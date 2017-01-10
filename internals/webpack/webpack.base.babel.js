@@ -8,7 +8,7 @@ const webpack = require('webpack');
 module.exports = (options) => ({
   entry: options.entry,
   output: Object.assign({ // Compile into js/build.js
-    path: path.resolve(process.cwd(), 'build'),
+    path: path.resolve(process.cwd(), 'dist'),
     publicPath: '/',
   }, options.output), // Merge with env dependent settings
   module: {
@@ -76,8 +76,12 @@ module.exports = (options) => ({
     }),
     new webpack.NamedModulesPlugin(),
   ]),
+  externals: {
+    react: true,
+    'react-dom': true,
+  },
   resolve: {
-    modules: ['app', 'node_modules'],
+    modules: ['src', 'node_modules'],
     extensions: [
       '.js',
       '.jsx',
