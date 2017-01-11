@@ -79,6 +79,8 @@ export function navbar(
 
     &.navbar {
       position: relative;
+      display: flex;
+      flex-direction: column;
       padding: ${$navbarPaddingY} ${$navbarPaddingX};
 
       ${clearfix()}
@@ -168,12 +170,13 @@ export function navbar(
     */
 
     & .navbar-brand {
-      float: left;
+      display: inline-block;
       padding-top: ${$navbarBrandPaddingY};
       padding-bottom: ${$navbarBrandPaddingY};
       margin-right: 1rem;
       font-size: ${$fontSizeLg};
       line-height: inherit;
+      white-space: nowrap;
 
       ${hoverFocus(
         $enableHoverMediaQuery,
@@ -216,8 +219,7 @@ export function navbar(
     */
 
     & .navbar-toggler {
-      width: 2.5em;
-      height: 2em;
+      align-self: flex-start; 
       padding: ${$navbarTogglerPaddingY} ${$navbarTogglerPaddingX};
       font-size: ${$navbarTogglerFontSize};
       line-height: 1;
@@ -231,6 +233,27 @@ export function navbar(
         'text-decoration: none;'
       )}
     }
+    
+    /* Keep as a separate element so folks can easily override it with another icon or image file as needed. */
+    & .navbar-toggler-icon {
+      display: inline-block;
+      width: 1.5em;
+      height: 1.5em;
+      vertical-align: middle;
+      content: "";
+      background: no-repeat center center;
+      background-size: 100% 100%;
+    }
+    
+    /* Use position on the toggler to prevent it from being auto placed as a flex item and allow easy placement. */
+    & .navbar-toggler-left {
+      position: absolute;
+      left: ${$navbarPaddingX};
+    }
+    & .navbar-toggler-right {
+      position: absolute;
+      right: ${$navbarPaddingX};
+    }
 
     ${navbarToggleable()}
 
@@ -240,14 +263,19 @@ export function navbar(
     */
 
     & .navbar-nav {
-      .nav-item {
+      display: flex;
+      flex-direction: column;
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
+      
+      & .nav-item {
         float: left;
       }
 
       & .nav-link {
-        display: block;
-        padding-top:    .425rem;
-        padding-bottom: .425rem;
+        padding-right: 0;
+        padding-left: 0;
 
         + .nav-link {
           margin-left: 1rem;

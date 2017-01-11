@@ -21,26 +21,57 @@ export function navbarToggleable(gridBreakpoints = defaultProps['$grid-breakpoin
        
         ${mediaBreakpointDown(breakpoint, gridBreakpoints, `
 
-         & .navbar-brand {
+          & .navbar-brand {
             display: block;
             float: none;
             margin-top: .5rem;
             margin-right: 0;
           }
-         
-         & .navbar-nav {
-            margin-top: .5rem;
-            margin-bottom: .5rem;
-            
+          
+          & .navbar-nav {
             & .dropdown-menu {
               position: static;
               float: none;
             }
-          }        
+          }
+          
+          > .container {
+            padding-right: 0;
+            padding-left: 0;
+          }
         `)}
       
         ${mediaBreakpointUp(next, gridBreakpoints, `
-          display: block;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-items: center;
+  
+          & .navbar-nav {
+            flex-direction: row;
+  
+            & .nav-link {
+              padding-right: .5rem;
+              padding-left: .5rem;
+            }
+          }
+  
+          /*  For nesting containers, have to redeclare for alignment purposes */
+          > .container {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+          }
+  
+          /* scss-lint:disable ImportantRule */
+          & .navbar-collapse {
+            display: flex !important;
+            width: 100%;
+          }
+          / scss-lint:enable ImportantRule */
+  
+          & .navbar-toggler {
+            display: none;
+          }
         `)}
       }
     `;
