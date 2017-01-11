@@ -15,7 +15,6 @@ import theme from 'config';
 import Header from '../Header';
 import A from '../A';
 import Nav from '../Nav';
-import Clearfix from '../Clearfix';
 import MenuCollapse from '../MenuCollapse';
 import MenuSlide from '../MenuSlide';
 import MenuPush from '../MenuPush';
@@ -137,21 +136,21 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
                 </div>
               )}
               {this.props.composeCollapsed && (
-              <div className="d-flex justify-content-between hidden-lg-up navbar-toggleable-md">
-                <Clearfix>
-                  <Button
-                    className="navbar-toggler"
-                    type="button"
-                    onClick={this.props.composeCollapsed.onClick}
-                  />
-                  <A className="navbar-brand" href="/">
-                    {title}
-                  </A>
-                </Clearfix>
-                <MenuCollapse active={this.props.composeCollapsed.isCollapsed}>
-                  {this.props.composeCollapsed.menuCollapsed.menu}
-                </MenuCollapse>
-                </div>
+                <Container>
+                  <div className="d-flex justify-content-between hidden-lg-up">
+                    <Button
+                      className="navbar-toggler"
+                      type="button"
+                      onClick={this.props.composeCollapsed.onClick}
+                    />
+                    <A className="navbar-brand" href="/">
+                      {title}
+                    </A>
+                  </div>
+                  <MenuCollapse active={this.props.composeCollapsed.isCollapsed}>
+                    {this.props.composeCollapsed.menuCollapsed.menu}
+                  </MenuCollapse>
+                </Container>
               )}
             </Nav>
           </Wrapper>
