@@ -6,7 +6,7 @@ describe('bootstrap flex utility', () => {
     const css = getFlexUtilities(!defaultProps['$enable-flex'], defaultProps['$grid-breakpoints']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-950429936);
+    expect(fromJS({ css }).hashCode()).toEqual(-492897907);
   });
   it('getFlexUtilities should return an empty css', () => {
     const css = getFlexUtilities(defaultProps['$enable-flex'], defaultProps['$grid-breakpoints']);
