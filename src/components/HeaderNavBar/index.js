@@ -137,7 +137,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
                 </div>
               )}
               {this.props.composeCollapsed && (
-              <div className="d-flex justify-content-between hidden-lg-up">
+              <div className="d-flex justify-content-between hidden-lg-up navbar-toggleable-md">
                 <Clearfix>
                   <Button
                     className="navbar-toggler"
