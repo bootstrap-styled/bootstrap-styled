@@ -1,6 +1,7 @@
 /**
  * Testing our Li component
  */
+
 import { ThemeProvider } from 'styled-components';
 import theme from 'config';
 
@@ -18,6 +19,7 @@ const renderComponent = (props = {}) => shallow(
     active={props.active}
     dropdown-item={props['dropdown-item']}
     dropdown-header={props['dropdown-header']}
+    dropdown-footer={props['dropdown-footer']}
     className={props.className}
   >
     {children}
@@ -33,6 +35,7 @@ const renderComponentUsingTheme = (props = {}) => mount(
       active={props.active}
       dropdown-item={props['dropdown-item']}
       dropdown-header={props['dropdown-header']}
+      dropdown-footer={props['dropdown-footer']}
       className={props.className}
     >
       {children}
@@ -95,6 +98,13 @@ describe('<Li />', () => {
       'dropdown-header': true,
     });
     expect(renderedComponent.find('li').hasClass('dropdown-header')).toBe(true);
+  });
+  it('should have a class .dropdown-footer with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      'dropdown-footer': true,
+    });
+    expect(renderedComponent.find('li').hasClass('dropdown-footer')).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

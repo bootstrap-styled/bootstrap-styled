@@ -6,6 +6,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 import theme from 'config';
+
 import { listUnstyled } from '../../styled/mixins/lists';
 
 const defaultProps = { theme };
@@ -20,6 +21,7 @@ class Li extends React.Component { // eslint-disable-line react/prefer-stateless
     active: PropTypes.bool,
     'dropdown-item': PropTypes.bool,
     'dropdown-header': PropTypes.bool,
+    'dropdown-footer': PropTypes.bool,
   }
 
   render() {
@@ -31,6 +33,7 @@ class Li extends React.Component { // eslint-disable-line react/prefer-stateless
           active: this.props.active,
           disabled: this.props.disabled,
           'dropdown-header': this.props['dropdown-header'],
+          'dropdown-footer': this.props['dropdown-footer'],
         })}
       >
         {this.props.children}

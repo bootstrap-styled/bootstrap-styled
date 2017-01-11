@@ -5,8 +5,9 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import onClickOutside from 'react-onclickoutside';
 import theme from 'config';
+import onClickOutside from 'react-onclickoutside';
+
 import Button from '../Button';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { boxShadow } from '../../styled/mixins/box-shadow';
@@ -20,6 +21,7 @@ const defaultProps = {
   buttonProps: {
     type: 'button',
     children: 'Dropdown',
+    'dropdown-toggle': true,
   },
   theme,
 };
@@ -32,6 +34,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
     buttonProps: PropTypes.object.isRequired,
     className: PropTypes.string,
     'dropdown-split': PropTypes.bool,
+    'dropdown-toggle': PropTypes.bool,
   };
 
   state = {
@@ -65,7 +68,9 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
       <div className={this.props.className}>
         <Btn
           {...rest}
-          className={cn(className, 'dropdown-toggle')}
+          className={cn(className, {
+            'dropdown-toggle': this.props['dropdown-toggle'],
+          })}
           href={href}
           onClick={this.handleClick}
         >
