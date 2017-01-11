@@ -60,12 +60,11 @@ describe('<MenuCollapse />', () => {
     expect(renderedComponent.find('MenuCollapse').length).toBe(1);
     expect(renderedComponent.find('div').length).toBe(1);
   });
-  it('should have a class .collapse and .navbar-toggleable-xs by default with a theme', () => {
+  it('should have a class .collapse by default with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
     expect(renderedComponent.find('div').hasClass('collapse')).toBe(true);
-    expect(renderedComponent.find('div').hasClass('navbar-toggleable-xs')).toBe(true);
   });
   it('should have an attribute active', () => {
     const renderedComponent = renderComponentUsingTheme({

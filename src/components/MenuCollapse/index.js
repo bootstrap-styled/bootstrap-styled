@@ -21,7 +21,7 @@ class MenuCollapse extends React.Component {// eslint-disable-line react/prefer-
   render() {
     return (
       <div
-        className={cn(this.props.className, 'collapse', 'navbar-toggleable-xs', {
+        className={cn(this.props.className, 'collapse', 'navbar-collapse', {
           active: this.props.active,
         })}
       >

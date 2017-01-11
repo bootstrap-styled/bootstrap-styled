@@ -137,14 +137,14 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
                 </div>
               )}
               {this.props.composeCollapsed && (
-              <div>
+              <div className="d-flex justify-content-between hidden-lg-up">
                 <Clearfix>
                   <Button
-                    className="navbar-toggler float-xs-right hidden-sm-up"
+                    className="navbar-toggler"
                     type="button"
                     onClick={this.props.composeCollapsed.onClick}
                   />
-                  <A className="navbar-brand hidden-sm-up" href="/">
+                  <A className="navbar-brand" href="/">
                     {title}
                   </A>
                 </Clearfix>
@@ -174,16 +174,13 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
 HeaderNavBar = styled(HeaderNavBar)`
   ${(props) => `
     
-    height: 70px;
     outline: 1px solid #E7EAEC;
-    paddingL: 0 0;
     
     ${transition(
       props.theme['$enable-transitions'],
       props.theme['$menu-push-transition-duration']
     )}
     
-     
     
     & .collapse {
       max-height: 0;
