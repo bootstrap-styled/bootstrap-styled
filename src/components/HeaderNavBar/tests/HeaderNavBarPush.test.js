@@ -8,7 +8,21 @@ import theme from 'config';
 import { mount } from 'enzyme';
 import React from 'react';
 
-import HeaderNavBar, { composeCollapse } from '../index';
+import HeaderNavBar, { composePush } from '../index';
+
+const menuAccount = (
+  <ul>
+    <li className="nav-item active">
+      <a className="nav-item nav-link">a</a>
+    </li>
+    <li className="nav-item">
+      <a className="nav-item nav-link">b</a>
+    </li>
+    <li className="nav-item">
+      <a className="nav-item nav-link">c</a>
+    </li>
+  </ul>
+);
 
 const menu = (
   <ul>
@@ -24,29 +38,37 @@ const menu = (
   </ul>
 );
 
-const menuCollapsed = {
-  menu,
-  isCollapsed: false,
+const menuTop = {
+  menuAccount,
 };
 
-const HeaderNavBarCollapse = composeCollapse(HeaderNavBar);
+const menuOffset = {
+  menu,
+  isHidden: true,
+};
+
+
+const HeaderNavBarPush = composePush(HeaderNavBar);
 
 const renderComponentUsingTheme = (props) => mount(
   <ThemeProvider theme={theme}>
-    <HeaderNavBarCollapse
+    <HeaderNavBarPush
       className={props.className}
-      menuCollapsed={menuCollapsed}
+      menuTop={menuTop}
+      menuOffset={menuOffset}
     />
   </ThemeProvider>
 );
 
-describe('<HeaderNavBarCollapse />', () => {
+describe('<HeaderNavBarPush />', () => {
   it('should simulate a click', () => {
     const renderedComponent = renderComponentUsingTheme({
+      menuAccount,
       menu,
     });
-    expect(renderedComponent.find('MenuCollapse').props().active).toBe(false);
+
+    expect(renderedComponent.find('MenuPush').props().active).toBe(false);
     renderedComponent.find('button').simulate('click');
-    expect(renderedComponent.find('MenuCollapse').props().active).toBe(true);
+    expect(renderedComponent.find('MenuPush').props().active).toBe(true);
   });
 });

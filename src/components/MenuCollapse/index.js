@@ -2,8 +2,13 @@
  * MenuCollapse Component
  *
  */
+
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
+
+const defaultProps = {
+  active: false,
+};
 
 class MenuCollapse extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
@@ -25,5 +30,6 @@ class MenuCollapse extends React.Component {// eslint-disable-line react/prefer-
     );
   }
 }
+MenuCollapse.defaultProps = defaultProps;
 
 export default MenuCollapse;

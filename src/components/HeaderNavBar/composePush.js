@@ -2,17 +2,17 @@
  * Kopax Ltd Copyright (c) 2016.
  */
 import React, { PropTypes } from 'react';
-import shapeMenuOffsetSlide from './shapeMenuOffsetSlide';
-import shapeMenuTopSlide from './shapeMenuTopSlide';
+import shapeMenuOffsetPush from './shapeMenuOffsetPush';
+import shapeMenuTopPush from './shapeMenuTopPush';
 
-export default function composeSlide(HeaderNavBar) {
-  class Slide extends React.Component {
+export default function composePush(HeaderNavBar) {
+  class Push extends React.Component {
 
     static propTypes = {
       className: PropTypes.string,
       onClick: PropTypes.func,
-      menuTop: shapeMenuTopSlide,
-      menuOffset: shapeMenuOffsetSlide,
+      menuTop: shapeMenuTopPush,
+      menuOffset: shapeMenuOffsetPush,
     }
 
     state = {
@@ -34,19 +34,18 @@ export default function composeSlide(HeaderNavBar) {
       return (
         <HeaderNavBar
           className={className}
-          composeSlide={{
+          composePush={{
             isHidden: this.state.isHidden,
             onClick: this.handleClick,
             menuTop,
             menuOffset,
           }}
           {...rest}
-
         />
       );
     }
 
   }
 
-  return Slide;
+  return Push;
 }

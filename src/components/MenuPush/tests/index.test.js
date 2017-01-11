@@ -1,5 +1,9 @@
+/*
+ * Kopax Ltd Copyright (c) 2016.
+ */
+
 /**
- * Testing our MenuCollapse component
+ * Testing our MenuPush component
  */
 
 
@@ -9,19 +13,21 @@ import theme from 'config';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 
-import MenuCollapse from '../index';
+import MenuPush from '../index';
 
 const children = (<h1>test</h1>);
 
 // eslint-disable-next-line arrow-body-style
 const renderComponent = (props = {}) => {
   return shallow(
-    <MenuCollapse
+    <MenuPush
       active={props.active}
+      menu-right={props['menu-right']}
+      menu-left={props['menu-left']}
       {...props}
     >
       {children}
-    </MenuCollapse>
+    </MenuPush>
   );
 };
 
@@ -29,23 +35,25 @@ const renderComponent = (props = {}) => {
 const renderComponentUsingTheme = (props = {}) => {
   return mount(
     <ThemeProvider theme={theme}>
-      <MenuCollapse
+      <MenuPush
         active={props.active}
+        menu-right={props['menu-right']}
+        menu-left={props['menu-left']}
         {...props}
       >
         {children}
-      </MenuCollapse>
+      </MenuPush>
     </ThemeProvider>
   );
 };
 
 
-describe('<MenuCollapse />', () => {
+describe('<MenuPush />', () => {
   it('should have a length of 1 rendered component', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('div').length).toBe(1);
+    expect(renderedComponent.find('MenuPush').length).toBe(1);
   });
   it('should have children', () => {
     const renderedComponent = renderComponent({
@@ -57,14 +65,13 @@ describe('<MenuCollapse />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('MenuCollapse').length).toBe(1);
+    expect(renderedComponent.find('MenuPush').length).toBe(1);
     expect(renderedComponent.find('div').length).toBe(1);
   });
-  it('should have a class .collapse and .navbar-toggleable-xs by default with a theme', () => {
+  it('should have a class .navbar-toggleable-xs by default with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('div').hasClass('collapse')).toBe(true);
     expect(renderedComponent.find('div').hasClass('navbar-toggleable-xs')).toBe(true);
   });
   it('should have an attribute active', () => {
@@ -72,7 +79,21 @@ describe('<MenuCollapse />', () => {
       children,
       active: true,
     });
-    expect(renderedComponent.find('MenuCollapse').props().active).toBe(true);
+    expect(renderedComponent.find('MenuPush').props().active).toBe(true);
+  });
+  it('should have an attribute menu-left', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      'menu-left': true,
+    });
+    expect(renderedComponent.find('MenuPush').props()['menu-left']).toBe(true);
+  });
+  it('should have an attribute menu-right', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      'menu-right': true,
+    });
+    expect(renderedComponent.find('MenuPush').props()['menu-right']).toBe(true);
   });
   it('should have children', () => {
     const renderedComponent = renderComponentUsingTheme({

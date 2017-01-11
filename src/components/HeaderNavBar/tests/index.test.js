@@ -1,6 +1,7 @@
 /**
  * Testing our HeaderNavBar component
  */
+
 import { ThemeProvider } from 'styled-components';
 import theme from 'config';
 
@@ -68,8 +69,7 @@ describe('<HeaderNavBar />', () => {
     const renderedComponent = renderComponentUsingTheme({
       menu,
     });
-    expect(renderedComponent.find('Button').length).toBe(1);
-    expect(renderedComponent.find('div').length).toBe(3);
+    expect(renderedComponent.find('div').length).toBe(2);
     expect(renderedComponent.find('HeaderNavBar').length).toBe(1);
   });
   it('should have the className .navbar and bd-navbar by default', () => {

@@ -11,22 +11,32 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 import theme from 'config';
+
 import Header from '../Header';
 import A from '../A';
 import Nav from '../Nav';
 import Clearfix from '../Clearfix';
 import MenuCollapse from '../MenuCollapse';
 import MenuSlide from '../MenuSlide';
+import MenuPush from '../MenuPush';
+import MenuAccount from '../MenuAccount';
 import Container from '../Container';
 import ContainerFluid from '../ContainerFluid';
 import Button from '../Button';
 import { transition } from '../../styled/mixins/transition';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
+import shapeMenuOffsetPush from './shapeMenuOffsetPush';
+import shapeMenuTopPush from './shapeMenuTopPush';
+import shapeMenuOffsetSlide from './shapeMenuOffsetSlide';
+import shapeMenuTopSlide from './shapeMenuTopSlide';
+import shapeMenuCollapsed from './shapeMenuCollapsed';
 import collapse from './composeCollapse';
 import slide from './composeSlide';
+import push from './composePush';
 
 export const composeCollapse = collapse;
 export const composeSlide = slide;
+export const composePush = push;
 
 const defaultProps = {
   theme,
@@ -43,16 +53,24 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
 
   static propTypes = {
     className: PropTypes.string,
-    menu: PropTypes.node.isRequired,
     btnText: PropTypes.string,
     container: PropTypes.bool,
     composeCollapsed: PropTypes.shape({
-      onToggleMenu: PropTypes.func.isRequired,
-      isCollapsed: PropTypes.bool.isRequired,
+      isCollapsed: PropTypes.bool,
+      onClick: PropTypes.func.isRequired,
+      menuCollapsed: shapeMenuCollapsed,
     }),
     composeSlide: PropTypes.shape({
-      onToggleMenu: PropTypes.func.isRequired,
-      isHidden: PropTypes.bool.isRequired,
+      onClick: PropTypes.func.isRequired,
+      isHidden: PropTypes.bool,
+      menuOffset: shapeMenuOffsetSlide,
+      menuTop: shapeMenuTopSlide,
+    }),
+    composePush: PropTypes.shape({
+      onClick: PropTypes.func.isRequired,
+      isHidden: PropTypes.bool,
+      menuOffset: shapeMenuOffsetPush,
+      menuTop: shapeMenuTopPush,
     }),
     'container-fluid': PropTypes.bool,
     'navbar-dark': PropTypes.bool,
@@ -74,12 +92,6 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     } else if (isContainerFluid) {
       this.wrapper = ContainerFluid;
     }
-
-    if (this.props.composeCollapsed) {
-      this.onToggleMenu = this.props.composeCollapsed.onToggleMenu;
-    } else if (this.props.composeSlide) {
-      this.onToggleMenu = this.props.composeSlide.onToggleMenu;
-    }
   }
 
   render() {
@@ -100,28 +112,59 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
         <Header className={cssClasses} ref={(node) => { this.node = node; }}>
           <Wrapper>
             <Nav>
-              <Clearfix>
+              {this.props.composePush && (
+              <div>
                 <Button
-                  className="navbar-toggler float-xs-right hidden-sm-up"
+                  className="navbar-toggler float-xs-left ma-2"
                   type="button"
-                  onClick={this.onToggleMenu}
+                  onClick={this.props.composePush.onClick}
                 />
-                <A className="navbar-brand hidden-sm-up" href="/">
-                  {title}
-                </A>
-              </Clearfix>
+                <MenuAccount>
+                  {this.props.composePush.menuTop.menuAccount}
+                </MenuAccount>
+              </div>
+              )}
+              {this.props.composeSlide && (
+                <div>
+                  <Button
+                    className="navbar-toggler float-xs-left ma-3"
+                    type="button"
+                    onClick={this.props.composeSlide.onClick}
+                  />
+                  <MenuAccount>
+                    {this.props.composeSlide.menuTop.menuAccount}
+                  </MenuAccount>
+                </div>
+              )}
               {this.props.composeCollapsed && (
+              <div>
+                <Clearfix>
+                  <Button
+                    className="navbar-toggler float-xs-right hidden-sm-up"
+                    type="button"
+                    onClick={this.props.composeCollapsed.onClick}
+                  />
+                  <A className="navbar-brand hidden-sm-up" href="/">
+                    {title}
+                  </A>
+                </Clearfix>
                 <MenuCollapse active={this.props.composeCollapsed.isCollapsed}>
-                  {this.props.menu}
+                  {this.props.composeCollapsed.menuCollapsed.menu}
                 </MenuCollapse>
+                </div>
               )}
             </Nav>
           </Wrapper>
         </Header>
         {this.props.composeSlide && (
-          <MenuSlide active={!this.props.composeSlide.isHidden} menu-right>
-            {this.props.menu}
+          <MenuSlide active={!this.props.composeSlide.isHidden} menu-right={this.props.composeSlide.menuOffset.isRight} menu-left={this.props.composeSlide.menuOffset.isLeft}>
+            {this.props.composeSlide.menuOffset.menu}
           </MenuSlide>
+        )}
+        {this.props.composePush && (
+          <MenuPush active={!this.props.composePush.isHidden} menu-right={this.props.composePush.menuOffset.isRight} menu-left={this.props.composePush.menuOffset.isLeft}>
+            {this.props.composePush.menuOffset.menu}
+          </MenuPush>
         )}
       </div>
     );
@@ -130,6 +173,18 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
 // eslint-disable-next-line no-class-assign
 HeaderNavBar = styled(HeaderNavBar)`
   ${(props) => `
+    
+    height: 70px;
+    outline: 1px solid #E7EAEC;
+    paddingL: 0 0;
+    
+    ${transition(
+      props.theme['$enable-transitions'],
+      props.theme['$menu-push-transition-duration']
+    )}
+    
+     
+    
     & .collapse {
       max-height: 0;
       position: relative;
@@ -139,7 +194,7 @@ HeaderNavBar = styled(HeaderNavBar)`
         'ease-in-out, .35s, max-height'
       )}
     
-    &.active {
+      &.active {
         display: block;
         max-height: ${props.theme['$header-max-height']};
       }
