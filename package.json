@@ -202,7 +202,7 @@
     "warning": "3.0.0"
   },
   "devDependencies": {
-    "babel-cli": "6.18.0",
+    "babel-node": "6.18.0",
     "babel-core": "6.21.0",
     "babel-eslint": "7.1.1",
     "babel-loader": "6.2.10",
