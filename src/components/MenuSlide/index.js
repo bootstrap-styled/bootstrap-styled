@@ -45,13 +45,14 @@ export class MenuSlide extends React.Component { // eslint-disable-line react/pr
 MenuSlide = styled(MenuSlide)`
   ${(props) => `
     width: 100%;
+    z-index: 1999;
     position: absolute;
     top: ${props.theme['$navbar-height']};
     bottom: 0;
     ${transition(
-  props.theme['$enable-transitions'],
-  `transform ${props.theme['$menu-slide-transition-duration']}`
-)}
+    props.theme['$enable-transitions'],
+    `transform ${props.theme['$menu-slide-transition-duration']}`
+  )}
     
     &.menu-right {
       transform: translate3d(100%,0,0);

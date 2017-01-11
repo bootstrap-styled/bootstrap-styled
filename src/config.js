@@ -569,7 +569,7 @@ v['$zindex-modal'] = '1050';
 
 // 16. Navbar
 
-v['$navbar-height'] = '60px';
+v['$navbar-height'] = '70px';
 
 v['$navbar-border-radius'] = v['$border-radius'];
 v['$navbar-padding-x'] = v['$spacer'];
