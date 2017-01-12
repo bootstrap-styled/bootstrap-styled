@@ -1,5 +1,4 @@
-import { clearfix } from './clearfix';
-import { breakpointNext, mediaBreakpointDown, mediaBreakpointUp } from './breakpoints';
+import { breakpointNext, mediaBreakpointDown, mediaBreakpointUp, breakpointInfix } from './breakpoints';
 
 export const defaultProps = {
   '$grid-breakpoints': {
@@ -15,64 +14,57 @@ export function navbarToggleable(gridBreakpoints = defaultProps['$grid-breakpoin
   const navbarBreakpointList = [];
   Object.keys(gridBreakpoints).forEach((breakpoint) => {
     const next = breakpointNext(breakpoint, gridBreakpoints);
-    const navbarBreakpoint = `
-      .navbar-toggleable-${breakpoint} {
-        ${clearfix()}
-       
-        ${mediaBreakpointDown(breakpoint, gridBreakpoints, `
+    const infix = breakpointInfix(breakpoint, gridBreakpoints);
 
-          .navbar-brand {
-            display: block;
-            float: none;
-            margin-top: .5rem;
-            margin-right: 0;
-          }
-          
-          .navbar-nav {
-            & .dropdown-menu {
-              position: static;
-              float: none;
+    const navbarBreakpoint = `
+      .navbar-toggleable {
+        &${infix} {
+          ${mediaBreakpointDown(breakpoint, gridBreakpoints, `
+            .navbar-nav {
+              .dropdown-menu {
+                position: static;
+                float: none;
+              }
             }
-          }
-          
-          > .container {
-            padding-right: 0;
-            padding-left: 0;
-          }
-        `)}
-      
-        ${mediaBreakpointUp(next, gridBreakpoints, `
-          flex-direction: row;
-          flex-wrap: nowrap;
-          align-items: center;
-  
-          & .navbar-nav {
+
+            > .container {
+              padding-right: 0;
+              padding-left: 0;
+            }
+          `)}
+          ${mediaBreakpointUp(next, gridBreakpoints, `
             flex-direction: row;
-  
-            & .nav-link {
-              padding-right: .5rem;
-              padding-left: .5rem;
-            }
-          }
-  
-          /*  For nesting containers, have to redeclare for alignment purposes */
-          > .container {
-            display: flex;
             flex-wrap: nowrap;
             align-items: center;
-          }
-  
-          /* scss-lint:disable ImportantRule */
-          & .navbar-collapse {
-            display: flex !important;
-            width: 100%;
-          }
-          / scss-lint:enable ImportantRule */
-  
-          & .navbar-toggler {
-            display: none;
-          }
-        `)}
+    
+            .navbar-nav {
+              flex-direction: row;
+    
+              .nav-link {
+                padding-right: .5rem;
+                padding-left: .5rem;
+              }
+            }
+    
+            /* For nesting containers, have to redeclare for alignment purposes */
+            > .container {
+              display: flex;
+              flex-wrap: nowrap;
+              align-items: center;
+            }
+    
+            /* scss-lint:disable ImportantRule  */
+            .navbar-collapse {
+              display: flex !important;
+              width: 100%;
+            }
+            
+            /* scss-lint:enable ImportantRule */
+            .navbar-toggler {
+              display: none;
+            }
+          `)}
+        }
       }
     `;
     navbarBreakpointList.push(navbarBreakpoint);

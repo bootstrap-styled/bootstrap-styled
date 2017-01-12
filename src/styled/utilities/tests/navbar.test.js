@@ -34,6 +34,6 @@ describe('bootstrap navbar utility', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(248159780);
+    expect(fromJS({ css }).hashCode()).toEqual(-25712331);
   });
 });
