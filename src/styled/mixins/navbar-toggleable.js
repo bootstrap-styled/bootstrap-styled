@@ -16,19 +16,19 @@ export function navbarToggleable(gridBreakpoints = defaultProps['$grid-breakpoin
   Object.keys(gridBreakpoints).forEach((breakpoint) => {
     const next = breakpointNext(breakpoint, gridBreakpoints);
     const navbarBreakpoint = `
-      & .navbar-toggleable-${breakpoint} {
+      .navbar-toggleable-${breakpoint} {
         ${clearfix()}
        
         ${mediaBreakpointDown(breakpoint, gridBreakpoints, `
 
-          & .navbar-brand {
+          .navbar-brand {
             display: block;
             float: none;
             margin-top: .5rem;
             margin-right: 0;
           }
           
-          & .navbar-nav {
+          .navbar-nav {
             & .dropdown-menu {
               position: static;
               float: none;

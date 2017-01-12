@@ -937,8 +937,9 @@ v['$pre-scrollable-max-height'] = '340px';
 
 // Customization
 
-// MenuSlide component
+// Menu transition component
 v['$menu-slide-transition-duration'] = '.6s';
+v['$menu-push-transition-duration'] = '.6s';
 
 
 // ============================================================================================================================
