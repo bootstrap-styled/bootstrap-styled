@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import theme from 'config';
 import { navbar } from '../../styled/utilities/navbar';
-import { navbarToggleable } from '../../styled/mixins/navbar-toggleable';
 
 const defaultProps = { theme };
 
@@ -35,13 +34,8 @@ const Header = styled.header`
       props.theme['$navbar-dark-toggler-bg'],
       props.theme['$navbar-dark-toggler-border'],
     )}
-    
-    ${navbarToggleable(
-      props.theme['$grid-breakpoints'],
-    )}
-  `}
-   
-  `;
+  `}  
+`;
 
 Header.defaultProps = defaultProps;
 

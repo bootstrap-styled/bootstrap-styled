@@ -34,7 +34,7 @@ Example Usage HeaderNavBarCollapse
       logout={this.props.logout}
       menuCollapsed={{
         menu: (
-          <Nav className="nav nav-pills nav-stacked">
+          <Ul className="nav navbar-nav">
             <Li className="nav-item">
               <Link className="nav-link active" to={pages.pageDashboard.path}>Kopax Ltd</Link>
             </Li>
@@ -60,7 +60,7 @@ Example Usage HeaderNavBarCollapse
             <Li className="nav-item white">
               <LocaleToggle />
             </Li>
-          </Nav>
+          </Ul>
         ),
         isCollapsed: false,
       }}

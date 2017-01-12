@@ -25,7 +25,6 @@ import Button from '../Button';
 import { transition } from '../../styled/mixins/transition';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { getFlexUtilities } from '../../styled/utilities/flex';
-import { navbarToggleable } from '../../styled/mixins/navbar-toggleable';
 import shapeMenuOffsetPush from './shapeMenuOffsetPush';
 import shapeMenuTopPush from './shapeMenuTopPush';
 import shapeMenuOffsetSlide from './shapeMenuOffsetSlide';
@@ -144,7 +143,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
               )}
               {this.props.composeCollapsed && (
                 <Container>
-                  <div className="d-flex justify-content-xs-between hidden-lg-up">
+                  <div className="d-flex justify-content-between hidden-lg-up">
                     <A className="navbar-brand" href="/">
                       {title}
                     </A>
@@ -183,9 +182,7 @@ HeaderNavBar = styled(HeaderNavBar)`
     outline: 1px solid #E7EAEC;
     
     ${getFlexUtilities(true, props.theme['$grid-breakpoints'])}
-    
-    ${navbarToggleable(props.theme['$grid-breakpoints'])}
-    
+        
       ${transition(
       true,
       '.6s'
