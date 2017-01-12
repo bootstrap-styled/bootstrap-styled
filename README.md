@@ -1,3 +1,23 @@
+# Bootstrap-styled
+
+Bootstrap 4.0 made in styled components
+
+## Dependencies
+
+This modules require peerDependencies when using : 
+    
+    
+    "peerDependencies": {
+        "react": "^15.4.1",
+        "styled-components": "^1.1.2"
+    },
+   
+## Documentation
+
+The documentation is available at [http://doc.bootstrap.com](http://doc.bootstrap.com)
+
+## React-boilerplate
+
 <img src="https://raw.githubusercontent.com/mxstbr/react-boilerplate-brand/master/assets/banner-metal-optimized.jpg" alt="react boilerplate banner" align="center" />
 
 <br />

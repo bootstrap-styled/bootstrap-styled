@@ -79,6 +79,7 @@ module.exports = (options) => ({
   externals: {
     react: true,
     'react-dom': true,
+    'styled-components': true,
   },
   resolve: {
     modules: ['src', 'node_modules'],
