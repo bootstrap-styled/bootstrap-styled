@@ -16,7 +16,6 @@ export const defaultProps = {
   '$enable-hover-media-query': false,
   '$navbar-padding-y': '0.5rem',
   '$navbar-padding-x': '1rem',
-  '$navbar-border-radius': '.25rem',
   '$zindex-navbar': '1000',
   '$zindex-navbar-fixed': '1030',
   '$zindex-navbar-sticky': '1030',
