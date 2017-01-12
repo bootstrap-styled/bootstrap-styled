@@ -24,6 +24,8 @@ import ContainerFluid from '../ContainerFluid';
 import Button from '../Button';
 import { transition } from '../../styled/mixins/transition';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
+import { getFlexUtilities } from '../../styled/utilities/flex';
+import { navbarToggleable } from '../../styled/mixins/navbar-toggleable';
 import shapeMenuOffsetPush from './shapeMenuOffsetPush';
 import shapeMenuTopPush from './shapeMenuTopPush';
 import shapeMenuOffsetSlide from './shapeMenuOffsetSlide';
@@ -94,13 +96,18 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
   }
 
   render() {
-    const cssClasses = cn('navbar', 'bd-navbar', this.props.className, {
+    const classConfig = [];
+    if (this.props.composeCollapsed) {
+      classConfig.push('navbar-toggleable-md');
+    }
+    const cssClasses = cn('navbar', 'bd-navbar', classConfig, this.props.className, {
       'navbar-dark': this.props['navbar-dark'],
       'bg-inverse': this.props['navbar-dark'],
       'navbar-light': !this.props['navbar-dark'] && this.props['navbar-light'],
       'bg-faded': !this.props['navbar-dark'] && this.props['navbar-light'],
       'navbar-static-top': !this.props['navbar-fixed-top'] && this.props['navbar-static-top'],
       'navbar-fixed-top': this.props['navbar-fixed-top'],
+
     });
 
     const title = this.props.btnText;
@@ -137,15 +144,15 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
               )}
               {this.props.composeCollapsed && (
                 <Container>
-                  <div className="d-flex justify-content-between hidden-lg-up">
+                  <div className="d-flex justify-content-xs-between hidden-lg-up">
+                    <A className="navbar-brand" href="/">
+                      {title}
+                    </A>
                     <Button
                       className="navbar-toggler"
                       type="button"
                       onClick={this.props.composeCollapsed.onClick}
                     />
-                    <A className="navbar-brand" href="/">
-                      {title}
-                    </A>
                   </div>
                   <MenuCollapse active={this.props.composeCollapsed.isCollapsed}>
                     {this.props.composeCollapsed.menuCollapsed.menu}
@@ -175,9 +182,13 @@ HeaderNavBar = styled(HeaderNavBar)`
     
     outline: 1px solid #E7EAEC;
     
-    ${transition(
-      props.theme['$enable-transitions'],
-      props.theme['$menu-push-transition-duration']
+    ${getFlexUtilities(true, props.theme['$grid-breakpoints'])}
+    
+    ${navbarToggleable(props.theme['$grid-breakpoints'])}
+    
+      ${transition(
+      true,
+      '.6s'
     )}
     
     
@@ -186,7 +197,7 @@ HeaderNavBar = styled(HeaderNavBar)`
       position: relative;
       overflow: hidden;
       ${transition(
-        props.theme['$enable-transitions'],
+        true,
         'ease-in-out, .35s, max-height'
       )}
     

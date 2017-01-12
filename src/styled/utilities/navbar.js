@@ -1,6 +1,5 @@
-import { clearfix } from '../mixins/clearfix';
 import { hoverFocus, plainHoverFocus } from '../mixins/hover';
-import { mediaBreakpointUp, mediaBreakpointDown } from '../mixins/breakpoints';
+import { mediaBreakpointUp } from '../mixins/breakpoints';
 import { borderRadius } from '../mixins/border-radius';
 import { navbarToggleable } from '../mixins/navbar-toggleable';
 import { getBackgroundUtilities } from './background';
@@ -17,7 +16,6 @@ export const defaultProps = {
   '$enable-hover-media-query': false,
   '$navbar-padding-y': '0.5rem',
   '$navbar-padding-x': '1rem',
-  '$navbar-border-radius': '.25rem',
   '$zindex-navbar': '1000',
   '$zindex-navbar-fixed': '1030',
   '$zindex-navbar-sticky': '1030',
@@ -47,7 +45,6 @@ export function navbar(
   $enableHoverMediaQuery = defaultProps['$enable-hover-media-query'],
   $navbarPaddingY = defaultProps['$navbar-padding-y'],
   $navbarPaddingX = defaultProps['$navbar-padding-x'],
-  $navbarBorderRadius = defaultProps['$navbar-border-radius'],
   $zindexNavbar = defaultProps['$zindex-navbar'],
   $zindexNavbarFixed = defaultProps['$zindex-navbar-fixed'],
   $zindexNavbarSticky = defaultProps['$zindex-navbar-sticky'],
@@ -83,19 +80,68 @@ export function navbar(
       flex-direction: column;
       padding: ${$navbarPaddingY} ${$navbarPaddingX};
 
-      ${clearfix()}
-
-      ${mediaBreakpointUp(
-        'sm',
-        $gridBreakpoints,
-        borderRadius(
-          $enableRounded,
-          $navbarBorderRadius
-        )
-      )}
-
       ${getBackgroundUtilities()}
     }
+    
+    /*
+     Brand/project name
+    */
+
+    & .navbar-brand {
+      display: inline-block;
+      padding-top: ${$navbarBrandPaddingY};
+      padding-bottom: ${$navbarBrandPaddingY};
+      margin-right: 1rem;
+      font-size: ${$fontSizeLg};
+      line-height: inherit;
+      white-space: nowrap;
+
+      ${hoverFocus(
+        $enableHoverMediaQuery,
+        'text-decoration: none;'
+      )}
+    }
+    
+    /* Navigation
+
+     Custom navbar navigation built on the base .nav styles.
+    */
+
+    &.navbar-nav 
+    ,& .navbar-nav {
+      display: flex;
+      flex-direction: column;
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
+      
+      & .nav-item {
+        float: left;
+      }
+
+      & .nav-link {
+        padding-right: 0;
+        padding-left: 0;
+
+        + .nav-link {
+          margin-left: 1rem;
+        }
+      }
+
+      .nav-item + .nav-item {
+        margin-left: 1rem;
+      }
+    }
+    
+    /* Navbar text  */
+
+    & .navbar-text {
+      display: inline-block;
+      padding-top:    .425rem;
+      padding-bottom: .425rem;
+    }
+
+
 
     /* Navbar alignment options
 
@@ -144,7 +190,6 @@ export function navbar(
       bottom: 0;
     }
 
-
     /* position sticky does not seem to be working AJT*/
 
     &.navbar-sticky-top {
@@ -164,27 +209,6 @@ export function navbar(
       )}
     }
 
-
-    /*
-     Brand/project name
-    */
-
-    & .navbar-brand {
-      display: inline-block;
-      padding-top: ${$navbarBrandPaddingY};
-      padding-bottom: ${$navbarBrandPaddingY};
-      margin-right: 1rem;
-      font-size: ${$fontSizeLg};
-      line-height: inherit;
-      white-space: nowrap;
-
-      ${hoverFocus(
-        $enableHoverMediaQuery,
-        'text-decoration: none;'
-      )}
-    }
-
-
     & .navbar-divider {
       float: left;
       width: ${$borderWidth};
@@ -198,19 +222,6 @@ export function navbar(
         content: '\00a0';
       }
     }
-
-
-
-    /* Navbar text
-
-    */
-
-    & .navbar-text {
-      display: inline-block;
-      padding-top:    .425rem;
-      padding-bottom: .425rem;
-    }
-
 
     /* Navbar toggle
 
@@ -226,7 +237,7 @@ export function navbar(
       background: transparent no-repeat center center;
       background-size: 24px 24px;
       border: ${$borderWidth} solid transparent;
-      ${borderRadius($navbarTogglerBorderRadius)};
+      ${borderRadius($enableRounded, $navbarTogglerBorderRadius)};
 
       ${hoverFocus(
         $enableHoverMediaQuery,
@@ -253,38 +264,6 @@ export function navbar(
     & .navbar-toggler-right {
       position: absolute;
       right: ${$navbarPaddingX};
-    }
-
-    ${navbarToggleable()}
-
-    /* Navigation
-
-     Custom navbar navigation built on the base .nav styles.
-    */
-
-    & .navbar-nav {
-      display: flex;
-      flex-direction: column;
-      padding-left: 0;
-      margin-bottom: 0;
-      list-style: none;
-      
-      & .nav-item {
-        float: left;
-      }
-
-      & .nav-link {
-        padding-right: 0;
-        padding-left: 0;
-
-        + .nav-link {
-          margin-left: 1rem;
-        }
-      }
-
-      .nav-item + .nav-item {
-        margin-left: 1rem;
-      }
     }
 
     /* Dark links against a light background */
@@ -375,71 +354,9 @@ export function navbar(
       }
     }
 
+    ${navbarToggleable($gridBreakpoints)}
 
-    /* Navbar toggleable
-     Custom override for collapse plugin in navbar.
-    */
 
-    & .navbar-toggleable {
-      &-xs {
-        ${clearfix()}
-        ${mediaBreakpointDown(
-          'xs',
-          $gridBreakpoints,
-          `.navbar-nav .nav-item {
-              float: none;
-              margin-left: 0;
-            }`
-        )}      
-        ${mediaBreakpointUp(
-          'sm',
-          $gridBreakpoints,
-          'display: block !important;'
-        )}
-        &-slide{        
-        ${mediaBreakpointUp(
-          'sm',
-          $gridBreakpoints,
-          'display: none;'
-        )}
-        }
-      }
-
-      &-sm {
-        ${clearfix()}
-        ${mediaBreakpointDown(
-        'sm',
-        $gridBreakpoints,
-          `.navbar-nav .nav-item {
-              float: none;
-              margin-left: 0;
-            }`
-        )}
-        ${mediaBreakpointUp(
-          'md',
-          $gridBreakpoints,
-          'display: block !important;'
-        )}
-      }
-
-      &-md {
-        ${clearfix()}
-        ${mediaBreakpointDown(
-          'md',
-          $gridBreakpoints,
-          `.navbar-nav .nav-item {
-              float: none;
-              margin-left: 0;
-            }`
-        )}
-        ${mediaBreakpointUp(
-          'lg',
-          $gridBreakpoints,
-          'display: block !important;'
-        )}
-      }
-    }
-    
   `;
 }
 

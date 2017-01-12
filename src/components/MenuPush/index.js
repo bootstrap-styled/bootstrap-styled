@@ -54,7 +54,7 @@ MenuPush = styled(MenuPush)`
     height: 100%;
     width: ${props.theme['$menu-push-mini-width']};
     ${transition(
-      props.theme['$enable-transitions'],
+      true,
       `${props.theme['$menu-push-transition-duration']}`
     )}
   

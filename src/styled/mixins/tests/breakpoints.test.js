@@ -1,8 +1,11 @@
+import { fromJS } from 'immutable';
+
 import {
   defaultProps,
   breakpointNext,
   breakpointMin,
   breakpointMax,
+  breakpointInfix,
   mediaBreakpointUp,
   mediaBreakpointDown,
   mediaBreakpointBetween,
@@ -36,28 +39,36 @@ describe('bootstrap breakpoints mixins', () => {
     const breakpoint = breakpointMax('xl', defaultProps['$grid-breakpoints']);
     expect(breakpoint).toBeNull();
   });
+  it('mediaBreakpointInfix should return ""', () => {
+    const breakpoint = breakpointInfix('xs', defaultProps['$grid-breakpoints']);
+    expect(breakpoint).toEqual('');
+  });
+  it('mediaBreakpointInfix should return null', () => {
+    const breakpoint = breakpointInfix('md', defaultProps['$grid-breakpoints']);
+    expect(fromJS({ breakpoint }).hashCode()).toEqual(-636542927);
+  });
   it('mediaBreakpointUp should return a media query', () => {
     const breakpointUp = mediaBreakpointUp('md', defaultProps['$grid-breakpoints'], `
       content: 'awesome!';
     `);
-    expect(breakpointUp).toEqual('\n      @media (min-width: 768px) {\n        \n      content: \'awesome!\';\n    \n      }\n    ');
+    expect(fromJS({ breakpointUp }).hashCode()).toEqual(-575742520);
   });
   it('mediaBreakpointDown should return a media query', () => {
     const breakpointDown = mediaBreakpointDown('md', defaultProps['$grid-breakpoints'], `
       content: 'awesome!';
     `);
-    expect(breakpointDown).toEqual('\n      @media (max-width: 991px) {\n        \n      content: \'awesome!\';\n    \n      }\n    ');
+    expect(fromJS({ breakpointDown }).hashCode()).toEqual(646243350);
   });
   it('mediaBreakpointBetween should return a media query', () => {
     const breakpointBetween = mediaBreakpointBetween('md', 'lg', defaultProps['$grid-breakpoints'], `
       content: 'awesome!';
     `);
-    expect(breakpointBetween).toEqual('\n      @media (min-width: 768px) {\n        \n      @media (max-width: 1199px) {\n        \n      content: \'awesome!\';\n    \n      }\n    \n      }\n    ');
+    expect(fromJS({ breakpointBetween }).hashCode()).toEqual(758957517);
   });
   it('mediaBreakpointOnly should return a media query', () => {
     const breakpointOnly = mediaBreakpointOnly('md', defaultProps['$grid-breakpoints'], `
       content: 'awesome!';
     `);
-    expect(breakpointOnly).toEqual('\n      @media (min-width: 768px) {\n        \n      @media (max-width: 991px) {\n        \n      content: \'awesome!\';\n    \n      }\n    \n      }\n    ');
+    expect(fromJS({ breakpointOnly }).hashCode()).toEqual(-169417565);
   });
 });

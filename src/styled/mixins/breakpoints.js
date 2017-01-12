@@ -56,6 +56,18 @@ export function breakpointMax(name, breakpoints = defaultProps['$grid-breakpoint
   return null;
 }
 
+
+// Returns a blank string if smallest breakpoint, otherwise returns the name with a dash infront.
+// Useful for making responsive utilities.
+//
+//    >> breakpoint-infix(xs, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    ""  (Returns a blank string)
+//    >> breakpoint-infix(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    "-sm"
+export function breakpointInfix(name, breakpoints = defaultProps['$grid-breakpoints']) {
+  return breakpointMin(name, breakpoints) == null ? '' : `-${name}`;
+}
+
 // Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
 // Makes the @content apply to the given breakpoint and wider.
 export function mediaBreakpointUp(name, breakpoints = defaultProps['$grid-breakpoints'], content) {
@@ -106,6 +118,7 @@ export default {
   breakpointNext,
   breakpointMin,
   breakpointMax,
+  breakpointInfix,
   mediaBreakpointUp,
   mediaBreakpointDown,
   mediaBreakpointBetween,

@@ -50,9 +50,9 @@ MenuSlide = styled(MenuSlide)`
     top: ${props.theme['$navbar-height']};
     bottom: 0;
     ${transition(
-    props.theme['$enable-transitions'],
-    `transform ${props.theme['$menu-slide-transition-duration']}`
-  )}
+      true,
+      props.theme['$menu-slide-transition-duration'],
+    )}
     
     &.menu-right {
       transform: translate3d(100%,0,0);
