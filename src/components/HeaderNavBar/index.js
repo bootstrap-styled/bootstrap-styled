@@ -25,6 +25,7 @@ import Button from '../Button';
 import { transition } from '../../styled/mixins/transition';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { getFlexUtilities } from '../../styled/utilities/flex';
+import { navbarToggleable } from '../../styled/mixins/navbar-toggleable';
 import shapeMenuOffsetPush from './shapeMenuOffsetPush';
 import shapeMenuTopPush from './shapeMenuTopPush';
 import shapeMenuOffsetSlide from './shapeMenuOffsetSlide';
@@ -182,10 +183,10 @@ HeaderNavBar = styled(HeaderNavBar)`
     outline: 1px solid #E7EAEC;
     
     ${getFlexUtilities(true, props.theme['$grid-breakpoints'])}
-
+    ${navbarToggleable(props.theme['$grid-breakpoints'])}
     ${transition(
       props.theme['$enable-transitions'],
-      props.theme['$menu-push-transition-duration']
+      `transform ${props.theme['$menu-push-transition-duration']}`
     )}
     
     
