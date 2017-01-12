@@ -9,7 +9,6 @@ describe('bootstrap navbar utility', () => {
       defaultProps['$enable-hover-media-query'],
       defaultProps['$navbar-padding-y'],
       defaultProps['$navbar-padding-x'],
-      defaultProps['$navbar-border-radius'],
       defaultProps['$zindex-navbar'],
       defaultProps['$zindex-navbar-fixed'],
       defaultProps['$zindex-navbar-sticky'],
@@ -34,6 +33,6 @@ describe('bootstrap navbar utility', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-405742559);
+    expect(fromJS({ css }).hashCode()).toEqual(704762978);
   });
 });

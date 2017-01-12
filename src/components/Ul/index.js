@@ -43,7 +43,6 @@ Ul = styled(Ul)`
       props.theme['$enable-hover-media-query'],
       props.theme['$navbar-padding-y'],
       props.theme['$navbar-padding-x'],
-      props.theme['$navbar-border-radius'],
       props.theme['$zindex-navbar'],
       props.theme['$zindex-navbar-fixed'],
       props.theme['$zindex-navbar-sticky'],
