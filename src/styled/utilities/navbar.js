@@ -267,9 +267,6 @@ export function navbar(
       right: ${$navbarPaddingX};
     }
 
-    ${navbarToggleable($gridBreakpoints)}
-
-
     /* Dark links against a light background */
     &.navbar-light {
       .navbar-brand,
@@ -357,6 +354,9 @@ export function navbar(
         background-color: rgba(255,255,255,.075);
       }
     }
+
+    ${navbarToggleable($gridBreakpoints)}
+
 
   `;
 }

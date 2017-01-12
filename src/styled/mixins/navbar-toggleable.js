@@ -18,7 +18,7 @@ export function navbarToggleable(gridBreakpoints = defaultProps['$grid-breakpoin
 
     const navbarBreakpoint = `
       .navbar-toggleable {
-        &${infix} {
+        ${infix} {
           ${mediaBreakpointDown(breakpoint, gridBreakpoints, `
             .navbar-nav {
               .dropdown-menu {
