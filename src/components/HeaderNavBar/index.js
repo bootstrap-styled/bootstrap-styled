@@ -186,7 +186,7 @@ HeaderNavBar = styled(HeaderNavBar)`
     ${navbarToggleable(props.theme['$grid-breakpoints'])}
     ${transition(
       props.theme['$enable-transitions'],
-      `transform ${props.theme['$menu-push-transition-duration']}`
+      props.theme['$menu-push-transition-duration']
     )}
     
     
