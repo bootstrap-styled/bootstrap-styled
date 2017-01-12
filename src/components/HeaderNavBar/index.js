@@ -183,10 +183,12 @@ HeaderNavBar = styled(HeaderNavBar)`
     outline: 1px solid #E7EAEC;
     
     ${getFlexUtilities(true, props.theme['$grid-breakpoints'])}
+    
     ${navbarToggleable(props.theme['$grid-breakpoints'])}
-    ${transition(
+    
+      ${transition(
       props.theme['$enable-transitions'],
-      props.theme['$menu-push-transition-duration']
+      '.6s'
     )}
     
     
