@@ -187,7 +187,7 @@ HeaderNavBar = styled(HeaderNavBar)`
     ${navbarToggleable(props.theme['$grid-breakpoints'])}
     
       ${transition(
-      props.theme['$enable-transitions'],
+      true,
       '.6s'
     )}
     
@@ -197,7 +197,7 @@ HeaderNavBar = styled(HeaderNavBar)`
       position: relative;
       overflow: hidden;
       ${transition(
-        props.theme['$enable-transitions'],
+        true,
         'ease-in-out, .35s, max-height'
       )}
     

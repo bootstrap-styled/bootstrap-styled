@@ -255,7 +255,7 @@ export function navbar(
       right: ${$navbarPaddingX};
     }
 
-    ${navbarToggleable()}
+    ${navbarToggleable($gridBreakpoints)}
 
     /* Navigation
 

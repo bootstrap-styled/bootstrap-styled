@@ -50,7 +50,7 @@ MenuSlide = styled(MenuSlide)`
     top: ${props.theme['$navbar-height']};
     bottom: 0;
     ${transition(
-      props.theme['$enable-transitions'],
+      true,
       props.theme['$menu-slide-transition-duration'],
     )}
     
