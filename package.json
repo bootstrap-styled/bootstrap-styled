@@ -20,7 +20,6 @@
     "analyze:clean": "rimraf stats.json",
     "preanalyze": "npm run analyze:clean",
     "analyze": "node $(pwd)/internals/scripts/analyze.js",
-    "extract-intl": "babel-node --presets latest,stage-0 -- $(pwd)/internals/scripts/extract-intl.js",
     "npmcheckversion": "node $(pwd)/internals/scripts/npmcheckversion.js",
     "prebuild": "npm run build:clean && npm run test",
     "build": "cross-env NODE_ENV=production webpack --config $(pwd)/internals/webpack/webpack.prod.babel.js --color -p --progress",
