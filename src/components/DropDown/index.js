@@ -274,6 +274,16 @@ DropDown = styled(DropDown)`
       color: ${props.theme['$dropdown-header-color']};
       white-space: nowrap; /* as with > li > a */
     }
+    /* Dropdown section footers */
+    & .dropdown-footer {
+      display: block;
+      padding: ${props.theme['$dropdown-padding-y']} ${props.theme['$dropdown-item-padding-x']};
+      margin-bottom: 0; /* for use with heading elements */
+      font-size: ${props.theme['$font-size-sm']};
+      color: ${props.theme['$dropdown-header-color']};
+      white-space: nowrap; /* as with > li > a */
+    }
+    
 
     /* Backdrop to catch body clicks on mobile, etc. */
     & .dropdown-backdrop {
