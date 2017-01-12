@@ -71,6 +71,9 @@ export function getFlexUtilities(enableFlex = defaultProps['$enable-flex'], grid
           .align-self-${breakpoint}-baseline { align-self: baseline !important; }
           .align-self-${breakpoint}-stretch  { align-self: stretch !important; }
         `)}
+        
+        .justify-content-between { justify-content: space-between !important; }
+
     
       `);
     });
