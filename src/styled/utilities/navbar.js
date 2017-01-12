@@ -355,8 +355,6 @@ export function navbar(
     }
 
     ${navbarToggleable($gridBreakpoints)}
-
-
   `;
 }
 
