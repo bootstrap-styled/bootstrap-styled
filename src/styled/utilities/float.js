@@ -1,5 +1,5 @@
 import { floatLeft, floatRight, floatNone } from '../mixins/float';
-import { mediaBreakpointUp } from '../mixins/breakpoints';
+import { mediaBreakpointUp, breakpointInfix } from '../mixins/breakpoints';
 
 export const defaultProps = {
   '$grid-breakpoints': {
@@ -14,14 +14,15 @@ export const defaultProps = {
 export function getFloatUtilities(gridBreakpoints = defaultProps['$grid-breakpoints']) {
   const floatUtilityList = [];
   Object.keys(gridBreakpoints).forEach((breakpoint) => {
+    const infix = breakpointInfix(breakpoint, gridBreakpoints);
     const floatUtility = mediaBreakpointUp(breakpoint, gridBreakpoints, `
-      .float-${breakpoint}-left {
+      .float${infix}-left {
         ${floatLeft()}
       }
-      .float-${breakpoint}-right {
+      .float${infix}-right {
         ${floatRight()}
       }
-      .float-${breakpoint}-none {
+      .float${infix}-none {
         ${floatNone()}
       }
     `);

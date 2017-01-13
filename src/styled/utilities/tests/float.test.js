@@ -6,6 +6,6 @@ describe('bootstrap float utility', () => {
     const css = getFloatUtilities(defaultProps['$grid-breakpoints']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-463111699);
+    expect(fromJS({ css }).hashCode()).toEqual(-111904855);
   });
 });
