@@ -63,7 +63,6 @@ export function navbarToggleable(gridBreakpoints = defaultProps['$grid-breakpoin
             display: none;
           }
         `)}
-        }
       }
     `;
     navbarBreakpointList.push(navbarBreakpoint);
