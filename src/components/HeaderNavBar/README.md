@@ -28,11 +28,10 @@ Example Usage HeaderNavBarCollapse
     <HeaderNavBarCollapse
       navbar-light
       navbar-fixed-top
-      btnText="Kopax Ltd."
-      onClick={(e) => console.log('yoyo')}
       sendingLogoutRequest={this.props.sendingLogoutRequest}
       logout={this.props.logout}
       menuCollapsed={{
+      brandTitle: "Kopax Ltd.
         menu: (
           <Ul className="nav navbar-nav">
             <Li className="nav-item">
@@ -78,7 +77,6 @@ in the Header and a second `menuOffset` that is located to the side and will be 
     <HeaderNavBarPush
         navbar-light
         navbar-fixed-top
-        onClick={(e) => console.log('yoyo')}
         sendingLogoutRequest={this.props.sendingLogoutRequest}
         logout={this.props.logout}
         menuTop={{

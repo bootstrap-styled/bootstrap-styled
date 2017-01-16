@@ -8,6 +8,7 @@ export default function composeCollapse(HeaderNavBar) {
   class Collapse extends React.Component {
 
     static propTypes = {
+      brandTitle: PropTypes.string,
       className: PropTypes.string,
       onClick: PropTypes.func,
       menuCollapsed: shapeMenuCollapsed,
@@ -33,6 +34,7 @@ export default function composeCollapse(HeaderNavBar) {
         <HeaderNavBar
           className={className}
           composeCollapsed={{
+            brandTitle: this.props.brandTitle,
             isCollapsed: this.state.isCollapsed,
             onClick: this.handleClick,
             menuCollapsed,
