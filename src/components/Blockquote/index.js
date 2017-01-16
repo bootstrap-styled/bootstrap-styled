@@ -43,7 +43,7 @@ Blockquote = styled(Blockquote)`
       border-left: ${props.theme['$blockquote-border-width']} solid ${props.theme['$blockquote-border-color']};
     }
     
-    & .blockquote-footer {
+    &.blockquote-footer {
       display: block;
       font-size: 80%; /* back to default font-size */
       color: ${props.theme['$blockquote-small-color']};
