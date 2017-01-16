@@ -134,7 +134,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
               {this.props.composePush && (
                 <div>
                   <ButtonToggle
-                    className={cn('navbar-toggler float-xs-left ma-2', this.props.composePush.menuTop.buttonClass)}
+                    className="navbar-toggler float-xs-left ma-2"
                     type="button"
                     onClick={this.props.composePush.onClick}
                   />

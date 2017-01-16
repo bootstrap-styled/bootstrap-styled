@@ -1,4 +1,4 @@
-import HeaderNavBar, { composeCollapse, composeSlide } from './components/HeaderNavBar';
+import HeaderNavBar, { composeCollapse, composeSlide, composePush } from './components/HeaderNavBar';
 import alert from './styled/mixins/alert';
 import animation from './styled/mixins/animation';
 import backgroundVariant from './styled/mixins/background-variant';
@@ -133,6 +133,7 @@ export { default as CardDeck } from './components/CardDeck';
 export { default as CardGroup } from './components/CardGroup';
 export { default as DropDown } from './components/DropDown';
 export { default as MenuSlide } from './components/MenuSlide';
+export { default as MenuPush } from './components/MenuPush';
 export { default as NavBar } from './components/NavBar';
 // 3. Organisms
 export { default as Container } from './components/Container';
@@ -140,8 +141,10 @@ export { default as ContainerFluid } from './components/ContainerFluid';
 // 3.1. Create HeaderNavBar type
 const HeaderNavBarCollapse = composeCollapse(HeaderNavBar);
 const HeaderNavBarSlide = composeSlide(HeaderNavBar);
+const HeaderNavBarPush = composePush(HeaderNavBar);
+
 // 3.2 Export HeaderNavBar
-export { HeaderNavBar, HeaderNavBarCollapse, HeaderNavBarSlide };
+export { HeaderNavBar, HeaderNavBarCollapse, HeaderNavBarPush, HeaderNavBarSlide };
 // 4. Templates
 export { default as DocBootstrap } from './components/DocBootstrap';
 // 5. mixins
