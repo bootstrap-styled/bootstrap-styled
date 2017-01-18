@@ -76,7 +76,7 @@ v['$brand-inverse'] = v['$gray-dark'];
 //
 // Quickly modify global styling by enabling or disabling optional features.
 
-v['$enable-flex'] = false;
+v['$enable-flex'] = true;
 v['$enable-rounded'] = true;
 v['$enable-shadows'] = true;
 v['$enable-gradients'] = false;
@@ -942,6 +942,9 @@ v['$pre-scrollable-max-height'] = '340px';
 v['$menu-slide-transition-duration'] = '.6s';
 v['$menu-push-transition-duration'] = '.6s';
 
+// MenuPush component
+v['$menu-push-mini-width'] = '75px';
+v['$menu-push-width'] = '220px';
 
 // ============================================================================================================================
 //                 Unused code in Bootstrap v4.0.0alpha.5 compared to Bootstrap v3.0.0
