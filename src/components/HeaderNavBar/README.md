@@ -23,15 +23,17 @@ Example Usage HeaderNavBarCollapse
 ----------------------------------
 
 1. Different structure than the other `HeaderNavBars`.
+1. Button1 refers to a Component button that is importer in HeaderNavBarCollapse. If not specified it will apply another Button Component set by default.
 
 
     <HeaderNavBarCollapse
       navbar-light
       navbar-fixed-top
+      button={Button1}
       sendingLogoutRequest={this.props.sendingLogoutRequest}
       logout={this.props.logout}
       menuCollapsed={{
-      brandTitle: "Kopax Ltd.
+        brandTitle: "Kopax Ltd.
         menu: (
           <Ul className="nav navbar-nav">
             <Li className="nav-item">

@@ -203,9 +203,12 @@ HeaderNavBar = styled(HeaderNavBar)`
     
     outline: 1px solid #E7EAEC;
     
-    ${getFlexUtilities(true, props.theme['$grid-breakpoints'])}
+    ${getFlexUtilities(props.theme['$enable-flex'], props.theme['$grid-breakpoints'])}
         
-    ${transition(true, '.6s')}
+    ${transition(
+      props.theme['$enable-transitions'],
+      '.6s'
+    )}
     
     ${ifElse(
       props.composeCollapsed,
@@ -218,7 +221,7 @@ HeaderNavBar = styled(HeaderNavBar)`
       position: relative;
       overflow: hidden;
       ${transition(
-        true,
+        props.theme['$enable-transitions'],
         'ease-in-out, .35s, max-height'
       )}
     
