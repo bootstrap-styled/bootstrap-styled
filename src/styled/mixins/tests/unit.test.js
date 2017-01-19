@@ -76,4 +76,9 @@ describe('kopax unit mixins', () => {
     const value = math.divide('0.1em', -2);
     expect(value).toEqual('-0.05em');
   });
+  it('should throw error if wrong arguments are passed', () => {
+    expect(function test() {        // eslint-disable-line  prefer-arrow-callback
+      detectUnit('test-function');
+    }).toThrowError("detectUnit can't find unit for test-function");
+  });
 });

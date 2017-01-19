@@ -59,6 +59,7 @@ describe('<ButtonGroup />', () => {
       children,
     });
     expect(renderedComponent.find('div').hasClass('btn-toolbar')).toEqual(true);
+    expect(renderedComponent.find('div').hasClass('btn-group')).toEqual(false);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponent({

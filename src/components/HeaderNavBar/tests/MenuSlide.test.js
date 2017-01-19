@@ -12,7 +12,7 @@ import theme from 'config';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 
-import MenuSlide from '../index';
+import MenuSlide from '../MenuSlide';
 
 const children = (<h1>test</h1>);
 

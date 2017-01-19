@@ -8,7 +8,7 @@ import theme from 'config';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 
-import MenuAccount from '../index';
+import MenuAccount from '../MenuAccount';
 
 const children = (<h1>test</h1>);
 

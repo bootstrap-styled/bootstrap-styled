@@ -24,10 +24,15 @@ const menu = (
   </ul>
 );
 
+const ButtonTest = (<button><span>&quothello&quot</span></button>);
+
+const clickTest = jest.fn();
+clickTest.mockReturnValue('test-click-additional');
+
 const renderComponent = (props) => shallow(
   <HeaderNavBar
     menu={props.menu}
-    btnText={props.btnText}
+    button={props.button}
     container={props.container}
     composeCollapsed={props.composeCollapsed}
     composeSlide={props.composeSlide}
@@ -45,7 +50,7 @@ const renderComponentUsingTheme = (props) => mount(
   <ThemeProvider theme={theme}>
     <HeaderNavBar
       menu={props.menu}
-      btnText={props.btnText}
+      button={props.button}
       container={props.container}
       composeCollapsed={props.composeCollapsed}
       composeSlide={props.composeSlide}
@@ -55,6 +60,7 @@ const renderComponentUsingTheme = (props) => mount(
       navbar-light={props['navbar-light']}
       navbar-static-top={props['navbar-static-top']}
       navbar-fixed-top={props['navbar-fixed-top']}
+      onClick={props.onClick}
     />
   </ThemeProvider>
 );
@@ -78,13 +84,6 @@ describe('<HeaderNavBar />', () => {
     });
     expect(renderedComponent.find('header').hasClass('navbar')).toBe(true);
     expect(renderedComponent.find('header').hasClass('bd-navbar')).toBe(true);
-  });
-  it('should have an attribute btnText', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      menu,
-      btnText: 'btnTest',
-    });
-    expect(renderedComponent.find('HeaderNavBar').props().btnText).toEqual('btnTest');
   });
   it('should have an attribute container', () => {
     const renderedComponent = renderComponentUsingTheme({
@@ -129,5 +128,13 @@ describe('<HeaderNavBar />', () => {
       'navbar-fixed-top': true,
     });
     expect(renderedComponent.find('HeaderNavBar').props()['navbar-fixed-top']).toEqual(true);
+  });
+
+  it('should add to the  onCLick function if props onClick is set', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      menu,
+      button: ButtonTest,
+    });
+    expect(renderedComponent.find('HeaderNavBar').props().button).toEqual(ButtonTest);
   });
 });

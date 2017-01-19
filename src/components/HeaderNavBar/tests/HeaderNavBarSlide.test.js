@@ -48,12 +48,16 @@ const menuOffset = {
 
 const HeaderNavBarSlide = composeSlide(HeaderNavBar);
 
+const clickTest = jest.fn();
+clickTest.mockReturnValue('test-click-additional');
+
 const renderComponentUsingTheme = (props) => mount(
   <ThemeProvider theme={theme}>
     <HeaderNavBarSlide
       className={props.className}
       menuTop={menuTop}
       menuOffset={menuOffset}
+      onClick={props.onClick}
     />
   </ThemeProvider>
 );
@@ -67,5 +71,15 @@ describe('<HeaderNavBarSlide />', () => {
     expect(renderedComponent.find('MenuSlide').props().active).toBe(false);
     renderedComponent.find('button').simulate('click');
     expect(renderedComponent.find('MenuSlide').props().active).toBe(true);
+  });
+  it('should add to the  onCLick function if props onClick is set', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      menuAccount,
+      menu,
+      onClick: clickTest,
+    });
+    expect(renderedComponent.find('Slide').props().onClick).toBeDefined();
+    renderedComponent.find('button').simulate('click');
+    expect(clickTest()).toBe('test-click-additional');
   });
 });

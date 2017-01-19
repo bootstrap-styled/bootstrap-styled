@@ -9,7 +9,7 @@ import theme from 'config';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 
-import MenuCollapse from '../index';
+import MenuCollapse from '../MenuCollapse';
 
 const children = (<h1>test</h1>);
 

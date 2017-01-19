@@ -50,12 +50,17 @@ const menuOffset = {
 
 const HeaderNavBarPush = composePush(HeaderNavBar);
 
+const clickTest = jest.fn();
+clickTest.mockReturnValue('test-click-additional');
+
 const renderComponentUsingTheme = (props) => mount(
   <ThemeProvider theme={theme}>
     <HeaderNavBarPush
       className={props.className}
+      isMini={props.isMini}
       menuTop={menuTop}
       menuOffset={menuOffset}
+      onClick={props.onClick}
     />
   </ThemeProvider>
 );
@@ -66,9 +71,26 @@ describe('<HeaderNavBarPush />', () => {
       menuAccount,
       menu,
     });
-
     expect(renderedComponent.find('MenuPush').props().active).toBe(false);
     renderedComponent.find('button').simulate('click');
     expect(renderedComponent.find('MenuPush').props().active).toBe(true);
+  });
+  it('should override default onCLick function is props onClick is set', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      menuAccount,
+      menu,
+      onClick: clickTest,
+    });
+    expect(renderedComponent.find('Push').props().onClick).toBeDefined();
+    renderedComponent.find('button').simulate('click');
+    expect(clickTest()).toBe('test-click-additional');
+  });
+  it('should have isMini props', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      menuAccount,
+      menu,
+      isMini: true,
+    });
+    expect(renderedComponent.find('HeaderNavBar').props().isMini).toBe(true);
   });
 });

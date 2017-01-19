@@ -4,11 +4,10 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from 'config';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import Img from '../index';
 
-const children = (<h1>Test</h1>);
 const src = 'test.png';
 const alt = 'test';
 const width = '50px';
@@ -23,12 +22,10 @@ const renderComponent = (props = {}) => shallow(
     height={height}
     useMap={useMap}
     {...props}
-  >
-    {children}
-  </Img>
+  />
 );
 
-const renderComponentUsingTheme = (props = {}) => shallow(
+const renderComponentUsingTheme = (props = {}) => mount(
   <ThemeProvider theme={theme}>
     <Img
       src={src}
@@ -37,9 +34,7 @@ const renderComponentUsingTheme = (props = {}) => shallow(
       height={height}
       useMap={useMap}
       {...props}
-    >
-      {children}
-    </Img>
+    />
   </ThemeProvider>
 );
 
@@ -52,15 +47,6 @@ describe('<Img>', () => {
     const renderedComponent = renderComponentUsingTheme();
     expect(renderedComponent.find('img')).toBeDefined();
   });
-  it('should have children', () => {
-    const renderedComponent = renderComponent();
-    expect(renderedComponent.contains(children)).toEqual(true);
-  });
-  it('should have children with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme();
-    expect(renderedComponent.contains(children)).toEqual(true);
-  });
-
   it('should have an src attribute', () => {
     const renderedComponent = renderComponent();
     expect(renderedComponent.find('src', src)).toBeDefined();
@@ -78,27 +64,27 @@ describe('<Img>', () => {
     const renderedComponent = renderComponentUsingTheme();
     expect(renderedComponent.find('alt', alt)).toBeDefined();
   });
-  it('should have an alt attribute', () => {
+  it('should have an width attribute', () => {
     const renderedComponent = renderComponent();
     expect(renderedComponent.find('width', width)).toBeDefined();
   });
-  it('should have an src attribute', () => {
+  it('should have an width attribute', () => {
     const renderedComponent = renderComponentUsingTheme();
     expect(renderedComponent.find('width', width)).toBeDefined();
   });
-  it('should have an alt attribute', () => {
+  it('should have an height attribute', () => {
     const renderedComponent = renderComponent();
     expect(renderedComponent.find('height', height)).toBeDefined();
   });
-  it('should have an src attribute', () => {
+  it('should have an height attribute', () => {
     const renderedComponent = renderComponentUsingTheme();
     expect(renderedComponent.find('height', height)).toBeDefined();
   });
-  it('should have an alt attribute', () => {
+  it('should have an useMap attribute', () => {
     const renderedComponent = renderComponent();
     expect(renderedComponent.find('useMap', useMap)).toBeDefined();
   });
-  it('should have an src attribute', () => {
+  it('should have an useMap attribute', () => {
     const renderedComponent = renderComponentUsingTheme();
     expect(renderedComponent.find('useMap', useMap)).toBeDefined();
   });
