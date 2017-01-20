@@ -11,6 +11,7 @@ export default function composePush(HeaderNavBar) {
     static propTypes = {
       className: PropTypes.string,
       onClick: PropTypes.func,
+      isMini: PropTypes.bool,
       menuTop: shapeMenuTopPush,
       menuOffset: shapeMenuOffsetPush,
     }
@@ -37,6 +38,7 @@ export default function composePush(HeaderNavBar) {
           composePush={{
             isHidden: this.state.isHidden,
             onClick: this.handleClick,
+            isMini: this.props.isMini,
             menuTop,
             menuOffset,
           }}

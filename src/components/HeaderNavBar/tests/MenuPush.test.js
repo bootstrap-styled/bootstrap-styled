@@ -13,7 +13,7 @@ import theme from 'config';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 
-import MenuPush from '../index';
+import MenuPush from '../MenuPush';
 
 const children = (<h1>test</h1>);
 

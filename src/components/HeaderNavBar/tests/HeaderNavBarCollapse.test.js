@@ -30,7 +30,6 @@ const menuCollapsed = {
 };
 
 const HeaderNavBarCollapse = composeCollapse(HeaderNavBar);
-
 const clickTest = jest.fn();
 clickTest.mockReturnValue('test-click-additional');
 
@@ -71,5 +70,6 @@ describe('<HeaderNavBarCollapse />', () => {
     expect(renderedComponent.find('Collapse').props().onClick).toBeDefined();
     renderedComponent.find('button').simulate('click');
     expect(clickTest()).toBe('test-click-additional');
+    console.log(renderedComponent.debug());
   });
 });

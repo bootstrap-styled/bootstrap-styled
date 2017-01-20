@@ -566,7 +566,7 @@ v['$zindex-navbar-fixed'] = '1030';
 v['$zindex-navbar-sticky'] = '1030';
 v['$zindex-modal-bg'] = '1040';
 v['$zindex-modal'] = '1050';
-
+v['$zindex-menu-push'] = '2000';
 // 16. Navbar
 
 v['$navbar-height'] = '70px';
@@ -603,7 +603,9 @@ v['$navbar-light-toggler-border'] = 'rgba(0,0,0,.1)';
 
 v['$header-max-height'] = '450px';
 v['$header-collapsed-max-height'] = '1000px';
-
+v['$header-navbar-border-color'] = v['$gray-lighter'];
+v['$header-navbar-border-width'] = v['$border-width'];
+v['$header-navbar-transition-duration'] = '.6s';
 // 17. Navs
 
 v['$nav-item-margin'] = '.2rem';
@@ -943,8 +945,11 @@ v['$menu-slide-transition-duration'] = '.6s';
 v['$menu-push-transition-duration'] = '.6s';
 
 // MenuPush component
+v['$menu-push-bg'] = 'white';
 v['$menu-push-mini-width'] = '75px';
 v['$menu-push-width'] = '220px';
+v['$menu-push-full-width'] = '100%';
+
 
 // ============================================================================================================================
 //                 Unused code in Bootstrap v4.0.0alpha.5 compared to Bootstrap v3.0.0

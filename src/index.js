@@ -102,7 +102,6 @@ export { default as Li } from './components/Li';
 export { default as ListGroup } from './components/ListGroup';
 export { default as Map } from './components/Map';
 export { default as Mark } from './components/Mark';
-export { default as MenuCollapse } from './components/MenuCollapse';
 export { default as Nav } from './components/Nav';
 export { default as Ol } from './components/Ol';
 export { default as Option } from './components/Option';
@@ -132,8 +131,6 @@ export { default as CardColumns } from './components/CardColumns';
 export { default as CardDeck } from './components/CardDeck';
 export { default as CardGroup } from './components/CardGroup';
 export { default as DropDown } from './components/DropDown';
-export { default as MenuSlide } from './components/MenuSlide';
-export { default as MenuPush } from './components/MenuPush';
 export { default as NavBar } from './components/NavBar';
 // 3. Organisms
 export { default as Container } from './components/Container';

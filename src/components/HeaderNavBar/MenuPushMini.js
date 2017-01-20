@@ -10,22 +10,17 @@
  */
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import cn from 'classnames';
 import theme from 'config';
 
 import { transition } from '../../styled/mixins/transition';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
-import 
+import MenuPush from './MenuPush';
 const defaultProps = { theme };
 
 // eslint-disable-next-line no-class-assign
-MenuPush = styled(MenuPush)`
+const MenuPushMini = styled(MenuPush)`
   ${(props) => `
-    background-color: #243746;
-    z-index: 2001;
-    position: fixed;
-    top: 0;
-    height: 100%;
+
     width: ${props.theme['$menu-push-mini-width']};
     ${transition(
       props.theme['$enable-transitions'],
@@ -48,7 +43,7 @@ MenuPush = styled(MenuPush)`
           opacity: 1;
           transform: translateX(0);
           width: ${props.theme['$menu-push-width']};
-          &.active {
+         &.active {
             transform: translateX(0);
             width: ${props.theme['$menu-push-mini-width']};
           }
@@ -78,6 +73,6 @@ MenuPush = styled(MenuPush)`
 `;
 
 
-MenuPush.defaultProps = defaultProps;
+MenuPushMini.defaultProps = defaultProps;
 
-export default MenuPush;
+export default MenuPushMini;

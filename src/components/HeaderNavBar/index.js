@@ -14,10 +14,11 @@ import theme from 'config';
 import Header from '../Header';
 import A from '../A';
 import Nav from '../Nav';
-import MenuCollapse from '../MenuCollapse';
-import MenuSlide from '../MenuSlide';
-import MenuPush from '../MenuPush';
-import MenuAccount from '../MenuAccount';
+import MenuCollapse from './MenuCollapse';
+import MenuSlide from './MenuSlide';
+import MenuPushMini from './MenuPushMini';
+import MenuPushSimple from './MenuPushSimple';
+import MenuAccount from './MenuAccount';
 import Container from '../Container';
 import ContainerFluid from '../ContainerFluid';
 import Button from '../Button';
@@ -56,7 +57,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
   static propTypes = {
     className: PropTypes.string,
     container: PropTypes.bool,
-    button: PropTypes.bool,
+    button: PropTypes.node,
     composeCollapsed: PropTypes.shape({
       brandTitle: PropTypes.string,
       isCollapsed: PropTypes.bool,
@@ -72,6 +73,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     composePush: PropTypes.shape({
       onClick: PropTypes.func.isRequired,
       isHidden: PropTypes.bool,
+      isMini: PropTypes.bool,
       menuOffset: shapeMenuOffsetPush,
       menuTop: shapeMenuTopPush,
     }),
@@ -125,7 +127,25 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
 
     const Wrapper = this.wrapper;
     const ButtonToggle = this.button;
-
+    // TODO Checkout MaterialsUI for improvements on rendering display! <=======================
+    // const containerCollapse = (this.props.composeCollapsed) ? (
+    //   <Container>
+    //     <div className="d-flex justify-content-between hidden-lg-up">
+    //       <A className="navbar-brand" href="/">
+    //         {this.props.composeCollapsed.brandTitle}
+    //       </A>
+    //       <ButtonToggle
+    //         className="navbar-toggler"
+    //         type="button"
+    //         onClick={this.props.composeCollapsed.onClick}
+    //       />
+    //     </div>
+    //     <MenuCollapse active={this.props.composeCollapsed.isCollapsed}>
+    //       {this.props.composeCollapsed.menuCollapsed.menu}
+    //     </MenuCollapse>
+    //   </Container>
+    // ) : null;
+    //
     return (
       <div>
         <Header className={cssClasses} ref={(node) => { this.node = node; }}>
@@ -184,14 +204,23 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
             {this.props.composeSlide.menuOffset.menu}
           </MenuSlide>
         )}
-        {this.props.composePush && (
-          <MenuPush
+        {this.props.composePush && this.props.composePush.isMini && (
+          <MenuPushMini
             active={!this.props.composePush.isHidden}
             menu-right={this.props.composePush.menuOffset.isRight}
             menu-left={this.props.composePush.menuOffset.isLeft}
           >
             {this.props.composePush.menuOffset.menu}
-          </MenuPush>
+          </MenuPushMini>
+        )}
+        {this.props.composePush && !this.props.composePush.isMini && (
+          <MenuPushSimple
+            active={!this.props.composePush.isHidden}
+            menu-right={this.props.composePush.menuOffset.isRight}
+            menu-left={this.props.composePush.menuOffset.isLeft}
+          >
+            {this.props.composePush.menuOffset.menu}
+          </MenuPushSimple>
         )}
       </div>
     );
@@ -201,13 +230,13 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
 HeaderNavBar = styled(HeaderNavBar)`
   ${(props) => `
     
-    outline: 1px solid #E7EAEC;
+    outline: ${props.theme['$header-navbar-border-width']} 1px solid ${props.theme['$header-navbar-border-color']};
     
     ${getFlexUtilities(props.theme['$enable-flex'], props.theme['$grid-breakpoints'])}
         
     ${transition(
       props.theme['$enable-transitions'],
-      '.6s'
+      props.theme['$header-navbar-transition-duration'],
     )}
     
     ${ifElse(
