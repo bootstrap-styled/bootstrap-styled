@@ -34,7 +34,6 @@ const MenuPushMini = styled(MenuPush)`
       &.active {
         transform: translateX(0);
         opacity: 1;
-
       }
       ${mediaBreakpointUp(
         'md',

@@ -8,7 +8,7 @@ import theme from 'config';
 import { mount } from 'enzyme';
 import React from 'react';
 
-import HeaderNavBar, { composeCollapse } from '../index';
+import HeaderNavBar, { compCollapse } from '../index';
 
 const menu = (
   <ul>
@@ -29,7 +29,7 @@ const menuCollapsed = {
   isCollapsed: false,
 };
 
-const HeaderNavBarCollapse = composeCollapse(HeaderNavBar);
+const HeaderNavBarCollapse = compCollapse(HeaderNavBar);
 const clickTest = jest.fn();
 clickTest.mockReturnValue('test-click-additional');
 
@@ -70,6 +70,5 @@ describe('<HeaderNavBarCollapse />', () => {
     expect(renderedComponent.find('Collapse').props().onClick).toBeDefined();
     renderedComponent.find('button').simulate('click');
     expect(clickTest()).toBe('test-click-additional');
-    console.log(renderedComponent.debug());
   });
 });

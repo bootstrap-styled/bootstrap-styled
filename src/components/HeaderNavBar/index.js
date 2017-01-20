@@ -35,9 +35,9 @@ import collapse from './composeCollapse';
 import slide from './composeSlide';
 import push from './composePush';
 
-export const composeCollapse = collapse;
-export const composeSlide = slide;
-export const composePush = push;
+export const compCollapse = collapse;
+export const compSlide = slide;
+export const compPush = push;
 
 const defaultProps = {
   theme,
@@ -110,11 +110,19 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
   }
 
   render() {
+    const {
+      className,
+      composeCollapsed,
+      composePush,
+      composeSlide,
+    } = this.props;
+
     const classConfig = [];
-    if (this.props.composeCollapsed) {
+    if (composeCollapsed) {
       classConfig.push('navbar-toggleable-md');
     }
-    const cssClasses = cn('navbar', 'bd-navbar', classConfig, this.props.className, {
+
+    const cssClasses = cn('navbar', 'bd-navbar', classConfig, className, {
       'navbar-dark': this.props['navbar-dark'],
       'bg-inverse': this.props['navbar-dark'],
       'navbar-light': this.props['navbar-light'],
@@ -127,101 +135,95 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
 
     const Wrapper = this.wrapper;
     const ButtonToggle = this.button;
-    // TODO Checkout MaterialsUI for improvements on rendering display! <=======================
-    // const containerCollapse = (this.props.composeCollapsed) ? (
-    //   <Container>
-    //     <div className="d-flex justify-content-between hidden-lg-up">
-    //       <A className="navbar-brand" href="/">
-    //         {this.props.composeCollapsed.brandTitle}
-    //       </A>
-    //       <ButtonToggle
-    //         className="navbar-toggler"
-    //         type="button"
-    //         onClick={this.props.composeCollapsed.onClick}
-    //       />
-    //     </div>
-    //     <MenuCollapse active={this.props.composeCollapsed.isCollapsed}>
-    //       {this.props.composeCollapsed.menuCollapsed.menu}
-    //     </MenuCollapse>
-    //   </Container>
-    // ) : null;
-    //
+
+    const containerCollapse = (composeCollapsed) ? (
+      <Container>
+        <div className="d-flex justify-content-between hidden-lg-up">
+          <A className="navbar-brand" href="/">
+            {composeCollapsed.brandTitle}
+          </A>
+          <ButtonToggle
+            className="navbar-toggler"
+            type="button"
+            onClick={composeCollapsed.onClick}
+          />
+        </div>
+        <MenuCollapse active={composeCollapsed.isCollapsed}>
+          {composeCollapsed.menuCollapsed.menu}
+        </MenuCollapse>
+      </Container>
+    ) : null;
+
+    const navTopPush = (composePush) ? (
+      <div>
+        <ButtonToggle
+          className="navbar-toggler hidden-md-up float-xs-left ma-4"
+          type="button"
+          onClick={composePush.onClick}
+        />
+        <MenuAccount>
+          {composePush.menuTop.menuAccount}
+        </MenuAccount>
+      </div>
+    ) : null;
+
+    const navTopSlide = (composeSlide) ? (
+      <div>
+        <ButtonToggle
+          className="navbar-toggler float-xs-left ma-3"
+          type="button"
+          onClick={composeSlide.onClick}
+        />
+        <MenuAccount>
+          {composeSlide.menuTop.menuAccount}
+        </MenuAccount>
+      </div>
+    ) : null;
+
+    const containerPushMini = (composePush && composePush.isMini) ? (
+      <MenuPushMini
+        active={!composePush.isHidden}
+        menu-right={composePush.menuOffset.isRight}
+        menu-left={composePush.menuOffset.isLeft}
+      >
+        {composePush.menuOffset.menu}
+      </MenuPushMini>
+    ) : null;
+
+    const containerPush = (composePush && !composePush.isMini) ? (
+      <MenuPushSimple
+        active={!composePush.isHidden}
+        menu-right={composePush.menuOffset.isRight}
+        menu-left={composePush.menuOffset.isLeft}
+      >
+        {composePush.menuOffset.menu}
+      </MenuPushSimple>
+    ) : null;
+
+    const containerSlide = (composeSlide) ? (
+      <MenuSlide
+        active={!composeSlide.isHidden}
+        menu-right={composeSlide.menuOffset.isRight}
+        menu-left={composeSlide.menuOffset.isLeft}
+      >
+        {composeSlide.menuOffset.menu}
+      </MenuSlide>
+    ) : null;
+
     return (
       <div>
         <Header className={cssClasses} ref={(node) => { this.node = node; }}>
           <Wrapper>
             <Nav>
-              {this.props.composePush && (
-                <div>
-                  <ButtonToggle
-                    className="navbar-toggler float-xs-left ma-2"
-                    type="button"
-                    onClick={this.props.composePush.onClick}
-                  />
-                  <MenuAccount>
-                    {this.props.composePush.menuTop.menuAccount}
-                  </MenuAccount>
-                </div>
-              )}
-              {this.props.composeSlide && (
-                <div>
-                  <ButtonToggle
-                    className="navbar-toggler float-xs-left ma-3"
-                    type="button"
-                    onClick={this.props.composeSlide.onClick}
-                  />
-                  <MenuAccount>
-                    {this.props.composeSlide.menuTop.menuAccount}
-                  </MenuAccount>
-                </div>
-              )}
-              {this.props.composeCollapsed && (
-                <Container>
-                  <div className="d-flex justify-content-between hidden-lg-up">
-                    <A className="navbar-brand" href="/">
-                      {this.props.composeCollapsed.brandTitle}
-                    </A>
-                    <ButtonToggle
-                      className="navbar-toggler"
-                      type="button"
-                      onClick={this.props.composeCollapsed.onClick}
-                    />
-                  </div>
-                  <MenuCollapse active={this.props.composeCollapsed.isCollapsed}>
-                    {this.props.composeCollapsed.menuCollapsed.menu}
-                  </MenuCollapse>
-                </Container>
-              )}
+              {navTopPush}
+              {navTopSlide}
+              {containerCollapse}
             </Nav>
           </Wrapper>
         </Header>
-        {this.props.composeSlide && (
-          <MenuSlide
-            active={!this.props.composeSlide.isHidden}
-            menu-right={this.props.composeSlide.menuOffset.isRight}
-            menu-left={this.props.composeSlide.menuOffset.isLeft}
-          >
-            {this.props.composeSlide.menuOffset.menu}
-          </MenuSlide>
-        )}
-        {this.props.composePush && this.props.composePush.isMini && (
-          <MenuPushMini
-            active={!this.props.composePush.isHidden}
-            menu-right={this.props.composePush.menuOffset.isRight}
-            menu-left={this.props.composePush.menuOffset.isLeft}
-          >
-            {this.props.composePush.menuOffset.menu}
-          </MenuPushMini>
-        )}
-        {this.props.composePush && !this.props.composePush.isMini && (
-          <MenuPushSimple
-            active={!this.props.composePush.isHidden}
-            menu-right={this.props.composePush.menuOffset.isRight}
-            menu-left={this.props.composePush.menuOffset.isLeft}
-          >
-            {this.props.composePush.menuOffset.menu}
-          </MenuPushSimple>
-        )}
+        {containerSlide}
+        {containerPushMini}
+        {containerPush}
       </div>
     );
   }
@@ -230,7 +232,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
 HeaderNavBar = styled(HeaderNavBar)`
   ${(props) => `
     
-    outline: ${props.theme['$header-navbar-border-width']} 1px solid ${props.theme['$header-navbar-border-color']};
+    outline: ${props.theme['$header-navbar-border-width']} solid ${props.theme['$header-navbar-border-color']};
     
     ${getFlexUtilities(props.theme['$enable-flex'], props.theme['$grid-breakpoints'])}
         

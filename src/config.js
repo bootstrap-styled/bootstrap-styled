@@ -945,7 +945,7 @@ v['$menu-slide-transition-duration'] = '.6s';
 v['$menu-push-transition-duration'] = '.6s';
 
 // MenuPush component
-v['$menu-push-bg'] = 'white';
+v['$menu-push-bg'] = 'black';
 v['$menu-push-mini-width'] = '75px';
 v['$menu-push-width'] = '220px';
 v['$menu-push-full-width'] = '100%';

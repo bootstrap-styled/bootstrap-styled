@@ -8,7 +8,7 @@ import theme from 'config';
 import { mount } from 'enzyme';
 import React from 'react';
 
-import HeaderNavBar, { composeSlide } from '../index';
+import HeaderNavBar, { compSlide } from '../index';
 
 const menuAccount = (
   <ul>
@@ -46,7 +46,7 @@ const menuOffset = {
 };
 
 
-const HeaderNavBarSlide = composeSlide(HeaderNavBar);
+const HeaderNavBarSlide = compSlide(HeaderNavBar);
 
 const clickTest = jest.fn();
 clickTest.mockReturnValue('test-click-additional');

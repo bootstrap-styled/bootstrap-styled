@@ -1,4 +1,4 @@
-import HeaderNavBar, { composeCollapse, composeSlide, composePush } from './components/HeaderNavBar';
+import HeaderNavBar, { compCollapse, compSlide, compPush } from './components/HeaderNavBar';
 import alert from './styled/mixins/alert';
 import animation from './styled/mixins/animation';
 import backgroundVariant from './styled/mixins/background-variant';
@@ -136,9 +136,9 @@ export { default as NavBar } from './components/NavBar';
 export { default as Container } from './components/Container';
 export { default as ContainerFluid } from './components/ContainerFluid';
 // 3.1. Create HeaderNavBar type
-const HeaderNavBarCollapse = composeCollapse(HeaderNavBar);
-const HeaderNavBarSlide = composeSlide(HeaderNavBar);
-const HeaderNavBarPush = composePush(HeaderNavBar);
+const HeaderNavBarCollapse = compCollapse(HeaderNavBar);
+const HeaderNavBarSlide = compSlide(HeaderNavBar);
+const HeaderNavBarPush = compPush(HeaderNavBar);
 
 // 3.2 Export HeaderNavBar
 export { HeaderNavBar, HeaderNavBarCollapse, HeaderNavBarPush, HeaderNavBarSlide };
