@@ -2,12 +2,12 @@
  * Testing our Blockquote component
  */
 import { ThemeProvider } from 'styled-components';
-import theme from 'config';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 
 import Blockquote from '../index';
+import theme from '../../../config';
 
 const children = (<h1>Test</h1>);
 

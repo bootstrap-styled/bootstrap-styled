@@ -5,9 +5,8 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from 'config';
 import onClickOutside from 'react-onclickoutside';
-
+import theme from '../../config';
 import Button from '../Button';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { boxShadow } from '../../styled/mixins/box-shadow';

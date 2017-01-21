@@ -2,6 +2,8 @@
 /**
  * Testing our NavBar component
  */
+import { ThemeProvider } from 'styled-components';
+import React from 'react';
 
 import DropDown from '../index';
 import Button from '../../Button';
@@ -9,12 +11,10 @@ import Ul from '../../Ul';
 import Li from '../../Li';
 import A from '../../A';
 
-import { ThemeProvider } from 'styled-components';
-import theme from 'config';
+import theme from '../../../config';
 
 import { mount } from 'enzyme';
 
-import React from 'react';
 
 const dropdown = (<Ul dropdown-menu>
   <Li><A dropdown-item href="#">Item 1</A></Li>

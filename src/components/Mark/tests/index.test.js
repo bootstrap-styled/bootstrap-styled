@@ -3,11 +3,12 @@
  */
 
 import { ThemeProvider } from 'styled-components';
-import theme from 'config';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import Mark from '../index';
+import theme from '../../../config';
+
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(

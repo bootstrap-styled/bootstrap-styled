@@ -6,7 +6,7 @@ import { mount } from 'enzyme';
 import React from 'react';
 
 import { ThemeProvider } from 'styled-components';
-import theme from 'config';
+import theme from '../../../config';
 
 import Close from '../index';
 

@@ -2,12 +2,12 @@
  * Testing our Hr component
  */
 import { ThemeProvider } from 'styled-components';
-import theme from 'config';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 
 import Hr from '../index';
+import theme from '../../../config';
 
 const renderComponent = (props = {}) => shallow(
   <Hr

@@ -5,7 +5,7 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from 'config';
+import theme from '../../config';
 import { ifElse } from '../../styled/mixins/conditional';
 
 const defaultProps = { theme };

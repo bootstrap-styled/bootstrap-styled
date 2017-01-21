@@ -7,7 +7,7 @@
 
 import styled from 'styled-components';
 import React, { PropTypes } from 'react';
-import theme from 'config';
+import theme from '../../config';
 import { imgFluid } from '../../styled/mixins/image';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { borderRadius } from '../../styled/mixins/border-radius';

@@ -2,12 +2,12 @@
  * Testing our Summary component
  */
 import { ThemeProvider } from 'styled-components';
-import theme from 'config';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 
 import Summary from '../index';
+import theme from '../../../config';
 
 const children = (<h1>Test</h1>);
 

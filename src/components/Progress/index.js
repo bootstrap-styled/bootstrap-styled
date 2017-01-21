@@ -3,7 +3,7 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
-import theme from 'config';
+import theme from '../../config';
 import { progressVariant } from '../../styled/mixins/progress';
 import { borderRadius, borderLeftRadius, borderRightRadius } from '../../styled/mixins/border-radius';
 import { boxShadow } from '../../styled/mixins/box-shadow';

@@ -1,10 +1,10 @@
 /**
  * Testing our link component
  */
-import theme from 'config';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
+import theme from '../../../config';
 
 import A from '../index';
 

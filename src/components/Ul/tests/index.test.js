@@ -5,7 +5,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { ThemeProvider } from 'styled-components';
-import theme from 'config';
+import theme from '../../../config';
 import Ul from '../index';
 import Li from '../../Li';
 

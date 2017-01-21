@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme from 'config';
+import theme from '../../config';
 
 const defaultProps = { theme };
 

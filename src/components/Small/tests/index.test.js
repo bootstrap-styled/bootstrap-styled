@@ -2,10 +2,10 @@
  * Testing our Small component
  */
 import { ThemeProvider } from 'styled-components';
-import theme from 'config';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
+import theme from '../../../config';
 
 import Small from '../index';
 

@@ -5,7 +5,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from 'config';
+import theme from '../../config';
 import { navbar } from '../../styled/utilities/navbar';
 
 const defaultProps = { theme };

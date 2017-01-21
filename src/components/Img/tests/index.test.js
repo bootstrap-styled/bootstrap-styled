@@ -3,10 +3,10 @@
  */
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import theme from 'config';
 import { shallow, mount } from 'enzyme';
 
 import Img from '../index';
+import theme from '../../../config';
 
 const src = 'test.png';
 const alt = 'test';

@@ -5,7 +5,7 @@
  */
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from 'config';
+import theme from '../../config';
 import { typography } from '../../styled/utilities/typography';
 
 const defaultProps = { theme };

@@ -17,7 +17,7 @@ module.exports = require('./webpack.base.babel')({
     umdNamedDefine: true,
     // chunkFilename: '[name].[chunkhash].chunk.js',
   },
-
+  devtool: 'source-map',
   plugins: [
 
   ],

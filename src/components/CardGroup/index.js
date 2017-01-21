@@ -6,7 +6,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from 'config';
+import theme from '../../config';
 import { clearfix } from '../../styled/mixins/clearfix';
 import { hover } from '../../styled/mixins/hover';
 import { borderRadius, borderRightRadius, borderTopRadius, borderBottomRadius, borderLeftRadius } from '../../styled/mixins/border-radius';

@@ -2,11 +2,10 @@
  * Testing our Kbd component
  */
 import { ThemeProvider } from 'styled-components';
-import theme from 'config';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-
+import theme from '../../../config';
 
 import Kbd from '../index';
 const children = (<h1>Test</h1>);

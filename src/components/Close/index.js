@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from 'config';
+import theme from '../../config';
 import { hoverFocus } from '../../styled/mixins/hover';
 
 const defaultProps = { theme };

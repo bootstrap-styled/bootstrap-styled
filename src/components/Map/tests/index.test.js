@@ -3,10 +3,10 @@
  */
 
 import { ThemeProvider } from 'styled-components';
-import theme from 'config';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
+import theme from '../../../config';
 
 import Map from '../index';
 const children = (<h1>Test</h1>);

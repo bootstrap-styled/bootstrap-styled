@@ -1,11 +1,11 @@
 /**
  * Testing our Address component
  */
-import theme from 'config';
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { ThemeProvider } from 'styled-components';
 import Address from '../index';
+import theme from '../../../config';
 
 const children = (<h1>Test</h1>);
 

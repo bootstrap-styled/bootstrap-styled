@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, { PropTypes } from 'react';
-import theme from 'config';
+import theme from '../../config';
 import { makeRow } from '../../styled/mixins/grid';
 
 const defaultProps = { theme };

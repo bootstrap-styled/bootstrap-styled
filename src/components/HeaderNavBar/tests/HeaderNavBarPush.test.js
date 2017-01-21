@@ -3,10 +3,10 @@
  */
 
 import { ThemeProvider } from 'styled-components';
-import theme from 'config';
 
 import { mount } from 'enzyme';
 import React from 'react';
+import theme from '../../../config';
 
 import HeaderNavBar, { compPush } from '../index';
 

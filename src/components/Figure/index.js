@@ -3,11 +3,11 @@
  *
  *
  */
-import theme from 'config';
 
 import styled from 'styled-components';
 import React, { PropTypes } from 'react';
 import { getTextUtilities } from '../../styled/utilities/text';
+import theme from '../../config';
 
 const defaultProps = { theme };
 

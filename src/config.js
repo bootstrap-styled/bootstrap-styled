@@ -44,8 +44,8 @@
 // 35. Code
 
 import Color from 'color';
-import { detectUnit, rmUnit, UNIT } from 'styled/mixins/unit';
-import { assertAscending, assertStartAtZero } from 'styled/mixins/variables';
+import { detectUnit, rmUnit, UNIT } from './styled/mixins/unit';
+import { assertAscending, assertStartAtZero } from './styled/mixins/variables';
 const v = {};
 
 // General variable structure

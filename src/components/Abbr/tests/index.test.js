@@ -2,11 +2,11 @@
  * Testing our Abbr component
  */
 import React from 'react';
-import theme from 'config';
 import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
 
 import Abbr from '../index';
+import theme from '../../../config';
 
 const children = (<h1>Test</h1>);
 
