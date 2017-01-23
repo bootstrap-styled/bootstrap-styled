@@ -13,10 +13,8 @@ const defaultProps = { theme };
 class Button extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    onClick: PropTypes.func,
     disabled: PropTypes.bool,
     outline: PropTypes.bool,
-    type: PropTypes.string,
     'dropdown-toggle': PropTypes.bool,
     dropup: PropTypes.bool,
     className: PropTypes.string,
@@ -24,22 +22,20 @@ class Button extends React.Component { // eslint-disable-line react/prefer-state
   }
 
   render() {
-    const { type, onClick, disabled } = this.props;
-    const cssClasses = cn(this.props.className, {
-      disabled: this.props.disabled,
-      outline: this.props.outline,
-      dropup: this.props.dropup,
+    const { className, disabled, outline, dropup, children, ...rest } = this.props;
+    const cssClasses = cn(className, {
+      disabled,
+      outline,
+      dropup,
       'dropdown-toggle': this.props['dropdown-toggle'],
     });
 
     return (
       <button
         className={cssClasses}
-        onClick={onClick}
-        type={type}
-        disabled={disabled}
+        {...rest}
       >
-        {this.props.children}
+        {children}
       </button>
     );
   }

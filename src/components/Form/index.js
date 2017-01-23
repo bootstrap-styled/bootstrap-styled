@@ -22,20 +22,13 @@ class Form extends React.Component { // eslint-disable-line react/prefer-statele
 
   static propTypes = {
     children: PropTypes.node.isRequired,
-    action: PropTypes.string,
-    onSubmit: PropTypes.func,
-    className: PropTypes.string,
   }
 
   render() {
-    const { children, className, action, onSubmit } = this.props;
+    const { children, ...rest } = this.props;
 
     return (
-      <form
-        className={className}
-        action={action}
-        onSubmit={onSubmit}
-      >
+      <form {...rest}>
         {children}
       </form>
     );
