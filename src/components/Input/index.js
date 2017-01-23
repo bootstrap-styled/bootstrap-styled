@@ -6,7 +6,10 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import theme from '../../config';
 
-const defaultProps = { theme };
+const defaultProps = {
+  theme,
+  type: 'text',
+};
 
 class Input extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -17,11 +20,13 @@ class Input extends React.Component { // eslint-disable-line react/prefer-statel
   }
 
   render() {
+    const { className, type, placeholder, ...rest } = this.props;
     return (
       <input
-        className={this.props.className}
-        type={this.props.type}
-        placeholder={this.props.placeholder}
+        className={className}
+        type={type}
+        placeholder={placeholder}
+        {...rest}
       />
     );
   }
