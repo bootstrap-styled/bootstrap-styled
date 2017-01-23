@@ -7,32 +7,20 @@ import styled from 'styled-components';
 class Select extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    theme: PropTypes.object,
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
-    autoFocus: PropTypes.bool,
-    disabled: PropTypes.bool,
-    form: PropTypes.string,
-    multiple: PropTypes.bool,
-    name: PropTypes.string,
-    required: PropTypes.bool,
-    size: PropTypes.string,
   }
 
   render() {
-    const { autoFocus, disabled, form, multiple, name, required, size } = this.props;
+    const { theme, className, children, ...rest } = this.props; // eslint-disable-line
 
     return (
       <select
-        autoFocus={autoFocus}
-        disabled={disabled}
-        form={form}
-        multiple={multiple}
-        name={name}
-        required={required}
-        size={size}
-        className={cn(this.props.className, 'select')}
+        className={cn(className, 'select')}
+        {...rest}
       >
-        {this.props.children}
+        {children}
       </select>
     );
   }

@@ -14,20 +14,13 @@ const defaultProps = {
 class Input extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    className: PropTypes.string,
-    type: PropTypes.string,
-    placeholder: PropTypes.string,
+    theme: PropTypes.object,
   }
 
   render() {
-    const { className, type, placeholder, ...rest } = this.props;
+    const { theme, ...rest } = this.props; // eslint-disable-line
     return (
-      <input
-        className={className}
-        type={type}
-        placeholder={placeholder}
-        {...rest}
-      />
+      <input {...rest} />
     );
   }
 

@@ -13,19 +13,14 @@ class Textarea extends React.Component { // eslint-disable-line react/prefer-sta
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
-    wrap: PropTypes.string,
-    value: PropTypes.string,
-    onChange: PropTypes.func,
   }
 
   render() {
-    const { children, value, wrap, onChange } = this.props;
+    const { theme, children, className, ...rest } = this.props;  // eslint-disable-line
     return (
       <textarea
-        value={value}
-        wrap={wrap}
-        onChange={onChange}
-        className={cn('textarea', this.props.className)}
+        className={cn('textarea', className)}
+        {...rest}
       >
         {children}
       </textarea>
