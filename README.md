@@ -43,9 +43,9 @@ It will automatically install the following dependencies :
         Button,
     } from 'bootstrap-styled;
 
-If you wan't just part of your bootstrap for building a package to distribute for example you can also do
+If you want just part of your bootstrap for building a package to distribute for example you can also do
 
-    import Button from 'bootstrap-styled/lib/components/
+    import Button from 'bootstrap-styled/lib/components/Button';
 
 ## Documentation
 
