@@ -7,12 +7,9 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 import theme from '../../config';
-import { clearfix } from '../../styled/mixins/clearfix';
 import { hover } from '../../styled/mixins/hover';
-import { borderRadius, borderRightRadius, borderTopRadius, borderBottomRadius, borderLeftRadius } from '../../styled/mixins/border-radius';
+import { borderRadius, borderTopRadius, borderBottomRadius } from '../../styled/mixins/border-radius';
 import { cardVariant, cardOutlineVariant, cardInverse } from '../../styled/mixins/cards';
-import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
-import { ifElse, ifThen } from '../../styled/mixins/conditional';
 
 const defaultProps = { theme };
 
@@ -44,20 +41,16 @@ Card = styled(Card)`
     */
     &.card {
       position: relative;
-      display: block;
-      margin-bottom:  ${props.theme['$card-spacer-y']};
+      display: flex;
+      flex-direction: column;
       background-color: ${props.theme['$card-bg']};
-      /* border: ${props.theme['$card-border-width']} solid ${props.theme['$card-border-color']}; */
+      border: ${props.theme['$card-border-width']} solid ${props.theme['$card-border-color']};
       ${borderRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius'])};
       border: ${props.theme['$card-border-width']} solid ${props.theme['$card-border-color']};
-      .card-block{
-        ${clearfix()};
-        padding: ${props.theme['$card-spacer-x']};
-      }
     }
     
-    &.card-block {
-      ${clearfix()};
+    & .card-block {
+      flex: 1 1 auto;
       padding: ${props.theme['$card-spacer-x']};
     }
     
@@ -110,7 +103,6 @@ Card = styled(Card)`
     */
     
     & .card-header {
-      ${clearfix()};
       padding: ${props.theme['$card-spacer-y']} ${props.theme['$card-spacer-x']};
       margin-bottom: 0; /* Removes the default margin-bottom of <hN> */
       background-color: ${props.theme['$card-cap-bg']};
@@ -128,7 +120,6 @@ Card = styled(Card)`
     }
     
     & .card-footer {
-      ${clearfix()};
       padding: ${props.theme['$card-spacer-y']} ${props.theme['$card-spacer-x']};
       background-color: ${props.theme['$card-cap-bg']};
       border-top: ${props.theme['$card-border-width']} solid ${props.theme['$card-border-color']};
@@ -284,152 +275,6 @@ Card = styled(Card)`
         props.theme['$card-border-radius-inner']
       )}
     }
-    
-    
-    /* Card set
-    
-     Heads up! We do some funky style resetting here for margins across our two
-     variations (one flex, one table). Individual cards have margin-bottom by
-     default, but they're ignored due to table styles. For a consistent design,
-     we've done the same to the flex variation.
-    
-     Those changes are noted by '// Margin balancing'.
-     */
-    ${ifElse(
-      props.theme['$enable-flex'],
-      mediaBreakpointUp(
-        'sm',
-        props.theme['$grid-breakpoints'],
-        `
-          & .card-deck {
-            display: flex;
-            flex-flow: row wrap;
-            margin-right: -${props.theme['$card-deck-margin']};
-            margin-bottom: ${props.theme['$card-spacer-y']}; /* Margin balancing */
-            margin-left: -${props.theme['$card-deck-margin']};
-          
-            .card {
-              flex: 1 0 0;
-              margin-right: ${props.theme['$card-deck-margin']};
-              margin-bottom: 0; /* Margin balancing */
-              margin-left: ${props.theme['$card-deck-margin']};
-            }
-          }
-        `
-      ),
-      mediaBreakpointUp(
-        'sm',
-        props.theme['$grid-breakpoints'],
-        `
-          & .card-deck {
-            display: table;
-            width: 100%;
-            margin-bottom: ${props.theme['$card-spacer-y']}; /* Margin balancing */
-            table-layout: fixed;
-            border-spacing: ${props.theme['$space-between-cards']} 0;
-            
-            .card {
-              display: table-cell;
-              margin-bottom: 0; /* Margin balancing */
-              vertical-align: top;
-            }
-          }
-        
-          &.card-deck-wrapper {
-            margin-right: -${props.theme['$space-between-cards']};
-            margin-left: -${props.theme['$space-between-cards']};
-          }
-        `
-      )
-    )}
-
-    /*
-     Card groups
-    */
-    ${mediaBreakpointUp(
-      'sm',
-      props.theme['$grid-breakpoints'],
-      `
-        &.card-group {
-          ${ifElse(
-            props.theme['$enable-flex'],
-            `
-              display: flex;
-              flex-flow: row wrap;
-            `,
-            `
-              display: table;
-              width: 100%;
-              table-layout: fixed;
-            `
-          )}
-        }
-        
-        & .card {
-          ${ifElse(
-            props.theme['$enable-flex'],
-            `
-              flex: 1 0 0;
-            `,
-            `
-              display: table-cell;
-              vertical-align: top;
-            `
-          )}
-        
-        
-          + .card {
-              margin-left: 0;
-              border-left: 0;
-          }
-        
-          /* Handle rounded corners */
-        
-          ${ifThen(
-            props.theme['$enable-rounded'],
-            `
-              &:first-child {
-                ${borderRightRadius(
-                  props.theme['$enable-rounded'],
-                  '0'
-                )}
-                .card-img-top {
-                  border-top-right-radius: 0;
-                }
-                
-                .card-img-bottom {
-                  border-bottom-right-radius: 0;
-                }
-              }
-              
-              &:last-child {
-                ${borderLeftRadius(
-                  props.theme['$enable-rounded'],
-                  '0'
-                )}
-                
-                .card-img-top {
-                  border-top-left-radius: 0;
-                }
-                
-                .card-img-bottom {
-                  border-bottom-left-radius: 0;
-                }
-              }
-              
-              &:not(:first-child):not(:last-child) {
-                border-radius: 0;
-      
-                .card-img-top,
-                .card-img-bottom {
-                  border-radius: 0;
-                }
-              }
-            `
-          )}    
-        }
-      `
-    )}
   `}
 `;
 
