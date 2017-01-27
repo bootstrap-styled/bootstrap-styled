@@ -8,4 +8,8 @@ describe('bootstrap flex utility', () => {
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(2123778);
   });
+  it('getFlexUtilities should have arguments', () => {
+    const css = getFlexUtilities();
+    expect(fromJS({ css }).hashCode()).toEqual(2123778);
+  });
 });

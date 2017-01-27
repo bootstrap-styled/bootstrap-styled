@@ -1,3 +1,4 @@
+import { fromJS } from 'immutable';
 import { assertAscending, comparable, assertStartAtZero } from '../variables';
 
 describe('bootstrap variables mixins', () => {
@@ -28,6 +29,10 @@ describe('bootstrap variables mixins', () => {
   it('comparable false', () => {
     const res = comparable(1, 'a');
     expect(res).toEqual(false);
+  });
+  it('comparable should have arguments', () => {
+    const css = comparable();
+    expect(fromJS({ css }).hashCode()).toEqual(788434458);
   });
   it('assertStartAtZero true', () => {
     const res = assertStartAtZero({

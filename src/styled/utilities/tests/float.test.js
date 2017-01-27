@@ -8,4 +8,8 @@ describe('bootstrap float utility', () => {
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(-111904855);
   });
+  it('getFloatUtilities should have arguments', () => {
+    const css = getFloatUtilities();
+    expect(fromJS({ css }).hashCode()).toEqual(-111904855);
+  });
 });

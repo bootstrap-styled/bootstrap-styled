@@ -8,4 +8,8 @@ describe('bootstrap display utility', () => {
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(987994556);
   });
+  it('getDisplayUtilities should have arguments', () => {
+    const css = getDisplayUtilities();
+    expect(fromJS({ css }).hashCode()).toEqual(987994556);
+  });
 });

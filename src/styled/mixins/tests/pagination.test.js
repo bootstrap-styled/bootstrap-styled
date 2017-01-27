@@ -1,3 +1,4 @@
+import { fromJS } from 'immutable';
 import { defaultProps, paginationSize, paginationSizeBootstrap } from '../pagination';
 
 describe('bootstrap pagination mixins', () => {
@@ -11,7 +12,7 @@ describe('bootstrap pagination mixins', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(css).toEqual('\n    .page-link {\n      padding: .75rem 1.5rem;\n      font-size: 1.25rem;\n    }\n  \n    .page-item {\n      &:first-child {\n        .page-link {\n          \n      border-bottom-left-radius: .25rem;\n      border-top-left-radius: .25rem;\n    \n        }\n      }\n      &:last-child {\n        .page-link {\n          \n      border-bottom-right-radius: .25rem;\n      border-top-right-radius: .25rem;\n    \n        }\n      }\n    }\n  ');
+    expect(fromJS({ css }).hashCode()).toEqual(-857700927);
   });
   it('paginationSize should return a css without rounded', () => {
     const css = paginationSize(
@@ -23,7 +24,11 @@ describe('bootstrap pagination mixins', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(css).toEqual('\n    .page-link {\n      padding: .75rem 1.5rem;\n      font-size: 1.25rem;\n    }\n  \n    .page-item {\n      &:first-child {\n        .page-link {\n          \n        }\n      }\n      &:last-child {\n        .page-link {\n          \n        }\n      }\n    }\n  ');
+    expect(fromJS({ css }).hashCode()).toEqual(466039394);
+  });
+  it('paginationSize should have arguments', () => {
+    const css = paginationSize();
+    expect(fromJS({ css }).hashCode()).toEqual(381535574);
   });
   it('paginationSizeBootstrap should return a css with rounded', () => {
     const css = paginationSizeBootstrap(
@@ -36,7 +41,7 @@ describe('bootstrap pagination mixins', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(css).toEqual('\n    .page-link {\n      padding: .75rem 1.5rem;\n      font-size: 1.25rem;\n    }\n  \n    .page-item {\n      &:first-child {\n        .page-link {\n          \n      border-bottom-left-radius: .25rem;\n      border-top-left-radius: .25rem;\n    \n        }\n      }\n      &:last-child {\n        .page-link {\n          \n      border-bottom-right-radius: .25rem;\n      border-top-right-radius: .25rem;\n    \n        }\n      }\n    }\n  ');
+    expect(fromJS({ css }).hashCode()).toEqual(-857700927);
   });
   it('paginationSizeBootstrap should return a css without rounded', () => {
     const css = paginationSizeBootstrap(
@@ -49,6 +54,10 @@ describe('bootstrap pagination mixins', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(css).toEqual('\n    .page-link {\n      padding: .75rem 1.5rem;\n      font-size: 1.25rem;\n    }\n  \n    .page-item {\n      &:first-child {\n        .page-link {\n          \n        }\n      }\n      &:last-child {\n        .page-link {\n          \n        }\n      }\n    }\n  ');
+    expect(fromJS({ css }).hashCode()).toEqual(466039394);
+  });
+  it('paginationSizeBootstrap should have arguments', () => {
+    const css = paginationSizeBootstrap();
+    expect(fromJS({ css }).hashCode()).toEqual(381535574);
   });
 });

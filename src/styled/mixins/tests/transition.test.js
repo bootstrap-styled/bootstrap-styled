@@ -1,3 +1,4 @@
+import { fromJS } from 'immutable';
 import { defaultProps, transition } from '../transition';
 
 describe('bootstrap transition mixins', () => {
@@ -12,5 +13,9 @@ describe('bootstrap transition mixins', () => {
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
     expect(css).toEqual('\n      transition: all .2s ease-in-out;\n    ');
+  });
+  it('transition should have arguments', () => {
+    const css = transition();
+    expect(fromJS({ css }).hashCode()).toEqual(788434458);
   });
 });

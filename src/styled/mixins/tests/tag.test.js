@@ -14,4 +14,8 @@ describe('bootstrap tag mixins', () => {
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(-79729166);
   });
+  it('tagVariant should have arguments', () => {
+    const css = tagVariant();
+    expect(fromJS({ css }).hashCode()).toEqual(584875103);
+  });
 });

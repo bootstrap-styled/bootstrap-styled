@@ -14,4 +14,8 @@ describe('bootstrap badge mixins', () => {
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(117949390);
   });
+  it('badgeVariant should return css by default ', () => {
+    const css = badgeVariant();
+    expect(fromJS({ css }).hashCode()).toEqual(-365631061);
+  });
 });

@@ -14,4 +14,8 @@ describe('bootstrap list-group mixins', () => {
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(657451382);
   });
+  it('listGroupItemVariant should return a css with hover media query', () => {
+    const css = listGroupItemVariant();
+    expect(fromJS({ css }).hashCode()).toEqual(-174709419);
+  });
 });

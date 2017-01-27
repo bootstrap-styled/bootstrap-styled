@@ -1,3 +1,5 @@
+import { fromJS } from 'immutable';
+
 import {
   defaultProps,
   borderRadius,
@@ -18,6 +20,10 @@ describe('bootstrap border-radius mixins', () => {
       expect(css).toEqual('');
     }
   });
+  it('borderRadius should have arguments', () => {
+    const css = borderRadius();
+    expect(fromJS({ css }).hashCode()).toEqual(412224342);
+  });
   it('borderTopRadius should return a css', () => {
     const css = borderTopRadius(defaultProps['$enable-rounded'], defaultProps['$border-radius']);
     expect(css).not.toContain('undefined');
@@ -27,6 +33,10 @@ describe('bootstrap border-radius mixins', () => {
     } else {
       expect(css).toEqual('');
     }
+  });
+  it('borderTopRadius should return a css by default', () => {
+    const css = borderTopRadius();
+    expect(fromJS({ css }).hashCode()).toEqual(-805177024);
   });
   it('borderRightRadius should return a css', () => {
     const css = borderRightRadius(defaultProps['$enable-rounded'], defaultProps['$border-radius']);
@@ -38,6 +48,10 @@ describe('bootstrap border-radius mixins', () => {
       expect(css).toEqual('');
     }
   });
+  it('borderRightRadius should return a css by default', () => {
+    const css = borderRightRadius();
+    expect(fromJS({ css }).hashCode()).toEqual(-48434351);
+  });
   it('borderBottomRadius should return a css', () => {
     const css = borderBottomRadius(defaultProps['$enable-rounded'], defaultProps['$border-radius']);
     expect(css).not.toContain('undefined');
@@ -48,6 +62,10 @@ describe('bootstrap border-radius mixins', () => {
       expect(css).toEqual('');
     }
   });
+  it('borderBottomRadius should return a css by default', () => {
+    const css = borderBottomRadius();
+    expect(fromJS({ css }).hashCode()).toEqual(688610612);
+  });
   it('borderLeftRadius should return a css', () => {
     const css = borderLeftRadius(defaultProps['$enable-rounded'], defaultProps['$border-radius']);
     expect(css).not.toContain('undefined');
@@ -57,5 +75,9 @@ describe('bootstrap border-radius mixins', () => {
     } else {
       expect(css).toEqual('');
     }
+  });
+  it('borderLeftRadius should return a css by default', () => {
+    const css = borderLeftRadius();
+    expect(fromJS({ css }).hashCode()).toEqual(-1049744082);
   });
 });

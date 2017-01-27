@@ -1,3 +1,4 @@
+import { fromJS } from 'immutable';
 import { math, rmUnit, toPercent, detectUnit, UNIT } from '../unit';
 
 describe('kopax unit mixins', () => {
@@ -59,6 +60,10 @@ describe('kopax unit mixins', () => {
     const total = 20;
     const decimal = 3;
     expect(toPercent(value, total, decimal)).toEqual('25%');
+  });
+  it('toPercent should have arguments', () => {
+    const css = toPercent();
+    expect(fromJS({ css }).hashCode()).toEqual(-478201565);
   });
   it('math should addition units', () => {
     const value = math.addition('10%', '15%');

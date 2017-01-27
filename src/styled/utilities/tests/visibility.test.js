@@ -8,4 +8,8 @@ describe('bootstrap visibility utility', () => {
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(804893845);
   });
+  it('getVisibilityUtilities should have arguments', () => {
+    const css = getVisibilityUtilities();
+    expect(fromJS({ css }).hashCode()).toEqual(804893845);
+  });
 });

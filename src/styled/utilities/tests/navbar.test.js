@@ -35,4 +35,8 @@ describe('bootstrap navbar utility', () => {
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(-40506995);
   });
+  it('navbar should have arguments', () => {
+    const css = navbar();
+    expect(fromJS({ css }).hashCode()).toEqual(-40506995);
+  });
 });

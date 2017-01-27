@@ -12,4 +12,8 @@ describe('bootstrap spacing utility', () => {
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(744287943);
   });
+  it('getSpacingUtilities should have arguments', () => {
+    const css = getSpacingUtilities();
+    expect(fromJS({ css }).hashCode()).toEqual(744287943);
+  });
 });

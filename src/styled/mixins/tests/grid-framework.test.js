@@ -24,4 +24,8 @@ describe('bootstrap grid-framework mixins', () => {
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(-439799360);
   });
+  it('makeGridColumns should have arguments', () => {
+    const css = makeGridColumns();
+    expect(fromJS({ css }).hashCode()).toEqual(-439799360);
+  });
 });

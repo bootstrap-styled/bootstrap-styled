@@ -253,11 +253,7 @@ InputGroup = styled(InputGroup)`
       /* Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214. */
       background-image: none;
       background-clip: padding-box;
-      ${props.theme['$enable-rounded'] ? `
-        border-radius: ${props.theme['$input-border-radius']}
-      ` : ` 
-        border-radius: 0;
-      `}
+      ${props.theme['$enable-rounded'] ? `border-radius: ${props.theme['$input-border-radius']}` : 'border-radius: 0;'}
       border: ${props.theme['$input-btn-border-width']} solid ${props.theme['$input-border-color']};
       ${transition(
         props.theme['$enable-transitions'],

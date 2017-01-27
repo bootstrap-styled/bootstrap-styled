@@ -168,10 +168,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 97,
-        "branches": 62,
-        "functions": 97,
-        "lines": 98
+        "statements": 99,
+        "branches": 93,
+        "functions": 98,
+        "lines": 99
       }
     },
     "moduleDirectories": [
