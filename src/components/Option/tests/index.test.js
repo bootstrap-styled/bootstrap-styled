@@ -44,7 +44,7 @@ describe('<Option />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('option').length).toBe(1);
+    expect(renderedComponent.find('Option').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
