@@ -6,7 +6,7 @@
  */
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from '../../config';
+import themeBs from '../../config';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { transition } from '../../styled/mixins/transition';
@@ -14,7 +14,7 @@ import { formControlFocus, formControlValidation } from '../../styled/mixins/for
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { math } from '../../styled/mixins/unit';
 
-const defaultProps = { theme };
+const defaultProps = { theme: themeBs };
 
 class Form extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -23,7 +23,7 @@ class Form extends React.Component { // eslint-disable-line react/prefer-statele
   }
 
   render() {
-    const { children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { theme , children, ...rest } = this.props; // eslint-disable-line
 
     return (
       <form {...rest}>

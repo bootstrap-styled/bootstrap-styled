@@ -5,10 +5,10 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from '../../config';
+import themeBs from '../../config';
 import { button } from '../../styled/utilities/button';
 
-const defaultProps = { theme };
+const defaultProps = { theme: themeBs };
 
 class Button extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -22,7 +22,7 @@ class Button extends React.Component { // eslint-disable-line react/prefer-state
   }
 
   render() {
-    const { className, disabled, outline, dropup, children, ...rest } = this.props;
+    const { theme, className, disabled, outline, dropup, children, ...rest } = this.props; // eslint-disable-line
     const cssClasses = cn(className, {
       disabled,
       outline,
@@ -33,6 +33,7 @@ class Button extends React.Component { // eslint-disable-line react/prefer-state
     return (
       <button
         className={cssClasses}
+        disabled={disabled}
         {...rest}
       >
         {children}
