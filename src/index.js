@@ -70,7 +70,6 @@ export { default as Breadcrumb } from './components/Breadcrumb';
 export { default as Button } from './components/Button';
 export { default as ButtonGroup } from './components/ButtonGroup';
 export { default as Caption } from './components/Caption';
-export { default as CardDeckWrapper } from './components/CardDeckWrapper';
 export { default as Clearfix } from './components/Clearfix';
 export { default as Close } from './components/Close';
 export { default as Code } from './components/Code';

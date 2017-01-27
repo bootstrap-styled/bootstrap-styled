@@ -25,7 +25,6 @@ class Col extends React.Component {    // eslint-disable-line react/prefer-state
 Col = styled(Col)`
   ${(props) => `
     ${makeGridColumns(
-      props.theme['$enable-flex'],
       props.theme['$enable-grid-classes'],
       props.theme['$grid-columns'],
       props.theme['$grid-gutter-widths'],

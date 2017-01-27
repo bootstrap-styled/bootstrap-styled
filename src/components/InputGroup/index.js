@@ -9,7 +9,6 @@ import theme from '../../config';
 
 import { hoverFocusActive } from '../../styled/mixins/hover';
 import { borderRadius, borderLeftRadius, borderRightRadius } from '../../styled/mixins/border-radius';
-import { ifElse } from '../../styled/mixins/conditional';
 import { transition } from '../../styled/mixins/transition';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { formControlFocus } from '../../styled/mixins/forms';
@@ -43,55 +42,201 @@ InputGroup = styled(InputGroup)`
    
     &.input-group {
       position: relative;
+      display: flex;
       width: 100%;
-   
-      ${ifElse(
-        props.theme['$enable-flex'],
-        `
-          display: flex;
-        `
-        ,
-        `
-          display: table;
-          /* Prevent input groups from inheriting border styles from table cells when placed within a table. */
-          border-collapse: separate;
-        `
-      )}
-   
+
       .form-control {
-        /* Ensure that the input is always above the *appended* addon button for
-        proper border colors.
+        /* 
+          Ensure that the input is always above the *appended* addon button for
+          proper border colors.
         */
+        
         position: relative;
         z-index: 2;
-        /* Bring the "active" form control to the front */
-
+        flex: 1 1 auto;
+        /* Add width 1% and flex-basis auto to ensure that button will not wrap out */
+        /* the column. Applies to IE Edge+ and Firefox. Chrome does not require this. */
+        width: 1%;
+        margin-bottom: 0;
+        
         ${hoverFocusActive(
           props.theme['$enable-hover-media-query'],
           'z-index: 3;'
         )}
-        
-        ${ifElse(
-          props.theme['$enable-flex'],
-        `
-          flex: 1;
-        `
-        ,
-        `
-          /* IE9 fubars the placeholder attribute in text inputs and the arrows on
-          select elements in input groups. To fix it, we float the input. Details:
-          https://github.com/twbs/bootstrap/issues/11561#issuecomment-28936855
-          */
-          float: left;
-          width: 100%;
-        `
-        )}
-        
-        margin-bottom: 0;
       }
     }
     
-    /* Added So that Inputs in InputGroup grab the same .form-control class as in Component Form Not Bs4 */
+    & .input-group-addon,
+    & .input-group-btn,
+    &.input-group .form-control {
+      /* Vertically centers the content of the addons within the input group */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+
+      &:not(:first-child):not(:last-child) {
+        ${borderRadius(
+          props.theme['$enable-rounded'],
+          '0'
+        )}
+      }
+    }
+   
+    & .input-group-addon,
+    & .input-group-btn {
+
+      white-space: nowrap;
+      vertical-align: middle; /* Match the inputs */
+    }
+   
+   
+    /* Sizing options
+    Remix the default form control sizing classes into new ones for easier
+    manipulation.
+    */
+   
+    &.input-group-lg > .form-control,
+    &.input-group-lg > .input-group-addon,
+    &.input-group-lg > .input-group-btn > .btn {
+      padding: ${props.theme['$input-padding-y-lg']} ${props.theme['$input-padding-x-lg']};
+      font-size: ${props.theme['$font-size-lg']};
+      ${borderRadius(
+        props.theme['$enable-rounded'],
+        props.theme['$input-border-radius-lg']
+      )}
+    }
+    
+    &.input-group-sm > .form-control,
+    &.input-group-sm > .input-group-addon,
+    &.input-group-sm > .input-group-btn > .btn {
+      padding: ${props.theme['$input-padding-y-sm']} ${props.theme['$input-padding-x-sm']};
+      font-size: ${props.theme['$font-size-sm']};
+      ${borderRadius(
+        props.theme['$enable-rounded'],
+        props.theme['$input-border-radius-sm']
+      )}
+    }
+   
+   
+    /*
+    Text input groups
+    */
+   
+    & .input-group-addon {
+      padding: ${props.theme['$input-padding-y']} ${props.theme['$input-padding-x']};
+      margin-bottom: 0; /* Allow use of <label> elements by overriding our default margin-bottom */
+      font-size: ${props.theme['$font-size-base']};
+      font-weight: normal;
+      line-height: ${props.theme['$input-line-height']};
+      color: ${props.theme['$input-color']};
+      text-align: center;
+      background-color: ${props.theme['$input-group-addon-bg']};
+      border: ${props.theme['$input-btn-border-width']} solid ${props.theme['$input-group-addon-border-color']};
+      ${borderRadius(
+        props.theme['$enable-rounded'],
+        props.theme['$input-border-radius']
+      )}
+   
+      /* scss-lint:disable QualifyingElement
+      Nuke default margins from checkboxes and radios to vertically center within.
+      */
+      input[type="radio"],
+      input[type="checkbox"] {
+        margin-top: 0;
+      }
+      /* scss-lint:enable QualifyingElement */
+    }
+   
+   
+    /*
+     Reset rounded corners
+    */
+   
+    &.input-group .form-control:not(:last-child),
+    & .input-group-addon:not(:last-child),
+    & .input-group-btn:not(:last-child) > .btn,
+    & .input-group-btn:not(:last-child) > .btn-group > .btn,
+    & .input-group-btn:not(:last-child) > .dropdown-toggle,
+    & .input-group-btn:not(:first-child) > .btn:not(:last-child):not(.dropdown-toggle),
+    & .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn {
+      ${borderRightRadius(
+        props.theme['$enable-rounded'],
+        '0'
+      )}
+    }
+    & .input-group-addon:not(:last-child) {
+      border-right: 0;
+    }
+    &.input-group .form-control:not(:first-child),
+    & .input-group-addon:not(:first-child),
+    & .input-group-btn:not(:first-child) > .btn,
+    & .input-group-btn:not(:first-child) > .btn-group > .btn,
+    & .input-group-btn:not(:first-child) > .dropdown-toggle,
+    & .input-group-btn:not(:last-child) > .btn:not(:first-child),
+    & .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn {
+      ${borderLeftRadius(
+        props.theme['$enable-rounded'],
+        '0'
+      )}
+    }
+    &.form-control + .input-group-addon:not(:first-child) {
+      border-left: 0;
+    }
+   
+    /*
+     Button input groups
+    */
+   
+    & .input-group-btn {
+      position: relative;
+      /* Jankily prevent input button groups from wrapping with 'white-space' and
+      'font-size' in combination with 'inline-block' on buttons.
+      */
+      font-size: 0;
+      white-space: nowrap;
+   
+      /* Negative margin for spacing, position for bringing hovered/focused/actived
+      element above the siblings.
+      */
+      > .btn {
+        position: relative;
+        /* Vertically stretch the button and center its content */
+        flex: 1;
+        
+        + .btn {
+          margin-left: -${props.theme['$input-btn-border-width']};
+        }
+        
+        /* Bring the "active" button to the front */
+        ${hoverFocusActive(
+          props.theme['$enable-hover-media-query'],
+          'z-index: 3;'
+        )}
+      }
+   
+      /* Negative margin to only have a single, shared border between the two */
+      &:not(:last-child) {
+        > .btn,
+        > .btn-group {
+          margin-right: -${props.theme['$input-btn-border-width']};
+        }
+      }
+      &:not(:first-child) {
+        > .btn,
+        > .btn-group {
+          z-index: 2;
+          margin-left: -${props.theme['$input-btn-border-width']};
+          /* Because specificity */
+        ${hoverFocusActive(
+          props.theme['$enable-hover-media-query'],
+          'z-index: 3;'
+        )}
+        }
+      }
+    }
+    
+     /* Added So that Inputs in InputGroup grab the same .form-control class as in Component Form Not Bs4 */
     & .form-control {
       display: block;
       width: 100%;
@@ -163,193 +308,6 @@ InputGroup = styled(InputGroup)`
       }
     }
    
-    & .input-group-addon,
-    .input-group-btn,
-    .input-group .form-control {
-      ${ifElse(
-        props.theme['$enable-flex'],
-        '',
-        'display: table-cell;'
-      )}
-   
-      &:not(:first-child):not(:last-child) {
-        ${borderRadius(
-          props.theme['$enable-rounded'],
-          '0'
-        )}
-      }
-    }
-   
-    & .input-group-addon,
-    .input-group-btn {
-      ${ifElse(
-        props.theme['$enable-flex'],
-        '',
-        'width: 1%;'
-      )}
-      white-space: nowrap;
-      vertical-align: middle; /* Match the inputs */
-    }
-   
-   
-    /* Sizing options
-    Remix the default form control sizing classes into new ones for easier
-    manipulation.
-    */
-   
-    &.input-group-lg > .form-control,
-    &.input-group-lg > .input-group-addon,
-    &.input-group-lg > .input-group-btn > .btn {
-      padding: ${props.theme['$input-padding-y-lg']} ${props.theme['$input-padding-x-lg']};
-      font-size: ${props.theme['$font-size-lg']};
-      ${borderRadius(
-        props.theme['$enable-rounded'],
-        props.theme['$input-border-radius-lg']
-      )}
-    }
-    
-    &.input-group-sm > .form-control,
-    &.input-group-sm > .input-group-addon,
-    &.input-group-sm > .input-group-btn > .btn {
-      padding: ${props.theme['$input-padding-y-sm']} ${props.theme['$input-padding-x-sm']};
-      font-size: ${props.theme['$font-size-sm']};
-      ${borderRadius(
-        props.theme['$enable-rounded'],
-        props.theme['$input-border-radius-sm']
-      )}
-    }
-   
-   
-    /*
-    Text input groups
-    */
-   
-    & .input-group-addon {
-      padding: ${props.theme['$input-padding-y']} ${props.theme['$input-padding-x']};
-      margin-bottom: 0; /* Allow use of <label> elements by overriding our default margin-bottom */
-      font-size: ${props.theme['$font-size-base']};
-      font-weight: normal;
-      line-height: ${props.theme['$input-line-height']};
-      color: ${props.theme['$input-color']};
-      text-align: center;
-      background-color: ${props.theme['$input-group-addon-bg']};
-      border: ${props.theme['$input-btn-border-width']} solid ${props.theme['$input-group-addon-border-color']};
-      ${borderRadius(
-        props.theme['$enable-rounded'],
-        props.theme['$input-border-radius']
-      )}
-   
-      /* Sizing */
-      &.form-control-sm {
-        padding: ${props.theme['$input-padding-y-sm']} ${props.theme['$input-padding-x-sm']};
-        font-size: ${props.theme['$font-size-sm']};
-        ${borderRadius(
-          props.theme['$enable-rounded'],
-          props.theme['$input-border-radius-sm']
-        )}
-      }
-      &.form-control-lg {
-        padding: ${props.theme['$input-padding-y-lg']} ${props.theme['$input-padding-x-lg']};
-        font-size: ${props.theme['$font-size-lg']};
-        ${borderRadius(
-          props.theme['$enable-rounded'],
-          props.theme['$input-border-radius-lg']
-        )}
-      }
-   
-      /* scss-lint:disable QualifyingElement
-      Nuke default margins from checkboxes and radios to vertically center within.
-      */
-      input[type="radio"],
-      input[type="checkbox"] {
-        margin-top: 0;
-      }
-      /* scss-lint:enable QualifyingElement */
-    }
-   
-   
-    /*
-     Reset rounded corners
-    */
-   
-    &.input-group .form-control:not(:last-child),
-    .input-group-addon:not(:last-child),
-    .input-group-btn:not(:last-child) > .btn,
-    .input-group-btn:not(:last-child) > .btn-group > .btn,
-    .input-group-btn:not(:last-child) > .dropdown-toggle,
-    .input-group-btn:not(:first-child) > .btn:not(:last-child):not(.dropdown-toggle),
-    .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn {
-      ${borderRightRadius(
-        props.theme['$enable-rounded'],
-        '0'
-      )}
-    }
-    & .input-group-addon:not(:last-child) {
-      border-right: 0;
-    }
-    &.input-group .form-control:not(:first-child),
-    .input-group-addon:not(:first-child),
-    .input-group-btn:not(:first-child) > .btn,
-    .input-group-btn:not(:first-child) > .btn-group > .btn,
-    .input-group-btn:not(:first-child) > .dropdown-toggle,
-    .input-group-btn:not(:last-child) > .btn:not(:first-child),
-    .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn {
-      ${borderLeftRadius(
-        props.theme['$enable-rounded'],
-        '0'
-      )}
-    }
-    &.form-control + .input-group-addon:not(:first-child) {
-      border-left: 0;
-    }
-   
-    /*
-     Button input groups
-    */
-   
-    & .input-group-btn {
-      position: relative;
-      /* Jankily prevent input button groups from wrapping with 'white-space' and
-      'font-size' in combination with 'inline-block' on buttons.
-      */
-      font-size: 0;
-      white-space: nowrap;
-   
-      /* Negative margin for spacing, position for bringing hovered/focused/actived
-      element above the siblings.
-      */
-      > .btn {
-        position: relative;
-        + .btn {
-          margin-left: -${props.theme['$input-btn-border-width']};
-        }
-        /* Bring the "active" button to the front */
-        ${hoverFocusActive(
-          props.theme['$enable-hover-media-query'],
-          'z-index: 3;'
-        )}
-      }
-   
-      /* Negative margin to only have a single, shared border between the two */
-      &:not(:last-child) {
-        > .btn,
-        > .btn-group {
-          margin-right: -${props.theme['$input-btn-border-width']};
-        }
-      }
-      &:not(:first-child) {
-        > .btn,
-        > .btn-group {
-          z-index: 2;
-          margin-left: -${props.theme['$input-btn-border-width']};
-          /* Because specificity */
-        ${hoverFocusActive(
-          props.theme['$enable-hover-media-query'],
-          'z-index: 3;'
-        )}
-        }
-      }
-    }
 
   `}
 `;

@@ -1,5 +1,5 @@
 import { makeGutters, makeCol, makeColModifier } from './grid';
-import { mediaBreakpointUp } from './breakpoints';
+import { mediaBreakpointUp, breakpointInfix } from './breakpoints';
 
 export const defaultProps = {
   '$grid-gutter-widths': {
@@ -18,7 +18,6 @@ export const defaultProps = {
   },
   '$grid-columns': 12,
   '$enable-grid-classes': true,
-  '$enable-flex': false,
 };
 
 // Framework grid generation
@@ -26,70 +25,55 @@ export const defaultProps = {
 // Used only by Bootstrap to generate the correct number of grid classes given
 // any value of `$grid-columns`.
 
-function getGridColumn(enableFlex = defaultProps['$enable-flex'], columns = defaultProps['$grid-columns'], gridGutterWidths = defaultProps['$grid-gutter-widths']) {
-  let flexVal = '';
-  if (enableFlex) {
-    flexVal = `
-      width: 100%;
-    `;
-  }
+function getGridColumn(columns = defaultProps['$grid-columns'], gridGutterWidths = defaultProps['$grid-gutter-widths']) {
   return `
     position: relative;
-    /* Prevent columns from collapsing when empty */
-    min-height: 1px;
-
-    ${flexVal}
-
+    width: 100%;
+    min-height: 1px; /* Prevent columns from collapsing when empty */
     ${makeGutters(gridGutterWidths)}
   `;
 }
 
-function getColumnGridColumn(enableFlex = defaultProps['$enable-flex'], gridColumns = defaultProps['$grid-columns'], gridGutterWidths = defaultProps['$grid-gutter-widths'], breakpoint) {
+function getColumnGridColumn(gridColumns = defaultProps['$grid-columns'], gridBreakpoints = defaultProps['$grid-breakpoints'], gridGutterWidths = defaultProps['$grid-gutter-widths'], breakpoint) {
   const columnList = [];
+  const infix = breakpointInfix(breakpoint, gridBreakpoints);
   for (let i = 1; i <= gridColumns; i += 1) {
     const column = `
-      &.col-${breakpoint}-${i},
-      & .col-${breakpoint}-${i} {
-        ${getGridColumn(enableFlex, gridColumns, gridGutterWidths)}
+      &.col${infix}-${i} {
+        ${getGridColumn(gridColumns, gridGutterWidths)}
       }
     `;
     columnList.push(column);
   }
   return `
     /* Allow columns to stretch full width below their breakpoints */
-    &.col-${breakpoint},
-    & .col-${breakpoint}{
-      ${getGridColumn(enableFlex, gridColumns, gridGutterWidths)}
+    &.col${infix} {
+      ${getGridColumn(gridColumns, gridGutterWidths)}
     }
 
     ${columnList.join('\n')}
   `;
 }
 
-function getMediaBreakpointUp(enableFlex = defaultProps['$enable-flex'], gridColumns = defaultProps['$grid-columns'], gridBreakpoints = defaultProps['$grid-breakpoints'], breakpoint, breakpointCounter) {
-  let flexVal = '';
-  if (enableFlex) {
-    // Provide basic `.col-{bp}` classes for equal-width flexbox columns
-    flexVal = `
-      &.col-${breakpoint},
-      & .col-${breakpoint}{
-        flex-basis: 0;
-        flex-grow: 1;
-        max-width: 100%;
-      }
-      &.col-${breakpoint}-auto,
-      & .col-${breakpoint}-auto{
-        flex: 0 0 auto;
-        width: auto;
-      }
-    `;
-  }
+function getMediaBreakpointUp(gridColumns = defaultProps['$grid-columns'], gridBreakpoints = defaultProps['$grid-breakpoints'], breakpoint) {
+  const infix = breakpointInfix(breakpoint, gridBreakpoints);
+  const basic = `
+    &.col${infix} {
+      flex-basis: 0;
+      flex-grow: 1;
+      max-width: 100%;
+    }
+    &.col${infix}-auto {
+      flex: 0 0 auto;
+      width: auto;
+    }
+  `;
+
   const columnList = [];
   for (let i = 1; i <= gridColumns; i += 1) {
     const column = `
-      &.col-${breakpoint}-${i},
-      & .col-${breakpoint}-${i}{
-        ${makeCol(enableFlex, i, gridColumns)}
+      &.col${infix}-${i} {
+        ${makeCol(i, gridColumns)}
       }
     `;
     columnList.push(column);
@@ -99,8 +83,7 @@ function getMediaBreakpointUp(enableFlex = defaultProps['$enable-flex'], gridCol
   modifierList.forEach((modifier) => {
     for (let i = 0; i <= gridColumns; i += 1) {
       const columnModifier = `
-        &.${modifier}-${breakpoint}-${i},
-        & .${modifier}-${breakpoint}-${i}{
+        &.${modifier}${infix}-${i} {
           ${makeColModifier(modifier, i, gridColumns)}
         }
       `;
@@ -110,10 +93,9 @@ function getMediaBreakpointUp(enableFlex = defaultProps['$enable-flex'], gridCol
   // `$columns - 1` because offsetting by the width of an entire row isn't possible
   const offsetColumnList = [];
   for (let i = 0; i <= (gridColumns - 1); i += 1) {
-    if (breakpointCounter !== 1 || i !== 0) { // Avoid emitting useless .offset-xs-0
+    if (infix !== 1 || i !== 0) { // Avoid emitting useless .offset-xs-0
       const offsetColumn = `
-        &.offset-${breakpoint}-${i},
-        & .offset-${breakpoint}-${i}{
+        &.offset${infix}-${i} {
           ${makeColModifier('offset', i, gridColumns)}
         }
       `;
@@ -121,22 +103,20 @@ function getMediaBreakpointUp(enableFlex = defaultProps['$enable-flex'], gridCol
     }
   }
   return mediaBreakpointUp(breakpoint, gridBreakpoints, `
-    ${flexVal}
+    ${basic}
     ${columnList.join('\n')}
     ${columnModifierList.join('\n')}
     ${offsetColumnList.join('\n')}
   `);
 }
 
-export function makeGridColumns(enableFlex = defaultProps['$enable-flex'], enableGridClasses = defaultProps['$enable-grid-classes'], gridColumns = defaultProps['$grid-columns'], gridGutterWidths = defaultProps['$grid-gutter-widths'], gridBreakpoints = defaultProps['$grid-breakpoints']) {
+export function makeGridColumns(enableGridClasses = defaultProps['$enable-grid-classes'], gridColumns = defaultProps['$grid-columns'], gridGutterWidths = defaultProps['$grid-gutter-widths'], gridBreakpoints = defaultProps['$grid-breakpoints']) {
   if (enableGridClasses) {
-    let breakpointCounter = 0;
     const gridColumnList = [];
     Object.keys(gridBreakpoints).forEach((breakpoint) => {
-      breakpointCounter += 1;
       const gridColumn = `
-        ${getColumnGridColumn(enableFlex, gridColumns, gridGutterWidths, breakpoint)}
-        ${getMediaBreakpointUp(enableFlex, gridColumns, gridBreakpoints, breakpoint, breakpointCounter)}
+        ${getColumnGridColumn(gridColumns, gridBreakpoints, gridGutterWidths, breakpoint)}
+        ${getMediaBreakpointUp(gridColumns, gridBreakpoints, breakpoint)}
       `;
       gridColumnList.push(gridColumn);
     });

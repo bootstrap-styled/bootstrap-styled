@@ -7,8 +7,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 import theme from '../../config';
-import { hoverFocus, plainHoverFocus } from '../../styled/mixins/hover';
-import { clearfix } from '../../styled/mixins/clearfix';
+import { hoverFocus } from '../../styled/mixins/hover';
 import { borderRadius, borderTopRadius } from '../../styled/mixins/border-radius';
 import { nav } from '../../styled/utilities/nav';
 
@@ -45,7 +44,8 @@ Nav = styled(Nav)`
 
     
     & .nav-link {
-      display: inline-block;
+      display: block;
+      padding: ${props.theme['$nav-link-padding']};
       
       ${hoverFocus(
         props.theme['$enable-hover-media-query'],
@@ -55,57 +55,26 @@ Nav = styled(Nav)`
       /* Disabled state lightens text and removes hover/tab effects */
       &.disabled {
         color: ${props.theme['$nav-disabled-link-color']};
-            
-        ${plainHoverFocus(
-          props.theme['$enable-hover-media-query'],
-          `
-            color: ${props.theme['$nav-disabled-link-color']};
-            cursor: ${props.theme['$cursor-disabled']};
-            background-color: ${props.theme['$nav-disabled-link-hover-bg']};
-          `
-        )}
+        cursor: ${props.theme['$cursor-disabled']}; 
+      }
+    }
         
-      }
-    }
-    
-    /* Nav inline */
-    &.nav-inline {    
-      & .nav-item {
-        display: inline-block;
-      }
-      
-      & .nav-item + .nav-item,
-      & .nav-link + .nav-link {
-        margin-left: ${props.theme['$nav-item-inline-spacer']};
-      }
-    }
-    
     /*
      Tabs
     */
     
     &.nav-tabs {
       border-bottom: ${props.theme['$nav-tabs-border-width']} solid ${props.theme['$nav-tabs-border-color']};
-      
-      ${clearfix()}
-    
+          
       & .nav-item {
-        float: left;
-        /* Make the list-items overlay the bottom border */
         margin-bottom: -${props.theme['$nav-tabs-border-width']};
-    
-        & + .nav-item {
-          margin-left: ${props.theme['$nav-item-margin']};
-        }
       }
-    
+   
       & .nav-link {
-        display: block;
-        padding: ${props.theme['$nav-link-padding']};
         border: ${props.theme['$nav-tabs-border-width']} solid transparent;
         ${borderTopRadius(
           props.theme['$enable-rounded'],
-          props.theme['$nav-link-padding']
+          props.theme['$nav-tabs-border-radius']
         )}
       
         ${hoverFocus(
@@ -116,27 +85,17 @@ Nav = styled(Nav)`
         )};
       
         &.disabled {
-          ${plainHoverFocus(
-            props.theme['$enable-hover-media-query'],
-            `
-              color: ${props.theme['$nav-disabled-link-color']};
-              background-color: transparent;
-              border-color: transparent;
-            `
-          )};
+          color: ${props.theme['$nav-disabled-link-color']};
+          background-color: transparent;
+          border-color: transparent;
         }
       }
       
       & .nav-link.active,
       .nav-item.open .nav-link {
-        ${plainHoverFocus(
-          props.theme['$enable-hover-media-query'],
-          `
-            color: ${props.theme['$nav-tabs-active-link-hover-color']};
-            background-color: ${props.theme['$nav-tabs-active-link-hover-bg']};
-            border-color: ${props.theme['$nav-tabs-active-link-hover-border-color']} ${props.theme['$nav-tabs-active-link-hover-border-color']} transparent;
-          `
-        )};
+        color: ${props.theme['$nav-tabs-active-link-hover-color']};
+        background-color: ${props.theme['$nav-tabs-active-link-hover-bg']};
+        border-color: ${props.theme['$nav-tabs-active-link-hover-border-color']} ${props.theme['$nav-tabs-active-link-hover-border-color']} transparent;
       }
       
       & .dropdown-menu {
@@ -154,19 +113,8 @@ Nav = styled(Nav)`
      Pills
     */
     
-    &.nav-pills {
-      ${clearfix()};
-    
-      & .nav-item {
-        float: left;
-        & + .nav-item {
-          margin-left: ${props.theme['$nav-item-margin']};
-        }
-      }
-    
+    &.nav-pills {    
       .nav-link {
-        display: block;
-        padding: ${props.theme['$nav-link-padding']};
         ${borderRadius(
           props.theme['$enable-rounded'],
           props.theme['$nav-pills-border-radius']
@@ -175,29 +123,28 @@ Nav = styled(Nav)`
     
       & .nav-link.active,
       .nav-item.open .nav-link {
-        ${plainHoverFocus(
-          props.theme['$enable-hover-media-query'],
-          `
-            color: ${props.theme['$nav-pills-active-link-color']};
-            cursor: default;
-            background-color: ${props.theme['$nav-pills-active-link-bg']};
-          `
-        )};
+        color: ${props.theme['$nav-pills-active-link-color']};
+        background-color: ${props.theme['$nav-pills-active-link-bg']};
       }
     }
     
-    &.nav-stacked {
-      & .nav-item {
-        display: block;
-        float: none;
+    /*
+      Justified variants
+    */
     
-        &+ .nav-item {
-          margin-top: ${props.theme['$nav-item-margin']};
-          margin-left: 0;
-        }
+    &.nav-fill {
+      .nav-item {
+        flex: 1 1 auto;
+        text-align: center;
       }
     }
     
+    &.nav-justified {
+      .nav-item {
+        flex: 1 1 100%;
+        text-align: center;
+      }
+    }
     
     /*
      Tabbable tabs

@@ -42,21 +42,26 @@ export function typography(
     &.display-1 {
       font-size: ${$display1Size};
       font-weight: ${$display1Weight};
+      line-height: ${$headingsLineHeight};
+
     }
     
     &.display-2 {
       font-size: ${$display2Size};
       font-weight: ${$display2Weight};
+      line-height: ${$headingsLineHeight};
     }
     
     &.display-3 {
       font-size: ${$display3Size};
       font-weight: ${$display3Weight};
+      line-height: ${$headingsLineHeight};
     }
     
     &.display-4 {
       font-size: ${$display4Size};
       font-weight: ${$display4Weight};
+        line-height: ${$headingsLineHeight};
     }
     
 

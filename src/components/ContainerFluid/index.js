@@ -25,7 +25,6 @@ class ContainerFluid extends React.Component {    // eslint-disable-line react/p
 ContainerFluid = styled(ContainerFluid)`
   ${(props) => `
     ${makeContainer(
-      props.theme['$enable-flex'],
       props.theme['$enable-grid-classes'],
       props.theme['$grid-gutter-widths']
     )}

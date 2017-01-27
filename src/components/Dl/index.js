@@ -6,7 +6,6 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import theme from '../../config';
-import { ifElse } from '../../styled/mixins/conditional';
 
 const defaultProps = { theme };
 
@@ -28,24 +27,9 @@ class Dl extends React.Component { // eslint-disable-line react/prefer-stateless
 
 // eslint-disable-next-line no-class-assign
 Dl = styled(Dl)` 
-  ${(props) => `
-    /* Reboot Scss */
-    margin-top: 0;
-    margin-bottom: 1rem;
-    
-    /* Type Scss */
-    /* Clean up some horizontal 'dl's built with grids */
-  
-    ${ifElse(
-      props.theme['$enable-flex'],
-      '',
-      `&.row {
-        > dd + dt {
-          clear: left;
-        }
-      }`
-    )}     
-  `}
+  /* Reboot Scss */
+  margin-top: 0;
+  margin-bottom: 1rem;
 `;
 
 Dl.defaultProps = defaultProps;

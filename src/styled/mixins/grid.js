@@ -1,5 +1,4 @@
 import { mediaBreakpointUp } from './breakpoints';
-import { clearfix } from './clearfix';
 import { toPercent, rmUnit, detectUnit } from '../mixins/unit';
 
 export const defaultProps = {
@@ -25,14 +24,13 @@ export const defaultProps = {
   },
   '$grid-columns': 12,
   '$enable-grid-classes': true,
-  '$enable-flex': false,
 };
 
 // Grid system
 //
 // Generate semantic grid columns with these mixins.
 
-export function makeContainer(enableFlex = defaultProps['$enable-flex'], enableGridClasses = defaultProps['$enable-grid-classes'], gridGutterWidths = defaultProps['$grid-gutter-widths']) {
+export function makeContainer(enableGridClasses = defaultProps['$enable-grid-classes'], gridGutterWidths = defaultProps['$grid-gutter-widths']) {
   if (enableGridClasses) {
     const columns = [];
     Object.keys(gridGutterWidths).forEach((breakpoint) => {
@@ -44,11 +42,9 @@ export function makeContainer(enableFlex = defaultProps['$enable-flex'], enableG
       columns.push(column);
     });
     return `
+      position: relative;
       margin-left: auto;
-      margin-right: auto;
-    
-      ${!enableFlex ? clearfix() : ''}
-    
+      margin-right: auto;    
       ${columns.join('\n')}
     `;
   }
@@ -89,18 +85,8 @@ export function makeGutters(gridGutterWidths = defaultProps['$grid-gutter-widths
   `;
 }
 
-export function makeRow(enableFlex = defaultProps['$enable-flex'], enableGridClasses = defaultProps['$enable-grid-classes'], gridGutterWidths = defaultProps['$grid-gutter-widths']) {
+export function makeRow(enableGridClasses = defaultProps['$enable-grid-classes'], gridGutterWidths = defaultProps['$grid-gutter-widths']) {
   if (enableGridClasses) {
-    let clear;
-    if (enableFlex) {
-      clear = `
-        display: flex;
-        flex-wrap: wrap;
-      `;
-    } else {
-      clear = clearfix();
-    }
-
     const rowList = [];
     Object.keys(gridGutterWidths).forEach((breakpoint) => {
       let gutter = gridGutterWidths[breakpoint];
@@ -112,17 +98,15 @@ export function makeRow(enableFlex = defaultProps['$enable-flex'], enableGridCla
       rowList.push(row);
     });
     return `
-      ${clear}
-  
+      display: flex;
+      flex-wrap: wrap;
       ${rowList.join('\n')}
     `;
   }
   return '';
 }
 
-export function makeColReady(enableFlex = defaultProps['$enable-flex'], gridGutterWidths = defaultProps['$grid-gutter-widths']) {
-  const flexWidth = enableFlex ? 'width: 100%;' : '';
-
+export function makeColReady(gridGutterWidths = defaultProps['$grid-gutter-widths']) {
   const colReadyList = [];
   Object.keys(gridGutterWidths).forEach((breakpoint) => {
     let gutter = gridGutterWidths[breakpoint];
@@ -135,35 +119,22 @@ export function makeColReady(enableFlex = defaultProps['$enable-flex'], gridGutt
   });
   return `
     position: relative;
-    min-height: 1px; /* Prevent collapsing */
-
     /* Prevent columns from becoming too narrow when at smaller grid tiers by */
     /* always setting 'width: 100%;'. This works because we use 'flex' values */
     /* later on to override this initial width. */
-    ${flexWidth}
-
+    min-height: 1px; /* Prevent collapsing */
+    width: 100%;
     ${colReadyList.join('\n')}
   `;
 }
 
-export function makeCol(enableFlex = defaultProps['$enable-flex'], size, columns = defaultProps['$grid-columns']) {
-  let col;
-  if (enableFlex) {
-    col = `
-      flex: 0 0 ${toPercent(size, columns)};
-      /* Add a 'max-width' to ensure content within each column does not blow out */
-      /* the width of the column. Applies to IE10+ and Firefox. Chrome and Safari */
-      /* do not appear to require this. */
-      max-width: ${toPercent(size, columns)};
-    `;
-  } else {
-    col = `
-      float: left;
-      width: ${toPercent(size, columns)};
-    `;
-  }
+export function makeCol(size, columns = defaultProps['$grid-columns']) {
   return `
-    ${col}
+    flex: 0 0 ${toPercent(size, columns)};
+    /* Add a 'max-width' to ensure content within each column does not blow out */
+    /* the width of the column. Applies to IE10+ and Firefox. Chrome and Safari */
+    /* do not appear to require this. */
+    max-width: ${toPercent(size, columns)};
   `;
 }
 

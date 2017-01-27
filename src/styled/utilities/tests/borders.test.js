@@ -14,17 +14,29 @@ describe('bootstrap borders utility', () => {
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(959363096);
   });
-  it('rouded should return a css with rounded', () => {
+  it('getBordersUtilities without arguments should return a css ', () => {
+    const css = getBordersUtilities();
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(-531498544);
+  });
+  it('rounded should return a css with rounded', () => {
     const css = rounded(defaultProps['$enable-rounded'], defaultProps['$border-radius']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(-919223289);
   });
-  it('rouded should return a css without rounded', () => {
+  it('rounded should return a css without rounded', () => {
     const css = rounded(!defaultProps['$enable-rounded'], defaultProps['$border-radius']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(101513786);
+  });
+  it('rounded with no arguments should return a css ', () => {
+    const css = rounded();
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(-919223289);
   });
   it('roundedBottom should return a css with rounded', () => {
     const css = roundedBottom(defaultProps['$enable-rounded'], defaultProps['$border-radius']);
@@ -38,6 +50,12 @@ describe('bootstrap borders utility', () => {
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(-770947480);
   });
+  it('roundedBottom wihtout arguments should return a css', () => {
+    const css = roundedBottom();
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(822841448);
+  });
   it('roundedCircle should return a css with rounded', () => {
     const css = roundedCircle(defaultProps['$enable-rounded'], defaultProps['$border-radius']);
     expect(css).not.toContain('undefined');
@@ -46,6 +64,12 @@ describe('bootstrap borders utility', () => {
   });
   it('roundedCircle should return a css without rounded', () => {
     const css = roundedCircle(!defaultProps['$enable-rounded'], defaultProps['$border-radius']);
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(-532555416);
+  });
+  it('roundedCircle should return a css', () => {
+    const css = roundedCircle();
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(-532555416);

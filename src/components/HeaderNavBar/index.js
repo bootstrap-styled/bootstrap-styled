@@ -234,7 +234,7 @@ HeaderNavBar = styled(HeaderNavBar)`
     
     outline: ${props.theme['$header-navbar-border-width']} solid ${props.theme['$header-navbar-border-color']};
     
-    ${getFlexUtilities(props.theme['$enable-flex'], props.theme['$grid-breakpoints'])}
+    ${getFlexUtilities(props.theme['$grid-breakpoints'])}
         
     ${transition(
       props.theme['$enable-transitions'],
