@@ -128,6 +128,18 @@ Nav = styled(Nav)`
       }
     }
     
+    &.nav-stacked {
+      & .nav-item {
+        display: block;
+        float: none;
+    
+        &+ .nav-item {
+          margin-top: ${props.theme['$nav-item-margin']};
+          margin-left: 0;
+        }
+      }
+    }
+    
     /*
       Justified variants
     */
