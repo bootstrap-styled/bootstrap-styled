@@ -157,7 +157,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     const navTopPush = (composePush) ? (
       <div>
         <ButtonToggle
-          className="navbar-toggler hidden-md-up float-xs-left ma-4"
+          className="navbar-toggler hidden-md-up float-xs-left ma-3"
           type="button"
           onClick={composePush.onClick}
         />

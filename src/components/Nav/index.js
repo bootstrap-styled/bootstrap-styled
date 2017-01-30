@@ -65,7 +65,6 @@ Nav = styled(Nav)`
     
     &.nav-tabs {
       border-bottom: ${props.theme['$nav-tabs-border-width']} solid ${props.theme['$nav-tabs-border-color']};
-          
       & .nav-item {
         margin-bottom: -${props.theme['$nav-tabs-border-width']};
       }
@@ -114,7 +113,6 @@ Nav = styled(Nav)`
     */
     
     &.nav-pills {
-    width: 100%;
       .nav-item {
         float: left;
         + .nav-item {
