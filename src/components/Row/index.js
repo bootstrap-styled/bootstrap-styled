@@ -28,6 +28,22 @@ Row = styled(Row)`
     props.theme['$enable-grid-classes'],
     props.theme['$grid-gutter-widths']
   )}
+  
+  /*
+    Remove the negative margin from default .row, then the horizontal padding
+    from all immediate children columns (to prevent runaway style inheritance).
+  */
+  
+  &.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+
+    > .col,
+    > [class*="col-"] {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
 `;
 
 Row.defaultProps = defaultProps;
