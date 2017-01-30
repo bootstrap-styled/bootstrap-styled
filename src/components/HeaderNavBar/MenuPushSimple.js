@@ -13,14 +13,13 @@ import styled from 'styled-components';
 import theme from '../../config';
 
 import { transition } from '../../styled/mixins/transition';
-import { mediaBreakpointUp, mediaBreakpointDown } from '../../styled/mixins/breakpoints';
+import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import MenuPush from './MenuPush';
 const defaultProps = { theme };
 
 // eslint-disable-next-line no-class-assign
 const MenuPushSimple = styled(MenuPush)`
   ${(props) => `
-    
     ${transition(
       props.theme['$enable-transitions'],
       props.theme['$menu-push-transition-duration']
@@ -64,7 +63,6 @@ const MenuPushSimple = styled(MenuPush)`
     
   `}
 `;
-
 
 MenuPushSimple.defaultProps = defaultProps;
 
