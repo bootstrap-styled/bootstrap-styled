@@ -41,8 +41,12 @@ Nav = styled(Nav)`
      */
     
     ${nav()}
+    &.nav-item {
+      float: left;
+      + .nav-item {
+        margin-left: ${props.theme['$nav-item-margin']};
+    }
 
-    
     & .nav-link {
       display: block;
       padding: ${props.theme['$nav-link-padding']};
