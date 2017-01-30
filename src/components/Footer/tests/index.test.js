@@ -36,7 +36,7 @@ describe('<Footer />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('footer').length).toBe(1);
+    expect(renderedComponent.find('Footer').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -49,6 +49,7 @@ describe('<Footer />', () => {
       children,
     });
     expect(renderedComponent.find('footer').length).toBe(1);
+    expect(renderedComponent.find('Footer').length).toBe(1);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
