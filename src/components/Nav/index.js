@@ -41,11 +41,6 @@ Nav = styled(Nav)`
      */
     
     ${nav()}
-    &.nav-item {
-      float: left;
-      + .nav-item {
-        margin-left: ${props.theme['$nav-item-margin']};
-    }
 
     & .nav-link {
       display: block;
@@ -118,6 +113,7 @@ Nav = styled(Nav)`
     
     &.nav-pills {
       .nav-item {
+        width: 100%;
         float: left;
         + .nav-item {
           margin-left: ${props.theme['$nav-item-margin']};
