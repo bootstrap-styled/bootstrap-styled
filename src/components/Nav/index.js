@@ -114,6 +114,7 @@ Nav = styled(Nav)`
     */
     
     &.nav-pills {
+    width: 100%;
       .nav-item {
         float: left;
         + .nav-item {
