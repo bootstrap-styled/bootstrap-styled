@@ -113,15 +113,24 @@ Nav = styled(Nav)`
      Pills
     */
     
-    &.nav-pills {    
+    &.nav-pills {
+      .nav-item {
+        float: left;
+        + .nav-item {
+          margin-left: ${props.theme['$nav-item-margin']};
+        }
+      }
+    
       .nav-link {
+        display: block;
+        padding: ${props.theme['$nav-link-padding']};
         ${borderRadius(
           props.theme['$enable-rounded'],
           props.theme['$nav-pills-border-radius']
         )};
       }
     
-      & .nav-link.active,
+      .nav-link.active,
       .nav-item.open .nav-link {
         color: ${props.theme['$nav-pills-active-link-color']};
         background-color: ${props.theme['$nav-pills-active-link-bg']};
@@ -129,11 +138,11 @@ Nav = styled(Nav)`
     }
     
     &.nav-stacked {
-      & .nav-item {
+      .nav-item {
         display: block;
         float: none;
     
-        &+ .nav-item {
+        + .nav-item {
           margin-top: ${props.theme['$nav-item-margin']};
           margin-left: 0;
         }
