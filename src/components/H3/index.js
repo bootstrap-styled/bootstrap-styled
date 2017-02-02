@@ -30,7 +30,21 @@ class H3 extends React.Component { // eslint-disable-line react/prefer-stateless
 H3 = styled(H3)`
   ${(props) => `
     font-size: ${props.theme['$font-size-h3']};
-    ${typography()}
+    ${typography(
+      props.theme['$headings-margin-bottom'],
+      props.theme['$headings-font-family'],
+      props.theme['$headings-font-weight'],
+      props.theme['$headings-line-height'],
+      props.theme['$headings-color'],
+      props.theme['$display1-size'],
+      props.theme['$display2-size'],
+      props.theme['$display3-size'],
+      props.theme['$display4-size'],
+      props.theme['$display1-weight'],
+      props.theme['$display2-weight'],
+      props.theme['$display3-weight'],
+      props.theme['$display4-weight'],
+    )}
 
     /* Reboot Scss */
     margin-top: 0;
