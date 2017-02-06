@@ -126,4 +126,21 @@ describe('<Select />', () => {
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
+  it('should not apply android fix', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      className: 'form-control',
+      children,
+    });
+    expect(renderedComponent.find('select').props().className.indexOf('form-control') > -1).toBe(true);
+  });
+  it('should apply android fix', () => {
+    /* eslint-disable no-restricted-properties, no-underscore-dangle */
+    navigator.__defineGetter__('userAgent', () => 'Mozilla/5.0 Android AppleWebKit'); // customized user agent
+    /* eslint-enable no-restricted-properties, no-underscore-dangle */
+    const renderedComponent = renderComponentUsingTheme({
+      className: 'form-control',
+      children,
+    });
+    expect(renderedComponent.find('select').props().className.indexOf('form-control')).toBe(-1);
+  });
 });

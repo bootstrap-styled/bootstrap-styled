@@ -12,12 +12,28 @@ class Select extends React.Component { // eslint-disable-line react/prefer-state
     children: PropTypes.node.isRequired,
   }
 
+  state = {
+    className: null,
+  }
+
+  // Android browser fix: https://v4-alpha.getbootstrap.com/getting-started/browsers-devices/#android-stock-browser
+  componentWillMount() {
+    const nua = navigator.userAgent;
+    const isAndroid = (nua.indexOf('Mozilla/5.0') > -1 && nua.indexOf('Android ') > -1 && nua.indexOf('AppleWebKit') > -1 && nua.indexOf('Chrome') === -1);
+    if (isAndroid) {
+      this.setState({
+        className: this.props.className.replace(/\bform-control\b/, ''),
+      });
+    } else {
+      this.state.className = this.props.className;
+    }
+  }
+
   render() {
     const { theme, className, children, ...rest } = this.props; // eslint-disable-line
-
     return (
       <select
-        className={cn(className, 'select')}
+        className={cn(this.state.className, 'select')}
         {...rest}
       >
         {children}

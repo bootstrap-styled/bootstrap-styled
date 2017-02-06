@@ -1,12 +1,11 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import theme from '../../../config';
+import { mount } from 'enzyme';
 
 import BootstrapProvider from '../index';
 
 const children = (<h1>Test</h1>);
 
-const renderComponent = (props = {}) => shallow(
+const renderComponent = (props = {}) => mount(
   <BootstrapProvider theme={props.theme}>
     {props.children}
   </BootstrapProvider>
@@ -31,5 +30,26 @@ describe('<BootstrapProvider />', () => {
       children,
     });
     expect(renderedComponent.props().theme.color).toEqual('red');
+  });
+  it('should not apply windows phone 8 fix', () => {
+    const renderedComponent = renderComponent({
+      theme: {
+        color: 'red',
+      },
+      children,
+    });
+    expect(renderedComponent.state('isWindowPhone8Fixed')).toBe(null);
+  });
+  it('should apply windows phone 8 fix', () => {
+    /* eslint-disable no-restricted-properties, no-underscore-dangle */
+    navigator.__defineGetter__('userAgent', () => 'IEMobile/10.0'); // customized user agent
+    /* eslint-enable no-restricted-properties, no-underscore-dangle */
+    const renderedComponent = renderComponent({
+      theme: {
+        color: 'red',
+      },
+      children,
+    });
+    expect(renderedComponent.state('isWindowPhone8Fixed')).toBe(true);
   });
 });
