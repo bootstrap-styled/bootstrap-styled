@@ -1,82 +1,39 @@
-import alert from './styled/mixins/alert';
-import animation from './styled/mixins/animation';
-import backgroundVariant from './styled/mixins/background-variant';
-import badge from './styled/mixins/badge';
-import borderRadius from './styled/mixins/border-radius';
-import boxShadow from './styled/mixins/box-shadow';
-import breakpoints from './styled/mixins/breakpoints';
-import button from './styled/mixins/button';
-import cards from './styled/mixins/cards';
-import clearfix from './styled/mixins/clearfix';
-import conditional from './styled/mixins/conditional';
-import unit from './styled/mixins/unit';
-import float from './styled/mixins/float';
-import forms from './styled/mixins/forms';
-import gradients from './styled/mixins/gradients';
-import grid from './styled/mixins/grid';
-import gridFramework from './styled/mixins/grid-framework';
-import hover from './styled/mixins/hover';
-import listGroup from './styled/mixins/list-group';
-import lists from './styled/mixins/lists';
-import navDivider from './styled/mixins/nav-divider';
-import navbarAlign from './styled/mixins/navbar-align';
-import navbarToggleable from './styled/mixins/navbar-toggleable';
-import pagination from './styled/mixins/pagination';
-import progress from './styled/mixins/progress';
-import resetFilter from './styled/mixins/reset-filter';
-import resetText from './styled/mixins/reset-text';
-import resize from './styled/mixins/resize';
-import screenReader from './styled/mixins/screen-reader';
-import size from './styled/mixins/size';
-import tabFocus from './styled/mixins/tab-focus';
-import tableRow from './styled/mixins/table-row';
-import tag from './styled/mixins/tag';
-import textEmphasis from './styled/mixins/text-emphasis';
-import textHide from './styled/mixins/text-hide';
-import textTruncate from './styled/mixins/text-truncate';
-import transition from './styled/mixins/transition';
-import variables from './styled/mixins/variables';
-import visibility from './styled/mixins/visibility';
-
-// 5. mixins
-export const mixins = {
-  alert,
-  animation,
-  backgroundVariant,
-  badge,
-  borderRadius,
-  boxShadow,
-  breakpoints,
-  button,
-  cards,
-  clearfix,
-  conditional,
-  float,
-  forms,
-  gradients,
-  grid,
-  gridFramework,
-  hover,
-  listGroup,
-  lists,
-  navDivider,
-  navbarAlign,
-  navbarToggleable,
-  pagination,
-  progress,
-  resetFilter,
-  resetText,
-  resize,
-  screenReader,
-  size,
-  tabFocus,
-  tableRow,
-  tag,
-  textEmphasis,
-  textHide,
-  textTruncate,
-  transition,
-  unit,
-  variables,
-  visibility,
-};
+export { default as alertMixins } from './styled/mixins/alert';
+export { default as animationMixins } from './styled/mixins/animation';
+export { default as backgroundVariantMixins } from './styled/mixins/background-variant';
+export { default as badgeMixins } from './styled/mixins/badge';
+export { default as borderRadiusMixins } from './styled/mixins/border-radius';
+export { default as boxShadowMixins } from './styled/mixins/box-shadow';
+export { default as breakpointsMixins } from './styled/mixins/breakpoints';
+export { default as buttonMixins } from './styled/mixins/button';
+export { default as cardsMixins } from './styled/mixins/cards';
+export { default as clearfixMixins } from './styled/mixins/clearfix';
+export { default as conditionalMixins } from './styled/mixins/conditional';
+export { default as unitMixins } from './styled/mixins/unit';
+export { default as floatMixins } from './styled/mixins/float';
+export { default as formsMixins } from './styled/mixins/forms';
+export { default as gradientsMixins } from './styled/mixins/gradients';
+export { default as gridMixins } from './styled/mixins/grid';
+export { default as gridFrameworkMixins } from './styled/mixins/grid-framework';
+export { default as hoverMixins } from './styled/mixins/hover';
+export { default as listGroupMixins } from './styled/mixins/list-group';
+export { default as listsMixins } from './styled/mixins/lists';
+export { default as navDividerMixins } from './styled/mixins/nav-divider';
+export { default as navbarAlignMixins } from './styled/mixins/navbar-align';
+export { default as navbarToggleableMixins } from './styled/mixins/navbar-toggleable';
+export { default as paginationMixins } from './styled/mixins/pagination';
+export { default as progressMixins } from './styled/mixins/progress';
+export { default as resetFilterMixins } from './styled/mixins/reset-filter';
+export { default as resetTextMixins } from './styled/mixins/reset-text';
+export { default as resizeMixins } from './styled/mixins/resize';
+export { default as screenReaderMixins } from './styled/mixins/screen-reader';
+export { default as sizeMixins } from './styled/mixins/size';
+export { default as tabFocusMixins } from './styled/mixins/tab-focus';
+export { default as tableRowMixins } from './styled/mixins/table-row';
+export { default as tagMixins } from './styled/mixins/tag';
+export { default as textEmphasisMixins } from './styled/mixins/text-emphasis';
+export { default as textHideMixins } from './styled/mixins/text-hide';
+export { default as textTruncateMixins } from './styled/mixins/text-truncate';
+export { default as transitionMixins } from './styled/mixins/transition';
+export { default as variablesMixins } from './styled/mixins/variables';
+export { default as visibilityMixins } from './styled/mixins/visibility';

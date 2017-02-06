@@ -46,6 +46,20 @@ It will automatically install the following dependencies :
 If you want just part of your bootstrap for building a package to distribute for example you can also do
 
     import Button from 'bootstrap-styled/lib/components/Button';
+    
+## Mixins
+
+Example of import of the __alert__ mixins
+
+    import { alertMixins } from 'bootstrap-styled';
+
+## Utilities
+
+Example of import of the __alert__ utility
+
+__alert__
+
+    import { alertUtils } from 'bootstrap-styled';
 
 ## Documentation
 

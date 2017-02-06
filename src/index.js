@@ -1,8 +1,8 @@
-import HeaderNavBar, { compCollapse, compSlide, compPush } from './components/HeaderNavBar';
-
+// -1. Mixins et Utilities exported in global export default and suffixed
 const mixins = require('./mixins');
 const utilities = require('./utilities');
-
+Object.keys(mixins).forEach((key) => { module.exports[key] = mixins[key]; });
+Object.keys(utilities).forEach((key) => { module.exports[key] = utilities[key]; });
 // 0. Configuration
 export { default as theme } from './config';
 // 1. Atoms
@@ -82,15 +82,6 @@ export { default as NavBar } from './components/NavBar';
 // 3. Organisms
 export { default as Container } from './components/Container';
 export { default as ContainerFluid } from './components/ContainerFluid';
-// 3.1. Create HeaderNavBar type
-const HeaderNavBarCollapse = compCollapse(HeaderNavBar);
-const HeaderNavBarSlide = compSlide(HeaderNavBar);
-const HeaderNavBarPush = compPush(HeaderNavBar);
-// 3.2 Export HeaderNavBar
-export { HeaderNavBar, HeaderNavBarCollapse, HeaderNavBarPush, HeaderNavBarSlide };
+export { default as HeaderNavBar, HeaderNavBarCollapse, HeaderNavBarPush, HeaderNavBarSlide } from './components/HeaderNavBar';
 // 4. Templates
 export { default as DocBootstrap } from './components/DocBootstrap';
-
-// 5. Mixins et Utilities exported in global export default and suffixed
-Object.keys(mixins).forEach((key) => { module.exports[`${key}Mixins`] = mixins[key]; });
-Object.keys(utilities).forEach((key) => { module.exports[`${key}Utils`] = utilities[key]; });

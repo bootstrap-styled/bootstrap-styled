@@ -8,7 +8,7 @@ import { mount } from 'enzyme';
 import React from 'react';
 import theme from '../../../config';
 
-import HeaderNavBar, { compCollapse } from '../index';
+import { HeaderNavBarCollapse } from '../index';
 
 const menu = (
   <ul>
@@ -29,7 +29,6 @@ const menuCollapsed = {
   isCollapsed: false,
 };
 
-const HeaderNavBarCollapse = compCollapse(HeaderNavBar);
 const clickTest = jest.fn();
 clickTest.mockReturnValue('test-click-additional');
 
