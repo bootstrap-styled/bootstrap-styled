@@ -1,4 +1,4 @@
-// -1. Mixins et Utilities exported in global export default and suffixed
+// -1. Mixins et Utilities (export everything)
 const mixins = require('./mixins');
 const utilities = require('./utilities');
 Object.keys(mixins).forEach((key) => { module.exports[key] = mixins[key]; });
