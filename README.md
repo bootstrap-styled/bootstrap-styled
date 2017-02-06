@@ -40,11 +40,11 @@ It will automatically install the following dependencies :
 
 bootstrap-styled is made on top of [styled-components](https://github.com/styled-components/styled-components)
 
-__Wrapper your application within a `<BootstrapProvider>`__
+__Wrapper your application within a `<BootstrapProvider>` __instead of__ a `<ThemeProvider>`__
 
     import { BootstrapProvider } from 'bootstrap-styled';
     // ... then in your render
-    <BootstrapProvider>
+    <BootstrapProvider theme={theme}>
         <App />
     </BootstrapProvider>
     
