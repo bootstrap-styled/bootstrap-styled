@@ -93,4 +93,4 @@ export { default as DocBootstrap } from './components/DocBootstrap';
 
 // 5. Mixins et Utilities exported in global export default and suffixed
 Object.keys(mixins).forEach((key) => { module.exports[`${key}Mixins`] = mixins[key]; });
-Object.keys(utilities).forEach((key) => { module.exports[`${key}Util`] = utilities[key]; });
+Object.keys(utilities).forEach((key) => { module.exports[`${key}Utils`] = utilities[key]; });

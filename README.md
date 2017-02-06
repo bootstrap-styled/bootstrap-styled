@@ -64,6 +64,12 @@ Test driven development
 Automatically build dist (do not build lib)
 
     npm run build:watch
+    
+Exports are done in `src/index.js`, the suffix __Utils__ and __Mixins__ are reserved for mixins and utilities.
+
+Utilities available in the API are exported in `src/utilities`;
+
+Mixins available in the API are exported in `src/mixins`;
 
 ## License
 
