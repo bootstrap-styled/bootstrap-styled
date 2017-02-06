@@ -7,6 +7,8 @@ Bootstrap 4.0 made in styled components
   - [Dependencies](#dependencies)
   - [Installation](#installation)
   - [Basic Usage](#basic-usage)
+  - [Mixins](#mixins)
+  - [Utilities](#utilities)
   - [Documentation](#documentation)
   - [Developers](#developers)
   - [License](#license)
