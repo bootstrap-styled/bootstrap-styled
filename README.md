@@ -38,7 +38,28 @@ It will automatically install the following dependencies :
 
 ## Basic Usage
 
+bootstrap-styled is made on top of [styled-components](https://github.com/styled-components/styled-components)
+
+__Wrapper your application within a `<BootstrapProvider>`__
+
+    import { BootstrapProvider } from 'bootstrap-styled';
+    // ... then in your render
+    <BootstrapProvider>
+        <App />
+    </BootstrapProvider>
+    
+This will execute all the compatiblity fix for all the different browsers.
+
+For more information see `src/components/BootstrapProvider/index.js`
+
+__Import bootstrap-styled component__
+    
     import {
+        A,
+        Ul,
+        Li,
+        Pre,
+        Form,
         DropDown,
         Button,
     } from 'bootstrap-styled;
