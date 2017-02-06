@@ -70,17 +70,15 @@ If you want just part of your bootstrap for building a package to distribute for
     
 ## Mixins
 
-Example of import of the __alert__ mixins
+Example of import of the __breapoints__ mixins
 
-    import { alertMixins } from 'bootstrap-styled';
+    import { breakpointsMixins } from 'bootstrap-styled';
 
 ## Utilities
 
-Example of import of the __alert__ utility
+Example of import of the __visibility__ utility
 
-__alert__
-
-    import { alertUtils } from 'bootstrap-styled';
+    import { visibilityUtils } from 'bootstrap-styled';
 
 ## Documentation
 
