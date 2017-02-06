@@ -6,17 +6,17 @@ describe('bootstrap borders utility', () => {
     const css = getBordersUtilities(defaultProps['$enable-rounded'], defaultProps['$border-radius']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-80877161);
+    expect(fromJS({ css }).hashCode()).toEqual(-576500417);
   });
   it('getBordersUtilities should return a list of css utilities without rounded', () => {
     const css = getBordersUtilities(!defaultProps['$enable-rounded'], defaultProps['$border-radius']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(360780664);
+    expect(fromJS({ css }).hashCode()).toEqual(144131383);
   });
   it('getBordersUtilities should have arguments', () => {
     const css = getBordersUtilities();
-    expect(fromJS({ css }).hashCode()).toEqual(-80877161);
+    expect(fromJS({ css }).hashCode()).toEqual(-576500417);
   });
   it('rounded should return a css with rounded', () => {
     const css = rounded(defaultProps['$enable-rounded'], defaultProps['$border-radius']);
@@ -116,22 +116,22 @@ describe('bootstrap borders utility', () => {
   });
   it('resetBorder should return an utility', () => {
     const css = resetBorder();
-    expect(fromJS({ css }).hashCode()).toEqual(941375245);
+    expect(fromJS({ css }).hashCode()).toEqual(-362746140);
   });
   it('resetBorderTop should return an utility', () => {
     const css = resetBorderTop();
-    expect(fromJS({ css }).hashCode()).toEqual(707988632);
+    expect(fromJS({ css }).hashCode()).toEqual(-397720654);
   });
   it('resetBorderRight should return an utility', () => {
     const css = resetBorderRight();
-    expect(fromJS({ css }).hashCode()).toEqual(209244742);
+    expect(fromJS({ css }).hashCode()).toEqual(-1042110320);
   });
   it('resetBorderBottom should return an utility', () => {
     const css = resetBorderBottom();
-    expect(fromJS({ css }).hashCode()).toEqual(-906297157);
+    expect(fromJS({ css }).hashCode()).toEqual(712395519);
   });
   it('resetBorderLeft should return an utility', () => {
     const css = resetBorderLeft();
-    expect(fromJS({ css }).hashCode()).toEqual(818837702);
+    expect(fromJS({ css }).hashCode()).toEqual(514409208);
   });
 });

@@ -72,7 +72,7 @@ export function roundedCircle() {
 export function resetBorder() {
   return `
     .border-0 {
-      border: 0;
+      border: 0 !important;
     }
   `;
 }
@@ -80,7 +80,7 @@ export function resetBorder() {
 export function resetBorderTop() {
   return `
     .border-top-0 {
-      border-top: 0;
+      border-top: 0 !important;
     }
   `;
 }
@@ -88,7 +88,7 @@ export function resetBorderTop() {
 export function resetBorderRight() {
   return `
     .border-right-0 {
-      border-right: 0;
+      border-right: 0 !important;
     }
   `;
 }
@@ -97,7 +97,7 @@ export function resetBorderRight() {
 export function resetBorderBottom() {
   return `
     .border-bottom-0 {
-      border-bottom: 0;
+      border-bottom: 0 !important;
     }
   `;
 }
@@ -105,7 +105,7 @@ export function resetBorderBottom() {
 export function resetBorderLeft() {
   return `
     .border-left-0 {
-      border-left: 0;
+      border-left: 0 !important;
     }
   `;
 }
