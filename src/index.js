@@ -1,8 +1,63 @@
 // -1. Mixins et Utilities (export everything)
-const mixins = require('./mixins');
-const utilities = require('./utilities');
-Object.keys(mixins).forEach((key) => { module.exports[key] = mixins[key]; });
-Object.keys(utilities).forEach((key) => { module.exports[key] = utilities[key]; });
+export {
+  alertMixins,
+  animationMixins,
+  backgroundVariantMixins,
+  badgeMixins,
+  borderRadiusMixins,
+  boxShadowMixins,
+  buttonMixins,
+  cardsMixins,
+  clearfixMixins,
+  conditionalMixins,
+  floatMixins,
+  formsMixins,
+  gradientsMixins,
+  gridFrameworkMixins,
+  gridMixins,
+  hoverMixins,
+  listGroupMixins,
+  listsMixins,
+  navbarAlignMixins,
+  navbarToggleableMixins,
+  navDividerMixins,
+  paginationMixins,
+  progressMixins,
+  resetFilterMixins,
+  resetTextMixins,
+  resizeMixins,
+  screenReaderMixins,
+  sizeMixins,
+  tabFocusMixins,
+  tableRowMixins,
+  tagMixins,
+  textEmphasisMixins,
+  textHideMixins,
+  textTruncateMixins,
+  transitionMixins,
+  unitMixins,
+  variablesMixins,
+  visibilityMixins,
+} from './mixins';
+export {
+  alignUtils,
+  aUtils,
+  backgroundUtils,
+  bordersUtils,
+  buttonGroupUtils,
+  buttonUtilityUtils,
+  clearfixUtils,
+  displayUtils,
+  flexUtils,
+  floatUtils,
+  navbarUtils,
+  navUtils,
+  screenreadersUtils,
+  spacingUtils,
+  textUtils,
+  typographyUtils,
+  visibilityUtils,
+} from './utilities';
 // 0. Configuration
 export { default as theme } from './config';
 // 1. Atoms
