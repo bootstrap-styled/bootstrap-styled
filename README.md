@@ -32,9 +32,7 @@ It will automatically install the following dependencies :
 
 ## Installation
 
-// Todo create link
-
-    npm install bootstrap-styled --save
+    npm install ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled.git --save
 
 ## Basic Usage
 
@@ -63,7 +61,7 @@ __alert__
 
 ## Documentation
 
-The complete documentation is available at [http://doc.bootstrap.com](http://doc.bootstrap.com)
+The complete documentation is available at [http://bootstrap-styled.kopaxgroup.com](http://bootstrap-styled.kopaxgroup.com)
 
 ## Developers
 

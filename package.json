@@ -9,7 +9,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/kopaxgroup/bootstrap-styled.git"
+    "url": "ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled.git"
   },
   "engines": {
     "npm": ">=3",
@@ -46,7 +46,10 @@
   "lint-staged": {
     "*.js": "lint:eslint"
   },
-  "pre-commit": "lint:staged",
+  "pre-commit": [
+    "build:readme",
+    "lint:staged"
+  ],
   "babel": {
     "presets": [
       [
