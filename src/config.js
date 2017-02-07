@@ -259,8 +259,6 @@ v['$dt-font-weight'] = ' bold';
 v['$kbd-box-shadow'] = 'inset 0 -.1rem 0 rgba(0,0,0,.25)';
 v['$nested-kbd-font-weight'] = ' bold';
 
-v['$list-inline-padding'] = '5px';
-
 // 10. Components
 //
 // Define common padding and border radius sizes and more.
@@ -524,7 +522,7 @@ v['$custom-file-box-shadow'] = 'inset 0 .2rem .4rem rgba(0,0,0,.05)';
 v['$custom-file-button-color'] = v['$custom-file-color'];
 v['$custom-file-button-bg'] = '#eee';
 
-v['$custom-file-text-placefolder-en'] = 'Choose file...';
+v['$custom-file-text-placeholder-en'] = 'Choose file...';
 v['$custom-file-text-button-label-en'] = 'Browse';
 
 
@@ -597,8 +595,6 @@ v['$navbar-toggler-padding-x'] = '.75rem';
 v['$navbar-toggler-padding-y'] = '.5rem';
 v['$navbar-toggler-font-size'] = v['$font-size-lg'];
 v['$navbar-toggler-border-radius'] = v['$btn-border-radius'];
-v['$navbar-toggler-padding-x'] = '.75rem';
-v['$navbar-toggler-padding-y'] = '.5rem';
 
 v['$navbar-dark-color'] = 'rgba(255,255,255,.5)';
 v['$navbar-dark-hover-color'] = 'rgba(255,255,255,.75)';
@@ -610,7 +606,7 @@ v['$navbar-dark-toggler-border'] = 'rgba(255,255,255,.1)';
 v['$navbar-light-color'] = 'rgba(0,0,0,.5)';
 v['$navbar-light-hover-color'] = 'rgba(0,0,0,.7)';
 v['$navbar-light-active-color'] = 'rgba(0,0,0,.9)';
-v['$navbar-light-dark-greyisabled-color'] = 'rgba(0,0,0,.3)';
+v['$navbar-light-dark-gray-disabled-color'] = 'rgba(0,0,0,.3)';
 v['$navbar-light-toggler-bg'] = `url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="${v['$navbar-light-color']}" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 8h24M4 16h24M4 24h24"/%3E%3C/svg%3E')`;
 v['$navbar-light-toggler-border'] = 'rgba(0,0,0,.1)';
 
@@ -781,32 +777,6 @@ v['$tag-pill-padding-x'] = '.6em';
 // customizing padding or font-size on labels.
 v['$tag-pill-border-radius'] = '10rem';
 
-// 25. Modals
-
-v['$modal-inner-padding'] = '15px';
-
-v['$modal-dialog-margin'] = '10px';
-v['$modal-dialog-sm-up-margin-y'] = '30px';
-
-v['$modal-title-padding'] = '15px';
-v['$modal-title-line-height'] = v['$line-height-base'];
-
-v['$modal-content-bg'] = '#fff';
-v['$modal-content-border-color'] = 'rgba(0,0,0,.2)';
-v['$modal-content-border-width'] = v['$border-width'];
-v['$modal-content-xs-box-shadow'] = '0 3px 9px rgba(0,0,0,.5)';
-v['$modal-content-sm-up-box-shadow'] = '0 5px 15px rgba(0,0,0,.5)';
-
-v['$modal-backdrop-bg'] = '#000';
-v['$modal-backdrop-opacity'] = '.5';
-v['$modal-header-border-color'] = '#e5e5e5';
-v['$modal-footer-border-color'] = v['$modal-header-border-color'];
-v['$modal-header-border-width'] = v['$modal-content-border-width'];
-v['$modal-footer-border-width'] = v['$modal-header-border-width'];
-
-v['$modal-lg'] = '900px';
-v['$modal-md'] = '600px';
-v['$modal-sm'] = '300px';
 
 // 26. Alerts
 //
@@ -879,6 +849,8 @@ v['$list-group-link-heading-color'] = '#333';
 v['$list-group-item-padding-x'] = '1.25rem';
 v['$list-group-item-padding-y'] = '.75rem';
 v['$list-group-item-heading-margin-bottom'] = '5px';
+
+v['$list-inline-padding'] = '5px';
 
 
 // 29. Image thumbnails
@@ -975,5 +947,6 @@ v['$menu-push-bg'] = 'black';
 v['$menu-push-mini-width'] = '75px';
 v['$menu-push-width'] = '220px';
 v['$menu-push-full-width'] = '100%';
+
 
 export default v;
