@@ -20,7 +20,7 @@ export const defaultProps = {
   '$brand-info': '#5bc0de',
   '$brand-warning': '#f0ad4e',
   '$brand-danger': '#d9534f',
-  '$grey-dark': '#373a3c',
+  '$gray-dark': '#373a3c',
 };
 
 export function getTextUtilities(
@@ -34,7 +34,7 @@ export function getTextUtilities(
   brandInfo = defaultProps['$brand-info'],
   brandWarning = defaultProps['$brand-warning'],
   brandDanger = defaultProps['$brand-danger'],
-  greyDark = defaultProps['$grey-dark']
+  grayDark = defaultProps['$gray-dark']
 ) {
   const responseAlignmentList = [];
   Object.keys(gridBreakpoints).forEach((bp) => {
@@ -90,7 +90,7 @@ export function getTextUtilities(
 
     /* Font color */
 
-    ${textEmphasisVariant(enableHoverMediaQuery, '.text-gray-dark', greyDark)}
+    ${textEmphasisVariant(enableHoverMediaQuery, '.text-gray-dark', grayDark)}
 
     /* Misc */
 

@@ -14,7 +14,7 @@ describe('bootstrap text utility', () => {
       defaultProps['$brand-info'],
       defaultProps['$brand-warning'],
       defaultProps['$brand-danger'],
-      defaultProps['$grey-dark']
+      defaultProps['$gray-dark']
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');

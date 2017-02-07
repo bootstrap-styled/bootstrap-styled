@@ -27,10 +27,10 @@ export function getBackgroundUtilities() {
   `;
 }
 
-export function bgFaded(greyBackground = defaultProps['$gray-lightest']) {
+export function bgFaded(grayBackground = defaultProps['$gray-lightest']) {
   return `
     &.bg-faded {
-      background-color: ${greyBackground};
+      background-color: ${grayBackground};
     }
   `;
 }
