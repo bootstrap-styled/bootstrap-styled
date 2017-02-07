@@ -46,7 +46,6 @@ class Button extends React.Component { // eslint-disable-line react/prefer-state
 // eslint-disable-next-line no-class-assign
 Button = styled(Button)`
   ${(props) => `
-
     ${button(
       props.theme['$enable-shadows'],
       props.theme['$enable-hover-media-query'],
