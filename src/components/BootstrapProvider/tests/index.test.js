@@ -45,6 +45,23 @@ describe('<BootstrapProvider />', () => {
       });
       expect(renderedComponent.state('isWindowPhone8Fixed')).toBe(true);
     });
+
+    it('should contain the default color of $brand-primary', () => {
+      const renderedComponent = renderComponent({
+        children,
+      });
+      expect(renderedComponent.find('ThemeProvider').props().theme['$brand-primary']).toBe(theme['$brand-primary']);
+    });
+
+    it('should contain the overriden color of $brand-primary', () => {
+      const renderedComponent = renderComponent({
+        children,
+        theme: {
+          '$brand-primary': 'red',
+        },
+      });
+      expect(renderedComponent.find('ThemeProvider').props().theme['$brand-primary']).toBe('red');
+    });
   });
 
   describe('<BootstrapProvider /> utils', () => {

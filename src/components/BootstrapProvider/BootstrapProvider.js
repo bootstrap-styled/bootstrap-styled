@@ -55,7 +55,7 @@ export default class BootstrapProvider extends React.Component { // eslint-disab
   render() {
     const { children, theme, utils } = this.props;
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={Object.assign({}, themeBs, theme)}>
         <UtilityProvider utils={utils}>
           {children}
         </UtilityProvider>
