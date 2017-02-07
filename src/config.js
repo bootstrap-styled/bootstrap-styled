@@ -608,7 +608,7 @@ v['$navbar-dark-toggler-border'] = 'rgba(255,255,255,.1)';
 v['$navbar-light-color'] = 'rgba(0,0,0,.5)';
 v['$navbar-light-hover-color'] = 'rgba(0,0,0,.7)';
 v['$navbar-light-active-color'] = 'rgba(0,0,0,.9)';
-v['$navbar-light-dark-greyisabled-color'] = 'rgba(0,0,0,.3)';
+v['$navbar-light-dark-gray-disabled-color'] = 'rgba(0,0,0,.3)';
 v['$navbar-light-toggler-bg'] = `url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="${v['$navbar-light-color']}" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 8h24M4 16h24M4 24h24"/%3E%3C/svg%3E')`;
 v['$navbar-light-toggler-border'] = 'rgba(0,0,0,.1)';
 
@@ -784,30 +784,30 @@ v['$tag-pill-border-radius'] = '10rem';
 
 // 25. Modals
 
-v['$modal-inner-padding'] = '15px';
-
-v['$modal-dialog-margin'] = '10px';
-v['$modal-dialog-sm-up-margin-y'] = '30px';
-
-v['$modal-title-padding'] = '15px';
-v['$modal-title-line-height'] = v['$line-height-base'];
-
-v['$modal-content-bg'] = '#fff';
-v['$modal-content-border-color'] = 'rgba(0,0,0,.2)';
-v['$modal-content-border-width'] = v['$border-width'];
-v['$modal-content-xs-box-shadow'] = '0 3px 9px rgba(0,0,0,.5)';
-v['$modal-content-sm-up-box-shadow'] = '0 5px 15px rgba(0,0,0,.5)';
-
-v['$modal-backdrop-bg'] = '#000';
-v['$modal-backdrop-opacity'] = '.5';
-v['$modal-header-border-color'] = '#e5e5e5';
-v['$modal-footer-border-color'] = v['$modal-header-border-color'];
-v['$modal-header-border-width'] = v['$modal-content-border-width'];
-v['$modal-footer-border-width'] = v['$modal-header-border-width'];
-
-v['$modal-lg'] = '900px';
-v['$modal-md'] = '600px';
-v['$modal-sm'] = '300px';
+// v['$modal-inner-padding'] = '15px';
+//
+// v['$modal-dialog-margin'] = '10px';
+// v['$modal-dialog-sm-up-margin-y'] = '30px';
+//
+// v['$modal-title-padding'] = '15px';
+// v['$modal-title-line-height'] = v['$line-height-base'];
+//
+// v['$modal-content-bg'] = '#fff';
+// v['$modal-content-border-color'] = 'rgba(0,0,0,.2)';
+// v['$modal-content-border-width'] = v['$border-width'];
+// v['$modal-content-xs-box-shadow'] = '0 3px 9px rgba(0,0,0,.5)';
+// v['$modal-content-sm-up-box-shadow'] = '0 5px 15px rgba(0,0,0,.5)';
+//
+// v['$modal-backdrop-bg'] = '#000';
+// v['$modal-backdrop-opacity'] = '.5';
+// v['$modal-header-border-color'] = '#e5e5e5';
+// v['$modal-footer-border-color'] = v['$modal-header-border-color'];
+// v['$modal-header-border-width'] = v['$modal-content-border-width'];
+// v['$modal-footer-border-width'] = v['$modal-header-border-width'];
+//
+// v['$modal-lg'] = '900px';
+// v['$modal-md'] = '600px';
+// v['$modal-sm'] = '300px';
 
 // 26. Alerts
 //
