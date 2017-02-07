@@ -22,7 +22,6 @@ export function a(
   $linkHoverColor = defaultProps['$link-hover-color'],
   $linkHoverDecoration = defaultProps['$link-hover-decoration'],
   $enableHoverMediaQuery = defaultProps['$enable-hover-media-query'],
-
 ) {
   return `
     color: ${$linkColor};
