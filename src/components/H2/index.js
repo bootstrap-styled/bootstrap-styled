@@ -53,7 +53,7 @@ H2 = styled(H2)`
     )}
        
     /* Reboot Scss */
-    margin-top: 0;
+    margin-top: 10;
   `}
 `;
 

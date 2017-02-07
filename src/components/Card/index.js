@@ -69,7 +69,7 @@ Card = styled(Card)`
    
     & .card-link {
       ${hover(`
-        text-decoration: none;;
+        text-decoration: none;
       `)}
     
       + .card-link {
