@@ -48,7 +48,6 @@
   },
   "pre-commit": [
     "build:readme",
-    "dist",
     "lint:staged"
   ],
   "babel": {
