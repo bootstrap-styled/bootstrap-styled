@@ -1,4 +1,4 @@
-import { mediaBreakpointUp } from '../mixins/breakpoints';
+import { mediaBreakpointUp, breakpointInfix } from '../mixins/breakpoints';
 import { textTruncate } from '../mixins/text-truncate';
 import { textHide } from '../mixins/text-hide';
 import { textEmphasisVariant } from '../mixins/text-emphasis';
@@ -38,10 +38,11 @@ export function getTextUtilities(
 ) {
   const responseAlignmentList = [];
   Object.keys(gridBreakpoints).forEach((bp) => {
+    const infix = breakpointInfix(bp, gridBreakpoints);
     const responsiveAlignement = mediaBreakpointUp(bp, gridBreakpoints, `
-      .text-${bp}-left { text-align: left !important; }
-      .text-${bp}-right  { text-align: right !important; }
-      .text-${bp}-center { text-align: center !important; }
+      .text${infix}-left { text-align: left !important; }
+      .text${infix}-right  { text-align: right !important; }
+      .text${infix}-center { text-align: center !important; }
     `);
     responseAlignmentList.push(responsiveAlignement);
   });

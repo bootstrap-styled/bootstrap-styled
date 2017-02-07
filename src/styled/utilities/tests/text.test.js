@@ -18,6 +18,6 @@ describe('bootstrap text utility', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(866713678);
+    expect(fromJS({ css }).hashCode()).toEqual(541368988);
   });
 });

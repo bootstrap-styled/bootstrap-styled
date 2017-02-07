@@ -6,9 +6,9 @@
 import styled from 'styled-components';
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
-import theme from '../../config';
+import bsTheme from '../../config';
 import { tableRowVariant } from '../../styled/mixins/table-row';
-import { hover } from '../../styled/mixins/hover';
+import { hover as hoverMixin } from '../../styled/mixins/hover';
 import { math } from '../../styled/mixins/unit';
 
 const defaultProps = {
@@ -17,52 +17,63 @@ const defaultProps = {
   hover: false,
   condensed: false,
   responsive: false,
-  theme,
+  theme: bsTheme,
 };
 
-class Table extends React.Component {
+class Table extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
-    striped: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
-    bordered: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
-    hover: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
-    condensed: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
+    theme: PropTypes.object,
+    striped: PropTypes.bool,
+    bordered: PropTypes.bool,
+    hover: PropTypes.bool,
+    condensed: PropTypes.bool,
     responsive: PropTypes.bool,
     children: PropTypes.node.isRequired,
   };
 
   render() {
-    const table = (
-      <table
-        className={cn(this.props.className, 'table', {
-          'table-bordered': this.props.bordered,
-          'table-striped': this.props.striped,
-          'table-hover': this.props.hover,
-          'table-condensed': this.props.condensed,
-        })}
-      >
-        {this.props.children}
-      </table>
-    );
+    const { className, theme, children, responsive, bordered, striped, hover, condensed, ...rest } = this.props; // eslint-disable-line no-unused-vars
 
-    if (this.props.responsive) {
+    if (responsive) {
       return (
         <div
-          className={cn(this.props.className, {
-            'responsive': this.props.responsive,
-            'table-bordered': this.props.bordered,
-            'table-striped': this.props.striped,
-            'table-hover': this.props.hover,
-            'table-condensed': this.props.condensed,
+          className={cn(className, {
+            'responsive': responsive,
+            'table-bordered': bordered,
+            'table-striped': striped,
+            'table-hover': hover,
+            'table-condensed': condensed,
           })}
+          {...rest}
         >
-          {table}
+          <table
+            className={cn(className, 'table', {
+              'table-bordered': bordered,
+              'table-striped': striped,
+              'table-hover': hover,
+              'table-condensed': condensed,
+            })}
+          >
+            {children}
+          </table>
         </div>
       );
     }
-
-    return table;
+    return (
+      <table
+        className={cn(className, 'table', {
+          'table-bordered': bordered,
+          'table-striped': striped,
+          'table-hover': hover,
+          'table-condensed': condensed,
+        })}
+        {...rest}
+      >
+        {children}
+      </table>
+    );
   }
 }
 
@@ -174,7 +185,7 @@ Table = styled(Table)`
     
     &.table-hover {
       tbody tr {
-        ${hover(`
+        ${hoverMixin(`
           background-color: ${props.theme['$table-bg-hover']};
         `)}
       }
