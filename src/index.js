@@ -21,6 +21,7 @@ export {
 export {
   alignUtils,
   aUtils,
+  backgroundUtils,
   bordersUtils,
   clearfixUtils,
   displayUtils,

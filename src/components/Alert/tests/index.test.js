@@ -88,4 +88,11 @@ describe('<Alert />', () => {
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
+  it('should render close button', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      onDismiss: jest.fn(),
+    });
+    expect(renderedComponent.find('Close').length).toEqual(2);
+  });
 });

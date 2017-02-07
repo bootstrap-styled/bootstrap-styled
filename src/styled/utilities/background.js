@@ -1,7 +1,6 @@
 import { bgVariant } from '../mixins/background-variant';
 
 export const defaultProps = {
-  '$body-bg': '#fff',
   '$brand-primary': '#0275d8',
   '$brand-success': '#5cb85c',
   '$brand-info': '#5bc0de',
@@ -15,22 +14,30 @@ export const defaultProps = {
 // Contextual backgrounds
 //
 
-export function getBackgroundUtilities() {
+export function getBackgroundUtilities(
+  $brandPrimary = defaultProps['$brand-primary'],
+  $brandSuccess = defaultProps['$brand-success'],
+  $brandInfo = defaultProps['$brand-info'],
+  $brandWarning = defaultProps['$brand-warning'],
+  $brandDanger = defaultProps['$brand-danger'],
+  $brandInverse = defaultProps['$brand-inverse'],
+  $grayLightest = defaultProps['$gray-lightest'],
+) {
   return `
-    ${bgFaded()}
-    ${bgPrimary()}
-    ${bgSuccess()}
-    ${bgInfo()}
-    ${bgWarning()}
-    ${bgDanger()}
-    ${bgInverse()}
+    ${bgPrimary($brandPrimary)}
+    ${bgSuccess($brandSuccess)}
+    ${bgInfo($brandInfo)}
+    ${bgWarning($brandWarning)}
+    ${bgDanger($brandDanger)}
+    ${bgInverse($brandInverse)}
+    ${bgFaded($grayLightest)}
   `;
 }
 
-export function bgFaded(greyBackground = defaultProps['$gray-lightest']) {
+export function bgFaded(grayBackground = defaultProps['$gray-lightest']) {
   return `
-    &.bg-faded {
-      background-color: ${greyBackground};
+    .bg-faded {
+      background-color: ${grayBackground};
     }
   `;
 }
