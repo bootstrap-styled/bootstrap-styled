@@ -5,7 +5,6 @@
  */
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import cn from 'classnames';
 import theme from '../../config';
 import { hoverFocus } from '../../styled/mixins/hover';
 import { borderRadius, borderTopRadius } from '../../styled/mixins/border-radius';
@@ -23,7 +22,7 @@ class Nav extends React.Component {// eslint-disable-line react/prefer-stateless
   render() {
     return (
       <nav
-        className={cn(this.props.className, 'nav')}
+        className={this.props.className}
       >
         {this.props.children}
       </nav>

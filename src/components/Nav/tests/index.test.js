@@ -51,12 +51,6 @@ describe('<Nav />', () => {
     expect(renderedComponent.find('nav').length).toBe(1);
     expect(renderedComponent.find('Nav').length).toBe(1);
   });
-  it('should have class .legend by default with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-    });
-    expect(renderedComponent.find('nav').hasClass('nav')).toBe(true);
-  });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
