@@ -123,6 +123,15 @@ v['$spacers'] = {
     y: (rmUnit(v['$spacer-y']) * 3) + v['$spacer-unit'],
   },
 };
+
+// This variable affects the `.h-*` and `.w-*` classes.
+v['$sizes'] = {
+  25: '25%',
+  50: '50%',
+  75: '75%',
+  100: '100%',
+};
+
 v['$border-width'] = '1px';
 
 // 4. Body
@@ -571,13 +580,16 @@ v['$dropdown-header-color'] = v['$gray-light'];
 v['$zindex-dropdown-backdrop'] = '990';
 v['$zindex-navbar'] = '1000';
 v['$zindex-dropdown'] = '1000';
-v['$zindex-popover'] = '1060';
-v['$zindex-tooltip'] = '1070';
+v['$zindex-fixed'] = '1030';
+v['$zindex-sticky'] = '1030';
 v['$zindex-navbar-fixed'] = '1030';
 v['$zindex-navbar-sticky'] = '1030';
-v['$zindex-modal-bg'] = '1040';
+v['$zindex-modal-backdrop'] = '1040';
 v['$zindex-modal'] = '1050';
+v['$zindex-popover'] = '1060';
+v['$zindex-tooltip'] = '1070';
 v['$zindex-menu-push'] = '2000';
+
 // 16. Navbar
 
 v['$navbar-height'] = '70px';

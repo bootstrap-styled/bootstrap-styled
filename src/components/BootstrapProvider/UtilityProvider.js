@@ -9,7 +9,9 @@ import {
   displayUtils,
   flexUtils,
   floatUtils,
+  positionUtils,
   screenreadersUtils,
+  sizingUtils,
   spacingUtils,
   textUtils,
   visibilityUtils,
@@ -27,7 +29,9 @@ const defaultProps = {
     display: false,
     flex: false,
     float: false,
+    position: false,
     screenreaders: false,
+    sizing: false,
     spacing: false,
     text: false,
     visibility: false,
@@ -91,7 +95,14 @@ const UtilityProvider = styled.div`
     ))}
     ${ifThen(props.utils.visibility, visibilityUtils.getVisibilityUtilities(
       props.theme['$grid-breakpoints']
-    ))}    
+    ))}
+    ${ifThen(props.utils.position, positionUtils.getPositionUtilities(
+      props.theme['$zindex-fixed'],
+      props.theme['$zindex-sticky'],
+    ))}
+    ${ifThen(props.utils.sizing, sizingUtils.getSizingUtilities(
+      props.theme['$sizes'], // eslint-disable-line dot-notation
+    ))}
   `}
 `;
 
