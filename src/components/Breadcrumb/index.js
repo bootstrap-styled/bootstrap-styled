@@ -4,7 +4,7 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from '../../config';
+import theme from 'theme';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { clearfix } from '../../styled/mixins/clearfix';
 

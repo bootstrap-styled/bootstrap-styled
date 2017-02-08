@@ -6,8 +6,8 @@ import { ThemeProvider } from 'styled-components';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
+import theme from 'theme';
 import H3 from '../index';
-import theme from '../../../config';
 
 const children = <p>Test</p>;
 

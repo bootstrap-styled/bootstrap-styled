@@ -6,7 +6,7 @@
 import styled from 'styled-components';
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
-import bsTheme from '../../config';
+import bsTheme from '../../theme';
 import { tableRowVariant } from '../../styled/mixins/table-row';
 import { hover as hoverMixin } from '../../styled/mixins/hover';
 import { math } from '../../styled/mixins/unit';

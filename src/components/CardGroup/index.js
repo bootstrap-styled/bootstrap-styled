@@ -6,7 +6,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from '../../config';
+import theme from 'theme';
 import { borderRightRadius, borderLeftRadius } from '../../styled/mixins/border-radius';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { ifThen } from '../../styled/mixins/conditional';

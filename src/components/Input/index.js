@@ -4,7 +4,7 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from '../../config';
+import theme from 'theme';
 import { button } from '../../styled/utilities/button';
 
 const defaultProps = {

@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { mount } from 'enzyme';
 import React from 'react';
-import theme from '../../../config';
+import theme from 'theme';
 
 import { HeaderNavBarSlide } from '../index';
 

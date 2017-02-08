@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, { PropTypes } from 'react';
-import theme from '../../config';
+import theme from 'theme';
 import { makeGridColumns } from '../../styled/mixins/grid-framework';
 
 const defaultProps = { theme };

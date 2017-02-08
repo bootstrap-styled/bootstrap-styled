@@ -3,7 +3,7 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
-import theme from '../../config';
+import theme from 'theme';
 import { hoverFocus } from '../../styled/mixins/hover';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { badgeVariant } from '../../styled/mixins/badge';

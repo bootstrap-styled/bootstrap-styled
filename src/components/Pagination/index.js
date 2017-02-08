@@ -4,7 +4,7 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
-import theme from '../../config';
+import theme from 'theme';
 import { paginationSize } from '../../styled/mixins/pagination';
 import { borderRadius, borderLeftRadius, borderRightRadius } from '../../styled/mixins/border-radius';
 import { hoverFocus, plainHoverFocus } from '../../styled/mixins/hover';

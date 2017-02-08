@@ -6,7 +6,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from '../../config';
+import theme from 'theme';
 import { hover } from '../../styled/mixins/hover';
 import { borderRadius, borderTopRadius, borderBottomRadius } from '../../styled/mixins/border-radius';
 import { cardVariant, cardOutlineVariant, cardInverse } from '../../styled/mixins/cards';

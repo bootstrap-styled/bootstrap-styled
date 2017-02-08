@@ -4,9 +4,8 @@
 import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-
+import theme from 'theme';
 import Progress from '../index';
-import theme from '../../../config';
 
 const renderComponent = (props = {}) => shallow(
   <Progress

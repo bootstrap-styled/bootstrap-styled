@@ -4,9 +4,8 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
-
+import theme from 'theme';
 import Abbr from '../index';
-import theme from '../../../config';
 
 const children = (<h1>Test</h1>);
 

@@ -35,7 +35,7 @@ export {
   visibilityUtils,
 } from './utilities';
 // 0. Configuration
-export { default as theme } from './config';
+export { default as theme, makeTheme } from 'theme';
 // 1. Atoms
 export { default as A, composeLink } from './components/A';
 export { default as Abbr } from './components/Abbr';

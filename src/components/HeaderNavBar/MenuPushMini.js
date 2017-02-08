@@ -10,7 +10,7 @@
  */
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from '../../config';
+import theme from 'theme';
 
 import { transition } from '../../styled/mixins/transition';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';

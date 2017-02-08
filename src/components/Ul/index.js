@@ -8,7 +8,7 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from '../../config';
+import theme from 'theme';
 
 import { nav } from '../../styled/utilities/nav';
 import { listUnstyled } from '../../styled/mixins/lists';

@@ -4,7 +4,7 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
-import theme from '../../../config';
+import theme from 'theme';
 import A, { composeLink } from '../index';
 
 const Link = composeLink(A);

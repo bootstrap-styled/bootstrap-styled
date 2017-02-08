@@ -2,7 +2,7 @@
  * Testing our Jumbotron component
  */
 import { ThemeProvider } from 'styled-components';
-import theme from 'config';
+import theme from 'theme';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';

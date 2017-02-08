@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from 'theme';
 import { conditionalMixins } from '../../mixins';
 import {
   alignUtils,
@@ -16,7 +17,6 @@ import {
   textUtils,
   visibilityUtils,
 } from '../../utilities';
-import theme from '../../config';
 
 const defaultProps = {
   theme,

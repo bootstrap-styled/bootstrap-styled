@@ -6,7 +6,7 @@
  */
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import themeBs from '../../config';
+import themeBs from '../../theme';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { transition } from '../../styled/mixins/transition';

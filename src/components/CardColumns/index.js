@@ -6,7 +6,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from '../../config';
+import theme from 'theme';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { card } from '../../styled/utilities/card';
 

@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from '../../../config';
+import theme from 'theme';
 
 import Area from '../index';
 

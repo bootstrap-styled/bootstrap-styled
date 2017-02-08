@@ -6,7 +6,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from '../../config';
+import theme from 'theme';
 import Close from '../Close';
 import { alertVariant } from '../../styled/mixins/alert';
 import { borderRadius } from '../../styled/mixins/border-radius';

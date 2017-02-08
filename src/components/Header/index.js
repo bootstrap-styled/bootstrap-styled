@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme from '../../config';
+import theme from 'theme';
 import { navbar } from '../../styled/utilities/navbar';
 
 const defaultProps = { theme };

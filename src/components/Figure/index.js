@@ -6,8 +6,8 @@
 
 import styled from 'styled-components';
 import React, { PropTypes } from 'react';
+import theme from 'theme';
 import { getTextUtilities } from '../../styled/utilities/text';
-import theme from '../../config';
 
 const defaultProps = { theme };
 

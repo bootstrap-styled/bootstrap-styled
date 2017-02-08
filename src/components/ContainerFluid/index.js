@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { PropTypes } from 'react';
+import theme from 'theme';
 import { makeContainer } from '../../styled/mixins/grid';
-import theme from '../../config';
 
 const defaultProps = { theme };
 

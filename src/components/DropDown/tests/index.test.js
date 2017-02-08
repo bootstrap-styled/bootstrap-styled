@@ -11,7 +11,7 @@ import Ul from '../../Ul';
 import Li from '../../Li';
 import A from '../../A';
 
-import theme from '../../../config';
+import theme from 'theme';
 
 import { mount } from 'enzyme';
 
