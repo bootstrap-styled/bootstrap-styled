@@ -95,7 +95,7 @@ export { default as Select } from './components/Select';
 export { default as Small } from './components/Small';
 export { default as Summary } from './components/Summary';
 export { default as Table } from './components/Table';
-export { default as Tag } from './components/Tag';
+export { default as Badge } from './components/Badge';
 export { default as Tbody } from './components/Tbody';
 export { default as Td } from './components/Td';
 export { default as Textarea } from './components/Textarea';

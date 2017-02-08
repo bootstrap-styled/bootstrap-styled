@@ -30,7 +30,6 @@ export { default as screenReaderMixins } from './styled/mixins/screen-reader';
 export { default as sizeMixins } from './styled/mixins/size';
 export { default as tabFocusMixins } from './styled/mixins/tab-focus';
 export { default as tableRowMixins } from './styled/mixins/table-row';
-export { default as tagMixins } from './styled/mixins/tag';
 export { default as textEmphasisMixins } from './styled/mixins/text-emphasis';
 export { default as textHideMixins } from './styled/mixins/text-hide';
 export { default as textTruncateMixins } from './styled/mixins/text-truncate';

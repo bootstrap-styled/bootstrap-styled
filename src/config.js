@@ -772,27 +772,27 @@ v['$popover-arrow-outer-color'] = Color(v['$popover-arrow-color']).fade(0.5).toS
 
 // 24. Tags
 
-v['$tag-default-bg'] = v['$gray'];
-v['$tag-primary-bg'] = v['$brand-primary'];
-v['$tag-success-bg'] = v['$brand-success'];
-v['$tag-info-bg'] = v['$brand-info'];
-v['$tag-warning-bg'] = v['$brand-warning'];
-v['$tag-danger-bg'] = v['$brand-danger'];
+v['$badge-default-bg'] = v['$gray'];
+v['$badge-primary-bg'] = v['$brand-primary'];
+v['$badge-success-bg'] = v['$brand-success'];
+v['$badge-info-bg'] = v['$brand-info'];
+v['$badge-warning-bg'] = v['$brand-warning'];
+v['$badge-danger-bg'] = v['$brand-danger'];
 
-v['$tag-color'] = '#fff';
-v['$tag-link-hover-color'] = '#fff';
-v['$tag-font-size'] = '75%';
-v['$tag-font-weight'] = 'bold';
-v['$tag-line-height'] = '1';
-v['$tag-padding-x'] = '.4em';
-v['$tag-padding-y'] = '.2em';
-v['$tag-border-radius'] = '.25rem';
+v['$badge-color'] = '#fff';
+v['$badge-link-hover-color'] = '#fff';
+v['$badge-font-size'] = '75%';
+v['$badge-font-weight'] = 'bold';
+v['$badge-line-height'] = '1';
+v['$badge-padding-x'] = '.4em';
+v['$badge-padding-y'] = '.2em';
+v['$badge-border-radius'] = '.25rem';
 
 
-v['$tag-pill-padding-x'] = '.6em';
+v['$badge-pill-padding-x'] = '.6em';
 // Use a higher than normal value to ensure completely rounded edges when
 // customizing padding or font-size on labels.
-v['$tag-pill-border-radius'] = '10rem';
+v['$badge-pill-border-radius'] = '10rem';
 
 // 25. Modals
 
