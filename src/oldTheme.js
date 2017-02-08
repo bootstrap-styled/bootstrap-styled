@@ -784,7 +784,7 @@ v['$popover-arrow-outer-width'] = ((rmUnit(v['$popover-arrow-width'], UNIT.PX) +
 v['$popover-arrow-outer-color'] = Color(v['$popover-arrow-color']).fade(0.5).toString();
 
 
-// 24. Tags
+// 24. Badges
 
 v['$badge-default-bg'] = v['$gray'];
 v['$badge-primary-bg'] = v['$brand-primary'];

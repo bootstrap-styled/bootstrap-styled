@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { ThemeProvider } from 'styled-components';
-import themeBs from 'theme';
+import themeBs, { makeTheme } from 'theme';
 import UtilityProvider from './UtilityProvider';
 
 export default class BootstrapProvider extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -57,7 +57,7 @@ export default class BootstrapProvider extends React.Component { // eslint-disab
   render() {
     const { children, theme, utils } = this.props;
     return (
-      <ThemeProvider theme={Object.assign({}, themeBs, theme)}>
+      <ThemeProvider theme={makeTheme(theme)}>
         <UtilityProvider utils={utils}>
           {children}
         </UtilityProvider>

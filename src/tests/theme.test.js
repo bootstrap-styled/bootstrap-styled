@@ -1,41 +1,28 @@
-import oldTheme from '../oldTheme';
-import theme from '../theme';
+import { fromJS } from 'immutable';
+import theme, { makeTheme } from '../theme';
 
-
-console.log('old theme contain', Object.keys(oldTheme).length, 'vars');
-console.log('new theme contain', Object.keys(theme).length, 'vars');
-
-console.log('Checking diff between old vs new');
-
-
-const foundList = [];
-const notFoundList = [];
-/* eslint-disable array-callback-return, consistent-return, no-unused-expressions */
-Object.keys(oldTheme).forEach((key) => {
-  const found = Object.keys(theme).some((newKey) => {
-    if (key === newKey) {
-      return true;
-    }
+describe('theme', () => {
+  describe('default theme', () => {
+    it('should have every values defined', () => {
+      Object.keys(theme).forEach((key) => {
+        expect(theme[key]).toBeDefined();
+      });
+    });
   });
-  !found ? notFoundList.push(key) : foundList.push(found);
-});
-/* eslint-enable array-callback-return, consistent-return, no-unused-expressions */
-console.log('Old theme is missing', notFoundList.length, ' vars and has', foundList.length, 'vars in common');
-console.log(notFoundList.join('\n'));
 
-const foundListNew = [];
-const notFoundListNew = [];
-/* eslint-disable array-callback-return, consistent-return, no-unused-expressions */
-Object.keys(theme).forEach((key) => {
-  const found = Object.keys(oldTheme).some((newKey) => {
-    if (key === newKey) {
-      return true;
-    }
+  describe('makeTheme', () => {
+    it('should return a default theme', () => {
+      const newTheme = makeTheme();
+      Object.keys(newTheme).forEach((key) => {
+        expect(newTheme[key]).toBeDefined();
+      });
+    });
+    it('should return an extended theme', () => {
+      const notDefaultTheme = makeTheme({
+        $white: '#eee',
+      });
+      expect(fromJS(notDefaultTheme).hashCode() !== fromJS(theme).hashCode()).toBe(true);
+      expect(fromJS(makeTheme()).hashCode() === fromJS(theme).hashCode()).toBe(true);
+    });
   });
-  !found ? notFoundListNew.push(key) : foundListNew.push(found);
 });
-/* eslint-enable array-callback-return, consistent-return, no-unused-expressions */
-
-console.log('New theme is missing', notFoundListNew.length, ' vars and has', foundListNew.length, 'vars in common');
-console.log(notFoundListNew.join('\n'));
-

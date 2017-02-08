@@ -910,4 +910,195 @@ export function makeTheme(userTheme = {}) {
 
   // This will ensure u rest untouched and copy v value over u
   return Object.assign({}, u, v);
+
+  // THIS COME FROM old theme in config.js and doesn't exist in the new theme
+
+  // v['$gray-base'] = '#000';
+  // v['$spacer-halved'] = (rmUnit(v['$spacer'], UNIT.REM) / 2) + UNIT.REM;
+  // v['$font-family-serif'] = 'Georgia, \'Times New Roman\'; Times, serif';
+  // v['$font-size-root'] = '16px';
+  // v['$headings-underline-width'] = '180%';
+  // v['$headings-underline-height'] = '1px';
+  // v['$headings-underline-left-position'] = '-40%';
+  // v['$headings-underline-gradient-color-1'] = v['$brand-primary'];
+  // v['$headings-underline-gradient-color-2'] = v['$body-bg'];
+  // v['$abbr-border-color'] = v['$gray-light'];
+  // v['$caret-width-lg'] = v['$caret-width'];
+  // v['$padding-base-vertical'] = '6px';
+  // v['$padding-base-horizontal'] = '12px';
+  // v['$padding-large-vertical'] = '10px';
+  // v['$padding-large-horizontal'] = '16px';
+  // v['$padding-small-vertical'] = '5px';
+  // v['$padding-small-horizontal'] = '10px';
+  // v['$padding-xs-vertical'] = '1px';
+  // v['$padding-xs-horizontal'] = '5px';
+  // v['$table-bg-inverse'] = v['$gray-dark'];
+  // v['$table-inverse-border-color'] = v['$gray'];
+  // v['$table-border-header-width'] = (rmUnit(v['$border-width'], UNIT.PX) * 2) + UNIT.PX;
+  // v['$table-row-hover-color'] = v['$gray-lightest'];
+  // v['$table-header-padding'] = '0.5rem';
+  // v['$table-condensed-padding'] = (rmUnit(v['$table-header-padding'], UNIT.REM) / 1.6) + UNIT.REM;
+  // v['$btn-font-size'] = v['$font-size-sm'];
+  // v['$btn-border-width'] = v['$border-width'];
+  // v['$btn-toolbar-margin'] = '.5rem';
+  // v['$input-border-width'] = ((rmUnit(v['$border-width'], UNIT.PX) * 2) + UNIT.PX);
+  // v['$form-control-feedback-margin-top'] = v['$form-text-margin-top'];
+  // v['$form-control-padding-right'] = ((rmUnit(v['$input-padding-x'], UNIT.REM) * 3) + UNIT.REM);
+  // v['$form-control-background-position'] = ((rmUnit(v['$input-height'], UNIT.REM) / 4) + UNIT.REM);
+  // v['$form-control-background-size'] = ((rmUnit(v['$input-height'], UNIT.REM) / 2) + UNIT.REM);
+  // v['$custom-select-sm-padding-y'] = '.2rem';
+  // v['$select-border-width'] = ((rmUnit(v['$border-width'], UNIT.PX) * 2) + UNIT.PX);
+  // v['$custom-file-text-placeholder-en'] = 'Choose file...';
+  // v['$custom-file-text-button-label-en'] = 'Browse';
+  //
+  // // 15. Z-index master list
+  //
+  // v['$zindex-navbar'] = '1000';
+  // v['$zindex-navbar-fixed'] = '1030';
+  // v['$zindex-navbar-sticky'] = '1030';
+  // v['$zindex-menu-push'] = '2000';
+  //
+  // // 16. Navbar
+  //
+  // v['$navbar-height'] = '70px';
+  // v['$navbar-max-height'] = '400px';
+  // v['$navbar-border-radius'] = v['$border-radius'];
+  // v['$navbar-brand-padding-y'] = '.25rem';
+  // v['$navbar-divider-padding-y'] = '.425rem';
+  // v['$navbar-dark-color'] = 'rgba(255,255,255,.5)';
+  // v['$navbar-dark-hover-color'] = 'rgba(255,255,255,.75)';
+  // v['$navbar-dark-active-color'] = 'rgba(255,255,255,1)';
+  // v['$navbar-dark-disabled-color'] = 'rgba(255,255,255,.25)';
+  // v['$navbar-dark-toggler-bg'] = `url('data:image/svg+xml;charset=utf8,%3Csvg viewBox=\'0 0 32 32\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath stroke=\'rgba(255,255,255,.5)\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-miterlimit=\'10\' d=\'M4 8h24M4 16h24M4 24h24\'/%3E%3C/svg%3E')`;
+  // v['$navbar-dark-toggler-border'] = 'rgba(255,255,255,.1)';
+  // v['$navbar-light-dark-gray-disabled-color'] = 'rgba(0,0,0,.3)';
+  // v['$header-max-height'] = '450px';
+  // v['$header-collapsed-max-height'] = '1000px';
+  // v['$header-navbar-border-color'] = v['$gray-lighter'];
+  // v['$header-navbar-border-width'] = v['$border-width'];
+  // v['$header-navbar-transition-duration'] = '.6s';
+  //
+  // // 17. Navs
+  //
+  // v['$nav-item-margin'] = '.2rem';
+  // v['$nav-item-inline-spacer'] = '1rem';
+  // v['$nav-link-hover-bg'] = v['$gray-lighter'];
+  // v['$nav-disabled-link-hover-color'] = v['$gray-light'];
+  // v['$nav-disabled-link-hover-bg'] = 'transparent';
+  // v['$nav-tabs-justified-link-border-color'] = '#ddd';
+  // v['$nav-tabs-justified-active-link-border-color'] = v['$body-bg'];
+  // v['$space-between-cards'] = ((rmUnit(v['$card-deck-margin'], UNIT.REM) * 2) + UNIT.REM);
+  // // Added by AJT not original bootstrap variable
+  // v['$card-margin-y-halved'] = ((rmUnit(v['$card-spacer-y'], UNIT.REM) / 2) + UNIT.REM);
+  // v['$card-margin-x-halved'] = ((rmUnit(v['$card-spacer-x'], UNIT.REM) / 2) + UNIT.REM);
+  //
+  // // 24. Badges
+  //
+  // v['$badge-line-height'] = '1';
+  // v['$badge-border-radius'] = '.25rem';
+  //
+  // // 26. Alerts
+  // //
+  // // Define alert colors, border radius, and padding.
+  //
+  // v['$alert-dismissible-padding-x'] = ((rmUnit(v['$alert-padding-x'], UNIT.REM) * 2) + UNIT.REM);
+  //
+  // // 28. List group
+  //
+  // v['$list-group-active-text-color'] = Color(v['$list-group-active-bg']).lighten(0.4).toString();
+  // v['$list-group-disabled-text-color'] = v['$list-group-disabled-color'];
+  // v['$list-group-disabled-text-color'] = v['$list-group-disabled-color'];
+  // v['$list-group-item-heading-margin-bottom'] = '5px';
+  //
+  // // 32. Media objects
+  //
+  // v['$media-margin-top'] = '15px';
+  // v['$media-heading-margin-bottom'] = '5px';
+  // v['$media-alignment-padding-x'] = '10px';
+  //
+  // // 33. Carousel
+  //
+  // v['$carousel-text-shadow'] = '0 1px 2px rgba(0,0,0,.6)';
+  // v['$carousel-control-sm-up-size'] = '30px';
+  // v['$carousel-control-font-size'] = '20px';
+  // v['$carousel-indicators-width'] = '60%';
+  // v['$carousel-indicator-size'] = '10px';
+  // v['$carousel-indicator-active-size'] = '12px';
+  // v['$carousel-indicator-border-color'] = '#fff';
+  // v['$carousel-caption-sm-up-width'] = '60%';
+  // v['$carousel-icon-width'] = '20px';
+  //
+  // v['$pre-bg'] = '#f7f7f9';
+  // v['$pre-border-color'] = '#ccc';
+  //
+  // // Customization
+  //
+  // // 36. Footer
+  //
+  // v['$footer-height'] = '150px';
+  // v['$footer-background'] = 'purple';
+  // v['$footer-color'] = 'white';
+  //
+  // // Menu transition component
+  // v['$menu-slide-transition-duration'] = '.6s';
+  // v['$menu-push-transition-duration'] = '.6s';
+  //
+  // // MenuPush component
+  // v['$menu-push-bg'] = 'black';
+  // v['$menu-push-mini-width'] = '75px';
+  // v['$menu-push-width'] = '220px';
+  // v['$menu-push-full-width'] = '100%';
+
+
+  // THIS COME FROM the new import and are listed here as information, they were not present in old theme
+
+  // v['$font-weight-base'] = 'normal';
+  // v['$display-line-height'] = '1.1';
+  // v['$transition-base'] = 'all .2s ease-in-out';
+  // v['$transition-fade'] = 'opacity .15s linear';
+  // v['$transition-collapse'] = 'height .35s ease';
+  // v['$table-inverse-bg'] = '#292b2c';
+  // v['$table-inverse-color'] = '#fff';
+  // v['$btn-focus-box-shadow'] = '0 0 0 2px rgba(#0275d8, .25)';
+  // v['$btn-transition'] = 'all .2s ease-in-out';
+  // v['$input-transition'] = 'border-color ease-in-out .15s, box-shadow ease-in-out .15s';
+  // v['$custom-select-line-height'] = '1.25';
+  // v['$custom-file-text'] = {'placeholder':{'en':'Choose file...'},'button-label':{'en':'Browse'}};
+  // v['$navbar-inverse-color'] = 'rgba(255, 255, 255, 0.5)';
+  // v['$navbar-inverse-hover-color'] = 'rgba(255, 255, 255, 0.75)';
+  // v['$navbar-inverse-active-color'] = 'rgb(255, 255, 255)';
+  // v['$navbar-inverse-disabled-color'] = 'rgba(255, 255, 255, 0.25)';
+  // v['$navbar-inverse-toggler-bg'] = `url('data:image/svg+xml;charset=utf8,%3Csvg viewBox=\'0 0 30 30\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath stroke=\'rgba(255, 255, 255, 0.5)\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-miterlimit=\'10\' d=\'M4 7h22M4 15h22M4 23h22\'/%3E%3C/svg%3E')`;
+  // v['$navbar-inverse-toggler-border'] = 'rgba(255, 255, 255, 0.1)';
+  // v['$navbar-light-disabled-color'] = 'rgba(0, 0, 0, 0.3)';
+  // v['$pagination-line-height'] = '1.25';
+  // v['$modal-inner-padding'] = '15px';
+  // v['$modal-dialog-margin'] = '10px';
+  // v['$modal-dialog-sm-up-margin-y'] = '30px';
+  // v['$modal-title-line-height'] = '1.5';
+  // v['$modal-content-bg'] = '#fff';
+  // v['$modal-content-border-color'] = 'rgba(0, 0, 0, 0.2)';
+  // v['$modal-content-border-width'] = '1px';
+  // v['$modal-content-xs-box-shadow'] = '0 3px 9px rgba(0, 0, 0, 0.5)';
+  // v['$modal-content-sm-up-box-shadow'] = '0 5px 15px rgba(0, 0, 0, 0.5)';
+  // v['$modal-backdrop-bg'] = '#000';
+  // v['$modal-backdrop-opacity'] = '.5';
+  // v['$modal-header-border-color'] = '#eceeef';
+  // v['$modal-footer-border-color'] = '#eceeef';
+  // v['$modal-header-border-width'] = '1px';
+  // v['$modal-footer-border-width'] = '1px';
+  // v['$modal-header-padding'] = '15px';
+  // v['$modal-lg'] = '800px';
+  // v['$modal-md'] = '500px';
+  // v['$modal-sm'] = '300px';
+  // v['$modal-transition'] = 'transform .3s ease-out';
+  // v['$thumbnail-transition'] = 'all .2s ease-in-out';
+  // v['$figure-caption-color'] = '#636c72';
+  // v['$carousel-indicator-width'] = '30px';
+  // v['$carousel-indicator-height'] = '3px';
+  // v['$carousel-indicator-spacer'] = '3px';
+  // v['$carousel-control-icon-width'] = '20px';
+  // v['$carousel-control-prev-icon-bg'] = `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'#fff\' viewBox=\'0 0 8 8\'%3E%3Cpath d=\'M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z\'/%3E%3C/svg%3E')`;
+  // v['$carousel-control-next-icon-bg'] = `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'#fff\' viewBox=\'0 0 8 8\'%3E%3Cpath d=\'M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z\'/%3E%3C/svg%3E')`;
+  // v['$carousel-transition'] = 'transform .6s ease-in-out';
 }
