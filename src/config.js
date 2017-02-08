@@ -58,6 +58,20 @@ const v = {};
 //
 // Grayscale and brand colors for use across Bootstrap.
 
+// Start with assigning color names to specific hex values.
+v['$white'] = '#fff';
+v['$black'] = '#000';
+v['$red'] = '#d9534f';
+v['$orange'] = '#f0ad4e';
+v['$yellow'] = '#ffd500';
+v['$green'] = '#5cb85c';
+v['$blue'] = '#0275d8';
+v['$teal'] = '#5bc0de';
+v['$pink'] = '#ff5b77';
+v['$purple'] = '#613d7c';
+
+// Create grayscale
+
 v['$gray-base'] = '#000';
 v['$gray-dark'] = '#373a3c';
 v['$gray'] = '#55595c';
@@ -138,7 +152,7 @@ v['$border-width'] = '1px';
 //
 // Settings for the `<body>` element.
 
-v['$body-bg'] = '#fff';
+v['$body-bg'] = v['$white'];
 v['$body-color'] = v['$gray-dark'];
 
 // 5. Links
@@ -279,7 +293,7 @@ v['$border-radius'] = '.25rem';
 v['$border-radius-lg'] = '.3rem';
 v['$border-radius-sm'] = '.2rem';
 
-v['$component-active-color'] = '#fff';
+v['$component-active-color'] = v['$white'];
 v['$component-active-bg'] = v['$brand-primary'];
 
 v['$caret-width'] = '.3em';
@@ -341,7 +355,7 @@ v['$btn-active-box-shadow'] = 'inset 0 3px 5px rgba(0,0,0,.125)';
 
 // in the bootstrap 4.0.0alpha.5 default color is replaced by secondary color
 
-v['$btn-primary-color'] = '#fff';
+v['$btn-primary-color'] = v['$white'];
 v['$btn-primary-bg'] = v['$brand-primary'];
 v['$btn-primary-border'] = v['$btn-primary-bg'];
 
@@ -349,11 +363,11 @@ v['$btn-primary-border'] = v['$btn-primary-bg'];
 // v['$btn-primary-hover-border'] = Color(v['$btn-primary-hover-color']).darken(0.2).toString();
 
 v['$btn-secondary-color'] = v['$gray-dark'];
-v['$btn-secondary-bg'] = '#fff';
+v['$btn-secondary-bg'] = v['$white'];
 v['$btn-secondary-border'] = '#ccc';
 
 
-v['$btn-success-color'] = '#fff';
+v['$btn-success-color'] = v['$white'];
 v['$btn-success-bg'] = v['$brand-success'];
 v['$btn-success-border'] = v['$btn-success-bg'];
 
@@ -361,7 +375,7 @@ v['$btn-success-border'] = v['$btn-success-bg'];
 // v['$btn-success-hover-border'] = Color(v['$btn-success-hover-color']).darken(0.2).toString();
 
 
-v['$btn-info-color'] = '#fff';
+v['$btn-info-color'] = v['$white'];
 v['$btn-info-bg'] = v['$brand-info'];
 v['$btn-info-border'] = v['$btn-info-bg'];
 
@@ -369,7 +383,7 @@ v['$btn-info-border'] = v['$btn-info-bg'];
 // v['$btn-info-hover-border'] = Color(v['$btn-info-hover-color']).darken(0.2).toString();
 
 
-v['$btn-warning-color'] = '#fff';
+v['$btn-warning-color'] = v['$white'];
 v['$btn-warning-bg'] = v['$brand-warning'];
 v['$btn-warning-border'] = v['$btn-warning-bg'];
 
@@ -377,7 +391,7 @@ v['$btn-warning-border'] = v['$btn-warning-bg'];
 // v['$btn-warning-hover-border'] = Color(v['$btn-warning-hover-color']).darken(0.2).toString();
 
 
-v['$btn-danger-color'] = '#fff';
+v['$btn-danger-color'] = v['$white'];
 v['$btn-danger-bg'] = v['$brand-danger'];
 v['$btn-danger-border'] = v['$btn-danger-bg'];
 
@@ -407,7 +421,7 @@ v['$input-padding-x'] = '.75rem ';
 v['$input-padding-y'] = '.5rem';
 v['$input-line-height'] = '1.25';
 
-v['$input-bg'] = '#fff';
+v['$input-bg'] = v['$white'];
 v['$input-bg-disabled'] = v['$gray-lighter'];
 
 v['$input-color'] = v['$gray'];
@@ -473,13 +487,13 @@ v['$custom-control-disabled-cursor'] = v['$cursor-disabled'];
 v['$custom-control-disabled-indicator-bg'] = '#eee';
 v['$custom-control-disabled-description-color'] = '#767676';
 
-v['$custom-control-checked-indicator-color'] = '#fff';
+v['$custom-control-checked-indicator-color'] = v['$white'];
 v['$custom-control-checked-indicator-bg'] = '#0074d9';
 v['$custom-control-checked-indicator-box-shadow'] = 'none';
 
-v['$custom-control-focus-indicator-box-shadow'] = '0 0 0 .075rem #fff, 0 0 0 .2rem #0074d9';
+v['$custom-control-focus-indicator-box-shadow'] = `0 0 0 1px ${v['$body-bg']}, 0 0 0 3px ${v['$brand-primary']}`;
 
-v['$custom-control-active-indicator-color'] = '#fff';
+v['$custom-control-active-indicator-color'] = v['$white'];
 v['$custom-control-active-indicator-bg'] = '#84c6ff';
 v['$custom-control-active-indicator-box-shadow'] = 'none';
 
@@ -517,7 +531,7 @@ v['$select-border-width'] = ((rmUnit(v['$border-width'], UNIT.PX) * 2) + UNIT.PX
 
 v['$custom-file-height'] = '2.5rem';
 v['$custom-file-width'] = '14rem';
-v['$custom-file-focus-box-shadow'] = '0 0 0 .075rem #fff, 0 0 0 .2rem #0074d9';
+v['$custom-file-focus-box-shadow'] = `0 0 0 .075rem ${v['$white']}, 0 0 0 .2rem ${v['$brand-primary']}`;
 
 v['$custom-file-padding-x'] = '.5rem';
 v['$custom-file-padding-y'] = '1rem';
@@ -852,17 +866,14 @@ v['$alert-danger-text'] = v['$state-danger-text'];
 v['$alert-danger-border'] = v['$state-danger-border'];
 
 // 27. Progress bars
-
-v['$progress-bg'] = '#eee';
-v['$progress-bar-color'] = '#0074d9';
+v['$progress-height'] = '1rem';
+v['$progress-font-size'] = '.75rem';
+v['$progress-bg'] = v['$gray-lighter'];
 v['$progress-border-radius'] = v['$border-radius'];
 v['$progress-box-shadow'] = 'inset 0 .1rem .1rem rgba(0,0,0,.1)';
-
+v['$progress-bar-color'] = '#0074d9';
 v['$progress-bar-bg'] = v['$brand-primary'];
-v['$progress-bar-success-bg'] = v['$brand-success'];
-v['$progress-bar-warning-bg'] = v['$brand-warning'];
-v['$progress-bar-danger-bg'] = v['$brand-danger'];
-v['$progress-bar-info-bg'] = v['$brand-info'];
+v['$progress-bar-animation-timing'] = '1s linear infinite';
 
 // 28. List group
 

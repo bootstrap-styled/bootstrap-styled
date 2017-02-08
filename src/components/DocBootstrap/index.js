@@ -695,15 +695,6 @@ const DocBootstrap = styled.div`
     clear: both;
   }
   
-  .items-spaced {
-    display: flex;
-    flex-flow: row wrap;
-  }
-  
-  .items-spaced * {
-    margin-left: .5rem;
-  }
-  
   @media (min-width: 576px) {
     .bd-example {
       padding: 1.5rem;
