@@ -259,7 +259,7 @@ export function card(
         $enableHoverMediaQuery,
         $cardLinkHoverColor,
         $cardInverseBgColor,
-        $cardInverseBorderColor
+        $cardInverseBorderColor,
       )}
     }
     
