@@ -36,7 +36,23 @@ class Ul extends React.Component { // eslint-disable-line react/prefer-stateless
 Ul = styled(Ul)`
   ${(props) => `
   
-    ${nav()}
+    ${nav(
+      props.theme['$enable-rounded'],
+      props.theme['$enable-hover-media-query'],
+      props.theme['$nav-link-padding'],
+      props.theme['$nav-disabled-link-color'],
+      props.theme['$cursor-disabled'],
+      props.theme['$nav-tabs-border-width'],
+      props.theme['$nav-tabs-border-color'],
+      props.theme['$nav-tabs-border-radius'],
+      props.theme['$nav-tabs-link-hover-border-color'],
+      props.theme['$nav-tabs-active-link-hover-color'],
+      props.theme['$nav-tabs-active-link-hover-bg'],
+      props.theme['$nav-tabs-active-link-hover-border-color'],
+      props.theme['$nav-pills-border-radius'],
+      props.theme['$nav-pills-active-link-color'],
+      props.theme['$nav-pills-active-link-bg'],
+    )}
     ${navbar(
       props.theme['$grid-breakpoints'],
       props.theme['$enable-rounded'],
