@@ -27,7 +27,7 @@ export function cardOutlineVariant(cardColor) {
 export function cardInverse(enableHoverMediaQuery = defaultProps['$enable-hover-media-query'], cardLinkHoverColor = defaultProps['$card-link-hover-color']) {
   return `
     color: rgba(255,255,255,.65);
-  
+    
     & .card-header,
     & .card-footer {
       background-color: transparent;
