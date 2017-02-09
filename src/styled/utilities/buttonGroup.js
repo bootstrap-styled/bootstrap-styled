@@ -1,6 +1,5 @@
 import { unitUtils } from 'math-utils';
 import { hover } from '../mixins/hover';
-import { clearfix } from '../mixins/clearfix';
 import { borderRightRadius, borderLeftRadius, borderBottomRadius, borderTopRadius } from '../mixins/border-radius';
 import { boxShadow } from '../mixins/box-shadow';
 import { buttonSize } from '../mixins/button';
@@ -84,21 +83,14 @@ export function buttonGroup(
     /* Optional: Group multiple button groups together for a toolbar */
     &.btn-toolbar,
     & .btn-toolbar{
-      margin-left: -${$btnToolbarMargin}; /* Offset the first child's margin */
-      ${clearfix()}
+       display: flex;
+      justify-content: flex-start;
     
-      .btn-group,
       .input-group {
-        float: left;
-      }
-    
-      > .btn,
-      > .btn-group,
-      > .input-group {
-        margin-left: ${$btnToolbarMargin};
+        width: auto;
       }
     }
-    
+     
     &.btn-group,
     & .btn-group {
       > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
@@ -257,24 +249,16 @@ export function buttonGroup(
     
     &.btn-group-vertical,
     & .btn-group-vertical {
-      > .btn,
-      > .btn-group,
-      > .btn-group > .btn {
-        display: block;
-        float: none;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    
+      .btn,
+      .btn-group {
         width: 100%;
-        max-width: 100%;
       }
-    
-      /* Clear floats so dropdown menus can be properly placed */
-      > .btn-group {
-        ${clearfix()}
-    
-        > .btn {
-          float: none;
-        }
-      }
-    
+      
       > .btn + .btn,
       > .btn + .btn-group,
       > .btn-group + .btn,
@@ -321,6 +305,32 @@ export function buttonGroup(
         '0'
       )}
     }
+  
+  /*
+   Checkbox and radio options
+  
+   In order to support the browser's form validation feedback, powered by the
+   required attribute, we have to "hide" the inputs via clip. We cannot use
+   display: none; or visibility: hidden; as that also hides the popover.
+   Simply visually hiding the inputs via opacity would leave them clickable in
+   certain cases which is prevented by using clip and pointer-events.
+   This way, we ensure a DOM element is visible to position the popover from.
+  
+   See https://github.com/twbs/bootstrap/pull/12794 and
+   https://github.com/twbs/bootstrap/pull/14559 for more information.
+  
+  [data-toggle="buttons"] {
+    > .btn,
+    > .btn-group > .btn {
+      input[type="radio"],
+      input[type="checkbox"] {
+        position: absolute;
+        clip: rect(0,0,0,0);
+        pointer-events: none;
+      }
+    }
+  }
+  */
   
   `;
 }
