@@ -48,7 +48,7 @@ describe('<Progress />', () => {
     });
     expect(renderedComponent.props().valueMax).toEqual(420);
   });
-  it('should render a <progress> tag with a theme', () => {
+  it('should render a <Progress> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme();
     expect(renderedComponent.find('Progress').length).toBe(1);
   });

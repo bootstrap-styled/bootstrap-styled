@@ -3,7 +3,7 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
-import { rangePackage } from 'math-utils';
+import { rangeUtils } from 'math-utils';
 import theme from 'theme';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { gradientStriped } from '../../styled/mixins/gradients';
@@ -20,7 +20,7 @@ const defaultProps = {
 class Progress extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    className: PropTypes.string,
+    className: PropTypes.string.isRequired,
     children: PropTypes.node,
     valueMin: PropTypes.number,
     valueNow: PropTypes.number,
@@ -30,16 +30,55 @@ class Progress extends React.Component { // eslint-disable-line react/prefer-sta
     animated: PropTypes.bool,
   }
 
+  TO_PROGRESS_BAR_LIST = [ // eslint-disable-line react/sort-comp
+    'bg-faded',
+    'bg-primary',
+    'bg-success',
+    'bg-info',
+    'bg-warning',
+    'bg-danger',
+    'bg-inverse',
+  ];
+
+  state = {
+    classNameProgress: '',
+    classNameProgressBar: '',
+  }
+
+  setClassList() {
+    const { className } = this.props;
+    const classNameList = className.split(' ');
+
+    const classNameProgressList = [];
+    const classNameProgressBarList = [];
+    classNameList.forEach((oneClass) => {
+      if (this.TO_PROGRESS_BAR_LIST.indexOf(oneClass) === -1) {
+        classNameProgressList.push(oneClass);
+      } else {
+        classNameProgressBarList.push(oneClass);
+      }
+    });
+    this.setState({
+      classNameProgress: classNameProgressList.join(' '),
+      classNameProgressBar: classNameProgressBarList.join(' '),
+    });
+  }
+
+  componentWillMount() {
+    this.setClassList();
+  }
+
   getWidth(valueNow, valueMin, valueMax) {
-    return `${rangePackage.mapBetween(valueNow, valueMin, valueMax)}%`;
+    return `${rangeUtils.mapBetween(valueNow, valueMin, valueMax)}%`;
   }
 
   render() {
-    const { className, children, valueNow, valueMin, valueMax, height, striped, animated } = this.props;
+    const { children, valueNow, valueMin, valueMax, height, striped, animated } = this.props;
+    const { classNameProgress, classNameProgressBar } = this.state;
     return (
-      <div className={className}>
+      <div className={cn('progress', classNameProgress)}>
         <div
-          className={cn('progress-bar', {
+          className={cn('progress-bar', classNameProgressBar, {
             'progress-bar-striped': striped,
             'progress-bar-animated': animated,
           })}
@@ -61,16 +100,18 @@ Progress = styled(Progress)`
       to { background-position: 0 0; }
     }
     
-    display: flex;
-    overflow: hidden; // force rounded corners by cropping it
-    font-size: ${props.theme['$progress-font-size']};
-    line-height: ${props.theme['$progress-height']};
-    text-align: center;
-    background-color: ${props.theme['$progress-bg']};
-    ${borderRadius(
-      props.theme['$enable-rounded'],
-      props.theme['$progress-border-radius']
-    )}
+    &.progress {
+      display: flex;
+      overflow: hidden; // force rounded corners by cropping it
+      font-size: ${props.theme['$progress-font-size']};
+      line-height: ${props.theme['$progress-height']};
+      text-align: center;
+      background-color: ${props.theme['$progress-bg']};
+      ${borderRadius(
+        props.theme['$enable-rounded'],
+        props.theme['$progress-border-radius']
+      )}
+    }
     
     .progress-bar {
       height: ${props.theme['$progress-height']};
@@ -82,6 +123,7 @@ Progress = styled(Progress)`
     .progress-bar-striped {
       ${gradientStriped()}
       background-size: ${props.theme['$progress-height']} ${props.theme['$progress-height']};
+      background-repeat: repeat; /* Not present in bootstrap original but required to repeat the background */
     }
     
     .progress-bar-animated {

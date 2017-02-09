@@ -199,7 +199,7 @@
   "dependencies": {
     "classnames": "2.2.5",
     "color": "1.0.3",
-    "math-utils": "git+ssh://git@module.kopaxgroup.com:20024/dev-tools/math-utils.git#v0.1.0"
+    "math-utils": "git+ssh://git@module.kopaxgroup.com:20024/dev-tools/math-utils.git#v0.2.0"
   },
   "devDependencies": {
     "babel-cli": "6.22.2",
