@@ -33,17 +33,16 @@ class Blockquote extends React.Component { // eslint-disable-line react/prefer-s
 Blockquote = styled(Blockquote)` 
   ${(props) => `
 
-    /* Type Scss */
     
+    /* Reboot from bootstrap v4 */
+    margin: 0;
+    /* Type Scss */
     /* Blockquotes */
     &.blockquote {
       padding: ${props.theme['$spacer-halved']} ${props.theme['$spacer']};
       margin-bottom: ${props.theme['$spacer']};
       font-size: ${props.theme['$blockquote-font-size']};
       border-left: ${props.theme['$blockquote-border-width']} solid ${props.theme['$blockquote-border-color']};
-      
-      /* Reboot from bootstrap v4 */
-      margin: 0;
     }
     
 
