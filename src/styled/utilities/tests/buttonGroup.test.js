@@ -6,6 +6,6 @@ describe('bootstrap buttonGroup utility', () => {
     const css = buttonGroup();
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(481578756);
+    expect(fromJS({ css }).hashCode()).toEqual(173366388);
   });
 });
