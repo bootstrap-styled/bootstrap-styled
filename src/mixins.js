@@ -1,5 +1,4 @@
 export { default as alertMixins } from './styled/mixins/alert';
-export { default as animationMixins } from './styled/mixins/animation';
 export { default as backgroundVariantMixins } from './styled/mixins/background-variant';
 export { default as badgeMixins } from './styled/mixins/badge';
 export { default as borderRadiusMixins } from './styled/mixins/border-radius';
