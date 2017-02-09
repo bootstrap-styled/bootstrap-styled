@@ -7,7 +7,7 @@ import { shallow, mount } from 'enzyme';
 import React from 'react';
 import theme from 'theme';
 
-import Card from '../index';
+import Card from '../Card';
 
 const children = <h1> test </h1>;
 
