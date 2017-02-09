@@ -4,6 +4,10 @@ import { assertAscending, assertStartAtZero } from './styled/mixins/variables';
 
 const { detectUnit, rmUnit, UNIT } = unitUtils;
 
+// ===============================================================================================
+// DO NOT ADD ANY NEW VARIABLES TO THE THEME, ADD THEM AT THE BOTTOM OF THE LIST WHERE INDICATED
+// ===============================================================================================
+
 // Export a default theme as default
 export default makeTheme();
 
@@ -909,10 +913,12 @@ export function makeTheme(userTheme = {}) {
   v['$pre-color'] = u['$pre-color'] || v['$gray-dark'];
   v['$pre-scrollable-max-height'] = u['$pre-scrollable-max-height'] || '340px';
 
+  // OUR KOPAX EXTEND OF BOOTSTRAP ONLY ADD NEW VARIBALES HERE
+
+  v['$spacer-halved'] = (rmUnit(v['$spacer'], UNIT.REM) / 2) + UNIT.REM;
+
   // This will ensure u rest untouched and copy v value over u
   return Object.assign({}, u, v);
-
-  // OUR KOPAX EXTEND OF BOOTSTRAP
 
   // THIS COME FROM old theme in config.js and doesn't exist in the new theme
 
