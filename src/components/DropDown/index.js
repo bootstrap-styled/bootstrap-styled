@@ -61,7 +61,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
 
   render() {
     const Btn = this.props.button;
-    const { href, value, className, dropdownContent, ...rest } = this.props.buttonProps;
+    const { href, value, className, ...rest } = this.props.buttonProps;
 
     const dropdown = (
       <div className={this.props.className}>
@@ -78,7 +78,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
         <div
           className={cn({ 'dropdown-hide': !this.state.dropped })}
         >
-          {dropdownContent}
+          {this.props.dropdown}
         </div>
       </div>
     );
@@ -109,7 +109,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
               'dropdown-hide': !this.state.dropped,
             })}
           >
-            {dropdownContent}
+            {this.props.dropdown}
           </div>
         </div>
       );
