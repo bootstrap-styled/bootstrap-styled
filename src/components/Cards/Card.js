@@ -227,7 +227,9 @@ Card = styled(Card)`
     &.card-inverse {
       ${cardInverse(
         props.theme['$enable-hover-media-query'],
-        props.theme['$card-link-hover-color']
+        props.theme['$card-link-hover-color'],
+        props.theme['$card-inverse-bg-color'],
+        props.theme['$card-inverse-border-color'],
       )}
     }
     

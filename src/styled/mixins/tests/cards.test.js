@@ -26,16 +26,16 @@ describe('bootstrap cards mixins', () => {
     const css = cardInverse(defaultProps['$enable-hover-media-query'], defaultProps['$card-link-hover-color']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-908356698);
+    expect(fromJS({ css }).hashCode()).toEqual(-1030211806);
   });
   it('cardInverse should return a css with media query', () => {
     const css = cardInverse(!defaultProps['$enable-hover-media-query'], defaultProps['$card-link-hover-color']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-12827358);
+    expect(fromJS({ css }).hashCode()).toEqual(1067391143);
   });
   it('cardInverse should return a css by default', () => {
     const css = cardInverse();
-    expect(fromJS({ css }).hashCode()).toEqual(-908356698);
+    expect(fromJS({ css }).hashCode()).toEqual(-1030211806);
   });
 });

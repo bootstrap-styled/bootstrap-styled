@@ -59,6 +59,8 @@ CardColumns = styled(CardColumns)`
       props.theme['$btn-danger-bg'],
       props.theme['$card-link-hover-color'],
       props.theme['$card-img-overlay-padding'],
+      props.theme['$card-inverse-bg-color'],
+      props.theme['$card-inverse-border-color'],
     )}
     /*
      Card Column
