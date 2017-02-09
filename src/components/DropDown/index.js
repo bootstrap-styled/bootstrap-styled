@@ -64,7 +64,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
     const { href, value, className, dropdownContent, ...rest } = this.props.buttonProps;
 
     const dropdown = (
-      <div>
+      <div className={this.props.className}>
         <Btn
           {...rest}
           className={cn(className, {
@@ -85,7 +85,9 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
 
     if (this.props['dropdown-split']) {
       return (
-        <div>
+        <div
+          className={className}
+        >
           <Btn
             {...rest}
             className={className}
