@@ -1,6 +1,5 @@
 // -1. Mixins et Utilities (export everything)
 export {
-  animationMixins,
   borderRadiusMixins,
   boxShadowMixins,
   breakpointsMixins,
@@ -104,10 +103,7 @@ export { default as Thead } from './components/Thead';
 export { default as Tr } from './components/Tr';
 export { default as Ul } from './components/Ul';
 // 2. Molecules
-export { default as Card } from './components/Card';
-export { default as CardColumns } from './components/CardColumns';
-export { default as CardDeck } from './components/CardDeck';
-export { default as CardGroup } from './components/CardGroup';
+export { default as Card, CardColumns, CardDeck, CardGroup } from './components/Cards';
 export { default as DropDown } from './components/DropDown';
 export { default as NavBar } from './components/NavBar';
 // 3. Organisms
