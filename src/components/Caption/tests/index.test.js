@@ -3,30 +3,34 @@
  */
 import { ThemeProvider } from 'styled-components';
 
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
 import theme from 'theme';
 
 import Caption from '../index';
 
-const children = (<h1>Test</h1>);
+const children = <span>Test</span>;
 
-const renderComponent = (props = {}) => shallow(
-  <Caption
-    className={props.className}
-  >
-    {props.children}
-  </Caption>
-);
-
-
-const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
+const renderComponent = (props = {}) => mount(
+  <table>
     <Caption
       className={props.className}
     >
       {props.children}
     </Caption>
+  </table>
+);
+
+
+const renderComponentUsingTheme = (props = {}) => mount(
+  <ThemeProvider theme={theme}>
+    <table>
+      <Caption
+        className={props.className}
+      >
+        {props.children}
+      </Caption>
+    </table>
   </ThemeProvider>
 );
 

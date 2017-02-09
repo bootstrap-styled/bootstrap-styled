@@ -3,26 +3,30 @@
  */
 import { ThemeProvider } from 'styled-components';
 
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
 import theme from 'theme';
 
 import Option from '../index';
 
-const children = <h1>test</h1>;
+const children = 'test';
 
-const renderComponent = () => shallow(
-  <Option>
-    {children}
-  </Option>
+const renderComponent = (props = {}) => mount(
+  <select>
+    <Option>
+      {props.children}
+    </Option>
+  </select>
 );
 
 
-const renderComponentUsingTheme = () => mount(
+const renderComponentUsingTheme = (props = {}) => mount(
   <ThemeProvider theme={theme}>
-    <Option>
-      {children}
-    </Option>
+    <select>
+      <Option>
+        {props.children}
+      </Option>
+    </select>
   </ThemeProvider>
 );
 
@@ -34,11 +38,11 @@ describe('<Option />', () => {
     });
     expect(renderedComponent.find('Option').length).toBe(1);
   });
-  it('should have children without a theme', () => {
+  it('should have text node without a theme', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.contains(children)).toEqual(true);
+    expect(renderedComponent.find('option').text()).toEqual(children);
   });
   it('should render an <Option> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
@@ -75,10 +79,10 @@ describe('<Option />', () => {
   //   });
   //   expect(renderedComponent.find('option').props().value).toBe('test-value');
   // });
-  it('should have children with a theme', () => {
+  it('should have text node with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.contains(children)).toEqual(true);
+    expect(renderedComponent.find('option').text()).toEqual(children);
   });
 });

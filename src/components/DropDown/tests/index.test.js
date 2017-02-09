@@ -30,7 +30,7 @@ const renderComponentUsingTheme = (props = {}) => mount(
       button={Button}
       buttonProps={{
         type: 'button',
-        'dropdown-toggle': true,
+
         value: 'Dropdown',
       }}
       dropdown={dropdown}
