@@ -909,9 +909,10 @@ export function makeTheme(userTheme = {}) {
   v['$pre-color'] = u['$pre-color'] || v['$gray-dark'];
   v['$pre-scrollable-max-height'] = u['$pre-scrollable-max-height'] || '340px';
 
-
   // This will ensure u rest untouched and copy v value over u
   return Object.assign({}, u, v);
+
+  // OUR KOPAX EXTEND OF BOOTSTRAP
 
   // THIS COME FROM old theme in config.js and doesn't exist in the new theme
 
