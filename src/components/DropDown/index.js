@@ -61,10 +61,10 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
 
   render() {
     const Btn = this.props.button;
-    const { href, value, className, dropdownContent, ...rest } = this.props.buttonProps;
+    const { href, value, className, ...rest } = this.props.buttonProps;
 
     const dropdown = (
-      <div>
+      <div className={this.props.className}>
         <Btn
           {...rest}
           className={cn(className, {
@@ -78,14 +78,18 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
         <div
           className={cn({ 'dropdown-hide': !this.state.dropped })}
         >
-          {dropdownContent}
+          {this.props.dropdown}
         </div>
       </div>
     );
 
     if (this.props['dropdown-split']) {
       return (
-        <div>
+        <div
+          className={cn(this.props.className, {
+            'dropdown-toggle-split': this.props['dropdown-split'],
+          })}
+        >
           <Btn
             {...rest}
             className={className}
@@ -94,9 +98,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
           </Btn>
           <Btn
             {...rest}
-            className={cn(className, 'dropdown-toggle', {
-              'dropdown-toggle-split': this.props['dropdown-split'],
-            })}
+            className={cn(className, 'dropdown-toggle')}
             href={href}
             onClick={this.handleClick}
           >
@@ -107,7 +109,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
               'dropdown-hide': !this.state.dropped,
             })}
           >
-            {dropdownContent}
+            {this.props.dropdown}
           </div>
         </div>
       );
