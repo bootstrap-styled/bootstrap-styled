@@ -848,10 +848,6 @@ const DocBootstrap = styled.div`
     margin-left: auto;
   }
   
-  .bd-example > .dropdown > .dropdown-toggle {
-    float: left;
-  }
-  
   .bd-example > .dropdown > .dropdown-menu {
     position: static;
     display: block;
