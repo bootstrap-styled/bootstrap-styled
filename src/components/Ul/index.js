@@ -8,25 +8,27 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from 'theme';
+import bsTheme from 'theme';
 
 import { nav } from '../../styled/utilities/nav';
 import { listUnstyled } from '../../styled/mixins/lists';
 import { navbar } from '../../styled/utilities/navbar';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
 class Ul extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
+    theme: PropTypes.object,
   }
 
   render() {
+    const { theme, className, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
     return (
-      <ul className={this.props.className}>
-        {this.props.children}
+      <ul className={className} {...rest}>
+        {children}
       </ul>
     );
   }

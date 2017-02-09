@@ -5,23 +5,27 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from 'theme';
+import bsTheme from 'theme';
 
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { boxShadow } from '../../styled/mixins/box-shadow';
-const defaultProps = { theme };
+
+const defaultProps = { theme: bsTheme };
 
 class Kbd extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
+    theme: PropTypes.object,
   }
 
   render() {
+    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+
     return (
-      <kbd className={this.props.className}>
-        {this.props.children}
+      <kbd className={className} {...rest}>
+        {children}
       </kbd>
     );
   }
