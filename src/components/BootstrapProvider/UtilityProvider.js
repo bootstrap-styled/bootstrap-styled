@@ -3,7 +3,6 @@ import theme from 'theme';
 import { conditionalMixins } from '../../mixins';
 import {
   alignUtils,
-  aUtils,
   backgroundUtils,
   bordersUtils,
   clearfixUtils,
@@ -23,7 +22,6 @@ const defaultProps = {
   utils: {
     align: false,
     background: false,
-    a: false,
     border: false,
     clearfix: false,
     display: false,
@@ -52,13 +50,6 @@ const UtilityProvider = styled.div`
       props.theme['$brand-danger'],
       props.theme['$brand-inverse'],
       props.theme['$gray-lightest'],
-    ))}
-    ${ifThen(props.utils.a, aUtils.a(
-      props.theme['$link-color'],
-      props.theme['$link-decoration'],
-      props.theme['$link-hover-color'],
-      props.theme['$link-hover-decoration'],
-      props.theme['$enable-hover-media-query'],
     ))}
     ${ifThen(props.utils.border, bordersUtils.getBordersUtilities(
       props.theme['$enable-rounded'],

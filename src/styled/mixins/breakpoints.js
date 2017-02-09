@@ -1,4 +1,4 @@
-import { rmUnit, UNIT } from './unit';
+import { unitUtils } from 'math-utils';
 
 export const defaultProps = {
   '$grid-breakpoints': {
@@ -50,8 +50,8 @@ export function breakpointMin(name, breakpoints = defaultProps['$grid-breakpoint
 export function breakpointMax(name, breakpoints = defaultProps['$grid-breakpoints']) {
   const next = breakpointNext(name, breakpoints);
   if (next) {
-    const min = rmUnit(breakpointMin(next, breakpoints), UNIT.PX);
-    return (min - 1).toString() + UNIT.PX;
+    const min = unitUtils.rmUnit(breakpointMin(next, breakpoints), unitUtils.UNIT.PX);
+    return (min - 1).toString() + unitUtils.UNIT.PX;
   }
   return null;
 }

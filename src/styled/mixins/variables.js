@@ -1,4 +1,4 @@
-import { rmUnit } from '../mixins/unit';
+import { unitUtils } from 'math-utils';
 
 export function assertAscending(map, mapName) {
   let prevKey;
@@ -8,12 +8,12 @@ export function assertAscending(map, mapName) {
     const num = map[key];
     if (prevNum == null) {
       // do nothing
-    } else if (!comparable(rmUnit(prevNum), rmUnit(num))) {
+    } else if (!comparable(unitUtils.rmUnit(prevNum), unitUtils.rmUnit(num))) {
       if (process.env.NODE !== 'test') {
         console.warn(`Potentially invalid value for ${mapName}: This map must be in ascending order, but key '${key}' has value ${num} whose unit makes it incomparable to ${prevNum}, the value of the previous key '${prevKey}' !`); // eslint-disable-line no-console
       }
       asserted = false;
-    } else if (rmUnit(prevNum) >= rmUnit(num)) {
+    } else if (unitUtils.rmUnit(prevNum) >= unitUtils.rmUnit(num)) {
       if (process.env.NODE !== 'test') {
         console.warn(`Invalid value for ${mapName}: This map must be in ascending order, but key '${key}' has value ${num} which isn't greater than ${prevNum}, the value of the previous key '${prevKey}' !`); // eslint-disable-line no-console
       }
@@ -27,7 +27,7 @@ export function assertAscending(map, mapName) {
 
 export function assertStartAtZero(map) {
   const values = Object.values(map);
-  const firstValue = rmUnit(values[0]);
+  const firstValue = unitUtils.rmUnit(values[0]);
   let asserted = true;
   if (firstValue !== 0) {
     if (process.env.NODE !== 'test') {

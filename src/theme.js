@@ -1,6 +1,8 @@
 import Color from 'color';
-import { detectUnit, rmUnit, UNIT } from './styled/mixins/unit';
+import { unitUtils } from 'math-utils';
 import { assertAscending, assertStartAtZero } from './styled/mixins/variables';
+
+const { detectUnit, rmUnit, UNIT } = unitUtils;
 
 // Export a default theme as default
 export default makeTheme();

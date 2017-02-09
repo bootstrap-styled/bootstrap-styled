@@ -1,4 +1,4 @@
-import { rmUnit, UNIT } from '../mixins/unit';
+import { unitUtils } from 'math-utils';
 
 export const defaultProps = {
   '$spacer-y': '1rem',
@@ -8,7 +8,7 @@ export const defaultProps = {
 //
 // Dividers (basically an hr) within dropdowns and nav lists
 export function navDivider(spacerY = defaultProps['$spacer-y'], dividerColor = '#e5e5e5') {
-  const marginY = `${rmUnit(spacerY, UNIT.REM) / 2}${UNIT.REM}`;
+  const marginY = `${unitUtils.rmUnit(spacerY, unitUtils.UNIT.REM) / 2}${unitUtils.UNIT.REM}`;
   return `
     height: 1px;
     margin: ${marginY} 0;

@@ -1,5 +1,5 @@
+import { unitUtils } from 'math-utils';
 import { mediaBreakpointUp } from './breakpoints';
-import { toPercent, rmUnit, detectUnit } from '../mixins/unit';
 
 export const defaultProps = {
   '$grid-gutter-widths': {
@@ -36,8 +36,8 @@ export function makeContainer(enableGridClasses = defaultProps['$enable-grid-cla
     Object.keys(gridGutterWidths).forEach((breakpoint) => {
       const gutter = gridGutterWidths[breakpoint];
       const column = mediaBreakpointUp(breakpoint, gutter, `
-        padding-right: ${rmUnit(gutter) / 2}${detectUnit(gutter)};
-        padding-left:  ${rmUnit(gutter) / 2}${detectUnit(gutter)};
+        padding-right: ${unitUtils.rmUnit(gutter) / 2}${unitUtils.detectUnit(gutter)};
+        padding-left:  ${unitUtils.rmUnit(gutter) / 2}${unitUtils.detectUnit(gutter)};
       `);
       columns.push(column);
     });
@@ -73,7 +73,7 @@ export function makeGutters(gridGutterWidths = defaultProps['$grid-gutter-widths
   const gutterList = [];
   Object.keys(gridGutterWidths).forEach((breakpoint) => {
     let gutterValue = gridGutterWidths[breakpoint];
-    gutterValue = `${rmUnit(gutterValue) / 2}${detectUnit(gutterValue)}`;
+    gutterValue = `${unitUtils.rmUnit(gutterValue) / 2}${unitUtils.detectUnit(gutterValue)}`;
     const gutter = mediaBreakpointUp(breakpoint, gridGutterWidths, `
       padding-right: ${gutterValue};
       padding-left:  ${gutterValue};
@@ -90,7 +90,7 @@ export function makeRow(enableGridClasses = defaultProps['$enable-grid-classes']
     const rowList = [];
     Object.keys(gridGutterWidths).forEach((breakpoint) => {
       let gutter = gridGutterWidths[breakpoint];
-      gutter = `${rmUnit(gutter) / -2}${detectUnit(gutter)}`;
+      gutter = `${unitUtils.rmUnit(gutter) / -2}${unitUtils.detectUnit(gutter)}`;
       const row = `
         margin-right: ${gutter};
         margin-left:  ${gutter};
@@ -110,7 +110,7 @@ export function makeColReady(gridGutterWidths = defaultProps['$grid-gutter-width
   const colReadyList = [];
   Object.keys(gridGutterWidths).forEach((breakpoint) => {
     let gutter = gridGutterWidths[breakpoint];
-    gutter = `${rmUnit(gutter) / 2}${detectUnit(gutter)}`;
+    gutter = `${unitUtils.rmUnit(gutter) / 2}${unitUtils.detectUnit(gutter)}`;
     const colReady = mediaBreakpointUp(breakpoint, gridGutterWidths, `
       padding-right: ${gutter};
       padding-left:  ${gutter};
@@ -130,29 +130,29 @@ export function makeColReady(gridGutterWidths = defaultProps['$grid-gutter-width
 
 export function makeCol(size, columns = defaultProps['$grid-columns']) {
   return `
-    flex: 0 0 ${toPercent(size, columns)};
+    flex: 0 0 ${unitUtils.toPercent(size, columns)};
     /* Add a 'max-width' to ensure content within each column does not blow out */
     /* the width of the column. Applies to IE10+ and Firefox. Chrome and Safari */
     /* do not appear to require this. */
-    max-width: ${toPercent(size, columns)};
+    max-width: ${unitUtils.toPercent(size, columns)};
   `;
 }
 
 export function makeColOffset($size, columns = defaultProps['$grid-columns']) {
   return `
-    margin-left: ${toPercent($size, columns)};
+    margin-left: ${unitUtils.toPercent($size, columns)};
   `;
 }
 
 export function makeColPush(size, columns = defaultProps['$grid-columns']) {
   return `
-    left: ${size > 0 ? toPercent(size, columns) : 'auto'};
+    left: ${size > 0 ? unitUtils.toPercent(size, columns) : 'auto'};
   `;
 }
 
 export function makeColPull(size, columns = defaultProps['$grid-columns']) {
   return `
-    right: ${size > 0 ? toPercent(size, columns) : 'auto'};
+    right: ${size > 0 ? unitUtils.toPercent(size, columns) : 'auto'};
   `;
 }
 

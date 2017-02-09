@@ -6,13 +6,13 @@
  */
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
+import { unitUtils } from 'math-utils';
 import themeBs from '../../theme';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { transition } from '../../styled/mixins/transition';
 import { formControlFocus, formControlValidation } from '../../styled/mixins/forms';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
-import { math } from '../../styled/mixins/unit';
 
 const defaultProps = { theme: themeBs };
 
@@ -314,10 +314,10 @@ Form = styled(Form)`
     & .form-control-success,
     & .form-control-warning,
     & .form-control-danger {
-      padding-right: ${math.multiply(props.theme['$input-padding-x'], 3)};
+      padding-right: ${unitUtils.math.multiply(props.theme['$input-padding-x'], 3)};
       background-repeat: no-repeat;
-      background-position: center right ${math.divide(props.theme['$input-height'], 4)};
-      background-size: ${math.divide(props.theme['$input-height'], 2)} ${math.divide(props.theme['$input-height'], 2)};
+      background-position: center right ${unitUtils.math.divide(props.theme['$input-height'], 4)};
+      background-size: ${unitUtils.math.divide(props.theme['$input-height'], 2)} ${unitUtils.math.divide(props.theme['$input-height'], 2)};
     }
     
     /* Form validation states */

@@ -9,7 +9,7 @@ export { default as buttonMixins } from './styled/mixins/button';
 export { default as cardsMixins } from './styled/mixins/cards';
 export { default as clearfixMixins } from './styled/mixins/clearfix';
 export { default as conditionalMixins } from './styled/mixins/conditional';
-export { default as unitMixins } from './styled/mixins/unit';
+export { unitUtils as unitMixins } from 'math-utils';
 export { default as floatMixins } from './styled/mixins/float';
 export { default as formsMixins } from './styled/mixins/forms';
 export { default as gradientsMixins } from './styled/mixins/gradients';

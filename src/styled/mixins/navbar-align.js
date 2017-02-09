@@ -1,4 +1,4 @@
-import { rmUnit, UNIT } from '../mixins/unit';
+import { unitUtils } from 'math-utils';
 
 export const defaultProps = {
   '$navbar-height': '50px',
@@ -15,8 +15,8 @@ export const defaultProps = {
 // }
 
 export function navbarVerticalAlign(navbarHeight = defaultProps['$navbar-height'], elementHeight) {
-  const marginTop = `${(rmUnit(navbarHeight, UNIT.PX) - rmUnit(elementHeight, UNIT.PX)) / 2}${UNIT.PX}`;
-  const marginBottom = `${(rmUnit(navbarHeight, UNIT.PX) - rmUnit(elementHeight, UNIT.PX)) / 2}${UNIT.PX}`;
+  const marginTop = `${(unitUtils.rmUnit(navbarHeight, unitUtils.UNIT.PX) - unitUtils.rmUnit(elementHeight, unitUtils.UNIT.PX)) / 2}${unitUtils.UNIT.PX}`;
+  const marginBottom = `${(unitUtils.rmUnit(navbarHeight, unitUtils.UNIT.PX) - unitUtils.rmUnit(elementHeight, unitUtils.UNIT.PX)) / 2}${unitUtils.UNIT.PX}`;
   return `
     margin-top: ${marginTop};
     margin-bottom: ${marginBottom};  

@@ -2,10 +2,11 @@
 
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { rangeUtils } from 'math-utils';
 import theme from 'theme';
 import { borderRadius } from '../../styled/mixins/border-radius';
+import { getBackgroundUtilities } from '../../styled/utilities/background';
 import { gradientStriped } from '../../styled/mixins/gradients';
 
 const defaultProps = {
@@ -91,14 +92,14 @@ class Progress extends React.Component { // eslint-disable-line react/prefer-sta
   }
 }
 
+const backgroundPositionKeyFrame = (props) => keyframes`
+  from { background-position: ${props.theme['$progress-height']} 0; }
+  to { background-position: 0 0; }
+`;
+
 // eslint-disable-next-line no-class-assign
 Progress = styled(Progress)`
   ${(props) => `
-  
-    @keyframes progress-bar-stripes {
-      from { background-position: ${props.theme['$progress-height']} 0; }
-      to { background-position: 0 0; }
-    }
     
     &.progress {
       display: flex;
@@ -110,6 +111,15 @@ Progress = styled(Progress)`
       ${borderRadius(
         props.theme['$enable-rounded'],
         props.theme['$progress-border-radius']
+      )}
+      ${getBackgroundUtilities(
+        props.theme['$brand-primary'],
+        props.theme['$brand-success'],
+        props.theme['$brand-info'],
+        props.theme['$brand-warning'],
+        props.theme['$brand-danger'],
+        props.theme['$brand-inverse'],
+        props.theme['$gray-lightest'],
       )}
     }
     
@@ -127,7 +137,7 @@ Progress = styled(Progress)`
     }
     
     .progress-bar-animated {
-      animation: progress-bar-stripes ${props.theme['$progress-bar-animation-timing']};
+      animation: ${backgroundPositionKeyFrame(props)} ${props.theme['$progress-bar-animation-timing']};
     }
 
   `}

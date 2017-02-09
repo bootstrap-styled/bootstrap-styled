@@ -20,7 +20,6 @@ export {
 } from './mixins';
 export {
   alignUtils,
-  aUtils,
   backgroundUtils,
   bordersUtils,
   clearfixUtils,

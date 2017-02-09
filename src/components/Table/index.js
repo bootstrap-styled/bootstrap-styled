@@ -6,10 +6,10 @@
 import styled from 'styled-components';
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
+import { unitUtils } from 'math-utils';
 import bsTheme from '../../theme';
 import { tableRowVariant } from '../../styled/mixins/table-row';
 import { hover as hoverMixin } from '../../styled/mixins/hover';
-import { math } from '../../styled/mixins/unit';
 
 const defaultProps = {
   striped: false,
@@ -122,11 +122,11 @@ Table = styled(Table)`
     
       thead th {
         vertical-align: bottom;
-        border-bottom: ${math.multiply(2, props.theme['$table-border-width'])} solid ${props.theme['$table-border-color']};
+        border-bottom: ${unitUtils.math.multiply(2, props.theme['$table-border-width'])} solid ${props.theme['$table-border-color']};
       }
     
       tbody + tbody {
-        border-top: ${math.multiply(2, props.theme['$table-border-width'])} solid ${props.theme['$table-border-color']};
+        border-top: ${unitUtils.math.multiply(2, props.theme['$table-border-width'])} solid ${props.theme['$table-border-color']};
       }
     
       .table {
@@ -161,7 +161,7 @@ Table = styled(Table)`
       thead {
         th,
         td {
-          border-bottom-width: ${math.multiply(2, props.theme['$table-border-width'])};
+          border-bottom-width: ${unitUtils.math.multiply(2, props.theme['$table-border-width'])};
         }
       }
     }

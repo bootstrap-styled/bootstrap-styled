@@ -1,9 +1,9 @@
+import { unitUtils } from 'math-utils';
 import { hover } from '../mixins/hover';
 import { clearfix } from '../mixins/clearfix';
 import { borderRightRadius, borderLeftRadius, borderBottomRadius, borderTopRadius } from '../mixins/border-radius';
 import { boxShadow } from '../mixins/box-shadow';
 import { buttonSize } from '../mixins/button';
-import { math } from '../mixins/unit';
 
 export const defaultProps = {
   '$enable-shadows': true,
@@ -198,8 +198,8 @@ export function buttonGroup(
     */
     
     & .btn + .dropdown-toggle-split {
-      padding-right: ${math.multiply($btnPaddingX, 0.75)};
-      padding-left: ${math.multiply($btnPaddingX, 0.75)};
+      padding-right: ${unitUtils.math.multiply($btnPaddingX, 0.75)};
+      padding-left: ${unitUtils.math.multiply($btnPaddingX, 0.75)};
     
       &::after {
         margin-left: 0;
@@ -207,13 +207,13 @@ export function buttonGroup(
     }
     
     & .btn-sm + .dropdown-toggle-split {
-      padding-right: ${math.multiply($btnPaddingXSm, 0.75)};
-      padding-left: ${math.multiply($btnPaddingXSm, 0.75)};
+      padding-right: ${unitUtils.math.multiply($btnPaddingXSm, 0.75)};
+      padding-left: ${unitUtils.math.multiply($btnPaddingXSm, 0.75)};
     }
     
     & .btn-lg + .dropdown-toggle-split {
-      padding-right: ${math.multiply($btnPaddingXLg, 0.75)};
-      padding-left: ${math.multiply($btnPaddingXLg, 0.75)};
+      padding-right: ${unitUtils.math.multiply($btnPaddingXLg, 0.75)};
+      padding-left: ${unitUtils.math.multiply($btnPaddingXLg, 0.75)};
     }
     
     
