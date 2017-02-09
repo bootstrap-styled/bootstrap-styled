@@ -3,6 +3,8 @@ import { hoverFocus } from './hover';
 export const defaultProps = {
   '$card-link-hover-color': '#fff',
   '$enable-hover-media-query': false,
+  '$card-inverse-bg-color': '#464a4c',
+  '$card-inverse-border-color': '#464a4c',
 };
 
 export function cardVariant(cardBackground, cardBorder) {
@@ -24,10 +26,11 @@ export function cardOutlineVariant(cardColor) {
   `;
 }
 
-export function cardInverse(enableHoverMediaQuery = defaultProps['$enable-hover-media-query'], cardLinkHoverColor = defaultProps['$card-link-hover-color']) {
+export function cardInverse(enableHoverMediaQuery = defaultProps['$enable-hover-media-query'], cardLinkHoverColor = defaultProps['$card-link-hover-color'], cardBackground = defaultProps['$card-inverse-bg-color'], cardBorder = defaultProps['$card-inverse-border-color']) {
   return `
     color: rgba(255,255,255,.65);
-    
+    background-color: ${cardBackground}
+    border-color: ${cardBorder}
     & .card-header,
     & .card-footer {
       background-color: transparent;
