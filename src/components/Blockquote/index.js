@@ -41,7 +41,12 @@ Blockquote = styled(Blockquote)`
       margin-bottom: ${props.theme['$spacer']};
       font-size: ${props.theme['$blockquote-font-size']};
       border-left: ${props.theme['$blockquote-border-width']} solid ${props.theme['$blockquote-border-color']};
+      
+      /* Reboot from bootstrap v4 */
+      margin: 0;
     }
+    
+
     
     &.blockquote-footer {
       display: block;
