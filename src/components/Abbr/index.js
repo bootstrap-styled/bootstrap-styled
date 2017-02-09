@@ -21,12 +21,14 @@ class Abbr extends React.Component { // eslint-disable-line react/prefer-statele
   }
 
   render() {
+    const { className, title, children, ...rest } = this.props;
     return (
       <abbr
-        className={this.props.className}
-        title={this.props.title}
+        className={className}
+        title={title}
+        {...rest}
       >
-        {this.props.children}
+        {children}
       </abbr>
     );
   }
