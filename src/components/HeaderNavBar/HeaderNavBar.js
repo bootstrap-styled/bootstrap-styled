@@ -24,7 +24,6 @@ import ContainerFluid from '../ContainerFluid';
 import Button from '../Button';
 import { transition } from '../../styled/mixins/transition';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
-import { getFlexUtilities } from '../../styled/utilities/flex';
 import { ifElse } from '../../styled/mixins/conditional';
 import shapeMenuOffsetPush from './shapeMenuOffsetPush';
 import shapeMenuTopPush from './shapeMenuTopPush';
@@ -233,9 +232,7 @@ HeaderNavBar = styled(HeaderNavBar)`
   ${(props) => `
     
     outline: ${props.theme['$header-navbar-border-width']} solid ${props.theme['$header-navbar-border-color']};
-    
-    ${getFlexUtilities(props.theme['$grid-breakpoints'])}
-        
+            
     ${transition(
       props.theme['$enable-transitions'],
       props.theme['$header-navbar-transition-duration'],

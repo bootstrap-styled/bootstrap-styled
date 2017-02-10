@@ -33,10 +33,11 @@ const DocBootstrap = styled.div`
     border: 1px solid #cdbfe3;
   }
   
-  .bd-navbar {
+  /* .bd-navbar {
     padding-right: 0;
     padding-left: 0;
   }
+  */
   
   .bd-navbar .navbar-nav .nav-link {
     color: #8e869d;
