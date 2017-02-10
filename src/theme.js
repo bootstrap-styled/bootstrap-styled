@@ -936,7 +936,7 @@ export function makeTheme(userTheme = {}) {
 
   // Navbar
 
-  v['$navbar-max-height'] = u['$card-margin-x-halved'] || '400px';
+  v['$navbar-max-height'] = u['$navbar-max-height'] || '400px';
   v['$navbar-height'] = u['$navbar-height'] || '70px';
 
   // This will ensure u rest untouched and copy v value over u
