@@ -28,7 +28,7 @@ class Jumbotron extends React.Component { // eslint-disable-line react/prefer-st
 Jumbotron = styled(Jumbotron)`
   ${(props) => `
     &.jumbotron {
-      padding: ${props.theme['$jumbotron-padding']} (${props.theme['$jumbotron-padding']} / 2);
+      padding: ${props.theme['$jumbotron-padding']} calc(${props.theme['$jumbotron-padding']} / 2);
       margin-bottom: ${props.theme['$jumbotron-padding']};
       background-color: ${props.theme['$jumbotron-bg']};
       ${borderRadius(
@@ -37,8 +37,8 @@ Jumbotron = styled(Jumbotron)`
       )}
     
       ${mediaBreakpointUp('sm',
-          props.theme['$jumbotron-padding'] * 2,
-          props.theme['$jumbotron-padding']
+        props.theme['$grid-breakpoints'],
+        `calc(${props.theme['$jumbotron-padding']} * 2)`,
       )}
 
     & .jumbotron-hr {
@@ -48,8 +48,9 @@ Jumbotron = styled(Jumbotron)`
     & .jumbotron-fluid {
       padding-right: 0;
       padding-left: 0;
-      ${borderRadius(0,
-        props.theme['$enable-rounded']
+      ${borderRadius(
+        props.theme['$enable-rounded'],
+        0
       )}
     }
   `}
