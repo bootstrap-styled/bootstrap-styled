@@ -7,10 +7,10 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from 'theme';
+import bsTheme from 'theme';
 
 const defaultProps = {
-  theme,
+  theme: bsTheme,
 };
 
 class Blockquote extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -18,12 +18,14 @@ class Blockquote extends React.Component { // eslint-disable-line react/prefer-s
   static propTypes = {
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
+    theme: PropTypes.object,
   }
 
   render() {
+    const { theme, className, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
     return (
-      <blockquote className={this.props.className}>
-        {this.props.children}
+      <blockquote className={className} {...rest}>
+        {children}
       </blockquote>
     );
   }
@@ -35,7 +37,7 @@ Blockquote = styled(Blockquote)`
 
     
     /* Reboot from bootstrap v4 */
-    margin: 0;
+    margin: 0 0 1rem;
     /* Type Scss */
     /* Blockquotes */
     &.blockquote {
@@ -71,7 +73,7 @@ Blockquote = styled(Blockquote)`
         content: "";
       }
       &::after {
-        /* content: '\\00A0 \\2014'; nbsp, em dash */
+        content: '\\00A0 \\2014'; /* nbsp, em dash */
       }
     }
  `} 

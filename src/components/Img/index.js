@@ -7,12 +7,12 @@
 
 import styled from 'styled-components';
 import React, { PropTypes } from 'react';
-import theme from 'theme';
+import bsTheme from 'theme';
 import { imgFluid } from '../../styled/mixins/image';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { borderRadius } from '../../styled/mixins/border-radius';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
 class Img extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -26,17 +26,21 @@ class Img extends React.Component { // eslint-disable-line react/prefer-stateles
     height: PropTypes.string,
     useMap: PropTypes.string,
     className: PropTypes.string,
+    theme: PropTypes.object,
   }
 
   render() {
+    const { theme, className, src, alt, width, height, useMap, ...rest } = this.props; // eslint-disable-line no-unused-vars
+
     return (
       <img
-        className={this.props.className}
-        src={this.props.src}
-        alt={this.props.alt}
-        width={this.props.width}
-        height={this.props.height}
-        useMap={this.props.useMap}
+        className={className}
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        useMap={useMap}
+        {...rest}
       />
     );
   }

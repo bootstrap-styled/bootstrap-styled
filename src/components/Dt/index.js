@@ -6,21 +6,23 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
-import theme from 'theme';
+import bsTheme from 'theme';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
 class Dt extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
+    theme: PropTypes.object,
   }
 
   render() {
+    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
     return (
-      <dt className={this.props.className}>
-        {this.props.children}
+      <dt className={className} {...rest}>
+        {children}
       </dt>
     );
   }

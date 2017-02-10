@@ -3,25 +3,27 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
-import theme from 'theme';
+import bsTheme from 'theme';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
 class Caption extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-    style: PropTypes.string,
+    theme: PropTypes.object,
   }
 
   render() {
+    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+
     return (
       <caption
-        style={this.props.style}
-        className={cn(this.props.className, 'caption')}
+        className={cn(className, 'caption')}
+        {...rest}
       >
-        {this.props.children}
+        {children}
       </caption>
     );
   }
@@ -30,13 +32,11 @@ class Caption extends React.Component { // eslint-disable-line react/prefer-stat
 // eslint-disable-next-line no-class-assign
 Caption = styled(Caption)`
   ${(props) => `
-    &.caption {
-      padding-top: ${props.theme['$table-cell-padding']};
-      padding-bottom: ${props.theme['$table-cell-padding']};
-      color: ${props.theme['$text-muted']};
-      text-align: left;
-      caption-side: top;
-    }
+    padding-top: ${props.theme['$table-cell-padding']};
+    padding-bottom: ${props.theme['$table-cell-padding']};
+    color: ${props.theme['$text-muted']};
+    text-align: left;
+    caption-side: top;
   `}
 `;
 

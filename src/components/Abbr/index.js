@@ -6,10 +6,10 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
-import theme from 'theme';
+import bsTheme from 'theme';
 
 const defaultProps = {
-  theme,
+  theme: bsTheme,
 };
 
 class Abbr extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -18,15 +18,18 @@ class Abbr extends React.Component { // eslint-disable-line react/prefer-statele
     className: PropTypes.string,
     children: PropTypes.node,
     title: PropTypes.string.isRequired,
+    theme: PropTypes.object,
   }
 
   render() {
+    const { className, theme, title, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
     return (
       <abbr
-        className={this.props.className}
-        title={this.props.title}
+        className={className}
+        title={title}
+        {...rest}
       >
-        {this.props.children}
+        {children}
       </abbr>
     );
   }

@@ -6,22 +6,24 @@
 
 import styled from 'styled-components';
 import React, { PropTypes } from 'react';
-import theme from 'theme';
-import { getTextUtilities } from '../../styled/utilities/text';
+import bsTheme from 'theme';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
 class Figure extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
+    theme: PropTypes.object,
   }
 
   render() {
+    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+
     return (
-      <figure className={this.props.className}>
-        {this.props.children}
+      <figure className={className} {...rest}>
+        {children}
       </figure>
     );
   }
@@ -46,14 +48,11 @@ Figure = styled(Figure)`
       color: ${props.theme['$gray-light']};
     }
 
-    
     /* Reboot Scss */
     /* Normalize adds 'margin' to 'figure's as browsers apply it inconsistently. */
     /* We reset that to create a better flow in-page. */
     margin: 0 0 1rem;
     
-    /* The next classes are not part of Bs4, added for rendering of DocBootstrapPage */
-    ${getTextUtilities(props.theme['$grid-breakpoints'])}    
   `}
 `;
 

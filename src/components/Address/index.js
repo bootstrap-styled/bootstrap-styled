@@ -28,7 +28,6 @@ Address = styled(Address)`
   margin-bottom: 1rem;
   font-style: normal;
   line-height: inherit;
-  }
 `;
 
 export default Address;

@@ -11,12 +11,14 @@ class Dd extends React.Component { // eslint-disable-line react/prefer-stateless
   static propTypes = {
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
+    theme: PropTypes.object,
   }
 
   render() {
+    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
     return (
-      <dd className={this.props.className}>
-        {this.props.children}
+      <dd className={className} {...rest}>
+        {children}
       </dd>
     );
   }

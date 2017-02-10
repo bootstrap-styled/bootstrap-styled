@@ -5,21 +5,23 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from 'theme';
+import bsTheme from 'theme';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
 class Pre extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
+    theme: PropTypes.object,
   }
 
   render() {
+    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
     return (
-      <pre className={this.props.className}>
-        {this.props.children}
+      <pre className={className} {...rest}>
+        {children}
       </pre>
     );
   }
@@ -37,7 +39,7 @@ Pre = styled(Pre)`
     color: ${props.theme['$pre-color']};
     
     /* Enable scrollable blocks of code */
-    /* AJT This class was present in bootstrap/scss/code.scss  We must decide if this class should be a mixin or not!*/
+    /* AJT This class was present in bootstrap/scss/code.scss  We must decide if this class should be a mixin or not! */
     &.pre-scrollable {
       max-height: ${props.theme['$pre-scrollable-max-height']};
       overflow-y: scroll;
@@ -63,7 +65,7 @@ Pre = styled(Pre)`
     overflow: auto;
     
     /* Bootstrap 4 does not place this css rule straight into Kbd tag see: bootstrap/scss/code.scss */
-    font-family: ${props.theme['$font-family-monospace']};;
+    font-family: ${props.theme['$font-family-monospace']};
   `}
 `;
 

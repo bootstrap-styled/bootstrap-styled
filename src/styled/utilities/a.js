@@ -26,6 +26,8 @@ export function a(
   return `
     color: ${$linkColor};
     text-decoration: ${$linkDecoration};
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
   
     ${hoverFocus(
         $enableHoverMediaQuery,
@@ -39,6 +41,22 @@ export function a(
       ${tabFocus()}
     }
 
+    a:not([href]):not([tabindex]) {
+      color: inherit;
+      text-decoration: none;
+      
+      ${hoverFocus(
+        $enableHoverMediaQuery,
+        `
+          color: inherit;
+          text-decoration: none;
+        `
+      )};
+
+      &:focus {
+        outline: 0;
+      }
+    }
   `;
 }
 

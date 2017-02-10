@@ -23,7 +23,6 @@ const renderComponentUsingTheme = (props = {}) => mount(
   <ThemeProvider theme={theme}>
     <Blockquote
       className={props.className}
-      btn-toolbar={props['btn-toolbar']}
     >
       {props.children}
     </Blockquote>
