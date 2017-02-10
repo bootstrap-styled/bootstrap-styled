@@ -115,6 +115,12 @@ export function makeTheme(userTheme = {}) {
   // You can add more entries to the v['$spacers'] map, should you need more variation.
 
   v['$spacer'] = u['$spacer'] || '1rem';
+
+  // =============================================================================================================
+  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
+  v['$spacer-halved'] = u['$spacer-halved'] || ((rmUnit(v['$spacer'], UNIT.REM) / 2) + UNIT.REM);
+  // =============================================================================================================
+
   v['$spacer-x'] = u['$spacer-x'] || v['$spacer'];
   v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
   let detectedUnit = detectUnit(v['$spacer']);
@@ -285,7 +291,7 @@ export function makeTheme(userTheme = {}) {
   //
   // Define common padding and border radius sizes and more.
 
-  v['$line-height-lg'] = u['$line-height-lg'] || '(4 / 3)';
+  v['$line-height-lg'] = u['$line-height-lg'] || '1.3';
   v['$line-height-sm'] = u['$line-height-sm'] || '1.5';
 
   v['$border-radius'] = u['$border-radius'] || '.25rem';
@@ -567,7 +573,7 @@ export function makeTheme(userTheme = {}) {
   // Navbar
 
   v['$navbar-padding-x'] = u['$navbar-padding-x'] || v['$spacer'];
-  v['$navbar-padding-y'] = u['$navbar-padding-y'] || `(${v['$spacer']} / 2)`;
+  v['$navbar-padding-y'] = u['$navbar-padding-y'] || v['$spacer-halved'];
 
   v['$navbar-toggler-padding-x'] = u['$navbar-toggler-padding-x'] || '.75rem';
   v['$navbar-toggler-padding-y'] = u['$navbar-toggler-padding-y'] || '.25rem';
@@ -915,8 +921,18 @@ export function makeTheme(userTheme = {}) {
 
   // OUR KOPAX EXTEND OF BOOTSTRAP ONLY ADD NEW VARIBALES HERE
 
-  v['$spacer-halved'] = (rmUnit(v['$spacer'], UNIT.REM) / 2) + UNIT.REM;
+  // tools
 
+  // Header
+  v['$header-max-height'] = u['$header-max-height'] || '450px';
+  v['$header-collapsed-max-height'] = u['$header-collapsed-max-height'] || '1000px';
+  v['$header-navbar-border-color'] = u['$header-navbar-border-color'] || v['$gray-lighter'];
+  v['$header-navbar-border-width'] = u['$header-navbar-border-width'] || v['$border-width'];
+  v['$header-navbar-transition-duration'] = u['$header-navbar-transition-duration'] || '.6s';
+
+  // Card
+  v['$card-margin-y-halved'] = v['$card-margin-y-halved'] || ((rmUnit(v['$card-spacer-y'], UNIT.REM) / 2) + UNIT.REM);
+  v['$card-margin-x-halved'] = v['$card-margin-x-halved'] || ((rmUnit(v['$card-spacer-x'], UNIT.REM) / 2) + UNIT.REM);
   // This will ensure u rest untouched and copy v value over u
   return Object.assign({}, u, v);
 
