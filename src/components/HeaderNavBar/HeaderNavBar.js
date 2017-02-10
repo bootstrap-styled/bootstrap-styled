@@ -250,7 +250,7 @@ HeaderNavBar = styled(HeaderNavBar)`
       overflow: hidden;
       ${transition(
         props.theme['$enable-transitions'],
-        'ease-in-out, .35s, max-height'
+        props.theme['$transition-collapse']
       )}
     
       &.active {

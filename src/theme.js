@@ -939,6 +939,9 @@ export function makeTheme(userTheme = {}) {
   v['$navbar-max-height'] = u['$navbar-max-height'] || '400px';
   v['$navbar-height'] = u['$navbar-height'] || '70px';
 
+  // Transition
+  v['$transition-collapse'] = 'height .35s ease';
+
   // This will ensure u rest untouched and copy v value over u
   return Object.assign({}, u, v);
 
