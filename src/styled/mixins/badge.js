@@ -7,7 +7,7 @@ export const defaultProps = {
 
 export function badgeVariant(enableHoverMediaQuery = defaultProps['$enable-hover-mediaQuery'], badgeColor) {
   return `
-    background-color: ${badgeColor}
+    background-color: ${badgeColor};
     
     &[href] {
       ${hoverFocus(
