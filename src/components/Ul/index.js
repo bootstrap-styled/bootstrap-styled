@@ -13,6 +13,7 @@ import bsTheme from 'theme';
 import { nav } from '../../styled/utilities/nav';
 import { listUnstyled } from '../../styled/mixins/lists';
 import { navbar } from '../../styled/utilities/navbar';
+import { pagination } from '../../styled/utilities/pagination';
 
 const defaultProps = { theme: bsTheme };
 
@@ -84,6 +85,39 @@ Ul = styled(Ul)`
       props.theme['$navbar-inverse-toggler-bg'],
       props.theme['$navbar-inverse-toggler-border'],
       props.theme['$navbar-inverse-disabled-color'],
+    )}
+    
+    ${pagination(
+      props.theme['$enable-rounded'],
+      props.theme['$enable-hover-media-query'],
+      props.theme['$border-radius'],
+      props.theme['$pagination-active-color'],
+      props.theme['$pagination-active-bg'],
+      props.theme['$pagination-active-border'],
+      props.theme['$pagination-disabled-color'],
+      props.theme['$cursor-disabled'],
+      props.theme['$pagination-disabled-bg'],
+      props.theme['$pagination-disabled-border'],
+      props.theme['$pagination-padding-y'],
+      props.theme['$pagination-padding-x'],
+      props.theme['$pagination-line-height'],
+      props.theme['$pagination-color'],
+      props.theme['$pagination-bg'],
+      props.theme['$pagination-border-width'],
+      props.theme['$pagination-border-color'],
+      props.theme['$pagination-hover-color'],
+      props.theme['$pagination-hover-bg'],
+      props.theme['$pagination-hover-border'],
+      props.theme['$pagination-padding-y-lg'],
+      props.theme['$pagination-padding-x-lg'],
+      props.theme['$font-size-lg'],
+      props.theme['$line-height-lg'],
+      props.theme['$border-radius-lg'],
+      props.theme['$pagination-padding-y-sm'],
+      props.theme['$pagination-padding-x-sm'],
+      props.theme['$font-size-sm'],
+      props.theme['$line-height-sm'],
+      props.theme['$border-radius-sm'],
     )}
     
     /* Type Scss */

@@ -31,7 +31,6 @@ describe('bootstrap navbar utility', () => {
       defaultProps['$navbar-dark-toggler-bg'],
       defaultProps['$navbar-dark-toggler-border'],
     );
-    console.log(css);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(-1041907432);
