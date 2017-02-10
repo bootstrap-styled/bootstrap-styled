@@ -6,6 +6,6 @@ describe('bootstrap nav utility', () => {
     const css = nav();
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(71261105);
+    expect(fromJS({ css }).hashCode()).toEqual(-980416306);
   });
 });
