@@ -38,7 +38,7 @@ Jumbotron = styled(Jumbotron)`
     
       ${mediaBreakpointUp('sm',
         props.theme['$grid-breakpoints'],
-        `calc(${props.theme['$jumbotron-padding']} * 2);`,
+        `padding: calc(${props.theme['$jumbotron-padding']} * 2);`,
       )}
 
     & .jumbotron-hr {
