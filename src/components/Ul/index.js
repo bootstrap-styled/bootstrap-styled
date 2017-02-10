@@ -77,11 +77,13 @@ Ul = styled(Ul)`
       props.theme['$navbar-light-hover-color'],
       props.theme['$navbar-light-toggler-bg'],
       props.theme['$navbar-light-toggler-border'],
-      props.theme['$navbar-dark-active-color'],
-      props.theme['$navbar-dark-color'],
-      props.theme['$navbar-dark-hover-color'],
-      props.theme['$navbar-dark-toggler-bg'],
-      props.theme['$navbar-dark-toggler-border'],
+      props.theme['$navbar-light-disabled-color'],
+      props.theme['$navbar-inverse-active-color'],
+      props.theme['$navbar-inverse-color'],
+      props.theme['$navbar-inverse-hover-color'],
+      props.theme['$navbar-inverse-toggler-bg'],
+      props.theme['$navbar-inverse-toggler-border'],
+      props.theme['$navbar-inverse-disabled-color'],
     )}
     
     /* Type Scss */

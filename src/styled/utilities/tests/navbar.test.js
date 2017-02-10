@@ -31,12 +31,13 @@ describe('bootstrap navbar utility', () => {
       defaultProps['$navbar-dark-toggler-bg'],
       defaultProps['$navbar-dark-toggler-border'],
     );
+    console.log(css);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-50030925);
+    expect(fromJS({ css }).hashCode()).toEqual(-1041907432);
   });
   it('navbar should have arguments', () => {
     const css = navbar();
-    expect(fromJS({ css }).hashCode()).toEqual(-50030925);
+    expect(fromJS({ css }).hashCode()).toEqual(201829380);
   });
 });
