@@ -4,23 +4,26 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from 'theme';
+import bsTheme from 'theme';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { clearfix } from '../../styled/mixins/clearfix';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
 class Breadcrumb extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
+    theme: PropTypes.object,
   }
 
   render() {
+    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+
     return (
-      <ol className={this.props.className}>
-        {this.props.children}
+      <ol className={className} {...rest}>
+        {children}
       </ol>
     );
   }

@@ -12,7 +12,7 @@ import Li from '../../Li';
 import A from '../../A';
 
 
-const dropdown = (<Ul dropdown-menu>
+const dropdown = (<Ul>
   <Li><A dropdown-item href="#">Item 1</A></Li>
   <Li><A dropdown-item active href="#">Item active</A></Li>
   <Li separator />

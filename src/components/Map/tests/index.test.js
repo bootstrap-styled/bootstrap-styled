@@ -36,7 +36,7 @@ describe('<Map />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Map').length).toBe(1);
+    expect(renderedComponent.find('map').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -49,13 +49,6 @@ describe('<Map />', () => {
       children,
     });
     expect(renderedComponent.find('map').length).toBe(1);
-    expect(renderedComponent.find('Map').length).toBe(1);
-  });
-  it('should have class .map by default with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-    });
-    expect(renderedComponent.find('map').hasClass('map')).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

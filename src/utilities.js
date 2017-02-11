@@ -13,6 +13,7 @@ export { default as navUtils } from './styled/utilities/nav';
 export { default as navbarUtils } from './styled/utilities/navbar';
 export { default as paginationUtils } from './styled/utilities/pagination';
 export { default as positionUtils } from './styled/utilities/position';
+export { default as rebootUtils } from './styled/utilities/reboot';
 export { default as screenreadersUtils } from './styled/utilities/screenreaders';
 export { default as sizingUtils } from './styled/utilities/sizing';
 export { default as spacingUtils } from './styled/utilities/spacing';

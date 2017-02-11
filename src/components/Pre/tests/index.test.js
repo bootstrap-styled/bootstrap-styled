@@ -36,7 +36,7 @@ describe('<Pre />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Pre').length).toBe(1);
+    expect(renderedComponent.find('pre').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -49,7 +49,6 @@ describe('<Pre />', () => {
       children,
     });
     expect(renderedComponent.find('pre').length).toBe(1);
-    expect(renderedComponent.find('Pre').length).toBe(1);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

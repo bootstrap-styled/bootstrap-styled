@@ -42,7 +42,7 @@ describe('<Fieldset />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Fieldset').length).toBe(1);
+    expect(renderedComponent.find('fieldset').length).toBe(1);
   });
   it('should have an attribute disabled without a theme', () => {
     const renderedComponent = renderComponent({
@@ -76,7 +76,6 @@ describe('<Fieldset />', () => {
       children,
     });
     expect(renderedComponent.find('fieldset').length).toBe(1);
-    expect(renderedComponent.find('Fieldset').length).toBe(1);
   });
   it('should have an attribute disabled without a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

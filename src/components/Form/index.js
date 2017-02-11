@@ -4,37 +4,19 @@
  *
  *
  */
-import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import { unitUtils } from 'math-utils';
-import themeBs from '../../theme';
+import bsTheme from 'theme';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { transition } from '../../styled/mixins/transition';
 import { formControlFocus, formControlValidation } from '../../styled/mixins/forms';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 
-const defaultProps = { theme: themeBs };
-
-class Form extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-  }
-
-  render() {
-    const { theme , children, ...rest } = this.props; // eslint-disable-line
-
-    return (
-      <form {...rest}>
-        {children}
-      </form>
-    );
-  }
-}
+const defaultProps = { theme: bsTheme };
 
 // eslint-disable-next-line no-class-assign
-Form = styled(Form)` 
+const Form = styled.form` 
   ${(props) => `
     /*
      Textual form controls

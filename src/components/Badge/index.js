@@ -3,24 +3,27 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
-import theme from 'theme';
+import bsTheme from 'theme';
 import { hoverFocus } from '../../styled/mixins/hover';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { badgeVariant } from '../../styled/mixins/badge';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
 class Badge extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
+    theme: PropTypes.object,
   }
 
   render() {
+    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+
     return (
-      <span className={cn(this.props.className, 'badge')}>
-        {this.props.children}
+      <span className={cn(className, 'badge')} {...rest}>
+        {children}
       </span>
     );
   }

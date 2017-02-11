@@ -39,21 +39,21 @@ describe('<Form />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Form').length).toBe(1);
+    expect(renderedComponent.length).toBe(1);
   });
   it('should have an action props', () => {
     const renderedComponent = renderComponent({
       children,
       action: 'test-action',
     });
-    expect(renderedComponent.find('Form').props().action).toEqual('test-action');
+    expect(renderedComponent.props().action).toEqual('test-action');
   });
   it('should have an onSubmit props', () => {
     const renderedComponent = renderComponent({
       children,
       onSubmit: submitTest,
     });
-    expect(renderedComponent.find('Form').props().onSubmit).toBeDefined();
+    expect(renderedComponent.props().onSubmit).toBeDefined();
   });
   it('should have children', () => {
     const renderedComponent = renderComponent();
@@ -63,22 +63,7 @@ describe('<Form />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('form').length).toBe(1);
-    expect(renderedComponent.find('Form').length).toBe(1);
-  });
-  it('should have an action props using a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-      action: 'test-action',
-    });
-    expect(renderedComponent.find('form').props().action).toEqual('test-action');
-  });
-  it('should have an onSubmit props using a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-      onSubmit: submitTest,
-    });
-    expect(renderedComponent.find('Form').props().onSubmit).toBeDefined();
+    expect(renderedComponent.length).toBe(1);
   });
   it('should have children using a theme', () => {
     const renderedComponent = renderComponentUsingTheme();

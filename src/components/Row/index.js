@@ -13,9 +13,10 @@ class Row extends React.Component {    // eslint-disable-line react/prefer-state
   }
 
   render() {
+    const { className, children } = this.props; // eslint-disable-line no-unused-vars
     return (
-      <div className={this.props.className}>
-        {this.props.children}
+      <div className={className}>
+        {children}
       </div>
     );
   }

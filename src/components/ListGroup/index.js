@@ -6,26 +6,28 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from 'theme';
+import bsTheme from 'theme';
 import { borderTopRadius, borderBottomRadius } from '../../styled/mixins/border-radius';
 import { hoverFocus } from '../../styled/mixins/hover';
 import { listGroupItemVariant } from '../../styled/mixins/list-group';
 import Ul from '../Ul/index';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
 class ListGroup extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
+    theme: PropTypes.object,
   }
 
   render() {
-    const { children, className } = this.props;
+    const { children, theme, className, ...rest } = this.props; // eslint-disable-line no-unused-vars
     return (
       <Ul
         className={cn(className, 'list-group')}
+        {...rest}
       >
         {children}
       </Ul>

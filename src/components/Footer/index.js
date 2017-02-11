@@ -5,29 +5,11 @@
  */
 
 import styled from 'styled-components';
-import React, { PropTypes } from 'react';
 import theme from 'theme';
 
 const defaultProps = { theme };
 
-class Footer extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node.isRequired,
-  }
-
-  render() {
-    return (
-      <footer className={this.props.className}>
-        {this.props.children}
-      </footer>
-    );
-  }
-}
-
-// eslint-disable-next-line no-class-assign
-Footer = styled(Footer)`
+const Footer = styled.footer`
   ${(props) => `
     height: ${props.theme['$footer-height']};
     background: ${props.theme['$footer-background']};

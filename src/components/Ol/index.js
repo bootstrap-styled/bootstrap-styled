@@ -6,45 +6,57 @@
  *
  */
 
-import React, { PropTypes } from 'react';
 import styled from 'styled-components';
+import theme from 'theme';
 import { nav } from '../../styled/utilities/nav';
-import { listUnstyled } from '../../styled/mixins/lists';
+import { listUnstyled, listInline, listInlineItem } from '../../styled/mixins/lists';
 
-class Ol extends React.Component { // eslint-disable-line react/prefer-stateless-function
+const defaultProps = { theme };
 
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string,
-  }
-
-  render() {
-    return (
-      <ol className={this.props.className}>
-        {this.props.children}
-      </ol>
-    );
-  }
-}
-
-// eslint-disable-next-line no-class-assign
-Ol = styled(Ol)` 
-  ${nav()}
-  
-  /* Type Scss */
-  &.list-unstyled {
-    ${listUnstyled()};
-  }
-  
-  /* Reboot Scss */
-  margin-top: 0;
-  margin-bottom: 1rem;
-  
-  & ol,
-  & ul {
-    margin-bottom: 0;
-  }
-
+const Ol = styled.ol` 
+  ${(props) => `
+    ${nav(
+      props.theme['$enable-rounded'],
+      props.theme['$enable-hover-media-query'],
+      props.theme['$nav-link-padding'],
+      props.theme['$nav-disabled-link-color'],
+      props.theme['$cursor-disabled'],
+      props.theme['$nav-tabs-border-width'],
+      props.theme['$nav-tabs-border-color'],
+      props.theme['$nav-tabs-border-radius'],
+      props.theme['$nav-tabs-link-hover-border-color'],
+      props.theme['$nav-tabs-active-link-hover-color'],
+      props.theme['$nav-tabs-active-link-hover-bg'],
+      props.theme['$nav-tabs-active-link-hover-border-color'],
+      props.theme['$nav-pills-border-radius'],
+      props.theme['$nav-pills-active-link-color'],
+      props.theme['$nav-pills-active-link-bg'],
+    )}
+    
+    /* Type Scss */
+    &.list-unstyled {
+      ${listUnstyled()}
+    }
+    
+    &.list-inline {
+      ${listInline()}
+    }
+    
+    &.list-inline-item {
+      ${listInlineItem(props.theme['$list-inline-padding'])}
+    }
+    
+    /* Reboot Scss */
+    margin-top: 0;
+    margin-bottom: 1rem;
+    
+    & ol,
+    & ul {
+      margin-bottom: 0;
+    }
+  `}
 `;
+
+Ol.defaultProps = defaultProps;
 
 export default Ol;

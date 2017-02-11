@@ -3,31 +3,12 @@
  */
 
 
-import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import theme from 'theme';
 
 const defaultProps = { theme };
 
-class Mark extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node,
-  }
-
-  render() {
-    return (
-      <mark className={this.props.className}>
-        {this.props.children}
-      </mark>
-    );
-  }
-
-}
-
-// eslint-disable-next-line no-class-assign
-Mark = styled(Mark)`
+const Mark = styled.mark`
   ${(props) => `
     /* Reboot Scss */
     padding: ${props.theme['$mark-padding']};

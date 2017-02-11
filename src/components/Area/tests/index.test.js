@@ -46,7 +46,7 @@ const renderComponentUsingTheme = (props = {}) => mount(
 describe('<Area />', () => {
   it('should render an <Area> tag without a theme', () => {
     const renderedComponent = renderComponent();
-    expect(renderedComponent.find('Area').length).toBe(1);
+    expect(renderedComponent.find('area').length).toBe(1);
   });
   it('should have an shape attribute without a theme', () => {
     const renderedComponent = renderComponent({
@@ -105,7 +105,6 @@ describe('<Area />', () => {
   it('should render an <area> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme();
     expect(renderedComponent.find('area').length).toBe(1);
-    expect(renderedComponent.find('Area').length).toBe(1);
   });
   it('should have an shape attribute without a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

@@ -34,7 +34,7 @@ describe('<InputGroup />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('InputGroup').length).toBe(1);
+    expect(renderedComponent.find('div').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -47,7 +47,6 @@ describe('<InputGroup />', () => {
       children,
     });
     expect(renderedComponent.find('div').length).toBe(1);
-    expect(renderedComponent.find('InputGroup').length).toBe(1);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

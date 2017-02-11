@@ -2,14 +2,14 @@
 
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
-import theme from 'theme';
+import bsTheme from 'theme';
 import styled, { keyframes } from 'styled-components';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { getBackgroundUtilities } from '../../styled/utilities/background';
 import { gradientStriped } from '../../styled/mixins/gradients';
 
 const defaultProps = {
-  theme,
+  theme: bsTheme,
 };
 
 class Progress extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -17,12 +17,13 @@ class Progress extends React.Component { // eslint-disable-line react/prefer-sta
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
+    theme: PropTypes.object,
   }
 
   render() {
-    const { children, className } = this.props;
+    const { children, className, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
     return (
-      <div className={cn('progress', className)}>
+      <div className={cn('progress', className)} {...rest}>
         {children}
       </div>
     );

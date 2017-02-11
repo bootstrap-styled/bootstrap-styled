@@ -5,10 +5,10 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from 'theme';
+import bsTheme from 'theme';
 import { buttonGroup } from '../../styled/utilities/buttonGroup';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
 class ButtonGroup extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -16,22 +16,26 @@ class ButtonGroup extends React.Component { // eslint-disable-line react/prefer-
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
     'btn-toolbar': PropTypes.bool,
+    theme: PropTypes.object,
   }
 
   render() {
+    const { className, theme, children, 'btn-toolbar': btnToolbar, ...rest } = this.props; // eslint-disable-line no-unused-vars
+
     let classList = [];
 
     // if this ButtonGroup is a btn-toolbar, then we don't need .btn-group
-    if (this.props['btn-toolbar']) {
+    if (btnToolbar) {
       classList = classList.filter((c) => c !== 'btn-group');
       classList.push('btn-toolbar');
     }
 
     return (
       <div
-        className={cn(this.props.className, classList)}
+        className={cn(className, classList)}
+        {...rest}
       >
-        {this.props.children}
+        {children}
       </div>
     );
   }

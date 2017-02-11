@@ -32,7 +32,8 @@ class Figure extends React.Component { // eslint-disable-line react/prefer-state
 // eslint-disable-next-line no-class-assign
 Figure = styled(Figure)`
   ${(props) => `
-  
+    margin: 0 0 1rem;  /* Apply a consistent margin strategy (matches our type styles). */
+    
     &.figure {
       // Ensures the caption's text aligns with the image.
       display: inline-block;

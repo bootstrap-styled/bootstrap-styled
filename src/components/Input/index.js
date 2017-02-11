@@ -33,6 +33,20 @@ Input = styled(Input)`
     /* Reboot Scss */
     touch-action: manipulation;
     
+    &[type="radio"],
+    &[type="checkbox"] {
+      box-sizing: border-box; /* 1. Add the correct box sizing in IE 10- */
+      padding: 0; /* 2. Remove the padding in IE 10- */
+      /*
+       Apply a disabled cursor for radios and checkboxes.
+       Note: Neither radios nor checkboxes can be readonly.
+      */
+   
+      &:disabled {
+        cursor: ${props.theme['$cursor-disabled']};
+      }
+    }
+    
     /* Normalize includes 'font: inherit;', so 'font-family'. 'font-size', etc are */
     /* properly inherited. However, 'line-height' isn't inherited there. */
     line-height: inherit;
@@ -41,10 +55,10 @@ Input = styled(Input)`
       cursor: ${props.theme['$cursor-disabled']};
     }
    
-    input[type="date"],
-    input[type="time"],
-    input[type="datetime-local"],
-    input[type="month"] {
+    &[type="date"],
+    &[type="time"],
+    &[type="datetime-local"],
+    &[type="month"] {
     /* Remove the default appearance of temporal inputs to avoid a Mobile Safari
        bug where setting a custom line-height prevents text from being vertically
        centered within the input.
@@ -53,12 +67,25 @@ Input = styled(Input)`
       -webkit-appearance: listbox;
     }
       
-    input[type="search"] {
+    /* Correct the cursor style of increment and decrement buttons in Chrome. */
+    &[type="number"]::-webkit-inner-spin-button,
+    &[type="number"]::-webkit-outer-spin-button {
+      height: auto;
+    }
+    
+    &[type="search"] {
       /* This overrides the extra rounded corners on search inputs in iOS so that our
       '.form-control' class can properly style them. Note that this cannot simply
        be added to '.form-control' as it's not specific enough. For details, see
        https://github.com/twbs/bootstrap/issues/11586.
        */
+      outline-offset: -2px; /* 2. Correct the outline style in Safari. */
+      -webkit-appearance: none;
+    }
+    
+    /* Remove the inner padding and cancel buttons in Chrome and Safari on macOS. */
+    &[type="search"]::-webkit-search-cancel-button,
+    &[type="search"]::-webkit-search-decoration {
       -webkit-appearance: none;
     }
     

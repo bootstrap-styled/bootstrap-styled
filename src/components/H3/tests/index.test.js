@@ -36,7 +36,7 @@ describe('<H3 />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('H3').length).toBe(1);
+    expect(renderedComponent.find('h3').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

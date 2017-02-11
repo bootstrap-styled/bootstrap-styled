@@ -3,33 +3,14 @@
  *
  *
  */
-import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import theme from 'theme';
 import { nav } from '../../styled/utilities/nav';
 
 const defaultProps = { theme };
 
-class Nav extends React.Component {// eslint-disable-line react/prefer-stateless-function
-
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node.isRequired,
-  }
-
-  render() {
-    return (
-      <nav
-        className={this.props.className}
-      >
-        {this.props.children}
-      </nav>
-    );
-  }
-}
-
 // eslint-disable-next-line no-class-assign
-Nav = styled(Nav)`
+const Nav = styled.nav`
   ${(props) => `
    
     ${nav(

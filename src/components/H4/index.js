@@ -3,33 +3,12 @@
  *
  *
  */
-import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-
-import theme from 'theme';
-
+import bsTheme from 'theme';
 import { typography } from '../../styled/utilities/typography';
+const defaultProps = { theme: bsTheme };
 
-const defaultProps = { theme };
-
-class H4 extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string,
-  }
-
-  render() {
-    return (
-      <h4 className={this.props.className}>
-        {this.props.children}
-      </h4>
-    );
-  }
-}
-
-// eslint-disable-next-line no-class-assign
-H4 = styled(H4)`
+const H4 = styled.h4`
   ${(props) => `
     font-size: ${props.theme['$font-size-h4']};
     ${typography(
@@ -52,6 +31,11 @@ H4 = styled(H4)`
       props.theme['$display3-weight'],
       props.theme['$display4-weight'],
     )}
+
+    &.lead {
+      font-size: ${props.theme['$lead-font-size']};
+      font-weight: ${props.theme['$lead-font-weight']};
+    }
 
     /* Reboot Scss */
     margin-top: 0;

@@ -4,45 +4,39 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from 'theme';
+import bsTheme from 'theme';
 
 import { a } from '../../styled/utilities/a';
 import { button } from '../../styled/utilities/button';
 
 const defaultProps = {
-  theme,
+  theme: bsTheme,
 };
 
 class A extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
-    href: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
-    type: PropTypes.node,
-    target: PropTypes.string,
-    onClick: PropTypes.func,
     active: PropTypes.bool,
     disabled: PropTypes.bool,
     'dropdown-item': PropTypes.bool,
+    theme: PropTypes.object,
   }
 
   render() {
-    const { onClick, href, target, type } = this.props;
+    const { className, theme, active, disabled, 'dropdown-item': dropdownItem, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
 
     return (
       <a
-        className={cn(this.props.className, {
-          active: this.props.active,
-          disabled: this.props.disabled,
-          'dropdown-item': this.props['dropdown-item'],
+        className={cn(className, {
+          active,
+          disabled,
+          'dropdown-item': dropdownItem,
         })}
-        onClick={onClick}
-        href={href}
-        target={target}
-        type={type}
+        {...rest}
       >
-        {this.props.children}
+        {children}
       </a>
     );
   }

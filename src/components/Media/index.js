@@ -5,25 +5,27 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from 'theme';
+import cn from 'classnames';
+import bsTheme from 'theme';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
 class Media extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
+    theme: PropTypes.object,
   }
 
   render() {
+    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
     return (
-      <div className={this.props.className}>
-        {this.props.children}
+      <div className={cn('media', className)} {...rest}>
+        {children}
       </div>
     );
   }
-
 }
 
 // eslint-disable-next-line no-class-assign

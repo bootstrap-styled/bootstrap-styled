@@ -44,6 +44,8 @@ Abbr = styled(Abbr)`
     &[title],
     /* Add data-* attribute to help out our tooltip plugin, per https://github.com/twbs/bootstrap/issues/5257 */
     &[data-original-title] {
+      text-decoration: underline;
+      text-decoration: underline dotted;
       cursor: help;
       border-bottom: 1px dotted ${props.theme['$abbr-border-color']};
     }

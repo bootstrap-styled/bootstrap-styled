@@ -6,7 +6,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from 'theme';
+import themeBs from 'theme';
 import Close from '../Close';
 import { alertVariant } from '../../styled/mixins/alert';
 import { borderRadius } from '../../styled/mixins/border-radius';
@@ -14,7 +14,7 @@ import { srOnly } from '../../styled/mixins/screen-reader';
 
 const defaultProps = {
   closeLabel: 'Close',
-  theme,
+  theme: themeBs,
 };
 
 class Alert extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -24,16 +24,18 @@ class Alert extends React.Component { // eslint-disable-line react/prefer-statel
     onDismiss: PropTypes.func,
     className: PropTypes.string,
     closeLabel: PropTypes.string,
+    theme: PropTypes.object,
   }
 
   render() {
-    const { className, onDismiss, children, closeLabel } = this.props;
+    const { className, theme, onDismiss, children, closeLabel, ...rest } = this.props; // eslint-disable-line no-unused-vars
 
     return (
       <div
         className={cn(className, 'alert', {
           'alert-dismissible': !!onDismiss,
         })}
+        {...rest}
       >
         {!!onDismiss && <Close onDismiss={onDismiss} />}
         {children}

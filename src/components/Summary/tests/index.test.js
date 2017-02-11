@@ -35,7 +35,7 @@ describe('<Summary />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Summary').length).toBe(1);
+    expect(renderedComponent.find('summary').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -48,13 +48,6 @@ describe('<Summary />', () => {
       children,
     });
     expect(renderedComponent.find('summary').length).toBe(1);
-    expect(renderedComponent.find('Summary').length).toBe(1);
-  });
-  it('should have class .summary by default with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-    });
-    expect(renderedComponent.find('summary').hasClass('summary')).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

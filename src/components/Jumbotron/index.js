@@ -16,9 +16,10 @@ class Jumbotron extends React.Component { // eslint-disable-line react/prefer-st
   }
 
   render() {
+    const { className, children } = this.props;
     return (
-      <div className={this.props.className}>
-        {this.props.children}
+      <div className={className}>
+        {children}
       </div>
     );
   }

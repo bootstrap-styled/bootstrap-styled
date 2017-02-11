@@ -40,7 +40,7 @@ describe('<Caption />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Caption').length).toBe(1);
+    expect(renderedComponent.find('caption').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -53,13 +53,6 @@ describe('<Caption />', () => {
       children,
     });
     expect(renderedComponent.find('caption').length).toBe(1);
-    expect(renderedComponent.find('Caption').length).toBe(1);
-  });
-  it('should have class .caption by default with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-    });
-    expect(renderedComponent.find('caption').hasClass('caption')).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

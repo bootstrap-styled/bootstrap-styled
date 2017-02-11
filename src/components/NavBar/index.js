@@ -5,22 +5,24 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from 'theme';
+import bsTheme from 'theme';
 import { navbar } from '../../styled/utilities/navbar';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
 class NavBar extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
+    theme: PropTypes.object,
   };
 
   render() {
+    const { className, children, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
     return (
-      <nav className={cn(this.props.className, 'navbar')}>
-        {this.props.children}
+      <nav className={cn(className, 'navbar')} {...rest}>
+        {children}
       </nav>
     );
   }

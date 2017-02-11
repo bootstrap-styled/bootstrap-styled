@@ -3,7 +3,6 @@
  *
  *
  */
-import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import theme from 'theme';
 
@@ -15,26 +14,7 @@ import { formControlFocus } from '../../styled/mixins/forms';
 
 const defaultProps = { theme };
 
-class InputGroup extends React.Component {// eslint-disable-line react/prefer-stateless-function
-
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node.isRequired,
-  }
-
-  render() {
-    return (
-      <div
-        className={this.props.className}
-      >
-        {this.props.children}
-      </div>
-    );
-  }
-}
-
-// eslint-disable-next-line no-class-assign
-InputGroup = styled(InputGroup)`
+const InputGroup = styled.div`
   ${(props) => `
     /*
      Base styles

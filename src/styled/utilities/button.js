@@ -103,7 +103,7 @@ export function button(
     */
     font-family: inherit;
 
-    &.btn{
+    &.btn {
       /* Adapt the colors based on primary prop */
       display: inline-block;
       font-weight: ${$btnFontWeight};
@@ -358,17 +358,21 @@ export function button(
       outline: 1px dotted;
       outline: 5px auto -webkit-focus-ring-color;
     }
-    &[type="radio"],
-    &[type="checkbox"] {
-    /*
-     Apply a disabled cursor for radios and checkboxes.
-     Note: Neither radios nor checkboxes can be readonly.
-    */
-   
-      &:disabled {
-        cursor: ${$cursorDisabled};
-      }
+    
+    &[type="button"],
+    &[type="reset"],
+    &[type="submit"] {
+      -webkit-appearance: button;
     }
+    
+    &::-moz-focus-inner,
+    &[type="button"]::-moz-focus-inner,
+    &[type="reset"]::-moz-focus-inner,
+    &[type="submit"]::-moz-focus-inner {
+      padding: 0;
+      border-style: none;
+    }
+
   `;
 }
 

@@ -8,20 +8,16 @@ class Output extends React.Component { // eslint-disable-line react/prefer-state
 
   static propTypes = {
     className: PropTypes.string,
-    htmlFor: PropTypes.string,
-    form: PropTypes.string,
-    name: PropTypes.string,
+    theme: PropTypes.object,
   }
 
   render() {
-    const { htmlFor, form, name } = this.props;
+    const { className, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
 
     return (
       <output
-        htmlFor={htmlFor}
-        form={form}
-        name={name}
-        className={cn(this.props.className, 'output')}
+        className={cn(className, 'output')}
+        {...rest}
       >
       </output>
     );

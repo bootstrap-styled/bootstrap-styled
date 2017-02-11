@@ -5,11 +5,11 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from 'theme';
+import bsTheme from 'theme';
 
 import { listUnstyled } from '../../styled/mixins/lists';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
 class Li extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -22,21 +22,24 @@ class Li extends React.Component { // eslint-disable-line react/prefer-stateless
     'dropdown-item': PropTypes.bool,
     'dropdown-header': PropTypes.bool,
     'dropdown-footer': PropTypes.bool,
+    theme: PropTypes.object,
   }
 
   render() {
+    const { className, theme, children, separator, 'dropdown-item': dropdownItem, active, disabled, 'dropdown-header': dropdownHeader, 'dropdown-footer': dropdownFooter, ...rest } = this.props; // eslint-disable-line no-unused-vars
     return (
       <li
-        className={cn(this.props.className, {
-          'dropdown-divider': this.props.separator,
-          'dropdown-item': this.props['dropdown-item'],
-          active: this.props.active,
-          disabled: this.props.disabled,
-          'dropdown-header': this.props['dropdown-header'],
-          'dropdown-footer': this.props['dropdown-footer'],
+        className={cn(className, {
+          'dropdown-divider': separator,
+          'dropdown-item': dropdownItem,
+          active,
+          disabled,
+          'dropdown-header': dropdownHeader,
+          'dropdown-footer': dropdownFooter,
         })}
+        {...rest}
       >
-        {this.props.children}
+        {children}
       </li>
     );
   }

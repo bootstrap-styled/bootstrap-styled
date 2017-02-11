@@ -34,7 +34,7 @@ describe('<Address />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Address').length).toBe(1);
+    expect(renderedComponent.find('address').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -47,7 +47,6 @@ describe('<Address />', () => {
       children,
     });
     expect(renderedComponent.find('address').length).toBe(1);
-    expect(renderedComponent.find('Address').length).toBe(1);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

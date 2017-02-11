@@ -11,7 +11,7 @@ import styled from 'styled-components';
 import bsTheme from 'theme';
 
 import { nav } from '../../styled/utilities/nav';
-import { listUnstyled } from '../../styled/mixins/lists';
+import { listUnstyled, listInline, listInlineItem } from '../../styled/mixins/lists';
 import { navbar } from '../../styled/utilities/navbar';
 import { pagination } from '../../styled/utilities/pagination';
 
@@ -120,9 +120,18 @@ Ul = styled(Ul)`
       props.theme['$border-radius-sm'],
     )}
     
+
     /* Type Scss */
     &.list-unstyled {
-      ${listUnstyled()};
+      ${listUnstyled()}
+    }
+    
+    &.list-inline {
+      ${listInline()}
+    }
+    
+    &.list-inline-item {
+      ${listInlineItem(props.theme['$list-inline-padding'])}
     }
     
     /* Reboot Scss */

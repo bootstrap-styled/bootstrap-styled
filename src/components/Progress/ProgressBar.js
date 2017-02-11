@@ -35,7 +35,7 @@ export default class ProgressBar extends React.Component { // eslint-disable-lin
   }
 
   render() {
-    const { children, className, valueNow, valueMin, valueMax, height, striped, animated } = this.props;
+    const { children, className, valueNow, valueMin, valueMax, height, striped, animated, ...rest } = this.props; // eslint-disable-line no-unused-vars
     return (
       <div
         className={cn('progress-bar', className, {
@@ -43,6 +43,7 @@ export default class ProgressBar extends React.Component { // eslint-disable-lin
           'progress-bar-animated': animated,
         })}
         style={Object.assign({ width: this.getWidth(valueNow, valueMin, valueMax) }, { height })}
+        {...rest}
       >
         {children}
       </div>

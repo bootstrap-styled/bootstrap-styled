@@ -3,33 +3,12 @@
  */
 
 
-import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import bsTheme from 'theme';
 
 const defaultProps = { theme: bsTheme };
 
-class Pre extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node,
-    theme: PropTypes.object,
-  }
-
-  render() {
-    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
-    return (
-      <pre className={className} {...rest}>
-        {children}
-      </pre>
-    );
-  }
-
-}
-
-// eslint-disable-next-line no-class-assign
-Pre = styled(Pre)`
+const Pre = styled.pre`
   ${(props) => `
     /* Blocks of code */
     display: block;

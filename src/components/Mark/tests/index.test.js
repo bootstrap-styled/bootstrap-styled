@@ -36,7 +36,7 @@ describe('<Mark />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Mark').length).toBe(1);
+    expect(renderedComponent.find('mark').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -49,7 +49,6 @@ describe('<Mark />', () => {
       children,
     });
     expect(renderedComponent.find('mark').length).toBe(1);
-    expect(renderedComponent.find('Mark').length).toBe(1);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

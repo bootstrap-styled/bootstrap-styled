@@ -36,7 +36,7 @@ describe('<Option />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Option').length).toBe(1);
+    expect(renderedComponent.find('option').length).toBe(1);
   });
   it('should have text node without a theme', () => {
     const renderedComponent = renderComponent({
@@ -48,7 +48,6 @@ describe('<Option />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('Option').length).toBe(1);
     expect(renderedComponent.find('option').length).toBe(1);
   });
   // it('should have an attribute selected with a theme', () => {

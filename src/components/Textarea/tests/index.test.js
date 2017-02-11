@@ -36,7 +36,7 @@ describe('<Textarea />', () => {
       value: 'Insert text here',
       wrap: 'wrapString',
     });
-    expect(renderedComponent.find('Textarea').length).toBe(1);
+    expect(renderedComponent.find('textarea').length).toBe(1);
   });
 
   it('should have a value attribute without a theme', () => {
@@ -60,7 +60,6 @@ describe('<Textarea />', () => {
       wrap: 'wrapString',
     });
     expect(renderedComponent.find('textarea').length).toBe(1);
-    expect(renderedComponent.find('Textarea').length).toBe(1);
   });
   it('should render a value attribute of <Textarea> with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
