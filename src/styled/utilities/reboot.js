@@ -11,12 +11,26 @@ import bsTheme from 'theme';
  *
  * This utility MUST return only things that can ONLY be injected in global styles
  */
-export function getGlobalStyles(theme = bsTheme) {
+export function getGlobalStyles(
+  fontFamilyBase = bsTheme['$font-family-base'],
+  fontSizeBase = bsTheme['$font-size-base'],
+  fontWeightBase = bsTheme['$font-weight-base'],
+  lineHeightBase = bsTheme['$line-height-base'],
+  bodyColor = bsTheme['$body-color'],
+  bodyBg = bsTheme['$body-bg'],
+) {
   return `
     ${html()}
     ${boxSizing()}
     ${ie10FixViewport()}
-    ${body(theme)}
+    ${body(
+      fontFamilyBase,
+      fontSizeBase,
+      fontWeightBase,
+      lineHeightBase,
+      bodyColor,
+      bodyBg,
+    )}
     ${tabIndex()}
     ${svg()}
     ${ie10FixHidden()}
@@ -53,7 +67,7 @@ export function boxSizing() {
     *,
     *::before,
     *::after {
-      box-sizing: inherit; /* 1 */
+      box-sizing: inherit;
     }
   `;
 }
@@ -70,16 +84,23 @@ export function ie10FixViewport() {
 // 1. Remove the margin in all browsers.
 // 2. As a best practice, apply a default `background-color`.
 
-export function body(theme = bsTheme) {
+export function body(
+  fontFamilyBase = bsTheme['$font-family-base'],
+  fontSizeBase = bsTheme['$font-size-base'],
+  fontWeightBase = bsTheme['$font-weight-base'],
+  lineHeightBase = bsTheme['$line-height-base'],
+  bodyColor = bsTheme['$body-color'],
+  bodyBg = bsTheme['$body-bg'],
+) {
   return `
     body {
       margin: 0;
-      font-family: ${theme['$font-family-base']};
-      font-size: ${theme['$font-size-base']};
-      font-weight: ${theme['$font-weight-base']};
-      line-height: ${theme['$line-height-base']};
-      color: ${theme['$body-color']};
-      background-color: ${theme['$body-bg']};
+      font-family: ${fontFamilyBase};
+      font-size: ${fontSizeBase};
+      font-weight: ${fontWeightBase};
+      line-height: ${lineHeightBase};
+      color: ${bodyColor};
+      background-color: ${bodyBg};
     }
   `;
 }
