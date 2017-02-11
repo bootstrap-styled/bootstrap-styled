@@ -10,9 +10,7 @@ import InputGroup from '../index';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <InputGroup
-    className={props.className}
-  >
+  <InputGroup>
     {props.children}
   </InputGroup>
 );
@@ -20,9 +18,7 @@ const renderComponent = (props = {}) => shallow(
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <ThemeProvider theme={theme}>
-    <InputGroup
-      className={props.className}
-    >
+    <InputGroup>
       {props.children}
     </InputGroup>
   </ThemeProvider>
@@ -34,7 +30,7 @@ describe('<InputGroup />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('div').length).toBe(1);
+    expect(renderedComponent.find('InputGroup').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -46,7 +42,7 @@ describe('<InputGroup />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('div').length).toBe(1);
+    expect(renderedComponent.find('InputGroup').length).toBe(1);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

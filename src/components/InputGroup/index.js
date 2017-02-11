@@ -3,18 +3,39 @@
  *
  *
  */
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from 'theme';
-
+import bsTheme from 'theme';
+import cn from 'classnames';
 import { hoverFocusActive } from '../../styled/mixins/hover';
 import { borderRadius, borderLeftRadius, borderRightRadius } from '../../styled/mixins/border-radius';
 import { transition } from '../../styled/mixins/transition';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { formControlFocus } from '../../styled/mixins/forms';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
-const InputGroup = styled.div`
+
+class InputGroup extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static propTypes = {
+    className: PropTypes.string,
+    theme: PropTypes.object,
+    children: PropTypes.node.isRequired,
+  };
+
+  render() {
+    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    return (
+      <div className={cn('input-group', className)} {...rest} >
+        {children}
+      </div>
+    );
+  }
+}
+
+// eslint-disable-next-line no-class-assign
+InputGroup = styled(InputGroup)`
   ${(props) => `
     /*
      Base styles
