@@ -1,5 +1,5 @@
 import { hoverFocus } from '../mixins/hover';
-import { mediaBreakpointUp } from '../mixins/breakpoints';
+import { mediaBreakpointUp, mediaBreakpointDown } from '../mixins/breakpoints';
 import { borderRadius } from '../mixins/border-radius';
 import { navbarToggleable } from '../mixins/navbar-toggleable';
 
@@ -40,36 +40,34 @@ export const defaultProps = {
   '$navbar-inverse-disabled-color': 'rgba(255, 255, 255, 0.25)',
 };
 
-export function navbar(
-  $gridBreakpoints = defaultProps['$grid-breakpoints'],
-  $enableRounded = defaultProps['$enable-rounded'],
-  $enableHoverMediaQuery = defaultProps['$enable-hover-media-query'],
-  $navbarPaddingY = defaultProps['$navbar-padding-y'],
-  $navbarPaddingX = defaultProps['$navbar-padding-x'],
-  $zindexNavbar = defaultProps['$zindex-navbar'],
-  $zindexNavbarFixed = defaultProps['$zindex-navbar-fixed'],
-  $zindexNavbarSticky = defaultProps['$zindex-navbar-sticky'],
-  $navbarBrandPaddingY = defaultProps['$navbar-brand-padding-y'],
-  $fontSizeLg = defaultProps['$font-size-lg'],
-  $navbarDividerPaddingY = defaultProps['$navbar-divider-padding-y'],
-  $navbarTogglerPaddingY = defaultProps['$navbar-toggler-padding-y'],
-  $navbarTogglerPaddingX = defaultProps['$navbar-toggler-padding-x'],
-  $navbarTogglerFontSize = defaultProps['$navbar-toggler-font-size'],
-  $borderWidth = defaultProps['$border-width'],
-  $navbarTogglerBorderRadius = defaultProps['$navbar-toggler-border-radius'],
-  $navbarLightActiveColor = defaultProps['$navbar-light-active-color'],
-  $navbarLightColor = defaultProps['$navbar-light-color'],
-  $navbarLightHoverColor = defaultProps['$navbar-light-hover-color'],
-  $navbarLightTogglerBorder = defaultProps['$navbar-light-toggler-border'],
-  $navbarLightDisabledColor = defaultProps['$navbar-light-disabled-color'],
-  $navbarLightTogglerBg = defaultProps['$navbar-light-toggler-bg'],
-  $navbarInverseActiveColor = defaultProps['$navbar-inverse-active-color'],
-  $navbarInverseColor = defaultProps['$navbar-inverse-color'],
-  $navbarInverseHoverColor = defaultProps['$navbar-inverse-hover-color'],
-  $navbarInverseTogglerBorder = defaultProps['$navbar-inverse-toggler-border'],
-  $navbarInverseTogglerBg = defaultProps['$navbar-inverse-toggler-bg'],
-  $navbarInverseDisabledColor = defaultProps['$navbar-inverse-disabled-color'],
-) {
+export function navbar($gridBreakpoints = defaultProps['$grid-breakpoints'],
+                       $enableRounded = defaultProps['$enable-rounded'],
+                       $enableHoverMediaQuery = defaultProps['$enable-hover-media-query'],
+                       $navbarPaddingY = defaultProps['$navbar-padding-y'],
+                       $navbarPaddingX = defaultProps['$navbar-padding-x'],
+                       $zindexNavbar = defaultProps['$zindex-navbar'],
+                       $zindexNavbarFixed = defaultProps['$zindex-navbar-fixed'],
+                       $zindexNavbarSticky = defaultProps['$zindex-navbar-sticky'],
+                       $navbarBrandPaddingY = defaultProps['$navbar-brand-padding-y'],
+                       $fontSizeLg = defaultProps['$font-size-lg'],
+                       $navbarDividerPaddingY = defaultProps['$navbar-divider-padding-y'],
+                       $navbarTogglerPaddingY = defaultProps['$navbar-toggler-padding-y'],
+                       $navbarTogglerPaddingX = defaultProps['$navbar-toggler-padding-x'],
+                       $navbarTogglerFontSize = defaultProps['$navbar-toggler-font-size'],
+                       $borderWidth = defaultProps['$border-width'],
+                       $navbarTogglerBorderRadius = defaultProps['$navbar-toggler-border-radius'],
+                       $navbarLightActiveColor = defaultProps['$navbar-light-active-color'],
+                       $navbarLightColor = defaultProps['$navbar-light-color'],
+                       $navbarLightHoverColor = defaultProps['$navbar-light-hover-color'],
+                       $navbarLightTogglerBorder = defaultProps['$navbar-light-toggler-border'],
+                       $navbarLightDisabledColor = defaultProps['$navbar-light-disabled-color'],
+                       $navbarLightTogglerBg = defaultProps['$navbar-light-toggler-bg'],
+                       $navbarInverseActiveColor = defaultProps['$navbar-inverse-active-color'],
+                       $navbarInverseColor = defaultProps['$navbar-inverse-color'],
+                       $navbarInverseHoverColor = defaultProps['$navbar-inverse-hover-color'],
+                       $navbarInverseTogglerBorder = defaultProps['$navbar-inverse-toggler-border'],
+                       $navbarInverseTogglerBg = defaultProps['$navbar-inverse-toggler-bg'],
+                       $navbarInverseDisabledColor = defaultProps['$navbar-inverse-disabled-color']) {
   return `
     /* Wrapper and base class
 
@@ -82,6 +80,13 @@ export function navbar(
       display: flex;
       flex-direction: column;
       padding: ${$navbarPaddingY} ${$navbarPaddingX};
+      
+      ${mediaBreakpointDown(Object.keys($gridBreakpoints)[0], $gridBreakpoints, `
+        & > .container {
+          margin-right: 0;
+          margin-left: 0;
+        }
+      `)}
     }
     
     /*
@@ -108,8 +113,8 @@ export function navbar(
      Custom navbar navigation built on the base .nav styles.
     */
 
-    &.navbar-nav 
-    ,& .navbar-nav {
+    &.navbar-nav,
+    & .navbar-nav {
       display: flex;
       flex-direction: column; /* cannot use inherit to get the .navbars value */
       padding-left: 0;

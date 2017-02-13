@@ -340,11 +340,13 @@ const Form = styled.form`
     
     &.form-inline {
       display: flex;
-      flex-flow: row-wrap;
-        .form-check {
-          width: 100%;
-        }
-    
+      flex-flow: row wrap;
+      align-items: center; /* Prevent shorter elements from growing to same height as others (e.g., small buttons growing to normal sized button height) */
+      
+      .form-check {
+         width: 100%;
+      }
+
       /* Kick in the inline */
       ${mediaBreakpointUp('sm', props.theme['$grid-breakpoints'],
         `

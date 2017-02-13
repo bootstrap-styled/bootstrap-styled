@@ -6,6 +6,6 @@ describe('bootstrap typography utility', () => {
     const css = typography();
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(145002828);
+    expect(fromJS({ css }).hashCode()).toEqual(-385634248);
   });
 });

@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
 import { navbar } from '../../styled/utilities/navbar';
+import { nav } from '../../styled/utilities/nav';
 
 const defaultProps = { theme: bsTheme };
 
@@ -51,15 +52,32 @@ NavBar = styled(NavBar)`
       props.theme['$navbar-light-active-color'],
       props.theme['$navbar-light-color'],
       props.theme['$navbar-light-hover-color'],
-      props.theme['$navbar-light-toggler-bg'],
       props.theme['$navbar-light-toggler-border'],
       props.theme['$navbar-light-disabled-color'],
+      props.theme['$navbar-light-toggler-bg'],
       props.theme['$navbar-inverse-active-color'],
       props.theme['$navbar-inverse-color'],
       props.theme['$navbar-inverse-hover-color'],
-      props.theme['$navbar-inverse-toggler-bg'],
       props.theme['$navbar-inverse-toggler-border'],
+      props.theme['$navbar-inverse-toggler-bg'],
       props.theme['$navbar-inverse-disabled-color'],
+    )}
+    ${nav(
+      props.theme['$enable-rounded'],
+      props.theme['$enable-hover-media-query'],
+      props.theme['$nav-link-padding'],
+      props.theme['$nav-disabled-link-color'],
+      props.theme['$cursor-disabled'],
+      props.theme['$nav-tabs-border-width'],
+      props.theme['$nav-tabs-border-color'],
+      props.theme['$nav-tabs-border-radius'],
+      props.theme['$nav-tabs-link-hover-border-color'],
+      props.theme['$nav-tabs-active-link-hover-color'],
+      props.theme['$nav-tabs-active-link-hover-bg'],
+      props.theme['$nav-tabs-active-link-hover-border-color'],
+      props.theme['$nav-pills-border-radius'],
+      props.theme['$nav-pills-active-link-color'],
+      props.theme['$nav-pills-active-link-bg'],
     )}
   `}
 `;
