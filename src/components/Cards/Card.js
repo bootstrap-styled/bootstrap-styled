@@ -50,7 +50,6 @@ Card = styled(Card)`
       border: ${props.theme['$card-border-width']} solid ${props.theme['$card-border-color']};
       ${borderRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius'])};
       border: ${props.theme['$card-border-width']} solid ${props.theme['$card-border-color']};
-      /* Added by AJT so that width information is passed to width props rather than styled attribute */
     }
     
     & .card-block {
@@ -232,6 +231,8 @@ Card = styled(Card)`
       ${cardInverse(
         props.theme['$enable-hover-media-query'],
         props.theme['$card-link-hover-color'],
+        props.theme['$card-inverse-bg-color'],
+        props.theme['$card-inverse-border-color'],
       )}
     }
     
