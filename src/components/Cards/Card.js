@@ -6,27 +6,31 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from 'theme';
+import bsTheme from 'theme';
 import { hover } from '../../styled/mixins/hover';
 import { borderRadius, borderTopRadius, borderBottomRadius } from '../../styled/mixins/border-radius';
 import { cardVariant, cardOutlineVariant, cardInverse } from '../../styled/mixins/cards';
 
-const defaultProps = { theme };
-
+const defaultProps = {
+  theme: bsTheme,
+};
 class Card extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
+    width: PropTypes.string,
+    theme: PropTypes.object,
   }
 
   render() {
-    // default class
+    const { className, children, width, theme, ...rest } = this.props;// eslint-disable-line no-unused-vars
     return (
       <div
-        className={cn(this.props.className, 'card')}
+        className={cn(className, 'card')}
+        {...rest}
       >
-        {this.props.children}
+        {children}
       </div>
     );
   }
@@ -47,6 +51,8 @@ Card = styled(Card)`
       border: ${props.theme['$card-border-width']} solid ${props.theme['$card-border-color']};
       ${borderRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius'])};
       border: ${props.theme['$card-border-width']} solid ${props.theme['$card-border-color']};
+      /* Added by AJT so that width information is passed to width props rather than styled attribute */
+      ${props.width && (`width: ${props.width};`)
     }
     
     & .card-block {
@@ -228,8 +234,6 @@ Card = styled(Card)`
       ${cardInverse(
         props.theme['$enable-hover-media-query'],
         props.theme['$card-link-hover-color'],
-        props.theme['$card-inverse-bg-color'],
-        props.theme['$card-inverse-border-color'],
       )}
     }
     
