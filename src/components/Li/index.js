@@ -8,6 +8,7 @@ import cn from 'classnames';
 import bsTheme from 'theme';
 
 import { listUnstyled } from '../../styled/mixins/lists';
+import { media } from '../../styled/mixins/media';
 
 const defaultProps = { theme: bsTheme };
 
@@ -59,6 +60,8 @@ Li = styled(Li)`
         margin-right: ${props.theme['$list-inline-padding']};
       }
     }
+    
+    ${media()}
   `}
 `;
 

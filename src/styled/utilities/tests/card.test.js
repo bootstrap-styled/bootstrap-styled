@@ -32,10 +32,10 @@ describe('bootstrap card utility', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(589354714);
+    expect(fromJS({ css }).hashCode()).toEqual(-628199880);
   });
   it('card should have arguments', () => {
     const css = card();
-    expect(fromJS({ css }).hashCode()).toEqual(589354714);
+    expect(fromJS({ css }).hashCode()).toEqual(-628199880);
   });
 });

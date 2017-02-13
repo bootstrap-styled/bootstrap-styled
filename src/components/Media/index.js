@@ -7,7 +7,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
-
+import { media } from '../../styled/mixins/media';
 const defaultProps = { theme: bsTheme };
 
 class Media extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -30,14 +30,7 @@ class Media extends React.Component { // eslint-disable-line react/prefer-statel
 
 // eslint-disable-next-line no-class-assign
 Media = styled(Media)`
-  &.media {
-    display: flex;
-    align-items: flex-start;
-  }
-  
-  & .media-body {
-    flex: 1;
-  }
+  ${media()}
 `;
 
 Media.defaultProps = defaultProps;
