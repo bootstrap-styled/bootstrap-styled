@@ -11,7 +11,7 @@ export function getAlignUtilities() {
 
 export function alignBaseline() {
   return `
-    .align-baseline { vertical-align: baseline !important; } // Browser default
+    .align-baseline { vertical-align: baseline !important; } /* Browser default */
   `;
 }
 

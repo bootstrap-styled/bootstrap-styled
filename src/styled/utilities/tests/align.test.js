@@ -6,13 +6,13 @@ describe('bootstrap align utility', () => {
     const css = getAlignUtilities();
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-741616511);
+    expect(fromJS({ css }).hashCode()).toEqual(-994697783);
   });
   it('alignBaseline should return a css', () => {
     const css = alignBaseline();
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(814475733);
+    expect(fromJS({ css }).hashCode()).toEqual(746143447);
   });
   it('alignTop should return a css', () => {
     const css = alignTop();
