@@ -614,6 +614,11 @@ const DocBootstrap = styled.div`
   .bd-example>.form-control+.form-control {
       margin-top: .5rem
   }
+  
+  .bd-example > .card {
+    max-width: 20rem;
+  }
+  
   .bd-example>.alert+.alert,
   .bd-example>.nav+.nav,
   .bd-example>.navbar+.navbar,
