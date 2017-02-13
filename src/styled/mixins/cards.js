@@ -9,8 +9,8 @@ export const defaultProps = {
 
 export function cardVariant(cardBackground, cardBorder) {
   return `
-    background-color: ${cardBackground} !important;
-    border-color: ${cardBorder} !important;
+    background-color: ${cardBackground};
+    border-color: ${cardBorder};
   
     & .card-header,
     & .card-footer {
@@ -26,11 +26,9 @@ export function cardOutlineVariant(cardColor) {
   `;
 }
 
-export function cardInverse(enableHoverMediaQuery = defaultProps['$enable-hover-media-query'], cardLinkHoverColor = defaultProps['$card-link-hover-color'], cardBackground = defaultProps['$card-inverse-bg-color'], cardBorder = defaultProps['$card-inverse-border-color']) {
+export function cardInverse(enableHoverMediaQuery = defaultProps['$enable-hover-media-query'], cardLinkHoverColor = defaultProps['$card-link-hover-color']) {
   return `
     color: rgba(255,255,255,.65);
-    background-color: ${cardBackground};
-    border-color: ${cardBorder};
     & .card-header,
     & .card-footer {
       background-color: transparent;

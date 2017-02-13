@@ -10,6 +10,7 @@ import bsTheme from 'theme';
 import { hover } from '../../styled/mixins/hover';
 import { borderRadius, borderTopRadius, borderBottomRadius } from '../../styled/mixins/border-radius';
 import { cardVariant, cardOutlineVariant, cardInverse } from '../../styled/mixins/cards';
+import { ifThen } from '../../styled/mixins/conditional';
 
 const defaultProps = {
   theme: bsTheme,
@@ -20,6 +21,9 @@ class Card extends React.Component {// eslint-disable-line react/prefer-stateles
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
     theme: PropTypes.object,
+    width: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    borderColor: PropTypes.string,
   }
 
   render() {
@@ -50,6 +54,18 @@ Card = styled(Card)`
       border: ${props.theme['$card-border-width']} solid ${props.theme['$card-border-color']};
       ${borderRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius'])};
       border: ${props.theme['$card-border-width']} solid ${props.theme['$card-border-color']};
+      ${ifThen(
+        props.width,
+        `width: ${props.width};`
+      )}
+      ${ifThen(
+        props.backgroundColor,
+        `background-color: ${props.backgroundColor};`
+      )}
+      ${ifThen(
+        props.borderColor,
+        `border-color: ${props.borderColor};`
+      )}
     }
     
     & .card-block {
@@ -231,8 +247,6 @@ Card = styled(Card)`
       ${cardInverse(
         props.theme['$enable-hover-media-query'],
         props.theme['$card-link-hover-color'],
-        props.theme['$card-inverse-bg-color'],
-        props.theme['$card-inverse-border-color'],
       )}
     }
     

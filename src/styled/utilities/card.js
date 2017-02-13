@@ -29,8 +29,6 @@ export const defaultProps = {
   '$btn-danger-bg': '#d9534f',
   '$card-link-hover-color': '#fff',
   '$card-img-overlay-padding': '1.25rem',
-  '$card-inverse-bg-color': '#464a4c',
-  '$card-inverse-border-color': '#464a4c',
 };
 
 export function card(
@@ -59,8 +57,6 @@ export function card(
   $btnDangerBg = defaultProps['$btn-danger-bg'],
   $cardLinkHoverColor = defaultProps['$card-link-hover-color'],
   $cardImgOverlayPadding = defaultProps['$card-img-overlay-padding'],
-  $cardInverseBgColor = defaultProps['$card-inverse-bg-color'],
-  $cardInverseBorderColor = defaultProps['$card-inverse-border-color'],
 ) {
   return `
     
@@ -201,9 +197,9 @@ export function card(
     }
     & .card-info{
       ${cardVariant(
-      $brandInfo,
-      $brandInfo,
-    )}
+        $brandInfo,
+        $brandInfo,
+      )}
     }
     & .card-warning{
       ${cardVariant(
@@ -258,8 +254,6 @@ export function card(
       ${cardInverse(
         $enableHoverMediaQuery,
         $cardLinkHoverColor,
-        $cardInverseBgColor,
-        $cardInverseBorderColor,
       )}
     }
     

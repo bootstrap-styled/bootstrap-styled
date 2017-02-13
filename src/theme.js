@@ -689,8 +689,6 @@ export function makeTheme(userTheme = {}) {
   v['$card-columns-count'] = u['$card-columns-count'] || '3';
   v['$card-columns-gap'] = u['$card-columns-gap'] || '1.25rem';
   v['$card-columns-margin'] = u['$card-columns-margin'] || v['$card-spacer-y'];
-  v['$card-inverse-bg-color'] = u['$card-inverse-bg-color'] || v['$gray'];
-  v['$card-inverse-border-color'] = u['$card-inverse-border-color'] || v['$gray'];
   // Tooltips
 
   v['$tooltip-max-width'] = u['$tooltip-max-width'] || '200px';

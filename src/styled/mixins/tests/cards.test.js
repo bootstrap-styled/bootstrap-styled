@@ -6,11 +6,11 @@ describe('bootstrap cards mixins', () => {
     const css = cardVariant('#f00', '#0f0');
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-424202874);
+    expect(fromJS({ css }).hashCode()).toEqual(-667338980);
   });
   it('cardVariant should return a css by default', () => {
     const css = cardVariant();
-    expect(fromJS({ css }).hashCode()).toEqual(-500713559);
+    expect(fromJS({ css }).hashCode()).toEqual(-29949046);
   });
   it('cardOutlineVariant should return a css', () => {
     const css = cardOutlineVariant('#f00');
@@ -26,16 +26,16 @@ describe('bootstrap cards mixins', () => {
     const css = cardInverse(defaultProps['$enable-hover-media-query'], defaultProps['$card-link-hover-color']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-1030211806);
+    expect(fromJS({ css }).hashCode()).toEqual(588066515);
   });
   it('cardInverse should return a css with media query', () => {
     const css = cardInverse(!defaultProps['$enable-hover-media-query'], defaultProps['$card-link-hover-color']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(1067391143);
+    expect(fromJS({ css }).hashCode()).toEqual(514109294);
   });
   it('cardInverse should return a css by default', () => {
     const css = cardInverse();
-    expect(fromJS({ css }).hashCode()).toEqual(-1030211806);
+    expect(fromJS({ css }).hashCode()).toEqual(588066515);
   });
 });
