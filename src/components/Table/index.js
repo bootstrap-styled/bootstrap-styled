@@ -49,7 +49,7 @@ class Table extends React.Component { // eslint-disable-line react/prefer-statel
           {...rest}
         >
           <table
-            className={cn(className, {
+            className={cn(className, 'table', {
               'table-bordered': bordered,
               'table-striped': striped,
               'table-hover': hover,
@@ -63,7 +63,7 @@ class Table extends React.Component { // eslint-disable-line react/prefer-statel
     }
     return (
       <table
-        className={cn(className, {
+        className={cn(className, 'table', {
           'table-bordered': bordered,
           'table-striped': striped,
           'table-hover': hover,
