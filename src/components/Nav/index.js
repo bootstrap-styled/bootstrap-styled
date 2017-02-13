@@ -12,7 +12,6 @@ const defaultProps = { theme };
 // eslint-disable-next-line no-class-assign
 const Nav = styled.nav`
   ${(props) => `
-   
     ${nav(
       props.theme['$enable-rounded'],
       props.theme['$enable-hover-media-query'],

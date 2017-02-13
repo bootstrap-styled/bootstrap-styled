@@ -59,7 +59,7 @@ export function typography(
         height: ${$headingsUnderlingHeight};
         bottom: 0;
         left: ${$headingsUnderlingLeftPosition};
-        background: -webkit-gradient(radial, center center, 0, center center, 460, from(${$headingsUnderlingGradientColor1}red), to(${$headingsUnderlingGradientColor2}white));
+        background: -webkit-gradient(radial, center center, 0, center center, 460, from(${$headingsUnderlingGradientColor1}), to(${$headingsUnderlingGradientColor2}));
         background: -webkit-radial-gradient(circle, ${$headingsUnderlingGradientColor1}, ${$headingsUnderlingGradientColor2});
         background: -moz-radial-gradient(circle, ${$headingsUnderlingGradientColor1}, ${$headingsUnderlingGradientColor2});
       }
