@@ -66,12 +66,12 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
     const dropdown = (
       <div className={this.props.className}>
         <Btn
-          {...rest}
           className={cn(className, {
             'dropdown-toggle': this.props['dropdown-toggle'],
           })}
           href={href}
           onClick={this.handleClick}
+          {...rest}
         >
           {value}
         </Btn>
@@ -91,8 +91,8 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
           })}
         >
           <Btn
-            {...rest}
             className={className}
+            {...rest}
           >
             {value}
           </Btn>
@@ -317,8 +317,24 @@ DropDown = styled(DropDown)`
       }
     }
     /* Added Mixin boutonGroup to enable dropdown to beneficiate from buttonGroup classes */
-    ${buttonGroup()}
-
+    ${buttonGroup(
+      props.theme['$enable-shadows'],
+      props.theme['$enable-rounded'],
+      props.theme['$input-btn-border-width'],
+      props.theme['$btn-toolbar-margin'],
+      props.theme['$btn-padding-x'],
+      props.theme['$btn-active-box-shadow'],
+      props.theme['$caret-width-lg'],
+      props.theme['$btn-padding-x-lg'],
+      props.theme['$btn-padding-y-lg'],
+      props.theme['$font-size-lg'],
+      props.theme['$btn-border-radius-lg'],
+      props.theme['$btn-padding-x-sm'],
+      props.theme['$btn-padding-y-sm'],
+      props.theme['$font-size-sm'],
+      props.theme['$btn-border-radius-sm'],
+      props.theme['$btn-border-width']
+    )}
   `}
 `;
 
