@@ -69,12 +69,6 @@ describe('<Table />', () => {
     expect(renderedComponent.find('Table').length).toBe(1);
     expect(renderedComponent.find('table').length).toBe(1);
   });
-  it('should have a class .table by default with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-    });
-    expect(renderedComponent.find('table').hasClass('table')).toBe(true);
-  });
   it('should have a class .table-striped by default with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
