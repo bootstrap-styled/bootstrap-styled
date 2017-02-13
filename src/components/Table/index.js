@@ -199,7 +199,7 @@ Table = styled(Table)`
     & thead.thead-inverse {
       th {
         color: #fff;
-        background-color: ${props.theme['$table-bg-inverse']};
+        background-color: ${props.theme['$table-inverse-bg']};
       }
     }
     
@@ -213,7 +213,7 @@ Table = styled(Table)`
     
     &.table-inverse {
       color: ${props.theme['$table-head-bg']};
-      background-color: ${props.theme['$table-bg-inverse']};
+      background-color: ${props.theme['$table-inverse-bg']};
     
       th,
       td,
