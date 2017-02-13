@@ -11,7 +11,7 @@ export function navDivider(spacerY = defaultProps['$spacer-y'], dividerColor = '
   const marginY = `${unitUtils.rmUnit(spacerY, unitUtils.UNIT.REM) / 2}${unitUtils.UNIT.REM}`;
   return `
     height: 1px;
-    margin: ${marginY} 0;
+    margin: calc(${marginY} / 2) 0;
     overflow: hidden;
     background-color: ${dividerColor};
   `;

@@ -191,7 +191,7 @@ DropDown = styled(DropDown)`
 
     /* mixin from bootstrap 4, see : scss/mixins/_nav-divider.css */
     & .dropdown-divider {
-      ${navDivider(props.theme['$spacer-y-half'], props.theme['$dropdown-divider-bg'])}
+      ${navDivider(props.theme['$spacer-y'], props.theme['$dropdown-divider-bg'])}
     }
 
     & .dropdown-item {

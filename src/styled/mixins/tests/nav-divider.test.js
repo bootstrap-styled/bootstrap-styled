@@ -6,10 +6,10 @@ describe('bootstrap nav-divider mixins', () => {
     const css = navDivider(defaultProps['$spacer-y'], '#f0f');
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(css).toEqual('\n    height: 1px;\n    margin: 0.5rem 0;\n    overflow: hidden;\n    background-color: #f0f;\n  ');
+    expect(fromJS({ css }).hashCode()).toEqual(858038477);
   });
   it('navDivider should have arguments', () => {
     const css = navDivider();
-    expect(fromJS({ css }).hashCode()).toEqual(1046670948);
+    expect(fromJS({ css }).hashCode()).toEqual(-953521003);
   });
 });
