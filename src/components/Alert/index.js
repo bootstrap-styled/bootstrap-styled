@@ -10,7 +10,6 @@ import themeBs from 'theme';
 import Close from '../Close';
 import { alertVariant } from '../../styled/mixins/alert';
 import { borderRadius } from '../../styled/mixins/border-radius';
-import { srOnly } from '../../styled/mixins/screen-reader';
 
 const defaultProps = {
   closeLabel: 'Close',
@@ -74,19 +73,14 @@ Alert = styled(Alert)`
     /* Dismissible alerts
     Expand the right padding and account for the close button's positioning. */
     
-    &.alert-dismissible {
-      padding-right: ${props.theme['$alert-dismissible-padding-x']};
-    
+    &.alert-dismissible {    
       /* Adjust close link position*/
       & .close {
         position: relative;
-        top: -.125rem;
+        top: -${props.theme['$alert-padding-y']};
         right: -${props.theme['$alert-padding-x']};
+        padding: ${props.theme['$alert-padding-y']} ${props.theme['$alert-padding-x']}
         color: inherit;
-      }
-      
-      & .sr-only {
-        ${srOnly}
       }
     }
     /* Alternate styles
