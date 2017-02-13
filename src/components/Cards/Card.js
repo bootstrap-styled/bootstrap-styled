@@ -53,7 +53,7 @@ Card = styled(Card)`
       background-color: ${props.theme['$card-bg']};
       border: ${props.theme['$card-border-width']} solid ${props.theme['$card-border-color']};
       ${borderRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius'])};
-      border: ${props.theme['$card-border-width']} solid ${props.theme['$card-border-color']};
+      
       ${ifThen(
         props.width,
         `width: ${props.width};`

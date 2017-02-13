@@ -6,27 +6,31 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from 'theme';
+import bsTheme from 'theme';
 import { borderRightRadius, borderLeftRadius } from '../../styled/mixins/border-radius';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { ifThen } from '../../styled/mixins/conditional';
 import { card } from '../../styled/utilities/card';
 
-const defaultProps = { theme };
-
+const defaultProps = {
+  theme: bsTheme,
+};
 class CardGroup extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
+    theme: PropTypes.object,
   }
 
   render() {
+    const { className, children, theme, ...rest } = this.props;// eslint-disable-line no-unused-vars
     return (
       <div
-        className={cn(this.props.className, 'card-group')}
+        className={cn(className, 'card-group')}
+        {...rest}
       >
-        {this.props.children}
+        {children}
       </div>
     );
   }

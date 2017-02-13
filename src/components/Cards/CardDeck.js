@@ -6,29 +6,29 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from 'theme';
+import bsTheme from 'theme';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { card } from '../../styled/utilities/card';
 
-const defaultProps = { theme };
-
+const defaultProps = {
+  theme: bsTheme,
+};
 class CardDeck extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
+    theme: PropTypes.object,
   }
 
   render() {
-    // default class
-    const classConfigList = ['card-deck'];
-
-
+    const { className, children, theme, ...rest } = this.props;// eslint-disable-line no-unused-vars
     return (
       <div
-        className={cn(this.props.className, classConfigList)}
+        className={cn(className, 'card-deck')}
+        {...rest}
       >
-        {this.props.children}
+        {children}
       </div>
     );
   }
