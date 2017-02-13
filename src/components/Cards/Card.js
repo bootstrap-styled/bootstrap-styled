@@ -10,7 +10,6 @@ import bsTheme from 'theme';
 import { hover } from '../../styled/mixins/hover';
 import { borderRadius, borderTopRadius, borderBottomRadius } from '../../styled/mixins/border-radius';
 import { cardVariant, cardOutlineVariant, cardInverse } from '../../styled/mixins/cards';
-import { ifThen } from '../../styled/mixins/conditional';
 
 const defaultProps = {
   theme: bsTheme,
@@ -20,7 +19,6 @@ class Card extends React.Component {// eslint-disable-line react/prefer-stateles
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
-    width: PropTypes.string,
     theme: PropTypes.object,
   }
 
@@ -53,12 +51,6 @@ Card = styled(Card)`
       ${borderRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius'])};
       border: ${props.theme['$card-border-width']} solid ${props.theme['$card-border-color']};
       /* Added by AJT so that width information is passed to width props rather than styled attribute */
-      ${ifThen(
-        props.width,
-        `
-        width: ${props.width};
-        `
-      )}
     }
     
     & .card-block {
