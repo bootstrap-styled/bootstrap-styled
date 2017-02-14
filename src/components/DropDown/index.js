@@ -11,8 +11,9 @@ import Button from '../Button';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { navDivider } from '../../styled/mixins/nav-divider';
-import { hoverFocus, plainHoverFocus } from '../../styled/mixins/hover';
+import { hoverFocus } from '../../styled/mixins/hover';
 import { buttonGroup } from '../../styled/utilities/buttonGroup';
+import { ifThen } from '../../styled/mixins/conditional';
 
 const defaultProps = {
   type: 'link',
@@ -206,29 +207,21 @@ DropDown = styled(DropDown)`
         background-color: ${props.theme['$dropdown-link-hover-bg']}
       `)}
 
-      &.active {
-        ${plainHoverFocus(props.theme['$enable-hover-media-query'], `
-          color: ${props.theme['$dropdown-link-active-color']};
-          text-decoration: none;
-          background-color: ${props.theme['$dropdown-link-active-bg']}
-          text-decoration: none;
-          outline: 0;
-        `)}
+      &.active,
+      &:active {
+        color: ${props.theme['$dropdown-link-active-color']};
+        text-decoration: none;
+        background-color: ${props.theme['$dropdown-link-active-bg']}
       }
 
-      &.disabled {
-
-        ${plainHoverFocus(props.theme['$enable-hover-media-query'], `
-          color: ${props.theme['$dropdown-link-disabled-color']};
-        `)}
-
-        /* Nuke hover/focus effects */
-        ${hoverFocus(props.theme['$enable-hover-media-query'], `
-          text-decoration: none;
-          cursor: ${props.theme['$cursor-disabled']};
-          background-color: transparent;
-          background-image: none; /* Remove CSS gradient */
-        `)}
+      &.disabled,
+      &:disabled{
+        color: ${props.theme['$dropdown-link-disabled-color']};
+        cursor: ${props.theme['$cursor-disabled']};
+        background-color: transparent;
+        ${ifThen(props.theme['$enabled-gradients'],
+          'background-image: none; /* Remove CSS gradient */'
+        )}
       }
     }
 
