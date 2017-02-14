@@ -318,7 +318,6 @@ export function makeTheme(userTheme = {}) {
   v['$table-bg'] = u['$table-bg'] || 'transparent';
 
   v['$table-inverse-bg'] = u['$table-inverse-bg'] || v['$gray-dark'];
-  v['$table-inverse-color'] = u['$table-inverse-color'] || v['$body-bg'];
 
   v['$table-bg-accent'] = u['$table-bg-accent'] || Color(v['$black']).alpha(0.05).toString();
   v['$table-bg-hover'] = u['$table-bg-hover'] || Color(v['$black']).alpha(0.075).toString();
