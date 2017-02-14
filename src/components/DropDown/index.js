@@ -20,7 +20,6 @@ const defaultProps = {
   buttonProps: {
     type: 'button',
     children: 'Dropdown',
-    'dropdown-toggle': true,
   },
   theme,
 };
@@ -33,7 +32,6 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
     buttonProps: PropTypes.object.isRequired,
     className: PropTypes.string,
     'dropdown-split': PropTypes.bool,
-    'dropdown-toggle': PropTypes.bool,
   };
 
   state = {
@@ -66,9 +64,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
     const dropdown = (
       <div className={this.props.className}>
         <Btn
-          className={cn(className, {
-            'dropdown-toggle': this.props['dropdown-toggle'],
-          })}
+          className={cn(className, 'dropdown-toggle')}
           href={href}
           onClick={this.handleClick}
           {...rest}
