@@ -45,7 +45,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
     e.stopPropagation();
 
     if (e.target.tagName === 'A') {
-      e.target.classList.toggle('active');
+      e.target.classList.toggle('show');
     }
 
     this.setState({
@@ -86,9 +86,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
     if (this.props['dropdown-split']) {
       return (
         <div
-          className={cn(this.props.className, {
-            'dropdown-toggle-split': this.props['dropdown-split'],
-          })}
+          className={this.props.className}
         >
           <Btn
             className={className}
@@ -98,7 +96,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
           </Btn>
           <Btn
             {...rest}
-            className={cn(className, 'dropdown-toggle')}
+            className={cn(className, 'dropdown-toggle', 'dropdown-toggle-split')}
             href={href}
             onClick={this.handleClick}
           >
@@ -158,8 +156,8 @@ DropDown = styled(DropDown)`
       }
     }
 
-    & .dropup {
-      &.dropdown-toggle {
+    &.dropup {
+      .dropdown-toggle {
         &::after {
           border-top: 0;
           border-bottom: ${props.theme['$caret-width']} solid;
@@ -238,7 +236,7 @@ DropDown = styled(DropDown)`
       }
     }
 
-    &.active {
+    &.show {
       /* show the menu */
       &>.dropdown-menu {
         display: block;
@@ -299,23 +297,14 @@ DropDown = styled(DropDown)`
     /* Just add .dropup after the standard .dropdown class and you're set. */
     /* TODO: abstract this so that the navbar fixed styles are not placed here? */
 
-    & .dropup,
-    & .navbar-fixed-bottom .dropdown {
-      /* Reverse the caret */
-      & .caret {
-        content: '';
-        border-top: 0;
-        border-bottom: ${props.theme['$caret-width']} solid;
-      }
-
-      /* Different positioning for bottom up menu */
-      &+div>.dropdown-menu,
+    &.dropup {
       .dropdown-menu {
         top: auto;
         bottom: 100%;
         margin-bottom: ${props.theme['$dropdown-margin-top']};
       }
     }
+        
     /* Added Mixin boutonGroup to enable dropdown to beneficiate from buttonGroup classes */
     ${buttonGroup(
       props.theme['$enable-shadows'],
