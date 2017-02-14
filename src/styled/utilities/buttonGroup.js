@@ -49,12 +49,12 @@ export function buttonGroup(
     &.btn-group-vertical,
     & .btn-group-vertical {
       position: relative;
-      display: inline-block;
+      display: inline-flex;
       vertical-align: middle; /* match .btn alignment given font-size hack above */
     
       > .btn {
         position: relative;
-        float: left;
+        flex: 0 1 auto;
         margin-bottom: 0;
     
         /* Bring the "active" button to the front */
@@ -84,6 +84,7 @@ export function buttonGroup(
     &.btn-toolbar,
     & .btn-toolbar{
        display: flex;
+       flex-wrap: wrap;
       justify-content: flex-start;
     
       .input-group {
