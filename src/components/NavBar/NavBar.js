@@ -8,11 +8,12 @@ import cn from 'classnames';
 import bsTheme from 'theme';
 import Collapse from 'react-collapse';
 import A from 'components/A';
-import MediaQuery from 'react-responsive';
 import NavBarToggler from './NavBarToggler';
 import { navbar } from '../../styled/utilities/navbar';
 import { nav } from '../../styled/utilities/nav';
 import { ifThen } from '../../styled/mixins/conditional';
+import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
+
 
 const defaultProps = {
   brand: {
@@ -44,8 +45,23 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
     isOpened: false,
   }
 
+  componentWillMount() {
+    this.closeCollapse();
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.closeCollapse);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.closeCollapse);
+  }
+
+  closeCollapse = () => {
+    this.setState({ isOpened: false });
+  }
+
   handleToggler = () => {
-    console.log('toggle state', !this.state.isOpened);
     this.setState({
       isOpened: !this.state.isOpened,
     });
@@ -55,7 +71,6 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
     const { className, children, theme, toggler, brand, ...rest } = this.props; // eslint-disable-line no-unused-vars
     const { component: NavBarBrand, text: textBrand, className: classNameBrand, ...restBrand } = brand;
     const { isOpened } = this.state;
-    const { sm } = theme['$grid-breakpoints'];
     return (
       <nav className={cn(className, 'navbar')} {...rest}>
         {toggler && (
@@ -65,19 +80,9 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
           <NavBarBrand className={cn(classNameBrand, 'navbar-brand')} {...restBrand}>{textBrand}</NavBarBrand>
         )}
 
-        <MediaQuery maxDeviceWidth={sm}>
-          <Collapse isOpened={isOpened}>
-            {children}
-          </Collapse>
-        </MediaQuery>
-        <Collapse isOpened={isOpened}>
-          <MediaQuery maxDeviceWidth={sm}>
-            {children}
-          </MediaQuery>
-        </Collapse>
-        <MediaQuery minDeviceWidth={sm}>
+        <Collapse isOpened={isOpened} keepCollapsedContent className="navbar-collapse">
           {children}
-        </MediaQuery>
+        </Collapse>
       </nav>
     );
   }
@@ -86,6 +91,16 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
 // eslint-disable-next-line no-class-assign
 NavBar = styled(NavBar)`
   ${(props) => `
+    ${mediaBreakpointUp('lg', props.theme['$grid-breakpoints'], `
+      & .navbar-collapse {
+        display: flex !important;
+        height: auto !important;
+        
+        >div:first-child {
+          display: flex;
+        }
+      }
+    `)}
     ${navbar(
       props.theme['$grid-breakpoints'],
       props.theme['$enable-rounded'],
