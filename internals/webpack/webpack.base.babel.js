@@ -80,6 +80,10 @@ module.exports = (options) => ({
     react: true,
     'react-dom': true,
     'styled-components': true,
+    'react-collapse': true,
+    'react-height': true,
+    'react-motion': true,
+    'react-responsive': true,
   },
   resolve: {
     modules: ['src', 'node_modules'],
