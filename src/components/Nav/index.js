@@ -6,6 +6,7 @@
 import styled from 'styled-components';
 import theme from 'theme';
 import { nav } from '../../styled/utilities/nav';
+import { breadcrumb } from '../../styled/utilities/breadcrumb';
 
 const defaultProps = { theme };
 
@@ -28,6 +29,18 @@ const Nav = styled.nav`
       props.theme['$nav-pills-border-radius'],
       props.theme['$nav-pills-active-link-color'],
       props.theme['$nav-pills-active-link-bg'],
+    )}
+    ${breadcrumb(
+      props.theme['$enable-rounded'],
+      props.theme['$border-radius'],
+      props.theme['$breadcrumb-padding-y'],
+      props.theme['$breadcrumb-padding-x'],
+      props.theme['$spacer-y'],
+      props.theme['$breadcrumb-bg'],
+      props.theme['$breadcrumb-item-padding'],
+      props.theme['$breadcrumb-divider-color'],
+      props.theme['$breadcrumb-divider'],
+      props.theme['$breadcrumb-item-active-color']
     )}
   `}
 `;
