@@ -4,6 +4,7 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
+import cn from 'classnames';
 import bsTheme from 'theme';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { clearfix } from '../../styled/mixins/clearfix';
@@ -22,7 +23,10 @@ class Breadcrumb extends React.Component { // eslint-disable-line react/prefer-s
     const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
 
     return (
-      <ol className={className} {...rest}>
+      <ol
+        className={cn(className, 'breadcrumb')}
+        {...rest}
+      >
         {children}
       </ol>
     );
@@ -75,7 +79,7 @@ Breadcrumb = styled(Breadcrumb)`
       }
     
       &.active {
-        color: ${props.theme['$breadcrumb-active-color']};
+        color: ${props.theme['$breadcrumb-item-active-color']};
       }
     }
   `}

@@ -9,6 +9,7 @@
 import styled from 'styled-components';
 import theme from 'theme';
 import { nav } from '../../styled/utilities/nav';
+import { breadcrumb } from '../../styled/utilities/breadcrumb';
 import { listUnstyled, listInline, listInlineItem } from '../../styled/mixins/lists';
 
 const defaultProps = { theme };
@@ -32,24 +33,36 @@ const Ol = styled.ol`
       props.theme['$nav-pills-active-link-color'],
       props.theme['$nav-pills-active-link-bg'],
     )}
-    
+    ${breadcrumb(
+      props.theme['$enable-rounded'],
+      props.theme['$border-radius'],
+      props.theme['$breadcrumb-padding-y'],
+      props.theme['$breadcrumb-padding-x'],
+      props.theme['$spacer-y'],
+      props.theme['$breadcrumb-bg'],
+      props.theme['$breadcrumb-item-padding'],
+      props.theme['$breadcrumb-divider-color'],
+      props.theme['$breadcrumb-divider'],
+      props.theme['$breadcrumb-item-active-color']
+    )}
+
     /* Type Scss */
     &.list-unstyled {
       ${listUnstyled()}
     }
-    
+
     &.list-inline {
       ${listInline()}
     }
-    
+
     &.list-inline-item {
       ${listInlineItem(props.theme['$list-inline-padding'])}
     }
-    
+
     /* Reboot Scss */
     margin-top: 0;
     margin-bottom: 1rem;
-    
+
     & ol,
     & ul {
       margin-bottom: 0;
