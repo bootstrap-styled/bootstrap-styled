@@ -20,10 +20,6 @@ const defaultProps = {
     component: Button,
     text: 'Dropdown',
   },
-  menu: {
-    left: false,
-    right: false,
-  },
   theme: bsTheme,
 };
 
@@ -38,10 +34,6 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
       component: PropTypes.component,
       className: PropTypes.string,
       text: PropTypes.string.isRequired,
-    }),
-    menu: PropTypes.shape({
-      left: PropTypes.bool,
-      right: PropTypes.bool,
     }),
   };
 
@@ -69,9 +61,8 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
   }
 
   render() {
-    const { className, children, theme, toggler, menu } = this.props; // eslint-disable-line no-unused-vars
+    const { className, children, theme, toggler } = this.props; // eslint-disable-line no-unused-vars
     const { component: Toggler, className: classNameToggler, text: textToggler, ...restToggler } = toggler;
-    const { left: leftMenu, right: rightMenu } = menu;
     const { dropped } = this.state;
 
     const dropdown = (
@@ -83,7 +74,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
         >
           {textToggler}
         </Toggler>
-        <div className={cn({ 'dropdown-hide': !dropped, 'dropdown-menu-left': leftMenu, 'dropdown-menu-right': rightMenu })}>
+        <div className={cn({ 'dropdown-hide': !dropped })}>
           {children}
         </div>
       </div>
@@ -102,7 +93,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
           >
             <span className="sr-only"></span>
           </Toggler>
-          <div className={cn({ 'dropdown-hide': !dropped, 'dropdown-menu-left': leftMenu, 'dropdown-menu-right': rightMenu })}>
+          <div className={cn({ 'dropdown-hide': !dropped })}>
             {children}
           </div>
         </div>

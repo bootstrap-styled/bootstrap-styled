@@ -91,32 +91,6 @@ describe('<DropDown />', () => {
     });
     expect(renderedComponent.find('DropDown').length).toBe(1);
   });
-  it('should render a <DropDown> with a menu left', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      toggler: {
-        component: Button,
-        text: 'Dropdown',
-        className: 'btn btn-secondary',
-      },
-      menu: {
-        left: true,
-      },
-    });
-    expect(renderedComponent.find('DropDown').length).toBe(1);
-  });
-  it('should render a <DropDown> with a menu right', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      toggler: {
-        component: Button,
-        text: 'Dropdown',
-        className: 'btn btn-secondary',
-      },
-      menu: {
-        right: true,
-      },
-    });
-    expect(renderedComponent.find('DropDown').length).toBe(1);
-  });
   // it('should have a class .dropdown-toggle by default with a theme', () => {
   //   const renderedComponent = renderComponentUsingTheme();
   //   console.log(renderedComponent.debug());
