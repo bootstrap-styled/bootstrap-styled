@@ -111,7 +111,6 @@ export function button(
       text-align: center;
       white-space: nowrap;
       vertical-align: middle;
-      cursor: pointer;
       user-select: none;
       border: ${$inputBtnBorderWidth} solid transparent;
       ${buttonSize(
