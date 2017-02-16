@@ -1,4 +1,4 @@
-import { breakpointMin, mediaBreakpointUp } from '../mixins/breakpoints';
+import { breakpointInfix, mediaBreakpointUp } from '../mixins/breakpoints';
 
 export const defaultProps = {
   '$grid-breakpoints': {
@@ -39,7 +39,6 @@ export const defaultProps = {
 
 export function getSpacingUtilities(
   gridBreakpoints = defaultProps['$grid-breakpoints'],
-  zindexNavbarFixed = defaultProps['$zindex-navbar-fixed'],
   spacers = defaultProps['$spacers'] // eslint-disable-line dot-notation
 ) {
   const abbrevs = {
@@ -53,84 +52,41 @@ export function getSpacingUtilities(
       const abbrev = abbrevs[prop];
       Object.keys(spacers).forEach((size) => {
         const lengths = spacers[size];
-        const min = breakpointMin(breakpoint, gridBreakpoints);
-        if (min) {
-          spacingUtilityList.push(mediaBreakpointUp(breakpoint, gridBreakpoints, `
-            @media (min-width: ${min}) {
-              .${abbrev}-${breakpoint}-${size} { ${prop}:        ${lengths.y} ${lengths.x} !important; } /* a = All sides */
-              .${abbrev}t-${breakpoint}-${size} { ${prop}-top:    ${lengths.y} !important; }
-              .${abbrev}r-${breakpoint}-${size} { ${prop}-right:  ${lengths.x} !important; }
-              .${abbrev}b-${breakpoint}-${size} { ${prop}-bottom: ${lengths.y} !important; }
-              .${abbrev}l-${breakpoint}-${size} { ${prop}-left:   ${lengths.x} !important; }
-              .${abbrev}a-${breakpoint}-${size} {
-                ${prop}-top:    ${lengths.y} !important;
-                ${prop}-bottom: ${lengths.y} !important;
-                ${prop}-right:  ${lengths.x} !important;
-                ${prop}-left:   ${lengths.x} !important;
-              }
-              .${abbrev}x-${breakpoint}-${size} {
-                ${prop}-right:  ${lengths.x} !important;
-                ${prop}-left:   ${lengths.x} !important;
-              }
-              .${abbrev}y-${breakpoint}-${size} {
-                ${prop}-top:    ${lengths.y} !important;
-                ${prop}-bottom: ${lengths.y} !important;
-              }
-            }
-          `));
-        } else {
-          spacingUtilityList.push(`
-            /* xs */
-            .${abbrev}-${size} { ${prop}:        ${lengths.y} ${lengths.x} !important; } /* a = All sides */
-            .${abbrev}t-${size} { ${prop}-top:    ${lengths.y} !important; }
-            .${abbrev}r-${size} { ${prop}-right:  ${lengths.x} !important; }
-            .${abbrev}b-${size} { ${prop}-bottom: ${lengths.y} !important; }
-            .${abbrev}l-${size} { ${prop}-left:   ${lengths.x} !important; }
-            .${abbrev}a-${size} {
-              ${prop}-top:    ${lengths.y} !important;
-              ${prop}-bottom: ${lengths.y} !important;
-              ${prop}-right:  ${lengths.x} !important;
-              ${prop}-left:   ${lengths.x} !important;
-            }
-            .${abbrev}x-${size} {
-              ${prop}-right:  ${lengths.x} !important;
-              ${prop}-left:   ${lengths.x} !important;
-            }
-            .${abbrev}y-${size} {
-              ${prop}-top:    ${lengths.y} !important;
-              ${prop}-bottom: ${lengths.y} !important;
-            }
-          `);
+        const infix = breakpointInfix(breakpoint, gridBreakpoints);
+        spacingUtilityList.push(mediaBreakpointUp(breakpoint, gridBreakpoints, `
+
+        .${abbrev}${infix}-${size} { ${prop}:        ${lengths.y} ${lengths.x} !important; } /* a = All sides */
+        .${abbrev}t${infix}-${size} { ${prop}-top:    ${lengths.y} !important; }
+        .${abbrev}r${infix}-${size} { ${prop}-right:  ${lengths.x} !important; }
+        .${abbrev}b${infix}-${size} { ${prop}-bottom: ${lengths.y} !important; }
+        .${abbrev}l${infix}-${size} { ${prop}-left:   ${lengths.x} !important; }
+        .${abbrev}x${infix}-${size} {
+          ${prop}-right:  ${lengths.x} !important;
+          ${prop}-left:   ${lengths.x} !important;
         }
+        .${abbrev}y${infix}-${size} {
+          ${prop}-top:    ${lengths.y} !important;
+          ${prop}-bottom: ${lengths.y} !important;
+        }
+        
+        .m${infix}-auto  { margin:        auto !important; }
+        .mt${infix}-auto { margin-top:    auto !important; }
+        .mr${infix}-auto { margin-right:  auto !important; }
+        .mb${infix}-auto { margin-bottom: auto !important; }
+        .ml${infix}-auto { margin-left:   auto !important; }
+        .mx${infix}-auto {
+          margin-right: auto !important;
+          margin-left:  auto !important;
+        }
+        .my${infix}-auto {
+          margin-top:    auto !important;
+          margin-bottom: auto !important;
+        }
+        `));
       });
     });
   });
-
-  return `
-    /* Width and height */
-    
-    .w-100 { width: 100% !important; }
-    .h-100 { height: 100% !important; }
-    
-    /* Margin and Padding */
-    
-    .mx-auto {
-      margin-right: auto !important;
-      margin-left:  auto !important;
-    }
-    
-    ${spacingUtilityList.join('\n')}
-    
-    /* Positioning */
-    
-    .pos-f-t {
-      position: fixed;
-      top: 0;
-      right: 0;
-      left: 0;
-      z-index: ${zindexNavbarFixed};
-    }
-  `;
+  return spacingUtilityList.join('\n');
 }
 
 export default {
