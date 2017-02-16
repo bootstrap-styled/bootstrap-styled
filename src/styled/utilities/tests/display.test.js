@@ -6,10 +6,10 @@ describe('bootstrap display utility', () => {
     const css = getDisplayUtilities(defaultProps['$grid-breakpoints']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(987994556);
+    expect(fromJS({ css }).hashCode()).toEqual(-419391227);
   });
   it('getDisplayUtilities should have arguments', () => {
     const css = getDisplayUtilities();
-    expect(fromJS({ css }).hashCode()).toEqual(987994556);
+    expect(fromJS({ css }).hashCode()).toEqual(-419391227);
   });
 });

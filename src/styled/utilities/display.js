@@ -1,4 +1,4 @@
-import { breakpointMin } from '../mixins/breakpoints';
+import { breakpointInfix } from '../mixins/breakpoints';
 
 export const defaultProps = {
   '$grid-breakpoints': {
@@ -13,30 +13,16 @@ export const defaultProps = {
 export function getDisplayUtilities(gridBreakpoints = defaultProps['$grid-breakpoints']) {
   const utilityList = [];
   Object.keys(gridBreakpoints).forEach((breakpoint) => {
-    const min = breakpointMin(breakpoint, gridBreakpoints);
-    if (min) {
-      utilityList.push(`
-        @media (min-width: ${min}) {
-          .d-${breakpoint}-none { display: none !important; }
-          .d-${breakpoint}-inline { display: inline !important; }
-          .d-${breakpoint}-inline-block { display: inline-block !important; }
-          .d-${breakpoint}-block { display: block !important; }
-          .d-${breakpoint}-table { display: table !important; }
-          .d-${breakpoint}-table-cell { display: table-cell !important; }
-          .d-${breakpoint}-flex { display: flex !important; }
-        }
-      `);
-    } else {
-      utilityList.push(`
-        .d-none { display: none !important; }
-        .d-inline { display: inline !important; }
-        .d-inline-block { display: inline-block !important; }
-        .d-block { display: block !important; }
-        .d-table { display: table !important; }
-        .d-table-cell { display: table-cell !important; }
-        .d-flex { display: flex !important; }
-      `);
-    }
+    const infix = breakpointInfix(breakpoint, gridBreakpoints);
+    utilityList.push(`
+      .d${infix}-none { display: none !important; }
+      .d${infix}-inline { display: inline !important; }
+      .d${infix}-inline-block { display: inline-block !important; }
+      .d${infix}-block { display: block !important; }
+      .d${infix}-table { display: table !important; }
+      .d${infix}-table-cell { display: table-cell !important; }
+      .d${infix}-flex { display: flex !important; }
+    `);
   });
   return utilityList.join('\n');
 }
