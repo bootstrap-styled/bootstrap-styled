@@ -1,11 +1,10 @@
 /**
  * Testing our Collapse component
  */
-import { BootstrapProvider } from 'bootstrap-styled';
 
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import Collapse from '../index';
 
 const children = (<h1>Test</h1>);
