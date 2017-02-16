@@ -6,14 +6,13 @@ import React, { PropTypes } from 'react';
 import styled, { withTheme } from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
-import Collapse from 'react-collapse';
 import A from 'components/A';
+import Collapse from 'components/Collapse/Collapse';
 import NavBarToggler from './NavBarToggler';
 import { navbar } from '../../styled/utilities/navbar';
 import { nav } from '../../styled/utilities/nav';
 import { ifThen } from '../../styled/mixins/conditional';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
-
 
 const defaultProps = {
   brand: {
