@@ -17,7 +17,7 @@ import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 const defaultProps = {
   brand: {
     component: A,
-    text: 'fix', // important to correct the height if no text is provided
+    children: 'fix', // important to correct the height if no text is provided
   },
   theme: bsTheme,
 };
@@ -33,9 +33,19 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
       left: PropTypes.bool,
       className: PropTypes.string,
     }),
+    collapse: PropTypes.shape({
+      children: PropTypes.oneOfType([
+        PropTypes.text,
+        PropTypes.node,
+      ]).isRequired,
+      className: PropTypes.string,
+    }),
     brand: PropTypes.shape({
       component: PropTypes.component,
-      text: PropTypes.string.isRequired,
+      children: PropTypes.oneOfType([
+        PropTypes.text,
+        PropTypes.node,
+      ]).isRequired,
       className: PropTypes.string,
     }),
   };
@@ -67,21 +77,24 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
   }
 
   render() {
-    const { className, children, theme, toggler, brand, ...rest } = this.props; // eslint-disable-line no-unused-vars
-    const { component: NavBarBrand, text: textBrand, className: classNameBrand, ...restBrand } = brand;
+    const { className, children, theme, toggler, brand, collapse, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { component: NavBarBrand, children: childrenBrand, className: classNameBrand, ...restBrand } = brand;
+    const { children: childrenCollapse, className: classNameCollapse, ...restCollapse } = collapse;
     const { isOpened } = this.state;
     return (
-      <nav className={cn(className, 'navbar')} {...rest}>
+      <nav className={cn('navbar', className)} {...rest}>
         {toggler && (
           <NavBarToggler className={toggler.className} left={toggler.left} right={toggler.right} onClick={this.handleToggler} />
         )}
-        {textBrand && (
-          <NavBarBrand className={cn(classNameBrand, 'navbar-brand')} {...restBrand}>{textBrand}</NavBarBrand>
+        {childrenBrand && (
+          <NavBarBrand className={cn('navbar-brand', classNameBrand)} {...restBrand}>{childrenBrand}</NavBarBrand>
         )}
-
-        <Collapse isOpened={isOpened} keepCollapsedContent className="navbar-collapse">
-          {children}
-        </Collapse>
+        {childrenCollapse && (
+          <Collapse isOpened={isOpened} keepCollapsedContent className={cn('navbar-collapse', classNameCollapse)} {...restCollapse}>
+            {childrenCollapse}
+          </Collapse>
+        )}
+        {children}
       </nav>
     );
   }
@@ -95,7 +108,8 @@ NavBar = styled(NavBar)`
         display: flex !important;
         height: auto !important;
         
-        >div:first-child {
+        >div:first-child,
+        >div:first-child>div:first-child { /* solve the wrapping issue */
           display: flex;
         }
       }
@@ -147,7 +161,7 @@ NavBar = styled(NavBar)`
       props.theme['$nav-pills-active-link-color'],
       props.theme['$nav-pills-active-link-bg'],
     )}
-    ${ifThen(props.brand && props.brand.text === 'fix', '.navbar-brand { visibility: hidden !important ; }')}
+    ${ifThen(props.brand && props.brand.children === 'fix', '.navbar-brand { visibility: hidden !important ; }')}
   `}
 `;
 
