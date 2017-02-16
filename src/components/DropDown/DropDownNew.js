@@ -21,6 +21,7 @@ const defaultProps = {
     text: 'Dropdown',
   },
   theme: bsTheme,
+  'dropdown-split': false,
 };
 
 class DropDownNew extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -61,12 +62,12 @@ class DropDownNew extends React.Component { // eslint-disable-line react/prefer-
   }
 
   render() {
-    const { className, children, theme, toggler, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { className, children, theme, toggler } = this.props; // eslint-disable-line no-unused-vars
     const { component: Toggler, className: classNameToggler, text: textToggler, ...restToggler } = toggler;
     const { dropped } = this.state;
 
     const dropdown = (
-      <div className={className} {...rest}>
+      <div className={className}>
         <Toggler
           className={cn(classNameToggler, 'dropdown-toggle')}
           onClick={this.handleClick}
@@ -82,7 +83,7 @@ class DropDownNew extends React.Component { // eslint-disable-line react/prefer-
 
     if (this.props['dropdown-split']) {
       return (
-        <div className={className} {...rest}>
+        <div className={className}>
           <Toggler className={classNameToggler} {...restToggler}>
             {textToggler}
           </Toggler>
