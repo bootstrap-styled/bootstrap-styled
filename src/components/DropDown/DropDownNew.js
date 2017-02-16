@@ -61,12 +61,12 @@ class DropDownNew extends React.Component { // eslint-disable-line react/prefer-
   }
 
   render() {
-    const { className, children, theme, toggler, 'dropdown-split': dropdownSplit, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { className, children, theme, toggler, ...rest } = this.props; // eslint-disable-line no-unused-vars
     const { component: Toggler, className: classNameToggler, text: textToggler, ...restToggler } = toggler;
     const { dropped } = this.state;
 
     const dropdown = (
-      <div className={className}>
+      <div className={className} {...rest}>
         <Toggler
           className={cn(classNameToggler, 'dropdown-toggle')}
           onClick={this.handleClick}
@@ -74,23 +74,16 @@ class DropDownNew extends React.Component { // eslint-disable-line react/prefer-
         >
           {textToggler}
         </Toggler>
-        <div
-          className={cn({ 'dropdown-hide': !dropped })}
-        >
+        <div className={cn({ 'dropdown-hide': !dropped })}>
           {children}
         </div>
       </div>
     );
 
-    if (dropdownSplit) {
+    if (this.props['dropdown-split']) {
       return (
-        <div
-          className={className}
-        >
-          <Toggler
-            className={classNameToggler}
-            {...rest}
-          >
+        <div className={className} {...rest}>
+          <Toggler className={classNameToggler} {...restToggler}>
             {textToggler}
           </Toggler>
           <Toggler
@@ -100,9 +93,7 @@ class DropDownNew extends React.Component { // eslint-disable-line react/prefer-
           >
             <span className="sr-only"></span>
           </Toggler>
-          <div
-            className={cn({ 'dropdown-hide': !dropped })}
-          >
+          <div className={cn({ 'dropdown-hide': !dropped })}>
             {children}
           </div>
         </div>
@@ -316,5 +307,4 @@ DropDownNew = styled(DropDownNew)`
 `;
 
 DropDownNew.defaultProps = defaultProps;
-
 export default DropDownNew;

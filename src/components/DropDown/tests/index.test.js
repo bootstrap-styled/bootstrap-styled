@@ -71,7 +71,7 @@ describe('<DropDown />', () => {
     });
     expect(renderedComponent.find('OnClickOutside(DropDown)').length).toBe(1);
   });
-  it.only('should render a <DropDown> with a <A> button', () => {
+  it('should render a <DropDown> with a <A> button', () => {
     const renderedComponent = renderComponentUsingTheme({
       button: A,
       buttonProps: {
