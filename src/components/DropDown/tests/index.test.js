@@ -11,40 +11,37 @@ import Ul from '../../Ul';
 import Li from '../../Li';
 import A from '../../A';
 
-
-const dropdown = (<Ul>
-  <Li><A dropdown-item href="#">Item 1</A></Li>
-  <Li><A dropdown-item active href="#">Item active</A></Li>
-  <Li separator />
-  <Li><A dropdown-item disabled href="#">Item disabled</A></Li>
-  <Li><A dropdown-item href="#">Item last</A></Li>
-</Ul>);
-
 const renderComponent = (props = {}) => shallow(
-  <DropDown
-    button={props.button}
-    buttonProps={props.buttonProps}
-    dropdown={dropdown}
-  />
+  <DropDown className="dropdown" {...props}>
+    <Ul>
+      <Li><A dropdown-item href="#">Item 1</A></Li>
+      <Li separator />
+      <Li><A dropdown-item disabled href="#">Item disabled</A></Li>
+      <Li><A dropdown-item href="#">Item last</A></Li>
+    </Ul>
+  </DropDown>
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <ThemeProvider theme={theme}>
-    <DropDown
-      button={props.button}
-      buttonProps={props.buttonProps}
-      dropdown={dropdown}
-    />
+    <DropDown className="dropdown" {...props}>
+      <Ul>
+        <Li><A dropdown-item href="#">Item 1</A></Li>
+        <Li separator />
+        <Li><A dropdown-item disabled href="#">Item disabled</A></Li>
+        <Li><A dropdown-item href="#">Item last</A></Li>
+      </Ul>
+    </DropDown>
   </ThemeProvider>
 );
 
 describe('<DropDown />', () => {
   it('should render an <DropDown> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
-      button: Button,
-      buttonProps: {
-        type: 'button',
-        value: 'Dropdown',
+      toggler: {
+        component: Button,
+        text: 'Dropdown',
+        className: 'btn btn-secondary',
       },
     });
     expect(renderedComponent.find('DropDown').length).toBe(1);
@@ -52,10 +49,10 @@ describe('<DropDown />', () => {
   });
   it('should toggle the state on click <DropDown>', () => {
     const renderedComponent = renderComponentUsingTheme({
-      button: Button,
-      buttonProps: {
-        type: 'button',
-        value: 'Dropdown',
+      toggler: {
+        component: Button,
+        text: 'Dropdown',
+        className: 'btn btn-secondary',
       },
     });
     renderedComponent.find('button').simulate('click');
@@ -63,20 +60,21 @@ describe('<DropDown />', () => {
   });
   it('should render an <DropDown> tag without a theme', () => {
     const renderedComponent = renderComponent({
-      button: Button,
-      buttonProps: {
-        type: 'button',
-        value: 'Dropdown',
+      toggler: {
+        component: Button,
+        text: 'Dropdown',
+        className: 'btn btn-secondary',
       },
     });
     expect(renderedComponent.find('OnClickOutside(DropDown)').length).toBe(1);
   });
   it('should render a <DropDown> with a <A> button', () => {
     const renderedComponent = renderComponentUsingTheme({
-      button: A,
-      buttonProps: {
+      toggler: {
+        component: A,
+        text: 'Dropdown',
         href: 'http://toto',
-        value: 'Dropdown',
+        className: 'btn btn-secondary',
       },
     });
     renderedComponent.find('a[href="http://toto"]').simulate('click');
@@ -84,10 +82,10 @@ describe('<DropDown />', () => {
   });
   it('should render a <DropDown> with a dropdown-split', () => {
     const renderedComponent = renderComponentUsingTheme({
-      button: A,
-      buttonProps: {
-        href: 'http://toto',
-        value: 'Dropdown',
+      toggler: {
+        component: Button,
+        text: 'Dropdown',
+        className: 'btn btn-secondary',
       },
       'dropdown-split': true,
     });

@@ -6,7 +6,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 import onClickOutside from 'react-onclickoutside';
-import theme from 'theme';
+import bsTheme from 'theme';
 import Button from '../Button';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { boxShadow } from '../../styled/mixins/box-shadow';
@@ -16,23 +16,25 @@ import { buttonGroup } from '../../styled/utilities/buttonGroup';
 import { ifThen } from '../../styled/mixins/conditional';
 
 const defaultProps = {
-  type: 'link',
-  button: { Button },
-  buttonProps: {
-    type: 'button',
-    children: 'Dropdown',
+  toggler: {
+    component: Button,
+    text: 'Dropdown',
   },
-  theme,
+  theme: bsTheme,
 };
 
 class DropDown extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    dropdown: PropTypes.node.isRequired,
-    button: PropTypes.any.isRequired,
-    buttonProps: PropTypes.object.isRequired,
+    children: PropTypes.node.isRequired,
     className: PropTypes.string,
+    theme: PropTypes.object,
     'dropdown-split': PropTypes.bool,
+    toggler: PropTypes.shape({
+      component: PropTypes.component,
+      className: PropTypes.string,
+      text: PropTypes.string.isRequired,
+    }),
   };
 
   state = {
@@ -59,52 +61,40 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
   }
 
   render() {
-    const Btn = this.props.button;
-    const { href, value, className, ...rest } = this.props.buttonProps;
+    const { className, children, theme, toggler } = this.props; // eslint-disable-line no-unused-vars
+    const { component: Toggler, className: classNameToggler, text: textToggler, ...restToggler } = toggler;
+    const { dropped } = this.state;
 
     const dropdown = (
-      <div className={this.props.className}>
-        <Btn
-          className={cn(className, 'dropdown-toggle')}
-          href={href}
+      <div className={className}>
+        <Toggler
+          className={cn(classNameToggler, 'dropdown-toggle')}
           onClick={this.handleClick}
-          {...rest}
+          {...restToggler}
         >
-          {value}
-        </Btn>
-        <div
-          className={cn({ 'dropdown-hide': !this.state.dropped })}
-        >
-          {this.props.dropdown}
+          {textToggler}
+        </Toggler>
+        <div className={cn({ 'dropdown-hide': !dropped })}>
+          {children}
         </div>
       </div>
     );
 
     if (this.props['dropdown-split']) {
       return (
-        <div
-          className={this.props.className}
-        >
-          <Btn
-            className={className}
-            {...rest}
-          >
-            {value}
-          </Btn>
-          <Btn
-            {...rest}
-            className={cn(className, 'dropdown-toggle', 'dropdown-toggle-split')}
-            href={href}
+        <div className={cn(className, 'btn-group')}>
+          <Toggler className={classNameToggler} {...restToggler}>
+            {textToggler}
+          </Toggler>
+          <Toggler
+            className={cn(classNameToggler, 'dropdown-toggle', 'dropdown-toggle-split')}
             onClick={this.handleClick}
+            {...restToggler}
           >
             <span className="sr-only"></span>
-          </Btn>
-          <div
-            className={cn({
-              'dropdown-hide': !this.state.dropped,
-            })}
-          >
-            {this.props.dropdown}
+          </Toggler>
+          <div className={cn({ 'dropdown-hide': !dropped })}>
+            {children}
           </div>
         </div>
       );
@@ -317,5 +307,4 @@ DropDown = styled(DropDown)`
 `;
 
 DropDown.defaultProps = defaultProps;
-
 export default DropDown;
