@@ -8,6 +8,11 @@ const { detectUnit, rmUnit, UNIT } = unitUtils;
 // DO NOT ADD ANY NEW VARIABLES TO THE THEME, ADD THEM AT THE BOTTOM OF THE LIST WHERE INDICATED
 // ===============================================================================================
 
+// Helper used to keep false values provided by userTheme
+function allowFalseValue(userValue, defaultValue) {
+  return userValue === false ? userValue : userValue || defaultValue;
+}
+
 // Export a default theme as default
 export default makeTheme();
 
@@ -99,13 +104,13 @@ export function makeTheme(userTheme = {}) {
   //
   // Quickly modify global styling by enabling or disabling optional features.
 
-  v['$enable-rounded'] = u['$enable-rounded'] || true;
-  v['$enable-shadows'] = u['$enable-shadows'] || false;
-  v['$enable-gradients'] = u['$enable-gradients'] || false;
-  v['$enable-transitions'] = u['$enable-transitions'] || true;
-  v['$enable-hover-media-query'] = u['$enable-hover-media-query'] || false;
-  v['$enable-grid-classes'] = u['$enable-grid-classes'] || true;
-  v['$enable-print-styles'] = u['$enable-print-styles'] || true;
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+  v['$enable-gradients'] = allowFalseValue(u['$enable-gradients'], false);
+  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+  v['$enable-print-styles'] = allowFalseValue(u['$enable-print-styles'], true);
 
 
   // Spacing

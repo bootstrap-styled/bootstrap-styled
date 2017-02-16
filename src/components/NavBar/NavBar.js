@@ -12,7 +12,6 @@ import NavBarToggler from './NavBarToggler';
 import { navbar } from '../../styled/utilities/navbar';
 import { nav } from '../../styled/utilities/nav';
 import { ifThen } from '../../styled/mixins/conditional';
-import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 
 const defaultProps = {
   brand: {
@@ -103,17 +102,6 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
 // eslint-disable-next-line no-class-assign
 NavBar = styled(NavBar)`
   ${(props) => `
-    ${mediaBreakpointUp('lg', props.theme['$grid-breakpoints'], `
-      & .navbar-collapse {
-        display: flex !important;
-        height: auto !important;
-        
-        >div:first-child,
-        >div:first-child>div:first-child { /* solve the wrapping issue */
-          display: flex;
-        }
-      }
-    `)}
     ${navbar(
       props.theme['$grid-breakpoints'],
       props.theme['$enable-rounded'],
