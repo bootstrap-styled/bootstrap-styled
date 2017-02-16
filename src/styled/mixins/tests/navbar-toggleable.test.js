@@ -12,10 +12,10 @@ describe('bootstrap toggleable mixins', () => {
     const css = navbarToggleable(defaultProps['$grid-breakpoints']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(222088669);
+    expect(fromJS({ css }).hashCode()).toEqual(71089233);
   });
   it('navbarToggleable should have arguments', () => {
     const css = navbarToggleable();
-    expect(fromJS({ css }).hashCode()).toEqual(222088669);
+    expect(fromJS({ css }).hashCode()).toEqual(71089233);
   });
 });

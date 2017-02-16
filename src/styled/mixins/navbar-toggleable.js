@@ -52,19 +52,21 @@ export function navbarToggleable(gridBreakpoints = defaultProps['$grid-breakpoin
             align-items: center;
           }
   
-          /* scss-lint:disable ImportantRule  */
           .navbar-collapse {
             display: flex !important;
             width: 100%;
             height: auto !important;
             
-            >div:first-child,
-            >div:first-child>div:first-child { /* solve the wrapping issue */
-              display: flex;
+
+            >div:first-child { /* solve the wrapping issue */
+              width: 100%;
+              
+              >div:first-child {
+                display: flex;
+              }
             }
           }
           
-          /* scss-lint:enable ImportantRule */
           .navbar-toggler {
             display: none;
           }
