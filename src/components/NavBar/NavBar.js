@@ -9,6 +9,7 @@ import bsTheme from 'theme';
 import A from 'components/A';
 import Collapse from 'components/Collapse/Collapse';
 import NavBarToggler from './NavBarToggler';
+import Container from '../Container';
 import { navbar } from '../../styled/utilities/navbar';
 import { nav } from '../../styled/utilities/nav';
 import { ifThen } from '../../styled/mixins/conditional';
@@ -24,9 +25,13 @@ const defaultProps = {
 class NavBar extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.oneOfType([
+      PropTypes.text,
+      PropTypes.node,
+    ]),
     className: PropTypes.string,
     theme: PropTypes.object,
+    fullWidth: PropTypes.bool,
     toggler: PropTypes.shape({
       right: PropTypes.bool,
       left: PropTypes.bool,
@@ -76,11 +81,29 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
   }
 
   render() {
-    const { className, children, theme, toggler, brand, collapse, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { className, children, theme, toggler, brand, collapse, fullWidth, ...rest } = this.props; // eslint-disable-line no-unused-vars
     const { component: NavBarBrand, children: childrenBrand, className: classNameBrand, ...restBrand } = brand;
-    const { children: childrenCollapse, className: classNameCollapse, ...restCollapse } = collapse;
+    const { children: childrenCollapse, className: classNameCollapse, ...restCollapse } = collapse || {};
     const { isOpened } = this.state;
-    return (
+
+    return fullWidth ? (
+      <nav className={cn('navbar', className)} {...rest}>
+        <Container>
+          {toggler && (
+            <NavBarToggler className={toggler.className} left={toggler.left} right={toggler.right} onClick={this.handleToggler} />
+          )}
+          {childrenBrand && (
+            <NavBarBrand className={cn('navbar-brand', classNameBrand)} {...restBrand}>{childrenBrand}</NavBarBrand>
+          )}
+          {childrenCollapse && (
+            <Collapse isOpened={isOpened} keepCollapsedContent className={cn('navbar-collapse', classNameCollapse)} {...restCollapse}>
+              {childrenCollapse}
+            </Collapse>
+          )}
+          {children}
+        </Container>
+      </nav>
+    ) : (
       <nav className={cn('navbar', className)} {...rest}>
         {toggler && (
           <NavBarToggler className={toggler.className} left={toggler.left} right={toggler.right} onClick={this.handleToggler} />
