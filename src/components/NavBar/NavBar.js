@@ -31,7 +31,7 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
     ]),
     className: PropTypes.string,
     theme: PropTypes.object,
-    fullWidth: PropTypes.bool,
+    contained: PropTypes.bool,
     toggler: PropTypes.shape({
       right: PropTypes.bool,
       left: PropTypes.bool,
@@ -81,12 +81,12 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
   }
 
   render() {
-    const { className, children, theme, toggler, brand, collapse, fullWidth, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { className, children, theme, toggler, brand, collapse, contained, ...rest } = this.props; // eslint-disable-line no-unused-vars
     const { component: NavBarBrand, children: childrenBrand, className: classNameBrand, ...restBrand } = brand;
     const { children: childrenCollapse, className: classNameCollapse, ...restCollapse } = collapse || {};
     const { isOpened } = this.state;
 
-    return fullWidth ? (
+    return contained ? (
       <nav className={cn('navbar', className)} {...rest}>
         <Container>
           {toggler && (
