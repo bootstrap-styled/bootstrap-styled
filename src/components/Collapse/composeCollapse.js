@@ -24,7 +24,6 @@ export default (CollapseLib) => class Collapse extends React.Component {
     const { children, theme, ...props } = this.props;
     // extract keys for div
     const { className, isOpened, fixedHeight, springConfig, keepCollapsedContent, onRest, onHeightReady, ...rest } = props;
-    console.log('JS value of $enable-transitions', theme['$enable-transitions']);
     return theme['$enable-transitions'] ? (
       <CollapseLib className={className} {...props}>{children}</CollapseLib>
     ) : (
