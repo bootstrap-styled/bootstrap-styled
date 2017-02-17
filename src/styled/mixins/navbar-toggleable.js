@@ -54,10 +54,12 @@ export function navbarToggleable(gridBreakpoints = defaultProps['$grid-breakpoin
   
           .navbar-collapse {
             display: flex !important;
+            /* FIX DUE TO COLLAPSE */
+            /* ============================================= */
             width: 100%;
             height: auto !important;
-            
-
+            overflow: visible !important;
+            /* ============================================= */
             >div:first-child { /* solve the wrapping issue */
               width: 100%;
               
