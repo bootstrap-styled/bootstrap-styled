@@ -17,7 +17,7 @@ export function getPositionUtilities(
 export function fixedTop(zindexFixed = defaultProps['$zindex-fixed']) {
   return `
   .fixed-top {
-    position: fixed;
+    position: fixed !important;
     top: 0;
     right: 0;
     left: 0;
@@ -29,7 +29,7 @@ export function fixedTop(zindexFixed = defaultProps['$zindex-fixed']) {
 export function fixedBottom(zindexFixed = defaultProps['$zindex-fixed']) {
   return `
     .fixed-bottom {
-      position: fixed;
+      position: fixed !important;
       right: 0;
       bottom: 0;
       left: 0;
@@ -41,7 +41,7 @@ export function fixedBottom(zindexFixed = defaultProps['$zindex-fixed']) {
 export function stickTop(zindexSticky = defaultProps['$zindex-sticky']) {
   return `
     .sticky-top {
-      position: sticky;
+      position: sticky !important;
       top: 0;
       z-index: ${zindexSticky};
     }
