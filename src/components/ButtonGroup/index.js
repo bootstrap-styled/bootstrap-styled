@@ -51,7 +51,6 @@ ButtonGroup = styled(ButtonGroup)`
       props.theme['$btn-toolbar-margin'],
       props.theme['$btn-padding-x'],
       props.theme['$btn-active-box-shadow'],
-      props.theme['$caret-width-lg'],
       props.theme['$btn-padding-x-lg'],
       props.theme['$btn-padding-y-lg'],
       props.theme['$font-size-lg'],
@@ -59,8 +58,7 @@ ButtonGroup = styled(ButtonGroup)`
       props.theme['$btn-padding-x-sm'],
       props.theme['$btn-padding-y-sm'],
       props.theme['$font-size-sm'],
-      props.theme['$btn-border-radius-sm'],
-      props.theme['$btn-border-width']
+      props.theme['$btn-border-radius-sm']
     )}
   `}  
 `;
