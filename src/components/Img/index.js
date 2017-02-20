@@ -11,6 +11,7 @@ import bsTheme from 'theme';
 import { imgFluid } from '../../styled/mixins/image';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { borderRadius } from '../../styled/mixins/border-radius';
+import { transition } from '../../styled/mixins/transition';
 
 const defaultProps = { theme: bsTheme };
 
@@ -73,7 +74,10 @@ Img = styled(Img)`
         props.theme['$enable-rounded'],
         props.theme['$thumbnail-border-radius']
       )}
-      transition: all .2s ease-in-out;
+      ${transition(
+        props.theme['$enable-transitions'],
+        'all .2s ease-in-out'
+      )}
       ${boxShadow(
         props.theme['$enable-shadows'],
         props.theme['$thumbnail-box-shadow']
