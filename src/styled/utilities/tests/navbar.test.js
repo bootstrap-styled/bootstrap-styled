@@ -33,10 +33,10 @@ describe('bootstrap navbar utility', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(62170552);
+    expect(fromJS({ css }).hashCode()).toEqual(208135976);
   });
   it('navbar should have arguments', () => {
     const css = navbar();
-    expect(fromJS({ css }).hashCode()).toEqual(-493051211);
+    expect(fromJS({ css }).hashCode()).toEqual(-689343645);
   });
 });

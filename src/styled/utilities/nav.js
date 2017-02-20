@@ -146,10 +146,6 @@ export function nav(
       }
     }
     
-    /*
-     Tabbable tabs
-    */
-    
     /* Hide tabbable panes to start, show them when .active */
     &.tab-content {
       > .tab-pane {
