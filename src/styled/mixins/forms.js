@@ -1,7 +1,6 @@
 import color from 'color';
 import { borderRadius } from './border-radius';
 import { boxShadow } from './box-shadow';
-
 export const defaultProps = {
   '$enable-shadows': false,
   '$enable-rounded': true,
@@ -12,7 +11,6 @@ export const defaultProps = {
   '$input-border-radius': '.25rem',
   '$input-box-shadow-focus': 'inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6)',
 };
-
 // Form validation states
 //
 // Used in _forms.scss to generate the form validation CSS for warnings, errors,
@@ -46,7 +44,6 @@ export function formControlValidation(enableShadows = defaultProps['$enable-shad
     }
   `;
 }
-
 // Form control focus state
 //
 // Generate a customized focus state and for any input with the specified color,
@@ -70,7 +67,6 @@ export function formControlFocus(enableShadows = defaultProps['$enable-shadows']
     }
   `;
 }
-
 // Form control sizing
 //
 // Relative text size, padding, and border-radii changes for form controls. For
@@ -97,11 +93,9 @@ export function inputSize(enableRounded = defaultProps['$enable-rounded'], paren
     }
   `;
 }
-
 export default {
   defaultProps,
   formControlValidation,
   formControlFocus,
   inputSize,
 };
-
