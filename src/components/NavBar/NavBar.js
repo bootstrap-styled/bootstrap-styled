@@ -88,7 +88,7 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
 
     return contained ? (
       <nav className={cn('navbar', className)} {...rest}>
-        <Container>
+        <Container {...rest}>
           {toggler && (
             <NavBarToggler className={toggler.className} left={toggler.left} right={toggler.right} onClick={this.handleToggler} />
           )}
