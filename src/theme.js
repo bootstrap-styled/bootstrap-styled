@@ -921,7 +921,7 @@ export function makeTheme(userTheme = {}) {
   v['$pre-color'] = u['$pre-color'] || v['$gray-dark'];
   v['$pre-scrollable-max-height'] = u['$pre-scrollable-max-height'] || '340px';
 
-  // OUR KOPAX EXTEND OF BOOTSTRAP ONLY ADD NEW VARIBALES HERE
+  // OUR KOPAX EXTEND OF BOOTSTRAP ONLY ADD NEW VARIABLES DOWN HERE
 
   // tools
 
@@ -946,25 +946,7 @@ export function makeTheme(userTheme = {}) {
 
   // THIS COME FROM old theme in config.js and doesn't exist in the new theme
 
-  // v['$gray-base'] = '#000';
   // v['$spacer-halved'] = (rmUnit(v['$spacer'], UNIT.REM) / 2) + UNIT.REM;
-  // v['$font-family-serif'] = 'Georgia, \'Times New Roman\'; Times, serif';
-  // v['$font-size-root'] = '16px';
-  // v['$headings-underline-width'] = '180%';
-  // v['$headings-underline-height'] = '1px';
-  // v['$headings-underline-left-position'] = '-40%';
-  // v['$headings-underline-gradient-color-1'] = v['$brand-primary'];
-  // v['$headings-underline-gradient-color-2'] = v['$body-bg'];
-  // v['$abbr-border-color'] = v['$gray-light'];
-  // v['$caret-width-lg'] = v['$caret-width'];
-  // v['$padding-base-vertical'] = '6px';
-  // v['$padding-base-horizontal'] = '12px';
-  // v['$padding-large-vertical'] = '10px';
-  // v['$padding-large-horizontal'] = '16px';
-  // v['$padding-small-vertical'] = '5px';
-  // v['$padding-small-horizontal'] = '10px';
-  // v['$padding-xs-vertical'] = '1px';
-  // v['$padding-xs-horizontal'] = '5px';
   // v['$table-bg-inverse'] = v['$gray-dark'];
   // v['$table-inverse-border-color'] = v['$gray'];
   // v['$table-border-header-width'] = (rmUnit(v['$border-width'], UNIT.PX) * 2) + UNIT.PX;

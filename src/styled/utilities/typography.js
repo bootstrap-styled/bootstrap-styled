@@ -4,11 +4,6 @@ export const defaultProps = {
   '$headings-font-weight': '500',
   '$headings-line-height': '1.1',
   '$headings-color': 'inherit',
-  '$headings-underline-width': '180%',
-  '$headings-underline-height': '1px',
-  '$headings-underline-left-position': '-40%',
-  '$headings-underline-gradient-color-1': '#0275d8',
-  '$headings-underline-gradient-color-2': '#fff',
   '$display1-size': '6rem',
   '$display2-size': '5.5rem',
   '$display3-size': '4.5rem',
@@ -17,7 +12,6 @@ export const defaultProps = {
   '$display2-weight': '300',
   '$display3-weight': '300',
   '$display4-weight': '300',
-
 };
 
 export function typography(
@@ -26,11 +20,6 @@ export function typography(
   $headingsFontWeight = defaultProps['$headings-font-weight'],
   $headingsLineHeight = defaultProps['$headings-line-height'],
   $headingsColor = defaultProps['$headings-color'],
-  $headingsUnderlingWidth = defaultProps['$headings-underline-width'],
-  $headingsUnderlingHeight = defaultProps['$headings-underline-height'],
-  $headingsUnderlingLeftPosition = defaultProps['$headings-underline-left-position'],
-  $headingsUnderlingGradientColor1 = defaultProps['$headings-underline-gradient-color-1'],
-  $headingsUnderlingGradientColor2 = defaultProps['$headings-underline-gradient-color-2'],
   $display1Size = defaultProps['$display1-size'],
   $display2Size = defaultProps['$display2-size'],
   $display3Size = defaultProps['$display3-size'],
@@ -39,7 +28,6 @@ export function typography(
   $display2Weight = defaultProps['$display2-weight'],
   $display3Weight = defaultProps['$display3-weight'],
   $display4Weight = defaultProps['$display4-weight'],
-
 ) {
   return `
     margin-bottom: ${$headingsMarginBottom};
@@ -47,23 +35,6 @@ export function typography(
     font-weight: ${$headingsFontWeight};
     line-height: ${$headingsLineHeight};
     color: ${$headingsColor};
-    
-    &.underline{
-      display: inline-block;
-      padding-bottom: 5px;
-      position: relative;
-      &:before{
-        content: "";
-        position: absolute;
-        width: ${$headingsUnderlingWidth};
-        height: ${$headingsUnderlingHeight};
-        bottom: 0;
-        left: ${$headingsUnderlingLeftPosition};
-        background: -webkit-gradient(radial, center center, 0, center center, 460, from(${$headingsUnderlingGradientColor1}), to(${$headingsUnderlingGradientColor2}));
-        background: -webkit-radial-gradient(circle, ${$headingsUnderlingGradientColor1}, ${$headingsUnderlingGradientColor2});
-        background: -moz-radial-gradient(circle, ${$headingsUnderlingGradientColor1}, ${$headingsUnderlingGradientColor2});
-      }
-    }
     
     /* Type Scss */
 

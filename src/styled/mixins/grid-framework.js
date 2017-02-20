@@ -39,7 +39,8 @@ function getColumnGridColumn(gridColumns = defaultProps['$grid-columns'], gridBr
   const infix = breakpointInfix(breakpoint, gridBreakpoints);
   for (let i = 1; i <= gridColumns; i += 1) {
     const column = `
-      &.col${infix}-${i} {
+      &.col${infix}-${i},
+       & .col${infix}-${i}{
         ${getGridColumn(gridColumns, gridGutterWidths)}
       }
     `;
@@ -47,7 +48,8 @@ function getColumnGridColumn(gridColumns = defaultProps['$grid-columns'], gridBr
   }
   return `
     /* Allow columns to stretch full width below their breakpoints */
-    &.col${infix} {
+    &.col${infix},
+     & .col${infix}{
       ${getGridColumn(gridColumns, gridGutterWidths)}
     }
 
@@ -58,12 +60,14 @@ function getColumnGridColumn(gridColumns = defaultProps['$grid-columns'], gridBr
 function getMediaBreakpointUp(gridColumns = defaultProps['$grid-columns'], gridBreakpoints = defaultProps['$grid-breakpoints'], breakpoint) {
   const infix = breakpointInfix(breakpoint, gridBreakpoints);
   const basic = `
-    &.col${infix} {
+    &.col${infix},
+     & .col${infix}{
       flex-basis: 0;
       flex-grow: 1;
       max-width: 100%;
     }
-    &.col${infix}-auto {
+    &.col${infix}-auto,
+     & .col${infix}-auto{
       flex: 0 0 auto;
       width: auto;
     }
@@ -72,7 +76,8 @@ function getMediaBreakpointUp(gridColumns = defaultProps['$grid-columns'], gridB
   const columnList = [];
   for (let i = 1; i <= gridColumns; i += 1) {
     const column = `
-      &.col${infix}-${i} {
+      &.col${infix}-${i},
+       & .col${infix}-${i}{
         ${makeCol(i, gridColumns)}
       }
     `;
@@ -83,7 +88,8 @@ function getMediaBreakpointUp(gridColumns = defaultProps['$grid-columns'], gridB
   modifierList.forEach((modifier) => {
     for (let i = 0; i <= gridColumns; i += 1) {
       const columnModifier = `
-        &.${modifier}${infix}-${i} {
+        &.${modifier}${infix}-${i},
+         & .${modifier}${infix}-${i}{
           ${makeColModifier(modifier, i, gridColumns)}
         }
       `;
@@ -95,7 +101,8 @@ function getMediaBreakpointUp(gridColumns = defaultProps['$grid-columns'], gridB
   for (let i = 0; i <= (gridColumns - 1); i += 1) {
     if (infix !== 1 || i !== 0) { // Avoid emitting useless .offset-xs-0
       const offsetColumn = `
-        &.offset${infix}-${i} {
+        &.offset${infix}-${i},
+         & .offset${infix}-${i}{
           ${makeColModifier('offset', i, gridColumns)}
         }
       `;

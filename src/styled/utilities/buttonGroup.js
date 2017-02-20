@@ -11,8 +11,6 @@ export const defaultProps = {
   '$btn-toolbar-margin': '.5rem',
   '$btn-padding-x': '1rem',
   '$btn-active-box-shadow': 'inset 0 3px 5px rgba(0,0,0,.125)',
-  '$caret-width': '.3em',
-  '$caret-width-lg': '.3em',
   '$btn-padding-x-lg': '1.5rem',
   '$btn-padding-y-lg': '.75rem',
   '$font-size-lg': '1.25rem',
@@ -31,7 +29,6 @@ export function buttonGroup(
   $btnToolbarMargin = defaultProps['$btn-toolbar-margin'],
   $btnPaddingX = defaultProps['$btn-padding-x'],
   $btnActiveBoxShadow = defaultProps['$btn-active-box-shadow'],
-  $caretWidthLg = defaultProps['$caret-width-lg'],
   $btnPaddingXLg = defaultProps['$btn-padding-x-lg'],
   $btnPaddingYLg = defaultProps['$btn-padding-y-lg'],
   $fontSizeLg = defaultProps['$font-size-lg'],
@@ -39,8 +36,7 @@ export function buttonGroup(
   $btnPaddingXSm = defaultProps['$btn-padding-x-sm'],
   $btnPaddingYSm = defaultProps['$btn-padding-y-sm'],
   $fontSizeSm = defaultProps['$font-size-sm'],
-  $btnBorderRadiusSm = defaultProps['$btn-border-radius-sm'],
-  $btnBorderWidth = defaultProps['$btn-border-width']
+  $btnBorderRadiusSm = defaultProps['$btn-border-radius-sm']
 ) {
   return ` 
     /*  Make the div behave like a button */
@@ -76,15 +72,15 @@ export function buttonGroup(
       .btn + .btn-group,
       .btn-group + .btn,
       .btn-group + .btn-group {
-        margin-left: -${$btnBorderWidth};
+        margin-left: -${$inputBtnBorderWidth};
       }
     }
     
     /* Optional: Group multiple button groups together for a toolbar */
     &.btn-toolbar,
     & .btn-toolbar{
-       display: flex;
-       flex-wrap: wrap;
+      display: flex;
+      flex-wrap: wrap;
       justify-content: flex-start;
     
       .input-group {
@@ -165,7 +161,7 @@ export function buttonGroup(
     */
     
     &.btn-group-sm > .btn,
-    & .btn-group-sm > .btn{ 
+    & .btn-group-sm > .btn { 
       ${buttonSize(
         $enableRounded,
         $btnPaddingYSm,
@@ -226,24 +222,7 @@ export function buttonGroup(
         )}
       }
     }
-    
-    
-    /* Reposition the caret */
-    & .btn .caret {
-      margin-left: 0;
-    }
-    /* Carets in other button sizes */
-    & .btn-lg .caret {
-      border-width: ${$caretWidthLg} ${$caretWidthLg} 0;
-      border-bottom-width: 0;
-    }
-    /* Upside down carets for .dropup */
-    & .dropup .btn-lg .caret {
-      border-width: 0 ${$caretWidthLg} ${$caretWidthLg};
-    }
-    
-    
-    
+
     /*
      Vertical button groups
     */
