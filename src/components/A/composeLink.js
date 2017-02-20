@@ -47,6 +47,7 @@ export default function composeLink(RouterLink) {
         props.theme['$enable-rounded'],
         props.theme['$btn-font-weight'],
         props.theme['$btn-line-height'],
+        props.theme['$btn-transitions'],
         props.theme['$input-btn-border-width'],
         props.theme['$btn-padding-x'],
         props.theme['$btn-padding-y'],

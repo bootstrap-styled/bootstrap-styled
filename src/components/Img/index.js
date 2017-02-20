@@ -76,7 +76,7 @@ Img = styled(Img)`
       )}
       ${transition(
         props.theme['$enable-transitions'],
-        'all .2s ease-in-out'
+        props.theme['$thumbnail-transition']
       )}
       ${boxShadow(
         props.theme['$enable-shadows'],
@@ -84,6 +84,11 @@ Img = styled(Img)`
       )}
       /* Keep them at most 100% wide */
       ${imgFluid()}
+    }
+    
+    &.figure-img {
+      margin-bottom: ${props.theme['$spacer-halved']};
+      line-height: 1;
     }
     
     /* Reboot Scss */

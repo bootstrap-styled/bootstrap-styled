@@ -40,7 +40,7 @@ const Nav = styled.nav`
       props.theme['$breadcrumb-item-padding'],
       props.theme['$breadcrumb-divider-color'],
       props.theme['$breadcrumb-divider'],
-      props.theme['$breadcrumb-item-active-color']
+      props.theme['$breadcrumb-active-color']
     )}
   `}
 `;

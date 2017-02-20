@@ -11,7 +11,7 @@ export const defaultProps = {
   '$breadcrumb-item-padding': '.5rem',
   '$breadcrumb-divider-color': '#636c72',
   '$breadcrumb-divider': '"/"',
-  '$breadcrumb-item-active-color': '#636c72',
+  '$breadcrumb-active-color': '#636c72',
 };
 
 export function breadcrumb(
@@ -24,7 +24,7 @@ export function breadcrumb(
   $breadcrumbItemPadding = defaultProps['$breadcrumb-item-padding'],
   $breadcrumbDividerColor = defaultProps['$breadcrumb-divider-color'],
   $breadcrumbDivider = defaultProps['$breadcrumb-divider'],
-  $breadcrumbItemActiveColor = defaultProps['$breadcrumb-item-active-color'],
+  $breadcrumbActiveColor = defaultProps['$breadcrumb-active-color'],
 ) {
   return `
     &.breadcrumb {
@@ -69,7 +69,7 @@ export function breadcrumb(
       }
     
       &.active {
-        color: ${$breadcrumbItemActiveColor};
+        color: ${$breadcrumbActiveColor};
       }
     }
   `;

@@ -756,32 +756,32 @@ export function makeTheme(userTheme = {}) {
   // Modals
 
   // Padding applied to the modal body
-  v['$modal-inner-padding'] = u['$modal-inner-padding'] || '15px';
-
-  v['$modal-dialog-margin'] = u['$modal-dialog-margin'] || '10px';
-  v['$modal-dialog-sm-up-margin-y'] = u['$modal-dialog-sm-up-margin-y'] || '30px';
-
-  v['$modal-title-line-height'] = u['$modal-title-line-height'] || v['$line-height-base'];
-
-  v['$modal-content-bg'] = u['$modal-content-bg'] || v['$white'];
-  v['$modal-content-border-color'] = u['$modal-content-border-color'] || Color(v['$black']).alpha(0.2).toString();
-  v['$modal-content-border-width'] = u['$modal-content-border-width'] || v['$border-width'];
-  v['$modal-content-xs-box-shadow'] = u['$modal-content-xs-box-shadow'] || `0 3px 9px ${Color(v['$black']).alpha(0.5).toString()}`;
-  v['$modal-content-sm-up-box-shadow'] = u['$modal-content-sm-up-box-shadow'] || `0 5px 15px ${Color(v['$black']).alpha(0.5).toString()}`;
-
-  v['$modal-backdrop-bg'] = u['$modal-backdrop-bg'] || v['$black'];
-  v['$modal-backdrop-opacity'] = u['$modal-backdrop-opacity'] || '.5';
-  v['$modal-header-border-color'] = u['$modal-header-border-color'] || v['$gray-lighter'];
-  v['$modal-footer-border-color'] = u['$modal-footer-border-color'] || v['$modal-header-border-color'];
-  v['$modal-header-border-width'] = u['$modal-header-border-width'] || v['$modal-content-border-width'];
-  v['$modal-footer-border-width'] = u['$modal-footer-border-width'] || v['$modal-header-border-width'];
-  v['$modal-header-padding'] = u['$modal-header-padding'] || '15px';
-
-  v['$modal-lg'] = u['$modal-lg'] || '800px';
-  v['$modal-md'] = u['$modal-md'] || '500px';
-  v['$modal-sm'] = u['$modal-sm'] || '300px';
-
-  v['$modal-transition'] = u['$modal-transition'] || 'transform .3s ease-out';
+  // v['$modal-inner-padding'] = u['$modal-inner-padding'] || '15px';
+  //
+  // v['$modal-dialog-margin'] = u['$modal-dialog-margin'] || '10px';
+  // v['$modal-dialog-sm-up-margin-y'] = u['$modal-dialog-sm-up-margin-y'] || '30px';
+  //
+  // v['$modal-title-line-height'] = u['$modal-title-line-height'] || v['$line-height-base'];
+  //
+  // v['$modal-content-bg'] = u['$modal-content-bg'] || v['$white'];
+  // v['$modal-content-border-color'] = u['$modal-content-border-color'] || Color(v['$black']).alpha(0.2).toString();
+  // v['$modal-content-border-width'] = u['$modal-content-border-width'] || v['$border-width'];
+  // v['$modal-content-xs-box-shadow'] = u['$modal-content-xs-box-shadow'] || `0 3px 9px ${Color(v['$black']).alpha(0.5).toString()}`;
+  // v['$modal-content-sm-up-box-shadow'] = u['$modal-content-sm-up-box-shadow'] || `0 5px 15px ${Color(v['$black']).alpha(0.5).toString()}`;
+  //
+  // v['$modal-backdrop-bg'] = u['$modal-backdrop-bg'] || v['$black'];
+  // v['$modal-backdrop-opacity'] = u['$modal-backdrop-opacity'] || '.5';
+  // v['$modal-header-border-color'] = u['$modal-header-border-color'] || v['$gray-lighter'];
+  // v['$modal-footer-border-color'] = u['$modal-footer-border-color'] || v['$modal-header-border-color'];
+  // v['$modal-header-border-width'] = u['$modal-header-border-width'] || v['$modal-content-border-width'];
+  // v['$modal-footer-border-width'] = u['$modal-footer-border-width'] || v['$modal-header-border-width'];
+  // v['$modal-header-padding'] = u['$modal-header-padding'] || '15px';
+  //
+  // v['$modal-lg'] = u['$modal-lg'] || '800px';
+  // v['$modal-md'] = u['$modal-md'] || '500px';
+  // v['$modal-sm'] = u['$modal-sm'] || '300px';
+  //
+  // v['$modal-transition'] = u['$modal-transition'] || 'transform .3s ease-out';
 
 
   // Alerts
@@ -880,24 +880,24 @@ export function makeTheme(userTheme = {}) {
 
   // Carousel
 
-  v['$carousel-control-color'] = u['$carousel-control-color'] || v['$white'];
-  v['$carousel-control-width'] = u['$carousel-control-width'] || '15%';
-  v['$carousel-control-opacity'] = u['$carousel-control-opacity'] || '.5';
-
-  v['$carousel-indicator-width'] = u['$carousel-indicator-width'] || '30px';
-  v['$carousel-indicator-height'] = u['$carousel-indicator-height'] || '3px';
-  v['$carousel-indicator-spacer'] = u['$carousel-indicator-spacer'] || '3px';
-  v['$carousel-indicator-active-bg'] = u['$carousel-indicator-active-bg'] || v['$white'];
-
-  v['$carousel-caption-width'] = u['$carousel-caption-width'] || '70%';
-  v['$carousel-caption-color'] = u['$carousel-caption-color'] || v['$white'];
-
-  v['$carousel-control-icon-width'] = u['$carousel-control-icon-width'] || '20px';
-
-  v['$carousel-control-prev-icon-bg'] = u['$carousel-control-prev-icon-bg'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="${v['$carousel-control-color']}" viewBox="0 0 8 8"%3E%3Cpath d="M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z"/%3E%3C/svg%3E')`;
-  v['$carousel-control-next-icon-bg'] = u['$carousel-control-next-icon-bg'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="${v['$carousel-control-color']}" viewBox="0 0 8 8"%3E%3Cpath d="M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z"/%3E%3C/svg%3E')`;
-
-  v['$carousel-transition'] = u['$carousel-transition'] || 'transform .6s ease-in-out';
+  // v['$carousel-control-color'] = u['$carousel-control-color'] || v['$white'];
+  // v['$carousel-control-width'] = u['$carousel-control-width'] || '15%';
+  // v['$carousel-control-opacity'] = u['$carousel-control-opacity'] || '.5';
+  //
+  // v['$carousel-indicator-width'] = u['$carousel-indicator-width'] || '30px';
+  // v['$carousel-indicator-height'] = u['$carousel-indicator-height'] || '3px';
+  // v['$carousel-indicator-spacer'] = u['$carousel-indicator-spacer'] || '3px';
+  // v['$carousel-indicator-active-bg'] = u['$carousel-indicator-active-bg'] || v['$white'];
+  //
+  // v['$carousel-caption-width'] = u['$carousel-caption-width'] || '70%';
+  // v['$carousel-caption-color'] = u['$carousel-caption-color'] || v['$white'];
+  //
+  // v['$carousel-control-icon-width'] = u['$carousel-control-icon-width'] || '20px';
+  //
+  // v['$carousel-control-prev-icon-bg'] = u['$carousel-control-prev-icon-bg'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="${v['$carousel-control-color']}" viewBox="0 0 8 8"%3E%3Cpath d="M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z"/%3E%3C/svg%3E')`;
+  // v['$carousel-control-next-icon-bg'] = u['$carousel-control-next-icon-bg'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="${v['$carousel-control-color']}" viewBox="0 0 8 8"%3E%3Cpath d="M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z"/%3E%3C/svg%3E')`;
+  //
+  // v['$carousel-transition'] = u['$carousel-transition'] || 'transform .6s ease-in-out';
 
 
   // Close
@@ -1031,17 +1031,6 @@ export function makeTheme(userTheme = {}) {
   // v['$media-heading-margin-bottom'] = '5px';
   // v['$media-alignment-padding-x'] = '10px';
   //
-  // // 33. Carousel
-  //
-  // v['$carousel-text-shadow'] = '0 1px 2px rgba(0,0,0,.6)';
-  // v['$carousel-control-sm-up-size'] = '30px';
-  // v['$carousel-control-font-size'] = '20px';
-  // v['$carousel-indicators-width'] = '60%';
-  // v['$carousel-indicator-size'] = '10px';
-  // v['$carousel-indicator-active-size'] = '12px';
-  // v['$carousel-indicator-border-color'] = '#fff';
-  // v['$carousel-caption-sm-up-width'] = '60%';
-  // v['$carousel-icon-width'] = '20px';
   //
   // v['$pre-bg'] = '#f7f7f9';
   // v['$pre-border-color'] = '#ccc';
@@ -1063,57 +1052,4 @@ export function makeTheme(userTheme = {}) {
   // v['$menu-push-mini-width'] = '75px';
   // v['$menu-push-width'] = '220px';
   // v['$menu-push-full-width'] = '100%';
-
-
-  // THIS COME FROM the new import and are listed here as information, they were not present in old theme
-
-  // v['$font-weight-base'] = 'normal';
-  // v['$display-line-height'] = '1.1';
-  // v['$transition-base'] = 'all .2s ease-in-out';
-  // v['$transition-fade'] = 'opacity .15s linear';
-  // v['$transition-collapse'] = 'height .35s ease';
-  // v['$table-inverse-bg'] = '#292b2c';
-  // v['$table-inverse-color'] = '#fff';
-  // v['$btn-focus-box-shadow'] = '0 0 0 2px rgba(#0275d8, .25)';
-  // v['$btn-transition'] = 'all .2s ease-in-out';
-  // v['$input-transition'] = 'border-color ease-in-out .15s, box-shadow ease-in-out .15s';
-  // v['$custom-select-line-height'] = '1.25';
-  // v['$custom-file-text'] = {'placeholder':{'en':'Choose file...'},'button-label':{'en':'Browse'}};
-  // v['$navbar-inverse-color'] = 'rgba(255, 255, 255, 0.5)';
-  // v['$navbar-inverse-hover-color'] = 'rgba(255, 255, 255, 0.75)';
-  // v['$navbar-inverse-active-color'] = 'rgb(255, 255, 255)';
-  // v['$navbar-inverse-disabled-color'] = 'rgba(255, 255, 255, 0.25)';
-  // v['$navbar-inverse-toggler-bg'] = `url('data:image/svg+xml;charset=utf8,%3Csvg viewBox=\'0 0 30 30\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath stroke=\'rgba(255, 255, 255, 0.5)\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-miterlimit=\'10\' d=\'M4 7h22M4 15h22M4 23h22\'/%3E%3C/svg%3E')`;
-  // v['$navbar-inverse-toggler-border'] = 'rgba(255, 255, 255, 0.1)';
-  // v['$navbar-light-disabled-color'] = 'rgba(0, 0, 0, 0.3)';
-  // v['$pagination-line-height'] = '1.25';
-  // v['$modal-inner-padding'] = '15px';
-  // v['$modal-dialog-margin'] = '10px';
-  // v['$modal-dialog-sm-up-margin-y'] = '30px';
-  // v['$modal-title-line-height'] = '1.5';
-  // v['$modal-content-bg'] = '#fff';
-  // v['$modal-content-border-color'] = 'rgba(0, 0, 0, 0.2)';
-  // v['$modal-content-border-width'] = '1px';
-  // v['$modal-content-xs-box-shadow'] = '0 3px 9px rgba(0, 0, 0, 0.5)';
-  // v['$modal-content-sm-up-box-shadow'] = '0 5px 15px rgba(0, 0, 0, 0.5)';
-  // v['$modal-backdrop-bg'] = '#000';
-  // v['$modal-backdrop-opacity'] = '.5';
-  // v['$modal-header-border-color'] = '#eceeef';
-  // v['$modal-footer-border-color'] = '#eceeef';
-  // v['$modal-header-border-width'] = '1px';
-  // v['$modal-footer-border-width'] = '1px';
-  // v['$modal-header-padding'] = '15px';
-  // v['$modal-lg'] = '800px';
-  // v['$modal-md'] = '500px';
-  // v['$modal-sm'] = '300px';
-  // v['$modal-transition'] = 'transform .3s ease-out';
-  // v['$thumbnail-transition'] = 'all .2s ease-in-out';
-  // v['$figure-caption-color'] = '#636c72';
-  // v['$carousel-indicator-width'] = '30px';
-  // v['$carousel-indicator-height'] = '3px';
-  // v['$carousel-indicator-spacer'] = '3px';
-  // v['$carousel-control-icon-width'] = '20px';
-  // v['$carousel-control-prev-icon-bg'] = `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'#fff\' viewBox=\'0 0 8 8\'%3E%3Cpath d=\'M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z\'/%3E%3C/svg%3E')`;
-  // v['$carousel-control-next-icon-bg'] = `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'#fff\' viewBox=\'0 0 8 8\'%3E%3Cpath d=\'M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z\'/%3E%3C/svg%3E')`;
-  // v['$carousel-transition'] = 'transform .6s ease-in-out';
 }

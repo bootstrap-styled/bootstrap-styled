@@ -58,6 +58,7 @@ export function button(
   $enableRounded = defaultProps['$enable-rounded'],
   $btnFontWeight = defaultProps['$btn-font-weight'],
   $btnLineHeight = defaultProps['$btn-line-height'],
+  $btnTransition = defaultProps['$btn-transitions'],
   $inputBtnBorderWidth = defaultProps['$input-btn-border-width'],
   $btnPaddingX = defaultProps['$btn-padding-x'],
   $btnPaddingY = defaultProps['$btn-padding-y'],
@@ -122,7 +123,7 @@ export function button(
       )};
       ${transition(
         $enableTransitions,
-        'all .2s ease-in-out'
+        $btnTransition
       )};
      
       &,
