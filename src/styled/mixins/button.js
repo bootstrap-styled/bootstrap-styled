@@ -58,7 +58,7 @@ export function button(
   $enableRounded = defaultProps['$enable-rounded'],
   $btnFontWeight = defaultProps['$btn-font-weight'],
   $btnLineHeight = defaultProps['$btn-line-height'],
-  $btnTransition = defaultProps['$btn-transitions'],
+  $btnTransition = defaultProps['$btn-transition'],
   $inputBtnBorderWidth = defaultProps['$input-btn-border-width'],
   $btnPaddingX = defaultProps['$btn-padding-x'],
   $btnPaddingY = defaultProps['$btn-padding-y'],
