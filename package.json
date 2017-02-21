@@ -214,7 +214,7 @@
     "babel-plugin-dynamic-import-node": "1.0.0",
     "babel-plugin-react-intl": "2.2.0",
     "babel-plugin-react-transform": "2.0.2",
-    "babel-plugin-styled-components": "^1.0.0",
+    "babel-plugin-styled-components": "1.0.0",
     "babel-plugin-transform-es2015-modules-commonjs": "6.22.0",
     "babel-plugin-transform-react-constant-elements": "6.9.1",
     "babel-plugin-transform-react-inline-elements": "6.8.0",
