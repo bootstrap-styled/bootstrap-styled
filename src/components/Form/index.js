@@ -16,6 +16,7 @@ import { customForms } from '../../styled/mixins/customForms';
 import { makeRow } from '../../styled/mixins/grid';
 
 const defaultProps = { theme: bsTheme };
+const selectBorderWidth = unitUtils.math.multiply(bsTheme['$border-width'], 2);
 
 // eslint-disable-next-line no-class-assign
 const Form = styled.form` 
@@ -59,12 +60,12 @@ const Form = styled.form`
 
       /* Customize the :focus state to imitate native WebKit styles. */
       ${formControlFocus(
-  props.theme['$enable-shadows'],
-  props.theme['$input-color-focus'],
-  props.theme['$input-bg-focus'],
-  props.theme['$input-border-focus'],
-  props.theme['$input-box-shadow-focus'],
-)}
+        props.theme['$enable-shadows'],
+        props.theme['$input-color-focus'],
+        props.theme['$input-bg-focus'],
+        props.theme['$input-border-focus'],
+        props.theme['$input-box-shadow-focus'],
+      )}
 
       /* Placeholder */
       &::placeholder {
@@ -93,8 +94,7 @@ const Form = styled.form`
 
     select.form-control {
       &:not([size]):not([multiple]) {
-        ${props.theme['$select-border-width']}: (${props.theme['$border-width']} * 2);
-        height: calc(${props.theme['$input-height']} + ${props.theme['$select-border-width']});
+        height: calc(${props.theme['$input-height']} + ${selectBorderWidth});
       }
 
       &:focus::-ms-value {
@@ -189,9 +189,9 @@ const Form = styled.form`
       padding: ${props.theme['$input-padding-y-sm']} ${props.theme['$input-padding-x-sm']};
       font-size: ${props.theme['$font-size-sm']};
       ${borderRadius(
-  props.theme['$enable-rounded'],
-  props.theme['$input-border-radius-sm']
-)}
+        props.theme['$enable-rounded'],
+        props.theme['$input-border-radius-sm']
+      )}
     }
 
     & .select.form-control-sm {
@@ -204,9 +204,9 @@ const Form = styled.form`
       padding: ${props.theme['$input-padding-y-lg']} ${props.theme['$input-padding-x-lg']};
       font-size: ${props.theme['$font-size-lg']};
       ${borderRadius(
-  props.theme['$enable-rounded'],
-  props.theme['$input-border-radius-lg']
-)}
+        props.theme['$enable-rounded'],
+        props.theme['$input-border-radius-lg']
+      )}
     }
 
     select.form-control-lg {
@@ -236,8 +236,8 @@ const Form = styled.form`
      Indent the labels to position radios/checkboxes as hanging controls.
     */
 
-    &.form-check,
-    & .form-check {
+    &. form-check,
+     .form-check {
       position: relative;
       display: block;
       margin-bottom: ${props.theme['$form-check-margin-bottom']};
@@ -258,8 +258,8 @@ const Form = styled.form`
 
     & .form-check-input {
       position: absolute;
-      margin-top: .${props.theme['$form-check-input-margin-y']};
-      margin-left: ${props.theme['$form-check-input-gutter']};
+      margin-top: ${props.theme['$form-check-input-margin-y']};
+      margin-left: -${props.theme['$form-check-input-gutter']};
 
       &:only-child {
         position: static;
@@ -301,7 +301,7 @@ const Form = styled.form`
     }
 
     /* Form validation states */
-    &.has-success {
+    & .has-success {
       ${formControlValidation(props.theme['$enable-shadows'], props.theme['$brand-success'], props.theme['$box-shadow'])}
 
       .form-control-success {
@@ -309,7 +309,7 @@ const Form = styled.form`
       }
     }
 
-    &.has-warning {
+    & .has-warning {
       ${formControlValidation(props.theme['$enable-shadows'], props.theme['$brand-warning'], props.theme['$box-shadow'])}
 
       .form-control-warning {
@@ -317,7 +317,7 @@ const Form = styled.form`
       }
     }
 
-    &.has-danger {
+    & .has-danger {
       ${formControlValidation(props.theme['$enable-shadows'], props.theme['$brand-danger'], props.theme['$box-shadow'])}
 
       .form-control-danger {
@@ -336,18 +336,17 @@ const Form = styled.form`
      default HTML form controls and our custom form controls (e.g., input groups).
     */
 
-    &.form-inline {
+    & .form-inline {
       display: flex;
       flex-flow: row wrap;
       align-items: center; /* Prevent shorter elements from growing to same height as others (e.g., small buttons growing to normal sized button height) */
 
-      .form-check {
+      & .form-check {
          width: 100%;
       }
 
       /* Kick in the inline */
-      ${mediaBreakpointUp('sm', props.theme['$grid-breakpoints'],
-  `
+      ${mediaBreakpointUp('sm', props.theme['$grid-breakpoints'], `
           & .label {
             display: flex;
             align-items: center;
@@ -423,9 +422,8 @@ const Form = styled.form`
           & .has-feedback .form-control-feedback {
             top: 0;
           }
-
         `
-)}
+      )}
     }
     ${customForms(
         props.theme['$enable-rounded'],

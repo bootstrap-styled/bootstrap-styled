@@ -29,9 +29,9 @@ Row = styled(Row)`
   ${(props) => `
     &.row{
       ${makeRow(
-  props.theme['$enable-grid-classes'],
-  props.theme['$grid-gutter-widths']
-)}
+        props.theme['$enable-grid-classes'],
+        props.theme['$grid-gutter-widths']
+      )}
     }
     /*
       Remove the negative margin from default .row, then the horizontal padding
