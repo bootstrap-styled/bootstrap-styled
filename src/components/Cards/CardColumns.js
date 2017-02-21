@@ -13,6 +13,7 @@ import { card } from '../../styled/mixins/card';
 const defaultProps = {
   theme: bsTheme,
 };
+
 class CardColumns extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {

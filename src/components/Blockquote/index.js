@@ -48,10 +48,10 @@ Blockquote = styled(Blockquote)`
     }
     
 
-    
+    /* back to default font-size */
     &.blockquote-footer {
       display: block;
-      font-size: 80%; /* back to default font-size */
+      font-size: 80%; 
       color: ${props.theme['$blockquote-small-color']};
     
       &::before {

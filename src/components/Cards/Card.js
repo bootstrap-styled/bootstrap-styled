@@ -15,6 +15,7 @@ import { ifThen } from '../../styled/mixins/conditional';
 const defaultProps = {
   theme: bsTheme,
 };
+
 class Card extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
@@ -27,7 +28,7 @@ class Card extends React.Component {// eslint-disable-line react/prefer-stateles
   }
 
   render() {
-    const { className, children, theme, ...rest } = this.props;// eslint-disable-line no-unused-vars
+    const { className, children, theme, backgroundColor, borderColor, ...rest } = this.props;// eslint-disable-line no-unused-vars
     return (
       <div
         className={cn(className, 'card')}

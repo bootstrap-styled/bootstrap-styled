@@ -79,7 +79,7 @@ Breadcrumb = styled(Breadcrumb)`
       }
     
       &.active {
-        color: ${props.theme['$breadcrumb-item-active-color']};
+        color: ${props.theme['$breadcrumb-active-color']};
       }
     }
   `}

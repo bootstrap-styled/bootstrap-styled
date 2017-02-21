@@ -56,7 +56,7 @@ Alert = styled(Alert)`
       padding: ${props.theme['$alert-padding-y']} ${props.theme['$alert-padding-x']};
       margin-bottom: ${props.theme['$alert-margin-bottom']};
       border: ${props.theme['$alert-border-width']} solid transparent;
-      ${borderRadius(props.theme['$enable-rounded'], props.theme['$alert-border-radius'])};
+      ${borderRadius(props.theme['$enable-rounded'], props.theme['$alert-border-radius'])}
     }
     
     /* Headings for larger alerts */
@@ -67,24 +67,22 @@ Alert = styled(Alert)`
     
     /* Provide class for links that match alerts */
     & .alert-link { 
-      font-weight: ${props.theme['$alert-link-font-weight']} 
+      font-weight: ${props.theme['$alert-link-font-weight']};
     }
     
-    /* Dismissible alerts
-    Expand the right padding and account for the close button's positioning. */
+    /* Dismissible alerts Expand the right padding and account for the close buttons positioning. */
     
     &.alert-dismissible {    
-      /* Adjust close link position*/
+      /* Adjust close link position */
       & .close {
         position: relative;
         top: -${props.theme['$alert-padding-y']};
         right: -${props.theme['$alert-padding-x']};
-        padding: ${props.theme['$alert-padding-y']} ${props.theme['$alert-padding-x']}
+        padding: ${props.theme['$alert-padding-y']} ${props.theme['$alert-padding-x']};
         color: inherit;
       }
     }
-    /* Alternate styles
-    Generate contextual modifier classes for colorizing the alert. */
+    /* Alternate styles Generate contextual modifier classes for colorizing the alert. */
 
     &.alert-success{
       ${alertVariant(
