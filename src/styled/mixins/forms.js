@@ -22,13 +22,15 @@ export function formControlValidation(enableShadows = defaultProps['$enable-shad
     & .form-control-label,
     & .col-form-label,
     & .form-check-label,
-    & .form-check-inline,
     & .custom-control {
       color: ${formColor};
     }
   
     /* Set the border and box shadow on specific inputs to match */
-    & .form-control {
+      
+    & .form-control,
+    & .custom-select,
+    & .custom-file-control {
       border-color: ${formColor};
   
       &:focus {
