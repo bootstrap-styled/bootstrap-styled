@@ -1,8 +1,8 @@
 import { fromJS } from 'immutable';
 import { defaultProps, customForms } from '../customForms';
 
-describe('bootstrap customForms utility', () => {
-  it('customForms should return a list of css utilities', () => {
+describe('bootstrap customForms mixin', () => {
+  it('customForms should return a list of css mixin', () => {
     const css = customForms(
       defaultProps['$enable-rounded'],
       defaultProps['$enable-shadows'],
@@ -68,15 +68,14 @@ describe('bootstrap customForms utility', () => {
       defaultProps['$custom-file-button-bg'],
       defaultProps['$custom-file-text'],
     );
-
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(569747993);
+    expect(fromJS({ css }).hashCode()).toEqual(721552648);
   });
   it('customForms should use default arguments', () => {
     const css = customForms();
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(569747993);
+    expect(fromJS({ css }).hashCode()).toEqual(721552648);
   });
 });
