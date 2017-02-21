@@ -49,7 +49,7 @@ Blockquote = styled(Blockquote)`
     
 
     /* back to default font-size */
-    &.blockquote-footer {
+    & .blockquote-footer {
       display: block;
       font-size: 80%; 
       color: ${props.theme['$blockquote-small-color']};

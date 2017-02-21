@@ -34,7 +34,7 @@ export function formControlValidation(enableShadows = defaultProps['$enable-shad
       border-color: ${formColor};
   
       &:focus {
-        ${boxShadow(enableShadows, `${inputBoxShadow}, 0 0 6px ${color(formColor).lighten(0.2).toString()}`)};
+        ${boxShadow(enableShadows, `${inputBoxShadow}, 0 0 6px ${color(formColor).lighten(0.2).toString()}`)}
       }
     }
   

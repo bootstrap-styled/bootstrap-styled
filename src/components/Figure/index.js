@@ -31,12 +31,12 @@ class Figure extends React.Component { // eslint-disable-line react/prefer-state
 Figure = styled(Figure)`
     
   &.figure {
-    /* Ensures the caption's text aligns with the image. */
+    /* Ensures the captions text aligns with the image. */
     display: inline-block;
   }
 
   /* Reboot Scss */
-  /* Normalize adds 'margin' to 'figure's as browsers apply it inconsistently. */
+  /* Normalize adds margin to figures as browsers apply it inconsistently. */
   /* We reset that to create a better flow in-page. */
   margin: 0 0 1rem;
   

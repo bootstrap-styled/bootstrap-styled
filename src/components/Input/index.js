@@ -47,8 +47,8 @@ Input = styled(Input)`
       }
     }
     
-    /* Normalize includes 'font: inherit;', so 'font-family'. 'font-size', etc are */
-    /* properly inherited. However, 'line-height' isn't inherited there. */
+    /* Normalize includes font: inherit;, so font-family. font-size, etc are */
+    /* properly inherited. However, line-height is not inherited there. */
     line-height: inherit;
    
     &.disabled {
@@ -75,8 +75,8 @@ Input = styled(Input)`
     
     &[type="search"] {
       /* This overrides the extra rounded corners on search inputs in iOS so that our
-      '.form-control' class can properly style them. Note that this cannot simply
-       be added to '.form-control' as it's not specific enough. For details, see
+      .form-control class can properly style them. Note that this cannot simply
+       be added to .form-control as it is not specific enough. For details, see
        https://github.com/twbs/bootstrap/issues/11586.
        */
       outline-offset: -2px; /* 2. Correct the outline style in Safari. */

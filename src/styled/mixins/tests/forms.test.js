@@ -6,17 +6,17 @@ describe('bootstrap forms mixins', () => {
     const css = formControlValidation(defaultProps['$enable-shadows'], '#f00', defaultProps['$input-box-shadow']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(322283103);
+    expect(fromJS({ css }).hashCode()).toEqual(-756613172);
   });
   it('formControlValidation should return a css with shadows', () => {
     const css = formControlValidation(!defaultProps['$enable-shadows'], '#f00', defaultProps['$input-box-shadow']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-168116285);
+    expect(fromJS({ css }).hashCode()).toEqual(1055188213);
   });
   it('formControlValidation should have arguments', () => {
     const css = formControlValidation();
-    expect(fromJS({ css }).hashCode()).toEqual(151652912);
+    expect(fromJS({ css }).hashCode()).toEqual(856583856);
   });
   it('formControlFocus should return a css without shadows', () => {
     const css = formControlFocus(defaultProps['$enable-shadows'], defaultProps['$input-color-focus'], defaultProps['$input-bg-focus'], defaultProps['$input-border-focus'], defaultProps['$input-box-shadow-focus']);

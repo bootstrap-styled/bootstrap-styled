@@ -70,12 +70,12 @@ describe('bootstrap customForms mixin', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(721552648);
+    expect(fromJS({ css }).hashCode()).toEqual(877271104);
   });
   it('customForms should use default arguments', () => {
     const css = customForms();
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(721552648);
+    expect(fromJS({ css }).hashCode()).toEqual(877271104);
   });
 });

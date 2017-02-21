@@ -139,14 +139,13 @@ InputGroup = styled(InputGroup)`
         props.theme['$input-border-radius']
       )}
    
-      /* scss-lint:disable QualifyingElement
+      /* 
       Nuke default margins from checkboxes and radios to vertically center within.
       */
       input[type="radio"],
       input[type="checkbox"] {
         margin-top: 0;
       }
-      /* scss-lint:enable QualifyingElement */
     }
    
    
@@ -191,8 +190,8 @@ InputGroup = styled(InputGroup)`
    
     & .input-group-btn {
       position: relative;
-      /* Jankily prevent input button groups from wrapping with 'white-space' and
-      'font-size' in combination with 'inline-block' on buttons.
+      /* Jankily prevent input button groups from wrapping with white-space and
+      font-size in combination with inline-block on buttons.
       */
       font-size: 0;
       white-space: nowrap;
@@ -209,7 +208,7 @@ InputGroup = styled(InputGroup)`
           margin-left: -${props.theme['$input-btn-border-width']};
         }
         
-        /* Bring the "active" button to the front */
+        /* Bring the active button to the front */
         ${hoverFocusActive(
           props.theme['$enable-hover-media-query'],
           'z-index: 3;'
@@ -229,10 +228,10 @@ InputGroup = styled(InputGroup)`
           z-index: 2;
           margin-left: -${props.theme['$input-btn-border-width']};
           /* Because specificity */
-        ${hoverFocusActive(
-          props.theme['$enable-hover-media-query'],
-          'z-index: 3;'
-        )}
+          ${hoverFocusActive(
+            props.theme['$enable-hover-media-query'],
+            'z-index: 3;'
+          )}
         }
       }
     }
@@ -254,11 +253,11 @@ InputGroup = styled(InputGroup)`
       /* Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214. */
       background-image: none;
       background-clip: padding-box;
-      ${props.theme['$enable-rounded'] ? `border-radius: ${props.theme['$input-border-radius']}` : 'border-radius: 0;'}
+      ${props.theme['$enable-rounded'] ? `border-radius: ${props.theme['$input-border-radius']};` : 'border-radius: 0;'}
       border: ${props.theme['$input-btn-border-width']} solid ${props.theme['$input-border-color']};
       ${transition(
         props.theme['$enable-transitions'],
-        'border-color ease-in-out .15s, box-shadow ease-in-out .15s'
+        props.theme['$input-transition']
       )}
       ${boxShadow(
         props.theme['$enable-shadows'],
@@ -283,14 +282,14 @@ InputGroup = styled(InputGroup)`
       /* Placeholder */
       &::placeholder {
         color: ${props.theme['$input-color-placeholder']};
-        /* Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526. */
+        /* Override Firefox unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526. */
         opacity: 1;
       }
     
       /* Disabled and read-only inputs
-       HTML5 says that controls under a fieldset > legend:first-child won't be
+       HTML5 says that controls under a fieldset > legend:first-child will not be
        disabled if the fieldset is disabled. Due to implementation difficulty, we
-       don't honor that edge case; we style them as disabled anyway.
+       do not honor that edge case; we style them as disabled anyway.
        */
        
       &:disabled,

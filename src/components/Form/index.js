@@ -41,11 +41,12 @@ const Form = styled.form`
       /* Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214. */
       background-image: none;
       background-clip: padding-box;
-      ${props.theme['$enable-rounded'] ? `border-radius: ${props.theme['$input-border-radius']}` : 'border-radius: 0;'}
+      /* Note: This has no effect on <select>s in some browsers, due to the limited stylability of <select>s in CSS. */
+      ${props.theme['$enable-rounded'] ? `border-radius: ${props.theme['$input-border-radius']};` : 'border-radius: 0;'} /* Manually use the if/else instead of the mixin to account for iOS override */
       border: ${props.theme['$input-btn-border-width']} solid ${props.theme['$input-border-color']};
       ${transition(
         props.theme['$enable-transitions'],
-        'border-color ease-in-out .15s, box-shadow ease-in-out .15s'
+        props.theme['$input-transition']
       )}
       ${boxShadow(
         props.theme['$enable-shadows'],
@@ -70,14 +71,14 @@ const Form = styled.form`
       /* Placeholder */
       &::placeholder {
         color: ${props.theme['$input-color-placeholder']};
-        /* Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526. */
+        /* Override Firefox unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526. */
         opacity: 1;
       }
 
       /* Disabled and read-only inputs
-       HTML5 says that controls under a fieldset > legend:first-child won't be
+       HTML5 says that controls under a fieldset > legend:first-child will not be
        disabled if the fieldset is disabled. Due to implementation difficulty, we
-       don't honor that edge case; we style them as disabled anyway.
+       do not honor that edge case; we style them as disabled anyway.
        */
 
       &:disabled,
@@ -121,7 +122,7 @@ const Form = styled.form`
     */
 
     /* For use with horizontal and inline forms, when you need the label text to */
-    /*  align with the form controls. */
+    /* align with the form controls. */
     & .col-form-label {
       padding-top: calc(${props.theme['$input-padding-y']} - ${props.theme['$input-btn-border-width']} *2);
       padding-bottom: calc(${props.theme['$input-padding-y']} - ${props.theme['$input-btn-border-width']} *2);
@@ -178,10 +179,10 @@ const Form = styled.form`
 
     /* Form control sizing
 
-     Build on '.form-control' with modifier classes to decrease or increase the
+     Build on .form-control with modifier classes to decrease or increase the
      height and font-size of form controls.
 
-     The '.form-group-* form-control' variations are sadly duplicated to avoid the
+     The .form-group-* form-control variations are sadly duplicated to avoid the
      issue documented in https://github.com/twbs/bootstrap/issues/15074.
     */
 
@@ -216,10 +217,7 @@ const Form = styled.form`
     }
 
 
-    /* Form groups
-     Designed to help with the organization and spacing of vertical forms. For
-     horizontal forms, use the predefined grid classes.
-    */
+    /* Form groups Designed to help with the organization and spacing of vertical forms. For horizontal forms, use the predefined grid classes. */
 
     &.form-group,
      & .form-group {
@@ -232,9 +230,7 @@ const Form = styled.form`
     }
 
 
-    /* Checkboxes and radios
-     Indent the labels to position radios/checkboxes as hanging controls.
-    */
+    /* Checkboxes and radios Indent the labels to position radios/checkboxes as hanging controls. */
 
     &. form-check,
      .form-check {
@@ -252,7 +248,7 @@ const Form = styled.form`
 
     & .form-check-label {
       padding-left: ${props.theme['$form-check-input-gutter']};
-      margin-bottom: 0; /* Override default '<label>' bottom margin */
+      margin-bottom: 0; /* Override default <label> bottom margin */
       cursor: pointer;
     }
 
@@ -266,7 +262,7 @@ const Form = styled.form`
       }
     }
 
-    /*  Radios and checkboxes on same line */
+    /* Radios and checkboxes on same line */
     & .form-check-inline {
       display: inline-block;
       .form-check-label {
@@ -284,9 +280,7 @@ const Form = styled.form`
     }
 
 
-    /* Form control feedback states
-     Apply contextual and semantic states to individual form controls.
-    */
+    /* Form control feedback states Apply contextual and semantic states to individual form controls. */
     & .form-control-feedback {
       margin-top: ${props.theme['$form-feedback-margin-top']};
     }
@@ -328,11 +322,11 @@ const Form = styled.form`
 
     /* Inline forms
 
-     Make forms appear inline(-block) by adding the '.form-inline' class. Inline
+     Make forms appear inline(-block) by adding the .form-inline class. Inline
      forms begin stacked on extra small (mobile) devices and then go inline when
      viewports reach <768px.
 
-     Requires wrapping inputs and labels with '.form-group' for proper display of
+     Requires wrapping inputs and labels with .form-group for proper display of
      default HTML form controls and our custom form controls (e.g., input groups).
     */
 
@@ -354,7 +348,7 @@ const Form = styled.form`
             margin-bottom: 0;
           }
           
-          /* Inline-block all the things for 'inline' */
+          /* Inline-block all the things for inline */
           & .form-group {
             display: flex;
             flex: 0 0 auto;
@@ -362,10 +356,10 @@ const Form = styled.form`
             margin-bottom: 0;
           }
       
-          /* Allow folks to *not* use '.form-group' */
+          /* Allow folks to *not* use .form-group */
           & .form-control {
             display: inline-block;
-            width: auto; /* Prevent labels from stacking above inputs in '.form-group' */
+            width: auto; /* Prevent labels from stacking above inputs in .form-group */
             vertical-align: middle;
           }
       

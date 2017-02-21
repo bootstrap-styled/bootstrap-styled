@@ -5,6 +5,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
+import Color from 'color';
 import bsTheme from 'theme';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
@@ -36,7 +37,7 @@ class Jumbotron extends React.Component { // eslint-disable-line react/prefer-st
 
 // eslint-disable-next-line no-class-assign
 Jumbotron = styled(Jumbotron)`
-  ${(props) => `
+  ${(props) => console.log(`
     &.jumbotron {
       padding: ${props.theme['$jumbotron-padding']} calc(${props.theme['$jumbotron-padding']} / 2);
       margin-bottom: ${props.theme['$jumbotron-padding']};
@@ -52,7 +53,7 @@ Jumbotron = styled(Jumbotron)`
       )}
 
     & .jumbotron-hr {
-      border-top-color: darken(${props.theme['$jumbotron-bg']}, 10%);
+      border-top-color: ${Color(props.theme['$jumbotron-bg']).darken(0.1).toString()};
     }
     
     &.jumbotron-fluid {
@@ -63,8 +64,9 @@ Jumbotron = styled(Jumbotron)`
         0
       )}
     }
-  `}
+  `)}
 `;
 
 Jumbotron.defaultProps = defaultProps;
+
 export default Jumbotron;

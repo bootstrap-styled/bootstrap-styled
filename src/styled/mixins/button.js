@@ -120,27 +120,29 @@ export function button(
         $btnPaddingX,
         $fontSizeBase,
         $btnBorderRadius
-      )};
+      )}
       ${transition(
         $enableTransitions,
         $btnTransition
-      )};
+      )}
      
       &,
       &:active,
       &.active {
         &:focus,
         &.focus {
-          ${tabFocus()};
+          ${tabFocus()}
         }
       }
      
       ${hoverFocus(
         $enableHoverMediaQuery,
-        `text-decoration: none;
-            &.focus {
-              text-decoration: none;
-            }`
+        `
+          text-decoration: none;
+          &.focus {
+            text-decoration: none;
+          }
+        `
       )};
      
       &:active,
@@ -157,7 +159,7 @@ export function button(
       &:disabled {
         cursor: ${$cursorDisabled};
         opacity: .65;
-        ${boxShadow($enableShadows, 'none')};
+        ${boxShadow($enableShadows, 'none')}
       }
     }   
  
@@ -170,7 +172,7 @@ export function button(
    
     /* Alternate buttons */
    
-    &.btn-primary{
+    &.btn-primary {
       ${buttonVariant(
         $enableHoverMediaQuery,
         $btnPrimaryColor,
@@ -178,7 +180,7 @@ export function button(
         $btnPrimaryBorder,
       )}
     }
-    &.btn-secondary{
+    &.btn-secondary {
       ${buttonVariant(
         $enableHoverMediaQuery,
         $btnSecondaryColor,
@@ -186,7 +188,7 @@ export function button(
         $btnSecondaryBorder,
       )}
     }
-    &.btn-info{
+    &.btn-info {
       ${buttonVariant(
         $enableHoverMediaQuery,
         $btnInfoColor,
@@ -194,7 +196,7 @@ export function button(
         $btnInfoBorder,
       )}
     }
-    &.btn-success{
+    &.btn-success {
       ${buttonVariant(
         $enableHoverMediaQuery,
         $btnSuccessColor,
@@ -202,7 +204,7 @@ export function button(
         $btnSuccessBorder,
       )}
     }
-    &.btn-warning{
+    &.btn-warning {
       ${buttonVariant(
         $enableHoverMediaQuery,
         $btnWarningColor,
@@ -210,7 +212,7 @@ export function button(
         $btnWarningBorder,
       )}
     }
-    &.btn-danger{
+    &.btn-danger {
       ${buttonVariant(
         $enableHoverMediaQuery,
         $btnDangerColor,
@@ -224,32 +226,32 @@ export function button(
     &.btn-outline-primary{
       ${buttonOutlineVariant(
         $btnPrimaryBg,
-      )};
+      )}
     }    
     &.btn-outline-secondary{
       ${buttonOutlineVariant(
         $btnSecondaryBorder,
-      )};
+      )}
     }    
     &.btn-outline-info{
       ${buttonOutlineVariant(
         $btnInfoBg,
-      )};
+      )}
     }    
     &.btn-outline-success{
       ${buttonOutlineVariant(
         $btnSuccessBg,
-      )};
-    }    
+      )}
+    }
     &.btn-outline-warning{
       ${buttonOutlineVariant(
         $btnWarningBg,
-      )};
+      )}
     }
     &.btn-outline-danger{
       ${buttonOutlineVariant(
         $btnDangerBg,
-      )};
+      )}
     }
    
     /*
@@ -270,7 +272,7 @@ export function button(
         ${boxShadow(
           $enableShadows,
           'none'
-        )};
+        )}
       }
      
       &,
@@ -281,21 +283,23 @@ export function button(
      
       ${hover(`
         border-color: transparent;
-      `)};
+      `)}
      
       ${hoverFocus(
         $enableHoverMediaQuery,
         `color: ${$linkHoverColor};
         text-decoration: ${$linkHoverDecoration};
         background-color: transparent;`
-      )};
+      )}
      
       &:disabled {
         ${hoverFocus(
           $enableHoverMediaQuery,
-          `color: ${$btnLinkDisabledColor};
-                text-decoration: none;`
-        )};
+          `
+            color: ${$btnLinkDisabledColor};
+            text-decoration: none;
+          `
+        )}
       }
     }
    
@@ -311,7 +315,7 @@ export function button(
         $btnPaddingXLg,
         $fontSizeLg,
         $btnBorderRadiusLg
-      )};
+      )}
     }
    
     &.btn-sm {
@@ -322,7 +326,7 @@ export function button(
         $btnPaddingXSm,
         $fontSizeSm,
         $btnBorderRadiusSm
-      )};
+      )}
     }
    
    
@@ -335,15 +339,15 @@ export function button(
       width: 100%;
     }
    
-    /*  Vertically space out multiple block buttons */
+    /* Vertically space out multiple block buttons */
     &.btn-block + .btn-block {
       margin-top: ${$btnBlockSpacingY};
     }
    
-    /*  Specificity overrides */
-    input[type='submit'],
-    input[type='reset'],
-    input[type='button'] {
+    /* Specificity overrides */
+    input[type="submit"],
+    input[type="reset"],
+    input[type="button"] {
       &.btn-block {
         width: 100%;
       }
@@ -351,8 +355,8 @@ export function button(
    
     /* Reboot Scss */
     touch-action: manipulation;
-    /* Normalize includes 'font: inherit;', so 'font-family'. 'font-size', etc are */
-    /* properly inherited. However, 'line-height' isn't inherited there. */
+    /* Normalize includes font: inherit;, so font-family. font-size, etc are */
+    /* properly inherited. However, line-height is not inherited there. */
     line-height: inherit;
     &:focus{
       outline: 1px dotted;

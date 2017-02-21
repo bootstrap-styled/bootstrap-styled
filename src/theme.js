@@ -547,7 +547,7 @@ export function makeTheme(userTheme = {}) {
   v['$dropdown-box-shadow'] = u['$dropdown-box-shadow'] || `0 .5rem 1rem rgba(${v['$black']},.175)`;
 
   v['$dropdown-link-color'] = u['$dropdown-link-color'] || v['$gray-dark'];
-  v['$dropdown-link-hover-color'] = u['$dropdown-link-hover-color'] || `darken(${v['$gray-dark']}, 5%)`;
+  v['$dropdown-link-hover-color'] = u['$dropdown-link-hover-color'] || Color(v['$gray-dark']).darken(0.05).toString();
   v['$dropdown-link-hover-bg'] = u['$dropdown-link-hover-bg'] || v['$gray-lightest'];
 
   v['$dropdown-link-active-color'] = u['$dropdown-link-active-color'] || v['$component-active-color'];

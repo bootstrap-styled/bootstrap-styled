@@ -144,7 +144,7 @@ export function customForms(
   Object.keys($customFileText.placeholder).forEach(($lang) => {
     customFileControlBeforeList.push(`
       &:lang(${$lang})::after {
-        content: ${$customFileText.placeholder[$lang]};
+        content: "${$customFileText.placeholder[$lang]}";
       }   
     `);
   });
@@ -153,7 +153,7 @@ export function customForms(
   Object.keys($customFileText['button-label']).forEach(($lang) => {
     customFileControlAfterList.push(`
       &:lang(${$lang})::before {
-        content: ${$customFileText['button-label'][$lang]};
+        content: "${$customFileText['button-label'][$lang]}";
       }
     `);
   });
@@ -180,7 +180,7 @@ export function customForms(
     
     & .custom-control-input {
       position: absolute;
-      z-index: -1; /* Put the input behind the label so it doesn't overlay text */
+      z-index: -1; /* Put the input behind the label so it does not overlay text */
       opacity: 0;
     
       &:checked ~ .custom-control-indicator {
@@ -281,7 +281,7 @@ export function customForms(
     
     
     /* Layout options */
-    /* By default radios and checkboxes are 'inline-block' with no additional spacing */
+    /* By default radios and checkboxes are inline-block with no additional spacing */
     /* set. Use these optional classes to tweak the layout. */
     
     & .custom-controls-stacked {
@@ -317,7 +317,7 @@ export function customForms(
         $enableRounded,
         $customSelectBorderRadius
       )}
-      /* Use vendor prefixes as 'appearance' isn't part of the CSS spec.  */
+      /* Use vendor prefixes as appearance is not part of the CSS spec.  */
       -moz-appearance: none;
       -webkit-appearance: none;
     
@@ -334,7 +334,7 @@ export function customForms(
           /* supress the default white text on blue background highlight given to */
           /* the selected option text when the (still closed) <select> receives focus */
           /* in IE and (under certain conditions) Edge. */
-          /* See https:/*github.com/twbs/bootstrap/issues/19398. */
+          /* See https://github.com/twbs/bootstrap/issues/19398. */
           color: ${$inputColor};
           background-color: ${$inputBg};
         }
@@ -383,7 +383,6 @@ export function customForms(
       opacity: 0;
     
       &:focus ~ .custom-file-control {
-        @include box-shadow($custom-file-focus-box-shadow);
         ${boxShadow(
           $enableShadows,
           $customFileFocusBoxShadow
