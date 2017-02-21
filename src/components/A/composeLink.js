@@ -4,8 +4,8 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import theme from 'theme';
-import { a } from '../../styled/utilities/a';
-import { button } from '../../styled/utilities/button';
+import { a } from '../../styled/mixins/a';
+import { button } from '../../styled/mixins/button';
 
 const defaultProps = {
   theme,

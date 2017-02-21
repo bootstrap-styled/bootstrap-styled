@@ -10,8 +10,8 @@ import A from 'components/A';
 import Collapse from 'components/Collapse/Collapse';
 import NavBarToggler from './NavBarToggler';
 import Container from '../Container';
-import { navbar } from '../../styled/utilities/navbar';
-import { nav } from '../../styled/utilities/nav';
+import { navbar } from '../../styled/mixins/navbar';
+import { nav } from '../../styled/mixins/nav';
 import { ifThen } from '../../styled/mixins/conditional';
 
 const defaultProps = {

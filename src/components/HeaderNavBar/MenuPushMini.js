@@ -24,7 +24,7 @@ const MenuPushMini = styled(MenuPush)`
     width: ${props.theme['$menu-push-mini-width']};
     ${transition(
       props.theme['$enable-transitions'],
-      props.theme['$menu-push-transition-duration']
+      props.theme['$menu-transition-duration']
     )}
   
     &.menu-left {
@@ -42,7 +42,7 @@ const MenuPushMini = styled(MenuPush)`
           opacity: 1;
           transform: translateX(0);
           width: ${props.theme['$menu-push-width']};
-         &.active {
+          &.active {
             transform: translateX(0);
             width: ${props.theme['$menu-push-mini-width']};
           }

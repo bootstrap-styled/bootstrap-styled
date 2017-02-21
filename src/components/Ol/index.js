@@ -8,8 +8,8 @@
 
 import styled from 'styled-components';
 import theme from 'theme';
-import { nav } from '../../styled/utilities/nav';
-import { breadcrumb } from '../../styled/utilities/breadcrumb';
+import { nav } from '../../styled/mixins/nav';
+import { breadcrumb } from '../../styled/mixins/breadcrumb';
 import { listUnstyled, listInline, listInlineItem } from '../../styled/mixins/lists';
 
 const defaultProps = { theme };

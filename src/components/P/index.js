@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import theme from 'theme';
-import { typography } from '../../styled/utilities/typography';
+import { typography } from '../../styled/mixins/typography';
 
 const defaultProps = { theme };
 
