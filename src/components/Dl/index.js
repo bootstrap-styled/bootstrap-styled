@@ -6,6 +6,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import theme from 'theme';
+import { makeRow } from '../../styled/mixins/grid';
 
 const defaultProps = { theme };
 
@@ -30,6 +31,13 @@ Dl = styled(Dl)`
   /* Reboot Scss */
   margin-top: 0;
   margin-bottom: 1rem;
+  
+  ${(props) => `
+    ${makeRow(
+      props.theme['$enable-grid-classes'],
+      props.theme['$grid-gutter-widths']
+    )}
+  `}
 `;
 
 Dl.defaultProps = defaultProps;

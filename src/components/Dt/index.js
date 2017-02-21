@@ -5,8 +5,8 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-
 import bsTheme from 'theme';
+import { makeGridColumns } from '../../styled/mixins/grid-framework';
 
 const defaultProps = { theme: bsTheme };
 
@@ -33,6 +33,12 @@ Dt = styled(Dt)`
   ${(props) => `
     /* Reboot Scss */
     font-weight: ${props.theme['$dt-font-weight']};
+    ${makeGridColumns(
+      props.theme['$enable-grid-classes'],
+      props.theme['$grid-columns'],
+      props.theme['$grid-gutter-widths'],
+      props.theme['$grid-breakpoints']
+    )}
   `}
 `;
 

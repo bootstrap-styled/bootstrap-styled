@@ -159,6 +159,8 @@ export function customForms(
   });
   const selectBorderWidth = unitUtils.math.multiply($borderWidth, 2);
   const customSelectPaddingRight = unitUtils.math.addition($customSelectPaddingY, $customSelectIndicatorPadding);
+  const lineHeightBaseMinusCustomControlIndicatorSize = unitUtils.math.subtract($lineHeightBase, $customControlIndicatorSize);
+
   return `
     /* Embedded icons from Open Iconic. */
     /* Released under MIT and copyright 2014 Waybury. */
@@ -171,7 +173,7 @@ export function customForms(
     & .custom-control {
       position: relative;
       display: inline-flex;
-      min-height: (1rem * ${$lineHeightBase});
+      min-height: calc(1rem * ${$lineHeightBase});
       padding-left: ${$customControlGutter};
       margin-right: ${$customControlSpacerX};
     }
@@ -222,7 +224,7 @@ export function customForms(
     
     & .custom-control-indicator {
       position: absolute;
-      top: ((${$lineHeightBase} - ${$customControlIndicatorSize}) / 2);
+      top: calc(${lineHeightBaseMinusCustomControlIndicatorSize} / 2);
       left: 0;
       display: block;
       width: ${$customControlIndicatorSize};

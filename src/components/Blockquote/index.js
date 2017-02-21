@@ -55,7 +55,7 @@ Blockquote = styled(Blockquote)`
       color: ${props.theme['$blockquote-small-color']};
     
       &::before {
-        /* content: '\\2014 \\00A0'; em dash, nbsp */
+        content: '\\2014 \\00A0';
       }
     }
     
@@ -73,7 +73,7 @@ Blockquote = styled(Blockquote)`
         content: "";
       }
       &::after {
-        content: '\\00A0 \\2014'; /* nbsp, em dash */
+        content: '\\00A0 \\2014';
       }
     }
  `} 
