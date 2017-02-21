@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import theme from 'theme';
-import { navbar } from '../../styled/utilities/navbar';
+import { navbar } from '../../styled/mixins/navbar';
 
 const defaultProps = { theme };
 

@@ -6,7 +6,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
-import { buttonGroup } from '../../styled/utilities/buttonGroup';
+import { buttonGroup } from '../../styled/mixins/buttonGroup';
 
 const defaultProps = { theme: bsTheme };
 

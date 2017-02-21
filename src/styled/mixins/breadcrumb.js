@@ -1,5 +1,5 @@
-import { borderRadius } from '../mixins/border-radius';
-import { clearfix } from '../mixins/clearfix';
+import { borderRadius } from './border-radius';
+import { clearfix } from './clearfix';
 
 export const defaultProps = {
   '$enable-rounded': true,

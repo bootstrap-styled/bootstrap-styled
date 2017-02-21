@@ -6,8 +6,8 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
 
-import { a } from '../../styled/utilities/a';
-import { button } from '../../styled/utilities/button';
+import { a } from '../../styled/mixins/a';
+import { button } from '../../styled/mixins/button';
 
 const defaultProps = {
   theme: bsTheme,

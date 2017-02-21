@@ -926,20 +926,26 @@ export function makeTheme(userTheme = {}) {
   // tools
 
   // Header
-  v['$header-max-height'] = u['$header-max-height'] || '450px';
-  v['$header-collapsed-max-height'] = u['$header-collapsed-max-height'] || '1000px';
   v['$header-navbar-border-color'] = u['$header-navbar-border-color'] || v['$gray-lighter'];
   v['$header-navbar-border-width'] = u['$header-navbar-border-width'] || v['$border-width'];
-  v['$header-navbar-transition-duration'] = u['$header-navbar-transition-duration'] || '.6s';
 
   // Card
   v['$card-margin-y-halved'] = u['$card-margin-y-halved'] || ((rmUnit(v['$card-spacer-y'], UNIT.REM) / 2) + UNIT.REM);
   v['$card-margin-x-halved'] = u['$card-margin-x-halved'] || ((rmUnit(v['$card-spacer-x'], UNIT.REM) / 2) + UNIT.REM);
 
   // Navbar
-
   v['$navbar-max-height'] = u['$navbar-max-height'] || '400px';
   v['$navbar-height'] = u['$navbar-height'] || '70px';
+  // Menu
+  v['$menu-push-bg'] = u['$menu-push-bg'] || 'black';
+  v['$menu-push-mini-width'] = u['$menu-push-mini-width'] || '75px';
+  v['$menu-push-width'] = u['$menu-push-width'] || '220px';
+  v['$menu-push-full-width'] = u['$menu-push-full-width'] || '100%';
+  v['$menu-transition-duration'] = u['$menu-transition-duration'] || '.6s';
+
+  // Zindex
+  v['$zindex-menu-push'] = v['$zindex-menu-push'] || '2000';
+
 
   // This will ensure u rest untouched and copy v value over u
   return Object.assign({}, u, v);
@@ -1043,13 +1049,56 @@ export function makeTheme(userTheme = {}) {
   // v['$footer-background'] = 'purple';
   // v['$footer-color'] = 'white';
   //
-  // // Menu transition component
-  // v['$menu-slide-transition-duration'] = '.6s';
-  // v['$menu-push-transition-duration'] = '.6s';
-  //
-  // // MenuPush component
-  // v['$menu-push-bg'] = 'black';
-  // v['$menu-push-mini-width'] = '75px';
-  // v['$menu-push-width'] = '220px';
-  // v['$menu-push-full-width'] = '100%';
+
+  // THIS COME FROM the new import and are listed here as information, they were not present in old theme
+
+  // v['$font-weight-base'] = 'normal';
+  // v['$display-line-height'] = '1.1';
+  // v['$transition-base'] = 'all .2s ease-in-out';
+  // v['$transition-fade'] = 'opacity .15s linear';
+  // v['$transition-collapse'] = 'height .35s ease';
+  // v['$table-inverse-bg'] = '#292b2c';
+  // v['$table-inverse-color'] = '#fff';
+  // v['$btn-focus-box-shadow'] = '0 0 0 2px rgba(#0275d8, .25)';
+  // v['$btn-transition'] = 'all .2s ease-in-out';
+  // v['$input-transition'] = 'border-color ease-in-out .15s, box-shadow ease-in-out .15s';
+  // v['$custom-select-line-height'] = '1.25';
+  // v['$custom-file-text'] = {'placeholder':{'en':'Choose file...'},'button-label':{'en':'Browse'}};
+  // v['$navbar-inverse-color'] = 'rgba(255, 255, 255, 0.5)';
+  // v['$navbar-inverse-hover-color'] = 'rgba(255, 255, 255, 0.75)';
+  // v['$navbar-inverse-active-color'] = 'rgb(255, 255, 255)';
+  // v['$navbar-inverse-disabled-color'] = 'rgba(255, 255, 255, 0.25)';
+  // v['$navbar-inverse-toggler-bg'] = `url('data:image/svg+xml;charset=utf8,%3Csvg viewBox=\'0 0 30 30\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath stroke=\'rgba(255, 255, 255, 0.5)\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-miterlimit=\'10\' d=\'M4 7h22M4 15h22M4 23h22\'/%3E%3C/svg%3E')`;
+  // v['$navbar-inverse-toggler-border'] = 'rgba(255, 255, 255, 0.1)';
+  // v['$navbar-light-disabled-color'] = 'rgba(0, 0, 0, 0.3)';
+  // v['$pagination-line-height'] = '1.25';
+  // v['$modal-inner-padding'] = '15px';
+  // v['$modal-dialog-margin'] = '10px';
+  // v['$modal-dialog-sm-up-margin-y'] = '30px';
+  // v['$modal-title-line-height'] = '1.5';
+  // v['$modal-content-bg'] = '#fff';
+  // v['$modal-content-border-color'] = 'rgba(0, 0, 0, 0.2)';
+  // v['$modal-content-border-width'] = '1px';
+  // v['$modal-content-xs-box-shadow'] = '0 3px 9px rgba(0, 0, 0, 0.5)';
+  // v['$modal-content-sm-up-box-shadow'] = '0 5px 15px rgba(0, 0, 0, 0.5)';
+  // v['$modal-backdrop-bg'] = '#000';
+  // v['$modal-backdrop-opacity'] = '.5';
+  // v['$modal-header-border-color'] = '#eceeef';
+  // v['$modal-footer-border-color'] = '#eceeef';
+  // v['$modal-header-border-width'] = '1px';
+  // v['$modal-footer-border-width'] = '1px';
+  // v['$modal-header-padding'] = '15px';
+  // v['$modal-lg'] = '800px';
+  // v['$modal-md'] = '500px';
+  // v['$modal-sm'] = '300px';
+  // v['$modal-transition'] = 'transform .3s ease-out';
+  // v['$thumbnail-transition'] = 'all .2s ease-in-out';
+  // v['$figure-caption-color'] = '#636c72';
+  // v['$carousel-indicator-width'] = '30px';
+  // v['$carousel-indicator-height'] = '3px';
+  // v['$carousel-indicator-spacer'] = '3px';
+  // v['$carousel-control-icon-width'] = '20px';
+  // v['$carousel-control-prev-icon-bg'] = `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'#fff\' viewBox=\'0 0 8 8\'%3E%3Cpath d=\'M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z\'/%3E%3C/svg%3E')`;
+  // v['$carousel-control-next-icon-bg'] = `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'#fff\' viewBox=\'0 0 8 8\'%3E%3Cpath d=\'M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z\'/%3E%3C/svg%3E')`;
+  // v['$carousel-transition'] = 'transform .6s ease-in-out';
 }

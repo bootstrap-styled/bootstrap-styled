@@ -1,8 +1,8 @@
 import { unitUtils } from 'math-utils';
-import { hover } from '../mixins/hover';
-import { borderRightRadius, borderLeftRadius, borderBottomRadius, borderTopRadius } from '../mixins/border-radius';
-import { boxShadow } from '../mixins/box-shadow';
-import { buttonSize } from '../mixins/button';
+import { hover } from './hover';
+import { borderRightRadius, borderLeftRadius, borderBottomRadius, borderTopRadius } from './border-radius';
+import { boxShadow } from './box-shadow';
+import { buttonSize } from './buttons';
 
 export const defaultProps = {
   '$enable-shadows': true,

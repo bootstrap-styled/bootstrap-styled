@@ -5,7 +5,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import theme from 'theme';
-import { button } from '../../styled/utilities/button';
+import { button } from '../../styled/mixins/button';
 
 const defaultProps = {
   theme,

@@ -1,5 +1,5 @@
-import { hoverFocus } from '../mixins/hover';
-import { borderRadius, borderTopRadius } from '../mixins/border-radius';
+import { hoverFocus } from './hover';
+import { borderRadius, borderTopRadius } from './border-radius';
 
 export const defaultProps = {
   '$enable-rounded': true,

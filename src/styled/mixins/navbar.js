@@ -1,7 +1,7 @@
-import { hoverFocus } from '../mixins/hover';
-import { mediaBreakpointUp, mediaBreakpointDown } from '../mixins/breakpoints';
-import { borderRadius } from '../mixins/border-radius';
-import { navbarToggleable } from '../mixins/navbar-toggleable';
+import { hoverFocus } from './hover';
+import { mediaBreakpointUp, mediaBreakpointDown } from './breakpoints';
+import { borderRadius } from './border-radius';
+import { navbarToggleable } from './navbar-toggleable';
 
 export const defaultProps = {
   '$grid-breakpoints': {

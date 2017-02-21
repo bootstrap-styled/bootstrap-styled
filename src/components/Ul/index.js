@@ -10,10 +10,10 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import bsTheme from 'theme';
 
-import { nav } from '../../styled/utilities/nav';
+import { nav } from '../../styled/mixins/nav';
 import { listUnstyled, listInline, listInlineItem } from '../../styled/mixins/lists';
-import { navbar } from '../../styled/utilities/navbar';
-import { pagination } from '../../styled/utilities/pagination';
+import { navbar } from '../../styled/mixins/navbar';
+import { pagination } from '../../styled/mixins/pagination';
 
 const defaultProps = { theme: bsTheme };
 

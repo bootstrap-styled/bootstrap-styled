@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
-import { card } from '../../styled/utilities/card';
+import { card } from '../../styled/mixins/card';
 
 const defaultProps = {
   theme: bsTheme,
