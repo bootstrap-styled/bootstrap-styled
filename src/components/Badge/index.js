@@ -68,7 +68,7 @@ Badge = styled(Badge)`
     /* scss-lint:enable QualifyingElement */
     
     /* Pill tags */
-    /* Make them extra rounded with a modifier to replace v3's badges. */
+    /* Make them extra rounded with a modifier to replace v3s badges. */
     
     &.badge-pill {
       padding-right: ${props.theme['$badge-pill-padding-x']};

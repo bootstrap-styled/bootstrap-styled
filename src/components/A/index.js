@@ -6,8 +6,8 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
 
-import { a } from '../../styled/utilities/a';
-import { button } from '../../styled/utilities/button';
+import { a } from '../../styled/mixins/a';
+import { button } from '../../styled/mixins/button';
 
 const defaultProps = {
   theme: bsTheme,
@@ -60,6 +60,7 @@ A = styled(A)`
       props.theme['$enable-rounded'],
       props.theme['$btn-font-weight'],
       props.theme['$btn-line-height'],
+      props.theme['$btn-transition'],
       props.theme['$input-btn-border-width'],
       props.theme['$btn-padding-x'],
       props.theme['$btn-padding-y'],

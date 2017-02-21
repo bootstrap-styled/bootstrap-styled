@@ -8,8 +8,8 @@
 
 import styled from 'styled-components';
 import theme from 'theme';
-import { nav } from '../../styled/utilities/nav';
-import { breadcrumb } from '../../styled/utilities/breadcrumb';
+import { nav } from '../../styled/mixins/nav';
+import { breadcrumb } from '../../styled/mixins/breadcrumb';
 import { listUnstyled, listInline, listInlineItem } from '../../styled/mixins/lists';
 
 const defaultProps = { theme };
@@ -43,7 +43,7 @@ const Ol = styled.ol`
       props.theme['$breadcrumb-item-padding'],
       props.theme['$breadcrumb-divider-color'],
       props.theme['$breadcrumb-divider'],
-      props.theme['$breadcrumb-item-active-color']
+      props.theme['$breadcrumb-active-color']
     )}
 
     /* Type Scss */

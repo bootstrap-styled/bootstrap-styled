@@ -5,8 +5,8 @@
  */
 import styled from 'styled-components';
 import theme from 'theme';
-import { nav } from '../../styled/utilities/nav';
-import { breadcrumb } from '../../styled/utilities/breadcrumb';
+import { nav } from '../../styled/mixins/nav';
+import { breadcrumb } from '../../styled/mixins/breadcrumb';
 
 const defaultProps = { theme };
 
@@ -40,7 +40,7 @@ const Nav = styled.nav`
       props.theme['$breadcrumb-item-padding'],
       props.theme['$breadcrumb-divider-color'],
       props.theme['$breadcrumb-divider'],
-      props.theme['$breadcrumb-item-active-color']
+      props.theme['$breadcrumb-active-color']
     )}
   `}
 `;

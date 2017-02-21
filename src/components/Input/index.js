@@ -5,7 +5,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import theme from 'theme';
-import { button } from '../../styled/utilities/button';
+import { button } from '../../styled/mixins/button';
 
 const defaultProps = {
   theme,
@@ -96,6 +96,7 @@ Input = styled(Input)`
       props.theme['$enable-rounded'],
       props.theme['$btn-font-weight'],
       props.theme['$btn-line-height'],
+      props.theme['$btn-transition'],
       props.theme['$input-btn-border-width'],
       props.theme['$btn-padding-x'],
       props.theme['$btn-padding-y'],

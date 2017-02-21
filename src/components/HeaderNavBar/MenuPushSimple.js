@@ -22,7 +22,7 @@ const MenuPushSimple = styled(MenuPush)`
   ${(props) => `
     ${transition(
       props.theme['$enable-transitions'],
-      props.theme['$menu-push-transition-duration']
+      props.theme['$menu-transition-duration']
     )}
     
     &.menu-left {

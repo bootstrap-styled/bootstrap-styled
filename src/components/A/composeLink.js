@@ -4,8 +4,8 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import theme from 'theme';
-import { a } from '../../styled/utilities/a';
-import { button } from '../../styled/utilities/button';
+import { a } from '../../styled/mixins/a';
+import { button } from '../../styled/mixins/button';
 
 const defaultProps = {
   theme,
@@ -47,6 +47,7 @@ export default function composeLink(RouterLink) {
         props.theme['$enable-rounded'],
         props.theme['$btn-font-weight'],
         props.theme['$btn-line-height'],
+        props.theme['$btn-transition'],
         props.theme['$input-btn-border-width'],
         props.theme['$btn-padding-x'],
         props.theme['$btn-padding-y'],

@@ -10,7 +10,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from 'theme';
+import bsTheme from 'theme';
 import Header from '../Header';
 import A from '../A';
 import Nav from '../Nav';
@@ -22,9 +22,6 @@ import MenuAccount from './MenuAccount';
 import Container from '../Container';
 import ContainerFluid from '../ContainerFluid';
 import Button from '../Button';
-import { transition } from '../../styled/mixins/transition';
-import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
-import { ifElse } from '../../styled/mixins/conditional';
 import shapeMenuOffsetPush from './shapeMenuOffsetPush';
 import shapeMenuTopPush from './shapeMenuTopPush';
 import shapeMenuOffsetSlide from './shapeMenuOffsetSlide';
@@ -39,7 +36,7 @@ export const compSlide = slide;
 export const compPush = push;
 
 const defaultProps = {
-  theme,
+  theme: bsTheme,
   btnText: 'Bootstrap',
   container: false,
   'container-fluid': false,
@@ -55,6 +52,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
 
   static propTypes = {
     className: PropTypes.string,
+    theme: PropTypes.object,
     container: PropTypes.bool,
     button: PropTypes.node,
     composeCollapsed: PropTypes.shape({
@@ -114,6 +112,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       composeCollapsed,
       composePush,
       composeSlide,
+      theme,  // eslint-disable-line no-unused-vars
     } = this.props;
 
     const classConfig = [];
@@ -230,44 +229,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
 // eslint-disable-next-line no-class-assign
 HeaderNavBar = styled(HeaderNavBar)`
   ${(props) => `
-    
-    outline: ${props.theme['$header-navbar-border-width']} solid ${props.theme['$header-navbar-border-color']};
-            
-    ${transition(
-      props.theme['$enable-transitions'],
-      props.theme['$header-navbar-transition-duration'],
-    )}
-    
-    ${ifElse(
-      props.composeCollapsed,
-      `max-height: ${props.theme['$navbar-max-height']};`,
-      `height: ${props.theme['$navbar-height']};`,
-    )}
-     
-    & .collapse {
-      max-height: 0;
-      position: relative;
-      overflow: hidden;
-      ${transition(
-        props.theme['$enable-transitions'],
-        'ease-in-out, .35s, max-height'
-      )}
-    
-      &.active {
-        display: block;
-        max-height: ${props.theme['$header-max-height']};
-      }
-    }
-
-    ${mediaBreakpointUp('sm',
-      props.theme['$grid-breakpoints'],
-      `
-            & .collapse {
-              height: auto;
-              max-height: ${props.theme['$header-collapsed-max-height']};
-            }
-          `
-    )}
+    outline: ${props.theme['$header-navbar-border-width']} solid ${props.theme['$header-navbar-border-color']}; 
   `}
 `;
 

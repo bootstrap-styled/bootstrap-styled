@@ -71,7 +71,8 @@
         "plugins": [
           "transform-react-remove-prop-types",
           "transform-react-constant-elements",
-          "transform-react-inline-elements"
+          "transform-react-inline-elements",
+          "styled-components"
         ]
       },
       "test": {
@@ -171,10 +172,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 50,
-        "branches": 50,
-        "functions": 50,
-        "lines": 50
+        "statements": 95,
+        "branches": 95,
+        "functions": 95,
+        "lines": 95
       }
     },
     "moduleDirectories": [
@@ -194,7 +195,7 @@
   },
   "peerDependencies": {
     "react": "^15.4.2",
-    "styled-components": "^1.4.3",
+    "styled-components": "^2.0.0-4",
     "react-collapse": "^2.3.3",
     "react-height": "^2.2.0",
     "react-motion": "^0.4.7",
@@ -213,6 +214,7 @@
     "babel-plugin-dynamic-import-node": "1.0.0",
     "babel-plugin-react-intl": "2.2.0",
     "babel-plugin-react-transform": "2.0.2",
+    "babel-plugin-styled-components": "1.0.0",
     "babel-plugin-transform-es2015-modules-commonjs": "6.22.0",
     "babel-plugin-transform-react-constant-elements": "6.9.1",
     "babel-plugin-transform-react-inline-elements": "6.8.0",
@@ -260,7 +262,7 @@
     "shelljs": "0.7.5",
     "sinon": "2.0.0-pre",
     "style-loader": "0.13.1",
-    "styled-components": "1.4.3",
+    "styled-components": "2.0.0-4",
     "toctoc": "0.2.3",
     "url-loader": "0.5.7",
     "webpack": "2.2.0",

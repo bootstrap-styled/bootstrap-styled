@@ -5,7 +5,7 @@
  */
 import styled from 'styled-components';
 import bsTheme from 'theme';
-import { typography } from '../../styled/utilities/typography';
+import { typography } from '../../styled/mixins/typography';
 const defaultProps = { theme: bsTheme };
 
 const H4 = styled.h4`
@@ -17,11 +17,6 @@ const H4 = styled.h4`
       props.theme['$headings-font-weight'],
       props.theme['$headings-line-height'],
       props.theme['$headings-color'],
-      props.theme['$headings-underline-width'],
-      props.theme['$headings-underline-height'],
-      props.theme['$headings-underline-left-position'],
-      props.theme['$headings-underline-gradient-color-1'],
-      props.theme['$headings-underline-gradient-color-2'],
       props.theme['$display1-size'],
       props.theme['$display2-size'],
       props.theme['$display3-size'],

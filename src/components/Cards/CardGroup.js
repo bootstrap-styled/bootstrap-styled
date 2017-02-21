@@ -10,11 +10,12 @@ import bsTheme from 'theme';
 import { borderRightRadius, borderLeftRadius } from '../../styled/mixins/border-radius';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { ifThen } from '../../styled/mixins/conditional';
-import { card } from '../../styled/utilities/card';
+import { card } from '../../styled/mixins/card';
 
 const defaultProps = {
   theme: bsTheme,
 };
+
 class CardGroup extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {

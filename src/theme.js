@@ -756,32 +756,32 @@ export function makeTheme(userTheme = {}) {
   // Modals
 
   // Padding applied to the modal body
-  v['$modal-inner-padding'] = u['$modal-inner-padding'] || '15px';
-
-  v['$modal-dialog-margin'] = u['$modal-dialog-margin'] || '10px';
-  v['$modal-dialog-sm-up-margin-y'] = u['$modal-dialog-sm-up-margin-y'] || '30px';
-
-  v['$modal-title-line-height'] = u['$modal-title-line-height'] || v['$line-height-base'];
-
-  v['$modal-content-bg'] = u['$modal-content-bg'] || v['$white'];
-  v['$modal-content-border-color'] = u['$modal-content-border-color'] || Color(v['$black']).alpha(0.2).toString();
-  v['$modal-content-border-width'] = u['$modal-content-border-width'] || v['$border-width'];
-  v['$modal-content-xs-box-shadow'] = u['$modal-content-xs-box-shadow'] || `0 3px 9px ${Color(v['$black']).alpha(0.5).toString()}`;
-  v['$modal-content-sm-up-box-shadow'] = u['$modal-content-sm-up-box-shadow'] || `0 5px 15px ${Color(v['$black']).alpha(0.5).toString()}`;
-
-  v['$modal-backdrop-bg'] = u['$modal-backdrop-bg'] || v['$black'];
-  v['$modal-backdrop-opacity'] = u['$modal-backdrop-opacity'] || '.5';
-  v['$modal-header-border-color'] = u['$modal-header-border-color'] || v['$gray-lighter'];
-  v['$modal-footer-border-color'] = u['$modal-footer-border-color'] || v['$modal-header-border-color'];
-  v['$modal-header-border-width'] = u['$modal-header-border-width'] || v['$modal-content-border-width'];
-  v['$modal-footer-border-width'] = u['$modal-footer-border-width'] || v['$modal-header-border-width'];
-  v['$modal-header-padding'] = u['$modal-header-padding'] || '15px';
-
-  v['$modal-lg'] = u['$modal-lg'] || '800px';
-  v['$modal-md'] = u['$modal-md'] || '500px';
-  v['$modal-sm'] = u['$modal-sm'] || '300px';
-
-  v['$modal-transition'] = u['$modal-transition'] || 'transform .3s ease-out';
+  // v['$modal-inner-padding'] = u['$modal-inner-padding'] || '15px';
+  //
+  // v['$modal-dialog-margin'] = u['$modal-dialog-margin'] || '10px';
+  // v['$modal-dialog-sm-up-margin-y'] = u['$modal-dialog-sm-up-margin-y'] || '30px';
+  //
+  // v['$modal-title-line-height'] = u['$modal-title-line-height'] || v['$line-height-base'];
+  //
+  // v['$modal-content-bg'] = u['$modal-content-bg'] || v['$white'];
+  // v['$modal-content-border-color'] = u['$modal-content-border-color'] || Color(v['$black']).alpha(0.2).toString();
+  // v['$modal-content-border-width'] = u['$modal-content-border-width'] || v['$border-width'];
+  // v['$modal-content-xs-box-shadow'] = u['$modal-content-xs-box-shadow'] || `0 3px 9px ${Color(v['$black']).alpha(0.5).toString()}`;
+  // v['$modal-content-sm-up-box-shadow'] = u['$modal-content-sm-up-box-shadow'] || `0 5px 15px ${Color(v['$black']).alpha(0.5).toString()}`;
+  //
+  // v['$modal-backdrop-bg'] = u['$modal-backdrop-bg'] || v['$black'];
+  // v['$modal-backdrop-opacity'] = u['$modal-backdrop-opacity'] || '.5';
+  // v['$modal-header-border-color'] = u['$modal-header-border-color'] || v['$gray-lighter'];
+  // v['$modal-footer-border-color'] = u['$modal-footer-border-color'] || v['$modal-header-border-color'];
+  // v['$modal-header-border-width'] = u['$modal-header-border-width'] || v['$modal-content-border-width'];
+  // v['$modal-footer-border-width'] = u['$modal-footer-border-width'] || v['$modal-header-border-width'];
+  // v['$modal-header-padding'] = u['$modal-header-padding'] || '15px';
+  //
+  // v['$modal-lg'] = u['$modal-lg'] || '800px';
+  // v['$modal-md'] = u['$modal-md'] || '500px';
+  // v['$modal-sm'] = u['$modal-sm'] || '300px';
+  //
+  // v['$modal-transition'] = u['$modal-transition'] || 'transform .3s ease-out';
 
 
   // Alerts
@@ -880,24 +880,24 @@ export function makeTheme(userTheme = {}) {
 
   // Carousel
 
-  v['$carousel-control-color'] = u['$carousel-control-color'] || v['$white'];
-  v['$carousel-control-width'] = u['$carousel-control-width'] || '15%';
-  v['$carousel-control-opacity'] = u['$carousel-control-opacity'] || '.5';
-
-  v['$carousel-indicator-width'] = u['$carousel-indicator-width'] || '30px';
-  v['$carousel-indicator-height'] = u['$carousel-indicator-height'] || '3px';
-  v['$carousel-indicator-spacer'] = u['$carousel-indicator-spacer'] || '3px';
-  v['$carousel-indicator-active-bg'] = u['$carousel-indicator-active-bg'] || v['$white'];
-
-  v['$carousel-caption-width'] = u['$carousel-caption-width'] || '70%';
-  v['$carousel-caption-color'] = u['$carousel-caption-color'] || v['$white'];
-
-  v['$carousel-control-icon-width'] = u['$carousel-control-icon-width'] || '20px';
-
-  v['$carousel-control-prev-icon-bg'] = u['$carousel-control-prev-icon-bg'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="${v['$carousel-control-color']}" viewBox="0 0 8 8"%3E%3Cpath d="M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z"/%3E%3C/svg%3E')`;
-  v['$carousel-control-next-icon-bg'] = u['$carousel-control-next-icon-bg'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="${v['$carousel-control-color']}" viewBox="0 0 8 8"%3E%3Cpath d="M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z"/%3E%3C/svg%3E')`;
-
-  v['$carousel-transition'] = u['$carousel-transition'] || 'transform .6s ease-in-out';
+  // v['$carousel-control-color'] = u['$carousel-control-color'] || v['$white'];
+  // v['$carousel-control-width'] = u['$carousel-control-width'] || '15%';
+  // v['$carousel-control-opacity'] = u['$carousel-control-opacity'] || '.5';
+  //
+  // v['$carousel-indicator-width'] = u['$carousel-indicator-width'] || '30px';
+  // v['$carousel-indicator-height'] = u['$carousel-indicator-height'] || '3px';
+  // v['$carousel-indicator-spacer'] = u['$carousel-indicator-spacer'] || '3px';
+  // v['$carousel-indicator-active-bg'] = u['$carousel-indicator-active-bg'] || v['$white'];
+  //
+  // v['$carousel-caption-width'] = u['$carousel-caption-width'] || '70%';
+  // v['$carousel-caption-color'] = u['$carousel-caption-color'] || v['$white'];
+  //
+  // v['$carousel-control-icon-width'] = u['$carousel-control-icon-width'] || '20px';
+  //
+  // v['$carousel-control-prev-icon-bg'] = u['$carousel-control-prev-icon-bg'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="${v['$carousel-control-color']}" viewBox="0 0 8 8"%3E%3Cpath d="M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z"/%3E%3C/svg%3E')`;
+  // v['$carousel-control-next-icon-bg'] = u['$carousel-control-next-icon-bg'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="${v['$carousel-control-color']}" viewBox="0 0 8 8"%3E%3Cpath d="M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z"/%3E%3C/svg%3E')`;
+  //
+  // v['$carousel-transition'] = u['$carousel-transition'] || 'transform .6s ease-in-out';
 
 
   // Close
@@ -921,50 +921,38 @@ export function makeTheme(userTheme = {}) {
   v['$pre-color'] = u['$pre-color'] || v['$gray-dark'];
   v['$pre-scrollable-max-height'] = u['$pre-scrollable-max-height'] || '340px';
 
-  // OUR KOPAX EXTEND OF BOOTSTRAP ONLY ADD NEW VARIBALES HERE
+  // OUR KOPAX EXTEND OF BOOTSTRAP ONLY ADD NEW VARIABLES DOWN HERE
 
   // tools
 
   // Header
-  v['$header-max-height'] = u['$header-max-height'] || '450px';
-  v['$header-collapsed-max-height'] = u['$header-collapsed-max-height'] || '1000px';
   v['$header-navbar-border-color'] = u['$header-navbar-border-color'] || v['$gray-lighter'];
   v['$header-navbar-border-width'] = u['$header-navbar-border-width'] || v['$border-width'];
-  v['$header-navbar-transition-duration'] = u['$header-navbar-transition-duration'] || '.6s';
 
   // Card
   v['$card-margin-y-halved'] = u['$card-margin-y-halved'] || ((rmUnit(v['$card-spacer-y'], UNIT.REM) / 2) + UNIT.REM);
   v['$card-margin-x-halved'] = u['$card-margin-x-halved'] || ((rmUnit(v['$card-spacer-x'], UNIT.REM) / 2) + UNIT.REM);
 
   // Navbar
-
   v['$navbar-max-height'] = u['$navbar-max-height'] || '400px';
   v['$navbar-height'] = u['$navbar-height'] || '70px';
+  // Menu
+  v['$menu-push-bg'] = u['$menu-push-bg'] || 'black';
+  v['$menu-push-mini-width'] = u['$menu-push-mini-width'] || '75px';
+  v['$menu-push-width'] = u['$menu-push-width'] || '220px';
+  v['$menu-push-full-width'] = u['$menu-push-full-width'] || '100%';
+  v['$menu-transition-duration'] = u['$menu-transition-duration'] || '.6s';
+
+  // Zindex
+  v['$zindex-menu-push'] = v['$zindex-menu-push'] || '2000';
+
 
   // This will ensure u rest untouched and copy v value over u
   return Object.assign({}, u, v);
 
   // THIS COME FROM old theme in config.js and doesn't exist in the new theme
 
-  // v['$gray-base'] = '#000';
   // v['$spacer-halved'] = (rmUnit(v['$spacer'], UNIT.REM) / 2) + UNIT.REM;
-  // v['$font-family-serif'] = 'Georgia, \'Times New Roman\'; Times, serif';
-  // v['$font-size-root'] = '16px';
-  // v['$headings-underline-width'] = '180%';
-  // v['$headings-underline-height'] = '1px';
-  // v['$headings-underline-left-position'] = '-40%';
-  // v['$headings-underline-gradient-color-1'] = v['$brand-primary'];
-  // v['$headings-underline-gradient-color-2'] = v['$body-bg'];
-  // v['$abbr-border-color'] = v['$gray-light'];
-  // v['$caret-width-lg'] = v['$caret-width'];
-  // v['$padding-base-vertical'] = '6px';
-  // v['$padding-base-horizontal'] = '12px';
-  // v['$padding-large-vertical'] = '10px';
-  // v['$padding-large-horizontal'] = '16px';
-  // v['$padding-small-vertical'] = '5px';
-  // v['$padding-small-horizontal'] = '10px';
-  // v['$padding-xs-vertical'] = '1px';
-  // v['$padding-xs-horizontal'] = '5px';
   // v['$table-bg-inverse'] = v['$gray-dark'];
   // v['$table-inverse-border-color'] = v['$gray'];
   // v['$table-border-header-width'] = (rmUnit(v['$border-width'], UNIT.PX) * 2) + UNIT.PX;
@@ -1049,17 +1037,6 @@ export function makeTheme(userTheme = {}) {
   // v['$media-heading-margin-bottom'] = '5px';
   // v['$media-alignment-padding-x'] = '10px';
   //
-  // // 33. Carousel
-  //
-  // v['$carousel-text-shadow'] = '0 1px 2px rgba(0,0,0,.6)';
-  // v['$carousel-control-sm-up-size'] = '30px';
-  // v['$carousel-control-font-size'] = '20px';
-  // v['$carousel-indicators-width'] = '60%';
-  // v['$carousel-indicator-size'] = '10px';
-  // v['$carousel-indicator-active-size'] = '12px';
-  // v['$carousel-indicator-border-color'] = '#fff';
-  // v['$carousel-caption-sm-up-width'] = '60%';
-  // v['$carousel-icon-width'] = '20px';
   //
   // v['$pre-bg'] = '#f7f7f9';
   // v['$pre-border-color'] = '#ccc';
@@ -1072,16 +1049,6 @@ export function makeTheme(userTheme = {}) {
   // v['$footer-background'] = 'purple';
   // v['$footer-color'] = 'white';
   //
-  // // Menu transition component
-  // v['$menu-slide-transition-duration'] = '.6s';
-  // v['$menu-push-transition-duration'] = '.6s';
-  //
-  // // MenuPush component
-  // v['$menu-push-bg'] = 'black';
-  // v['$menu-push-mini-width'] = '75px';
-  // v['$menu-push-width'] = '220px';
-  // v['$menu-push-full-width'] = '100%';
-
 
   // THIS COME FROM the new import and are listed here as information, they were not present in old theme
 

@@ -10,8 +10,8 @@ import A from 'components/A';
 import Collapse from 'components/Collapse/Collapse';
 import NavBarToggler from './NavBarToggler';
 import Container from '../Container';
-import { navbar } from '../../styled/utilities/navbar';
-import { nav } from '../../styled/utilities/nav';
+import { navbar } from '../../styled/mixins/navbar';
+import { nav } from '../../styled/mixins/nav';
 import { ifThen } from '../../styled/mixins/conditional';
 
 const defaultProps = {
@@ -88,7 +88,7 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
 
     return contained ? (
       <nav className={cn('navbar', className)} {...rest}>
-        <Container>
+        <Container {...rest}>
           {toggler && (
             <NavBarToggler className={toggler.className} left={toggler.left} right={toggler.right} onClick={this.handleToggler} />
           )}

@@ -12,7 +12,7 @@ import { borderRadius } from '../../styled/mixins/border-radius';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { navDivider } from '../../styled/mixins/nav-divider';
 import { hoverFocus } from '../../styled/mixins/hover';
-import { buttonGroup } from '../../styled/utilities/buttonGroup';
+import { buttonGroup } from '../../styled/mixins/buttonGroup';
 import { ifThen } from '../../styled/mixins/conditional';
 
 const defaultProps = {
@@ -292,7 +292,6 @@ DropDown = styled(DropDown)`
       props.theme['$btn-toolbar-margin'],
       props.theme['$btn-padding-x'],
       props.theme['$btn-active-box-shadow'],
-      props.theme['$caret-width-lg'],
       props.theme['$btn-padding-x-lg'],
       props.theme['$btn-padding-y-lg'],
       props.theme['$font-size-lg'],
@@ -300,8 +299,7 @@ DropDown = styled(DropDown)`
       props.theme['$btn-padding-x-sm'],
       props.theme['$btn-padding-y-sm'],
       props.theme['$font-size-sm'],
-      props.theme['$btn-border-radius-sm'],
-      props.theme['$btn-border-width']
+      props.theme['$btn-border-radius-sm']
     )}
   `}
 `;

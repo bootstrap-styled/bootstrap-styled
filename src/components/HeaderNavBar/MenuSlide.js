@@ -51,7 +51,7 @@ MenuSlide = styled(MenuSlide)`
     bottom: 0;
     ${transition(
       props.theme['$enable-transitions'],
-      props.theme['$menu-slide-transition-duration'],
+      props.theme['$menu-transition-duration'],
     )}
     
     &.menu-right {
