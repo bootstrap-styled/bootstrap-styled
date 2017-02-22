@@ -13,7 +13,7 @@ import bsTheme from 'theme';
 import { nav } from '../../styled/mixins/nav';
 import { listUnstyled, listInline, listInlineItem } from '../../styled/mixins/lists';
 import { navbar } from '../../styled/mixins/navbar';
-import { pagination } from '../../styled/mixins/pagination';
+import { pagination } from '../../styled/mixins/paginations';
 
 const defaultProps = { theme: bsTheme };
 
