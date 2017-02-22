@@ -37,7 +37,7 @@ class Jumbotron extends React.Component { // eslint-disable-line react/prefer-st
 
 // eslint-disable-next-line no-class-assign
 Jumbotron = styled(Jumbotron)`
-  ${(props) => console.log(`
+  ${(props) => `
     &.jumbotron {
       padding: ${props.theme['$jumbotron-padding']} calc(${props.theme['$jumbotron-padding']} / 2);
       margin-bottom: ${props.theme['$jumbotron-padding']};
@@ -64,7 +64,7 @@ Jumbotron = styled(Jumbotron)`
         0
       )}
     }
-  `)}
+  `}
 `;
 
 Jumbotron.defaultProps = defaultProps;

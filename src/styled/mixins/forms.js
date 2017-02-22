@@ -1,16 +1,106 @@
 import color from 'color';
+import theme from 'theme';
 import { borderRadius } from './border-radius';
 import { boxShadow } from './box-shadow';
-export const defaultProps = {
-  '$enable-shadows': false,
-  '$enable-rounded': true,
-  '$input-box-shadow': 'inset 0 1px 1px rgba(0,0,0,.075)',
-  '$input-color-focus': '#55595c',
-  '$input-bg-focus': '#fff',
-  '$input-border-focus': '#66afe9',
-  '$input-border-radius': '.25rem',
-  '$input-box-shadow-focus': 'inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6)',
-};
+import { transition } from '../mixins/transition';
+
+export const defaultProps = theme;
+
+export function formControl(
+  $enableRounded = defaultProps['$enable-rounded'],
+  $enableTransitions = defaultProps['$enable-transitions'],
+  $enableShadows = defaultProps['$enable-shadows'],
+  $inputHeight = defaultProps['$input-height'],
+  $inputPaddingY = defaultProps['$input-padding-y'],
+  $inputPaddingX = defaultProps['$input-padding-x'],
+  $fontSizeBase = defaultProps['$font-size-base'],
+  $inputLineHeight = defaultProps['$input-line-height'],
+  $inputColor = defaultProps['$input-color'],
+  $inputBg = defaultProps['$input-bg'],
+  $inputBorderRadius = defaultProps['$input-border-radius'],
+  $inputBtnBorderWidth = defaultProps['$input-btn-border-width'],
+  $inputBorderColor = defaultProps['$input-border-color'],
+  $inputTransition = defaultProps['$input-transition'],
+  $inputBoxShadow = defaultProps['$input-box-shadow'],
+  $inputColorFocus = defaultProps['$input-color-focus'],
+  $inputBgFocus = defaultProps['$input-bg-focus'],
+  $inputBorderFocus = defaultProps['$input-border-focus'],
+  $inputBoxShadowFocus = defaultProps['$input-box-shadow-focus'],
+  $inputColorPlaceholder = defaultProps['$input-color-placeholder'],
+  $inputBgDisabled = defaultProps['$input-bg-disabled'],
+  $cursorDisabled = defaultProps['$cursor-disabled'],
+) {
+  return `
+      & .form-control {
+        display: block;
+        width: 100%;
+  
+        /* Make inputs at least the height of their button counterpart (base line-height + padding + border) */
+        /* height: ${$inputHeight}; */
+  
+        padding: ${$inputPaddingY} ${$inputPaddingX};
+        font-size: ${$fontSizeBase};
+        line-height: ${$inputLineHeight};
+        color: ${$inputColor};
+        background-color: ${$inputBg};
+  
+        /* Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214. */
+        background-image: none;
+        background-clip: padding-box;
+        /* Note: This has no effect on <select>s in some browsers, due to the limited stylability of <select>s in CSS. */
+        ${$enableRounded ? `border-radius: ${$inputBorderRadius};` : 'border-radius: 0;'} /* Manually use the if/else instead of the mixin to account for iOS override */
+        border: ${$inputBtnBorderWidth} solid ${$inputBorderColor};
+        ${transition(
+          $enableTransitions,
+          $inputTransition
+        )}
+        ${boxShadow(
+          $enableShadows,
+          $inputBoxShadow
+        )}
+  
+        /* Unstyle the caret on selects in IE10+. */
+        &::-ms-expand {
+          background-color: transparent;
+          border: 0;
+        }
+  
+        /* Customize the :focus state to imitate native WebKit styles. */
+        ${formControlFocus(
+          $enableShadows,
+            $inputColorFocus,
+            $inputBgFocus,
+            $inputBorderFocus,
+            $inputBoxShadowFocus,
+          )}
+  
+        /* Placeholder */
+        &::placeholder {
+          color: ${$inputColorPlaceholder};
+          /* Override Firefox unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526. */
+          opacity: 1;
+        }
+  
+        /* Disabled and read-only inputs
+         HTML5 says that controls under a fieldset > legend:first-child will not be
+         disabled if the fieldset is disabled. Due to implementation difficulty, we
+         do not honor that edge case; we style them as disabled anyway.
+         */
+  
+        &:disabled,
+        &[readonly] {
+          background-color:${$inputBgDisabled};
+          /* iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655. */
+          opacity: 1;
+        }
+  
+        &:disabled {
+          cursor: ${$cursorDisabled};
+        }
+      }
+  `;
+}
+
 // Form validation states
 //
 // Used in _forms.scss to generate the form validation CSS for warnings, errors,
@@ -95,8 +185,10 @@ export function inputSize(enableRounded = defaultProps['$enable-rounded'], paren
     }
   `;
 }
+
 export default {
   defaultProps,
+  formControl,
   formControlValidation,
   formControlFocus,
   inputSize,

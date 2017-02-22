@@ -7,10 +7,8 @@
 import styled from 'styled-components';
 import { unitUtils } from 'math-utils';
 import bsTheme from 'theme';
-import { boxShadow } from '../../styled/mixins/box-shadow';
 import { borderRadius } from '../../styled/mixins/border-radius';
-import { transition } from '../../styled/mixins/transition';
-import { formControlFocus, formControlValidation } from '../../styled/mixins/forms';
+import { formControl, formControlValidation } from '../../styled/mixins/forms';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { customForms } from '../../styled/mixins/customForms';
 import { makeRow } from '../../styled/mixins/grid';
@@ -25,74 +23,31 @@ const Form = styled.form`
      Textual form controls
     */
 
-    & .form-control {
-      display: block;
-      width: 100%;
-
-      /* Make inputs at least the height of their button counterpart (base line-height + padding + border) */
-      /* height: ${props.theme['$input-height']}; */
-
-      padding: ${props.theme['$input-padding-y']} ${props.theme['$input-padding-x']};
-      font-size: ${props.theme['$font-size-base']};
-      line-height: ${props.theme['$input-line-height']};
-      color: ${props.theme['$input-color']};
-      background-color: ${props.theme['$input-bg']};
-
-      /* Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214. */
-      background-image: none;
-      background-clip: padding-box;
-      /* Note: This has no effect on <select>s in some browsers, due to the limited stylability of <select>s in CSS. */
-      ${props.theme['$enable-rounded'] ? `border-radius: ${props.theme['$input-border-radius']};` : 'border-radius: 0;'} /* Manually use the if/else instead of the mixin to account for iOS override */
-      border: ${props.theme['$input-btn-border-width']} solid ${props.theme['$input-border-color']};
-      ${transition(
-        props.theme['$enable-transitions'],
-        props.theme['$input-transition']
-      )}
-      ${boxShadow(
-        props.theme['$enable-shadows'],
-        props.theme['$input-box-shadow']
-      )}
-
-      /* Unstyle the caret on selects in IE10+. */
-      &::-ms-expand {
-        background-color: transparent;
-        border: 0;
-      }
-
-      /* Customize the :focus state to imitate native WebKit styles. */
-      ${formControlFocus(
-        props.theme['$enable-shadows'],
-        props.theme['$input-color-focus'],
-        props.theme['$input-bg-focus'],
-        props.theme['$input-border-focus'],
-        props.theme['$input-box-shadow-focus'],
-      )}
-
-      /* Placeholder */
-      &::placeholder {
-        color: ${props.theme['$input-color-placeholder']};
-        /* Override Firefox unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526. */
-        opacity: 1;
-      }
-
-      /* Disabled and read-only inputs
-       HTML5 says that controls under a fieldset > legend:first-child will not be
-       disabled if the fieldset is disabled. Due to implementation difficulty, we
-       do not honor that edge case; we style them as disabled anyway.
-       */
-
-      &:disabled,
-      &[readonly] {
-        background-color:${props.theme['$input-bg-disabled']};
-        /* iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655. */
-        opacity: 1;
-      }
-
-      &:disabled {
-        cursor: ${props.theme['$cursor-disabled']};
-      }
-    }
-
+    ${formControl(
+      props.theme['$enable-rounded'],
+      props.theme['$enable-transitions'],
+      props.theme['$enable-shadows'],
+      props.theme['$input-height'],
+      props.theme['$input-padding-y'],
+      props.theme['$input-padding-x'],
+      props.theme['$font-size-base'],
+      props.theme['$input-line-height'],
+      props.theme['$input-color'],
+      props.theme['$input-bg'],
+      props.theme['$input-border-radius'],
+      props.theme['$input-btn-border-width'],
+      props.theme['$input-border-color'],
+      props.theme['$input-transition'],
+      props.theme['$input-box-shadow'],
+      props.theme['$input-color-focus'],
+      props.theme['$input-bg-focus'],
+      props.theme['$input-border-focus'],
+      props.theme['$input-box-shadow-focus'],
+      props.theme['$input-color-placeholder'],
+      props.theme['$input-bg-disabled'],
+      props.theme['$cursor-disabled'],
+    )}
+    
     select.form-control {
       &:not([size]):not([multiple]) {
         height: calc(${props.theme['$input-height']} + ${selectBorderWidth});
