@@ -256,7 +256,7 @@ export function customForms(
         background-image: ${$customCheckboxCheckedIcon};
       }
     
-      & .custom-control-input:indeterminate ~ .custom-control-indicator {
+      & .custom-control-input.indeterminate ~ .custom-control-indicator {
         background-color: ${$customCheckboxIndeterminateBg};
         background-image: ${$customCheckboxIndeterminateIcon};
         ${boxShadow(

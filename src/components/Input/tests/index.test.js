@@ -14,6 +14,7 @@ const renderComponent = (props = {}) => shallow(
     type={props.type}
     placeholder={props.placeholder}
     className={props.className}
+    indeterminate={props.indeterminate}
   />
 
 );
@@ -25,6 +26,7 @@ const renderComponentUsingTheme = (props = {}) => mount(
       type={props.type}
       placeholder={props.placeholder}
       className={props.className}
+      indeterminate={props.indeterminate}
     />
   </ThemeProvider>
 );
@@ -63,5 +65,13 @@ describe('<Input />', () => {
       placeholder: 'Enter your input here',
     });
     expect(renderedComponent.find('input').props().placeholder).toEqual('Enter your input here');
+  });
+  it('should render an indeterminate checkbox', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      placeholder: 'Enter your input here',
+      type: 'checkbox',
+      indeterminate: true,
+    });
+    expect(renderedComponent.find('input').hasClass('indeterminate')).toEqual(true);
   });
 });

@@ -4,24 +4,50 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from 'theme';
+import cn from 'classnames';
+import bsTheme from 'theme';
 import { button } from '../../styled/mixins/button';
 
 const defaultProps = {
-  theme,
+  theme: bsTheme,
   type: 'text',
 };
 
 class Input extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    className: PropTypes.string,
     theme: PropTypes.object,
+    onChange: PropTypes.func,
+    indeterminate: PropTypes.bool,
+  }
+
+  state = {
+    indeterminate: false,
+  }
+
+  componentWillMount() {
+    this.setState({
+      indeterminate: this.props.indeterminate,
+    });
+  }
+
+  handleChange = (e) => {
+    if (this.state.indeterminate) {
+      this.setState({
+        indeterminate: false,
+      });
+    }
+    if (this.props.onChange) {
+      this.props.onChange(e);
+    }
   }
 
   render() {
-    const { theme, ...rest } = this.props; // eslint-disable-line
+    const { className, indeterminate: unused, onChange, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { indeterminate } = this.state;
     return (
-      <input {...rest} />
+      <input className={cn(className, { indeterminate })} {...rest} onChange={this.handleChange} />
     );
   }
 
