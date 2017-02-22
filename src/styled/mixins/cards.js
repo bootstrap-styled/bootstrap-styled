@@ -81,12 +81,7 @@ export function card(
   $cardImgOverlayPadding,
 ) {
   return `
-    
-    /*
-    Base styles
-    */
-    
-    & .card{
+    & .card {
       position: relative;
       display: flex;
       flex-direction: column;
@@ -95,8 +90,7 @@ export function card(
       ${borderRadius($enableRounded, $cardBorderRadius)}
     }
     
-
-    & .card-block{
+    & .card-block {
       flex: 1 1 auto;
 
       padding: ${$cardSpacerX};
@@ -145,14 +139,9 @@ export function card(
       }
     }
     
-    
-    /*
-     Optional textual caps
-    */
-    
     & .card-header {
       padding: ${$cardSpacerY} ${$cardSpacerX};
-      margin-bottom: 0; /* Removes the default margin-bottom of <hN> */
+      margin-bottom: 0;
       background-color: ${$cardCapBg};
       border-bottom: ${$cardBorderWidth} solid ${$cardBorderColor};
     
@@ -182,12 +171,7 @@ export function card(
         )}
       }
     }
-    
-    
-    /*
-     Header navs
-    */
-    
+
     & .card-header-tabs {
       margin-right: -${$cardMarginXHalved};
       margin-bottom: -${$cardSpacerY};
@@ -200,98 +184,82 @@ export function card(
       margin-left: -${$cardMarginXHalved};
     }
     
-    
-    /*
-     Background variations
-    */
-    
-    & .card-primary{
+    & .card-primary {
       ${cardVariant(
         $brandPrimary,
         $brandPrimary,
       )}
     }
-    & .card-success{
+    & .card-success {
       ${cardVariant(
         $brandSuccess,
         $brandSuccess,
       )}
     }
-    & .card-info{
+    & .card-info {
       ${cardVariant(
         $brandInfo,
         $brandInfo,
       )}
     }
-    & .card-warning{
+    & .card-warning {
       ${cardVariant(
         $brandWarning,
         $brandWarning,
       )}
     }
-    & .card-danger{
+    & .card-danger {
       ${cardVariant(
         $brandDanger,
         $brandDanger,
       )}
     }
     
-    /* Remove all backgrounds */
-    & .card-outline-primary{
+    & .card-outline-primary {
       ${cardOutlineVariant(
         $btnPrimaryBg,
       )}
     }
-    & .card-outline-secondary{
+    & .card-outline-secondary {
       ${cardOutlineVariant(
         $btnSecondaryBorder,
       )}
     }
-    & .card-outline-info{
+    & .card-outline-info {
       ${cardOutlineVariant(
         $btnInfoBg,
       )}
     }
-    & .card-outline-success{
+    & .card-outline-success {
       ${cardOutlineVariant(
         $btnSuccessBg,
       )}
     }
-    & .card-outline-warning{
+    & .card-outline-warning {
       ${cardOutlineVariant(
         $btnWarningBg,
       )}
     }
-    & .card-outline-danger{
+    & .card-outline-danger {
       ${cardOutlineVariant(
         $btnDangerBg,
       )}
     }
-    
-    /*
-     Inverse text within a card for use with dark backgrounds
-    */
-    
-    & .card-inverse{
+        
+    & .card-inverse {
       ${cardInverse(
         $enableHoverMediaQuery,
         $cardLinkHoverColor,
       )}
     }
-    
-    /*
-     Blockquote
-    */
-    
+
     & .card-blockquote {
       padding: 0;
       margin-bottom: 0;
       border-left: 0;
     }
     
-    /* Card image */
     & .card-img {
-      /* margin: -1.325rem; */
       ${borderRadius(
         $enableRounded,
         $cardBorderRadiusInner,
@@ -306,10 +274,7 @@ export function card(
       left: 0;
       padding: ${$cardImgOverlayPadding};
     }
-    
-    
-    
-    /* Card image caps */
+
     & .card-img-top {
       ${borderTopRadius(
         $enableRounded,

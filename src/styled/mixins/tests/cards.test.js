@@ -68,10 +68,10 @@ describe('bootstrap cards mixins', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-200514915);
+    expect(fromJS({ css }).hashCode()).toEqual(279735614);
   });
   it('card should return a css by default', () => {
     const css = card();
-    expect(fromJS({ css }).hashCode()).toEqual(551864327);
+    expect(fromJS({ css }).hashCode()).toEqual(1013963828);
   });
 });

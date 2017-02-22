@@ -53,7 +53,7 @@ Card = styled(Card)`
       flex-direction: column;
       background-color: ${props.theme['$card-bg']};
       border: ${props.theme['$card-border-width']} solid ${props.theme['$card-border-color']};
-      ${borderRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius'])};
+      ${borderRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius'])}
       
       ${ifThen(
         props.width,
@@ -135,7 +135,7 @@ Card = styled(Card)`
           props.theme['$card-border-radius-inner'],
           '0',
           '0'
-        )};
+        )}
       }
     }
     
@@ -151,7 +151,7 @@ Card = styled(Card)`
           '0',
           props.theme['$card-border-radius-inner'],
           props.theme['$card-border-radius-inner']
-        )};
+        )}
       }
     }
     
@@ -263,7 +263,6 @@ Card = styled(Card)`
     
     /* Card image */
     & .card-img {
-      /* margin: -1.325rem; */
       ${borderRadius(
         props.theme['$enable-rounded'],
         props.theme['$card-border-radius-inner'],
