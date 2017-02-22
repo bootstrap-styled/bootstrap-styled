@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
-import { card } from '../../styled/mixins/card';
+import { card } from '../../styled/mixins/cards';
 
 const defaultProps = {
   theme: bsTheme,
@@ -64,10 +64,9 @@ CardDeck = styled(CardDeck)`
       props.theme['$btn-danger-bg'],
       props.theme['$card-link-hover-color'],
       props.theme['$card-img-overlay-padding'],
-    props.theme['$card-inverse-bg-color'],
-    props.theme['$card-inverse-border-color'],
+      props.theme['$card-inverse-bg-color'],
+      props.theme['$card-inverse-border-color'],
     )}
-    
     ${mediaBreakpointUp(
       'sm',
       props.theme['$grid-breakpoints'],
@@ -79,13 +78,7 @@ CardDeck = styled(CardDeck)`
           .card {
             display: flex;
             flex: 1 0 0;
-            flex-direction: column;
-            /*
-              Selectively apply horizontal margins to cards to avoid doing the
-              negative margin dance like our grid. This differs from the grid
-              due to the use of margins as gutters instead of padding.
-            */
-            
+            flex-direction: column;  
             &:not(:first-child) { margin-left: ${props.theme['$card-deck-margin']}; }
             &:not(:last-child) { margin-right: ${props.theme['$card-deck-margin']}; }
           }

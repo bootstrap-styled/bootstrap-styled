@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
-import { card } from '../../styled/mixins/card';
+import { card } from '../../styled/mixins/cards';
 
 const defaultProps = {
   theme: bsTheme,
@@ -67,9 +67,6 @@ CardColumns = styled(CardColumns)`
       props.theme['$card-inverse-bg-color'],
       props.theme['$card-inverse-border-color'],
     )}
-    /*
-     Card Column
-    */
     ${mediaBreakpointUp(
       'sm',
       props.theme['$grid-breakpoints'],

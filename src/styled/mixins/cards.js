@@ -1,11 +1,8 @@
-import { hoverFocus } from './hover';
+import theme from 'theme';
+import { hover, hoverFocus } from './hover';
+import { borderRadius, borderTopRadius, borderBottomRadius } from './border-radius';
 
-export const defaultProps = {
-  '$card-link-hover-color': '#fff',
-  '$enable-hover-media-query': false,
-  '$card-inverse-bg-color': '#464a4c',
-  '$card-inverse-border-color': '#464a4c',
-};
+export const defaultProps = theme;
 
 export function cardVariant(cardBackground, cardBorder) {
   return `
@@ -56,9 +53,284 @@ export function cardInverse(enableHoverMediaQuery = defaultProps['$enable-hover-
   `;
 }
 
+export function card(
+  $enableRounded,
+  $enableHoverMediaQuery,
+  $cardSpacerY,
+  $cardSpacerX,
+  $cardBg,
+  $cardBorderWidth,
+  $cardBorderColor,
+  $cardBorderRadius,
+  $cardMarginYHalved,
+  $cardMarginXHalved,
+  $cardCapBg,
+  $cardBorderRadiusInner,
+  $brandPrimary,
+  $brandSuccess,
+  $brandInfo,
+  $brandWarning,
+  $brandDanger,
+  $btnPrimaryBg,
+  $btnSecondaryBorder,
+  $btnInfoBg,
+  $btnSuccessBg,
+  $btnWarningBg,
+  $btnDangerBg,
+  $cardLinkHoverColor,
+  $cardImgOverlayPadding,
+) {
+  return `
+    
+    /*
+    Base styles
+    */
+    
+    & .card{
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background-color: ${$cardBg};
+      border: ${$cardBorderWidth} solid ${$cardBorderColor};
+      ${borderRadius($enableRounded, $cardBorderRadius)}
+    }
+    
+
+    & .card-block{
+      flex: 1 1 auto;
+
+      padding: ${$cardSpacerX};
+    }
+    
+    & .card-title {
+      margin-bottom: ${$cardSpacerY};
+    }
+    
+    & .card-subtitle {
+      margin-top: -${$cardMarginYHalved};
+      margin-bottom: 0;
+    }
+    
+    & .card-text:last-child {
+      margin-bottom: 0;
+    }
+   
+    & .card-link {
+      ${hover(`
+        text-decoration: none;
+      `)}
+    
+      + .card-link {
+        margin-left: ${$cardSpacerX};
+      }
+    }
+    
+    & .card{
+      > .list-group:first-child {
+        .list-group-item:first-child {
+          ${borderTopRadius(
+            $enableRounded,
+            $cardBorderRadius
+          )}
+        }
+      }
+    
+      > .list-group:last-child {
+        .list-group-item:last-child {
+          ${borderBottomRadius(
+            $enableRounded,
+            $cardBorderRadius
+          )}
+        }
+      }
+    }
+    
+    
+    /*
+     Optional textual caps
+    */
+    
+    & .card-header {
+      padding: ${$cardSpacerY} ${$cardSpacerX};
+      margin-bottom: 0; /* Removes the default margin-bottom of <hN> */
+      background-color: ${$cardCapBg};
+      border-bottom: ${$cardBorderWidth} solid ${$cardBorderColor};
+    
+      &:first-child {
+        ${borderRadius(
+          $enableRounded,
+          $cardBorderRadiusInner,
+          $cardBorderRadiusInner,
+          '0',
+          '0'
+        )}
+      }
+    }
+    
+    & .card-footer {
+      padding: ${$cardSpacerY} ${$cardSpacerX};
+      background-color: ${$cardCapBg};
+      border-top: ${$cardBorderWidth} solid ${$cardBorderColor};
+    
+      &:last-child {
+        ${borderRadius(
+          $enableRounded,
+          '0',
+          '0',
+          $cardBorderRadiusInner,
+          $cardBorderRadiusInner
+        )}
+      }
+    }
+    
+    
+    /*
+     Header navs
+    */
+    
+    & .card-header-tabs {
+      margin-right: -${$cardMarginXHalved};
+      margin-bottom: -${$cardSpacerY};
+      margin-left: -${$cardMarginXHalved};
+      border-bottom: 0;
+    }
+    
+    & .card-header-pills {
+      margin-right: -${$cardMarginXHalved};
+      margin-left: -${$cardMarginXHalved};
+    }
+    
+    
+    /*
+     Background variations
+    */
+    
+    & .card-primary{
+      ${cardVariant(
+        $brandPrimary,
+        $brandPrimary,
+      )}
+    }
+    & .card-success{
+      ${cardVariant(
+        $brandSuccess,
+        $brandSuccess,
+      )}
+    }
+    & .card-info{
+      ${cardVariant(
+        $brandInfo,
+        $brandInfo,
+      )}
+    }
+    & .card-warning{
+      ${cardVariant(
+        $brandWarning,
+        $brandWarning,
+      )}
+    }
+    & .card-danger{
+      ${cardVariant(
+        $brandDanger,
+        $brandDanger,
+      )}
+    }
+    
+    /* Remove all backgrounds */
+    & .card-outline-primary{
+      ${cardOutlineVariant(
+        $btnPrimaryBg,
+      )}
+    }
+    & .card-outline-secondary{
+      ${cardOutlineVariant(
+        $btnSecondaryBorder,
+      )}
+    }
+    & .card-outline-info{
+      ${cardOutlineVariant(
+        $btnInfoBg,
+      )}
+    }
+    & .card-outline-success{
+      ${cardOutlineVariant(
+        $btnSuccessBg,
+      )}
+    }
+    & .card-outline-warning{
+      ${cardOutlineVariant(
+        $btnWarningBg,
+      )}
+    }
+    & .card-outline-danger{
+      ${cardOutlineVariant(
+        $btnDangerBg,
+      )}
+    }
+    
+    /*
+     Inverse text within a card for use with dark backgrounds
+    */
+    
+    & .card-inverse{
+      ${cardInverse(
+        $enableHoverMediaQuery,
+        $cardLinkHoverColor,
+      )}
+    }
+    
+    /*
+     Blockquote
+    */
+    
+    & .card-blockquote {
+      padding: 0;
+      margin-bottom: 0;
+      border-left: 0;
+    }
+    
+    /* Card image */
+    & .card-img {
+      /* margin: -1.325rem; */
+      ${borderRadius(
+        $enableRounded,
+        $cardBorderRadiusInner,
+      )}
+    }
+    
+    & .card-img-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: ${$cardImgOverlayPadding};
+    }
+    
+    
+    
+    /* Card image caps */
+    & .card-img-top {
+      ${borderTopRadius(
+        $enableRounded,
+        $cardBorderRadiusInner
+      )}
+    }
+    
+    & .card-img-bottom {
+      ${borderBottomRadius(
+        $enableRounded,
+        $cardBorderRadiusInner
+      )}
+    }
+  `;
+}
+
+
 export default {
   defaultProps,
   cardVariant,
   cardOutlineVariant,
   cardInverse,
+  card,
 };

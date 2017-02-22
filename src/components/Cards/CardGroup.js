@@ -10,7 +10,7 @@ import bsTheme from 'theme';
 import { borderRightRadius, borderLeftRadius } from '../../styled/mixins/border-radius';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { ifThen } from '../../styled/mixins/conditional';
-import { card } from '../../styled/mixins/card';
+import { card } from '../../styled/mixins/cards';
 
 const defaultProps = {
   theme: bsTheme,
@@ -69,68 +69,64 @@ CardGroup = styled(CardGroup)`
       props.theme['$card-inverse-bg-color'],
       props.theme['$card-inverse-border-color'],
     )}
-    /*
-     Card groups
-    */
-      ${mediaBreakpointUp(
-        'sm',
-        props.theme['$grid-breakpoints'],
-        `
-          &.card-group {
-            display: flex;
-            flex-flow: row wrap;
-        
-            .card {
-              flex: 1 0 0;
-        
-              + .card {
-                margin-left: 0;
-                border-left: 0;
-              }
-        
-            ${ifThen(
-              props.theme['$enable-rounded'],
-              `
-                &:first-child {
-                  ${borderRightRadius(
-                    props.theme['$enable-rounded'],
-                    '0'
-                  )}
-                  .card-img-top {
-                    border-top-right-radius: 0;
-                  }
-                  
-                  .card-img-bottom {
-                    border-bottom-right-radius: 0;
-                  }
-                }
-              
-                &:last-child {
-                  ${borderLeftRadius(
-                    props.theme['$enable-rounded'],
-                    '0'
-                  )}
-                  
-                  .card-img-top {
-                    border-top-left-radius: 0;
-                  }
-                  
-                  .card-img-bottom {
-                    border-bottom-left-radius: 0;
-                  }
+    ${mediaBreakpointUp(
+      'sm',
+      props.theme['$grid-breakpoints'],
+      `
+        &.card-group {
+          display: flex;
+          flex-flow: row wrap;
+      
+          .card {
+            flex: 1 0 0;
+      
+            + .card {
+              margin-left: 0;
+              border-left: 0;
+            }
+      
+          ${ifThen(
+            props.theme['$enable-rounded'],
+            `
+              &:first-child {
+                ${borderRightRadius(
+                  props.theme['$enable-rounded'],
+                  '0'
+                )}
+                .card-img-top {
+                  border-top-right-radius: 0;
                 }
                 
-                &:not(:first-child):not(:last-child) {
-                  border-radius: 0;
-        
-                  .card-img-top,
-                  .card-img-bottom {
-                    border-radius: 0;
-                  }
+                .card-img-bottom {
+                  border-bottom-right-radius: 0;
                 }
-              `
-            )}  
-          }
+              }
+            
+              &:last-child {
+                ${borderLeftRadius(
+                  props.theme['$enable-rounded'],
+                  '0'
+                )}
+                
+                .card-img-top {
+                  border-top-left-radius: 0;
+                }
+                
+                .card-img-bottom {
+                  border-bottom-left-radius: 0;
+                }
+              }
+              
+              &:not(:first-child):not(:last-child) {
+                border-radius: 0;
+      
+                .card-img-top,
+                .card-img-bottom {
+                  border-radius: 0;
+                }
+              }
+            `
+          )}  
         }
       `
     )}
