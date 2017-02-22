@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { defaultProps, buttonVariant, buttonOutlineVariant, buttonSize } from '../buttons';
+import { defaultProps, buttonVariant, buttonOutlineVariant, buttonSize, button } from '../buttons';
 
 describe('bootstrap button mixins', () => {
   it('buttonVariant should return a css without shadows', () => {
@@ -12,7 +12,7 @@ describe('bootstrap button mixins', () => {
     const css = buttonVariant(!defaultProps['$enable-shadows'], '#f00', '#0f0', '#0ff', defaultProps['$btn-active-box-shadow']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(161175461);
+    expect(fromJS({ css }).hashCode()).toEqual(-256046541);
   });
   it('buttonVariant should return a css by default', () => {
     const css = buttonVariant();
@@ -43,5 +43,61 @@ describe('bootstrap button mixins', () => {
   it('buttonSize should return a css by default', () => {
     const css = buttonSize();
     expect(fromJS({ css }).hashCode()).toEqual(813225771);
+  });
+  it('button should return a a css', () => {
+    const css = button(
+      defaultProps['$enable-shadows'],
+      defaultProps['$enable-hover-media-query'],
+      defaultProps['$enable-transitions'],
+      defaultProps['$enable-rounded'],
+      defaultProps['$btn-font-weight'],
+      defaultProps['$btn-line-height'],
+      defaultProps['$btn-transition'],
+      defaultProps['$input-btn-border-width'],
+      defaultProps['$btn-padding-x'],
+      defaultProps['$btn-padding-y'],
+      defaultProps['$font-size-base'],
+      defaultProps['$btn-border-radius'],
+      defaultProps['$btn-active-box-shadow'],
+      defaultProps['$cursor-disabled'],
+      defaultProps['$link-color'],
+      defaultProps['$link-hover-color'],
+      defaultProps['$link-hover-decoration'],
+      defaultProps['$btn-link-disabled-color'],
+      defaultProps['$btn-padding-x-lg'],
+      defaultProps['$btn-padding-y-lg'],
+      defaultProps['$font-size-lg'],
+      defaultProps['$btn-border-radius-lg'],
+      defaultProps['$btn-padding-x-sm'],
+      defaultProps['$btn-padding-y-sm'],
+      defaultProps['$font-size-sm'],
+      defaultProps['$btn-border-radius-sm'],
+      defaultProps['$btn-block-spacing-y'],
+      defaultProps['$btn-primary-color'],
+      defaultProps['$btn-primary-bg'],
+      defaultProps['$btn-primary-border'],
+      defaultProps['$btn-secondary-color'],
+      defaultProps['$btn-secondary-bg'],
+      defaultProps['$btn-secondary-border'],
+      defaultProps['$btn-info-color'],
+      defaultProps['$btn-info-bg'],
+      defaultProps['$btn-info-border'],
+      defaultProps['$btn-success-color'],
+      defaultProps['$btn-success-bg'],
+      defaultProps['$btn-success-border'],
+      defaultProps['$btn-warning-color'],
+      defaultProps['$btn-warning-bg'],
+      defaultProps['$btn-warning-border'],
+      defaultProps['$btn-danger-color'],
+      defaultProps['$btn-danger-bg'],
+      defaultProps['$btn-danger-border'],
+    );
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(-467569414);
+  });
+  it('button should return a button utility by default', () => {
+    const css = button();
+    expect(fromJS({ css }).hashCode()).toEqual(965736455);
   });
 });

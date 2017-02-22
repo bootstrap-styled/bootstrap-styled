@@ -7,7 +7,7 @@ import cn from 'classnames';
 import bsTheme from 'theme';
 
 import { a } from '../../styled/mixins/a';
-import { button } from '../../styled/mixins/button';
+import { button } from '../../styled/mixins/buttons';
 
 const defaultProps = {
   theme: bsTheme,
