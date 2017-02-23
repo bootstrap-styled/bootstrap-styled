@@ -50,7 +50,8 @@ Jumbotron = styled(Jumbotron)`
       ${mediaBreakpointUp('sm',
         props.theme['$grid-breakpoints'],
         `padding: calc(${props.theme['$jumbotron-padding']} * 2) ${props.theme['$jumbotron-padding']};`
-      )}
+      )}  
+    }
 
     & .jumbotron-hr {
       border-top-color: ${Color(props.theme['$jumbotron-bg']).darken(0.1).toString()};
