@@ -56,7 +56,7 @@ const renderComponentUsingTheme = (props) => mount(
       composeSlide={props.composeSlide}
       className={props.className}
       container-fluid={props['container-fluid']}
-      navbar-dark={props['navbar-dark']}
+      navbar-inverse={props['navbar-inverse']}
       navbar-light={props['navbar-light']}
       navbar-static-top={props['navbar-static-top']}
       navbar-fixed-top={props['navbar-fixed-top']}
@@ -99,12 +99,12 @@ describe('<HeaderNavBar />', () => {
     });
     expect(renderedComponent.find('HeaderNavBar').props()['container-fluid']).toEqual(true);
   });
-  it('should have an attribute navbar-dark and applies class .bg-inverse by default', () => {
+  it('should have an attribute navbar-inverse and applies class .bg-inverse by default', () => {
     const renderedComponent = renderComponentUsingTheme({
       menu,
-      'navbar-dark': true,
+      'navbar-inverse': true,
     });
-    expect(renderedComponent.find('HeaderNavBar').props()['navbar-dark']).toEqual(true);
+    expect(renderedComponent.find('HeaderNavBar').props()['navbar-inverse']).toEqual(true);
     expect(renderedComponent.find('header').hasClass('bg-inverse')).toBe(true);
   });
   it('should have an attribute navbar-light and applies class .bg-faded by default', () => {

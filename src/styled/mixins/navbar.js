@@ -149,7 +149,10 @@ export function navbar($gridBreakpoints = defaultProps['$grid-breakpoints'],
       line-height: 1;
       background: transparent;
       border: ${$borderWidth} solid transparent;
-      ${borderRadius($enableRounded, $navbarTogglerBorderRadius)};
+      ${borderRadius(
+        $enableRounded,
+        $navbarTogglerBorderRadius)
+      }
 
       ${hoverFocus(
         $enableHoverMediaQuery,
@@ -277,9 +280,9 @@ export function navbar($gridBreakpoints = defaultProps['$grid-breakpoints'],
 
     ${navbarToggleable($gridBreakpoints)}
     
-    // DELETED IN LATEST BOOTSTRAP VERSINO
+    /* DELETED IN LATEST BOOTSTRAP VERSINO */
     
-        /* Navbar alignment options
+    /* Navbar alignment options
 
      Display the navbar across the entirety of the page or fixed it to the top or
      bottom of the page.
@@ -307,7 +310,7 @@ export function navbar($gridBreakpoints = defaultProps['$grid-breakpoints'],
       left: 0;
       z-index: ${$zindexNavbarFixed};
 
-      /*  Undo the rounded corners*/
+      /*  Undo the rounded corners */
       ${mediaBreakpointUp(
         'sm',
         $gridBreakpoints,

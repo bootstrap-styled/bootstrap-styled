@@ -30,6 +30,7 @@ import shapeMenuCollapsed from './shapeMenuCollapsed';
 import collapse from './composeCollapse';
 import slide from './composeSlide';
 import push from './composePush';
+import { ifElse } from '../../styled/mixins/conditional';
 
 export const compCollapse = collapse;
 export const compSlide = slide;
@@ -40,7 +41,7 @@ const defaultProps = {
   btnText: 'Bootstrap',
   container: false,
   'container-fluid': false,
-  'navbar-dark': false,
+  'navbar-inverse': false,
   'navbar-light': false,
   'static-top': false,
   'sticky-top': false,
@@ -75,7 +76,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       menuTop: shapeMenuTopPush,
     }),
     'container-fluid': PropTypes.bool,
-    'navbar-dark': PropTypes.bool,
+    'navbar-inverse': PropTypes.bool,
     'navbar-light': PropTypes.bool,
     'static-top': PropTypes.bool,
     'sticky-top': PropTypes.bool,
@@ -121,8 +122,8 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     }
 
     const cssClasses = cn('navbar', 'bd-navbar', classConfig, className, {
-      'navbar-dark': this.props['navbar-dark'],
-      'bg-inverse': this.props['navbar-dark'],
+      'navbar-inverse': this.props['navbar-inverse'],
+      'bg-inverse': this.props['navbar-inverse'],
       'navbar-light': this.props['navbar-light'],
       'bg-faded': this.props['navbar-light'],
       'navbar-static-top': this.props['static-top'],
@@ -212,7 +213,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       <div>
         <Header className={cssClasses} ref={(node) => { this.node = node; }}>
           <Wrapper>
-            <Nav>
+            <Nav className="nav">
               {navTopPush}
               {navTopSlide}
               {containerCollapse}
@@ -229,7 +230,13 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
 // eslint-disable-next-line no-class-assign
 HeaderNavBar = styled(HeaderNavBar)`
   ${(props) => `
-    outline: ${props.theme['$header-navbar-border-width']} solid ${props.theme['$header-navbar-border-color']}; 
+    outline: ${props.theme['$header-navbar-border-width']} solid ${props.theme['$header-navbar-border-color']};
+    
+    ${ifElse(
+      props.composeCollapsed,
+      `max-height: ${props.theme['$navbar-max-height']};`,
+      `height: ${props.theme['$navbar-height']};`,
+    )}
   `}
 `;
 
