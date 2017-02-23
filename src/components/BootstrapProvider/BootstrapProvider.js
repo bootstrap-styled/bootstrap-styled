@@ -26,6 +26,7 @@ export default class BootstrapProvider extends React.Component { // eslint-disab
       sizing: PropTypes.bool,
       spacing: PropTypes.bool,
       text: PropTypes.bool,
+      transition: PropTypes.bool,
       visibility: PropTypes.bool,
     }),
   }

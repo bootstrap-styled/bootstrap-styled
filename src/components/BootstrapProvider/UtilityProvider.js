@@ -14,6 +14,7 @@ import {
   sizingUtils,
   spacingUtils,
   textUtils,
+  transitionUtils,
   visibilityUtils,
 } from '../../utilities';
 
@@ -32,6 +33,7 @@ const defaultProps = {
     sizing: false,
     spacing: false,
     text: false,
+    transition: false,
     visibility: false,
   },
 };
@@ -82,10 +84,15 @@ const UtilityProvider = styled.div`
       props.theme['$brand-info'],
       props.theme['$brand-warning'],
       props.theme['$brand-danger'],
-      props.theme['$gray-dark']
+      props.theme['$gray-dark'],
+    ))}
+    ${ifThen(props.utils.transition, transitionUtils.getTransitionUtilities(
+      props.theme['$enable-transitions'],
+      props.theme['$transition-fade'],
+      props.theme['$transition-collapse'],
     ))}
     ${ifThen(props.utils.visibility, visibilityUtils.getVisibilityUtilities(
-      props.theme['$grid-breakpoints']
+      props.theme['$grid-breakpoints'],
     ))}
     ${ifThen(props.utils.position, positionUtils.getPositionUtilities(
       props.theme['$zindex-fixed'],

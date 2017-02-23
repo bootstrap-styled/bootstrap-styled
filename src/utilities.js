@@ -10,5 +10,6 @@ export { default as rebootUtils } from './styled/utilities/reboot';
 export { default as screenreadersUtils } from './styled/utilities/screenreaders';
 export { default as sizingUtils } from './styled/utilities/sizing';
 export { default as spacingUtils } from './styled/utilities/spacing';
+export { default as transitionUtils } from './styled/utilities/transition';
 export { default as textUtils } from './styled/utilities/text';
 export { default as visibilityUtils } from './styled/utilities/visibility';

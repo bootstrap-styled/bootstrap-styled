@@ -4,7 +4,7 @@
 
 
 import React, { PropTypes } from 'react';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import cn from 'classnames';
 import themeBs from 'theme';
 import Close from '../Close';
@@ -20,25 +20,71 @@ class Alert extends React.Component { // eslint-disable-line react/prefer-statel
 
   static propTypes = {
     children: PropTypes.node,
-    onDismiss: PropTypes.func,
+    close: PropTypes.bool,
+    dismissed: PropTypes.bool,
     className: PropTypes.string,
     closeLabel: PropTypes.string,
     theme: PropTypes.object,
   }
 
+  state = {
+    dismissed: false,
+  }
+
+  componentWillMount = () => {
+    const { dismissed } = this.props;
+    if (dismissed) {
+      this.setState({
+        dismissed,
+      });
+    }
+  }
+
+  regAnimationDuration = new RegExp(/(\.\d+)s/); // eg: [0] = .2s [1] = .2, assuming we only use animation shorter than 1 sec
+
+  handleDisappearing = (alertElement) => {
+    const { theme } = this.props;
+    let animationDurationMs = 0;
+
+    if (theme['$enable-transition']) {
+      const animationDurationS = theme['$transition-fade'].match(this.regAnimationDuration)[1];
+      animationDurationMs = parseFloat(animationDurationS) * 1000;
+    }
+
+    setTimeout(() => {
+      alertElement.classList.add('d-none');
+    }, animationDurationMs);
+  }
+
+  handleDismiss = (e) => {
+    this.setState({
+      dismissed: true,
+    });
+
+    const target = e.target;
+    let alertElement = target.parentElement;
+    while (!alertElement.classList.contains('alert-dismissible')) {
+      alertElement = alertElement.parentElement;
+    }
+    this.handleDisappearing(alertElement);
+  }
+
   render() {
-    const { className, theme, onDismiss, children, closeLabel, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { className, theme, dismissed: unused, close, children, closeLabel, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { dismissed } = this.state;
 
     return (
       <div
         className={cn(className, 'alert', {
-          'alert-dismissible': !!onDismiss,
+          'alert-dismissible': close,
+          fade: close,
+          show: close && !dismissed,
         })}
         {...rest}
       >
-        {!!onDismiss && <Close onDismiss={onDismiss} />}
+        {close && <Close onDismiss={this.handleDismiss} />}
         {children}
-        {!!onDismiss && <Close sr-only onDismiss={onDismiss} closeLabel={closeLabel} />}
+        {close && <Close sr-only onDismiss={this.handleDismiss} closeLabel={closeLabel} />}
       </div>
     );
   }
@@ -117,5 +163,5 @@ Alert = styled(Alert)`
 
 Alert.defaultProps = defaultProps;
 
-export default Alert;
+export default withTheme(Alert);
 

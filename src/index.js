@@ -12,7 +12,6 @@ export {
   screenReaderMixins,
   sizeMixins,
   textTruncateMixins,
-  transitionMixins,
   unitMixins,
   variablesMixins,
   visibilityMixins,
@@ -30,6 +29,7 @@ export {
   screenreadersUtils,
   sizingUtils,
   spacingUtils,
+  transitionUtils,
   textUtils,
   visibilityUtils,
 } from './utilities';

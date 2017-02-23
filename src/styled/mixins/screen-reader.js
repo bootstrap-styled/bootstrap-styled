@@ -4,7 +4,7 @@
 
 export function srOnly() {
   return `
-    position: absolute;
+    position: absolute !important;
     width: 1px;
     height: 1px;
     padding: 0;

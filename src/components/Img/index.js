@@ -11,7 +11,7 @@ import bsTheme from 'theme';
 import { imgFluid } from '../../styled/mixins/image';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { borderRadius } from '../../styled/mixins/border-radius';
-import { transition } from '../../styled/mixins/transition';
+import { transition } from '../../styled/utilities/transition';
 
 const defaultProps = { theme: bsTheme };
 

@@ -1,127 +1,55 @@
-import color from 'color';
-import theme from 'theme';
-import { borderRadius } from './border-radius';
-import { hover, hoverFocus } from './hover';
-import { boxShadow } from './box-shadow';
+import { buttonVariant, buttonOutlineVariant, buttonSize } from '../mixins/buttons';
 import { transition } from '../utilities/transition';
 import { tabFocus } from './tab-focus';
-export const defaultProps = theme;
+import { hover, hoverFocus } from './hover';
+import { boxShadow } from './box-shadow';
 
-
-export function buttonVariant(enableShadows = defaultProps['$enable-shadows'], buttonColor, background, border, btnActiveBoxShadow = defaultProps['$btn-active-box-shadow']) {
-  const activeBackground = color(background).darken(0.1).toString();
-  const activeBorder = color(border).darken(0.12).toString();
-
-  return `
-    color: ${buttonColor};
-    background-color: ${background};
-    border-color: ${border};
-    ${boxShadow(enableShadows, btnActiveBoxShadow)};
-  
-    ${hover(`
-      color: ${buttonColor};
-      background-color: ${activeBackground};
-          border-color: ${activeBorder};
-    `)}
-  
-    &:focus,
-    &.focus {
-      color: ${buttonColor};
-      background-color: ${activeBackground};
-          border-color: ${activeBorder};
-    }
-  
-    &:active,
-    &.active,
-    .open > &.dropdown-toggle {
-      color: ${buttonColor};
-      background-color: ${activeBackground};
-          border-color: ${activeBorder};
-      /* Remove the gradient for the pressed/active state */
-      background-image: none;
-    ${boxShadow(enableShadows, btnActiveBoxShadow)};
-  
-      &:hover,
-      &:focus,
-      &.focus {
-        color: ${buttonColor};
-        background-color: ${color(background).darken(0.17).toString()};
-            border-color: ${color(border).darken(0.25).toString()};
-      }
-    }
-  
-    &.disabled,
-    &:disabled {
-      &:focus,
-      &.focus {
-        background-color: ${background};
-            border-color: ${border};
-      }
-      ${hover(`
-        background-color: ${background};
-            border-color: ${border};
-      `)}
-    }
-  `;
-}
-
-export function buttonOutlineVariant(buttonColor, buttonColorHover = '#fff') {
-  return `
-    color: ${buttonColor};
-    background-image: none;
-    background-color: transparent;
-    border-color: ${buttonColor};
-  
-    ${hover(`
-      color: ${buttonColorHover};
-      background-color: ${buttonColor};
-          border-color: ${buttonColor};
-    `)}
-  
-    &:focus,
-    &.focus {
-      color: ${buttonColorHover};
-      background-color: ${buttonColor};
-          border-color: ${buttonColor};
-    }
-  
-    &:active,
-    &.active,
-    & .open > &.dropdown-toggle {
-      color: ${buttonColorHover};
-      background-color: ${buttonColor};
-          border-color: ${buttonColor};
-  
-      &:hover,
-      &:focus,
-      &.focus {
-        color: ${buttonColorHover};
-        background-color: ${color(buttonColor).darken(0.17).toString()};
-            border-color: ${color(buttonColor).darken(0.25).toString()};
-      }
-    }
-  
-    &.disabled,
-    &:disabled {
-      &:focus,
-      &.focus {
-        border-color: ${color(buttonColor).lighten(0.2).toString()};
-      }
-      ${hover(`
-        border-color: ${color(buttonColor).lighten(0.2).toString()};
-      `)}
-    }
-  `;
-}
-
-// Button sizes
-export function buttonSize(enableRounded = defaultProps['$enable-rounded'], paddingY, paddingX, fontSize, btnBorderRadius) {
-  return `
-    padding: ${paddingY} ${paddingX};
-    font-size: ${fontSize};
-    ${borderRadius(enableRounded, btnBorderRadius)}
-  `;
-}
+export const defaultProps = {
+  '$enable-shadows': true,
+  '$enable-hover-media-query': false,
+  '$enable-transitions': false,
+  '$enable-rounded': true,
+  '$btn-font-weight': 'normal',
+  '$btn-line-height': '1.25',
+  '$input-btn-border-width': '1px',
+  '$btn-padding-x': '1rem',
+  '$btn-padding-y': '.5rem',
+  '$font-size-base': '1rem',
+  '$btn-border-radius': '.25rem',
+  '$btn-active-box-shadow': 'inset 0 3px 5px rgba(0,0,0,.125)',
+  '$cursor-disabled': 'not-allowed',
+  '$link-color': '#0275d8',
+  '$link-hover-color': '#014C8D',
+  '$link-hover-decoration': 'underline',
+  '$btn-link-disabled-color': '#818a91',
+  '$btn-padding-x-lg': '1.5rem',
+  '$btn-padding-y-lg': '.75rem',
+  '$font-size-lg': '1.25rem',
+  '$btn-border-radius-lg': '.3rem',
+  '$btn-padding-x-sm': '.5rem',
+  '$btn-padding-y-sm': '.25rem',
+  '$font-size-sm': '.875rem',
+  '$btn-border-radius-sm': '.2rem',
+  '$btn-block-spacing-y': '.5rem',
+  '$btn-primary-color': '#fff',
+  '$btn-primary-bg': '#0275d8',
+  '$btn-primary-border': '#0275d8',
+  '$btn-secondary-color': '#373a3c',
+  '$btn-secondary-bg': '#fff',
+  '$btn-secondary-border': '#ccc',
+  '$btn-info-color': '#fff',
+  '$btn-info-bg': '#5bc0de',
+  '$btn-info-border': '#5bc0de',
+  '$btn-success-color': '#fff',
+  '$btn-success-bg': '#5cb85c',
+  '$btn-success-border': '#5cb85c',
+  '$btn-warning-color': '#fff',
+  '$btn-warning-bg': '#f0ad4e',
+  '$btn-warning-border': '#f0ad4e',
+  '$btn-danger-color': '#fff',
+  '$btn-danger-bg': '#d9534f',
+  '$btn-danger-border': '#d9534f',
+};
 
 export function button(
   $enableShadows = defaultProps['$enable-shadows'],
@@ -171,7 +99,7 @@ export function button(
   $btnDangerBorder = defaultProps['$btn-danger-border'],
 ) {
   return `
-    /*
+/*
      Base styles
     */
     font-family: inherit;
@@ -359,11 +287,9 @@ export function button(
      
       ${hoverFocus(
         $enableHoverMediaQuery,
-        `
-          color: ${$linkHoverColor};
-          text-decoration: ${$linkHoverDecoration};
-          background-color: transparent;
-        `
+        `color: ${$linkHoverColor};
+        text-decoration: ${$linkHoverDecoration};
+        background-color: transparent;`
       )}
      
       &:disabled {
@@ -456,8 +382,5 @@ export function button(
 
 export default {
   defaultProps,
-  buttonVariant,
-  buttonOutlineVariant,
-  buttonSize,
   button,
 };

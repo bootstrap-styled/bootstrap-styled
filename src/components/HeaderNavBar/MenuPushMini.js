@@ -12,7 +12,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import theme from 'theme';
 
-import { transition } from '../../styled/mixins/transition';
+import { transition } from '../../styled/utilities/transition';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import MenuPush from './MenuPush';
 const defaultProps = { theme };

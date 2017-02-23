@@ -1,14 +1,15 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import theme from 'theme';
+import bsTheme from 'theme';
 import { hoverFocus } from '../../styled/mixins/hover';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
 class Close extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    theme: PropTypes.object,
     'sr-only': PropTypes.bool,
     className: PropTypes.string,
     closeLabel: PropTypes.string,
@@ -16,16 +17,17 @@ class Close extends React.Component { // eslint-disable-line react/prefer-statel
   }
 
   render() {
-    const { onDismiss, closeLabel } = this.props;
+    const { className, 'sr-only': srOnly, onDismiss, closeLabel, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
 
-    if (this.props['sr-only']) {
+    if (srOnly) {
       return (
         <button
           type="button"
-          className={cn(this.props.className, ['close', 'sr-only'])}
+          className={cn(className, ['close', 'sr-only'])}
           onClick={onDismiss}
+          {...rest}
         >
-          ${closeLabel}
+          {closeLabel}
           <span>&times;</span>
         </button>
       );
@@ -33,8 +35,9 @@ class Close extends React.Component { // eslint-disable-line react/prefer-statel
     return (
       <button
         type="button"
-        className={cn(this.props.className, 'close')}
+        className={cn(className, 'close')}
         onClick={onDismiss}
+        {...rest}
       >
         <span>&times;</span>
       </button>
