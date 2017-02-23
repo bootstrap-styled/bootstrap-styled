@@ -49,7 +49,7 @@ Jumbotron = styled(Jumbotron)`
     
       ${mediaBreakpointUp('sm',
         props.theme['$grid-breakpoints'],
-        `padding: calc(${props.theme['$jumbotron-padding']} * 2) ${props.theme['$jumbotron-padding']};`,
+        `padding: calc(${props.theme['$jumbotron-padding']} * 2) ${props.theme['$jumbotron-padding']};`
       )}
 
     & .jumbotron-hr {
@@ -61,7 +61,7 @@ Jumbotron = styled(Jumbotron)`
       padding-left: 0;
       ${borderRadius(
         props.theme['$enable-rounded'],
-        0
+        '0'
       )}
     }
   `}
