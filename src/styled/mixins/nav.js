@@ -53,7 +53,7 @@ export function nav(
         'text-decoration: none;'
       )}
 
-      /* Disabled state lightens text and removes hover/tab effects */
+      /* Disabled state lightens text and removes hover tab effects */
       &.disabled {
         color: ${$navDisabledLinkColor};
         cursor: ${$cursorDisabled}; 
@@ -82,7 +82,7 @@ export function nav(
           `
             border-color: ${$navTabsLinkHoverBorderColor} ${$navTabsLinkHoverBorderColor} ${$navTabsBorderColor};
           `
-        )};
+        )}
       
         &.disabled {
           color: ${$navDisabledLinkColor};
@@ -105,7 +105,7 @@ export function nav(
         ${borderTopRadius(
           $enableRounded,
           '0'
-        )};
+        )}
       }
     }
     
@@ -118,7 +118,7 @@ export function nav(
         ${borderRadius(
           $enableRounded,
           $navPillsBorderRadius
-        )};
+        )}
       }
 
       .nav-link.active,

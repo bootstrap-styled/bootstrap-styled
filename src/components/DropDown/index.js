@@ -31,7 +31,10 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
     theme: PropTypes.object,
     'dropdown-split': PropTypes.bool,
     toggler: PropTypes.shape({
-      component: PropTypes.component,
+      component: PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.component,
+      ]),
       className: PropTypes.string,
       text: PropTypes.string.isRequired,
     }),
