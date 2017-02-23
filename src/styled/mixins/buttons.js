@@ -16,7 +16,7 @@ export function buttonVariant(enableShadows = defaultProps['$enable-shadows'], b
     color: ${buttonColor};
     background-color: ${background};
     border-color: ${border};
-    ${boxShadow(enableShadows, btnActiveBoxShadow)};
+    ${boxShadow(enableShadows, btnActiveBoxShadow)}
   
     ${hover(`
       color: ${buttonColor};
