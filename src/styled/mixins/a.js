@@ -51,7 +51,7 @@ export function a(
           color: inherit;
           text-decoration: none;
         `
-      )};
+      )}
 
       &:focus {
         outline: 0;
