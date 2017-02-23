@@ -83,7 +83,6 @@ module.exports = (options) => ({
     'react-collapse': true,
     'react-height': true,
     'react-motion': true,
-    'react-responsive': true,
   },
   resolve: {
     modules: ['src', 'node_modules'],

@@ -6,6 +6,6 @@ describe('bootstrap button utility', () => {
     const css = a();
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-292674796);
+    expect(fromJS({ css }).hashCode()).toEqual(914075158);
   });
 });
