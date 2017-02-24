@@ -52,11 +52,11 @@ Img = styled(Img)`
   ${(props) => `
     
     /* 
-      Responsive images (ensure images don't scale beyond their parents)
-      This is purposefully opt-in via an explicit class rather than being the default for all 'img's.
+      Responsive images (ensure images does not scale beyond their parents)
+      This is purposefully opt-in via an explicit class rather than being the default for all <img>.
       We previously tried the "images are responsive by default" approach in Bootstrap v2,
       and abandoned it in Bootstrap v3 because it breaks lots of third-party widgets (including Google Maps)
-      which weren't expecting the images within themselves to be involuntarily resized.
+      which we are not expecting the images within themselves to be involuntarily resized.
       See also https://github.com/twbs/bootstrap/issues/18178
     */
     
@@ -66,7 +66,8 @@ Img = styled(Img)`
     
     
      /* Image thumbnails */ 
-    &.img-thumbnail {
+    &.img-thumbnail,
+     & .img-thumbnail{
       padding: ${props.theme['$thumbnail-padding']};
       background-color: ${props.theme['$thumbnail-bg']};
       border: ${props.theme['$thumbnail-border-width']} solid ${props.theme['$thumbnail-border-color']};
@@ -85,7 +86,7 @@ Img = styled(Img)`
       /* Keep them at most 100% wide */
       ${imgFluid()}
     }
-    
+   
     &.figure-img {
       margin-bottom: ${props.theme['$spacer-halved']};
       line-height: 1;
@@ -94,13 +95,13 @@ Img = styled(Img)`
     /* Reboot Scss */
     
     /*
-     By default, 'img's are 'inline-block'. This assumes that, and vertically
-     centers them. This won't apply should you reset them to 'block' level.
+     By default, <img> are inline-block. This assumes that, and vertically
+     centers them. This will not apply should you reset them to block level.
     */
     vertical-align: middle;
     /*
-     Note: 'img's are deliberately not made responsive by default.
-     For the rationale behind this, see the comments on the '.img-fluid' class.
+     Note: <img> are deliberately not made responsive by default.
+     For the rationale behind this, see the comments on the .img-fluid class.
     */
   `}
 `;
