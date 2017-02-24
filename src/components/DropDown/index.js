@@ -33,7 +33,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
     toggler: PropTypes.shape({
       component: PropTypes.component,
       className: PropTypes.string,
-      text: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
     }),
   };
 
@@ -62,7 +62,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
 
   render() {
     const { className, children, theme, toggler } = this.props; // eslint-disable-line no-unused-vars
-    const { component: Toggler, className: classNameToggler, text: textToggler, ...restToggler } = toggler;
+    const { component: Toggler, className: classNameToggler, value: valueToggler, ...restToggler } = toggler;
     const { dropped } = this.state;
 
     const dropdown = (
@@ -72,7 +72,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
           onClick={this.handleClick}
           {...restToggler}
         >
-          {textToggler}
+          {valueToggler}
         </Toggler>
         <div className={cn({ 'dropdown-hide': !dropped })}>
           {children}
@@ -84,7 +84,7 @@ class DropDown extends React.Component { // eslint-disable-line react/prefer-sta
       return (
         <div className={cn(className, 'btn-group')}>
           <Toggler className={classNameToggler} {...restToggler}>
-            {textToggler}
+            {valueToggler}
           </Toggler>
           <Toggler
             className={cn(classNameToggler, 'dropdown-toggle', 'dropdown-toggle-split')}
