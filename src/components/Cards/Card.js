@@ -69,6 +69,7 @@ Card = styled(Card)`
       )}
     }
     
+    &.card-block,
     & .card-block {
       flex: 1 1 auto;
       padding: ${props.theme['$card-spacer-x']};
