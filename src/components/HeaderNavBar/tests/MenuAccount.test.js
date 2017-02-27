@@ -44,7 +44,8 @@ describe('<MenuAccount />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('div').length).toBe(1);
+    console.log(renderedComponent.debug());
+    expect(renderedComponent.find('MenuAccount').length).toBe(1);
   });
   it('should have children', () => {
     const renderedComponent = renderComponent({

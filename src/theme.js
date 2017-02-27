@@ -937,9 +937,12 @@ export function makeTheme(userTheme = {}) {
   v['$card-margin-y-halved'] = u['$card-margin-y-halved'] || ((rmUnit(v['$card-spacer-y'], UNIT.REM) / 2) + UNIT.REM);
   v['$card-margin-x-halved'] = u['$card-margin-x-halved'] || ((rmUnit(v['$card-spacer-x'], UNIT.REM) / 2) + UNIT.REM);
 
+  // Nav
+  v['$nav-link-hover-bg'] = u['$nav-link-hover-bg'] || Color(v['$brand-inverse']).darken(0.03).toString();
   // Navbar
   v['$navbar-max-height'] = u['$navbar-max-height'] || '400px';
   v['$navbar-height'] = u['$navbar-height'] || '70px';
+
   // Menu
   v['$menu-push-bg'] = u['$menu-push-bg'] || 'black';
   v['$menu-push-mini-width'] = u['$menu-push-mini-width'] || '75px';
