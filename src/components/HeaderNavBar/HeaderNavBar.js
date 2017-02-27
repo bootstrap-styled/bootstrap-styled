@@ -163,6 +163,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
         <MenuAccount>
           {composePush.menuTop.menuAccount}
         </MenuAccount>
+
       </div>
     ) : null;
 
@@ -231,6 +232,55 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
 HeaderNavBar = styled(HeaderNavBar)`
   ${(props) => `
     outline: ${props.theme['$header-navbar-border-width']} solid ${props.theme['$header-navbar-border-color']};
+    
+    & .navbar {
+      padding: 0;
+    }
+    
+    & .nav {
+      ${props.theme['$navbar-height']};
+      
+      .navbar-toggler {
+        ${props.theme['$navbar-height']};
+      }
+      
+      .nav-account {
+        position: absolute;
+        top: 0;
+        right: 0;
+        
+        .nav-link {
+          display: block;
+          height: 70px;
+          width: 100%;
+          &:hover {
+            background-color: grey;
+          }
+        }
+      }
+    }
+    
+    & .dropdown-menu {
+      margin: 0;
+    }
+
+    & .menu-offset {
+      .nav-item {
+        &:first-child {
+          text-align: center;
+          height: ${props.theme['$navbar-height']};
+          .nav-link{
+            padding: 1.25rem 1rem;
+          }
+        }
+      } 
+    }
+    
+    ${ifElse(
+      props.composeCollapsed,
+      `max-height: ${props.theme['$navbar-max-height']};`,
+      `height: ${props.theme['$navbar-height']};`,
+    )}
     
     ${ifElse(
       props.composeCollapsed,
