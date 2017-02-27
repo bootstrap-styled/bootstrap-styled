@@ -30,7 +30,6 @@ import shapeMenuCollapsed from './shapeMenuCollapsed';
 import collapse from './composeCollapse';
 import slide from './composeSlide';
 import push from './composePush';
-import { ifElse } from '../../styled/mixins/conditional';
 
 export const compCollapse = collapse;
 export const compSlide = slide;
@@ -233,7 +232,7 @@ HeaderNavBar = styled(HeaderNavBar)`
   ${(props) => `
     outline: ${props.theme['$header-navbar-border-width']} solid ${props.theme['$header-navbar-border-color']};
     
-    & .navbar {
+    &.navbar {
       padding: 0;
     }
     
@@ -243,27 +242,8 @@ HeaderNavBar = styled(HeaderNavBar)`
       .navbar-toggler {
         ${props.theme['$navbar-height']};
       }
-      
-      .nav-account {
-        position: absolute;
-        top: 0;
-        right: 0;
-        
-        .nav-link {
-          display: block;
-          height: 70px;
-          width: 100%;
-          &:hover {
-            background-color: grey;
-          }
-        }
-      }
     }
     
-    & .dropdown-menu {
-      margin: 0;
-    }
-
     & .menu-offset {
       .nav-item {
         &:first-child {
@@ -275,18 +255,6 @@ HeaderNavBar = styled(HeaderNavBar)`
         }
       } 
     }
-    
-    ${ifElse(
-      props.composeCollapsed,
-      `max-height: ${props.theme['$navbar-max-height']};`,
-      `height: ${props.theme['$navbar-height']};`,
-    )}
-    
-    ${ifElse(
-      props.composeCollapsed,
-      `max-height: ${props.theme['$navbar-max-height']};`,
-      `height: ${props.theme['$navbar-height']};`,
-    )}
   `}
 `;
 
