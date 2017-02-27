@@ -940,7 +940,7 @@ export function makeTheme(userTheme = {}) {
   v['$navbar-height'] = u['$navbar-height'] || '70px';
 
   // Menu
-  v['$menu-push-bg'] = u['$menu-push-bg'] || 'black';
+  v['$menu-push-bg'] = u['$menu-push-bg'] || v['$brand-inverse'];
   v['$menu-push-mini-width'] = u['$menu-push-mini-width'] || '75px';
   v['$menu-push-width'] = u['$menu-push-width'] || '220px';
   v['$menu-push-full-width'] = u['$menu-push-full-width'] || '100%';

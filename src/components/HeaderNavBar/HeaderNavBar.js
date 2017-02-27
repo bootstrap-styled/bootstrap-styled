@@ -153,7 +153,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     ) : null;
 
     const navTopPush = (composePush) ? (
-      <div>
+      <div className="nav-account-top">
         <ButtonToggle
           className="navbar-toggler hidden-md-up float-xs-left ma-3"
           type="button"
@@ -167,7 +167,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     ) : null;
 
     const navTopSlide = (composeSlide) ? (
-      <div>
+      <div className="nav-account-top">
         <ButtonToggle
           className="navbar-toggler float-xs-left ma-3"
           type="button"
@@ -234,26 +234,13 @@ HeaderNavBar = styled(HeaderNavBar)`
     
     &.navbar {
       padding: 0;
-    }
-    
-    & .nav {
-      ${props.theme['$navbar-height']};
-      
-      .navbar-toggler {
-        ${props.theme['$navbar-height']};
-      }
-    }
-    
-    & .menu-offset {
-      .nav-item {
-        &:first-child {
-          text-align: center;
+      .nav-account-top {
+        height: ${props.theme['$navbar-height']};
+        
+        .navbar-toggler {
           height: ${props.theme['$navbar-height']};
-          .nav-link{
-            padding: 1.25rem 1rem;
-          }
         }
-      } 
+      }
     }
   `}
 `;

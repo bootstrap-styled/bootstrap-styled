@@ -47,8 +47,29 @@ MenuPush = styled(MenuPush)`
     position: fixed;
     top: 0;
     height: 100%;
-    background-color: ${props.theme['$menu-push-bg']};
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
     z-index: ${props.theme['$zindex-menu-push']};
+    
+    & .menu-offset {
+      .brand-inverse {
+        height: ${props.theme['$navbar-height']};
+        margin: 0 0 .75rem 0;
+        background-color: ${props.theme['$brand-primary']};
+        .nav-link {
+          color: white;
+        }
+      }
+      
+      .nav-item {
+        padding: .25rem 0;
+        .nav-link {
+          &:hover {
+            background-color: grey;
+          }
+        }
+      }
+    }
   `}
 `;
 

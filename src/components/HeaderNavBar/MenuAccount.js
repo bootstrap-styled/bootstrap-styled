@@ -27,24 +27,25 @@ class MenuAccount extends React.Component {// eslint-disable-line react/prefer-s
 // eslint-disable-next-line no-class-assign
 MenuAccount = styled(MenuAccount)`
   ${(props) => `
-
-    & .dropdown-menu {
-      margin: 0;
-    }
-    
-    & .nav-account {
+    &.nav-account {
       position: absolute;
       top: 0;
       right: 0;
       
-      .nav-link {
-        display: block;
-        height: ${props.theme['$navbar-height']};
-        width: 100%;
-        &:hover {
-          background-color: ${props.theme['$nav-link-hover-bg']};
-        }
-      }
+      .nav-item {
+        .nav-link {
+          display: block;
+          height: ${props.theme['$navbar-height']};
+          width: 100%;
+          &:hover {
+            background-color: ${props.theme['$nav-link-hover-bg']};
+          }
+
+          .dropdown-menu {
+            margin: 0;
+          }
+        }      
+      } 
     }
   `}
 `;
