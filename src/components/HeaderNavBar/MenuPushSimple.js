@@ -26,15 +26,16 @@ const MenuPushSimple = styled(MenuPush)`
     )}
     
     &.menu-left {
+      display: none;
       left:0;
-      right: 0;
       transform: translate3d(-${props.theme['$menu-push-full-width']},0,0);
       ${mediaBreakpointUp(
         'sm',
         props.theme['$grid-breakpoints'],
         `
+          display: block;
           transform: translateX(0);
-           width: ${props.theme['$menu-push-width']};
+          width: ${props.theme['$menu-push-width']};
 
         `
       )}
