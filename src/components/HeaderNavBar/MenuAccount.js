@@ -33,16 +33,16 @@ MenuAccount = styled(MenuAccount)`
       right: 0;
       
       .nav-item {
+        .dropdown-menu {
+          margin-top: 0;
+        }
         .nav-link {
           display: block;
           height: ${props.theme['$navbar-height']};
           width: 100%;
+          padding: 1.25rem 1rem;
           &:hover {
             background-color: ${props.theme['$nav-link-hover-bg']};
-          }
-
-          .dropdown-menu {
-            margin: 0;
           }
         }      
       } 

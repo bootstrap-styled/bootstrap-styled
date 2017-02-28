@@ -19,49 +19,40 @@ const defaultProps = { theme };
 
 // eslint-disable-next-line no-class-assign
 const MenuPushSimple = styled(MenuPush)`
-  ${(props) => `
+  ${(props) => ` 
     ${transition(
       props.theme['$enable-transitions'],
-      props.theme['$menu-transition-duration']
+      'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
+    )}
+    transform: translate3d(-100%, 0, 0);
+    ${mediaBreakpointUp(
+      'sm',
+      props.theme['$grid-breakpoints'],
+      `
+        transform: translateX(0);
+      `
     )}
     
     &.menu-left {
-      display: none;
       left:0;
-      transform: translate3d(-${props.theme['$menu-push-full-width']},0,0);
-      ${mediaBreakpointUp(
-        'sm',
-        props.theme['$grid-breakpoints'],
-        `
-          display: block;
-          transform: translateX(0);
-          width: ${props.theme['$menu-push-width']};
-
-        `
-      )}
-      &.active {
-        transform: translateX(0);
-        ${mediaBreakpointUp(
-          'sm',
-          props.theme['$grid-breakpoints'],
-          `
-            transform: translateX(0);
-            width: ${props.theme['$menu-push-width']};
-          `
-        )}
-      }
-
     }
     
     &.menu-right {
-      left:0;
       right:0;
-      transform: translate3d(${props.theme['$menu-push-mini-width']},0,0);
-      &.active {
-        transform: translateX(0);
-      }
     }
     
+    &.active {
+      transform: translateX(0);
+      width: 100%;
+      ${mediaBreakpointUp(
+          'sm',
+          props.theme['$grid-breakpoints'],
+          `
+            display: block;
+            width: ${props.theme['$menu-push-width']};
+          `
+      )}
+    }
   `}
 `;
 

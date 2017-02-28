@@ -66,13 +66,6 @@ describe('<MenuPush />', () => {
       children,
     });
     expect(renderedComponent.find('MenuPush').length).toBe(1);
-    expect(renderedComponent.find('div').length).toBe(1);
-  });
-  it('should have a class .navbar-toggleable-xs by default with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-    });
-    expect(renderedComponent.find('div').hasClass('navbar-toggleable-xs')).toBe(true);
   });
   it('should have an attribute active', () => {
     const renderedComponent = renderComponentUsingTheme({

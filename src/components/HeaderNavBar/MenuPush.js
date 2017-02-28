@@ -12,9 +12,8 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 import theme from 'theme';
-
 const defaultProps = { theme };
-
+import Close from '../Button/Close';
 
 class MenuPush extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -24,6 +23,7 @@ class MenuPush extends React.Component { // eslint-disable-line react/prefer-sta
     active: PropTypes.bool,
     'menu-right': PropTypes.bool,
     'menu-left': PropTypes.bool,
+    onCLick:  PropTypes.func,
   };
 
   render() {
@@ -35,6 +35,7 @@ class MenuPush extends React.Component { // eslint-disable-line react/prefer-sta
           active: this.props.active,
         })}
       >
+        <Close onClick={this.handleClick} />
         {this.props.children}
       </div>
     );
@@ -46,6 +47,7 @@ MenuPush = styled(MenuPush)`
   ${(props) => `
     position: fixed;
     top: 0;
+    width: ${props.theme['$menu-push-width']};
     height: 100%;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
@@ -63,12 +65,12 @@ MenuPush = styled(MenuPush)`
       
       .nav-item {
         padding: .25rem 0;
-        .nav-link {
-          &:hover {
-            background-color: grey;
-          }
-        }
       }
+    }
+    & .close-menu {
+      position: absolute;
+      top: 10px;
+      right: 10px;
     }
   `}
 `;
