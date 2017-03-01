@@ -1,16 +1,6 @@
 import theme from 'theme';
-
+import { transition } from '../mixins/transition';
 export const defaultProps = theme;
-
-// eslint-disable-next-line consistent-return
-export function transition(enableTransitions = defaultProps['$enable-transitions'], ...args) {
-  if (enableTransitions && args.length) {
-    return `
-      transition: ${args.join(' ')};
-    `;
-  }
-  return '';
-}
 
 export function getTransitionUtilities(
   enableTransitions = defaultProps['$enable-transitions'],
@@ -68,7 +58,6 @@ export function collapse(enableTransitions = defaultProps['$enable-transitions']
 
 export default {
   defaultProps,
-  transition,
   getTransitionUtilities,
   fade,
   collapse,

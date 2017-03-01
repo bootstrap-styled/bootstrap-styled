@@ -14,6 +14,7 @@ export {
   textTruncateMixins,
   unitMixins,
   variablesMixins,
+  transitionMixins,
   visibilityMixins,
 } from './mixins';
 export {
