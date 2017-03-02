@@ -3,7 +3,7 @@ import theme from 'theme';
 import { borderRadius } from './border-radius';
 import { hover, hoverFocus } from './hover';
 import { boxShadow } from './box-shadow';
-import { transition } from '../utilities/transition';
+import { transition } from '../mixins/transition';
 import { tabFocus } from './tab-focus';
 export const defaultProps = theme;
 

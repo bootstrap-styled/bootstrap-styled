@@ -38,6 +38,7 @@ export { default as tableRowMixins } from './styled/mixins/table-row';
 export { default as textEmphasisMixins } from './styled/mixins/text-emphasis';
 export { default as textHideMixins } from './styled/mixins/text-hide';
 export { default as textTruncateMixins } from './styled/mixins/text-truncate';
+export { default as transitionMixins } from './styled/mixins/transition';
 export { default as typographyMixins } from './styled/mixins/typography';
 export { default as variablesMixins } from './styled/mixins/variables';
 export { default as visibilityMixins } from './styled/mixins/visibility';

@@ -12,7 +12,7 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import theme from 'theme';
 
-import { transition } from '../../styled/utilities/transition';
+import { transition } from '../../styled/mixins/transition';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 
 const defaultProps = { theme };

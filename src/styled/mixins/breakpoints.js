@@ -100,11 +100,38 @@ export function mediaBreakpointDown(name, breakpoints = defaultProps['$grid-brea
   `;
 }
 
-// Media that spans multiple breakpoint widths.
-// Makes the @content apply between the min and max breakpoints
+// // Media that spans multiple breakpoint widths.
+// // Makes the @content apply between the min and max breakpoints
+// export function mediaBreakpointBetween(lower, upper, breakpoints = defaultProps['$grid-breakpoints'], content) {
+//   return mediaBreakpointUp(lower, breakpoints, mediaBreakpointDown(upper, breakpoints, content));
+// }
 export function mediaBreakpointBetween(lower, upper, breakpoints = defaultProps['$grid-breakpoints'], content) {
-  return mediaBreakpointUp(lower, breakpoints, mediaBreakpointDown(upper, breakpoints, content));
+  const min = breakpointMin(lower, breakpoints);
+  const max = breakpointMax(upper, breakpoints);
+  if (min && max) {
+    return `
+      @media (min-width: ${min}) and (max-width: ${max}) {
+        ${content}
+      }
+    `;
+  } else if (min) {
+    return `
+      @media (min-width: ${min}) {
+        ${content}
+      }
+    `;
+  } else if (max) {
+    return `
+      @media (max-width: ${max}) {
+        ${content}
+      }
+    `;
+  }
+  return `
+    ${content}
+  `;
 }
+
 
 // Media between the breakpoint's minimum and maximum widths.
 // No minimum for the smallest breakpoint, and no maximum for the largest one.
