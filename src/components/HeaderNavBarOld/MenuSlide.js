@@ -13,6 +13,7 @@ import cn from 'classnames';
 import theme from 'theme';
 
 import { transition } from '../../styled/utilities/transition';
+import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 
 const defaultProps = { theme };
 
@@ -46,8 +47,10 @@ MenuSlide = styled(MenuSlide)`
   ${(props) => `
     width: 100%;
     z-index: 1999;
-    position: absolute;
+    position: fixed;
     top: ${props.theme['$navbar-height']};
+    box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
+    background-color: white;
     bottom: 0;
     ${transition(
       props.theme['$enable-transitions'],
@@ -67,6 +70,13 @@ MenuSlide = styled(MenuSlide)`
     &.menu-left.active {
       transform: translateX(0);
     }
+    ${mediaBreakpointUp(
+      'sm',
+      props.theme['$grid-breakpoints'],
+      `
+        width: ${props.theme['$menu-push-width']};
+      `
+    )}
   `}
 `;
 

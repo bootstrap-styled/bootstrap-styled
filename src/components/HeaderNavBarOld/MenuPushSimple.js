@@ -24,25 +24,33 @@ const MenuPushSimple = styled(MenuPush)`
       props.theme['$enable-transitions'],
       'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
     )}
-    transform: translate3d(-100%, 0, 0);
-    ${mediaBreakpointUp(
-      'sm',
-      props.theme['$grid-breakpoints'],
-      `
-        transform: translateX(0);
-      `
-    )}
-    
+   
     &.menu-left {
       left:0;
+      transform: translate3d(-100%, 0, 0);
+      ${mediaBreakpointUp(
+        'sm',
+        props.theme['$grid-breakpoints'],
+        `
+          transform: translate3d(0, 0, 0);
+        `
+      )}
     }
     
     &.menu-right {
       right:0;
+      transform: translate3d(100%, 0, 0);
+      ${mediaBreakpointUp(
+        'sm',
+        props.theme['$grid-breakpoints'],
+        `
+          transform: translate3d(0, 0, 0);
+        `
+      )}
     }
     
     &.active {
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
       width: 100%;
       ${mediaBreakpointUp(
           'sm',
