@@ -19,7 +19,7 @@ export function navbarToggleable(gridBreakpoints = defaultProps['$grid-breakpoin
     const navbarBreakpoint = `
       &.navbar-toggleable${infix} {
         ${mediaBreakpointDown(breakpoint, gridBreakpoints, `
-          .navbar-nav {
+          & .navbar-nav {
             .dropdown-menu {
               position: static;
               float: none;
@@ -68,16 +68,6 @@ export function navbarToggleable(gridBreakpoints = defaultProps['$grid-breakpoin
             }
             /* ============================================= */
           }
-          /* FIX DUE TO COLLAPSE */
-          /* ============================================= */
-          
-          .navbar-collapse.justify-content${infix}-center  { 
-            >div:first-child { /* solve the wrapping issue */
-              width: auto;
-            }
-           }
-           
-          /* ============================================= */
 
           .navbar-toggler {
             display: none;
