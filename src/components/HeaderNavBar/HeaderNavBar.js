@@ -6,6 +6,7 @@
 import React, { PropTypes } from 'react';
 // import styled from 'styled-components';
 import cn from 'classnames';
+import bsTheme from 'theme';
 import Button from '../Button';
 import Header from '../Header';
 import OffsetNav from './OffsetNav';
@@ -16,6 +17,7 @@ const defaultProps = {
     component: Button,
   },
   show: false,
+  theme: bsTheme,
 };
 
 class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -23,6 +25,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
+    theme: PropTypes.object,
     show: PropTypes.bool,
     onClick: PropTypes.func,
     button: PropTypes.shape({
@@ -59,6 +62,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     const {
       className,
       children,
+      theme,  // eslint-disable-line no-unused-vars
       button,
       'nav-top': navTop,
       'menu-right': menuRight,

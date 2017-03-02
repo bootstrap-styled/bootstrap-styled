@@ -52,6 +52,14 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
       ]).isRequired,
       className: PropTypes.string,
     }),
+    'navbar-inverse': PropTypes.bool,
+    'navbar-light': PropTypes.bool,
+    'static-top': PropTypes.bool,
+    'sticky-top': PropTypes.bool,
+    'fixed-top': PropTypes.bool,
+    'fixed-bottom': PropTypes.bool,
+    'bg-inverse': PropTypes.bool,
+    'bg-faded': PropTypes.bool,
   };
 
   state = {
@@ -81,13 +89,41 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
   }
 
   render() {
-    const { className, children, theme, toggler, brand, collapse, contained, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      className,
+      children,
+      theme,  // eslint-disable-line no-unused-vars
+      toggler,
+      brand,
+      collapse,
+      contained,
+      'navbar-inverse': navbarInverse,
+      'bg-inverse': bgInverse,
+      'navbar-light': navbarLight,
+      'bg-faded': bgFaded,
+      'static-top': staticTop,
+      'sticky-top': stickyTop,
+      'fixed-top': fixedTop,
+      'fixed-bottom': fixedBottom,
+      ...rest
+    } = this.props;
+
     const { component: NavBarBrand, children: childrenBrand, className: classNameBrand, ...restBrand } = brand;
     const { children: childrenCollapse, className: classNameCollapse, ...restCollapse } = collapse || {};
     const { isOpened } = this.state;
 
+    const cssClasses = cn('navbar', className, {
+      'navbar-inverse': navbarInverse,
+      'bg-inverse': bgInverse,
+      'navbar-light': navbarLight,
+      'bg-faded': bgFaded,
+      'navbar-static-top': staticTop,
+      'navbar-sticky-top': stickyTop,
+      'navbar-fixed-top': fixedTop,
+      'navbar-fixed-bottom': fixedBottom,
+    });
     return contained ? (
-      <nav className={cn('navbar', className)} {...rest}>
+      <nav className={cssClasses} {...rest}>
         <Container {...rest}>
           {toggler && (
             <NavBarToggler className={toggler.className} left={toggler.left} right={toggler.right} onClick={this.handleToggler} />
@@ -104,7 +140,7 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
         </Container>
       </nav>
     ) : (
-      <nav className={cn('navbar', className)} {...rest}>
+      <nav className={cssClasses} {...rest}>
         {toggler && (
           <NavBarToggler className={toggler.className} left={toggler.left} right={toggler.right} onClick={this.handleToggler} />
         )}
