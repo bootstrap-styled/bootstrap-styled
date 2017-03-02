@@ -20,7 +20,7 @@ class OffsetNav extends React.Component { // eslint-disable-line react/prefer-st
   render() {
     const { className, children, active, 'menu-right': menuRight, ...rest } = this.props; // eslint-disable-line no-unused-vars
     const menuDirectionClassNames = menuRight ? 'menu-right' : 'menu-left';
-    const cssClasses = cn(className, menuDirectionClassNames, { active: active }); // eslint-disable-line  object-shorthand
+    const cssClasses = cn(className, menuDirectionClassNames, { active }); // eslint-disable-line  object-shorthand
     return (
       <div className={cssClasses} {...rest}>
         {children}

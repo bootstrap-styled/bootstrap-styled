@@ -18,7 +18,7 @@ class Overlay extends React.Component { // eslint-disable-line react/prefer-stat
 
   render() {
     const { className, children, active, ...rest } = this.props; // eslint-disable-line no-unused-vars
-    const cssClasses = cn(className, { active: active }); // eslint-disable-line  object-shorthand
+    const cssClasses = cn(className, { active }); // eslint-disable-line  object-shorthand
     return (
       <div className={cssClasses} {...rest}>
         {children}
