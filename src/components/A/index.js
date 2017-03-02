@@ -24,17 +24,42 @@ class A extends React.Component { // eslint-disable-line react/prefer-stateless-
     theme: PropTypes.object,
   }
 
+  state = {
+    focus: false,
+  }
+
+  handleFocus = () => {
+    this.setState({
+      focus: true,
+    });
+  }
+
+  handleBlur = () => {
+    this.setState({
+      focus: false,
+    });
+  }
+
   render() {
     const { className, theme, active, disabled, 'dropdown-item': dropdownItem, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { focus } = this.state;
+
+    const optional = {};
+    if (className.indexOf('btn') !== -1) {
+      optional.onFocus = this.handleFocus;
+      optional.onBlur = this.handleBlur;
+    }
 
     return (
       <a
         className={cn(className, {
           active,
           disabled,
+          focus,
           'dropdown-item': dropdownItem,
         })}
         {...rest}
+        {...optional}
       >
         {children}
       </a>

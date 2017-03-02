@@ -27,7 +27,7 @@ class Row extends React.Component {    // eslint-disable-line react/prefer-state
 // eslint-disable-next-line no-class-assign
 Row = styled(Row)`
   ${(props) => `
-    &.row{
+    &.row {
       ${makeRow(
         props.theme['$enable-grid-classes'],
         props.theme['$grid-gutter-widths']

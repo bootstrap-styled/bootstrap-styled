@@ -21,20 +21,47 @@ class Button extends React.Component { // eslint-disable-line react/prefer-state
     children: PropTypes.node,
   }
 
+  state = {
+    focus: false,
+  }
+
+  handleFocus = () => {
+    this.setState({
+      focus: true,
+    });
+  }
+
+  handleBlur = () => {
+    this.setState({
+      focus: false,
+    });
+  }
+
   render() {
-    const { theme, className, disabled, outline, dropup, children, ...rest } = this.props; // eslint-disable-line
-    const cssClasses = cn(className, {
+    const { theme, className, disabled, outline, dropup, children, 'dropdown-toggle': dropdownToggle, ...rest } = this.props; // eslint-disable-line
+    const { focus } = this.state;
+    const cssClasses = cn('btn', className, {
       disabled,
       outline,
       dropup,
-      'dropdown-toggle': this.props['dropdown-toggle'],
+      focus,
+      'dropdown-toggle': dropdownToggle,
     });
+
+    const optional = {};
+    if (className.indexOf('btn') !== -1) {
+      optional.onFocus = this.handleFocus;
+      optional.onBlur = this.handleBlur;
+    }
 
     return (
       <button
         className={cssClasses}
         disabled={disabled}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
         {...rest}
+        {...optional}
       >
         {children}
       </button>

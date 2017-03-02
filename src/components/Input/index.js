@@ -23,6 +23,7 @@ class Input extends React.Component { // eslint-disable-line react/prefer-statel
   }
 
   state = {
+    focus: false,
     indeterminate: false,
   }
 
@@ -43,12 +44,30 @@ class Input extends React.Component { // eslint-disable-line react/prefer-statel
     }
   }
 
+  handleFocus = () => {
+    this.setState({
+      focus: true,
+    });
+  }
+
+  handleBlur = () => {
+    this.setState({
+      focus: false,
+    });
+  }
+
   render() {
     const { className, indeterminate: unused, onChange, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
-    const { indeterminate } = this.state;
+    const { indeterminate, focus } = this.state;
+
+    const optional = {};
+    if (className.indexOf('btn') !== -1) {
+      optional.onFocus = this.handleFocus;
+      optional.onBlur = this.handleBlur;
+    }
 
     return (
-      <input className={cn(className, { indeterminate })} {...rest} onChange={this.handleChange} />
+      <input className={cn(className, { indeterminate, focus })} {...rest} {...optional} onChange={this.handleChange} />
     );
   }
 

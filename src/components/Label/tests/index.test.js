@@ -36,7 +36,7 @@ describe('<Label />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('label').length).toBe(1);
+    expect(renderedComponent.find('Label').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
