@@ -17,11 +17,33 @@ class ButtonGroup extends React.Component { // eslint-disable-line react/prefer-
     children: PropTypes.node.isRequired,
     'btn-toolbar': PropTypes.bool,
     theme: PropTypes.object,
+    name: PropTypes.string,
+    selectedValue: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.bool,
+    ]),
+    onChange: PropTypes.func,
+  }
+
+  static childContextTypes = {
+    buttonGroup: React.PropTypes.object,
+  };
+
+  getChildContext() {
+    const { name, selectedValue, onChange } = this.props;
+    return {
+      buttonGroup: {
+        name,
+        selectedValue,
+        onChange,
+      },
+    };
   }
 
   render() {
-    const { className, theme, children, 'btn-toolbar': btnToolbar, ...rest } = this.props; // eslint-disable-line no-unused-vars
-
+    const { className, theme, 'btn-toolbar': btnToolbar, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { name, selectedValue, onChange, children, ...restAfterChildContext } = rest; // eslint-disable-line no-unused-vars
     let classList = [];
 
     // if this ButtonGroup is a btn-toolbar, then we don't need .btn-group
@@ -33,7 +55,7 @@ class ButtonGroup extends React.Component { // eslint-disable-line react/prefer-
     return (
       <div
         className={cn(className, classList)}
-        {...rest}
+        {...restAfterChildContext}
       >
         {children}
       </div>

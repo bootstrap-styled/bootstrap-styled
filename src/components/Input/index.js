@@ -46,6 +46,7 @@ class Input extends React.Component { // eslint-disable-line react/prefer-statel
   render() {
     const { className, indeterminate: unused, onChange, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
     const { indeterminate } = this.state;
+
     return (
       <input className={cn(className, { indeterminate })} {...rest} onChange={this.handleChange} />
     );
