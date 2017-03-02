@@ -1,4 +1,4 @@
-import HeaderNavBar from './HeaderNavBar';
+import HeaderNavBarOld from './HeaderNavBarOld';
 import composeCollapse from './composeCollapse';
 
-export default composeCollapse(HeaderNavBar);
+export default composeCollapse(HeaderNavBarOld);

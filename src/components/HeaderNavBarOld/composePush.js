@@ -5,7 +5,7 @@ import React, { PropTypes } from 'react';
 import shapeMenuOffsetPush from './shapeMenuOffsetPush';
 import shapeMenuTopPush from './shapeMenuTopPush';
 
-export default function composePush(HeaderNavBar) {
+export default function composePush(HeaderNavBarOld) {
   class Push extends React.Component {
 
     static propTypes = {
@@ -33,7 +33,7 @@ export default function composePush(HeaderNavBar) {
       const { className, menuTop, menuOffset, ...rest } = this.props;
 
       return (
-        <HeaderNavBar
+        <HeaderNavBarOld
           className={className}
           composePush={{
             isHidden: this.state.isHidden,

@@ -4,7 +4,7 @@
 import React, { PropTypes } from 'react';
 import shapeMenuCollapsed from './shapeMenuCollapsed';
 
-export default function composeCollapse(HeaderNavBar) {
+export default function composeCollapse(HeaderNavBarOld) {
   class Collapse extends React.Component {
 
     static propTypes = {
@@ -31,7 +31,7 @@ export default function composeCollapse(HeaderNavBar) {
       const { className, menuCollapsed, ...rest } = this.props;
 
       return (
-        <HeaderNavBar
+        <HeaderNavBarOld
           className={className}
           composeCollapsed={{
             brandTitle: this.props.brandTitle,

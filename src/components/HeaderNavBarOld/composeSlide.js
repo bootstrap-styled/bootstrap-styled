@@ -5,7 +5,7 @@ import React, { PropTypes } from 'react';
 import shapeMenuOffsetSlide from './shapeMenuOffsetSlide';
 import shapeMenuTopSlide from './shapeMenuTopSlide';
 
-export default function composeSlide(HeaderNavBar) {
+export default function composeSlide(HeaderNavBarOld) {
   class Slide extends React.Component {
 
     static propTypes = {
@@ -32,7 +32,7 @@ export default function composeSlide(HeaderNavBar) {
       const { className, menuTop, menuOffset, ...rest } = this.props;
 
       return (
-        <HeaderNavBar
+        <HeaderNavBarOld
           className={className}
           composeSlide={{
             isHidden: this.state.isHidden,

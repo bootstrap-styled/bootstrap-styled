@@ -1,4 +1,4 @@
-import HeaderNavBar from './HeaderNavBar';
+import HeaderNavBarOld from './HeaderNavBarOld';
 import composeSlide from './composeSlide';
 
-export default composeSlide(HeaderNavBar);
+export default composeSlide(HeaderNavBarOld);
