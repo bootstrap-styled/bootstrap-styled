@@ -6,7 +6,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
-import { transition } from '../../styled/utilities/transition';
+import { transition } from '../../styled/mixins/transition';
 
 class OffsetNav extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
