@@ -66,7 +66,7 @@ const Form = styled.form`
     }
 
     /* Make file inputs better match text inputs by forcing them to new lines. */
-    .form-control-file,
+    & .form-control-file,
     .form-control-range {
       display: block;
     }
@@ -285,7 +285,7 @@ const Form = styled.form`
      default HTML form controls and our custom form controls (e.g., input groups).
     */
 
-    & .form-inline {
+    &.form-inline {
       display: flex;
       flex-flow: row wrap;
       align-items: center; /* Prevent shorter elements from growing to same height as others (e.g., small buttons growing to normal sized button height) */
@@ -295,7 +295,8 @@ const Form = styled.form`
       }
 
       /* Kick in the inline */
-      ${mediaBreakpointUp('sm', props.theme['$grid-breakpoints'], `
+      ${mediaBreakpointUp('sm', props.theme['$grid-breakpoints'],
+        `
           & .label {
             display: flex;
             align-items: center;
