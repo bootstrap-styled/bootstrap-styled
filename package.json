@@ -1,5 +1,6 @@
 {
   "name": "bootstrap-styled",
+  "humanName": "Bootstrap Styled",
   "version": "0.1.1",
   "description": "Bootstrap framework in styled-component",
   "main": "dist/bootstrap-styled.js",

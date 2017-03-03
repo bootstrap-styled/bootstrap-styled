@@ -139,7 +139,7 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
             )}
           </div>
           {childrenCollapse && (
-            <Collapse isOpened={isOpened} keepCollapsedContent className={cn('navbar-collapse', classNameCollapse)} {...restCollapse}>
+            <Collapse key={Math.random()} isOpened={isOpened} keepCollapsedContent className={cn('navbar-collapse', classNameCollapse)} {...restCollapse}>
               {childrenCollapse}
             </Collapse>
           )}
