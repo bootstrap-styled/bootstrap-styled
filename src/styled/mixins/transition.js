@@ -11,3 +11,7 @@ export function transition(enableTransitions = defaultProps['$enable-transitions
   }
   return '';
 }
+
+export default {
+  transition,
+};
