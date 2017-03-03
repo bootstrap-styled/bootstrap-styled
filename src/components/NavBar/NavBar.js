@@ -31,7 +31,9 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
     ]),
     className: PropTypes.string,
     theme: PropTypes.object,
-    contained: PropTypes.bool,
+    contained: PropTypes.shape({
+      className: PropTypes.string,
+    }),
     toggler: PropTypes.shape({
       right: PropTypes.bool,
       left: PropTypes.bool,
@@ -110,6 +112,8 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
 
     const { component: NavBarBrand, children: childrenBrand, className: classNameBrand, ...restBrand } = brand;
     const { children: childrenCollapse, className: classNameCollapse, ...restCollapse } = collapse || {};
+    const { className: containerClassName } = contained || {};
+
     const { isOpened } = this.state;
 
     const cssClasses = cn('navbar', className, {
@@ -122,9 +126,10 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
       'navbar-fixed-top': fixedTop,
       'navbar-fixed-bottom': fixedBottom,
     });
+
     return contained ? (
       <nav className={cssClasses} {...rest}>
-        <Container {...rest}>
+        <Container className={containerClassName} {...rest}>
           {toggler && (
             <NavBarToggler className={toggler.className} left={toggler.left} right={toggler.right} onClick={this.handleToggler} />
           )}
