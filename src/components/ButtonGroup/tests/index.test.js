@@ -58,7 +58,6 @@ describe('<ButtonGroup />', () => {
       'btn-toolbar': true,
       children,
     });
-    console.log(renderedComponent.debug());
     expect(renderedComponent.find('div').hasClass('btn-toolbar')).toEqual(true);
     expect(renderedComponent.find('div').hasClass('btn-group')).toEqual(false);
   });
