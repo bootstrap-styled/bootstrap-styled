@@ -129,13 +129,15 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
 
     return contained ? (
       <nav className={cssClasses} {...rest}>
-        <Container className={containerClassName} {...rest}>
-          {toggler && (
-            <NavBarToggler className={toggler.className} left={toggler.left} right={toggler.right} onClick={this.handleToggler} />
-          )}
-          {childrenBrand && (
-            <NavBarBrand className={cn('navbar-brand', classNameBrand)} {...restBrand}>{childrenBrand}</NavBarBrand>
-          )}
+        <Container>
+          <div className={containerClassName}>
+            {toggler && (
+              <NavBarToggler className={toggler.className} left={toggler.left} right={toggler.right} onClick={this.handleToggler} />
+            )}
+            {childrenBrand && (
+              <NavBarBrand className={cn('navbar-brand', classNameBrand)} {...restBrand}>{childrenBrand}</NavBarBrand>
+            )}
+          </div>
           {childrenCollapse && (
             <Collapse isOpened={isOpened} keepCollapsedContent className={cn('navbar-collapse', classNameCollapse)} {...restCollapse}>
               {childrenCollapse}

@@ -1,5 +1,5 @@
 import { hoverFocus } from './hover';
-import { mediaBreakpointUp, mediaBreakpointDown } from './breakpoints';
+import { mediaBreakpointUp } from './breakpoints';
 import { borderRadius } from './border-radius';
 import { navbarToggleable } from './navbar-toggleable';
 
@@ -80,13 +80,6 @@ export function navbar($gridBreakpoints = defaultProps['$grid-breakpoints'],
       display: flex;
       flex-direction: column;
       padding: ${$navbarPaddingY} ${$navbarPaddingX};
-      
-      ${mediaBreakpointDown(Object.keys($gridBreakpoints)[0], $gridBreakpoints, `
-        & > .container {
-          margin-right: 0;
-          margin-left: 0;
-        }
-      `)}
     }
     
     /*
