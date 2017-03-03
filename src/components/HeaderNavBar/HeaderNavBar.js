@@ -1,15 +1,11 @@
-/**
- * Menu component
- */
-
-
 import React, { PropTypes } from 'react';
 // import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
 import Button from '../Button';
 import Header from '../Header';
-import OffsetNav from './OffsetNav';
+import OffsetNavPush from './OffsetNavPush';
+import OffsetNavSlide from './OffsetNavSlide';
 import Overlay from './Overlay';
 
 const defaultProps = {
@@ -18,6 +14,7 @@ const defaultProps = {
   },
   show: false,
   theme: bsTheme,
+  noOverlay: false,
 };
 
 class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -42,6 +39,8 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     'fixed-bottom': PropTypes.bool,
     'bg-inverse': PropTypes.bool,
     'bg-faded': PropTypes.bool,
+    'animation-push': PropTypes.bool,
+    'no-overlay': PropTypes.bool,
   }
 
   state = {
@@ -50,12 +49,26 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
 
 
   handleClick = (e) => {
-    const { onClick } = this.props;
+    const { onClick, 'animation-push': animationPush, 'menu-right': menuRight } = this.props;
     const { show } = this.state;
     if (onClick) {
       onClick(e);
     }
     this.setState({ show: !show });
+
+    if (animationPush) {
+      const direction = menuRight ? (
+        document.getElementById('wrapper').classList.toggle('active') &&
+        document.getElementById('wrapper').classList.toggle('right')
+      ) : (
+        document.getElementById('wrapper').classList.toggle('active') &&
+        document.getElementById('wrapper').classList.toggle('left')
+      );
+      const sheet = window.document.styleSheets[0];
+      sheet.insertRule('.overflow { overflow: hidden; }', sheet.cssRules.length);
+      document.getElementById('app').classList.toggle('overflow');
+      direction; // eslint-disable-line no-unused-expressions
+    }
   };
 
   render() {
@@ -74,6 +87,8 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       'sticky-top': stickyTop,
       'fixed-top': fixedTop,
       'fixed-bottom': fixedBottom,
+      'animation-push': animationPush,
+      'no-overlay': noOverlay,
       ...restTmp
     } = this.props;
 
@@ -94,16 +109,24 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     const buttonMenuRight = menuRight ? 'flex-last' : '';
     const buttonClasses = cn(buttonMenuRight, classNameButton, { 'navbar-toggler-icon p-3 my-auto': !classNameButton });
 
+    const OffsetMenuAnimated = animationPush ? (
+      <OffsetNavPush active={this.state.show} menu-right={menuRight} animation-push={animationPush}>
+        {children}
+      </OffsetNavPush>
+    ) : (
+      <OffsetNavSlide active={this.state.show} menu-right={menuRight} animation-push={animationPush}>
+        {children}
+      </OffsetNavSlide>
+    );
+
     return (
       <div>
-        <Overlay active={this.state.show} onClick={this.handleClick} />
+        {!noOverlay && (<Overlay active={this.state.show} onClick={this.handleClick} />)}
         <Header className={cn(cssClasses)} {...rest}>
           <ButtonToggle className={buttonClasses} onClick={this.handleClick} {...restButton} />
           {navTop && (<div>{navTop}</div>)}
         </Header>
-        <OffsetNav active={this.state.show} menu-right={menuRight}>
-          {children}
-        </OffsetNav>
+        {OffsetMenuAnimated}
       </div>
     );
   }
