@@ -5,23 +5,23 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import Label from '../Label';
-import Button from '../Button';
 import Input from '../Input';
 
 export default class ButtonRadio extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
+    className: PropTypes.string,
     children: PropTypes.string,
     value: PropTypes.string,
     checked: PropTypes.bool,
   }
 
   static contextTypes = {
-    buttonGroup: React.PropTypes.object,
+    buttonRadioGroup: React.PropTypes.object,
   }
 
   render() {
-    const { children, value, checked } = this.props; // eslint-disable-line no-unused-vars
-    const { name, selectedValue, onChange } = this.context.buttonGroup;
+    const { className, children, value, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { name, selectedValue, onChange } = this.context.buttonRadioGroup;
 
     const optional = {};
     if (selectedValue !== undefined) {
@@ -32,27 +32,20 @@ export default class ButtonRadio extends React.Component { // eslint-disable-lin
     }
 
     return (
-      <Label key={Math.random()}>
+      <Label
+        className={cn(className, 'btn', {
+          active: optional.checked,
+        })}
+      >
         <Input
-          hidden
+          key={Math.random()}
           value={value}
-          checked={checked}
           name={name}
           type="radio"
-          onChange={() => onChange(value)}
+          {...rest}
           {...optional}
-
         />
-        <Button
-          className={cn('btn', 'btn-primary', {
-            active: checked,
-          })}
-          type="button"
-          autoComplete="off"
-          onClick={() => onChange(value)}
-        >
-          {children}
-        </Button>
+        {children}
       </Label>
     );
   }

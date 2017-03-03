@@ -9,8 +9,8 @@ export const defaultProps = theme;
 
 
 export function buttonVariant(enableShadows = defaultProps['$enable-shadows'], buttonColor, background, border, btnActiveBoxShadow = defaultProps['$btn-active-box-shadow']) {
-  const activeBackground = color(background).darken(0.1).toString();
-  const activeBorder = color(border).darken(0.12).toString();
+  const activeBackground = color(background).darken(0.1).hex();
+  const activeBorder = color(border).darken(0.12).hex();
 
   return `
     color: ${buttonColor};
@@ -39,7 +39,7 @@ export function buttonVariant(enableShadows = defaultProps['$enable-shadows'], b
           border-color: ${activeBorder};
       /* Remove the gradient for the pressed/active state */
       background-image: none;
-    ${boxShadow(enableShadows, btnActiveBoxShadow)};
+    ${boxShadow(enableShadows, btnActiveBoxShadow)}
   
       &:hover,
       &:focus,
@@ -295,32 +295,32 @@ export function button(
    
    /* Remove all backgrounds */
 
-    &.btn-outline-primary{
+    &.btn-outline-primary {
       ${buttonOutlineVariant(
         $btnPrimaryBg,
       )}
     }    
-    &.btn-outline-secondary{
+    &.btn-outline-secondary {
       ${buttonOutlineVariant(
         $btnSecondaryBorder,
       )}
     }    
-    &.btn-outline-info{
+    &.btn-outline-info {
       ${buttonOutlineVariant(
         $btnInfoBg,
       )}
     }    
-    &.btn-outline-success{
+    &.btn-outline-success {
       ${buttonOutlineVariant(
         $btnSuccessBg,
       )}
     }
-    &.btn-outline-warning{
+    &.btn-outline-warning {
       ${buttonOutlineVariant(
         $btnWarningBg,
       )}
     }
-    &.btn-outline-danger{
+    &.btn-outline-danger {
       ${buttonOutlineVariant(
         $btnDangerBg,
       )}

@@ -8,7 +8,7 @@ import { shallow, mount } from 'enzyme';
 import React from 'react';
 import theme from 'theme';
 
-import HeaderNavBarOld from '../index';
+import HeaderNavBar from '../index';
 
 const menu = (
   <ul>
@@ -30,7 +30,7 @@ const clickTest = jest.fn();
 clickTest.mockReturnValue('test-click-additional');
 
 const renderComponent = (props) => shallow(
-  <HeaderNavBarOld
+  <HeaderNavBar
     menu={props.menu}
     button={props.button}
     container={props.container}
@@ -48,7 +48,7 @@ const renderComponent = (props) => shallow(
 
 const renderComponentUsingTheme = (props) => mount(
   <ThemeProvider theme={theme}>
-    <HeaderNavBarOld
+    <HeaderNavBar
       menu={props.menu}
       button={props.button}
       container={props.container}

@@ -1,4 +1,4 @@
-import HeaderNavBarOld from './HeaderNavBarOld';
+import HeaderNavBar from './HeaderNavBar';
 import composePush from './composePush';
 
-export default composePush(HeaderNavBarOld);
+export default composePush(HeaderNavBar);

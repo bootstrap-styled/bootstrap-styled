@@ -5,65 +5,67 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import Label from '../Label';
-import Button from '../Button';
 import Input from '../Input';
-
-const render = 0; // eslint-disable-line no-unused-vars
 
 export default class ButtonCheckbox extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    className: PropTypes.string,
     children: PropTypes.string,
     onChange: PropTypes.func,
     checked: PropTypes.bool,
+    value: PropTypes.string,
   };
 
-  state = {
-    checked: false,
-  };
+  static contextTypes = {
+    buttonCheckboxGroup: React.PropTypes.object,
+  }
 
-  componentWillMount() {
-    const { checked } = this.props;
-    this.setState({
-      checked: !!checked,
-    });
+  addOrRemove(array, value) {
+    const index = array.indexOf(value);
+
+    if (index === -1) {
+      array.push(value);
+    } else {
+      array.splice(index, 1);
+    }
+    return array;
   }
 
   handleChange = () => {
-    const { onChange } = this.props;
-    const { checked } = this.state;
-    const newChecked = !checked;
-    this.setState({
-      checked: newChecked,
-    });
-    if (onChange) {
-      onChange(newChecked);
-    }
+    const { value } = this.props; // eslint-disable-line no-unused-vars
+    const { selectedValueList, onChange } = this.context.buttonCheckboxGroup;
+    const valueList = this.addOrRemove(selectedValueList, value);
+    onChange(valueList);
   }
 
   render() {
-    const { children, onChange: unused, ...rest } = this.props; // eslint-disable-line no-unused-vars
-    const { checked } = this.state;
+    const { className, children, value, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { name, selectedValueList, onChange } = this.context.buttonCheckboxGroup;
+
+    const optional = {};
+    if (selectedValueList !== undefined) {
+      optional.checked = selectedValueList.includes(value);
+    }
+    if (typeof onChange === 'function') {
+      optional.onChange = this.handleChange;
+    }
 
     return (
-      <Label>
+      <Label
+        className={cn('btn', className, {
+          active: optional.checked,
+        })}
+      >
         <Input
-          hidden
+          key={Math.random()}
+          value={value}
+          name={name}
           type="checkbox"
-          checked={checked}
-          onChange={this.handleChange}
           {...rest}
+          {...optional}
         />
-        <Button
-          className={cn('btn', 'btn-primary', {
-            active: checked,
-          })}
-          type="button"
-          autoComplete="off"
-          onClick={this.handleChange}
-        >
-          {children}
-        </Button>
+        {children}
       </Label>
     );
   }

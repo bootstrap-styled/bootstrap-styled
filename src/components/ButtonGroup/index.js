@@ -23,38 +23,41 @@ class ButtonGroup extends React.Component { // eslint-disable-line react/prefer-
       PropTypes.number,
       PropTypes.bool,
     ]),
+    selectedValueList: PropTypes.array,
     onChange: PropTypes.func,
   }
 
   static childContextTypes = {
-    buttonGroup: React.PropTypes.object,
+    buttonCheckboxGroup: React.PropTypes.object,
+    buttonRadioGroup: React.PropTypes.object,
   };
 
   getChildContext() {
-    const { name, selectedValue, onChange } = this.props;
+    const { name, selectedValue, selectedValueList, onChange } = this.props;
     return {
-      buttonGroup: {
+      buttonRadioGroup: {
         name,
         selectedValue,
+        onChange,
+      },
+      buttonCheckboxGroup: {
+        name,
+        selectedValueList,
         onChange,
       },
     };
   }
 
   render() {
-    const { className, theme, 'btn-toolbar': btnToolbar, ...rest } = this.props; // eslint-disable-line no-unused-vars
-    const { name, selectedValue, onChange, children, ...restAfterChildContext } = rest; // eslint-disable-line no-unused-vars
-    let classList = [];
-
-    // if this ButtonGroup is a btn-toolbar, then we don't need .btn-group
-    if (btnToolbar) {
-      classList = classList.filter((c) => c !== 'btn-group');
-      classList.push('btn-toolbar');
-    }
+    const { className, children, theme, 'btn-toolbar': btnToolbar, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { name, selectedValue, selectedValueList, onChange, ...restAfterChildContext } = rest; // eslint-disable-line no-unused-vars
 
     return (
       <div
-        className={cn(className, classList)}
+        className={cn(className, {
+          'btn-group': !btnToolbar, // if this ButtonGroup is a btn-toolbar, then we don't need .btn-group
+          'btn-toolbar': btnToolbar,
+        })}
         {...restAfterChildContext}
       >
         {children}

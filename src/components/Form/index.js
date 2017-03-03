@@ -66,7 +66,7 @@ const Form = styled.form`
     }
 
     /* Make file inputs better match text inputs by forcing them to new lines. */
-    & .form-control-file,
+    .form-control-file,
     .form-control-range {
       display: block;
     }
@@ -295,8 +295,7 @@ const Form = styled.form`
       }
 
       /* Kick in the inline */
-      ${mediaBreakpointUp('sm', props.theme['$grid-breakpoints'],
-        `
+      ${mediaBreakpointUp('sm', props.theme['$grid-breakpoints'], `
           & .label {
             display: flex;
             align-items: center;

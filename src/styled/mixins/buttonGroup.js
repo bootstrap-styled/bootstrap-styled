@@ -67,7 +67,7 @@ export function buttonGroup(
     
     /*  Prevent double borders when buttons are next to each other */
     &.btn-group,
-    & .btn-group{
+    & .btn-group {
       .btn + .btn,
       .btn + .btn-group,
       .btn-group + .btn,
@@ -78,7 +78,7 @@ export function buttonGroup(
     
     /* Optional: Group multiple button groups together for a toolbar */
     &.btn-toolbar,
-    & .btn-toolbar{
+    & .btn-toolbar {
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-start;
@@ -109,7 +109,7 @@ export function buttonGroup(
         }
       }
     }
-    /* Need .dropdown-toggle since :last-child doesn't apply given a .dropdown-menu immediately after it */
+    /* Need .dropdown-toggle since :last-child does not apply given a .dropdown-menu immediately after it */
     &.btn-group > .btn:last-child:not(:first-child),
     & .btn-group > .btn:last-child:not(:first-child),
     &.btn-group > .dropdown-toggle:not(:first-child),
@@ -122,14 +122,14 @@ export function buttonGroup(
     
     /* Custom edits for including btn-groups within btn-groups (useful for including dropdown buttons within a btn-group) */
     &.btn-group > .btn-group,
-    & .btn-group > .btn-group{
+    & .btn-group > .btn-group {
       float: left;
     }
     &.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn,
     & .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
       border-radius: 0;
     }
-    &.btn-group > .btn-group:first-child:not(:last-child)
+    &.btn-group > .btn-group:first-child:not(:last-child),
     & .btn-group > .btn-group:first-child:not(:last-child) {
       > .btn:last-child,
       > .dropdown-toggle {
@@ -147,7 +147,7 @@ export function buttonGroup(
       )}
     }
     
-    /* On active and open, don't show outline */
+    /* On active and open, do not show outline */
     &.btn-group .dropdown-toggle:active,
     & .btn-group .dropdown-toggle:active,
     &.btn-group.open .dropdown-toggle,
@@ -214,7 +214,7 @@ export function buttonGroup(
         $btnActiveBoxShadow,
       )}
     
-      /* Show no shadow for '.btn-link' since it has no other button styles. */
+      /* Show no shadow for .btn-link since it has no other button styles. */
       &.btn-link {
         ${boxShadow(
           $enableShadows,
@@ -285,33 +285,18 @@ export function buttonGroup(
         '0'
       )}
     }
-  
-  /*
-   Checkbox and radio options
-  
-   In order to support the browser's form validation feedback, powered by the
-   required attribute, we have to "hide" the inputs via clip. We cannot use
-   display: none; or visibility: hidden; as that also hides the popover.
-   Simply visually hiding the inputs via opacity would leave them clickable in
-   certain cases which is prevented by using clip and pointer-events.
-   This way, we ensure a DOM element is visible to position the popover from.
-  
-   See https://github.com/twbs/bootstrap/pull/12794 and
-   https://github.com/twbs/bootstrap/pull/14559 for more information.
-  
-  [data-toggle="buttons"] {
-    > .btn,
-    > .btn-group > .btn {
-      input[type="radio"],
-      input[type="checkbox"] {
-        position: absolute;
-        clip: rect(0,0,0,0);
-        pointer-events: none;
+    
+    &.btn-group {
+      > .btn,
+      > .btn-group > .btn {
+        input[type="radio"],
+        input[type="checkbox"] {
+          position: absolute;
+          clip: rect(0,0,0,0);
+          pointer-events: none;
+        }
       }
     }
-  }
-  */
-  
   `;
 }
 

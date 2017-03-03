@@ -21,12 +21,12 @@ describe('bootstrap buttonGroup utility', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-787804183);
+    expect(fromJS({ css }).hashCode()).toEqual(-420518194);
   });
   it('should return a buttonGroup utility css with default props', () => {
     const css = buttonGroup();
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-787804183);
+    expect(fromJS({ css }).hashCode()).toEqual(-420518194);
   });
 });
