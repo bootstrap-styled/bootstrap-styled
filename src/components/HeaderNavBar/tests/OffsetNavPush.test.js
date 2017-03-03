@@ -32,7 +32,7 @@ describe('<OffsetNavPush />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('OffsetNavPush').length).toBe(1);
+    expect(renderedComponent.find('OffsetNav').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -44,14 +44,7 @@ describe('<OffsetNavPush />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('OffsetNavPush').length).toBe(1);
-  });
-  it('should render an <OffsetNav> with a props menu-right with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-      'menu-right': true,
-    });
-    expect(renderedComponent.find('OffsetNavPush').props()['menu-right']).toEqual(true);
+    expect(renderedComponent.find('OffsetNav').length).toBe(1);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
