@@ -47,46 +47,54 @@ export function getSpacingUtilities(
   };
 
   const spacingUtilityList = [];
+  const infixList = [];
   Object.keys(gridBreakpoints).forEach((breakpoint) => {
+    const infix = breakpointInfix(breakpoint, gridBreakpoints);
+    infixList.push(infix);
+
     Object.keys(abbrevs).forEach((prop) => {
       const abbrev = abbrevs[prop];
       Object.keys(spacers).forEach((size) => {
         const lengths = spacers[size];
-        const infix = breakpointInfix(breakpoint, gridBreakpoints);
         spacingUtilityList.push(mediaBreakpointUp(breakpoint, gridBreakpoints, `
-
-        .${abbrev}${infix}-${size} { ${prop}:        ${lengths.y} ${lengths.x} !important; } /* a = All sides */
-        .${abbrev}t${infix}-${size} { ${prop}-top:    ${lengths.y} !important; }
-        .${abbrev}r${infix}-${size} { ${prop}-right:  ${lengths.x} !important; }
-        .${abbrev}b${infix}-${size} { ${prop}-bottom: ${lengths.y} !important; }
-        .${abbrev}l${infix}-${size} { ${prop}-left:   ${lengths.x} !important; }
-        .${abbrev}x${infix}-${size} {
-          ${prop}-right:  ${lengths.x} !important;
-          ${prop}-left:   ${lengths.x} !important;
-        }
-        .${abbrev}y${infix}-${size} {
-          ${prop}-top:    ${lengths.y} !important;
-          ${prop}-bottom: ${lengths.y} !important;
-        }
-        
-        .m${infix}-auto  { margin:        auto !important; }
-        .mt${infix}-auto { margin-top:    auto !important; }
-        .mr${infix}-auto { margin-right:  auto !important; }
-        .mb${infix}-auto { margin-bottom: auto !important; }
-        .ml${infix}-auto { margin-left:   auto !important; }
-        .mx${infix}-auto {
-          margin-right: auto !important;
-          margin-left:  auto !important;
-        }
-        .my${infix}-auto {
-          margin-top:    auto !important;
-          margin-bottom: auto !important;
-        }
+          .${abbrev}${infix}-${size} { ${prop}:        ${lengths.y} ${lengths.x} !important; } /* a = All sides */
+          .${abbrev}t${infix}-${size} { ${prop}-top:    ${lengths.y} !important; }
+          .${abbrev}r${infix}-${size} { ${prop}-right:  ${lengths.x} !important; }
+          .${abbrev}b${infix}-${size} { ${prop}-bottom: ${lengths.y} !important; }
+          .${abbrev}l${infix}-${size} { ${prop}-left:   ${lengths.x} !important; }
+          .${abbrev}x${infix}-${size} {
+            ${prop}-right:  ${lengths.x} !important;
+            ${prop}-left:   ${lengths.x} !important;
+          }
+          .${abbrev}y${infix}-${size} {
+            ${prop}-top:    ${lengths.y} !important;
+            ${prop}-bottom: ${lengths.y} !important;
+          }
         `));
       });
     });
   });
-  return spacingUtilityList.join('\n');
+
+  const infixUtilityList = infixList.map((infix) => `
+    .m${infix}-auto  { margin:        auto !important; }
+    .mt${infix}-auto { margin-top:    auto !important; }
+    .mr${infix}-auto { margin-right:  auto !important; }
+    .mb${infix}-auto { margin-bottom: auto !important; }
+    .ml${infix}-auto { margin-left:   auto !important; }
+    .mx${infix}-auto {
+      margin-right: auto !important;
+      margin-left:  auto !important;
+    }
+    .my${infix}-auto {
+      margin-top:    auto !important;
+      margin-bottom: auto !important;
+    }
+  `);
+
+  return `
+    ${infixUtilityList.join('\n')}
+    ${spacingUtilityList.join('\n')}
+  `;
 }
 
 export default {

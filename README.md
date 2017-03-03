@@ -17,20 +17,7 @@ Bootstrap 4.0 made in styled components
 
 ## Dependencies
 
-This modules require the following peerDependencies : 
-    
-    "peerDependencies": {
-        "react": "^15.4.2",
-        "styled-components": "^1.3.1"
-    },
-    
-It will automatically install the following dependencies :
-
-    "dependencies": {
-        "classnames": "2.2.5",
-        "color": "1.0.3"
-    },
-
+This modules require peerDependencies, see `package.json`.
 
 ## Installation
 
