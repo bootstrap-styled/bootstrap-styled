@@ -24,10 +24,8 @@ class PageWrapper extends React.Component { // eslint-disable-line react/prefer-
 PageWrapper = styled(PageWrapper)`
   height: 100%;
   transition: transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-  &.active {
-    &.left { transform: translateX(220px); }
-    &.right { transform: translateX(-220px); }
-  }
+  &.left { transform: translateX(220px); }
+  &.right { transform: translateX(-220px); }
 `;
 
 

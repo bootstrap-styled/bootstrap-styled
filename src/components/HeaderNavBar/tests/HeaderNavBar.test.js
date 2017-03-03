@@ -129,7 +129,7 @@ describe('<HeaderNavBar />', () => {
     expect(renderedComponent.find('Button').length).toBe(1);
     expect(renderedComponent.find('button').hasClass('btn-test')).toEqual(true);
   });
-  it.only('should render an <HeaderNavBar> with a click that changes the props active of Overlay and OffsetNav', () => {
+  it('should render an <HeaderNavBar> with a click that changes the props active of Overlay and OffsetNav', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });

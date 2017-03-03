@@ -58,10 +58,8 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
 
     if (animationPush) {
       const direction = menuRight ? (
-        document.getElementById('wrapper').classList.toggle('active') &&
         document.getElementById('wrapper').classList.toggle('right')
       ) : (
-        document.getElementById('wrapper').classList.toggle('active') &&
         document.getElementById('wrapper').classList.toggle('left')
       );
       const sheet = window.document.styleSheets[0];
