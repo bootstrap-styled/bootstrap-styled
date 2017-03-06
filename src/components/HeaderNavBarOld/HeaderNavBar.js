@@ -184,6 +184,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
         active={!composePush.isHidden}
         menu-right={composePush.menuOffset.isRight}
         menu-left={composePush.menuOffset.isLeft}
+        onClick={composePush.onClick}
       >
         {composePush.menuOffset.menu}
       </MenuPushMini>
@@ -194,6 +195,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
         active={!composePush.isHidden}
         menu-right={composePush.menuOffset.isRight}
         menu-left={composePush.menuOffset.isLeft}
+        onClose={composePush.onClick}
       >
         {composePush.menuOffset.menu}
       </MenuPushSimple>

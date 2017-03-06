@@ -13,7 +13,7 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import theme from 'theme';
 const defaultProps = { theme };
-import Close from '../Button/Close';
+import Close from '../Close';
 
 class MenuPush extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -23,20 +23,21 @@ class MenuPush extends React.Component { // eslint-disable-line react/prefer-sta
     active: PropTypes.bool,
     'menu-right': PropTypes.bool,
     'menu-left': PropTypes.bool,
-    onCLick:  PropTypes.func,
+    onClose: PropTypes.func,
   };
 
   render() {
+    const { className, children, active, 'menu-right': menuRight, 'menu-left': menuLeft, onClose } = this.props;
     return (
       <div
-        className={cn('navbar-toggleable-xs', this.props.className, {
-          'menu-right': this.props['menu-right'],
-          'menu-left': this.props['menu-left'],
-          active: this.props.active,
+        className={cn('navbar-toggleable-xs hidden-sm-up', className, {
+          'menu-right': menuRight,
+          'menu-left': menuLeft,
+          active: active,
         })}
       >
-        <Close onClick={this.handleClick} />
-        {this.props.children}
+        <Close onDismiss={onClose} />
+        {children}
       </div>
     );
   }
@@ -67,10 +68,15 @@ MenuPush = styled(MenuPush)`
         padding: .25rem 0;
       }
     }
-    & .close-menu {
+    & .close {
       position: absolute;
       top: 10px;
       right: 10px;
+      opacity: 1;
+      color:white;
+      &:hover {
+        opacity: .5;
+      }
     }
   `}
 `;
