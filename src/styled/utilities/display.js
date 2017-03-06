@@ -12,6 +12,37 @@ export const defaultProps = {
 
 export function getDisplayUtilities(gridBreakpoints = defaultProps['$grid-breakpoints']) {
   const utilityList = [];
+  utilityList.push(`
+    .d-print-block {
+      display: none !important;
+    
+      @media print {
+        display: block !important;
+      }
+    }
+    
+    .d-print-inline {
+      display: none !important;
+    
+      @media print {
+        display: inline !important;
+      }
+    }
+    
+    .d-print-inline-block {
+      display: none !important;
+    
+      @media print {
+        display: inline-block !important;
+      }
+    }
+    
+    .d-print-none {
+      @media print {
+        display: none !important;
+      }
+    }
+  `);
   Object.keys(gridBreakpoints).forEach((breakpoint) => {
     const infix = breakpointInfix(breakpoint, gridBreakpoints);
     utilityList.push(`
@@ -22,6 +53,7 @@ export function getDisplayUtilities(gridBreakpoints = defaultProps['$grid-breakp
       .d${infix}-table { display: table !important; }
       .d${infix}-table-cell { display: table-cell !important; }
       .d${infix}-flex { display: flex !important; }
+      .d${infix}-inline-flex { display: inline-flex !important; }
     `);
   });
   return utilityList.join('\n');
