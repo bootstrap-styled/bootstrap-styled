@@ -69,7 +69,7 @@ describe('<HeaderNavBarPush />', () => {
       menu,
     });
     expect(renderedComponent.find('MenuPush').props().active).toBe(false);
-    renderedComponent.find('button').simulate('click');
+    renderedComponent.find('Button').simulate('click');
     expect(renderedComponent.find('MenuPush').props().active).toBe(true);
   });
   it('should override default onCLick function is props onClick is set', () => {
@@ -79,7 +79,7 @@ describe('<HeaderNavBarPush />', () => {
       onClick: clickTest,
     });
     expect(renderedComponent.find('Push').props().onClick).toBeDefined();
-    renderedComponent.find('button').simulate('click');
+    renderedComponent.find('Button').simulate('click');
     expect(clickTest()).toBe('test-click-additional');
   });
   it('should have isMini props', () => {
