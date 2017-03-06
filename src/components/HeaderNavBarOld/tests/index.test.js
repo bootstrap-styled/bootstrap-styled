@@ -34,7 +34,6 @@ const renderComponent = (props) => shallow(
     menu={props.menu}
     button={props.button}
     container={props.container}
-    composeCollapsed={props.composeCollapsed}
     composeSlide={props.composeSlide}
     className={props.className}
     container-fluid={props['container-fluid']}
@@ -52,7 +51,6 @@ const renderComponentUsingTheme = (props) => mount(
       menu={props.menu}
       button={props.button}
       container={props.container}
-      composeCollapsed={props.composeCollapsed}
       composeSlide={props.composeSlide}
       className={props.className}
       container-fluid={props['container-fluid']}
