@@ -65,11 +65,17 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
   };
 
   state = {
+    navId: 0,
     isOpened: false,
   }
 
   componentWillMount() {
     this.closeCollapse();
+    if (this.state.navId === 0) {
+      this.setState({
+        navId: new Date().getTime(),
+      });
+    }
   }
 
   componentDidMount() {
@@ -114,7 +120,7 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
     const { children: childrenCollapse, className: classNameCollapse, ...restCollapse } = collapse || {};
     const { className: containerClassName } = contained || {};
 
-    const { isOpened } = this.state;
+    const { isOpened, navId } = this.state;
 
     const cssClasses = cn('navbar', className, {
       'navbar-inverse': navbarInverse,
@@ -139,7 +145,7 @@ class NavBar extends React.Component { // eslint-disable-line react/prefer-state
             )}
           </div>
           {childrenCollapse && (
-            <Collapse key={Math.random()} isOpened={isOpened} keepCollapsedContent className={cn('navbar-collapse', classNameCollapse)} {...restCollapse}>
+            <Collapse key={navId} isOpened={isOpened} keepCollapsedContent className={cn('navbar-collapse', classNameCollapse)} {...restCollapse}>
               {childrenCollapse}
             </Collapse>
           )}
