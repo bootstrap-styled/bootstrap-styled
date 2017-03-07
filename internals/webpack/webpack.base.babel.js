@@ -83,6 +83,8 @@ module.exports = (options) => ({
     'react-collapse': true,
     'react-height': true,
     'react-motion': true,
+    'react-addons-css-transition-group': true,
+    'react-addons-transition-group': true,
   },
   resolve: {
     modules: ['src', 'node_modules'],
