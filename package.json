@@ -173,10 +173,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 95,
-        "branches": 94,
-        "functions": 95,
-        "lines": 95
+        "statements": 84,
+        "branches": 84,
+        "functions": 81,
+        "lines": 81
       }
     },
     "moduleDirectories": [
@@ -264,7 +264,7 @@
     "styled-components": "2.0.0-6",
     "toctoc": "0.2.3",
     "url-loader": "0.5.7",
-    "webpack": "2.2.0",
+    "webpack": "2.2.1",
     "webpack-dev-middleware": "1.9.0",
     "webpack-hot-middleware": "2.15.0"
   }
