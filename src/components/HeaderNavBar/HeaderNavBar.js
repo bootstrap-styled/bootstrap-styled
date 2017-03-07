@@ -43,6 +43,13 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     'no-overlay': PropTypes.bool,
   }
 
+  constructor(props) {
+    super(props);
+    const sheet = window.document.styleSheets[0];
+    sheet.insertRule('.overflow { overflow: hidden; }', sheet.cssRules.length);
+  }
+
+
   state = {
     show: false,
   };
@@ -62,8 +69,6 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       ) : (
         document.getElementById('wrapper').classList.toggle('left')
       );
-      const sheet = window.document.styleSheets[0];
-      sheet.insertRule('.overflow { overflow: hidden; }', sheet.cssRules.length);
       document.getElementById('app').classList.toggle('overflow');
       direction; // eslint-disable-line no-unused-expressions
     }
