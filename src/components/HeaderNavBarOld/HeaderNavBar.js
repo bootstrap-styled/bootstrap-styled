@@ -12,9 +12,7 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
 import Header from '../Header';
-import A from '../A';
 import Nav from '../Nav';
-import MenuCollapse from './MenuCollapse';
 import MenuSlide from './MenuSlide';
 import MenuPushMini from './MenuPushMini';
 import MenuPushSimple from './MenuPushSimple';
@@ -26,12 +24,9 @@ import shapeMenuOffsetPush from './shapeMenuOffsetPush';
 import shapeMenuTopPush from './shapeMenuTopPush';
 import shapeMenuOffsetSlide from './shapeMenuOffsetSlide';
 import shapeMenuTopSlide from './shapeMenuTopSlide';
-import shapeMenuCollapsed from './shapeMenuCollapsed';
-import collapse from './composeCollapse';
 import slide from './composeSlide';
 import push from './composePush';
 
-export const compCollapse = collapse;
 export const compSlide = slide;
 export const compPush = push;
 
@@ -55,12 +50,6 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     theme: PropTypes.object,
     container: PropTypes.bool,
     button: PropTypes.node,
-    composeCollapsed: PropTypes.shape({
-      brandTitle: PropTypes.string,
-      isCollapsed: PropTypes.bool,
-      onClick: PropTypes.func.isRequired,
-      menuCollapsed: shapeMenuCollapsed,
-    }),
     composeSlide: PropTypes.shape({
       onClick: PropTypes.func.isRequired,
       isHidden: PropTypes.bool,
@@ -109,18 +98,12 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
   render() {
     const {
       className,
-      composeCollapsed,
       composePush,
       composeSlide,
       theme,  // eslint-disable-line no-unused-vars
     } = this.props;
 
-    const classConfig = [];
-    if (composeCollapsed) {
-      classConfig.push('navbar-toggleable-md');
-    }
-
-    const cssClasses = cn('navbar', 'bd-navbar', classConfig, className, {
+    const cssClasses = cn('navbar', 'bd-navbar', className, {
       'navbar-inverse': this.props['navbar-inverse'],
       'bg-inverse': this.props['navbar-inverse'],
       'navbar-light': this.props['navbar-light'],
@@ -134,28 +117,10 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     const Wrapper = this.wrapper;
     const ButtonToggle = this.button;
 
-    const containerCollapse = (composeCollapsed) ? (
-      <Container>
-        <div className="d-flex justify-content-between hidden-lg-up">
-          <A className="navbar-brand" href="/">
-            {composeCollapsed.brandTitle}
-          </A>
-          <ButtonToggle
-            className="navbar-toggler"
-            type="button"
-            onClick={composeCollapsed.onClick}
-          />
-        </div>
-        <MenuCollapse active={composeCollapsed.isCollapsed}>
-          {composeCollapsed.menuCollapsed.menu}
-        </MenuCollapse>
-      </Container>
-    ) : null;
-
     const navTopPush = (composePush) ? (
       <div className="nav-account-top">
         <ButtonToggle
-          className="navbar-toggler navbar-toggler-icon hidden-md-up float-xs-left m-2 p-3"
+          className="navbar-toggler navbar-toggler-icon d-md-none float-xs-left m-2 p-3"
           type="button"
           onClick={composePush.onClick}
         />
@@ -218,7 +183,6 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
             <Nav className="nav">
               {navTopPush}
               {navTopSlide}
-              {containerCollapse}
             </Nav>
           </Wrapper>
         </Header>

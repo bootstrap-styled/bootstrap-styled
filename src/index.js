@@ -122,5 +122,5 @@ export { default as NavBar, NavBarToggler } from './components/NavBar';
 // 3. Organisms
 export { default as Container } from './components/Container';
 export { default as ContainerFluid } from './components/ContainerFluid';
-export { default as HeaderNavBarCollapse, HeaderNavBarPush, HeaderNavBarSlide } from './components/HeaderNavBarOld';
+export { default as HeaderNavBarPush, HeaderNavBarSlide } from './components/HeaderNavBarOld';
 export { default as HeaderNavBar, PageWrapper } from './components/HeaderNavBar';

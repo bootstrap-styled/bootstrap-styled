@@ -30,7 +30,7 @@ class MenuPush extends React.Component { // eslint-disable-line react/prefer-sta
     const { className, children, active, 'menu-right': menuRight, 'menu-left': menuLeft, onClose } = this.props;
     return (
       <div
-        className={cn('navbar-toggleable-xs hidden-sm-up', className, {
+        className={cn('navbar-toggleable-xs d-sm-none', className, {
           'menu-right': menuRight,
           'menu-left': menuLeft,
           active: active,
