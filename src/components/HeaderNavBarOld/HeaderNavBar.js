@@ -72,27 +72,36 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     'fixed-bottom': PropTypes.bool,
   };
 
-  constructor(props) {
-    super(props);
+  state = {
+    button: Button,
+    wrapper: (props) => (<div>{props.children}</div>),
+  }
 
-    const isContainer = this.props.container;
-    const isContainerFluid = this.props['container-fluid'];
+  componentWillMount() {
+    const {
+      container: isContainer,
+      'container-fluid': isContainerFluid,
+      button: customButton,
+    } = this.props;
+    const { wrapper: defaultStateWrapper } = this.state;
 
-    if (!isContainer && !isContainerFluid) {
-      this.wrapper = (p) => (<div>{p.children}</div>);
-    } else if (isContainer) {
-      this.wrapper = Container;
-    } else if (isContainerFluid) {
-      this.wrapper = ContainerFluid;
+    let wrapper = defaultStateWrapper;
+    if (isContainer) {
+      wrapper = Container;
+    }
+    if (isContainerFluid) {
+      wrapper = ContainerFluid;
     }
 
-    const isButton = this.props.button;
-
-    if (!isButton) {
-      this.button = Button;
-    } else {
-      this.button = this.props.button;
+    let button = Button;
+    if (customButton) {
+      button = customButton;
     }
+
+    this.setState({
+      wrapper,
+      button,
+    });
   }
 
   render() {
@@ -114,8 +123,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       'navbar-fixed-bottom': this.props['fixed-bottom'],
     });
 
-    const Wrapper = this.wrapper;
-    const ButtonToggle = this.button;
+    const { wrapper: Wrapper, button: ButtonToggle } = this.state;
 
     const navTopPush = (composePush) ? (
       <div className="nav-account-top">
@@ -127,7 +135,6 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
         <MenuAccount>
           {composePush.menuTop.menuAccount}
         </MenuAccount>
-
       </div>
     ) : null;
 

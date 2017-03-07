@@ -16,7 +16,7 @@ const defaultProps = { theme };
 import Close from '../Close';
 
 class MenuPush extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
+  
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
