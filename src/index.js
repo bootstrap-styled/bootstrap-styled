@@ -77,7 +77,7 @@ export { default as Header } from './components/Header';
 export { default as Hr } from './components/Hr';
 export { default as Img } from './components/Img';
 export { default as Input } from './components/Input';
-export { default as InputGroup } from './components/InputGroup';
+export { default as InputGroup, InputGroupAddon, InputGroupButton } from './components/InputGroup';
 export { default as IssueIcon } from './components/IssueIcon';
 export { default as Kbd } from './components/Kbd';
 export { default as Jumbotron } from './components/Jumbotron';

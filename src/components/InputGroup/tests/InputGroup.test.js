@@ -1,11 +1,10 @@
 /**
  * Testing our InputGroup component
  */
-import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-import InputGroup from '../index';
+import InputGroup from '../InputGroup';
+import BootstrapProvider from '../../BootstrapProvider';
 
 const children = (<h1>Test</h1>);
 
@@ -17,11 +16,11 @@ const renderComponent = (props = {}) => shallow(
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
+  <BootstrapProvider>
     <InputGroup>
       {props.children}
     </InputGroup>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 
