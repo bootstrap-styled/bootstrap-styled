@@ -9,28 +9,38 @@ import cn from 'classnames';
 import bsTheme from 'theme';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { card } from '../../styled/mixins/cards';
+import { mapToCssModules } from '../../styled/utilities/tools';
 
 const defaultProps = {
   theme: bsTheme,
+  tag: 'div',
 };
 
 class CardDeck extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
-    children: PropTypes.node.isRequired,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     theme: PropTypes.object,
+    cssModule: PropTypes.object,
   }
 
   render() {
-    const { className, children, theme, ...rest } = this.props;// eslint-disable-line no-unused-vars
+    const {
+      className,
+      cssModule,
+      tag: Tag,
+      theme,  // eslint-disable-line no-unused-vars
+      ...attributes
+    } = this.props;
+
+    const classes = mapToCssModules(cn(
+      className,
+      'card-deck'
+    ), cssModule);
+
     return (
-      <div
-        className={cn(className, 'card-deck')}
-        {...rest}
-      >
-        {children}
-      </div>
+      <Tag {...attributes} className={classes} />
     );
   }
 }

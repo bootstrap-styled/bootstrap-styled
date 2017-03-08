@@ -11,28 +11,38 @@ import { borderRightRadius, borderLeftRadius } from '../../styled/mixins/border-
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { ifThen } from '../../styled/mixins/conditional';
 import { card } from '../../styled/mixins/cards';
+import { mapToCssModules } from '../../styled/utilities/tools';
 
 const defaultProps = {
   theme: bsTheme,
+  tag: 'div',
 };
 
 class CardGroup extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
-    children: PropTypes.node.isRequired,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     theme: PropTypes.object,
+    cssModule: PropTypes.object,
   }
 
   render() {
-    const { className, children, theme, ...rest } = this.props;// eslint-disable-line no-unused-vars
+    const {
+      className,
+      cssModule,
+      tag: Tag,
+      theme,  // eslint-disable-line no-unused-vars
+      ...attributes
+    } = this.props;
+
+    const classes = mapToCssModules(cn(
+      className,
+      'card-group'
+    ), cssModule);
+
     return (
-      <div
-        className={cn(className, 'card-group')}
-        {...rest}
-      >
-        {children}
-      </div>
+      <Tag {...attributes} className={classes} />
     );
   }
 }

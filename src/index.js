@@ -116,7 +116,7 @@ export { default as Thead } from './components/Thead';
 export { default as Tr } from './components/Tr';
 export { default as Ul } from './components/Ul';
 // 2. Molecules
-export { default as Card, CardColumns, CardDeck, CardGroup } from './components/Cards';
+export { default as Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup } from './components/Cards';
 export { default as Accordion, AccordionGroup } from './components/Accordions';
 export { default as DropDown } from './components/DropDown';
 export { default as NavBar, NavBarToggler } from './components/NavBar';

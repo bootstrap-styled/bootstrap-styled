@@ -7,6 +7,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import { mapToCssModules } from '../../styled/utilities/tools';
 import { hover } from '../../styled/mixins/hover';
 import { borderRadius, borderTopRadius, borderBottomRadius } from '../../styled/mixins/border-radius';
 import { cardVariant, cardOutlineVariant, cardInverse } from '../../styled/mixins/cards';
@@ -14,28 +15,50 @@ import { ifThen } from '../../styled/mixins/conditional';
 
 const defaultProps = {
   theme: bsTheme,
+  tag: 'div',
 };
 
 class Card extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
-    children: PropTypes.node.isRequired,
     theme: PropTypes.object,
+    cssModule: PropTypes.object,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    inverse: PropTypes.bool,
+    color: PropTypes.string,
+    block: PropTypes.bool,
+    outline: PropTypes.bool,
     width: PropTypes.string,
     backgroundColor: PropTypes.string,
     borderColor: PropTypes.string,
   }
 
   render() {
-    const { className, children, theme, backgroundColor, borderColor, ...rest } = this.props;// eslint-disable-line no-unused-vars
+    const {
+      className,
+      cssModule,
+      color,
+      block,
+      inverse,
+      outline,
+      backgroundColor,  // eslint-disable-line no-unused-vars
+      borderColor,  // eslint-disable-line no-unused-vars
+      theme,  // eslint-disable-line no-unused-vars
+      tag: Tag,
+      ...attributes
+    } = this.props;
+
+    const classes = mapToCssModules(cn(
+      className,
+      'card',
+      inverse ? 'card-inverse' : false,
+      block ? 'card-block' : false,
+      color ? `card${outline ? '-outline' : ''}-${color}` : false
+    ), cssModule);
+
     return (
-      <div
-        className={cn(className, 'card')}
-        {...rest}
-      >
-        {children}
-      </div>
+      <Tag {...attributes} className={classes} />
     );
   }
 }
