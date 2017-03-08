@@ -25,7 +25,6 @@ class BreadcrumbItem extends React.Component { // eslint-disable-line react/pref
       cssModule,
       active,
       tag: Tag,
-      theme,  // eslint-disable-line
       ...attributes
     } = this.props;
 
