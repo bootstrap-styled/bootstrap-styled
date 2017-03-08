@@ -32,7 +32,6 @@ class Nav extends React.Component { // eslint-disable-line react/prefer-stateles
   }
 
   render() {
-
     const {
       className,
       cssModule,
@@ -54,7 +53,7 @@ class Nav extends React.Component { // eslint-disable-line react/prefer-stateles
         'nav-pills': pills,
         'nav-inline': inline,
         'nav-stacked': stacked,
-        disabled: attributes.disabled
+        disabled: attributes.disabled,
       }
     ), cssModule);
 
