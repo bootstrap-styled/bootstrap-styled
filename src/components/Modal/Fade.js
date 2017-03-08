@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import {
   omit,
-} from './utils';
+} from '../../styled/utilities/tools';
 
 const propTypes = {
   baseClass: PropTypes.string,

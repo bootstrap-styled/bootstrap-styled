@@ -6,13 +6,14 @@ import TransitionGroup from 'react-addons-transition-group';
 import classNames from 'classnames';
 import Fade from './Fade';
 
-import {
+import {   
   getOriginalBodyPadding,
   conditionallyUpdateScrollbar,
   setScrollbarWidth,
   mapToCssModules,
-  omit,
-} from './utils';
+  omit, 
+} from '../../styled/utilities/tools';
+
 
 
 const defaultProps = {
