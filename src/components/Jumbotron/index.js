@@ -9,28 +9,41 @@ import Color from 'color';
 import bsTheme from 'theme';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
+import { mapToCssModules } from '../../styled/utilities/tools';
 
 const defaultProps = {
   theme: bsTheme,
+  tag: 'div',
 };
 
 class Jumbotron extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    fluid: PropTypes.bool,
     className: PropTypes.string,
-    children: PropTypes.node,
+    cssModule: PropTypes.object,
     theme: PropTypes.object,
   }
 
   render() {
-    const { className, children, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      className,
+      cssModule,
+      tag: Tag,
+      fluid,
+      theme,  // eslint-disable-line no-unused-vars
+      ...attributes
+    } = this.props;
+
+    const classes = mapToCssModules(cn(
+      className,
+      'jumbotron',
+      fluid ? 'jumbotron-fluid' : false
+    ), cssModule);
+
     return (
-      <div
-        className={cn(className, 'jumbotron')}
-        {...rest}
-      >
-        {children}
-      </div>
+      <Tag {...attributes} className={classes} />
     );
   }
 }

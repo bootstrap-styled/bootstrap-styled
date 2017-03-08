@@ -1,12 +1,10 @@
 /**
  * Testing our Jumbotron component
  */
-import { ThemeProvider } from 'styled-components';
-import theme from 'theme';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import Jumbotron from '../index';
 
 const children = <h1> test </h1>;
@@ -21,13 +19,13 @@ const renderComponent = (props = {}) => shallow(
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
+  <BootstrapProvider>
     <Jumbotron
       className={props.className}
     >
       {children}
     </Jumbotron>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 
