@@ -84,7 +84,7 @@ export { default as Jumbotron } from './components/Jumbotron';
 export { default as Label } from './components/Label';
 export { default as Legend } from './components/Legend';
 export { default as Li } from './components/Li';
-export { default as ListGroup } from './components/ListGroup';
+export { default as ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from './components/ListGroup';
 export { default as Map } from './components/Map';
 export { default as Mark } from './components/Mark';
 export { default as Media } from './components/Media';

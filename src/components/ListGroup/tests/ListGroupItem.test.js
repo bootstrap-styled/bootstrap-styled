@@ -1,42 +1,40 @@
 /**
- * Testing our ListGroup component
+ * Testing our ListGroupItem component
  */
-import { ThemeProvider } from 'styled-components';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
-import ListGroup from '../index';
+import BootstrapProvider from '../../BootstrapProvider';
+import ListGroupItem from '../ListGroupItem';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <ListGroup
+  <ListGroupItem
     className={props.className}
   >
     {props.children}
-  </ListGroup>
+  </ListGroupItem>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <ListGroup
+  <BootstrapProvider>
+    <ListGroupItem
       className={props.className}
     >
       {props.children}
-    </ListGroup>
-  </ThemeProvider>
+    </ListGroupItem>
+  </BootstrapProvider>
 );
 
 
-describe('<ListGroup />', () => {
-  it('should render an <ListGroup> tag without a theme', () => {
+describe('<ListGroupItem />', () => {
+  it('should render an <ListGroupItem> tag without a theme', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('ListGroup').length).toBe(1);
+    expect(renderedComponent.find('li').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -44,18 +42,12 @@ describe('<ListGroup />', () => {
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
-  it('should render a <ul> tag with a theme', () => {
+  it('should render a <ListGroupItem> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('ul').length).toBe(1);
-    expect(renderedComponent.find('ListGroup').length).toBe(1);
-  });
-  it('should have class .caption by default with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-    });
-    expect(renderedComponent.find('ul').hasClass('list-group')).toBe(true);
+    expect(renderedComponent.find('li').length).toBe(1);
+    expect(renderedComponent.find('ListGroupItem').length).toBe(1);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
