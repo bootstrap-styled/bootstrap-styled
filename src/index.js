@@ -46,7 +46,7 @@ export { default as Article } from './components/Article';
 export { default as B } from './components/B';
 export { default as Blockquote } from './components/Blockquote';
 export { default as BootstrapProvider } from './components/BootstrapProvider';
-export { default as Breadcrumb } from './components/Breadcrumb';
+export { default as Breadcrumb, BreadcrumbItem } from './components/Breadcrumb';
 export { default as Button } from './components/Button';
 export { default as ButtonGroup } from './components/ButtonGroup';
 export { default as ButtonCheckbox } from './components/ButtonCheckbox';

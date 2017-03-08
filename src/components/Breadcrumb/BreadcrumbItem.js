@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
-
 const defaultProps = {
-  tag: 'li'
+  tag: 'li',
 };
 
 function mapToCssModules(className, cssModule) {
@@ -26,9 +25,10 @@ class BreadcrumbItem extends React.Component { // eslint-disable-line react/pref
       cssModule,
       active,
       tag: Tag,
+      theme,  // eslint-disable-line
       ...attributes
     } = this.props;
-    
+
     const classes = mapToCssModules(classNames(
       className,
       active ? 'active' : false,
@@ -36,10 +36,10 @@ class BreadcrumbItem extends React.Component { // eslint-disable-line react/pref
     ), cssModule);
 
     return (
-      <Tag {...attributes} className={classes}/>
+      <Tag {...attributes} className={classes} />
     );
   }
-};
+}
 
 BreadcrumbItem.defaultProps = defaultProps;
 
