@@ -10,70 +10,67 @@ import { unitUtils } from 'math-utils';
 import bsTheme from '../../theme';
 import { tableRowVariant } from '../../styled/mixins/table-row';
 import { hover as hoverMixin } from '../../styled/mixins/hover';
+import { mapToCssModules } from '../../styled/utilities/tools';
 
 const defaultProps = {
-  striped: false,
-  bordered: false,
-  hover: false,
-  condensed: false,
-  responsive: false,
+  tag: 'table',
+  responsiveTag: 'div',
   theme: bsTheme,
 };
 
 class Table extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    className: PropTypes.string,
     theme: PropTypes.object,
-    striped: PropTypes.bool,
+    className: PropTypes.string,
+    cssModule: PropTypes.object,
+    size: PropTypes.string,
     bordered: PropTypes.bool,
+    striped: PropTypes.bool,
+    inverse: PropTypes.bool,
     hover: PropTypes.bool,
-    condensed: PropTypes.bool,
+    reflow: PropTypes.bool,
     responsive: PropTypes.bool,
-    children: PropTypes.node.isRequired,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    responsiveTag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   };
 
   render() {
-    const { className, theme, children, responsive, bordered, striped, hover, condensed, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      className,
+      cssModule,
+      size,
+      bordered,
+      striped,
+      inverse,
+      hover,
+      reflow,
+      responsive,
+      tag: Tag,
+      responsiveTag: ResponsiveTag,
+      theme,  // eslint-disable-line
+      ...attributes
+    } = this.props;
+
+    const classes = mapToCssModules(cn(
+      className,
+      'table',
+      size ? 'table-' + size : false, // eslint-disable-line
+      bordered ? 'table-bordered' : false,
+      striped ? 'table-striped' : false,
+      inverse ? 'table-inverse' : false,
+      hover ? 'table-hover' : false,
+      reflow ? 'table-reflow' : false
+    ), cssModule);
+
+    const table = <Tag {...attributes} className={classes} />;
 
     if (responsive) {
       return (
-        <div
-          className={cn(className, {
-            'responsive': responsive,
-            'table-bordered': bordered,
-            'table-striped': striped,
-            'table-hover': hover,
-            'table-condensed': condensed,
-          })}
-          {...rest}
-        >
-          <table
-            className={cn(className, 'table', {
-              'table-bordered': bordered,
-              'table-striped': striped,
-              'table-hover': hover,
-              'table-condensed': condensed,
-            })}
-          >
-            {children}
-          </table>
-        </div>
+        <ResponsiveTag className="table-responsive">{table}</ResponsiveTag>
       );
     }
-    return (
-      <table
-        className={cn(className, 'table', {
-          'table-bordered': bordered,
-          'table-striped': striped,
-          'table-hover': hover,
-          'table-condensed': condensed,
-        })}
-        {...rest}
-      >
-        {children}
-      </table>
-    );
+    return table;
   }
 }
 
