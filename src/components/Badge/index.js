@@ -4,27 +4,53 @@ import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
 import bsTheme from 'theme';
+import { mapToCssModules } from '../../styled/utilities/tools';
 import { hoverFocus } from '../../styled/mixins/hover';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { badgeVariant } from '../../styled/mixins/badge';
 
-const defaultProps = { theme: bsTheme };
+const defaultProps = {
+  theme: bsTheme,
+  color: 'default',
+  pill: false,
+  tag: 'span',
+};
 
 class Badge extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    color: PropTypes.string,
+    pill: PropTypes.bool,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    children: PropTypes.node,
     className: PropTypes.string,
-    children: PropTypes.node.isRequired,
+    cssModule: PropTypes.object,
     theme: PropTypes.object,
   }
 
   render() {
-    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      theme, // eslint-disable-line
+      className,
+      cssModule,
+      color,
+      pill,
+      tag: Component,
+      children,
+      ...rest }
+      = this.props;
+
+    const classes = mapToCssModules(cn(
+      className,
+      'badge',
+      'badge-' + color, // eslint-disable-line
+      pill ? 'badge-pill' : false
+    ), cssModule);
 
     return (
-      <span className={cn(className, 'badge')} {...rest}>
+      <Component className={classes} {...rest}>
         {children}
-      </span>
+      </Component>
     );
   }
 }
