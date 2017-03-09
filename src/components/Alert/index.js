@@ -4,26 +4,37 @@
 
 
 import React, { PropTypes } from 'react';
-import styled, { withTheme } from 'styled-components';
 import cn from 'classnames';
+import styled, { withTheme } from 'styled-components';
 import themeBs from 'theme';
 import Close from '../Close';
+import { mapToCssModules } from '../../styled/utilities/tools';
 import { alertVariant } from '../../styled/mixins/alert';
 import { borderRadius } from '../../styled/mixins/border-radius';
 
 const defaultProps = {
+  color: 'success',
+  tag: 'div',
   closeLabel: 'Close',
   theme: themeBs,
 };
+
+// const FirstChild = ({ children }) => (
+//   React.Children.toArray(children)[0] || null
+// );
+
 
 class Alert extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     children: PropTypes.node,
-    close: PropTypes.bool,
-    dismissed: PropTypes.bool,
     className: PropTypes.string,
+    cssModule: PropTypes.object,
+    color: PropTypes.string,
+    close: PropTypes.bool,
     closeLabel: PropTypes.string,
+    dismissed: PropTypes.bool,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     theme: PropTypes.object,
   }
 
@@ -70,25 +81,42 @@ class Alert extends React.Component { // eslint-disable-line react/prefer-statel
   }
 
   render() {
-    const { className, theme, dismissed: unused, close, children, closeLabel, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      theme, // eslint-disable-line
+      dismissed: unused, // eslint-disable-line
+      close,
+      closeLabel,
+      className,
+      cssModule,
+      tag: Tag,
+      color,
+      children,
+      ...rest }
+      = this.props;
+
     const { dismissed } = this.state;
 
+    const classes = mapToCssModules(cn(
+      className,
+      'alert',
+      `alert-${color}`,
+      { 'alert-dismissible': close },
+      { fade: close },
+      { show: close && !dismissed },
+    ), cssModule);
+
     return (
-      <div
-        className={cn(className, 'alert', {
-          'alert-dismissible': close,
-          fade: close,
-          show: close && !dismissed,
-        })}
+      <Tag
+        className={classes}
+        role="alert"
         {...rest}
       >
         {close && <Close onDismiss={this.handleDismiss} />}
-        {children}
+        { children }
         {close && <Close sr-only onDismiss={this.handleDismiss} closeLabel={closeLabel} />}
-      </div>
+      </Tag>
     );
   }
-
 }
 
 // eslint-disable-next-line no-class-assign

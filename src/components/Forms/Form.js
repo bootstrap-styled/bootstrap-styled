@@ -1,10 +1,12 @@
 /* eslint-disable quote-props, dot-notation */
 /**
- * Form Component
+ * Form Component test
  *
  *
  */
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
+import cn from 'classnames';
 import { unitUtils } from 'math-utils';
 import bsTheme from 'theme';
 import { borderRadius } from '../../styled/mixins/border-radius';
@@ -12,12 +14,51 @@ import { formControl, formControlValidation } from '../../styled/mixins/forms';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { customForms } from '../../styled/mixins/customForms';
 import { makeRow } from '../../styled/mixins/grid';
+import { mapToCssModules } from '../../styled/utilities/tools';
 
-const defaultProps = { theme: bsTheme };
+const defaultProps = {
+  theme: bsTheme,
+  tag: 'form',
+};
+
 const selectBorderWidth = unitUtils.math.multiply(bsTheme['$border-width'], 2);
 
+class Form extends React.Component {// eslint-disable-line react/prefer-stateless-function
+
+  static propTypes = {
+    children: PropTypes.node,
+    theme: PropTypes.object,
+    inline: PropTypes.bool,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    className: PropTypes.string,
+    cssModule: PropTypes.object,
+  }
+
+  render() {
+    const {
+      className,
+      cssModule,
+      inline,
+      theme,  // eslint-disable-line no-unused-vars
+      tag: Tag,
+      getRef,
+      ...rest
+    } = this.props;
+
+    const classes = mapToCssModules(cn(
+      className,
+      inline ? 'form-inline' : false
+    ), cssModule);
+
+    return (
+      <Tag ref={getRef} className={classes} {...rest} />
+    );
+  }
+}
+
 // eslint-disable-next-line no-class-assign
-const Form = styled.form` 
+Form = styled(Form)` 
   ${(props) => `
     /*
      Textual form controls
@@ -70,7 +111,6 @@ const Form = styled.form`
     .form-control-range {
       display: block;
     }
-
 
     /*
      Labels
