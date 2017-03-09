@@ -24,7 +24,6 @@ const renderComponent = (props = {}) => shallow(
     striped={props.striped}
     bordered={props.bordered}
     hover={props.hover}
-    condensed={props.condensed}
     responsive={props.responsive}
     className={props.className}
   >
@@ -39,7 +38,6 @@ const renderComponentUsingTheme = (props = {}) => mount(
       striped={props.striped}
       bordered={props.bordered}
       hover={props.hover}
-      condensed={props.condensed}
       responsive={props.responsive}
       className={props.className}
     >
@@ -96,13 +94,6 @@ describe('<Table />', () => {
     });
     expect(renderedComponent.find('table').hasClass('table-hover')).toBe(true);
   });
-  it('should have a class .table-condensed by default with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-      condensed: true,
-    });
-    expect(renderedComponent.find('table').hasClass('table-condensed')).toBe(true);
-  });
   it('should have a class .table-responsive by default with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
@@ -110,7 +101,6 @@ describe('<Table />', () => {
     });
     expect(renderedComponent.find('div').length).toBe(1);
     expect(renderedComponent.find('div').hasClass('table')).toBe(false);
-    expect(renderedComponent.find('div').hasClass('responsive')).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

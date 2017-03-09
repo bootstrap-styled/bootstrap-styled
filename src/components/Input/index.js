@@ -7,16 +7,27 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
 import { button } from '../../styled/mixins/buttons';
+import { mapToCssModules } from '../../styled/utilities/tools';
 
 const defaultProps = {
   theme: bsTheme,
   type: 'text',
+  tag: 'p',
 };
 
 class Input extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    children: PropTypes.node,
+    type: PropTypes.string,
+    size: PropTypes.string,
+    state: PropTypes.string,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    static: PropTypes.bool,
+    addon: PropTypes.bool,
     className: PropTypes.string,
+    cssModule: PropTypes.object,
     theme: PropTypes.object,
     onChange: PropTypes.func,
     indeterminate: PropTypes.bool,
@@ -57,7 +68,22 @@ class Input extends React.Component { // eslint-disable-line react/prefer-statel
   }
 
   render() {
-    const { className, indeterminate: unused, onChange, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      className,
+      cssModule,
+      indeterminate: unused,   // eslint-disable-line no-unused-vars
+      theme,   // eslint-disable-line no-unused-vars
+      onChange, // eslint-disable-line no-unused-vars
+      type,
+      size,
+      state,
+      tag,
+      addon,
+      static: staticInput,
+      getRef,
+      ...attributes
+    } = this.props;
+
     const { indeterminate, focus } = this.state;
 
     const optional = {};
@@ -66,11 +92,40 @@ class Input extends React.Component { // eslint-disable-line react/prefer-statel
       optional.onBlur = this.handleBlur;
     }
 
+    const checkInput = ['radio', 'checkbox'].indexOf(type) > -1;
+    const fileInput = type === 'file';
+    const textareaInput = type === 'textarea';
+    const selectInput = type === 'select';
+    let Tag = selectInput || textareaInput ? type : 'input';
+
+    let formControlClass = 'form-control';
+
+    if (staticInput) {
+      formControlClass = `${formControlClass}-static`;
+      Tag = tag;
+    } else if (fileInput) {
+      formControlClass = `${formControlClass}-file`;
+    } else if (checkInput) {
+      if (addon) {
+        formControlClass = null;
+      } else {
+        formControlClass = 'form-check-input';
+      }
+    }
+
+    const classes = mapToCssModules(cn(
+      className,
+      state ? `form-control-${state}` : false,
+      size ? `form-control-${size}` : false,
+      focus,
+      indeterminate,
+      formControlClass
+    ), cssModule);
+
     return (
-      <input className={cn(className, { indeterminate, focus })} {...rest} {...optional} onChange={this.handleChange} />
+      <Tag {...attributes} ref={getRef} className={classes} {...optional} onChange={this.handleChange} />
     );
   }
-
 }
 
 // eslint-disable-next-line no-class-assign

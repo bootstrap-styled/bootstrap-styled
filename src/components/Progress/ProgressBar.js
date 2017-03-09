@@ -3,6 +3,7 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import { rangeUtils } from 'math-utils';
+import { mapToCssModules } from '../../styled/utilities/tools';
 
 export default class ProgressBar extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -23,6 +24,9 @@ export default class ProgressBar extends React.Component { // eslint-disable-lin
     height: PropTypes.string,
     striped: PropTypes.bool,
     animated: PropTypes.bool,
+    cssModule: PropTypes.object,
+    color: PropTypes.string,
+
   }
 
   state = {
@@ -35,13 +39,31 @@ export default class ProgressBar extends React.Component { // eslint-disable-lin
   }
 
   render() {
-    const { children, className, valueNow, valueMin, valueMax, height, striped, animated, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      children,
+      color,
+      className,
+      cssModule,
+      valueNow,
+      valueMin,
+      valueMax,
+      height,
+      striped,
+      animated,
+      ...rest
+    } = this.props; // eslint-disable-line no-unused-vars
+
+    const progressBarClasses = mapToCssModules(cn(
+      className,
+      'progress-bar',
+      animated ? 'progress-bar-animated' : null,
+      color ? `bg-${color}` : null,
+      striped || animated ? 'progress-bar-striped' : null
+    ), cssModule);
+
     return (
       <div
-        className={cn('progress-bar', className, {
-          'progress-bar-striped': striped,
-          'progress-bar-animated': animated,
-        })}
+        className={progressBarClasses}
         style={Object.assign({ width: this.getWidth(valueNow, valueMin, valueMax) }, { height })}
         {...rest}
       >

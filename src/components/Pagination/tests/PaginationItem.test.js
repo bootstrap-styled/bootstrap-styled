@@ -1,46 +1,52 @@
 /**
- * Testing our Jumbotron component
+ * Testing our PaginationItem component
  */
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
-import Jumbotron from '../index';
+import PaginationItem from '../PaginationItem';
 
-const children = <h1> test </h1>;
+const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Jumbotron
+  <PaginationItem
     className={props.className}
   >
-    {children}
-  </Jumbotron>
+    {props.children}
+  </PaginationItem>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Jumbotron
+    <PaginationItem
       className={props.className}
     >
-      {children}
-    </Jumbotron>
+      {props.children}
+    </PaginationItem>
   </BootstrapProvider>
 );
 
 
-describe('<Jumbotron />', () => {
-  it('should render an <Jumbotron> tag without a theme', () => {
+describe('<PaginationItem />', () => {
+  it('should render an <PaginationItem> tag without a theme', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Jumbotron').length).toBe(1);
+    expect(renderedComponent.find('li').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
       children,
     });
     expect(renderedComponent.contains(children)).toEqual(true);
+  });
+  it('should render a <PaginationItem> tag with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+    });
+    expect(renderedComponent.find('PaginationItem').length).toBe(1);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

@@ -1,46 +1,47 @@
 /**
- * Testing our Jumbotron component
+ * Testing our InputGroupAddon component
  */
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
+import InputGroupAddon from '../InputGroupAddon';
 import BootstrapProvider from '../../BootstrapProvider';
-import Jumbotron from '../index';
 
-const children = <h1> test </h1>;
+const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Jumbotron
-    className={props.className}
-  >
-    {children}
-  </Jumbotron>
+  <InputGroupAddon>
+    {props.children}
+  </InputGroupAddon>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Jumbotron
-      className={props.className}
-    >
-      {children}
-    </Jumbotron>
+    <InputGroupAddon>
+      {props.children}
+    </InputGroupAddon>
   </BootstrapProvider>
 );
 
 
-describe('<Jumbotron />', () => {
-  it('should render an <Jumbotron> tag without a theme', () => {
+describe('<InputGroupAddon />', () => {
+  it('should render an <InputGroup> tag without a theme', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Jumbotron').length).toBe(1);
+    expect(renderedComponent.find('div').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
       children,
     });
     expect(renderedComponent.contains(children)).toEqual(true);
+  });
+  it('should render a <InputGroupAddon> tag with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+    });
+    expect(renderedComponent.find('InputGroupAddon').length).toBe(1);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

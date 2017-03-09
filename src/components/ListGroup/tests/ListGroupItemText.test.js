@@ -1,46 +1,52 @@
 /**
- * Testing our Jumbotron component
+ * Testing our ListGroupItemText component
  */
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
-import Jumbotron from '../index';
+import ListGroupItemText from '../ListGroupItemText';
 
-const children = <h1> test </h1>;
+const children = (<span>Test</span>);
 
 const renderComponent = (props = {}) => shallow(
-  <Jumbotron
+  <ListGroupItemText
     className={props.className}
   >
-    {children}
-  </Jumbotron>
+    {props.children}
+  </ListGroupItemText>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Jumbotron
+    <ListGroupItemText
       className={props.className}
     >
-      {children}
-    </Jumbotron>
+      {props.children}
+    </ListGroupItemText>
   </BootstrapProvider>
 );
 
 
-describe('<Jumbotron />', () => {
-  it('should render an <Jumbotron> tag without a theme', () => {
+describe('<ListGroupItemText />', () => {
+  it('should render an <ListGroupItemText> tag without a theme', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Jumbotron').length).toBe(1);
+    expect(renderedComponent.find('p').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
       children,
     });
     expect(renderedComponent.contains(children)).toEqual(true);
+  });
+  it('should render a <ListGroupItemText> tag with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+    });
+    expect(renderedComponent.find('p').length).toBe(1);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
