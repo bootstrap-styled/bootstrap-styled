@@ -35,7 +35,7 @@ class Badge extends React.Component { // eslint-disable-line react/prefer-statel
       cssModule,
       color,
       pill,
-      tag: Component,
+      tag: Tag,
       children,
       ...rest }
       = this.props;
@@ -48,9 +48,9 @@ class Badge extends React.Component { // eslint-disable-line react/prefer-statel
     ), cssModule);
 
     return (
-      <Component className={classes} {...rest}>
+      <Tag className={classes} {...rest}>
         {children}
-      </Component>
+      </Tag>
     );
   }
 }
