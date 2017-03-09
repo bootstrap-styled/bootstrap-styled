@@ -7,59 +7,98 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
 import { button } from '../../styled/mixins/buttons';
+import { mapToCssModules } from '../../styled/utilities/tools';
+
+const colSizes = ['xs', 'sm', 'md', 'lg', 'xl'];
+
+const stringOrNumberProp = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
+
+const columnProps = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number,
+  PropTypes.shape({
+    size: stringOrNumberProp,
+    push: stringOrNumberProp,
+    pull: stringOrNumberProp,
+    offset: stringOrNumberProp,
+  }),
+]);
+
+const propTypes = {
+  children: PropTypes.node,
+  hidden: PropTypes.bool,
+  check: PropTypes.bool,
+  inline: PropTypes.bool,
+  disabled: PropTypes.bool,
+  size: PropTypes.string,
+  for: PropTypes.string,
+  tag: PropTypes.string,
+  className: PropTypes.string,
+  cssModule: PropTypes.object,
+  xs: columnProps,
+  sm: columnProps,
+  md: columnProps,
+  lg: columnProps,
+  xl: columnProps,
+  theme: PropTypes.object,
+};
 
 const defaultProps = {
+  tag: 'label',
   theme: bsTheme,
 };
 
-class Label extends React.Component { // eslint-disable-line react/prefer-stateless-function
+const Label = (props) => {
+  let {
+    className,  // eslint-disable-line
+    cssModule,  // eslint-disable-line
+    hidden, // eslint-disable-line
+    tag: Tag, // eslint-disable-line
+    check,  // eslint-disable-line
+    inline, // eslint-disable-line
+    disabled, // eslint-disable-line
+    size, // eslint-disable-line
+    theme,  // eslint-disable-line
+    for: htmlFor, // eslint-disable-line
+    ...attributes
+  } = props;
 
-  static propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-    htmlFor: PropTypes.string,
-    theme: PropTypes.object,
-  }
+  const colClasses = [];
 
-  state = {
-    focus: false,
-  }
+  colSizes.forEach(colSize => { // eslint-disable-line
+    const columnProp = props[colSize];
+    delete attributes[colSize];
 
-  handleFocus = () => {
-    this.setState({
-      focus: true,
-    });
-  }
-
-  handleBlur = () => {
-    this.setState({
-      focus: false,
-    });
-  }
-
-  render() {
-    const { className, children, htmlFor, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
-    const { focus } = this.state;
-
-    const optional = {};
-    if (className.indexOf('btn') !== -1) {
-      optional.onFocus = this.handleFocus;
-      optional.onBlur = this.handleBlur;
+    if (columnProp && columnProp.size) {
+      colClasses.push(mapToCssModules(cn({
+        [`col-${colSize}-${columnProp.size}`]: columnProp.size,
+        [`push-${colSize}-${columnProp.push}`]: columnProp.push,
+        [`pull-${colSize}-${columnProp.pull}`]: columnProp.pull,
+        [`offset-${colSize}-${columnProp.offset}`]: columnProp.offset,
+      })), cssModule);
+    } else if (columnProp) {
+      colClasses.push(`col-${colSize}-${columnProp}`);
     }
+  });
 
-    return (
-      <label htmlFor={htmlFor} className={cn(className, { focus })} {...rest} {...optional}>
-        {children}
-      </label>
-    );
-  }
+  const classes = mapToCssModules(cn(
+    className,
+    hidden ? 'sr-only' : false,
+    check ? `form-check-${inline ? 'inline' : 'label'}` : false,
+    check && inline && disabled ? 'disabled' : false,
+    size ? `col-form-label-${size}` : false,
+    colClasses,
+    colClasses.length ? 'col-form-label' : false
+  ), cssModule);
 
-}
+  return (
+    <Tag htmlFor={htmlFor} {...attributes} className={classes} />
+  );
+};
 
 // eslint-disable-next-line no-class-assign
 Label = styled(Label)`
   ${(props) => `
- 
     /* Reboot Scss */
     touch-action: manipulation;
     /* Allow labels to use margin for spacing. */
@@ -116,6 +155,7 @@ Label = styled(Label)`
  `}
 `;
 
+Label.propTypes = propTypes;
 Label.defaultProps = defaultProps;
 
 export default Label;

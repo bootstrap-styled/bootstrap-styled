@@ -33,47 +33,11 @@ class Input extends React.Component { // eslint-disable-line react/prefer-statel
     indeterminate: PropTypes.bool,
   }
 
-  state = {
-    focus: false,
-    indeterminate: false,
-  }
-
-  componentWillMount() {
-    this.setState({
-      indeterminate: this.props.indeterminate,
-    });
-  }
-
-  handleChange = (e) => {
-    if (this.state.indeterminate) {
-      this.setState({
-        indeterminate: false,
-      });
-    }
-    if (this.props.onChange) {
-      this.props.onChange(e);
-    }
-  }
-
-  handleFocus = () => {
-    this.setState({
-      focus: true,
-    });
-  }
-
-  handleBlur = () => {
-    this.setState({
-      focus: false,
-    });
-  }
-
   render() {
     const {
       className,
       cssModule,
-      indeterminate: unused,   // eslint-disable-line no-unused-vars
       theme,   // eslint-disable-line no-unused-vars
-      onChange, // eslint-disable-line no-unused-vars
       type,
       size,
       state,
@@ -84,13 +48,6 @@ class Input extends React.Component { // eslint-disable-line react/prefer-statel
       ...attributes
     } = this.props;
 
-    const { indeterminate, focus } = this.state;
-
-    const optional = {};
-    if (className.indexOf('btn') !== -1) {
-      optional.onFocus = this.handleFocus;
-      optional.onBlur = this.handleBlur;
-    }
 
     const checkInput = ['radio', 'checkbox'].indexOf(type) > -1;
     const fileInput = type === 'file';
@@ -117,13 +74,14 @@ class Input extends React.Component { // eslint-disable-line react/prefer-statel
       className,
       state ? `form-control-${state}` : false,
       size ? `form-control-${size}` : false,
-      focus,
-      indeterminate,
       formControlClass
     ), cssModule);
 
+    if (Tag === 'input') {
+      attributes.type = type;
+    }
     return (
-      <Tag {...attributes} ref={getRef} className={classes} {...optional} onChange={this.handleChange} />
+      <Tag {...attributes} ref={getRef} className={classes} />
     );
   }
 }
