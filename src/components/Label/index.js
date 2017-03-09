@@ -48,18 +48,18 @@ const defaultProps = {
   theme: bsTheme,
 };
 
-const Label = (props) => {
-  let {
-    className,  // eslint-disable-line
-    cssModule,  // eslint-disable-line
-    hidden, // eslint-disable-line
-    tag: Tag, // eslint-disable-line
-    check,  // eslint-disable-line
-    inline, // eslint-disable-line
-    disabled, // eslint-disable-line
-    size, // eslint-disable-line
+let Label = (props) => {  // eslint-disable-line
+  const {
+    className,
+    cssModule,
+    hidden,
+    tag: Tag,
+    check,
+    inline,
+    disabled,
+    size,
     theme,  // eslint-disable-line
-    for: htmlFor, // eslint-disable-line
+    for: htmlFor,
     ...attributes
   } = props;
 
