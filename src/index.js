@@ -119,7 +119,7 @@ export { default as Ul } from './components/Ul';
 export { default as Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup } from './components/Cards';
 export { default as Accordion, AccordionGroup } from './components/Accordions';
 export { default as Form, FormGroup, FormText, FormFeedback } from './components/Forms';
-export { default as DropDown } from './components/DropDown';
+export { default as Dropdown } from './components/Dropdown';
 export { default as NavBar, NavBarToggler } from './components/NavBar';
 // 3. Organisms
 export { default as Container } from './components/Container';
