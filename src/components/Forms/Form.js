@@ -107,7 +107,7 @@ Form = styled(Form)`
     }
 
     /* Make file inputs better match text inputs by forcing them to new lines. */
-    .form-control-file,
+    & .form-control-file,
     .form-control-range {
       display: block;
     }
@@ -227,8 +227,7 @@ Form = styled(Form)`
 
     /* Checkboxes and radios Indent the labels to position radios/checkboxes as hanging controls. */
 
-    &. form-check,
-     .form-check {
+    & .form-check {
       position: relative;
       display: block;
       margin-bottom: ${props.theme['$form-check-margin-bottom']};
@@ -336,7 +335,7 @@ Form = styled(Form)`
 
       /* Kick in the inline */
       ${mediaBreakpointUp('sm', props.theme['$grid-breakpoints'], `
-          & .label {
+          label {
             display: flex;
             align-items: center;
             justify-content: center;
