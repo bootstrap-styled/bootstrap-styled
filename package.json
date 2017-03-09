@@ -173,10 +173,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 84,
-        "branches": 84,
-        "functions": 81,
-        "lines": 81
+        "statements": 80,
+        "branches": 80,
+        "functions": 80,
+        "lines": 80
       }
     },
     "moduleDirectories": [
@@ -200,8 +200,8 @@
     "react-collapse": "^2.3.3",
     "react-height": "^2.2.0",
     "react-motion": "^0.4.7",
-    "react-addons-css-transition-group": "^0.14.0 || ^15.0.0",
-    "react-addons-transition-group": "^0.14.0 || ^15.0.0"
+    "react-addons-css-transition-group": "^15.4.2",
+    "react-addons-transition-group": "^15.4.2"
   },
   "dependencies": {
     "classnames": "2.2.5",
@@ -259,8 +259,8 @@
     "react-height": "2.2.0",
     "react-motion": "0.4.7",
     "react-onclickoutside": "5.8.3",
-    "react-addons-css-transition-group": "^0.14.0 || ^15.0.0",
-    "react-addons-transition-group": "^0.14.0 || ^15.0.0",
+    "react-addons-css-transition-group": "15.4.2",
+    "react-addons-transition-group": "15.4.2",
     "rimraf": "2.5.4",
     "shelljs": "0.7.5",
     "sinon": "2.0.0-pre",
