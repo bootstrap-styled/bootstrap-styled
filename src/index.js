@@ -66,7 +66,6 @@ export { default as Fieldset } from './components/Fieldset';
 export { default as FigCaption } from './components/FigCaption';
 export { default as Figure } from './components/Figure';
 export { default as Footer } from './components/Footer';
-export { default as Form } from './components/Form';
 export { default as H1 } from './components/H1';
 export { default as H2 } from './components/H2';
 export { default as H3 } from './components/H3';
@@ -119,6 +118,7 @@ export { default as Ul } from './components/Ul';
 // 2. Molecules
 export { default as Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup } from './components/Cards';
 export { default as Accordion, AccordionGroup } from './components/Accordions';
+export { default as Form, FormGroup, FormText, FormFeedback } from './components/Forms';
 export { default as DropDown } from './components/DropDown';
 export { default as NavBar, NavBarToggler } from './components/NavBar';
 // 3. Organisms
