@@ -7,22 +7,47 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import themeBs from '../../theme';
 import { button } from '../../styled/mixins/buttons';
+import { mapToCssModules } from '../../styled/utilities/tools';
 
-const defaultProps = { theme: themeBs };
+const defaultProps = {
+  theme: themeBs,
+  tag: 'button',
+  color: 'secondary',
+};
 
 class Button extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    active: PropTypes.bool,
+    block: PropTypes.bool,
+    color: PropTypes.string,
     disabled: PropTypes.bool,
     outline: PropTypes.bool,
-    'dropdown-toggle': PropTypes.bool,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    onClick: PropTypes.func,
+    size: PropTypes.string,
     dropup: PropTypes.bool,
     className: PropTypes.string,
     children: PropTypes.node,
+    'dropdown-toggle': PropTypes.bool,
+    cssModule: PropTypes.object,
+    theme: PropTypes.object,
   }
 
   state = {
     focus: false,
+  }
+
+  onClick = (e) => {
+    if (this.props.disabled) {
+      e.preventDefault();
+      return;
+    }
+
+    if (this.props.onClick) {
+      this.props.onClick(e);
+    }
   }
 
   handleFocus = () => {
@@ -38,15 +63,38 @@ class Button extends React.Component { // eslint-disable-line react/prefer-state
   }
 
   render() {
-    const { theme, className, disabled, outline, dropup, children, 'dropdown-toggle': dropdownToggle, ...rest } = this.props; // eslint-disable-line
-    const { focus } = this.state;
-    const cssClasses = cn('btn', className, {
-      disabled,
+    let {
+      tag: Tag,
+    } = this.props;
+
+    const {
+      active,
+      block,
+      className,
+      cssModule,
+      dropup,
+      'dropdown-toggle': dropdownToggle,
+      color,
       outline,
+      size,
+      getRef,
+      theme,  // eslint-disable-line
+      ...attributes
+    } = this.props;
+
+    const { focus } = this.state;
+
+    const classes = mapToCssModules(cn(
+      className,
+      'btn',
+      `btn${outline ? '-outline' : ''}-${color}`,
+      size ? `btn-${size}` : false,
+      block ? 'btn-block' : false,
       dropup,
       focus,
-      'dropdown-toggle': dropdownToggle,
-    });
+      { 'dropdown-toggle': dropdownToggle },
+      { active, disabled: this.props.disabled }
+    ), cssModule);
 
     const optional = {};
     if (className.indexOf('btn') !== -1) {
@@ -54,20 +102,21 @@ class Button extends React.Component { // eslint-disable-line react/prefer-state
       optional.onBlur = this.handleBlur;
     }
 
+    if (attributes.href && Tag === 'button') {
+      Tag = 'a';
+    }
+
     return (
-      <button
-        className={cssClasses}
-        disabled={disabled}
+      <Tag
+        className={classes}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
-        {...rest}
+        ref={getRef}
+        {...attributes}
         {...optional}
-      >
-        {children}
-      </button>
+      />
     );
   }
-
 }
 
 // eslint-disable-next-line no-class-assign
