@@ -6,6 +6,7 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import styled, { withTheme } from 'styled-components';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import themeBs from 'theme';
 import Close from '../Close';
 import { mapToCssModules } from '../../styled/utilities/tools';
@@ -14,14 +15,17 @@ import { borderRadius } from '../../styled/mixins/border-radius';
 
 const defaultProps = {
   color: 'success',
+  isOpen: true,
   tag: 'div',
-  closeLabel: 'Close',
+  transitionAppearTimeout: 150,
+  transitionEnterTimeout: 150,
+  transitionLeaveTimeout: 150,
   theme: themeBs,
 };
 
-// const FirstChild = ({ children }) => (
-//   React.Children.toArray(children)[0] || null
-// );
+const FirstChild = ({ children }) => (
+  React.Children.toArray(children)[0] || null
+);
 
 
 class Alert extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -31,90 +35,75 @@ class Alert extends React.Component { // eslint-disable-line react/prefer-statel
     className: PropTypes.string,
     cssModule: PropTypes.object,
     color: PropTypes.string,
-    close: PropTypes.bool,
-    closeLabel: PropTypes.string,
-    dismissed: PropTypes.bool,
+    isOpen: PropTypes.bool,
+    toggle: PropTypes.func,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    theme: PropTypes.object,
+    transitionAppearTimeout: PropTypes.number,
+    transitionEnterTimeout: PropTypes.number,
+    transitionLeaveTimeout: PropTypes.number,
   }
 
-  state = {
-    dismissed: false,
+  state= {
+    visible: true,
   }
 
-  componentWillMount = () => {
-    const { dismissed } = this.props;
-    if (dismissed) {
-      this.setState({
-        dismissed,
-      });
-    }
+  onDismiss = () => {
+    this.setState({ visible: false });
   }
 
-  regAnimationDuration = new RegExp(/(\.\d+)s/); // eg: [0] = .2s [1] = .2, assuming we only use animation shorter than 1 sec
-
-  handleDisappearing = (alertElement) => {
-    const { theme } = this.props;
-    let animationDurationMs = 0;
-
-    if (theme['$enable-transition']) {
-      const animationDurationS = theme['$transition-fade'].match(this.regAnimationDuration)[1];
-      animationDurationMs = parseFloat(animationDurationS) * 1000;
-    }
-
-    setTimeout(() => {
-      alertElement.classList.add('d-none');
-    }, animationDurationMs);
-  }
-
-  handleDismiss = (e) => {
-    this.setState({
-      dismissed: true,
-    });
-
-    const target = e.target;
-    let alertElement = target.parentElement;
-    while (!alertElement.classList.contains('alert-dismissible')) {
-      alertElement = alertElement.parentElement;
-    }
-    this.handleDisappearing(alertElement);
-  }
 
   render() {
     const {
       theme, // eslint-disable-line
-      dismissed: unused, // eslint-disable-line
-      close,
-      closeLabel,
       className,
       cssModule,
       tag: Tag,
       color,
+      isOpen,
+      toggle,
       children,
-      ...rest }
-      = this.props;
-
-    const { dismissed } = this.state;
+      transitionAppearTimeout,
+      transitionEnterTimeout,
+      transitionLeaveTimeout,
+      ...attributes
+    } = this.props;
 
     const classes = mapToCssModules(cn(
       className,
       'alert',
       `alert-${color}`,
-      { 'alert-dismissible': close },
-      { fade: close },
-      { show: close && !dismissed },
+      { 'alert-dismissible': toggle }
     ), cssModule);
 
-    return (
-      <Tag
-        className={classes}
-        role="alert"
-        {...rest}
-      >
-        {close && <Close onDismiss={this.handleDismiss} />}
+    const alert = (
+      <Tag {...attributes} className={classes} role="alert">
+        { toggle ?
+          <Close aria-label="Close" onClick={toggle} />
+          : null }
         { children }
-        {close && <Close sr-only onDismiss={this.handleDismiss} closeLabel={closeLabel} />}
       </Tag>
+    );
+
+    return (
+      <ReactCSSTransitionGroup
+        component={FirstChild}
+        transitionName={{
+          appear: 'fade',
+          appearActive: 'show',
+          enter: 'fade',
+          enterActive: 'show',
+          leave: 'fade',
+          leaveActive: 'out',
+        }}
+        transitionAppear={transitionAppearTimeout > 0}
+        transitionAppearTimeout={transitionAppearTimeout}
+        transitionEnter={transitionEnterTimeout > 0}
+        transitionEnterTimeout={transitionEnterTimeout}
+        transitionLeave={transitionLeaveTimeout > 0}
+        transitionLeaveTimeout={transitionLeaveTimeout}
+      >
+        {isOpen ? alert : null}
+      </ReactCSSTransitionGroup>
     );
   }
 }
