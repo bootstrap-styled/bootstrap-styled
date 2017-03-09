@@ -10,11 +10,11 @@ import cn from 'classnames';
 import { nav } from '../../styled/mixins/nav';
 import { navbar as navbarMixin } from '../../styled/mixins/navbar';
 import { mapToCssModules } from '../../styled/utilities/tools';
-
+import Ul from '../Ul';
 
 const defaultProps = {
   theme: bsTheme,
-  tag: 'ul',
+  tag: Ul,
 };
 
 class Nav extends React.Component { // eslint-disable-line react/prefer-stateless-function
