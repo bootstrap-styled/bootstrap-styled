@@ -5,27 +5,27 @@ import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import bsTheme from 'theme';
 
-export default (CollapseLib) => class Collapse extends React.Component {
+export default (CollapseLib) => class CollapseTest extends React.Component {
 
   static propTypes = {
     children: PropTypes.node.isRequired,
     theme: PropTypes.object.isRequired,
-    isOpened: PropTypes.bool,
+    isOpen: PropTypes.bool,
   };
 
   defaultProps = {
     theme: bsTheme,
-    isOpened: false,
+    isOpen: false,
   };
 
   render() {
     const { children, theme, ...props } = this.props;
     // extract keys for div
-    const { className, isOpened, fixedHeight, springConfig, keepCollapsedContent, onRest, onHeightReady, ...rest } = props; // eslint-disable-line no-unused-vars
+    const { className, isOpen, fixedHeight, springConfig, keepCollapsedContent, onRest, onHeightReady, ...rest } = props; // eslint-disable-line no-unused-vars
     return theme['$enable-transitions'] ? (
       <CollapseLib className={className} {...props}>{children}</CollapseLib>
     ) : (
-      <div className={cn(className, { 'd-none': !isOpened })} {...rest}>{children}</div>
+      <div className={cn(className, { 'd-none': !isOpen })} {...rest}>{children}</div>
     );
   }
 };
