@@ -55,6 +55,7 @@ export { default as Close } from './components/Close';
 export { default as Code } from './components/Code';
 export { default as Col } from './components/Col';
 export { default as Collapse } from './components/Collapse';
+export { default as CollapseTest } from './components/Collapse';
 export { default as Dd } from './components/Dd';
 export { default as Dfn } from './components/Dfn';
 export { default as Details } from './components/Details';
@@ -111,6 +112,7 @@ export { default as Textarea } from './components/Textarea';
 export { default as Tfoot } from './components/Tfoot';
 export { default as Th } from './components/Th';
 export { default as Thead } from './components/Thead';
+export { default as Tooltip } from './components/Tooltip';
 export { default as Tr } from './components/Tr';
 export { default as Ul } from './components/Ul';
 // 2. Molecules
