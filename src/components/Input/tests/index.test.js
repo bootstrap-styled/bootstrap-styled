@@ -66,12 +66,4 @@ describe('<Input />', () => {
     });
     expect(renderedComponent.find('input').props().placeholder).toEqual('Enter your input here');
   });
-  it('should render an indeterminate checkbox', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      placeholder: 'Enter your input here',
-      type: 'checkbox',
-      indeterminate: true,
-    });
-    expect(renderedComponent.find('input').hasClass('indeterminate')).toEqual(true);
-  });
 });
