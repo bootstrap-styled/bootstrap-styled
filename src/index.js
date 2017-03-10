@@ -49,8 +49,6 @@ export { default as BootstrapProvider } from './components/BootstrapProvider';
 export { default as Breadcrumb, BreadcrumbItem } from './components/Breadcrumb';
 export { default as Button, ButtonDropdown } from './components/Button';
 export { default as ButtonGroup, ButtonToolbar } from './components/ButtonGroup';
-export { default as ButtonCheckbox } from './components/ButtonCheckbox';
-export { default as ButtonRadio } from './components/ButtonRadio';
 export { default as Caption } from './components/Caption';
 export { default as Clearfix } from './components/Clearfix';
 export { default as Close } from './components/Close';
