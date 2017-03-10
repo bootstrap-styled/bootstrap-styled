@@ -343,9 +343,9 @@ export function makeTheme(userTheme = {}) {
   v['$btn-padding-y'] = u['$btn-padding-y'] || '.5rem';
   v['$btn-line-height'] = u['$btn-line-height'] || '1.25';
   v['$btn-font-weight'] = u['$btn-font-weight'] || v['$font-weight-normal'];
-  v['$btn-box-shadow'] = u['$btn-box-shadow'] || `inset 0 1px 0 rgba(${v['$white']},.15), 0 1px 1px ${Color(v['$black']).alpha(0.075).toString()}`;
-  v['$btn-focus-box-shadow'] = u['$btn-focus-box-shadow'] || `0 0 0 2px rgba(${v['$brand-primary']}, .25)`;
-  v['$btn-active-box-shadow'] = u['$btn-active-box-shadow'] || `inset 0 3px 5px rgba(${v['$black']},.125)`;
+  v['$btn-box-shadow'] = u['$btn-box-shadow'] || `inset 0 1px 0 ${Color(v['$white']).alpha(0.15).toString()}, 0 1px 1px ${Color(v['$black']).alpha(0.075).toString()}`;
+  v['$btn-focus-box-shadow'] = u['$btn-focus-box-shadow'] || `0 0 0 2px ${Color(v['$brand-primary']).alpha(0.25).toString()}`;
+  v['$btn-active-box-shadow'] = u['$btn-active-box-shadow'] || `inset 0 3px 5px ${Color(v['$black']).alpha(0.125).toString()}`;
 
   v['$btn-primary-color'] = u['$btn-primary-color'] || v['$white'];
   v['$btn-primary-bg'] = u['$btn-primary-bg'] || v['$brand-primary'];

@@ -5,10 +5,12 @@ import { hover, hoverFocus } from './hover';
 import { boxShadow } from './box-shadow';
 import { transition } from '../mixins/transition';
 import { tabFocus } from './tab-focus';
+import { ifElse } from './conditional';
+
 export const defaultProps = theme;
 
 
-export function buttonVariant(enableShadows = defaultProps['$enable-shadows'], buttonColor, background, border, btnActiveBoxShadow = defaultProps['$btn-active-box-shadow']) {
+export function buttonVariant(enableShadows = defaultProps['$enable-shadows'], buttonColor, background, border, btnBoxShadow = defaultProps['$btn-box-shadow'], btnActiveBoxShadow = defaultProps['$btn-active-box-shadow']) {
   const activeBackground = color(background).darken(0.1).hex();
   const activeBorder = color(border).darken(0.12).hex();
 
@@ -16,51 +18,37 @@ export function buttonVariant(enableShadows = defaultProps['$enable-shadows'], b
     color: ${buttonColor};
     background-color: ${background};
     border-color: ${border};
-    ${boxShadow(enableShadows, btnActiveBoxShadow)}
+    ${boxShadow(enableShadows, btnBoxShadow)}
   
     ${hover(`
       color: ${buttonColor};
       background-color: ${activeBackground};
-          border-color: ${activeBorder};
+      border-color: ${activeBorder};
     `)}
   
     &:focus,
     &.focus {
-      color: ${buttonColor};
-      background-color: ${activeBackground};
-          border-color: ${activeBorder};
+      ${ifElse(enableShadows,
+        `box-shadow: ${btnBoxShadow}, 0 0 0 2px ${color(border).alpha(0.5).toString()};`,
+        `box-shadow: 0 0 0 2px ${color(border).alpha(0.5).toString()});`
+      )}
     }
   
     &:active,
     &.active,
-    .open > &.dropdown-toggle {
+    .show > &.dropdown-toggle {
       color: ${buttonColor};
       background-color: ${activeBackground};
-          border-color: ${activeBorder};
+      border-color: ${activeBorder};
       /* Remove the gradient for the pressed/active state */
       background-image: none;
-    ${boxShadow(enableShadows, btnActiveBoxShadow)}
-  
-      &:hover,
-      &:focus,
-      &.focus {
-        color: ${buttonColor};
-        background-color: ${color(background).darken(0.17).toString()};
-            border-color: ${color(border).darken(0.25).toString()};
-      }
+      ${boxShadow(enableShadows, btnActiveBoxShadow)}
     }
   
     &.disabled,
     &:disabled {
-      &:focus,
-      &.focus {
-        background-color: ${background};
-            border-color: ${border};
-      }
-      ${hover(`
-        background-color: ${background};
-            border-color: ${border};
-      `)}
+      background-color: ${background};
+      border-color: ${border};
     }
   `;
 }
@@ -75,42 +63,26 @@ export function buttonOutlineVariant(buttonColor, buttonColorHover = '#fff') {
     ${hover(`
       color: ${buttonColorHover};
       background-color: ${buttonColor};
-          border-color: ${buttonColor};
+      border-color: ${buttonColor};
     `)}
   
     &:focus,
     &.focus {
-      color: ${buttonColorHover};
-      background-color: ${buttonColor};
-          border-color: ${buttonColor};
+      box-shadow: 0 0 0 2px rgba(${buttonColor}, .5);
+    }
+    
+    &.disabled,
+    &:disabled {
+      color: ${buttonColor};
+      background-color: transparent;
     }
   
     &:active,
     &.active,
-    & .open > &.dropdown-toggle {
+    & .show > &.dropdown-toggle {
       color: ${buttonColorHover};
       background-color: ${buttonColor};
-          border-color: ${buttonColor};
-  
-      &:hover,
-      &:focus,
-      &.focus {
-        color: ${buttonColorHover};
-        background-color: ${color(buttonColor).darken(0.17).toString()};
-            border-color: ${color(buttonColor).darken(0.25).toString()};
-      }
-    }
-  
-    &.disabled,
-    &:disabled {
-      &:focus,
-      &.focus {
-        border-color: ${color(buttonColor).lighten(0.2).toString()};
-      }
-      ${hover(`
-        border-color: ${color(buttonColor).lighten(0.2).toString()};
-      `)}
-    }
+      border-color: ${buttonColor};
   `;
 }
 
