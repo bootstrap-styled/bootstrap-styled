@@ -30,7 +30,7 @@ export function buttonVariant(enableShadows = defaultProps['$enable-shadows'], b
     &.focus {
       ${ifElse(enableShadows,
         `box-shadow: ${btnBoxShadow}, 0 0 0 2px ${color(border).alpha(0.5).toString()};`,
-        `box-shadow: 0 0 0 2px ${color(border).alpha(0.5).toString()});`
+        `box-shadow: 0 0 0 2px ${color(border).alpha(0.5).toString()};`
       )}
     }
   
