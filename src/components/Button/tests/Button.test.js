@@ -1,12 +1,10 @@
 /**
  * Testing our Button component
  */
-import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
-import Button from '../index';
+import BootstrapProvider from '../../BootstrapProvider';
+import Button from '../Button';
 
 const children = (<span>Test</span>);
 
@@ -20,13 +18,13 @@ const renderComponent = (props = {}) => shallow(
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
+  <BootstrapProvider>
     <Button
       className={props.className}
     >
       {props.children}
     </Button>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 

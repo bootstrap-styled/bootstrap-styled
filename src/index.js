@@ -47,7 +47,7 @@ export { default as B } from './components/B';
 export { default as Blockquote } from './components/Blockquote';
 export { default as BootstrapProvider } from './components/BootstrapProvider';
 export { default as Breadcrumb, BreadcrumbItem } from './components/Breadcrumb';
-export { default as Button } from './components/Button';
+export { default as Button, ButtonDropdown } from './components/Button';
 export { default as ButtonGroup, ButtonToolbar } from './components/ButtonGroup';
 export { default as ButtonCheckbox } from './components/ButtonCheckbox';
 export { default as ButtonRadio } from './components/ButtonRadio';
@@ -119,7 +119,7 @@ export { default as Ul } from './components/Ul';
 export { default as Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup } from './components/Cards';
 export { default as Accordion, AccordionGroup } from './components/Accordions';
 export { default as Form, FormGroup, FormText, FormFeedback } from './components/Forms';
-export { default as Dropdown } from './components/Dropdown';
+export { default as Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from './components/Dropdown';
 export { default as NavBar, NavBarToggler } from './components/NavBar';
 // 3. Organisms
 export { default as Container } from './components/Container';
