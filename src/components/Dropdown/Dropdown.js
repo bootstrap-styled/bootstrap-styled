@@ -1,119 +1,204 @@
 /**
- * DropDown
+ * Dropdown
  */
 
 import React, { PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import cn from 'classnames';
-import onClickOutside from 'react-onclickoutside';
 import bsTheme from 'theme';
-import Button from '../Button';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { navDivider } from '../../styled/mixins/nav-divider';
 import { hoverFocus } from '../../styled/mixins/hover';
 import { buttonGroup } from '../../styled/mixins/buttonGroup';
 import { ifThen } from '../../styled/mixins/conditional';
+import { mapToCssModules, omit } from '../../styled/utilities/tools';
+import DropdownMenu from './DropdownMenu';
+import TetherContent from './TetherContent';
 
 const defaultProps = {
-  toggler: {
-    component: Button,
-    text: 'Dropdown',
-  },
+  isOpen: false,
+  tag: 'div',
   theme: bsTheme,
 };
 
-class DropDown extends React.Component { // eslint-disable-line react/prefer-stateless-function
+const defaultTetherConfig = {
+  classPrefix: 'bs-tether',
+  classes: { element: 'dropdown', enabled: 'show' },
+  constraints: [
+    { to: 'scrollParent', attachment: 'together none' },
+    { to: 'window', attachment: 'together none' },
+  ],
+};
+
+class Dropdown extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    children: PropTypes.node.isRequired,
+    disabled: PropTypes.bool,
+    dropup: PropTypes.bool,
+    group: PropTypes.bool,
+    isOpen: PropTypes.bool,
+    size: PropTypes.string,
+    tag: PropTypes.string,
+    tether: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+    toggle: PropTypes.func,
+    children: PropTypes.node,
     className: PropTypes.string,
+    cssModule: PropTypes.object,
     theme: PropTypes.object,
-    'dropdown-split': PropTypes.bool,
-    toggler: PropTypes.shape({
-      component: PropTypes.component,
-      className: PropTypes.string,
-      value: PropTypes.string.isRequired,
-    }),
   };
 
-  state = {
-    dropped: false,
+  static childContextTypes = {
+    toggle: PropTypes.func.isRequired,
+    isOpen: PropTypes.bool.isRequired,
   };
 
-  handleClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (e.target.tagName === 'A') {
-      e.target.classList.toggle('show');
-    }
-
-    this.setState({
-      dropped: !this.state.dropped,
-    });
+  getChildContext() {
+    return {
+      toggle: this.props.toggle,
+      isOpen: this.props.isOpen,
+    };
   }
 
-  closeMenu = () => {
-    this.setState({
-      dropped: false,
+  componentDidMount() {
+    this.handleProps();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.isOpen !== prevProps.isOpen) {
+      this.handleProps();
+    }
+  }
+
+  componentWillUnmount() {
+    this.removeEvents();
+  }
+
+  getTetherTarget() {
+    const container = ReactDOM.findDOMNode(this); // eslint-disable-line react/no-find-dom-node
+
+    return container.querySelector('[data-toggle="dropdown"]');
+  }
+
+  getTetherConfig = (childProps) => {
+    const target = () => this.getTetherTarget();
+    let vElementAttach = 'top';
+    let hElementAttach = 'left';
+    let vTargetAttach = 'bottom';
+    let hTargetAttach = 'left';
+
+    if (childProps.right) {
+      hElementAttach = 'right';
+      hTargetAttach = 'right';
+    }
+
+    if (this.props.dropup) {
+      vElementAttach = 'bottom';
+      vTargetAttach = 'top';
+    }
+
+    return {
+      ...defaultTetherConfig,
+      attachment: vElementAttach + ' ' + hElementAttach,  // eslint-disable-line prefer-template
+      targetAttachment: vTargetAttach + ' ' + hTargetAttach,  // eslint-disable-line prefer-template
+      target,
+      ...this.props.tether,
+    };
+  }
+
+  addEvents = () => {
+    document.addEventListener('click', this.handleDocumentClick, true);
+  }
+
+  removeEvents = () => {
+    document.removeEventListener('click', this.handleDocumentClick, true);
+  }
+
+  handleDocumentClick = (e) => {
+    const container = ReactDOM.findDOMNode(this); // eslint-disable-line react/no-find-dom-node
+
+    if (container.contains(e.target) && container !== e.target) {
+      return;
+    }
+
+    this.toggle();
+  }
+
+  handleProps() {
+    if (this.props.tether) {
+      return;
+    }
+
+    if (this.props.isOpen) {
+      this.addEvents();
+    } else {
+      this.removeEvents();
+    }
+  }
+
+  toggle = (e) => {
+    if (this.props.disabled) {
+      return e && e.preventDefault();
+    }
+
+    return this.props.toggle();
+  }
+
+  renderChildren() {
+    const { tether, children, ...attrs } = this.props;
+    attrs.toggle = this.toggle;
+
+    return React.Children.map(React.Children.toArray(children), (child) => {
+      if (tether && child.type === DropdownMenu) {
+        const tetherConfig = this.getTetherConfig(child.props);
+        return (
+          <TetherContent {...attrs} tether={tetherConfig}>{child}</TetherContent>
+        );
+      }
+
+      return child;
     });
   }
 
   render() {
-    const { className, children, theme, toggler } = this.props; // eslint-disable-line no-unused-vars
-    const { component: Toggler, className: classNameToggler, value: valueToggler, ...restToggler } = toggler;
-    const { dropped } = this.state;
+    const {
+      className,
+      cssModule,
+      dropup,
+      group,
+      size,
+      tag: Tag,
+      isOpen,
+      theme,  // eslint-disable-line
+      ...attributes
+    } = omit(this.props, ['toggle', 'tether']);
 
-    const dropdown = (
-      <div className={className}>
-        <Toggler
-          className={cn(classNameToggler, 'dropdown-toggle')}
-          onClick={this.handleClick}
-          {...restToggler}
-        >
-          {valueToggler}
-        </Toggler>
-        <div className={cn({ 'dropdown-hide': !dropped })}>
-          {children}
-        </div>
-      </div>
+    const classes = mapToCssModules(cn(
+      className,
+      {
+        'btn-group': group,
+        [`btn-group-${size}`]: !!size,
+        dropdown: !group,
+        show: isOpen,
+        dropup,
+      }
+    ), cssModule);
+
+    return (
+      <Tag
+        {...attributes}
+        className={classes}
+      >
+        {this.renderChildren()}
+      </Tag>
     );
-
-    if (this.props['dropdown-split']) {
-      return (
-        <div className={cn(className, 'btn-group')}>
-          <Toggler className={classNameToggler} {...restToggler}>
-            {valueToggler}
-          </Toggler>
-          <Toggler
-            className={cn(classNameToggler, 'dropdown-toggle', 'dropdown-toggle-split')}
-            onClick={this.handleClick}
-            {...restToggler}
-          >
-            <span className="sr-only"></span>
-          </Toggler>
-          <div className={cn({ 'dropdown-hide': !dropped })}>
-            {children}
-          </div>
-        </div>
-      );
-    }
-    return dropdown;
   }
 }
 
 // eslint-disable-next-line no-class-assign
-DropDown = onClickOutside(DropDown, {
-  handleClickOutside(instance) {
-    return instance.closeMenu;
-  },
-});
-
-// eslint-disable-next-line no-class-assign
-DropDown = styled(DropDown)`
+Dropdown = styled(Dropdown)`
   ${(props) => `
-
     &.dropup,
     &.dropdown {
       position: relative;
@@ -158,7 +243,7 @@ DropDown = styled(DropDown)`
       top: 100%;
       left: 0;
       z-index: ${props.theme['$zindex-dropdown']};
-      display: block; /* none by default, but block on 'open' of the menu */
+      display: none; // none by default, but block on "open" of the menu
       float: left;
       min-width: ${props.theme['$dropdown-min-width']};
       padding: ${props.theme['$dropdown-padding-y']} 0;
@@ -304,5 +389,6 @@ DropDown = styled(DropDown)`
   `}
 `;
 
-DropDown.defaultProps = defaultProps;
-export default DropDown;
+Dropdown.defaultProps = defaultProps;
+
+export default Dropdown;
