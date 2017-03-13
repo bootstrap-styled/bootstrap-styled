@@ -9,9 +9,10 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import bsTheme from 'theme';
+import cn from 'classnames';
 
 import { nav } from '../../styled/mixins/nav';
-import { listUnstyled, listInline, listInlineItem } from '../../styled/mixins/lists';
+import { listUnstyled, listInline } from '../../styled/mixins/lists';
 import { navbar } from '../../styled/mixins/navbar';
 
 const defaultProps = { theme: bsTheme };
@@ -22,12 +23,20 @@ class Ul extends React.Component { // eslint-disable-line react/prefer-stateless
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
     theme: PropTypes.object,
+    inline: PropTypes.bool,
+    unstyled: PropTypes.bool,
   }
 
   render() {
-    const { theme, className, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { theme, className, inline, unstyled, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+
+    const classes = cn(
+      className,
+      inline ? 'list-inline' : false,
+      unstyled ? 'list-unstyled' : false,
+    );
     return (
-      <ul className={className} {...rest}>
+      <ul className={classes} {...rest}>
         {children}
       </ul>
     );
@@ -37,7 +46,6 @@ class Ul extends React.Component { // eslint-disable-line react/prefer-stateless
 // eslint-disable-next-line no-class-assign
 Ul = styled(Ul)`
   ${(props) => `
-  
     ${nav(
       props.theme['$enable-rounded'],
       props.theme['$enable-hover-media-query'],
@@ -85,19 +93,14 @@ Ul = styled(Ul)`
       props.theme['$navbar-inverse-toggler-bg'],
       props.theme['$navbar-inverse-disabled-color'],
     )}
-       
 
     /* Type Scss */
     &.list-unstyled {
       ${listUnstyled()}
     }
-    
+
     &.list-inline {
       ${listInline()}
-    }
-    
-    &.list-inline-item {
-      ${listInlineItem(props.theme['$list-inline-padding'])}
     }
     
     /* Reboot Scss */
