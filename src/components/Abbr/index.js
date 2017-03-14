@@ -5,7 +5,7 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-
+import cn from 'classnames';
 class Abbr extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
@@ -13,13 +13,19 @@ class Abbr extends React.Component { // eslint-disable-line react/prefer-statele
     children: PropTypes.node,
     title: PropTypes.string.isRequired,
     theme: PropTypes.object,
+    initialism: PropTypes.bool,
   }
 
   render() {
-    const { className, theme, title, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { className, initialism, theme, title, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const classes = cn(
+      className,
+      initialism ? 'initialism' : false,
+    );
+
     return (
       <abbr
-        className={className}
+        className={classes}
         title={title}
         {...rest}
       >

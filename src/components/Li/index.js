@@ -6,9 +6,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
-
-import { listUnstyled } from '../../styled/mixins/lists';
-import { media } from '../../styled/mixins/media';
+import { media as mediaCss } from '../../styled/mixins/media';
 
 const defaultProps = { theme: bsTheme };
 
@@ -20,6 +18,8 @@ class Li extends React.Component { // eslint-disable-line react/prefer-stateless
     className: PropTypes.string,
     separator: PropTypes.bool,
     active: PropTypes.bool,
+    inline: PropTypes.bool,
+    media: PropTypes.bool,
     'dropdown-item': PropTypes.bool,
     'dropdown-header': PropTypes.bool,
     'dropdown-footer': PropTypes.bool,
@@ -27,18 +27,33 @@ class Li extends React.Component { // eslint-disable-line react/prefer-stateless
   }
 
   render() {
-    const { className, theme, children, separator, 'dropdown-item': dropdownItem, active, disabled, 'dropdown-header': dropdownHeader, 'dropdown-footer': dropdownFooter, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      className,
+      theme,  // eslint-disable-line no-unused-vars
+      children,
+      inline,
+      separator,
+      media,
+      'dropdown-item': dropdownItem,
+      'dropdown-header': dropdownHeader,
+      'dropdown-footer': dropdownFooter,
+      ...attributes
+    } = this.props;
+
+    const classes = cn(
+      className,
+      separator ? 'dropdown-divider' : false,
+      dropdownItem ? 'dropdown-item' : false,
+      dropdownItem ? 'dropdown-item' : false,
+      dropdownHeader ? 'dropdown-header' : false,
+      dropdownFooter ? 'dropdown-footer' : false,
+      inline ? 'list-inline-item' : false,
+      media ? 'media' : false,
+    );
     return (
       <li
-        className={cn(className, {
-          'dropdown-divider': separator,
-          'dropdown-item': dropdownItem,
-          active,
-          disabled,
-          'dropdown-header': dropdownHeader,
-          'dropdown-footer': dropdownFooter,
-        })}
-        {...rest}
+        className={classes}
+        {...attributes}
       >
         {children}
       </li>
@@ -49,10 +64,6 @@ class Li extends React.Component { // eslint-disable-line react/prefer-stateless
 // eslint-disable-next-line no-class-assign
 Li = styled(Li)`
   ${(props) => `
-    /* Type Scss */
-    &.list-inline {
-      ${listUnstyled()};
-    }
     &.list-inline-item {
       display: inline-block;
     
@@ -61,7 +72,7 @@ Li = styled(Li)`
       }
     }
     
-    ${media()}
+    ${mediaCss()}
   `}
 `;
 
