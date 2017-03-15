@@ -49,7 +49,7 @@ describe('<Button />', () => {
     expect(renderedComponent.find('Button').length).toBe(1);
   });
   it('should have children with a theme', () => {
-    const renderedComponent = renderComponent({
+    const renderedComponent = renderComponentUsingTheme({
       children,
     });
     expect(renderedComponent.contains(children)).toEqual(true);

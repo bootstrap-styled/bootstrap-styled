@@ -1,14 +1,49 @@
-/**
- * H5 Component
- *
- *
- */
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from 'theme';
+import bsTheme from 'theme';
+import cn from 'classnames';
+import { mapToCssModules } from '../../styled/utilities/tools';
 import { typography } from '../../styled/mixins/typography';
-const defaultProps = { theme };
 
-const H5 = styled.h5`
+const defaultProps = { theme: bsTheme };
+
+class H5 extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static propTypes = {
+    className: PropTypes.string,
+    children: PropTypes.node,
+    theme: PropTypes.object,
+    color: PropTypes.string,
+    lead: PropTypes.bool,
+    cssModule: PropTypes.object,
+  }
+
+  render() {
+    const {
+      className,
+      color,
+      theme,  // eslint-disable-line no-unused-vars
+      children,
+      cssModule,
+      lead,
+      ...attributes
+    } = this.props;
+
+    const classes = mapToCssModules(cn(
+      className,
+      lead ? 'lead' : false,
+      color ? `text-${color}` : false,
+    ), cssModule);
+
+    return (
+      <h5 className={classes} {...attributes}>
+        {children}
+      </h5>
+    );
+  }
+}
+// eslint-disable-next-line no-class-assign
+H5 = styled(H5)`
   ${(props) => `
     font-size: ${props.theme['$font-size-h5']};
     ${typography(

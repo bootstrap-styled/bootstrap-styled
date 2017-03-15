@@ -1,19 +1,47 @@
-/**
- * H1 Component
- *
- *
- */
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from 'theme';
+import bsTheme from 'theme';
+import cn from 'classnames';
+import { mapToCssModules } from '../../styled/utilities/tools';
 import { typography } from '../../styled/mixins/typography';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
+class H1 extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
+  static propTypes = {
+    className: PropTypes.string,
+    children: PropTypes.node,
+    theme: PropTypes.object,
+    color: PropTypes.string,
+    cssModule: PropTypes.object,
+  }
+
+  render() {
+    const {
+      className,
+      color,
+      theme,  // eslint-disable-line no-unused-vars
+      children,
+      cssModule,
+      ...attributes
+    } = this.props;
+
+    const classes = mapToCssModules(cn(
+      className,
+      color ? `text-${color}` : false,
+    ), cssModule);
+
+    return (
+      <strong className={classes} {...attributes}>
+        {children}
+      </strong>
+    );
+  }
+}
 // eslint-disable-next-line no-class-assign
-const H1 = styled.h1`
+H1 = styled(H1)`
   ${(props) => `
-
     font-size: ${props.theme['$font-size-h1']};
     ${typography(
       props.theme['$headings-margin-bottom'],

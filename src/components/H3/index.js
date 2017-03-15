@@ -1,14 +1,48 @@
-/**
- * H3 Component
- *
- *
- */
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from 'theme';
+import bsTheme from 'theme';
+import cn from 'classnames';
+import { mapToCssModules } from '../../styled/utilities/tools';
 import { typography } from '../../styled/mixins/typography';
-const defaultProps = { theme };
 
-const H3 = styled.h3`
+const defaultProps = { theme: bsTheme };
+
+class H3 extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static propTypes = {
+    className: PropTypes.string,
+    children: PropTypes.node,
+    theme: PropTypes.object,
+    color: PropTypes.string,
+    lead: PropTypes.bool,
+    cssModule: PropTypes.object,
+  }
+
+  render() {
+    const { className,
+      color,
+      theme,  // eslint-disable-line no-unused-vars
+      children,
+      cssModule,
+      lead,
+      ...attributes
+    } = this.props;
+
+    const classes = mapToCssModules(cn(
+      className,
+      lead ? 'lead' : false,
+      color ? `text-${color}` : false,
+    ), cssModule);
+
+    return (
+      <h3 className={classes} {...attributes}>
+        {children}
+      </h3>
+    );
+  }
+}
+// eslint-disable-next-line no-class-assign
+H3 = styled(H3)`
   ${(props) => `
     font-size: ${props.theme['$font-size-h3']};
     ${typography(

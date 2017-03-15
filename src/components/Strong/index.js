@@ -5,33 +5,42 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-
 import bsTheme from 'theme';
+import cn from 'classnames';
+import { mapToCssModules } from '../../styled/utilities/tools';
 
-const defaultProps = {
-  theme: bsTheme,
-};
+const defaultProps = { theme: bsTheme };
 
 class Strong extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
     theme: PropTypes.object,
+    color: PropTypes.string,
+    cssModule: PropTypes.object,
   }
 
   render() {
-    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { className,
+      color,
+      theme,  // eslint-disable-line no-unused-vars
+      children,
+      cssModule,
+      ...attributes
+    } = this.props;
+
+    const classes = mapToCssModules(cn(
+      className,
+      color ? `text-${color}` : false,
+    ), cssModule);
+
     return (
-      <strong
-        className={className}
-        {...rest}
-      >
+      <strong className={classes} {...attributes}>
         {children}
       </strong>
     );
   }
-
 }
 
 // eslint-disable-next-line no-class-assign

@@ -64,26 +64,12 @@ describe('<Li />', () => {
     expect(renderedComponent.find('Li').length).toBe(1);
     expect(renderedComponent.find('li').length).toBe(1);
   });
-  it('should have a class .disabled with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-      disabled: true,
-    });
-    expect(renderedComponent.find('li').hasClass('disabled')).toBe(true);
-  });
   it('should have a class .dropdown-divider with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
       separator: true,
     });
     expect(renderedComponent.find('li').hasClass('dropdown-divider')).toBe(true);
-  });
-  it('should have a class .active with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-      active: true,
-    });
-    expect(renderedComponent.find('li').hasClass('active')).toBe(true);
   });
   it('should have a class .dropdown-item with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

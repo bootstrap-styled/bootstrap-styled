@@ -6,7 +6,8 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import bsTheme from 'theme';
-
+import cn from 'classnames';
+import { mapToCssModules } from '../../styled/utilities/tools';
 const defaultProps = { theme: bsTheme };
 
 class Small extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -15,18 +16,30 @@ class Small extends React.Component { // eslint-disable-line react/prefer-statel
     className: PropTypes.string,
     children: PropTypes.node,
     theme: PropTypes.object,
+    color: PropTypes.string,
+    cssModule: PropTypes.object,
   }
 
   render() {
-    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { className,
+      color,
+      theme,  // eslint-disable-line no-unused-vars
+      children,
+      cssModule,
+      ...attributes
+    } = this.props;
+
+    const classes = mapToCssModules(cn(
+      className,
+      color ? `text-${color}` : false,
+    ), cssModule);
 
     return (
-      <small className={className} {...rest}>
+      <small className={classes} {...attributes}>
         {children}
       </small>
     );
   }
-
 }
 
 // eslint-disable-next-line no-class-assign
