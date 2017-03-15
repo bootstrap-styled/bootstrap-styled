@@ -36,7 +36,7 @@ describe('<H6 />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('h6').length).toBe(1);
+    expect(renderedComponent.find('H6').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -48,7 +48,7 @@ describe('<H6 />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('h6').length).toBe(1);
+    expect(renderedComponent.find('H6').length).toBe(1);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

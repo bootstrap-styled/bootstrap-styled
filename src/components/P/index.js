@@ -1,10 +1,48 @@
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import theme from 'theme';
+import bsTheme from 'theme';
+import cn from 'classnames';
+import { mapToCssModules } from '../../styled/utilities/tools';
 import { typography } from '../../styled/mixins/typography';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
-const P = styled.p`
+class P extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static propTypes = {
+    className: PropTypes.string,
+    children: PropTypes.node,
+    theme: PropTypes.object,
+    color: PropTypes.string,
+    lead: PropTypes.bool,
+    cssModule: PropTypes.object,
+  }
+
+  render() {
+    const { className,
+      color,
+      theme,  // eslint-disable-line no-unused-vars
+      children,
+      cssModule,
+      lead,
+      ...attributes
+    } = this.props;
+
+    const classes = mapToCssModules(cn(
+      className,
+      lead ? 'lead' : false,
+      color ? `text-${color}` : false,
+    ), cssModule);
+
+    return (
+      <p className={classes} {...attributes}>
+        {children}
+      </p>
+    );
+  }
+}
+// eslint-disable-next-line no-class-assign
+P = styled(P)`
   ${(props) => `
     /* Type Scss */
 

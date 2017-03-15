@@ -36,7 +36,7 @@ describe('<P />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('p').length).toBe(1);
+    expect(renderedComponent.find('P').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -48,7 +48,7 @@ describe('<P />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('p').length).toBe(1);
+    expect(renderedComponent.find('P').length).toBe(1);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

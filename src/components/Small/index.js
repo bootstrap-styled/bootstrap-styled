@@ -31,7 +31,7 @@ class Small extends React.Component { // eslint-disable-line react/prefer-statel
 
     const classes = mapToCssModules(cn(
       className,
-      `text-${color}`,
+      color ? `text-${color}` : false,
     ), cssModule);
 
     return (
@@ -40,7 +40,6 @@ class Small extends React.Component { // eslint-disable-line react/prefer-statel
       </small>
     );
   }
-
 }
 
 // eslint-disable-next-line no-class-assign

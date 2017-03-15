@@ -1,14 +1,49 @@
-/**
- * H4 Component
- *
- *
- */
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import bsTheme from 'theme';
+import cn from 'classnames';
+import { mapToCssModules } from '../../styled/utilities/tools';
 import { typography } from '../../styled/mixins/typography';
+
 const defaultProps = { theme: bsTheme };
 
-const H4 = styled.h4`
+class H4 extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static propTypes = {
+    className: PropTypes.string,
+    children: PropTypes.node,
+    theme: PropTypes.object,
+    color: PropTypes.string,
+    lead: PropTypes.bool,
+    cssModule: PropTypes.object,
+  }
+
+  render() {
+    const {
+      className,
+      color,
+      theme,  // eslint-disable-line no-unused-vars
+      children,
+      cssModule,
+      lead,
+      ...attributes
+    } = this.props;
+
+    const classes = mapToCssModules(cn(
+      className,
+      lead ? 'lead' : false,
+      color ? `text-${color}` : false,
+    ), cssModule);
+
+    return (
+      <h4 className={classes} {...attributes}>
+        {children}
+      </h4>
+    );
+  }
+}
+// eslint-disable-next-line no-class-assign
+H4 = styled(H4)`
   ${(props) => `
     font-size: ${props.theme['$font-size-h4']};
     ${typography(
