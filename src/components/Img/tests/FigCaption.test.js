@@ -5,7 +5,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
 import theme from 'theme';
-import FigCaption from '../index';
+import FigCaption from '../FigCaption';
 
 const children = 'Test';
 

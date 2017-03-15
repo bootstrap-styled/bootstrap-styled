@@ -7,7 +7,7 @@ import { shallow, mount } from 'enzyme';
 import React from 'react';
 import theme from 'theme';
 
-import Figure from '../index';
+import Figure from '../Figure';
 
 const children = (<h1>Test</h1>);
 
