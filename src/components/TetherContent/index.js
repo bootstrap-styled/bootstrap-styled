@@ -17,8 +17,8 @@ class TetherContent extends React.Component {// eslint-disable-line react/prefer
   static propTypes = {
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
+    isOpen: PropTypes.bool,
     disabled: PropTypes.bool,
-    isOpen: PropTypes.bool.isRequired,
     toggle: PropTypes.func.isRequired,
     tether: PropTypes.object.isRequired,
     tetherRef: PropTypes.func,

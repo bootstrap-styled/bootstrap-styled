@@ -18,7 +18,7 @@ const defaultProps = {
   placement: 'bottom',
   delay: DEFAULT_DELAYS,
   autohide: true,
-  toggle() {},
+  toggle: () => {},
 };
 
 const defaultTetherConfig = {
@@ -31,6 +31,24 @@ const defaultTetherConfig = {
     { to: 'scrollParent', attachment: 'together none' },
     { to: 'window', attachment: 'together none' },
   ],
+};
+// propTypes need to be excluded of the tooltip class
+// issue on : https://github.com/yannickcr/eslint-plugin-react/issues/203
+const propTypes = {
+  placement: React.PropTypes.oneOf(tetherAttachements),
+  target: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool,
+  disabled: PropTypes.bool,
+  tether: PropTypes.object,
+  tetherRef: PropTypes.func,
+  className: PropTypes.string,
+  cssModule: PropTypes.object,
+  toggle: PropTypes.func,
+  autohide: PropTypes.bool,
+  delay: PropTypes.oneOfType([
+    PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
+    PropTypes.number,
+  ]),
 };
 
 class Tooltip extends React.Component {
@@ -116,14 +134,14 @@ class Tooltip extends React.Component {
     };
   }
 
-  show() {
+  show = () => {
     if (!this.props.isOpen) {
       this.clearShowTimeout();
       this.toggle();
     }
   }
 
-  hide() {
+  hide = () => {
     if (this.props.isOpen) {
       this.clearHideTimeout();
       this.toggle();
@@ -133,6 +151,9 @@ class Tooltip extends React.Component {
   clearShowTimeout = () => {
     clearTimeout(this.showTimeout);
     this.showTimeout = undefined;
+    // this.showTimeout = 0;
+    // console.log('##showTimeout ', typeof (this.showTimeout));
+    // console.log('##clear ', clearTimeout(this.showTimeout));
   }
 
   clearHideTimeout = () => {
@@ -183,11 +204,16 @@ class Tooltip extends React.Component {
       return null;
     }
 
-    const attributes = omit(this.props, Object.keys(this.propTypes));
+    const attributes = omit(this.props, Object.keys(propTypes));
+    // console.log('####thisProps ', this.props);
+    // console.log('####propTypes ', propTypes);
+    // console.log('####propTypes1 ', this.propTypes);
+    // console.log('####props.propTypes ', this.props.propTypes);
+    // console.log('####this ', this);
+
     const classes = mapToCssModules(cn(
       'tooltip-inner',
-      this.props.className,
-      this.props.isOpen,
+      this.props.className
     ), this.props.cssModule);
 
     const tetherConfig = this.getTetherConfig();
@@ -218,118 +244,170 @@ class Tooltip extends React.Component {
   }
 }
 
-
 // eslint-disable-next-line no-class-assign
 Tooltip = styled(Tooltip)`
-  &.tooltip {
-    position: absolute;
-    z-index: 1070;
-    display: block;
-    font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    letter-spacing: normal;
-    line-break: auto;
-    line-height: 1.5;
-    text-align: left;
-    text-align: start;
-    text-decoration: none;
-    text-shadow: none;
-    text-transform: none;
-    white-space: normal;
-    word-break: normal;
-    word-spacing: normal;
-    font-size: .875rem;
-    word-wrap: break-word;
-    opacity: 0
-  }
-  
-  &.tooltip.show {
-    opacity: .9
-  }
-  
-  &.tooltip.bs-tether-element-attached-bottom,
-  &.tooltip.tooltip-top {
-    padding: 5px 0;
-    margin-top: -3px
-  }
-  
-  &.tooltip.bs-tether-element-attached-bottom .tooltip-inner:before,
-  &.tooltip.tooltip-top .tooltip-inner:before {
-    bottom: 0;
-    left: 50%;
-    margin-left: -5px;
-    content: "";
-    border-width: 5px 5px 0;
-    border-top-color: #000
-  }
-  
-  &.tooltip.bs-tether-element-attached-left,
-  &.tooltip.tooltip-right {
-    padding: 0 5px;
-    margin-left: 3px
-  }
-  
-  &.tooltip.bs-tether-element-attached-left .tooltip-inner:before,
-  &.tooltip.tooltip-right .tooltip-inner:before {
-    top: 50%;
-    left: 0;
-    margin-top: -5px;
-    content: "";
-    border-width: 5px 5px 5px 0;
-    border-right-color: #000
-  }
-  
-  &.tooltip.bs-tether-element-attached-top,
-  &.tooltip.tooltip-bottom {
-    padding: 5px 0;
-    margin-top: 3px
-  }
-  
-  &.tooltip.bs-tether-element-attached-top .tooltip-inner:before,
-  &.tooltip.tooltip-bottom .tooltip-inner:before {
-    top: 0;
-    left: 50%;
-    margin-left: -5px;
-    content: "";
-    border-width: 0 5px 5px;
-    border-bottom-color: #000
-  }
-  
-  &.tooltip.bs-tether-element-attached-right,
-  &.tooltip.tooltip-left {
-    padding: 0 5px;
-    margin-left: -3px
-  }
-  
-  &.tooltip.bs-tether-element-attached-right .tooltip-inner:before,
-  &.tooltip.tooltip-left .tooltip-inner:before {
-    top: 50%;
-    right: 0;
-    margin-top: -5px;
-    content: "";
-    border-width: 5px 0 5px 5px;
-    border-left-color: #000
-  }
-  
-  &.tooltip-inner {
-    max-width: 200px;
-    padding: 3px 8px;
-    color: #fff;
-    text-align: center;
-    background-color: #000;
-    border-radius: .25rem
-  }
-  
-  &.tooltip-inner:before {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid
-  }
+  ${(props) => `
+    &.tooltip {
+      position: absolute;
+      z-index: 1070;
+      display: block;
+      font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      letter-spacing: normal;
+      line-break: auto;
+      line-height: 1.5;
+      text-align: left;
+      text-align: start;
+      text-decoration: none;
+      text-shadow: none;
+      text-transform: none;
+      white-space: normal;
+      word-break: normal;
+      word-spacing: normal;
+      font-size: .875rem;
+      word-wrap: break-word;
+      opacity: 0
+    }
+    
+    &.tooltip.show {
+      opacity: ${props.theme['$tooltip-opacity']}
+    }
+    
+    &.tooltip.bs-tether-element-attached-bottom,
+    &.tooltip.tooltip-top {
+      padding: 5px 0;
+      margin-top: -3px
+    }
+    
+    &.tooltip.bs-tether-element-attached-bottom .tooltip-inner:before,
+    &.tooltip.tooltip-top .tooltip-inner:before {
+      bottom: 0;
+      left: 50%;
+      margin-left: -5px;
+      content: "";
+      border-width: 5px 5px 0;
+      border-top-color: #000
+    }
+    
+    &.tooltip.bs-tether-element-attached-left,
+    &.tooltip.tooltip-right {
+      padding: 0 5px;
+      margin-left: 3px
+    }
+    
+    &.tooltip.bs-tether-element-attached-left .tooltip-inner:before,
+    &.tooltip.tooltip-right .tooltip-inner:before {
+      top: 50%;
+      left: 0;
+      margin-top: -5px;
+      content: "";
+      border-width: 5px 5px 5px 0;
+      border-right-color: #000
+    }
+    
+    &.tooltip.bs-tether-element-attached-top,
+    &.tooltip.tooltip-bottom {
+      padding: 5px 0;
+      margin-top: 3px
+    }
+    
+    &.tooltip.bs-tether-element-attached-top .tooltip-inner:before,
+    &.tooltip.tooltip-bottom .tooltip-inner:before {
+      top: 0;
+      left: 50%;
+      margin-left: -5px;
+      content: "";
+      border-width: 0 5px 5px;
+      border-bottom-color: #000
+    }
+    
+    &.tooltip.bs-tether-element-attached-right,
+    &.tooltip.tooltip-left {
+      padding: 0 5px;
+      margin-left: -3px
+    }
+    
+    &.tooltip.bs-tether-element-attached-right .tooltip-inner:before,
+    &.tooltip.tooltip-left .tooltip-inner:before {
+      top: 50%;
+      right: 0;
+      margin-top: -5px;
+      content: "";
+      border-width: 5px 0 5px 5px;
+      border-left-color: #000
+    }
+    
+    &.tooltip-inner {
+      max-width: ${props.theme['$tooltip-max-width']};
+      padding: ${props.theme['$tooltip-padding-y']} ${props.theme['$tooltip-padding-x']};
+      color: ${props.theme['$tooltip-color']};
+      text-align: center;
+      background-color: ${props.theme['$tooltip-bg']};
+      border-radius: .25rem
+    }
+    
+    &.tooltip-inner:before {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-color: transparent;
+      border-style: solid
+    }
+  `}
 `;
 
 Tooltip.defaultProps = defaultProps;
 
 export default Tooltip;
+
+//
+//
+//
+// render() {
+//   if (!this.props.isOpen) {
+//     return null;
+//   }
+//
+//
+//   const {
+//     className,
+//     cssModule,
+//     tag: Tag,
+//     theme,  // eslint-disable-line
+//     ...attributes
+//   } = omit(this.props, Object.keys(this.props));
+//
+//   const classes = mapToCssModules(cn(
+//     'tooltip-inner',
+//     className
+//   ), cssModule);
+//
+//   const tetherConfig = this.getTetherConfig();
+//
+//   const optional = {};
+//   if (this.state.focus === true) {
+//     optional.onFocus = this.handleFocus;
+//   }
+//
+//
+//   return (
+//     <TetherContent
+//       className="tooltip"
+//       tether={tetherConfig}
+//       tetherRef={this.props.tetherRef}
+//       isOpen={this.props.isOpen}
+//       toggle={this.toggle}
+//     >
+//       <Tag
+//         {...attributes}
+//         className={classes}
+//         onMouseOver={this.onMouseOverTooltipContent}
+//         onMouseLeave={this.onMouseLeaveTooltipContent}
+//         onFocus={this.handleFocus}
+//         {...optional}
+//       />
+//     </TetherContent>
+//   );
+// }
+// }
