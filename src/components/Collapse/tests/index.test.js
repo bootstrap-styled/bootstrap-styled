@@ -25,7 +25,7 @@ describe('<Collapse />', () => {
   it('should render a <div> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      isOpened: true,
+      isOpen: true,
       theme: makeTheme({
         '$enable-transitions': false,
       }),
@@ -35,7 +35,7 @@ describe('<Collapse />', () => {
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      isOpened: true,
+      isOpen: true,
       theme: makeTheme({
         '$enable-transitions': false,
       }),
@@ -45,7 +45,7 @@ describe('<Collapse />', () => {
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      isOpened: false,
+      isOpen: false,
       theme: makeTheme({
         '$enable-transitions': true,
       }),
