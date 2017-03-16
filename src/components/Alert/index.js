@@ -41,6 +41,7 @@ class Alert extends React.Component { // eslint-disable-line react/prefer-statel
     transitionAppearTimeout: PropTypes.number,
     transitionEnterTimeout: PropTypes.number,
     transitionLeaveTimeout: PropTypes.number,
+    theme: PropTypes.object,
   }
 
   state= {
@@ -50,7 +51,6 @@ class Alert extends React.Component { // eslint-disable-line react/prefer-statel
   onDismiss = () => {
     this.setState({ visible: false });
   }
-
 
   render() {
     const {
