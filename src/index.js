@@ -60,6 +60,7 @@ export { default as Dfn } from './components/Dfn';
 export { default as Details } from './components/Details';
 export { default as Dl } from './components/Dl';
 export { default as Dt } from './components/Dt';
+export { default as Fade } from './components/Fade';
 export { default as Fieldset } from './components/Fieldset';
 export { default as Footer } from './components/Footer';
 export { default as H1 } from './components/H1';
