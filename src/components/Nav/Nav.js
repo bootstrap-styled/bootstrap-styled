@@ -25,7 +25,9 @@ class Nav extends React.Component { // eslint-disable-line react/prefer-stateles
     cssModule: PropTypes.object,
     theme: PropTypes.object,
     inline: PropTypes.bool,
-    disabled: PropTypes.bool,
+    vertical: PropTypes.bool,
+    justified: PropTypes.bool,
+    fill: PropTypes.bool,
     tabs: PropTypes.bool,
     pills: PropTypes.bool,
     stacked: PropTypes.bool,
@@ -38,8 +40,11 @@ class Nav extends React.Component { // eslint-disable-line react/prefer-stateles
       cssModule,
       tabs,
       pills,
+      fill,
       inline,
       stacked,
+      vertical,
+      justified,
       navbar,
       tag: Tag,
       theme,  // eslint-disable-line
@@ -52,9 +57,11 @@ class Nav extends React.Component { // eslint-disable-line react/prefer-stateles
       {
         'nav-tabs': tabs,
         'nav-pills': pills,
+        'nav-fill': fill,
         'nav-inline': inline,
         'nav-stacked': stacked,
-        disabled: attributes.disabled,
+        'nav-justified': justified,
+        'flex-column': vertical,
       }
     ), cssModule);
 
