@@ -32,7 +32,6 @@ class Accordion extends React.Component { // eslint-disable-line react/prefer-st
   render() {
     // extract keys for div
     const { className, name, component: Component, children, heading, ...rest } = this.props; // eslint-disable-line no-unused-vars
-    const { fixedHeight, springConfig, keepCollapsedContent, onRest, onHeightReady, ...restAfterCollapse } = rest; // eslint-disable-line no-unused-vars
     const { activeAccordionName, onClick, 'heading-component': HeadingComponent } = this.context.accordionGroup;
     const optional = {
       isOpened: false,
@@ -49,19 +48,9 @@ class Accordion extends React.Component { // eslint-disable-line react/prefer-st
       <div className="card-header" onClick={optional.onClick}><H5>{heading}</H5></div> // eslint-disable-line jsx-a11y/no-static-element-interactions
     );
     return (
-      <Component
-        className={className}
-        {...restAfterCollapse}
-      >
+      <Component className={className} {...rest}>
         {accordionHeading}
-        <Collapse
-          isOpened={optional.isOpened}
-          fixedHeight={fixedHeight}
-          springConfig={springConfig}
-          keepCollapsedContent={keepCollapsedContent}
-          onRest={onRest}
-          onHeightReady={onHeightReady}
-        >
+        <Collapse isOpen={optional.isOpened}>
           {children}
         </Collapse>
       </Component>
