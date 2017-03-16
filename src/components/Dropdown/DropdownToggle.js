@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { mapToCssModules } from '../../styled/utilities/tools';
 import Button from '../Button';
-
+import A from '../A';
 const defaultProps = {
   'data-toggle': 'dropdown',
   'aria-haspopup': true,
@@ -64,7 +64,7 @@ class DropdownToggle extends React.Component {
     let Tag;
 
     if (nav && !tag) {
-      Tag = 'a';
+      Tag = A;
       props.href = '#';
     } else if (!tag) {
       Tag = Button;
