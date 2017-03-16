@@ -3,13 +3,13 @@
  */
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import InputGroup from '../InputGroup';
 import BootstrapProvider from '../../BootstrapProvider';
+import InputGroup from '../InputGroup';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <InputGroup>
+  <InputGroup {...props}>
     {props.children}
   </InputGroup>
 );
@@ -17,7 +17,7 @@ const renderComponent = (props = {}) => shallow(
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <InputGroup>
+    <InputGroup {...props}>
       {props.children}
     </InputGroup>
   </BootstrapProvider>
@@ -42,6 +42,13 @@ describe('<InputGroup />', () => {
       children,
     });
     expect(renderedComponent.find('InputGroup').length).toBe(1);
+  });
+  it('should have a class input-group-size-test with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      size: 'size-test',
+    });
+    expect(renderedComponent.find('InputGroup').hasClass('input-group-size-test'));
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

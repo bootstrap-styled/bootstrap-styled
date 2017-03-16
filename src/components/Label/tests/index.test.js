@@ -1,33 +1,26 @@
 /**
  * Testing our Label component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import Label from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Label
-    className={props.className}
-  >
+  <Label {...props}>
     {props.children}
   </Label>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Label
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <Label {...props}>
       {props.children}
     </Label>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 
@@ -49,6 +42,45 @@ describe('<Label />', () => {
       children,
     });
     expect(renderedComponent.find('label').length).toBe(1);
+  });
+  it('should have a class sr-only with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      hidden: true,
+    });
+    expect(renderedComponent.find('Label').hasClass('sr-only'));
+  });
+  it('should have a class form-check-inline with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      check: true,
+      inline: true,
+    });
+    expect(renderedComponent.find('Label').hasClass('form-check-inline'));
+  });
+  it('should have a class form-check-label with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      check: true,
+      inline: false,
+    });
+    expect(renderedComponent.find('Label').hasClass('form-check-label'));
+  });
+  it('should have a class col-form-label-test-size` with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      size: 'test-size',
+    });
+    expect(renderedComponent.find('Label').hasClass('col-form-label-test-size'));
+  });
+  it('should have an attribute disabled with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      check: true,
+      inline: true,
+      disabled: true,
+    });
+    expect(renderedComponent.find('Label').props().disabled).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

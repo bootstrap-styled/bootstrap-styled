@@ -94,12 +94,12 @@ describe('bootstrap button mixins', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(956134276);
+    expect(fromJS({ css }).hashCode()).toEqual(1026628703);
   });
   it('button should return a button utility by default', () => {
     const css = button();
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(956134276);
+    expect(fromJS({ css }).hashCode()).toEqual(1026628703);
   });
 });

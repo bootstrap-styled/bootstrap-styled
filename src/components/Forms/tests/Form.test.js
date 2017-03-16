@@ -1,36 +1,28 @@
-/**
- * Testing our Jumbotron component
- */
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
-import Jumbotron from '../index';
+import Form from '../Form';
 
-const children = <h1> test </h1>;
+const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Jumbotron {...props}>
+  <Form {...props}>
     {children}
-  </Jumbotron>
+  </Form>
 );
-
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Jumbotron {...props}>
+    <Form {...props}>
       {children}
-    </Jumbotron>
+    </Form>
   </BootstrapProvider>
 );
 
-
-describe('<Jumbotron />', () => {
-  it('should render an <Jumbotron> tag without a theme', () => {
-    const renderedComponent = renderComponent({
-      children,
-    });
-    expect(renderedComponent.find('Jumbotron').length).toBe(1);
+describe('<Form />', () => {
+  it('should render an <Form> tag without a theme', () => {
+    const renderedComponent = renderComponent();
+    expect(renderedComponent.find('Form').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -38,18 +30,15 @@ describe('<Jumbotron />', () => {
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
-  it('should render a <Jumbotron> tag with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-    });
-    expect(renderedComponent.find('Jumbotron').length).toBe(1);
+  it('should render an <Form> tag with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme();
+    expect(renderedComponent.find('Form').length).toBe(1);
   });
-  it('should have a class jumbtron-fluid', () => {
+  it('should have a classname form-inline', () => {
     const renderedComponent = renderComponentUsingTheme({
-      children,
-      fluid: true,
+      inline: true,
     });
-    expect(renderedComponent.find(Jumbotron).props().fluid).toEqual(true);
+    expect(renderedComponent.find('form').hasClass('form-inline'));
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

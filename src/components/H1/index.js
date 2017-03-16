@@ -12,6 +12,7 @@ class H1 extends React.Component { // eslint-disable-line react/prefer-stateless
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
+    lead: PropTypes.node,
     theme: PropTypes.object,
     color: PropTypes.string,
     cssModule: PropTypes.object,
@@ -24,18 +25,20 @@ class H1 extends React.Component { // eslint-disable-line react/prefer-stateless
       theme,  // eslint-disable-line no-unused-vars
       children,
       cssModule,
+      lead,
       ...attributes
     } = this.props;
 
     const classes = mapToCssModules(cn(
       className,
+      lead ? 'lead' : false,
       color ? `text-${color}` : false,
     ), cssModule);
 
     return (
-      <strong className={classes} {...attributes}>
+      <h1 className={classes} {...attributes}>
         {children}
-      </strong>
+      </h1>
     );
   }
 }

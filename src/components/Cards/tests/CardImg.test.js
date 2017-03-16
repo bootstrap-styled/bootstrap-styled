@@ -1,24 +1,21 @@
 /**
  * Testing our CardImg component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import CardImg from '../CardImg';
 
 
-const renderComponent = () => shallow(
-  <CardImg />
+const renderComponent = (props) => shallow(
+  <CardImg {...props} />
 );
 
 
-const renderComponentUsingTheme = () => mount(
-  <ThemeProvider theme={theme}>
-    <CardImg />
-  </ThemeProvider>
+const renderComponentUsingTheme = (props) => mount(
+  <BootstrapProvider>
+    <CardImg {...props} />
+  </BootstrapProvider>
 );
 
 
@@ -27,11 +24,22 @@ describe('<CardImg />', () => {
     const renderedComponent = renderComponent();
     expect(renderedComponent.find('img').length).toBe(1);
   });
-
   it('should render an <CardImg> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme();
     expect(renderedComponent.find('CardImg').length).toBe(1);
     expect(renderedComponent.find('img').length).toBe(1);
+  });
+  it('should have an attribute top without a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      top: true,
+    });
+    expect(renderedComponent.find('CardImg').props().top).toBe(true);
+  });
+  it('should have an attribute bottom without a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      bottom: true,
+    });
+    expect(renderedComponent.find('CardImg').props().bottom).toBe(true);
   });
   it('should have a class .card-img by default with a theme', () => {
     const renderedComponent = renderComponentUsingTheme();

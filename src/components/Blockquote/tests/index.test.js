@@ -1,32 +1,26 @@
 /**
  * Testing our Blockquote component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
+import BootstrapProvider from '../../BootstrapProvider';
 import Blockquote from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Blockquote
-    className={props.className}
-  >
+  <Blockquote {...props}>
     {props.children}
   </Blockquote>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Blockquote
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <Blockquote {...props}>
       {props.children}
     </Blockquote>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 
@@ -36,6 +30,12 @@ describe('<Blockquote />', () => {
       children,
     });
     expect(renderedComponent.find('Blockquote').length).toBe(1);
+  });
+  it('should have an attribute reverse without a theme', () => {
+    const renderedComponent = renderComponent({
+      reverse: true,
+    });
+    expect(renderedComponent.find('Blockquote').props().reverse).toBe(true);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -49,6 +49,12 @@ describe('<Blockquote />', () => {
     });
     expect(renderedComponent.find('blockquote').length).toBe(1);
     expect(renderedComponent.find('Blockquote').length).toBe(1);
+  });
+  it('should have an attribute reverse with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      reverse: true,
+    });
+    expect(renderedComponent.find('Blockquote').props().reverse).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

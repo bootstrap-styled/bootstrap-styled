@@ -1,33 +1,27 @@
 /**
  * Testing our H6 component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import H6 from '../index';
 
 const children = <p>Test</p>;
 
 const renderComponent = (props = {}) => shallow(
-  <H6
-    className={props.className}
-  >
+  <H6 {...props}>
     {props.children}
   </H6>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <H6
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <H6 {...props}>
+
       {props.children}
     </H6>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 
@@ -44,11 +38,24 @@ describe('<H6 />', () => {
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
-  it('should render a <h6> tag with a theme', () => {
+  it('should render a <H6> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
     expect(renderedComponent.find('H6').length).toBe(1);
+  });
+  it('should have an attribute color', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      color: 'test-color',
+    });
+    expect(renderedComponent.find('H6').props().color).toBe('test-color');
+  });
+  it('should have a classname lead', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      lead: true,
+    });
+    expect(renderedComponent.find('h6').hasClass('lead'));
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

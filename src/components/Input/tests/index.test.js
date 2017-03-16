@@ -1,34 +1,22 @@
 /**
  * Testing our Input component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
+import BootstrapProvider from '../../BootstrapProvider';
 
 import Input from '../index';
 
 const renderComponent = (props = {}) => shallow(
-  <Input
-    type={props.type}
-    placeholder={props.placeholder}
-    className={props.className}
-    indeterminate={props.indeterminate}
-  />
+  <Input {...props} />
 
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Input
-      type={props.type}
-      placeholder={props.placeholder}
-      className={props.className}
-      indeterminate={props.indeterminate}
-    />
-  </ThemeProvider>
+  <BootstrapProvider>
+    <Input {...props} />
+  </BootstrapProvider>
 );
 
 
@@ -65,5 +53,35 @@ describe('<Input />', () => {
       placeholder: 'Enter your input here',
     });
     expect(renderedComponent.find('input').props().placeholder).toEqual('Enter your input here');
+  });
+  it('should have a class form-control-static if static: true with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      static: true,
+    });
+    expect(renderedComponent.find('Input').hasClass('form-control-static'));
+  });
+  it('should have a class form-control-file if type: file with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      type: 'file',
+    });
+    expect(renderedComponent.find('Input').hasClass('form-control-file'));
+  });
+  it('should have a class form-check-input if addon: true with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      addon: false,
+    });
+    expect(renderedComponent.find('Input').hasClass('form-check-input'));
+  });
+  it('should have a class form-control-state-test with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      state: 'state-test',
+    });
+    expect(renderedComponent.find('Input').hasClass('form-control-state-test'));
+  });
+  it('should have a class form-control-size-test with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      size: 'size-test',
+    });
+    expect(renderedComponent.find('Input').hasClass('form-control-size-test'));
   });
 });

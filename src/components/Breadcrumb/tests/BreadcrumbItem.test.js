@@ -11,9 +11,7 @@ import BreadcrumbItem from '../BreadcrumbItem';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <BreadcrumbItem
-    className={props.className}
-  >
+  <BreadcrumbItem {...props}>
     {props.children}
   </BreadcrumbItem>
 );
@@ -21,9 +19,7 @@ const renderComponent = (props = {}) => shallow(
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <ThemeProvider theme={theme}>
-    <BreadcrumbItem
-      className={props.className}
-    >
+    <BreadcrumbItem {...props}>
       {props.children}
     </BreadcrumbItem>
   </ThemeProvider>
@@ -49,6 +45,12 @@ describe('<BreadcrumbItem />', () => {
     });
     expect(renderedComponent.find('li').length).toBe(1);
     expect(renderedComponent.find('BreadcrumbItem').length).toBe(1);
+  });
+  it('should have an attribute active without a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      active: true,
+    });
+    expect(renderedComponent.find('BreadcrumbItem').props().active).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

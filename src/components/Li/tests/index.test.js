@@ -1,46 +1,26 @@
 /**
  * Testing our Li component
  */
-
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import Li from '../index';
 
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => shallow(
-  <Li
-    disabled={props.disabled}
-    separator={props.separator}
-    active={props.active}
-    dropdown-item={props['dropdown-item']}
-    dropdown-header={props['dropdown-header']}
-    dropdown-footer={props['dropdown-footer']}
-    className={props.className}
-  >
+  <Li {...props}>
     {children}
   </Li>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Li
-      disabled={props.disabled}
-      separator={props.separator}
-      active={props.active}
-      dropdown-item={props['dropdown-item']}
-      dropdown-header={props['dropdown-header']}
-      dropdown-footer={props['dropdown-footer']}
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <Li {...props}>
       {children}
     </Li>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 
@@ -84,6 +64,20 @@ describe('<Li />', () => {
       'dropdown-header': true,
     });
     expect(renderedComponent.find('li').hasClass('dropdown-header')).toBe(true);
+  });
+  it('should have a class list-inline-item with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      inline: true,
+    });
+    expect(renderedComponent.find('li').hasClass('list-inline-item'));
+  });
+  it('should have a class media with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      media: true,
+    });
+    expect(renderedComponent.find('li').hasClass('media'));
   });
   it('should have a class .dropdown-footer with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

@@ -1,14 +1,10 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
+import { mapToCssModules } from '../../styled/utilities/tools';
 
 const defaultProps = {
   tag: 'li',
 };
-
-function mapToCssModules(className, cssModule) {
-  if (!cssModule) return className;
-  return className.split(' ').map(c => cssModule[c] || c).join(' '); // eslint-disable-line arrow-parens
-}
 
 class BreadcrumbItem extends React.Component { // eslint-disable-line react/prefer-stateless-function
 

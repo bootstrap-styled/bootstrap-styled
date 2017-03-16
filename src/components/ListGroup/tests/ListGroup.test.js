@@ -55,6 +55,13 @@ describe('<ListGroup />', () => {
     });
     expect(renderedComponent.find('ul').hasClass('list-group')).toBe(true);
   });
+  it('should have a class list-group-flush with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      flush: true,
+    });
+    expect(renderedComponent.find('ul').hasClass('list-group-flush'));
+  });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,

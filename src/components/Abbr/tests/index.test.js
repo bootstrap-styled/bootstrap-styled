@@ -2,32 +2,25 @@
  * Testing our Abbr component
  */
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
-import theme from 'theme';
+import BootstrapProvider from '../../BootstrapProvider';
 import Abbr from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Abbr
-    title={props.title}
-    className={props.className}
-  >
+  <Abbr {...props}>
     {props.children}
   </Abbr>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Abbr
-      title={props.title}
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <Abbr {...props}>
       {props.children}
     </Abbr>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 
@@ -67,6 +60,14 @@ describe('<Abbr />', () => {
       children,
     });
     expect(renderedComponent.find('abbr').props().title).toEqual('abbr title');
+  });
+  it('should have an attribute initialism with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      title: 'abbr title',
+      initialism: true,
+      children,
+    });
+    expect(renderedComponent.find('abbr').hasClass('initialism'));
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
