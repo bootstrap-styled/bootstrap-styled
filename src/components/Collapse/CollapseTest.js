@@ -1,26 +1,12 @@
 /* eslint-disable */
-import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
+import React, { PropTypes } from 'react';
+import cn from 'classnames';
 import { mapToCssModules, omit } from '../../styled/utilities/tools';
 
 const SHOW = 'SHOW';
 const SHOWN = 'SHOWN';
 const HIDE = 'HIDE';
 const HIDDEN = 'HIDDEN';
-
-const propTypes = {
-  isOpen: PropTypes.bool,
-  className: PropTypes.node,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  cssModule: PropTypes.object,
-  navbar: PropTypes.bool,
-  delay: PropTypes.oneOfType([
-    PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
-    PropTypes.number,
-  ]),
-  onOpened: PropTypes.func,
-  onClosed: PropTypes.func,
-};
 
 const DEFAULT_DELAYS = {
   show: 350,
@@ -35,18 +21,29 @@ const defaultProps = {
   onClosed: () => {},
 };
 
-class Collapse extends Component {
-  constructor(props) {
-    super(props);
+class Collapse extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-    this.state = {
-      collapse: props.isOpen ? SHOWN : HIDDEN,
-      height: null
-    };
-    this.element = null;
+  static propTypes = {
+    isOpen: PropTypes.bool,
+    className: PropTypes.node,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    cssModule: PropTypes.object,
+    navbar: PropTypes.bool,
+    delay: PropTypes.oneOfType([
+      PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
+      PropTypes.number,
+    ]),
+    onOpened: PropTypes.func,
+    onClosed: PropTypes.func,
   }
 
-  componentWillReceiveProps(nextProps) {
+  state = {
+    collapse: this.props.isOpen ? SHOWN : HIDDEN,
+    height: null,
+    element: null,
+  }
+
+  componentWillReceiveProps = (nextProps) => {
     const willOpen = nextProps.isOpen;
     const collapse = this.state.collapse;
 
@@ -83,7 +80,7 @@ class Collapse extends Component {
     // else: do nothing.
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate = (prevProps, prevState) => {
     if (this.state.collapse === SHOWN &&
       prevState &&
       prevState.collapse !== SHOWN) {
@@ -97,11 +94,11 @@ class Collapse extends Component {
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     clearTimeout(this.transitionTag);
   }
 
-  getDelay(key) {
+  getDelay = (key) => {
     const { delay } = this.props;
     if (typeof delay === 'object') {
       return isNaN(delay[key]) ? DEFAULT_DELAYS[key] : delay[key];
@@ -109,7 +106,7 @@ class Collapse extends Component {
     return delay;
   }
 
-  getHeight() {
+  getHeight = () => {
     return this.element.scrollHeight;
   }
 
@@ -141,7 +138,7 @@ class Collapse extends Component {
         collapseClass = 'collapse';
     }
 
-    const classes = mapToCssModules(classNames(
+    const classes = mapToCssModules(cn(
       className,
       collapseClass,
       navbar && 'navbar-collapse'
@@ -158,6 +155,6 @@ class Collapse extends Component {
   }
 }
 
-Collapse.propTypes = propTypes;
 Collapse.defaultProps = defaultProps;
+
 export default Collapse;

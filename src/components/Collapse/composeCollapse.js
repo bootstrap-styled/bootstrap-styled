@@ -4,20 +4,16 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import bsTheme from 'theme';
-
 export default (CollapseLib) => class Collapse extends React.Component {
-
   static propTypes = {
     children: PropTypes.node.isRequired,
     theme: PropTypes.object.isRequired,
     isOpened: PropTypes.bool,
   };
-
   defaultProps = {
     theme: bsTheme,
     isOpened: false,
   };
-
   render() {
     const { children, theme, ...props } = this.props;
     // extract keys for div

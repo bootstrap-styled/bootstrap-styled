@@ -15,7 +15,7 @@ import { buttonGroup } from '../../styled/mixins/buttonGroup';
 import { ifThen } from '../../styled/mixins/conditional';
 import { mapToCssModules, omit } from '../../styled/utilities/tools';
 import DropdownMenu from './DropdownMenu';
-import TetherContent from './TetherContent';
+import TetherContent from '../TetherContent';
 
 const defaultProps = {
   isOpen: false,
