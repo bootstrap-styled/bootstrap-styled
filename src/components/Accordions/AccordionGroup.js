@@ -35,10 +35,13 @@ export default class AccordionGroup extends React.Component {// eslint-disable-l
 
   render() {
     const { children, ...rest } = this.props;
-    const { ...restAfterChildContext } = rest;
+    const { activeAccordionName, onClick, 'heading-component': headingComponent, ...restAfterChildContext } = rest; // eslint-disable-line no-unused-vars
 
     return (
-      <div {...restAfterChildContext}>
+      <div
+        {...restAfterChildContext}
+
+      >
         {children}
       </div>
     );
