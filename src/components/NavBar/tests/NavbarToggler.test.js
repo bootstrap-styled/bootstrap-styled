@@ -3,14 +3,18 @@
  */
 import { shallow } from 'enzyme';
 import React from 'react';
-import NavBarToggler from '../NavBarToggler';
+import NavbarToggler from '../NavbarToggler';
 
 const renderComponent = (props = {}) => shallow(
-  <NavBarToggler {...props} />
+  <NavbarToggler {...props} />
 );
 
-describe('<NavBarToggler />', () => {
-  it('should render a <NavBarToggler> with class .navbar-toggler-left', () => {
+describe('<NavbarToggler />', () => {
+  it('should render an <NavbarToggler> tag without a theme', () => {
+    const renderedComponent = renderComponent();
+    expect(renderedComponent.find('NavbarToggler').length).toBe(0);
+  });
+  it('should render a <NavbarToggler> with class .navbar-toggler-left', () => {
     const renderedComponent = renderComponent({
       left: true,
     });

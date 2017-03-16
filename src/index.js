@@ -117,7 +117,7 @@ export { default as Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOve
 export { default as Accordion, AccordionGroup } from './components/Accordions';
 export { default as Form, FormGroup, FormText, FormFeedback } from './components/Forms';
 export { default as Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from './components/Dropdown';
-export { default as NavBar, NavBarToggler } from './components/NavBar';
+export { default as Navbar, NavbarToggler, NavbarBrand, NavDropdown } from './components/NavBar';
 // 3. Organisms
 export { default as Container } from './components/Container';
 export { default as ContainerFluid } from './components/ContainerFluid';
