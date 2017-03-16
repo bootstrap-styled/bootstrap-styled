@@ -187,7 +187,7 @@ export function button(
             text-decoration: none;
           }
         `
-      )};
+      )}
      
       &:active,
       &.active {
@@ -207,15 +207,12 @@ export function button(
       }
     }   
  
-    /* Future-proof disabling of clicks on a elements */
     a.btn.disabled,
     fieldset[disabled] a.btn {
       pointer-events: none;
     }
    
-   
-    /* Alternate buttons */
-   
+      
     &.btn-primary {
       ${buttonVariant(
         $enableHoverMediaQuery,
@@ -265,8 +262,6 @@ export function button(
       )}
     }
    
-   /* Remove all backgrounds */
-
     &.btn-outline-primary {
       ${buttonOutlineVariant(
         $btnPrimaryBg,

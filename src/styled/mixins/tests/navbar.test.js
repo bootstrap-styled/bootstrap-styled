@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable';
 import { defaultProps, navbar } from '../navbar';
 
-describe('bootstrap navbar utility', () => {
+describe('bootstrap navbar mixins', () => {
   it('navbar should return a css for navbar', () => {
     const css = navbar(
       defaultProps['$grid-breakpoints'],
@@ -33,10 +33,10 @@ describe('bootstrap navbar utility', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(918810301);
+    expect(fromJS({ css }).hashCode()).toEqual(-987119289);
   });
   it('navbar should have arguments', () => {
     const css = navbar();
-    expect(fromJS({ css }).hashCode()).toEqual(-979629576);
+    expect(fromJS({ css }).hashCode()).toEqual(486819200);
   });
 });

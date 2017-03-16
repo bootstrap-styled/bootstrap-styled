@@ -35,7 +35,7 @@ export function a(
         color: ${$linkHoverColor};
         text-decoration: ${$linkHoverDecoration};
       `
-    )};
+    )}
     
     &:focus {
       ${tabFocus()}
