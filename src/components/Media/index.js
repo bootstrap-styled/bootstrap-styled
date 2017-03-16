@@ -92,7 +92,8 @@ class Media extends React.Component { // eslint-disable-line react/prefer-statel
 
 // eslint-disable-next-line no-class-assign
 Media = styled(Media)`
-  &.media {
+  &.media,
+   & .media {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
