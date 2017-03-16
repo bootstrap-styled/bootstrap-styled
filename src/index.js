@@ -84,7 +84,7 @@ export { default as Map } from './components/Map';
 export { default as Mark } from './components/Mark';
 export { default as Media } from './components/Media';
 export { default as Modal } from './components/Modal';
-export { default as Nav, NavLink, NavItem, NavDropdown } from './components/Nav';
+export { default as Nav, NavLink, NavItem } from './components/Nav';
 export { default as Ol } from './components/Ol';
 export { default as Option } from './components/Option';
 export { default as Output } from './components/Output';
