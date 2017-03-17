@@ -4,7 +4,8 @@
  *
  */
 import React, { PropTypes } from 'react';
-import Card from '../Cards';
+import Card from '../Cards/Card';
+import CardHeader from '../Cards/CardHeader';
 import Collapse from '../Collapse';
 import H5 from '../H5';
 
@@ -45,7 +46,7 @@ class Accordion extends React.Component { // eslint-disable-line react/prefer-st
     const accordionHeading = HeadingComponent ? (
       <HeadingComponent onClick={optional.onClick}>{heading}</HeadingComponent> // eslint-disable-line jsx-a11y/no-static-element-interactions
     ) : (
-      <div className="card-header" onClick={optional.onClick}><H5>{heading}</H5></div> // eslint-disable-line jsx-a11y/no-static-element-interactions
+      <CardHeader onClick={optional.onClick}><H5>{heading}</H5></CardHeader> // eslint-disable-line jsx-a11y/no-static-element-interactions
     );
     return (
       <Component className={className} {...rest}>

@@ -2,7 +2,7 @@
  * Testing our Collapse component
  */
 
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
 import Collapse from '../index';
@@ -10,11 +10,9 @@ import { makeTheme } from '../../../theme';
 
 const children = (<h1>Test</h1>);
 
-const renderComponentUsingTheme = (props = {}) => shallow(
+const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider theme={props.theme}>
-    <Collapse
-      isOpened={props.isOpened}
-    >
+    <Collapse {...props}>
       {props.children}
     </Collapse>
   </BootstrapProvider>
@@ -22,16 +20,6 @@ const renderComponentUsingTheme = (props = {}) => shallow(
 
 
 describe('<Collapse />', () => {
-  it('should render a <div> tag with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-      isOpen: true,
-      theme: makeTheme({
-        '$enable-transitions': false,
-      }),
-    });
-    expect(renderedComponent.length).toBe(1);
-  });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,

@@ -50,4 +50,46 @@ describe('bootstrap background utility', () => {
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(671518634);
   });
+  it('bgFaded should have a parameter', () => {
+    const css = bgFaded();
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(149412521);
+  });
+  it('bgFaded should have a parameter', () => {
+    const css = bgPrimary();
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(-295025470);
+  });
+  it('bgFaded should have a parameter', () => {
+    const css = bgSuccess();
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(543174936);
+  });
+  it('bgFaded should have a parameter', () => {
+    const css = bgInfo();
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(770988521);
+  });
+  it('bgFaded should have a parameter', () => {
+    const css = bgWarning();
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(48917392);
+  });
+  it('bgFaded should have a parameter', () => {
+    const css = bgDanger();
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(387368167);
+  });
+  it('bgFaded should have a parameter', () => {
+    const css = bgInverse();
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(671518634);
+  });
 });

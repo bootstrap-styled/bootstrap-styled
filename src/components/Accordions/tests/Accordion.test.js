@@ -6,6 +6,7 @@ import { shallow, mount } from 'enzyme';
 import BootstrapProvider from '../../BootstrapProvider';
 import Accordion from '../Accordion';
 import AccordionGroup from '../AccordionGroup';
+import Card from '../../Cards/Card';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
@@ -33,10 +34,12 @@ describe('<Accordion />', () => {
   beforeEach(() => {
     renderedComponent = renderComponent({
       children,
+      component: Card,
     });
     renderedComponent.setState({ activeName: 'Accordion2' });
     renderedComponentTheme = renderComponentUsingTheme({
       children,
+      component: Card,
     });
     renderedComponent.setState({ activeName: 'Accordion2' });
   });
@@ -47,10 +50,10 @@ describe('<Accordion />', () => {
   it('should have an attribute heading without a theme', () => {
     renderedComponent = renderComponent({
       heading: 'heading-test',
+      component: Card,
       children,
-
     });
-    expect(renderedComponent.props().heading).toEqual('heading-test');
+    expect(renderedComponent.find(Accordion).props().heading).toEqual('heading-test');
   });
   it('should have children without a theme', () => {
     expect(renderedComponent.contains(children)).toEqual(true);

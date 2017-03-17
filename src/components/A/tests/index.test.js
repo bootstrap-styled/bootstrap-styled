@@ -41,7 +41,6 @@ const renderComponentUsingTheme = (props = {}) => mount(
   </ThemeProvider>
 );
 
-
 describe('<A />', () => {
   it('should render an <A> tag without a theme', () => {
     const active = true;
@@ -123,7 +122,6 @@ describe('<A />', () => {
     });
     expect(renderedComponent.find('a').props().target).toEqual('_blank');
   });
-
   it('should render an <A> tag without a theme and props active', () => {
     const active = true;
     const renderedComponent = renderComponentUsingTheme({

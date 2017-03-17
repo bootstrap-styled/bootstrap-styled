@@ -2,10 +2,9 @@
  * Testing our Unordered List component
  */
 
-import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { ThemeProvider } from 'styled-components';
-import theme from 'theme';
+import React from 'react';
+import BootstrapProvider from '../../BootstrapProvider';
 import Ul from '../index';
 import Li from '../../Li';
 
@@ -13,21 +12,17 @@ import Li from '../../Li';
 const children = (<Li>Test</Li>);
 
 const renderComponent = (props = {}) => shallow(
-  <Ul
-    className={props.className}
-  >
+  <Ul {...props}>
     {props.children}
   </Ul>
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Ul
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <Ul {...props}>
       {props.children}
     </Ul>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 describe('<Ul />', () => {
@@ -52,7 +47,20 @@ describe('<Ul />', () => {
     expect(renderedComponent.find('ul').length).toBe(1);
     expect(renderedComponent.find('Ul').length).toBe(1);
   });
-
+  it('should have a classname list-inline', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      inline: true,
+      children,
+    });
+    expect(renderedComponent.find('ul').hasClass('list-inline'));
+  });
+  it('should have a classname list-unstyled', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      unstyled: true,
+      children,
+    });
+    expect(renderedComponent.find('ul').hasClass('list-unstyled'));
+  });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,

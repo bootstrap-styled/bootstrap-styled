@@ -5,6 +5,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import BootstrapProvider from '../../BootstrapProvider';
 import AccordionGroup from '../AccordionGroup';
+
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
@@ -41,12 +42,24 @@ describe('<AccordionGroup />', () => {
   it('should render an <AccordionGroup> tag without a theme', () => {
     expect(renderedComponent.find('div').length).toBe(1);
   });
-  it('should have an attribute heading without a theme', () => {
-    renderedComponent = renderComponent({
-      heading: 'heading-test',
+  it('should have an attribute activeAccordionName with a theme', () => {
+    renderedComponent = renderComponentUsingTheme({
       children,
+      accordionGroup: {
+        activeAccordionName: 'name-test',
+      },
     });
-    expect(renderedComponent.props().heading).toEqual('heading-test');
+    expect(renderedComponent.find(AccordionGroup).props().accordionGroup.activeAccordionName).toEqual('name-test');
+  });
+  it('should have an attribute heading-component with a theme', () => {
+    renderedComponent = renderComponentUsingTheme({
+      children,
+      accordionGroup: {
+        activeAccordionName: 'name-test',
+        'heading-component': (<h1>hello</h1>),
+      },
+    });
+    expect(renderedComponent.find(AccordionGroup).props().accordionGroup['heading-component']).toEqual(<h1>hello</h1>);
   });
   it('should have children without a theme', () => {
     expect(renderedComponent.contains(children)).toEqual(true);

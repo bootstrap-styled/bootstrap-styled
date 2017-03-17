@@ -9,6 +9,12 @@ describe('bootstrap transition mixins', () => {
     expect(css).not.toContain('null');
     expect(fromJS({ css }).hashCode()).toEqual(-798931882);
   });
+  it('getTransitionUtils should have parameters', () => {
+    const css = getTransitionUtilities();
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(1001874370);
+  });
   it('fade should return a css with defaultProps', () => {
     const css = fade();
     expect(fromJS({ css }).hashCode()).toEqual(15137366);
@@ -47,5 +53,21 @@ describe('bootstrap transition mixins', () => {
     };
     const css = parseTransition(enableTransitions, 'height .35s ease');
     expect(css).toMatchObject(objectTest);
+  });
+  it('parseTransition should return an object', () => {
+    const enableTransitions = true;
+    const objectTest = {
+      property: 'height',
+      duration: 350,
+      functionTiming: 'ease',
+      delay: 350,
+    };
+    const css = parseTransition(enableTransitions, 'height .35s ease .35s');
+    expect(css).toMatchObject(objectTest);
+  });
+  it('parseTransition should return an object', () => {
+    const enableTransitions = false;
+    const css = parseTransition(enableTransitions, 'height .35s ease');
+    expect(css.duration).toEqual(1);
   });
 });

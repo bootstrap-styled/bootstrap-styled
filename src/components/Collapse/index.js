@@ -1,6 +1,8 @@
 /* eslint-disable */
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import bsTheme from 'theme';
+
 import { mapToCssModules, omit } from '../../styled/utilities/tools';
 
 const SHOW = 'SHOW';
@@ -28,6 +30,7 @@ class Collapse extends Component {
 
   static defaultProps = {
     isOpen: false,
+    theme: bsTheme,
     tag: 'div',
     delay: {
       show: 350,
@@ -119,6 +122,7 @@ class Collapse extends Component {
       navbar,
       className,
       cssModule,
+      theme, // eslint-disable-line
       tag: Tag,
       ...attributes
     } = omit(this.props, ['isOpen', 'delay', 'onOpened', 'onClosed']);
