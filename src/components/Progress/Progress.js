@@ -51,6 +51,7 @@ Progress = styled(Progress)`
         props.theme['$progress-border-radius']
       )}
       ${getBackgroundUtilities(
+        props.theme['$enable-hover-media-query'],
         props.theme['$brand-primary'],
         props.theme['$brand-success'],
         props.theme['$brand-info'],
