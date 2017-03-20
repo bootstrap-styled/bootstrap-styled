@@ -15,6 +15,7 @@ const defaultProps = {
   show: false,
   theme: bsTheme,
   noOverlay: false,
+  belowNav: false,
 };
 
 class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -25,6 +26,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     theme: PropTypes.object,
     show: PropTypes.bool,
     onClick: PropTypes.func,
+    belowHeader: PropTypes.bool,
     button: PropTypes.shape({
       component: PropTypes.component,
       className: PropTypes.string,
@@ -46,7 +48,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
   constructor(props) {
     super(props);
     const sheet = window.document.styleSheets[0];
-    sheet.insertRule('.overflow { overflow: hidden; }', sheet.cssRules.length);
+    sheet.insertRule('.overflow { overflow: hidden; padding-right:15px; }', sheet.cssRules.length);
   }
 
 
@@ -54,6 +56,13 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     show: false,
   };
 
+  componentDidMount() {
+    //  Setting height of HeaderNavbar to OffsetNav if props belowHeader is true
+    const headerNavbar = document.getElementById('header-nav');
+    const headerNavbarHeight = headerNavbar.offsetHeight + 'px';  // eslint-disable-line prefer-template
+    const offsetNav = document.getElementById('offset-nav');
+    this.props.belowHeader ? (offsetNav.style.marginTop = headerNavbarHeight) : null; // eslint-disable-line no-unused-expressions
+  }
 
   handleClick = (e) => {
     const { onClick, 'animation-push': animationPush, 'menu-right': menuRight } = this.props;
@@ -63,14 +72,16 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     }
     this.setState({ show: !show });
 
+    // add .overflow class to body when triggered
+    document.body.classList.toggle('overflow');
+
+    //  menu-push animation
     if (animationPush) {
-      const direction = menuRight ? (
+      menuRight ? ( // eslint-disable-line no-unused-expressions
         document.getElementById('wrapper').classList.toggle('right')
       ) : (
         document.getElementById('wrapper').classList.toggle('left')
       );
-      document.getElementById('app').classList.toggle('overflow');
-      direction; // eslint-disable-line no-unused-expressions
     }
   };
 
@@ -80,6 +91,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       children,
       theme,  // eslint-disable-line no-unused-vars
       button,
+      belowHeader,  // eslint-disable-line no-unused-vars
       'nav-top': navTop,
       'menu-right': menuRight,
       'navbar-inverse': navbarInverse,
@@ -113,11 +125,11 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     const buttonClasses = cn(buttonMenuRight, classNameButton, { 'navbar-toggler-icon p-3 my-auto': !classNameButton });
 
     const OffsetMenuAnimated = animationPush ? (
-      <OffsetNavPush active={this.state.show} menu-right={menuRight} animation-push={animationPush}>
+      <OffsetNavPush active={this.state.show} menu-right={menuRight} animation-push={animationPush} id="offset-nav">
         {children}
       </OffsetNavPush>
     ) : (
-      <OffsetNavSlide active={this.state.show} menu-right={menuRight} animation-push={animationPush}>
+      <OffsetNavSlide active={this.state.show} menu-right={menuRight} animation-push={animationPush} id="offset-nav">
         {children}
       </OffsetNavSlide>
     );
@@ -125,7 +137,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     return (
       <div>
         {!noOverlay && (<Overlay active={this.state.show} onClick={this.handleClick} />)}
-        <Header className={cn(cssClasses)} {...rest}>
+        <Header className={cn(cssClasses)} {...rest} id="header-nav">
           <ButtonToggle className={buttonClasses} onClick={this.handleClick} {...restButton} />
           {navTop && (<div>{navTop}</div>)}
         </Header>
