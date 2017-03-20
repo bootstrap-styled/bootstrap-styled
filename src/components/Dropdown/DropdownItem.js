@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import { mapToCssModules } from '../../styled/utilities/tools';
-import H6 from '../H6';
 
 const defaultProps = {
   tag: 'button',
@@ -45,12 +44,12 @@ class DropdownItem extends React.Component {
 
   render() {
     const tabIndex = this.getTabIndex();
-    let { tag: Tag } = this.props;
-    const {
-      className,
-      cssModule,
-      divider,
-      header,
+    let {
+      className,  // eslint-disable-line prefer-const
+      cssModule,  // eslint-disable-line prefer-const
+      divider,  // eslint-disable-line prefer-const
+      tag: Tag,
+      header, // eslint-disable-line prefer-const
       ...props } = this.props;
 
     const classes = mapToCssModules(cn(
@@ -65,7 +64,7 @@ class DropdownItem extends React.Component {
 
     if (Tag === 'button') {
       if (header) {
-        Tag = H6;
+        Tag = 'h6';
       } else if (divider) {
         Tag = 'div';
       }
