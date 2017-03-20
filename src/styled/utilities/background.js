@@ -1,6 +1,7 @@
 import { bgVariant } from '../mixins/background-variant';
 
 export const defaultProps = {
+  '$enable-hover-media-query': false,
   '$brand-primary': '#0275d8',
   '$brand-success': '#5cb85c',
   '$brand-info': '#5bc0de',
@@ -15,6 +16,7 @@ export const defaultProps = {
 //
 
 export function getBackgroundUtilities(
+  $enableHoverMediaQuery = defaultProps['$enable-hover-media-query'],
   $brandPrimary = defaultProps['$brand-primary'],
   $brandSuccess = defaultProps['$brand-success'],
   $brandInfo = defaultProps['$brand-info'],
@@ -24,30 +26,22 @@ export function getBackgroundUtilities(
   $grayLightest = defaultProps['$gray-lightest'],
 ) {
   return `
-    ${bgPrimary($brandPrimary)}
-    ${bgSuccess($brandSuccess)}
-    ${bgInfo($brandInfo)}
-    ${bgWarning($brandWarning)}
-    ${bgDanger($brandDanger)}
-    ${bgInverse($brandInverse)}
-    ${bgFaded($grayLightest)}
+    ${bgVariant($enableHoverMediaQuery, '.bg-primary', $brandPrimary)}
+    ${bgVariant($enableHoverMediaQuery, '.bg-success', $brandSuccess)}
+    ${bgVariant($enableHoverMediaQuery, '.bg-info', $brandInfo)}
+    ${bgVariant($enableHoverMediaQuery, '.bg-warning', $brandWarning)}
+    ${bgVariant($enableHoverMediaQuery, '.bg-danger', $brandDanger)}
+    ${bgVariant($enableHoverMediaQuery, '.bg-inverse', $brandInverse)}
+    ${bgVariant($enableHoverMediaQuery, '.bg-faded', $grayLightest)}
   `;
 }
-
-export function bgFaded(grayBackground = defaultProps['$gray-lightest']) {
-  return `
-    .bg-faded {
-      background-color: ${grayBackground};
-    }
-  `;
-}
-
-export const bgPrimary = (bgColor = defaultProps['$brand-primary']) => bgVariant('.bg-primary', bgColor);
-export const bgSuccess = (bgColor = defaultProps['$brand-success']) => bgVariant('.bg-success', bgColor);
-export const bgInfo = (bgColor = defaultProps['$brand-info']) => bgVariant('.bg-info', bgColor);
-export const bgWarning = (bgColor = defaultProps['$brand-warning']) => bgVariant('.bg-warning', bgColor);
-export const bgDanger = (bgColor = defaultProps['$brand-danger']) => bgVariant('.bg-danger', bgColor);
-export const bgInverse = (bgColor = defaultProps['$brand-inverse']) => bgVariant('.bg-inverse', bgColor);
+export const bgPrimary = ($enableHoverMediaQuery, bgColor = defaultProps['$brand-primary']) => bgVariant($enableHoverMediaQuery, '.bg-primary', bgColor);
+export const bgSuccess = ($enableHoverMediaQuery, bgColor = defaultProps['$brand-success']) => bgVariant($enableHoverMediaQuery, '.bg-success', bgColor);
+export const bgInfo = ($enableHoverMediaQuery, bgColor = defaultProps['$brand-info']) => bgVariant($enableHoverMediaQuery, '.bg-info', bgColor);
+export const bgWarning = ($enableHoverMediaQuery, bgColor = defaultProps['$brand-warning']) => bgVariant($enableHoverMediaQuery, '.bg-warning', bgColor);
+export const bgDanger = ($enableHoverMediaQuery, bgColor = defaultProps['$brand-danger']) => bgVariant($enableHoverMediaQuery, '.bg-danger', bgColor);
+export const bgInverse = ($enableHoverMediaQuery, bgColor = defaultProps['$brand-inverse']) => bgVariant($enableHoverMediaQuery, '.bg-inverse', bgColor);
+export const bgFaded = ($enableHoverMediaQuery, bgColor = defaultProps['$gray-lightest']) => bgVariant($enableHoverMediaQuery, '.bg-faded', bgColor);
 
 export default {
   defaultProps,

@@ -14,7 +14,7 @@ export function textEmphasisVariant(enableHoverMediaQuery = defaultProps['$enabl
     a${parent} {
       ${hoverFocus(
         enableHoverMediaQuery,
-        `color: ${color(textColor).darken(0.1).toString()} !important;`
+        `color: ${color(textColor).darken(0.20).rgb()} !important;`
        )}
     }
   `;

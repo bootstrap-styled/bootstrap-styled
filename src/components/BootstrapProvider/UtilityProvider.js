@@ -45,6 +45,7 @@ const UtilityProvider = styled.div`
   ${(props) => `
     ${ifThen(props.utils.align, alignUtils.getAlignUtilities())}
     ${ifThen(props.utils.background, backgroundUtils.getBackgroundUtilities(
+      props.theme['$enable-hover-media-query'],
       props.theme['$brand-primary'],
       props.theme['$brand-success'],
       props.theme['$brand-info'],

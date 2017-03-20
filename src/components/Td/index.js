@@ -6,8 +6,6 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import bsTheme from 'theme';
 
-import { getBackgroundUtilities } from '../../styled/utilities/background';
-
 const defaultProps = { theme: bsTheme };
 
 class Td extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -31,7 +29,6 @@ class Td extends React.Component { // eslint-disable-line react/prefer-stateless
 
 // eslint-disable-next-line no-class-assign
 Td = styled(Td)`
-  ${getBackgroundUtilities()}
 `;
 
 Td.defaultProps = defaultProps;

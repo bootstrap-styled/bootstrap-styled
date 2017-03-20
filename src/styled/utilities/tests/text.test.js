@@ -18,12 +18,12 @@ describe('bootstrap text utility', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(541368988);
+    expect(fromJS({ css }).hashCode()).toEqual(-500964232);
   });
   it('getTextUtilities should have arguments', () => {
     const css = getTextUtilities();
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(541368988);
+    expect(fromJS({ css }).hashCode()).toEqual(-500964232);
   });
 });
