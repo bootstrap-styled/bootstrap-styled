@@ -2,43 +2,25 @@
  * Testing our link component
  */
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import A from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <A
-    href={props.href}
-    target={props.target}
-    type={props.type}
-    active={props.active}
-    className={props.className}
-    disabled={props.disabled}
-    dropdown-item={props['dropdown-item']}
-  >
+  <A {...props}>
     {props.children}
   </A>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <A
-      href={props.href}
-      target={props.target}
-      type={props.type}
-      active={props.active}
-      className={props.className}
-      disabled={props.disabled}
-      dropdown-item={props['dropdown-item']}
-    >
+  <BootstrapProvider>
+    <A {...props}>
       {props.children}
     </A>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 describe('<A />', () => {
@@ -147,6 +129,14 @@ describe('<A />', () => {
       'dropdown-item': true,
     });
     expect(renderedComponent.find('a').hasClass('dropdown-item')).toEqual(true);
+  });
+  it('should have an attribute color', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      href: 'http://mxstbr.com/',
+      children,
+      color: 'test-color',
+    });
+    expect(renderedComponent.find('a').hasClass('text-test-color')).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

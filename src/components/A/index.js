@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
 
+import { mapToCssModules } from '../../styled/utilities/tools';
 import { a } from '../../styled/mixins/a';
 import { button } from '../../styled/mixins/buttons';
 
@@ -22,6 +23,8 @@ class A extends React.Component { // eslint-disable-line react/prefer-stateless-
     disabled: PropTypes.bool,
     'dropdown-item': PropTypes.bool,
     theme: PropTypes.object,
+    color: PropTypes.string,
+    cssModule: PropTypes.object,
   }
 
   state = {
@@ -41,7 +44,18 @@ class A extends React.Component { // eslint-disable-line react/prefer-stateless-
   }
 
   render() {
-    const { className, theme, active, disabled, 'dropdown-item': dropdownItem, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      className,
+      theme,   // eslint-disable-line no-unused-vars
+      active,
+      disabled,
+      cssModule,
+      color,
+      'dropdown-item': dropdownItem,
+      children,
+      ...rest
+    } = this.props;
+
     const { focus } = this.state;
 
     const optional = {};
@@ -50,14 +64,18 @@ class A extends React.Component { // eslint-disable-line react/prefer-stateless-
       optional.onBlur = this.handleBlur;
     }
 
+    const classes = mapToCssModules(cn(
+      className,
+      active ? 'active' : false,
+      disabled ? 'disabled' : false,
+      focus,
+      dropdownItem ? 'dropdown-item' : false,
+      color ? `text-${color}` : false,
+    ), cssModule);
+
     return (
       <a
-        className={cn(className, {
-          active,
-          disabled,
-          focus,
-          'dropdown-item': dropdownItem,
-        })}
+        className={classes}
         {...rest}
         {...optional}
       >
