@@ -12,7 +12,7 @@ import { media } from '../../styled/mixins/media';
 import A from '../A';
 import Img from '../Img';
 import Ul from '../Ul';
-
+import H4 from '../H4';
 const defaultProps = {
   theme: bsTheme,
 };
@@ -56,7 +56,7 @@ class Media extends React.Component { // eslint-disable-line react/prefer-statel
 
     let defaultTag;
     if (heading) {
-      defaultTag = 'h4';
+      defaultTag = H4;
     } else if (left || right) {
       defaultTag = A;
     } else if (object) {
