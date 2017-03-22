@@ -151,9 +151,6 @@ class Tooltip extends React.Component {
   clearShowTimeout = () => {
     clearTimeout(this.showTimeout);
     this.showTimeout = undefined;
-    // this.showTimeout = 0;
-    // console.log('##showTimeout ', typeof (this.showTimeout));
-    // console.log('##clear ', clearTimeout(this.showTimeout));
   }
 
   clearHideTimeout = () => {
@@ -205,14 +202,9 @@ class Tooltip extends React.Component {
     }
 
     const attributes = omit(this.props, Object.keys(propTypes));
-    // console.log('####thisProps ', this.props);
-    // console.log('####propTypes ', propTypes);
-    // console.log('####propTypes1 ', this.propTypes);
-    // console.log('####props.propTypes ', this.props.propTypes);
-    // console.log('####this ', this);
 
     const classes = mapToCssModules(cn(
-      'tooltip-inner',
+      'tooltip',
       this.props.className
     ), this.props.cssModule);
 
@@ -225,7 +217,7 @@ class Tooltip extends React.Component {
 
     return (
       <TetherContent
-        className="tooltip"
+        className={classes}
         tether={tetherConfig}
         tetherRef={this.props.tetherRef}
         isOpen={this.props.isOpen}
@@ -233,7 +225,7 @@ class Tooltip extends React.Component {
       >
         <div
           {...attributes}
-          className={classes}
+          className={'tooltip-inner'}
           onMouseOver={this.onMouseOverTooltipContent}
           onMouseLeave={this.onMouseLeaveTooltipContent}
           onFocus={this.handleFocus}
@@ -338,7 +330,7 @@ Tooltip = styled(Tooltip)`
       border-left-color: #000
     }
     
-    &.tooltip-inner {
+    & .tooltip-inner {
       max-width: ${props.theme['$tooltip-max-width']};
       padding: ${props.theme['$tooltip-padding-y']} ${props.theme['$tooltip-padding-x']};
       color: ${props.theme['$tooltip-color']};
@@ -347,7 +339,7 @@ Tooltip = styled(Tooltip)`
       border-radius: .25rem
     }
     
-    &.tooltip-inner:before {
+    & .tooltip-inner:before {
       position: absolute;
       width: 0;
       height: 0;
