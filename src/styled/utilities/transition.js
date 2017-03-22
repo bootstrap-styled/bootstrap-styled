@@ -15,7 +15,7 @@ export function getTransitionUtilities(
 
 export function fade(enableTransitions = defaultProps['$enable-transitions'], transitionFade = defaultProps['$transition-fade']) {
   return `
-    .fade {
+    &.fade {
       opacity: 0;
       ${transition(enableTransitions, transitionFade)}
     
@@ -28,7 +28,7 @@ export function fade(enableTransitions = defaultProps['$enable-transitions'], tr
 
 export function collapse(enableTransitions = defaultProps['$enable-transitions'], transitionCollapse = defaultProps['$transition-collapse']) {
   return `
-    .collapse {
+    &.collapse {
       display: none;
       &.show {
         display: block;
@@ -47,7 +47,7 @@ export function collapse(enableTransitions = defaultProps['$enable-transitions']
       }
     }
     
-    .collapsing {
+    &.collapsing {
       position: relative;
       height: 0;
       overflow: hidden;
