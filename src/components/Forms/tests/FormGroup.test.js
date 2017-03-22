@@ -40,4 +40,33 @@ describe('<FormGroup />', () => {
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
+  it('should have a class has-info', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      color: 'info',
+    });
+    expect(renderedComponent.find('div').at(1).hasClass('has-info')).toBe(true);
+  });
+  it('should have a class row', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      row: true,
+    });
+    expect(renderedComponent.find('div').at(1).hasClass('row')).toBe(true);
+  });
+  it('should have a class form-check', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      check: true,
+    });
+    expect(renderedComponent.find('div').at(1).hasClass('form-check')).toBe(true);
+  });
+  it('should have a class disabled', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      check: true,
+      disabled: true,
+    });
+    expect(renderedComponent.find('div').at(1).hasClass('disabled')).toBe(true);
+  });
 });

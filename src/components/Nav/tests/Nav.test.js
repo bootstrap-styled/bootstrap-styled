@@ -1,33 +1,27 @@
 /**
  * Testing our Nav component
  */
-import { ThemeProvider } from 'styled-components';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import Nav from '../Nav';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Nav
-    className={props.className}
-  >
+  <Nav {...props}>
     {props.children}
   </Nav>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Nav
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <Nav {...props}>
       {props.children}
     </Nav>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 
@@ -55,5 +49,61 @@ describe('<Nav />', () => {
       children,
     });
     expect(renderedComponent.contains(children)).toEqual(true);
+  });
+  it('should have a class navbar-nav but not nav', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      navbar: true,
+    });
+    expect(renderedComponent.find('ul').hasClass('navbar-nav')).toBe(true);
+  });
+  it('should have a class nav-tabs', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      tabs: true,
+    });
+    expect(renderedComponent.find('ul').hasClass('nav-tabs')).toBe(true);
+  });
+  it('should have a class nav-pills', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      pills: true,
+    });
+    expect(renderedComponent.find('ul').hasClass('nav-pills')).toBe(true);
+  });
+  it('should have a class nav-fill', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      fill: true,
+    });
+    expect(renderedComponent.find('ul').hasClass('nav-fill')).toBe(true);
+  });
+  it('should have a class nav-inline', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      inline: true,
+    });
+    expect(renderedComponent.find('ul').hasClass('nav-inline')).toBe(true);
+  });
+  it('should have a class nav-stacked', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      stacked: true,
+    });
+    expect(renderedComponent.find('ul').hasClass('nav-stacked')).toBe(true);
+  });
+  it('should have a class nav-justified', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      justified: true,
+    });
+    expect(renderedComponent.find('ul').hasClass('nav-justified')).toBe(true);
+  });
+  it('should have a class flex-column', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      vertical: true,
+    });
+    expect(renderedComponent.find('ul').hasClass('flex-column')).toBe(true);
   });
 });

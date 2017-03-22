@@ -1,33 +1,27 @@
 /**
  * Testing our NavItem component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
+import BootstrapProvider from '../../BootstrapProvider';
 
 import NavItem from '../NavItem';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <NavItem
-    className={props.className}
-  >
+  <NavItem {...props}>
     {props.children}
   </NavItem>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <NavItem
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <NavItem {...props}>
       {props.children}
     </NavItem>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 

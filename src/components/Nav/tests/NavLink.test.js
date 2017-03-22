@@ -1,33 +1,28 @@
 /**
  * Testing our NavLink component
  */
-import { ThemeProvider } from 'styled-components';
 
 import { mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
+import BootstrapProvider from '../../BootstrapProvider';
 
 import NavLink from '../NavLink';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => mount(
-  <NavLink
-    className={props.className}
-  >
+  <NavLink {...props}>
     {props.children}
   </NavLink>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <NavLink
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <NavLink {...props}>
       {props.children}
     </NavLink>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 
@@ -55,5 +50,25 @@ describe('<NavLink />', () => {
       children,
     });
     expect(renderedComponent.contains(children)).toEqual(true);
+  });
+  it('should handle onClick prop with a theme', () => {
+    const functionTest = jest.fn();
+
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      onClick: functionTest,
+    });
+    renderedComponent.find('a').simulate('click');
+    expect(renderedComponent.find('NavLink').props().onClick).toHaveBeenCalled();
+  });
+  it('should handle onClick events with a theme', () => {
+    const functionTest = jest.fn();
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      onClick: functionTest,
+      disabled: true,
+    });
+    renderedComponent.find('a').simulate('click');
+    expect(renderedComponent.find('NavLink').props().onClick).not.toHaveBeenCalled();
   });
 });

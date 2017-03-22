@@ -1,35 +1,27 @@
 /**
  * Testing our P component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import P from '../index';
 
 const children = <span>test</span>;
 
 const renderComponent = (props = {}) => shallow(
-  <P
-    className={props.className}
-  >
+  <P {...props}>
     {props.children}
   </P>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <P
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <P {...props}>
       {props.children}
     </P>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
-
 
 describe('<P />', () => {
   it('should render an <P> tag without a theme', () => {
@@ -49,6 +41,20 @@ describe('<P />', () => {
       children,
     });
     expect(renderedComponent.find('P').length).toBe(1);
+  });
+  it('should have a class lead with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      lead: true,
+    });
+    expect(renderedComponent.find('p').hasClass('lead')).toBe(true);
+  });
+  it('should have a class text-info with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      color: 'info',
+    });
+    expect(renderedComponent.find('p').hasClass('text-info')).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

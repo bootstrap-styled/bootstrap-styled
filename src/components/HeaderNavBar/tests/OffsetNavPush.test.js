@@ -3,20 +3,13 @@
  */
 import { ThemeProvider } from 'styled-components';
 
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
 import theme from 'theme';
 
 import OffsetNavPush from '../OffsetNavPush';
 
 const children = (<h1>Test</h1>);
-
-const renderComponent = (props = {}) => shallow(
-  <OffsetNavPush {...props}>
-    {props.children}
-  </OffsetNavPush>
-);
-
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <ThemeProvider theme={theme}>
@@ -28,18 +21,6 @@ const renderComponentUsingTheme = (props = {}) => mount(
 
 
 describe('<OffsetNavPush />', () => {
-  it('should render an <OffsetNavPush> tag without a theme', () => {
-    const renderedComponent = renderComponent({
-      children,
-    });
-    expect(renderedComponent.find('OffsetNav').length).toBe(1);
-  });
-  it('should have children without a theme', () => {
-    const renderedComponent = renderComponent({
-      children,
-    });
-    expect(renderedComponent.contains(children)).toEqual(true);
-  });
   it('should render an <OffsetNavPush> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,

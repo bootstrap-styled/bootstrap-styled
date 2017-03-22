@@ -43,6 +43,60 @@ describe('<Label />', () => {
     });
     expect(renderedComponent.find('label').length).toBe(1);
   });
+  it('should render with col-form-label-lg class when size is provided', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      size: 'lg',
+    });
+    expect(renderedComponent.find('label').hasClass('col-form-label-lg')).toBe(true);
+  });
+  it('should pass col size specific classes as Numbers', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      sm: '6',
+    });
+    expect(renderedComponent.find('label').hasClass('col-sm-6')).toBe(true);
+  });
+  it('should pass col size specific classes via Objects', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      sm: {
+        size: 6,
+        push: 2,
+        pull: 2,
+        offset: 2,
+      },
+    });
+    expect(renderedComponent.find('label').hasClass('col-sm-6')).toBe(true);
+    expect(renderedComponent.find('label').hasClass('push-sm-2')).toBe(true);
+    expect(renderedComponent.find('label').hasClass('pull-sm-2')).toBe(true);
+    expect(renderedComponent.find('label').hasClass('offset-sm-2')).toBe(true);
+  });
+  it('should pass multiple col size specific classes via Objects', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      sm: {
+        size: 6,
+        push: 2,
+        pull: 2,
+        offset: 2,
+      },
+      md: {
+        size: 7,
+        push: 1,
+        pull: 1,
+        offset: 1,
+      },
+    });
+    expect(renderedComponent.find('label').hasClass('col-sm-6')).toBe(true);
+    expect(renderedComponent.find('label').hasClass('push-sm-2')).toBe(true);
+    expect(renderedComponent.find('label').hasClass('pull-sm-2')).toBe(true);
+    expect(renderedComponent.find('label').hasClass('offset-sm-2')).toBe(true);
+    expect(renderedComponent.find('label').hasClass('col-md-7')).toBe(true);
+    expect(renderedComponent.find('label').hasClass('push-md-1')).toBe(true);
+    expect(renderedComponent.find('label').hasClass('pull-md-1')).toBe(true);
+    expect(renderedComponent.find('label').hasClass('offset-md-1')).toBe(true);
+  });
   it('should have a class sr-only with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
@@ -65,13 +119,6 @@ describe('<Label />', () => {
       inline: false,
     });
     expect(renderedComponent.find('Label').hasClass('form-check-label'));
-  });
-  it('should have a class col-form-label-test-size` with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-      size: 'test-size',
-    });
-    expect(renderedComponent.find('Label').hasClass('col-form-label-test-size'));
   });
   it('should have an attribute disabled with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

@@ -79,4 +79,10 @@ describe('<ListGroupItem />', () => {
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
+  it('should prevent click event when disabled is passed', () => {
+    const onDisableClick = jest.fn();
+    const renderedComponent = mount(<ListGroupItem disabled onClick={onDisableClick}>Yo!</ListGroupItem>);
+    renderedComponent.find('li').simulate('click');
+    expect(onDisableClick).not.toHaveBeenCalled();
+  });
 });

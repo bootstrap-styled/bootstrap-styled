@@ -40,4 +40,18 @@ describe('<FormText />', () => {
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
+  it('should have a class text-info', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      color: 'info',
+    });
+    expect(renderedComponent.find('small').hasClass('text-info')).toBe(true);
+  });
+  it('should NOT have a class form-text', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      inline: true,
+    });
+    expect(renderedComponent.find('small').hasClass('form-text')).toBe(false);
+  });
 });

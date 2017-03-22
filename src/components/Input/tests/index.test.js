@@ -84,4 +84,17 @@ describe('<Input />', () => {
     });
     expect(renderedComponent.find('Input').hasClass('form-control-size-test'));
   });
+  it('should not render with "form-check-input" nor "form-control" class when type is checkbox and addon is truthy', () => {
+    const renderedComponent = shallow(<Input addon type="checkbox" />);
+
+    expect(renderedComponent.hasClass('form-check-input')).toBe(false);
+    expect(renderedComponent.hasClass('form-control')).toBe(false);
+  });
+
+  it('should not render with "form-check-input" nor "form-control" class when type is radio and addon is truthy', () => {
+    const renderedComponent = shallow(<Input addon type="radio" />);
+
+    expect(renderedComponent.hasClass('form-check-input')).toBe(false);
+    expect(renderedComponent.hasClass('form-control')).toBe(false);
+  });
 });

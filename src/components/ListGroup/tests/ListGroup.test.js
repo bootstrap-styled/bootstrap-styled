@@ -10,9 +10,7 @@ import ListGroup from '../ListGroup';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <ListGroup
-    className={props.className}
-  >
+  <ListGroup {...props}>
     {props.children}
   </ListGroup>
 );
@@ -20,9 +18,7 @@ const renderComponent = (props = {}) => shallow(
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <ListGroup
-      className={props.className}
-    >
+    <ListGroup {...props}>
       {props.children}
     </ListGroup>
   </BootstrapProvider>
@@ -60,7 +56,7 @@ describe('<ListGroup />', () => {
       children,
       flush: true,
     });
-    expect(renderedComponent.find('ul').hasClass('list-group-flush'));
+    expect(renderedComponent.find('ul').hasClass('list-group-flush')).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

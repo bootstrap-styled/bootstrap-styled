@@ -1,33 +1,27 @@
 /**
  * Testing our Small component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
+import BootstrapProvider from '../../BootstrapProvider';
 
 import Small from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Small
-    className={props.className}
-  >
+  <Small {...props}>
     {props.children}
   </Small>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Small
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <Small {...props}>
       {props.children}
     </Small>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 
@@ -50,6 +44,13 @@ describe('<Small />', () => {
     });
     expect(renderedComponent.find('small').length).toBe(1);
     expect(renderedComponent.find('Small').length).toBe(1);
+  });
+  it('should have a class text-info with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      color: 'info',
+    });
+    expect(renderedComponent.find('small').hasClass('text-info')).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

@@ -95,7 +95,7 @@ describe('bootstrap pagination mixins', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(627360205);
+    expect(fromJS({ css }).hashCode()).toEqual(61318776);
   });
   it('pagination should parameters', () => {
     const css = pagination();

@@ -1,33 +1,27 @@
 /**
  * Testing our Col component
  */
-import { ThemeProvider } from 'styled-components';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import Col, { getColumnSizeClass } from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Col
-    className={props.className}
-  >
-    {props.children}
+  <Col {...props}>
+    {children}
   </Col>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Col
-      className={props.className}
-    >
-      {props.children}
+  <BootstrapProvider>
+    <Col {...props}>
+      {children}
     </Col>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 
@@ -48,17 +42,55 @@ describe('<Col />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('div').length).toBe(1);
     expect(renderedComponent.find('Col').length).toBe(1);
   });
-  it('should have getColumnSizeClass auto with a theme', () => {
+  it('getColumnSizeClass should return col', () => {
+    expect(getColumnSizeClass('xs', '', '')).toEqual('col');
+  });
+  it('getColumnSizeClass should return col-auto', () => {
+    expect(getColumnSizeClass('xs', '', 'auto')).toEqual('col-auto');
+  });
+  it('getColumnSizeClass should return col-lg-auto', () => {
     expect(getColumnSizeClass('', 'lg', 'auto')).toEqual('col-lg-auto');
   });
-  it('should have getColumnSizeClass 8 with a theme', () => {
+  it('getColumnSizeClass should return col-8', () => {
+    expect(getColumnSizeClass('xs', '', '8')).toEqual('col-8');
+  });
+  it('getColumnSizeClass should return col-lg-8', () => {
     expect(getColumnSizeClass('', 'lg', '8')).toEqual('col-lg-8');
   });
-  it('should have getColumnSizeClass xs-8 with a theme', () => {
-    expect(getColumnSizeClass('xs', 'lg', '8')).toEqual('col-8');
+  it('should have a class col-6', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      xs: '6',
+    });
+    expect(renderedComponent.find('div').at(1).hasClass('col-6')).toEqual(true);
+  });
+  it('should have a class col-md-6', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      md: '6',
+    });
+    expect(renderedComponent.find('div').at(1).hasClass('col-md-6')).toEqual(true);
+  });
+  it('should have a class col-auto', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      xs: 'auto',
+    });
+    expect(renderedComponent.find('div').at(1).hasClass('col-auto')).toEqual(true);
+  });
+  it('should have a class col-md-auto', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      md: 'auto',
+    });
+    expect(renderedComponent.find('div').at(1).hasClass('col-md-auto')).toEqual(true);
+  });
+  it('should have a classes .col .col-sm-6 .sm-push-2 .sm-pull-2 .sm-offset-2', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      sm: { size: 6, push: 2, pull: 2, offset: 1 },
+    });
+    expect(renderedComponent.find('div').at(1).hasClass('col-sm-6')).toEqual(true);
+    expect(renderedComponent.find('div').at(1).hasClass('push-sm-2')).toEqual(true);
+    expect(renderedComponent.find('div').at(1).hasClass('pull-sm-2')).toEqual(true);
+    expect(renderedComponent.find('div').at(1).hasClass('offset-sm-1')).toEqual(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

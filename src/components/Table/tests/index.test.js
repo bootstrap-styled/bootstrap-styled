@@ -2,11 +2,9 @@
  * Testing our Table component
  */
 
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
+import BootstrapProvider from '../../BootstrapProvider';
 import Table from '../index';
 
 const children = (
@@ -20,30 +18,18 @@ const children = (
 );
 
 const renderComponent = (props = {}) => shallow(
-  <Table
-    striped={props.striped}
-    bordered={props.bordered}
-    hover={props.hover}
-    responsive={props.responsive}
-    className={props.className}
-  >
+  <Table {...props}>
     {children}
   </Table>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Table
-      striped={props.striped}
-      bordered={props.bordered}
-      hover={props.hover}
-      responsive={props.responsive}
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <Table {...props}>
       {children}
     </Table>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 
@@ -73,34 +59,47 @@ describe('<Table />', () => {
     });
     expect(renderedComponent.find('table').hasClass('table')).toBe(true);
   });
-  it('should have a class .table-striped by default with a theme', () => {
+  it('should have a class .table-sm with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      striped: true,
+      size: 'sm',
     });
-    expect(renderedComponent.find('table').hasClass('table-striped')).toBe(true);
+    expect(renderedComponent.find('table').hasClass('table-sm')).toBe(true);
   });
-  it('should have a class .table-bordered by default with a theme', () => {
+  it('should have a class .table-bordered with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
       bordered: true,
     });
     expect(renderedComponent.find('table').hasClass('table-bordered')).toBe(true);
   });
-  it('should have a class .table-hover by default with a theme', () => {
+  it('should have a class .table-striped with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      striped: true,
+    });
+    expect(renderedComponent.find('table').hasClass('table-striped')).toBe(true);
+  });
+  it('should have a class .table-inverse with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      inverse: true,
+    });
+    expect(renderedComponent.find('table').hasClass('table-inverse')).toBe(true);
+  });
+  it('should have a class .table-hover with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
       hover: true,
     });
     expect(renderedComponent.find('table').hasClass('table-hover')).toBe(true);
   });
-  it('should have a class .table-responsive by default with a theme', () => {
+  it('should have a class .table-reflow with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      responsive: true,
+      reflow: true,
     });
-    expect(renderedComponent.find('div').length).toBe(1);
-    expect(renderedComponent.find('div').hasClass('table')).toBe(false);
+    expect(renderedComponent.find('table').hasClass('table-reflow')).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

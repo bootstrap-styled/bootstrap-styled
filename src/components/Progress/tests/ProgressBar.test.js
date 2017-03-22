@@ -1,38 +1,27 @@
 /**
  * Testing our ProgressBar component
  */
-import { ThemeProvider } from 'styled-components';
 import { mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
+import BootstrapProvider from '../../BootstrapProvider';
 import Progress, { ProgressBar } from '../index';
 
 const renderComponent = (props = {}) => mount(
   <Progress>
-    <ProgressBar
-      valueMin={props.valueMin}
-      valueNow={props.valueNow}
-      valueMax={props.valueMax}
-    >
+    <ProgressBar {...props}>
       {props.children}
     </ProgressBar>
   </Progress>
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
+  <BootstrapProvider>
     <Progress>
-      <ProgressBar
-        valueMin={props.valueMin}
-        valueNow={props.valueNow}
-        valueMax={props.valueMax}
-        striped={props.striped}
-        animated={props.animated}
-      >
+      <ProgressBar {...props}>
         {props.children}
       </ProgressBar>
     </Progress>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 describe('<ProgressBar />', () => {
@@ -59,6 +48,24 @@ describe('<ProgressBar />', () => {
   it('should have class .progress-bar by default with a theme', () => {
     const renderedComponent = renderComponentUsingTheme();
     expect(renderedComponent.find('.progress-bar').length).toEqual(1);
+  });
+  it('should have class .progress-bar-animated with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      animated: true,
+    });
+    expect(renderedComponent.find('.progress-bar-animated').length).toEqual(1);
+  });
+  it('should have class bg-info with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      color: 'info',
+    });
+    expect(renderedComponent.find('.bg-info').length).toEqual(1);
+  });
+  it('should have class .progress-bar-striped with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      striped: true,
+    });
+    expect(renderedComponent.find('.progress-bar-striped').length).toEqual(1);
   });
   it('should render a <Progress> tag with children and a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
