@@ -1,10 +1,10 @@
 import { fromJS } from 'immutable';
 import bsTheme from 'theme';
-import { body, boxSizing, getGlobalStyles, html, ie10FixHidden, ie10FixViewport, svg, tabIndex, webkitFileUploadButton } from '../reboot';
+import { body, boxSizing, getGlobalStyles, getRebootUtils, html, ie10FixHidden, ie10FixViewport, svg, tabIndex, webkitFileUploadButton } from '../reboot';
 
 describe('bootstrap reboot utility', () => {
-  it('body should return a body global style', () => {
-    const css = body(
+  it('getRebootUtils should return a set of global styles', () => {
+    const css = getRebootUtils(
       bsTheme['$font-family-base'],
       bsTheme['$font-size-base'],
       bsTheme['$font-weight-base'],
@@ -12,19 +12,12 @@ describe('bootstrap reboot utility', () => {
       bsTheme['$body-color'],
       bsTheme['$body-bg'],
     );
-    expect(css).not.toContain('undefined');
-    expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(202960930);
+    console.log(css);
+    expect(fromJS({ css }).hashCode()).toEqual(-142391712);
   });
-  it('body should return a body global style without params', () => {
-    const css = body();
-    expect(css).not.toContain('undefined');
-    expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(202960930);
-  });
-  it('boxSizing should return a fix', () => {
-    const css = boxSizing();
-    expect(fromJS({ css }).hashCode()).toEqual(849919480);
+  it('getRebootUtils should return a set of global styles without params', () => {
+    const css = getRebootUtils();
+    expect(fromJS({ css }).hashCode()).toEqual(-142391712);
   });
   it('getGlobalStyles should return a set of global styles', () => {
     const css = getGlobalStyles(
@@ -35,34 +28,71 @@ describe('bootstrap reboot utility', () => {
       bsTheme['$body-color'],
       bsTheme['$body-bg'],
     );
-    expect(fromJS({ css }).hashCode()).toEqual(-904022236);
+    expect(fromJS({ css }).hashCode()).toEqual(-663578906);
   });
   it('getGlobalStyles should return a set of global styles without params', () => {
     const css = getGlobalStyles();
-    expect(fromJS({ css }).hashCode()).toEqual(-904022236);
+    expect(fromJS({ css }).hashCode()).toEqual(-663578906);
   });
-  it('html should return a reset', () => {
+  it('body should return a css with default values', () => {
+    const css = body();
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(-830622298);
+  });
+  it('body should return a css with custom values', () => {
+    const css = body(
+      'arial',
+      '1.2rem',
+      'bold',
+      '1.5rem',
+      'red',
+      'blue',
+    );
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(-308159639);
+  });
+  it('boxSizing should return a css', () => {
+    const css = boxSizing();
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(680872989);
+  });
+  it('html should return a css', () => {
     const css = html();
-    expect(fromJS({ css }).hashCode()).toEqual(-177371224);
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(-401909997);
   });
-  it('ie10FixHidden should return a fix', () => {
+  it('ie10FixHidden should return a css', () => {
     const css = ie10FixHidden();
-    expect(fromJS({ css }).hashCode()).toEqual(-81669626);
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(-1008903539);
   });
-  it('ie10FixViewport should return a fix', () => {
+  it('ie10FixViewport should return a css', () => {
     const css = ie10FixViewport();
-    expect(fromJS({ css }).hashCode()).toEqual(-223171500);
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(-966787180);
   });
-  it('svg should return a fix', () => {
+  it('svg should return a css', () => {
     const css = svg();
-    expect(fromJS({ css }).hashCode()).toEqual(45357565);
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(15932031);
   });
-  it('tabIndex should return a fix', () => {
+  it('tabIndex should return a css', () => {
     const css = tabIndex();
-    expect(fromJS({ css }).hashCode()).toEqual(647290882);
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(972266682);
   });
-  it('webkitFileUploadButton should return a fix', () => {
+  it('webkitFileUploadButton should return a css', () => {
     const css = webkitFileUploadButton();
-    expect(fromJS({ css }).hashCode()).toEqual(-306877417);
+    expect(css).not.toContain('undefined');
+    expect(css).not.toContain('null');
+    expect(fromJS({ css }).hashCode()).toEqual(764020772);
   });
 });

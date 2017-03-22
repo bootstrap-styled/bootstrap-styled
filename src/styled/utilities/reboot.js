@@ -1,13 +1,55 @@
 import bsTheme from 'theme';
-// Reboot
-//
-// Normalization of HTML elements, manually forked from Normalize.css to remove
-// styles targeting irrelevant browsers while applying new styles.
-//
-// Normalize is licensed MIT. https://github.com/necolas/normalize.css
 
 /**
- * getGlobalStyles
+ * getRebootUtils
+ *
+ * Return the reboot using mixins :global injection
+ */
+export function getRebootUtils(
+  fontFamilyBase = bsTheme['$font-family-base'],
+  fontSizeBase = bsTheme['$font-size-base'],
+  fontWeightBase = bsTheme['$font-weight-base'],
+  lineHeightBase = bsTheme['$line-height-base'],
+  bodyColor = bsTheme['$body-color'],
+  bodyBg = bsTheme['$body-bg'],
+) {
+  return `
+    :global(html) {
+      ${html()}
+    }
+    :global(@-ms-viewport) {
+      ${ie10FixViewport()}
+    }
+    :global(*, *::before, *::after) {
+      ${boxSizing()}
+    }
+    :global(body) {
+      ${body(
+        fontFamilyBase,
+        fontSizeBase,
+        fontWeightBase,
+        lineHeightBase,
+        bodyColor,
+        bodyBg,
+      )}
+    }
+    :global([tabindex="-1"]:focus) {
+      ${tabIndex()}
+    }
+    :global(svg:not(:root)) {
+      ${svg()}
+    }
+    :global([hidden]) {
+      ${ie10FixHidden()}
+    }
+    :global(::-webkit-file-upload-button) {
+      ${webkitFileUploadButton()}
+    }
+  `;
+}
+
+/**
+ * getRebootUtility
  *
  * This utility MUST return only things that can ONLY be injected in global styles
  */
@@ -20,21 +62,39 @@ export function getGlobalStyles(
   bodyBg = bsTheme['$body-bg'],
 ) {
   return `
-    ${html()}
-    ${boxSizing()}
-    ${ie10FixViewport()}
-    ${body(
-      fontFamilyBase,
-      fontSizeBase,
-      fontWeightBase,
-      lineHeightBase,
-      bodyColor,
-      bodyBg,
-    )}
-    ${tabIndex()}
-    ${svg()}
-    ${ie10FixHidden()}
-    ${webkitFileUploadButton()}
+    html {
+      ${html()}
+    }
+    *,
+    *::before,
+    *::after {
+      ${boxSizing()}
+    }
+    @-ms-viewport { 
+      ${ie10FixViewport()} 
+    }
+    body {
+      ${body(
+        fontFamilyBase,
+        fontSizeBase,
+        fontWeightBase,
+        lineHeightBase,
+        bodyColor,
+        bodyBg,
+      )} 
+    }
+    [tabindex="-1"]:focus {
+      ${tabIndex()}
+    }
+    svg:not(:root) {
+      ${svg()}
+    }
+    [hidden] {
+      ${ie10FixHidden()}
+    }
+    ::-webkit-file-upload-button {
+      ${webkitFileUploadButton()}
+    }
   `;
 }
 
@@ -47,35 +107,28 @@ export function getGlobalStyles(
 // 5. Setting @viewport causes scrollbars to overlap content in IE11 and Edge, so
 //    we force a non-overlapping, non-auto-hiding scrollbar to counteract.
 // 6. Change the default tap highlight to be completely transparent in iOS.
-
 export function html() {
   return `
-    html {
-      box-sizing: border-box;
-      font-family: sans-serif;
-      line-height: 1.15;
-      -ms-text-size-adjust: 100%;
-      -webkit-text-size-adjust: 100%;
-      -ms-overflow-style: scrollbar;
-      -webkit-tap-highlight-color: rgba(0,0,0,0);
-    }
+    box-sizing: border-box;
+    font-family: sans-serif;
+    line-height: 1.15;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-overflow-style: scrollbar;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
   `;
 }
 
 export function boxSizing() {
   return `
-    *,
-    *::before,
-    *::after {
-      box-sizing: inherit;
-    }
+    box-sizing: inherit;
   `;
 }
 
 // IE10+ doesn't honor `<meta name="viewport">` in some cases.
 export function ie10FixViewport() {
   return `
-    @-ms-viewport { width: device-width; }
+    width: device-width;
   `;
 }
 
@@ -83,7 +136,6 @@ export function ie10FixViewport() {
 //
 // 1. Remove the margin in all browsers.
 // 2. As a best practice, apply a default `background-color`.
-
 export function body(
   fontFamilyBase = bsTheme['$font-family-base'],
   fontSizeBase = bsTheme['$font-size-base'],
@@ -93,15 +145,13 @@ export function body(
   bodyBg = bsTheme['$body-bg'],
 ) {
   return `
-    body {
-      margin: 0;
-      font-family: ${fontFamilyBase};
-      font-size: ${fontSizeBase};
-      font-weight: ${fontWeightBase};
-      line-height: ${lineHeightBase};
-      color: ${bodyColor};
-      background-color: ${bodyBg};
-    }
+    margin: 0;
+    font-family: ${fontFamilyBase};
+    font-size: ${fontSizeBase};
+    font-weight: ${fontWeightBase};
+    line-height: ${lineHeightBase};
+    color: ${bodyColor};
+    background-color: ${bodyBg};
   `;
 }
 
@@ -112,18 +162,14 @@ export function body(
 // Credit: https://github.com/suitcss/base
 export function tabIndex() {
   return `
-    [tabindex="-1"]:focus {
-      outline: none !important;
-    }
+    outline: none !important;
   `;
 }
 
 // Hide the overflow in IE
 export function svg() {
   return `
-    svg:not(:root) {
-      overflow: hidden;
-    }
+    overflow: hidden;
   `;
 }
 
@@ -131,18 +177,14 @@ export function svg() {
 // Needed for proper display in IE 10-.
 export function ie10FixHidden() {
   return `
-    [hidden] {
-      display: none !important;
-    }
+    display: none !important;
   `;
 }
 
 export function webkitFileUploadButton() {
   return `
-    ::-webkit-file-upload-button {
-      font: inherit;
-      -webkit-appearance: button;
-    }
+    font: inherit;
+    -webkit-appearance: button;
   `;
 }
 
@@ -155,5 +197,6 @@ export default {
   svg,
   ie10FixHidden,
   getGlobalStyles,
+  getRebootUtils,
   webkitFileUploadButton,
 };

@@ -13,6 +13,7 @@ import {
   screenreadersUtils,
   sizingUtils,
   spacingUtils,
+  rebootUtils,
   textUtils,
   transitionUtils,
   visibilityUtils,
@@ -21,20 +22,21 @@ import {
 const defaultProps = {
   theme,
   utils: {
-    align: false,
-    background: false,
-    border: false,
-    clearfix: false,
-    display: false,
-    flex: false,
-    float: false,
-    position: false,
-    screenreaders: false,
-    sizing: false,
-    spacing: false,
-    text: false,
-    transition: false,
-    visibility: false,
+    reboot: true,
+    align: true,
+    background: true,
+    border: true,
+    clearfix: true,
+    display: true,
+    flex: true,
+    float: true,
+    position: true,
+    screenreaders: true,
+    sizing: true,
+    spacing: true,
+    text: true,
+    transition: true,
+    visibility: true,
   },
 };
 
@@ -43,6 +45,14 @@ const ifThen = conditionalMixins.ifThen;
 // eslint-disable-next-line no-class-assign
 const UtilityProvider = styled.div`
   ${(props) => `
+    ${ifThen(props.utils.reboot, rebootUtils.getRebootUtils(
+      props.theme['$font-family-base'],
+      props.theme['$font-size-base'],
+      props.theme['$font-weight-base'],
+      props.theme['$line-height-base'],
+      props.theme['$body-color'],
+      props.theme['$body-bg'],
+    ))}
     ${ifThen(props.utils.align, alignUtils.getAlignUtilities())}
     ${ifThen(props.utils.background, backgroundUtils.getBackgroundUtilities(
       props.theme['$enable-hover-media-query'],
