@@ -11,19 +11,21 @@ import H5 from '../H5';
 
 const defaultProps = {
   component: Card,
+  tag: 'div',
 };
 
 class Accordion extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
+    component: PropTypes.component,
     heading: PropTypes.oneOfType([
       PropTypes.node,
       PropTypes.string,
     ]),
     children: PropTypes.node.isRequired,
     name: PropTypes.string,
-    component: PropTypes.component,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   }
 
   static contextTypes = {
@@ -32,7 +34,7 @@ class Accordion extends React.Component { // eslint-disable-line react/prefer-st
 
   render() {
     // extract keys for div
-    const { className, name, component: Component, children, heading, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { className, name, component: Component, children, heading, tag: Tag, ...rest } = this.props; // eslint-disable-line no-unused-vars
     const { activeAccordionName, onClick, 'heading-component': HeadingComponent } = this.context.accordionGroup;
     const optional = {
       isOpened: false,
@@ -49,12 +51,12 @@ class Accordion extends React.Component { // eslint-disable-line react/prefer-st
       <CardHeader onClick={optional.onClick}><H5>{heading}</H5></CardHeader> // eslint-disable-line jsx-a11y/no-static-element-interactions
     );
     return (
-      <Component className={className} {...rest}>
+      <Tag className={className} {...rest}>
         {accordionHeading}
         <Collapse isOpen={optional.isOpened}>
           {children}
         </Collapse>
-      </Component>
+      </Tag>
     );
   }
 }
