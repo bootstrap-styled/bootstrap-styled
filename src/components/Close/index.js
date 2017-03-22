@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
 import { hoverFocus } from '../../styled/mixins/hover';
+import { mapToCssModules } from '../../styled/utilities/tools';
 
 const defaultProps = { theme: bsTheme };
 
@@ -13,32 +14,35 @@ class Close extends React.Component { // eslint-disable-line react/prefer-statel
     'sr-only': PropTypes.bool,
     className: PropTypes.string,
     closeLabel: PropTypes.string,
+    cssModule: PropTypes.object,
     onDismiss: PropTypes.func.isRequired,
   }
 
   render() {
-    const { className, 'sr-only': srOnly, onDismiss, closeLabel, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      className,
+      'sr-only': srOnly,
+      onDismiss,
+      closeLabel,
+      cssModule,
+      theme,   // eslint-disable-line no-unused-vars
+      ...rest
+    } = this.props;
 
-    if (srOnly) {
-      return (
-        <button
-          type="button"
-          className={cn(className, ['close', 'sr-only'])}
-          onClick={onDismiss}
-          {...rest}
-        >
-          {closeLabel}
-          <span>&times;</span>
-        </button>
-      );
-    }
+    const classes = mapToCssModules(cn(
+      className,
+      'close',
+      srOnly ? 'sr-only' : null,
+    ), cssModule);
+
     return (
       <button
         type="button"
-        className={cn(className, 'close')}
+        className={classes}
         onClick={onDismiss}
         {...rest}
       >
+        {closeLabel}
         <span>&times;</span>
       </button>
     );
