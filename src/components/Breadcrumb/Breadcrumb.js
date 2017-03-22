@@ -17,7 +17,7 @@ const defaultProps = {
 class Breadcrumb extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    tag: PropTypes.string,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     className: PropTypes.string,
     cssModule: PropTypes.object,
     theme: PropTypes.object,
