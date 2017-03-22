@@ -49,7 +49,6 @@ export { default as Breadcrumb, BreadcrumbItem } from './components/Breadcrumb';
 export { default as Button, ButtonDropdown } from './components/Button';
 export { default as ButtonGroup, ButtonToolbar } from './components/ButtonGroup';
 export { default as Caption } from './components/Caption';
-export { default as Clearfix } from './components/Clearfix';
 export { default as Close } from './components/Close';
 export { default as Code } from './components/Code';
 export { default as Col } from './components/Col';
@@ -83,7 +82,7 @@ export { default as ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupIte
 export { default as Map } from './components/Map';
 export { default as Mark } from './components/Mark';
 export { default as Media } from './components/Media';
-export { default as Modal } from './components/Modal';
+export { default as Modal, ModalBody, ModalFooter, ModalHeader } from './components/Modal';
 export { default as Nav, NavLink, NavItem } from './components/Nav';
 export { default as Ol } from './components/Ol';
 export { default as Option } from './components/Option';

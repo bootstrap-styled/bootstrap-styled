@@ -5,6 +5,11 @@ import styled from 'styled-components';
 import TransitionGroup from 'react-addons-transition-group';
 import classNames from 'classnames';
 import Fade from './Fade';
+import { transition } from '../../styled/mixins/transition';
+import { borderRadius } from '../../styled/mixins/border-radius';
+import { boxShadow } from '../../styled/mixins/box-shadow';
+import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
+import { fade } from '../../styled/utilities/transition';
 
 import {   
   getOriginalBodyPadding,
@@ -18,6 +23,7 @@ import {
 
 const defaultProps = {
   isOpen: false,
+  isLocked: false,
   backdrop: true,
   keyboard: true,
   zIndex: 1000,
@@ -26,8 +32,10 @@ const defaultProps = {
 class Modal extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool,
+    isLocked: PropTypes.bool,
+    onUnlock: PropTypes.func,
     size: PropTypes.string,
-    toggle: PropTypes.func,
+    onBackdrop: PropTypes.func,
     keyboard: PropTypes.bool,
     backdrop: PropTypes.oneOfType([
       PropTypes.bool,
@@ -47,6 +55,8 @@ class Modal extends React.Component {
       PropTypes.string,
     ]),
   };
+
+  isTransitioning = false;
 
   constructor(props) {
     super(props);
@@ -84,6 +94,10 @@ class Modal extends React.Component {
   }
 
   onEnter() {
+    this.isTransitioning = true;
+    if (this.props.isLocked && this.props.onUnlock) {
+      this.props.onUnlock();
+    }
     if (this.props.onEnter) {
       this.props.onEnter();
     }
@@ -91,24 +105,26 @@ class Modal extends React.Component {
 
   onExit() {
     this.destroy();
+    this.isTransitioning = false;
+    if (this.props.isLocked && this.props.onUnlock) {
+      this.props.onUnlock();
+    }
     if (this.props.onExit) {
       this.props.onExit();
     }
   }
 
   handleEscape(e) {
-    if (this.props.keyboard && e.keyCode === 27 && this.props.toggle) {
-      this.props.toggle();
+    this.isTransitioning = false;
+    if (!this.isTransitioning && this.props.keyboard && e.keyCode === 27 && this.props.onBackdrop) {
+      this.props.onBackdrop();
     }
   }
 
   handleBackdropClick(e) {
-    if (this.props.backdrop !== true) return;
-
-    const container = this._dialog;
-
-    if (e.target && !container.contains(e.target) && this.props.toggle) {
-      this.props.toggle();
+    this.isTransitioning = false;
+    if (!this.isTransitioning && this.props.backdrop && e.target && !this._dialog.contains(e.target) && this.props.onBackdrop) {
+      this.props.onBackdrop();
     }
   }
 
@@ -183,7 +199,7 @@ class Modal extends React.Component {
       backdrop,
       children,
       ...attributes
-    } = omit(this.props, ['toggle', 'keyboard', 'onEnter', 'onExit', 'zIndex']);
+    } = omit(this.props, ['isLocked', 'onUnlock', 'onBackdrop', 'keyboard', 'onEnter', 'onExit', 'zIndex']);
 
     return (
       <TransitionGroup component="div" className={mapToCssModules(classNames(wrapClassName, className))}>
@@ -210,7 +226,7 @@ class Modal extends React.Component {
               ref={(c) => (this._dialog = c)}
               {...attributes}
             >
-              <div className={ mapToCssModules(classNames('modal-content', contentClassName), cssModule)}>
+              <div className={mapToCssModules(classNames('modal-content', contentClassName), cssModule)}>
                 {children}
               </div>
             </div>
@@ -236,121 +252,129 @@ class Modal extends React.Component {
 
 // eslint-disable-next-line no-class-assign
 Modal = styled(Modal)`
+  ${(props) => `
 
-  & .modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1050;
-    display: none;
-    outline: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-    
-    &.fade {
-      opacity: 0;
-      transition: opacity .15s linear;
+    & .modal {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: ${props.theme['$zindex-modal']};
+      display: none;
+      outline: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      
+      ${fade(props.theme['$enable-transitions'], props.theme['$transition-fade'])}
+      &.fade {
+        .modal-dialog {
+          ${transition(props.theme['$enable-transitions'], props.theme['$modal-transition'])}
+          transform: translate(0, -25%);
+        }
+      }
       &.show {
-        opacity: 1;
-      }
-      .modal-dialog {
-        transition: transform .3s ease-out,-webkit-transform .3s ease-out;
-        transform: translateY(-25%);
+        .modal-dialog {
+          transform: translate(0, 0);
+        }
       }
     }
-    &.show {
-      .modal-dialog {
-        transform: translate(0);
+    
+    & .modal-dialog {
+      position: relative;
+      width: auto;
+      margin: ${props.theme['$modal-dialog-margin']};
+    }
+    
+    
+    & .modal-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background-color: ${props.theme['$modal-content-bg']};
+      background-clip: padding-box;
+      border: ${props.theme['$modal-content-border-width']} solid ${props.theme['$modal-content-border-color']};
+      ${borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius-lg'])}
+      ${boxShadow(props.theme['$enable-shadows'], props.theme['$modal-content-xs-box-shadow'])}
+      outline: 0;
+    }
+    
+    & .modal-backdrop {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: ${props.theme['$zindex-modal-backdrop']};
+      background-color: ${props.theme['$modal-backdrop-bg']};
+      &.fade {
+        opacity: 0
+      }
+      &.show {
+        opacity: ${props.theme['$modal-backdrop-opacity']};
       }
     }
-  }
-  
-  & .modal-dialog {
-    position: relative;
-    width: auto;
-    margin: 10px;
-  }
-  
-  
-  & .modal-content {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.2);
-    border-radius: .3rem;
-    outline: 0;
-  }
-  
-  & .modal-header {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    padding: 15px;
-    border-bottom: 1px solid #eceeef;
-  }
-  
-  & .modal-body {
-    position: relative;
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    padding: 15px;
-  }
-  
-  & .modal-footer {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: end;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
-    padding: 15px;
-    border-top: 1px solid #eceeef;
-  }
-  
-  & .modal-backdrop {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1040;
-    background-color: #000;
-    &.fade {
-      opacity: 0
+      
+        
+    & .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: ${props.theme['$modal-header-padding']};
+      border-bottom: ${props.theme['$modal-header-border-width']} solid ${props.theme['$modal-header-border-color']};
     }
-    &.show {
-      opacity: .5;
+    
+    & .modal-title {
+      margin-bottom: 0;
+      line-height: ${props.theme['$modal-title-line-height']};
     }
-  }
-  
-  & .fade {
-    opacity: 0;
-    transition: opacity .15s linear;
-    .show {
-      opacity: 1;
+    
+    & .modal-body {
+      position: relative;
+      flex: 1 1 auto;
+      padding: ${props.theme['$modal-inner-padding']};
     }
-  }
+    
+    & .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: ${props.theme['$modal-inner-padding']};
+      border-top: ${props.theme['$modal-footer-border-width']} solid ${props.theme['$modal-footer-border-color']};
+      // Easily place margin between footer elements
+      > :not(:first-child) { margin-left: .25rem; }
+      > :not(:last-child) { margin-right: .25rem; }
+    }
+    
+
   
+    // Scale up the modal
+    ${mediaBreakpointUp('sm', props.theme['$grid-breakpoints'],
+  `
+        & .modal-dialog {
+          max-width: ${props.theme['$modal-md']};
+          margin: ${props.theme['$modal-dialog-sm-up-margin-y']} auto;
+        }
+      
+        & .modal-content {
+          ${boxShadow(props.theme['$enable-shadows'], props.theme['$modal-content-sm-up-box-shadow'])}
+        }
+      
+        & .modal-sm {
+          max-width: ${props.theme['$modal-sm']};
+        }
+      `
+    )}
   
+
+    ${mediaBreakpointUp('lg', props.theme['$grid-breakpoints'],
+  `
+        & .modal-lg {
+           max-width:  ${props.theme['$modal-lg']}; 
+         }
+      `
+    )}
+  `}
 `;
 
 
