@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import { mapToCssModules } from '../../styled/utilities/tools';
-
+import H6 from '../H6';
 const defaultProps = {
   tag: 'button',
 };
@@ -64,7 +64,7 @@ class DropdownItem extends React.Component {
 
     if (Tag === 'button') {
       if (header) {
-        Tag = 'h6';
+        Tag = H6;
       } else if (divider) {
         Tag = 'div';
       }
