@@ -319,6 +319,10 @@ export default function makeOriginal(userTheme = {}) {
   v['$table-bg'] = u['$table-bg'] || 'transparent';
 
   v['$table-inverse-bg'] = u['$table-inverse-bg'] || v['$gray-dark'];
+  v['$table-inverse-bg-accent'] = u['$table-inverse-bg-accent'] || Color(v['$white']).alpha(0.05).toString();
+  v['$table-inverse-bg-hover'] = u['$table-inverse-bg-hover'] || Color(v['$white']).alpha(0.075).toString();
+  v['$table-inverse-color'] = u['$table-inverse-color'] || v['$body-bg'];
+  v['$table-inverse-border'] = u['$table-inverse-border'] || Color(v['$gray-dark']).lighten(0.075).toString();
 
   v['$table-bg-accent'] = u['$table-bg-accent'] || Color(v['$black']).alpha(0.05).toString();
   v['$table-bg-hover'] = u['$table-bg-hover'] || Color(v['$black']).alpha(0.075).toString();

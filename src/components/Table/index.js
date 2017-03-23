@@ -85,31 +85,8 @@ Table = styled(Table)`
       width: 100%;
       max-width: 100%;
       margin-bottom: ${props.theme['$spacer']};
-    
-      /* from reboot.scss */
-      th {
-        /* Centered by default, but left-align-ed to match the tds below. */
-        text-align: left;
-      }
-    
-      /* bs4 utility moved here */
-      tr,
-      th,
-      td {
-      
-        /* Table backgrounds
-         Exact selectors below required to override '.table-striped' and prevent
-         inheritance to nested tables.
-        */
-        
-        /* Generate the contextual variants */
-        ${tableRowVariant('active', props.theme['$table-bg-active'])}
-        ${tableRowVariant('success', props.theme['$state-success-bg'])}
-        ${tableRowVariant('info', props.theme['$state-info-bg'])}
-        ${tableRowVariant('warning', props.theme['$state-warning-bg'])}
-        ${tableRowVariant('danger', props.theme['$state-danger-bg'])}
-      }
-      
+      background-color: ${props.theme['$table-bg']};
+
       th,
       td {
         padding: ${props.theme['$table-cell-padding']};
@@ -188,6 +165,18 @@ Table = styled(Table)`
       }
     }
     
+    /* Table backgrounds
+    Exact selectors below required to override '.table-striped' and prevent
+    inheritance to nested tables.
+    */
+        
+    /* Generate the contextual variants */
+    ${tableRowVariant('active', props.theme['$table-bg-active'])}
+    ${tableRowVariant('success', props.theme['$state-success-bg'])}
+    ${tableRowVariant('info', props.theme['$state-info-bg'])}
+    ${tableRowVariant('warning', props.theme['$state-warning-bg'])}
+    ${tableRowVariant('danger', props.theme['$state-danger-bg'])}
+     
     
     /* Inverse styles
     Same table markup, but inverted color scheme: dark background and light text.
@@ -195,7 +184,7 @@ Table = styled(Table)`
     
     & thead.thead-inverse {
       th {
-        color: #fff;
+        color: ${props.theme['$table-inverse-color']};
         background-color: ${props.theme['$table-inverse-bg']};
       }
     }
@@ -209,17 +198,31 @@ Table = styled(Table)`
     }
     
     &.table-inverse {
-      color: ${props.theme['$table-head-bg']};
+      color: ${props.theme['$table-inverse-color']};
       background-color: ${props.theme['$table-inverse-bg']};
     
       th,
       td,
       thead th {
-        border-color: ${props.theme['$table-inverse-border-color']};
+        border-color: ${props.theme['$table-inverse-border']};
       }
     
       &.table-bordered {
         border: 0;
+      }
+      
+      &.table-striped {
+        tbody tr:nth-of-type(odd) {
+        background-color: ${props.theme['$table-inverse-bg-accent']};
+        }
+      }
+      
+      &.table-hover {
+        tbody tr {
+          ${hoverMixin(`
+            background-color: ${props.theme['$table-inverse-bg-hover']};
+          `)}
+        }
       }
     }
     
@@ -234,14 +237,11 @@ Table = styled(Table)`
     &.table-responsive {
       display: block;
       width: 100%;
-      min-height: 0%; /* Workaround for IE9 bug (see https://github.com/twbs/bootstrap/issues/14837) */
       overflow-x: auto;
-    
-       /*TODO: find out if we need this still.
-      
-       border: ${props.theme['$table-border-width']} solid ${props.theme['$table-border-color']};
-       -ms-overflow-style: -ms-autohiding-scrollbar; // See https://github.com/twbs/bootstrap/pull/10057
-        */
+      -ms-overflow-style: -ms-autohiding-scrollbar; /* See https://github.com/twbs/bootstrap/pull/10057 */
+      &.table-bordered {
+        border: 0;
+      }
     }
     
     
@@ -289,6 +289,14 @@ Table = styled(Table)`
       }
     }
     
+      /* from reboot.scss */
+      th {
+        /* Centered by default, but left-align-ed to match the tds below. */
+        text-align: left;
+      }
+        
+
+      
     /* Reboot Scss */
     /* No longer part of Normalize since v4 */
     border-collapse: collapse;
