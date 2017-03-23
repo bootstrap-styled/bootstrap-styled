@@ -9,7 +9,7 @@ export const defaultProps = theme;
 
 
 export function buttonVariant(enableShadows = defaultProps['$enable-shadows'], buttonColor, background, border, btnActiveBoxShadow = defaultProps['$btn-active-box-shadow'], btnBoxShadow = defaultProps['$btn-box-shadow']) {
-  const activeBackground = color(background).darken(0.1).toString();
+  const activeBackground = color(background).darken(0.2).toString();
   const activeBorder = color(border).darken(0.12).toString();
 
   return `

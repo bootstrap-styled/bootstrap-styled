@@ -6,13 +6,13 @@ describe('bootstrap button mixins', () => {
     const css = buttonVariant(defaultProps['$enable-shadows'], '#f00', '#0f0', '#0ff', defaultProps['$btn-active-box-shadow'], defaultProps['$btn-box-shadow']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(135893933);
+    expect(fromJS({ css }).hashCode()).toEqual(603985282);
   });
   it('buttonVariant should return a css with shadows', () => {
     const css = buttonVariant(!defaultProps['$enable-shadows'], '#f00', '#0f0', '#0ff', defaultProps['$btn-active-box-shadow'], defaultProps['$btn-box-shadow']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-381183020);
+    expect(fromJS({ css }).hashCode()).toEqual(-1008580414);
   });
   it('buttonVariant should return a css by default', () => {
     const css = buttonVariant();
@@ -94,12 +94,12 @@ describe('bootstrap button mixins', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(911399032);
+    expect(fromJS({ css }).hashCode()).toEqual(-273811278);
   });
   it('button should return a button utility by default', () => {
     const css = button();
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-636700595);
+    expect(fromJS({ css }).hashCode()).toEqual(118548585);
   });
 });
