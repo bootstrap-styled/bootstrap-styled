@@ -14,17 +14,8 @@ export function getRebootUtils(
   bodyBg = bsTheme['$body-bg'],
 ) {
   return `
-    :global(html) {
-      ${html()}
-    }
-    :global(@-ms-viewport) {
-      ${ie10FixViewport()}
-    }
-    :global(*, *::before, *::after) {
-      ${boxSizing()}
-    }
-    :global(body) {
-      ${body(
+    @global {
+      ${getGlobalStyles(
         fontFamilyBase,
         fontSizeBase,
         fontWeightBase,
@@ -32,18 +23,6 @@ export function getRebootUtils(
         bodyColor,
         bodyBg,
       )}
-    }
-    :global([tabindex="-1"]:focus) {
-      ${tabIndex()}
-    }
-    :global(svg:not(:root)) {
-      ${svg()}
-    }
-    :global([hidden]) {
-      ${ie10FixHidden()}
-    }
-    :global(::-webkit-file-upload-button) {
-      ${webkitFileUploadButton()}
     }
   `;
 }
