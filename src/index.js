@@ -113,7 +113,7 @@ export { default as Tooltip } from './components/Tooltip';
 export { default as Tr } from './components/Tr';
 export { default as Ul } from './components/Ul';
 // 2. Molecules
-export { default as Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup } from './components/Cards';
+export { default as Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote } from './components/Cards';
 export { default as Accordion, AccordionGroup } from './components/Accordions';
 export { default as Form, FormGroup, FormText, FormFeedback } from './components/Forms';
 export { default as Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from './components/Dropdown';

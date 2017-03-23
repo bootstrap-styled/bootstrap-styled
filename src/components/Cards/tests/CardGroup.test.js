@@ -1,33 +1,27 @@
 /**
  * Testing our CardGroup component
  */
-import { ThemeProvider } from 'styled-components';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import CardGroup from '../CardGroup';
 
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => shallow(
-  <CardGroup
-    className={props.className}
-  >
+  <CardGroup {...props}>
     {children}
   </CardGroup>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <CardGroup
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <CardGroup {...props}>
       {children}
     </CardGroup>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 

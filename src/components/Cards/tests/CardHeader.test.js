@@ -1,33 +1,27 @@
 /**
  * Testing our CardHeader component
  */
-import { ThemeProvider } from 'styled-components';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import CardHeader from '../CardHeader';
 
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => shallow(
-  <CardHeader
-    className={props.className}
-  >
+  <CardHeader {...props}>
     {children}
   </CardHeader>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <CardHeader
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <CardHeader {...props}>
       {children}
     </CardHeader>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 

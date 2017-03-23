@@ -1,33 +1,27 @@
 /**
  * Testing our CardFooter component
  */
-import { ThemeProvider } from 'styled-components';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import CardFooter from '../CardFooter';
 
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => shallow(
-  <CardFooter
-    className={props.className}
-  >
+  <CardFooter {...props}>
     {children}
   </CardFooter>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <CardFooter
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <CardFooter {...props}>
       {children}
     </CardFooter>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 

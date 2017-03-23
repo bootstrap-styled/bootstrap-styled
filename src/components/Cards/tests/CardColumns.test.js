@@ -1,33 +1,27 @@
 /**
  * Testing our CardColumns component
  */
-import { ThemeProvider } from 'styled-components';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import CardColumns from '../CardColumns';
 
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => shallow(
-  <CardColumns
-    className={props.className}
-  >
+  <CardColumns {...props}>
     {children}
   </CardColumns>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <CardColumns
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <CardColumns {...props}>
       {children}
     </CardColumns>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 

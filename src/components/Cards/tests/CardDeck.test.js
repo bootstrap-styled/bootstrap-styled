@@ -1,33 +1,26 @@
 /**
  * Testing our CardDeck component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import CardDeck from '../CardDeck';
 
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => shallow(
-  <CardDeck
-    className={props.className}
-  >
+  <CardDeck {...props}>
     {children}
   </CardDeck>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <CardDeck
-      className={props.className}
-    >
+  <BootstrapProvider>
+    <CardDeck {...props}>
       {children}
     </CardDeck>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 

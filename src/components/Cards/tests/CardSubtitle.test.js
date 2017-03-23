@@ -9,20 +9,15 @@ import BootstrapProvider from '../../BootstrapProvider';
 
 const children = <p> test </p>;
 
-
 const renderComponent = (props = {}) => mount(
-  <CardSubtitle
-    className={props.className}
-  >
+  <CardSubtitle {...props}>
     {children}
   </CardSubtitle>
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <CardSubtitle
-      className={props.className}
-    >
+    <CardSubtitle {...props}>
       {children}
     </CardSubtitle>
   </BootstrapProvider>

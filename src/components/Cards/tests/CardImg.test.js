@@ -6,7 +6,6 @@ import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
 import CardImg from '../CardImg';
 
-
 const renderComponent = (props) => shallow(
   <CardImg {...props} />
 );

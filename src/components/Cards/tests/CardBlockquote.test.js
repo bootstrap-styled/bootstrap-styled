@@ -1,36 +1,37 @@
 /**
- * Testing our CardImgOverlay component
+ * Testing our CardBlockquote component
  */
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
-import CardImgOverlay from '../CardImgOverlay';
+
+import CardBlockquote from '../CardBlockquote';
 
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => shallow(
-  <CardImgOverlay {...props}>
+  <CardBlockquote {...props}>
     {children}
-  </CardImgOverlay>
+  </CardBlockquote>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <CardImgOverlay {...props}>
+    <CardBlockquote {...props}>
       {children}
-    </CardImgOverlay>
+    </CardBlockquote>
   </BootstrapProvider>
 );
 
 
-describe('<CardImgOverlay />', () => {
-  it('should render an <CardImgOverlay> tag without a theme', () => {
+describe('<CardBlockquote />', () => {
+  it('should render an <CardBlockquote> tag without a theme', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('div').length).toBe(1);
+    expect(renderedComponent.find('blockquote').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -38,13 +39,18 @@ describe('<CardImgOverlay />', () => {
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
-  it('should render an <CardImgOverlay> tag with a theme', () => {
+  it('should render an <CardBlockquote> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('CardImgOverlay').length).toBe(1);
+    expect(renderedComponent.find('CardBlockquote').length).toBe(1);
   });
-
+  it('should have a class .card-header by default with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+    });
+    expect(renderedComponent.find('blockquote').hasClass('card-blockquote')).toBe(true);
+  });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
