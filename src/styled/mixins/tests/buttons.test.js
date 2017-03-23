@@ -6,27 +6,27 @@ describe('bootstrap button mixins', () => {
     const css = buttonVariant(defaultProps['$enable-shadows'], '#f00', '#0f0', '#0ff', defaultProps['$btn-active-box-shadow'], defaultProps['$btn-box-shadow']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(916230894);
+    expect(fromJS({ css }).hashCode()).toEqual(135893933);
   });
   it('buttonVariant should return a css with shadows', () => {
     const css = buttonVariant(!defaultProps['$enable-shadows'], '#f00', '#0f0', '#0ff', defaultProps['$btn-active-box-shadow'], defaultProps['$btn-box-shadow']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-865738949);
+    expect(fromJS({ css }).hashCode()).toEqual(-381183020);
   });
   it('buttonVariant should return a css by default', () => {
     const css = buttonVariant();
-    expect(fromJS({ css }).hashCode()).toEqual(-370928681);
+    expect(fromJS({ css }).hashCode()).toEqual(-902414697);
   });
   it('buttonOutlineVariant should return a css', () => {
     const css = buttonOutlineVariant('#f00', '#0f0');
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-105052217);
+    expect(fromJS({ css }).hashCode()).toEqual(741338911);
   });
   it('buttonOutlineVariant should return a css by default', () => {
     const css = buttonOutlineVariant();
-    expect(fromJS({ css }).hashCode()).toEqual(722820438);
+    expect(fromJS({ css }).hashCode()).toEqual(-716049729);
   });
   it('buttonSize should return a css with rounded', () => {
     const css = buttonSize(defaultProps['$enable-rounded'], '#f00', '#00f', '#eee', '3px');
@@ -94,12 +94,12 @@ describe('bootstrap button mixins', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(1026628703);
+    expect(fromJS({ css }).hashCode()).toEqual(-381889459);
   });
   it('button should return a button utility by default', () => {
     const css = button();
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(1026628703);
+    expect(fromJS({ css }).hashCode()).toEqual(413496899);
   });
 });

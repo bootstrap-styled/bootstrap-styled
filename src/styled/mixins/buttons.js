@@ -4,15 +4,13 @@ import { borderRadius } from './border-radius';
 import { hover, hoverFocus } from './hover';
 import { boxShadow } from './box-shadow';
 import { transition } from '../mixins/transition';
-import { tabFocus } from './tab-focus';
 import { ifElse } from './conditional';
-
 export const defaultProps = theme;
 
 
-export function buttonVariant(enableShadows = defaultProps['$enable-shadows'], buttonColor, background, border, btnBoxShadow = defaultProps['$btn-box-shadow'], btnActiveBoxShadow = defaultProps['$btn-active-box-shadow']) {
-  const activeBackground = color(background).darken(0.1).hex();
-  const activeBorder = color(border).darken(0.12).hex();
+export function buttonVariant(enableShadows = defaultProps['$enable-shadows'], buttonColor, background, border, btnActiveBoxShadow = defaultProps['$btn-active-box-shadow'], btnBoxShadow = defaultProps['$btn-box-shadow']) {
+  const activeBackground = color(background).darken(0.1).toString();
+  const activeBorder = color(border).darken(0.12).toString();
 
   return `
     color: ${buttonColor};
@@ -28,27 +26,27 @@ export function buttonVariant(enableShadows = defaultProps['$enable-shadows'], b
   
     &:focus,
     &.focus {
-      ${ifElse(enableShadows,
+      ${ifElse(
         `box-shadow: ${btnBoxShadow}, 0 0 0 2px ${color(border).alpha(0.5).toString()};`,
         `box-shadow: 0 0 0 2px ${color(border).alpha(0.5).toString()};`
       )}
     }
   
+    /* Disabled comes first so active can properly restyle */
+    &.disabled,
+    &:disabled {
+      background-color: ${background};
+      border-color: ${border};
+    }
+    
     &:active,
     &.active,
     .show > &.dropdown-toggle {
       color: ${buttonColor};
       background-color: ${activeBackground};
-      border-color: ${activeBorder};
-      /* Remove the gradient for the pressed/active state */
       background-image: none;
+      border-color: ${activeBorder};
       ${boxShadow(enableShadows, btnActiveBoxShadow)}
-    }
-  
-    &.disabled,
-    &:disabled {
-      background-color: ${background};
-      border-color: ${border};
     }
   `;
 }
@@ -68,21 +66,22 @@ export function buttonOutlineVariant(buttonColor, buttonColorHover = '#fff') {
   
     &:focus,
     &.focus {
-      box-shadow: 0 0 0 2px rgba(${buttonColor}, .5);
+      box-shadow: 0 0 0 2px ${color(buttonColor).alpha(0.5).toString()};
     }
-    
+  
     &.disabled,
     &:disabled {
       color: ${buttonColor};
-      background-color: transparent;
+      border-color: transparent;
     }
-  
+    
     &:active,
     &.active,
-    & .show > &.dropdown-toggle {
+    & .open > &.dropdown-toggle {
       color: ${buttonColorHover};
       background-color: ${buttonColor};
       border-color: ${buttonColor};
+    }
   `;
 }
 
@@ -100,6 +99,7 @@ export function button(
   $enableHoverMediaQuery = defaultProps['$enable-hover-media-query'],
   $enableTransitions = defaultProps['$enable-transitions'],
   $enableRounded = defaultProps['$enable-rounded'],
+  $fontWeightNormal = defaultProps['$font-weight-normal'],
   $btnFontWeight = defaultProps['$btn-font-weight'],
   $btnLineHeight = defaultProps['$btn-line-height'],
   $btnTransition = defaultProps['$btn-transition'],
@@ -108,6 +108,8 @@ export function button(
   $btnPaddingY = defaultProps['$btn-padding-y'],
   $fontSizeBase = defaultProps['$font-size-base'],
   $btnBorderRadius = defaultProps['$btn-border-radius'],
+  $btnBoxShadow = defaultProps['$btn-box-shadow'],
+  $btnFocusBoxShadow = defaultProps['$btn-focus-box-shadow'],
   $btnActiveBoxShadow = defaultProps['$btn-active-box-shadow'],
   $cursorDisabled = defaultProps['$cursor-disabled'],
   $linkColor = defaultProps['$link-color'],
@@ -143,17 +145,14 @@ export function button(
   $btnDangerBorder = defaultProps['$btn-danger-border'],
 ) {
   return `
-    /*
-     Base styles
-    */
+  
     font-family: inherit;
-
+    
     &.btn {
-      /* Adapt the colors based on primary prop */
       display: inline-block;
       font-weight: ${$btnFontWeight};
       line-height: ${$btnLineHeight};
-      text-align: center;
+      text-align: center
       white-space: nowrap;
       vertical-align: middle;
       user-select: none;
@@ -170,126 +169,134 @@ export function button(
         $btnTransition
       )}
      
-      &,
-      &:active,
-      &.active {
-        &:focus,
-        &.focus {
-          ${tabFocus()}
-        }
-      }
-     
       ${hoverFocus(
         $enableHoverMediaQuery,
-        `
-          text-decoration: none;
-          &.focus {
-            text-decoration: none;
-          }
-        `
+        'text-decoration: none;'
       )}
-     
-      &:active,
-      &.active {
-        background-image: none;
+
+      &:focus,
+      &.focus {
         outline: 0;
-        ${boxShadow(
-          $enableShadows,
-          $btnActiveBoxShadow
-        )}
+        box-shadow: ${$btnFocusBoxShadow};
       }
-     
+
       &.disabled,
       &:disabled {
         cursor: ${$cursorDisabled};
         opacity: .65;
         ${boxShadow($enableShadows, 'none')}
+      }  
+
+      &:active,
+      &.active {
+        background-image: none;
+        ${boxShadow($enableShadows, $btnFocusBoxShadow, $btnActiveBoxShadow)}
       }
-    }   
- 
+    }
+    
     a.btn.disabled,
     fieldset[disabled] a.btn {
       pointer-events: none;
     }
    
-      
+   
+    /* Alternate buttons */
+   
     &.btn-primary {
       ${buttonVariant(
-        $enableHoverMediaQuery,
+        $enableShadows,
         $btnPrimaryColor,
         $btnPrimaryBg,
         $btnPrimaryBorder,
+        $btnActiveBoxShadow,
+        $btnBoxShadow
       )}
     }
     &.btn-secondary {
       ${buttonVariant(
-        $enableHoverMediaQuery,
+        $enableShadows,
         $btnSecondaryColor,
         $btnSecondaryBg,
         $btnSecondaryBorder,
+        $btnActiveBoxShadow,
+        $btnBoxShadow
       )}
     }
     &.btn-info {
       ${buttonVariant(
-        $enableHoverMediaQuery,
+        $enableShadows,
         $btnInfoColor,
         $btnInfoBg,
         $btnInfoBorder,
+        $btnActiveBoxShadow,
+        $btnBoxShadow
       )}
     }
     &.btn-success {
       ${buttonVariant(
-        $enableHoverMediaQuery,
+        $enableShadows,
         $btnSuccessColor,
         $btnSuccessBg,
         $btnSuccessBorder,
+        $btnActiveBoxShadow,
+        $btnBoxShadow
       )}
     }
     &.btn-warning {
       ${buttonVariant(
-        $enableHoverMediaQuery,
+        $enableShadows,
         $btnWarningColor,
         $btnWarningBg,
         $btnWarningBorder,
+        $btnActiveBoxShadow,
+        $btnBoxShadow
       )}
     }
     &.btn-danger {
       ${buttonVariant(
-        $enableHoverMediaQuery,
+        $enableShadows,
         $btnDangerColor,
         $btnDangerBg,
         $btnDangerBorder,
+        $btnActiveBoxShadow,
+        $btnBoxShadow
       )}
     }
    
     &.btn-outline-primary {
       ${buttonOutlineVariant(
         $btnPrimaryBg,
+        $btnPrimaryColor,
       )}
     }    
     &.btn-outline-secondary {
       ${buttonOutlineVariant(
         $btnSecondaryBorder,
+        $btnSecondaryColor,
       )}
     }    
     &.btn-outline-info {
       ${buttonOutlineVariant(
         $btnInfoBg,
+        $btnInfoColor,
       )}
     }    
     &.btn-outline-success {
       ${buttonOutlineVariant(
         $btnSuccessBg,
+        $btnSuccessColor,
       )}
     }
     &.btn-outline-warning {
       ${buttonOutlineVariant(
         $btnWarningBg,
+        $btnWarningColor,
       )}
     }
     &.btn-outline-danger {
       ${buttonOutlineVariant(
         $btnDangerBg,
+        $btnDangerColor,
       )}
     }
    
@@ -297,9 +304,8 @@ export function button(
      Link buttons
     */
    
-    /* Make a button look and behave like a link */
     &.btn-link {
-      font-weight: normal;
+      font-weight: ${$fontWeightNormal};
       color: ${$linkColor};
       border-radius: 0;
    
@@ -334,16 +340,17 @@ export function button(
       )}
      
       &:disabled {
+        color: ${$btnLinkDisabledColor};
         ${hoverFocus(
           $enableHoverMediaQuery,
           `
-            color: ${$btnLinkDisabledColor};
             text-decoration: none;
           `
         )}
       }
     }
-   
+  
+  
     /*
      Button Sizes
     */
@@ -396,8 +403,6 @@ export function button(
    
     /* Reboot Scss */
     touch-action: manipulation;
-    /* Normalize includes font: inherit;, so font-family. font-size, etc are */
-    /* properly inherited. However, line-height is not inherited there. */
     line-height: inherit;
     &:focus{
       outline: 1px dotted;
