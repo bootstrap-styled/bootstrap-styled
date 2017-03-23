@@ -12,12 +12,11 @@ describe('bootstrap reboot utility', () => {
       bsTheme['$body-color'],
       bsTheme['$body-bg'],
     );
-    console.log(css);
-    expect(fromJS({ css }).hashCode()).toEqual(-142391712);
+    expect(fromJS({ css }).hashCode()).toEqual(-478980935);
   });
   it('getRebootUtils should return a set of global styles without params', () => {
     const css = getRebootUtils();
-    expect(fromJS({ css }).hashCode()).toEqual(-142391712);
+    expect(fromJS({ css }).hashCode()).toEqual(-478980935);
   });
   it('getGlobalStyles should return a set of global styles', () => {
     const css = getGlobalStyles(
