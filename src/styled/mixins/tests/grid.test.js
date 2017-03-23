@@ -51,11 +51,11 @@ describe('bootstrap grid mixins', () => {
     const css = makeGutters(defaultProps['$grid-gutter-widths']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(391692486);
+    expect(fromJS({ css }).hashCode()).toEqual(-927179453);
   });
   it('makeGutters should have arguments', () => {
     const css = makeGutters();
-    expect(fromJS({ css }).hashCode()).toEqual(391692486);
+    expect(fromJS({ css }).hashCode()).toEqual(-927179453);
   });
   it('makeRow should return an empty css', () => {
     const css = makeRow(!defaultProps['$enable-grid-classes'], defaultProps['$grid-gutter-widths']);

@@ -44,8 +44,8 @@ describe('<Col />', () => {
     });
     expect(renderedComponent.find('Col').length).toBe(1);
   });
-  it('getColumnSizeClass should return col', () => {
-    expect(getColumnSizeClass('xs', '', '')).toEqual('col');
+  it('getColumnSizeClass should return empty string', () => {
+    expect(getColumnSizeClass('xs', '', '')).toEqual('');
   });
   it('getColumnSizeClass should return col-auto', () => {
     expect(getColumnSizeClass('xs', '', 'auto')).toEqual('col-auto');

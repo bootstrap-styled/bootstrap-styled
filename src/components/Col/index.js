@@ -28,7 +28,7 @@ const defaultProps = {
 
 export const getColumnSizeClass = (isXs, colWidth, colSize) => {
   if (colSize === true || colSize === '') {
-    return isXs ? 'col' : `col-${colWidth}`;
+    return isXs ? '' : `col-${colWidth}`;
   } else if (colSize === 'auto') {
     return isXs ? 'col-auto' : `col-${colWidth}-auto`;
   }

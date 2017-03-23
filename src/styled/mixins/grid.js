@@ -69,12 +69,12 @@ export function makeContainerMaxWidths(enableGridClasses = defaultProps['$enable
   return '';
 }
 
-export function makeGutters(gridGutterWidths = defaultProps['$grid-gutter-widths']) {
+export function makeGutters(gridGutterWidths = defaultProps['$grid-gutter-widths'], breakpoints = defaultProps['$grid-breakpoints']) {
   const gutterList = [];
   Object.keys(gridGutterWidths).forEach((breakpoint) => {
     let gutterValue = gridGutterWidths[breakpoint];
     gutterValue = `${unitUtils.rmUnit(gutterValue) / 2}${unitUtils.detectUnit(gutterValue)}`;
-    const gutter = mediaBreakpointUp(breakpoint, gridGutterWidths, `
+    const gutter = mediaBreakpointUp(breakpoint, breakpoints, `
       padding-right: ${gutterValue};
       padding-left:  ${gutterValue};
     `);

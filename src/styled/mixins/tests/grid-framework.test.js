@@ -22,10 +22,10 @@ describe('bootstrap grid-framework mixins', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-316578969);
+    expect(fromJS({ css }).hashCode()).toEqual(975098536);
   });
   it('makeGridColumns should have arguments', () => {
     const css = makeGridColumns();
-    expect(fromJS({ css }).hashCode()).toEqual(-316578969);
+    expect(fromJS({ css }).hashCode()).toEqual(975098536);
   });
 });

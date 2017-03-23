@@ -25,12 +25,12 @@ export const defaultProps = {
 // Used only by Bootstrap to generate the correct number of grid classes given
 // any value of `$grid-columns`.
 
-function getGridColumn(columns = defaultProps['$grid-columns'], gridGutterWidths = defaultProps['$grid-gutter-widths']) {
+function getGridColumn(columns = defaultProps['$grid-columns'], gridGutterWidths = defaultProps['$grid-gutter-widths'], breakpoints = defaultProps['$grid-breakpoints']) {
   return `
     position: relative;
     width: 100%;
     min-height: 1px; /* Prevent columns from collapsing when empty */
-    ${makeGutters(gridGutterWidths)}
+    ${makeGutters(gridGutterWidths, breakpoints)}
   `;
 }
 
@@ -41,7 +41,7 @@ function getColumnGridColumn(gridColumns = defaultProps['$grid-columns'], gridBr
     const column = `
       &.col${infix}-${i},
        & .col${infix}-${i}{
-        ${getGridColumn(gridColumns, gridGutterWidths)}
+        ${getGridColumn(gridColumns, gridGutterWidths, gridBreakpoints)}
       }
     `;
     columnList.push(column);
@@ -50,7 +50,7 @@ function getColumnGridColumn(gridColumns = defaultProps['$grid-columns'], gridBr
     /* Allow columns to stretch full width below their breakpoints */
     &.col${infix},
      & .col${infix}{
-      ${getGridColumn(gridColumns, gridGutterWidths)}
+      ${getGridColumn(gridColumns, gridGutterWidths, gridBreakpoints)}
     }
 
     ${columnList.join('\n')}
