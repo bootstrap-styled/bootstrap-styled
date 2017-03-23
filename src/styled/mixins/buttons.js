@@ -152,7 +152,7 @@ export function button(
       display: inline-block;
       font-weight: ${$btnFontWeight};
       line-height: ${$btnLineHeight};
-      text-align: center
+      text-align: center;
       white-space: nowrap;
       vertical-align: middle;
       user-select: none;
