@@ -33,6 +33,7 @@ describe('<Blockquote />', () => {
   });
   it('should have an attribute reverse without a theme', () => {
     const renderedComponent = renderComponent({
+      children,
       reverse: true,
     });
     expect(renderedComponent.find('Blockquote').props().reverse).toBe(true);
@@ -52,6 +53,7 @@ describe('<Blockquote />', () => {
   });
   it('should have an attribute reverse with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
+      children,
       reverse: true,
     });
     expect(renderedComponent.find('Blockquote').props().reverse).toBe(true);

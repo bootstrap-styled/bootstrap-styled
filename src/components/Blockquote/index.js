@@ -27,7 +27,8 @@ class Blockquote extends React.Component { // eslint-disable-line react/prefer-s
     const { theme, className, reverse, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
     const classes = cn(
       className,
-      reverse ? 'blockquote-reverse' : 'blockquote',
+      'blockquote',
+      reverse ? 'blockquote-reverse' : false,
     );
     return (
       <blockquote className={classes} {...rest}>
