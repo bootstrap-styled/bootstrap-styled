@@ -195,7 +195,7 @@
   },
   "peerDependencies": {
     "react": "^15.4.2",
-    "styled-components": "^2.0.0-6",
+    "styled-components": "^2.0.0-8",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2"
   },
@@ -258,7 +258,7 @@
     "shelljs": "0.7.5",
     "sinon": "2.0.0-pre",
     "style-loader": "0.13.1",
-    "styled-components": "2.0.0-6",
+    "styled-components": "2.0.0-8",
     "toctoc": "0.2.3",
     "url-loader": "0.5.7",
     "webpack": "2.2.1",
