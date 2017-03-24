@@ -115,7 +115,7 @@ export { default as Ul } from './components/Ul';
 // 2. Molecules
 export { default as Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote } from './components/Cards';
 export { default as Accordion, AccordionGroup } from './components/Accordions';
-export { default as Form, FormGroup, FormText, FormFeedback } from './components/Forms';
+export { default as Form, FormGroup, FormText, FormFeedback, FormCustom } from './components/Forms';
 export { default as Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from './components/Dropdown';
 export { default as Navbar, NavbarToggler, NavbarBrand, NavDropdown } from './components/NavBar';
 // 3. Organisms

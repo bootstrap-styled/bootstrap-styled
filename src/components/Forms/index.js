@@ -5,3 +5,4 @@ export { default } from './Form';
 export { default as FormGroup } from './FormGroup';
 export { default as FormText } from './FormText';
 export { default as FormFeedback } from './FormFeedback';
+export { default as FormCustom } from './FormCustom';
