@@ -42,14 +42,13 @@ describe('<CardGroup />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('div').length).toBe(1);
     expect(renderedComponent.find('CardGroup').length).toBe(1);
   });
   it('should have a class .card-group by default with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('div').hasClass('card-group')).toBe(true);
+    expect(renderedComponent.find('div').at(1).hasClass('card-group')).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

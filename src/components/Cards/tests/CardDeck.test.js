@@ -41,14 +41,13 @@ describe('<CardDeck />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('div').length).toBe(1);
     expect(renderedComponent.find('CardDeck').length).toBe(1);
   });
   it('should have a class .card-deck by default with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('div').hasClass('card-deck')).toBe(true);
+    expect(renderedComponent.find('div').at(1).hasClass('card-deck')).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

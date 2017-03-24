@@ -43,13 +43,12 @@ describe('<CardFooter />', () => {
       children,
     });
     expect(renderedComponent.find('CardFooter').length).toBe(1);
-    expect(renderedComponent.find('div').length).toBe(1);
   });
   it('should have a class .card-footer by default with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('div').hasClass('card-footer')).toBe(true);
+    expect(renderedComponent.find('div').at(1).hasClass('card-footer')).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

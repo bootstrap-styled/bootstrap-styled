@@ -42,14 +42,13 @@ describe('<CardColumns />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('div').length).toBe(1);
     expect(renderedComponent.find('CardColumns').length).toBe(1);
   });
   it('should have a class .card-columns by default with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('div').hasClass('card-columns')).toBe(true);
+    expect(renderedComponent.find('div').at(1).hasClass('card-columns')).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
