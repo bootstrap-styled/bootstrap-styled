@@ -26,7 +26,7 @@ export function assertAscending(map, mapName) {
 }
 
 export function assertStartAtZero(map) {
-  const values = Object.values(map);
+  const values = Object.keys(map).map((key) => map[key]);
   const firstValue = unitUtils.rmUnit(values[0]);
   let asserted = true;
   if (firstValue !== 0) {
