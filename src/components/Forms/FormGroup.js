@@ -32,6 +32,7 @@ class FormGroup extends React.Component {// eslint-disable-line react/prefer-sta
       cssModule,
       row,
       disabled,
+      inline,
       color,
       check,
       tag: Tag,
@@ -43,7 +44,8 @@ class FormGroup extends React.Component {// eslint-disable-line react/prefer-sta
       color ? `has-${color}` : false,
       row ? 'row' : false,
       check ? 'form-check' : 'form-group',
-      check && disabled ? 'disabled' : false
+      check && disabled ? 'disabled' : false,
+      inline ? 'form-check-inline' : false,
     ), cssModule);
 
     return (

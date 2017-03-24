@@ -61,6 +61,13 @@ describe('<FormGroup />', () => {
     });
     expect(renderedComponent.find('div').at(1).hasClass('form-check')).toBe(true);
   });
+  it('should have a class form-check-inline', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      inline: true,
+    });
+    expect(renderedComponent.find('div').at(1).hasClass('form-check-inline')).toBe(true);
+  });
   it('should have a class disabled', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
