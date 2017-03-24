@@ -29,7 +29,7 @@ describe('bootstrap forms mixins', () => {
     );
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(369714860);
+    expect(fromJS({ css }).hashCode()).toEqual(715200646);
   });
   it('formControlValidation should return a css without shadows', () => {
     const css = formControlValidation(defaultProps['$enable-shadows'], '#f00', defaultProps['$input-box-shadow']);

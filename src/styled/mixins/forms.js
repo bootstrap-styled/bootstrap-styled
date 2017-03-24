@@ -47,7 +47,7 @@ export function formControl(
         /* Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214. */
         background-image: none;
         background-clip: padding-box;
-        /* Note: This has no effect on <select>s in some browsers, due to the limited stylability of <select>s in CSS. */
+        /* Note: This has no effect on selects in some browsers, due to the limited stylability of selects in CSS. */
         ${$enableRounded ? `border-radius: ${$inputBorderRadius};` : 'border-radius: 0;'} /* Manually use the if/else instead of the mixin to account for iOS override */
         border: ${$inputBtnBorderWidth} solid ${$inputBorderColor};
         ${transition(
