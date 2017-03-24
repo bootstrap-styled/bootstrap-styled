@@ -27,6 +27,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     show: PropTypes.bool,
     onClick: PropTypes.func,
     belowHeader: PropTypes.bool,
+    noOverlay: PropTypes.bool,
     button: PropTypes.shape({
       component: PropTypes.component,
       className: PropTypes.string,
@@ -42,7 +43,6 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     'bg-inverse': PropTypes.bool,
     'bg-faded': PropTypes.bool,
     'animation-push': PropTypes.bool,
-    'no-overlay': PropTypes.bool,
   }
 
   constructor(props) {
@@ -91,6 +91,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       children,
       theme,  // eslint-disable-line no-unused-vars
       button,
+      noOverlay,
       belowHeader,  // eslint-disable-line no-unused-vars
       'nav-top': navTop,
       'menu-right': menuRight,
@@ -103,7 +104,6 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       'fixed-top': fixedTop,
       'fixed-bottom': fixedBottom,
       'animation-push': animationPush,
-      'no-overlay': noOverlay,
       ...restTmp
     } = this.props;
 
@@ -125,11 +125,11 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     const buttonClasses = cn(buttonMenuRight, classNameButton, { 'navbar-toggler-icon p-3 my-auto': !classNameButton });
 
     const OffsetMenuAnimated = animationPush ? (
-      <OffsetNavPush active={this.state.show} menu-right={menuRight} animation-push={animationPush} id="offset-nav">
+      <OffsetNavPush active={this.state.show} menu-right={menuRight} animation-push={animationPush} id="offset-nav" dismiss={this.handleClick}>
         {children}
       </OffsetNavPush>
     ) : (
-      <OffsetNavSlide active={this.state.show} menu-right={menuRight} animation-push={animationPush} id="offset-nav">
+      <OffsetNavSlide active={this.state.show} menu-right={menuRight} animation-push={animationPush} dismiss={this.handleClick} id="offset-nav">
         {children}
       </OffsetNavSlide>
     );

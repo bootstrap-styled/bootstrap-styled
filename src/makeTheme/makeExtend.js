@@ -42,6 +42,8 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
   v['$menu-push-mini-width'] = u['$menu-push-mini-width'] || '75px';
   v['$menu-push-width'] = u['$menu-push-width'] || '220px';
   v['$menu-transition-duration'] = u['$menu-transition-duration'] || '.6s';
+  v['$menu-offset-nav-transition'] = u['$menu-offset-nav-transition'] || 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms';
+  v['$menu-offset-nav-box-shadow'] = u['$menu-offset-nav-box-shadow'] || 'rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px';
 
   // Zindex
   v['$zindex-menu-push'] = v['$zindex-menu-push'] || '2000';

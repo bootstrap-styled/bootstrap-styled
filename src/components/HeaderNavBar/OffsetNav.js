@@ -6,22 +6,30 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
+import bsTheme from 'theme';
+import Close from '../Close';
+
+const defaultProps = { theme: bsTheme };
+
 class OffsetNav extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
     active: PropTypes.bool,
+    dismiss: PropTypes.func,
+    theme: PropTypes.object,
     'menu-right': PropTypes.bool,
     'animation-push': PropTypes.bool,
   }
 
   render() {
-    const { className, children, active, 'menu-right': menuRight, 'animation-push': animationPush, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { className, children, active, dismiss, 'menu-right': menuRight, 'animation-push': animationPush, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
     const menuDirectionClassNames = menuRight ? 'menu-right' : 'menu-left';
     const cssClasses = cn(className, menuDirectionClassNames, { active }); // eslint-disable-line  object-shorthand
     return (
       <div className={cssClasses} {...rest}>
+        <Close aria-label="Close" onDismiss={dismiss} />
         {children}
       </div>
     );
@@ -38,6 +46,7 @@ OffsetNav = styled(OffsetNav)`
   `}
 `;
 
+OffsetNav.defaultProps = defaultProps;
 
 export default OffsetNav;
 
