@@ -2,7 +2,7 @@ import { fromJS } from 'immutable';
 import makeOriginal from '../makeOriginal';
 
 describe('makeOriginal', () => {
-  const FINAL_CHECKSUM_THEME_ORIGINAL = 130401891; // DO NOT CHANGE THIS VALUE IN ANY CASE!
+  const FINAL_CHECKSUM_THEME_ORIGINAL = -525229622; // DO NOT CHANGE THIS VALUE IN ANY CASE!
   it('should have makeOriginal defined', () => {
     expect(makeOriginal).toBeDefined();
   });
