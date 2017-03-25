@@ -29,7 +29,7 @@ class OffsetNav extends React.Component { // eslint-disable-line react/prefer-st
     const cssClasses = cn(className, menuDirectionClassNames, { active }); // eslint-disable-line  object-shorthand
     return (
       <div className={cssClasses} {...rest}>
-        <Close aria-label="Close" onDismiss={dismiss} />
+        {dismiss && <Close aria-label="Close" onDismiss={dismiss} />}
         {children}
       </div>
     );
