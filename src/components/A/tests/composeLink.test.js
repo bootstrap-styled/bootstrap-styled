@@ -9,7 +9,7 @@ import A, { composeLink } from '../index';
 const Link = composeLink(A);
 
 const renderComponentUsingTheme = (props) => mount(
-  <ThemeProvider theme={props.theme}>
+  <ThemeProvider theme={{}}>
     <Link {...props}>test</Link>
   </ThemeProvider>
 );
@@ -17,22 +17,8 @@ const renderComponentUsingTheme = (props) => mount(
 describe('composeLink', () => {
   it('should render a Link', () => {
     const renderedComponent = renderComponentUsingTheme({
-      theme: {
-        '$enable-dynamic-links': true,
-      },
-      href: 'http://test.com',
       to: 'http://test.com',
     });
     expect(renderedComponent.find('Link').length).toBe(1);
-  });
-  it('should render a Link using <A>', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      theme: {
-        '$enable-dynamic-links': false,
-      },
-      href: 'http://test.com',
-      to: 'http://test.com',
-    });
-    expect(renderedComponent.find('A').length).toBe(1);
   });
 });

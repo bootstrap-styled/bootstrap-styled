@@ -1,6 +1,5 @@
 import Color from 'color';
 import { unitUtils } from 'math-utils';
-import { allowFalseValue } from './utils';
 import makeOriginal from './makeOriginal';
 const { rmUnit, UNIT } = unitUtils;
 /**
@@ -17,10 +16,6 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
   const u = userTheme;
 
   // tools
-  /**
-   * $enable-dynamic-links will choose between react-router and A in composeLink
-   */
-  v['$enable-dynamic-links'] = allowFalseValue(u['$enable-dynamic-links'], true);
 
   // Header
   v['$header-navbar-border-color'] = u['$header-navbar-border-color'] || v['$gray-lighter'];

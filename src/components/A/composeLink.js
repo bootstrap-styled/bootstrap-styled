@@ -2,9 +2,8 @@
  * Kopax Ltd Copyright (c) 2016.
  */
 import React, { PropTypes } from 'react';
-import styled, { withTheme } from 'styled-components';
+import styled from 'styled-components';
 import theme from 'theme';
-import A from '../A';
 import { a } from '../../styled/mixins/a';
 import { button } from '../../styled/mixins/buttons';
 
@@ -24,11 +23,8 @@ export default function composeLink(RouterLink) {
 
     render() {
       const { className, to, children, theme, ...rest } = this.props;  // eslint-disable-line
-
-      return theme['$enable-dynamic-links'] ? (
+      return (
         <RouterLink className={className} to={to} {...rest}>{children}</RouterLink>
-      ) : (
-        <A className={className} href={to} {...rest}>{children}</A>
       );
     }
   }
@@ -97,5 +93,5 @@ export default function composeLink(RouterLink) {
     `}
   `;
   Link.defaultProps = defaultProps;
-  return withTheme(Link);
+  return Link;
 }
