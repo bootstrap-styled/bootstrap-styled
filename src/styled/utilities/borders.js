@@ -13,6 +13,11 @@ export function getBordersUtilities(enableRounded = defaultProps['$enable-rounde
     ${roundedBottom(enableRounded, radius)}
     ${roundedLeft(enableRounded, radius)}
     ${roundedCircle(enableRounded, radius)}
+    ${resetRounded()}
+    ${resetRoundedTop()}
+    ${resetRoundedRight()}
+    ${resetRoundedLeft()}
+    ${resetRoundedBottom()}
     ${resetBorder()}
     ${resetBorderTop()}
     ${resetBorderRight()}
@@ -110,6 +115,49 @@ export function resetBorderLeft() {
   `;
 }
 
+export function resetRounded() {
+  return `
+    .rounded-0 {
+      border-radius: 0 !important;
+    }
+  `;
+}
+
+export function resetRoundedTop() {
+  return `
+    .rounded-top-0 {
+      border-top-left-radius: 0 !important;
+      border-top-right-radius: 0 !important;
+    }
+  `;
+}
+
+export function resetRoundedBottom() {
+  return `
+    .rounded-bottom-0 {
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+  `;
+}
+
+export function resetRoundedLeft() {
+  return `
+    .rounded-left-0 {
+      border-bottom-left-radius: 0 !important;
+      border-top-left-radius: 0 !important;
+    }
+  `;
+}
+
+export function resetRoundedRight() {
+  return `
+    .rounded-right-0 {
+      border-bottom-right-radius: 0 !important;
+      border-top-right-radius: 0 !important;
+    }
+  `;
+}
 export default {
   defaultProps,
   getBordersUtilities,

@@ -1,22 +1,41 @@
 import { fromJS } from 'immutable';
-import { defaultProps, getBordersUtilities, rounded, roundedBottom, roundedCircle, roundedLeft, roundedRight, roundedTop, resetBorder, resetBorderTop, resetBorderRight, resetBorderBottom, resetBorderLeft } from '../borders';
+import {
+  defaultProps,
+  getBordersUtilities,
+  rounded,
+  roundedBottom,
+  roundedCircle,
+  roundedLeft,
+  roundedRight,
+  roundedTop,
+  resetBorder,
+  resetBorderTop,
+  resetBorderRight,
+  resetBorderBottom,
+  resetBorderLeft,
+  resetRounded,
+  resetRoundedTop,
+  resetRoundedRight,
+  resetRoundedBottom,
+  resetRoundedLeft,
+} from '../borders';
 
 describe('bootstrap borders utility', () => {
   it('getBordersUtilities should return a list of css utilities with rounded', () => {
     const css = getBordersUtilities(defaultProps['$enable-rounded'], defaultProps['$border-radius']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-576500417);
+    expect(fromJS({ css }).hashCode()).toEqual(381084790);
   });
   it('getBordersUtilities should return a list of css utilities without rounded', () => {
     const css = getBordersUtilities(!defaultProps['$enable-rounded'], defaultProps['$border-radius']);
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(144131383);
+    expect(fromJS({ css }).hashCode()).toEqual(521233947);
   });
   it('getBordersUtilities should have arguments', () => {
     const css = getBordersUtilities();
-    expect(fromJS({ css }).hashCode()).toEqual(-576500417);
+    expect(fromJS({ css }).hashCode()).toEqual(381084790);
   });
   it('rounded should return a css with rounded', () => {
     const css = rounded(defaultProps['$enable-rounded'], defaultProps['$border-radius']);
@@ -133,5 +152,25 @@ describe('bootstrap borders utility', () => {
   it('resetBorderLeft should return an utility', () => {
     const css = resetBorderLeft();
     expect(fromJS({ css }).hashCode()).toEqual(514409208);
+  });
+  it('resetRounded should return an utility', () => {
+    const css = resetRounded();
+    expect(fromJS({ css }).hashCode()).toEqual(-204501487);
+  });
+  it('resetRoundedTop should return an utility', () => {
+    const css = resetRoundedTop();
+    expect(fromJS({ css }).hashCode()).toEqual(47750857);
+  });
+  it('resetRoundedRight should return an utility', () => {
+    const css = resetRoundedRight();
+    expect(fromJS({ css }).hashCode()).toEqual(-166463815);
+  });
+  it('resetRoundedBottom should return an utility', () => {
+    const css = resetRoundedBottom();
+    expect(fromJS({ css }).hashCode()).toEqual(-626233766);
+  });
+  it('resetRoundedLeft should return an utility', () => {
+    const css = resetRoundedLeft();
+    expect(fromJS({ css }).hashCode()).toEqual(713920736);
   });
 });

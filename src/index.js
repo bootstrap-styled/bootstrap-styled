@@ -22,6 +22,7 @@ export {
   backgroundUtils,
   bordersUtils,
   clearfixUtils,
+  cursorUtils,
   displayUtils,
   flexUtils,
   floatUtils,

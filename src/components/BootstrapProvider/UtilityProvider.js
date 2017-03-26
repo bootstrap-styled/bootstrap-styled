@@ -6,6 +6,7 @@ import {
   backgroundUtils,
   bordersUtils,
   clearfixUtils,
+  cursorUtils,
   displayUtils,
   flexUtils,
   floatUtils,
@@ -27,6 +28,7 @@ const defaultProps = {
     background: true,
     border: true,
     clearfix: true,
+    cursor: true,
     display: true,
     flex: true,
     float: true,
@@ -69,6 +71,7 @@ const UtilityProvider = styled.div`
       props.theme['$border-radius']
     ))}
     ${ifThen(props.utils.clearfix, clearfixUtils.getClearfixUtilities())}
+    ${ifThen(props.utils.cursor, cursorUtils.getCursorUtilities())}
     ${ifThen(props.utils.display, displayUtils.getDisplayUtilities(
       props.theme['$grid-breakpoints'],
     ))}

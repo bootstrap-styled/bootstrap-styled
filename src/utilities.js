@@ -2,6 +2,7 @@ export { default as alignUtils } from './styled/utilities/align';
 export { default as backgroundUtils } from './styled/utilities/background';
 export { default as bordersUtils } from './styled/utilities/borders';
 export { default as clearfixUtils } from './styled/utilities/clearfix';
+export { default as cursorUtils } from './styled/utilities/cursor';
 export { default as displayUtils } from './styled/utilities/display';
 export { default as flexUtils } from './styled/utilities/flex';
 export { default as floatUtils } from './styled/utilities/float';
