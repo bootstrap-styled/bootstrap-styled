@@ -77,10 +77,8 @@ class Alert extends React.Component { // eslint-disable-line react/prefer-statel
 
     const alert = (
       <Tag {...attributes} className={classes} role="alert">
-        { toggle ?
-          <Close aria-label="Close" toggle={toggle} />
-          : null }
-        { children }
+        {toggle && <Close onDismiss={toggle} />}
+        {children}
       </Tag>
     );
 
