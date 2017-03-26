@@ -9,7 +9,7 @@ export function getClearfixUtilities() {
 export function getClearfix() {
   return `
     .clearfix {
-      ${clearfix()};
+      ${clearfix()}
     }
   `;
 }
