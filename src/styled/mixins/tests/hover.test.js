@@ -88,4 +88,28 @@ describe('bootstrap hover mixins', () => {
     const css = plainHoverFocus();
     expect(fromJS({ css }).hashCode()).toEqual(-1020241862);
   });
+  it('hover should have hoverFocus', () => {
+    const css = hover.hoverFocus(
+      defaultProps['$enable-hover-media-query'],
+      `cursor: pointer;
+      opacity: .5;`
+    );
+    expect(fromJS({ css }).hashCode()).toEqual(-75696186);
+  });
+  it('hover should have plainHoverFocus', () => {
+    const css = hover.plainHoverFocus(
+      defaultProps['$enable-hover-media-query'],
+      `cursor: pointer;
+      opacity: .5;`
+    );
+    expect(fromJS({ css }).hashCode()).toEqual(507113767);
+  });
+  it('hover should have hoverFocusActive', () => {
+    const css = hover.hoverFocusActive(
+      defaultProps['$enable-hover-media-query'],
+      `cursor: pointer;
+      opacity: .5;`
+    );
+    expect(fromJS({ css }).hashCode()).toEqual(313791295);
+  });
 });

@@ -54,9 +54,9 @@ export function borderLeftRadius(enableRounded = defaultProps['$enable-rounded']
 
 export default {
   defaultProps,
-  borderRadius,
-  borderTopRadius,
-  borderRightRadius,
-  borderBottomRadius,
-  borderLeftRadius,
+  all: borderRadius,
+  top: borderTopRadius,
+  right: borderRightRadius,
+  bottom: borderBottomRadius,
+  left: borderLeftRadius,
 };

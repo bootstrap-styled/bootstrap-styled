@@ -61,11 +61,11 @@ export function gradientStriped(color = 'rgba(255,255,255,.15)', angle = '45deg'
 }
 
 export default {
-  gradientX,
-  gradientY,
-  gradientDirectional,
-  gradientXThreeColors,
-  gradientYThreeColors,
-  gradientRadial,
-  gradientStriped,
+  x: gradientX,
+  y: gradientY,
+  directional: gradientDirectional,
+  xThreeColors: gradientXThreeColors,
+  yThreeColors: gradientYThreeColors,
+  radial: gradientRadial,
+  striped: gradientStriped,
 };

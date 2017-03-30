@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import theme from 'theme';
-import { conditionalMixins } from '../../mixins';
+import { ifThen } from '../../mixins';
 import {
   alignUtils,
   backgroundUtils,
@@ -41,8 +41,6 @@ const defaultProps = {
     visibility: true,
   },
 };
-
-const ifThen = conditionalMixins.ifThen;
 
 // eslint-disable-next-line no-class-assign
 const UtilityProvider = styled.div`

@@ -142,12 +142,8 @@ export function mediaBreakpointOnly(name, breakpoints = defaultProps['$grid-brea
 
 export default {
   defaultProps,
-  breakpointNext,
-  breakpointMin,
-  breakpointMax,
-  breakpointInfix,
-  mediaBreakpointUp,
-  mediaBreakpointDown,
-  mediaBreakpointBetween,
-  mediaBreakpointOnly,
+  up: mediaBreakpointUp,
+  down: mediaBreakpointDown,
+  between: mediaBreakpointBetween,
+  only: mediaBreakpointOnly,
 };
