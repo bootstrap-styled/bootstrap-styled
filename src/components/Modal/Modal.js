@@ -115,6 +115,7 @@ class Modal extends React.Component {
   }
 
   handleEscape(e) {
+    if (this.props.backdrop !== true) return;
     this.isTransitioning = false;
     if (!this.isTransitioning && this.props.keyboard && e.keyCode === 27 && this.props.onBackdrop) {
       this.props.onBackdrop();
@@ -122,6 +123,7 @@ class Modal extends React.Component {
   }
 
   handleBackdropClick(e) {
+    if (this.props.backdrop !== true) return;
     this.isTransitioning = false;
     if (!this.isTransitioning && this.props.backdrop && e.target && !this._dialog.contains(e.target) && this.props.onBackdrop) {
       this.props.onBackdrop();
@@ -350,7 +352,7 @@ Modal = styled(Modal)`
   
     // Scale up the modal
     ${mediaBreakpointUp('sm', props.theme['$grid-breakpoints'],
-  `
+      `
         & .modal-dialog {
           max-width: ${props.theme['$modal-md']};
           margin: ${props.theme['$modal-dialog-sm-up-margin-y']} auto;
@@ -368,7 +370,7 @@ Modal = styled(Modal)`
   
 
     ${mediaBreakpointUp('lg', props.theme['$grid-breakpoints'],
-  `
+      `
         & .modal-lg {
            max-width:  ${props.theme['$modal-lg']}; 
          }
