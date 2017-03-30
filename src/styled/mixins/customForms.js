@@ -321,7 +321,7 @@ export function customForms(
       -moz-appearance: none;
       -webkit-appearance: none;
     
-      :focus {
+      &:focus {
         border-color: ${$customSelectFocusBorderColor};
         outline: none;
         ${boxShadow(
@@ -340,7 +340,7 @@ export function customForms(
         }
       }
     
-      :disabled {
+      &:disabled {
         color: ${$customSelectDisabledColor};
         cursor: ${$cursorDisabled};
         background-color: ${$customSelectDisabledBg};
