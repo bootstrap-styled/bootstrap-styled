@@ -38,12 +38,12 @@ class FormCustom extends React.Component {// eslint-disable-line react/prefer-st
     ), cssModule);
 
     const CustomInput = radio ? (
-      <Input type="radio" id={radio.id} name={radio.name} className="custom-control-input" {...attributes} />
+      <Input type="radio" id={radio.id} name={radio.name} className="custom-control-input" />
     ) : (
-      <Input type="checkbox" className="custom-control-input" {...attributes} />
+      <Input type="checkbox" className="custom-control-input" />
     );
     return (
-      <Label className={classes} >
+      <Label className={classes} {...attributes}>
         {CustomInput}
         <span className="custom-control-indicator"></span>
         <span className="custom-control-description">{children}</span>
