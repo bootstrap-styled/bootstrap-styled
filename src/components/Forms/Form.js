@@ -190,7 +190,7 @@ Form = styled(Form)`
       )}
     }
 
-    & .select.form-control-sm {
+    select.form-control-sm {
       &:not([size]):not([multiple]) {
         height: ${props.theme['$input-height-sm']};
       }
