@@ -15,7 +15,8 @@ export function getTransitionUtilities(
 
 export function fade(enableTransitions = defaultProps['$enable-transitions'], transitionFade = defaultProps['$transition-fade']) {
   return `
-    &.fade {
+    .fade,
+     &.fade {
       opacity: 0;
       ${transition(enableTransitions, transitionFade)}
     

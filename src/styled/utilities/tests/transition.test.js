@@ -7,27 +7,27 @@ describe('bootstrap transition mixins', () => {
     const css = getTransitionUtilities(enableTransitions, 'all .2s ease-in-out', 'height .35s ease');
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-1062749687);
+    expect(fromJS({ css }).hashCode()).toEqual(6006592);
   });
   it('getTransitionUtils should have parameters', () => {
     const css = getTransitionUtilities();
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(11101159);
+    expect(fromJS({ css }).hashCode()).toEqual(419397045);
   });
   it('fade should return a css with defaultProps', () => {
     const css = fade();
-    expect(fromJS({ css }).hashCode()).toEqual(747721370);
+    expect(fromJS({ css }).hashCode()).toEqual(-297507179);
   });
   it('fade should return a css with transition', () => {
     const enableTransitions = true;
     const css = fade(enableTransitions, 'opacity .15s linear');
-    expect(fromJS({ css }).hashCode()).toEqual(747721370);
+    expect(fromJS({ css }).hashCode()).toEqual(-297507179);
   });
   it('fade should return a css without transition', () => {
     const enableTransitions = false;
     const css = fade(enableTransitions, 'opacity .15s linear');
-    expect(fromJS({ css }).hashCode()).toEqual(432666126);
+    expect(fromJS({ css }).hashCode()).toEqual(-1046095170);
   });
   it('collapse should return a css with defaultProps', () => {
     const css = collapse();
