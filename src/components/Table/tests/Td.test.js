@@ -8,9 +8,9 @@ import React from 'react';
 import theme from 'theme';
 
 import Td from '../index';
-import Table from '../../Table';
-import Tr from '../../Tr';
-import Tbody from '../../Tbody';
+import Table from '../Table';
+import Tr from '../Tr';
+import Tbody from '../Tbody';
 
 const children = (<h1>Test</h1>);
 

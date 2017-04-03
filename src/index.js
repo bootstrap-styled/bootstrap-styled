@@ -101,16 +101,10 @@ export { default as Strong } from './components/Strong';
 export { default as Summary } from './components/Summary';
 export { default as Sub } from './components/Sub';
 export { default as Sup } from './components/Sup';
-export { default as Table } from './components/Table';
+export { default as Table, Tbody, Tfoot, Thead, Td, Th, Tr } from './components/Table';
 export { default as Badge } from './components/Badge';
-export { default as Tbody } from './components/Tbody';
-export { default as Td } from './components/Td';
 export { default as Textarea } from './components/Textarea';
-export { default as Tfoot } from './components/Tfoot';
-export { default as Th } from './components/Th';
-export { default as Thead } from './components/Thead';
 export { default as Tooltip } from './components/Tooltip';
-export { default as Tr } from './components/Tr';
 export { default as Ul } from './components/Ul';
 // 2. Molecules
 export { default as Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote } from './components/Cards';
