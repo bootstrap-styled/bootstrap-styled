@@ -89,6 +89,14 @@ describe('<Button />', () => {
   it('should have a function onClick', () => {
     const renderedComponent = renderComponentUsingTheme({
       onClick,
+      disabled: true,
+    });
+    renderedComponent.find('Button').simulate('click');
+    expect(onClick).not.toHaveBeenCalled();
+  });
+  it('should have a function onClick', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      onClick,
     });
     renderedComponent.find('Button').simulate('click');
     expect(onClick).toHaveBeenCalled();
