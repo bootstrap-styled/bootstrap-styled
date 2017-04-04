@@ -34,10 +34,6 @@ class Button extends React.Component { // eslint-disable-line react/prefer-state
     theme: PropTypes.object,
   }
 
-  state = {
-    focus: false,
-  }
-
   onClick = (e) => {
     if (this.props.disabled) {
       e.preventDefault();
@@ -49,35 +45,21 @@ class Button extends React.Component { // eslint-disable-line react/prefer-state
     }
   }
 
-  handleFocus = () => {
-    this.setState({
-      focus: true,
-    });
-  }
-
-  handleBlur = () => {
-    this.setState({
-      focus: false,
-    });
-  }
-
   render() {
-    const {
-      active,
-      block,
-      className,
-      cssModule,
-      dropup,
-      color,
-      outline,
-      size,
-      getRef,
-      tag: Tag,
+    let {
+      active, // eslint-disable-line prefer-const
+      block,  // eslint-disable-line prefer-const
+      className,  // eslint-disable-line prefer-const
+      cssModule,  // eslint-disable-line prefer-const
+      dropup, // eslint-disable-line prefer-const
+      color,  // eslint-disable-line prefer-const
+      outline,  // eslint-disable-line prefer-const
+      size, // eslint-disable-line prefer-const
+      getRef, // eslint-disable-line prefer-const
+      tag: Tag, // eslint-disable-line prefer-const
       theme,  // eslint-disable-line
       ...attributes
     } = this.props;
-
-    const { focus } = this.state;
 
     const classes = mapToCssModules(cn(
       className,
@@ -86,24 +68,20 @@ class Button extends React.Component { // eslint-disable-line react/prefer-state
       size ? `btn-${size}` : false,
       block ? 'btn-block' : false,
       dropup,
-      focus,
       { active, disabled: this.props.disabled }
     ), cssModule);
 
-    const optional = {};
-    if (className.indexOf('btn') !== -1) {
-      optional.onFocus = this.handleFocus;
-      optional.onBlur = this.handleBlur;
+    if (attributes.href && Tag === 'button') {
+      Tag = 'a';
     }
 
     return (
       <Tag
+        type={(Tag === 'button' && attributes.onClick) ? 'button' : undefined}
         className={classes}
-        onFocus={this.handleFocus}
-        onBlur={this.handleBlur}
         ref={getRef}
         {...attributes}
-        {...optional}
+        onClick={this.onClick}
       />
     );
   }

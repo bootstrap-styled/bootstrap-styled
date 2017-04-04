@@ -10,7 +10,7 @@ const children = (<span>Test</span>);
 
 const renderComponent = (props = {}) => shallow(
   <Button {...props}>
-    {props.children}
+    {children}
   </Button>
 );
 
@@ -18,13 +18,19 @@ const renderComponent = (props = {}) => shallow(
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
     <Button {...props}>
-      {props.children}
+      {children}
     </Button>
   </BootstrapProvider>
 );
 
 
 describe('<Button />', () => {
+  let onClick;
+
+  beforeAll(() => {
+    onClick = jest.fn();
+  });
+
   it('should render an <Button> tag without a theme', () => {
     const renderedComponent = renderComponent({
       children,
@@ -79,6 +85,26 @@ describe('<Button />', () => {
       block: true,
     });
     expect(renderedComponent.find('Button').props().block).toBe(true);
+  });
+  it('should have a function onClick', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      onClick,
+    });
+    renderedComponent.find('Button').simulate('click');
+    expect(onClick).toHaveBeenCalled();
+  });
+  it('should have a type=button', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      onClick,
+    });
+    expect(renderedComponent.find('button').props().type).toEqual('button');
+  });
+  it('should have a type=undefined', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      href: '#',
+    });
+    expect(renderedComponent.find('a').length).toEqual(1);
+    expect(renderedComponent.find('a').props().type).toEqual(undefined);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
