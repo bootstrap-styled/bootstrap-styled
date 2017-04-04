@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import { mapToCssModules } from '../../styled/utilities/tools';
-
+import Blockquote from '../Blockquote';
 
 const defaultProps = {
-  tag: 'blockquote',
+  tag: Blockquote,
 };
 
 class CardBlockquote extends React.Component { // eslint-disable-line react/prefer-stateless-function
