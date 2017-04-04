@@ -14,7 +14,6 @@ import {
   screenreadersUtils,
   sizingUtils,
   spacingUtils,
-  rebootUtils,
   textUtils,
   transitionUtils,
   visibilityUtils,
@@ -23,7 +22,6 @@ import {
 const defaultProps = {
   theme,
   utils: {
-    reboot: true,
     align: true,
     background: true,
     border: true,
@@ -45,14 +43,6 @@ const defaultProps = {
 // eslint-disable-next-line no-class-assign
 const UtilityProvider = styled.div`
   ${(props) => `
-    ${ifThen(props.utils.reboot, rebootUtils.getRebootUtils(
-      props.theme['$font-family-base'],
-      props.theme['$font-size-base'],
-      props.theme['$font-weight-base'],
-      props.theme['$line-height-base'],
-      props.theme['$body-color'],
-      props.theme['$body-bg'],
-    ))}
     ${ifThen(props.utils.align, alignUtils.getAlignUtilities())}
     ${ifThen(props.utils.background, backgroundUtils.getBackgroundUtilities(
       props.theme['$enable-hover-media-query'],

@@ -13,7 +13,6 @@ export default class BootstrapProvider extends React.Component { // eslint-disab
     children: PropTypes.node,
     theme: PropTypes.object,
     utils: PropTypes.shape({
-      reboot: PropTypes.bool,
       align: PropTypes.bool,
       background: PropTypes.bool,
       a: PropTypes.bool,

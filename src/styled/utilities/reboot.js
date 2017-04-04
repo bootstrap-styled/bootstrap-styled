@@ -1,33 +1,6 @@
 import bsTheme from 'theme';
 
 /**
- * getRebootUtils
- *
- * Return the reboot using mixins :global injection
- */
-export function getRebootUtils(
-  fontFamilyBase = bsTheme['$font-family-base'],
-  fontSizeBase = bsTheme['$font-size-base'],
-  fontWeightBase = bsTheme['$font-weight-base'],
-  lineHeightBase = bsTheme['$line-height-base'],
-  bodyColor = bsTheme['$body-color'],
-  bodyBg = bsTheme['$body-bg'],
-) {
-  return `
-    @global {
-      ${getGlobalStyles(
-        fontFamilyBase,
-        fontSizeBase,
-        fontWeightBase,
-        lineHeightBase,
-        bodyColor,
-        bodyBg,
-      )}
-    }
-  `;
-}
-
-/**
  * getRebootUtility
  *
  * This utility MUST return only things that can ONLY be injected in global styles
@@ -61,6 +34,7 @@ export function getGlobalStyles(
         bodyColor,
         bodyBg,
       )} 
+      ${bodyUtils()}
     }
     [tabindex="-1"]:focus {
       ${tabIndex()}
@@ -134,6 +108,14 @@ export function body(
   `;
 }
 
+export function bodyUtils() {
+  return `
+    &.overflow {
+      overflow: hidden;
+    }
+  `;
+}
+
 // Suppress the focus outline on elements that cannot be accessed via keyboard.
 // This prevents an unwanted focus outline from appearing around elements that
 // might still respond to pointer events.
@@ -172,10 +154,10 @@ export default {
   boxSizing,
   ie10FixViewport,
   body,
+  bodyUtils,
   tabIndex,
   svg,
   ie10FixHidden,
   getGlobalStyles,
-  getRebootUtils,
   webkitFileUploadButton,
 };
