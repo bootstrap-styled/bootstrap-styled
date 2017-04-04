@@ -60,17 +60,8 @@ class Modal extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.originalBodyPadding = null;
     this.isBodyOverflowing = false;
-    this.togglePortal = this.togglePortal.bind(this);
-    this.handleBackdropClick = this.handleBackdropClick.bind(this);
-    this.handleEscape = this.handleEscape.bind(this);
-    this.destroy = this.destroy.bind(this);
-    this.onEnter = this.onEnter.bind(this);
-    this.onExit = this.onExit.bind(this);
-    const sheet = window.document.styleSheets[0];
-    sheet.insertRule('.modal-open { overflow: hidden; }', sheet.cssRules.length);
   }
 
   componentDidMount() {
@@ -93,7 +84,7 @@ class Modal extends React.Component {
     this.onExit();
   }
 
-  onEnter() {
+  onEnter = () => {
     this.isTransitioning = true;
     if (this.props.isLocked && this.props.onUnlock) {
       this.props.onUnlock();
@@ -103,7 +94,7 @@ class Modal extends React.Component {
     }
   }
 
-  onExit() {
+  onExit = () => {
     this.destroy();
     this.isTransitioning = false;
     if (this.props.isLocked && this.props.onUnlock) {
@@ -114,7 +105,7 @@ class Modal extends React.Component {
     }
   }
 
-  handleEscape(e) {
+  handleEscape = (e) => {
     if (this.props.backdrop !== true) return;
     this.isTransitioning = false;
     if (!this.isTransitioning && this.props.keyboard && e.keyCode === 27 && this.props.onBackdrop) {
@@ -122,7 +113,7 @@ class Modal extends React.Component {
     }
   }
 
-  handleBackdropClick(e) {
+  handleBackdropClick = (e) => {
     if (this.props.backdrop !== true) return;
     this.isTransitioning = false;
     if (!this.isTransitioning && this.props.backdrop && e.target && !this._dialog.contains(e.target) && this.props.onBackdrop) {
@@ -130,7 +121,7 @@ class Modal extends React.Component {
     }
   }
 
-  togglePortal() {
+  togglePortal = () => {
     if (this.props.isOpen) {
       this._focus = true;
       this.show();
@@ -139,14 +130,14 @@ class Modal extends React.Component {
     }
   }
 
-  destroy() {
+  destroy = () => {
     if (this._element) {
       ReactDOM.unmountComponentAtNode(this._element);
       document.body.removeChild(this._element);
       this._element = null;
     }
 
-    const classes = document.body.className.replace('modal-open', '');
+    const classes = document.body.className.replace('overflow', '');
     document.body.className = mapToCssModules(classNames(classes).trim(), this.props.cssModule);
     setScrollbarWidth(this.originalBodyPadding);
   }
@@ -168,7 +159,7 @@ class Modal extends React.Component {
     document.body.appendChild(this._element);
     document.body.className = mapToCssModules(classNames(
       classes,
-      'modal-open'
+      'overflow'
     ), this.props.cssModule);
 
     this.renderIntoSubtree();

@@ -5,18 +5,39 @@ import React from 'react';
 import { mount } from 'enzyme';
 import BootstrapProvider from '../../BootstrapProvider';
 import DropdownItem from '../DropdownItem';
+import Dropdown from '../Dropdown';
+import DropdownToggle from '../DropdownToggle';
+import DropdownMenu from '../DropdownMenu';
 
 const children = (<h1>Test</h1>);
 
-const renderComponentUsingTheme = () => mount(
+let dropdownOpen;
+let toggle;
+let onClick;
+
+const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <DropdownItem>
-      {children}
-    </DropdownItem>
+    <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+      <DropdownToggle caret>
+        Dropdown
+      </DropdownToggle>
+      <DropdownMenu>
+        <DropdownItem {...props}>
+          {children}
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
   </BootstrapProvider>
 );
 
 describe('<DropdownItem />', () => {
+  
+  beforeEach(() => {
+    dropdownOpen = false;
+    toggle = jest.fn();
+    onClick = jest.fn();
+  });
+  
   it('should render an <DropdownItem> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme();
     expect(renderedComponent.find('DropdownItem').length).toBe(1);
@@ -36,12 +57,6 @@ describe('<DropdownItem />', () => {
       expect(renderedComponent.find('h6').hasClass('dropdown-header')).toBe(true);
       expect(renderedComponent.text()).toBe('Heading');
     });
-  });
-
-  let isOpen; // eslint-disable-line no-unused-vars
-
-  beforeEach(() => {
-    isOpen = false;
   });
 
   describe('header', () => {
@@ -94,6 +109,14 @@ describe('<DropdownItem />', () => {
       );
       renderedComponent.find('button').simulate('click');
       expect(functionTest).toHaveBeenCalled();
+    });
+    it('should call onClick', () => {
+      const renderedComponent = renderComponentUsingTheme({
+        children,
+        onClick,
+      });
+      renderedComponent.find('button').at(1).simulate('click');
+      expect(onClick).toHaveBeenCalled();
     });
   });
 });

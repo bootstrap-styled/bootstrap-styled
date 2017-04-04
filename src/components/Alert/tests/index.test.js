@@ -13,15 +13,19 @@ const children = (<h1>Test</h1>);
 
 const renderComponentUsingTheme = (props) => mount(
   <ThemeProvider theme={theme}>
-    <Alert
-      className={props.className}
-    >
+    <Alert {...props}>
       {children}
     </Alert>
   </ThemeProvider>
 );
 
 describe('<Alert />', () => {
+  let toggle;
+
+  beforeAll(() => {
+    toggle = jest.fn();
+  });
+
   it('should render an <Alert> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
@@ -40,5 +44,14 @@ describe('<Alert />', () => {
       children,
     });
     expect(renderedComponent.contains(children)).toEqual(true);
+  });
+  it('should have a toggle function', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      toggle,
+    });
+    expect(renderedComponent.find('Close').length).toEqual(1);
+    renderedComponent.find('button').simulate('click');
+    expect(toggle).toHaveBeenCalled();
   });
 });

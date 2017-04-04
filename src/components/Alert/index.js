@@ -44,8 +44,19 @@ class Alert extends React.Component { // eslint-disable-line react/prefer-statel
     theme: PropTypes.object,
   }
 
+
   state= {
     visible: true,
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isOpen) {
+      this.setState({ isOpen: nextProps.isOpen });
+      const timer = setTimeout(() => {
+        clearTimeout(timer);
+        this.setState({ isOpen: false });
+      }, 1000);
+    }
   }
 
   onDismiss = () => {
