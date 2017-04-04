@@ -27,7 +27,7 @@ class PageWrapper extends React.Component { // eslint-disable-line react/prefer-
 PageWrapper = styled(PageWrapper)`
   ${(props) => `
     height: 100%;
-    transition: ${props.theme['$menu-offset-nav-box-shadow']};
+    transition: ${props.theme['$menu-offset-nav-transition']};
     &.left { transform: translateX(220px); }
     &.right { transform: translateX(-220px); }
   `}
