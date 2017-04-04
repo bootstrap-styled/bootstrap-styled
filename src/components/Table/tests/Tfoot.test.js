@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import Tfoot from '../index';
+import Tfoot from '../Tfoot';
 
 const children = <span> test </span>;
 const renderComponent = () => shallow(

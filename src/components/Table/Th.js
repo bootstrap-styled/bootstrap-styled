@@ -1,12 +1,34 @@
 /**
- * A Table Header Cell
+ * Th component
  */
-import styled from 'styled-components';
 
-const Th = styled.th`
-  /* Reboot Scss*/
-  /* Centered by default, but left-align-ed to match the 'td's below. */
-  text-align: left;
-`;
+import React, { PropTypes } from 'react';
+import cn from 'classnames';
 
-export default Th;
+export default class Th extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static propTypes = {
+    className: PropTypes.string,
+    color: PropTypes.string,
+    children: PropTypes.node,
+  };
+
+  render() {
+    const {
+      className,
+      color,
+      children,
+      ...attributes
+    } = this.props;
+
+    const classes = cn(
+      className,
+      color ? `table-${color}` : false,
+    );
+    return (
+      <th className={classes} {...attributes}>
+        {children}
+      </th>
+    );
+  }
+}

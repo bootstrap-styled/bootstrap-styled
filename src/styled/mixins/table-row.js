@@ -7,7 +7,7 @@ export function tableRowVariant(state, background) {
   return `
   /* Exact selectors below required to override '.table-striped' and prevent */
   /* inheritance to nested tables. */
-  &.table-${state} {
+  & .table-${state} {
     &,
     > th,
     > td {
@@ -19,7 +19,7 @@ export function tableRowVariant(state, background) {
   /* Note: this is not available for cells or rows within 'thead' or 'tfoot'. */
   &.table-hover {
 
-    &.table-${state} {
+    .table-${state} {
       ${hover(`
         background-color: ${hoverBackground};
 

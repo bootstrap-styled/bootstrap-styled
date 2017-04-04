@@ -1,37 +1,34 @@
 /**
- * A Table cell
+ * Td component
  */
 
 import React, { PropTypes } from 'react';
-import styled from 'styled-components';
-import bsTheme from 'theme';
+import cn from 'classnames';
 
-const defaultProps = { theme: bsTheme };
-
-class Td extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export default class Td extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
+    color: PropTypes.string,
     children: PropTypes.node,
-    theme: PropTypes.object,
-  }
+  };
 
   render() {
-    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      className,
+      color,
+      children,
+      ...attributes
+    } = this.props;
+
+    const classes = cn(
+      className,
+      color ? `table-${color}` : false,
+    );
     return (
-      <td className={className} {...rest}>
+      <td className={classes} {...attributes}>
         {children}
       </td>
     );
   }
-
 }
-
-// eslint-disable-next-line no-class-assign
-Td = styled(Td)`
-`;
-
-Td.defaultProps = defaultProps;
-
-export default Td;
-

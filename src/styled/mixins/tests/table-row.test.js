@@ -6,30 +6,30 @@ describe('bootstrap table-row mixins', () => {
     const css = tableRowVariant('active', '#f00');
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(240293522);
+    expect(fromJS({ css }).hashCode()).toEqual(543831532);
   });
   it('tableRowVariant should return a css success variant', () => {
     const css = tableRowVariant('success', '#f00');
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(955376544);
+    expect(fromJS({ css }).hashCode()).toEqual(487776158);
   });
   it('tableRowVariant should return a css info variant', () => {
     const css = tableRowVariant('info', '#f00');
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(918541721);
+    expect(fromJS({ css }).hashCode()).toEqual(-466312365);
   });
   it('tableRowVariant should return a css warning variant', () => {
     const css = tableRowVariant('warning', '#f00');
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-22637318);
+    expect(fromJS({ css }).hashCode()).toEqual(456471389);
   });
   it('tableRowVariant should return a css danger variant', () => {
-    const css = tableRowVariant('warning', '#f00');
+    const css = tableRowVariant('danger', '#f00');
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(-22637318);
+    expect(fromJS({ css }).hashCode()).toEqual(202181733);
   });
 });

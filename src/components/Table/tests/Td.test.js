@@ -7,22 +7,20 @@ import { mount } from 'enzyme';
 import React from 'react';
 import theme from 'theme';
 
-import Td from '../index';
+import Td from '../Td';
 import Table from '../Table';
 import Tr from '../Tr';
 import Tbody from '../Tbody';
 
-const children = (<h1>Test</h1>);
+const children = (<span>Test</span>);
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <ThemeProvider theme={theme}>
     <Table>
       <Tbody>
         <Tr>
-          <Td
-            className={props.className}
-          >
-            {props.children}
+          <Td {...props}>
+            {children}
           </Td>
         </Tr>
       </Tbody>
@@ -44,5 +42,12 @@ describe('<Td />', () => {
       children,
     });
     expect(renderedComponent.contains(children)).toEqual(true);
+  });
+  it('should have a className table-active', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      color: 'active',
+    });
+    expect(renderedComponent.find('td').hasClass('table-active')).toBe(true);
   });
 });

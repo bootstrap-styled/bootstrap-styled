@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import Thead from '../index';
+import Thead from '../Thead';
 
 
 const children = <span> test </span>;

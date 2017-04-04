@@ -4,11 +4,11 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import Th from '../index';
+import Th from '../Th';
 
 const children = <span> test </span>;
-const renderComponent = () => shallow(
-  <Th>
+const renderComponent = (props) => shallow(
+  <Th {...props}>
     {children}
   </Th>
 );
@@ -23,5 +23,12 @@ describe('<Th />', () => {
       children,
     });
     expect(renderedComponent.contains(children)).toEqual(true);
+  });
+  it('should have a className table-active', () => {
+    const renderedComponent = renderComponent({
+      children,
+      color: 'active',
+    });
+    expect(renderedComponent.find('th').hasClass('table-active')).toBe(true);
   });
 });
