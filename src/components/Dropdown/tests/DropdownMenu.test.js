@@ -5,14 +5,17 @@ import React from 'react';
 import { mount } from 'enzyme';
 import BootstrapProvider from '../../BootstrapProvider';
 import DropdownMenu from '../DropdownMenu';
+import NavDropdown from '../../NavBar/NavDropdown';
 
 const children = (<h1>Test</h1>);
 
 const renderComponentUsingTheme = () => mount(
   <BootstrapProvider>
-    <DropdownMenu>
-      {children}
-    </DropdownMenu>
+    <NavDropdown isOpen={false} toggle={jest.fn()}>
+      <DropdownMenu>
+        {children}
+      </DropdownMenu>
+    </NavDropdown>
   </BootstrapProvider>
 );
 

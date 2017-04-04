@@ -241,7 +241,7 @@ Tooltip = styled(Tooltip)`
   ${(props) => `
     &.tooltip {
       position: absolute;
-      z-index: 1070;
+      z-index: ${props.theme['$zindex-tooltip']};
       display: block;
       font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
       font-style: normal;

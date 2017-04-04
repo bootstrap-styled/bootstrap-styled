@@ -12,7 +12,7 @@ class H1 extends React.Component { // eslint-disable-line react/prefer-stateless
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-    lead: PropTypes.node,
+    lead: PropTypes.bool,
     theme: PropTypes.object,
     color: PropTypes.string,
     cssModule: PropTypes.object,

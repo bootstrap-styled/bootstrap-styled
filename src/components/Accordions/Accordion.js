@@ -10,15 +10,13 @@ import Collapse from '../Collapse';
 import H5 from '../H5';
 
 const defaultProps = {
-  component: Card,
-  tag: 'div',
+  tag: Card,
 };
 
 class Accordion extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
-    component: PropTypes.component,
     heading: PropTypes.oneOfType([
       PropTypes.node,
       PropTypes.string,
@@ -34,7 +32,7 @@ class Accordion extends React.Component { // eslint-disable-line react/prefer-st
 
   render() {
     // extract keys for div
-    const { className, name, component: Component, children, heading, tag: Tag, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { className, name, children, heading, tag: Tag, ...rest } = this.props; // eslint-disable-line no-unused-vars
     const { activeAccordionName, onClick, 'heading-component': HeadingComponent } = this.context.accordionGroup;
     const optional = {
       isOpened: false,

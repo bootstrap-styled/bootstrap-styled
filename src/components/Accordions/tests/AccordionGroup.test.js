@@ -5,21 +5,18 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import BootstrapProvider from '../../BootstrapProvider';
 import AccordionGroup from '../AccordionGroup';
+import Accordion from '../Accordion';
 
-const children = (<h1>Test</h1>);
+const children = (<Accordion heading="Collapsible Group Item #1" name="Accordion1">hey!</Accordion>);
 
 const renderComponent = (props = {}) => shallow(
-  <AccordionGroup {...props}>
-    {props.children}
-  </AccordionGroup>
+  <AccordionGroup {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <AccordionGroup {...props}>
-      {props.children}
-    </AccordionGroup>
+    <AccordionGroup {...props} />
   </BootstrapProvider>
 );
 
@@ -42,25 +39,7 @@ describe('<AccordionGroup />', () => {
   it('should render an <AccordionGroup> tag without a theme', () => {
     expect(renderedComponent.find('div').length).toBe(1);
   });
-  it('should have an attribute activeAccordionName with a theme', () => {
-    renderedComponent = renderComponentUsingTheme({
-      children,
-      accordionGroup: {
-        activeAccordionName: 'name-test',
-      },
-    });
-    expect(renderedComponent.find(AccordionGroup).props().accordionGroup.activeAccordionName).toEqual('name-test');
-  });
-  it('should have an attribute heading-component with a theme', () => {
-    renderedComponent = renderComponentUsingTheme({
-      children,
-      accordionGroup: {
-        activeAccordionName: 'name-test',
-        'heading-component': (<h1>hello</h1>),
-      },
-    });
-    expect(renderedComponent.find(AccordionGroup).props().accordionGroup['heading-component']).toEqual(<h1>hello</h1>);
-  });
+
   it('should have children without a theme', () => {
     expect(renderedComponent.contains(children)).toEqual(true);
   });

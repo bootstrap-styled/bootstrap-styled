@@ -11,27 +11,11 @@ import DropdownToggle from '../DropdownToggle';
 import TetherContent from '../../TetherContent';
 const children = (<h1>Test</h1>);
 
-const renderComponentUsingTheme = () => mount(
+const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Dropdown>
-      {children}
-    </Dropdown>
+    <Dropdown {...props} />
   </BootstrapProvider>
 );
-
-describe('<Dropdown />', () => {
-  it('should render an <Dropdown> tag with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme();
-    expect(renderedComponent.find('Dropdown').length).toBe(1);
-  });
-  it('should have children with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-    });
-    expect(renderedComponent.contains(children)).toEqual(true);
-  });
-});
-
 
 describe('Dropdown', () => {
   let isOpen;
@@ -40,7 +24,7 @@ describe('Dropdown', () => {
 
   beforeEach(() => {
     isOpen = false;
-    toggle = () => { isOpen = !isOpen; };
+    toggle = jest.fn();
     element = document.createElement('div');
     document.body.appendChild(element);
   });
@@ -48,6 +32,26 @@ describe('Dropdown', () => {
   afterEach(() => {
     document.body.removeChild(element);
     element = null;
+  });
+
+
+  describe('<Dropdown />', () => {
+    it('should render an <Dropdown> tag with a theme', () => {
+      const renderedComponent = renderComponentUsingTheme({
+        children,
+        isOpen,
+        toggle,
+      });
+      expect(renderedComponent.find('Dropdown').length).toBe(1);
+    });
+    it('should have children with a theme', () => {
+      const renderedComponent = renderComponentUsingTheme({
+        children,
+        isOpen,
+        toggle,
+      });
+      expect(renderedComponent.contains(children)).toEqual(true);
+    });
   });
 
   it('should render a single child', () => {

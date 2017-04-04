@@ -5,16 +5,20 @@ import React from 'react';
 import { mount } from 'enzyme';
 import BootstrapProvider from '../../BootstrapProvider';
 import DropdownToggle from '../DropdownToggle';
+import Dropdown from '../Dropdown';
 
 const children = (<h1>Test</h1>);
 
-const renderComponentUsingTheme = () => mount(
-  <BootstrapProvider>
-    <DropdownToggle>
-      {children}
-    </DropdownToggle>
-  </BootstrapProvider>
-);
+const renderComponentUsingTheme = (props = {}) => {
+  const { isOpen, toggle, ...rest } = props;
+  return mount(
+    <BootstrapProvider>
+      <Dropdown isOpen={isOpen} toggle={toggle}>
+        <DropdownToggle {...rest} />
+      </Dropdown>
+    </BootstrapProvider>
+  );
+};
 
 describe('<DropdownToggle />', () => {
   let isOpen;
@@ -22,25 +26,22 @@ describe('<DropdownToggle />', () => {
 
   beforeEach(() => {
     isOpen = false;
-    toggle = () => { isOpen = !isOpen; };
+    toggle = jest.fn();
   });
 
   it('should render an <DropdownToggle> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
-      context: {
-        isOpen,
-        toggle,
-      },
+      children,
+      isOpen,
+      toggle,
     });
     expect(renderedComponent.find('DropdownToggle').length).toBe(1);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      context: {
-        isOpen,
-        toggle,
-      },
+      isOpen,
+      toggle,
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
