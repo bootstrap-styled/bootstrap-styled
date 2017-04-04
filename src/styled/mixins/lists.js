@@ -1,5 +1,8 @@
 // Lists
 import theme from 'theme';
+export const defaultProps = {
+  '$list-inline-padding': '5px',
+};
 // Unstyled keeps list items block level, just removes default browser padding and list-style
 export function listUnstyled() {
   return `
@@ -22,6 +25,7 @@ export function listInlineItem(listInlinePadding = theme['$list-inline-padding']
   `;
 }
 export default {
+  defaultProps,
   listInline,
   listUnstyled,
 };

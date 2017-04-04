@@ -89,6 +89,18 @@ describe('bootstrap breakpoints mixins', () => {
     `);
     expect(fromJS({ breakpointBetween }).hashCode()).toEqual(-404328369);
   });
+  it('mediaBreakpointBetween should return a max media query', () => {
+    const breakpointBetween = mediaBreakpointBetween('xs', 'lg', defaultProps['$grid-breakpoints'], `
+      content: 'awesome!';
+    `);
+    expect(fromJS({ breakpointBetween }).hashCode()).toEqual(-796235382);
+  });
+  it('mediaBreakpointBetween should return a min media query', () => {
+    const breakpointBetween = mediaBreakpointBetween('md', 'xl', defaultProps['$grid-breakpoints'], `
+      content: 'awesome!';
+    `);
+    expect(fromJS({ breakpointBetween }).hashCode()).toEqual(-649979136);
+  });
   it('mediaBreakpointBetween should return null if no arguments are passed', () => {
     const breakpointBetween = mediaBreakpointBetween();
     expect(fromJS({ breakpointBetween }).hashCode()).toEqual(-278836038);

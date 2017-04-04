@@ -25,7 +25,7 @@ export const defaultProps = {
 // Used only by Bootstrap to generate the correct number of grid classes given
 // any value of `$grid-columns`.
 
-function getGridColumn(columns = defaultProps['$grid-columns'], gridGutterWidths = defaultProps['$grid-gutter-widths'], breakpoints = defaultProps['$grid-breakpoints']) {
+export function getGridColumn(columns = defaultProps['$grid-columns'], gridGutterWidths = defaultProps['$grid-gutter-widths'], breakpoints = defaultProps['$grid-breakpoints']) {
   return `
     position: relative;
     width: 100%;
@@ -34,7 +34,7 @@ function getGridColumn(columns = defaultProps['$grid-columns'], gridGutterWidths
   `;
 }
 
-function getColumnGridColumn(gridColumns = defaultProps['$grid-columns'], gridBreakpoints = defaultProps['$grid-breakpoints'], gridGutterWidths = defaultProps['$grid-gutter-widths'], breakpoint) {
+export function getColumnGridColumn(gridColumns = defaultProps['$grid-columns'], gridBreakpoints = defaultProps['$grid-breakpoints'], gridGutterWidths = defaultProps['$grid-gutter-widths'], breakpoint) {
   const columnList = [];
   const infix = breakpointInfix(breakpoint, gridBreakpoints);
   for (let i = 1; i <= gridColumns; i += 1) {
@@ -57,7 +57,7 @@ function getColumnGridColumn(gridColumns = defaultProps['$grid-columns'], gridBr
   `;
 }
 
-function getMediaBreakpointUp(gridColumns = defaultProps['$grid-columns'], gridBreakpoints = defaultProps['$grid-breakpoints'], breakpoint) {
+export function getMediaBreakpointUp(gridColumns = defaultProps['$grid-columns'], gridBreakpoints = defaultProps['$grid-breakpoints'], breakpoint) {
   const infix = breakpointInfix(breakpoint, gridBreakpoints);
   const basic = `
     &.col${infix},

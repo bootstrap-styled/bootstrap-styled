@@ -7,7 +7,6 @@ export { boxShadow } from './styled/mixins/box-shadow';
 export { default as bp } from './styled/mixins/breakpoints';
 export { default as buttonsMixins } from './styled/mixins/buttons';
 export { default as buttonGroupMixins } from './styled/mixins/buttonGroup';
-export { default as breadcrumbMixins } from './styled/mixins/breadcrumb';
 export { default as cardsMixins } from './styled/mixins/cards';
 export { clearfix } from './styled/mixins/clearfix';
 export { ifElse, ifThen } from './styled/mixins/conditional';

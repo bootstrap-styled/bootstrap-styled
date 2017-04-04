@@ -1,3 +1,4 @@
+import { fromJS } from 'immutable';
 import { defaultProps, navbarVerticalAlign } from '../navbar-align';
 
 describe('bootstrap navbar-align mixins', () => {
@@ -5,6 +6,6 @@ describe('bootstrap navbar-align mixins', () => {
     const css = navbarVerticalAlign(defaultProps['$navbar-height'], '30px');
     expect(css).not.toContain('undefined');
     expect(css).not.toContain('null');
-    expect(css).toEqual('\n    margin-top: 10px;\n    margin-bottom: 10px;  \n  ');
+    expect(fromJS({ css }).hashCode()).toEqual(1025386685);
   });
 });
