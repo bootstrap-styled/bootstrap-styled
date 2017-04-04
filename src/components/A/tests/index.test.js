@@ -10,7 +10,7 @@ const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
   <A {...props}>
-    {props.children}
+    {children}
   </A>
 );
 
@@ -18,7 +18,7 @@ const renderComponent = (props = {}) => shallow(
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
     <A {...props}>
-      {props.children}
+      {children}
     </A>
   </BootstrapProvider>
 );
