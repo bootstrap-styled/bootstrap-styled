@@ -19,13 +19,17 @@ class FigCaption extends React.Component { // eslint-disable-line react/prefer-s
     className: PropTypes.string,
     children: PropTypes.node,
     theme: PropTypes.object,
+    right: PropTypes.bool,
   }
 
   render() {
-    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { className, theme, children, right, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const classes = cn('figure-caption', className,
+      right ? 'text-right' : null
+    );
     return (
       <figcaption
-        className={cn('figure-caption', className)}
+        className={classes}
         {...rest}
       >
         {children}
