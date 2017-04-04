@@ -10,19 +10,21 @@ import Card from '../../Cards/Card';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <AccordionGroup {...props}>
-    <Accordion heading={props.heading}>
-      {props.children}
-    </Accordion>
+  <AccordionGroup
+    activeAccordionName="Accordion2"
+    onChange={jest.fn()}
+  >
+    <Accordion {...props} />
   </AccordionGroup>
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <AccordionGroup {...props}>
-      <Accordion heading={props.heading}>
-        {props.children}
-      </Accordion>
+    <AccordionGroup
+      activeAccordionName="Accordion2"
+      onChange={jest.fn()}
+    >
+      <Accordion {...props} />
     </AccordionGroup>
   </BootstrapProvider>
 );
@@ -34,12 +36,12 @@ describe('<Accordion />', () => {
   beforeEach(() => {
     renderedComponent = renderComponent({
       children,
-      component: Card,
+      tag: Card,
     });
     renderedComponent.setState({ activeName: 'Accordion2' });
     renderedComponentTheme = renderComponentUsingTheme({
       children,
-      component: Card,
+      tag: Card,
     });
     renderedComponent.setState({ activeName: 'Accordion2' });
   });
@@ -50,7 +52,7 @@ describe('<Accordion />', () => {
   it('should have an attribute heading without a theme', () => {
     renderedComponent = renderComponent({
       heading: 'heading-test',
-      component: Card,
+      tag: Card,
       children,
     });
     expect(renderedComponent.find(Accordion).props().heading).toEqual('heading-test');

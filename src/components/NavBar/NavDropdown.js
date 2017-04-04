@@ -8,6 +8,8 @@ const propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object,
+  toggle: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 };
 
 const defaultProps = {
