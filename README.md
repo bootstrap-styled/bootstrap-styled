@@ -59,7 +59,7 @@ If you want just part of your bootstrap for building a package to distribute for
 
 Example of import of the __breapoints__ mixins
 
-    import { breakpointsMixins } from 'bootstrap-styled';
+    import { bp } from 'bootstrap-styled';
 
 ## Utilities
 
