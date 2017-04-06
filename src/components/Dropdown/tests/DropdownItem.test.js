@@ -31,13 +31,11 @@ const renderComponentUsingTheme = (props = {}) => mount(
 );
 
 describe('<DropdownItem />', () => {
-  
   beforeEach(() => {
     dropdownOpen = false;
     toggle = jest.fn();
     onClick = jest.fn();
   });
-  
   it('should render an <DropdownItem> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme();
     expect(renderedComponent.find('DropdownItem').length).toBe(1);
