@@ -1,4 +1,15 @@
-import { omit, isFunction, setScrollbarWidth, isBodyOverflowing, getOriginalBodyPadding, conditionallyUpdateScrollbar, mapToCssModules, isObject, getTetherAttachments, getScrollbarWidth } from '../tools';
+import {
+  omit,
+  isFunction,
+  setScrollbarWidth,
+  isBodyOverflowing,
+  getOriginalBodyPadding,
+  conditionallyUpdateScrollbar,
+  mapToCssModules,
+  isObject,
+  getTetherAttachments,
+  getScrollbarWidth,
+} from '../tools';
 
 describe('tools', () => {
   describe('isFunction', () => {
