@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import themeBs from 'theme';
+import { mapToCssModules } from 'utils/tools';
 import { makeGridColumns } from '../../styled/mixins/grid-framework';
-import { mapToCssModules } from '../../styled/utilities/tools';
 
 const colWidths = ['xs', 'sm', 'md', 'lg', 'xl'];
 const stringOrNumberProp = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);

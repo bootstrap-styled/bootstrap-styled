@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
 import bsTheme from 'theme';
-import { mapToCssModules } from '../../styled/utilities/tools';
+import { mapToCssModules } from 'utils/tools';
 import { hoverFocus } from '../../styled/mixins/hover';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { badgeVariant } from '../../styled/mixins/badge';

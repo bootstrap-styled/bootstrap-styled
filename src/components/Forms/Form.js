@@ -9,12 +9,12 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import { unitUtils } from 'math-utils';
 import bsTheme from 'theme';
+import { mapToCssModules } from 'utils/tools';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { formControl, formControlValidation } from '../../styled/mixins/forms';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { customForms } from '../../styled/mixins/customForms';
 import { makeRow } from '../../styled/mixins/grid';
-import { mapToCssModules } from '../../styled/utilities/tools';
 
 const defaultProps = {
   theme: bsTheme,

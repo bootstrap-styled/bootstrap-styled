@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { withTheme } from 'styled-components';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import themeBs from 'theme';
-import { parseTransition } from '../../styled/utilities/transition';
+import parseTransition from 'utils/parseTransition';
 
 const defaultProps = {
   isOpen: true,
@@ -25,12 +25,12 @@ class Fade extends React.Component { // eslint-disable-line react/prefer-statele
 
   componentWillMount() {
     const { theme } = this.props;
-    const userThemeDurationInMs = parseTransition(theme['$enable-transitions'], theme['$transition-fade']);
+    const userThemeTransitionList = parseTransition(theme['$transition-fade']);
 
     this.setState({
-      transitionEnterTimeout: userThemeDurationInMs.duration,
-      transitionAppearTimeout: userThemeDurationInMs.duration,
-      transitionLeaveTimeout: userThemeDurationInMs.duration,
+      transitionEnterTimeout: userThemeTransitionList.duration,
+      transitionAppearTimeout: userThemeTransitionList.duration,
+      transitionLeaveTimeout: userThemeTransitionList.duration,
     });
   }
 

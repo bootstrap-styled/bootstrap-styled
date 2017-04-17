@@ -7,9 +7,9 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import { mapToCssModules } from 'utils/tools';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { card } from '../../styled/mixins/cards';
-import { mapToCssModules } from '../../styled/utilities/tools';
 
 const defaultProps = {
   theme: bsTheme,

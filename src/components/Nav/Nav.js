@@ -7,9 +7,9 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import bsTheme from 'theme';
 import cn from 'classnames';
+import { mapToCssModules } from 'utils/tools';
 import { nav } from '../../styled/mixins/nav';
 import { navbar as navbarMixin } from '../../styled/mixins/navbar';
-import { mapToCssModules } from '../../styled/utilities/tools';
 import Ul from '../Ul';
 
 const defaultProps = {

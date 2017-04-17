@@ -146,4 +146,53 @@ describe('<A />', () => {
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
+  it('className should set a class', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      className: 'btn',
+      target: '_blank',
+      href: 'http://mxstbr.com/',
+      children,
+    });
+    expect(renderedComponent.find('a').props().className).toEqual('btn sc-bwzfXH kwhShS');
+  });
+  it('active should set a class', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      className: 'btn',
+      target: '_blank',
+      href: 'http://mxstbr.com/',
+      children,
+      active: true,
+    });
+    expect(renderedComponent.find('a').hasClass('active')).toBe(true);
+  });
+  it('disabled should set a class', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      className: 'btn',
+      target: '_blank',
+      href: 'http://mxstbr.com/',
+      children,
+      disabled: true,
+    });
+    expect(renderedComponent.find('a').hasClass('disabled')).toBe(true);
+  });
+  it('color should set a class', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      className: 'btn',
+      target: '_blank',
+      href: 'http://mxstbr.com/',
+      children,
+      color: 'primary',
+    });
+    expect(renderedComponent.find('a').hasClass('text-primary')).toBe(true);
+  });
+  it('dropdown-item should set a class', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      className: 'btn',
+      target: '_blank',
+      href: 'http://mxstbr.com/',
+      children,
+      'dropdown-item': true,
+    });
+    expect(renderedComponent.find('a').hasClass('dropdown-item')).toBe(true);
+  });
 });

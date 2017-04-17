@@ -7,10 +7,10 @@ import styled from 'styled-components';
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import { unitUtils } from 'math-utils';
+import { mapToCssModules } from 'utils/tools';
 import bsTheme from '../../theme';
 import { tableRowVariant } from '../../styled/mixins/table-row';
 import { hover as hoverMixin } from '../../styled/mixins/hover';
-import { mapToCssModules } from '../../styled/utilities/tools';
 
 const defaultProps = {
   tag: 'table',

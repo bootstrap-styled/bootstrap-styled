@@ -7,9 +7,9 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import Color from 'color';
 import bsTheme from 'theme';
+import { mapToCssModules } from 'utils/tools';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
-import { mapToCssModules } from '../../styled/utilities/tools';
 
 const defaultProps = {
   theme: bsTheme,

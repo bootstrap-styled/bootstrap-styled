@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import { mapToCssModules } from 'utils/tools';
 import { hoverFocus } from '../../styled/mixins/hover';
-import { mapToCssModules } from '../../styled/utilities/tools';
 
 const defaultProps = { theme: bsTheme };
 

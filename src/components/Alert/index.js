@@ -8,8 +8,8 @@ import cn from 'classnames';
 import styled, { withTheme } from 'styled-components';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import themeBs from 'theme';
+import { mapToCssModules } from 'utils/tools';
 import Close from '../Close';
-import { mapToCssModules } from '../../styled/utilities/tools';
 import { alertVariant } from '../../styled/mixins/alert';
 import { borderRadius } from '../../styled/mixins/border-radius';
 

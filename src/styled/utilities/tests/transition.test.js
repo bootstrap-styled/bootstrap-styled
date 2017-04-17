@@ -1,73 +1,78 @@
 import { fromJS } from 'immutable';
-import { getTransitionUtilities, fade, collapse, parseTransition } from '../transition';
+import { getTransitionUtilities, fade, collapse, swapFade, makeReactTransition } from '../transition';
 
 describe('bootstrap transition mixins', () => {
-  it('getTransitionUtils should return a css utility', () => {
-    const enableTransitions = true;
-    const css = getTransitionUtilities(enableTransitions, 'all .2s ease-in-out', 'height .35s ease');
-    expect(css).not.toContain('undefined');
-    expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(6006592);
+  describe('getTransitionUtils', () => {
+    it('should return a css utility', () => {
+      const enableTransitions = true;
+      const css = getTransitionUtilities(enableTransitions, 'all .2s ease-in-out', 'height .35s ease');
+      expect(css).not.toContain('undefined');
+      expect(css).not.toContain('null');
+      expect(fromJS({ css }).hashCode()).toEqual(-407098760);
+    });
+    it('should have parameters', () => {
+      const css = getTransitionUtilities();
+      expect(css).not.toContain('undefined');
+      expect(css).not.toContain('null');
+      expect(fromJS({ css }).hashCode()).toEqual(-303544800);
+    });
   });
-  it('getTransitionUtils should have parameters', () => {
-    const css = getTransitionUtilities();
-    expect(css).not.toContain('undefined');
-    expect(css).not.toContain('null');
-    expect(fromJS({ css }).hashCode()).toEqual(419397045);
+  describe('fade', () => {
+    it('should return a css with defaultProps', () => {
+      const css = fade();
+      expect(fromJS({ css }).hashCode()).toEqual(-297507179);
+    });
+    it('should return a css with transition', () => {
+      const enableTransitions = true;
+      const css = fade(enableTransitions, 'opacity .15s linear');
+      expect(fromJS({ css }).hashCode()).toEqual(-297507179);
+    });
+    it('should return a css without transition', () => {
+      const enableTransitions = false;
+      const css = fade(enableTransitions, 'opacity .15s linear');
+      expect(fromJS({ css }).hashCode()).toEqual(-1046095170);
+    });
   });
-  it('fade should return a css with defaultProps', () => {
-    const css = fade();
-    expect(fromJS({ css }).hashCode()).toEqual(-297507179);
+  describe('collapse', () => {
+    it('should return a css with defaultProps', () => {
+      const css = collapse();
+      expect(fromJS({ css }).hashCode()).toEqual(330977907);
+    });
+    it('should return a css with transition', () => {
+      const enableTransitions = true;
+      const css = collapse(enableTransitions, 'height .35s ease');
+      expect(fromJS({ css }).hashCode()).toEqual(330977907);
+    });
+    it('should return a css without transition', () => {
+      const enableTransitions = false;
+      const css = collapse(enableTransitions, 'height .35s ease');
+      expect(fromJS({ css }).hashCode()).toEqual(1058176073);
+    });
   });
-  it('fade should return a css with transition', () => {
-    const enableTransitions = true;
-    const css = fade(enableTransitions, 'opacity .15s linear');
-    expect(fromJS({ css }).hashCode()).toEqual(-297507179);
+  describe('swapFade', () => {
+    it('should return a css with defaultProps', () => {
+      const css = swapFade();
+      expect(fromJS({ css }).hashCode()).toEqual(1010683774);
+    });
+    it('should return a css with transition', () => {
+      const enableTransitions = true;
+      const css = swapFade(enableTransitions, 'opacity 500ms ease');
+      expect(fromJS({ css }).hashCode()).toEqual(-575218961);
+    });
+    it('should return a css without transition', () => {
+      const enableTransitions = false;
+      const css = swapFade(enableTransitions, 'opacity 500ms ease');
+      expect(fromJS({ css }).hashCode()).toEqual(-454224996);
+    });
   });
-  it('fade should return a css without transition', () => {
-    const enableTransitions = false;
-    const css = fade(enableTransitions, 'opacity .15s linear');
-    expect(fromJS({ css }).hashCode()).toEqual(-1046095170);
-  });
-  it('collapse should return a css with defaultProps', () => {
-    const css = collapse();
-    expect(fromJS({ css }).hashCode()).toEqual(330977907);
-  });
-  it('collapse should return a css with transition', () => {
-    const enableTransitions = true;
-    const css = collapse(enableTransitions, 'height .35s ease');
-    expect(fromJS({ css }).hashCode()).toEqual(330977907);
-  });
-  it('collapse should return a css without transition', () => {
-    const enableTransitions = false;
-    const css = collapse(enableTransitions, 'height .35s ease');
-    expect(fromJS({ css }).hashCode()).toEqual(1058176073);
-  });
-  it('parseTransition should return an object', () => {
-    const enableTransitions = true;
-    const objectTest = {
-      property: 'height',
-      duration: 350,
-      functionTiming: 'ease',
-      delay: null,
-    };
-    const css = parseTransition(enableTransitions, 'height .35s ease');
-    expect(css).toMatchObject(objectTest);
-  });
-  it('parseTransition should return an object', () => {
-    const enableTransitions = true;
-    const objectTest = {
-      property: 'height',
-      duration: 350,
-      functionTiming: 'ease',
-      delay: 350,
-    };
-    const css = parseTransition(enableTransitions, 'height .35s ease .35s');
-    expect(css).toMatchObject(objectTest);
-  });
-  it('parseTransition should return an object', () => {
-    const enableTransitions = false;
-    const css = parseTransition(enableTransitions, 'height .35s ease');
-    expect(css.duration).toEqual(1);
+  describe('makeReactTransition', () => {
+    it('should return a css with defaultProps', () => {
+      const css = makeReactTransition();
+      expect(fromJS({ css }).hashCode()).toEqual(457648712);
+    });
+    it('should return a css adapted to react css transition group ', () => {
+      const css = makeReactTransition('opacity: 0;', 'opacity: 1;', 'transition: opacity .15s linear;', 'opacity: 1;', 'opacity: 0;', 'transition: opacity .15s linear;');
+      expect(fromJS({ css }).hashCode()).toEqual(147846138);
+    });
   });
 });

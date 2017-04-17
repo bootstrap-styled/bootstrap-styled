@@ -5,7 +5,7 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Tether from 'tether';
-import { isFunction } from '../../styled/utilities/tools';
+import { isFunction } from 'utils/tools';
 
 const defaultProps = {
   isOpen: false,

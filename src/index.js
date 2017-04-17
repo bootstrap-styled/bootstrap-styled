@@ -106,6 +106,11 @@ export { default as Badge } from './components/Badge';
 export { default as Textarea } from './components/Textarea';
 export { default as Tooltip } from './components/Tooltip';
 export { default as Ul } from './components/Ul';
+export { default as CssTransition } from './components/motion/components/transitions/CssTransition';
+export { default as CssTransitionSwap } from './components/motion/components/transitions/CssTransitionSwap';
+export { default as TransitionGroupSwap } from './components/motion/components/transitions/TransitionGroupSwap';
+export { Blur, Contrast, Brightness, Grayscale, HueRotate, Invert, Opacity, Sepia, Saturate, Bounce, BounceDown, BounceUp, BounceLeft, BounceRight, Flash, RollOut, RollIn, Rubber, Swing, Zoom, Hinge, Pulse, ExpandUp, Entrance, Hatch, SlideUp, SlideDown, SlideRight, SlideLeft, SlideRightLeft, FadeIn, FadeInDown, FadeInUp, FadeInLeft, FadeInRight, RotateIn, RotateLeft, RotateRight, RotateUpLeft, RotateUpRight, LightIn, LightOut, Flip, FlipX, FlipY } from './components/motion';
+
 // 2. Molecules
 export { default as Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote } from './components/Cards';
 export { default as Accordion, AccordionGroup } from './components/Accordions';

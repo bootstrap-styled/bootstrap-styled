@@ -6,8 +6,8 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import { mapToCssModules } from 'utils/tools';
 import { button } from '../../styled/mixins/buttons';
-import { mapToCssModules } from '../../styled/utilities/tools';
 
 const colSizes = ['xs', 'sm', 'md', 'lg', 'xl'];
 
