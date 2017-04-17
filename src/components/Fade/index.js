@@ -26,11 +26,10 @@ class Fade extends React.Component { // eslint-disable-line react/prefer-statele
   componentWillMount() {
     const { theme } = this.props;
     const userThemeTransitionList = parseTransition(theme['$transition-fade']);
-
     this.setState({
-      transitionEnterTimeout: userThemeTransitionList.duration,
-      transitionAppearTimeout: userThemeTransitionList.duration,
-      transitionLeaveTimeout: userThemeTransitionList.duration,
+      transitionEnterTimeout: userThemeTransitionList[0].duration,
+      transitionAppearTimeout: userThemeTransitionList[0].duration,
+      transitionLeaveTimeout: userThemeTransitionList[0].duration,
     });
   }
 
