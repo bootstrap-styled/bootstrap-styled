@@ -211,7 +211,5 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
   // Transition React : Sample CssTransitionSwap
   v['$transform-swap-fade-from'] = u['$transform-swap-fade-from'] || 'translate3d(0, 0, 0)';
   v['$transform-swap-fade-to'] = u['$transform-swap-fade-to'] || 'translate3d(0, 400px, 0)';
-
   return Object.assign({}, u, v);
 }
-

@@ -1,5 +1,5 @@
 /**
- * Testing our Fade component
+ * Testing our Fade comgit diff ponent
  */
 import { mount } from 'enzyme';
 import React from 'react';
