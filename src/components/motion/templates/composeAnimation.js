@@ -12,7 +12,7 @@ export default function composeAnimation(makeAnimation) {
       delay: '0s',
       direction: 'normal',
       iterations: '1',
-      backfaceVisible: 'visible',
+      backfaceVisibility: 'visible',
       fillMode: 'none',
       playState: 'running',
     };
@@ -26,7 +26,7 @@ export default function composeAnimation(makeAnimation) {
       delay: PropTypes.string,
       direction: PropTypes.string,
       iterations: PropTypes.string,
-      backfaceVisible: PropTypes.string,
+      backfaceVisibility: PropTypes.string,
       fillMode: PropTypes.string,
       playState: PropTypes.string,
     }
@@ -43,7 +43,7 @@ export default function composeAnimation(makeAnimation) {
         delay,
         direction,
         iterations,
-        backfaceVisible,
+        backfaceVisibility,
         fillMode,
         playState,
       } = this.props;
@@ -53,7 +53,7 @@ export default function composeAnimation(makeAnimation) {
       this.setState({
         styles: {
           animation: `${animationName} ${duration} ${timingFunction} ${delay} ${iterations} ${direction} ${fillMode} ${playState}`,
-          backfaceVisibility: `${backfaceVisible}`,
+          backfaceVisibility: `${backfaceVisibility}`,
         },
       });
     }
@@ -64,7 +64,7 @@ export default function composeAnimation(makeAnimation) {
         className,
         children,
         ...rest
-      } = omit(this.props, ['distance', 'duration', 'timingFunction', 'delay', 'iterations', 'direction', 'fillMode', 'playState', 'backfaceVisible']);
+      } = omit(this.props, ['distance', 'duration', 'timingFunction', 'delay', 'iterations', 'direction', 'fillMode', 'playState', 'backfaceVisibility']);
 
       return (
         <span
