@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import bsTheme from 'theme';
 
-import { mapToCssModules, omit } from '../../styled/utilities/tools';
+import { mapToCssModules, omit } from 'utils/tools';
 
 const SHOW = 'SHOW';
 const SHOWN = 'SHOWN';

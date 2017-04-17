@@ -6,9 +6,9 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import { mapToCssModules } from 'utils/tools';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { clearfix } from '../../styled/mixins/clearfix';
-import { mapToCssModules } from '../../styled/utilities/tools';
 const defaultProps = {
   theme: bsTheme,
   tag: 'ol',

@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
 import themeBs from '../../theme';
-import { mapToCssModules } from '../../styled/utilities/tools';
+import { mapToCssModules } from 'utils/tools';
 import { navbar } from '../../styled/mixins/navbar';
 import { nav } from '../../styled/mixins/nav';
 

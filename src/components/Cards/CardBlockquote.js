@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
-import { mapToCssModules } from '../../styled/utilities/tools';
+import { mapToCssModules } from 'utils/tools';
 import Blockquote from '../Blockquote';
 
 const defaultProps = {

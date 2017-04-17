@@ -7,13 +7,13 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import { mapToCssModules, omit } from 'utils/tools';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { navDivider } from '../../styled/mixins/nav-divider';
 import { hoverFocus } from '../../styled/mixins/hover';
 import { buttonGroup } from '../../styled/mixins/buttonGroup';
 import { ifThen } from '../../styled/mixins/conditional';
-import { mapToCssModules, omit } from '../../styled/utilities/tools';
 import DropdownMenu from './DropdownMenu';
 import TetherContent from '../TetherContent';
 

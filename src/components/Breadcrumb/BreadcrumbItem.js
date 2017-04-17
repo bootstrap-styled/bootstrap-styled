@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import { mapToCssModules } from '../../styled/utilities/tools';
+import { mapToCssModules } from 'utils/tools';
 
 const defaultProps = {
   tag: 'li',

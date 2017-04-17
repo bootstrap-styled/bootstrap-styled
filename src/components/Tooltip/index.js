@@ -5,8 +5,8 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
+import { mapToCssModules, omit, getTetherAttachments, tetherAttachements } from 'utils/tools';
 import TetherContent from '../TetherContent';
-import { mapToCssModules, omit, getTetherAttachments, tetherAttachements } from '../../styled/utilities/tools';
 
 const DEFAULT_DELAYS = {
   show: 0,
@@ -218,7 +218,6 @@ class Tooltip extends React.Component {
     if (this.state.focus === true) {
       optional.onFocus = this.handleFocus;
     }
-
     return (
       <TetherContent
         className={classes}

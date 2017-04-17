@@ -2,9 +2,7 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 
-import {
-  omit,
-} from '../../styled/utilities/tools';
+import { omit } from 'utils/tools';
 
 const propTypes = {
   baseClass: PropTypes.string,

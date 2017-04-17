@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import bsTheme from 'theme';
 import cn from 'classnames';
-import { mapToCssModules } from '../../styled/utilities/tools';
+import { mapToCssModules } from 'utils/tools';
 import { typography } from '../../styled/mixins/typography';
 
 const defaultProps = { theme: bsTheme };

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
 
-import { mapToCssModules } from '../../styled/utilities/tools';
+import { mapToCssModules } from 'utils/tools';
 import { a } from '../../styled/mixins/a';
 
 const defaultProps = {

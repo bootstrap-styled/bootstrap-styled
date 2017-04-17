@@ -7,11 +7,11 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import { mapToCssModules } from 'utils/tools';
 import { borderTopRadius, borderBottomRadius } from '../../styled/mixins/border-radius';
 import { hoverFocus } from '../../styled/mixins/hover';
 import { listGroupItemVariant } from '../../styled/mixins/list-group';
 import Ul from '../Ul/index';
-import { mapToCssModules } from '../../styled/utilities/tools';
 
 const defaultProps = {
   theme: bsTheme,

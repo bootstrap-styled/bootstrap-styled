@@ -17,7 +17,7 @@ import {
   setScrollbarWidth,
   mapToCssModules,
   omit, 
-} from '../../styled/utilities/tools';
+} from 'utils/tools';
 
 
 
