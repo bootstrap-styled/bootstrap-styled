@@ -66,14 +66,6 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
     easeInOut: 'ease-in-out',
   };
 
-  // You can even set your own custom timing function properties (For Timing functions usage, please refer to w3c documentation[https://www.w3schools.com/cssref/css3_pr_animation-timing-function.asp])
-  v['$motion-timing-function-custom'] = u['$motion-timing-function-custom'] || {
-    stepStart: 'step-start',
-    stepEnd: 'step-end',
-    steps: 'steps(3)',
-    cubicBezier: 'cubic-bezier(.04,.9,.15,.98)',
-  };
-
   // Use xs for disable delay. Delay can't exceed 1000ms (in order to don't be forget by the user).
   v['$motion-delay'] = u['$motion-delay'] || {
     xs: '0ms',
