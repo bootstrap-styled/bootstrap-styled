@@ -7,9 +7,8 @@ import cn from 'classnames';
 import styled from 'styled-components';
 import { mapToCssModules, omit, getTetherAttachments, tetherAttachements } from 'utils/tools';
 import TetherContent from '../TetherContent';
-
 const DEFAULT_DELAYS = {
-  show: 0,
+  shape: 0,
   hide: 250,
 };
 
