@@ -68,7 +68,7 @@ describe('bootstrap transition mixins', () => {
   describe('makeReactTransition', () => {
     it('should return a css with defaultProps', () => {
       const css = makeReactTransition();
-      expect(fromJS({ css }).hashCode()).toEqual(457648712);
+      expect(fromJS({ css }).hashCode()).toEqual(-494204153);
     });
     it('should return a css adapted to react css transition group ', () => {
       const css = makeReactTransition('opacity: 0;', 'opacity: 1;', 'transition: opacity .15s linear;', 'opacity: 1;', 'opacity: 0;', 'transition: opacity .15s linear;');

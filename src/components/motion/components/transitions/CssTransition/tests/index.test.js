@@ -1,5 +1,5 @@
 /**
- * Testing our TransitionGroup component
+ * Testing our CssTransitionGroup component
  */
 import React from 'react';
 import { mount } from 'enzyme';
@@ -15,7 +15,7 @@ const renderComponent = (props = {}) => mount(
 );
 
 describe('<CssTransition />', () => {
-  it('should render a <CssTransition> tag', () => {
+  it('should render a <CssTransition /> tag', () => {
     const renderedComponent = renderComponent({
       children,
     });

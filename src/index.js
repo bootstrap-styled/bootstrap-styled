@@ -34,6 +34,8 @@ export {
   textUtils,
   visibilityUtils,
 } from './utilities';
+// Useful meta-data
+export { tetherAttachements } from './utils/tools';
 // 0. Configuration
 export { default as theme, makeTheme } from './theme';
 // 1. Atoms
@@ -106,6 +108,7 @@ export { default as Badge } from './components/Badge';
 export { default as Textarea } from './components/Textarea';
 export { default as Tooltip } from './components/Tooltip';
 export { default as Ul } from './components/Ul';
+export { default as Transition } from './components/motion/components/transitions/Transition';
 export { default as CssTransition } from './components/motion/components/transitions/CssTransition';
 export { default as CssTransitionSwap } from './components/motion/components/transitions/CssTransitionSwap';
 export { default as TransitionGroupSwap } from './components/motion/components/transitions/TransitionGroupSwap';
