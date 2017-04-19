@@ -10,5 +10,6 @@ export {
   mapToCssModules,
   isObject,
   getTetherAttachments,
+  tetherAttachements,
   getScrollbarWidth,
 } from './fix';

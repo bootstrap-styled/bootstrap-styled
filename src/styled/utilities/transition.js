@@ -10,12 +10,12 @@ export function getTransitionUtilities(
   transitionCollapse = defaultProps['$transition-collapse'],
   transformSwapFadeFrom = defaultProps['$transform-swap-fade-from'],
   transformSwapFadeTo = defaultProps['$transform-swap-fade-to'],
-  motionCssPropertyEnter = defaultProps['$motion-css-transition-property-enter'],
-  motionTransitionEnter = defaultProps['$motion-css-transition-enter'],
-  motionCssPropertyEnterActive = defaultProps['$motion-css-transition-property-enter-active'],
-  motionCssPropertyLeave = defaultProps['$motion-css-transition-property-leave'],
-  motionTransitionLeave = defaultProps['$motion-css-transition-leave'],
-  motionCssPropertyLeaveActive = defaultProps['$motion-css-transition-property-leave-active'],
+  motionCssPropertyEnter = defaultProps['$motion-transition-property-enter'],
+  motionTransitionEnter = defaultProps['$motion-transition-enter'],
+  motionCssPropertyEnterActive = defaultProps['$motion-transition-property-enter-active'],
+  motionCssPropertyLeave = defaultProps['$motion-transition-property-leave'],
+  motionTransitionLeave = defaultProps['$motion-transition-leave'],
+  motionCssPropertyLeaveActive = defaultProps['$motion-transition-property-leave-active'],
 ) {
   return `
     ${fade(enableTransitions, transitionFade)}
@@ -82,7 +82,7 @@ export function getReactTransition(enableTransition, transition) {
 }
 
 // function for create react css transition rules
-export function makeReactTransition(motionCssPropertyEnter = defaultProps['$motion-css-property-enter'], motionCssPropertyEnterActive = defaultProps['$motion-css-property-enter-active'], motionTransitionEnter = defaultProps['$motion-transition-enter'], motionCssPropertyLeave = defaultProps['$motion-css-property-leave'], motionCssPropertyLeaveActive = defaultProps['$motion-css-property-leave-active'], motionTransitionLeave = defaultProps['$motion-transition-leave']) {
+export function makeReactTransition(motionCssPropertyEnter = defaultProps['$motion-transition-property-enter'], motionCssPropertyEnterActive = defaultProps['$motion-transition-property-enter-active'], motionTransitionEnter = defaultProps['$motion-transition-enter'], motionCssPropertyLeave = defaultProps['$motion-transition-property-leave'], motionCssPropertyLeaveActive = defaultProps['$motion-transition-property-leave-active'], motionTransitionLeave = defaultProps['$motion-transition-leave']) {
   return `
     .enter,
      &.enter {

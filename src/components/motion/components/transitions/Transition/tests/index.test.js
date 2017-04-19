@@ -1,21 +1,21 @@
 /**
- * Testing our CssTransitionGroup component
+ * Testing our TransitionGroup component
  */
 import React from 'react';
 import { mount } from 'enzyme';
 import BootstrapProvider from '../../../../../BootstrapProvider';
-import CssTransition from '../index';
+import Transition from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => mount(
   <BootstrapProvider>
-    <CssTransition {...props} />
+    <Transition {...props} />
   </BootstrapProvider>
 );
 
-describe('<CssTransition />', () => {
-  it('should render a <CssTransition /> tag', () => {
+describe('<Transition />', () => {
+  it('should render a <Transition /> tag', () => {
     const renderedComponent = renderComponent({
       children,
     });
