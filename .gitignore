@@ -2,7 +2,8 @@
 coverage
 node_modules
 stats.json
-
+.sonar
+reports
 # Cruft
 .DS_Store
 npm-debug.log
