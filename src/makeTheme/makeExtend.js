@@ -108,17 +108,17 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
 
   // Rotate animation configuration
   // using rotate3d css properties
-  v['$motion-rotating-degree'] = u['$motion-rotating-degree'] || {
+  v['$motion-degree'] = u['$motion-degree'] || {
     xs: '45',
     sm: '90',
     md: '180',
     lg: '270',
     xl: '360',
   };
-  assertAscending(v['$motion-rotating-degree'], '$motion-rotating-degree');
+  assertAscending(v['$motion-degree'], '$motion-degree');
 
   // Define perspective for rotating animation
-  v['$motion-rotating-perspective'] = u['$motion-rotating-perspective'] || {
+  v['$motion-perspective'] = u['$motion-perspective'] || {
     xs: '64px',
     sm: '128px',
     md: '256px',
@@ -127,13 +127,13 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
   };
 
   // Define backface visibility for rotating animation
-  v['$motion-rotating-backface-visibility'] = u['$motion-rotating-backface-visibility'] || {
+  v['$motion-backface-visibility'] = u['$motion-backface-visibility'] || {
     hidden: 'hidden',
     visible: 'visible',
   };
 
   // ANIMATION CONFIGURATION
-  v['$motion-animation-direction'] = u['$motion-animation-direction'] || {
+  v['$motion-direction'] = u['$motion-direction'] || {
     normal: 'normal',
     reverse: 'reverse',
     alternate: 'alternate',
@@ -141,7 +141,7 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
   };
 
   // Use for iterate n time or loop your animation
-  v['$motion-animation-iteration'] = u['$motion-animation-iteration'] || {
+  v['$motion-iteration'] = u['$motion-iteration'] || {
     xs: '1',
     sm: '3',
     md: '6',
@@ -150,7 +150,7 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
   };
 
   // Define if the animation should stop on the end and stay or come back to initial place
-  v['$motion-animation-fill-mode'] = u['$motion-animation-fill-mode'] || {
+  v['$motion-fill-mode'] = u['$motion-fill-mode'] || {
     none: 'none',
     forwards: 'forwards',
     backwards: 'backwards',
@@ -158,7 +158,7 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
   };
 
   // Define the playing state of your components
-  v['$motion-animation-play-state'] = u['$motion-animation-play-state'] || {
+  v['$motion-play-state'] = u['$motion-play-state'] || {
     running: 'running',
     paused: 'paused',
   };
@@ -178,12 +178,6 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
     sepia: 'filter: sepia(100%)',
   };
 
-  // Customisation Filter Extend
-  v['$motion-filter-custom'] = u['$motion-filter-custom'] || {
-    dropShadow: 'drop-shadow(8px 8px 10px red)',
-    url: 'url()', // takes the location of an XML file that specifies an SVG filter,
-  };
-
   // Customisation Transform
   v['$motion-transform'] = u['$motion-transform'] || {
     translate3d: 'translate3d(0px, 0px, 0px)',
@@ -195,13 +189,13 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
   // Transition React : Configuration Transition
   v['$motion-css-transition-property-enter'] = u['$motion-css-transition-property-enter'] || 'filter: opacity(0%);';
   v['$motion-css-transition-property-enter-active'] = u['$motion-css-transition-property-enter-active'] || 'filter: opacity(100%);';
-  v['$motion-css-transition-enter'] = u['$motion-transition-enter'] || 'transition: filter .15s linear;';
+  v['$motion-css-transition-enter'] = u['$motion-css-transition-enter'] || 'transition: filter .15s linear;';
   v['$motion-css-transition-property-leave'] = u['$motion-css-transition-property-leave'] || 'filter: opacity(100%);';
   v['$motion-css-transition-property-leave-active'] = u['$motion-css-transition-property-leave-active'] || 'filter: opacity(0%);';
-  v['$motion-css-transition-leave'] = u['$motion-transition-leave'] || 'transition: filter .15s linear;';
+  v['$motion-css-transition-leave'] = u['$motion-css-transition-leave'] || 'transition: filter .15s linear;';
 
   // Transition React : Sample CssTransitionSwap
-  v['$transform-swap-fade-from'] = u['$transform-swap-fade-from'] || 'translate3d(0, 0, 0)';
-  v['$transform-swap-fade-to'] = u['$transform-swap-fade-to'] || 'translate3d(0, 400px, 0)';
+  v['$transform-swap-fade-from'] = u['$transform-swap-fade-from'] || 'translate3d(0, 0, 0)'; // Sample example will be deleted
+  v['$transform-swap-fade-to'] = u['$transform-swap-fade-to'] || 'translate3d(0, 400px, 0)'; // Sample example will be deleted
   return Object.assign({}, u, v);
 }
