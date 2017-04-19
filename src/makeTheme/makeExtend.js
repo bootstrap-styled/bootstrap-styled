@@ -187,12 +187,12 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
 
   // Transition configuration
   // Transition React : Configuration Transition and Css transition
-  v['$motion-transition-property-enter'] = u['$motion-css-transition-property-enter'] || 'filter: opacity(0%);';
-  v['$motion-transition-property-enter-active'] = u['$motion-css-transition-property-enter-active'] || 'filter: opacity(100%);';
-  v['$motion-transition-enter'] = u['$motion-css-transition-enter'] || 'transition: filter .15s linear;';
-  v['$motion-transition-property-leave'] = u['$motion-css-transition-property-leave'] || 'filter: opacity(100%);';
-  v['$motion-transition-property-leave-active'] = u['$motion-css-transition-property-leave-active'] || 'filter: opacity(0%);';
-  v['$motion-transition-leave'] = u['$motion-css-transition-leave'] || 'transition: filter .15s linear;';
+  v['$motion-transition-property-enter'] = u['$motion-transition-property-enter'] || 'filter: opacity(0%);';
+  v['$motion-transition-property-enter-active'] = u['$motion-transition-property-enter-active'] || 'filter: opacity(100%);';
+  v['$motion-transition-enter'] = u['$motion-transition-enter'] || 'transition: filter .15s linear;';
+  v['$motion-transition-property-leave'] = u['$motion-transition-property-leave'] || 'filter: opacity(100%);';
+  v['$motion-transition-property-leave-active'] = u['$motion-transition-property-leave-active'] || 'filter: opacity(0%);';
+  v['$motion-transition-leave'] = u['$motion-transition-leave'] || 'transition: filter .15s linear;';
 
   // Transition React : Sample CssTransitionSwap
   v['$transform-swap-fade-from'] = u['$transform-swap-fade-from'] || 'translate3d(0, 0, 0)'; // Sample example will be deleted
