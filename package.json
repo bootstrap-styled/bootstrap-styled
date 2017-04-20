@@ -39,9 +39,10 @@
     "pretest": "npm run test:clean && npm run lint",
     "tdd": "npm run test:watch",
     "test:clean": "rimraf ./coverage",
-    "test": "cross-env NODE_ENV=test jest --coverage",
+    "test": "cross-env TEST_REPORT_PATH=reports NODE_ENV=test jest --coverage",
     "test:watch": "cross-env NODE_ENV=test jest --watch",
-    "coveralls": "cat ./coverage/lcov.info | coveralls"
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner"
   },
   "lint-staged": {
     "*.js": "lint:eslint"
@@ -192,7 +193,8 @@
     "testPathIgnorePatterns": [
       "<rootDir>/dist/",
       "<rootDir>/lib/"
-    ]
+    ],
+    "testResultsProcessor": "jest-sonar-reporter"
   },
   "peerDependencies": {
     "react": "^15.4.2",
@@ -265,6 +267,8 @@
     "url-loader": "0.5.7",
     "webpack": "2.2.1",
     "webpack-dev-middleware": "1.9.0",
-    "webpack-hot-middleware": "2.15.0"
+    "webpack-hot-middleware": "2.15.0",
+    "jest-sonar-reporter": "1.1.1",
+    "sonar-scanner": "1.0.1"
   }
 }
