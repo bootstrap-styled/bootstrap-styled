@@ -75,63 +75,6 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
     xl: '1000ms',
   };
 
-  // Moving animation configuration
-  // Only used for moving element (using translate3d css properties)
-  v['$motion-distance'] = u['$motion-distance'] || {
-    xs: '0%',
-    sm: '50%',
-    md: '100%',
-    lg: '200%',
-    xl: '800%',
-  };
-
-  // Scale animation configuration
-  // Only used for decrease scaling of element (using scale3d css properties)
-  v['$motion-scale-in'] = u['$motion-scale-in'] || {
-    xs: '0.1',
-    sm: '0.3',
-    md: '0.5',
-    lg: '0.7',
-    xl: '0.9',
-  };
-  assertAscending(v['$motion-scale-in'], '$motion-scale-in');
-
-  // Only used for increase scaling of element (using scale3d css properties)
-  v['$motion-scale-out'] = u['$motion-scale-out'] || {
-    xs: '1.1',
-    sm: '2',
-    md: '5',
-    lg: '10',
-    xl: '20',
-  };
-  assertAscending(v['$motion-scale-out'], '$motion-scale-out');
-
-  // Rotate animation configuration
-  // using rotate3d css properties
-  v['$motion-degree'] = u['$motion-degree'] || {
-    xs: '45',
-    sm: '90',
-    md: '180',
-    lg: '270',
-    xl: '360',
-  };
-  assertAscending(v['$motion-degree'], '$motion-degree');
-
-  // Define perspective for rotating animation
-  v['$motion-perspective'] = u['$motion-perspective'] || {
-    xs: '64px',
-    sm: '128px',
-    md: '256px',
-    lg: '512px',
-    xl: '1024px',
-  };
-
-  // Define backface visibility for rotating animation
-  v['$motion-backface-visibility'] = u['$motion-backface-visibility'] || {
-    hidden: 'hidden',
-    visible: 'visible',
-  };
-
   // ANIMATION CONFIGURATION
   v['$motion-direction'] = u['$motion-direction'] || {
     normal: 'normal',
@@ -166,23 +109,71 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
   // Motion Customisation
   // Customisation Filter
   v['$motion-filter'] = u['$motion-filter'] || {
-    none: 'filter: none',
-    blur: 'filter: blur(30px)',
-    brightness: 'filter: brightness(100%)',
-    contrast: 'filter: contrast(100%)',
-    grayscale: 'filter: grayscale(100%)',
-    hueRotate: 'filter: hue-rotate(360deg)',
-    invert: 'filter: invert(100%)',
-    opacity: 'filter: opacity(100%)',
-    saturate: 'filter: saturate(100%)',
-    sepia: 'filter: sepia(100%)',
+    blur: 'blur(30px)',
+    brightness: 'brightness(100%)',
+    contrast: 'contrast(100%)',
+    grayscale: 'grayscale(100%)',
+    hueRotate: 'hue-rotate(360deg)',
+    invert: 'invert(100%)',
+    opacity: 'opacity(100%)',
+    saturate: 'saturate(100%)',
+    sepia: 'sepia(100%)',
+    custom: 'sepia(50%), opacity(50%)',
+  };
+// Moving animation configuration
+  // Only used for moving element (using translate3d css properties)
+  v['$motion-distance'] = u['$motion-distance'] || {
+    xs: '0%',
+    sm: '50%',
+    md: '100%',
+    lg: '200%',
+    xl: '800%',
   };
 
-  // Customisation Transform
-  v['$motion-transform'] = u['$motion-transform'] || {
-    translate3d: 'translate3d(0px, 0px, 0px)',
-    rotate3d: 'rotate3d(0px, 0px, 0px, 0deg)',
-    scale3d: 'scale3d(0px, 0px, 0px)',
+  // Scale animation configuration
+  // Only used for decrease scaling of element (using scale3d css properties)
+  v['$motion-scale-in'] = u['$motion-scale-in'] || {
+    xs: '0.1',
+    sm: '0.3',
+    md: '0.5',
+    lg: '0.7',
+    xl: '0.9',
+  };
+  assertAscending(v['$motion-scale-in'], '$motion-scale-in');
+
+  // Only used for increase scaling of element (using scale3d css properties)
+  v['$motion-scale-out'] = u['$motion-scale-out'] || {
+    xs: '1.1',
+    sm: '2',
+    md: '5',
+    lg: '10',
+    xl: '20',
+  };
+  assertAscending(v['$motion-scale-out'], '$motion-scale-out');
+
+  // Rotate animation configuration
+  // using rotate3d css properties
+  v['$motion-degree'] = u['$motion-degree'] || {
+    xs: '45deg',
+    sm: '90deg',
+    md: '180deg',
+    lg: '270deg',
+    xl: '360deg',
+  };
+
+  // Define perspective for rotating animation
+  v['$motion-perspective'] = u['$motion-perspective'] || {
+    xs: '64px',
+    sm: '128px',
+    md: '256px',
+    lg: '512px',
+    xl: '1024px',
+  };
+
+  // Define backface visibility for rotating animation
+  v['$motion-backface-visibility'] = u['$motion-backface-visibility'] || {
+    hidden: 'hidden',
+    visible: 'visible',
   };
 
   // Transition configuration
