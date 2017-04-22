@@ -4,7 +4,7 @@ node_modules
 stats.json
 .sonar
 reports
-text-report.xml
+test-report.xml
 # Cruft
 .DS_Store
 npm-debug.log
