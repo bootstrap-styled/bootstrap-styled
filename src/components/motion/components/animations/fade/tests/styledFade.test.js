@@ -12,57 +12,44 @@ import {
 
 describe('styledFade', () => {
   describe('makeFadeIn', () => {
-    const makeFadeInResult = makeFadeIn();
-    it('should returns keyframe name', () => {
-      expect(makeFadeInResult).toEqual('bcCCNc');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeFadeInResult2 = makeFadeIn();
-      expect(makeFadeInResult2).toEqual(makeFadeInResult);
+    it('should returns an object', () => {
+      expect(typeof makeFadeIn()).toBe('object');
     });
   });
   describe('makeFadeLeft', () => {
     const distance = '10px';
-    const makeFadeLeftResult = makeFadeLeft(distance);
-    it('should returns keyframe name', () => {
-      expect(makeFadeLeftResult).toEqual('jtWtJi');
+    it('should returns an object', () => {
+      expect(typeof makeFadeLeft()).toBe('object');
     });
-    it('should returns the same keyframe name as last test', () => {
-      const makeFadeLeftResult2 = makeFadeLeft(distance);
-      expect(makeFadeLeftResult2).toEqual(makeFadeLeftResult);
+    it('should returns an object with params', () => {
+      expect(typeof makeFadeLeft(distance)).toBe('object');
     });
   });
   describe('makeFadeRight', () => {
     const distance = '10px';
-    const makeFadeRightResult = makeFadeRight(distance);
-    it('should returns keyframe name', () => {
-      expect(makeFadeRightResult).toEqual('iDeTOB');
+    it('should returns an object', () => {
+      expect(typeof makeFadeRight()).toBe('object');
     });
-    it('should returns the same keyframe name as last test', () => {
-      const makeFadeRightResult2 = makeFadeRight(distance);
-      expect(makeFadeRightResult2).toEqual(makeFadeRightResult);
+    it('should returns an object with params', () => {
+      expect(typeof makeFadeRight(distance)).toBe('object');
     });
   });
   describe('makeFadeDown', () => {
     const distance = '10px';
-    const makeFadeDownResult = makeFadeDown(distance);
-    it('should returns keyframe name', () => {
-      expect(makeFadeDownResult).toEqual('czWqDm');
+    it('should returns an object', () => {
+      expect(typeof makeFadeDown()).toBe('object');
     });
-    it('should returns the same keyframe name as last test', () => {
-      const makeFadeDownResult2 = makeFadeDown(distance);
-      expect(makeFadeDownResult2).toEqual(makeFadeDownResult);
+    it('should returns an object with params', () => {
+      expect(typeof makeFadeDown(distance)).toBe('object');
     });
   });
   describe('makeFadeUp', () => {
     const distance = '10px';
-    const makeFadeUpResult = makeFadeUp(distance);
-    it('should returns keyframe name', () => {
-      expect(makeFadeUpResult).toEqual('FzTce');
+    it('should returns an object', () => {
+      expect(typeof makeFadeUp()).toBe('object');
     });
-    it('should returns the same keyframe name as last test', () => {
-      const makeFadeUpResult2 = makeFadeUp(distance);
-      expect(makeFadeUpResult2).toEqual(makeFadeUpResult);
+    it('should returns an object with params', () => {
+      expect(typeof makeFadeUp(distance)).toBe('object');
     });
   });
 });

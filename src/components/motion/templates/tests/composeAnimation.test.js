@@ -12,7 +12,16 @@ describe('composeAnimation', () => {
   let renderedComponent;
 
   beforeAll(() => {
-    makeEffect = (distance) => `animationNameSuccess-${distance}`;
+    makeEffect = () => { // eslint-disable-line arrow-body-style
+      return {
+        from: {
+          width: '0',
+        },
+        to: {
+          width: '100%',
+        },
+      };
+    };
     AbstractAnimation = composeAnimation(makeEffect);
     renderedComponent = mount(
       <BootstrapProvider>
@@ -26,18 +35,16 @@ describe('composeAnimation', () => {
   });
 
   it('should set state with the correct animationName using default value', () => {
-    makeEffect = (distance) => `animationNameSuccess-${distance}`;
     AbstractAnimation = composeAnimation(makeEffect);
     renderedComponent = mount(
       <AbstractAnimation>
         Test
       </AbstractAnimation>
     );
-    expect(renderedComponent.state().styles.animation).toEqual('animationNameSuccess-100% 1s ease 0s 1 normal none running');
+    expect(renderedComponent.state().styles.animation).toEqual('jqxGuF 1s ease 0s 1 normal none running');
   });
 
   it('should set state with the correct animationName using props', () => {
-    makeEffect = (distance) => `animationNameSuccess-${distance}`;
     AbstractAnimation = composeAnimation(makeEffect);
     renderedComponent = mount(
       <AbstractAnimation
@@ -54,7 +61,7 @@ describe('composeAnimation', () => {
         Test
       </AbstractAnimation>
     );
-    expect(renderedComponent.state().styles.animation).toEqual('animationNameSuccess-1337 2s linear 1s 1 reverse forwards running');
+    expect(renderedComponent.state().styles.animation).toEqual('jqxGuF 2s linear 1s 1 reverse forwards running');
   });
   it('should set backfaceVisibility props', () => {
     AbstractAnimation = composeAnimation(makeEffect);
