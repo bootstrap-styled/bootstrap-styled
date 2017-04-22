@@ -10,33 +10,18 @@ import {
 
 describe('styledRotate', () => {
   describe('makeFlip', () => {
-    const makeFlipResult = makeFlip();
-    it('should returns keyframe name', () => {
-      expect(makeFlipResult).toEqual('bFRVYp');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeFlipResult2 = makeFlip();
-      expect(makeFlipResult2).toEqual(makeFlipResult);
+    it('should returns an object', () => {
+      expect(typeof makeFlip()).toBe('object');
     });
   });
   describe('makeFlipX', () => {
-    const makeFlipXResult = makeFlipX();
-    it('should returns keyframe name', () => {
-      expect(makeFlipXResult).toEqual('kMwdJm');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeFlipXResult2 = makeFlipX();
-      expect(makeFlipXResult2).toEqual(makeFlipXResult);
+    it('should returns an object', () => {
+      expect(typeof makeFlipX()).toBe('object');
     });
   });
   describe('makeFlipY', () => {
-    const makeFlipYResult = makeFlipY();
-    it('should returns keyframe name', () => {
-      expect(makeFlipYResult).toEqual('kmnyUX');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeFlipYResult2 = makeFlipY();
-      expect(makeFlipYResult2).toEqual(makeFlipYResult);
+    it('should returns an object', () => {
+      expect(typeof makeFlipY()).toBe('object');
     });
   });
 });
