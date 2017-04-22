@@ -9,11 +9,13 @@ export function assertAscending(map, mapName) {
     if (prevNum == null) {
       // do nothing
     } else if (!comparable(unitUtils.rmUnit(prevNum), unitUtils.rmUnit(num))) {
+      /* istanbul ignore if */
       if (process.env.NODE !== 'test') {
         console.warn(`Potentially invalid value for ${mapName}: This map must be in ascending order, but key '${key}' has value ${num} whose unit makes it incomparable to ${prevNum}, the value of the previous key '${prevKey}' !`); // eslint-disable-line no-console
       }
       asserted = false;
     } else if (unitUtils.rmUnit(prevNum) >= unitUtils.rmUnit(num)) {
+      /* istanbul ignore if */
       if (process.env.NODE !== 'test') {
         console.warn(`Invalid value for ${mapName}: This map must be in ascending order, but key '${key}' has value ${num} which isn't greater than ${prevNum}, the value of the previous key '${prevKey}' !`); // eslint-disable-line no-console
       }
