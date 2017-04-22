@@ -9,22 +9,21 @@ import AccordionGroup from '../AccordionGroup';
 import Card from '../../Cards/Card';
 const children = (<h1>Test</h1>);
 
-const renderComponent = (props = {}) => shallow(
+const renderComponent = (props = {}, propsAccordionGroup = {}) => shallow(
   <AccordionGroup
-    activeAccordionName="Accordion2"
-    onChange={jest.fn()}
+    {...propsAccordionGroup}
   >
     <Accordion {...props} />
   </AccordionGroup>
 );
 
-const renderComponentUsingTheme = (props = {}) => mount(
+const renderComponentUsingTheme = (props = {}, propsAccordionGroup = {}) => mount(
   <BootstrapProvider>
     <AccordionGroup
-      activeAccordionName="Accordion2"
-      onChange={jest.fn()}
+      {...propsAccordionGroup}
     >
       <Accordion {...props} />
+      <Accordion name="Accordion2" tag={Card}>{children}</Accordion>
     </AccordionGroup>
   </BootstrapProvider>
 );
@@ -32,16 +31,26 @@ const renderComponentUsingTheme = (props = {}) => mount(
 describe('<Accordion />', () => {
   let renderedComponent;
   let renderedComponentTheme;
+  let onChange;
 
   beforeEach(() => {
+    onChange = jest.fn();
+
     renderedComponent = renderComponent({
+      name: 'Accordion1',
       children,
       tag: Card,
+    }, {
+      activeAccordionName: 'Accordion2',
+      onChange,
     });
     renderedComponent.setState({ activeName: 'Accordion2' });
     renderedComponentTheme = renderComponentUsingTheme({
       children,
       tag: Card,
+    }, {
+      activeAccordionName: 'Accordion2',
+      onChange,
     });
     renderedComponent.setState({ activeName: 'Accordion2' });
   });
@@ -60,10 +69,17 @@ describe('<Accordion />', () => {
   it('should have children without a theme', () => {
     expect(renderedComponent.contains(children)).toEqual(true);
   });
-  it('should render a <Accordion> tag with a theme', () => {
-    expect(renderedComponentTheme.find('Accordion').length).toBe(1);
+  it('should have 1 or more <Accordion>', () => {
+    expect(renderedComponentTheme.find('Accordion').length > 0).toBe(true);
   });
   it('should have children with a theme', () => {
     expect(renderedComponentTheme.contains(children)).toEqual(true);
+  });
+  it('should handle onClick on header', () => {
+    renderedComponent.simulate('change', 'Accordion2');
+    expect(onChange).toHaveBeenCalledWith('Accordion2');
+  });
+  it('should have children without a theme', () => {
+    expect(renderedComponent.contains(children)).toEqual(true);
   });
 });
