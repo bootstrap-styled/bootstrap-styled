@@ -2,7 +2,7 @@
  * Testing our Fa component
  */
 
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import React from 'react';
 import Fa from '../Fa';
 
@@ -10,7 +10,7 @@ const renderComponent = (props = {}) => shallow(
   <Fa {...props} />
 );
 
-const renderComponentUsingTheme = (props = {}) => shallow(
+const renderComponentUsingTheme = (props = {}) => mount(
   <Fa {...props} />
 );
 
