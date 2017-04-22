@@ -52,6 +52,7 @@ export default function makeKeyframe(makeAnimation, distance, userKeyframes = {}
     hashCode,
   });
 
+  /* istanbul ignore if */
   if (keyframeRefList.length > MAX_KEYFRAMES) {
     console.warn(`You might have done a mistake because of current keyframes injection count. You currently have ${keyframeRefList.length} keyframes in your page.`); // eslint-disable-line no-console
   }
