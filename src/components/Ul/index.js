@@ -14,6 +14,7 @@ import cn from 'classnames';
 import { nav } from '../../styled/mixins/nav';
 import { listUnstyled, listInline } from '../../styled/mixins/lists';
 import { navbar } from '../../styled/mixins/navbar';
+import { makeGridColumns } from '../../styled/mixins/grid-framework';
 
 const defaultProps = { theme: bsTheme };
 
@@ -92,6 +93,13 @@ Ul = styled(Ul)`
       props.theme['$navbar-inverse-toggler-border'],
       props.theme['$navbar-inverse-toggler-bg'],
       props.theme['$navbar-inverse-disabled-color'],
+    )}
+    
+    ${makeGridColumns(
+      props.theme['$enable-grid-classes'],
+      props.theme['$grid-columns'],
+      props.theme['$grid-gutter-widths'],
+      props.theme['$grid-breakpoints']
     )}
 
     /* Type Scss */
