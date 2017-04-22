@@ -41,7 +41,7 @@ describe('composeAnimation', () => {
         Test
       </AbstractAnimation>
     );
-    expect(renderedComponent.state().styles.animation).toEqual('jqxGuF 1s ease 0s 1 normal none running');
+    expect(renderedComponent.state().styles.animation).toEqual('laoCwl 1s ease 0s 1 normal none running');
   });
 
   it('should set state with the correct animationName using props', () => {
@@ -61,7 +61,7 @@ describe('composeAnimation', () => {
         Test
       </AbstractAnimation>
     );
-    expect(renderedComponent.state().styles.animation).toEqual('jqxGuF 2s linear 1s 1 reverse forwards running');
+    expect(renderedComponent.state().styles.animation).toEqual('laoCwl 2s linear 1s 1 reverse forwards running');
   });
   it('should set backfaceVisibility props', () => {
     AbstractAnimation = composeAnimation(makeEffect);

@@ -15,7 +15,7 @@ const keyframeRefList = [];
 export function toKeyframeString(obj) {
   let keyframeStr = '';
   Object.keys(obj).forEach((step) => {
-    keyframeStr += `${step}:{`;
+    keyframeStr += `${step}{`;
     Object.keys(obj[step]).forEach((cssAttr) => {
       keyframeStr += `${cssAttr}:${obj[step][cssAttr]};`;
     });

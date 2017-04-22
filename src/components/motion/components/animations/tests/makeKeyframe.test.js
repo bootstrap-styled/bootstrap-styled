@@ -23,7 +23,7 @@ describe('motion keyframes utils', () => {
   describe('makeKeyframe', () => {
     it('should makeKeyframe', () => {
       const distance = '10px';
-      expect(makeKeyframe(makeFadeIn, distance)).toBe('esnCVL');
+      expect(makeKeyframe(makeFadeIn, distance)).toBe('gpYbTb');
     });
 
     it('should makeKeyframe and apply user keyframe', () => {
@@ -36,13 +36,13 @@ describe('motion keyframes utils', () => {
           width: '30%',
         },
       };
-      expect(makeKeyframe(makeFadeIn, distance, userKeyframe)).toBe('cTjfHl');
+      expect(makeKeyframe(makeFadeIn, distance, userKeyframe)).toBe('cVHrnJ');
     });
   });
 
   describe('toKeyframeString', () => {
     it('should convert objet to keyframe string', () => {
-      expect(toKeyframeString(sampleKeyframeObject)).toBe('from:{width:0%;}20%, 40%:{width:75%;}60%:{width:25%;}to:{width:100%;}');
+      expect(toKeyframeString(sampleKeyframeObject)).toBe('from{width:0%;}20%, 40%{width:75%;}60%{width:25%;}to{width:100%;}');
     });
   });
 });

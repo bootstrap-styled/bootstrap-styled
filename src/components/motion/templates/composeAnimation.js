@@ -51,8 +51,9 @@ export default function composeAnimation(makeAnimation) {
         keyframes,
       } = this.props;
 
+      console.log('will mount', this.makeAnimation);
       const keyframeName = makeKeyframe(this.makeAnimation, distance, keyframes);
-
+      console.log('and we got a name to use', keyframeName);
       this.setState({
         styles: {
           animation: `${keyframeName} ${duration} ${timingFunction} ${delay} ${iterations} ${direction} ${fillMode} ${playState}`,
