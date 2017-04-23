@@ -12,53 +12,28 @@ import {
 
 describe('styledRotate', () => {
   describe('makeRotateIn', () => {
-    const makeRotateInResult = makeRotateIn();
-    it('should returns keyframe name', () => {
-      expect(makeRotateInResult).toEqual('cxMKCH');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeRotateInResult2 = makeRotateIn();
-      expect(makeRotateInResult2).toEqual(makeRotateInResult);
+    it('should returns an object', () => {
+      expect(typeof makeRotateIn()).toBe('object');
     });
   });
   describe('makeRotateLeft', () => {
-    const makeRotateLeftResult = makeRotateLeft();
-    it('should returns keyframe name', () => {
-      expect(makeRotateLeftResult).toEqual('lpoUit');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeRotateLeftResult2 = makeRotateLeft();
-      expect(makeRotateLeftResult2).toEqual(makeRotateLeftResult);
+    it('should returns an object', () => {
+      expect(typeof makeRotateLeft()).toBe('object');
     });
   });
   describe('makeRotateRight', () => {
-    const makeRotateRightResult = makeRotateRight();
-    it('should returns keyframe name', () => {
-      expect(makeRotateRightResult).toEqual('fIDweJ');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeRotateRightResult2 = makeRotateRight();
-      expect(makeRotateRightResult2).toEqual(makeRotateRightResult);
+    it('should returns an object', () => {
+      expect(typeof makeRotateRight()).toBe('object');
     });
   });
   describe('makeRotateUpLeft', () => {
-    const makeRotateUpLeftResult = makeRotateUpLeft();
-    it('should returns keyframe name', () => {
-      expect(makeRotateUpLeftResult).toEqual('cEUyXs');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeLightOutResult2 = makeRotateUpLeft();
-      expect(makeLightOutResult2).toEqual(makeRotateUpLeftResult);
+    it('should returns an object', () => {
+      expect(typeof makeRotateUpLeft()).toBe('object');
     });
   });
   describe('makeRotateUpRight', () => {
-    const makeRotateUpRightResult = makeRotateUpRight();
-    it('should returns keyframe name', () => {
-      expect(makeRotateUpRightResult).toEqual('hQkJpn');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeRotateUpRightResult2 = makeRotateUpRight();
-      expect(makeRotateUpRightResult2).toEqual(makeRotateUpRightResult);
+    it('should returns an object', () => {
+      expect(typeof makeRotateUpRight()).toBe('object');
     });
   });
 });

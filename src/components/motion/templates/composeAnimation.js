@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
+import makeKeyframe from '../components/animations/makeKeyframe';
 import { omit } from '../../../utils/tools';
 
 export default function composeAnimation(makeAnimation) {
@@ -29,6 +30,7 @@ export default function composeAnimation(makeAnimation) {
       backfaceVisibility: PropTypes.string,
       fillMode: PropTypes.string,
       playState: PropTypes.string,
+      keyframes: PropTypes.object,
     }
     /* eslint-disable react/no-unused-prop-types */
     state = {
@@ -36,6 +38,10 @@ export default function composeAnimation(makeAnimation) {
     };
 
     componentWillMount = () => {
+      this.updateAnimationStyles();
+    }
+
+    updateAnimationStyles = () => {
       const {
         distance,
         duration,
@@ -46,17 +52,19 @@ export default function composeAnimation(makeAnimation) {
         backfaceVisibility,
         fillMode,
         playState,
+        keyframes,
       } = this.props;
 
-      const animationName = makeAnimation(distance);
-
+      const keyframeName = makeKeyframe(this.makeAnimation, distance, keyframes);
       this.setState({
         styles: {
-          animation: `${animationName} ${duration} ${timingFunction} ${delay} ${iterations} ${direction} ${fillMode} ${playState}`,
+          animation: `${keyframeName} ${duration} ${timingFunction} ${delay} ${iterations} ${direction} ${fillMode} ${playState}`,
           backfaceVisibility: `${backfaceVisibility}`,
         },
       });
     }
+
+    makeAnimation = makeAnimation;
 
     // Using <span> instead of composedComponent because each component has a base component <span> only.
     render() {
@@ -64,7 +72,7 @@ export default function composeAnimation(makeAnimation) {
         className,
         children,
         ...rest
-      } = omit(this.props, ['distance', 'duration', 'timingFunction', 'delay', 'iterations', 'direction', 'fillMode', 'playState', 'backfaceVisibility']);
+      } = omit(this.props, ['distance', 'duration', 'timingFunction', 'delay', 'iterations', 'direction', 'fillMode', 'playState', 'backfaceVisibility', 'keyframes']);
 
       return (
         <span

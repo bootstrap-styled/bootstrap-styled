@@ -23,7 +23,7 @@ describe('<Tooltip />', () => {
     };
   });
 
-  it.only('should render an <Tooltip> tag without a theme', () => {
+  it('should render an <Tooltip> tag without a theme', () => {
     const renderedComponent = renderComponent(props);
     expect(renderedComponent.find('Tooltip').length).toBe(1);
   });

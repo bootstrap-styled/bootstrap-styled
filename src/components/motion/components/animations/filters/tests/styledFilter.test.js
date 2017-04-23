@@ -16,93 +16,48 @@ import {
 
 describe('styledFilter', () => {
   describe('makeBlur', () => {
-    const makeBlurResult = makeBlur();
-    it('should returns keyframe name', () => {
-      expect(makeBlurResult).toEqual('kkLhYv');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeBlurResult2 = makeBlur();
-      expect(makeBlurResult2).toEqual(makeBlurResult);
+    it('should returns an object', () => {
+      expect(typeof makeBlur()).toBe('object');
     });
   });
   describe('makeContrast', () => {
-    const makeContrastResult = makeContrast();
-    it('should returns keyframe name', () => {
-      expect(makeContrastResult).toEqual('eqydIF');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeContrastResult2 = makeContrast();
-      expect(makeContrastResult2).toEqual(makeContrastResult);
+    it('should returns an object', () => {
+      expect(typeof makeContrast()).toBe('object');
     });
   });
   describe('makeBrightness', () => {
-    const makeBrightnessResult = makeBrightness();
-    it('should returns keyframe name', () => {
-      expect(makeBrightnessResult).toEqual('iPkqy');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeBrightnessResult2 = makeBrightness();
-      expect(makeBrightnessResult2).toEqual(makeBrightnessResult);
+    it('should returns an object', () => {
+      expect(typeof makeBrightness()).toBe('object');
     });
   });
   describe('makeGrayscale', () => {
-    const makeGrayscaleResult = makeGrayscale();
-    it('should returns keyframe name', () => {
-      expect(makeGrayscaleResult).toEqual('exrlcE');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeGrayscaleResult2 = makeGrayscale();
-      expect(makeGrayscaleResult2).toEqual(makeGrayscaleResult);
+    it('should returns an object', () => {
+      expect(typeof makeGrayscale()).toBe('object');
     });
   });
   describe('makeHueRotate', () => {
-    const makeHueRotateResult = makeHueRotate();
-    it('should returns keyframe name', () => {
-      expect(makeHueRotateResult).toEqual('htDoN');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeHueRotateResult2 = makeHueRotate();
-      expect(makeHueRotateResult2).toEqual(makeHueRotateResult);
+    it('should returns an object', () => {
+      expect(typeof makeHueRotate()).toBe('object');
     });
   });
   describe('makeInvert', () => {
-    const makeInvertResult = makeInvert();
-    it('should returns keyframe name', () => {
-      expect(makeInvertResult).toEqual('eJYBzU');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeInvertResult2 = makeInvert();
-      expect(makeInvertResult2).toEqual(makeInvertResult);
+    it('should returns an object', () => {
+      expect(typeof makeInvert()).toBe('object');
     });
   });
   describe('makeOpacity', () => {
-    const makeOpacityResult = makeOpacity();
-    it('should returns keyframe name', () => {
-      expect(makeOpacityResult).toEqual('gSjbIE');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeOpacityResult2 = makeOpacity();
-      expect(makeOpacityResult2).toEqual(makeOpacityResult);
+    it('should returns an object', () => {
+      expect(typeof makeOpacity()).toBe('object');
     });
   });
   describe('makeSepia', () => {
-    const makeSepiaResult = makeSepia();
-    it('should returns keyframe name', () => {
-      expect(makeSepiaResult).toEqual('fXcGH');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeSepiaResult2 = makeSepia();
-      expect(makeSepiaResult2).toEqual(makeSepiaResult);
+    it('should returns an object', () => {
+      expect(typeof makeSepia()).toBe('object');
     });
   });
   describe('makeSaturate', () => {
-    const makeSaturateResult = makeSaturate();
-    it('should returns keyframe name', () => {
-      expect(makeSaturateResult).toEqual('fOCqOY');
-    });
-    it('should returns the same keyframe name as last test', () => {
-      const makeSaturateResult2 = makeSaturate();
-      expect(makeSaturateResult2).toEqual(makeSaturateResult);
+    it('should returns an object', () => {
+      expect(typeof makeSaturate()).toBe('object');
     });
   });
 });
