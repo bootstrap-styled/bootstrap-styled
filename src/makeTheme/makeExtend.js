@@ -118,7 +118,6 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
     opacity: 'opacity(100%)',
     saturate: 'saturate(100%)',
     sepia: 'sepia(100%)',
-    custom: 'sepia(50%), opacity(50%)',
   };
 // Moving animation configuration
   // Only used for moving element (using translate3d css properties)
