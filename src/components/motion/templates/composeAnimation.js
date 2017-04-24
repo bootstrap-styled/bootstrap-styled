@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { withTheme } from 'styled-components';
 import cn from 'classnames';
 import makeKeyframe from '../components/animations/makeKeyframe';
 import { omit } from '../../../utils/tools';
@@ -8,7 +9,7 @@ export default function composeAnimation(makeAnimation) {
 
     static defaultProps = {
       distance: '100%',
-      duration: '1s',
+      duration: '500ms',
       timingFunction: 'ease',
       delay: '0s',
       direction: 'normal',
@@ -72,7 +73,7 @@ export default function composeAnimation(makeAnimation) {
         className,
         children,
         ...rest
-      } = omit(this.props, ['distance', 'duration', 'timingFunction', 'delay', 'iterations', 'direction', 'fillMode', 'playState', 'backfaceVisibility', 'keyframes']);
+      } = omit(this.props, ['theme', 'distance', 'duration', 'timingFunction', 'delay', 'iterations', 'direction', 'fillMode', 'playState', 'backfaceVisibility', 'keyframes']);
 
       return (
         <span
@@ -85,5 +86,6 @@ export default function composeAnimation(makeAnimation) {
       );
     }
   }
-  return HOC;
+
+  return withTheme(HOC);
 }

@@ -118,38 +118,29 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
     opacity: 'opacity(100%)',
     saturate: 'saturate(100%)',
     sepia: 'sepia(100%)',
-    custom: 'sepia(50%), opacity(50%)',
   };
 // Moving animation configuration
   // Only used for moving element (using translate3d css properties)
   v['$motion-distance'] = u['$motion-distance'] || {
     xs: '0%',
-    sm: '50%',
-    md: '100%',
-    lg: '200%',
-    xl: '800%',
+    sm: '25%',
+    md: '50%',
+    lg: '75%',
+    xl: '100%',
   };
 
   // Scale animation configuration
   // Only used for decrease scaling of element (using scale3d css properties)
-  v['$motion-scale-in'] = u['$motion-scale-in'] || {
-    xs: '0.1',
-    sm: '0.3',
-    md: '0.5',
-    lg: '0.7',
-    xl: '0.9',
+  v['$motion-scale'] = u['$motion-scale'] || {
+    xxs: '0.1',
+    xs: '0.4',
+    sm: '0.8',
+    md: '1.1',
+    lg: '1.4',
+    xl: '1.8',
+    xxl: '2',
   };
-  assertAscending(v['$motion-scale-in'], '$motion-scale-in');
-
-  // Only used for increase scaling of element (using scale3d css properties)
-  v['$motion-scale-out'] = u['$motion-scale-out'] || {
-    xs: '1.1',
-    sm: '2',
-    md: '5',
-    lg: '10',
-    xl: '20',
-  };
-  assertAscending(v['$motion-scale-out'], '$motion-scale-out');
+  assertAscending(v['$motion-scale'], '$motion-scale');
 
   // Rotate animation configuration
   // using rotate3d css properties
