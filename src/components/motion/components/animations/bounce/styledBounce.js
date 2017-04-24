@@ -27,7 +27,7 @@ export function makeBounce() {
   };
 }
 
-export function makeBounceDown(distance) {
+export function makeBounceDown({ distance }) {
   return {
     from: {
       'animation-timing-function': 'cubic-bezier(0.200, 0.620, 0.340, 1.000)',
@@ -50,7 +50,7 @@ export function makeBounceDown(distance) {
   };
 }
 
-export function makeBounceUp(distance) {
+export function makeBounceUp({ distance }) {
   return {
     from: {
       'animation-timing-function': 'cubic-bezier(0.200, 0.620, 0.340, 1.000)',
@@ -73,7 +73,7 @@ export function makeBounceUp(distance) {
   };
 }
 
-export function makeBounceLeft(distance) {
+export function makeBounceLeft({ distance }) {
   return {
     'from, 60% 75% 90%, to': {
       'animation-timing-function': 'cubic-bezier(0.200, 0.620, 0.340, 1.000)',
@@ -98,7 +98,7 @@ export function makeBounceLeft(distance) {
   };
 }
 
-export function makeBounceRight(distance) {
+export function makeBounceRight({ distance }) {
   return {
     'from, 60% 75% 90%, to': {
       'animation-timing-function': 'cubic-bezier(0.200, 0.620, 0.340, 1.000)',

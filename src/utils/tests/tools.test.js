@@ -1,4 +1,5 @@
 import {
+  toHashCode,
   omit,
   isFunction,
   setScrollbarWidth,
@@ -216,6 +217,12 @@ describe('tools', () => {
     it('mapToCssModules should have class "btn btn-primary"', () => {
       const classNameNew = mapToCssModules(className);
       expect(classNameNew).toEqual('btn btn-primary');
+    });
+    it('toHashCode should generate an hashCode"', () => {
+      const hash = toHashCode(JSON.stringify(getTetherAttachments()));
+      expect(typeof hash).toEqual('number');
+      const hash2 = toHashCode(JSON.stringify(getTetherAttachments()));
+      expect(hash).toEqual(hash2);
     });
   });
 });

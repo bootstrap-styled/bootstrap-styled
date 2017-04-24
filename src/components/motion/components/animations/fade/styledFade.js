@@ -9,7 +9,7 @@ export function makeFadeIn() {
   };
 }
 
-export function makeFadeLeft(distance) {
+export function makeFadeLeft({ distance }) {
   return {
     from: {
       opacity: 0,
@@ -22,7 +22,7 @@ export function makeFadeLeft(distance) {
   };
 }
 
-export function makeFadeRight(distance) {
+export function makeFadeRight({ distance }) {
   return {
     from: {
       opacity: 0,
@@ -35,7 +35,7 @@ export function makeFadeRight(distance) {
   };
 }
 
-export function makeFadeDown(distance) {
+export function makeFadeDown({ distance }) {
   return {
     from: {
       opacity: 0,
@@ -48,7 +48,7 @@ export function makeFadeDown(distance) {
   };
 }
 
-export function makeFadeUp(distance) {
+export function makeFadeUp({ distance }) {
   return {
     from: {
       opacity: 0,

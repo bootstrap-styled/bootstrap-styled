@@ -1,7 +1,7 @@
 /*
  * Kopax Ltd Copyright (c) 2016.
  */
-export { Blur, Contrast, Brightness, Grayscale, HueRotate, Invert, Opacity, Sepia, Saturate } from './components/animations/filters';
+export { Blur, Contrast, Brightness, Grayscale, HueRotate, Invert, Opacity, Sepia, Saturate, Dropshadow } from './components/animations/filters';
 export { Bounce, BounceDown, BounceUp, BounceLeft, BounceRight } from './components/animations/bounce';
 export { FadeIn, FadeInDown, FadeInUp, FadeInLeft, FadeInRight } from './components/animations/fade';
 export { Flip, FlipX, FlipY } from './components/animations/flip';

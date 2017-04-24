@@ -11,29 +11,31 @@ import {
 } from '../styledRotate';
 
 describe('styledRotate', () => {
+  const rotation = '45deg';
+
   describe('makeRotateIn', () => {
     it('should returns an object', () => {
-      expect(typeof makeRotateIn()).toBe('object');
+      expect(typeof makeRotateIn({ rotation })).toBe('object');
     });
   });
   describe('makeRotateLeft', () => {
     it('should returns an object', () => {
-      expect(typeof makeRotateLeft()).toBe('object');
+      expect(typeof makeRotateLeft({ rotation })).toBe('object');
     });
   });
   describe('makeRotateRight', () => {
     it('should returns an object', () => {
-      expect(typeof makeRotateRight()).toBe('object');
+      expect(typeof makeRotateRight({ rotation })).toBe('object');
     });
   });
   describe('makeRotateUpLeft', () => {
     it('should returns an object', () => {
-      expect(typeof makeRotateUpLeft()).toBe('object');
+      expect(typeof makeRotateUpLeft({ rotation })).toBe('object');
     });
   });
   describe('makeRotateUpRight', () => {
     it('should returns an object', () => {
-      expect(typeof makeRotateUpRight()).toBe('object');
+      expect(typeof makeRotateUpRight({ rotation })).toBe('object');
     });
   });
 });

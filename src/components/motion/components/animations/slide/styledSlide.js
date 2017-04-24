@@ -1,4 +1,4 @@
-export function makeSlideDown(distance) {
+export function makeSlideDown({ distance }) {
   return {
     from: {
       transform: `translate3d(0, -${distance}, 0)`,
@@ -9,7 +9,7 @@ export function makeSlideDown(distance) {
   };
 }
 
-export function makeSlideUp(distance) {
+export function makeSlideUp({ distance }) {
   return {
     from: {
       transform: `translate3d(0, ${distance}, 0)`,
@@ -20,7 +20,7 @@ export function makeSlideUp(distance) {
   };
 }
 
-export function makeSlideLeft(distance) {
+export function makeSlideLeft({ distance }) {
   return {
     from: {
       transform: `translate3d(-${distance}, 0, 0)`,
@@ -31,7 +31,7 @@ export function makeSlideLeft(distance) {
   };
 }
 
-export function makeSlideRight(distance) {
+export function makeSlideRight({ distance }) {
   return {
     from: {
       transform: `translate3d(${distance}, 0, 0)`,
@@ -42,7 +42,7 @@ export function makeSlideRight(distance) {
   };
 }
 
-export function makeSlideRightLeft(distance) {
+export function makeSlideRightLeft({ distance }) {
   return {
     from: {
       transform: 'translate3d(0, 0, 0)',

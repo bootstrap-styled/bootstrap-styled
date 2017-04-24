@@ -1,5 +1,5 @@
-import { fromJS } from 'immutable';
 import { keyframes } from 'styled-components';
+import { toHashCode } from 'utils/tools';
 
 /**
  * This will store a reference to all the keyframe created with makeKeyFrame
@@ -24,24 +24,28 @@ export function toKeyframeString(obj) {
   return keyframeStr;
 }
 
+
 /**
  * inject a keyframe in body <style> if it doesn't exist already
  * @param makeAnimation
- * @param distance
+ * @param options set from user through component props
  * @param userKeyframes
  */
-export default function makeKeyframe(makeAnimation, distance, userKeyframes = {}) {
+export default function makeKeyframe(make, options, userKeyframes = {}) {
   const MAX_KEYFRAMES = 50;
 
-  const merge = fromJS(makeAnimation(distance)).mergeDeep(userKeyframes);
-  const hashCode = merge.hashCode();
+  const merge = make(options);
+  Object.keys(userKeyframes).forEach((key) => {
+    merge[key] = Object.assign({}, merge[key], userKeyframes[key]);
+  });
+  const hashCode = toHashCode(JSON.stringify(merge));
   const filtered = keyframeRefList.filter((keyframeRef) => keyframeRef.hashCode === hashCode);
 
   if (filtered.length) {
     return filtered[0].name;
   }
 
-  const keyframeStr = toKeyframeString(merge.toJS());
+  const keyframeStr = toKeyframeString(merge);
 
   const name = keyframes`
     ${keyframeStr}

@@ -8,17 +8,21 @@ import {
   makeOpacity,
   makeSaturate,
   makeSepia,
+  makeDropshadow,
 } from './styledFilter';
 
 import composeAnimation from '../../../templates/composeAnimation';
+import composeAmplification from '../../../templates/composeAmplification';
+import composeRotation from '../../../templates/composeRotation';
+import composeDistance from '../../../templates/composeDistance';
 
-export const Blur = composeAnimation(makeBlur);
-export const Contrast = composeAnimation(makeContrast);
-export const Brightness = composeAnimation(makeBrightness);
-export const Grayscale = composeAnimation(makeGrayscale);
-export const HueRotate = composeAnimation(makeHueRotate);
-export const Invert = composeAnimation(makeInvert);
-export const Opacity = composeAnimation(makeOpacity);
-export const Saturate = composeAnimation(makeSaturate);
-export const Sepia = composeAnimation(makeSepia);
-
+export const Blur = composeDistance(composeAnimation(makeBlur), '$motion-blur-distance');
+export const Contrast = composeAmplification(composeAnimation(makeContrast), '$motion-contrast-amplification');
+export const Brightness = composeAmplification(composeAnimation(makeBrightness), '$motion-brightness-amplification');
+export const Grayscale = composeAmplification(composeAnimation(makeGrayscale), '$motion-grayscale-amplification');
+export const HueRotate = composeRotation(composeAnimation(makeHueRotate), '$motion-hue-rotate-degree');
+export const Invert = composeAmplification(composeAnimation(makeInvert), '$motion-invert-amplification');
+export const Opacity = composeAmplification(composeAnimation(makeOpacity), '$motion-opacity-amplification');
+export const Saturate = composeAmplification(composeAnimation(makeSaturate), '$motion-saturate-amplification');
+export const Sepia = composeAmplification(composeAnimation(makeSepia), '$motion-sepia-amplification');
+export const Dropshadow = composeAmplification(composeAnimation(makeDropshadow), '$motion-drop-shadow-amplification');
