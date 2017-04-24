@@ -32,7 +32,7 @@ describe('<HeaderNavBar />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('div').length).toBe(1);
+    expect(renderedComponent.find('div').length).toBe(2);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -131,7 +131,7 @@ describe('<HeaderNavBar />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    renderedComponent.find('button').at(0).simulate('click');
+    renderedComponent.find('div').at(3).simulate('click');
     expect(renderedComponent.find('Overlay').props().active).toEqual(true);
     expect(renderedComponent.find('OffsetNav').props().active).toEqual(true);
   });
