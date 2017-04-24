@@ -86,12 +86,12 @@ describe('<Button />', () => {
     });
     expect(renderedComponent.find('Button').props().block).toBe(true);
   });
-  it('should have a function onClick', () => {
+  it('should have a function onClick not called when disabled is true', () => {
     const renderedComponent = renderComponentUsingTheme({
       onClick,
       disabled: true,
     });
-    renderedComponent.find('Button').simulate('click');
+    renderedComponent.find('Button').simulate('click', { preventDefault: () => {} });
     expect(onClick).not.toHaveBeenCalled();
   });
   it('should have a function onClick', () => {
