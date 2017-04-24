@@ -83,7 +83,7 @@ describe('<Accordion />', () => {
   it('should have children without a theme', () => {
     expect(renderedComponent.contains(children)).toEqual(true);
   });
-  it('should have children without a theme', () => {
+  it('should have a heading-compoent H3 with a theme', () => {
     renderedComponentTheme = renderComponentUsingTheme({
       children,
       tag: Card,
