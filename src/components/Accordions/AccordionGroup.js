@@ -15,10 +15,7 @@ export default class AccordionGroup extends React.Component {// eslint-disable-l
       PropTypes.bool,
     ]),
     onChange: PropTypes.func,
-    'heading-component': PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.bool,
-    ]),
+    'heading-component': PropTypes.bool,
   }
 
   static childContextTypes = {
