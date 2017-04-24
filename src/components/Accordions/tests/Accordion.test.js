@@ -7,6 +7,7 @@ import BootstrapProvider from '../../BootstrapProvider';
 import Accordion from '../Accordion';
 import AccordionGroup from '../AccordionGroup';
 import Card from '../../Cards/Card';
+
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}, propsAccordionGroup = {}) => shallow(
@@ -81,5 +82,16 @@ describe('<Accordion />', () => {
   });
   it('should have children without a theme', () => {
     expect(renderedComponent.contains(children)).toEqual(true);
+  });
+  it('should have a heading-compoent H3 with a theme', () => {
+    renderedComponentTheme = renderComponentUsingTheme({
+      children,
+      tag: Card,
+    }, {
+      activeAccordionName: 'Accordion2',
+      'heading-component': 'H3',
+      onChange,
+    });
+    expect(renderedComponentTheme.find('H3').length).toBe(2);
   });
 });
