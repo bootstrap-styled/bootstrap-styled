@@ -17,6 +17,7 @@ import {
   textUtils,
   transitionUtils,
   visibilityUtils,
+  rebootUtils,
 } from '../../utilities';
 
 const defaultProps = {
@@ -103,6 +104,14 @@ const UtilityProvider = styled.div`
     ${ifThen(props.utils.sizing, sizingUtils.getSizingUtilities(
       props.theme['$sizes'], // eslint-disable-line dot-notation
     ))}
+    ${rebootUtils.body(
+      props.theme['$font-family-base'],
+      props.theme['$font-size-base'],
+      props.theme['$font-weight-base'],
+      props.theme['$line-height-base'],
+      props.theme['$body-color'],
+      props.theme['$body-bg'],
+    )}
   `}
 `;
 
