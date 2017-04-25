@@ -44,11 +44,11 @@ class Badge extends React.Component { // eslint-disable-line react/prefer-statel
 
     return (
       <Tag
-        {...attributes}
         className={mapToCssModules(cn(className, 'badge', {
           pill,
           [`badge-${color}`]: color,
         }), cssModule)}
+        {...attributes}
       />
     );
   }

@@ -38,11 +38,11 @@ class Abbr extends React.Component { // eslint-disable-line react/prefer-statele
 
     return (
       <Tag
-        {...attributes}
         className={cn(className, {
           initialism,
         })}
         title={title}
+        {...attributes}
       />
     );
   }
