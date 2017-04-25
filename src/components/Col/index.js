@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import themeBs from 'theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { makeGridColumns } from '../../styled/mixins/grid-framework';
 
@@ -40,6 +41,7 @@ export const getColumnSizeClass = (isXs, colWidth, colSize) => {
 class Col extends React.Component {    // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     xs: columnProps,
     sm: columnProps,
@@ -50,6 +52,7 @@ class Col extends React.Component {    // eslint-disable-line react/prefer-state
     cssModule: PropTypes.object,
     widths: PropTypes.array,
     theme: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
@@ -58,9 +61,9 @@ class Col extends React.Component {    // eslint-disable-line react/prefer-state
       cssModule,
       widths,
       tag: Tag,
-      theme,  // eslint-disable-line
       ...attributes
-    } = this.props;
+    } = omit(this.props, ['theme']);
+
     const colClasses = [];
 
     widths.forEach((colWidth, i) => {
@@ -95,13 +98,14 @@ class Col extends React.Component {    // eslint-disable-line react/prefer-state
       }
     });
 
-    const classes = mapToCssModules(cn(
-      className,
-      colClasses
-    ), cssModule);
-
     return (
-      <Tag {...attributes} className={classes} />
+      <Tag
+        className={mapToCssModules(cn(
+          className,
+          colClasses
+        ), cssModule)}
+        {...attributes}
+      />
     );
   }
 }
