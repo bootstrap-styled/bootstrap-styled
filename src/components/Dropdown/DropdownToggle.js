@@ -49,8 +49,8 @@ class DropdownToggle extends React.Component {
   }
 
   render() {
-    const { className, cssModule, caret, split, nav, tag, ...props } = this.props;
-    const ariaLabel = props['aria-label'] || 'Toggle Dropdown';
+    const { className, cssModule, caret, split, nav, tag, ...attributes } = this.props;
+    const ariaLabel = attributes['aria-label'] || 'Toggle Dropdown';
     const classes = mapToCssModules(classNames(
       className,
       {
@@ -60,13 +60,13 @@ class DropdownToggle extends React.Component {
         'nav-link': nav,
       }
     ), cssModule);
-    const children = props.children || <span className="sr-only">{ariaLabel}</span>;
+    const children = attributes.children || <span className="sr-only">{ariaLabel}</span>;
 
     let Tag;
 
     if (nav && !tag) {
       Tag = A;
-      props.href = '#';
+      attributes.href = '#';
     } else if (!tag) {
       Tag = Button;
     } else {
@@ -75,11 +75,11 @@ class DropdownToggle extends React.Component {
 
     return (
       <Tag
-        {...props}
         className={classes}
         onClick={this.onClick}
         aria-haspopup="true"
         aria-expanded={this.context.isOpen}
+        {...attributes}
       >
         {children}
       </Tag>
