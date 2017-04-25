@@ -2,22 +2,21 @@
  * Testing our FaStacked component
  */
 
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import React from 'react';
+import BootstrapProvider from '../../BootstrapProvider';
 import FaStacked from '../FaStacked';
+
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <FaStacked {...props}>
-    {children}
-  </FaStacked>
+  <FaStacked {...props} />
 );
 
-const renderComponentUsingTheme = (props = {}) => shallow(
-  <FaStacked {...props}>
-    {children}
-  </FaStacked>
-);
+const renderComponentUsingTheme = (props = {}) => mount(
+  <BootstrapProvider>
+    <FaStacked {...props} />
+  </BootstrapProvider>);
 
 describe('<FaStacked />', () => {
   it('should render an <FaStacked> tag without a theme', () => {
@@ -36,7 +35,7 @@ describe('<FaStacked />', () => {
   });
   it('should render an <FaStacked> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme();
-    expect(renderedComponent.find('span').length).toEqual(1);
+    expect(renderedComponent.find('FaStacked').length).toEqual(1);
   });
   it('should render an <FaStacked> tag with a className fa-lgwith a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
