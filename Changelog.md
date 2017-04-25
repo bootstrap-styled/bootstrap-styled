@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.0
+ 
+Release V1
+
+ - added animations components
+ - rename mixins exports
+ - handle tag within each components
+ - created documentation
+ - 93% code coverage
+
 ## 0.1.0 
 
 First release.

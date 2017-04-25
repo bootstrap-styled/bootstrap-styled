@@ -3,7 +3,6 @@ export {
   radius,
   boxShadow,
   bp,
-  clearfix,
   ifThen,
   ifElse,
   gradient,
@@ -11,10 +10,8 @@ export {
   srOnly,
   srOnlyFocusable,
   size,
-  textTruncate,
   unitMixins,
   transition,
-  invisible,
 } from './mixins';
 export {
   alignUtils,
