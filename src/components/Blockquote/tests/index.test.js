@@ -9,17 +9,13 @@ import Blockquote from '../index';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Blockquote {...props}>
-    {props.children}
-  </Blockquote>
+  <Blockquote {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Blockquote {...props}>
-      {props.children}
-    </Blockquote>
+    <Blockquote {...props} />
   </BootstrapProvider>
 );
 
