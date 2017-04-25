@@ -6,16 +6,12 @@ import FormGroup from '../FormGroup';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <FormGroup {...props}>
-    {children}
-  </FormGroup>
+  <FormGroup {...props} />
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <FormGroup {...props}>
-      {children}
-    </FormGroup>
+    <FormGroup {...props} />
   </BootstrapProvider>
 );
 

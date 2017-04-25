@@ -6,16 +6,12 @@ import FormCustom from '../FormCustom';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <FormCustom {...props}>
-    {children}
-  </FormCustom>
+  <FormCustom {...props} />
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <FormCustom {...props}>
-      {children}
-    </FormCustom>
+    <FormCustom {...props} />
   </BootstrapProvider>
 );
 

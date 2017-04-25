@@ -34,14 +34,14 @@ class FormText extends React.Component {// eslint-disable-line react/prefer-stat
       ...attributes
     } = this.props;
 
-    const classes = mapToCssModules(cn(
-      className,
-      !inline ? 'form-text' : false,
-      color ? `text-${color}` : false
-    ), cssModule);
-
     return (
-      <Tag {...attributes} className={classes} />
+      <Tag
+        className={mapToCssModules(cn(className, {
+          'form-text': !inline,
+          [`text-${color}`]: color,
+        }), cssModule)}
+        {...attributes}
+      />
     );
   }
 }
