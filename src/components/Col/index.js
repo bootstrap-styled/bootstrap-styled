@@ -96,7 +96,6 @@ class Col extends React.Component {    // eslint-disable-line react/prefer-state
     });
 
     const classes = mapToCssModules(cn(
-      'col',
       className,
       colClasses
     ), cssModule);
