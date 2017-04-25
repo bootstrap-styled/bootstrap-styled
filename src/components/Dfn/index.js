@@ -15,7 +15,7 @@ class Dfn extends React.Component { // eslint-disable-line react/prefer-stateles
   }
 
   render() {
-    const { className, ...attributes } = this.props; // eslint-disable-line no-unused-vars
+    const { className, ...attributes } = this.props;
     return (
       <dfn
         className={className}
