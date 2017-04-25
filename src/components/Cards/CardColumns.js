@@ -35,13 +35,14 @@ class CardColumns extends React.Component {// eslint-disable-line react/prefer-s
       ...attributes
     } = this.props;
 
-    const classes = mapToCssModules(cn(
-      className,
-      'card-columns'
-    ), cssModule);
-
     return (
-      <Tag {...attributes} className={classes} />
+      <Tag
+        className={mapToCssModules(cn(
+          className,
+          'card-columns'
+        ), cssModule)}
+        {...attributes}
+      />
     );
   }
 }

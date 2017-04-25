@@ -122,14 +122,6 @@ describe('<A />', () => {
     });
     expect(renderedComponent.find('a').hasClass('disabled')).toEqual(true);
   });
-  it('should render an <A> tag without a theme and props dropdown-item', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      href: 'http://mxstbr.com/',
-      children,
-      'dropdown-item': true,
-    });
-    expect(renderedComponent.find('a').hasClass('dropdown-item')).toEqual(true);
-  });
   it('should have an attribute color', () => {
     const renderedComponent = renderComponentUsingTheme({
       href: 'http://mxstbr.com/',
@@ -184,15 +176,5 @@ describe('<A />', () => {
       color: 'primary',
     });
     expect(renderedComponent.find('a').hasClass('text-primary')).toBe(true);
-  });
-  it('dropdown-item should set a class', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      className: 'btn',
-      target: '_blank',
-      href: 'http://mxstbr.com/',
-      children,
-      'dropdown-item': true,
-    });
-    expect(renderedComponent.find('a').hasClass('dropdown-item')).toBe(true);
   });
 });

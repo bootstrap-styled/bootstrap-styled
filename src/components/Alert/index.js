@@ -2,13 +2,13 @@
  * Alert component
  */
 
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled, { withTheme } from 'styled-components';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import themeBs from 'theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import Close from '../Close';
 import { alertVariant } from '../../styled/mixins/alert';
@@ -32,6 +32,7 @@ const FirstChild = ({ children }) => (
 class Alert extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     children: PropTypes.node,
     className: PropTypes.string,
     cssModule: PropTypes.object,
@@ -43,30 +44,11 @@ class Alert extends React.Component { // eslint-disable-line react/prefer-statel
     transitionEnterTimeout: PropTypes.number,
     transitionLeaveTimeout: PropTypes.number,
     theme: PropTypes.object,
-  }
-
-
-  state= {
-    visible: true,
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isOpen) {
-      this.setState({ isOpen: nextProps.isOpen });
-      const timer = setTimeout(() => {
-        clearTimeout(timer);
-        this.setState({ isOpen: false });
-      }, 1000);
-    }
-  }
-
-  onDismiss = () => {
-    this.setState({ visible: false });
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
     const {
-      theme, // eslint-disable-line
       className,
       cssModule,
       tag: Tag,
@@ -78,7 +60,7 @@ class Alert extends React.Component { // eslint-disable-line react/prefer-statel
       transitionEnterTimeout,
       transitionLeaveTimeout,
       ...attributes
-    } = this.props;
+    } = omit(this.props, ['theme']);
 
     const classes = mapToCssModules(cn(
       className,

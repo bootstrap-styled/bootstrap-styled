@@ -3,29 +3,20 @@
  */
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { ThemeProvider } from 'styled-components';
-import theme from 'theme';
+import BootstrapProvider from '../../BootstrapProvider';
 import Address from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Address
-    className={props.className}
-  >
-    {props.children}
-  </Address>
+  <Address {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Address
-      className={props.className}
-    >
-      {props.children}
-    </Address>
-  </ThemeProvider>
+  <BootstrapProvider>
+    <Address {...props} />
+  </BootstrapProvider>
 );
 
 

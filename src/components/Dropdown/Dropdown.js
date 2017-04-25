@@ -8,7 +8,8 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
-import { mapToCssModules, omit } from 'utils/tools';
+import omit from 'lodash.omit';
+import { mapToCssModules } from 'utils/tools';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { navDivider } from '../../styled/mixins/nav-divider';
@@ -171,9 +172,8 @@ class Dropdown extends React.Component { // eslint-disable-line react/prefer-sta
       size,
       tag: Tag,
       isOpen,
-      theme,  // eslint-disable-line
       ...attributes
-    } = omit(this.props, ['toggle', 'tether']);
+    } = omit(this.props, ['toggle', 'tether', 'theme']);
 
     const classes = mapToCssModules(cn(
       className,

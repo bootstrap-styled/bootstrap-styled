@@ -1,35 +1,22 @@
 /**
  * Testing our Details component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import Details from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Details
-    open={props.open}
-    className={props.className}
-  >
-    {props.children}
-  </Details>
+  <Details {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Details
-      open={props.open}
-      className={props.className}
-    >
-      {props.children}
-    </Details>
-  </ThemeProvider>
+  <BootstrapProvider>
+    <Details {...props} />
+  </BootstrapProvider>
 );
 
 

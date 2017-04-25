@@ -1,32 +1,22 @@
 /**
  * Testing our Dt component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import Dt from '../index';
+
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Dt
-    className={props.className}
-  >
-    {props.children}
-  </Dt>
+  <Dt {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Dt
-      className={props.className}
-    >
-      {props.children}
-    </Dt>
-  </ThemeProvider>
+  <BootstrapProvider>
+    <Dt {...props} />
+  </BootstrapProvider>
 );
 
 

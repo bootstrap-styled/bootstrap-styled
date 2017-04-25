@@ -7,34 +7,45 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
+import bsTheme from 'theme';
+import omit from 'lodash.omit';
+
+const defaultProps = {
+  tag: 'abbr',
+  theme: bsTheme,
+};
+
 class Abbr extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
-    children: PropTypes.node,
     title: PropTypes.string.isRequired,
     theme: PropTypes.object,
+    tag: PropTypes.string,
     initialism: PropTypes.bool,
-  }
+    /* eslint-enable react/no-unused-prop-types */
+  };
 
   render() {
-    const { className, initialism, theme, title, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
-    const classes = cn(
+    const {
       className,
-      initialism ? 'initialism' : false,
-    );
+      initialism,
+      title,
+      tag: Tag,
+      ...attributes
+    } = omit(this.props, ['theme']);
 
     return (
-      <abbr
-        className={classes}
+      <Tag
+        className={cn(className, {
+          initialism,
+        })}
         title={title}
-        {...rest}
-      >
-        {children}
-      </abbr>
+        {...attributes}
+      />
     );
   }
-
 }
 
 // eslint-disable-next-line no-class-assign
@@ -55,6 +66,8 @@ Abbr = styled(Abbr)`
     text-transform: uppercase;
   }
 `;
+
+Abbr.defaultProps = defaultProps;
 
 export default Abbr;
 

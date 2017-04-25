@@ -1,8 +1,8 @@
 /* A Caption (Box) */
 
 import styled from 'styled-components';
-import theme from 'theme';
-const defaultProps = { theme };
+import bsTheme from 'theme';
+const defaultProps = { theme: bsTheme };
 
 const Caption = styled.caption`
   ${(props) => `

@@ -9,17 +9,13 @@ import ButtonDropdown from '../ButtonDropdown';
 const children = (<span>Test</span>);
 
 const renderComponent = (props = {}) => shallow(
-  <ButtonDropdown
-    {...props}
-  />
+  <ButtonDropdown {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <ButtonDropdown
-      {...props}
-    />
+    <ButtonDropdown {...props} />
   </BootstrapProvider>
 );
 

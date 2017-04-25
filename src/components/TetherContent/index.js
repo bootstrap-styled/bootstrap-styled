@@ -6,7 +6,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import Tether from 'tether';
-import { isFunction } from 'utils/tools';
+import isFunction from 'lodash.omit';
 
 const defaultProps = {
   isOpen: false,

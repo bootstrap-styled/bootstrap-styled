@@ -10,16 +10,12 @@ import BootstrapProvider from '../../BootstrapProvider';
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => mount(
-  <CardLink {...props}>
-    {children}
-  </CardLink>
+  <CardLink {...props} />
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <CardLink {...props}>
-      {children}
-    </CardLink>
+    <CardLink {...props} />
   </BootstrapProvider>
 );
 

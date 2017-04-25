@@ -6,7 +6,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
-import { mapToCssModules, omit, getTetherAttachments, tetherAttachements } from 'utils/tools';
+import omit from 'lodash.omit';
+import { mapToCssModules, getTetherAttachments, tetherAttachements } from 'utils/tools';
 import TetherContent from '../TetherContent';
 const DEFAULT_DELAYS = {
   shape: 0,
@@ -355,54 +356,3 @@ Tooltip = styled(Tooltip)`
 Tooltip.defaultProps = defaultProps;
 
 export default Tooltip;
-
-//
-//
-//
-// render() {
-//   if (!this.props.isOpen) {
-//     return null;
-//   }
-//
-//
-//   const {
-//     className,
-//     cssModule,
-//     tag: Tag,
-//     theme,  // eslint-disable-line
-//     ...attributes
-//   } = omit(this.props, Object.keys(this.props));
-//
-//   const classes = mapToCssModules(cn(
-//     'tooltip-inner',
-//     className
-//   ), cssModule);
-//
-//   const tetherConfig = this.getTetherConfig();
-//
-//   const optional = {};
-//   if (this.state.focus === true) {
-//     optional.onFocus = this.handleFocus;
-//   }
-//
-//
-//   return (
-//     <TetherContent
-//       className="tooltip"
-//       tether={tetherConfig}
-//       tetherRef={this.props.tetherRef}
-//       isOpen={this.props.isOpen}
-//       toggle={this.toggle}
-//     >
-//       <Tag
-//         {...attributes}
-//         className={classes}
-//         onMouseOver={this.onMouseOverTooltipContent}
-//         onMouseLeave={this.onMouseLeaveTooltipContent}
-//         onFocus={this.handleFocus}
-//         {...optional}
-//       />
-//     </TetherContent>
-//   );
-// }
-// }

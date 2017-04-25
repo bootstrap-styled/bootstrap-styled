@@ -9,20 +9,14 @@ import ButtonToolbar from '../ButtonToolbar';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <ButtonToolbar>
-    {props.children}
-  </ButtonToolbar>
+  <ButtonToolbar {...props} />
 );
-
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <ButtonToolbar>
-      {props.children}
-    </ButtonToolbar>
+    <ButtonToolbar {...props} />
   </BootstrapProvider>
 );
-
 
 describe('<ButtonToolbar />', () => {
   it('should render an <ButtonToolbar> tag without a theme', () => {

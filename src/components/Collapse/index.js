@@ -1,9 +1,9 @@
-/* eslint-disable */
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 
-import { mapToCssModules, omit } from 'utils/tools';
+import { mapToCssModules } from 'utils/tools';
 
 const SHOW = 'SHOW';
 const SHOWN = 'SHOWN';
@@ -14,18 +14,19 @@ const HIDDEN = 'HIDDEN';
 class Collapse extends Component {
 
   static propTypes = {
-    isOpen: PropTypes.bool,
+    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.node,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     cssModule: PropTypes.object,
     navbar: PropTypes.bool,
+    /* eslint-enable react/no-unused-prop-types */
+    isOpen: PropTypes.bool,
     delay: PropTypes.oneOfType([
       PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
       PropTypes.number,
     ]),
     onOpened: PropTypes.func,
     onClosed: PropTypes.func,
-
   };
 
   static defaultProps = {
@@ -34,7 +35,7 @@ class Collapse extends Component {
     tag: 'div',
     delay: {
       show: 350,
-      hide: 350
+      hide: 350,
     },
     onOpened: () => {},
     onClosed: () => {},
@@ -45,7 +46,7 @@ class Collapse extends Component {
 
     this.state = {
       collapse: props.isOpen ? SHOWN : HIDDEN,
-      height: null
+      height: null,
     };
     this.element = null;
   }
@@ -62,7 +63,7 @@ class Collapse extends Component {
         this.transitionTag = setTimeout(() => {
           this.setState({
             collapse: SHOWN,
-            height: null
+            height: null,
           });
         }, this.getDelay('show'));
       });
@@ -71,7 +72,7 @@ class Collapse extends Component {
       this.setState({ height: this.getHeight() }, () => {
         this.setState({
           collapse: HIDE,
-          height: this.getHeight()
+          height: this.getHeight(),
         }, () => {
           this.setState({ height: 0 });
         });
@@ -80,7 +81,7 @@ class Collapse extends Component {
       this.transitionTag = setTimeout(() => {
         this.setState({
           collapse: HIDDEN,
-          height: null
+          height: null,
         });
       }, this.getDelay('hide'));
     }
@@ -122,10 +123,9 @@ class Collapse extends Component {
       navbar,
       className,
       cssModule,
-      theme, // eslint-disable-line
       tag: Tag,
       ...attributes
-    } = omit(this.props, ['isOpen', 'delay', 'onOpened', 'onClosed']);
+    } = omit(this.props, ['isOpen', 'theme', 'delay', 'onOpened', 'onClosed']);
 
     const { collapse, height } = this.state;
 

@@ -10,17 +10,13 @@ import CardFooter from '../CardFooter';
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => shallow(
-  <CardFooter {...props}>
-    {children}
-  </CardFooter>
+  <CardFooter {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <CardFooter {...props}>
-      {children}
-    </CardFooter>
+    <CardFooter {...props} />
   </BootstrapProvider>
 );
 

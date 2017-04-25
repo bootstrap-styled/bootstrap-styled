@@ -9,17 +9,13 @@ import Button from '../Button';
 const children = (<span>Test</span>);
 
 const renderComponent = (props = {}) => shallow(
-  <Button {...props}>
-    {children}
-  </Button>
+  <Button {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Button {...props}>
-      {children}
-    </Button>
+    <Button {...props} />
   </BootstrapProvider>
 );
 
@@ -91,7 +87,7 @@ describe('<Button />', () => {
       onClick,
       disabled: true,
     });
-    renderedComponent.find('Button').simulate('click');
+    renderedComponent.find('Button').simulate('click', { preventDefault() {} });
     expect(onClick).not.toHaveBeenCalled();
   });
   it('should have a function onClick', () => {

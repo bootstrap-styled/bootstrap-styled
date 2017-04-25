@@ -1,28 +1,22 @@
 /**
  * Testing our BreadcrumbItem component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
+import BootstrapProvider from '../../BootstrapProvider';
 import BreadcrumbItem from '../BreadcrumbItem';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <BreadcrumbItem {...props}>
-    {props.children}
-  </BreadcrumbItem>
+  <BreadcrumbItem {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <BreadcrumbItem {...props}>
-      {props.children}
-    </BreadcrumbItem>
-  </ThemeProvider>
+  <BootstrapProvider>
+    <BreadcrumbItem {...props} />
+  </BootstrapProvider>
 );
 
 

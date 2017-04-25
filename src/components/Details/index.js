@@ -6,17 +6,12 @@ class Details extends React.Component { // eslint-disable-line react/prefer-stat
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
-    open: PropTypes.bool,
   }
 
   render() {
+    const { className, ...attributes } = this.props;
     return (
-      <details
-        open={this.props.open}
-        className={this.props.className}
-      >
-        {this.props.children}
-      </details>
+      <details className={className} {...attributes} />
     );
   }
 }

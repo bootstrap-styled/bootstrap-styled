@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { button } from '../../styled/mixins/buttons';
 
@@ -19,6 +20,7 @@ const defaultProps = {
 class Button extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     active: PropTypes.bool,
     block: PropTypes.bool,
     color: PropTypes.string,
@@ -30,9 +32,9 @@ class Button extends React.Component { // eslint-disable-line react/prefer-state
     size: PropTypes.string,
     dropup: PropTypes.bool,
     className: PropTypes.string,
-    children: PropTypes.node,
     cssModule: PropTypes.object,
     theme: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   onClick = (e) => {
@@ -48,29 +50,29 @@ class Button extends React.Component { // eslint-disable-line react/prefer-state
 
   render() {
     let {
-      active, // eslint-disable-line prefer-const
-      block,  // eslint-disable-line prefer-const
-      className,  // eslint-disable-line prefer-const
-      cssModule,  // eslint-disable-line prefer-const
-      dropup, // eslint-disable-line prefer-const
-      color,  // eslint-disable-line prefer-const
-      outline,  // eslint-disable-line prefer-const
-      size, // eslint-disable-line prefer-const
-      getRef, // eslint-disable-line prefer-const
-      tag: Tag, // eslint-disable-line prefer-const
-      theme,  // eslint-disable-line
-      ...attributes
-    } = this.props;
-
-    const classes = mapToCssModules(cn(
+      /* eslint-disable prefer-const */
+      active,
+      disabled,
+      block,
       className,
-      'btn',
-      `btn${outline ? '-outline' : ''}-${color}`,
-      size ? `btn-${size}` : false,
-      block ? 'btn-block' : false,
+      cssModule,
       dropup,
-      { active, disabled: this.props.disabled }
-    ), cssModule);
+      color,
+      outline,
+      size,
+      getRef,
+      tag: Tag,
+      /* eslint-enable prefer-const */
+      ...attributes
+    } = omit(this.props, ['theme']);
+
+    const classes = mapToCssModules(cn(className, 'btn', {
+      dropup,
+      active,
+      disabled,
+      [`btn-${color}`]: size,
+      'btn-block': block,
+    }, `btn${outline ? '-outline' : ''}-${color}`), cssModule);
 
     if (attributes.href && Tag === 'button') {
       Tag = 'a';
