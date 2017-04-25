@@ -11,16 +11,23 @@ class Fa extends React.Component { // eslint-disable-line react/prefer-stateless
   };
 
   render() {
-    const { className, size, color, ...rest } = this.props;
-
-    const classes = cn(
+    const {
       className,
-      'fa',
-      size ? `fa-${size}` : false,
-      color ? `text-${color}` : false,
-    );
+      size,
+      color,
+      ...attributes
+    } = this.props;
+
+    const classes = cn(className, 'fa', {
+      [`text-${color}`]: color,
+      [`fa-${size}`]: size,
+    });
+
     return (
-      <i className={cn(classes, Object.keys(rest).map((key) => `fa-${key}`))} />
+      <i
+        className={cn(classes, Object.keys(attributes).map((key) => `fa-${key}`))}
+        {...attributes}
+      />
     );
   }
 }

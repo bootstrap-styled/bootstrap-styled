@@ -10,17 +10,13 @@ import Card from '../Card';
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => shallow(
-  <Card {...props}>
-    {children}
-  </Card>
+  <Card {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Card {...props}>
-      {children}
-    </Card>
+    <Card {...props} />
   </BootstrapProvider>
 );
 

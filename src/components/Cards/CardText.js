@@ -23,13 +23,14 @@ class CardText extends React.Component { // eslint-disable-line react/prefer-sta
       ...attributes
     } = this.props;
 
-    const classes = mapToCssModules(cn(
-      className,
-      'card-text'
-    ), cssModule);
-
     return (
-      <Tag {...attributes} className={classes} />
+      <Tag
+        className={mapToCssModules(cn(
+          className,
+          'card-text'
+        ), cssModule)}
+        {...attributes}
+      />
     );
   }
 }

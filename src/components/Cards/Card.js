@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { hover } from '../../styled/mixins/hover';
 import { borderRadius, borderTopRadius, borderBottomRadius } from '../../styled/mixins/border-radius';
@@ -22,6 +23,7 @@ const defaultProps = {
 class Card extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
     theme: PropTypes.object,
     cssModule: PropTypes.object,
@@ -33,6 +35,7 @@ class Card extends React.Component {// eslint-disable-line react/prefer-stateles
     width: PropTypes.string,
     backgroundColor: PropTypes.string,
     borderColor: PropTypes.string,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
@@ -43,23 +46,18 @@ class Card extends React.Component {// eslint-disable-line react/prefer-stateles
       block,
       inverse,
       outline,
-      backgroundColor,  // eslint-disable-line no-unused-vars
-      borderColor,  // eslint-disable-line no-unused-vars
-      theme,  // eslint-disable-line no-unused-vars
       tag: Tag,
       ...attributes
-    } = this.props;
-
-    const classes = mapToCssModules(cn(
-      className,
-      'card',
-      inverse ? 'card-inverse' : false,
-      block ? 'card-block' : false,
-      color ? `card${outline ? '-outline' : ''}-${color}` : false
-    ), cssModule);
+    } = omit(this.props, ['theme', 'backgroundColor', 'borderColor', 'width']);
 
     return (
-      <Tag {...attributes} className={classes} />
+      <Tag
+        className={mapToCssModules(cn(className, 'card', {
+          inverse,
+          block,
+        }, `card${outline ? '-outline' : ''}-${color}`), cssModule)}
+        {...attributes}
+      />
     );
   }
 }

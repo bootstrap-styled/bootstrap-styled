@@ -46,17 +46,20 @@ class DropdownItem extends React.Component {
   render() {
     const tabIndex = this.getTabIndex();
     let {
-      className,  // eslint-disable-line prefer-const
-      cssModule,  // eslint-disable-line prefer-const
-      divider,  // eslint-disable-line prefer-const
+      /* eslint-disable prefer-const */
+      className,
+      cssModule,
+      divider,
+      disabled,
       tag: Tag,
-      header, // eslint-disable-line prefer-const
-      ...props } = this.props;
+      header,
+      /* eslint-enable prefer-const */
+      ...attributes } = this.props;
 
     const classes = mapToCssModules(cn(
       className,
       {
-        disabled: props.disabled,
+        disabled,
         'dropdown-item': !divider && !header,
         'dropdown-header': header,
         'dropdown-divider': divider,
@@ -73,10 +76,10 @@ class DropdownItem extends React.Component {
 
     return (
       <Tag
-        {...props}
         tabIndex={tabIndex}
         className={classes}
         onClick={this.onClick}
+        {...attributes}
       />
     );
   }

@@ -9,17 +9,13 @@ import Abbr from '../index';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Abbr {...props}>
-    {props.children}
-  </Abbr>
+  <Abbr {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Abbr {...props}>
-      {props.children}
-    </Abbr>
+    <Abbr {...props} />
   </BootstrapProvider>
 );
 

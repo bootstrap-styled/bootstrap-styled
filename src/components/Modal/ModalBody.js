@@ -18,14 +18,17 @@ const ModalBody = (props) => {
     className,
     cssModule,
     tag: Tag,
-    ...attributes } = props;
-  const classes = mapToCssModules(cn(
-    className,
-    'modal-body'
-  ), cssModule);
+    ...attributes
+  } = props;
 
   return (
-    <Tag {...attributes} className={classes} />
+    <Tag
+      {...attributes}
+      className={mapToCssModules(cn(
+        className,
+        'modal-body'
+      ), cssModule)}
+    />
   );
 };
 

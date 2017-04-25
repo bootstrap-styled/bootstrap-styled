@@ -2,8 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-
-import { omit } from 'utils/tools';
+import omit from 'lodash.omit';
 
 const propTypes = {
   baseClass: PropTypes.string,

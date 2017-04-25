@@ -10,31 +10,39 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import bsTheme from 'theme';
 import cn from 'classnames';
+import omit from 'lodash.omit';
 
 const defaultProps = {
+  tag: 'blockquote',
   theme: bsTheme,
 };
 
 class Blockquote extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    children: PropTypes.node.isRequired,
+    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
     theme: PropTypes.object,
+    tag: PropTypes.string,
     reverse: PropTypes.bool,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
-    const { theme, className, reverse, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
-    const classes = cn(
+    const {
       className,
-      'blockquote',
-      reverse ? 'blockquote-reverse' : false,
-    );
+      reverse,
+      tag: Tag,
+      ...attributes
+    } = omit(this.props, ['theme']);
+
     return (
-      <blockquote className={classes} {...rest}>
-        {children}
-      </blockquote>
+      <Tag
+        className={cn(className, 'blockquote', {
+          'blockquote-reverse': reverse,
+        })}
+        {...attributes}
+      />
     );
   }
 }

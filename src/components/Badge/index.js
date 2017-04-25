@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { hoverFocus } from '../../styled/mixins/hover';
 import { borderRadius } from '../../styled/mixins/border-radius';
@@ -20,13 +21,14 @@ const defaultProps = {
 class Badge extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     color: PropTypes.string,
     pill: PropTypes.bool,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    children: PropTypes.node,
     className: PropTypes.string,
     cssModule: PropTypes.object,
     theme: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
@@ -37,21 +39,17 @@ class Badge extends React.Component { // eslint-disable-line react/prefer-statel
       color,
       pill,
       tag: Tag,
-      children,
-      ...rest }
-      = this.props;
-
-    const classes = mapToCssModules(cn(
-      className,
-      'badge',
-      'badge-' + color, // eslint-disable-line
-      pill ? 'badge-pill' : false
-    ), cssModule);
+      ...attributes
+    } = omit(this.props, ['theme']);
 
     return (
-      <Tag className={classes} {...rest}>
-        {children}
-      </Tag>
+      <Tag
+        className={mapToCssModules(cn(className, 'badge', {
+          pill,
+          [`badge-${color}`]: color,
+        }), cssModule)}
+        {...attributes}
+      />
     );
   }
 }

@@ -9,20 +9,15 @@ import ModalFooter from '../ModalFooter';
 const children = <p>Test</p>;
 
 const renderComponent = (props = {}) => shallow(
-  <ModalFooter {...props}>
-    {children}
-  </ModalFooter>
+  <ModalFooter {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <ModalFooter {...props}>
-      {children}
-    </ModalFooter>
+    <ModalFooter {...props} />
   </BootstrapProvider>
 );
-
 
 describe('<ModalFooter />', () => {
   it('should render an <ModalFooter> tag without a theme', () => {

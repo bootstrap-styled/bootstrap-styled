@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { hoverFocus } from '../../styled/mixins/hover';
 
@@ -11,12 +12,14 @@ const defaultProps = { theme: bsTheme };
 class Close extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     theme: PropTypes.object,
     'sr-only': PropTypes.bool,
     className: PropTypes.string,
     closeLabel: PropTypes.string,
     cssModule: PropTypes.object,
     onDismiss: PropTypes.func.isRequired,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
@@ -26,22 +29,17 @@ class Close extends React.Component { // eslint-disable-line react/prefer-statel
       onDismiss,
       closeLabel,
       cssModule,
-      theme,   // eslint-disable-line no-unused-vars
-      ...rest
-    } = this.props;
-
-    const classes = mapToCssModules(cn(
-      className,
-      'close',
-      srOnly ? 'sr-only' : null,
-    ), cssModule);
+      ...attributes
+    } = omit(this.props, ['theme']);
 
     return (
       <button
+        className={mapToCssModules(cn(className, 'close', {
+          'sr-only': srOnly,
+        }), cssModule)}
         type="button"
-        className={classes}
         onClick={onDismiss}
-        {...rest}
+        {...attributes}
       >
         {closeLabel}
         <span>&times;</span>

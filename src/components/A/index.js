@@ -6,25 +6,28 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 
 import { mapToCssModules } from 'utils/tools';
 import { a } from '../../styled/mixins/a';
 
 const defaultProps = {
+  tag: 'a',
   theme: bsTheme,
 };
 
 class A extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
-    children: PropTypes.node.isRequired,
     active: PropTypes.bool,
+    tag: PropTypes.string,
     disabled: PropTypes.bool,
-    'dropdown-item': PropTypes.bool,
     theme: PropTypes.object,
     color: PropTypes.string,
     cssModule: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   state = {
@@ -34,34 +37,26 @@ class A extends React.Component { // eslint-disable-line react/prefer-stateless-
   render() {
     const {
       className,
-      theme,   // eslint-disable-line no-unused-vars
       active,
       disabled,
       cssModule,
       color,
-      'dropdown-item': dropdownItem,
-      children,
+      tag: Tag,
       ...attributes
-    } = this.props;
+    } = omit(this.props, ['theme']);
 
     const { focus } = this.state;
 
-    const classes = mapToCssModules(cn(
-      className,
-      active ? 'active' : false,
-      disabled ? 'disabled' : false,
-      focus,
-      dropdownItem ? 'dropdown-item' : false,
-      color ? `text-${color}` : false,
-    ), cssModule);
-
     return (
-      <a
-        className={classes}
+      <Tag
+        className={mapToCssModules(cn(className, {
+          focus,
+          active,
+          disabled,
+          [`text-${color}`]: color,
+        }), cssModule)}
         {...attributes}
-      >
-        {children}
-      </a>
+      />
     );
   }
 }

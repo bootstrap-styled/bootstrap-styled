@@ -26,13 +26,15 @@ class CardLink extends React.Component { // eslint-disable-line react/prefer-sta
       ...attributes
     } = this.props;
 
-    const classes = mapToCssModules(cn(
-      className,
-      'card-link'
-    ), cssModule);
-
     return (
-      <Tag {...attributes} ref={getRef} className={classes} />
+      <Tag
+        className={mapToCssModules(cn(
+          className,
+          'card-link'
+        ), cssModule)}
+        ref={getRef}
+        {...attributes}
+      />
     );
   }
 }

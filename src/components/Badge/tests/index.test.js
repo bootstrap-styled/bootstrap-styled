@@ -9,16 +9,12 @@ import Badge from '../index';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Badge {...props}>
-    {children}
-  </Badge>
+  <Badge {...props} />
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Badge {...props}>
-      {children}
-    </Badge>
+    <Badge {...props} />
   </BootstrapProvider>
 );
 

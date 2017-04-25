@@ -7,13 +7,9 @@ import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
 import Modal from '../Modal';
 
-const children = (<h1>test</h1>);
-
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Modal {...props}>
-      {children}
-    </Modal>
+    <Modal {...props} />
   </BootstrapProvider>
 );
 

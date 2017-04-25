@@ -10,17 +10,13 @@ import CardHeader from '../CardHeader';
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => shallow(
-  <CardHeader {...props}>
-    {children}
-  </CardHeader>
+  <CardHeader {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <CardHeader {...props}>
-      {children}
-    </CardHeader>
+    <CardHeader {...props} />
   </BootstrapProvider>
 );
 

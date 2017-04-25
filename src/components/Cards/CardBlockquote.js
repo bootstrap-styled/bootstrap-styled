@@ -24,13 +24,14 @@ class CardBlockquote extends React.Component { // eslint-disable-line react/pref
       ...attributes
     } = this.props;
 
-    const classes = mapToCssModules(cn(
-      className,
-      'card-blockquote'
-    ), cssModule);
-
     return (
-      <Tag {...attributes} className={classes} />
+      <Tag
+        className={mapToCssModules(cn(
+          className,
+          'card-blockquote'
+        ), cssModule)}
+        {...attributes}
+      />
     );
   }
 }

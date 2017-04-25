@@ -9,20 +9,14 @@ import ModalBody from '../ModalBody';
 const children = <p>Test</p>;
 
 const renderComponent = (props = {}) => shallow(
-  <ModalBody {...props}>
-    {children}
-  </ModalBody>
+  <ModalBody {...props} />
 );
-
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <ModalBody {...props}>
-      {children}
-    </ModalBody>
+    <ModalBody {...props} />
   </BootstrapProvider>
 );
-
 
 describe('<ModalBody />', () => {
   it('should render an <ModalBody> tag without a theme', () => {

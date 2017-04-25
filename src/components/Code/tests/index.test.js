@@ -12,21 +12,13 @@ import Code from '../index';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Code
-    className={props.className}
-  >
-    {props.children}
-  </Code>
+  <Code {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <ThemeProvider theme={theme}>
-    <Code
-      className={props.className}
-    >
-      {props.children}
-    </Code>
+    <Code {...props} />
   </ThemeProvider>
 );
 

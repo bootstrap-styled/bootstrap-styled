@@ -4,28 +4,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import theme from 'theme';
+import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { a } from '../../styled/mixins/a';
 import { button } from '../../styled/mixins/buttons';
 
 const defaultProps = {
-  theme,
+  theme: bsTheme,
 };
 
 export default function composeLink(RouterLink) {
   class Link extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
     static propTypes = {
+      /* eslint-disable react/no-unused-prop-types */
       className: PropTypes.string,
       to: PropTypes.string.isRequired,
       theme: PropTypes.object,
-      children: PropTypes.node,
+      /* eslint-enable react/no-unused-prop-types */
     }
 
     render() {
-      const { className, to, children, theme, ...rest } = this.props;  // eslint-disable-line
+      const {
+        className,
+        to,
+        ...attributes
+      } = omit(this.props, ['theme']);
       return (
-        <RouterLink className={className} to={to} {...rest}>{children}</RouterLink>
+        <RouterLink className={className} to={to} {...attributes} />
       );
     }
   }

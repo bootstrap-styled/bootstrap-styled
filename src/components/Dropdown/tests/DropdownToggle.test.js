@@ -45,17 +45,6 @@ describe('<DropdownToggle />', () => {
     const renderedComponent = renderComponentUsingTheme();
     expect(renderedComponent.contains(children)).toEqual(true);
   });
-
-  // it('should add default sr-only content', () => {
-  //   const renderedComponent = renderComponentUsingTheme();
-  //   expect(renderedComponent.text()).toBe('Toggle Dropdown');
-  //   expect(renderedComponent.find('.sr-only').length).toBe(1);
-  // });
-  // it('should add default sr-only content', () => {
-  //   const renderedComponent = renderComponentUsingTheme();
-  //   expect(renderedComponent.text()).toBe('Dropup Toggle');
-  //   expect(renderedComponent.find('.sr-only').length).toBe(1);
-  // });
   it('should render a caret', () => {
     const renderedComponent = renderComponentUsingTheme({
       caret: true,
@@ -68,37 +57,5 @@ describe('<DropdownToggle />', () => {
       split: true,
     });
     expect(renderedComponent.find('[data-toggle="dropdown"]').hasClass('dropdown-toggle-split')).toBe(true);
-  });
-
-  // describe('onClick', () => {
-  //   it('should call props.onClick if it exists', () => {
-  //     onClick = jest.fn();
-  //     const renderedComponent = renderComponentUsingTheme({
-  //       onClick: onClick,
-  //     });
-  //     renderedComponent.find('button').at(0).simulate('click');
-  //     expect(onClick).toHaveBeenCalled();
-  //   });
-  //
-  //   it('should call context.toggle when present ', () => {
-  //     toggle = jest.fn();
-  //     const renderedComponent = renderComponentUsingTheme({
-  //       toggle: toggle,
-  //     });
-  //     renderedComponent.find('button').at(0).simulate('click');
-  //     expect(toggle).toHaveBeenCalled();
-  //   });
-  // });
-
-  // describe('nav', () => {
-  //   it('should add .nav-link class', () => {
-  //     const renderedComponent = renderComponentUsingTheme();
-  //     expect(renderedComponent.find('a').length).toBe(1);
-  //     expect(renderedComponent.find('.nav-link').length).toBe(1);
-  //   });
-
-  it('should not set the tag prop when the tag is defined', () => {
-    const renderedComponent = renderComponentUsingTheme();
-    expect(renderedComponent.find('[aria-haspopup="true"]').prop('tag')).toBe(undefined);
   });
 });

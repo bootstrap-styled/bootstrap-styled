@@ -9,17 +9,13 @@ import CardBlock from '../CardBlock';
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => shallow(
-  <CardBlock {...props}>
-    {children}
-  </CardBlock>
+  <CardBlock {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <CardBlock {...props}>
-      {children}
-    </CardBlock>
+    <CardBlock {...props} />
   </BootstrapProvider>
 );
 

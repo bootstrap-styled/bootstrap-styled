@@ -1,46 +1,15 @@
 import {
   toHashCode,
-  omit,
-  isFunction,
   setScrollbarWidth,
   isBodyOverflowing,
   getOriginalBodyPadding,
   conditionallyUpdateScrollbar,
   mapToCssModules,
-  isObject,
   getTetherAttachments,
   getScrollbarWidth,
 } from '../tools';
 
 describe('tools', () => {
-  describe('isFunction', () => {
-    it('should returns true', () => {
-      const test = jest.fn();
-      const functionTesting = isFunction(test);
-      expect(functionTesting).toEqual(true);
-    });
-    it('should returns false', () => {
-      const test = 'btn btn-primary';
-      const functionTesting = isFunction(test);
-      expect(functionTesting).toEqual(false);
-    });
-  });
-
-  describe('isObject', () => {
-    it('should returns true if test is an object', () => {
-      const test = {
-        btn: 'btn btn-primary',
-      };
-      const objectTesting = isObject(test);
-      expect(objectTesting).toEqual(true);
-    });
-    it('should returns false if test is not an object', () => {
-      const test = 'btn btn-primary';
-      const objectTesting = isObject(test);
-      expect(objectTesting).toEqual(false);
-    });
-  });
-
   describe('getTetherAttachments', () => {
     it('should returns a placement', () => {
       const getTetherAttachmentsTest = getTetherAttachments('top center');
@@ -134,22 +103,6 @@ describe('tools', () => {
       });
     });
   });
-
-  describe('omit', () => {
-    it('should return an object', () => {
-      const rest = omit({ test: 'test' }, []);
-      expect(isObject(rest)).toBe(true);
-    });
-    it('should returns an object without pathTest', () => {
-      const rest = omit({
-        test: 'test',
-        toggle: true,
-        isOpen: true,
-      }, ['toggle', 'isOpen']);
-      expect(rest).toEqual({ test: 'test' });
-    });
-  });
-
   describe('getScrollbarWidth', () => {
     it('should return scrollbar width equal to 0', () => {
       const scrollbarWidthTest = getScrollbarWidth();

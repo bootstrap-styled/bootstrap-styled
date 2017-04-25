@@ -6,19 +6,22 @@ class FaStacked extends React.Component { // eslint-disable-line react/prefer-st
   static propTypes = {
     className: PropTypes.string,
     size: PropTypes.string,
-    children: PropTypes.node,
   };
 
   render() {
-    const { className, size, children, ...rest } = this.props;
-
-    const classes = cn(
+    const {
       className,
-      'fa-stack',
-      size ? `fa-${size}` : false,
-    );
+      size,
+      ...attributes
+    } = this.props;
+
     return (
-      <span className={classes} {...rest}>{children}</span>
+      <span
+        className={cn(className, 'fa-stack', {
+          [`fa-${size}`]: size,
+        })}
+        {...attributes}
+      />
     );
   }
 }

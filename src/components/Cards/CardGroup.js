@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { borderRightRadius, borderLeftRadius } from '../../styled/mixins/border-radius';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
@@ -22,10 +23,12 @@ const defaultProps = {
 class CardGroup extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     theme: PropTypes.object,
     cssModule: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
@@ -33,17 +36,17 @@ class CardGroup extends React.Component {// eslint-disable-line react/prefer-sta
       className,
       cssModule,
       tag: Tag,
-      theme,  // eslint-disable-line no-unused-vars
       ...attributes
-    } = this.props;
-
-    const classes = mapToCssModules(cn(
-      className,
-      'card-group'
-    ), cssModule);
+    } = omit(this.props, ['theme']);
 
     return (
-      <Tag {...attributes} className={classes} />
+      <Tag
+        className={mapToCssModules(cn(
+          className,
+          'card-group'
+        ), cssModule)}
+        {...attributes}
+      />
     );
   }
 }

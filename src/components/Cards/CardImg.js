@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { mapToCssModules } from 'utils/tools';
 
-
 const defaultProps = {
   tag: 'img',
 };
@@ -28,21 +27,21 @@ class CardImg extends React.Component { // eslint-disable-line react/prefer-stat
       ...attributes
     } = this.props;
 
-    let cardImgClassName = 'card-img';  // eslint-disable-line no-unused-vars
+    let cardImgClassName = 'card-img';
     if (top) {
       cardImgClassName = 'card-img-top';
-    }
-    if (bottom) {
+    } else if (bottom) {
       cardImgClassName = 'card-img-bottom';
     }
 
-    const classes = mapToCssModules(cn(
-      className,
-      'card-img'
-    ), cssModule);
-
     return (
-      <Tag {...attributes} className={classes} />
+      <Tag
+        className={mapToCssModules(cn(
+          className,
+          cardImgClassName,
+        ), cssModule)}
+        {...attributes}
+      />
     );
   }
 }

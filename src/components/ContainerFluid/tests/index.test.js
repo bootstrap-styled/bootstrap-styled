@@ -1,33 +1,22 @@
 /**
  * Testing our ContainerFluid component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
+import BootstrapProvider from '../../BootstrapProvider';
 
 import ContainerFluid from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <ContainerFluid
-    className={props.className}
-  >
-    {props.children}
-  </ContainerFluid>
+  <ContainerFluid {...props} />
 );
 
-
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <ContainerFluid
-      className={props.className}
-    >
-      {props.children}
-    </ContainerFluid>
-  </ThemeProvider>
+  <BootstrapProvider>
+    <ContainerFluid {...props} />
+  </BootstrapProvider>
 );
 
 
@@ -48,7 +37,7 @@ describe('<ContainerFluid />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('div').length).toBe(1);
+    expect(renderedComponent.find('div').length).toBe(2);
     expect(renderedComponent.find('ContainerFluid').length).toBe(1);
   });
   it('should have children with a theme', () => {

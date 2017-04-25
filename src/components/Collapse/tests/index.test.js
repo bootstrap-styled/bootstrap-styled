@@ -12,16 +12,12 @@ import { makeTheme } from '../../../theme';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => mount(
-  <Collapse {...props}>
-    {props.children}
-  </Collapse>
+  <Collapse {...props} />
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider theme={props.theme}>
-    <Collapse {...props}>
-      {props.children}
-    </Collapse>
+    <Collapse {...props} />
   </BootstrapProvider>
 );
 
