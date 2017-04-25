@@ -1,32 +1,23 @@
 /**
  * Testing our Dl component
  */
-import { ThemeProvider } from 'styled-components';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import Dl from '../index';
+
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Dl
-    className={props.className}
-  >
-    {props.children}
-  </Dl>
+  <Dl {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Dl
-      className={props.className}
-    >
-      {props.children}
-    </Dl>
-  </ThemeProvider>
+  <BootstrapProvider>
+    <Dl {...props} />
+  </BootstrapProvider>
 );
 
 
