@@ -25,14 +25,13 @@ class BreadcrumbItem extends React.Component { // eslint-disable-line react/pref
       ...attributes
     } = this.props;
 
-    const classes = mapToCssModules(classNames(
-      className,
-      active ? 'active' : false,
-      'breadcrumb-item'
-    ), cssModule);
-
     return (
-      <Tag {...attributes} className={classes} />
+      <Tag
+        className={mapToCssModules(classNames(className, 'breadcrumb-item', {
+          active,
+        }), cssModule)}
+        {...attributes}
+      />
     );
   }
 }
