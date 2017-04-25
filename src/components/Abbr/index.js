@@ -7,8 +7,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
-import omit from 'lodash.omit';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 
 const defaultProps = {
   tag: 'abbr',
@@ -18,12 +18,14 @@ const defaultProps = {
 class Abbr extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
     title: PropTypes.string.isRequired,
     theme: PropTypes.object,
     tag: PropTypes.string,
     initialism: PropTypes.bool,
-  }
+    /* eslint-enable react/no-unused-prop-types */
+  };
 
   render() {
     const {
@@ -31,20 +33,19 @@ class Abbr extends React.Component { // eslint-disable-line react/prefer-statele
       initialism,
       title,
       tag: Tag,
-      ...rest
+      ...attributes
     } = omit(this.props, ['theme']);
 
     return (
       <Tag
+        {...attributes}
         className={cn(className, {
           initialism,
         })}
         title={title}
-        {...rest}
       />
     );
   }
-
 }
 
 // eslint-disable-next-line no-class-assign
