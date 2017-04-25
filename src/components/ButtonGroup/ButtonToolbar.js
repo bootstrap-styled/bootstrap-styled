@@ -6,22 +6,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
+import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { buttonGroup } from '../../styled/mixins/buttonGroup';
 
 const defaultProps = {
   tag: 'div',
   role: 'toolbar',
+  theme: bsTheme,
 };
 
 class ButtonToolbar extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    'aria-label': PropTypes.string,
     className: PropTypes.string,
     cssModule: PropTypes.object,
-    role: PropTypes.string,
+    theme: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
@@ -30,16 +34,16 @@ class ButtonToolbar extends React.Component { // eslint-disable-line react/prefe
       cssModule,
       tag: Tag,
       ...attributes
-    } = this.props;
-
-    const classes = mapToCssModules(cn(
-      className,
-      'btn-toolbar'
-    ), cssModule);
+    } = omit(this.props, ['theme']);
 
     return (
-      <Tag {...attributes} className={classes} />
-
+      <Tag
+        className={mapToCssModules(cn(
+          className,
+          'btn-toolbar'
+        ), cssModule)}
+        {...attributes}
+      />
     );
   }
 }

@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { buttonGroup } from '../../styled/mixins/buttonGroup';
 
@@ -19,14 +20,14 @@ const defaultProps = {
 class ButtonGroup extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    'aria-label': PropTypes.string,
     className: PropTypes.string,
     cssModule: PropTypes.object,
-    role: PropTypes.string,
     size: PropTypes.string,
     vertical: PropTypes.bool,
     theme: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
@@ -35,19 +36,18 @@ class ButtonGroup extends React.Component { // eslint-disable-line react/prefer-
       cssModule,
       size,
       vertical,
-      theme,  // eslint-disable-line
       tag: Tag,
       ...attributes
-    } = this.props;
+    } = omit(this.props, ['theme']);
 
-    const classes = mapToCssModules(cn(
-      className,
-      size ? 'btn-group-' + size : false, // eslint-disable-line prefer-template
-      vertical ? 'btn-group-vertical' : 'btn-group'
-    ), cssModule);
     return (
-      <Tag {...attributes} className={classes} />
-
+      <Tag
+        className={mapToCssModules(cn(className,
+          vertical ? 'btn-group-vertical' : 'btn-group',
+          { [`btn-group-${size}`]: size },
+        ), cssModule)}
+        {...attributes}
+      />
     );
   }
 }

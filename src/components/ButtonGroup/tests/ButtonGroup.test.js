@@ -9,20 +9,15 @@ import ButtonGroup from '../ButtonGroup';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <ButtonGroup {...props}>
-    {props.children}
-  </ButtonGroup>
+  <ButtonGroup {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <ButtonGroup {...props}>
-      {props.children}
-    </ButtonGroup>
+    <ButtonGroup {...props} />
   </BootstrapProvider>
 );
-
 
 describe('<ButtonGroup />', () => {
   it('should render an <ButtonGroup> tag without a theme', () => {
