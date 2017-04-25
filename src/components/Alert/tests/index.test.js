@@ -13,9 +13,7 @@ const children = (<h1>Test</h1>);
 
 const renderComponentUsingTheme = (props) => mount(
   <ThemeProvider theme={theme}>
-    <Alert {...props}>
-      {children}
-    </Alert>
+    <Alert {...props} />
   </ThemeProvider>
 );
 
