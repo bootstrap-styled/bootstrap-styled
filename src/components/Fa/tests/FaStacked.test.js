@@ -7,8 +7,6 @@ import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
 import FaStacked from '../FaStacked';
 
-const children = (<h1>Test</h1>);
-
 const renderComponent = (props = {}) => shallow(
   <FaStacked {...props} />
 );
@@ -27,12 +25,6 @@ describe('<FaStacked />', () => {
     const renderedComponent = renderComponent();
     expect(renderedComponent.find('span').hasClass('fa-stack')).toBe(true);
   });
-  it('should render an <FaStacked> with children', () => {
-    const renderedComponent = renderComponent({
-      children,
-    });
-    expect(renderedComponent.contains(children)).toEqual(true);
-  });
   it('should render an <FaStacked> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme();
     expect(renderedComponent.find('FaStacked').length).toEqual(1);
@@ -42,11 +34,5 @@ describe('<FaStacked />', () => {
       size: 'lg',
     });
     expect(renderedComponent.find('span').hasClass('fa-lg')).toBe(true);
-  });
-  it('should render an <FaStacked> with children with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-    });
-    expect(renderedComponent.contains(children)).toEqual(true);
   });
 });

@@ -7,8 +7,6 @@ import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
 import Fa from '../Fa';
 
-const children = (<h1>Test</h1>);
-
 const renderComponent = (props = {}) => shallow(
   <Fa {...props} />
 );
@@ -20,17 +18,27 @@ const renderComponentUsingTheme = (props = {}) => mount(
 );
 describe('<Fa />', () => {
   it('should render an <Fa> tag without a theme', () => {
-    const renderedComponent = renderComponent();
+    const renderedComponent = renderComponent({
+      trash: true,
+    });
     expect(renderedComponent.find('Fa').length).toEqual(1);
   });
-  it('should render an <Fa> with children', () => {
-    const renderedComponent = renderComponent({
-      children,
+  it('should have class .fa-trash', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      trash: true,
     });
-    expect(renderedComponent.contains(children)).toEqual(true);
+    expect(renderedComponent.find('i').hasClass('fa-trash')).toBe(true);
+  });
+  it('should not have attribute trash', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      trash: true,
+    });
+    expect(renderedComponent.find('[trash]').length).toBe(0);
   });
   it('should render an <Fa> tag with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme();
+    const renderedComponent = renderComponentUsingTheme({
+      trash: true,
+    });
     expect(renderedComponent.find('Fa').length).toEqual(1);
   });
   it('should render an <Fa> tag with a className fa-lgwith a theme', () => {
@@ -38,11 +46,5 @@ describe('<Fa />', () => {
       size: 'lg',
     });
     expect(renderedComponent.find('i').hasClass('fa-lg')).toBe(true);
-  });
-  it('should render an <Fa> with children with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-    });
-    expect(renderedComponent.contains(children)).toEqual(true);
   });
 });
