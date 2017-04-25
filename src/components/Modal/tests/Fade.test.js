@@ -15,9 +15,7 @@ const children = (<h1>test</h1>);
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Fade {...props}>
-      {children}
-    </Fade>
+    <Fade {...props} />
   </BootstrapProvider>
 );
 

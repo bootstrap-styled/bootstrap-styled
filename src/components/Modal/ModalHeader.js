@@ -26,7 +26,8 @@ const ModalHeader = (props) => {
     toggle,
     tag: Tag,
     wrapTag: WrapTag,
-    ...attributes } = props;
+    ...attributes
+  } = props;
 
   const classes = mapToCssModules(cn(
     className,

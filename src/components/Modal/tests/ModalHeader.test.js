@@ -9,17 +9,13 @@ import ModalHeader from '../ModalHeader';
 const children = <p>Test</p>;
 
 const renderComponent = (props = {}) => shallow(
-  <ModalHeader {...props}>
-    {children}
-  </ModalHeader>
+  <ModalHeader {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <ModalHeader {...props}>
-      {children}
-    </ModalHeader>
+    <ModalHeader {...props} />
   </BootstrapProvider>
 );
 
