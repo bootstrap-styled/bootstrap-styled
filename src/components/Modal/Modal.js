@@ -1,21 +1,25 @@
+/* eslint-disable */
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import TransitionGroup from 'react-addons-transition-group';
 import classNames from 'classnames';
 import omit from 'lodash.omit';
-import {
-  getOriginalBodyPadding,
-  conditionallyUpdateScrollbar,
-  setScrollbarWidth,
-  mapToCssModules,
-} from 'utils/tools';
 import Fade from './Fade';
 import { transition } from '../../styled/mixins/transition';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { fade } from '../../styled/utilities/transition';
+
+import {   
+  getOriginalBodyPadding,
+  conditionallyUpdateScrollbar,
+  setScrollbarWidth,
+  mapToCssModules,
+} from 'utils/tools';
+
+
 
 const defaultProps = {
   isOpen: false,
@@ -26,29 +30,25 @@ const defaultProps = {
 };
 
 class Modal extends React.Component {
-
-
   static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
+    isOpen: PropTypes.bool,
+    isLocked: PropTypes.bool,
+    onUnlock: PropTypes.func,
     size: PropTypes.string,
+    onBackdrop: PropTypes.func,
+    keyboard: PropTypes.bool,
+    backdrop: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.oneOf(['static'])
+    ]),
+    onEnter: PropTypes.func,
+    onExit: PropTypes.func,
     children: PropTypes.node,
     className: PropTypes.string,
     wrapClassName: PropTypes.string,
     modalClassName: PropTypes.string,
     backdropClassName: PropTypes.string,
     contentClassName: PropTypes.string,
-    /* eslint-enable react/no-unused-prop-types */
-    isOpen: PropTypes.bool,
-    isLocked: PropTypes.bool,
-    onUnlock: PropTypes.func,
-    onBackdrop: PropTypes.func,
-    keyboard: PropTypes.bool,
-    backdrop: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.oneOf(['static']),
-    ]),
-    onEnter: PropTypes.func,
-    onExit: PropTypes.func,
     cssModule: PropTypes.object,
     zIndex: PropTypes.oneOfType([
       PropTypes.number,
@@ -56,7 +56,7 @@ class Modal extends React.Component {
     ]),
   };
 
-  isTransitioning = false;  // eslint-disable-line react/sort-comp
+  isTransitioning = false;
 
   constructor(props) {
     super(props);
@@ -74,7 +74,7 @@ class Modal extends React.Component {
     if (this.props.isOpen !== prevProps.isOpen) {
       // handle portal events/dom updates
       this.togglePortal();
-    } else if (this._element) { // eslint-disable-line no-underscore-dangle
+    } else if (this._element) {
       // rerender portal
       this.renderIntoSubtree();
     }
@@ -116,14 +116,14 @@ class Modal extends React.Component {
   handleBackdropClick = (e) => {
     if (this.props.backdrop !== true) return;
     this.isTransitioning = false;
-    if (!this.isTransitioning && this.props.backdrop && e.target && !this._dialog.contains(e.target) && this.props.onBackdrop) {  // eslint-disable-line no-underscore-dangle
+    if (!this.isTransitioning && this.props.backdrop && e.target && !this._dialog.contains(e.target) && this.props.onBackdrop) {
       this.props.onBackdrop();
     }
   }
 
   togglePortal = () => {
     if (this.props.isOpen) {
-      this._focus = true; // eslint-disable-line no-underscore-dangle
+      this._focus = true;
       this.show();
     } else {
       this.hide();
@@ -131,10 +131,10 @@ class Modal extends React.Component {
   }
 
   destroy = () => {
-    if (this._element) {  // eslint-disable-line no-underscore-dangle
-      ReactDOM.unmountComponentAtNode(this._element); // eslint-disable-line no-underscore-dangle
-      document.body.removeChild(this._element); // eslint-disable-line no-underscore-dangle
-      this._element = null; // eslint-disable-line no-underscore-dangle
+    if (this._element) {
+      ReactDOM.unmountComponentAtNode(this._element);
+      document.body.removeChild(this._element);
+      this._element = null;
     }
 
     const classes = document.body.className.replace('overflow', '');
@@ -148,15 +148,15 @@ class Modal extends React.Component {
 
   show() {
     const classes = document.body.className;
-    this._element = document.createElement('div');  // eslint-disable-line no-underscore-dangle
-    this._element.setAttribute('tabindex', '-1'); // eslint-disable-line no-underscore-dangle
-    this._element.style.position = 'relative';  // eslint-disable-line no-underscore-dangle
-    this._element.style.zIndex = this.props.zIndex; // eslint-disable-line no-underscore-dangle
+    this._element = document.createElement('div');
+    this._element.setAttribute('tabindex', '-1');
+    this._element.style.position = 'relative';
+    this._element.style.zIndex = this.props.zIndex;
     this.originalBodyPadding = getOriginalBodyPadding();
 
     conditionallyUpdateScrollbar();
 
-    document.body.appendChild(this._element); // eslint-disable-line no-underscore-dangle
+    document.body.appendChild(this._element);
     document.body.className = mapToCssModules(classNames(
       classes,
       'overflow'
@@ -169,13 +169,13 @@ class Modal extends React.Component {
     ReactDOM.unstable_renderSubtreeIntoContainer(
       this,
       this.renderChildren(),
-      this._element  // eslint-disable-line no-underscore-dangle
+      this._element
     );
 
     // check if modal should receive focus
-    if (this._focus) {  // eslint-disable-line no-underscore-dangle
-      this._dialog.parentNode.focus();  // eslint-disable-line no-underscore-dangle
-      this._focus = false;  // eslint-disable-line no-underscore-dangle
+    if (this._focus) {
+      this._dialog.parentNode.focus();
+      this._focus = false;
     }
   }
 
@@ -212,11 +212,11 @@ class Modal extends React.Component {
           >
             <div
               className={mapToCssModules(classNames('modal-dialog', {
-                [`modal-${size}`]: size,
-                show: isOpen,
+              [`modal-${size}`]: size,
+              show: isOpen
               }))}
               role="document"
-              ref={(c) => (this._dialog = c)} // eslint-disable-line no-underscore-dangle
+              ref={(c) => (this._dialog = c)}
               {...attributes}
             >
               <div className={mapToCssModules(classNames('modal-content', contentClassName), cssModule)}>
