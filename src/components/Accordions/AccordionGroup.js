@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 export default class AccordionGroup extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    children: PropTypes.node.isRequired,
     activeAccordionName: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
@@ -35,16 +34,18 @@ export default class AccordionGroup extends React.Component {// eslint-disable-l
   }
 
   render() {
-    const { children, ...rest } = this.props;
-    const { activeAccordionName, onClick, 'heading-component': headingComponent, ...restAfterChildContext } = rest; // eslint-disable-line no-unused-vars
+    const { ...attributes } = this.props;
+    const {
+      /* eslint-disable no-unused-vars */
+      activeAccordionName,
+      onClick,
+      'heading-component': headingComponent,
+      /* eslint-enable no-unused-vars */
+      ...restAfterChildContext
+    } = attributes;
 
     return (
-      <div
-        {...restAfterChildContext}
-
-      >
-        {children}
-      </div>
+      <div {...restAfterChildContext} />
     );
   }
 }
