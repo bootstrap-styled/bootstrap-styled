@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import bsTheme from 'theme';
 import cn from 'classnames';
+import omit from 'lodash.omit';
 import { makeContainer } from '../../styled/mixins/grid';
 
 const defaultProps = {
@@ -12,17 +13,20 @@ const defaultProps = {
 class ContainerFluid extends React.Component {    // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
-    children: PropTypes.node.isRequired,
     theme: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
-    const { className, children, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      className,
+      ...attributes
+    } = omit(this.props, ['theme']);
+
     return (
-      <div className={cn(className, 'container-fluid')} {...rest}>
-        {children}
-      </div>
+      <div className={cn(className, 'container-fluid')} {...attributes} />
     );
   }
 }
