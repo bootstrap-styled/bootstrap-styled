@@ -3,7 +3,8 @@
  *
  *
  */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Card from '../Cards/Card';
 import CardHeader from '../Cards/CardHeader';
 import Collapse from '../Collapse';

@@ -3,7 +3,8 @@
  *
  *
  */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class AccordionGroup extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
@@ -15,10 +16,7 @@ export default class AccordionGroup extends React.Component {// eslint-disable-l
       PropTypes.bool,
     ]),
     onChange: PropTypes.func,
-    'heading-component': PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.bool,
-    ]),
+    'heading-component': PropTypes.bool,
   }
 
   static childContextTypes = {

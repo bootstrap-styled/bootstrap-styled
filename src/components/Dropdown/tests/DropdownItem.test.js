@@ -77,7 +77,7 @@ describe('<DropdownItem />', () => {
     it('should not be called when disabled', () => {
       const functionTest = jest.fn();
       const renderedComponent = mount(<DropdownItem disabled>Item</DropdownItem>);
-      renderedComponent.find('a').simulate('click');
+      renderedComponent.find('button').simulate('click');
       expect(functionTest).not.toHaveBeenCalled();
     });
 
@@ -105,7 +105,7 @@ describe('<DropdownItem />', () => {
           },
         }
       );
-      renderedComponent.find('a').simulate('click');
+      renderedComponent.find('button').simulate('click');
       expect(functionTest).toHaveBeenCalled();
     });
     it('should call onClick', () => {
@@ -113,7 +113,7 @@ describe('<DropdownItem />', () => {
         children,
         onClick,
       });
-      renderedComponent.find('a').simulate('click');
+      renderedComponent.find('button').at(1).simulate('click');
       expect(onClick).toHaveBeenCalled();
     });
   });

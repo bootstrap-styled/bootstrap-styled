@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import cn from 'classnames';
 import themeBs from 'theme';
 import { mapToCssModules } from 'utils/tools';
@@ -95,7 +96,6 @@ class Col extends React.Component {    // eslint-disable-line react/prefer-state
     });
 
     const classes = mapToCssModules(cn(
-      'col',
       className,
       colClasses
     ), cssModule);

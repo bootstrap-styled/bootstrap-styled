@@ -3,7 +3,8 @@
  */
 
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled, { withTheme } from 'styled-components';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';

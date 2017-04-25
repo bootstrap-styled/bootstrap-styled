@@ -4,7 +4,8 @@
  */
 
 import styled from 'styled-components';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { unitUtils } from 'math-utils';
 import { mapToCssModules } from 'utils/tools';
@@ -54,6 +55,7 @@ class Table extends React.Component { // eslint-disable-line react/prefer-statel
 
     const classes = mapToCssModules(cn(
       className,
+      'table',
       size ? 'table-' + size : false, // eslint-disable-line
       bordered ? 'table-bordered' : false,
       striped ? 'table-striped' : false,
@@ -62,11 +64,11 @@ class Table extends React.Component { // eslint-disable-line react/prefer-statel
       reflow ? 'table-reflow' : false
     ), cssModule);
 
-    const table = <Tag {...attributes} className={cn('table', classes)} />;
+    const table = <Tag {...attributes} className={classes} />;
 
     if (responsive) {
       return (
-        <ResponsiveTag className={cn('table-responsive', classes)}>{table}</ResponsiveTag>
+        <ResponsiveTag className="table-responsive">{table}</ResponsiveTag>
       );
     }
     return table;

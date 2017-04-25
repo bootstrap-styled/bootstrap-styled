@@ -40,8 +40,7 @@
     "tdd": "npm run test:watch",
     "test:clean": "rimraf ./coverage",
     "test": "cross-env TEST_REPORT_PATH=reports NODE_ENV=test jest --coverage",
-    "test:runinband": "cross-env TEST_REPORT_PATH=reports NODE_ENV=test jest --coverage --runInBand",
-    "test:watch": "cross-env TEST_REPORT_PATH=reports NODE_ENV=test jest --watch",
+    "test:watch": "cross-env NODE_ENV=test jest --watch",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner"
   },
@@ -198,16 +197,17 @@
     "testResultsProcessor": "jest-sonar-reporter"
   },
   "peerDependencies": {
-    "react": "^15.4.2",
-    "styled-components": "^2.0.0-13",
-    "react-addons-css-transition-group": "^15.4.2",
-    "react-addons-transition-group": "^15.4.2"
+    "react": "^15.5.4",
+    "styled-components": "^2.0.0-15",
+    "react-addons-css-transition-group": "^15.5.2",
+    "react-addons-transition-group": "^15.5.2"
   },
   "dependencies": {
     "classnames": "2.2.5",
     "color": "1.0.3",
     "lodash.omit": "^4.5.0",
     "math-utils": "git+ssh://git@module.kopaxgroup.com:20024/dev-tools/math-utils.git#v0.2.0",
+    "prop-types": "^15.5.8",
     "tether": "1.3.4"
   },
   "devDependencies": {
@@ -219,7 +219,7 @@
     "babel-plugin-dynamic-import-node": "1.0.0",
     "babel-plugin-react-intl": "2.2.0",
     "babel-plugin-react-transform": "2.0.2",
-    "babel-plugin-styled-components": "1.1.1",
+    "babel-plugin-styled-components": "1.1.4",
     "babel-plugin-transform-es2015-modules-commonjs": "6.22.0",
     "babel-plugin-transform-react-constant-elements": "6.9.1",
     "babel-plugin-transform-react-inline-elements": "6.8.0",
@@ -249,28 +249,29 @@
     "immutable": "3.8.1",
     "imports-loader": "0.6.5",
     "jest-cli": "18.1.0",
+    "jest-sonar-reporter": "1.1.1",
     "lint-staged": "3.2.1",
     "ngrok": "2.2.4",
     "node-plop": "0.5.4",
     "null-loader": "0.1.1",
     "plop": "1.7.3",
     "pre-commit": "1.1.3",
-    "react": "15.4.2",
-    "react-addons-css-transition-group": "15.4.2",
-    "react-addons-test-utils": "15.4.2",
-    "react-addons-transition-group": "15.4.2",
+    "react": "15.5.4",
+    "react-addons-css-transition-group": "15.5.2",
+    "react-addons-test-utils": "^15.5.1",
+    "react-addons-transition-group": "15.5.2",
     "react-dom": "15.4.2",
+    "react-test-renderer": "15.5.4",
     "rimraf": "2.5.4",
     "shelljs": "0.7.5",
     "sinon": "2.0.0-pre",
+    "sonar-scanner": "1.0.1",
     "style-loader": "0.13.1",
-    "styled-components": "2.0.0-13",
+    "styled-components": "2.0.0-15",
     "toctoc": "0.2.3",
     "url-loader": "0.5.7",
-    "webpack": "2.2.1",
-    "webpack-dev-middleware": "1.9.0",
-    "webpack-hot-middleware": "2.15.0",
-    "jest-sonar-reporter": "1.1.1",
-    "sonar-scanner": "1.0.1"
+    "webpack": "2.4.1",
+    "webpack-dev-middleware": "1.10.2",
+    "webpack-hot-middleware": "2.18.0"
   }
 }

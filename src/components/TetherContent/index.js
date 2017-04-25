@@ -2,7 +2,8 @@
  * A Tether Content component
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import Tether from 'tether';
 import isFunction from 'lodash.omit';

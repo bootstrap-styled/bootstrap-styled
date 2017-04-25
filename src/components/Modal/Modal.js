@@ -1,5 +1,6 @@
 /* eslint-disable */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import TransitionGroup from 'react-addons-transition-group';
