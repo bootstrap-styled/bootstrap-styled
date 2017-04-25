@@ -17,7 +17,7 @@ import { borderRadius } from '../../styled/mixins/border-radius';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { fade } from '../../styled/utilities/transition';
-import { rebootUtils } from '../../styled/utilities/reboot';
+import { body } from '../../styled/utilities/reboot';
 
 const defaultProps = {
   isOpen: false,
@@ -369,7 +369,7 @@ Modal = styled(Modal)`
          }
       `
     )}
-    ${rebootUtils.body(
+    ${body(
       props.theme['$font-family-base'],
       props.theme['$font-size-base'],
       props.theme['$font-weight-base'],
