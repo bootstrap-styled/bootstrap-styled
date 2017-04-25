@@ -1,47 +1,20 @@
 /**
  * Testing our Area component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import Area from '../index';
 
 const renderComponent = (props = {}) => shallow(
-  <Area
-    shape={props.shape}
-    coords={props.coords}
-    alt={props.alt}
-    href={props.href}
-    download={props.download}
-    media={props.media}
-    rel={props.rel}
-    target={props.target}
-    type={props.type}
-    className={props.className}
-  />
+  <Area {...props} />
 );
-
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Area
-      shape={props.shape}
-      coords={props.coords}
-      alt={props.alt}
-      href={props.href}
-      download={props.download}
-      media={props.media}
-      rel={props.rel}
-      target={props.target}
-      type={props.type}
-      className={props.className}
-    />
-  </ThemeProvider>
+  <BootstrapProvider>
+    <Area {...props} />
+  </BootstrapProvider>
 );
-
 
 describe('<Area />', () => {
   it('should render an <Area> tag without a theme', () => {
