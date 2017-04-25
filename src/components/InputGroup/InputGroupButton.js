@@ -3,7 +3,8 @@
  *
  *
  */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { mapToCssModules } from 'utils/tools';
 import Button from '../Button';

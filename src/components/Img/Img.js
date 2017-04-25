@@ -6,7 +6,8 @@
  */
 
 import styled from 'styled-components';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import cn from 'classnames';
 import bsTheme from 'theme';
 import { mapToCssModules } from 'utils/tools';

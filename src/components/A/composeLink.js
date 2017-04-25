@@ -1,7 +1,8 @@
 /*
  * Kopax Ltd Copyright (c) 2016.
  */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import theme from 'theme';
 import { a } from '../../styled/mixins/a';

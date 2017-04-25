@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 class Details extends React.Component { // eslint-disable-line react/prefer-stateless-function
 

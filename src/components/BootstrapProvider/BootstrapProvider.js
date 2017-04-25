@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import themeBs, { makeTheme } from 'theme';
 import UtilityProvider from './UtilityProvider';

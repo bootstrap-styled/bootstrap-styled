@@ -1,6 +1,7 @@
 /* A Fieldset (Box) */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import bsTheme from 'theme';
 import { makeRow } from '../../styled/mixins/grid';
