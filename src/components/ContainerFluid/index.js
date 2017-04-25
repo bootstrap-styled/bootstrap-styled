@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import bsTheme from 'theme';
 import cn from 'classnames';
 import { makeContainer } from '../../styled/mixins/grid';

@@ -2,7 +2,8 @@
  * Td component
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import cn from 'classnames';
 
 export default class Td extends React.Component { // eslint-disable-line react/prefer-stateless-function

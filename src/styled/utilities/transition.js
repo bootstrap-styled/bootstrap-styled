@@ -1,6 +1,6 @@
 import theme from 'theme';
 import parseTransition from 'utils/parseTransition';
-import { transition as transitionMixin, transform } from '../mixins/transition';
+import { transition as transitionMixin } from '../mixins/transition';
 
 export const defaultProps = theme;
 
@@ -8,20 +8,10 @@ export function getTransitionUtilities(
   enableTransitions = defaultProps['$enable-transitions'],
   transitionFade = defaultProps['$transition-fade'],
   transitionCollapse = defaultProps['$transition-collapse'],
-  transformSwapFadeFrom = defaultProps['$transform-swap-fade-from'],
-  transformSwapFadeTo = defaultProps['$transform-swap-fade-to'],
-  motionCssPropertyEnter = defaultProps['$motion-transition-property-enter'],
-  motionTransitionEnter = defaultProps['$motion-transition-enter'],
-  motionCssPropertyEnterActive = defaultProps['$motion-transition-property-enter-active'],
-  motionCssPropertyLeave = defaultProps['$motion-transition-property-leave'],
-  motionTransitionLeave = defaultProps['$motion-transition-leave'],
-  motionCssPropertyLeaveActive = defaultProps['$motion-transition-property-leave-active'],
 ) {
   return `
     ${fade(enableTransitions, transitionFade)}
     ${collapse(enableTransitions, transitionCollapse)}
-    ${swapFade(enableTransitions, transformSwapFadeFrom, transformSwapFadeTo)}
-    ${makeReactTransition(enableTransitions, motionCssPropertyEnter, motionCssPropertyEnterActive, motionTransitionEnter, motionCssPropertyLeave, motionCssPropertyLeaveActive, motionTransitionLeave)}
   `;
 }
 
@@ -81,50 +71,9 @@ export function getReactTransition(enableTransition, transition) {
   return transitionMixin(enableTransition, `${property} ${duration}ms ${timingFunction} ${delay}ms`);
 }
 
-// function for create react css transition rules
-export function makeReactTransition(motionCssPropertyEnter = defaultProps['$motion-transition-property-enter'], motionCssPropertyEnterActive = defaultProps['$motion-transition-property-enter-active'], motionTransitionEnter = defaultProps['$motion-transition-enter'], motionCssPropertyLeave = defaultProps['$motion-transition-property-leave'], motionCssPropertyLeaveActive = defaultProps['$motion-transition-property-leave-active'], motionTransitionLeave = defaultProps['$motion-transition-leave']) {
-  return `
-    .enter,
-     &.enter {
-      ${motionCssPropertyEnter}
-      ${motionTransitionEnter}
-    
-      &.enter-active {
-        ${motionCssPropertyEnterActive}
-      }
-    }
-    
-    .leave,
-     &.leave {
-      ${motionCssPropertyLeave}
-      ${motionTransitionLeave}
-    
-      &.leave-active {
-        ${motionCssPropertyLeaveActive}
-      }
-    }
-  `;
-}
-
-// Custom example for React Css Transition Group example (swapFade sample)
-export function swapFade(enableTransitions = defaultProps['$enable-transitions'], transitionFade = defaultProps['$transition-fade'], transformSwapFadeFrom = defaultProps['$transform-swap-fade-from'], transformSwapFadeTo = defaultProps['$transform-swap-fade-to']) {
-  return `
-    ${fade(enableTransitions, transitionFade)}
-    .fade {
-      ${transform(transformSwapFadeFrom)}
-      &.show {
-        ${transform(transformSwapFadeTo)}
-      }
-    }
-  `;
-}
-
 export default {
   defaultProps,
   getTransitionUtilities,
   fade,
   collapse,
-  makeReactTransition,
-  getReactTransition,
-  swapFade,
 };

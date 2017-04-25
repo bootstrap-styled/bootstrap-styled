@@ -3,6 +3,19 @@ import { makeFadeIn } from '../fade/styledFade';
 
 describe('motion keyframes utils', () => {
   let sampleKeyframeObject;
+
+  const userKeyframes = {
+    from: {
+      width: '10%',
+    },
+    '60%': {
+      width: '25%',
+    },
+    to: {
+      width: '100%',
+    },
+  };
+
   beforeAll(() => {
     sampleKeyframeObject = {
       from: {
@@ -23,7 +36,7 @@ describe('motion keyframes utils', () => {
   describe('makeKeyframe', () => {
     it('should makeKeyframe', () => {
       const distance = '10px';
-      expect(makeKeyframe(makeFadeIn, distance)).toBe('gpYbTb');
+      expect(makeKeyframe(makeFadeIn, { distance }, userKeyframes)).toBe('jTitkM');
     });
 
     it('should makeKeyframe and apply user keyframe', () => {
@@ -36,7 +49,7 @@ describe('motion keyframes utils', () => {
           width: '30%',
         },
       };
-      expect(makeKeyframe(makeFadeIn, distance, userKeyframe)).toBe('cVHrnJ');
+      expect(makeKeyframe(makeFadeIn, { distance }, userKeyframe)).toBe('cVHrnJ');
     });
   });
 

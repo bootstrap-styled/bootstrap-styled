@@ -1,98 +1,109 @@
-export function makeBlur() {
+export function makeBlur({ distance }) {
   return {
     '0%': {
       filter: 'blur(0px)',
     },
     '100%': {
-      filter: 'blur(5px)',
+      filter: `blur(${distance})`,
     },
   };
 }
 
-export function makeOpacity() {
+export function makeOpacity({ amplification }) {
   return {
     '0%': {
       filter: 'opacity(0%)',
     },
     '100%': {
-      filter: 'opacity(100%)',
+      filter: `opacity(${amplification * 100}%)`,
     },
   };
 }
 
-export function makeContrast() {
+export function makeContrast({ amplification }) {
   return {
     '0%': {
       filter: 'contrast(0%)',
     },
     '100%': {
-      filter: 'contrast(100%)',
+      filter: `contrast(${amplification * 100}%)`,
     },
   };
 }
 
-export function makeBrightness() {
+export function makeBrightness({ amplification }) {
   return {
     '0%': {
       filter: 'brightness(0%)',
     },
     '100%': {
-      filter: 'brightness(100%)',
+      filter: `brightness(${amplification * 100}%)`,
     },
   };
 }
 
-export function makeGrayscale() {
+export function makeGrayscale({ amplification }) {
   return {
     '0%': {
       filter: 'grayscale(0%)',
     },
     '100%': {
-      filter: 'grayscale(100%)',
+      filter: `grayscale(${amplification * 100}%)`,
     },
   };
 }
 
-export function makeHueRotate() {
+export function makeHueRotate({ rotation }) {
   return {
     '0%': {
       filter: 'hue-rotate(0deg)',
     },
     '100%': {
-      filter: 'hue-rotate(360deg)',
+      filter: `hue-rotate(${rotation})`,
     },
   };
 }
 
-export function makeInvert() {
+export function makeInvert({ amplification }) {
   return {
     '0%': {
       filter: 'invert(0%)',
     },
     '100%': {
-      filter: 'invert(100%)',
+      filter: `invert(${amplification * 100}%)`,
     },
   };
 }
 
-export function makeSaturate() {
+export function makeSaturate({ amplification }) {
   return {
     '0%': {
       filter: 'saturate(0%)',
     },
     '100%': {
-      filter: 'saturate(8%)',
+      filter: `saturate(${amplification * 8}%)`,
     },
   };
 }
 
-export function makeSepia() {
+export function makeSepia({ amplification }) {
   return {
     '0%': {
       filter: 'sepia(0%)',
     },
     '100%': {
-      filter: 'sepia(100%)',
+      filter: `sepia(${amplification * 100}%)`,
+    },
+  };
+}
+
+export function makeDropshadow({ amplification }) {
+  return {
+    '0%': {
+      filter: 'drop-shadow(0px 0px 0px #000)',
+    },
+    '100%': {
+      filter: `drop-shadow(${amplification * 5}px ${amplification * 5}px ${amplification * 5}px #000)`,
     },
   };
 }

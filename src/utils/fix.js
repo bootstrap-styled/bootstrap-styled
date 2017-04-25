@@ -234,3 +234,21 @@ export function mapToCssModules(className, cssModule) {
   if (!cssModule) return className;
   return className.split(' ').map(c => cssModule[c] || c).join(' '); // eslint-disable-line arrow-parens
 }
+
+
+/**
+ * http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
+ * generate a hash from a string
+ * @param str
+ * @returns {number}
+ */
+export function toHashCode(str) {
+  let hash = 0;
+  if (str.length === 0) return hash;
+  for (let i = 0; i < str.length; i += 1) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char; // eslint-disable-line no-bitwise
+    hash = hash & hash; // eslint-disable-line no-bitwise, operator-assignment
+  }
+  return hash;
+}

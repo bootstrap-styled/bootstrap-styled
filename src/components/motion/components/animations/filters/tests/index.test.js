@@ -4,7 +4,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import BootstrapProvider from '../../../../../BootstrapProvider';
-import { Blur, Contrast, Brightness, Grayscale, HueRotate, Invert, Opacity, Saturate, Sepia } from '../index';
+import { Blur, Contrast, Brightness, Grayscale, HueRotate, Invert, Opacity, Saturate, Sepia, Dropshadow } from '../index';
 
 const renderComponent = (EffectComponent = Blur, props = {}) => mount(
   <BootstrapProvider>
@@ -68,6 +68,12 @@ describe('filters', () => {
   });
   it('should render a <Sepia> tag', () => {
     const renderedComponent = renderComponent(Sepia, {
+      children,
+    });
+    expect(renderedComponent.length).toBe(1);
+  });
+  it('should render a <Dropshadow> tag', () => {
+    const renderedComponent = renderComponent(Dropshadow, {
       children,
     });
     expect(renderedComponent.length).toBe(1);

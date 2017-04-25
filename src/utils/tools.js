@@ -12,4 +12,5 @@ export {
   getTetherAttachments,
   tetherAttachements,
   getScrollbarWidth,
+  toHashCode,
 } from './fix';

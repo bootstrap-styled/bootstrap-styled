@@ -5,7 +5,8 @@ import TransitionGroup from 'react-addons-transition-group';
 
 import { mount } from 'enzyme';
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import BootstrapProvider from '../../BootstrapProvider';
 
 import Fade from '../Fade';

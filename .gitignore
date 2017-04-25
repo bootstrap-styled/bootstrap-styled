@@ -1,5 +1,6 @@
 # Don't check auto-generated stuff into git
 coverage
+reports
 node_modules
 stats.json
 .sonar
@@ -9,3 +10,4 @@ test-report.xml
 .DS_Store
 npm-debug.log
 .idea
+.sonar

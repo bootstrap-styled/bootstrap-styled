@@ -1,8 +1,10 @@
-export function makeRotateIn() {
+import { TYPE_ROTATE } from '../typeEnums';
+
+export function makeRotateIn({ rotation }) {
   return {
     from: {
       'transform-origin': 'center',
-      transform: 'rotate3d(0, 0, 1, -200deg)',
+      transform: `rotate3d(0, 0, 1, -${rotation})`,
       opacity: 0,
     },
     to: {
@@ -12,41 +14,13 @@ export function makeRotateIn() {
   };
 }
 
-export function makeRotateLeft() {
-  return {
-    from: {
-      'transform-origin': 'left bottom',
-      transform: 'rotate3d(0, 0, 1, -45deg)',
-      opacity: 0,
-    },
-    to: {
-      'transform-origin': 'left bottom',
-      transform: 'none',
-      opacity: 1,
-    },
-  };
-}
+makeRotateIn.type = TYPE_ROTATE;
 
-export function makeRotateRight() {
-  return {
-    from: {
-      'transform-origin': 'right bottom',
-      transform: 'rotate3d(0, 0, 1, 45deg)',
-      opacity: 0,
-    },
-    to: {
-      'transform-origin': 'right bottom',
-      transform: 'none',
-      opacity: 1,
-    },
-  };
-}
-
-export function makeRotateUpLeft() {
+export function makeRotateLeft({ rotation }) {
   return {
     from: {
       'transform-origin': 'left bottom',
-      transform: 'rotate3d(0, 0, 1, 45deg)',
+      transform: `rotate3d(0, 0, 1, -${rotation})`,
       opacity: 0,
     },
     to: {
@@ -57,11 +31,13 @@ export function makeRotateUpLeft() {
   };
 }
 
-export function makeRotateUpRight() {
+makeRotateLeft.type = TYPE_ROTATE;
+
+export function makeRotateRight({ rotation }) {
   return {
     from: {
       'transform-origin': 'right bottom',
-      transform: 'rotate3d(0, 0, 1, -45deg)',
+      transform: `rotate3d(0, 0, 1, ${rotation})`,
       opacity: 0,
     },
     to: {
@@ -71,3 +47,39 @@ export function makeRotateUpRight() {
     },
   };
 }
+
+makeRotateRight.type = TYPE_ROTATE;
+
+export function makeRotateUpLeft({ rotation }) {
+  return {
+    from: {
+      'transform-origin': 'left bottom',
+      transform: `rotate3d(0, 0, 1, ${rotation})`,
+      opacity: 0,
+    },
+    to: {
+      'transform-origin': 'left bottom',
+      transform: 'none',
+      opacity: 1,
+    },
+  };
+}
+
+makeRotateUpLeft.type = TYPE_ROTATE;
+
+export function makeRotateUpRight({ rotation }) {
+  return {
+    from: {
+      'transform-origin': 'right bottom',
+      transform: `rotate3d(0, 0, 1, -${rotation})`,
+      opacity: 0,
+    },
+    to: {
+      'transform-origin': 'right bottom',
+      transform: 'none',
+      opacity: 1,
+    },
+  };
+}
+
+makeRotateUpRight.type = TYPE_ROTATE;
