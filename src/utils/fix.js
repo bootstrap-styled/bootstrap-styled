@@ -1,78 +1,3 @@
-export function isFunction(value) {
-  /**
-   * lodash 3.0.8 (Custom Build) <https://lodash.com/>
-   * Build: `lodash modularize exports="npm" -o ./`
-   * Copyright 2012-2016 The Dojo Foundation <http://dojofoundation.org/>
-   * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-   * Copyright 2009-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-   * Available under MIT license <https://lodash.com/license>
-   */
-
-  /** `Object#toString` result references. */
-  const funcTag = '[object Function]';
-  const genTag = '[object GeneratorFunction]';
-
-  /** Used for built-in method references. */
-  const objectProto = Object.prototype;
-
-  /**
-   * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
-   * of values.
-   */
-  const objectToString = objectProto.toString;
-
-  /**
-   * Checks if `value` is classified as a `Function` object.
-   *
-   * @static
-   * @memberOf _
-   * @category Lang
-   * @param {*} value The value to check.
-   * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
-   * @example
-   *
-   * _.isFunction(_);
-   * // => true
-   *
-   * _.isFunction(/abc/);
-   * // => false
-   */
-  /** The use of `Object#toString` avoids issues with the `typeof` operator
-   * in Safari 8 which returns 'object' for typed array constructors, and
-   * PhantomJS 1.9 which returns 'function' for `NodeList` instances.
-   */
-  const tag = isObject(value) ? objectToString.call(value) : '';
-  return tag === funcTag || tag === genTag;
-}
-
-/**
- * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
- * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
- *
- * @static
- * @memberOf _
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an object, else `false`.
- * @example
- *
- * _.isObject({});
- * // => true
- *
- * _.isObject([1, 2, 3]);
- * // => true
- *
- * _.isObject(_.noop);
- * // => true
- *
- * _.isObject(null);
- * // => false
- */
-export function isObject(value) { /* value parameter deleted for test requirement => before it was : function isObject(value) */
-  const type = typeof value;
-  return !!value && (type === 'object' || type === 'function');
-}
-
 export function getTetherAttachments(placement) {
   let attachments = {};
   switch (placement) {
@@ -180,12 +105,6 @@ export const tetherAttachements = [
   'left middle',
   'left bottom',
 ];
-
-export function omit(obj, paths) {
-  return Object.entries(obj)
-    .filter(([key]) => !paths.includes(key))
-    .reduce((obj, [key, val]) => Object.assign(obj, { [key]: val }), {}); // eslint-disable-line no-shadow
-}
 
 // https://github.com/twbs/bootstrap/blob/v4.0.0-alpha.4/js/src/modal.js#L436-L443
 export function getScrollbarWidth() {

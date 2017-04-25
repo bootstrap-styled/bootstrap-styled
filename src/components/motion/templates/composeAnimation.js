@@ -2,9 +2,10 @@ import React, { PropTypes } from 'react';
 import { withTheme } from 'styled-components';
 import { fromJS } from 'immutable';
 import cn from 'classnames';
+import omit from 'lodash.omit';
+
 import { TYPE_ROTATE } from '../components/animations/typeEnums';
 import makeKeyframe from '../components/animations/makeKeyframe';
-import { omit } from '../../../utils/tools';
 
 export default function composeAnimation(makeAnimation) {
   class HOC extends React.Component { // eslint-disable-line react/prefer-stateless-function

@@ -1,8 +1,7 @@
 /* eslint-disable */
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
-
-import { omit } from 'utils/tools';
+import omit from 'lodash.omit';
 
 const propTypes = {
   baseClass: PropTypes.string,
