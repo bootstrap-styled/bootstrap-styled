@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { mapToCssModules } from 'utils/tools';
 
-
 const defaultProps = {
   tag: 'div',
 };
@@ -24,13 +23,14 @@ class CardHeader extends React.Component { // eslint-disable-line react/prefer-s
       ...attributes
     } = this.props;
 
-    const classes = mapToCssModules(cn(
-      className,
-      'card-header'
-    ), cssModule);
-
     return (
-      <Tag {...attributes} className={classes} />
+      <Tag
+        className={mapToCssModules(cn(
+          className,
+          'card-header'
+        ), cssModule)}
+        {...attributes}
+      />
     );
   }
 }

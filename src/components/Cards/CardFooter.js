@@ -24,13 +24,14 @@ class CardFooter extends React.Component { // eslint-disable-line react/prefer-s
       ...attributes
     } = this.props;
 
-    const classes = mapToCssModules(cn(
-      className,
-      'card-footer'
-    ), cssModule);
-
     return (
-      <Tag {...attributes} className={classes} />
+      <Tag
+        className={mapToCssModules(cn(
+          className,
+          'card-footer'
+        ), cssModule)}
+        {...attributes}
+      />
     );
   }
 }

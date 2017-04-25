@@ -10,16 +10,12 @@ import BootstrapProvider from '../../BootstrapProvider';
 const children = <span> test </span>;
 
 const renderComponent = (props = {}) => mount(
-  <CardText {...props}>
-    {children}
-  </CardText>
+  <CardText {...props} />
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <CardText {...props}>
-      {children}
-    </CardText>
+    <CardText {...props} />
   </BootstrapProvider>
 );
 

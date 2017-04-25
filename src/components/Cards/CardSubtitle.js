@@ -23,13 +23,14 @@ class CardSubtitle extends React.Component { // eslint-disable-line react/prefer
       ...attributes
     } = this.props;
 
-    const classes = mapToCssModules(cn(
-      className,
-      'card-subtitle'
-    ), cssModule);
-
     return (
-      <Tag {...attributes} className={classes} />
+      <Tag
+        className={mapToCssModules(cn(
+          className,
+          'card-subtitle'
+        ), cssModule)}
+        {...attributes}
+      />
     );
   }
 }

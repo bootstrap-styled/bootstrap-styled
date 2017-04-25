@@ -10,17 +10,13 @@ import CardImgOverlay from '../CardImgOverlay';
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => shallow(
-  <CardImgOverlay {...props}>
-    {children}
-  </CardImgOverlay>
+  <CardImgOverlay {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <CardImgOverlay {...props}>
-      {children}
-    </CardImgOverlay>
+    <CardImgOverlay {...props} />
   </BootstrapProvider>
 );
 

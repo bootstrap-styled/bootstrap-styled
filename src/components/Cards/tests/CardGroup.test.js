@@ -10,17 +10,13 @@ import CardGroup from '../CardGroup';
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => shallow(
-  <CardGroup {...props}>
-    {children}
-  </CardGroup>
+  <CardGroup {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <CardGroup {...props}>
-      {children}
-    </CardGroup>
+    <CardGroup {...props} />
   </BootstrapProvider>
 );
 

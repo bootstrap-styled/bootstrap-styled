@@ -11,17 +11,13 @@ import CardBlockquote from '../CardBlockquote';
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => shallow(
-  <CardBlockquote {...props}>
-    {children}
-  </CardBlockquote>
+  <CardBlockquote {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <CardBlockquote {...props}>
-      {children}
-    </CardBlockquote>
+    <CardBlockquote {...props} />
   </BootstrapProvider>
 );
 

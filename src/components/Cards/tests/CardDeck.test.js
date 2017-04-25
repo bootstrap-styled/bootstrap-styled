@@ -9,17 +9,13 @@ import CardDeck from '../CardDeck';
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => shallow(
-  <CardDeck {...props}>
-    {children}
-  </CardDeck>
+  <CardDeck {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <CardDeck {...props}>
-      {children}
-    </CardDeck>
+    <CardDeck {...props} />
   </BootstrapProvider>
 );
 
