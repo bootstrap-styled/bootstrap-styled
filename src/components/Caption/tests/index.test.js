@@ -13,11 +13,7 @@ const children = <span>Test</span>;
 
 const renderComponent = (props = {}) => mount(
   <table>
-    <Caption
-      className={props.className}
-    >
-      {props.children}
-    </Caption>
+    <Caption {...props} />
   </table>
 );
 
@@ -25,11 +21,7 @@ const renderComponent = (props = {}) => mount(
 const renderComponentUsingTheme = (props = {}) => mount(
   <ThemeProvider theme={theme}>
     <table>
-      <Caption
-        className={props.className}
-      >
-        {props.children}
-      </Caption>
+      <Caption {...props} />
     </table>
   </ThemeProvider>
 );
