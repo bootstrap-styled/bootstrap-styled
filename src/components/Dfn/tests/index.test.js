@@ -2,26 +2,21 @@
  * Testing our Dfn component
  */
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
-import theme from 'theme';
+import BootstrapProvider from '../../BootstrapProvider';
 import Dfn from '../index';
 
 const children = 'Test';
 
 const renderComponent = (props = {}) => shallow(
-  <Dfn>
-    {props.children}
-  </Dfn>
+  <Dfn {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Dfn>
-      {props.children}
-    </Dfn>
-  </ThemeProvider>
+  <BootstrapProvider>
+    <Dfn {...props} />
+  </BootstrapProvider>
 );
 
 
