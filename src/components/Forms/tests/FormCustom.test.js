@@ -21,7 +21,9 @@ describe('<FormCustom />', () => {
     expect(renderedComponent.find('span').length).toBe(2);
   });
   it('should have children without a theme', () => {
-    const renderedComponent = renderComponent();
+    const renderedComponent = renderComponent({
+      children,
+    });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
   it('should render an <FormCustom> tag with a theme', () => {

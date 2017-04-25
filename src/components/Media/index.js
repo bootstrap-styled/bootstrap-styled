@@ -13,7 +13,7 @@ import { media } from '../../styled/mixins/media';
 import A from '../A';
 import Img from '../Img';
 import Ul from '../Ul';
-import H4 from '../H4';
+import H4 from '../Headings/H4';
 const defaultProps = {
   theme: bsTheme,
 };
