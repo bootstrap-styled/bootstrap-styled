@@ -1,32 +1,21 @@
 /**
  * Testing our Kbd component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import Kbd from '../index';
+
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Kbd
-    className={props.className}
-  >
-    {props.children}
-  </Kbd>
+  <Kbd {...props} />
 );
 
-
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Kbd
-      className={props.className}
-    >
-      {props.children}
-    </Kbd>
-  </ThemeProvider>
+  <BootstrapProvider>
+    <Kbd {...props} />
+  </BootstrapProvider>
 );
 
 
