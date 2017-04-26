@@ -6,7 +6,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import H5 from '../H5';
+import H5 from '../Headings/H5';
 
 const defaultProps = {
   tag: H5,

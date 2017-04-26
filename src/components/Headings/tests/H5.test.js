@@ -1,29 +1,30 @@
 /**
- * Testing our Fieldset component
+ * Testing our H5 component
  */
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
-import Fieldset from '../index';
+import H5 from '../H5';
 
-const children = (<h1>Test</h1>);
+const children = <p>Test</p>;
 
 const renderComponent = (props = {}) => shallow(
-  <Fieldset {...props} />
+  <H5 {...props} />
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Fieldset {...props} />
+    <H5 {...props} />
   </BootstrapProvider>
 );
 
-describe('<Fieldset />', () => {
-  it('should render a <fieldset> tag without a theme', () => {
+
+describe('<H5 />', () => {
+  it('should render an <H5> tag without a theme', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Fieldset').length).toBe(1);
+    expect(renderedComponent.find('[tag="h5"]').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
@@ -31,11 +32,24 @@ describe('<Fieldset />', () => {
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
-  it('should render a <fieldset> tag with a theme', () => {
+  it('should render a <H5> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('fieldset').length).toBe(1);
+    expect(renderedComponent.find('h5').length).toBe(1);
+  });
+  it('should have an attribute color', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      color: 'test-color',
+    });
+    expect(renderedComponent.find('h5').hasClass('test-color'));
+  });
+  it('should have a classname lead', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      lead: true,
+    });
+    expect(renderedComponent.find('h5').hasClass('lead'));
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

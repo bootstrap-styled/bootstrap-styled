@@ -6,16 +6,12 @@ import FormText from '../FormText';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <FormText {...props}>
-    {children}
-  </FormText>
+  <FormText {...props} />
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <FormText {...props}>
-      {children}
-    </FormText>
+    <FormText {...props} />
   </BootstrapProvider>
 );
 

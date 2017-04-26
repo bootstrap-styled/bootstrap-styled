@@ -17,6 +17,7 @@ import { borderRadius } from '../../styled/mixins/border-radius';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { fade } from '../../styled/utilities/transition';
+import { body } from '../../styled/utilities/reboot';
 
 const defaultProps = {
   isOpen: false,
@@ -367,6 +368,14 @@ Modal = styled(Modal)`
            max-width:  ${props.theme['$modal-lg']}; 
          }
       `
+    )}
+    ${body(
+      props.theme['$font-family-base'],
+      props.theme['$font-size-base'],
+      props.theme['$font-weight-base'],
+      props.theme['$line-height-base'],
+      props.theme['$body-color'],
+      props.theme['$body-bg'],
     )}
   `}
 `;
