@@ -38,7 +38,7 @@ class Select extends React.Component { // eslint-disable-line react/prefer-state
   render() {
     const {
       ...attributes
-    } = omit(this.props, ['theme']);
+    } = omit(this.props, ['theme', 'className']);
 
     return (
       <select
