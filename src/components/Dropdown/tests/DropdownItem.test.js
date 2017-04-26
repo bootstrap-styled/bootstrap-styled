@@ -49,18 +49,7 @@ describe('<DropdownItem />', () => {
 
   describe('header', () => {
     it('should render h6 tag heading', () => {
-      const renderedComponent = mount(<DropdownItem header>Heading</DropdownItem>);
-
-      expect(renderedComponent.find('h6').length).toBe(1);
-      expect(renderedComponent.find('h6').hasClass('dropdown-header')).toBe(true);
-      expect(renderedComponent.text()).toBe('Heading');
-    });
-  });
-
-  describe('header', () => {
-    it('should render h6 tag heading', () => {
-      const renderedComponent = mount(<DropdownItem header>Heading</DropdownItem>);
-
+      const renderedComponent = mount(<DropdownItem tag="button" header>Heading</DropdownItem>);
       expect(renderedComponent.find('h6').length).toBe(1);
       expect(renderedComponent.find('h6').hasClass('dropdown-header')).toBe(true);
       expect(renderedComponent.text()).toBe('Heading');
@@ -69,7 +58,7 @@ describe('<DropdownItem />', () => {
 
   describe('divider', () => {
     it('should render a divider element', () => {
-      const renderedComponent = mount(<DropdownItem divider />);
+      const renderedComponent = mount(<DropdownItem tag="button" divider />);
       expect(renderedComponent.find('.dropdown-divider').length).toBe(1);
     });
   });
