@@ -25,13 +25,15 @@ const NavDropdown = (props) => {
     ...attributes
   } = props;
 
-  const classes = mapToCssModules(cn(
-    className,
-    'nav-item'
-  ), cssModule);
-
   return (
-    <Dropdown {...attributes} tag={Tag} className={classes} />
+    <Dropdown
+      className={mapToCssModules(cn(
+        className,
+        'nav-item'
+      ), cssModule)}
+      tag={Tag}
+      {...attributes}
+    />
   );
 };
 

@@ -31,15 +31,14 @@ const NavbarToggler = (props) => {
     ...attributes
   } = props;
 
-  const classes = mapToCssModules(cn(
-    className,
-    'navbar-toggler',
-    right && 'navbar-toggler-right',
-    left && 'navbar-toggler-left'
-  ), cssModule);
-
   return (
-    <Tag {...attributes} className={classes}>
+    <Tag
+      className={mapToCssModules(cn(className, 'navbar-toggler', {
+        'navbar-toggler-right': right,
+        'navbar-toggler-left': left,
+      }), cssModule)}
+      {...attributes}
+    >
       {children || navbarToggleIcon}
     </Tag>
   );
