@@ -105,6 +105,15 @@ describe('<HeaderNavBar />', () => {
     });
     expect(renderedComponent.find('header').hasClass('fixed-bottom')).toBe(true);
   });
+  it('should render an <HeaderNavBar> with a props animationPush and menuRight with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      animationPush: true,
+      menuRight: true,
+    });
+    expect(renderedComponent.find('HeaderNavBar').props().animationPush).toEqual(true);
+    expect(renderedComponent.find('HeaderNavBar').props().menuRight).toEqual(true);
+  });
   it('should render a <HeaderNavBar> with a Button Component with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
