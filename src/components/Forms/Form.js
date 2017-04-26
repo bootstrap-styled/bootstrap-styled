@@ -51,7 +51,7 @@ class Form extends React.Component {// eslint-disable-line react/prefer-stateles
     return (
       <Tag
         className={mapToCssModules(cn(className, {
-          inline,
+          'form-inline': inline,
         }), cssModule)}
         ref={getRef}
         {...attributes}
