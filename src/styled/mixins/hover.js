@@ -66,9 +66,9 @@ export function hoverFocusActive(enableHoverMediaQuery = defaultProps['$enable-h
 }
 
 
-hover.hoverFocus = hoverFocus;
-hover.plainHoverFocus = plainHoverFocus;
-hover.hoverFocusActive = hoverFocusActive;
+hover.focus = hoverFocus;
+hover.plainFocus = plainHoverFocus;
+hover.activeFocus = hoverFocusActive;
 
 export default {
   defaultProps,

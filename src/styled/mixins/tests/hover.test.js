@@ -89,7 +89,7 @@ describe('bootstrap hover mixins', () => {
     expect(fromJS({ css }).hashCode()).toEqual(-1020241862);
   });
   it('hover should have hoverFocus', () => {
-    const css = hover.hoverFocus(
+    const css = hover.focus(
       defaultProps['$enable-hover-media-query'],
       `cursor: pointer;
       opacity: .5;`
@@ -97,7 +97,7 @@ describe('bootstrap hover mixins', () => {
     expect(fromJS({ css }).hashCode()).toEqual(-75696186);
   });
   it('hover should have plainHoverFocus', () => {
-    const css = hover.plainHoverFocus(
+    const css = hover.plainFocus(
       defaultProps['$enable-hover-media-query'],
       `cursor: pointer;
       opacity: .5;`
@@ -105,7 +105,7 @@ describe('bootstrap hover mixins', () => {
     expect(fromJS({ css }).hashCode()).toEqual(507113767);
   });
   it('hover should have hoverFocusActive', () => {
-    const css = hover.hoverFocusActive(
+    const css = hover.activeFocus(
       defaultProps['$enable-hover-media-query'],
       `cursor: pointer;
       opacity: .5;`

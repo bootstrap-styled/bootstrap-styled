@@ -26,7 +26,6 @@ class Fa extends React.Component { // eslint-disable-line react/prefer-stateless
     return (
       <i
         className={cn(classes, Object.keys(attributes).map((key) => `fa-${key}`))}
-        {...attributes}
       />
     );
   }
