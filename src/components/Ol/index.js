@@ -7,10 +7,10 @@
  */
 
 import styled from 'styled-components';
-import theme from 'theme';
+import bsTheme from 'theme';
 import { listUnstyled, listInline, listInlineItem } from '../../styled/mixins/lists';
 
-const defaultProps = { theme };
+const defaultProps = { theme: bsTheme };
 
 const Ol = styled.ol` 
   ${(props) => `
