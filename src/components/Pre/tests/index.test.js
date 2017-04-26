@@ -12,21 +12,13 @@ import Pre from '../index';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Pre
-    className={props.className}
-  >
-    {props.children}
-  </Pre>
+  <Pre {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <ThemeProvider theme={theme}>
-    <Pre
-      className={props.className}
-    >
-      {props.children}
-    </Pre>
+    <Pre {...props} />
   </ThemeProvider>
 );
 
