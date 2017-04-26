@@ -10,21 +10,13 @@ import ListGroupItemHeading from '../ListGroupItemHeading';
 const children = (<p>Test</p>);
 
 const renderComponent = (props = {}) => mount(
-  <ListGroupItemHeading
-    className={props.className}
-  >
-    {props.children}
-  </ListGroupItemHeading>
+  <ListGroupItemHeading {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <ListGroupItemHeading
-      className={props.className}
-    >
-      {props.children}
-    </ListGroupItemHeading>
+    <ListGroupItemHeading {...props} />
   </BootstrapProvider>
 );
 

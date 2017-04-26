@@ -37,21 +37,20 @@ class ListGroupItem extends React.Component { // eslint-disable-line react/prefe
       ...attributes
     } = this.props;
 
-    const classes = cn(
-      className,
-      active ? 'active' : false,
-      disabled ? 'disabled' : false,
-      action ? 'list-group-item-action' : false,
-      color ? `list-group-item-${color}` : false,
-      'list-group-item'
-    );
-
     // Prevent click event when disabled.
     if (disabled) {
       attributes.onClick = handleDisabledOnClick;
     }
     return (
-      <Tag {...attributes} className={classes} />
+      <Tag
+        className={cn(className, 'list-group-item', {
+          active,
+          disabled,
+          'list-group-item-action': action,
+          [`list-group-item-${color}`]: color,
+        })}
+        {...attributes}
+      />
     );
   }
 }
