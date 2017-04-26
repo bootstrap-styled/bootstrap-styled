@@ -9,17 +9,13 @@ import Button from '../../Button';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <InputGroupButton>
-    {props.children}
-  </InputGroupButton>
+  <InputGroupButton {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <InputGroupButton>
-      {props.children}
-    </InputGroupButton>
+    <InputGroupButton {...props} />
   </BootstrapProvider>
 );
 
