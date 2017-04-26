@@ -76,6 +76,16 @@ describe('<NavLink />', () => {
     renderedComponent.find('a').simulate('click');
     expect(renderedComponent.find('NavLink').props().onClick).toHaveBeenCalled();
   });
+  it('should handle onClick prop  with href with a theme', () => {
+    const functionTest = jest.fn();
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      href: '#',
+      onClick: functionTest,
+    });
+    renderedComponent.find('a').simulate('click', { preventDefault() {} });
+    expect(renderedComponent.find('NavLink').props().onClick).toHaveBeenCalled();
+  });
   it('should NOT handle onClick events when disabled with a theme', () => {
     const functionTest = jest.fn();
     const renderedComponent = renderComponentUsingTheme({
