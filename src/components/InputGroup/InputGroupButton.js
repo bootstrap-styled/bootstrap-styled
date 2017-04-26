@@ -49,7 +49,9 @@ class InputGroupButton extends React.Component { // eslint-disable-line react/pr
       <Tag
         className={mapToCssModules(cn(className, 'input-group-btn'), cssModule)}
         {...attributes}
-      />
+      >
+        {children}
+      </Tag>
     );
   }
 }
