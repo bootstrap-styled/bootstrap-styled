@@ -9,17 +9,13 @@ import Navbar from '../Navbar';
 const children = (<span>Test</span>);
 
 const renderComponent = (props = {}) => shallow(
-  <Navbar {...props}>
-    {props.children}
-  </Navbar>
+  <Navbar {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Navbar {...props}>
-      {props.children}
-    </Navbar>
+    <Navbar {...props} />
   </BootstrapProvider>
 );
 

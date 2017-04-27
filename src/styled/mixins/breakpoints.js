@@ -102,9 +102,6 @@ export function mediaBreakpointDown(name, breakpoints = defaultProps['$grid-brea
 
 // // Media that spans multiple breakpoint widths.
 // // Makes the @content apply between the min and max breakpoints
-// export function mediaBreakpointBetween(lower, upper, breakpoints = defaultProps['$grid-breakpoints'], content) {
-//   return mediaBreakpointUp(lower, breakpoints, mediaBreakpointDown(upper, breakpoints, content));
-// }
 export function mediaBreakpointBetween(lower, upper, breakpoints = defaultProps['$grid-breakpoints'], content) {
   const min = breakpointMin(lower, breakpoints);
   const max = breakpointMax(upper, breakpoints);

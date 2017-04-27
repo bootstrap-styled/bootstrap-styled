@@ -3,50 +3,49 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import bsTheme from 'theme';
 import cn from 'classnames';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { typography } from '../../styled/mixins/typography';
 
 const defaultProps = { theme: bsTheme };
 
-class H5 extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class Headings extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
-    children: PropTypes.node,
+    lead: PropTypes.bool,
+    tag: PropTypes.string.isRequired,
     theme: PropTypes.object,
     color: PropTypes.string,
-    lead: PropTypes.bool,
     cssModule: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
     const {
       className,
       color,
-      theme,  // eslint-disable-line no-unused-vars
-      children,
       cssModule,
       lead,
+      tag: Tag,
       ...attributes
-    } = this.props;
-
-    const classes = mapToCssModules(cn(
-      className,
-      lead ? 'lead' : false,
-      color ? `text-${color}` : false,
-    ), cssModule);
+    } = omit(this.props, ['theme']);
 
     return (
-      <h5 className={classes} {...attributes}>
-        {children}
-      </h5>
+      <Tag
+        className={mapToCssModules(cn(className, {
+          lead,
+          [`text-${color}`]: color,
+        }), cssModule)}
+        {...attributes}
+      />
     );
   }
 }
 // eslint-disable-next-line no-class-assign
-H5 = styled(H5)`
+Headings = styled(Headings)`
   ${(props) => `
-    font-size: ${props.theme['$font-size-h5']};
     ${typography(
       props.theme['$headings-margin-bottom'],
       props.theme['$headings-font-family'],
@@ -62,10 +61,10 @@ H5 = styled(H5)`
       props.theme['$display3-weight'],
       props.theme['$display4-weight'],
     )}
- 
+
     &.lead {
-     font-size: ${props.theme['$lead-font-size']};
-     font-weight: ${props.theme['$lead-font-weight']};
+      font-size: ${props.theme['$lead-font-size']};
+      font-weight: ${props.theme['$lead-font-weight']};
     }
 
     /* Reboot Scss */
@@ -73,6 +72,6 @@ H5 = styled(H5)`
   `}
 `;
 
-H5.defaultProps = defaultProps;
+Headings.defaultProps = defaultProps;
 
-export default H5;
+export default Headings;

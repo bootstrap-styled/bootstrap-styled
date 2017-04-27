@@ -1,33 +1,22 @@
 /**
  * Testing our Legend component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import Legend from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Legend
-    className={props.className}
-  >
-    {props.children}
-  </Legend>
+  <Legend {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Legend
-      className={props.className}
-    >
-      {props.children}
-    </Legend>
-  </ThemeProvider>
+  <BootstrapProvider>
+    <Legend {...props} />
+  </BootstrapProvider>
 );
 
 

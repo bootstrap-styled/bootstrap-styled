@@ -1,32 +1,22 @@
 /**
  * Testing our Ol component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
+import BootstrapProvider from '../../BootstrapProvider';
 import Ol from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Ol
-    className={props.className}
-  >
-    {props.children}
-  </Ol>
+  <Ol {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Ol
-      className={props.className}
-    >
-      {props.children}
-    </Ol>
-  </ThemeProvider>
+  <BootstrapProvider>
+    <Ol {...props} />
+  </BootstrapProvider>
 );
 
 

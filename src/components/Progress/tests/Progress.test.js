@@ -8,16 +8,12 @@ import theme from 'theme';
 import Progress, { ProgressBar } from '../index';
 
 const renderComponent = (props = {}) => shallow(
-  <Progress>
-    {props.children}
-  </Progress>
+  <Progress {...props} />
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <ThemeProvider theme={theme}>
-    <Progress>
-      {props.children}
-    </Progress>
+    <Progress {...props} />
   </ThemeProvider>
 );
 

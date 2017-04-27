@@ -8,10 +8,8 @@ import Thead from '../Thead';
 
 
 const children = <span> test </span>;
-const renderComponent = () => shallow(
-  <Thead>
-    {children}
-  </Thead>
+const renderComponent = (props = {}) => shallow(
+  <Thead {...props} />
 );
 
 describe('<Thead />', () => {

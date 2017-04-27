@@ -1,33 +1,26 @@
 /**
  * Testing our Option component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import Option from '../index';
 
 const children = 'test';
 
 const renderComponent = (props = {}) => mount(
   <select>
-    <Option>
-      {props.children}
-    </Option>
+    <Option {...props} />
   </select>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
+  <BootstrapProvider>
     <select>
-      <Option>
-        {props.children}
-      </Option>
+      <Option {...props} />
     </select>
-  </ThemeProvider>
+  </BootstrapProvider>
 );
 
 

@@ -6,16 +6,12 @@ import FormFeedback from '../FormFeedback';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <FormFeedback {...props}>
-    {children}
-  </FormFeedback>
+  <FormFeedback {...props} />
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <FormFeedback {...props}>
-      {children}
-    </FormFeedback>
+    <FormFeedback {...props} />
   </BootstrapProvider>
 );
 

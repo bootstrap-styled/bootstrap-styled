@@ -10,21 +10,13 @@ import ListGroupItemText from '../ListGroupItemText';
 const children = (<span>Test</span>);
 
 const renderComponent = (props = {}) => shallow(
-  <ListGroupItemText
-    className={props.className}
-  >
-    {props.children}
-  </ListGroupItemText>
+  <ListGroupItemText {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <ListGroupItemText
-      className={props.className}
-    >
-      {props.children}
-    </ListGroupItemText>
+    <ListGroupItemText {...props} />
   </BootstrapProvider>
 );
 

@@ -10,17 +10,13 @@ import PaginationLink from '../PaginationLink';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <PaginationLink {...props}>
-    {props.children}
-  </PaginationLink>
+  <PaginationLink {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <PaginationLink {...props}>
-      {props.children}
-    </PaginationLink>
+    <PaginationLink {...props} />
   </BootstrapProvider>
 );
 

@@ -2,32 +2,22 @@
  * Testing our Section component
  */
 
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
+import BootstrapProvider from '../../BootstrapProvider';
 import Section from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Section
-    className={props.className}
-  >
-    {props.children}
-  </Section>
+  <Section {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Section
-      className={props.className}
-    >
-      {props.children}
-    </Section>
-  </ThemeProvider>
+  <BootstrapProvider>
+    <Section {...props} />
+  </BootstrapProvider>
 );
 
 

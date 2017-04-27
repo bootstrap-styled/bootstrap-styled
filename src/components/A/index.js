@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
 import omit from 'lodash.omit';
-
 import { mapToCssModules } from 'utils/tools';
 import { a } from '../../styled/mixins/a';
 

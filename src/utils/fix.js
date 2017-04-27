@@ -150,7 +150,9 @@ export function conditionallyUpdateScrollbar() {
 }
 
 export function mapToCssModules(className, cssModule) {
-  if (!cssModule) return className;
+  if (!cssModule) {
+    return className;
+  }
   return className.split(' ').map(c => cssModule[c] || c).join(' '); // eslint-disable-line arrow-parens
 }
 

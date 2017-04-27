@@ -1,33 +1,21 @@
 /**
  * Testing our Figure component
  */
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
-
+import BootstrapProvider from '../../BootstrapProvider';
 import Figure from '../Figure';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Figure
-    className={props.className}
-  >
-    {props.children}
-  </Figure>
+  <Figure {...props} />
 );
 
-
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Figure
-      className={props.className}
-    >
-      {props.children}
-    </Figure>
-  </ThemeProvider>
+  <BootstrapProvider>
+    <Figure {...props} />
+  </BootstrapProvider>
 );
 
 

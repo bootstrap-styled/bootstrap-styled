@@ -12,27 +12,24 @@ export default class Thead extends React.Component { // eslint-disable-line reac
     className: PropTypes.string,
     inverse: PropTypes.bool,
     defaultBg: PropTypes.bool,
-    children: PropTypes.node,
   };
 
   render() {
     const {
       className,
       inverse,
-      children,
       defaultBg,
       ...attributes
     } = this.props;
 
-    const classes = cn(
-      className,
-      inverse ? 'thead-inverse' : false,
-      defaultBg ? 'thead-default' : false,
-    );
     return (
-      <thead className={classes} {...attributes}>
-        {children}
-      </thead>
+      <thead
+        className={cn(className, {
+          'thead-inverse': inverse,
+          'thead-default': defaultBg,
+        })}
+        {...attributes}
+      />
     );
   }
 }
