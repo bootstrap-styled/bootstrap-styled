@@ -10,17 +10,13 @@ import Small from '../index';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Small {...props}>
-    {props.children}
-  </Small>
+  <Small {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Small {...props}>
-      {props.children}
-    </Small>
+    <Small {...props} />
   </BootstrapProvider>
 );
 

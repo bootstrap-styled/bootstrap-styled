@@ -32,17 +32,14 @@ class PaginationItem extends React.Component { // eslint-disable-line react/pref
       ...attributes
     } = this.props;
 
-    const classes = mapToCssModules(cn(
-      className,
-      'page-item',
-      {
-        active,
-        disabled,
-      }
-    ), cssModule);
-
     return (
-      <Tag {...attributes} className={classes} />
+      <Tag
+        className={mapToCssModules(cn(className, 'page-item', {
+          active,
+          disabled,
+        }), cssModule)}
+        {...attributes}
+      />
     );
   }
 }

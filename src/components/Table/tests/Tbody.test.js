@@ -7,10 +7,8 @@ import { shallow } from 'enzyme';
 import Tbody from '../Tbody';
 
 const children = <span> test </span>;
-const renderComponent = () => shallow(
-  <Tbody>
-    {children}
-  </Tbody>
+const renderComponent = (props = {}) => shallow(
+  <Tbody {...props} />
 );
 
 describe('<Tbody />', () => {

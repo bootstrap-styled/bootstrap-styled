@@ -51,11 +51,44 @@ describe('<DropdownToggle />', () => {
     });
     expect(renderedComponent.find('[data-toggle="dropdown"]').hasClass('dropdown-toggle')).toBe(true);
   });
-
+  it('should be a component A if nav and not tag specified', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      nav: true,
+    });
+    expect(renderedComponent.find('a').length).toBe(1);
+    expect(renderedComponent.find('a').props().href).toBe('#');
+  });
+  it('should be a component Button if no tag specified', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      nav: true,
+    });
+    expect(renderedComponent.find('button').length).toBe(1);
+  });
+  it('should be have a tag li', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      tag: 'li',
+    });
+    expect(renderedComponent.find('li').length).toBe(1);
+  });
   it('should render a split', () => {
     const renderedComponent = renderComponentUsingTheme({
       split: true,
     });
     expect(renderedComponent.find('[data-toggle="dropdown"]').hasClass('dropdown-toggle-split')).toBe(true);
+  });
+  it('should call a function onClick', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      onClick,
+    });
+    renderedComponent.find('DropdownToggle').simulate('click');
+    expect(onClick).toHaveBeenCalled();
+  });
+  it('should call a function onClick with preventDefault if props nav', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      onClick,
+      nav: true,
+    });
+    renderedComponent.find('DropdownToggle').simulate('click', { preventDefault() {} });
+    expect(onClick).toHaveBeenCalled();
   });
 });

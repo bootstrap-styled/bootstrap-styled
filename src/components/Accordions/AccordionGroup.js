@@ -5,6 +5,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import omit from 'lodash.omit';
 
 export default class AccordionGroup extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
@@ -36,13 +37,8 @@ export default class AccordionGroup extends React.Component {// eslint-disable-l
   render() {
     const { ...attributes } = this.props;
     const {
-      /* eslint-disable no-unused-vars */
-      activeAccordionName,
-      onClick,
-      'heading-component': headingComponent,
-      /* eslint-enable no-unused-vars */
       ...restAfterChildContext
-    } = attributes;
+    } = omit(attributes, ['heading-component', 'onClick', 'activeAccordionName']);
 
     return (
       <div {...restAfterChildContext} />

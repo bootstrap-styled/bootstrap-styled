@@ -9,17 +9,13 @@ import InputGroup from '../InputGroup';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <InputGroup {...props}>
-    {props.children}
-  </InputGroup>
+  <InputGroup {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <InputGroup {...props}>
-      {props.children}
-    </InputGroup>
+    <InputGroup {...props} />
   </BootstrapProvider>
 );
 

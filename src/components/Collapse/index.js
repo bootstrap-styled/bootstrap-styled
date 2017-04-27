@@ -37,8 +37,12 @@ class Collapse extends Component {
       show: 350,
       hide: 350,
     },
-    onOpened: () => {},
-    onClosed: () => {},
+    onOpened: () => {
+      // This is intentional
+    },
+    onClosed: () => {
+      // This is intentional
+    },
   };
 
   constructor(props) {

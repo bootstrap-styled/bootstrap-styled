@@ -101,6 +101,13 @@ describe('<Table />', () => {
     });
     expect(renderedComponent.find('table').hasClass('table-reflow')).toBe(true);
   });
+  it('should have render a RepsonsiveTag', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      responsive: true,
+    });
+    expect(renderedComponent.find('.table-responsive').length).toBe(1);
+  });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,

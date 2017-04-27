@@ -9,7 +9,6 @@ const Sub = styled.sub`
   font-size: 75%;
   line-height: 0;
   vertical-align: baseline;
-  
   bottom: -.25em;
 `;
 

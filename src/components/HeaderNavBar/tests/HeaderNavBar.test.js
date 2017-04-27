@@ -12,17 +12,13 @@ const children = (<h1>Test</h1>);
 const navTopContent = (<span>Test</span>);
 
 const renderComponent = (props = {}) => shallow(
-  <HeaderNavBar {...props}>
-    {children}
-  </HeaderNavBar>
+  <HeaderNavBar {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <HeaderNavBar {...props}>
-      {children}
-    </HeaderNavBar>
+    <HeaderNavBar {...props} />
   </BootstrapProvider>
 );
 
@@ -63,58 +59,60 @@ describe('<HeaderNavBar />', () => {
   it('should render an <HeaderNavBar> with a props navbar-inverse tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      'navbar-inverse': true,
+      inverse: true,
     });
-    expect(renderedComponent.find('HeaderNavBar').props()['navbar-inverse']).toBe(true);
+    expect(renderedComponent.find('header').hasClass('navbar-inverse')).toBe(true);
   });
   it('should render an <HeaderNavBar> with a props bg-inverse tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      'bg-inverse': true,
+      color: 'inverse',
     });
-    expect(renderedComponent.find('HeaderNavBar').props()['bg-inverse']).toBe(true);
+    expect(renderedComponent.find('header').hasClass('bg-inverse')).toBe(true);
   });
   it('should render an <HeaderNavBar> with a props navbar-light tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      'navbar-light': true,
+      light: true,
     });
-    expect(renderedComponent.find('HeaderNavBar').props()['navbar-light']).toBe(true);
+    expect(renderedComponent.find('header').hasClass('navbar-light')).toBe(true);
   });
   it('should render an <HeaderNavBar> with a props bg-faded faded with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      'bg-faded': true,
+      color: 'faded',
     });
-    expect(renderedComponent.find('HeaderNavBar').props()['bg-faded']).toBe(true);
-  });
-  it('should render an <HeaderNavBar> with a props static-top faded with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-      'static-top': true,
-    });
-    expect(renderedComponent.find('HeaderNavBar').props()['static-top']).toBe(true);
+    expect(renderedComponent.find('header').hasClass('bg-faded')).toBe(true);
   });
   it('should render an <HeaderNavBar> with a props sticky-top faded with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      'sticky-top': true,
+      sticky: 'top',
     });
-    expect(renderedComponent.find('HeaderNavBar').props()['sticky-top']).toBe(true);
+    expect(renderedComponent.find('header').hasClass('sticky-top')).toBe(true);
   });
   it('should render an <HeaderNavBar> with a props fixed-top faded with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      'fixed-top': true,
+      fixed: 'top',
     });
-    expect(renderedComponent.find('HeaderNavBar').props()['fixed-top']).toBe(true);
+    expect(renderedComponent.find('header').hasClass('fixed-top')).toBe(true);
   });
   it('should render an <HeaderNavBar> with a props fixed-bottom faded with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      'fixed-bottom': true,
+      fixed: 'bottom',
     });
-    expect(renderedComponent.find('HeaderNavBar').props()['fixed-bottom']).toBe(true);
+    expect(renderedComponent.find('header').hasClass('fixed-bottom')).toBe(true);
+  });
+  it('should render an <HeaderNavBar> with a props animationPush and menuRight with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      animationPush: true,
+      menuRight: true,
+    });
+    expect(renderedComponent.find('HeaderNavBar').props().animationPush).toEqual(true);
+    expect(renderedComponent.find('HeaderNavBar').props().menuRight).toEqual(true);
   });
   it('should render a <HeaderNavBar> with a Button Component with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
@@ -134,6 +132,46 @@ describe('<HeaderNavBar />', () => {
     renderedComponent.find('button').at(0).simulate('click');
     expect(renderedComponent.find('Overlay').props().active).toEqual(true);
     expect(renderedComponent.find('OffsetNav').props().active).toEqual(true);
+  });
+  it('should render an <HeaderNavBar> with a props belowHeader with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      belowHeader: true,
+    });
+    expect(renderedComponent.find('HeaderNavBar').props().belowHeader).toEqual(true);
+  });
+  it('should render an <HeaderNavBar> with a props menuClose with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      menuClose: true,
+    });
+    expect(renderedComponent.find('HeaderNavBar').props().menuClose).toEqual(true);
+  });
+  it('should render an <HeaderNavBar> with a props animation-push with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      'animation-push': true,
+    });
+    expect(renderedComponent.find('HeaderNavBar').props()['animation-push']).toEqual(true);
+    expect(renderedComponent.find('OffsetNav').props()['animation-push']).toEqual(true);
+  });
+  it('should render an <HeaderNavBar> with an onClick function for Overlay', () => {
+    const onClick = jest.fn();
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      onClick,
+    });
+    renderedComponent.find('Overlay').simulate('click');
+    expect(onClick).toHaveBeenCalled();
+  });
+  it('should render an <HeaderNavBar> with an onClick function for Button', () => {
+    const onClick = jest.fn();
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      onClick,
+    });
+    renderedComponent.find('Button').simulate('click');
+    expect(onClick).toHaveBeenCalled();
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

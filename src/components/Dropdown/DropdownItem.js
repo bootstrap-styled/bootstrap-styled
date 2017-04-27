@@ -56,15 +56,12 @@ class DropdownItem extends React.Component {
       /* eslint-enable prefer-const */
       ...attributes } = this.props;
 
-    const classes = mapToCssModules(cn(
-      className,
-      {
-        disabled,
-        'dropdown-item': !divider && !header,
-        'dropdown-header': header,
-        'dropdown-divider': divider,
-      }
-    ), cssModule);
+    const classes = mapToCssModules(cn(className, {
+      disabled,
+      'dropdown-item': !divider && !header,
+      'dropdown-header': header,
+      'dropdown-divider': divider,
+    }), cssModule);
 
     if (Tag === 'button') {
       if (header) {
