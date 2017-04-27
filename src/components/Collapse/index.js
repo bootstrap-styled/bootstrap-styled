@@ -134,22 +134,12 @@ class Collapse extends Component {
     const { collapse, height } = this.state;
 
     let collapseClass;
-    switch (collapse) {
-      case SHOW:
-        collapseClass = 'collapsing';
-        break;
-      case SHOWN:
-        collapseClass = 'collapse show';
-        break;
-      case HIDE:
-        collapseClass = 'collapsing';
-        break;
-      case HIDDEN:
-        collapseClass = 'collapse';
-        break;
-      default:
-        // HIDDEN
-        collapseClass = 'collapse';
+    if (collapse === SHOW || collapse === HIDE) {
+      collapseClass = 'collapsing';
+    } else if (collapse === SHOWN) {
+      collapseClass = 'collapse show';
+    } else if (collapse === HIDDEN) {
+      collapseClass = 'collapse';
     }
 
     const classes = mapToCssModules(classNames(
