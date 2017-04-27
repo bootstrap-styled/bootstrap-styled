@@ -6,12 +6,16 @@ import FormCustom from '../FormCustom';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <FormCustom {...props} />
+  <FormCustom {...props}>
+    {children}
+  </FormCustom>
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <FormCustom {...props} />
+    <FormCustom {...props}>
+      {children}
+    </FormCustom>
   </BootstrapProvider>
 );
 
@@ -21,9 +25,7 @@ describe('<FormCustom />', () => {
     expect(renderedComponent.find('span').length).toBe(2);
   });
   it('should have children without a theme', () => {
-    const renderedComponent = renderComponent({
-      children,
-    });
+    const renderedComponent = renderComponent();
     expect(renderedComponent.contains(children)).toEqual(true);
   });
   it('should render an <FormCustom> tag with a theme', () => {

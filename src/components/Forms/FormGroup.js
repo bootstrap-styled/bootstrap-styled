@@ -40,17 +40,17 @@ class FormGroup extends React.Component {// eslint-disable-line react/prefer-sta
       ...attributes
     } = this.props;
 
+    const classes = mapToCssModules(cn(
+      className,
+      color ? `has-${color}` : false,
+      row ? 'row' : false,
+      check ? 'form-check' : 'form-group',
+      check && disabled ? 'disabled' : false,
+      inline ? 'form-check-inline' : false,
+    ), cssModule);
+
     return (
-      <Tag
-        className={mapToCssModules(cn(className, {
-          row,
-          'form-check': check,
-          'form-check-inline': inline,
-          'disabled': check && disabled,
-          [`has-${color}`]: color,
-        }), cssModule)}
-        {...attributes}
-      />
+      <Tag {...attributes} className={classes} />
     );
   }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { mapToCssModules } from 'utils/tools';
-import H6 from '../Headings/H6';
+import H6 from '../H6';
 const defaultProps = {
   tag: 'button',
 };
@@ -56,12 +56,15 @@ class DropdownItem extends React.Component {
       /* eslint-enable prefer-const */
       ...attributes } = this.props;
 
-    const classes = mapToCssModules(cn(className, {
-      disabled,
-      'dropdown-item': !divider && !header,
-      'dropdown-header': header,
-      'dropdown-divider': divider,
-    }), cssModule);
+    const classes = mapToCssModules(cn(
+      className,
+      {
+        disabled,
+        'dropdown-item': !divider && !header,
+        'dropdown-header': header,
+        'dropdown-divider': divider,
+      }
+    ), cssModule);
 
     if (Tag === 'button') {
       if (header) {

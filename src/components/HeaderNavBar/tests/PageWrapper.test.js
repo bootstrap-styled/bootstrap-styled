@@ -1,22 +1,29 @@
 /**
  * Testing our Nav component
  */
+import { ThemeProvider } from 'styled-components';
+
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import BootstrapProvider from '../../BootstrapProvider';
+import theme from 'theme';
+
 import PageWrapper from '../PageWrapper';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <PageWrapper {...props} />
+  <PageWrapper {...props}>
+    {props.children}
+  </PageWrapper>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <BootstrapProvider>
-    <PageWrapper {...props} />
-  </BootstrapProvider>
+  <ThemeProvider theme={theme}>
+    <PageWrapper {...props}>
+      {props.children}
+    </PageWrapper>
+  </ThemeProvider>
 );
 
 

@@ -16,6 +16,7 @@ const defaultProps = {
 class FormFeedback extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    children: PropTypes.node,
     tag: PropTypes.string,
     className: PropTypes.string,
     cssModule: PropTypes.object,
@@ -29,14 +30,13 @@ class FormFeedback extends React.Component {// eslint-disable-line react/prefer-
       ...attributes
     } = this.props;
 
+    const classes = mapToCssModules(cn(
+      className,
+      'form-control-feedback'
+    ), cssModule);
+
     return (
-      <Tag
-        className={mapToCssModules(cn(
-          className,
-          'form-control-feedback'
-        ), cssModule)}
-        {...attributes}
-      />
+      <Tag {...attributes} className={classes} />
     );
   }
 }

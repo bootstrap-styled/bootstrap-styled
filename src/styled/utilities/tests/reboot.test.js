@@ -1,10 +1,22 @@
 import { fromJS } from 'immutable';
+import bsTheme from 'theme';
 import { body, bodyUtils, boxSizing, getGlobalStyles, html, ie10FixHidden, ie10FixViewport, svg, tabIndex, webkitFileUploadButton } from '../reboot';
 
 describe('bootstrap reboot utility', () => {
+  it('getGlobalStyles should return a set of global styles', () => {
+    const css = getGlobalStyles(
+      bsTheme['$font-family-base'],
+      bsTheme['$font-size-base'],
+      bsTheme['$font-weight-base'],
+      bsTheme['$line-height-base'],
+      bsTheme['$body-color'],
+      bsTheme['$body-bg'],
+    );
+    expect(fromJS({ css }).hashCode()).toEqual(338048398);
+  });
   it('getGlobalStyles should return a set of global styles without params', () => {
     const css = getGlobalStyles();
-    expect(fromJS({ css }).hashCode()).toEqual(939671984);
+    expect(fromJS({ css }).hashCode()).toEqual(338048398);
   });
   it('body should return a css with default values', () => {
     const css = body();

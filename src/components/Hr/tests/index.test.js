@@ -9,13 +9,17 @@ import theme from 'theme';
 import Hr from '../index';
 
 const renderComponent = (props = {}) => shallow(
-  <Hr {...props} />
+  <Hr
+    className={props.className}
+  />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <ThemeProvider theme={theme}>
-    <Hr {...props} />
+    <Hr
+      className={props.className}
+    />
   </ThemeProvider>
 );
 

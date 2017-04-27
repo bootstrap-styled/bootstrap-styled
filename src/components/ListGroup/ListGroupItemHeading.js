@@ -1,12 +1,12 @@
 /**
- * ListGroupItemHeading component
+ * ListGroup component
  */
 
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import H5 from '../Headings/H5';
+import H5 from '../H5';
 
 const defaultProps = {
   tag: H5,
@@ -25,12 +25,13 @@ class ListGroupItemHeading extends React.Component { // eslint-disable-line reac
       tag: Tag,
       ...attributes
     } = this.props;
+    const classes = cn(
+      className,
+      'list-group-item-heading'
+    );
 
     return (
-      <Tag
-        className={cn(className, 'list-group-item-heading')}
-        {...attributes}
-      />
+      <Tag {...attributes} className={classes} />
     );
   }
 }

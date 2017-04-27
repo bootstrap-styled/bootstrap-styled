@@ -1,22 +1,32 @@
 /**
  * Testing our Summary component
  */
+import { ThemeProvider } from 'styled-components';
+
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import BootstrapProvider from '../../BootstrapProvider';
+import theme from 'theme';
 import Summary from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Summary {...props} />
+  <Summary
+    className={props.className}
+  >
+    {props.children}
+  </Summary>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <BootstrapProvider>
-    <Summary {...props} />
-  </BootstrapProvider>
+  <ThemeProvider theme={theme}>
+    <Summary
+      className={props.className}
+    >
+      {props.children}
+    </Summary>
+  </ThemeProvider>
 );
 
 

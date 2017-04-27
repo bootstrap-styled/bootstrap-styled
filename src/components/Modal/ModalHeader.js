@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { mapToCssModules } from 'utils/tools';
-import H4 from '../Headings/H4';
+import H4 from '../H4';
 const propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   wrapTag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),

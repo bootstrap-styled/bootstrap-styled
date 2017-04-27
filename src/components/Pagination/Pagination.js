@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
-import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { pagination } from '../../styled/mixins/paginations';
 
@@ -19,13 +18,12 @@ const defaultProps = {
 class Pagination extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
+    children: PropTypes.node,
     cssModule: PropTypes.object,
     size: PropTypes.string,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     theme: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
@@ -34,16 +32,20 @@ class Pagination extends React.Component { // eslint-disable-line react/prefer-s
       cssModule,
       tag: Tag,
       size,
+      theme,  // eslint-disable-line
       ...attributes
-    } = omit(this.props, ['theme']);
+    } = this.props;
+
+    const classes = mapToCssModules(cn(
+      className,
+      'pagination',
+      {
+        [`pagination-${size}`]: !!size,
+      }
+    ), cssModule);
 
     return (
-      <Tag
-        className={mapToCssModules(cn(className, 'pagination', {
-          [`pagination-${size}`]: !!size,
-        }), cssModule)}
-        {...attributes}
-      />
+      <Tag {...attributes} className={classes} />
     );
   }
 }

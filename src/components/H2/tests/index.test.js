@@ -1,65 +1,65 @@
 /**
- * Testing our H1 component
+ * Testing our H2 component
  */
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
-import Headings from '../Headings';
+import H2 from '../index';
 
 const children = <p>Test</p>;
 
 const renderComponent = (props = {}) => shallow(
-  <Headings {...props} />
+  <H2 {...props}>
+    {props.children}
+  </H2>
 );
+
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Headings {...props} />
+    <H2 {...props}>
+
+      {props.children}
+    </H2>
   </BootstrapProvider>
 );
 
 
-describe('<Headings />', () => {
-  it('should render an <Headings> tag without a theme', () => {
+describe('<H2 />', () => {
+  it('should render an <H2> tag without a theme', () => {
     const renderedComponent = renderComponent({
       children,
-      tag: 'h1',
     });
-    expect(renderedComponent.find('[tag="h1"]').length).toBe(1);
+    expect(renderedComponent.find('H2').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
       children,
-      tag: 'h1',
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
-  it('should render a <Headings> tag with a theme', () => {
+  it('should render a <H2> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      tag: 'h1',
     });
-    expect(renderedComponent.find('h1').length).toBe(1);
+    expect(renderedComponent.find('H2').length).toBe(1);
   });
   it('should have an attribute color', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
       color: 'test-color',
-      tag: 'h1',
     });
-    expect(renderedComponent.find('h1').hasClass('test-color'));
+    expect(renderedComponent.find('H2').props().color).toBe('test-color');
   });
   it('should have a classname lead', () => {
     const renderedComponent = renderComponentUsingTheme({
       lead: true,
-      tag: 'h1',
     });
-    expect(renderedComponent.find('h1').hasClass('lead'));
+    expect(renderedComponent.find('h2').hasClass('lead'));
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      tag: 'h1',
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });

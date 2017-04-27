@@ -11,22 +11,25 @@ export default class Tr extends React.Component { // eslint-disable-line react/p
   static propTypes = {
     className: PropTypes.string,
     color: PropTypes.string,
+    children: PropTypes.node,
   };
 
   render() {
     const {
       className,
       color,
+      children,
       ...attributes
     } = this.props;
 
+    const classes = cn(
+      className,
+      color ? `table-${color}` : false,
+    );
     return (
-      <tr
-        className={cn(className, {
-          [`table-${color}`]: color,
-        })}
-        {...attributes}
-      />
+      <tr className={classes} {...attributes}>
+        {children}
+      </tr>
     );
   }
 }

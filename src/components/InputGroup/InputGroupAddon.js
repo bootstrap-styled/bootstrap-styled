@@ -12,6 +12,7 @@ const defaultProps = {
   tag: 'div',
 };
 
+
 class InputGroupAddon extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
@@ -28,11 +29,13 @@ class InputGroupAddon extends React.Component { // eslint-disable-line react/pre
       ...attributes
     } = this.props;
 
+    const classes = mapToCssModules(cn(
+      className,
+      'input-group-addon'
+    ), cssModule);
+
     return (
-      <Tag
-        className={mapToCssModules(cn(className, 'input-group-addon'), cssModule)}
-        {...attributes}
-      />
+      <Tag {...attributes} className={classes} />
     );
   }
 }

@@ -3,6 +3,15 @@ export const defaultProps = {
 };
 
 export function hover(content) {
+// TODO: re-enable along with mq4-hover-shim
+//  @if $enable-hover-media-query {
+//    // See Media Queries Level 4: https://drafts.csswg.org/mediaqueries/#hover
+//    // Currently shimmed by https://github.com/twbs/mq4-hover-shim
+//    @media (hover: hover) {
+//      &:hover { @content }
+//    }
+//  }
+//  @else {
   return `
     &:hover { ${content} }
   `;

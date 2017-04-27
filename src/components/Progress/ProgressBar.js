@@ -54,13 +54,17 @@ export default class ProgressBar extends React.Component { // eslint-disable-lin
       ...rest
     } = this.props; // eslint-disable-line no-unused-vars
 
+    const progressBarClasses = mapToCssModules(cn(
+      className,
+      'progress-bar',
+      animated ? 'progress-bar-animated' : null,
+      color ? `bg-${color}` : null,
+      striped || animated ? 'progress-bar-striped' : null
+    ), cssModule);
+
     return (
       <div
-        className={mapToCssModules(cn(className, 'progress-bar', {
-          'progress-bar-animated': animated,
-          'progress-bar-striped': striped || animated,
-          [`bg-${color}`]: color,
-        }), cssModule)}
+        className={progressBarClasses}
         style={Object.assign({ width: this.getWidth(valueNow, valueMin, valueMax) }, { height })}
         {...rest}
       >

@@ -1,22 +1,29 @@
 /**
  * Testing our Nav component
  */
+import { ThemeProvider } from 'styled-components';
+
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import BootstrapProvider from '../../BootstrapProvider';
+import theme from 'theme';
+
 import OffsetNav from '../OffsetNav';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <OffsetNav {...props} />
+  <OffsetNav {...props}>
+    {props.children}
+  </OffsetNav>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <BootstrapProvider>
-    <OffsetNav {...props} />
-  </BootstrapProvider>
+  <ThemeProvider theme={theme}>
+    <OffsetNav {...props}>
+      {props.children}
+    </OffsetNav>
+  </ThemeProvider>
 );
 
 
@@ -45,15 +52,6 @@ describe('<OffsetNav />', () => {
       active: true,
     });
     expect(renderedComponent.find('OffsetNav').props().active).toEqual(true);
-  });
-  it('should render an <OffsetNav> with a props animationPush with a theme', () => {
-    const dismiss = jest.fn();
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-      menuClose: true,
-      dismiss,
-    });
-    expect(renderedComponent.find('Close').length).toBe(1);
   });
   it('should render an <OffsetNav> with a props menu-right with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

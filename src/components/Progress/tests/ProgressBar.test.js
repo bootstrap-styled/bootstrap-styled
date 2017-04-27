@@ -8,14 +8,18 @@ import Progress, { ProgressBar } from '../index';
 
 const renderComponent = (props = {}) => mount(
   <Progress>
-    <ProgressBar {...props} />
+    <ProgressBar {...props}>
+      {props.children}
+    </ProgressBar>
   </Progress>
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
     <Progress>
-      <ProgressBar {...props} />
+      <ProgressBar {...props}>
+        {props.children}
+      </ProgressBar>
     </Progress>
   </BootstrapProvider>
 );

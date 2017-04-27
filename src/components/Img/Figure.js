@@ -13,13 +13,17 @@ class Figure extends React.Component { // eslint-disable-line react/prefer-state
 
   static propTypes = {
     className: PropTypes.string,
+    children: PropTypes.node.isRequired,
+    theme: PropTypes.object,
   }
 
   render() {
-    const { className, ...attributes } = this.props; // eslint-disable-line no-unused-vars
+    const { className, theme, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
 
     return (
-      <figure className={cn('figure', className)} {...attributes} />
+      <figure className={cn('figure', className)} {...rest}>
+        {children}
+      </figure>
     );
   }
 }

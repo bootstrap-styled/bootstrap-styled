@@ -68,7 +68,7 @@ describe('<Media />', () => {
       children,
       heading: true,
     });
-    expect(renderedComponent.find('h4').length).toBe(3);
+    expect(renderedComponent.find('H4').length).toBe(3);
   });
   it('should render a <Media> tag with an A and a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

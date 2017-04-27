@@ -4,31 +4,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import bsTheme from 'theme';
-import omit from 'lodash.omit';
 import { makeRow } from '../../styled/mixins/grid';
 
 const defaultProps = { theme: bsTheme };
 
+
 class Fieldset extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
     theme: PropTypes.object,
     className: PropTypes.string,
-    /* eslint-enable react/no-unused-prop-types */
+    children: PropTypes.node.isRequired,
   }
 
   render() {
-    const {
-      className,
-      ...attributes
-    } = omit(this.props, ['theme']);
-
+    const { theme, className, children, ...rest } = this.props; // eslint-disable-line
     return (
       <fieldset
         className={className}
-        {...attributes}
-      />
+        {...rest}
+      >
+        {children}
+      </fieldset>
     );
   }
 }
@@ -47,6 +44,7 @@ Fieldset = styled(Fieldset)`
         props.theme['$grid-gutter-widths'],
       )}
     }
+
   `}
 `;
 

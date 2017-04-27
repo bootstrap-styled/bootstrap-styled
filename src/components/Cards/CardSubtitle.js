@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { mapToCssModules } from 'utils/tools';
-import H6 from '../Headings/H6';
+import H6 from '../H6';
 const defaultProps = {
   tag: H6,
 };

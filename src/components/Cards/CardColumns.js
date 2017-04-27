@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
-import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { card } from '../../styled/mixins/cards';
@@ -21,12 +20,10 @@ const defaultProps = {
 class CardColumns extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     theme: PropTypes.object,
     cssModule: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
@@ -34,8 +31,9 @@ class CardColumns extends React.Component {// eslint-disable-line react/prefer-s
       className,
       cssModule,
       tag: Tag,
+      theme,  // eslint-disable-line no-unused-vars
       ...attributes
-    } = omit(this.props, ['theme']);
+    } = this.props;
 
     return (
       <Tag

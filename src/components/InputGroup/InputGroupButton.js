@@ -12,6 +12,7 @@ const defaultProps = {
   tag: 'div',
 };
 
+
 class InputGroupButton extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
@@ -35,23 +36,25 @@ class InputGroupButton extends React.Component { // eslint-disable-line react/pr
     } = this.props;
 
     if (typeof children === 'string') {
+      const groupClasses = mapToCssModules(cn(
+        groupClassName,
+        'input-group-btn'
+      ), cssModule);
+
       return (
-        <Tag
-          className={mapToCssModules(cn(groupClassName, 'input-group-btn'), cssModule)}
-          {...groupAttributes}
-        >
+        <Tag {...groupAttributes} className={groupClasses}>
           <Button {...attributes} className={className}>{children}</Button>
         </Tag>
       );
     }
 
+    const classes = mapToCssModules(cn(
+      className,
+      'input-group-btn'
+    ), cssModule);
+
     return (
-      <Tag
-        className={mapToCssModules(cn(className, 'input-group-btn'), cssModule)}
-        {...attributes}
-      >
-        {children}
-      </Tag>
+      <Tag {...attributes} className={classes}>{children}</Tag>
     );
   }
 }

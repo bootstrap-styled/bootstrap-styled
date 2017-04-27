@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import Card from '../Cards/Card';
 import CardHeader from '../Cards/CardHeader';
 import Collapse from '../Collapse';
-import H5 from '../Headings/H5';
+import H5 from '../H5';
 
 const defaultProps = {
   tag: Card,

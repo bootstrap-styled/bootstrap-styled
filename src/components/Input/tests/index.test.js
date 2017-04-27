@@ -9,6 +9,7 @@ import Input from '../index';
 
 const renderComponent = (props = {}) => shallow(
   <Input {...props} />
+
 );
 
 
@@ -57,48 +58,42 @@ describe('<Input />', () => {
     const renderedComponent = renderComponentUsingTheme({
       static: true,
     });
-    expect(renderedComponent.find('p').hasClass('form-control-static')).toBe(true);
+    expect(renderedComponent.find('Input').hasClass('form-control-static'));
   });
   it('should have a class form-control-file if type: file with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       type: 'file',
     });
-    expect(renderedComponent.find('input').hasClass('form-control-file')).toBe(true);
+    expect(renderedComponent.find('Input').hasClass('form-control-file'));
   });
-  it('should have a class form-check-input if addon: false with a theme', () => {
+  it('should have a class form-check-input if addon: true with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
-      type: 'checkbox',
       addon: false,
     });
-    expect(renderedComponent.find('input').hasClass('form-check-input')).toBe(true);
-  });
-  it('should NOT have a class form-check-input if addon: true with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      type: 'checkbox',
-      addon: true,
-    });
-    expect(renderedComponent.find('input').hasClass('form-check-input')).toBe(false);
+    expect(renderedComponent.find('Input').hasClass('form-check-input'));
   });
   it('should have a class form-control-state-test with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       state: 'state-test',
     });
-    expect(renderedComponent.find('input').hasClass('form-control-state-test')).toBe(true);
+    expect(renderedComponent.find('Input').hasClass('form-control-state-test'));
   });
   it('should have a class form-control-size-test with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       size: 'size-test',
     });
-    expect(renderedComponent.find('input').hasClass('form-control-size-test')).toBe(true);
+    expect(renderedComponent.find('Input').hasClass('form-control-size-test'));
   });
   it('should not render with "form-check-input" nor "form-control" class when type is checkbox and addon is truthy', () => {
     const renderedComponent = shallow(<Input addon type="checkbox" />);
+
     expect(renderedComponent.hasClass('form-check-input')).toBe(false);
     expect(renderedComponent.hasClass('form-control')).toBe(false);
   });
 
   it('should not render with "form-check-input" nor "form-control" class when type is radio and addon is truthy', () => {
     const renderedComponent = shallow(<Input addon type="radio" />);
+
     expect(renderedComponent.hasClass('form-check-input')).toBe(false);
     expect(renderedComponent.hasClass('form-control')).toBe(false);
   });

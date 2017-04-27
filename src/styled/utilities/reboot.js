@@ -5,7 +5,14 @@ import bsTheme from 'theme';
  *
  * This utility MUST return only things that can ONLY be injected in global styles
  */
-export function getGlobalStyles() {
+export function getGlobalStyles(
+  fontFamilyBase = bsTheme['$font-family-base'],
+  fontSizeBase = bsTheme['$font-size-base'],
+  fontWeightBase = bsTheme['$font-weight-base'],
+  lineHeightBase = bsTheme['$line-height-base'],
+  bodyColor = bsTheme['$body-color'],
+  bodyBg = bsTheme['$body-bg'],
+) {
   return `
     html {
       ${html()}
@@ -19,6 +26,14 @@ export function getGlobalStyles() {
       ${ie10FixViewport()} 
     }
     body {
+      ${body(
+        fontFamilyBase,
+        fontSizeBase,
+        fontWeightBase,
+        lineHeightBase,
+        bodyColor,
+        bodyBg,
+      )} 
       ${bodyUtils()}
     }
     [tabindex="-1"]:focus {

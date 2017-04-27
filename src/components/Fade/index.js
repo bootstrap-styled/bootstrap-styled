@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import themeBs from 'theme';
-import omit from 'lodash.omit';
 import parseTransition from 'utils/parseTransition';
 
 const defaultProps = {
@@ -14,11 +13,9 @@ const defaultProps = {
 class Fade extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
     children: PropTypes.node.isRequired,
     theme: PropTypes.object,
     isOpen: PropTypes.bool,
-    /* eslint-enable react/no-unused-prop-types */
   }
 
   state = {
@@ -38,12 +35,7 @@ class Fade extends React.Component { // eslint-disable-line react/prefer-statele
   }
 
   render() {
-    const {
-      children,
-      isOpen,
-      ...rest
-    } = omit(this.props, ['theme']);
-
+    const { theme, children, isOpen, ...rest } = this.props; // eslint-disable-line no-unused-vars
     return (
       <ReactCSSTransitionGroup
         transitionAppearTimeout={this.state.transitionEnterTimeout}

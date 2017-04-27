@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mapToCssModules } from 'utils/tools';
 import A from '../A';
-
 const defaultProps = {
   tag: A,
 };

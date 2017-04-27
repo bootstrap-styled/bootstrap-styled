@@ -9,13 +9,17 @@ import P from '../index';
 const children = <span>test</span>;
 
 const renderComponent = (props = {}) => shallow(
-  <P {...props} />
+  <P {...props}>
+    {props.children}
+  </P>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <P {...props} />
+    <P {...props}>
+      {props.children}
+    </P>
   </BootstrapProvider>
 );
 

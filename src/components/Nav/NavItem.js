@@ -28,14 +28,13 @@ class NavItem extends React.Component { // eslint-disable-line react/prefer-stat
       ...attributes
     } = this.props;
 
+    const classes = mapToCssModules(cn(
+      className,
+      'nav-item'
+    ), cssModule);
+
     return (
-      <Tag
-        className={mapToCssModules(cn(
-          className,
-          'nav-item'
-        ), cssModule)}
-        {...attributes}
-      />
+      <Tag {...attributes} className={classes} />
     );
   }
 }

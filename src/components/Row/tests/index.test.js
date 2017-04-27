@@ -1,22 +1,32 @@
 /**
  * Testing our Row component
  */
+import { ThemeProvider } from 'styled-components';
+
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import BootstrapProvider from '../../BootstrapProvider';
+import theme from 'theme';
 import Row from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Row {...props} />
+  <Row
+    className={props.className}
+  >
+    {props.children}
+  </Row>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <BootstrapProvider>
-    <Row {...props} />
-  </BootstrapProvider>
+  <ThemeProvider theme={theme}>
+    <Row
+      className={props.className}
+    >
+      {props.children}
+    </Row>
+  </ThemeProvider>
 );
 
 
@@ -37,7 +47,7 @@ describe('<Row />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('div').length).toBe(2);
+    expect(renderedComponent.find('div').length).toBe(1);
     expect(renderedComponent.find('Row').length).toBe(1);
   });
   it('should have children with a theme', () => {
