@@ -7,27 +7,21 @@ import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
 
 import NavLink from '../NavLink';
-import Nav from '../Nav';
-import NavItem from '../NavItem';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => mount(
-  <Nav>
-    <NavItem>
-      <NavLink {...props} />
-    </NavItem>
-  </Nav>
+  <NavLink {...props}>
+    {props.children}
+  </NavLink>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Nav>
-      <NavItem>
-        <NavLink {...props} />
-      </NavItem>
-    </Nav>
+    <NavLink {...props}>
+      {props.children}
+    </NavLink>
   </BootstrapProvider>
 );
 
@@ -57,18 +51,9 @@ describe('<NavLink />', () => {
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
-  it('should handle click on link with a theme', () => {
-    const functionTest = jest.fn();
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-      onClick: functionTest,
-      href: 'test',
-    });
-    renderedComponent.find('a').simulate('click', { preventDefault() {} });
-    expect(renderedComponent.find('NavLink').props().onClick).toHaveBeenCalled();
-  });
   it('should handle onClick prop with a theme', () => {
     const functionTest = jest.fn();
+
     const renderedComponent = renderComponentUsingTheme({
       children,
       onClick: functionTest,
@@ -76,17 +61,7 @@ describe('<NavLink />', () => {
     renderedComponent.find('a').simulate('click');
     expect(renderedComponent.find('NavLink').props().onClick).toHaveBeenCalled();
   });
-  it('should handle onClick prop  with href with a theme', () => {
-    const functionTest = jest.fn();
-    const renderedComponent = renderComponentUsingTheme({
-      children,
-      href: '#',
-      onClick: functionTest,
-    });
-    renderedComponent.find('a').simulate('click', { preventDefault() {} });
-    expect(renderedComponent.find('NavLink').props().onClick).toHaveBeenCalled();
-  });
-  it('should NOT handle onClick events when disabled with a theme', () => {
+  it('should handle onClick events with a theme', () => {
     const functionTest = jest.fn();
     const renderedComponent = renderComponentUsingTheme({
       children,

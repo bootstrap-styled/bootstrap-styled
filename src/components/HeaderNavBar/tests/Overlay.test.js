@@ -1,22 +1,31 @@
 /**
  * Testing our Nav component
  */
+import { ThemeProvider } from 'styled-components';
+
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import BootstrapProvider from '../../BootstrapProvider';
+import theme from 'theme';
+
 import Overlay from '../Overlay';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Overlay {...props} />
+  <Overlay {...props}>
+    {props.children}
+  </Overlay>
 );
 
+
 const renderComponentUsingTheme = (props = {}) => mount(
-  <BootstrapProvider>
-    <Overlay {...props} />
-  </BootstrapProvider>
+  <ThemeProvider theme={theme}>
+    <Overlay {...props}>
+      {props.children}
+    </Overlay>
+  </ThemeProvider>
 );
+
 
 describe('<Overlay />', () => {
   it('should render an <Overlay> tag without a theme', () => {

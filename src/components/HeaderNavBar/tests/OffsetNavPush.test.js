@@ -1,17 +1,22 @@
 /**
  * Testing our Nav component
  */
+import { ThemeProvider } from 'styled-components';
+
 import { mount } from 'enzyme';
 import React from 'react';
-import BootstrapProvider from '../../BootstrapProvider';
+import theme from 'theme';
+
 import OffsetNavPush from '../OffsetNavPush';
 
 const children = (<h1>Test</h1>);
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <BootstrapProvider>
-    <OffsetNavPush {...props} />
-  </BootstrapProvider>
+  <ThemeProvider theme={theme}>
+    <OffsetNavPush {...props}>
+      {props.children}
+    </OffsetNavPush>
+  </ThemeProvider>
 );
 
 

@@ -2,36 +2,27 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import bsTheme from 'theme';
-import omit from 'lodash.omit';
+import theme from 'theme';
 import { makeRow } from '../../styled/mixins/grid';
 
-const defaultProps = {
-  tag: 'div',
-  theme: bsTheme,
-};
+const defaultProps = { theme };
 
 class Row extends React.Component {    // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
-    theme: PropTypes.object,
-    tag: PropTypes.string,
-    /* eslint-enable react/no-unused-prop-types */
+    children: PropTypes.node.isRequired,
   }
 
   render() {
-    const {
-      className,
-      tag: Tag,
-      ...attributes
-    } = omit(this.props, ['theme']);
-
+    const { className, children } = this.props; // eslint-disable-line no-unused-vars
     return (
-      <Tag className={cn(className, 'row')} {...attributes} />
+      <div className={cn(className, 'row')}>
+        {children}
+      </div>
     );
   }
+
 }
 
 // eslint-disable-next-line no-class-assign

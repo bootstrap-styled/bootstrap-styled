@@ -9,13 +9,17 @@ import NavDropdown from '../NavDropdown';
 const children = (<span>Test</span>);
 
 const renderComponent = (props = {}) => shallow(
-  <NavDropdown {...props} />
+  <NavDropdown
+    {...props}
+  />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <NavDropdown {...props} />
+    <NavDropdown
+      {...props}
+    />
   </BootstrapProvider>
 );
 

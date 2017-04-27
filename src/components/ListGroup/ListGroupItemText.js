@@ -1,5 +1,5 @@
 /**
- * ListGroupItemText component
+ * ListGroup component
  */
 
 
@@ -11,7 +11,7 @@ const defaultProps = {
   tag: 'p',
 };
 
-class ListGroupItemText extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class ListGroupItemHeading extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -24,17 +24,18 @@ class ListGroupItemText extends React.Component { // eslint-disable-line react/p
       tag: Tag,
       ...attributes
     } = this.props;
+    const classes = cn(
+      className,
+      'list-group-item-text'
+    );
 
     return (
-      <Tag
-        className={cn(className, 'list-group-item-text')}
-        {...attributes}
-      />
+      <Tag {...attributes} className={classes} />
     );
   }
 }
 
-ListGroupItemText.defaultProps = defaultProps;
+ListGroupItemHeading.defaultProps = defaultProps;
 
-export default ListGroupItemText ;
+export default ListGroupItemHeading ;
 

@@ -4,18 +4,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
-import bsTheme from 'theme';
-import omit from 'lodash.omit';
-
-const defaultProps = { theme: bsTheme };
 
 class Select extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
     theme: PropTypes.object,
     className: PropTypes.string,
-    /* eslint-enable react/no-unused-prop-types */
+    children: PropTypes.node.isRequired,
   }
 
   state = {
@@ -36,15 +31,14 @@ class Select extends React.Component { // eslint-disable-line react/prefer-state
   }
 
   render() {
-    const {
-      ...attributes
-    } = omit(this.props, ['theme', 'className']);
-
+    const { theme, className, children, ...rest } = this.props; // eslint-disable-line
     return (
       <select
         className={cn(this.state.className, 'select')}
-        {...attributes}
-      />
+        {...rest}
+      >
+        {children}
+      </select>
     );
   }
 }
@@ -60,7 +54,5 @@ Select = styled(Select)`
     color: graytext;
   }
 `;
-
-Select.defaultProps = defaultProps;
 
 export default Select;

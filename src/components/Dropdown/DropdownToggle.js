@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classnames';
+import classNames from 'classnames';
 import { mapToCssModules } from 'utils/tools';
 import Button from '../Button';
 import A from '../A';
@@ -49,27 +49,17 @@ class DropdownToggle extends React.Component {
   }
 
   render() {
-    const {
-      className,
-      cssModule,
-      caret,
-      split,
-      nav,
-      tag,
-      disabled,
-      ...attributes
-    } = this.props;
-
+    const { className, cssModule, caret, split, nav, tag, ...attributes } = this.props;
     const ariaLabel = attributes['aria-label'] || 'Toggle Dropdown';
-
-    const classes = mapToCssModules(cn(className, {
-      'dropdown-toggle': caret || split,
-      'dropdown-toggle-split': split,
-      active: this.context.isOpen,
-      'nav-link': nav,
-      disabled,
-    }), cssModule);
-
+    const classes = mapToCssModules(classNames(
+      className,
+      {
+        'dropdown-toggle': caret || split,
+        'dropdown-toggle-split': split,
+        active: this.context.isOpen,
+        'nav-link': nav,
+      }
+    ), cssModule);
     const children = attributes.children || <span className="sr-only">{ariaLabel}</span>;
 
     let Tag;

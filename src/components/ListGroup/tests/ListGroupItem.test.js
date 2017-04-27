@@ -10,13 +10,17 @@ import ListGroupItem from '../ListGroupItem';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <ListGroupItem {...props} />
+  <ListGroupItem {...props}>
+    {props.children}
+  </ListGroupItem>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <ListGroupItem {...props} />
+    <ListGroupItem {...props}>
+      {props.children}
+    </ListGroupItem>
   </BootstrapProvider>
 );
 

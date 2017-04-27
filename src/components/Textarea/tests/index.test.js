@@ -4,17 +4,30 @@
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import BootstrapProvider from '../../BootstrapProvider';
+import { ThemeProvider } from 'styled-components';
+import theme from 'theme';
+
 import Textarea from '../index';
 
+const onChange = jest.fn();
 const renderComponent = (props = {}) => shallow(
-  <Textarea {...props} />
+  <Textarea
+    value={props.value}
+    wrap={props.wrap}
+    className={props.className}
+    onChange={onChange}
+  />
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <BootstrapProvider>
-    <Textarea {...props} />
-  </BootstrapProvider>
+  <ThemeProvider theme={theme}>
+    <Textarea
+      value={props.value}
+      wrap={props.wrap}
+      className={props.className}
+      onChange={onChange}
+    />
+  </ThemeProvider>
 );
 
 describe('<Textarea />', () => {

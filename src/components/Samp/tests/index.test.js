@@ -2,21 +2,26 @@
  * Testing our Samp component
  */
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
-import BootstrapProvider from '../../BootstrapProvider';
+import theme from 'theme';
 import Samp from '../index';
 
 const children = 'Test';
 
 const renderComponent = (props = {}) => shallow(
-  <Samp {...props} />
+  <Samp>
+    {props.children}
+  </Samp>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <BootstrapProvider>
-    <Samp {...props} />
-  </BootstrapProvider>
+  <ThemeProvider theme={theme}>
+    <Samp>
+      {props.children}
+    </Samp>
+  </ThemeProvider>
 );
 
 

@@ -8,7 +8,9 @@ import Tr from '../Tr';
 
 const children = <span> test </span>;
 const renderComponent = (props) => shallow(
-  <Tr {...props} />
+  <Tr {...props}>
+    {children}
+  </Tr>
 );
 
 describe('<Tr />', () => {

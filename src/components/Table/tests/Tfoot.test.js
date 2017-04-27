@@ -7,8 +7,10 @@ import { shallow } from 'enzyme';
 import Tfoot from '../Tfoot';
 
 const children = <span> test </span>;
-const renderComponent = (props = {}) => shallow(
-  <Tfoot {...props} />
+const renderComponent = () => shallow(
+  <Tfoot>
+    {children}
+  </Tfoot>
 );
 
 describe('<Tfoot />', () => {

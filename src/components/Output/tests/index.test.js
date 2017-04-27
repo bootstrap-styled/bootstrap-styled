@@ -1,20 +1,32 @@
 /**
  * Testing our Output component
  */
+import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import BootstrapProvider from '../../BootstrapProvider';
+import theme from 'theme';
 
 import Output from '../index';
 
 const renderComponent = (props = {}) => shallow(
-  <Output {...props} />
+
+  <Output
+    className={props.className}
+    htmlFor={props.htmlFor}
+    form={props.form}
+    name={props.name}
+  />
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <BootstrapProvider>
-    <Output {...props} />
-  </BootstrapProvider>
+  <ThemeProvider theme={theme}>
+    <Output
+      className={props.className}
+      htmlFor={props.htmlFor}
+      form={props.form}
+      name={props.name}
+    />
+  </ThemeProvider>
 );
 
 describe('<Output />', () => {

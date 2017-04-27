@@ -9,13 +9,17 @@ import BootstrapProvider from '../../BootstrapProvider';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <InputGroupAddon {...props} />
+  <InputGroupAddon>
+    {props.children}
+  </InputGroupAddon>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <InputGroupAddon {...props} />
+    <InputGroupAddon>
+      {props.children}
+    </InputGroupAddon>
   </BootstrapProvider>
 );
 

@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { mapToCssModules } from 'utils/tools';
 import A from '../A';
-
 const defaultProps = {
   tag: A,
 };
@@ -16,8 +15,8 @@ class PaginationItem extends React.Component { // eslint-disable-line react/pref
 
   static propTypes = {
     'aria-label': PropTypes.string,
-    children: PropTypes.node,
     className: PropTypes.string,
+    children: PropTypes.node,
     cssModule: PropTypes.object,
     next: PropTypes.bool,
     previous: PropTypes.bool,

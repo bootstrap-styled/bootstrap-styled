@@ -10,13 +10,17 @@ import Jumbotron from '../index';
 const children = <h1> test </h1>;
 
 const renderComponent = (props = {}) => shallow(
-  <Jumbotron {...props} />
+  <Jumbotron {...props}>
+    {children}
+  </Jumbotron>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Jumbotron {...props} />
+    <Jumbotron {...props}>
+      {children}
+    </Jumbotron>
   </BootstrapProvider>
 );
 

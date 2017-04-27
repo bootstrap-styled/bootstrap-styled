@@ -2,21 +2,26 @@
  * Testing our Sub component
  */
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
-import BootstrapProvider from '../../BootstrapProvider';
+import theme from 'theme';
 import Sub from '../index';
 
 const children = 'Test';
 
 const renderComponent = (props = {}) => shallow(
-  <Sub {...props} />
+  <Sub>
+    {props.children}
+  </Sub>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <BootstrapProvider>
-    <Sub {...props} />
-  </BootstrapProvider>
+  <ThemeProvider theme={theme}>
+    <Sub>
+      {props.children}
+    </Sub>
+  </ThemeProvider>
 );
 
 

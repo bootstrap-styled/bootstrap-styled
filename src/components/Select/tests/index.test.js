@@ -1,22 +1,46 @@
 /**
  * Testing our Select component
  */
+import { ThemeProvider } from 'styled-components';
+
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import BootstrapProvider from '../../BootstrapProvider';
+import theme from 'theme';
 import Select from '../index';
 
 const children = <option>test</option>;
 
 const renderComponent = (props = {}) => shallow(
-  <Select {...props} />
+  <Select
+    autoFocus={props.autoFocus}
+    disabled={props.disabled}
+    form={props.form}
+    multiple={props.multiple}
+    name={props.name}
+    required={props.required}
+    size={props.size}
+    className={props.className}
+  >
+    {children}
+  </Select>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <BootstrapProvider>
-    <Select {...props} />
-  </BootstrapProvider>
+  <ThemeProvider theme={theme}>
+    <Select
+      autoFocus={props.autoFocus}
+      disabled={props.disabled}
+      form={props.form}
+      multiple={props.multiple}
+      name={props.name}
+      required={props.required}
+      size={props.size}
+      className={props.className}
+    >
+      {children}
+    </Select>
+  </ThemeProvider>
 );
 
 

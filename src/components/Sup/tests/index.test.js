@@ -2,21 +2,26 @@
  * Testing our Sup component
  */
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
-import BootstrapProvider from '../../BootstrapProvider';
+import theme from 'theme';
 import Sup from '../index';
 
 const children = 'Test';
 
 const renderComponent = (props = {}) => shallow(
-  <Sup {...props} />
+  <Sup>
+    {props.children}
+  </Sup>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <BootstrapProvider>
-    <Sup {...props} />
-  </BootstrapProvider>
+  <ThemeProvider theme={theme}>
+    <Sup>
+      {props.children}
+    </Sup>
+  </ThemeProvider>
 );
 
 

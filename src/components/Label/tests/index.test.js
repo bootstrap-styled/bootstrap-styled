@@ -9,13 +9,17 @@ import Label from '../index';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Label {...props} />
+  <Label {...props}>
+    {props.children}
+  </Label>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Label {...props} />
+    <Label {...props}>
+      {props.children}
+    </Label>
   </BootstrapProvider>
 );
 

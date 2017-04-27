@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import bsTheme from 'theme';
 import cn from 'classnames';
-import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { nav } from '../../styled/mixins/nav';
 import { navbar as navbarMixin } from '../../styled/mixins/navbar';
@@ -22,7 +21,6 @@ const defaultProps = {
 class Nav extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     className: PropTypes.string,
     cssModule: PropTypes.object,
@@ -35,7 +33,6 @@ class Nav extends React.Component { // eslint-disable-line react/prefer-stateles
     pills: PropTypes.bool,
     stacked: PropTypes.bool,
     navbar: PropTypes.bool,
-    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
@@ -51,26 +48,26 @@ class Nav extends React.Component { // eslint-disable-line react/prefer-stateles
       justified,
       navbar,
       tag: Tag,
+      theme,  // eslint-disable-line
       ...attributes
-    } = omit(this.props, ['theme']);
+    } = this.props;
+
+    const classes = mapToCssModules(cn(
+      className,
+      navbar ? 'navbar-nav' : 'nav',
+      {
+        'nav-tabs': tabs,
+        'nav-pills': pills,
+        'nav-fill': fill,
+        'nav-inline': inline,
+        'nav-stacked': stacked,
+        'nav-justified': justified,
+        'flex-column': vertical,
+      }
+    ), cssModule);
 
     return (
-      <Tag
-        className={mapToCssModules(cn(
-          className,
-          navbar ? 'navbar-nav' : 'nav',
-          {
-            'nav-tabs': tabs,
-            'nav-pills': pills,
-            'nav-fill': fill,
-            'nav-inline': inline,
-            'nav-stacked': stacked,
-            'nav-justified': justified,
-            'flex-column': vertical,
-          }
-        ), cssModule)}
-        {...attributes}
-      />
+      <Tag {...attributes} className={classes} />
     );
   }
 }

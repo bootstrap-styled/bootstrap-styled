@@ -10,13 +10,17 @@ import Strong from '../index';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Strong {...props} />
+  <Strong {...props}>
+    {props.children}
+  </Strong>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Strong {...props} />
+    <Strong {...props}>
+      {props.children}
+    </Strong>
   </BootstrapProvider>
 );
 

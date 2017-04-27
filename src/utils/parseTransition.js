@@ -8,6 +8,7 @@ export default function parseTransition(transitions) {
     return [];
   }
   let sample = transitions;
+  let transitionsList = [];
   const RULE_DELIMITER = ',';
   const PROPERTY_DELIMITER = ' ';
   const MS_UNIT = 'ms';
@@ -27,7 +28,7 @@ export default function parseTransition(transitions) {
     sample = sample.replace(BEZIER_REGEX, TMP_STR);
   }
 
-  const transitionsList = sample.split(RULE_DELIMITER).map((rule) => {
+  transitionsList = sample.split(RULE_DELIMITER).map((rule) => {
     const properties = rule.trim().split(PROPERTY_DELIMITER);
     return {
       property: properties[0] || DEFAULT_PROPERTY,

@@ -1,22 +1,33 @@
 /**
  * Testing our Header component
  */
+import { ThemeProvider } from 'styled-components';
+
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import BootstrapProvider from '../../BootstrapProvider';
+import theme from 'theme';
+
 import Header from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Header {...props} />
+  <Header
+    className={props.className}
+  >
+    {props.children}
+  </Header>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <BootstrapProvider>
-    <Header {...props} />
-  </BootstrapProvider>
+  <ThemeProvider theme={theme}>
+    <Header
+      className={props.className}
+    >
+      {props.children}
+    </Header>
+  </ThemeProvider>
 );
 
 

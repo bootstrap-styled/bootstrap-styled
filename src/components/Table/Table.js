@@ -9,8 +9,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { unitUtils } from 'math-utils';
 import { mapToCssModules } from 'utils/tools';
-import omit from 'lodash.omit';
-import bsTheme from 'theme';
+import bsTheme from '../../theme';
 import { tableRowVariant } from '../../styled/mixins/table-row';
 import { hover as hoverMixin } from '../../styled/mixins/hover';
 
@@ -23,7 +22,6 @@ const defaultProps = {
 class Table extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
     theme: PropTypes.object,
     className: PropTypes.string,
     cssModule: PropTypes.object,
@@ -36,7 +34,6 @@ class Table extends React.Component { // eslint-disable-line react/prefer-statel
     responsive: PropTypes.bool,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     responsiveTag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    /* eslint-enable react/no-unused-prop-types */
   };
 
   render() {
@@ -52,17 +49,20 @@ class Table extends React.Component { // eslint-disable-line react/prefer-statel
       responsive,
       tag: Tag,
       responsiveTag: ResponsiveTag,
+      theme,  // eslint-disable-line
       ...attributes
-    } = omit(this.props, ['theme']);
+    } = this.props;
 
-    const classes = mapToCssModules(cn(className, 'table', {
-      [`table-${size}`]: size,
-      'table-bordered': bordered,
-      'table-striped': striped,
-      'table-inverse': inverse,
-      'table-hover': hover,
-      'table-reflow': reflow,
-    }), cssModule);
+    const classes = mapToCssModules(cn(
+      className,
+      'table',
+      size ? 'table-' + size : false, // eslint-disable-line
+      bordered ? 'table-bordered' : false,
+      striped ? 'table-striped' : false,
+      inverse ? 'table-inverse' : false,
+      hover ? 'table-hover' : false,
+      reflow ? 'table-reflow' : false
+    ), cssModule);
 
     const table = <Tag {...attributes} className={classes} />;
 

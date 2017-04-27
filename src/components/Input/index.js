@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
-import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { button } from '../../styled/mixins/buttons';
 
@@ -20,7 +19,6 @@ const defaultProps = {
 class Input extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
     children: PropTypes.node,
     type: PropTypes.string,
     size: PropTypes.string,
@@ -34,13 +32,13 @@ class Input extends React.Component { // eslint-disable-line react/prefer-statel
     theme: PropTypes.object,
     onChange: PropTypes.func,
     indeterminate: PropTypes.bool,
-    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
     const {
       className,
       cssModule,
+      theme,   // eslint-disable-line no-unused-vars
       type,
       size,
       state,
@@ -49,7 +47,7 @@ class Input extends React.Component { // eslint-disable-line react/prefer-statel
       static: staticInput,
       getRef,
       ...attributes
-    } = omit(this.props, ['theme']);
+    } = this.props;
 
 
     const checkInput = ['radio', 'checkbox'].indexOf(type) > -1;
@@ -73,18 +71,18 @@ class Input extends React.Component { // eslint-disable-line react/prefer-statel
       }
     }
 
+    const classes = mapToCssModules(cn(
+      className,
+      state ? `form-control-${state}` : false,
+      size ? `form-control-${size}` : false,
+      formControlClass
+    ), cssModule);
+
     if (Tag === 'input') {
       attributes.type = type;
     }
     return (
-      <Tag
-        className={mapToCssModules(cn(className, formControlClass, {
-          [`form-control-${state}`]: state,
-          [`form-control-${size}`]: size,
-        }), cssModule)}
-        ref={getRef}
-        {...attributes}
-      />
+      <Tag {...attributes} ref={getRef} className={classes} />
     );
   }
 }

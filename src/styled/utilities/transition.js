@@ -1,4 +1,5 @@
 import theme from 'theme';
+import parseTransition from 'utils/parseTransition';
 import { transition as transitionMixin } from '../mixins/transition';
 
 export const defaultProps = theme;
@@ -56,6 +57,18 @@ export function collapse(enableTransitions = defaultProps['$enable-transitions']
       ${transitionMixin(enableTransitions, transitionCollapse)}
     }
   `;
+}
+
+
+// function for get react transition (could even use filter and transform from mixin transition)
+export function getReactTransition(enableTransition, transition) {
+  const transitionList = parseTransition(transition);
+  const property = transitionList[0].property;
+  const duration = transitionList[0].duration;
+  const timingFunction = transitionList[0].timingFunction;
+  const delay = transitionList[0].delay;
+
+  return transitionMixin(enableTransition, `${property} ${duration}ms ${timingFunction} ${delay}ms`);
 }
 
 export default {

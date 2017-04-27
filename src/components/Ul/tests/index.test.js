@@ -12,12 +12,16 @@ import Li from '../../Li';
 const children = (<Li>Test</Li>);
 
 const renderComponent = (props = {}) => shallow(
-  <Ul {...props} />
+  <Ul {...props}>
+    {props.children}
+  </Ul>
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Ul {...props} />
+    <Ul {...props}>
+      {props.children}
+    </Ul>
   </BootstrapProvider>
 );
 

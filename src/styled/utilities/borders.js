@@ -12,7 +12,7 @@ export function getBordersUtilities(enableRounded = defaultProps['$enable-rounde
     ${roundedRight(enableRounded, radius)}
     ${roundedBottom(enableRounded, radius)}
     ${roundedLeft(enableRounded, radius)}
-    ${roundedCircle()}
+    ${roundedCircle(enableRounded, radius)}
     ${resetRounded()}
     ${resetRoundedTop()}
     ${resetRoundedRight()}

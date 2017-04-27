@@ -1,23 +1,33 @@
 /**
  * Testing our Footer component
  */
+import { ThemeProvider } from 'styled-components';
+
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import BootstrapProvider from '../../BootstrapProvider';
+import theme from 'theme';
 
 import Footer from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Footer {...props} />
+  <Footer
+    className={props.className}
+  >
+    {props.children}
+  </Footer>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <BootstrapProvider>
-    <Footer {...props} />
-  </BootstrapProvider>
+  <ThemeProvider theme={theme}>
+    <Footer
+      className={props.className}
+    >
+      {props.children}
+    </Footer>
+  </ThemeProvider>
 );
 
 
