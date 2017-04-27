@@ -1,7 +1,7 @@
 /**
  * Testing our NavBar component
  */
-import TransitionGroup from 'react-addons-transition-group';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
 
 import { mount } from 'enzyme';
 
