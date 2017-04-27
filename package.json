@@ -247,7 +247,7 @@
     "image-webpack-loader": "2.0.0",
     "immutable": "3.8.1",
     "imports-loader": "0.6.5",
-    "jest-cli": "18.1.0",
+    "jest-cli": "19.0.2",
     "jest-sonar-reporter": "1.1.1",
     "lint-staged": "3.2.1",
     "ngrok": "2.2.4",
