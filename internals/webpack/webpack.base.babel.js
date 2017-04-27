@@ -80,8 +80,7 @@ module.exports = (options) => ({
     react: true,
     'react-dom': true,
     'styled-components': true,
-    'react-addons-css-transition-group': true,
-    'react-addons-transition-group': true,
+    'react-transition-group': true,
   },
   resolve: {
     modules: ['src', 'node_modules'],
