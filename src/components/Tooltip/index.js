@@ -19,7 +19,9 @@ const defaultProps = {
   placement: 'bottom',
   delay: DEFAULT_DELAYS,
   autohide: true,
-  toggle: () => {},
+  toggle: () => {
+    // This is intentional
+  },
 };
 
 const defaultTetherConfig = {

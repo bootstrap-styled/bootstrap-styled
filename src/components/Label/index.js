@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { button } from '../../styled/mixins/buttons';
 
@@ -26,6 +27,7 @@ const columnProps = PropTypes.oneOfType([
 ]);
 
 const propTypes = {
+  /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
   hidden: PropTypes.bool,
   check: PropTypes.bool,
@@ -42,6 +44,7 @@ const propTypes = {
   lg: columnProps,
   xl: columnProps,
   theme: PropTypes.object,
+  /* eslint-enable react/no-unused-prop-types */
 };
 
 const defaultProps = {
@@ -59,10 +62,9 @@ let Label = (props) => {  // eslint-disable-line
     inline,
     disabled,
     size,
-    theme,  // eslint-disable-line
     for: htmlFor,
     ...attributes
-  } = props;
+  } = omit(props, ['theme']);
 
   const colClasses = [];
 
@@ -82,18 +84,16 @@ let Label = (props) => {  // eslint-disable-line
     }
   });
 
-  const classes = mapToCssModules(cn(
-    className,
-    hidden ? 'sr-only' : false,
-    check ? `form-check-${inline ? 'inline' : 'label'}` : false,
-    check && inline && disabled ? 'disabled' : false,
-    size ? `col-form-label-${size}` : false,
-    colClasses,
-    colClasses.length ? 'col-form-label' : false
-  ), cssModule);
+  const classes = mapToCssModules(cn(className, colClasses, {
+    'sr-only': hidden,
+    disabled: check && inline && disabled,
+    'col-form-label': colClasses.length,
+    [`col-form-label-${size}`]: size,
+    [`form-check-${inline ? 'inline' : 'label'}`]: check,
+  }), cssModule);
 
   return (
-    <Tag htmlFor={htmlFor} {...attributes} className={classes} />
+    <Tag className={classes} htmlFor={htmlFor} {...attributes} />
   );
 };
 

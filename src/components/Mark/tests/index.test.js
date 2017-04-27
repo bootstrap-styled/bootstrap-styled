@@ -2,32 +2,21 @@
  * Testing our Mark component
  */
 
-import { ThemeProvider } from 'styled-components';
-
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
+import BootstrapProvider from '../../BootstrapProvider';
 import Mark from '../index';
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Mark
-    className={props.className}
-  >
-    {props.children}
-  </Mark>
+  <Mark {...props} />
 );
 
-
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <Mark
-      className={props.className}
-    >
-      {props.children}
-    </Mark>
-  </ThemeProvider>
+  <BootstrapProvider>
+    <Mark {...props} />
+  </BootstrapProvider>
 );
 
 

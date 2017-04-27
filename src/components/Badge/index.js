@@ -33,7 +33,6 @@ class Badge extends React.Component { // eslint-disable-line react/prefer-statel
 
   render() {
     const {
-      theme, // eslint-disable-line
       className,
       cssModule,
       color,

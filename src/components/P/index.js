@@ -3,42 +3,44 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import bsTheme from 'theme';
 import cn from 'classnames';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { typography } from '../../styled/mixins/typography';
 
-const defaultProps = { theme: bsTheme };
-
+const defaultProps = {
+  tag: 'p',
+  theme: bsTheme,
+};
 class P extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
-    children: PropTypes.node,
     theme: PropTypes.object,
+    tag: PropTypes.string,
     color: PropTypes.string,
     lead: PropTypes.bool,
     cssModule: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
     const { className,
       color,
-      theme,  // eslint-disable-line no-unused-vars
-      children,
       cssModule,
       lead,
+      tag: Tag,
       ...attributes
-    } = this.props;
-
-    const classes = mapToCssModules(cn(
-      className,
-      lead ? 'lead' : false,
-      color ? `text-${color}` : false,
-    ), cssModule);
+    } = omit(this.props, ['theme']);
 
     return (
-      <p className={classes} {...attributes}>
-        {children}
-      </p>
+      <Tag
+        className={mapToCssModules(cn(className, {
+          lead,
+          [`text-${color}`]: color,
+        }), cssModule)}
+        {...attributes}
+      />
     );
   }
 }

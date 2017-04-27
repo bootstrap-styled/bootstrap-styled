@@ -8,9 +8,7 @@ import Th from '../Th';
 
 const children = <span> test </span>;
 const renderComponent = (props) => shallow(
-  <Th {...props}>
-    {children}
-  </Th>
+  <Th {...props} />
 );
 
 describe('<Th />', () => {

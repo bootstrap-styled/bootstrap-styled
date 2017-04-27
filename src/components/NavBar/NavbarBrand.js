@@ -21,13 +21,14 @@ const NavbarBrand = (props) => {
     ...attributes
   } = props;
 
-  const classes = mapToCssModules(cn(
-    className,
-    'navbar-brand'
-  ), cssModule);
-
   return (
-    <Tag {...attributes} className={classes} />
+    <Tag
+      className={mapToCssModules(cn(
+        className,
+        'navbar-brand'
+      ), cssModule)}
+      {...attributes}
+    />
   );
 };
 

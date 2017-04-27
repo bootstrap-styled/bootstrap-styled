@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { borderTopRadius, borderBottomRadius } from '../../styled/mixins/border-radius';
 import { hoverFocus } from '../../styled/mixins/hover';
@@ -22,11 +23,13 @@ const defaultProps = {
 class ListGroup extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     flush: PropTypes.bool,
     className: PropTypes.string,
     cssModule: PropTypes.object,
     theme: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
@@ -35,18 +38,16 @@ class ListGroup extends React.Component { // eslint-disable-line react/prefer-st
       cssModule,
       tag: Tag,
       flush,
-      theme,  // eslint-disable-line no-unused-vars
       ...attributes
-    } = this.props;
-
-    const classes = mapToCssModules(cn(
-      className,
-      'list-group',
-      flush ? 'list-group-flush' : false
-    ), cssModule);
+    } = omit(this.props, ['theme']);
 
     return (
-      <Tag {...attributes} className={classes} />
+      <Tag
+        className={mapToCssModules(cn(className, 'list-group', {
+          'list-group-flush': flush,
+        }), cssModule)}
+        {...attributes}
+      />
     );
   }
 }

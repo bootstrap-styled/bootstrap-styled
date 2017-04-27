@@ -13,13 +13,11 @@ const renderComponent = (props = {}) => shallow(
   <CardColumns {...props} />
 );
 
-
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
     <CardColumns {...props} />
   </BootstrapProvider>
 );
-
 
 describe('<CardColumns />', () => {
   it('should render an <CardColumns> tag without a theme', () => {

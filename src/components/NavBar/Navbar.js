@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
 import themeBs from '../../theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { navbar } from '../../styled/mixins/navbar';
 import { nav } from '../../styled/mixins/nav';
-
 
 const defaultProps = {
   tag: 'nav',
@@ -16,18 +16,9 @@ const defaultProps = {
   theme: themeBs,
 };
 
-const getToggleableClass = (toggleable) => { // eslint-disable-line react/prefer-stateless-function
-  if (toggleable === false) {
-    return false;
-  } else if (toggleable === true || toggleable === 'xs') {
-    return 'navbar-toggleable';
-  }
-
-  return `navbar-toggleable-${toggleable}`;
-};
-
 class Navbar extends React.Component {
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     light: PropTypes.bool,
     inverse: PropTypes.bool,
     full: PropTypes.bool,
@@ -40,6 +31,7 @@ class Navbar extends React.Component {
     cssModule: PropTypes.object,
     toggleable: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     theme: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   };
   render() {
     const {
@@ -53,15 +45,24 @@ class Navbar extends React.Component {
       sticky,
       color,
       tag: Tag,
-      theme,  // eslint-disable-line
       ...attributes
-    } = this.props;
-  
+    } = omit(this.props, ['theme']);
+    
+    const getToggleableClass = (toggleable) => { // eslint-disable-line react/prefer-stateless-function
+      if (toggleable === false) {
+        return false;
+      } else if (toggleable === true || toggleable === 'xs') {
+        return 'navbar-toggleable';
+      }
+      return `navbar-toggleable-${toggleable}`;
+    };
+    
     const classes = mapToCssModules(cn(
       className,
       'navbar',
       getToggleableClass(toggleable),
       {
+        [`navbar-toggleable${toggleable == 'xs' ? null : `-${toggleable}`}`]: toggleable,
         'navbar-light': light,
         'navbar-inverse': inverse,
         [`bg-${color}`]: color,
@@ -75,7 +76,7 @@ class Navbar extends React.Component {
       <Tag {...attributes} className={classes} />
     )
   }
-};
+}
 
 // eslint-disable-next-line no-class-assign
 Navbar = styled(Navbar)`

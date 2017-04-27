@@ -10,21 +10,13 @@ import Pagination from '../Pagination';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Pagination
-    className={props.className}
-  >
-    {props.children}
-  </Pagination>
+  <Pagination {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Pagination
-      className={props.className}
-    >
-      {props.children}
-    </Pagination>
+    <Pagination {...props} />
   </BootstrapProvider>
 );
 

@@ -5,35 +5,30 @@ import { shallow, mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
 import NavbarBrand from '../NavbarBrand';
+import Navbar from '../Navbar';
 
 const children = (<span>Test</span>);
 
 const renderComponent = (props = {}) => shallow(
-  <NavbarBrand
-    className={props.className}
-  >
-    {props.children}
-  </NavbarBrand>
+  <Navbar>
+    <NavbarBrand {...props} />
+  </Navbar>
 );
-
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <NavbarBrand
-      className={props.className}
-    >
-      {props.children}
-    </NavbarBrand>
+    <Navbar>
+      <NavbarBrand {...props} />
+    </Navbar>
   </BootstrapProvider>
 );
-
 
 describe('<NavbarBrand />', () => {
   it('should render an <NavbarBrand> tag without a theme', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('a').length).toBe(1);
+    expect(renderedComponent.find('NavbarBrand').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

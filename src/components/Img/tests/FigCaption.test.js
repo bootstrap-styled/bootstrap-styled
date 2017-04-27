@@ -2,26 +2,21 @@
  * Testing our FigCaption component
  */
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
-import theme from 'theme';
+import BootstrapProvider from '../../BootstrapProvider';
 import FigCaption from '../FigCaption';
 
 const children = 'Test';
 
 const renderComponent = (props = {}) => shallow(
-  <FigCaption {...props}>
-    {children}
-  </FigCaption>
+  <FigCaption {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
-  <ThemeProvider theme={theme}>
-    <FigCaption {...props}>
-      {children}
-    </FigCaption>
-  </ThemeProvider>
+  <BootstrapProvider>
+    <FigCaption {...props} />
+  </BootstrapProvider>
 );
 
 

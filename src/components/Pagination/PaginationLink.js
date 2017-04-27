@@ -1,5 +1,5 @@
 /**
- * A Breadcrumb
+ * A PaginationLink
  */
 
 import React from 'react';
@@ -7,16 +7,17 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { mapToCssModules } from 'utils/tools';
 import A from '../A';
+
 const defaultProps = {
   tag: A,
 };
 
-class PaginationItem extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class PaginationLink extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     'aria-label': PropTypes.string,
-    className: PropTypes.string,
     children: PropTypes.node,
+    className: PropTypes.string,
     cssModule: PropTypes.object,
     next: PropTypes.bool,
     previous: PropTypes.bool,
@@ -83,6 +84,6 @@ class PaginationItem extends React.Component { // eslint-disable-line react/pref
   }
 }
 
-PaginationItem.defaultProps = defaultProps;
+PaginationLink.defaultProps = defaultProps;
 
-export default PaginationItem;
+export default PaginationLink;
