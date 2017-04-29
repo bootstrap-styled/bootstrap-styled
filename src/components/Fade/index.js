@@ -42,7 +42,7 @@ class Fade extends React.Component { // eslint-disable-line react/prefer-statele
       children,
       isOpen,
       ...rest
-    } = omit(this.props, ['theme']);
+    } = omit(this.props, ['theme', 'innerRef']);
 
     return (
       <ReactCSSTransitionGroup
