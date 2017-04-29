@@ -18,10 +18,17 @@ const renderComponentUsingTheme = (props = {}) => mount(
 );
 
 describe('<Textarea />', () => {
+  let onChange;
+
+  beforeEach(() => {
+    onChange = jest.fn();
+  });
+
   it('should render an <Textarea> tag without a theme', () => {
     const renderedComponent = renderComponent({
       value: 'Insert text here',
       wrap: 'wrapString',
+      onChange,
     });
     expect(renderedComponent.find('textarea').length).toBe(1);
   });
@@ -30,6 +37,7 @@ describe('<Textarea />', () => {
     const renderedComponent = renderComponent({
       value: 'Insert text here',
       wrap: 'wrapString',
+      onChange,
     });
     expect(renderedComponent.props().value).toEqual('Insert text here');
   });
@@ -38,6 +46,7 @@ describe('<Textarea />', () => {
     const renderedComponent = renderComponent({
       value: 'Insert text here',
       wrap: 'wrapString',
+      onChange,
     });
     expect(renderedComponent.props().wrap).toEqual('wrapString');
   });
@@ -45,6 +54,7 @@ describe('<Textarea />', () => {
     const renderedComponent = renderComponentUsingTheme({
       value: 'Insert text here',
       wrap: 'wrapString',
+      onChange,
     });
     expect(renderedComponent.find('textarea').length).toBe(1);
   });
@@ -52,6 +62,7 @@ describe('<Textarea />', () => {
     const renderedComponent = renderComponentUsingTheme({
       value: 'Insert text here',
       wrap: 'wrapString',
+      onChange,
     });
     expect(renderedComponent.find('textarea').props().value).toEqual('Insert text here');
   });
@@ -59,12 +70,14 @@ describe('<Textarea />', () => {
     const renderedComponent = renderComponentUsingTheme({
       value: 'Insert text here',
       wrap: 'wrapString',
+      onChange,
     });
     expect(renderedComponent.find('textarea').props().wrap).toEqual('wrapString');
   });
   it('should have content with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       value: 'Insert text here',
+      onChange,
     });
     expect(renderedComponent.text()).toEqual('Insert text here');
   });
