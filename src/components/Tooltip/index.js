@@ -38,7 +38,7 @@ const defaultTetherConfig = {
 // propTypes need to be excluded of the tooltip class
 // issue on : https://github.com/yannickcr/eslint-plugin-react/issues/203
 const propTypes = {
-  placement: React.PropTypes.oneOf(tetherAttachements),
+  placement: PropTypes.oneOf(tetherAttachements),
   target: PropTypes.string.isRequired,
   isOpen: PropTypes.bool,
   disabled: PropTypes.bool,
@@ -57,7 +57,7 @@ const propTypes = {
 class Tooltip extends React.Component {
 
   static propTypes = {
-    placement: React.PropTypes.oneOf(tetherAttachements),
+    placement: PropTypes.oneOf(tetherAttachements),
     target: PropTypes.string.isRequired,
     isOpen: PropTypes.bool,
     disabled: PropTypes.bool,
