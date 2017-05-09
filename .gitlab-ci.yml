@@ -42,7 +42,7 @@ job_test:
   stage: test
   script:
     - npm run dist
-    - npm run sonar-scanner
+    - npm run sonar-scanner -Dsonar.login=${SONAR_LOGIN}
 #  only:
 #    - master
   tags:
