@@ -33,6 +33,12 @@ stages:
   - test
 #  - deploy
 
+cache:
+  untracked: true
+  key: "$CI_BUILD_REF_NAME"
+  paths:
+    - node_modules/
+
 job_install:
   stage: install
   script:
