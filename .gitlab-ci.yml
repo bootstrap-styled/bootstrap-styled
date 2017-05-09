@@ -1,6 +1,4 @@
 image: node:7.10
-#services:
-#  - postgres
 
 before_script:
   # Install ssh-agent if not already installed, it is required by Docker.
@@ -25,28 +23,19 @@ before_script:
   # - mkdir -p ~/.ssh
   # - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
 
+  # logging
+  - npm --version
+  - node --version
+
+  # install deps
+  - npm install
+
 #after_script:
 #  - rm secrets
 
 stages:
-  - install
   - test
 #  - deploy
-
-cache:
-  untracked: true
-  key: "$CI_BUILD_REF_NAME"
-  paths:
-    - node_modules/
-
-job_install:
-  stage: install
-  script:
-    - npm install
-#  only:
-#    - master
-  tags:
-    - docker
 
 job_test:
   stage: test
