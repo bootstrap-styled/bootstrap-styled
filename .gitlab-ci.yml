@@ -25,22 +25,18 @@ before_script:
   # - mkdir -p ~/.ssh
   # - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
 
-  # Install project
-  - npm install
-
 #after_script:
 #  - rm secrets
 
 stages:
-  - build
+  - install
   - test
 #  - deploy
 
-job1:
-  stage: build
+job:
+  stage: install
   script:
-    - npm run build:lib
-    - npm run build:dist
+    - npm install
 #  only:
 #    - master
   tags:
@@ -49,7 +45,7 @@ job1:
 job2:
   stage: test
   script:
-    - npm run test
+    - npm run dist
 #  only:
 #    - master
   tags:
