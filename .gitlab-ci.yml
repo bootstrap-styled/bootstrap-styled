@@ -33,7 +33,7 @@ stages:
   - test
 #  - deploy
 
-job:
+job_install:
   stage: install
   script:
     - npm install
@@ -42,7 +42,7 @@ job:
   tags:
     - docker
 
-job2:
+job_test:
   stage: test
   script:
     - npm run dist
