@@ -2,6 +2,16 @@
 
 Bootstrap 4.0 made in styled components
 
+**Master**
+
+[![build status](https://module.kopaxgroup.com/styled-components/bootstrap-styled/badges/master/build.svg)](https://module.kopaxgroup.com/styled-components/bootstrap-styled/commits/master)
+[![coverage report](https://module.kopaxgroup.com/styled-components/bootstrap-styled/badges/master/coverage.svg)](https://module.kopaxgroup.com/styled-components/bootstrap-styled/commits/master)
+
+**Dev**
+
+[![build status](https://module.kopaxgroup.com/styled-components/bootstrap-styled/badges/dev/build.svg)](https://module.kopaxgroup.com/styled-components/bootstrap-styled/commits/dev)
+[![coverage report](https://module.kopaxgroup.com/styled-components/bootstrap-styled/badges/dev/coverage.svg)](https://module.kopaxgroup.com/styled-components/bootstrap-styled/commits/dev)
+
 ## Table of Contents
 
   - [Dependencies](#dependencies)
