@@ -25,31 +25,35 @@ before_script:
   # - mkdir -p ~/.ssh
   # - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
 
-  # Install project
-  - npm install
+  # Output debugging info
+  - node --version
+  - npm --version
 
 #after_script:
 #  - rm secrets
 
 stages:
-  - build
+  - setup
   - test
 #  - deploy
 
-job1:
-  stage: build
-  script:
-    - npm run build:lib
-    - npm run build:dist
-#  only:
-#    - master
-  tags:
-    - docker
+cache:
+  untracked: true
+  key: "$CI_BUILD_REF_NAME"
+  paths:
+    - node_modules/
 
-job2:
+setup:
+  stage: setup
+  script:
+    - npm install
+
+test:
   stage: test
   script:
-    - npm run test
+
+    # Run build and test
+    - npm run dist
 #  only:
 #    - master
   tags:
