@@ -11,9 +11,9 @@ before_script:
 stages:
   - build
   - test
-  - deploy
+#  - deploy
 
-build:
+job1:
   stage: build
   script:
     - npm run build
@@ -22,7 +22,7 @@ build:
   tags:
     - docker
 
-test:
+job2:
   stage: test
   script:
     - npm run test
