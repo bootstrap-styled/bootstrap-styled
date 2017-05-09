@@ -39,7 +39,8 @@ stages:
 job1:
   stage: build
   script:
-    - npm run build
+    - npm run build:lib
+    - npm run build:dist
 #  only:
 #    - master
   tags:
