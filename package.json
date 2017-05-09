@@ -42,7 +42,7 @@
     "test": "cross-env TEST_REPORT_PATH=reports NODE_ENV=test jest --coverage",
     "test:watch": "cross-env NODE_ENV=test jest --watch",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner --"
+    "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner"
   },
   "lint-staged": {
     "*.js": "lint:eslint"
