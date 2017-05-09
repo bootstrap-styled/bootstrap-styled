@@ -1,0 +1,32 @@
+image: node:7.10-alpine
+#services:
+#  - postgres
+
+before_script:
+  - npm install
+
+#after_script:
+#  - rm secrets
+
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  script:
+    - npm run build
+  only:
+    - master
+  tags:
+    - docker
+
+test:
+  stage: test
+  script:
+    - npm run test
+  only:
+    - master
+  tags:
+    - docker
