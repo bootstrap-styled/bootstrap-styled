@@ -1,4 +1,4 @@
-image: node:7.10-alpine
+image: node:7.10
 #services:
 #  - postgres
 
