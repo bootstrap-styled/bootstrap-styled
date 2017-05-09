@@ -35,22 +35,23 @@ before_script:
 
 stages:
   - test
-  - sonar
+#  - sonar
 #  - deploy
 
 job_test:
   stage: test
   script:
     - npm run dist
+    - npm run sonar-scanner
 #  only:
 #    - master
   tags:
     - docker
-
-job_sonar:
-  stage: sonar
-  script:
-    - npm run sonar-scanner
-  tags:
-    - docker
-    - sonar
+#
+#job_sonar:
+#  stage: sonar
+#  script:
+#    - npm run sonar-scanner
+#  tags:
+#    - docker
+#    - sonar
