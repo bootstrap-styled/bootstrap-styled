@@ -1,12 +1,11 @@
 /**
  * Testing our NavBar component
  */
-import TransitionGroup from 'react-addons-transition-group';
-
-import { mount } from 'enzyme';
-
 import React from 'react';
+import { mount } from 'enzyme';
 import PropTypes from 'prop-types';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
+
 import BootstrapProvider from '../../BootstrapProvider';
 
 import Fade from '../Fade';

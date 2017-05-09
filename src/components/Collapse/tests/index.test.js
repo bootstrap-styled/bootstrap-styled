@@ -135,15 +135,6 @@ describe('<Collapse />', () => {
     const renderedComponent = shallow(<Collapse isOpen={isOpen} />);
     expect(renderedComponent.state('height')).toBe(null);
   });
-
-  it('should render with class "collapse" with default collapse state', () => {
-    const renderedComponent = mount(<Collapse isOpen={isOpen} />);
-    renderedComponent.setState({ collapse: null });
-    renderedComponent.update();
-    expect(renderedComponent.find('.collapse').length).toBe(1);
-    renderedComponent.unmount();
-  });
-
   it('should change state with { collapse: ${State} } when isOpen change to true before transition', () => {
     const renderedComponent = mount(<Collapse isOpen={isOpen} />);
     toggle();

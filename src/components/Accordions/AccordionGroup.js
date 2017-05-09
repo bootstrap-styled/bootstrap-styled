@@ -19,7 +19,7 @@ export default class AccordionGroup extends React.Component {// eslint-disable-l
   }
 
   static childContextTypes = {
-    accordionGroup: React.PropTypes.object,
+    accordionGroup: PropTypes.object,
   };
 
   getChildContext() {

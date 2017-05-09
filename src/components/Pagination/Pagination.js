@@ -1,5 +1,5 @@
 /**
- * A Breadcrumb
+ * A Pagination
  */
 
 import React from 'react';

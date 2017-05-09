@@ -136,6 +136,7 @@ export default function composeAnimation(makeAnimation) {
         'backfaceVisibility',
         'amplification',
         'rotation',
+        'innerRef',
       ]);
 
       return (

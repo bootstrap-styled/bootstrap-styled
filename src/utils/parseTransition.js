@@ -8,7 +8,6 @@ export default function parseTransition(transitions) {
     return [];
   }
   let sample = transitions;
-  let transitionsList = [];
   const RULE_DELIMITER = ',';
   const PROPERTY_DELIMITER = ' ';
   const MS_UNIT = 'ms';
@@ -28,7 +27,7 @@ export default function parseTransition(transitions) {
     sample = sample.replace(BEZIER_REGEX, TMP_STR);
   }
 
-  transitionsList = sample.split(RULE_DELIMITER).map((rule) => {
+  const transitionList = sample.split(RULE_DELIMITER).map((rule) => {
     const properties = rule.trim().split(PROPERTY_DELIMITER);
     return {
       property: properties[0] || DEFAULT_PROPERTY,
@@ -37,5 +36,5 @@ export default function parseTransition(transitions) {
       delay: properties[3] && !properties[3].includes(MS_UNIT) ? parseFloat(properties[3]) * 1000 : parseFloat(properties[3]) || DEFAULT_DELAY,
     };
   });
-  return transitionsList;
+  return transitionList;
 }
