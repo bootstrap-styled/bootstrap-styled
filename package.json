@@ -44,7 +44,7 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner",
     "preversion": "npm test",
-    "version": "echo Tagging version $(node -p \"require('./package.json').version\") && git add -A && git commit -m \"new version\"",
+    "version": "git add package.json sonar-project.properties",
     "postversion": "git push && git push --tags"
   },
   "lint-staged": {
