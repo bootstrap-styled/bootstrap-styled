@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+ - Minor bug fix
+
 ## 1.0.1
 
  - Corrected React 15.5 warnings

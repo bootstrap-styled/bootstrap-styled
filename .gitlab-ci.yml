@@ -40,7 +40,7 @@ job_testdev:
   stage: test
   script:
     - npm run dist
-    - echo sonar.projectVersion=$(cat package.json | grep version | head -1 | awk -F= "{ print $2 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') >> sonar-project.properties
+    - echo sonar.projectVersion=$(node -p "require('./package.json').version") >> sonar-project.properties
     - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=dev
   only:
     - dev
@@ -51,8 +51,9 @@ job_testmaster:
   stage: test
   script:
     - npm run dist
-    - echo sonar.projectVersion=$(cat package.json | grep version | head -1 | awk -F= "{ print $2 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') >> sonar-project.properties
+    - echo sonar.projectVersion=$(node -p "require('./package.json').version") >> sonar-project.properties
     - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN}
+    - npm version $(node -p "require('./package.json').version" | awk -F '-SNAPSHOT' '{print $1}')
   only:
     - master
   tags:
