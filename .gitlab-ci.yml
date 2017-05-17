@@ -30,7 +30,7 @@ before_script:
   # git tag
   - git config --global user.email "gitlab-ci@kopaxgroup.com"
   - git config --global user.name "gitlab-ci"
-  - npm config set sign-git-tag true
+  # - npm config set sign-git-tag true
 
   # install deps
   - npm install
