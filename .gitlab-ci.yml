@@ -53,6 +53,7 @@ job_testmaster:
     - npm run dist
     - echo sonar.projectVersion=$(node -p "require('./package.json').version") >> sonar-project.properties
     - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN}
+    - npm version $(node -p "require('./package.json').version" | awk -F '-SNAPSHOT' '{print $1}')
   only:
     - master
   tags:
