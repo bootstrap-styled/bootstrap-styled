@@ -38,7 +38,7 @@ stages:
 #  - sonar
 #  - deploy
 
-job_test:
+job_testdev:
   stage: test
   script:
     - npm run dist
@@ -52,7 +52,7 @@ job_testmaster:
   stage: test
   script:
     - npm run dist
-    - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=dev
+    - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN}
   only:
     - master
   tags:
