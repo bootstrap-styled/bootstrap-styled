@@ -33,7 +33,7 @@ before_script:
   # - npm config set sign-git-tag true
 
   # install deps
-  - npm install
+  - npm install --unsafe-perm
 
 #after_script:
 #  - rm secrets
