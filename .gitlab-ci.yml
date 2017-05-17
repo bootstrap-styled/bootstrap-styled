@@ -56,7 +56,8 @@ job_testmaster:
   stage: test
   script:
     - PACKAGE_VERSION=$(node -p "require('./package.json').version" | awk -F '-SNAPSHOT' '{print $1}')
-    - git checkout -b $PACKAGE_VERSION
+    - echo preparing version ${PACKAGE_VERSION}
+    - git checkout -b ${PACKAGE_VERSION}
     - npm version ${PACKAGE_VERSION} -m "New version %s" --force
     - echo sonar.projectVersion=${PACKAGE_VERSION} >> sonar-project.properties
     - npm run dist
