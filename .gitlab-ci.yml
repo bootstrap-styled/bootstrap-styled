@@ -35,8 +35,6 @@ before_script:
 
 stages:
   - test
-#  - sonar
-#  - deploy
 
 job_testdev:
   stage: test
@@ -53,17 +51,9 @@ job_testmaster:
   stage: test
   script:
     - npm run dist
+    - echo sonar.projectVersion=$(cat package.json | grep version | head -1 | awk -F= "{ print $2 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') >> sonar-project.properties
     - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN}
   only:
     - master
   tags:
     - docker
-
-#
-#job_sonar:
-#  stage: sonar
-#  script:
-#    - npm run sonar-scanner
-#  tags:
-#    - docker
-#    - sonar
