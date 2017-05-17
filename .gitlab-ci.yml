@@ -56,7 +56,9 @@ job_testmaster:
   stage: test
   script:
     - npm run dist
-    - npm version $(node -p "require('./package.json').version" | awk -F '-SNAPSHOT' '{print $1}') -m "New version %s" --force
+    # - npm version $(node -p "require('./package.json').version" | awk -F '-SNAPSHOT' '{print $1}') -m "New version %s" --force
+    - npm version $(node -p "require('./package.json').version" | awk -F '-SNAPSHOT' '{print $1}')
+    - git add package.json sonar-project.properties && git commit -m "new version %s" && git push && git push --tags
     - echo sonar.projectVersion=$(node -p "require('./package.json').version") >> sonar-project.properties
     - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN}
   only:
