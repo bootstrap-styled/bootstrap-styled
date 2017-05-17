@@ -43,8 +43,8 @@ job_test:
   script:
     - npm run dist
     - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=dev
-#  only:
-#    - master
+ only:
+   - dev
   tags:
     - docker
 #
