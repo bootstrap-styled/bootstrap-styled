@@ -47,6 +47,17 @@ job_test:
     - dev
   tags:
     - docker
+
+job_testmaster:
+  stage: test
+  script:
+    - npm run dist
+    - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=dev
+  only:
+    - master
+  tags:
+    - docker
+
 #
 #job_sonar:
 #  stage: sonar
