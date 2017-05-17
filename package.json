@@ -1,7 +1,7 @@
 {
   "name": "bootstrap-styled",
   "description": "Bootstrap Styled",
-  "version": "1.0.2",
+  "version": "1.0.2-SNAPSHOT",
   "main": "dist/bootstrap-styled.js",
   "files": [
     "dist/",
