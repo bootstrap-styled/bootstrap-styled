@@ -52,6 +52,7 @@ job_testmaster:
   script:
     - npm run dist
     - echo before $(node -p "require('./package.json').version")
+    - npm config set sign-git-tag true
     - npm version $(node -p "require('./package.json').version" | awk -F '-SNAPSHOT' '{print $1}') -m "New version %s" --force
     - echo after $(node -p "require('./package.json').version")
     - echo sonar.projectVersion=$(node -p "require('./package.json').version") >> sonar-project.properties
