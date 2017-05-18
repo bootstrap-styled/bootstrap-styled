@@ -1,4 +1,4 @@
-image: kopaxgroup/node7-jdk8-sonarscanner2:latest
+image: kopaxgroup/node7-jdk8-sonarscanner2-docker1.8:latest
 
 before_script:
   # Install ssh-agent if not already installed, it is required by Docker.
