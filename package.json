@@ -199,7 +199,7 @@
   "peerDependencies": {
     "react": "^15.5.4",
     "styled-components": "^2.0.0-17",
-    "react-transition-group": "^1.1.1"
+    "react-transition-group": "^1.1.2"
   },
   "dependencies": {
     "classnames": "2.2.5",
