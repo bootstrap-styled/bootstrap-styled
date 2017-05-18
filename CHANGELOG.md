@@ -2,7 +2,7 @@
 
 ## 1.0.2
 
- - Minor bug fix
+ - Corrected tooltip error since 15.5
 
 ## 1.0.1
 
