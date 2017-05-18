@@ -27,15 +27,8 @@ before_script:
   - npm --version
   - node --version
 
-  # git tag
-  - export CI_PUSH_REPO=`echo $CI_BUILD_REPO | perl -pe 's#.*@(.+?(\:\d+)?)/#git@\1:#'`
-  - git config --global user.email "gitlab-ci@kopaxgroup.com"
-  - git config --global user.name "gitlab-ci"
-  - git remote set-url --push origin "${CI_PUSH_REPO}"
-  # - npm config set sign-git-tag true
-
   # install deps
-  - npm install --unsafe-perm
+  - npm install
 
 #after_script:
 #  - rm secrets
@@ -46,8 +39,9 @@ stages:
 job_testdev:
   stage: test
   script:
+    - PACKAGE_VERSION=$(node -p "require('./package.json').version")
+    - echo sonar.projectVersion=${PACKAGE_VERSION} >> sonar-project.properties
     - npm run dist
-    - echo sonar.projectVersion=$(node -p "require('./package.json').version") >> sonar-project.properties
     - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=dev
   only:
     - dev
@@ -57,19 +51,10 @@ job_testdev:
 job_testmaster:
   stage: test
   script:
-    # we need to extract the ssh/git URL as the runner uses a tokenized URL
-    - PACKAGE_VERSION=$(node -p "require('./package.json').version" | awk -F '-SNAPSHOT' '{print $1}')
-    - echo preparing version ${PACKAGE_VERSION} on repo ${CI_PUSH_REPO}
-    - git checkout -b ${PACKAGE_VERSION}
-    - npm version ${PACKAGE_VERSION} -m "New version %s" --force
+    - PACKAGE_VERSION=$(node -p "require('./package.json').version")
     - echo sonar.projectVersion=${PACKAGE_VERSION} >> sonar-project.properties
     - npm run dist
-    - git add -A
-    - git commit -m "new branch" 
-    - git push origin ${PACKAGE_VERSION} && git push --tags
     - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN}
-    # - npm version $(node -p "require('./package.json').version" | awk -F '-SNAPSHOT' '{print $1}') -m "New version %s" --force
-    # - echo sonar.projectVersion=$(node -p "require('./package.json').version") >> sonar-project.properties
   only:
     - master
   tags:
