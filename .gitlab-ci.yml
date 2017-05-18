@@ -23,6 +23,9 @@ before_script:
   # - mkdir -p ~/.ssh
   # - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
 
+  # const
+  - export PACKAGE_VERSION=$(node -p "require('./package.json').version")
+
   # logging
   - npm --version
   - node --version
@@ -39,7 +42,6 @@ stages:
 job_testdev:
   stage: test
   script:
-    - PACKAGE_VERSION=$(node -p "require('./package.json').version")
     - echo sonar.projectVersion=${PACKAGE_VERSION} >> sonar-project.properties
     - npm run dist
     - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=dev
@@ -51,7 +53,6 @@ job_testdev:
 job_testmaster:
   stage: test
   script:
-    - PACKAGE_VERSION=$(node -p "require('./package.json').version")
     - echo sonar.projectVersion=${PACKAGE_VERSION} >> sonar-project.properties
     - npm run dist
     - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN}
