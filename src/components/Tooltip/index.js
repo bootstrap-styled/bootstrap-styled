@@ -37,7 +37,10 @@ const defaultTetherConfig = {
 // issue on : https://github.com/yannickcr/eslint-plugin-react/issues/203
 const propTypes = {
   placement: PropTypes.oneOf(tetherAttachements),
-  target: PropTypes.string.isRequired,
+  target: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
   isOpen: PropTypes.bool,
   disabled: PropTypes.bool,
   tether: PropTypes.object,
@@ -52,31 +55,16 @@ const propTypes = {
   ]),
 };
 
-class Tooltip extends React.Component {
+export class TooltipUnstyled extends React.Component {
 
-  static propTypes = {
-    placement: PropTypes.oneOf(tetherAttachements),
-    target: PropTypes.string.isRequired,
-    isOpen: PropTypes.bool,
-    disabled: PropTypes.bool,
-    tether: PropTypes.object,
-    tetherRef: PropTypes.func,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    toggle: PropTypes.func,
-    autohide: PropTypes.bool,
-    delay: PropTypes.oneOfType([
-      PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
-      PropTypes.number,
-    ]),
-  };
+  static propTypes = propTypes;
 
   state = {
     focus: false,
   }
 
   componentDidMount = () => {
-    this.target = document.getElementById(this.props.target);
+    this.target = this.getTarget();
     this.addTargetEvents();
   }
 
@@ -125,12 +113,20 @@ class Tooltip extends React.Component {
     return delay;
   }
 
+  getTarget = () => {
+    const { target } = this.props;
+    if (typeof target === 'object') {
+      return target;
+    }
+    return document.getElementById(target);
+  }
+
   getTetherConfig = () => {
     const attachments = getTetherAttachments(this.props.placement);
     return {
       ...defaultTetherConfig,
       ...attachments,
-      target: '#' + this.props.target, // eslint-disable-line prefer-template
+      target: this.getTarget,
       ...this.props.tether,
     };
   }
@@ -240,8 +236,7 @@ class Tooltip extends React.Component {
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Tooltip = styled(Tooltip)`
+const Tooltip = styled(TooltipUnstyled)`
   ${(props) => `
     &.tooltip {
       position: absolute;
