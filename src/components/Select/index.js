@@ -4,13 +4,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
+import omit from 'lodash.omit';
 
 class Select extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     theme: PropTypes.object,
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   state = {
@@ -26,12 +29,18 @@ class Select extends React.Component { // eslint-disable-line react/prefer-state
         className: this.props.className.replace(/\bform-control\b/, ''),
       });
     } else {
-      this.state.className = this.props.className;
+      this.setState({
+        className: this.props.className,
+      });
     }
   }
 
   render() {
-    const { theme, className, children, ...rest } = this.props; // eslint-disable-line
+    const {
+      children,
+      ...rest
+    } = omit(this.props, ['theme', 'className']);
+
     return (
       <select
         className={cn(this.state.className, 'select')}

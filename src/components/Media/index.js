@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { media } from '../../styled/mixins/media';
 import A from '../A';
@@ -21,6 +22,7 @@ const defaultProps = {
 class Media extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     theme: PropTypes.object,
     body: PropTypes.bool,
     bottom: PropTypes.bool,
@@ -35,11 +37,11 @@ class Media extends React.Component { // eslint-disable-line react/prefer-statel
     right: PropTypes.bool,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     top: PropTypes.bool,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
     const {
-      theme, // eslint-disable-line no-unused-vars
       body,
       bottom,
       className,
@@ -53,7 +55,7 @@ class Media extends React.Component { // eslint-disable-line react/prefer-statel
       tag,
       top,
       ...attributes
-    } = this.props;
+    } = omit(this.props, ['theme']);
 
     let defaultTag;
     if (heading) {

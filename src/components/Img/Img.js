@@ -10,6 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { imgFluid } from '../../styled/mixins/image';
 import { boxShadow } from '../../styled/mixins/box-shadow';
@@ -23,6 +24,7 @@ const defaultProps = {
 class Img extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     src: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.object,
@@ -35,11 +37,11 @@ class Img extends React.Component { // eslint-disable-line react/prefer-stateles
     theme: PropTypes.object,
     cssModule: PropTypes.object,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
     const {
-      theme, // eslint-disable-line no-unused-vars
       className,
       src,
       alt,
@@ -49,7 +51,7 @@ class Img extends React.Component { // eslint-disable-line react/prefer-stateles
       cssModule,
       tag: Tag,
       ...attributes
-    } = this.props;
+    } = omit(this.props, ['theme']);
 
     const classes = mapToCssModules(cn(
       className,

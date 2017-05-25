@@ -8,21 +8,29 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { fade } from '../../styled/utilities/transition';
 const defaultProps = { theme: bsTheme };
 
 class Overlay extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
     children: PropTypes.node,
     active: PropTypes.bool,
     theme: PropTypes.object,
-
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
-    const { className, children, active, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      className,
+      children,
+      active,
+      ...rest
+    } = omit(this.props, ['theme']);
+
     const cssClasses = cn(
       className,
       'fade',

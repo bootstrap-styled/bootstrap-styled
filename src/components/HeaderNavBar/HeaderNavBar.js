@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import findDOMNode from 'react-dom/lib/findDOMNode';
-
-// import styled from 'styled-components';
+import omit from 'lodash.omit';
 import cn from 'classnames';
 import bsTheme from 'theme';
 import Button from '../Button';
@@ -24,6 +23,7 @@ const defaultProps = {
 class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
     theme: PropTypes.object,
@@ -47,6 +47,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     'bg-inverse': PropTypes.bool,
     'bg-faded': PropTypes.bool,
     'animation-push': PropTypes.bool,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   state = {
@@ -86,11 +87,9 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     const {
       className,
       children,
-      theme,  // eslint-disable-line no-unused-vars
       button,
       noOverlay,
       offsetNavWidth,
-      belowHeader,  // eslint-disable-line no-unused-vars
       'nav-top': navTop,
       'menu-right': menuRight,
       'navbar-inverse': navbarInverse,
@@ -103,9 +102,9 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       'fixed-bottom': fixedBottom,
       'animation-push': animationPush,
       ...restTmp
-    } = this.props;
+    } = omit(this.props, ['theme', 'belowHeader']);
 
-    const { onClick: unused, ...rest } = restTmp; // eslint-disable-line no-unused-vars
+    const { ...rest } = omit(restTmp, ['onClick']);
     const { component: ButtonToggle, className: classNameButton, ...restButton } = button;
 
     const cssClasses = cn('navbar', 'justify-content-between', 'flex-row', className, {

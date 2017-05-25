@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
 import themeBs from '../../theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { navbar } from '../../styled/mixins/navbar';
 import { nav } from '../../styled/mixins/nav';
-
 
 const defaultProps = {
   tag: 'nav',
@@ -27,7 +27,9 @@ const getToggleableClass = (toggleable) => { // eslint-disable-line react/prefer
 };
 
 class Navbar extends React.Component {
+
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     light: PropTypes.bool,
     inverse: PropTypes.bool,
     full: PropTypes.bool,
@@ -40,7 +42,9 @@ class Navbar extends React.Component {
     cssModule: PropTypes.object,
     toggleable: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     theme: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   };
+
   render() {
     const {
       toggleable,
@@ -53,10 +57,9 @@ class Navbar extends React.Component {
       sticky,
       color,
       tag: Tag,
-      theme,  // eslint-disable-line
       ...attributes
-    } = this.props;
-  
+    } = omit(this.props, ['theme']);
+
     const classes = mapToCssModules(cn(
       className,
       'navbar',
@@ -70,8 +73,8 @@ class Navbar extends React.Component {
         [`sticky-${sticky}`]: sticky,
       }
     ), cssModule);
-  
-    return(  
+
+    return(
       <Tag {...attributes} className={classes} />
     )
   }

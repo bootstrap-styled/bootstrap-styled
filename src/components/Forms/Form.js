@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import { unitUtils } from 'math-utils';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { formControl, formControlValidation } from '../../styled/mixins/forms';
@@ -27,6 +28,7 @@ const selectBorderWidth = unitUtils.math.multiply(bsTheme['$border-width'], 2);
 class Form extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     children: PropTypes.node,
     theme: PropTypes.object,
     inline: PropTypes.bool,
@@ -34,6 +36,7 @@ class Form extends React.Component {// eslint-disable-line react/prefer-stateles
     getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     className: PropTypes.string,
     cssModule: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
@@ -41,11 +44,10 @@ class Form extends React.Component {// eslint-disable-line react/prefer-stateles
       className,
       cssModule,
       inline,
-      theme,  // eslint-disable-line no-unused-vars
       tag: Tag,
       getRef,
       ...rest
-    } = this.props;
+    } = omit(this.props, ['theme']);
 
     const classes = mapToCssModules(cn(
       className,
