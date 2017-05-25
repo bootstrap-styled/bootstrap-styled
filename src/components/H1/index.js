@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import bsTheme from 'theme';
 import cn from 'classnames';
 import { mapToCssModules } from 'utils/tools';
+import omit from 'lodash.omit';
 import { typography } from '../../styled/mixins/typography';
 
 const defaultProps = { theme: bsTheme };
@@ -11,24 +12,25 @@ const defaultProps = { theme: bsTheme };
 class H1 extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
     children: PropTypes.node,
     lead: PropTypes.bool,
     theme: PropTypes.object,
     color: PropTypes.string,
     cssModule: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
     const {
       className,
       color,
-      theme,  // eslint-disable-line no-unused-vars
       children,
       cssModule,
       lead,
       ...attributes
-    } = this.props;
+    } = omit(this.props, ['theme']);
 
     const classes = mapToCssModules(cn(
       className,

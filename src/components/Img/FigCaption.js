@@ -7,7 +7,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
-
+import omit from 'lodash.omit';
 import bsTheme from 'theme';
 
 const defaultProps = {
@@ -17,14 +17,22 @@ const defaultProps = {
 class FigCaption extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
     children: PropTypes.node,
     theme: PropTypes.object,
     right: PropTypes.bool,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
-    const { className, theme, children, right, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      className,
+      children,
+      right,
+      ...rest
+    } = omit(this.props, ['theme']);
+
     const classes = cn('figure-caption', className,
       right ? 'text-right' : null
     );

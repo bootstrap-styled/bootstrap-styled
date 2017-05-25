@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import styled, { keyframes } from 'styled-components';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { getBackgroundUtilities } from '../../styled/utilities/background';
@@ -16,13 +17,20 @@ const defaultProps = {
 class Progress extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
     children: PropTypes.node,
     theme: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
-    const { children, className, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      children,
+      className,
+      ...rest
+    } = omit(this.props, ['theme']);
+
     return (
       <div className={cn('progress', className)} {...rest}>
         {children}
