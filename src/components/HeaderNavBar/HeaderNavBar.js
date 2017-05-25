@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import findDOMNode from 'react-dom/lib/findDOMNode';
-import omit from 'lodash.omit';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import Button from '../Button';
 import Header from '../Header';
 import OffsetNavPush from './OffsetNavPush';
@@ -18,6 +18,7 @@ const defaultProps = {
   theme: bsTheme,
   noOverlay: false,
   belowNav: false,
+  menuClose: false,
 };
 
 class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -32,20 +33,21 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     belowHeader: PropTypes.bool,
     offsetNavWidth: PropTypes.string,
     noOverlay: PropTypes.bool,
+    menuClose: PropTypes.bool,
+    cssModule: PropTypes.object,
+    dismiss: PropTypes.func,
     button: PropTypes.shape({
       component: PropTypes.component,
       className: PropTypes.string,
     }),
     'nav-top': PropTypes.node,
+    light: PropTypes.bool,
+    inverse: PropTypes.bool,
+    full: PropTypes.bool,
+    fixed: PropTypes.string,
+    sticky: PropTypes.string,
+    color: PropTypes.string,
     'menu-right': PropTypes.bool,
-    'navbar-inverse': PropTypes.bool,
-    'navbar-light': PropTypes.bool,
-    'static-top': PropTypes.bool,
-    'sticky-top': PropTypes.bool,
-    'fixed-top': PropTypes.bool,
-    'fixed-bottom': PropTypes.bool,
-    'bg-inverse': PropTypes.bool,
-    'bg-faded': PropTypes.bool,
     'animation-push': PropTypes.bool,
     /* eslint-enable react/no-unused-prop-types */
   }
@@ -89,44 +91,65 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       children,
       button,
       noOverlay,
+      menuClose,
       offsetNavWidth,
       'nav-top': navTop,
       'menu-right': menuRight,
-      'navbar-inverse': navbarInverse,
-      'bg-inverse': bgInverse,
-      'navbar-light': navbarLight,
-      'bg-faded': bgFaded,
-      'static-top': staticTop,
-      'sticky-top': stickyTop,
-      'fixed-top': fixedTop,
-      'fixed-bottom': fixedBottom,
       'animation-push': animationPush,
-      ...restTmp
+      light,
+      inverse,
+      fixed,
+      sticky,
+      color,
+      ...attributesTemp
     } = omit(this.props, ['theme', 'belowHeader']);
 
-    const { ...rest } = omit(restTmp, ['onClick']);
-    const { component: ButtonToggle, className: classNameButton, ...restButton } = button;
+    const {
+      ...attributes
+    } = omit(attributesTemp, ['onClick']);
+
+    const {
+      component: ButtonToggle,
+      className: classNameButton,
+      ...restButton
+    } = button;
 
     const cssClasses = cn('navbar', 'justify-content-between', 'flex-row', className, {
-      'navbar-inverse': navbarInverse,
-      'bg-inverse': bgInverse,
-      'navbar-light': navbarLight,
-      'bg-faded': bgFaded,
-      'navbar-static-top': staticTop,
-      'navbar-sticky-top': stickyTop,
-      'navbar-fixed-top': fixedTop,
-      'navbar-fixed-bottom': fixedBottom,
+      'navbar-light': light,
+      'navbar-inverse': inverse,
+      [`bg-${color}`]: color,
+      [`fixed-${fixed}`]: fixed,
+      [`sticky-${sticky}`]: sticky,
     });
 
     const buttonMenuRight = menuRight ? 'flex-last' : '';
-    const buttonClasses = cn(buttonMenuRight, classNameButton, { 'navbar-toggler-icon p-3 my-auto': !classNameButton });
+
+    const buttonClasses = cn(buttonMenuRight, classNameButton, {
+      'navbar-toggler-icon p-3 my-auto cursor-pointer': !classNameButton,
+    });
 
     const OffsetMenuAnimated = animationPush ? (
-      <OffsetNavPush className="offset-nav-margin-top" elementWidth={offsetNavWidth} active={this.state.show} menu-right={menuRight} animation-push={animationPush} dismiss={this.handleClick}>
+      <OffsetNavPush
+        className="offset-nav-margin-top"
+        elementWidth={offsetNavWidth}
+        active={this.state.show}
+        menu-right={menuRight}
+        animation-push={animationPush}
+        menuClose={menuClose}
+        dismiss={this.handleClick}
+      >
         {children}
       </OffsetNavPush>
     ) : (
-      <OffsetNavSlide className="offset-nav-margin-top" elementWidth={offsetNavWidth} active={this.state.show} menu-right={menuRight} animation-push={animationPush} dismiss={this.handleClick}>
+      <OffsetNavSlide
+        className="offset-nav-margin-top"
+        elementWidth={offsetNavWidth}
+        active={this.state.show}
+        menu-right={menuRight}
+        animation-push={animationPush}
+        menuClose={menuClose}
+        dismiss={this.handleClick}
+      >
         {children}
       </OffsetNavSlide>
     );
@@ -134,7 +157,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     return (
       <div>
         {!noOverlay && (<Overlay active={this.state.show} onClick={this.handleClick} />)}
-        <Header className={cn(cssClasses)} {...rest} innerRef={(header) => { this.header = header; }}>
+        <Header className={cn(cssClasses)} {...attributes} innerRef={(header) => { this.header = header; }}>
           <ButtonToggle className={buttonClasses} onClick={this.handleClick} {...restButton} />
           {navTop && (<div>{navTop}</div>)}
         </Header>

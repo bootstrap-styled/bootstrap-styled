@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { getTransitionUtilities, fade, collapse } from '../transition';
+import { getTransitionUtilities, fade, collapse, getReactTransition } from '../transition';
 
 describe('bootstrap transition mixins', () => {
   describe('getTransitionUtils', () => {
@@ -47,6 +47,18 @@ describe('bootstrap transition mixins', () => {
       const enableTransitions = false;
       const css = collapse(enableTransitions, 'height .35s ease');
       expect(fromJS({ css }).hashCode()).toEqual(1058176073);
+    });
+  });
+  describe('getReactTransition', () => {
+    it('should return a css with transition', () => {
+      const enableTransitions = true;
+      const css = getReactTransition(enableTransitions, 'height .35s ease');
+      expect(fromJS({ css }).hashCode()).toEqual(-627217750);
+    });
+    it('should return a css without transition', () => {
+      const enableTransitions = false;
+      const css = getReactTransition(enableTransitions, 'height .35s ease');
+      expect(fromJS({ css }).hashCode()).toEqual(788434458);
     });
   });
 });
