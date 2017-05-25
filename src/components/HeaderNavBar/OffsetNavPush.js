@@ -28,7 +28,6 @@ const OffsetNavPush = styled(OffsetNav)`
         props.theme['$menu-offset-nav-transition'],
       )}
     }
-
   `}
 `;
 

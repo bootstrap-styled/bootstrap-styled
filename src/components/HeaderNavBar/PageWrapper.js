@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import bsTheme from 'theme';
 import omit from 'lodash.omit';
-
 const defaultProps = { theme: bsTheme };
 
 class PageWrapper extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -19,12 +18,14 @@ class PageWrapper extends React.Component { // eslint-disable-line react/prefer-
 
   render() {
     const {
-      children,
       className,
+      children,
     } = omit(this.props, ['theme']);
-
     return (
-      <div id="wrapper" className={className}>
+      <div
+        className={className}
+        id="wrapper"
+      >
         {children}
       </div>
     );

@@ -2,7 +2,6 @@
  * Menu component
  */
 
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -23,6 +22,7 @@ class OffsetNav extends React.Component { // eslint-disable-line react/prefer-st
     children: PropTypes.node,
     active: PropTypes.bool,
     dismiss: PropTypes.func,
+    menuClose: PropTypes.bool,
     elementWidth: PropTypes.string,
     theme: PropTypes.object,
     'menu-right': PropTypes.bool,
@@ -36,15 +36,18 @@ class OffsetNav extends React.Component { // eslint-disable-line react/prefer-st
       children,
       active,
       dismiss,
+      menuClose,
       'menu-right': menuRight,
-      ...rest
+      ...attributes
     } = omit(this.props, ['theme', 'elementWidth', 'animation-push']);
 
     const menuDirectionClassNames = menuRight ? 'menu-right' : 'menu-left';
-    const cssClasses = cn(className, menuDirectionClassNames, { active }); // eslint-disable-line  object-shorthand
     return (
-      <div className={cssClasses} {...rest}>
-        {dismiss && <Close aria-label="Close" onDismiss={dismiss} />}
+      <div
+        className={cn(className, menuDirectionClassNames, { active })}
+        {...attributes}
+      >
+        {menuClose && <Close aria-label="Close" onDismiss={dismiss} />}
         {children}
       </div>
     );
