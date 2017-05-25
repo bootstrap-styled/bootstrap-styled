@@ -37,9 +37,8 @@ export default class AccordionGroup extends React.Component {// eslint-disable-l
   render() {
     const { ...attributes } = this.props;
     const {
-      'heading-component': headingComponent,
       ...restAfterChildContext
-    } = omit(attributes, ['activeAccordionName', 'onClick', headingComponent]);
+    } = omit(attributes, ['activeAccordionName', 'onClick', 'headingComponent']);
 
     return (
       <div {...restAfterChildContext} />
