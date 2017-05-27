@@ -8,6 +8,7 @@
  - Added test for getReactTransition
  - Corrected HeaderNavbar
  - Improve code quality
+ - Inject body css in BootstrapProvider and Modal
   
 ## 1.0.2
 
