@@ -25,6 +25,7 @@ before_script:
 
   # const
   - export PACKAGE_VERSION=$(node -p "require('./package.json').version")
+  - export PACKAGE_PIPELINE_VERSION=${PACKAGE_VERSION}-${CI_PIPELINE_ID}-${CI_COMMIT_REF_NAME}
 
   # logging
   - npm --version
@@ -42,9 +43,9 @@ stages:
 job_testdev:
   stage: test
   script:
-    - echo sonar.projectVersion=${PACKAGE_VERSION} >> sonar-project.properties
+    - echo sonar.projectVersion=${PACKAGE_PIPELINE_VERSION} >> sonar-project.properties
     - npm run dist
-    - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=dev
+    - sonar-scanner -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=dev
   only:
     - dev
   tags:
@@ -53,9 +54,9 @@ job_testdev:
 job_testmaster:
   stage: test
   script:
-    - echo sonar.projectVersion=${PACKAGE_VERSION} >> sonar-project.properties
+    - echo sonar.projectVersion=${PACKAGE_PIPELINE_VERSION} >> sonar-project.properties
     - npm run dist
-    - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN}
+    - sonar-scanner -Dsonar.login=${SONAR_LOGIN}
   only:
     - master
   tags:
