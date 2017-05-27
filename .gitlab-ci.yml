@@ -45,7 +45,7 @@ job_testdev:
   script:
     - echo sonar.projectVersion=${PACKAGE_PIPELINE_VERSION} >> sonar-project.properties
     - npm run dist
-    - sonar-scanner -- -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=dev
+    - sonar-scanner -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=dev
   only:
     - dev
   tags:
