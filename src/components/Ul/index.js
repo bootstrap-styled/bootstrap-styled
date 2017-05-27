@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import bsTheme from 'theme';
 import cn from 'classnames';
-
+import omit from 'lodash.omit';
 import { nav } from '../../styled/mixins/nav';
 import { listUnstyled, listInline } from '../../styled/mixins/lists';
 import { navbar } from '../../styled/mixins/navbar';
@@ -21,15 +21,23 @@ const defaultProps = { theme: bsTheme };
 class Ul extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
     theme: PropTypes.object,
     inline: PropTypes.bool,
     unstyled: PropTypes.bool,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
-    const { theme, className, inline, unstyled, children, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      className,
+      inline,
+      unstyled,
+      children,
+      ...rest
+    } = omit(this.props, ['theme']);
 
     const classes = cn(
       className,

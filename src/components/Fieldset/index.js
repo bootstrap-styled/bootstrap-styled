@@ -4,21 +4,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { makeRow } from '../../styled/mixins/grid';
 
 const defaultProps = { theme: bsTheme };
 
-
 class Fieldset extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     theme: PropTypes.object,
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
-    const { theme, className, children, ...rest } = this.props; // eslint-disable-line
+    const {
+      className,
+      children,
+      ...rest
+    } = omit(this.props, ['theme']);
+
     return (
       <fieldset
         className={className}

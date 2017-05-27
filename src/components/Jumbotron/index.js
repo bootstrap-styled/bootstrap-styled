@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import Color from 'color';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
@@ -20,11 +21,13 @@ const defaultProps = {
 class Jumbotron extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     fluid: PropTypes.bool,
     className: PropTypes.string,
     cssModule: PropTypes.object,
     theme: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
@@ -33,9 +36,8 @@ class Jumbotron extends React.Component { // eslint-disable-line react/prefer-st
       cssModule,
       tag: Tag,
       fluid,
-      theme,  // eslint-disable-line no-unused-vars
       ...attributes
-    } = this.props;
+    } = omit(this.props, ['theme']);
 
     const classes = mapToCssModules(cn(
       className,

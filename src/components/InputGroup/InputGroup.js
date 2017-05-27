@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import bsTheme from 'theme';
 import cn from 'classnames';
+import omit from 'lodash.omit';
 import { mapToCssModules } from 'utils/tools';
 import { hoverFocusActive } from '../../styled/mixins/hover';
 import { borderRadius, borderLeftRadius, borderRightRadius } from '../../styled/mixins/border-radius';
@@ -22,11 +23,13 @@ const defaultProps = {
 class InputGroup extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     size: PropTypes.string,
     className: PropTypes.string,
     cssModule: PropTypes.object,
     theme: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   };
 
   render() {
@@ -35,9 +38,8 @@ class InputGroup extends React.Component { // eslint-disable-line react/prefer-s
       cssModule,
       tag: Tag,
       size,
-      theme,  // eslint-disable-line
       ...attributes
-    } = this.props;
+    } = omit(this.props, ['theme']);
 
     const classes = mapToCssModules(cn(
       className,

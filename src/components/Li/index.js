@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import bsTheme from 'theme';
+import omit from 'lodash.omit';
 import { media as mediaCss } from '../../styled/mixins/media';
 
 const defaultProps = { theme: bsTheme };
@@ -14,6 +15,7 @@ const defaultProps = { theme: bsTheme };
 class Li extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     children: PropTypes.node,
     disabled: PropTypes.bool,
     className: PropTypes.string,
@@ -25,12 +27,12 @@ class Li extends React.Component { // eslint-disable-line react/prefer-stateless
     'dropdown-header': PropTypes.bool,
     'dropdown-footer': PropTypes.bool,
     theme: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
     const {
       className,
-      theme,  // eslint-disable-line no-unused-vars
       children,
       inline,
       separator,
@@ -39,7 +41,7 @@ class Li extends React.Component { // eslint-disable-line react/prefer-stateless
       'dropdown-header': dropdownHeader,
       'dropdown-footer': dropdownFooter,
       ...attributes
-    } = this.props;
+    } = omit(this.props, ['theme']);
 
     const classes = cn(
       className,

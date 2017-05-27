@@ -1,7 +1,7 @@
 {
   "name": "bootstrap-styled",
   "description": "Bootstrap Styled",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "main": "dist/bootstrap-styled.js",
   "files": [
     "dist/",
@@ -198,7 +198,7 @@
   },
   "peerDependencies": {
     "react": "^15.5.4",
-    "styled-components": "^2.0.0-17",
+    "styled-components": "^2.0.0",
     "react-transition-group": "^1.1.2"
   },
   "dependencies": {
@@ -264,7 +264,7 @@
     "sinon": "2.0.0-pre",
     "sonar-scanner": "1.0.1",
     "style-loader": "0.13.1",
-    "styled-components": "2.0.0-17",
+    "styled-components": "2.0.0",
     "toctoc": "0.2.3",
     "url-loader": "0.5.7",
     "webpack": "2.4.1",

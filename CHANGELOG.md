@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.0
+
+ - Corrected version react-transition-group to fit peer
+ - Corrected tooltip error since 15.5
+ - Upgraded styled-components to v2.0.0 
+ - Added test for getReactTransition
+ - Corrected HeaderNavbar
+ - Improve code quality
+ - Inject body css in BootstrapProvider and Modal
+  
 ## 1.0.2
 
  - Corrected tooltip error since 15.5
