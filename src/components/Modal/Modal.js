@@ -17,6 +17,7 @@ import { borderRadius } from '../../styled/mixins/border-radius';
 import { boxShadow } from '../../styled/mixins/box-shadow';
 import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 import { fade } from '../../styled/utilities/transition';
+import { rebootUtils } from '../../utilities';
 
 const defaultProps = {
   isOpen: false,
@@ -247,7 +248,14 @@ class Modal extends React.Component {
 // eslint-disable-next-line no-class-assign
 Modal = styled(Modal)`
   ${(props) => `
-
+    ${rebootUtils.body(
+      props.theme['$font-family-base'],
+      props.theme['$font-size-base'],
+      props.theme['$font-weight-base'],
+      props.theme['$line-height-base'],
+      props.theme['$body-color'],
+      props.theme['$body-bg'],
+    )}
     & .modal {
       position: fixed;
       top: 0;
