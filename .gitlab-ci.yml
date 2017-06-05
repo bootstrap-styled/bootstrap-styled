@@ -90,6 +90,7 @@ release:
   script:
     # tag current version
     - git checkout -b v${PACKAGE_VERSION}
+    - git add dist/ lib/ && git commit -m "new version v${PACKAGE_VERSION}"
     - git push origin v${PACKAGE_VERSION}
     - git tag -a -m "new version v${PACKAGE_VERSION}" v${PACKAGE_VERSION}
     - git push --tags
