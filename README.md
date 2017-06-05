@@ -21,9 +21,8 @@ Bootstrap 4.0 made in styled components
   - [Mixins](#mixins)
   - [Utilities](#utilities)
   - [Documentation](#documentation)
-  - [Developers](#developers)
-     - [Contribute](#contribute)
-     - [Guide](#guide)
+  - [Contribute](#contribute)
+  - [Guide](#guide)
   - [License](#license)
 
 ---
@@ -88,9 +87,9 @@ Example of import of the __visibility__ utility
 
 The complete documentation is available at [http://bootstrap-styled.kopaxgroup.com](http://bootstrap-styled.kopaxgroup.com)
 
-## Developers
+# Developers
 
-### Contribute
+## Contribute
 
 `master` is used to release the version. 
 
@@ -106,7 +105,7 @@ If you wish to implement new functionalities you need to do a merge request incl
 
 You can now start working on your branch. Don't forget to check `Delete branch when merged`.
 
-### Guide
+## Guide
 
 Create a new distribution build (including distribution file and lib)
 
