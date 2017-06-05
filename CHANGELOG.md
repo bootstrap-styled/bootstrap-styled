@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+ - Added tag on CI master
+ 
 ## 1.1.0
 
  - Corrected version react-transition-group to fit peer
