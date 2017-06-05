@@ -74,8 +74,7 @@ build:
 test:
   stage: test
   script:
-    - echo sonar.projectVersion=${SONAR_VERSION} >> sonar-project.properties
-    - sonar-scanner -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=${CI_COMMIT_REF_NAME}
+    - sonar-scanner -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=${CI_COMMIT_REF_NAME} -Dsonar.projectVersion=${SONAR_VERSION}
   dependencies:
     - build
   only:
