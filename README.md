@@ -14,6 +14,7 @@ Bootstrap 4.0 made in styled components
 
 ## Table of Contents
 
+  - [Changelog](#changelog)
   - [Dependencies](#dependencies)
   - [Installation](#installation)
   - [Basic Usage](#basic-usage)
@@ -21,6 +22,8 @@ Bootstrap 4.0 made in styled components
   - [Utilities](#utilities)
   - [Documentation](#documentation)
   - [Developers](#developers)
+     - [Contribute](#contribute)
+     - [Guide](#guide)
   - [License](#license)
 
 ---
