@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2
+
+ - Added props `alwaysShow` to `<HeaderNavBar />`
+
 ## 1.1.1
 
  - Added tag on CI master
