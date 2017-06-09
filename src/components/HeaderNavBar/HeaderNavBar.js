@@ -17,7 +17,7 @@ const defaultProps = {
   alwaysShow: false,
   theme: bsTheme,
   noOverlay: false,
-  belowNav: false,
+  belowHeader: false,
   menuClose: false,
 };
 
@@ -108,8 +108,9 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       fixed,
       sticky,
       color,
+      alwaysShow,
       ...attributesTemp
-    } = omit(this.props, ['theme', 'belowHeader', 'alwaysShow']);
+    } = omit(this.props, ['theme', 'belowHeader']);
 
     const {
       ...attributes
@@ -165,7 +166,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       <div>
         {!noOverlay && (<Overlay active={this.state.show} onClick={this.handleClick} />)}
         <Header className={cn(cssClasses)} {...attributes} innerRef={(header) => { this.header = header; }}>
-          <ButtonToggle className={buttonClasses} onClick={this.handleClick} {...restButton} />
+          {!alwaysShow && (<ButtonToggle className={buttonClasses} onClick={this.handleClick} {...restButton} />)}
           {navTop && (<div>{navTop}</div>)}
         </Header>
         {OffsetMenuAnimated}

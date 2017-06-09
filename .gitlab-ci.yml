@@ -1,5 +1,8 @@
 image: kopaxgroup/node7-jdk8-sonarscanner2:latest
 
+variables:
+  GIT_STRATEGY: none
+
 before_script:
   # Install ssh-agent if not already installed, it is required by Docker.
   # (change apt-get to yum if you use a CentOS-based image)
@@ -22,40 +25,79 @@ before_script:
   # instead.
   # - mkdir -p ~/.ssh
   # - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
+  # clone with ssh
+  - "[[ ! -e 'package.json' ]] && git clone ${REPOSITORY_SSH_URL} ."
+  - git checkout ${CI_COMMIT_REF_NAME}
 
   # const
   - export PACKAGE_VERSION=$(node -p "require('./package.json').version")
+  - export SONAR_VERSION=${PACKAGE_VERSION}-b${CI_PIPELINE_ID}-${CI_COMMIT_REF_NAME}
 
   # logging
   - npm --version
   - node --version
 
-  # install deps
-  - npm install
+  # commit message
+  - git config --global user.email "contact@kopaxgroup.com"
+  - git config --global user.name "Gitlab-CI"
 
 #after_script:
 #  - rm secrets
 
 stages:
+  - build
   - test
+  - release
 
-job_testdev:
-  stage: test
+# Job: Build
+build:
+  stage: build
+  coverage: '/All files[^|]*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*([\d.]*)\s*\|\s*/'
   script:
-    - echo sonar.projectVersion=${PACKAGE_VERSION} >> sonar-project.properties
+    - npm install
     - npm run dist
-    - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=dev
-  only:
-    - dev
+  cache:
+    key: ${CI_BUILD_REF_NAME}
+    paths:
+      - node_modules/
+  artifacts:
+    when: on_success
+    name: "${CI_PROJECT_PATH}-${CI_PIPELINE_ID}-${CI_COMMIT_REF_NAME}"
+    untracked: true
+    expire_in: 1 hour
+    paths:
+      - .
   tags:
     - docker
 
-job_testmaster:
+# Job: Test
+test:
   stage: test
   script:
-    - echo sonar.projectVersion=${PACKAGE_VERSION} >> sonar-project.properties
-    - npm run dist
-    - npm run sonar-scanner -- -Dsonar.login=${SONAR_LOGIN}
+    - sonar-scanner -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=${CI_COMMIT_REF_NAME} -Dsonar.projectVersion=${SONAR_VERSION}
+  dependencies:
+    - build
+  only:
+    - dev
+    - master
+  tags:
+    - docker
+
+# Job: Release
+release:
+  stage: release
+  script:
+    # tag current version
+    - git checkout -b v${PACKAGE_VERSION}
+    - git add dist/ lib/ && git commit -m "new version v${PACKAGE_VERSION}"
+    - git push origin v${PACKAGE_VERSION}
+    - git tag -a -m "new version v${PACKAGE_VERSION}" v${PACKAGE_VERSION}
+    - git push --tags
+    # prepare next dev version
+    - npm version patch
+    - git push origin HEAD:dev
+  dependencies:
+    - build
   only:
     - master
   tags:

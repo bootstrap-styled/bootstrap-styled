@@ -14,16 +14,22 @@ Bootstrap 4.0 made in styled components
 
 ## Table of Contents
 
+  - [Changelog](#changelog)
   - [Dependencies](#dependencies)
   - [Installation](#installation)
   - [Basic Usage](#basic-usage)
   - [Mixins](#mixins)
   - [Utilities](#utilities)
   - [Documentation](#documentation)
-  - [Developers](#developers)
+  - [Contribute](#contribute)
+  - [Guide](#guide)
   - [License](#license)
 
 ---
+
+## Changelog
+
+ - View [changelog](CHANGELOG.md)
 
 ## Dependencies
 
@@ -81,7 +87,25 @@ Example of import of the __visibility__ utility
 
 The complete documentation is available at [http://bootstrap-styled.kopaxgroup.com](http://bootstrap-styled.kopaxgroup.com)
 
-## Developers
+# Developers
+
+## Contribute
+
+`master` is used to release the version. 
+
+- `master` only accept merge requests from `dev`
+
+`dev` is the developement branch. It should be used by developers for applying their merge requests.
+
+If you wish to implement new functionalities you need to do a merge request including your change on the `dev` branch.
+
+    git checkout dev
+    git checkout $(whoami)-dev
+    git push -u origin $(whoami)-dev 
+
+You can now start working on your branch. Don't forget to check `Delete branch when merged`.
+
+## Guide
 
 Create a new distribution build (including distribution file and lib)
 
