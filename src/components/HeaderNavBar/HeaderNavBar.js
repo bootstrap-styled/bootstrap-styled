@@ -14,7 +14,7 @@ const defaultProps = {
   button: {
     component: Button,
   },
-  show: false,
+  alwaysShow: false,
   theme: bsTheme,
   noOverlay: false,
   belowNav: false,
@@ -28,7 +28,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
     theme: PropTypes.object,
-    show: PropTypes.bool,
+    alwaysShow: PropTypes.bool,
     onClick: PropTypes.func,
     belowHeader: PropTypes.bool,
     offsetNavWidth: PropTypes.string,
@@ -55,6 +55,13 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
   state = {
     show: false,
   };
+
+  componentWillMount() {
+    const { alwaysShow } = this.props;
+    if (alwaysShow) {
+      this.setState({ show: true });
+    }
+  }
 
   componentDidMount() {
     const componentAsANodeReact = findDOMNode(this);
@@ -102,7 +109,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       sticky,
       color,
       ...attributesTemp
-    } = omit(this.props, ['theme', 'belowHeader']);
+    } = omit(this.props, ['theme', 'belowHeader', 'alwaysShow']);
 
     const {
       ...attributes
