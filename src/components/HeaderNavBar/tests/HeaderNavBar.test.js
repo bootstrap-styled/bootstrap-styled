@@ -123,6 +123,20 @@ describe('<HeaderNavBar />', () => {
     });
     expect(renderedComponent.find('OffsetNav').props().active).toEqual(true);
   });
+  it('should render an <HeaderNavBar> with a props shadowHeader tag with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      shadowHeader: true,
+    });
+    expect(renderedComponent.find('HeaderNavBar').props().shadowHeader).toBe(true);
+  });
+  it('should render an <HeaderNavBar> with a props offsetColor tag with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      offsetColor: true,
+    });
+    expect(renderedComponent.find('HeaderNavBar').props().offsetColor).toBe(true);
+  });
   it('should render a <HeaderNavBar> with a Button Component with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,

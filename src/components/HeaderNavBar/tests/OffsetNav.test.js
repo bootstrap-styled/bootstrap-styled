@@ -60,6 +60,13 @@ describe('<OffsetNav />', () => {
     });
     expect(renderedComponent.find('OffsetNav').props()['menu-right']).toEqual(true);
   });
+  it('should render an <OffsetNav> with a props offset-color with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      offsetColor: 'primary',
+    });
+    expect(renderedComponent.find('div').hasClass('bg-primary')).toEqual(true);
+  });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,

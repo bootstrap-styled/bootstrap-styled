@@ -31,6 +31,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     alwaysShow: PropTypes.bool,
     onClick: PropTypes.func,
     belowHeader: PropTypes.bool,
+    shadowHeader: PropTypes.bool,
     offsetNavWidth: PropTypes.string,
     noOverlay: PropTypes.bool,
     menuClose: PropTypes.bool,
@@ -47,6 +48,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     fixed: PropTypes.string,
     sticky: PropTypes.string,
     color: PropTypes.string,
+    offsetColor: PropTypes.bool,
     'menu-right': PropTypes.bool,
     'animation-push': PropTypes.bool,
     /* eslint-enable react/no-unused-prop-types */
@@ -108,7 +110,9 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       fixed,
       sticky,
       color,
+      offsetColor,
       alwaysShow,
+      shadowHeader,
       ...attributesTemp
     } = omit(this.props, ['theme', 'belowHeader']);
 
@@ -141,6 +145,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
         className="offset-nav-margin-top"
         elementWidth={offsetNavWidth}
         active={this.state.show}
+        offsetColor={offsetColor}
         menu-right={menuRight}
         animation-push={animationPush}
         menuClose={menuClose}
@@ -153,6 +158,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
         className="offset-nav-margin-top"
         elementWidth={offsetNavWidth}
         active={this.state.show}
+        offsetColor={offsetColor}
         menu-right={menuRight}
         animation-push={animationPush}
         menuClose={menuClose}
@@ -165,7 +171,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     return (
       <div>
         {!noOverlay && (<Overlay active={this.state.show} onClick={this.handleClick} />)}
-        <Header className={cn(cssClasses)} {...attributes} innerRef={(header) => { this.header = header; }}>
+        <Header className={cn(cssClasses)} shadowHeader={shadowHeader} {...attributes} innerRef={(header) => { this.header = header; }}>
           {!alwaysShow && (<ButtonToggle className={buttonClasses} onClick={this.handleClick} {...restButton} />)}
           {navTop && (<div>{navTop}</div>)}
         </Header>

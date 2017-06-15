@@ -25,6 +25,7 @@ class OffsetNav extends React.Component { // eslint-disable-line react/prefer-st
     menuClose: PropTypes.bool,
     elementWidth: PropTypes.string,
     theme: PropTypes.object,
+    offsetColor: PropTypes.string,
     'menu-right': PropTypes.bool,
     'animation-push': PropTypes.bool,
     /* eslint-enable react/no-unused-prop-types */
@@ -37,14 +38,20 @@ class OffsetNav extends React.Component { // eslint-disable-line react/prefer-st
       active,
       dismiss,
       menuClose,
+      offsetColor,
       'menu-right': menuRight,
       ...attributes
     } = omit(this.props, ['theme', 'elementWidth', 'animation-push']);
 
     const menuDirectionClassNames = menuRight ? 'menu-right' : 'menu-left';
+
+    const cssClasses = cn(className, menuDirectionClassNames, {
+      [`bg-${offsetColor}`]: offsetColor,
+    });
+
     return (
       <div
-        className={cn(className, menuDirectionClassNames, { active })}
+        className={cn(cssClasses, { active })}
         {...attributes}
       >
         {menuClose && <Close aria-label="Close" onDismiss={dismiss} />}

@@ -2,7 +2,8 @@
 
 ## 1.1.2
 
- - Added props `alwaysShow` to `<HeaderNavBar />`
+ - Added props `alwaysShow`, `offsetColor` and `shadowHeader` to `<HeaderNavBar />`
+ - Fixed `size` props in Button
 
 ## 1.1.1
 
