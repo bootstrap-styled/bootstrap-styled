@@ -70,7 +70,7 @@ class Button extends React.Component { // eslint-disable-line react/prefer-state
       dropup,
       active,
       disabled,
-      [`btn-${color}`]: size,
+      [`btn-${size}`]: size,
       'btn-block': block,
     }, `btn${outline ? '-outline' : ''}-${color}`), cssModule);
 
