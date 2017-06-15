@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import theme from 'theme';
 import { navbar } from '../../styled/mixins/navbar';
+import { ifThen } from '../../styled/mixins/conditional';
 
 const defaultProps = { theme };
 
@@ -35,6 +36,10 @@ const Header = styled.header`
       props.theme['$navbar-inverse-toggler-border'],
       props.theme['$navbar-inverse-toggler-bg'],
       props.theme['$navbar-inverse-disabled-color'],
+    )}
+    ${ifThen(
+      props.shadowHeader,
+      'box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);'
     )}
   `}  
 `;
