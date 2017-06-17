@@ -50,6 +50,32 @@ stages:
   - release
 
 # Job: Build
+build_dev:
+  stage: build
+  coverage: '/All files[^|]*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*([\d.]*)\s*\|\s*/'
+  script:
+    - npm install
+    - npm run dist
+    # release dist and lib
+    - git add dist/ lib/
+    - git commit -m "new release dist and lib"
+    - git push origin ${CI_COMMIT_REF_NAME}
+  cache:
+    key: ${CI_BUILD_REF_NAME}
+    paths:
+      - node_modules/
+  artifacts:
+    when: on_success
+    name: "${CI_PROJECT_PATH}-${CI_PIPELINE_ID}-${CI_COMMIT_REF_NAME}"
+    untracked: true
+    expire_in: 3 mins
+    paths:
+      - .
+  only:
+    - dev
+  tags:
+    - docker
+
 build:
   stage: build
   coverage: '/All files[^|]*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*([\d.]*)\s*\|\s*/'
@@ -67,6 +93,8 @@ build:
     expire_in: 1 hour
     paths:
       - .
+  except:
+    - dev
   tags:
     - docker
 
@@ -84,21 +112,6 @@ test:
     - docker
 
 # Job: Release
-release_dist_and_lib:
-  stage: release
-  script:
-    # release dist and lib
-    - git add dist/ lib/
-    - git commit -m "new release dist and lib"
-    - git push origin ${CI_COMMIT_REF_NAME}
-  dependencies:
-    - build
-  only:
-    - dev
-  tags:
-    - docker
-
-
 release:
   stage: release
   script:
