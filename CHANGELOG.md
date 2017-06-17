@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.3
+
+ - Corrected branch not having the proper `dist` and `lib` on release
+ 
 ## 1.1.2
 
  - Added props `alwaysShow`, `offsetColor` and `shadowHeader` to `<HeaderNavBar />`
