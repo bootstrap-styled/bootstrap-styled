@@ -59,7 +59,7 @@ build_dev:
     # release dist and lib
     - git add dist/ lib/
     - git commit -m "new release dist and lib" || echo "no change detected"
-    - git push origin ${CI_COMMIT_REF_NAME} || echo "skip push"
+    - git push origin ${CI_COMMIT_REF_NAME}
   cache:
     key: ${CI_BUILD_REF_NAME}
     paths:
@@ -99,6 +99,17 @@ build:
     - docker
 
 # Job: Test
+test_dev:
+  stage: test
+  script:
+    - sonar-scanner -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=${CI_COMMIT_REF_NAME} -Dsonar.projectVersion=${SONAR_VERSION}
+  dependencies:
+    - build_dev
+  only:
+    - dev
+  tags:
+    - docker
+
 test:
   stage: test
   script:
@@ -107,7 +118,6 @@ test:
     - build
   only:
     - dev
-    - master
   tags:
     - docker
 
