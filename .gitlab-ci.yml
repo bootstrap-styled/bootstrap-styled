@@ -84,12 +84,24 @@ test:
     - docker
 
 # Job: Release
-release:
+release_dist_and_lib:
   stage: release
   script:
     # release dist and lib
-    - git add dist/ lib/ && git commit -m "new release dist and lib"
+    - git add dist/ lib/
+    - git commit -m "new release dist and lib"
     - git push origin ${CI_COMMIT_REF_NAME}
+  dependencies:
+    - build
+  only:
+    - dev
+  tags:
+    - docker
+
+
+release:
+  stage: release
+  script:
     # tag current version
     - git checkout -b v${PACKAGE_VERSION}
     - git commit -m "new version v${PACKAGE_VERSION}"

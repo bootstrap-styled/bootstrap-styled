@@ -11,3 +11,4 @@ test-report.xml
 npm-debug.log
 .idea
 .sonar
+jest_0
