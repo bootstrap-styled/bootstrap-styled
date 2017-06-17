@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import findDOMNode from 'react-dom/lib/findDOMNode';
 import cn from 'classnames';
-import bsTheme from 'theme';
 import omit from 'lodash.omit';
+import bsTheme from '../../theme';
 import Button from '../Button';
 import Header from '../Header';
 import OffsetNavPush from './OffsetNavPush';
@@ -24,7 +24,7 @@ const defaultProps = {
 class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
+    /* eslint-disable react/no-unused-prop-types, react/require-default-props */
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
     theme: PropTypes.object,
@@ -48,10 +48,10 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     fixed: PropTypes.string,
     sticky: PropTypes.string,
     color: PropTypes.string,
-    offsetColor: PropTypes.bool,
+    offsetColor: PropTypes.string,
     'menu-right': PropTypes.bool,
     'animation-push': PropTypes.bool,
-    /* eslint-enable react/no-unused-prop-types */
+    /* eslint-enable react/no-unused-prop-types, react/require-default-props */
   }
 
   state = {

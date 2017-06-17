@@ -58,8 +58,8 @@ build_dev:
     - npm run dist
     # release dist and lib
     - git add dist/ lib/
-    - git commit -m "new release dist and lib"
-    - git push origin ${CI_COMMIT_REF_NAME}
+    - git commit -m "new release dist and lib" || echo "no change detected"
+    - git push origin ${CI_COMMIT_REF_NAME} || echo "skip push"
   cache:
     key: ${CI_BUILD_REF_NAME}
     paths:
