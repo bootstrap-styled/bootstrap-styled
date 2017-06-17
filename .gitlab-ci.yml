@@ -117,7 +117,7 @@ test:
   dependencies:
     - build
   only:
-    - dev
+    - master
   tags:
     - docker
 
