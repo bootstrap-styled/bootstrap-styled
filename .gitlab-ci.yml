@@ -125,10 +125,10 @@ test:
 release:
   stage: release
   script:
-    # tag current version
+    # create branch for release version
     - git checkout -b v${PACKAGE_VERSION}
-    - git commit -m "new version v${PACKAGE_VERSION}"
     - git push origin v${PACKAGE_VERSION}
+    # tag version
     - git tag -a -m "new version v${PACKAGE_VERSION}" v${PACKAGE_VERSION}
     - git push --tags
     # prepare next dev version
