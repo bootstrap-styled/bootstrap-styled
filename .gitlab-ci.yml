@@ -132,6 +132,7 @@ release:
     - git tag -a -m "new version v${PACKAGE_VERSION}" v${PACKAGE_VERSION}
     - git push --tags
     # prepare next dev version
+    - git checkout dev
     - npm version patch
     - git push origin HEAD:dev
   dependencies:
