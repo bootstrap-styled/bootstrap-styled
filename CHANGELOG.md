@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [1.1.3] - 2017-06-XX
 
  - Corrected branch not having the proper `dist` and `lib` on release
+ - Releasing to master will now checkout to `dev` for bumping the version preventing concurrent build to fail the push of version bumping on `dev`
  
 ## [1.1.2]
 
