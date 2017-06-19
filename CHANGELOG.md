@@ -1,19 +1,21 @@
 # Changelog
 
-## 1.1.3
+All notable changes to this project will be documented in this file.
+
+## [1.1.3] - 2017-06-XX
 
  - Corrected branch not having the proper `dist` and `lib` on release
  
-## 1.1.2
+## [1.1.2]
 
  - Added props `alwaysShow`, `offsetColor` and `shadowHeader` to `<HeaderNavBar />`
  - Fixed `size` props in Button
 
-## 1.1.1
+## [1.1.1]
 
  - Added tag on CI master
  
-## 1.1.0
+## [1.1.0]
 
  - Corrected version react-transition-group to fit peer
  - Corrected tooltip error since 15.5
@@ -23,15 +25,15 @@
  - Improve code quality
  - Inject body css in BootstrapProvider and Modal
   
-## 1.0.2
+## [1.0.2]
 
  - Corrected tooltip error since 15.5
 
-## 1.0.1
+## [1.0.1]
 
  - Corrected React 15.5 warnings
 
-## 1.0.0
+## [1.0.0]
  
 Release V1
 
@@ -41,7 +43,7 @@ Release V1
  - created documentation
  - 93% code coverage
 
-## 0.1.0 
+## [0.1.0] 
 
 First release.
  
