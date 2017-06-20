@@ -205,6 +205,7 @@
     "classnames": "2.2.5",
     "color": "1.0.3",
     "lodash.omit": "^4.5.0",
+    "map-to-css-modules": "^1.0.0",
     "math-utils": "git+ssh://git@module.kopaxgroup.com:20024/dev-tools/math-utils.git#v0.2.0",
     "prop-types": "^15.5.8",
     "tether": "1.3.4"
@@ -249,6 +250,7 @@
     "jest-cli": "19.0.2",
     "jest-sonar-reporter": "1.1.1",
     "lint-staged": "3.2.1",
+    "map-to-css-modules": "^1.0.4",
     "ngrok": "2.2.4",
     "node-plop": "0.5.4",
     "null-loader": "0.1.1",
