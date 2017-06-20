@@ -4,7 +4,6 @@ import {
   isBodyOverflowing,
   getOriginalBodyPadding,
   conditionallyUpdateScrollbar,
-  mapToCssModules,
   getTetherAttachments,
   getScrollbarWidth,
 } from '../tools';
@@ -150,27 +149,7 @@ describe('tools', () => {
     });
   });
 
-  describe('mapToCssModules', () => {
-    let className;
-    beforeAll(() => {
-      className = 'btn btn-primary';
-    });
-    it('should have a module btn-primary', () => {
-      const classNameNew = mapToCssModules(className, {
-        'btn-primary': 'replacement-primary',
-      });
-      expect(classNameNew).toEqual('btn replacement-primary');
-    });
-    it('should have class "replacement-btn btn-primary"', () => {
-      const classNameNew = mapToCssModules(className, {
-        btn: 'replacement-btn',
-      });
-      expect(classNameNew).toEqual('replacement-btn btn-primary');
-    });
-    it('mapToCssModules should have class "btn btn-primary"', () => {
-      const classNameNew = mapToCssModules(className);
-      expect(classNameNew).toEqual('btn btn-primary');
-    });
+  describe('toHashCode', () => {
     it('toHashCode should generate an hashCode"', () => {
       const hash = toHashCode(JSON.stringify(getTetherAttachments()));
       expect(typeof hash).toEqual('number');

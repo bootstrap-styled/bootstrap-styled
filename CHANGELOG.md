@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
  - Corrected branch not having the proper `dist` and `lib` on release
  - Releasing to master will now checkout to `dev` for bumping the version preventing concurrent build to fail the push of version bumping on `dev`
+ - Move to [dependency](https://module.kopaxgroup.com/dev-tools/map-to-css-modules) [mapToCssModules](https://www.npmjs.com/package/map-to-css-modules)
  
 ## [1.1.2]
 

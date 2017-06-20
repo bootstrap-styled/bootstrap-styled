@@ -1,3 +1,5 @@
+export { default as mapToCssModules } from 'map-to-css-modules';
+
 export function getTetherAttachments(placement) {
   switch (placement) {
     case 'top':
@@ -133,12 +135,6 @@ export function conditionallyUpdateScrollbar() {
     setScrollbarWidth(bodyPadding + scrollbarWidth);
   }
 }
-
-export function mapToCssModules(className, cssModule) {
-  if (!cssModule) return className;
-  return className.split(' ').map(c => cssModule[c] || c).join(' '); // eslint-disable-line arrow-parens
-}
-
 
 /**
  * http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
