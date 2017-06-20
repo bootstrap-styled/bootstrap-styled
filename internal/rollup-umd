@@ -1,0 +1,77 @@
+#!/bin/node
+
+/**
+ * Roll-umd cli tools.
+ * Can be used with npm run rollup-umd [program] [args]
+ */
+
+const pkg = require('../package.json');
+const initPackage = require('./programs/initPackage');
+const installExternal = require('./programs/installExternal');
+const installBabelPlugin = require('./programs/installBabelPlugin');
+const installEslint = require('./programs/installEslint');
+const appendBabelPreset = require('./programs/appendBabelPreset');
+
+const cli = {
+  name: `${pkg.name}-cli`,
+  description: `${pkg.name}-cli v${pkg.version}`,
+};
+
+let program;
+let programArgs;
+
+process.argv.forEach((arg, index) => {
+  if (index === 3) {
+    program = arg;
+    programArgs = process.argv.slice(4);
+  }
+});
+
+if (!program) {
+  console.warn('You must specify a program.');
+  help();
+  process.exit(0);
+}
+
+function help() {
+  console.log(`${cli.name} available commands:`);
+  console.log('');
+  console.log('    npm run rollup-umd [program]');
+  console.log('');
+  console.log('list of programs:');
+  console.log('');
+  console.log(' create');
+  console.log(' install-external');
+  console.log(' install-babel-plugin');
+  console.log(' help (display this message)');
+  console.log('');
+  console.log('run `npm run rollup-umd [program] help` for more help');
+}
+
+function run() {
+  console.log(`${cli.description}`);
+  switch (program) {
+    case 'help':
+      help();
+      break;
+    case 'create':
+      initPackage(programArgs);
+      break;
+    case 'install-external':
+      installExternal(programArgs);
+      break;
+    case 'install-babel-plugin':
+      installBabelPlugin(programArgs);
+      break;
+    case 'eslint-add':
+      installEslint(programArgs);
+      break;
+    case 'append-babel-preset':
+      appendBabelPreset(programArgs);
+      break;
+    default:
+      throw new Error('This program does not exist.');
+  }
+}
+
+run();

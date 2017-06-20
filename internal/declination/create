@@ -1,0 +1,272 @@
+#!/bin/bash
+
+set -e
+
+MY_PATH="`dirname \"$0\"`"
+DECLINATION_NAME=$1
+VERSION=$2
+
+if [ $1 = "react" ]; then
+
+# React
+cd
+git clone ssh://git@module.kopaxgroup.com:20024/dev-tools/rollup-umd.git rollup-react && cd rollup-react
+git checkout $VERSION
+npm install
+npm run rollup-umd install-external react*React
+npm run rollup-umd install-external react-dom*ReactDom
+npm run rollup-umd install-external prop-types*PropTypes
+npm uninstall --save-dev eslint-config-airbnb-base
+npm install --save-dev react-addons-test-utils \
+    react-test-renderer \
+    enzyme \
+    babel-plugin-react-intl \
+    babel-plugin-react-transform  \
+    babel-plugin-transform-react-constant-elements \
+    babel-plugin-transform-react-inline-elements \
+    babel-plugin-transform-react-remove-prop-types \
+    babel-preset-react \
+    babel-preset-react-hmre \
+    eslint-config-airbnb \
+    eslint-plugin-jsx-a11y \
+    eslint-plugin-react
+cat > tmp.json << EOL
+{
+      "jsx-a11y/aria-props": 2,
+      "jsx-a11y/heading-has-content": 0,
+      "jsx-a11y/href-no-hash": 2,
+      "jsx-a11y/label-has-for": 2,
+      "jsx-a11y/mouse-events-have-key-events": 2,
+      "jsx-a11y/role-has-required-aria-props": 2,
+      "jsx-a11y/role-supports-aria-props": 2
+}
+EOL
+npm run rollup-umd eslint-add tmp.json
+rm tmp.json
+cat > tmp.json << EOL
+{
+      "react/forbid-prop-types": 0,
+      "react/jsx-first-prop-new-line": [
+        2,
+        "multiline"
+      ],
+      "react/jsx-filename-extension": 0,
+      "react/jsx-no-target-blank": 0,
+      "react/require-extension": 0,
+      "react/self-closing-comp": 0
+}
+EOL
+npm run rollup-umd eslint-add tmp.json
+rm tmp.json
+sed -i "s/\"extends\": \"airbnb-base\",/\"extends\": \"airbnb\",/g" package.json
+npm run rollup-umd append-babel-preset react
+cat > src/index.js << EOL
+/**
+ * Code your first module here
+ */
+import React from 'react';
+import PropTypes from 'prop-types';
+
+// eslint-disable-next-line react/prefer-stateless-function
+export default class ReactDemo extends React.Component {
+  static propTypes = {
+    testProps: PropTypes.bool.isRequired,
+  }
+
+  static defaultProps = {
+    testProps: true,
+  }
+
+  render() {
+    const { testProps, ...rest } = this.props;
+    return (
+      <div {...rest}>Hello {testProps}</div>
+    );
+  }
+}
+
+EOL
+cat > src/tests/index.test.js << EOL
+/**
+ * Testing example
+ */
+
+import { shallow } from 'enzyme';
+import React from 'react';
+import ReactDemo from '../index';
+
+const renderComponent = (props = {}) => shallow(
+  <ReactDemo {...props}/>
+);
+
+describe('<ReactDemo />', () => {
+  it('should render an <ReactDemo /> tag', () => {
+    const renderedComponent = renderComponent();
+    expect(renderedComponent.length).toBe(1);
+  });
+});
+
+EOL
+npm run build
+git checkout -b $VERSION-react
+git add -A
+git commit -m "Create react declination from rollup-umd $VERSION"
+git push origin $VERSION-react
+git tag $VERSION-react
+git push --tags
+
+cd $MY_PATH
+
+elif [ $1 = "styled-components" ]; then
+
+# styled
+cd
+git clone ssh://git@module.kopaxgroup.com:20024/dev-tools/rollup-umd.git rollup-styled && cd rollup-styled
+git checkout $VERSION-react
+npm install
+npm run rollup-umd install-external styled-components*styled
+npm run rollup-umd install-babel-plugin babel-plugin-styled-components
+cat > src/index.js << EOL
+/**
+ * Code your first module here
+ */
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+// eslint-disable-next-line react/prefer-stateless-function
+export class ReactDemo extends React.Component {
+  static propTypes = {
+    testProps: PropTypes.bool.isRequired,
+  }
+
+  static defaultProps = {
+    testProps: true,
+  }
+
+  render() {
+    const { testProps, ...rest } = this.props;
+    return (
+      <div {...rest}>Hello {testProps}</div>
+    );
+  }
+}
+
+const ReactDemoStyled = styled(ReactDemo)\`
+  width: auto;
+\`;
+
+export default ReactDemoStyled;
+
+EOL
+cat > src/tests/index.test.js << EOL
+/**
+ * Testing example
+ */
+
+import { shallow } from 'enzyme';
+import React from 'react';
+import ReactDemoStyled, { ReactDemo } from '../index';
+
+describe('<ReactDemo />', () => {
+  it('should render an <ReactDemo /> tag', () => {
+    const renderedComponent = shallow(
+      <ReactDemo />
+    );
+    expect(renderedComponent.length).toBe(1);
+  });
+});
+
+describe('<ReactDemoStyled />', () => {
+  it('should render an <ReactDemoStyled /> tag', () => {
+    const renderedComponent = shallow(
+      <ReactDemoStyled />
+    );
+    expect(renderedComponent.length).toBe(1);
+  });
+});
+
+EOL
+
+npm run build
+git checkout -b $VERSION-styled
+git add -A
+git commit -m "Create styled-components declination from rollup-umd $VERSION"
+git push origin $VERSION-styled
+git tag $VERSION-styled
+git push --tags
+
+cd $MY_PATH
+
+elif [ $1 = "bootstrap-styled" ]; then
+
+# bootstrap-styled
+cd
+git clone ssh://git@module.kopaxgroup.com:20024/dev-tools/rollup-umd.git rollup-bs && cd rollup-bs
+git checkout $VERSION-styled
+npm install
+npm run rollup-umd install-external "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled.git*BootstrapStyled"
+npm run rollup-umd install-external classnames*cn
+npm run rollup-umd install-external react-transition-group*ReactTransitionGroup
+cat > src/index.js << EOL
+/**
+ * Code your first module here
+ */
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Dropdown } from 'bootstrap-styled';
+
+// eslint-disable-next-line react/prefer-stateless-function
+export default class ReactDemo extends React.Component {
+  static propTypes = {
+    testProps: PropTypes.bool.isRequired,
+  }
+
+  static defaultProps = {
+    testProps: true,
+  }
+
+  render() {
+    const { testProps, ...rest } = this.props;
+    return (
+      <Dropdown {...rest}>Hello {testProps}</Dropdown>
+    );
+  }
+}
+
+EOL
+cat > src/tests/index.test.js << EOL
+/**
+ * Testing example
+ */
+
+import { shallow } from 'enzyme';
+import React from 'react';
+import ReactDemo from '../index';
+
+describe('<ReactDemo />', () => {
+  it('should render an <Dropdown /> tag', () => {
+    const renderedComponent = shallow(
+      <ReactDemo />
+    );
+    expect(renderedComponent.find('Dropdown__Dropdown').length).toBe(1);
+  });
+});
+
+EOL
+npm run build
+git checkout -b $VERSION-bs
+git add -A
+git commit -m "Create bootstrap-styled declination from rollup-umd $VERSION"
+git push origin $VERSION-bs
+git tag $VERSION-bs
+git push --tags
+
+cd $MY_PATH
+
+else
+  echo "try again"
+fi
+
+
+

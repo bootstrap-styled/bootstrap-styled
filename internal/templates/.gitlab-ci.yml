@@ -1,0 +1,144 @@
+image: kopaxgroup/node7-jdk8-sonarscanner2:latest
+
+variables:
+  GIT_STRATEGY: none
+
+before_script:
+  # Install ssh-agent if not already installed, it is required by Docker.
+  # (change apt-get to yum if you use a CentOS-based image)
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+
+  # Run ssh-agent (inside the build environment)
+  - eval $(ssh-agent -s)
+
+  # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+
+  # For Docker builds disable host key checking. Be aware that by adding that
+  # you are suspectible to man-in-the-middle attacks.
+  # WARNING: Use this only with the Docker executor, if you use it with shell
+  # you will overwrite your user's SSH config.
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  # In order to properly check the server's host key, assuming you created the
+  # SSH_SERVER_HOSTKEYS variable previously, uncomment the following two lines
+  # instead.
+  # - mkdir -p ~/.ssh
+  # - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
+  # clone with ssh
+  - "[[ ! -e 'package.json' ]] && git clone ${REPOSITORY_SSH_URL} ."
+  - git checkout ${CI_COMMIT_REF_NAME}
+
+  # const
+  - export PACKAGE_VERSION=$(node -p "require('./package.json').version")
+  - export SONAR_VERSION=${PACKAGE_VERSION}-b${CI_PIPELINE_ID}-${CI_COMMIT_REF_NAME}
+
+  # logging
+  - npm --version
+  - node --version
+
+  # commit message
+  - git config --global user.email "contact@kopaxgroup.com"
+  - git config --global user.name "Gitlab-CI"
+
+#after_script:
+#  - rm secrets
+
+stages:
+  - build
+  - test
+  - release
+
+# Job: Build
+build_dev:
+  stage: build
+  coverage: '/All files[^|]*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*([\d.]*)\s*\|\s*/'
+  script:
+    - npm install
+    - npm run build
+    # release dist and lib
+    - git add dist/ lib/
+    - git commit -m "new release dist and lib" || echo "no change detected"
+    - git push origin ${CI_COMMIT_REF_NAME}
+  cache:
+    key: ${CI_BUILD_REF_NAME}
+    paths:
+      - node_modules/
+  artifacts:
+    when: on_success
+    name: "${CI_PROJECT_PATH}-${CI_PIPELINE_ID}-${CI_COMMIT_REF_NAME}"
+    untracked: true
+    expire_in: 3 mins
+    paths:
+      - .
+  only:
+    - dev
+  tags:
+    - docker
+
+build:
+  stage: build
+  coverage: '/All files[^|]*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*([\d.]*)\s*\|\s*/'
+  script:
+    - npm install
+    - npm run build
+  cache:
+    key: ${CI_BUILD_REF_NAME}
+    paths:
+      - node_modules/
+  artifacts:
+    when: on_success
+    name: "${CI_PROJECT_PATH}-${CI_PIPELINE_ID}-${CI_COMMIT_REF_NAME}"
+    untracked: true
+    expire_in: 1 hour
+    paths:
+      - .
+  except:
+    - dev
+  tags:
+    - docker
+
+# Job: Test
+test_dev:
+  stage: test
+  script:
+    - sonar-scanner -Dsonar.host.url=${SONAR_URL} -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=${CI_COMMIT_REF_NAME} -Dsonar.projectVersion=${SONAR_VERSION}
+  dependencies:
+    - build_dev
+  only:
+    - dev
+  tags:
+    - docker
+
+test:
+  stage: test
+  script:
+    - sonar-scanner -Dsonar.host.url=${SONAR_URL} -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=${CI_COMMIT_REF_NAME} -Dsonar.projectVersion=${SONAR_VERSION}
+  dependencies:
+    - build
+  only:
+    - master
+  tags:
+    - docker
+
+# Job: Release
+release:
+  stage: release
+  script:
+    # create branch for release version
+    - git checkout -b v${PACKAGE_VERSION}
+    - git push origin v${PACKAGE_VERSION}
+    # tag version
+    - git tag -a -m "new version v${PACKAGE_VERSION}" v${PACKAGE_VERSION}
+    - git push --tags
+    # prepare next dev version
+    - git checkout dev
+    - npm version patch
+    - git push origin HEAD:dev
+  dependencies:
+    - build
+  only:
+    - master
+  tags:
+    - docker
+
