@@ -1,7 +1,5 @@
 node_modules
-lib
 npm-debug.log
-dist
 tmp.json
 .DS_Store
 bundle-stats.html
