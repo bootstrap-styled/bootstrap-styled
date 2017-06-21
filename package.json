@@ -26,8 +26,7 @@
     "test:watch": "npm run test -- --watch",
     "lint": "eslint src",
     "prepublish": "npm run build",
-    "lint-staged": "lint-staged",
-    "rollup-umd": "node ./internal/rollup-umd --"
+    "lint-staged": "lint-staged"
   },
   "repository": {
     "type": "git",
