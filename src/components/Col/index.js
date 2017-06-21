@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import themeBs from 'theme';
 import omit from 'lodash.omit';
-import { mapToCssModules } from 'utils/tools';
+import themeBs from '../../theme';
+import { mapToCssModules } from '../../utils/tools';
 import { makeGridColumns } from '../../styled/mixins/grid-framework';
 
 const colWidths = ['xs', 'sm', 'md', 'lg', 'xl'];

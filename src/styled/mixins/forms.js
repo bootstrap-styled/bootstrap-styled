@@ -1,5 +1,5 @@
 import color from 'color';
-import theme from 'theme';
+import theme from '../../theme';
 import { borderRadius } from './border-radius';
 import { boxShadow } from './box-shadow';
 import { transition } from '../mixins/transition';

@@ -3,9 +3,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import bsTheme from 'theme';
 import omit from 'lodash.omit';
 import styled, { keyframes } from 'styled-components';
+import bsTheme from '../../theme';
 import { borderRadius } from '../../styled/mixins/border-radius';
 import { getBackgroundUtilities } from '../../styled/utilities/background';
 import { gradientStriped } from '../../styled/mixins/gradients';

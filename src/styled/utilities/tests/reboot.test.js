@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import bsTheme from 'theme';
+import bsTheme from '../../../theme';
 import { body, bodyUtils, boxSizing, getGlobalStyles, html, ie10FixHidden, ie10FixViewport, svg, tabIndex, webkitFileUploadButton } from '../reboot';
 
 describe('bootstrap reboot utility', () => {

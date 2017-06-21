@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
-import { fromJS } from 'immutable';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import { toHashCode } from '../../../utils/tools';
 
 import { TYPE_ROTATE } from '../components/animations/typeEnums';
 import makeKeyframe from '../components/animations/makeKeyframe';
@@ -49,7 +49,7 @@ export default function composeAnimation(makeAnimation) {
     }
 
     componentWillReceiveProps(newProps) {
-      if (fromJS(newProps.theme).hashCode() !== fromJS(this.props.theme).hashCode()) {
+      if (toHashCode(newProps.theme) !== toHashCode(this.props.theme)) {
         this.updateDefaultsFromTheme(this.updateAnimationStyles);
       } else {
         this.updateAnimationStyles();

@@ -55,7 +55,7 @@ build_dev:
   coverage: '/All files[^|]*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*([\d.]*)\s*\|\s*/'
   script:
     - npm install
-    - npm run dist
+    - npm run build
     # release dist and lib
     - git add dist/ lib/
     - git commit -m "new release dist and lib" || echo "no change detected"
@@ -81,7 +81,7 @@ build:
   coverage: '/All files[^|]*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*([\d.]*)\s*\|\s*/'
   script:
     - npm install
-    - npm run dist
+    - npm run build
   cache:
     key: ${CI_BUILD_REF_NAME}
     paths:
@@ -102,7 +102,7 @@ build:
 test_dev:
   stage: test
   script:
-    - sonar-scanner -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=${CI_COMMIT_REF_NAME} -Dsonar.projectVersion=${SONAR_VERSION}
+    - sonar-scanner -Dsonar.host.url=${SONAR_URL} -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=${CI_COMMIT_REF_NAME} -Dsonar.projectVersion=${SONAR_VERSION}
   dependencies:
     - build_dev
   only:
@@ -113,7 +113,7 @@ test_dev:
 test:
   stage: test
   script:
-    - sonar-scanner -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=${CI_COMMIT_REF_NAME} -Dsonar.projectVersion=${SONAR_VERSION}
+    - sonar-scanner -Dsonar.host.url=${SONAR_URL} -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=${CI_COMMIT_REF_NAME} -Dsonar.projectVersion=${SONAR_VERSION}
   dependencies:
     - build
   only:
@@ -132,6 +132,7 @@ release:
     - git tag -a -m "new version v${PACKAGE_VERSION}" v${PACKAGE_VERSION}
     - git push --tags
     # prepare next dev version
+    - git checkout dev
     - npm version patch
     - git push origin HEAD:dev
   dependencies:
@@ -140,3 +141,4 @@ release:
     - master
   tags:
     - docker
+

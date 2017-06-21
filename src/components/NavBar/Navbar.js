@@ -5,7 +5,7 @@ import cn from 'classnames';
 import styled from 'styled-components';
 import themeBs from '../../theme';
 import omit from 'lodash.omit';
-import { mapToCssModules } from 'utils/tools';
+import { mapToCssModules } from '../../utils/tools';
 import { navbar } from '../../styled/mixins/navbar';
 import { nav } from '../../styled/mixins/nav';
 

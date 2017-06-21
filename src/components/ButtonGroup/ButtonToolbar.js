@@ -6,9 +6,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
-import bsTheme from 'theme';
 import omit from 'lodash.omit';
-import { mapToCssModules } from 'utils/tools';
+import bsTheme from '../../theme';
+import { mapToCssModules } from '../../utils/tools';
 import { buttonGroup } from '../../styled/mixins/buttonGroup';
 
 const defaultProps = {

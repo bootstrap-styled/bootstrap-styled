@@ -7,9 +7,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
-import bsTheme from 'theme';
 import omit from 'lodash.omit';
-import { mapToCssModules } from 'utils/tools';
+import bsTheme from '../../theme';
+import { mapToCssModules } from '../../utils/tools';
 import { borderTopRadius, borderBottomRadius } from '../../styled/mixins/border-radius';
 import { hoverFocus } from '../../styled/mixins/hover';
 import { listGroupItemVariant } from '../../styled/mixins/list-group';
@@ -209,5 +209,5 @@ ListGroup = styled(ListGroup)`
 
 ListGroup.defaultProps = defaultProps;
 
-export default ListGroup ;
+export default ListGroup;
 

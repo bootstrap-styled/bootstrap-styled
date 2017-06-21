@@ -6,10 +6,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import bsTheme from 'theme';
 import cn from 'classnames';
 import omit from 'lodash.omit';
-import { mapToCssModules } from 'utils/tools';
+import bsTheme from '../../theme';
+import { mapToCssModules } from '../../utils/tools';
 const defaultProps = { theme: bsTheme };
 
 class Small extends React.Component { // eslint-disable-line react/prefer-stateless-function

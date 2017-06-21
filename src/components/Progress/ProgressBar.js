@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { rangeUtils } from 'math-utils';
-import { mapToCssModules } from 'utils/tools';
+import { mapToCssModules } from '../../utils/tools';
 
 export default class ProgressBar extends React.Component { // eslint-disable-line react/prefer-stateless-function
 

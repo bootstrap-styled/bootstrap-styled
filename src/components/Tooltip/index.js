@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
-import { mapToCssModules, getTetherAttachments, tetherAttachements } from 'utils/tools';
+import { mapToCssModules, getTetherAttachments, tetherAttachements } from '../../utils/tools';
 import TetherContent from '../TetherContent';
 const DEFAULT_DELAYS = {
   shape: 0,

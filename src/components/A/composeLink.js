@@ -4,8 +4,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import bsTheme from 'theme';
 import omit from 'lodash.omit';
+import bsTheme from '../../theme';
 import { a } from '../../styled/mixins/a';
 import { button } from '../../styled/mixins/buttons';
 

@@ -5,7 +5,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import Tether from 'tether';
+import Tether from 'tether-fix';
 import isFunction from 'lodash.omit';
 
 const defaultProps = {

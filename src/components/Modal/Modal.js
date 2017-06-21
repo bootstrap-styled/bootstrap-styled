@@ -10,7 +10,7 @@ import {
   conditionallyUpdateScrollbar,
   setScrollbarWidth,
   mapToCssModules,
-} from 'utils/tools';
+} from '../../utils/tools';
 import Fade from './Fade';
 import { transition } from '../../styled/mixins/transition';
 import { borderRadius } from '../../styled/mixins/border-radius';

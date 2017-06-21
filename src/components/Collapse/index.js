@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import bsTheme from 'theme';
 import omit from 'lodash.omit';
+import bsTheme from '../../theme';
 
-import { mapToCssModules } from 'utils/tools';
+import { mapToCssModules } from '../../utils/tools';
 
 const SHOW = 'SHOW';
 const SHOWN = 'SHOWN';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import theme from 'theme';
+import theme from '../../../theme';
 import BootstrapProvider from '../index';
 
 const children = (<h1>Test</h1>);

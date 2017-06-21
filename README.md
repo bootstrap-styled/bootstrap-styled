@@ -1,6 +1,6 @@
-# Bootstrap-styled
+# bootstrap-styled
 
-Bootstrap 4.0 made in styled components
+bootstrap-styled npm package.
 
 **Master**
 
@@ -15,81 +15,59 @@ Bootstrap 4.0 made in styled components
 ## Table of Contents
 
   - [Changelog](#changelog)
-  - [Dependencies](#dependencies)
-  - [Installation](#installation)
-  - [Basic Usage](#basic-usage)
-  - [Mixins](#mixins)
-  - [Utilities](#utilities)
-  - [Documentation](#documentation)
-  - [Contribute](#contribute)
-  - [Guide](#guide)
-  - [License](#license)
+  - [Reminders](#reminders)
+  - [Quick start](#quick-start)
+  - [Release](#release)
 
 ---
 
 ## Changelog
 
- - View [changelog](CHANGELOG.md)
+  - View [Changelog](CHANGELOG.md)
 
-## Dependencies
+## Reminders
 
-This modules require peerDependencies, see `package.json`.
-
-## Installation
-
-    npm install ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled.git --save
-
-## Basic Usage
-
-bootstrap-styled is made on top of [styled-components](https://github.com/styled-components/styled-components)
-
-__Wrapper your application within a `<BootstrapProvider>` __instead of__ a `<ThemeProvider>`__
-
-    import { BootstrapProvider } from 'bootstrap-styled';
-    // ... then in your render
-    <BootstrapProvider theme={theme}>
-        <App />
-    </BootstrapProvider>
+**⚠️ When using this plugin, you must import in the first line of your application javascript entry file `babel-polyfill`: ⚠️**
+  
+    import "babel-polyfill";
     
-This will execute all the compatiblity fix for all the different browsers.
+To enable ES features in older browsers, you MUST include in the package.json
 
-For more information see `src/components/BootstrapProvider/index.js`
+    "browserslist": ["ie >= 9", "last 2 versions"]
+    // or
+    "browserslist": ["ie >= 10", "last 2 versions"]
 
-__Import bootstrap-styled component__
+## Quick start
+
+Clone project
+
+    git clone ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled.git
+
+Install dependencies
+
+    npm install
+
+Build project
+
+    npm run build
     
-    import {
-        A,
-        Ul,
-        Li,
-        Pre,
-        Form,
-        DropDown,
-        Button,
-    } from 'bootstrap-styled;
-
-If you want just part of your bootstrap for building a package to distribute for example you can also do
-
-    import Button from 'bootstrap-styled/lib/components/Button';
+Run unit test
+     
+    npm test
     
-## Mixins
+Watch unit test
+     
+    npm run test:watch
 
-Example of import of the __breapoints__ mixins
+Watch the `/dist` directory
 
-    import { bp } from 'bootstrap-styled';
+    npm run build:dist:watch
 
-## Utilities
+Watch the `/lib` directory
 
-Example of import of the __visibility__ utility
+    npm run build:lib:watch
 
-    import { visibilityUtils } from 'bootstrap-styled';
-
-## Documentation
-
-The complete documentation is available at [http://bootstrap-styled.kopaxgroup.com](http://bootstrap-styled.kopaxgroup.com)
-
-# Developers
-
-## Contribute
+# Contribute
 
 `master` is used to release the version. 
 
@@ -105,26 +83,13 @@ If you wish to implement new functionalities you need to do a merge request incl
 
 You can now start working on your branch. Don't forget to check `Delete branch when merged`.
 
-## Guide
+## Release
 
-Create a new distribution build (including distribution file and lib)
+Merge `dev` into `master` will release a new version and prepare a new version in `dev`.
 
-    npm run dist
-    
-Test driven development
+To release a new version, edit the [Changelog](CHANGELOG.md) and set the version in `package.json` and merge your change into `master`.
 
-    npm run tdd
-    
-Automatically build dist (do not build lib)
+**⚠️ if you are releasing on a git repository instead of a npm repository, **DO NOT** forget to remove `build`, and `dist` from the `.gitignore` ⚠️**
 
-    npm run build:watch
-    
-Exports are done in `src/index.js`, the suffix __Utils__ and __Mixins__ are reserved for mixins and utilities.
+    sed -i "/lib\|dist/d" .gitignore
 
-Utilities available in the API are exported in `src/utilities`;
-
-Mixins available in the API are exported in `src/mixins`;
-
-## License
-
-Copyright (c) 2017 Kopax Ltd. For more information `contact@kopaxgroup.com`.
