@@ -37,5 +37,5 @@ class ListGroupItemHeading extends React.Component { // eslint-disable-line reac
 
 ListGroupItemHeading.defaultProps = defaultProps;
 
-export default ListGroupItemHeading ;
+export default ListGroupItemHeading;
 

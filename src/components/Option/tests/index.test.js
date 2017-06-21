@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
+import theme from '../../../theme';
 
 import Option from '../index';
 

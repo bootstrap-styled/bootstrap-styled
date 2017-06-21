@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import theme from 'theme';
+import theme from '../../../theme';
 import Hr from '../index';
 
 const renderComponent = (props = {}) => shallow(

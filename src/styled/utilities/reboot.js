@@ -1,4 +1,4 @@
-import bsTheme from 'theme';
+import bsTheme from '../../theme';
 
 /**
  * getRebootUtility

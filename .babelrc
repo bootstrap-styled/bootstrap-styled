@@ -1,0 +1,34 @@
+{
+  "only": [
+    "src"
+  ],
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false
+      }
+    ],
+    "stage-2",
+    "react"
+  ],
+  "plugins": [
+    "array-includes",
+    "transform-class-properties",
+    "styled-components"
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "add-module-exports",
+        "transform-es2015-modules-commonjs"
+      ]
+    },
+    "test": {
+      "plugins": [
+        "transform-es2015-modules-commonjs",
+        "dynamic-import-node"
+      ]
+    }
+  }
+}

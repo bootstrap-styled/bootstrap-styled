@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
-import themeBs, { makeTheme } from 'theme';
+import themeBs, { makeTheme } from '../../theme';
 import UtilityProvider from './UtilityProvider';
 
 export default class BootstrapProvider extends React.Component { // eslint-disable-line react/prefer-stateless-function

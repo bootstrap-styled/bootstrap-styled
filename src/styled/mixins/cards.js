@@ -1,4 +1,4 @@
-import theme from 'theme';
+import theme from '../../theme';
 import { hover, hoverFocus } from './hover';
 import { borderRadius, borderTopRadius, borderBottomRadius } from './border-radius';
 

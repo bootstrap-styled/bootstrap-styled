@@ -1,14 +1,10 @@
-# Don't check auto-generated stuff into git
-coverage
-reports
 node_modules
-stats.json
-.sonar
-reports
-test-report.xml
-# Cruft
-.DS_Store
 npm-debug.log
-.idea
-.sonar
+tmp.json
+.DS_Store
+bundle-stats.html
+.idea/
+coverage/
+/reports
+/test-report.xml
 jest_0

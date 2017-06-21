@@ -8,7 +8,7 @@ Following these guidelines helps to communicate that you respect the time of the
 
 ## Using the issue tracker
 
-The [issue tracker](https://github.com/kopaxgroup/bootstrap-styled/issues) is
+The [issue tracker](https://module.kopaxgroup.com/styled-components/bootstrap-styled/issues) is
 the preferred channel for [bug reports](#bugs), [features requests](#features)
 and [submitting pull requests](#pull-requests).
 

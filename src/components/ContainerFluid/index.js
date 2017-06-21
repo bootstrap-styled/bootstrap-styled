@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
-import bsTheme from 'theme';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import bsTheme from '../../theme';
 import { makeContainer } from '../../styled/mixins/grid';
 
 const defaultProps = {

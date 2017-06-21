@@ -1,5 +1,5 @@
-import theme from 'theme';
-import parseTransition from 'utils/parseTransition';
+import theme from '../../theme';
+import parseTransition from '../../utils/parseTransition';
 import { transition as transitionMixin } from '../mixins/transition';
 
 export const defaultProps = theme;

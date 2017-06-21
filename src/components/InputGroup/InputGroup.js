@@ -6,10 +6,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import bsTheme from 'theme';
 import cn from 'classnames';
 import omit from 'lodash.omit';
-import { mapToCssModules } from 'utils/tools';
+import bsTheme from '../../theme';
+import { mapToCssModules } from '../../utils/tools';
 import { hoverFocusActive } from '../../styled/mixins/hover';
 import { borderRadius, borderLeftRadius, borderRightRadius } from '../../styled/mixins/border-radius';
 import { formControl } from '../../styled/mixins/forms';

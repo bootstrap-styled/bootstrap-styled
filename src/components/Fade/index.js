@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
 import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
-import themeBs from 'theme';
 import omit from 'lodash.omit';
-import parseTransition from 'utils/parseTransition';
+import parseTransition from '../../utils/parseTransition';
+import themeBs from '../../theme';
 
 const defaultProps = {
   isOpen: true,

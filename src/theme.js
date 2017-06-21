@@ -1,4 +1,4 @@
-import { makeTheme as makeDefaultTheme } from 'makeTheme';
+import { makeTheme as makeDefaultTheme } from './makeTheme';
 
 /**
  * default export is a default theme

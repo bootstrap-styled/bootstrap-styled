@@ -2,8 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import bsTheme from 'theme';
 import omit from 'lodash.omit';
+import bsTheme from '../../theme';
+
 const defaultProps = { theme: bsTheme };
 
 class PageWrapper extends React.Component { // eslint-disable-line react/prefer-stateless-function

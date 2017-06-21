@@ -90,7 +90,7 @@ export { default as Output } from './components/Output';
 export { default as P } from './components/P';
 export { default as Pagination, PaginationItem, PaginationLink } from './components/Pagination';
 export { default as Pre } from './components/Pre';
-export { default as Progress, ProgressBar } from 'components/Progress';
+export { default as Progress, ProgressBar } from './components/Progress';
 export { default as Row } from './components/Row';
 export { default as Samp } from './components/Samp';
 export { default as Section } from './components/Section';

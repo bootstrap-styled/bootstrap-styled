@@ -6,9 +6,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
-import bsTheme from 'theme';
 import omit from 'lodash.omit';
-import { mapToCssModules } from 'utils/tools';
+import bsTheme from '../../theme';
+import { mapToCssModules } from '../../utils/tools';
 import { button } from '../../styled/mixins/buttons';
 
 const defaultProps = {
@@ -49,8 +49,8 @@ class Button extends React.Component { // eslint-disable-line react/prefer-state
   }
 
   render() {
+    /* eslint-disable prefer-const */
     let {
-      /* eslint-disable prefer-const */
       active,
       disabled,
       block,
@@ -62,9 +62,9 @@ class Button extends React.Component { // eslint-disable-line react/prefer-state
       size,
       getRef,
       tag: Tag,
-      /* eslint-enable prefer-const */
       ...attributes
     } = omit(this.props, ['theme']);
+    /* eslint-enable prefer-const */
 
     const classes = mapToCssModules(cn(className, 'btn', {
       dropup,

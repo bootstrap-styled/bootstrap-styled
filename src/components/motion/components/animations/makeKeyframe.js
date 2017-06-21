@@ -1,5 +1,5 @@
 import { keyframes } from 'styled-components';
-import { toHashCode } from 'utils/tools';
+import { toHashCode } from '../../../../utils/tools';
 
 /**
  * This will store a reference to all the keyframe created with makeKeyFrame

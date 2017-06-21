@@ -4,7 +4,7 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
-import theme from 'theme';
+import theme from '../../../theme';
 import Sub from '../index';
 
 const children = 'Test';

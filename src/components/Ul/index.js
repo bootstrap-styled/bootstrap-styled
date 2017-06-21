@@ -9,9 +9,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import bsTheme from 'theme';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import bsTheme from '../../theme';
 import { nav } from '../../styled/mixins/nav';
 import { listUnstyled, listInline } from '../../styled/mixins/lists';
 import { navbar } from '../../styled/mixins/navbar';

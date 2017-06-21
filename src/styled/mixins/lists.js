@@ -1,5 +1,5 @@
 // Lists
-import theme from 'theme';
+import theme from '../../theme';
 export const defaultProps = {
   '$list-inline-padding': '5px',
 };

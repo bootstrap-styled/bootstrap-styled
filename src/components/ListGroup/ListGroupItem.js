@@ -58,5 +58,5 @@ class ListGroupItem extends React.Component { // eslint-disable-line react/prefe
 
 ListGroupItem.defaultProps = defaultProps;
 
-export default ListGroupItem ;
+export default ListGroupItem;
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme from 'theme';
+import theme from '../../theme';
 import { navbar } from '../../styled/mixins/navbar';
 import { ifThen } from '../../styled/mixins/conditional';
 

@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import { mapToCssModules } from 'utils/tools';
+import { mapToCssModules } from '../../utils/tools';
 import Label from '../Label';
 import Input from '../Input';
 
