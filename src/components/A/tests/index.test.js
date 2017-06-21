@@ -27,7 +27,7 @@ describe('<A />', () => {
   it('should render an <A> tag without a theme', () => {
     const active = true;
     const renderedComponent = renderComponent({
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
       type: 'text/html',
       target: '_blank',
@@ -37,15 +37,15 @@ describe('<A />', () => {
   });
   it('should have an href attribute without a theme', () => {
     const renderedComponent = renderComponent({
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
     });
-    expect(renderedComponent.props().href).toEqual('http://mxstbr.com/');
+    expect(renderedComponent.props().href).toEqual('https://bootstrap-styled.kopaxgroup.com/');
   });
   it('should adopt a target attribute without a theme', () => {
     const renderedComponent = renderComponent({
       target: '_blank',
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
     });
     expect(renderedComponent.props().target).toEqual('_blank');
@@ -53,7 +53,7 @@ describe('<A />', () => {
   it('should adopt a type attribute without a theme', () => {
     const renderedComponent = renderComponent({
       type: 'text/html',
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
     });
     expect(renderedComponent.props().type).toEqual('text/html');
@@ -61,7 +61,7 @@ describe('<A />', () => {
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
       target: '_blank',
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
     });
     expect(renderedComponent.contains(children)).toEqual(true);
@@ -70,7 +70,7 @@ describe('<A />', () => {
     const active = true;
     const renderedComponent = renderComponentUsingTheme({
       target: '_blank',
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
       active,
     });
@@ -79,16 +79,16 @@ describe('<A />', () => {
   });
   it('should render a href attribute of <A> with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
       type: 'text/html',
       target: '_blank',
     });
-    expect(renderedComponent.find('a').props().href).toEqual('http://mxstbr.com/');
+    expect(renderedComponent.find('a').props().href).toEqual('https://bootstrap-styled.kopaxgroup.com/');
   });
   it('should render an type attribute of <A> with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
       type: 'text/html',
       target: '_blank',
@@ -97,7 +97,7 @@ describe('<A />', () => {
   });
   it('should render a target attribute of <A> with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
       type: 'text/html',
       target: '_blank',
@@ -107,7 +107,7 @@ describe('<A />', () => {
   it('should render an <A> tag without a theme and props active', () => {
     const active = true;
     const renderedComponent = renderComponentUsingTheme({
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
       active,
     });
@@ -116,7 +116,7 @@ describe('<A />', () => {
   it('should render an <A> tag without a theme and props disabled', () => {
     const disabled = true;
     const renderedComponent = renderComponentUsingTheme({
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
       disabled,
     });
@@ -124,7 +124,7 @@ describe('<A />', () => {
   });
   it('should have an attribute color', () => {
     const renderedComponent = renderComponentUsingTheme({
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
       color: 'test-color',
     });
@@ -133,7 +133,7 @@ describe('<A />', () => {
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       target: '_blank',
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
     });
     expect(renderedComponent.contains(children)).toEqual(true);
@@ -142,17 +142,16 @@ describe('<A />', () => {
     const renderedComponent = renderComponentUsingTheme({
       className: 'btn',
       target: '_blank',
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
     });
-    console.log(renderedComponent.find('a').debug());
     expect(renderedComponent.find('a').hasClass('btn')).toBe(true);
   });
   it('active should set a class', () => {
     const renderedComponent = renderComponentUsingTheme({
       className: 'btn',
       target: '_blank',
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
       active: true,
     });
@@ -162,7 +161,7 @@ describe('<A />', () => {
     const renderedComponent = renderComponentUsingTheme({
       className: 'btn',
       target: '_blank',
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
       disabled: true,
     });
@@ -172,7 +171,7 @@ describe('<A />', () => {
     const renderedComponent = renderComponentUsingTheme({
       className: 'btn',
       target: '_blank',
-      href: 'http://mxstbr.com/',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
       color: 'primary',
     });
