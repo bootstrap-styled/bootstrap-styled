@@ -218,7 +218,7 @@ class Modal extends React.Component {
                 show: isOpen,
               }))}
               role="document"
-              ref={(c) => (this._dialog = c)} // eslint-disable-line no-underscore-dangle
+              ref={(c) => (this._dialog = c)} // eslint-disable-line
               {...attributes}
             >
               <div className={mapToCssModules(classNames('modal-content', contentClassName), cssModule)}>
