@@ -9,6 +9,7 @@ import Header from '../Header';
 import OffsetNavPush from './OffsetNavPush';
 import OffsetNavSlide from './OffsetNavSlide';
 import Overlay from './Overlay';
+import { mapToCssModules } from '../../utils/tools';
 
 const defaultProps = {
   button: {
@@ -98,6 +99,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     const {
       className,
       children,
+      cssModule,
       button,
       noOverlay,
       menuClose,
@@ -126,7 +128,8 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       ...restButton
     } = button;
 
-    const cssClasses = cn('navbar', 'justify-content-between', 'flex-row', className, {
+    const cssClasses = cn('navbar', 'justify-content-between', className, {
+      'flex-row': !alwaysShow,
       'navbar-light': light,
       'navbar-inverse': inverse,
       [`bg-${color}`]: color,
@@ -171,7 +174,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     return (
       <div>
         {!noOverlay && (<Overlay active={this.state.show} onClick={this.handleClick} />)}
-        <Header className={cn(cssClasses)} shadowHeader={shadowHeader} {...attributes} innerRef={(header) => { this.header = header; }}>
+        <Header className={mapToCssModules(cn(cssClasses), cssModule)} shadowHeader={shadowHeader} {...attributes} innerRef={(header) => { this.header = header; }}>
           {!alwaysShow && (<ButtonToggle className={buttonClasses} onClick={this.handleClick} {...restButton} />)}
           {navTop && (<div>{navTop}</div>)}
         </Header>

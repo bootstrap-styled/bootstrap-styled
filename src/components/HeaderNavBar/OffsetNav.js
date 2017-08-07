@@ -9,6 +9,7 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import bsTheme from '../../theme';
 import Close from '../Close';
+import { mapToCssModules } from '../../utils/tools';
 
 const defaultProps = {
   theme: bsTheme,
@@ -28,6 +29,7 @@ class OffsetNav extends React.Component { // eslint-disable-line react/prefer-st
     offsetColor: PropTypes.string,
     'menu-right': PropTypes.bool,
     'animation-push': PropTypes.bool,
+    cssModule: PropTypes.object,
     /* eslint-enable react/no-unused-prop-types */
   }
 
@@ -39,6 +41,7 @@ class OffsetNav extends React.Component { // eslint-disable-line react/prefer-st
       dismiss,
       menuClose,
       offsetColor,
+      cssModule,
       'menu-right': menuRight,
       ...attributes
     } = omit(this.props, ['theme', 'elementWidth', 'animation-push']);
@@ -51,7 +54,7 @@ class OffsetNav extends React.Component { // eslint-disable-line react/prefer-st
 
     return (
       <div
-        className={cn(cssClasses, { active })}
+        className={mapToCssModules(cn(cssClasses, { active }), cssModule)}
         {...attributes}
       >
         {menuClose && <Close aria-label="Close" onDismiss={dismiss} />}
