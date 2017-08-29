@@ -67,7 +67,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
   }
 
   componentDidMount() {
-    const componentAsANodeReact = findDOMNode(this);
+    const componentAsANodeReact = findDOMNode(this); // eslint-disable-line react/no-find-dom-node
     const node = componentAsANodeReact.querySelector('.navbar.justify-content-between');
     const nodeHeight = node.clientHeight;
     const offsetNav = componentAsANodeReact.querySelector('.offset-nav-margin-top');

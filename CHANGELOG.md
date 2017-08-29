@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2017-XX-XX
+
+ - Added `mapToCssModules` to `HeaderNavBar` and `OffsetNav` components.
+ - Added eslint rules `react/no-find-dom-node` since warning appears.
+
 ## [1.2.0] - 2017-06-20
 
  - Replaced webpack with rollup module bundler for es module.
