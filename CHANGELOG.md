@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
  - Added `mapToCssModules` to `HeaderNavBar` and `OffsetNav` components.
  - Added eslint rules `react/no-find-dom-node` since warning appears.
+  - Corrected `gitlab-ci.yml` to checkout from `CI_COMMIT_SHA`.
+ - Corrected `gitlab-ci.yml` to push `/lib` and `/div` on `HEAD:dev`.
 
 ## [1.2.0] - 2017-06-20
 

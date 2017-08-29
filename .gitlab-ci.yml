@@ -27,7 +27,7 @@ before_script:
   # - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
   # clone with ssh
   - "[[ ! -e 'package.json' ]] && git clone ${REPOSITORY_SSH_URL} ."
-  - git checkout ${CI_COMMIT_REF_NAME}
+  - git checkout ${CI_COMMIT_SHA}
 
   # const
   - export PACKAGE_VERSION=$(node -p "require('./package.json').version")
@@ -59,7 +59,7 @@ build_dev:
     # release dist and lib
     - git add dist/ lib/
     - git commit -m "new release dist and lib" || echo "no change detected"
-    - git push origin ${CI_COMMIT_REF_NAME}
+    - git push origin HEAD:${CI_COMMIT_REF_NAME}
   cache:
     key: ${CI_BUILD_REF_NAME}
     paths:
