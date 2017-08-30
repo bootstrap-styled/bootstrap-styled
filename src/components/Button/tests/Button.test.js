@@ -31,25 +31,25 @@ describe('<Button />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Button').length).toBe(1);
+    expect(renderedComponent.find('ButtonUnstyled').length).toBe(1);
   });
   it('should have an attribute outline without a theme', () => {
     const renderedComponent = renderComponent({
       outline: true,
     });
-    expect(renderedComponent.find('Button').props().outline).toBe(true);
+    expect(renderedComponent.find('ButtonUnstyled').props().outline).toBe(true);
   });
   it('should have an attribute size without a theme', () => {
     const renderedComponent = renderComponent({
       size: 'sm',
     });
-    expect(renderedComponent.find('Button').props().size).toBe('sm');
+    expect(renderedComponent.find('ButtonUnstyled').props().size).toBe('sm');
   });
   it('should have an attribute block without a theme', () => {
     const renderedComponent = renderComponent({
       block: true,
     });
-    expect(renderedComponent.find('Button').props().block).toBe(true);
+    expect(renderedComponent.find('ButtonUnstyled').props().block).toBe(true);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

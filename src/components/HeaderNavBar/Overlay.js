@@ -13,7 +13,7 @@ import { fade } from '../../styled/utilities/transition';
 
 const defaultProps = { theme: bsTheme };
 
-class Overlay extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class OverlayUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -41,8 +41,7 @@ class Overlay extends React.Component { // eslint-disable-line react/prefer-stat
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Overlay = styled(Overlay)`
+const Overlay = styled(OverlayUnstyled)`
   ${(props) => `
     position: fixed;
     width: 100%;

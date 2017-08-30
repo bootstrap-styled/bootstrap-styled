@@ -30,7 +30,7 @@ describe('<Nav />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Nav').length).toBe(1);
+    expect(renderedComponent.find('NavUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

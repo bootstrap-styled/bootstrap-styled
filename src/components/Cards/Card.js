@@ -20,7 +20,7 @@ const defaultProps = {
   tag: 'div',
 };
 
-class Card extends React.Component {// eslint-disable-line react/prefer-stateless-function
+class CardUnstyled extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -62,8 +62,7 @@ class Card extends React.Component {// eslint-disable-line react/prefer-stateles
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Card = styled(Card)`
+const Card = styled(CardUnstyled)`
   ${(props) => `
     
     /*

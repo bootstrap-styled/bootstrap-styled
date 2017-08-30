@@ -30,7 +30,7 @@ describe('<H4 />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('H4').length).toBe(1);
+    expect(renderedComponent.find('H4Unstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

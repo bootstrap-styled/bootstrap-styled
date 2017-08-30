@@ -1,13 +1,13 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('prop-types'), require('styled-components'), require('react-dom')) :
 	typeof define === 'function' && define.amd ? define(['exports', 'react', 'prop-types', 'styled-components', 'react-dom'], factory) :
-	(factory((global['bootstrap-styled'] = global['bootstrap-styled'] || {}),global.React,global.PropTypes,global.styled,global.ReactDom));
+	(factory((global['bootstrap-styled'] = {}),global.React,global.PropTypes,global.styled,global.ReactDom));
 }(this, (function (exports,React,PropTypes,styled,ReactDOM) { 'use strict';
 
 var React__default = 'default' in React ? React['default'] : React;
-PropTypes = PropTypes && 'default' in PropTypes ? PropTypes['default'] : PropTypes;
+PropTypes = PropTypes && PropTypes.hasOwnProperty('default') ? PropTypes['default'] : PropTypes;
 var styled__default = 'default' in styled ? styled['default'] : styled;
-ReactDOM = ReactDOM && 'default' in ReactDOM ? ReactDOM['default'] : ReactDOM;
+ReactDOM = ReactDOM && ReactDOM.hasOwnProperty('default') ? ReactDOM['default'] : ReactDOM;
 
 function tabFocus() {
   return "\n    /* WebKit-specific. Other browsers will keep their default outline style. */\n    /* (Initially tried to also force default via 'outline: initial', */\n    /* but that seems to erroneously remove the outline in Firefox altogether.) */\n    outline: 5px auto -webkit-focus-ring-color;\n    outline-offset: -2px;\n  ";
@@ -84,6 +84,7 @@ function createCommonjsModule(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
 
+'use strict';
 var colorName = {
 	"aliceblue": [240, 248, 255],
 	"antiquewhite": [250, 235, 215],
@@ -235,6 +236,7 @@ var colorName = {
 	"yellowgreen": [154, 205, 50]
 };
 
+'use strict';
 var isArrayish = function isArrayish(obj) {
 	if (!obj || typeof obj === 'string') {
 		return false;
@@ -1240,6 +1242,7 @@ models.forEach(function (fromModel) {
 });
 var colorConvert = convert;
 
+'use strict';
 var _slice = [].slice;
 var skippedModels = [
 	'keyword',
@@ -2636,7 +2639,7 @@ function makeTheme$1() {
 }
 
 var bsTheme = makeTheme$1();
-var makeTheme = makeTheme$1;
+var makeTheme$$1 = makeTheme$1;
 
 var defaultProps$8 = bsTheme;
 function transition() {
@@ -2754,7 +2757,6 @@ function buttonGroup() {
   var $enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$9['$enable-shadows'];
   var $enableRounded = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$9['$enable-rounded'];
   var $inputBtnBorderWidth = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$9['$input-btn-border-width'];
-  var $btnToolbarMargin = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps$9['$btn-toolbar-margin'];
   var $btnPaddingX = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps$9['$btn-padding-x'];
   var $btnActiveBoxShadow = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps$9['$btn-active-box-shadow'];
   var $btnPaddingXLg = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps$9['$btn-padding-x-lg'];
@@ -3175,7 +3177,6 @@ var defaultProps$14 = {
   '$enable-grid-classes': true
 };
 function getGridColumn() {
-  var columns = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$14['$grid-columns'];
   var gridGutterWidths = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$14['$grid-gutter-widths'];
   var breakpoints$$1 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$14['$grid-breakpoints'];
   return '\n    position: relative;\n    width: 100%;\n    min-height: 1px; /* Prevent columns from collapsing when empty */\n    ' + makeGutters(gridGutterWidths, breakpoints$$1) + '\n  ';
@@ -3408,7 +3409,6 @@ function paginationSizeBootstrap() {
   var paddingY = arguments[1];
   var paddingX = arguments[2];
   var fontSize = arguments[3];
-  var lineHeight = arguments[4];
   var borderRadiusPagination = arguments[5];
   return '\n    .page-link {\n      padding: ' + paddingY + ' ' + paddingX + ';\n      font-size: ' + fontSize + ';\n    }\n  \n    .page-item {\n      &:first-child {\n        .page-link {\n          ' + borderLeftRadius(enableRounded, borderRadiusPagination) + '\n        }\n      }\n      &:last-child {\n        .page-link {\n          ' + borderRightRadius(enableRounded, borderRadiusPagination) + '\n        }\n      }\n    }\n  ';
 }
@@ -4160,7 +4160,7 @@ function toHashCode(str) {
   return hash;
 }
 
-var classnames = createCommonjsModule(function (module) {
+var classnames$1 = createCommonjsModule(function (module) {
 (function () {
 	'use strict';
 	var hasOwn = {}.hasOwnProperty;
@@ -4736,8 +4736,9 @@ var omit = baseRest(function(object, props) {
 function stubArray() {
   return [];
 }
-var lodash_omit = omit;
+var lodash_omit$1 = omit;
 
+var babelHelpers = {};
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
   return typeof obj;
 } : function (obj) {
@@ -4748,7 +4749,118 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 
 
+var asyncGenerator = function () {
+  function AwaitValue(value) {
+    this.value = value;
+  }
 
+  function AsyncGenerator(gen) {
+    var front, back;
+
+    function send(key, arg) {
+      return new Promise(function (resolve, reject) {
+        var request = {
+          key: key,
+          arg: arg,
+          resolve: resolve,
+          reject: reject,
+          next: null
+        };
+
+        if (back) {
+          back = back.next = request;
+        } else {
+          front = back = request;
+          resume(key, arg);
+        }
+      });
+    }
+
+    function resume(key, arg) {
+      try {
+        var result = gen[key](arg);
+        var value = result.value;
+
+        if (value instanceof AwaitValue) {
+          Promise.resolve(value.value).then(function (arg) {
+            resume("next", arg);
+          }, function (arg) {
+            resume("throw", arg);
+          });
+        } else {
+          settle(result.done ? "return" : "normal", result.value);
+        }
+      } catch (err) {
+        settle("throw", err);
+      }
+    }
+
+    function settle(type, value) {
+      switch (type) {
+        case "return":
+          front.resolve({
+            value: value,
+            done: true
+          });
+          break;
+
+        case "throw":
+          front.reject(value);
+          break;
+
+        default:
+          front.resolve({
+            value: value,
+            done: false
+          });
+          break;
+      }
+
+      front = front.next;
+
+      if (front) {
+        resume(front.key, front.arg);
+      } else {
+        back = null;
+      }
+    }
+
+    this._invoke = send;
+
+    if (typeof gen.return !== "function") {
+      this.return = undefined;
+    }
+  }
+
+  if (typeof Symbol === "function" && Symbol.asyncIterator) {
+    AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
+      return this;
+    };
+  }
+
+  AsyncGenerator.prototype.next = function (arg) {
+    return this._invoke("next", arg);
+  };
+
+  AsyncGenerator.prototype.throw = function (arg) {
+    return this._invoke("throw", arg);
+  };
+
+  AsyncGenerator.prototype.return = function (arg) {
+    return this._invoke("return", arg);
+  };
+
+  return {
+    wrap: function (fn) {
+      return function () {
+        return new AsyncGenerator(fn.apply(this, arguments));
+      };
+    },
+    await: function (value) {
+      return new AwaitValue(value);
+    }
+  };
+}();
 
 
 
@@ -4857,6 +4969,28 @@ var possibleConstructorReturn = function (self, call) {
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+babelHelpers;
+
 var defaultProps$37 = {
   theme: bsTheme
 };
@@ -4870,7 +5004,7 @@ function composeLink(RouterLink) {
     createClass$1(Link, [{
       key: 'render',
       value: function render() {
-        var _omit = lodash_omit(this.props, ['theme']),
+        var _omit = lodash_omit$1(this.props, ['theme']),
             className = _omit.className,
             to = _omit.to,
             attributes = objectWithoutProperties(_omit, ['className', 'to']);
@@ -4897,23 +5031,23 @@ var defaultProps$36 = {
   tag: 'a',
   theme: bsTheme
 };
-var A = function (_React$Component) {
-  inherits(A, _React$Component);
-  function A() {
+var AUnstyled = function (_React$Component) {
+  inherits(AUnstyled, _React$Component);
+  function AUnstyled() {
     var _ref;
     var _temp, _this, _ret;
-    classCallCheck$1(this, A);
+    classCallCheck$1(this, AUnstyled);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = A.__proto__ || Object.getPrototypeOf(A)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = AUnstyled.__proto__ || Object.getPrototypeOf(AUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       focus: false
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(A, [{
+  createClass$1(AUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           active = _omit.active,
           disabled = _omit.disabled,
@@ -4923,7 +5057,7 @@ var A = function (_React$Component) {
           attributes = objectWithoutProperties(_omit, ['className', 'active', 'disabled', 'cssModule', 'color', 'tag']);
       var focus = this.state.focus;
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, defineProperty({
+        className: mapToCssModules(classnames$1(className, defineProperty({
           focus: focus,
           active: active,
           disabled: disabled
@@ -4931,9 +5065,9 @@ var A = function (_React$Component) {
       }, attributes));
     }
   }]);
-  return A;
+  return AUnstyled;
 }(React__default.Component);
-A.propTypes = {
+AUnstyled.propTypes = {
   className: PropTypes.string,
   active: PropTypes.bool,
   tag: PropTypes.string,
@@ -4942,354 +5076,57 @@ A.propTypes = {
   color: PropTypes.string,
   cssModule: PropTypes.object
 };
-A = styled__default(A).withConfig({
-  displayName: 'A__A'
+var A = styled__default(AUnstyled).withConfig({
+  displayName: 'A'
 })(['', ''], function (props) {
   return '\n    ' + a(props.theme['$link-color'], props.theme['$link-decoration'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$enable-hover-media-query']) + '\n  ';
 });
 A.defaultProps = defaultProps$36;
-var A$1 = A;
 
 var defaultProps$38 = {
   tag: 'abbr',
   theme: bsTheme
 };
-var Abbr = function (_React$Component) {
-  inherits(Abbr, _React$Component);
-  function Abbr() {
-    classCallCheck$1(this, Abbr);
-    return possibleConstructorReturn(this, (Abbr.__proto__ || Object.getPrototypeOf(Abbr)).apply(this, arguments));
+var AbbrUnstyled = function (_React$Component) {
+  inherits(AbbrUnstyled, _React$Component);
+  function AbbrUnstyled() {
+    classCallCheck$1(this, AbbrUnstyled);
+    return possibleConstructorReturn(this, (AbbrUnstyled.__proto__ || Object.getPrototypeOf(AbbrUnstyled)).apply(this, arguments));
   }
-  createClass$1(Abbr, [{
+  createClass$1(AbbrUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           initialism = _omit.initialism,
           title = _omit.title,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'initialism', 'title', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: classnames(className, {
+        className: classnames$1(className, {
           initialism: initialism
         }),
         title: title
       }, attributes));
     }
   }]);
-  return Abbr;
+  return AbbrUnstyled;
 }(React__default.Component);
-Abbr.propTypes = {
+AbbrUnstyled.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
   theme: PropTypes.object,
   tag: PropTypes.string,
   initialism: PropTypes.bool
 };
-Abbr = styled__default(Abbr).withConfig({
-  displayName: 'Abbr__Abbr'
+var Abbr = styled__default(AbbrUnstyled).withConfig({
+  displayName: 'Abbr'
 })(['&[title]{text-decoration:underline;text-decoration:underline dotted;cursor:help;border-bottom:0;}&.initialism{font-size:90%;text-transform:uppercase;}']);
 Abbr.defaultProps = defaultProps$38;
-var Abbr$1 = Abbr;
 
 var Address = styled__default.address.withConfig({
-  displayName: 'Address__Address'
+  displayName: 'Address'
 })(['margin-bottom:1rem;font-style:normal;line-height:inherit;']);
-
-var chainFunction = function chain(){
-  var len = arguments.length;
-  var args = [];
-  for (var i = 0; i < len; i++)
-    args[i] = arguments[i];
-  args = args.filter(function(fn){ return fn != null });
-  if (args.length === 0) return undefined
-  if (args.length === 1) return args[0]
-  return args.reduce(function(current, next){
-    return function chainedFunction() {
-      current.apply(this, arguments);
-      next.apply(this, arguments);
-    };
-  })
-};
-
-var __DEV__ = "development" !== 'production';
-var warning = function() {};
-if (__DEV__) {
-  warning = function(condition, format, args) {
-    var len = arguments.length;
-    args = new Array(len > 2 ? len - 2 : 0);
-    for (var key = 2; key < len; key++) {
-      args[key - 2] = arguments[key];
-    }
-    if (format === undefined) {
-      throw new Error(
-        '`warning(condition, format, ...args)` requires a warning ' +
-        'message argument'
-      );
-    }
-    if (format.length < 10 || (/^[s\W]*$/).test(format)) {
-      throw new Error(
-        'The warning format should be able to uniquely identify this ' +
-        'warning. Please, use a more descriptive format than: ' + format
-      );
-    }
-    if (!condition) {
-      var argIndex = 0;
-      var message = 'Warning: ' +
-        format.replace(/%s/g, function() {
-          return args[argIndex++];
-        });
-      if (typeof console !== 'undefined') {
-        console.error(message);
-      }
-      try {
-        throw new Error(message);
-      } catch(x) {}
-    }
-  };
-}
-var warning_1 = warning;
-
-var ChildMapping = createCommonjsModule(function (module, exports) {
-'use strict';
-exports.__esModule = true;
-exports.getChildMapping = getChildMapping;
-exports.mergeChildMappings = mergeChildMappings;
-function getChildMapping(children) {
-  if (!children) {
-    return children;
-  }
-  var result = {};
-  React__default.Children.map(children, function (child) {
-    return child;
-  }).forEach(function (child) {
-    result[child.key] = child;
-  });
-  return result;
-}
-function mergeChildMappings(prev, next) {
-  prev = prev || {};
-  next = next || {};
-  function getValueForKey(key) {
-    if (next.hasOwnProperty(key)) {
-      return next[key];
-    }
-    return prev[key];
-  }
-  var nextKeysPending = {};
-  var pendingKeys = [];
-  for (var prevKey in prev) {
-    if (next.hasOwnProperty(prevKey)) {
-      if (pendingKeys.length) {
-        nextKeysPending[prevKey] = pendingKeys;
-        pendingKeys = [];
-      }
-    } else {
-      pendingKeys.push(prevKey);
-    }
-  }
-  var i = void 0;
-  var childMapping = {};
-  for (var nextKey in next) {
-    if (nextKeysPending.hasOwnProperty(nextKey)) {
-      for (i = 0; i < nextKeysPending[nextKey].length; i++) {
-        var pendingNextKey = nextKeysPending[nextKey][i];
-        childMapping[nextKeysPending[nextKey][i]] = getValueForKey(pendingNextKey);
-      }
-    }
-    childMapping[nextKey] = getValueForKey(nextKey);
-  }
-  for (i = 0; i < pendingKeys.length; i++) {
-    childMapping[pendingKeys[i]] = getValueForKey(pendingKeys[i]);
-  }
-  return childMapping;
-}
-});
-
-var TransitionGroup_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-exports.__esModule = true;
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-var _chainFunction2 = _interopRequireDefault(chainFunction);
-var _react2 = _interopRequireDefault(React__default);
-var _propTypes2 = _interopRequireDefault(PropTypes);
-var _warning2 = _interopRequireDefault(warning_1);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-var propTypes = {
-  component: _propTypes2.default.any,
-  childFactory: _propTypes2.default.func,
-  children: _propTypes2.default.node
-};
-var defaultProps = {
-  component: 'span',
-  childFactory: function childFactory(child) {
-    return child;
-  }
-};
-var TransitionGroup = function (_React$Component) {
-  _inherits(TransitionGroup, _React$Component);
-  function TransitionGroup(props, context) {
-    _classCallCheck(this, TransitionGroup);
-    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props, context));
-    _this.performAppear = function (key, component) {
-      _this.currentlyTransitioningKeys[key] = true;
-      if (component.componentWillAppear) {
-        component.componentWillAppear(_this._handleDoneAppearing.bind(_this, key, component));
-      } else {
-        _this._handleDoneAppearing(key, component);
-      }
-    };
-    _this._handleDoneAppearing = function (key, component) {
-      if (component.componentDidAppear) {
-        component.componentDidAppear();
-      }
-      delete _this.currentlyTransitioningKeys[key];
-      var currentChildMapping = (0, ChildMapping.getChildMapping)(_this.props.children);
-      if (!currentChildMapping || !currentChildMapping.hasOwnProperty(key)) {
-        _this.performLeave(key, component);
-      }
-    };
-    _this.performEnter = function (key, component) {
-      _this.currentlyTransitioningKeys[key] = true;
-      if (component.componentWillEnter) {
-        component.componentWillEnter(_this._handleDoneEntering.bind(_this, key, component));
-      } else {
-        _this._handleDoneEntering(key, component);
-      }
-    };
-    _this._handleDoneEntering = function (key, component) {
-      if (component.componentDidEnter) {
-        component.componentDidEnter();
-      }
-      delete _this.currentlyTransitioningKeys[key];
-      var currentChildMapping = (0, ChildMapping.getChildMapping)(_this.props.children);
-      if (!currentChildMapping || !currentChildMapping.hasOwnProperty(key)) {
-        _this.performLeave(key, component);
-      }
-    };
-    _this.performLeave = function (key, component) {
-      _this.currentlyTransitioningKeys[key] = true;
-      if (component.componentWillLeave) {
-        component.componentWillLeave(_this._handleDoneLeaving.bind(_this, key, component));
-      } else {
-        _this._handleDoneLeaving(key, component);
-      }
-    };
-    _this._handleDoneLeaving = function (key, component) {
-      if (component.componentDidLeave) {
-        component.componentDidLeave();
-      }
-      delete _this.currentlyTransitioningKeys[key];
-      var currentChildMapping = (0, ChildMapping.getChildMapping)(_this.props.children);
-      if (currentChildMapping && currentChildMapping.hasOwnProperty(key)) {
-        _this.keysToEnter.push(key);
-      } else {
-        _this.setState(function (state) {
-          var newChildren = _extends({}, state.children);
-          delete newChildren[key];
-          return { children: newChildren };
-        });
-      }
-    };
-    _this.childRefs = Object.create(null);
-    _this.state = {
-      children: (0, ChildMapping.getChildMapping)(props.children)
-    };
-    return _this;
-  }
-  TransitionGroup.prototype.componentWillMount = function componentWillMount() {
-    this.currentlyTransitioningKeys = {};
-    this.keysToEnter = [];
-    this.keysToLeave = [];
-  };
-  TransitionGroup.prototype.componentDidMount = function componentDidMount() {
-    var initialChildMapping = this.state.children;
-    for (var key in initialChildMapping) {
-      if (initialChildMapping[key]) {
-        this.performAppear(key, this.childRefs[key]);
-      }
-    }
-  };
-  TransitionGroup.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    var nextChildMapping = (0, ChildMapping.getChildMapping)(nextProps.children);
-    var prevChildMapping = this.state.children;
-    this.setState({
-      children: (0, ChildMapping.mergeChildMappings)(prevChildMapping, nextChildMapping)
-    });
-    for (var key in nextChildMapping) {
-      var hasPrev = prevChildMapping && prevChildMapping.hasOwnProperty(key);
-      if (nextChildMapping[key] && !hasPrev && !this.currentlyTransitioningKeys[key]) {
-        this.keysToEnter.push(key);
-      }
-    }
-    for (var _key in prevChildMapping) {
-      var hasNext = nextChildMapping && nextChildMapping.hasOwnProperty(_key);
-      if (prevChildMapping[_key] && !hasNext && !this.currentlyTransitioningKeys[_key]) {
-        this.keysToLeave.push(_key);
-      }
-    }
-  };
-  TransitionGroup.prototype.componentDidUpdate = function componentDidUpdate() {
-    var _this2 = this;
-    var keysToEnter = this.keysToEnter;
-    this.keysToEnter = [];
-    keysToEnter.forEach(function (key) {
-      return _this2.performEnter(key, _this2.childRefs[key]);
-    });
-    var keysToLeave = this.keysToLeave;
-    this.keysToLeave = [];
-    keysToLeave.forEach(function (key) {
-      return _this2.performLeave(key, _this2.childRefs[key]);
-    });
-  };
-  TransitionGroup.prototype.render = function render() {
-    var _this3 = this;
-    var childrenToRender = [];
-    var _loop = function _loop(key) {
-      var child = _this3.state.children[key];
-      if (child) {
-        var isCallbackRef = typeof child.ref !== 'string';
-        var factoryChild = _this3.props.childFactory(child);
-        var ref = function ref(r) {
-          _this3.childRefs[key] = r;
-        };
-        (0, _warning2.default)(isCallbackRef, 'string refs are not supported on children of TransitionGroup and will be ignored. ' + 'Please use a callback ref instead: https://facebook.github.io/react/docs/refs-and-the-dom.html#the-ref-callback-attribute');
-        if (factoryChild === child && isCallbackRef) {
-          ref = (0, _chainFunction2.default)(child.ref, ref);
-        }
-        childrenToRender.push(_react2.default.cloneElement(factoryChild, {
-          key: key,
-          ref: ref
-        }));
-      }
-    };
-    for (var key in this.state.children) {
-      _loop(key);
-    }
-    var props = _extends({}, this.props);
-    delete props.transitionLeave;
-    delete props.transitionName;
-    delete props.transitionAppear;
-    delete props.transitionEnter;
-    delete props.childFactory;
-    delete props.transitionLeaveTimeout;
-    delete props.transitionEnterTimeout;
-    delete props.transitionAppearTimeout;
-    delete props.component;
-    return _react2.default.createElement(this.props.component, props, childrenToRender);
-  };
-  return TransitionGroup;
-}(_react2.default.Component);
-TransitionGroup.displayName = 'TransitionGroup';
-TransitionGroup.propTypes = propTypes;
-TransitionGroup.defaultProps = defaultProps;
-exports.default = TransitionGroup;
-module.exports = exports['default'];
-});
-var TransitionGroup = unwrapExports(TransitionGroup_1);
 
 var hasClass_1 = createCommonjsModule(function (module, exports) {
 "use strict";
@@ -5302,6 +5139,7 @@ function hasClass(element, className) {
 }
 module.exports = exports["default"];
 });
+unwrapExports(hasClass_1);
 
 var addClass_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -5316,159 +5154,18 @@ function addClass(element, className) {
 }
 module.exports = exports['default'];
 });
+unwrapExports(addClass_1);
 
+'use strict';
 var removeClass = function removeClass(element, className) {
   if (element.classList) element.classList.remove(className);else element.className = element.className.replace(new RegExp('(^|\\s)' + className + '(?:\\s|$)', 'g'), '$1').replace(/\s+/g, ' ').replace(/^\s*|\s*$/g, '');
 };
 
-var inDOM = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-module.exports = exports['default'];
-});
-
-var requestAnimationFrame = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var _inDOM2 = _interopRequireDefault(inDOM);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var vendors = ['', 'webkit', 'moz', 'o', 'ms'];
-var cancel = 'clearTimeout';
-var raf = fallback;
-var compatRaf = void 0;
-var getKey = function getKey(vendor, k) {
-  return vendor + (!vendor ? k : k[0].toUpperCase() + k.substr(1)) + 'AnimationFrame';
-};
-if (_inDOM2.default) {
-  vendors.some(function (vendor) {
-    var rafKey = getKey(vendor, 'request');
-    if (rafKey in window) {
-      cancel = getKey(vendor, 'cancel');
-      return raf = function raf(cb) {
-        return window[rafKey](cb);
-      };
-    }
-  });
-}
-var prev = new Date().getTime();
-function fallback(fn) {
-  var curr = new Date().getTime(),
-      ms = Math.max(0, 16 - (curr - prev)),
-      req = setTimeout(fn, ms);
-  prev = curr;
-  return req;
-}
-compatRaf = function compatRaf(cb) {
-  return raf(cb);
-};
-compatRaf.cancel = function (id) {
-  window[cancel] && typeof window[cancel] === 'function' && window[cancel](id);
-};
-exports.default = compatRaf;
-module.exports = exports['default'];
-});
-
-var properties = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.animationEnd = exports.animationDelay = exports.animationTiming = exports.animationDuration = exports.animationName = exports.transitionEnd = exports.transitionDuration = exports.transitionDelay = exports.transitionTiming = exports.transitionProperty = exports.transform = undefined;
-var _inDOM2 = _interopRequireDefault(inDOM);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var transform = 'transform';
-var prefix = void 0,
-    transitionEnd = void 0,
-    animationEnd = void 0;
-var transitionProperty = void 0,
-    transitionDuration = void 0,
-    transitionTiming = void 0,
-    transitionDelay = void 0;
-var animationName = void 0,
-    animationDuration = void 0,
-    animationTiming = void 0,
-    animationDelay = void 0;
-if (_inDOM2.default) {
-  var _getTransitionPropert = getTransitionProperties();
-  prefix = _getTransitionPropert.prefix;
-  exports.transitionEnd = transitionEnd = _getTransitionPropert.transitionEnd;
-  exports.animationEnd = animationEnd = _getTransitionPropert.animationEnd;
-  exports.transform = transform = prefix + '-' + transform;
-  exports.transitionProperty = transitionProperty = prefix + '-transition-property';
-  exports.transitionDuration = transitionDuration = prefix + '-transition-duration';
-  exports.transitionDelay = transitionDelay = prefix + '-transition-delay';
-  exports.transitionTiming = transitionTiming = prefix + '-transition-timing-function';
-  exports.animationName = animationName = prefix + '-animation-name';
-  exports.animationDuration = animationDuration = prefix + '-animation-duration';
-  exports.animationTiming = animationTiming = prefix + '-animation-delay';
-  exports.animationDelay = animationDelay = prefix + '-animation-timing-function';
-}
-exports.transform = transform;
-exports.transitionProperty = transitionProperty;
-exports.transitionTiming = transitionTiming;
-exports.transitionDelay = transitionDelay;
-exports.transitionDuration = transitionDuration;
-exports.transitionEnd = transitionEnd;
-exports.animationName = animationName;
-exports.animationDuration = animationDuration;
-exports.animationTiming = animationTiming;
-exports.animationDelay = animationDelay;
-exports.animationEnd = animationEnd;
-exports.default = {
-  transform: transform,
-  end: transitionEnd,
-  property: transitionProperty,
-  timing: transitionTiming,
-  delay: transitionDelay,
-  duration: transitionDuration
-};
-function getTransitionProperties() {
-  var style = document.createElement('div').style;
-  var vendorMap = {
-    O: function O(e) {
-      return 'o' + e.toLowerCase();
-    },
-    Moz: function Moz(e) {
-      return e.toLowerCase();
-    },
-    Webkit: function Webkit(e) {
-      return 'webkit' + e;
-    },
-    ms: function ms(e) {
-      return 'MS' + e;
-    }
-  };
-  var vendors = Object.keys(vendorMap);
-  var transitionEnd = void 0,
-      animationEnd = void 0;
-  var prefix = '';
-  for (var i = 0; i < vendors.length; i++) {
-    var vendor = vendors[i];
-    if (vendor + 'TransitionProperty' in style) {
-      prefix = '-' + vendor.toLowerCase();
-      transitionEnd = vendorMap[vendor]('TransitionEnd');
-      animationEnd = vendorMap[vendor]('AnimationEnd');
-      break;
-    }
-  }
-  if (!transitionEnd && 'transitionProperty' in style) transitionEnd = 'transitionend';
-  if (!animationEnd && 'animationName' in style) animationEnd = 'animationend';
-  style = null;
-  return { animationEnd: animationEnd, transitionEnd: transitionEnd, prefix: prefix };
-}
-});
-
 var PropTypes$1 = createCommonjsModule(function (module, exports) {
 'use strict';
 exports.__esModule = true;
-exports.nameShape = undefined;
+exports.classNamesShape = exports.timeoutsShape = undefined;
 exports.transitionTimeout = transitionTimeout;
-var _react2 = _interopRequireDefault(React__default);
 var _propTypes2 = _interopRequireDefault(PropTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function transitionTimeout(transitionType) {
@@ -5485,249 +5182,690 @@ function transitionTimeout(transitionType) {
     return null;
   };
 }
-var nameShape = exports.nameShape = _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.shape({
+var timeoutsShape = exports.timeoutsShape = _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.shape({
+  enter: _propTypes2.default.number,
+  exit: _propTypes2.default.number
+}).isRequired]);
+var classNamesShape = exports.classNamesShape = _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.shape({
   enter: _propTypes2.default.string,
-  leave: _propTypes2.default.string,
+  exit: _propTypes2.default.string,
   active: _propTypes2.default.string
 }), _propTypes2.default.shape({
   enter: _propTypes2.default.string,
   enterActive: _propTypes2.default.string,
-  leave: _propTypes2.default.string,
-  leaveActive: _propTypes2.default.string,
-  appear: _propTypes2.default.string,
-  appearActive: _propTypes2.default.string
+  exit: _propTypes2.default.string,
+  exitActive: _propTypes2.default.string
 })]);
 });
+unwrapExports(PropTypes$1);
 
-var CSSTransitionGroupChild_1 = createCommonjsModule(function (module, exports) {
+var Transition_1 = createCommonjsModule(function (module, exports) {
 'use strict';
 exports.__esModule = true;
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-var _addClass2 = _interopRequireDefault(addClass_1);
-var _removeClass2 = _interopRequireDefault(removeClass);
-var _requestAnimationFrame2 = _interopRequireDefault(requestAnimationFrame);
+exports.EXITING = exports.ENTERED = exports.ENTERING = exports.EXITED = exports.UNMOUNTED = undefined;
+var PropTypes$$1 = _interopRequireWildcard(PropTypes);
 var _react2 = _interopRequireDefault(React__default);
-var _propTypes2 = _interopRequireDefault(PropTypes);
+var _reactDom2 = _interopRequireDefault(ReactDOM);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-var events = [];
-if (properties.transitionEnd) events.push(properties.transitionEnd);
-if (properties.animationEnd) events.push(properties.animationEnd);
-function addEndListener(node, listener) {
-  if (events.length) {
-    events.forEach(function (e) {
-      return node.addEventListener(e, listener, false);
-    });
-  } else {
-    setTimeout(listener, 0);
-  }
-  return function () {
-    if (!events.length) return;
-    events.forEach(function (e) {
-      return node.removeEventListener(e, listener, false);
-    });
-  };
-}
-var propTypes = {
-  children: _propTypes2.default.node,
-  name: PropTypes$1.nameShape.isRequired,
-  appear: _propTypes2.default.bool,
-  enter: _propTypes2.default.bool,
-  leave: _propTypes2.default.bool,
-  appearTimeout: _propTypes2.default.number,
-  enterTimeout: _propTypes2.default.number,
-  leaveTimeout: _propTypes2.default.number
-};
-var CSSTransitionGroupChild = function (_React$Component) {
-  _inherits(CSSTransitionGroupChild, _React$Component);
-  function CSSTransitionGroupChild() {
-    var _temp, _this, _ret;
-    _classCallCheck(this, CSSTransitionGroupChild);
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
+var UNMOUNTED = exports.UNMOUNTED = 'unmounted';
+var EXITED = exports.EXITED = 'exited';
+var ENTERING = exports.ENTERING = 'entering';
+var ENTERED = exports.ENTERED = 'entered';
+var EXITING = exports.EXITING = 'exiting';
+var Transition = function (_React$Component) {
+  _inherits(Transition, _React$Component);
+  function Transition(props, context) {
+    _classCallCheck(this, Transition);
+    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props, context));
+    var parentGroup = context.transitionGroup;
+    var appear = parentGroup && !parentGroup.isMounting ? props.enter : props.appear;
+    var initialStatus = void 0;
+    _this.nextStatus = null;
+    if (props.in) {
+      if (appear) {
+        initialStatus = EXITED;
+        _this.nextStatus = ENTERING;
+      } else {
+        initialStatus = ENTERED;
+      }
+    } else {
+      if (props.unmountOnExit || props.mountOnEnter) {
+        initialStatus = UNMOUNTED;
+      } else {
+        initialStatus = EXITED;
+      }
     }
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.componentWillAppear = function (done) {
-      if (_this.props.appear) {
-        _this.transition('appear', done, _this.props.appearTimeout);
-      } else {
-        done();
-      }
-    }, _this.componentWillEnter = function (done) {
-      if (_this.props.enter) {
-        _this.transition('enter', done, _this.props.enterTimeout);
-      } else {
-        done();
-      }
-    }, _this.componentWillLeave = function (done) {
-      if (_this.props.leave) {
-        _this.transition('leave', done, _this.props.leaveTimeout);
-      } else {
-        done();
-      }
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    _this.state = { status: initialStatus };
+    _this.nextCallback = null;
+    return _this;
   }
-  CSSTransitionGroupChild.prototype.componentWillMount = function componentWillMount() {
-    this.classNameAndNodeQueue = [];
-    this.transitionTimeouts = [];
+  Transition.prototype.getChildContext = function getChildContext() {
+    return { transitionGroup: null };
   };
-  CSSTransitionGroupChild.prototype.componentWillUnmount = function componentWillUnmount() {
-    this.unmounted = true;
-    if (this.timeout) {
-      clearTimeout(this.timeout);
-    }
-    this.transitionTimeouts.forEach(function (timeout) {
-      clearTimeout(timeout);
-    });
-    this.classNameAndNodeQueue.length = 0;
+  Transition.prototype.componentDidMount = function componentDidMount() {
+    this.updateStatus(true);
   };
-  CSSTransitionGroupChild.prototype.transition = function transition(animationType, finishCallback, timeout) {
-    var node = (0, ReactDOM.findDOMNode)(this);
-    if (!node) {
-      if (finishCallback) {
-        finishCallback();
+  Transition.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    var status = this.state.status;
+    if (nextProps.in) {
+      if (status === UNMOUNTED) {
+        this.setState({ status: EXITED });
       }
+      if (status !== ENTERING && status !== ENTERED) {
+        this.nextStatus = ENTERING;
+      }
+    } else {
+      if (status === ENTERING || status === ENTERED) {
+        this.nextStatus = EXITING;
+      }
+    }
+  };
+  Transition.prototype.componentDidUpdate = function componentDidUpdate() {
+    this.updateStatus();
+  };
+  Transition.prototype.componentWillUnmount = function componentWillUnmount() {
+    this.cancelNextCallback();
+  };
+  Transition.prototype.getTimeouts = function getTimeouts() {
+    var timeout = this.props.timeout;
+    var exit = void 0,
+        enter = void 0,
+        appear = void 0;
+    exit = enter = appear = timeout;
+    if (timeout != null && typeof timeout !== 'number') {
+      exit = timeout.exit;
+      enter = timeout.enter;
+      appear = timeout.appear;
+    }
+    return { exit: exit, enter: enter, appear: appear };
+  };
+  Transition.prototype.updateStatus = function updateStatus() {
+    var mounting = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    if (this.nextStatus !== null) {
+      this.cancelNextCallback();
+      var node = _reactDom2.default.findDOMNode(this);
+      if (this.nextStatus === ENTERING) {
+        this.performEnter(node, mounting);
+      } else {
+        this.performExit(node);
+      }
+      this.nextStatus = null;
+    } else if (this.props.unmountOnExit && this.state.status === EXITED) {
+      this.setState({ status: UNMOUNTED });
+    }
+  };
+  Transition.prototype.performEnter = function performEnter(node, mounting) {
+    var _this2 = this;
+    var enter = this.props.enter;
+    var appearing = this.context.transitionGroup ? this.context.transitionGroup.isMounting : mounting;
+    var timeouts = this.getTimeouts();
+    if (!mounting && !enter) {
+      this.safeSetState({ status: ENTERED }, function () {
+        _this2.props.onEntered(node);
+      });
       return;
     }
-    var className = this.props.name[animationType] || this.props.name + '-' + animationType;
-    var activeClassName = this.props.name[animationType + 'Active'] || className + '-active';
-    var timer = null;
-    var removeListeners = void 0;
-    (0, _addClass2.default)(node, className);
-    this.queueClassAndNode(activeClassName, node);
-    var finish = function finish(e) {
-      if (e && e.target !== node) {
-        return;
-      }
-      clearTimeout(timer);
-      if (removeListeners) removeListeners();
-      (0, _removeClass2.default)(node, className);
-      (0, _removeClass2.default)(node, activeClassName);
-      if (removeListeners) removeListeners();
-      if (finishCallback) {
-        finishCallback();
+    this.props.onEnter(node, appearing);
+    this.safeSetState({ status: ENTERING }, function () {
+      _this2.props.onEntering(node, appearing);
+      _this2.onTransitionEnd(node, timeouts.enter, function () {
+        _this2.safeSetState({ status: ENTERED }, function () {
+          _this2.props.onEntered(node, appearing);
+        });
+      });
+    });
+  };
+  Transition.prototype.performExit = function performExit(node) {
+    var _this3 = this;
+    var exit = this.props.exit;
+    var timeouts = this.getTimeouts();
+    if (!exit) {
+      this.safeSetState({ status: EXITED }, function () {
+        _this3.props.onExited(node);
+      });
+      return;
+    }
+    this.props.onExit(node);
+    this.safeSetState({ status: EXITING }, function () {
+      _this3.props.onExiting(node);
+      _this3.onTransitionEnd(node, timeouts.exit, function () {
+        _this3.safeSetState({ status: EXITED }, function () {
+          _this3.props.onExited(node);
+        });
+      });
+    });
+  };
+  Transition.prototype.cancelNextCallback = function cancelNextCallback() {
+    if (this.nextCallback !== null) {
+      this.nextCallback.cancel();
+      this.nextCallback = null;
+    }
+  };
+  Transition.prototype.safeSetState = function safeSetState(nextState, callback) {
+    this.setState(nextState, this.setNextCallback(callback));
+  };
+  Transition.prototype.setNextCallback = function setNextCallback(callback) {
+    var _this4 = this;
+    var active = true;
+    this.nextCallback = function (event) {
+      if (active) {
+        active = false;
+        _this4.nextCallback = null;
+        callback(event);
       }
     };
-    if (timeout) {
-      timer = setTimeout(finish, timeout);
-      this.transitionTimeouts.push(timer);
-    } else if (properties.transitionEnd) {
-      removeListeners = addEndListener(node, finish);
+    this.nextCallback.cancel = function () {
+      active = false;
+    };
+    return this.nextCallback;
+  };
+  Transition.prototype.onTransitionEnd = function onTransitionEnd(node, timeout, handler) {
+    this.setNextCallback(handler);
+    if (node) {
+      if (this.props.addEndListener) {
+        this.props.addEndListener(node, this.nextCallback);
+      }
+      if (timeout != null) {
+        setTimeout(this.nextCallback, timeout);
+      }
+    } else {
+      setTimeout(this.nextCallback, 0);
     }
   };
-  CSSTransitionGroupChild.prototype.queueClassAndNode = function queueClassAndNode(className, node) {
-    var _this2 = this;
-    this.classNameAndNodeQueue.push({
-      className: className,
-      node: node
-    });
-    if (!this.rafHandle) {
-      this.rafHandle = (0, _requestAnimationFrame2.default)(function () {
-        return _this2.flushClassNameAndNodeQueue();
-      });
+  Transition.prototype.render = function render() {
+    var status = this.state.status;
+    if (status === UNMOUNTED) {
+      return null;
     }
-  };
-  CSSTransitionGroupChild.prototype.flushClassNameAndNodeQueue = function flushClassNameAndNodeQueue() {
-    if (!this.unmounted) {
-      this.classNameAndNodeQueue.forEach(function (obj) {
-        obj.node.scrollTop;
-        (0, _addClass2.default)(obj.node, obj.className);
-      });
+    var _props = this.props,
+        children = _props.children,
+        childProps = _objectWithoutProperties(_props, ['children']);
+    delete childProps.in;
+    delete childProps.mountOnEnter;
+    delete childProps.unmountOnExit;
+    delete childProps.appear;
+    delete childProps.enter;
+    delete childProps.exit;
+    delete childProps.timeout;
+    delete childProps.addEndListener;
+    delete childProps.onEnter;
+    delete childProps.onEntering;
+    delete childProps.onEntered;
+    delete childProps.onExit;
+    delete childProps.onExiting;
+    delete childProps.onExited;
+    if (typeof children === 'function') {
+      return children(status, childProps);
     }
-    this.classNameAndNodeQueue.length = 0;
-    this.rafHandle = null;
+    var child = _react2.default.Children.only(children);
+    return _react2.default.cloneElement(child, childProps);
   };
-  CSSTransitionGroupChild.prototype.render = function render() {
-    var props = _extends({}, this.props);
-    delete props.name;
-    delete props.appear;
-    delete props.enter;
-    delete props.leave;
-    delete props.appearTimeout;
-    delete props.enterTimeout;
-    delete props.leaveTimeout;
-    delete props.children;
-    return _react2.default.cloneElement(_react2.default.Children.only(this.props.children), props);
-  };
-  return CSSTransitionGroupChild;
+  return Transition;
 }(_react2.default.Component);
-CSSTransitionGroupChild.displayName = 'CSSTransitionGroupChild';
-CSSTransitionGroupChild.propTypes = propTypes;
-exports.default = CSSTransitionGroupChild;
-module.exports = exports['default'];
+Transition.contextTypes = {
+  transitionGroup: PropTypes$$1.object
+};
+Transition.childContextTypes = {
+  transitionGroup: function transitionGroup() {}
+};
+Transition.propTypes = {
+  children: PropTypes$$1.oneOfType([PropTypes$$1.func.isRequired, PropTypes$$1.element.isRequired]).isRequired,
+  in: PropTypes$$1.bool,
+  mountOnEnter: PropTypes$$1.bool,
+  unmountOnExit: PropTypes$$1.bool,
+  appear: PropTypes$$1.bool,
+  enter: PropTypes$$1.bool,
+  exit: PropTypes$$1.bool,
+  timeout: function timeout(props) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+    var pt = PropTypes$1.timeoutsShape;
+    if (!props.addEndListener) pt = pt.isRequired;
+    return pt.apply(undefined, [props].concat(args));
+  },
+  addEndListener: PropTypes$$1.func,
+  onEnter: PropTypes$$1.func,
+  onEntering: PropTypes$$1.func,
+  onEntered: PropTypes$$1.func,
+  onExit: PropTypes$$1.func,
+  onExiting: PropTypes$$1.func,
+  onExited: PropTypes$$1.func
+};
+function noop() {}
+Transition.defaultProps = {
+  in: false,
+  mountOnEnter: false,
+  unmountOnExit: false,
+  appear: false,
+  enter: true,
+  exit: true,
+  onEnter: noop,
+  onEntering: noop,
+  onEntered: noop,
+  onExit: noop,
+  onExiting: noop,
+  onExited: noop
+};
+Transition.UNMOUNTED = 0;
+Transition.EXITED = 1;
+Transition.ENTERING = 2;
+Transition.ENTERED = 3;
+Transition.EXITING = 4;
+exports.default = Transition;
 });
+unwrapExports(Transition_1);
 
-var CSSTransitionGroup_1 = createCommonjsModule(function (module, exports) {
+var CSSTransition_1 = createCommonjsModule(function (module, exports) {
 'use strict';
 exports.__esModule = true;
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var PropTypes$$1 = _interopRequireWildcard(PropTypes);
+var _addClass2 = _interopRequireDefault(addClass_1);
+var _removeClass2 = _interopRequireDefault(removeClass);
 var _react2 = _interopRequireDefault(React__default);
-var _propTypes2 = _interopRequireDefault(PropTypes);
-var _TransitionGroup2 = _interopRequireDefault(TransitionGroup_1);
-var _CSSTransitionGroupChild2 = _interopRequireDefault(CSSTransitionGroupChild_1);
+var _Transition2 = _interopRequireDefault(Transition_1);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-var propTypes = {
-  transitionName: PropTypes$1.nameShape.isRequired,
-  transitionAppear: _propTypes2.default.bool,
-  transitionEnter: _propTypes2.default.bool,
-  transitionLeave: _propTypes2.default.bool,
-  transitionAppearTimeout: (0, PropTypes$1.transitionTimeout)('Appear'),
-  transitionEnterTimeout: (0, PropTypes$1.transitionTimeout)('Enter'),
-  transitionLeaveTimeout: (0, PropTypes$1.transitionTimeout)('Leave')
+var addClass = function addClass(node, classes) {
+  return classes && classes.split(' ').forEach(function (c) {
+    return (0, _addClass2.default)(node, c);
+  });
 };
-var defaultProps = {
-  transitionAppear: false,
-  transitionEnter: true,
-  transitionLeave: true
+var removeClass$$1 = function removeClass$$1(node, classes) {
+  return classes && classes.split(' ').forEach(function (c) {
+    return (0, _removeClass2.default)(node, c);
+  });
 };
-var CSSTransitionGroup = function (_React$Component) {
-  _inherits(CSSTransitionGroup, _React$Component);
-  function CSSTransitionGroup() {
+var propTypes = _extends({}, _Transition2.default.propTypes, {
+  classNames: PropTypes$1.classNamesShape,
+  onEnter: PropTypes$$1.func,
+  onEntering: PropTypes$$1.func,
+  onEntered: PropTypes$$1.func,
+  onExit: PropTypes$$1.func,
+  onExiting: PropTypes$$1.func,
+  onExited: PropTypes$$1.func
+});
+var CSSTransition = function (_React$Component) {
+  _inherits(CSSTransition, _React$Component);
+  function CSSTransition() {
     var _temp, _this, _ret;
-    _classCallCheck(this, CSSTransitionGroup);
+    _classCallCheck(this, CSSTransition);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this._wrapChild = function (child) {
-      return _react2.default.createElement(_CSSTransitionGroupChild2.default, {
-        name: _this.props.transitionName,
-        appear: _this.props.transitionAppear,
-        enter: _this.props.transitionEnter,
-        leave: _this.props.transitionLeave,
-        appearTimeout: _this.props.transitionAppearTimeout,
-        enterTimeout: _this.props.transitionEnterTimeout,
-        leaveTimeout: _this.props.transitionLeaveTimeout
-      }, child);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.onEnter = function (node, appearing) {
+      var _this$getClassNames = _this.getClassNames(appearing ? 'appear' : 'enter'),
+          className = _this$getClassNames.className;
+      _this.removeClasses(node, 'exit');
+      addClass(node, className);
+      if (_this.props.onEnter) {
+        _this.props.onEnter(node);
+      }
+    }, _this.onEntering = function (node, appearing) {
+      var _this$getClassNames2 = _this.getClassNames(appearing ? 'appear' : 'enter'),
+          activeClassName = _this$getClassNames2.activeClassName;
+      _this.reflowAndAddClass(node, activeClassName);
+      if (_this.props.onEntering) {
+        _this.props.onEntering(node);
+      }
+    }, _this.onEntered = function (node, appearing) {
+      _this.removeClasses(node, appearing ? 'appear' : 'enter');
+      if (_this.props.onEntered) {
+        _this.props.onEntered(node);
+      }
+    }, _this.onExit = function (node) {
+      var _this$getClassNames3 = _this.getClassNames('exit'),
+          className = _this$getClassNames3.className;
+      _this.removeClasses(node, 'appear');
+      _this.removeClasses(node, 'enter');
+      addClass(node, className);
+      if (_this.props.onExit) {
+        _this.props.onExit(node);
+      }
+    }, _this.onExiting = function (node) {
+      var _this$getClassNames4 = _this.getClassNames('exit'),
+          activeClassName = _this$getClassNames4.activeClassName;
+      _this.reflowAndAddClass(node, activeClassName);
+      if (_this.props.onExiting) {
+        _this.props.onExiting(node);
+      }
+    }, _this.onExited = function (node) {
+      _this.removeClasses(node, 'exit');
+      if (_this.props.onExited) {
+        _this.props.onExited(node);
+      }
+    }, _this.getClassNames = function (type) {
+      var classNames = _this.props.classNames;
+      var className = typeof classNames !== 'string' ? classNames[type] : classNames + '-' + type;
+      var activeClassName = typeof classNames !== 'string' ? classNames[type + 'Active'] : className + '-active';
+      return { className: className, activeClassName: activeClassName };
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
-  CSSTransitionGroup.prototype.render = function render() {
-    return _react2.default.createElement(_TransitionGroup2.default, _extends({}, this.props, { childFactory: this._wrapChild }));
+  CSSTransition.prototype.removeClasses = function removeClasses(node, type) {
+    var _getClassNames = this.getClassNames(type),
+        className = _getClassNames.className,
+        activeClassName = _getClassNames.activeClassName;
+    className && removeClass$$1(node, className);
+    activeClassName && removeClass$$1(node, activeClassName);
   };
-  return CSSTransitionGroup;
+  CSSTransition.prototype.reflowAndAddClass = function reflowAndAddClass(node, className) {
+    node.scrollTop;
+    addClass(node, className);
+  };
+  CSSTransition.prototype.render = function render() {
+    var props = _extends({}, this.props);
+    delete props.classNames;
+    return _react2.default.createElement(_Transition2.default, _extends({}, props, {
+      onEnter: this.onEnter,
+      onEntered: this.onEntered,
+      onEntering: this.onEntering,
+      onExit: this.onExit,
+      onExiting: this.onExiting,
+      onExited: this.onExited
+    }));
+  };
+  return CSSTransition;
 }(_react2.default.Component);
-CSSTransitionGroup.displayName = 'CSSTransitionGroup';
-CSSTransitionGroup.propTypes = propTypes;
-CSSTransitionGroup.defaultProps = defaultProps;
-exports.default = CSSTransitionGroup;
+CSSTransition.propTypes = propTypes;
+exports.default = CSSTransition;
 module.exports = exports['default'];
 });
-var ReactCSSTransitionGroup = unwrapExports(CSSTransitionGroup_1);
+unwrapExports(CSSTransition_1);
 
-var defaultProps$40 = { theme: bsTheme };
-var Close = function (_React$Component) {
-  inherits(Close, _React$Component);
-  function Close() {
-    classCallCheck$1(this, Close);
-    return possibleConstructorReturn(this, (Close.__proto__ || Object.getPrototypeOf(Close)).apply(this, arguments));
+var ChildMapping = createCommonjsModule(function (module, exports) {
+'use strict';
+exports.__esModule = true;
+exports.getChildMapping = getChildMapping;
+exports.mergeChildMappings = mergeChildMappings;
+function getChildMapping(children, mapFn) {
+  var mapper = function mapper(child) {
+    return mapFn && (0, React__default.isValidElement)(child) ? mapFn(child) : child;
+  };
+  var result = Object.create(null);
+  if (children) React__default.Children.map(children, function (c) {
+    return c;
+  }).forEach(function (child) {
+    result[child.key] = mapper(child);
+  });
+  return result;
+}
+function mergeChildMappings(prev, next) {
+  prev = prev || {};
+  next = next || {};
+  function getValueForKey(key) {
+    return key in next ? next[key] : prev[key];
   }
-  createClass$1(Close, [{
+  var nextKeysPending = Object.create(null);
+  var pendingKeys = [];
+  for (var prevKey in prev) {
+    if (prevKey in next) {
+      if (pendingKeys.length) {
+        nextKeysPending[prevKey] = pendingKeys;
+        pendingKeys = [];
+      }
+    } else {
+      pendingKeys.push(prevKey);
+    }
+  }
+  var i = void 0;
+  var childMapping = {};
+  for (var nextKey in next) {
+    if (nextKeysPending[nextKey]) {
+      for (i = 0; i < nextKeysPending[nextKey].length; i++) {
+        var pendingNextKey = nextKeysPending[nextKey][i];
+        childMapping[nextKeysPending[nextKey][i]] = getValueForKey(pendingNextKey);
+      }
+    }
+    childMapping[nextKey] = getValueForKey(nextKey);
+  }
+  for (i = 0; i < pendingKeys.length; i++) {
+    childMapping[pendingKeys[i]] = getValueForKey(pendingKeys[i]);
+  }
+  return childMapping;
+}
+});
+unwrapExports(ChildMapping);
+
+var TransitionGroup_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+exports.__esModule = true;
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _propTypes2 = _interopRequireDefault(PropTypes);
+var _react2 = _interopRequireDefault(React__default);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var values = Object.values || function (obj) {
+  return Object.keys(obj).map(function (k) {
+    return obj[k];
+  });
+};
+var propTypes = {
+  component: _propTypes2.default.any,
+  children: _propTypes2.default.node,
+  appear: _propTypes2.default.bool,
+  enter: _propTypes2.default.bool,
+  exit: _propTypes2.default.bool,
+  childFactory: _propTypes2.default.func
+};
+var defaultProps = {
+  component: 'div',
+  childFactory: function childFactory(child) {
+    return child;
+  }
+};
+var TransitionGroup = function (_React$Component) {
+  _inherits(TransitionGroup, _React$Component);
+  function TransitionGroup(props, context) {
+    _classCallCheck(this, TransitionGroup);
+    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props, context));
+    _this.handleExited = function (key, node, originalHandler) {
+      var currentChildMapping = (0, ChildMapping.getChildMapping)(_this.props.children);
+      if (key in currentChildMapping) return;
+      if (originalHandler) originalHandler(node);
+      _this.setState(function (state) {
+        var children = _extends({}, state.children);
+        delete children[key];
+        return { children: children };
+      });
+    };
+    _this.state = {
+      children: (0, ChildMapping.getChildMapping)(props.children, function (child) {
+        var onExited = function onExited(node) {
+          _this.handleExited(child.key, node, child.props.onExited);
+        };
+        return (0, React__default.cloneElement)(child, {
+          onExited: onExited,
+          in: true,
+          appear: _this.getProp(child, 'appear'),
+          enter: _this.getProp(child, 'enter'),
+          exit: _this.getProp(child, 'exit')
+        });
+      })
+    };
+    return _this;
+  }
+  TransitionGroup.prototype.getChildContext = function getChildContext() {
+    return {
+      transitionGroup: { isMounting: !this.appeared }
+    };
+  };
+  TransitionGroup.prototype.getProp = function getProp(child, prop) {
+    var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.props;
+    return props[prop] != null ? props[prop] : child.props[prop];
+  };
+  TransitionGroup.prototype.componentDidMount = function componentDidMount() {
+    this.appeared = true;
+  };
+  TransitionGroup.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    var _this2 = this;
+    var prevChildMapping = this.state.children;
+    var nextChildMapping = (0, ChildMapping.getChildMapping)(nextProps.children);
+    var children = (0, ChildMapping.mergeChildMappings)(prevChildMapping, nextChildMapping);
+    Object.keys(children).forEach(function (key) {
+      var child = children[key];
+      if (!(0, React__default.isValidElement)(child)) return;
+      var onExited = function onExited(node) {
+        _this2.handleExited(child.key, node, child.props.onExited);
+      };
+      var hasPrev = key in prevChildMapping;
+      var hasNext = key in nextChildMapping;
+      var prevChild = prevChildMapping[key];
+      var isLeaving = (0, React__default.isValidElement)(prevChild) && !prevChild.props.in;
+      if (hasNext && (!hasPrev || isLeaving)) {
+        children[key] = (0, React__default.cloneElement)(child, {
+          onExited: onExited,
+          in: true,
+          exit: _this2.getProp(child, 'exit', nextProps),
+          enter: _this2.getProp(child, 'enter', nextProps)
+        });
+      }
+      else if (!hasNext && hasPrev && !isLeaving) {
+          children[key] = (0, React__default.cloneElement)(child, { in: false });
+        }
+        else if (hasNext && hasPrev && (0, React__default.isValidElement)(prevChild)) {
+            children[key] = (0, React__default.cloneElement)(child, {
+              onExited: onExited,
+              in: prevChild.props.in,
+              exit: _this2.getProp(child, 'exit', nextProps),
+              enter: _this2.getProp(child, 'enter', nextProps)
+            });
+          }
+    });
+    this.setState({ children: children });
+  };
+  TransitionGroup.prototype.render = function render() {
+    var _props = this.props,
+        Component$$1 = _props.component,
+        childFactory = _props.childFactory,
+        props = _objectWithoutProperties(_props, ['component', 'childFactory']);
+    var children = this.state.children;
+    delete props.appear;
+    delete props.enter;
+    delete props.exit;
+    return _react2.default.createElement(
+      Component$$1,
+      props,
+      values(children).map(childFactory)
+    );
+  };
+  return TransitionGroup;
+}(_react2.default.Component);
+TransitionGroup.childContextTypes = {
+  transitionGroup: _propTypes2.default.object.isRequired
+};
+TransitionGroup.propTypes = propTypes;
+TransitionGroup.defaultProps = defaultProps;
+exports.default = TransitionGroup;
+module.exports = exports['default'];
+});
+var TransitionGroup = unwrapExports(TransitionGroup_1);
+
+var reactTransitionGroup = createCommonjsModule(function (module) {
+'use strict';
+var _CSSTransition2 = _interopRequireDefault(CSSTransition_1);
+var _TransitionGroup2 = _interopRequireDefault(TransitionGroup_1);
+var _Transition2 = _interopRequireDefault(Transition_1);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+module.exports = {
+  Transition: _Transition2.default,
+  TransitionGroup: _TransitionGroup2.default,
+  CSSTransition: _CSSTransition2.default
+};
+});
+unwrapExports(reactTransitionGroup);
+var reactTransitionGroup_2 = reactTransitionGroup.TransitionGroup;
+var reactTransitionGroup_3 = reactTransitionGroup.CSSTransition;
+
+var defaultProps$40 = {
+  isOpen: true,
+  appear: true,
+  theme: bsTheme
+};
+var Fade = function (_React$Component) {
+  inherits(Fade, _React$Component);
+  function Fade() {
+    var _ref;
+    var _temp, _this, _ret;
+    classCallCheck$1(this, Fade);
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = Fade.__proto__ || Object.getPrototypeOf(Fade)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      timeout: null
+    }, _temp), possibleConstructorReturn(_this, _ret);
+  }
+  createClass$1(Fade, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var _props = this.props,
+          theme = _props.theme,
+          timeout = _props.timeout;
+      this.setState({
+        timeout: timeout || parseTransition(theme['$transition-fade'])[0].duration
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme', 'innerRef', 'timeout']),
+          children = _omit.children,
+          appear = _omit.appear,
+          isOpen = _omit.isOpen,
+          rest = objectWithoutProperties(_omit, ['children', 'appear', 'isOpen']);
+      return React__default.createElement(
+        reactTransitionGroup_3,
+        _extends({
+          'in': isOpen,
+          appear: appear,
+          timeout: this.state.timeout,
+          classNames: {
+            enter: 'fade',
+            enterActive: 'show',
+            exit: 'fade'
+          }
+        }, rest),
+        children
+      );
+    }
+  }]);
+  return Fade;
+}(React__default.Component);
+Fade.propTypes = {
+  children: PropTypes.node.isRequired,
+  theme: PropTypes.object,
+  isOpen: PropTypes.bool,
+  appear: PropTypes.bool,
+  timeout: PropTypes.oneOfType([PropTypes.shape({
+    enter: PropTypes.number,
+    exit: PropTypes.number
+  }), PropTypes.number])
+};
+Fade.defaultProps = defaultProps$40;
+var Fade$1 = styled.withTheme(Fade);
+
+var defaultProps$41 = { theme: bsTheme };
+var CloseUnstyled = function (_React$Component) {
+  inherits(CloseUnstyled, _React$Component);
+  function CloseUnstyled() {
+    classCallCheck$1(this, CloseUnstyled);
+    return possibleConstructorReturn(this, (CloseUnstyled.__proto__ || Object.getPrototypeOf(CloseUnstyled)).apply(this, arguments));
+  }
+  createClass$1(CloseUnstyled, [{
+    key: 'render',
+    value: function render() {
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           srOnly = _omit['sr-only'],
           onDismiss = _omit.onDismiss,
@@ -5737,7 +5875,7 @@ var Close = function (_React$Component) {
       return React__default.createElement(
         'button',
         _extends({
-          className: mapToCssModules(classnames(className, 'close', {
+          className: mapToCssModules(classnames$1(className, 'close', {
             'sr-only': srOnly
           }), cssModule),
           type: 'button',
@@ -5752,9 +5890,9 @@ var Close = function (_React$Component) {
       );
     }
   }]);
-  return Close;
+  return CloseUnstyled;
 }(React__default.Component);
-Close.propTypes = {
+CloseUnstyled.propTypes = {
   theme: PropTypes.object,
   'sr-only': PropTypes.bool,
   className: PropTypes.string,
@@ -5762,81 +5900,65 @@ Close.propTypes = {
   cssModule: PropTypes.object,
   onDismiss: PropTypes.func.isRequired
 };
-Close = styled__default(Close).withConfig({
-  displayName: 'Close__Close'
+var Close = styled__default(CloseUnstyled).withConfig({
+  displayName: 'Close'
 })(['', ''], function (props) {
   return '\n    float: right;\n    font-size: ' + props.theme['$close-font-size'] + ';\n    font-weight: ' + props.theme['$close-font-weight'] + ';\n    line-height: 1;\n    color: ' + props.theme['$close-color'] + ';\n    text-shadow: ' + props.theme['$close-text-shadow'] + ';\n    opacity: .2;\n    \n    &:focus {outline:0;}\n    \n    ' + hoverFocus(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$close-color'] + ';\n        text-decoration: none;\n        cursor: pointer;\n        opacity: .5;\n      ') + '\n    \n    /* Additional properties for button version\n     iOS requires the button element instead of an anchor tag.\n     If you want the anchor version, it requires \'href="#"\'.\n     See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile\n     */\n    \n    /* scss-lint:disable QualifyingElement */\n    &button.close {\n      padding: 0;\n      cursor: pointer;\n      background: transparent;\n      border: 0;\n      -webkit-appearance: none;\n    }\n    /* scss-lint:enable QualifyingElement */\n  ';
 });
-Close.defaultProps = defaultProps$40;
-var Close$1 = Close;
+Close.defaultProps = defaultProps$41;
 
 var defaultProps$39 = {
   color: 'success',
   isOpen: true,
   tag: 'div',
-  transitionAppearTimeout: 150,
-  transitionEnterTimeout: 150,
-  transitionLeaveTimeout: 150,
   theme: bsTheme
 };
 var FirstChild = function FirstChild(_ref) {
   var children = _ref.children;
   return React__default.Children.toArray(children)[0] || null;
 };
-var Alert = function (_React$Component) {
-  inherits(Alert, _React$Component);
-  function Alert() {
-    classCallCheck$1(this, Alert);
-    return possibleConstructorReturn(this, (Alert.__proto__ || Object.getPrototypeOf(Alert)).apply(this, arguments));
+var AlertUnstyled = function (_React$Component) {
+  inherits(AlertUnstyled, _React$Component);
+  function AlertUnstyled() {
+    classCallCheck$1(this, AlertUnstyled);
+    return possibleConstructorReturn(this, (AlertUnstyled.__proto__ || Object.getPrototypeOf(AlertUnstyled)).apply(this, arguments));
   }
-  createClass$1(Alert, [{
+  createClass$1(AlertUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           color = _omit.color,
           isOpen = _omit.isOpen,
+          timeout = _omit.timeout,
           toggle = _omit.toggle,
           children = _omit.children,
-          transitionAppearTimeout = _omit.transitionAppearTimeout,
-          transitionEnterTimeout = _omit.transitionEnterTimeout,
-          transitionLeaveTimeout = _omit.transitionLeaveTimeout,
-          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'color', 'isOpen', 'toggle', 'children', 'transitionAppearTimeout', 'transitionEnterTimeout', 'transitionLeaveTimeout']);
-      var classes = mapToCssModules(classnames(className, 'alert', 'alert-' + color, { 'alert-dismissible': toggle }), cssModule);
+          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'color', 'isOpen', 'timeout', 'toggle', 'children']);
+      var classes = mapToCssModules(classnames$1(className, 'alert', 'alert-' + color, { 'alert-dismissible': toggle }), cssModule);
       var alert$$1 = React__default.createElement(
-        Tag,
-        _extends({}, attributes, { className: classes, role: 'alert' }),
-        toggle && React__default.createElement(Close$1, { onDismiss: toggle }),
-        children
+        Fade$1,
+        { isOpen: isOpen, timeout: timeout },
+        React__default.createElement(
+          Tag,
+          _extends({}, attributes, { className: classes, role: 'alert' }),
+          toggle && React__default.createElement(Close, { onDismiss: toggle }),
+          children
+        )
       );
       return React__default.createElement(
-        ReactCSSTransitionGroup,
+        reactTransitionGroup_2,
         {
-          component: FirstChild,
-          transitionName: {
-            appear: 'fade',
-            appearActive: 'show',
-            enter: 'fade',
-            enterActive: 'show',
-            leave: 'fade',
-            leaveActive: 'out'
-          },
-          transitionAppear: transitionAppearTimeout > 0,
-          transitionAppearTimeout: transitionAppearTimeout,
-          transitionEnter: transitionEnterTimeout > 0,
-          transitionEnterTimeout: transitionEnterTimeout,
-          transitionLeave: transitionLeaveTimeout > 0,
-          transitionLeaveTimeout: transitionLeaveTimeout
+          component: FirstChild
         },
         isOpen ? alert$$1 : null
       );
     }
   }]);
-  return Alert;
+  return AlertUnstyled;
 }(React__default.Component);
-Alert.propTypes = {
+AlertUnstyled.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   cssModule: PropTypes.object,
@@ -5844,69 +5966,69 @@ Alert.propTypes = {
   isOpen: PropTypes.bool,
   toggle: PropTypes.func,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  transitionAppearTimeout: PropTypes.number,
-  transitionEnterTimeout: PropTypes.number,
-  transitionLeaveTimeout: PropTypes.number,
+  timeout: PropTypes.oneOfType([PropTypes.shape({
+    enter: PropTypes.number,
+    exit: PropTypes.number
+  }), PropTypes.number]),
   theme: PropTypes.object
 };
-Alert = styled__default(Alert).withConfig({
-  displayName: 'Alert__Alert'
+var Alert = styled__default(AlertUnstyled).withConfig({
+  displayName: 'Alert'
 })(['', ''], function (props) {
-  return '\n    /*\n    Base styles\n    */\n    \n    &.alert{\n      padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n      margin-bottom: ' + props.theme['$alert-margin-bottom'] + ';\n      border: ' + props.theme['$alert-border-width'] + ' solid transparent;\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$alert-border-radius']) + '\n    }\n    \n    /* Headings for larger alerts */\n    &.alert-heading {\n      /* Specified to prevent conflicts of changing $headings-color */\n      color: inherit;\n    }\n    \n    /* Provide class for links that match alerts */\n    & .alert-link { \n      font-weight: ' + props.theme['$alert-link-font-weight'] + ';\n    }\n    \n    /* Dismissible alerts Expand the right padding and account for the close buttons positioning. */\n    \n    &.alert-dismissible {    \n      /* Adjust close link position */\n      & .close {\n        position: relative;\n        top: -' + props.theme['$alert-padding-y'] + ';\n        right: -' + props.theme['$alert-padding-x'] + ';\n        padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n        color: inherit;\n      }\n    }\n    /* Alternate styles Generate contextual modifier classes for colorizing the alert. */\n\n    &.alert-success{\n      ' + alertVariant(props.theme['$alert-success-bg'], props.theme['$alert-success-border'], props.theme['$alert-success-text']) + '    \n    }\n    &.alert-info{\n      ' + alertVariant(props.theme['$alert-info-bg'], props.theme['$alert-info-border'], props.theme['$alert-info-text']) + '\n    } \n    &.alert-warning{\n      ' + alertVariant(props.theme['$alert-warning-bg'], props.theme['$alert-warning-border'], props.theme['$alert-warning-text']) + ' \n    }\n    &.alert-danger{\n      ' + alertVariant(props.theme['$alert-danger-bg'], props.theme['$alert-danger-border'], props.theme['$alert-danger-text']) + ' \n    }\n  ';
+  return '\n    /*\n    Base styles\n    */\n    \n    &.alert {\n      padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n      margin-bottom: ' + props.theme['$alert-margin-bottom'] + ';\n      border: ' + props.theme['$alert-border-width'] + ' solid transparent;\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$alert-border-radius']) + '\n    }\n    \n    /* Headings for larger alerts */\n    &.alert-heading {\n      /* Specified to prevent conflicts of changing $headings-color */\n      color: inherit;\n    }\n    \n    /* Provide class for links that match alerts */\n    & .alert-link { \n      font-weight: ' + props.theme['$alert-link-font-weight'] + ';\n    }\n    \n    /* Dismissible alerts Expand the right padding and account for the close buttons positioning. */\n    \n    &.alert-dismissible {    \n      /* Adjust close link position */\n      & .close {\n        position: relative;\n        top: -' + props.theme['$alert-padding-y'] + ';\n        right: -' + props.theme['$alert-padding-x'] + ';\n        padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n        color: inherit;\n      }\n    }\n    /* Alternate styles Generate contextual modifier classes for colorizing the alert. */\n\n    &.alert-success {\n      ' + alertVariant(props.theme['$alert-success-bg'], props.theme['$alert-success-border'], props.theme['$alert-success-text']) + '    \n    }\n    &.alert-info {\n      ' + alertVariant(props.theme['$alert-info-bg'], props.theme['$alert-info-border'], props.theme['$alert-info-text']) + '\n    } \n    &.alert-warning {\n      ' + alertVariant(props.theme['$alert-warning-bg'], props.theme['$alert-warning-border'], props.theme['$alert-warning-text']) + ' \n    }\n    &.alert-danger {\n      ' + alertVariant(props.theme['$alert-danger-bg'], props.theme['$alert-danger-border'], props.theme['$alert-danger-text']) + ' \n    }\n  ';
 });
 Alert.defaultProps = defaultProps$39;
 var index$1$1 = styled.withTheme(Alert);
 
 var Area = styled__default.area.withConfig({
-  displayName: 'Area__Area'
+  displayName: 'Area'
 })(['display:inline;cursor:pointer;']);
 
 var Article = styled__default.article.withConfig({
-  displayName: 'Article__Article'
+  displayName: 'Article'
 })(['']);
 
-var defaultProps$41 = {
+var defaultProps$42 = {
   tag: 'blockquote',
   theme: bsTheme
 };
-var Blockquote = function (_React$Component) {
-  inherits(Blockquote, _React$Component);
-  function Blockquote() {
-    classCallCheck$1(this, Blockquote);
-    return possibleConstructorReturn(this, (Blockquote.__proto__ || Object.getPrototypeOf(Blockquote)).apply(this, arguments));
+var BlockquoteUnstyled = function (_React$Component) {
+  inherits(BlockquoteUnstyled, _React$Component);
+  function BlockquoteUnstyled() {
+    classCallCheck$1(this, BlockquoteUnstyled);
+    return possibleConstructorReturn(this, (BlockquoteUnstyled.__proto__ || Object.getPrototypeOf(BlockquoteUnstyled)).apply(this, arguments));
   }
-  createClass$1(Blockquote, [{
+  createClass$1(BlockquoteUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           reverse = _omit.reverse,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'reverse', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: classnames(className, 'blockquote', {
+        className: classnames$1(className, 'blockquote', {
           'blockquote-reverse': reverse
         })
       }, attributes));
     }
   }]);
-  return Blockquote;
+  return BlockquoteUnstyled;
 }(React__default.Component);
-Blockquote.propTypes = {
+BlockquoteUnstyled.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.object,
   tag: PropTypes.string,
   reverse: PropTypes.bool
 };
-Blockquote = styled__default(Blockquote).withConfig({
-  displayName: 'Blockquote__Blockquote'
+var Blockquote = styled__default(BlockquoteUnstyled).withConfig({
+  displayName: 'Blockquote'
 })(['  ', ' '], function (props) {
   return '\n    &.blockquote {\n      padding: ' + props.theme['$spacer-halved'] + ' ' + props.theme['$spacer'] + ';\n      margin-bottom: ' + props.theme['$spacer'] + ';\n      font-size: ' + props.theme['$blockquote-font-size'] + ';\n      border-left: ' + props.theme['$blockquote-border-width'] + ' solid ' + props.theme['$blockquote-border-color'] + ';\n      \n      .blockquote-footer {\n        display: block;\n        font-size: 80%; \n        color: ' + props.theme['$blockquote-small-color'] + ';\n        &::before {\n          content: \'\\2014 \\00A0\';\n        }\n      }\n    }\n\n    &.blockquote-reverse {\n      padding-right: ' + props.theme['$spacer'] + ';\n      padding-left: 0;\n      text-align: right;\n      border-right: ' + props.theme['$blockquote-border-width'] + ' solid ' + props.theme['$blockquote-border-color'] + ';\n      border-left: 0;\n      \n      .blockquote-footer {\n        display: block;\n        font-size: 80%; \n        color: ' + props.theme['$blockquote-small-color'] + ';\n        &::before {\n          content: "";\n        }\n        &::after {\n          content: \'\\00A0 \\2014\';\n        }\n      }\n    }\n    \n    /* Reboot from bootstrap v4 */\n    margin: 0 0 1rem;\n ';
 });
-Blockquote.defaultProps = defaultProps$41;
-var Blockquote$1 = Blockquote;
+Blockquote.defaultProps = defaultProps$42;
 
-var defaultProps$42 = {
+var defaultProps$43 = {
   theme: bsTheme,
   utils: {
     align: true,
@@ -5927,13 +6049,13 @@ var defaultProps$42 = {
   }
 };
 var UtilityProvider = styled__default.div.withConfig({
-  displayName: 'UtilityProvider__UtilityProvider'
+  displayName: 'UtilityProvider'
 })(['', ''], function (props) {
   return '\n    ' + rebootUtils.body(props.theme['$font-family-base'], props.theme['$font-size-base'], props.theme['$font-weight-base'], props.theme['$line-height-base'], props.theme['$body-color'], props.theme['$body-bg']) + '\n    ' + ifThen(props.utils.align, alignUtils.getAlignUtilities()) + '\n    ' + ifThen(props.utils.background, backgroundUtils.getBackgroundUtilities(props.theme['$enable-hover-media-query'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$brand-inverse'], props.theme['$gray-lightest'])) + '\n    ' + ifThen(props.utils.border, bordersUtils.getBordersUtilities(props.theme['$enable-rounded'], props.theme['$border-radius'])) + '\n    ' + ifThen(props.utils.clearfix, clearfixUtils.getClearfixUtilities()) + '\n    ' + ifThen(props.utils.cursor, cursorUtils.getCursorUtilities()) + '\n    ' + ifThen(props.utils.display, displayUtils.getDisplayUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + ifThen(props.utils.flex, flexUtils.getFlexUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + ifThen(props.utils.float, floatUtils.getFloatUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + ifThen(props.utils.screenreaders, screenreadersUtils.getScreenReadersUtilities()) + '\n    ' + ifThen(props.utils.spacing, spacingUtils.getSpacingUtilities(props.theme['$grid-breakpoints'], props.theme['$zindex-navbar-fixed'], props.theme['$spacers']
   )) + '\n    ' + ifThen(props.utils.text, textUtils.getTextUtilities(props.theme['$enable-hover-media-query'], props.theme['$grid-breakpoints'], props.theme['$font-weight-normal'], props.theme['$font-weight-bold'], props.theme['$text-muted'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$gray-dark'])) + '\n    ' + ifThen(props.utils.transition, transitionUtils.getTransitionUtilities(props.theme['$enable-transitions'], props.theme['$transition-fade'], props.theme['$transition-collapse'])) + '\n    ' + ifThen(props.utils.visibility, visibilityUtils.getVisibilityUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + ifThen(props.utils.position, positionUtils.getPositionUtilities(props.theme['$zindex-fixed'], props.theme['$zindex-sticky'])) + '\n    ' + ifThen(props.utils.sizing, sizingUtils.getSizingUtilities(props.theme['$sizes']
   )) + '\n  ';
 });
-UtilityProvider.defaultProps = defaultProps$42;
+UtilityProvider.defaultProps = defaultProps$43;
 
 var BootstrapProvider = function (_React$Component) {
   inherits(BootstrapProvider, _React$Component);
@@ -5974,7 +6096,7 @@ var BootstrapProvider = function (_React$Component) {
           utils = _props.utils;
       return React__default.createElement(
         styled.ThemeProvider,
-        { theme: makeTheme(theme) },
+        { theme: makeTheme$$1(theme) },
         React__default.createElement(
           UtilityProvider,
           { utils: utils },
@@ -6010,46 +6132,45 @@ BootstrapProvider.propTypes = {
   })
 };
 
-var defaultProps$43 = {
+var defaultProps$44 = {
   theme: bsTheme,
   tag: 'ol'
 };
-var Breadcrumb = function (_React$Component) {
-  inherits(Breadcrumb, _React$Component);
-  function Breadcrumb() {
-    classCallCheck$1(this, Breadcrumb);
-    return possibleConstructorReturn(this, (Breadcrumb.__proto__ || Object.getPrototypeOf(Breadcrumb)).apply(this, arguments));
+var BreadcrumbUnstyled = function (_React$Component) {
+  inherits(BreadcrumbUnstyled, _React$Component);
+  function BreadcrumbUnstyled() {
+    classCallCheck$1(this, BreadcrumbUnstyled);
+    return possibleConstructorReturn(this, (BreadcrumbUnstyled.__proto__ || Object.getPrototypeOf(BreadcrumbUnstyled)).apply(this, arguments));
   }
-  createClass$1(Breadcrumb, [{
+  createClass$1(BreadcrumbUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'breadcrumb'), cssModule)
+        className: mapToCssModules(classnames$1(className, 'breadcrumb'), cssModule)
       }, attributes));
     }
   }]);
-  return Breadcrumb;
+  return BreadcrumbUnstyled;
 }(React__default.Component);
-Breadcrumb.propTypes = {
+BreadcrumbUnstyled.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object,
   theme: PropTypes.object
 };
-Breadcrumb = styled__default(Breadcrumb).withConfig({
-  displayName: 'Breadcrumb__Breadcrumb'
+var Breadcrumb = styled__default(BreadcrumbUnstyled).withConfig({
+  displayName: 'Breadcrumb'
 })(['', ''], function (props) {
   return '\n    &.breadcrumb {\n      padding: ' + props.theme['$breadcrumb-padding-y'] + ' ' + props.theme['$breadcrumb-padding-x'] + ';\n      margin-bottom: ' + props.theme['$spacer-y'] + ';\n      list-style: none;\n      background-color: ' + props.theme['$breadcrumb-bg'] + ';\n \n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n            \n      ' + clearfix() + '\n    }\n\n    & .breadcrumb-item {\n      float: left;\n    \n      /* The separator between breadcrumbs (by default, a forward-slash: "/") */\n      + .breadcrumb-item::before {\n        display: inline-block; /* Suppress underlining of the separator in modern browsers */\n        padding-right: ' + props.theme['$breadcrumb-item-padding'] + ';\n        padding-left: ' + props.theme['$breadcrumb-item-padding'] + ';\n        color: ' + props.theme['$breadcrumb-divider-color'] + ';\n        content: ' + props.theme['$breadcrumb-divider'] + ';\n      }\n  \n      /* IE9-11 hack to properly handle hyperlink underlines for breadcrumbs built\n       without \'ul\'s. The \'::before\' pseudo-element generates an element\n       *within* the .breadcrumb-item and thereby inherits the \'text-decoration\'.\n      \n       To trick IE into suppressing the underline, we give the pseudo-element an\n       underline and then immediately remove it.\n      */\n      \n      + .breadcrumb-item:hover::before {\n        text-decoration: underline;\n      }\n      + .breadcrumb-item:hover::before {\n        text-decoration: none;\n      }\n    \n      &.active {\n        color: ' + props.theme['$breadcrumb-active-color'] + ';\n      }\n    }\n  ';
 });
-Breadcrumb.defaultProps = defaultProps$43;
-var Breadcrumb$1 = Breadcrumb;
+Breadcrumb.defaultProps = defaultProps$44;
 
-var defaultProps$44 = {
+var defaultProps$45 = {
   tag: 'li'
 };
 var BreadcrumbItem = function (_React$Component) {
@@ -6068,7 +6189,7 @@ var BreadcrumbItem = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'active', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'breadcrumb-item', {
+        className: mapToCssModules(classnames$1(className, 'breadcrumb-item', {
           active: active
         }), cssModule)
       }, attributes));
@@ -6082,23 +6203,23 @@ BreadcrumbItem.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-BreadcrumbItem.defaultProps = defaultProps$44;
+BreadcrumbItem.defaultProps = defaultProps$45;
 
-var defaultProps$45 = {
+var defaultProps$46 = {
   theme: bsTheme,
   tag: 'button',
   color: 'secondary'
 };
-var Button = function (_React$Component) {
-  inherits(Button, _React$Component);
-  function Button() {
+var ButtonUnstyled = function (_React$Component) {
+  inherits(ButtonUnstyled, _React$Component);
+  function ButtonUnstyled() {
     var _ref;
     var _temp, _this, _ret;
-    classCallCheck$1(this, Button);
+    classCallCheck$1(this, ButtonUnstyled);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = Button.__proto__ || Object.getPrototypeOf(Button)).call.apply(_ref, [this].concat(args))), _this), _this.onClick = function (e) {
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = ButtonUnstyled.__proto__ || Object.getPrototypeOf(ButtonUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.onClick = function (e) {
       if (_this.props.disabled) {
         e.preventDefault();
         return;
@@ -6108,11 +6229,11 @@ var Button = function (_React$Component) {
       }
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(Button, [{
+  createClass$1(ButtonUnstyled, [{
     key: 'render',
     value: function render() {
       var _cn;
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           active = _omit.active,
           disabled = _omit.disabled,
           block = _omit.block,
@@ -6125,7 +6246,7 @@ var Button = function (_React$Component) {
           getRef = _omit.getRef,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['active', 'disabled', 'block', 'className', 'cssModule', 'dropup', 'color', 'outline', 'size', 'getRef', 'tag']);
-      var classes = mapToCssModules(classnames(className, 'btn', (_cn = {
+      var classes = mapToCssModules(classnames$1(className, 'btn', (_cn = {
         dropup: dropup,
         active: active,
         disabled: disabled
@@ -6142,9 +6263,9 @@ var Button = function (_React$Component) {
       }));
     }
   }]);
-  return Button;
+  return ButtonUnstyled;
 }(React__default.Component);
-Button.propTypes = {
+ButtonUnstyled.propTypes = {
   active: PropTypes.bool,
   block: PropTypes.bool,
   color: PropTypes.string,
@@ -6159,13 +6280,12 @@ Button.propTypes = {
   cssModule: PropTypes.object,
   theme: PropTypes.object
 };
-Button = styled__default(Button).withConfig({
-  displayName: 'Button__Button'
+var Button = styled__default(ButtonUnstyled).withConfig({
+  displayName: 'Button'
 })(['', ' '], function (props) {
   return '\n    ' + button(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
-Button.defaultProps = defaultProps$45;
-var Button$1 = Button;
+Button.defaultProps = defaultProps$46;
 
 var propTypes$1 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -6174,7 +6294,7 @@ var propTypes$1 = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-var defaultProps$47 = {
+var defaultProps$48 = {
   tag: 'div'
 };
 var contextTypes = {
@@ -6186,14 +6306,14 @@ var DropdownMenu = function DropdownMenu(props, context) {
       right = props.right,
       Tag = props.tag,
       attributes = objectWithoutProperties(props, ['className', 'cssModule', 'right', 'tag']);
-  var classes = mapToCssModules(classnames(className, 'dropdown-menu', { 'dropdown-menu-right': right }), cssModule);
+  var classes = mapToCssModules(classnames$1(className, 'dropdown-menu', { 'dropdown-menu-right': right }), cssModule);
   return React__default.createElement(Tag, _extends({}, attributes, { tabIndex: '-1', 'aria-hidden': !context.isOpen, role: 'menu', className: classes }));
 };
 DropdownMenu.propTypes = propTypes$1;
-DropdownMenu.defaultProps = defaultProps$47;
+DropdownMenu.defaultProps = defaultProps$48;
 DropdownMenu.contextTypes = contextTypes;
 
-var tether = createCommonjsModule(function (module, exports) {
+var tether$1 = createCommonjsModule(function (module, exports) {
 (function(root, factory) {
   if (typeof undefined === 'function' && undefined.amd) {
     undefined(factory);
@@ -7560,7 +7680,7 @@ return Tether;
 }));
 });
 
-var defaultProps$48 = {
+var defaultProps$49 = {
   isOpen: false,
   tetherRef: function tetherRef() {}
 };
@@ -7585,7 +7705,7 @@ var TetherContent = function (_React$Component) {
       _this.hide();
     }, _this.getTarget = function () {
       var target = _this.props.tether.target;
-      if (lodash_omit(target)) {
+      if (lodash_omit$1(target)) {
         return target();
       }
       return target;
@@ -7623,7 +7743,7 @@ var TetherContent = function (_React$Component) {
       _this.element.className = _this.props.className;
       document.body.appendChild(_this.element);
       _this.renderIntoSubtree();
-      _this.tether = new tether(_this.getTetherConfig());
+      _this.tether = new tether$1(_this.getTetherConfig());
       _this.props.tetherRef(_this.tether);
       _this.tether.position();
       _this.element.childNodes[0].focus();
@@ -7659,9 +7779,9 @@ TetherContent.propTypes = {
   tetherRef: PropTypes.func,
   style: PropTypes.node
 };
-TetherContent.defaultProps = defaultProps$48;
+TetherContent.defaultProps = defaultProps$49;
 
-var defaultProps$46 = {
+var defaultProps$47 = {
   isOpen: false,
   tag: 'div',
   theme: bsTheme
@@ -7671,16 +7791,16 @@ var defaultTetherConfig = {
   classes: { element: 'dropdown', enabled: 'show' },
   constraints: [{ to: 'scrollParent', attachment: 'together none' }, { to: 'window', attachment: 'together none' }]
 };
-var Dropdown = function (_React$Component) {
-  inherits(Dropdown, _React$Component);
-  function Dropdown() {
+var DropdownUnstyled = function (_React$Component) {
+  inherits(DropdownUnstyled, _React$Component);
+  function DropdownUnstyled() {
     var _ref;
     var _temp, _this, _ret;
-    classCallCheck$1(this, Dropdown);
+    classCallCheck$1(this, DropdownUnstyled);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = Dropdown.__proto__ || Object.getPrototypeOf(Dropdown)).call.apply(_ref, [this].concat(args))), _this), _this.getTetherConfig = function (childProps) {
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = DropdownUnstyled.__proto__ || Object.getPrototypeOf(DropdownUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.getTetherConfig = function (childProps) {
       var target = function target() {
         return _this.getTetherTarget();
       };
@@ -7718,7 +7838,7 @@ var Dropdown = function (_React$Component) {
       return _this.props.toggle();
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(Dropdown, [{
+  createClass$1(DropdownUnstyled, [{
     key: 'getChildContext',
     value: function getChildContext() {
       return {
@@ -7786,7 +7906,7 @@ var Dropdown = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _cn;
-      var _omit = lodash_omit(this.props, ['toggle', 'tether', 'theme']),
+      var _omit = lodash_omit$1(this.props, ['toggle', 'tether', 'theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           dropup = _omit.dropup,
@@ -7795,7 +7915,7 @@ var Dropdown = function (_React$Component) {
           Tag = _omit.tag,
           isOpen = _omit.isOpen,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'dropup', 'group', 'size', 'tag', 'isOpen']);
-      var classes = mapToCssModules(classnames(className, (_cn = {
+      var classes = mapToCssModules(classnames$1(className, (_cn = {
         'btn-group': group
       }, defineProperty(_cn, 'btn-group-' + size, !!size), defineProperty(_cn, 'dropdown', !group), defineProperty(_cn, 'show', isOpen), defineProperty(_cn, 'dropup', dropup), _cn)), cssModule);
       return React__default.createElement(
@@ -7807,9 +7927,9 @@ var Dropdown = function (_React$Component) {
       );
     }
   }]);
-  return Dropdown;
+  return DropdownUnstyled;
 }(React__default.Component);
-Dropdown.propTypes = {
+DropdownUnstyled.propTypes = {
   disabled: PropTypes.bool,
   dropup: PropTypes.bool,
   group: PropTypes.bool,
@@ -7823,36 +7943,35 @@ Dropdown.propTypes = {
   cssModule: PropTypes.object,
   theme: PropTypes.object
 };
-Dropdown.childContextTypes = {
+DropdownUnstyled.childContextTypes = {
   toggle: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired
 };
-Dropdown = styled__default(Dropdown).withConfig({
-  displayName: 'Dropdown__Dropdown'
+var Dropdown = styled__default(DropdownUnstyled).withConfig({
+  displayName: 'Dropdown'
 })(['', ''], function (props) {
   return '\n    &.dropup,\n    &.dropdown {\n      position: relative;\n    }\n\n    & .dropdown-hide {\n      display: none;\n    }\n    \n    & .dropdown-toggle {\n      /* Generate the caret automatically */\n      &::after {\n        display: inline-block;\n        width: 0;\n        height: 0;\n        margin-left: ' + props.theme['$caret-width'] + ';\n        vertical-align: middle;\n        content: \'\';\n        border-top: ' + props.theme['$caret-width'] + ' solid;\n        border-right: ' + props.theme['$caret-width'] + ' solid transparent;\n        border-left: ' + props.theme['$caret-width'] + ' solid transparent;\n      }\n\n      /* Prevent the focus on the dropdown toggle when closing dropdowns */\n      &:focus {\n        outline: 0;\n      }\n    }\n\n    &.dropup {\n      .dropdown-toggle {\n        &::after {\n          border-top: 0;\n          border-bottom: ' + props.theme['$caret-width'] + ' solid;\n        }\n      }\n    }\n\n    & .dropdown-menu {\n      clear: left;\n      position: absolute;\n      top: 100%;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown'] + ';\n      display: none; // none by default, but block on "open" of the menu\n      float: left;\n      min-width: ' + props.theme['$dropdown-min-width'] + ';\n      padding: ' + props.theme['$dropdown-padding-y'] + ' 0;\n      margin: ' + props.theme['$dropdown-margin-top'] + ' 0; /* override default ul */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      color: ' + props.theme['$body-color'] + ';\n      text-align: left; /* Ensures proper alignment if parent has it changed (e.g., modal footer) */\n      list-style: none;\n      background-color: ' + props.theme['$dropdown-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$dropdown-border-width'] + ' solid ' + props.theme['$dropdown-border-color'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n      ' + boxShadow(props.theme['$enable-shadows'], props.theme['$dropdown-box-shadow']) + '\n    }\n\n    /* mixin from bootstrap 4, see : scss/mixins/_nav-divider.css */\n    & .dropdown-divider {\n      ' + navDivider(props.theme['$spacer-y'], props.theme['$dropdown-divider-bg']) + '\n    }\n\n    & .dropdown-item {\n      display: block;\n      width: 100%; /* For <button>s */\n      padding: 3px ' + props.theme['$dropdown-item-padding-x'] + ';\n      clear: both;\n      font-weight: ' + props.theme['$font-weight-normal'] + ';\n      color: ' + props.theme['$dropdown-link-color'] + ';\n      text-align: inherit; /* For <button>s */\n      white-space: nowrap; /* prevent links from randomly breaking onto new lines */\n      background: none; /* For <button>s */\n      border: 0; /* For <button>s */\n\n      ' + hoverFocus(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$dropdown-link-hover-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-hover-bg'] + '\n      ') + '\n\n      &.active,\n      &:active {\n        color: ' + props.theme['$dropdown-link-active-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-active-bg'] + '\n      }\n\n      &.disabled,\n      &:disabled{\n        color: ' + props.theme['$dropdown-link-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: transparent;\n        ' + ifThen(props.theme['$enabled-gradients'], 'background-image: none; /* Remove CSS gradient */') + '\n      }\n    }\n\n    &.show {\n      /* show the menu */\n      &>.dropdown-menu {\n        display: block;\n      }\n\n      & > a {\n        outline: 0;\n      }\n    }\n\n\n    /* Menu positioning */\n\n    /* Add extra class to .dropdown-menu to flip the alignment of the dropdown*\n    /* menu with the parent. */\n    & .dropdown-menu-right {\n      right: 0;\n      left: auto; /* Reset the default from .dropdown-menu */\n    }\n\n    & .dropdown-menu-left {\n      right: auto;\n      left: 0;\n    }\n\n    /* Dropdown section headers */\n    & .dropdown-header {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    /* Dropdown section footers */\n    & .dropdown-footer {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    \n\n    /* Backdrop to catch body clicks on mobile, etc. */\n    & .dropdown-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown-backdrop'] + ';\n    }\n\n    /* Allow for dropdowns to go bottom up (aka, dropup-menu) */\n\n    /* Just add .dropup after the standard .dropdown class and you\'re set. */\n    /* TODO: abstract this so that the navbar fixed styles are not placed here? */\n\n    &.dropup {\n      .dropdown-menu {\n        top: auto;\n        bottom: 100%;\n        margin-bottom: ' + props.theme['$dropdown-margin-top'] + ';\n      }\n    }\n        \n    /* Added Mixin boutonGroup to enable dropdown to beneficiate from buttonGroup classes */\n    ' + buttonGroup(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-toolbar-margin'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
-Dropdown.defaultProps = defaultProps$46;
-var Dropdown$1 = Dropdown;
+Dropdown.defaultProps = defaultProps$47;
 
-var defaultProps$50 = { theme: bsTheme };
-var H6 = function (_React$Component) {
-  inherits(H6, _React$Component);
-  function H6() {
-    classCallCheck$1(this, H6);
-    return possibleConstructorReturn(this, (H6.__proto__ || Object.getPrototypeOf(H6)).apply(this, arguments));
+var defaultProps$51 = { theme: bsTheme };
+var H6Unstyled = function (_React$Component) {
+  inherits(H6Unstyled, _React$Component);
+  function H6Unstyled() {
+    classCallCheck$1(this, H6Unstyled);
+    return possibleConstructorReturn(this, (H6Unstyled.__proto__ || Object.getPrototypeOf(H6Unstyled)).apply(this, arguments));
   }
-  createClass$1(H6, [{
+  createClass$1(H6Unstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           lead = _omit.lead,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule', 'lead']);
-      var classes = mapToCssModules(classnames(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames$1(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
       return React__default.createElement(
         'h6',
         _extends({ className: classes }, attributes),
@@ -7860,9 +7979,9 @@ var H6 = function (_React$Component) {
       );
     }
   }]);
-  return H6;
+  return H6Unstyled;
 }(React__default.Component);
-H6.propTypes = {
+H6Unstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   lead: PropTypes.bool,
@@ -7870,15 +7989,14 @@ H6.propTypes = {
   color: PropTypes.string,
   cssModule: PropTypes.object
 };
-H6 = styled__default(H6).withConfig({
-  displayName: 'H6__H6'
+var H6 = styled__default(H6Unstyled).withConfig({
+  displayName: 'H6'
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h6'] + ';\n    ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    \n    &.lead {\n     font-size: ' + props.theme['$lead-font-size'] + ';\n     font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-H6.defaultProps = defaultProps$50;
-var H6$1 = H6;
+H6.defaultProps = defaultProps$51;
 
-var defaultProps$49 = {
+var defaultProps$50 = {
   tag: 'button'
 };
 var DropdownItem = function (_React$Component) {
@@ -7918,7 +8036,7 @@ var DropdownItem = function (_React$Component) {
           Tag = _props.tag,
           header = _props.header,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'divider', 'disabled', 'tag', 'header']);
-      var classes = mapToCssModules(classnames(className, {
+      var classes = mapToCssModules(classnames$1(className, {
         disabled: disabled,
         'dropdown-item': !divider && !header,
         'dropdown-header': header,
@@ -7926,7 +8044,7 @@ var DropdownItem = function (_React$Component) {
       }), cssModule);
       if (Tag === 'button') {
         if (header) {
-          Tag = H6$1;
+          Tag = H6;
         } else if (divider) {
           Tag = 'div';
         }
@@ -7953,9 +8071,9 @@ DropdownItem.propTypes = {
 DropdownItem.contextTypes = {
   toggle: PropTypes.func
 };
-DropdownItem.defaultProps = defaultProps$49;
+DropdownItem.defaultProps = defaultProps$50;
 
-var defaultProps$51 = {
+var defaultProps$52 = {
   'data-toggle': 'dropdown',
   'aria-haspopup': true,
   color: 'secondary'
@@ -7995,7 +8113,7 @@ var DropdownToggle = function (_React$Component) {
           tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'caret', 'split', 'nav', 'tag']);
       var ariaLabel = attributes['aria-label'] || 'Toggle Dropdown';
-      var classes = mapToCssModules(classnames(className, {
+      var classes = mapToCssModules(classnames$1(className, {
         'dropdown-toggle': caret || split,
         'dropdown-toggle-split': split,
         active: this.context.isOpen,
@@ -8008,10 +8126,10 @@ var DropdownToggle = function (_React$Component) {
       );
       var Tag = void 0;
       if (nav && !tag) {
-        Tag = A$1;
+        Tag = A;
         attributes.href = '#';
       } else if (!tag) {
-        Tag = Button$1;
+        Tag = Button;
       } else {
         Tag = tag;
       }
@@ -8046,7 +8164,7 @@ DropdownToggle.contextTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired
 };
-DropdownToggle.defaultProps = defaultProps$51;
+DropdownToggle.defaultProps = defaultProps$52;
 
 var propTypes = {
   children: PropTypes.node,
@@ -8054,25 +8172,25 @@ var propTypes = {
   isOpen: PropTypes.bool.isRequired
 };
 var ButtonDropdown = function ButtonDropdown(props) {
-  return React__default.createElement(Dropdown$1, _extends({}, props, { group: true }));
+  return React__default.createElement(Dropdown, _extends({}, props, { group: true }));
 };
 ButtonDropdown.propTypes = propTypes;
 
-var defaultProps$52 = {
+var defaultProps$53 = {
   theme: bsTheme,
   tag: 'div',
   role: 'group'
 };
-var ButtonGroup = function (_React$Component) {
-  inherits(ButtonGroup, _React$Component);
-  function ButtonGroup() {
-    classCallCheck$1(this, ButtonGroup);
-    return possibleConstructorReturn(this, (ButtonGroup.__proto__ || Object.getPrototypeOf(ButtonGroup)).apply(this, arguments));
+var ButtonGroupUnstyled = function (_React$Component) {
+  inherits(ButtonGroupUnstyled, _React$Component);
+  function ButtonGroupUnstyled() {
+    classCallCheck$1(this, ButtonGroupUnstyled);
+    return possibleConstructorReturn(this, (ButtonGroupUnstyled.__proto__ || Object.getPrototypeOf(ButtonGroupUnstyled)).apply(this, arguments));
   }
-  createClass$1(ButtonGroup, [{
+  createClass$1(ButtonGroupUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           size = _omit.size,
@@ -8080,13 +8198,13 @@ var ButtonGroup = function (_React$Component) {
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'size', 'vertical', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, vertical ? 'btn-group-vertical' : 'btn-group', defineProperty({}, 'btn-group-' + size, size)), cssModule)
+        className: mapToCssModules(classnames$1(className, vertical ? 'btn-group-vertical' : 'btn-group', defineProperty({}, 'btn-group-' + size, size)), cssModule)
       }, attributes));
     }
   }]);
-  return ButtonGroup;
+  return ButtonGroupUnstyled;
 }(React__default.Component);
-ButtonGroup.propTypes = {
+ButtonGroupUnstyled.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object,
@@ -8094,76 +8212,74 @@ ButtonGroup.propTypes = {
   vertical: PropTypes.bool,
   theme: PropTypes.object
 };
-ButtonGroup = styled__default(ButtonGroup).withConfig({
-  displayName: 'ButtonGroup__ButtonGroup'
+var ButtonGroup = styled__default(ButtonGroupUnstyled).withConfig({
+  displayName: 'ButtonGroup'
 })(['', '  '], function (props) {
   return '\n    ' + buttonGroup(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-toolbar-margin'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
-ButtonGroup.defaultProps = defaultProps$52;
-var ButtonGroup$1 = ButtonGroup;
+ButtonGroup.defaultProps = defaultProps$53;
 
-var defaultProps$53 = {
+var defaultProps$54 = {
   tag: 'div',
   role: 'toolbar',
   theme: bsTheme
 };
-var ButtonToolbar = function (_React$Component) {
-  inherits(ButtonToolbar, _React$Component);
-  function ButtonToolbar() {
-    classCallCheck$1(this, ButtonToolbar);
-    return possibleConstructorReturn(this, (ButtonToolbar.__proto__ || Object.getPrototypeOf(ButtonToolbar)).apply(this, arguments));
+var ButtonToolbarUnstyled = function (_React$Component) {
+  inherits(ButtonToolbarUnstyled, _React$Component);
+  function ButtonToolbarUnstyled() {
+    classCallCheck$1(this, ButtonToolbarUnstyled);
+    return possibleConstructorReturn(this, (ButtonToolbarUnstyled.__proto__ || Object.getPrototypeOf(ButtonToolbarUnstyled)).apply(this, arguments));
   }
-  createClass$1(ButtonToolbar, [{
+  createClass$1(ButtonToolbarUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'btn-toolbar'), cssModule)
+        className: mapToCssModules(classnames$1(className, 'btn-toolbar'), cssModule)
       }, attributes));
     }
   }]);
-  return ButtonToolbar;
+  return ButtonToolbarUnstyled;
 }(React__default.Component);
-ButtonToolbar.propTypes = {
+ButtonToolbarUnstyled.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object,
   theme: PropTypes.object
 };
-ButtonToolbar = styled__default(ButtonToolbar).withConfig({
-  displayName: 'ButtonToolbar__ButtonToolbar'
+var ButtonToolbar = styled__default(ButtonToolbarUnstyled).withConfig({
+  displayName: 'ButtonToolbar'
 })(['', '  '], function (props) {
   return '\n    ' + buttonGroup(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-toolbar-margin'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
-ButtonToolbar.defaultProps = defaultProps$53;
-var ButtonToolbar$1 = ButtonToolbar;
+ButtonToolbar.defaultProps = defaultProps$54;
 
-var defaultProps$54 = { theme: bsTheme };
+var defaultProps$55 = { theme: bsTheme };
 var Caption = styled__default.caption.withConfig({
-  displayName: 'Caption__Caption'
+  displayName: 'Caption'
 })(['', ''], function (props) {
   return '\n    padding-top: ' + props.theme['$table-cell-padding'] + ';\n    padding-bottom: ' + props.theme['$table-cell-padding'] + ';\n    color: ' + props.theme['$text-muted'] + ';\n    text-align: left;\n    caption-side: top;\n  ';
 });
-Caption.defaultProps = defaultProps$54;
+Caption.defaultProps = defaultProps$55;
 
-var defaultProps$55 = {
+var defaultProps$56 = {
   tag: 'code',
   theme: bsTheme
 };
-var Code = function (_React$Component) {
-  inherits(Code, _React$Component);
-  function Code() {
-    classCallCheck$1(this, Code);
-    return possibleConstructorReturn(this, (Code.__proto__ || Object.getPrototypeOf(Code)).apply(this, arguments));
+var CodeUnstyled = function (_React$Component) {
+  inherits(CodeUnstyled, _React$Component);
+  function CodeUnstyled() {
+    classCallCheck$1(this, CodeUnstyled);
+    return possibleConstructorReturn(this, (CodeUnstyled.__proto__ || Object.getPrototypeOf(CodeUnstyled)).apply(this, arguments));
   }
-  createClass$1(Code, [{
+  createClass$1(CodeUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           children = _omit.children,
           Tag = _omit.tag,
@@ -8175,20 +8291,19 @@ var Code = function (_React$Component) {
       );
     }
   }]);
-  return Code;
+  return CodeUnstyled;
 }(React__default.Component);
-Code.propTypes = {
+CodeUnstyled.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.object,
   tag: PropTypes.string
 };
-Code = styled__default(Code).withConfig({
-  displayName: 'Code__Code'
+var Code = styled__default(CodeUnstyled).withConfig({
+  displayName: 'Code'
 })(['', ''], function (props) {
   return '\n    /* Inline code */\n    padding: ' + props.theme['$code-padding-y'] + ' ' + props.theme['$code-padding-x'] + ';\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$code-color'] + ';\n    background-color: ' + props.theme['$code-bg'] + ';\n    ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius']) + ';\n    \n    /* Streamline the style when inside anchors to avoid broken underline and more */\n    a > & {\n      padding: 0;\n      color: inherit;\n      background-color: inherit;\n    }\n    \n    /* Bootstrap 4 does not place this css rule straight into Code tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
-Code.defaultProps = defaultProps$55;
-var Code$1 = Code;
+Code.defaultProps = defaultProps$56;
 
 var colWidths = ['xs', 'sm', 'md', 'lg', 'xl'];
 var stringOrNumberProp = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
@@ -8198,7 +8313,7 @@ var columnProps = PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTyp
   pull: stringOrNumberProp,
   offset: stringOrNumberProp
 })]);
-var defaultProps$56 = {
+var defaultProps$57 = {
   theme: bsTheme,
   tag: 'div',
   widths: colWidths
@@ -8211,17 +8326,17 @@ var getColumnSizeClass = function getColumnSizeClass(isXs, colWidth, colSize) {
   }
   return isXs ? 'col-' + colSize : 'col-' + colWidth + '-' + colSize;
 };
-var Col = function (_React$Component) {
-  inherits(Col, _React$Component);
-  function Col() {
-    classCallCheck$1(this, Col);
-    return possibleConstructorReturn(this, (Col.__proto__ || Object.getPrototypeOf(Col)).apply(this, arguments));
+var ColUnstyled = function (_React$Component) {
+  inherits(ColUnstyled, _React$Component);
+  function ColUnstyled() {
+    classCallCheck$1(this, ColUnstyled);
+    return possibleConstructorReturn(this, (ColUnstyled.__proto__ || Object.getPrototypeOf(ColUnstyled)).apply(this, arguments));
   }
-  createClass$1(Col, [{
+  createClass$1(ColUnstyled, [{
     key: 'render',
     value: function render() {
       var _this2 = this;
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           widths = _omit.widths,
@@ -8243,20 +8358,20 @@ var Col = function (_React$Component) {
           var _cn;
           var colSizeInterfix = isXs ? '-' : '-' + colWidth + '-';
           colClass = getColumnSizeClass(isXs, colWidth, columnProp.size);
-          colClasses.push(mapToCssModules(classnames((_cn = {}, defineProperty(_cn, colClass, columnProp.size || columnProp.size === ''), defineProperty(_cn, 'push' + colSizeInterfix + columnProp.push, columnProp.push), defineProperty(_cn, 'pull' + colSizeInterfix + columnProp.pull, columnProp.pull), defineProperty(_cn, 'offset' + colSizeInterfix + columnProp.offset, columnProp.offset), _cn))), cssModule);
+          colClasses.push(mapToCssModules(classnames$1((_cn = {}, defineProperty(_cn, colClass, columnProp.size || columnProp.size === ''), defineProperty(_cn, 'push' + colSizeInterfix + columnProp.push, columnProp.push), defineProperty(_cn, 'pull' + colSizeInterfix + columnProp.pull, columnProp.pull), defineProperty(_cn, 'offset' + colSizeInterfix + columnProp.offset, columnProp.offset), _cn))), cssModule);
         } else {
           colClass = getColumnSizeClass(isXs, colWidth, columnProp);
           colClasses.push(colClass);
         }
       });
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, colClasses), cssModule)
+        className: mapToCssModules(classnames$1(className, colClasses), cssModule)
       }, attributes));
     }
   }]);
-  return Col;
+  return ColUnstyled;
 }(React__default.Component);
-Col.propTypes = {
+ColUnstyled.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   xs: columnProps,
   sm: columnProps,
@@ -8268,13 +8383,12 @@ Col.propTypes = {
   widths: PropTypes.array,
   theme: PropTypes.object
 };
-Col = styled__default(Col).withConfig({
-  displayName: 'Col__Col'
+var Col = styled__default(ColUnstyled).withConfig({
+  displayName: 'Col'
 })(['', ''], function (props) {
   return '\n    ' + makeGridColumns(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-Col.defaultProps = defaultProps$56;
-var Col$1 = Col;
+Col.defaultProps = defaultProps$57;
 
 var SHOW = 'SHOW';
 var SHOWN = 'SHOWN';
@@ -8358,7 +8472,7 @@ var Collapse = function (_Component) {
     key: 'render',
     value: function render() {
       var _this3 = this;
-      var _omit = lodash_omit(this.props, ['isOpen', 'theme', 'delay', 'onOpened', 'onClosed']),
+      var _omit = lodash_omit$1(this.props, ['isOpen', 'theme', 'delay', 'onOpened', 'onClosed']),
           navbar = _omit.navbar,
           className = _omit.className,
           cssModule = _omit.cssModule,
@@ -8375,7 +8489,7 @@ var Collapse = function (_Component) {
       } else if (collapse === HIDDEN) {
         collapseClass = 'collapse';
       }
-      var classes = mapToCssModules(classnames(className, collapseClass, navbar && 'navbar-collapse'), cssModule);
+      var classes = mapToCssModules(classnames$1(className, collapseClass, navbar && 'navbar-collapse'), cssModule);
       var style = height === null ? null : { height: height };
       return React__default.createElement(Tag, _extends({}, attributes, {
         style: _extends({}, attributes.style, style),
@@ -8410,41 +8524,40 @@ Collapse.defaultProps = {
   onClosed: function onClosed() {}
 };
 
-var Dd = function (_React$Component) {
-  inherits(Dd, _React$Component);
-  function Dd() {
-    classCallCheck$1(this, Dd);
-    return possibleConstructorReturn(this, (Dd.__proto__ || Object.getPrototypeOf(Dd)).apply(this, arguments));
+var DdUnstyled = function (_React$Component) {
+  inherits(DdUnstyled, _React$Component);
+  function DdUnstyled() {
+    classCallCheck$1(this, DdUnstyled);
+    return possibleConstructorReturn(this, (DdUnstyled.__proto__ || Object.getPrototypeOf(DdUnstyled)).apply(this, arguments));
   }
-  createClass$1(Dd, [{
+  createClass$1(DdUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
       return React__default.createElement('dd', _extends({ className: className }, attributes));
     }
   }]);
-  return Dd;
+  return DdUnstyled;
 }(React__default.Component);
-Dd.propTypes = {
+DdUnstyled.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.object
 };
-Dd = styled__default(Dd).withConfig({
-  displayName: 'Dd__Dd'
+var Dd = styled__default(DdUnstyled).withConfig({
+  displayName: 'Dd'
 })(['  margin-bottom:.5rem;margin-left:0;', ''], function (props) {
   return '\n    ' + makeGridColumns(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-var Dd$1 = Dd;
 
-var Dfn = function (_React$Component) {
-  inherits(Dfn, _React$Component);
-  function Dfn() {
-    classCallCheck$1(this, Dfn);
-    return possibleConstructorReturn(this, (Dfn.__proto__ || Object.getPrototypeOf(Dfn)).apply(this, arguments));
+var DfnUnstyled = function (_React$Component) {
+  inherits(DfnUnstyled, _React$Component);
+  function DfnUnstyled() {
+    classCallCheck$1(this, DfnUnstyled);
+    return possibleConstructorReturn(this, (DfnUnstyled.__proto__ || Object.getPrototypeOf(DfnUnstyled)).apply(this, arguments));
   }
-  createClass$1(Dfn, [{
+  createClass$1(DfnUnstyled, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -8455,16 +8568,15 @@ var Dfn = function (_React$Component) {
       }, attributes));
     }
   }]);
-  return Dfn;
+  return DfnUnstyled;
 }(React__default.Component);
-Dfn.propTypes = {
+DfnUnstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node
 };
-Dfn = styled__default(Dfn).withConfig({
-  displayName: 'Dfn__Dfn'
+var Dfn = styled__default(DfnUnstyled).withConfig({
+  displayName: 'Dfn'
 })(['font-style:italic;']);
-var Dfn$1 = Dfn;
 
 var Details = function (_React$Component) {
   inherits(Details, _React$Component);
@@ -8488,138 +8600,71 @@ Details.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-var defaultProps$57 = { theme: bsTheme };
-var Dl = function (_React$Component) {
-  inherits(Dl, _React$Component);
-  function Dl() {
-    classCallCheck$1(this, Dl);
-    return possibleConstructorReturn(this, (Dl.__proto__ || Object.getPrototypeOf(Dl)).apply(this, arguments));
+var defaultProps$58 = { theme: bsTheme };
+var DlUnstyled = function (_React$Component) {
+  inherits(DlUnstyled, _React$Component);
+  function DlUnstyled() {
+    classCallCheck$1(this, DlUnstyled);
+    return possibleConstructorReturn(this, (DlUnstyled.__proto__ || Object.getPrototypeOf(DlUnstyled)).apply(this, arguments));
   }
-  createClass$1(Dl, [{
+  createClass$1(DlUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
       return React__default.createElement('dl', _extends({ className: className }, attributes));
     }
   }]);
-  return Dl;
+  return DlUnstyled;
 }(React__default.Component);
-Dl.propTypes = {
+DlUnstyled.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.object
 };
-Dl = styled__default(Dl).withConfig({
-  displayName: 'Dl__Dl'
+var Dl = styled__default(DlUnstyled).withConfig({
+  displayName: 'Dl'
 })(['  margin-top:0;margin-bottom:1rem;', ''], function (props) {
   return '\n    ' + makeRow(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n  ';
 });
-Dl.defaultProps = defaultProps$57;
-var Dl$1 = Dl;
+Dl.defaultProps = defaultProps$58;
 
-var defaultProps$58 = { theme: bsTheme };
-var Dt = function (_React$Component) {
-  inherits(Dt, _React$Component);
-  function Dt() {
-    classCallCheck$1(this, Dt);
-    return possibleConstructorReturn(this, (Dt.__proto__ || Object.getPrototypeOf(Dt)).apply(this, arguments));
+var defaultProps$59 = { theme: bsTheme };
+var DtUnstyled = function (_React$Component) {
+  inherits(DtUnstyled, _React$Component);
+  function DtUnstyled() {
+    classCallCheck$1(this, DtUnstyled);
+    return possibleConstructorReturn(this, (DtUnstyled.__proto__ || Object.getPrototypeOf(DtUnstyled)).apply(this, arguments));
   }
-  createClass$1(Dt, [{
+  createClass$1(DtUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
       return React__default.createElement('dt', _extends({ className: className }, attributes));
     }
   }]);
-  return Dt;
+  return DtUnstyled;
 }(React__default.Component);
-Dt.propTypes = {
+DtUnstyled.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.object
 };
-Dt = styled__default(Dt).withConfig({
-  displayName: 'Dt__Dt'
+var Dt = styled__default(DtUnstyled).withConfig({
+  displayName: 'Dt'
 })(['  ', ''], function (props) {
   return '\n    /* Reboot Scss */\n    font-weight: ' + props.theme['$dt-font-weight'] + ';\n    ' + makeGridColumns(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-Dt.defaultProps = defaultProps$58;
-var Dt$1 = Dt;
+Dt.defaultProps = defaultProps$59;
 
-var defaultProps$59 = {
-  isOpen: true,
-  theme: bsTheme
-};
-var Fade = function (_React$Component) {
-  inherits(Fade, _React$Component);
-  function Fade() {
-    var _ref;
-    var _temp, _this, _ret;
-    classCallCheck$1(this, Fade);
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = Fade.__proto__ || Object.getPrototypeOf(Fade)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      transitionEnterTimeout: null,
-      transitionAppearTimeout: null,
-      transitionLeaveTimeout: null
-    }, _temp), possibleConstructorReturn(_this, _ret);
+var FaUnstyled = function (_React$Component) {
+  inherits(FaUnstyled, _React$Component);
+  function FaUnstyled() {
+    classCallCheck$1(this, FaUnstyled);
+    return possibleConstructorReturn(this, (FaUnstyled.__proto__ || Object.getPrototypeOf(FaUnstyled)).apply(this, arguments));
   }
-  createClass$1(Fade, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      var theme = this.props.theme;
-      var userThemeTransitionList = parseTransition(theme['$transition-fade']);
-      this.setState({
-        transitionEnterTimeout: userThemeTransitionList[0].duration,
-        transitionAppearTimeout: userThemeTransitionList[0].duration,
-        transitionLeaveTimeout: userThemeTransitionList[0].duration
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _omit = lodash_omit(this.props, ['theme', 'innerRef']),
-          children = _omit.children,
-          isOpen = _omit.isOpen,
-          rest = objectWithoutProperties(_omit, ['children', 'isOpen']);
-      return React__default.createElement(
-        ReactCSSTransitionGroup,
-        _extends({
-          transitionAppearTimeout: this.state.transitionEnterTimeout,
-          transitionEnterTimeout: this.state.transitionAppearTimeout,
-          transitionLeaveTimeout: this.state.transitionLeaveTimeout,
-          transitionName: {
-            appear: 'fade',
-            appearActive: 'show',
-            enter: 'fade',
-            enterActive: 'show',
-            leave: 'fade'
-          }
-        }, rest),
-        isOpen ? children : null
-      );
-    }
-  }]);
-  return Fade;
-}(React__default.Component);
-Fade.propTypes = {
-  children: PropTypes.node.isRequired,
-  theme: PropTypes.object,
-  isOpen: PropTypes.bool
-};
-Fade.defaultProps = defaultProps$59;
-var index$2 = styled.withTheme(Fade);
-
-var Fa = function (_React$Component) {
-  inherits(Fa, _React$Component);
-  function Fa() {
-    classCallCheck$1(this, Fa);
-    return possibleConstructorReturn(this, (Fa.__proto__ || Object.getPrototypeOf(Fa)).apply(this, arguments));
-  }
-  createClass$1(Fa, [{
+  createClass$1(FaUnstyled, [{
     key: 'render',
     value: function render() {
       var _cn;
@@ -8628,25 +8673,24 @@ var Fa = function (_React$Component) {
           size = _props.size,
           color = _props.color,
           attributes = objectWithoutProperties(_props, ['className', 'size', 'color']);
-      var classes = classnames(className, 'fa', (_cn = {}, defineProperty(_cn, 'text-' + color, color), defineProperty(_cn, 'fa-' + size, size), _cn));
+      var classes = classnames$1(className, 'fa', (_cn = {}, defineProperty(_cn, 'text-' + color, color), defineProperty(_cn, 'fa-' + size, size), _cn));
       return React__default.createElement('i', {
-        className: classnames(classes, Object.keys(attributes).map(function (key) {
+        className: classnames$1(classes, Object.keys(attributes).map(function (key) {
           return 'fa-' + key;
         }))
       });
     }
   }]);
-  return Fa;
+  return FaUnstyled;
 }(React__default.Component);
-Fa.propTypes = {
+FaUnstyled.propTypes = {
   className: PropTypes.string,
   size: PropTypes.string,
   color: PropTypes.string
 };
-Fa = styled__default(Fa).withConfig({
-  displayName: 'Fa__Fa'
+var Fa = styled__default(FaUnstyled).withConfig({
+  displayName: 'Fa'
 })(['&.fa-lg{vertical-align:-2%;}']);
-var Fa$1 = Fa;
 
 var FaStacked = function (_React$Component) {
   inherits(FaStacked, _React$Component);
@@ -8662,7 +8706,7 @@ var FaStacked = function (_React$Component) {
           size = _props.size,
           attributes = objectWithoutProperties(_props, ['className', 'size']);
       return React__default.createElement('span', _extends({
-        className: classnames(className, 'fa-stack', defineProperty({}, 'fa-' + size, size))
+        className: classnames$1(className, 'fa-stack', defineProperty({}, 'fa-' + size, size))
       }, attributes));
     }
   }]);
@@ -8674,16 +8718,16 @@ FaStacked.propTypes = {
 };
 
 var defaultProps$60 = { theme: bsTheme };
-var Fieldset = function (_React$Component) {
-  inherits(Fieldset, _React$Component);
-  function Fieldset() {
-    classCallCheck$1(this, Fieldset);
-    return possibleConstructorReturn(this, (Fieldset.__proto__ || Object.getPrototypeOf(Fieldset)).apply(this, arguments));
+var FieldsetUnstyled = function (_React$Component) {
+  inherits(FieldsetUnstyled, _React$Component);
+  function FieldsetUnstyled() {
+    classCallCheck$1(this, FieldsetUnstyled);
+    return possibleConstructorReturn(this, (FieldsetUnstyled.__proto__ || Object.getPrototypeOf(FieldsetUnstyled)).apply(this, arguments));
   }
-  createClass$1(Fieldset, [{
+  createClass$1(FieldsetUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           children = _omit.children,
           rest = objectWithoutProperties(_omit, ['className', 'children']);
@@ -8696,43 +8740,42 @@ var Fieldset = function (_React$Component) {
       );
     }
   }]);
-  return Fieldset;
+  return FieldsetUnstyled;
 }(React__default.Component);
-Fieldset.propTypes = {
+FieldsetUnstyled.propTypes = {
   theme: PropTypes.object,
   className: PropTypes.string,
   children: PropTypes.node.isRequired
 };
-Fieldset = styled__default(Fieldset).withConfig({
-  displayName: 'Fieldset__Fieldset'
+var Fieldset = styled__default(FieldsetUnstyled).withConfig({
+  displayName: 'Fieldset'
 })(['', ''], function (props) {
   return '\n    min-width: 0;\n    padding: 0;\n    margin: 0;\n    border: 0;\n\n    & .row {\n      ' + makeRow(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n\n  ';
 });
 Fieldset.defaultProps = defaultProps$60;
-var Fieldset$1 = Fieldset;
 
 var Footer = styled__default.footer.withConfig({
-  displayName: 'Footer__Footer'
+  displayName: 'Footer'
 })(['']);
 
 var defaultProps$61 = { theme: bsTheme };
-var H1 = function (_React$Component) {
-  inherits(H1, _React$Component);
-  function H1() {
-    classCallCheck$1(this, H1);
-    return possibleConstructorReturn(this, (H1.__proto__ || Object.getPrototypeOf(H1)).apply(this, arguments));
+var H1Unstyled = function (_React$Component) {
+  inherits(H1Unstyled, _React$Component);
+  function H1Unstyled() {
+    classCallCheck$1(this, H1Unstyled);
+    return possibleConstructorReturn(this, (H1Unstyled.__proto__ || Object.getPrototypeOf(H1Unstyled)).apply(this, arguments));
   }
-  createClass$1(H1, [{
+  createClass$1(H1Unstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           lead = _omit.lead,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule', 'lead']);
-      var classes = mapToCssModules(classnames(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames$1(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
       return React__default.createElement(
         'h1',
         _extends({ className: classes }, attributes),
@@ -8740,9 +8783,9 @@ var H1 = function (_React$Component) {
       );
     }
   }]);
-  return H1;
+  return H1Unstyled;
 }(React__default.Component);
-H1.propTypes = {
+H1Unstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   lead: PropTypes.bool,
@@ -8750,32 +8793,31 @@ H1.propTypes = {
   color: PropTypes.string,
   cssModule: PropTypes.object
 };
-H1 = styled__default(H1).withConfig({
-  displayName: 'H1__H1'
+var H1 = styled__default(H1Unstyled).withConfig({
+  displayName: 'H1'
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h1'] + ';\n    ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
 H1.defaultProps = defaultProps$61;
-var H1$1 = H1;
 
 var defaultProps$62 = { theme: bsTheme };
-var H2 = function (_React$Component) {
-  inherits(H2, _React$Component);
-  function H2() {
-    classCallCheck$1(this, H2);
-    return possibleConstructorReturn(this, (H2.__proto__ || Object.getPrototypeOf(H2)).apply(this, arguments));
+var H2Unstyled = function (_React$Component) {
+  inherits(H2Unstyled, _React$Component);
+  function H2Unstyled() {
+    classCallCheck$1(this, H2Unstyled);
+    return possibleConstructorReturn(this, (H2Unstyled.__proto__ || Object.getPrototypeOf(H2Unstyled)).apply(this, arguments));
   }
-  createClass$1(H2, [{
+  createClass$1(H2Unstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           lead = _omit.lead,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule', 'lead']);
-      var classes = mapToCssModules(classnames(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames$1(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
       return React__default.createElement(
         'h2',
         _extends({ className: classes }, attributes),
@@ -8783,9 +8825,9 @@ var H2 = function (_React$Component) {
       );
     }
   }]);
-  return H2;
+  return H2Unstyled;
 }(React__default.Component);
-H2.propTypes = {
+H2Unstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   lead: PropTypes.bool,
@@ -8793,32 +8835,31 @@ H2.propTypes = {
   color: PropTypes.string,
   cssModule: PropTypes.object
 };
-H2 = styled__default(H2).withConfig({
-  displayName: 'H2__H2'
+var H2 = styled__default(H2Unstyled).withConfig({
+  displayName: 'H2'
 })(['', ''], function (props) {
   return '\n\n    font-size: ' + props.theme['$font-size-h2'] + ';\n    ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
 H2.defaultProps = defaultProps$62;
-var H2$1 = H2;
 
 var defaultProps$63 = { theme: bsTheme };
-var H3 = function (_React$Component) {
-  inherits(H3, _React$Component);
-  function H3() {
-    classCallCheck$1(this, H3);
-    return possibleConstructorReturn(this, (H3.__proto__ || Object.getPrototypeOf(H3)).apply(this, arguments));
+var H3Unstyled = function (_React$Component) {
+  inherits(H3Unstyled, _React$Component);
+  function H3Unstyled() {
+    classCallCheck$1(this, H3Unstyled);
+    return possibleConstructorReturn(this, (H3Unstyled.__proto__ || Object.getPrototypeOf(H3Unstyled)).apply(this, arguments));
   }
-  createClass$1(H3, [{
+  createClass$1(H3Unstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           lead = _omit.lead,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule', 'lead']);
-      var classes = mapToCssModules(classnames(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames$1(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
       return React__default.createElement(
         'h3',
         _extends({ className: classes }, attributes),
@@ -8826,9 +8867,9 @@ var H3 = function (_React$Component) {
       );
     }
   }]);
-  return H3;
+  return H3Unstyled;
 }(React__default.Component);
-H3.propTypes = {
+H3Unstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   lead: PropTypes.bool,
@@ -8836,32 +8877,31 @@ H3.propTypes = {
   color: PropTypes.string,
   cssModule: PropTypes.object
 };
-H3 = styled__default(H3).withConfig({
-  displayName: 'H3__H3'
+var H3 = styled__default(H3Unstyled).withConfig({
+  displayName: 'H3'
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h3'] + ';\n    ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
 H3.defaultProps = defaultProps$63;
-var H3$1 = H3;
 
 var defaultProps$64 = { theme: bsTheme };
-var H4 = function (_React$Component) {
-  inherits(H4, _React$Component);
-  function H4() {
-    classCallCheck$1(this, H4);
-    return possibleConstructorReturn(this, (H4.__proto__ || Object.getPrototypeOf(H4)).apply(this, arguments));
+var H4Unstyled = function (_React$Component) {
+  inherits(H4Unstyled, _React$Component);
+  function H4Unstyled() {
+    classCallCheck$1(this, H4Unstyled);
+    return possibleConstructorReturn(this, (H4Unstyled.__proto__ || Object.getPrototypeOf(H4Unstyled)).apply(this, arguments));
   }
-  createClass$1(H4, [{
+  createClass$1(H4Unstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           lead = _omit.lead,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule', 'lead']);
-      var classes = mapToCssModules(classnames(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames$1(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
       return React__default.createElement(
         'h4',
         _extends({ className: classes }, attributes),
@@ -8869,9 +8909,9 @@ var H4 = function (_React$Component) {
       );
     }
   }]);
-  return H4;
+  return H4Unstyled;
 }(React__default.Component);
-H4.propTypes = {
+H4Unstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   lead: PropTypes.bool,
@@ -8879,32 +8919,31 @@ H4.propTypes = {
   color: PropTypes.string,
   cssModule: PropTypes.object
 };
-H4 = styled__default(H4).withConfig({
-  displayName: 'H4__H4'
+var H4 = styled__default(H4Unstyled).withConfig({
+  displayName: 'H4'
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h4'] + ';\n    ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
 H4.defaultProps = defaultProps$64;
-var H4$1 = H4;
 
 var defaultProps$65 = { theme: bsTheme };
-var H5 = function (_React$Component) {
-  inherits(H5, _React$Component);
-  function H5() {
-    classCallCheck$1(this, H5);
-    return possibleConstructorReturn(this, (H5.__proto__ || Object.getPrototypeOf(H5)).apply(this, arguments));
+var H5Unstyled = function (_React$Component) {
+  inherits(H5Unstyled, _React$Component);
+  function H5Unstyled() {
+    classCallCheck$1(this, H5Unstyled);
+    return possibleConstructorReturn(this, (H5Unstyled.__proto__ || Object.getPrototypeOf(H5Unstyled)).apply(this, arguments));
   }
-  createClass$1(H5, [{
+  createClass$1(H5Unstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           lead = _omit.lead,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule', 'lead']);
-      var classes = mapToCssModules(classnames(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames$1(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
       return React__default.createElement(
         'h5',
         _extends({ className: classes }, attributes),
@@ -8912,9 +8951,9 @@ var H5 = function (_React$Component) {
       );
     }
   }]);
-  return H5;
+  return H5Unstyled;
 }(React__default.Component);
-H5.propTypes = {
+H5Unstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   lead: PropTypes.bool,
@@ -8922,17 +8961,16 @@ H5.propTypes = {
   color: PropTypes.string,
   cssModule: PropTypes.object
 };
-H5 = styled__default(H5).withConfig({
-  displayName: 'H5__H5'
+var H5 = styled__default(H5Unstyled).withConfig({
+  displayName: 'H5'
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h5'] + ';\n    ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n \n    &.lead {\n     font-size: ' + props.theme['$lead-font-size'] + ';\n     font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
 H5.defaultProps = defaultProps$65;
-var H5$1 = H5;
 
 var defaultProps$66 = { theme: bsTheme };
 var Header = styled__default.header.withConfig({
-  displayName: 'Header__Header'
+  displayName: 'Header'
 })(['', '  '], function (props) {
   return '\n    ' + navbar(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + ifThen(props.shadowHeader, 'box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);') + '\n  ';
 });
@@ -8942,7 +8980,7 @@ var defaultProps$67 = {
   theme: bsTheme
 };
 var Hr = styled__default.hr.withConfig({
-  displayName: 'Hr__Hr'
+  displayName: 'Hr'
 })(['', ''], function (props) {
   return '\n    margin-top: ' + props.theme['$spacer-y'] + ';\n    margin-bottom: ' + props.theme['$spacer-y'] + ';\n    border: 0;\n    border-top: ' + props.theme['$hr-border-width'] + ' solid ' + props.theme['$hr-border-color'] + ';\n  ';
 });
@@ -8956,16 +8994,16 @@ var defaultProps$68 = {
   theme: bsTheme,
   tag: 'img'
 };
-var Img = function (_React$Component) {
-  inherits(Img, _React$Component);
-  function Img() {
-    classCallCheck$1(this, Img);
-    return possibleConstructorReturn(this, (Img.__proto__ || Object.getPrototypeOf(Img)).apply(this, arguments));
+var ImgUnstyled = function (_React$Component) {
+  inherits(ImgUnstyled, _React$Component);
+  function ImgUnstyled() {
+    classCallCheck$1(this, ImgUnstyled);
+    return possibleConstructorReturn(this, (ImgUnstyled.__proto__ || Object.getPrototypeOf(ImgUnstyled)).apply(this, arguments));
   }
-  createClass$1(Img, [{
+  createClass$1(ImgUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           src = _omit.src,
           alt = _omit.alt,
@@ -8975,7 +9013,7 @@ var Img = function (_React$Component) {
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'src', 'alt', 'fluid', 'figure', 'thumbnail', 'cssModule', 'tag']);
-      var classes = mapToCssModules(classnames(className, fluid ? 'img-fluid' : false, thumbnail ? 'img-thumbnail' : false, figure ? 'figure-img' : false), cssModule);
+      var classes = mapToCssModules(classnames$1(className, fluid ? 'img-fluid' : false, thumbnail ? 'img-thumbnail' : false, figure ? 'figure-img' : false), cssModule);
       return React__default.createElement(Tag, _extends({
         className: classes,
         src: src,
@@ -8983,9 +9021,9 @@ var Img = function (_React$Component) {
       }, attributes));
     }
   }]);
-  return Img;
+  return ImgUnstyled;
 }(React__default.Component);
-Img.propTypes = {
+ImgUnstyled.propTypes = {
   src: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   alt: PropTypes.string.isRequired,
   fluid: PropTypes.bool,
@@ -8996,64 +9034,62 @@ Img.propTypes = {
   cssModule: PropTypes.object,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
-Img = styled__default(Img).withConfig({
-  displayName: 'Img__Img'
+var Img = styled__default(ImgUnstyled).withConfig({
+  displayName: 'Img'
 })(['', ''], function (props) {
   return '\n    \n    /* \n      Responsive images (ensure images does not scale beyond their parents)\n      This is purposefully opt-in via an explicit class rather than being the default for all <img>.\n      We previously tried the "images are responsive by default" approach in Bootstrap v2,\n      and abandoned it in Bootstrap v3 because it breaks lots of third-party widgets (including Google Maps)\n      which we are not expecting the images within themselves to be involuntarily resized.\n      See also https://github.com/twbs/bootstrap/issues/18178\n    */\n    \n    &.img-fluid {\n      ' + imgFluid() + '\n    }\n    \n    \n     /* Image thumbnails */ \n    &.img-thumbnail {\n      padding: ' + props.theme['$thumbnail-padding'] + ';\n      background-color: ' + props.theme['$thumbnail-bg'] + ';\n      border: ' + props.theme['$thumbnail-border-width'] + ' solid ' + props.theme['$thumbnail-border-color'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$thumbnail-border-radius']) + '\n      ' + transition(props.theme['$enable-transitions'], props.theme['$thumbnail-transition']) + '\n      ' + boxShadow(props.theme['$enable-shadows'], props.theme['$thumbnail-box-shadow']) + '\n      /* Keep them at most 100% wide */\n      ' + imgFluid() + '\n    }\n   \n    &.figure-img {\n      margin-bottom: ' + props.theme['$spacer-halved'] + ';\n      line-height: 1;\n    }\n    \n    /* Reboot Scss */\n    \n    /*\n     By default, <img> are inline-block. This assumes that, and vertically\n     centers them. This will not apply should you reset them to block level.\n    */\n    vertical-align: middle;\n    /*\n     Note: <img> are deliberately not made responsive by default.\n     For the rationale behind this, see the comments on the .img-fluid class.\n    */\n  ';
 });
 Img.defaultProps = defaultProps$68;
-var Img$1 = Img;
 
-var Figure = function (_React$Component) {
-  inherits(Figure, _React$Component);
-  function Figure() {
-    classCallCheck$1(this, Figure);
-    return possibleConstructorReturn(this, (Figure.__proto__ || Object.getPrototypeOf(Figure)).apply(this, arguments));
+var FigureUnstyled = function (_React$Component) {
+  inherits(FigureUnstyled, _React$Component);
+  function FigureUnstyled() {
+    classCallCheck$1(this, FigureUnstyled);
+    return possibleConstructorReturn(this, (FigureUnstyled.__proto__ || Object.getPrototypeOf(FigureUnstyled)).apply(this, arguments));
   }
-  createClass$1(Figure, [{
+  createClass$1(FigureUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           children = _omit.children,
           rest = objectWithoutProperties(_omit, ['className', 'children']);
       return React__default.createElement(
         'figure',
-        _extends({ className: classnames('figure', className) }, rest),
+        _extends({ className: classnames$1('figure', className) }, rest),
         children
       );
     }
   }]);
-  return Figure;
+  return FigureUnstyled;
 }(React__default.Component);
-Figure.propTypes = {
+FigureUnstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
   theme: PropTypes.object
 };
-Figure = styled__default(Figure).withConfig({
-  displayName: 'Figure__Figure'
+var Figure = styled__default(FigureUnstyled).withConfig({
+  displayName: 'Figure'
 })(['&.figure{display:inline-block;}margin:0 0 1rem;']);
-var Figure$1 = Figure;
 
 var defaultProps$69 = {
   theme: bsTheme
 };
-var FigCaption = function (_React$Component) {
-  inherits(FigCaption, _React$Component);
-  function FigCaption() {
-    classCallCheck$1(this, FigCaption);
-    return possibleConstructorReturn(this, (FigCaption.__proto__ || Object.getPrototypeOf(FigCaption)).apply(this, arguments));
+var FigCaptionUnstyled = function (_React$Component) {
+  inherits(FigCaptionUnstyled, _React$Component);
+  function FigCaptionUnstyled() {
+    classCallCheck$1(this, FigCaptionUnstyled);
+    return possibleConstructorReturn(this, (FigCaptionUnstyled.__proto__ || Object.getPrototypeOf(FigCaptionUnstyled)).apply(this, arguments));
   }
-  createClass$1(FigCaption, [{
+  createClass$1(FigCaptionUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           children = _omit.children,
           right = _omit.right,
           rest = objectWithoutProperties(_omit, ['className', 'children', 'right']);
-      var classes = classnames('figure-caption', className, right ? 'text-right' : null);
+      var classes = classnames$1('figure-caption', className, right ? 'text-right' : null);
       return React__default.createElement(
         'figcaption',
         _extends({
@@ -9063,37 +9099,36 @@ var FigCaption = function (_React$Component) {
       );
     }
   }]);
-  return FigCaption;
+  return FigCaptionUnstyled;
 }(React__default.Component);
-FigCaption.propTypes = {
+FigCaptionUnstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   theme: PropTypes.object,
   right: PropTypes.bool
 };
-FigCaption = styled__default(FigCaption).withConfig({
-  displayName: 'FigCaption__FigCaption'
+var FigCaption = styled__default(FigCaptionUnstyled).withConfig({
+  displayName: 'FigCaption'
 })(['', ''], function (props) {
   return '\n    &.figure-caption {\n      font-size: ' + props.theme['$figure-caption-font-size'] + ';\n      color: ' + props.theme['$figure-caption-color'] + ';\n    }\n  ';
 });
 FigCaption.defaultProps = defaultProps$69;
-var FigCaption$1 = FigCaption;
 
 var defaultProps$70 = {
   theme: bsTheme,
   type: 'text',
   tag: 'p'
 };
-var Input = function (_React$Component) {
-  inherits(Input, _React$Component);
-  function Input() {
-    classCallCheck$1(this, Input);
-    return possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).apply(this, arguments));
+var InputUnstyled = function (_React$Component) {
+  inherits(InputUnstyled, _React$Component);
+  function InputUnstyled() {
+    classCallCheck$1(this, InputUnstyled);
+    return possibleConstructorReturn(this, (InputUnstyled.__proto__ || Object.getPrototypeOf(InputUnstyled)).apply(this, arguments));
   }
-  createClass$1(Input, [{
+  createClass$1(InputUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           type = _omit.type,
@@ -9122,16 +9157,16 @@ var Input = function (_React$Component) {
           formControlClass = 'form-check-input';
         }
       }
-      var classes = mapToCssModules(classnames(className, state ? 'form-control-' + state : false, size ? 'form-control-' + size : false, formControlClass), cssModule);
+      var classes = mapToCssModules(classnames$1(className, state ? 'form-control-' + state : false, size ? 'form-control-' + size : false, formControlClass), cssModule);
       if (Tag === 'input') {
         attributes.type = type;
       }
       return React__default.createElement(Tag, _extends({}, attributes, { ref: getRef, className: classes }));
     }
   }]);
-  return Input;
+  return InputUnstyled;
 }(React__default.Component);
-Input.propTypes = {
+InputUnstyled.propTypes = {
   children: PropTypes.node,
   type: PropTypes.string,
   size: PropTypes.string,
@@ -9146,53 +9181,51 @@ Input.propTypes = {
   onChange: PropTypes.func,
   indeterminate: PropTypes.bool
 };
-Input = styled__default(Input).withConfig({
-  displayName: 'Input__Input'
+var Input = styled__default(InputUnstyled).withConfig({
+  displayName: 'Input'
 })(['', ''], function (props) {
   return '\n    /* Reboot Scss */\n    touch-action: manipulation;\n    \n    &[type="radio"],\n    &[type="checkbox"] {\n      box-sizing: border-box; /* 1. Add the correct box sizing in IE 10- */\n      padding: 0; /* 2. Remove the padding in IE 10- */\n      /*\n       Apply a disabled cursor for radios and checkboxes.\n       Note: Neither radios nor checkboxes can be readonly.\n      */\n   \n      &:disabled {\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n      }\n    }\n    \n    /* Normalize includes font: inherit;, so font-family. font-size, etc are */\n    /* properly inherited. However, line-height is not inherited there. */\n    line-height: inherit;\n   \n    &.disabled {\n      cursor: ' + props.theme['$cursor-disabled'] + ';\n    }\n   \n    &[type="date"],\n    &[type="time"],\n    &[type="datetime-local"],\n    &[type="month"] {\n    /* Remove the default appearance of temporal inputs to avoid a Mobile Safari\n       bug where setting a custom line-height prevents text from being vertically\n       centered within the input.\n       Bug report: https://github.com/twbs/bootstrap/issues/11266\n     */\n      -webkit-appearance: listbox;\n    }\n      \n    /* Correct the cursor style of increment and decrement buttons in Chrome. */\n    &[type="number"]::-webkit-inner-spin-button,\n    &[type="number"]::-webkit-outer-spin-button {\n      height: auto;\n    }\n    \n    &[type="search"] {\n      /* This overrides the extra rounded corners on search inputs in iOS so that our\n      .form-control class can properly style them. Note that this cannot simply\n       be added to .form-control as it is not specific enough. For details, see\n       https://github.com/twbs/bootstrap/issues/11586.\n       */\n      outline-offset: -2px; /* 2. Correct the outline style in Safari. */\n      -webkit-appearance: none;\n    }\n    \n    /* Remove the inner padding and cancel buttons in Chrome and Safari on macOS. */\n    &[type="search"]::-webkit-search-cancel-button,\n    &[type="search"]::-webkit-search-decoration {\n      -webkit-appearance: none;\n    }\n    \n    ' + button(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
 Input.defaultProps = defaultProps$70;
-var Input$1 = Input;
 
 var defaultProps$71 = {
   theme: bsTheme,
   tag: 'div'
 };
-var InputGroup = function (_React$Component) {
-  inherits(InputGroup, _React$Component);
-  function InputGroup() {
-    classCallCheck$1(this, InputGroup);
-    return possibleConstructorReturn(this, (InputGroup.__proto__ || Object.getPrototypeOf(InputGroup)).apply(this, arguments));
+var InputGroupUnstyled = function (_React$Component) {
+  inherits(InputGroupUnstyled, _React$Component);
+  function InputGroupUnstyled() {
+    classCallCheck$1(this, InputGroupUnstyled);
+    return possibleConstructorReturn(this, (InputGroupUnstyled.__proto__ || Object.getPrototypeOf(InputGroupUnstyled)).apply(this, arguments));
   }
-  createClass$1(InputGroup, [{
+  createClass$1(InputGroupUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           size = _omit.size,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'size']);
-      var classes = mapToCssModules(classnames(className, 'input-group', size ? 'input-group-' + size : null), cssModule);
+      var classes = mapToCssModules(classnames$1(className, 'input-group', size ? 'input-group-' + size : null), cssModule);
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
-  return InputGroup;
+  return InputGroupUnstyled;
 }(React__default.Component);
-InputGroup.propTypes = {
+InputGroupUnstyled.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   size: PropTypes.string,
   className: PropTypes.string,
   cssModule: PropTypes.object,
   theme: PropTypes.object
 };
-InputGroup = styled__default(InputGroup).withConfig({
-  displayName: 'InputGroup__InputGroup'
+var InputGroup = styled__default(InputGroupUnstyled).withConfig({
+  displayName: 'InputGroup'
 })(['', ''], function (props) {
   return '\n    /*\n     Base styles\n    */\n   \n    &.input-group {\n      position: relative;\n      display: flex;\n      width: 100%;\n\n      .form-control {\n        /* \n          Ensure that the input is always above the *appended* addon button for\n          proper border colors.\n        */\n        \n        position: relative;\n        z-index: 2;\n        flex: 1 1 auto;\n        /* Add width 1% and flex-basis auto to ensure that button will not wrap out */\n        /* the column. Applies to IE Edge+ and Firefox. Chrome does not require this. */\n        width: 1%;\n        margin-bottom: 0;\n        \n        ' + hoverFocusActive(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n      }\n    }\n    \n    & .input-group-addon,\n    & .input-group-btn,\n    &.input-group .form-control {\n      /* Vertically centers the content of the addons within the input group */\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n\n\n      &:not(:first-child):not(:last-child) {\n        ' + borderRadius(props.theme['$enable-rounded'], '0') + '\n      }\n    }\n   \n    & .input-group-addon,\n    & .input-group-btn {\n\n      white-space: nowrap;\n      vertical-align: middle; /* Match the inputs */\n    }\n   \n   \n    /* Sizing options\n    Remix the default form control sizing classes into new ones for easier\n    manipulation.\n    */\n   \n    &.input-group-lg > .form-control,\n    &.input-group-lg > .input-group-addon,\n    &.input-group-lg > .input-group-btn > .btn {\n      padding: ' + props.theme['$input-padding-y-lg'] + ' ' + props.theme['$input-padding-x-lg'] + ';\n      font-size: ' + props.theme['$font-size-lg'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$input-border-radius-lg']) + '\n    }\n    \n    &.input-group-sm > .form-control,\n    &.input-group-sm > .input-group-addon,\n    &.input-group-sm > .input-group-btn > .btn {\n      padding: ' + props.theme['$input-padding-y-sm'] + ' ' + props.theme['$input-padding-x-sm'] + ';\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$input-border-radius-sm']) + '\n    }\n   \n   \n    /*\n    Text input groups\n    */\n   \n    & .input-group-addon {\n      padding: ' + props.theme['$input-padding-y'] + ' ' + props.theme['$input-padding-x'] + ';\n      margin-bottom: 0; /* Allow use of <label> elements by overriding our default margin-bottom */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      font-weight: normal;\n      line-height: ' + props.theme['$input-line-height'] + ';\n      color: ' + props.theme['$input-color'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$input-group-addon-bg'] + ';\n      border: ' + props.theme['$input-btn-border-width'] + ' solid ' + props.theme['$input-group-addon-border-color'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$input-border-radius']) + '\n   \n      /* \n      Nuke default margins from checkboxes and radios to vertically center within.\n      */\n      input[type="radio"],\n      input[type="checkbox"] {\n        margin-top: 0;\n      }\n    }\n   \n   \n    /*\n     Reset rounded corners\n    */\n   \n    &.input-group .form-control:not(:last-child),\n    & .input-group-addon:not(:last-child),\n    & .input-group-btn:not(:last-child) > .btn,\n    & .input-group-btn:not(:last-child) > .btn-group > .btn,\n    & .input-group-btn:not(:last-child) > .dropdown-toggle,\n    & .input-group-btn:not(:first-child) > .btn:not(:last-child):not(.dropdown-toggle),\n    & .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn {\n      ' + borderRightRadius(props.theme['$enable-rounded'], '0') + '\n    }\n    & .input-group-addon:not(:last-child) {\n      border-right: 0;\n    }\n    &.input-group .form-control:not(:first-child),\n    & .input-group-addon:not(:first-child),\n    & .input-group-btn:not(:first-child) > .btn,\n    & .input-group-btn:not(:first-child) > .btn-group > .btn,\n    & .input-group-btn:not(:first-child) > .dropdown-toggle,\n    & .input-group-btn:not(:last-child) > .btn:not(:first-child),\n    & .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn {\n      ' + borderLeftRadius(props.theme['$enable-rounded'], '0') + '\n    }\n    & .form-control + .input-group-addon:not(:first-child) {\n      border-left: 0;\n    }\n   \n    /*\n     Button input groups\n    */\n   \n    & .input-group-btn {\n      position: relative;\n      /* Jankily prevent input button groups from wrapping with white-space and\n      font-size in combination with inline-block on buttons.\n      */\n      font-size: 0;\n      white-space: nowrap;\n   \n      /* Negative margin for spacing, position for bringing hovered/focused/actived\n      element above the siblings.\n      */\n      > .btn {\n        position: relative;\n        /* Vertically stretch the button and center its content */\n        flex: 1;\n        \n        + .btn {\n          margin-left: -' + props.theme['$input-btn-border-width'] + ';\n        }\n        \n        /* Bring the active button to the front */\n        ' + hoverFocusActive(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n      }\n   \n      /* Negative margin to only have a single, shared border between the two */\n      &:not(:last-child) {\n        > .btn,\n        > .btn-group {\n          margin-right: -' + props.theme['$input-btn-border-width'] + ';\n        }\n      }\n      &:not(:first-child) {\n        > .btn,\n        > .btn-group {\n          z-index: 2;\n          margin-left: -' + props.theme['$input-btn-border-width'] + ';\n          /* Because specificity */\n          ' + hoverFocusActive(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n        }\n      }\n    }\n    \n   /* Added So that Inputs in InputGroup grab the same .form-control class as in Component Form Not Bs4 */\n   ' + formControl(props.theme['$enable-rounded'], props.theme['$enable-transitions'], props.theme['$enable-shadows'], props.theme['$input-height'], props.theme['$input-padding-y'], props.theme['$input-padding-x'], props.theme['$font-size-base'], props.theme['$input-line-height'], props.theme['$input-color'], props.theme['$input-bg'], props.theme['$input-border-radius'], props.theme['$input-btn-border-width'], props.theme['$input-border-color'], props.theme['$input-transition'], props.theme['$input-box-shadow'], props.theme['$input-color-focus'], props.theme['$input-bg-focus'], props.theme['$input-border-focus'], props.theme['$input-box-shadow-focus'], props.theme['$input-color-placeholder'], props.theme['$input-bg-disabled'], props.theme['$cursor-disabled']) + '\n    \n  ';
 });
 InputGroup.defaultProps = defaultProps$71;
-var InputGroup$1 = InputGroup;
 
 var defaultProps$72 = {
   tag: 'div'
@@ -9211,7 +9244,7 @@ var InputGroupAddon = function (_React$Component) {
           cssModule = _props.cssModule,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
-      var classes = mapToCssModules(classnames(className, 'input-group-addon'), cssModule);
+      var classes = mapToCssModules(classnames$1(className, 'input-group-addon'), cssModule);
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -9245,18 +9278,18 @@ var InputGroupButton = function (_React$Component) {
           groupAttributes = _props.groupAttributes,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag', 'children', 'groupClassName', 'groupAttributes']);
       if (typeof children === 'string') {
-        var groupClasses = mapToCssModules(classnames(groupClassName, 'input-group-btn'), cssModule);
+        var groupClasses = mapToCssModules(classnames$1(groupClassName, 'input-group-btn'), cssModule);
         return React__default.createElement(
           Tag,
           _extends({}, groupAttributes, { className: groupClasses }),
           React__default.createElement(
-            Button$1,
+            Button,
             _extends({}, attributes, { className: className }),
             children
           )
         );
       }
-      var classes = mapToCssModules(classnames(className, 'input-group-btn'), cssModule);
+      var classes = mapToCssModules(classnames$1(className, 'input-group-btn'), cssModule);
       return React__default.createElement(
         Tag,
         _extends({}, attributes, { className: classes }),
@@ -9292,16 +9325,16 @@ IssueIcon.propTypes = {
 };
 
 var defaultProps$74 = { theme: bsTheme };
-var Kbd = function (_React$Component) {
-  inherits(Kbd, _React$Component);
-  function Kbd() {
-    classCallCheck$1(this, Kbd);
-    return possibleConstructorReturn(this, (Kbd.__proto__ || Object.getPrototypeOf(Kbd)).apply(this, arguments));
+var KbdUnstyled = function (_React$Component) {
+  inherits(KbdUnstyled, _React$Component);
+  function KbdUnstyled() {
+    classCallCheck$1(this, KbdUnstyled);
+    return possibleConstructorReturn(this, (KbdUnstyled.__proto__ || Object.getPrototypeOf(KbdUnstyled)).apply(this, arguments));
   }
-  createClass$1(Kbd, [{
+  createClass$1(KbdUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           children = _omit.children,
           rest = objectWithoutProperties(_omit, ['className', 'children']);
@@ -9312,60 +9345,58 @@ var Kbd = function (_React$Component) {
       );
     }
   }]);
-  return Kbd;
+  return KbdUnstyled;
 }(React__default.Component);
-Kbd.propTypes = {
+KbdUnstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   theme: PropTypes.object
 };
-Kbd = styled__default(Kbd).withConfig({
-  displayName: 'Kbd__Kbd'
+var Kbd = styled__default(KbdUnstyled).withConfig({
+  displayName: 'Kbd'
 })(['', ''], function (props) {
   return '\n    /* User input typically entered via keyboard */\n    padding: ' + props.theme['$code-padding-y'] + ' ' + props.theme['$code-padding-x'] + ';\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$kbd-color'] + ';\n    background-color: ' + props.theme['$kbd-bg'] + ';\n    ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius-sm']) + '\n    ' + boxShadow(props.theme['$enable-shadows'], props.theme['$kbd-box-shadow']) + '\n    \n    & kbd {\n      padding: 0;\n      font-size: 100%;\n      font-weight: ' + props.theme['$nested-kbd-font-weight'] + ';\n      ' + boxShadow(props.theme['$enable-shadows'], 'none') + '\n    }\n    \n    /* Bootstrap 4 does not place this css rule straight into Kbd tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
 Kbd.defaultProps = defaultProps$74;
-var Kbd$1 = Kbd;
 
 var defaultProps$75 = {
   theme: bsTheme,
   tag: 'div'
 };
-var Jumbotron = function (_React$Component) {
-  inherits(Jumbotron, _React$Component);
-  function Jumbotron() {
-    classCallCheck$1(this, Jumbotron);
-    return possibleConstructorReturn(this, (Jumbotron.__proto__ || Object.getPrototypeOf(Jumbotron)).apply(this, arguments));
+var JumbotronUnstyled = function (_React$Component) {
+  inherits(JumbotronUnstyled, _React$Component);
+  function JumbotronUnstyled() {
+    classCallCheck$1(this, JumbotronUnstyled);
+    return possibleConstructorReturn(this, (JumbotronUnstyled.__proto__ || Object.getPrototypeOf(JumbotronUnstyled)).apply(this, arguments));
   }
-  createClass$1(Jumbotron, [{
+  createClass$1(JumbotronUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           fluid = _omit.fluid,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'fluid']);
-      var classes = mapToCssModules(classnames(className, 'jumbotron', fluid ? 'jumbotron-fluid' : false), cssModule);
+      var classes = mapToCssModules(classnames$1(className, 'jumbotron', fluid ? 'jumbotron-fluid' : false), cssModule);
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
-  return Jumbotron;
+  return JumbotronUnstyled;
 }(React__default.Component);
-Jumbotron.propTypes = {
+JumbotronUnstyled.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   fluid: PropTypes.bool,
   className: PropTypes.string,
   cssModule: PropTypes.object,
   theme: PropTypes.object
 };
-Jumbotron = styled__default(Jumbotron).withConfig({
-  displayName: 'Jumbotron__Jumbotron'
+var Jumbotron = styled__default(JumbotronUnstyled).withConfig({
+  displayName: 'Jumbotron'
 })(['', ''], function (props) {
   return '\n    &.jumbotron {\n      padding: ' + props.theme['$jumbotron-padding'] + ' calc(' + props.theme['$jumbotron-padding'] + ' / 2);\n      margin-bottom: ' + props.theme['$jumbotron-padding'] + ';\n      background-color: ' + props.theme['$jumbotron-bg'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius-lg']) + '\n    \n      ' + mediaBreakpointUp('sm', props.theme['$grid-breakpoints'], 'padding: calc(' + props.theme['$jumbotron-padding'] + ' * 2) ' + props.theme['$jumbotron-padding'] + ';') + '  \n    }\n\n    & .jumbotron-hr {\n      border-top-color: ' + color(props.theme['$jumbotron-bg']).darken(0.1).toString() + ';\n    }\n    \n    &.jumbotron-fluid {\n      padding-right: 0;\n      padding-left: 0;\n      ' + borderRadius(props.theme['$enable-rounded'], '0') + '\n    }\n  ';
 });
 Jumbotron.defaultProps = defaultProps$75;
-var Jumbotron$1 = Jumbotron;
 
 var colSizes = ['xs', 'sm', 'md', 'lg', 'xl'];
 var stringOrNumberProp$1 = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
@@ -9397,8 +9428,8 @@ var defaultProps$76 = {
   tag: 'label',
   theme: bsTheme
 };
-var Label = function Label(props) {
-  var _omit = lodash_omit(props, ['theme']),
+var LabelUnstyled = function LabelUnstyled(props) {
+  var _omit = lodash_omit$1(props, ['theme']),
       className = _omit.className,
       cssModule = _omit.cssModule,
       hidden = _omit.hidden,
@@ -9415,25 +9446,24 @@ var Label = function Label(props) {
     delete attributes[colSize];
     if (columnProp && columnProp.size) {
       var _cn;
-      colClasses.push(mapToCssModules(classnames((_cn = {}, defineProperty(_cn, 'col-' + colSize + '-' + columnProp.size, columnProp.size), defineProperty(_cn, 'push-' + colSize + '-' + columnProp.push, columnProp.push), defineProperty(_cn, 'pull-' + colSize + '-' + columnProp.pull, columnProp.pull), defineProperty(_cn, 'offset-' + colSize + '-' + columnProp.offset, columnProp.offset), _cn))), cssModule);
+      colClasses.push(mapToCssModules(classnames$1((_cn = {}, defineProperty(_cn, 'col-' + colSize + '-' + columnProp.size, columnProp.size), defineProperty(_cn, 'push-' + colSize + '-' + columnProp.push, columnProp.push), defineProperty(_cn, 'pull-' + colSize + '-' + columnProp.pull, columnProp.pull), defineProperty(_cn, 'offset-' + colSize + '-' + columnProp.offset, columnProp.offset), _cn))), cssModule);
     } else if (columnProp) {
       colClasses.push('col-' + colSize + '-' + columnProp);
     }
   });
-  var classes = mapToCssModules(classnames(className, hidden ? 'sr-only' : false, check ? 'form-check-' + (inline ? 'inline' : 'label') : false, check && inline && disabled ? 'disabled' : false, size ? 'col-form-label-' + size : false, colClasses, colClasses.length ? 'col-form-label' : false), cssModule);
+  var classes = mapToCssModules(classnames$1(className, hidden ? 'sr-only' : false, check ? 'form-check-' + (inline ? 'inline' : 'label') : false, check && inline && disabled ? 'disabled' : false, size ? 'col-form-label-' + size : false, colClasses, colClasses.length ? 'col-form-label' : false), cssModule);
   return React__default.createElement(Tag, _extends({ htmlFor: htmlFor }, attributes, { className: classes }));
 };
-Label = styled__default(Label).withConfig({
-  displayName: 'Label__Label'
+var Label = styled__default(LabelUnstyled).withConfig({
+  displayName: 'Label'
 })(['', ''], function (props) {
   return '\n    /* Reboot Scss */\n    touch-action: manipulation;\n    /* Allow labels to use margin for spacing. */\n    display: inline-block;\n    margin-bottom: .5rem;\n\n    ' + button(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
 Label.propTypes = propTypes$2;
 Label.defaultProps = defaultProps$76;
-var Label$1 = Label;
 
 var Legend = styled__default.legend.withConfig({
-  displayName: 'Legend__Legend'
+  displayName: 'Legend'
 })(['display:block;width:100%;padding:0;margin-bottom:.5rem;font-size:1.5rem;line-height:inherit;']);
 
 function media() {
@@ -9441,16 +9471,16 @@ function media() {
 }
 
 var defaultProps$77 = { theme: bsTheme };
-var Li = function (_React$Component) {
-  inherits(Li, _React$Component);
-  function Li() {
-    classCallCheck$1(this, Li);
-    return possibleConstructorReturn(this, (Li.__proto__ || Object.getPrototypeOf(Li)).apply(this, arguments));
+var LiUnstyled = function (_React$Component) {
+  inherits(LiUnstyled, _React$Component);
+  function LiUnstyled() {
+    classCallCheck$1(this, LiUnstyled);
+    return possibleConstructorReturn(this, (LiUnstyled.__proto__ || Object.getPrototypeOf(LiUnstyled)).apply(this, arguments));
   }
-  createClass$1(Li, [{
+  createClass$1(LiUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           children = _omit.children,
           inline = _omit.inline,
@@ -9460,7 +9490,7 @@ var Li = function (_React$Component) {
           dropdownHeader = _omit['dropdown-header'],
           dropdownFooter = _omit['dropdown-footer'],
           attributes = objectWithoutProperties(_omit, ['className', 'children', 'inline', 'separator', 'media', 'dropdown-item', 'dropdown-header', 'dropdown-footer']);
-      var classes = classnames(className, separator ? 'dropdown-divider' : false, dropdownItem ? 'dropdown-item' : false, dropdownItem ? 'dropdown-item' : false, dropdownHeader ? 'dropdown-header' : false, dropdownFooter ? 'dropdown-footer' : false, inline ? 'list-inline-item' : false, media$$1 ? 'media' : false);
+      var classes = classnames$1(className, separator ? 'dropdown-divider' : false, dropdownItem ? 'dropdown-item' : false, dropdownItem ? 'dropdown-item' : false, dropdownHeader ? 'dropdown-header' : false, dropdownFooter ? 'dropdown-footer' : false, inline ? 'list-inline-item' : false, media$$1 ? 'media' : false);
       return React__default.createElement(
         'li',
         _extends({
@@ -9470,9 +9500,9 @@ var Li = function (_React$Component) {
       );
     }
   }]);
-  return Li;
+  return LiUnstyled;
 }(React__default.Component);
-Li.propTypes = {
+LiUnstyled.propTypes = {
   children: PropTypes.node,
   disabled: PropTypes.bool,
   className: PropTypes.string,
@@ -9485,31 +9515,30 @@ Li.propTypes = {
   'dropdown-footer': PropTypes.bool,
   theme: PropTypes.object
 };
-Li = styled__default(Li).withConfig({
-  displayName: 'Li__Li'
+var Li = styled__default(LiUnstyled).withConfig({
+  displayName: 'Li'
 })(['', ''], function (props) {
   return '\n    &.list-inline-item {\n      display: inline-block;\n    \n      &:not(:last-child) {\n        margin-right: ' + props.theme['$list-inline-padding'] + ';\n      }\n    }\n    \n    ' + media() + '\n  ';
 });
 Li.defaultProps = defaultProps$77;
-var Li$1 = Li;
 
 var defaultProps$79 = { theme: bsTheme };
-var Ul = function (_React$Component) {
-  inherits(Ul, _React$Component);
-  function Ul() {
-    classCallCheck$1(this, Ul);
-    return possibleConstructorReturn(this, (Ul.__proto__ || Object.getPrototypeOf(Ul)).apply(this, arguments));
+var UlUnstyled = function (_React$Component) {
+  inherits(UlUnstyled, _React$Component);
+  function UlUnstyled() {
+    classCallCheck$1(this, UlUnstyled);
+    return possibleConstructorReturn(this, (UlUnstyled.__proto__ || Object.getPrototypeOf(UlUnstyled)).apply(this, arguments));
   }
-  createClass$1(Ul, [{
+  createClass$1(UlUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           inline = _omit.inline,
           unstyled = _omit.unstyled,
           children = _omit.children,
           rest = objectWithoutProperties(_omit, ['className', 'inline', 'unstyled', 'children']);
-      var classes = classnames(className, inline ? 'list-inline' : false, unstyled ? 'list-unstyled' : false);
+      var classes = classnames$1(className, inline ? 'list-inline' : false, unstyled ? 'list-unstyled' : false);
       return React__default.createElement(
         'ul',
         _extends({ className: classes }, rest),
@@ -9517,62 +9546,60 @@ var Ul = function (_React$Component) {
       );
     }
   }]);
-  return Ul;
+  return UlUnstyled;
 }(React__default.Component);
-Ul.propTypes = {
+UlUnstyled.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   theme: PropTypes.object,
   inline: PropTypes.bool,
   unstyled: PropTypes.bool
 };
-Ul = styled__default(Ul).withConfig({
-  displayName: 'Ul__Ul'
+var Ul = styled__default(UlUnstyled).withConfig({
+  displayName: 'Ul'
 })(['', ''], function (props) {
   return '\n    ' + nav(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n    ' + navbar(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n\n    /* Type Scss */\n    &.list-unstyled {\n      ' + listUnstyled() + '\n    }\n\n    &.list-inline {\n      ' + listInline() + '\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;\n    margin-bottom: 1rem;\n  \n    & ol,\n    & ul {\n      margin-bottom: 0;\n    }\n  ';
 });
 Ul.defaultProps = defaultProps$79;
-var Ul$1 = Ul;
 
 var defaultProps$78 = {
   theme: bsTheme,
-  tag: Ul$1
+  tag: Ul
 };
-var ListGroup = function (_React$Component) {
-  inherits(ListGroup, _React$Component);
-  function ListGroup() {
-    classCallCheck$1(this, ListGroup);
-    return possibleConstructorReturn(this, (ListGroup.__proto__ || Object.getPrototypeOf(ListGroup)).apply(this, arguments));
+var ListGroupUnstyled = function (_React$Component) {
+  inherits(ListGroupUnstyled, _React$Component);
+  function ListGroupUnstyled() {
+    classCallCheck$1(this, ListGroupUnstyled);
+    return possibleConstructorReturn(this, (ListGroupUnstyled.__proto__ || Object.getPrototypeOf(ListGroupUnstyled)).apply(this, arguments));
   }
-  createClass$1(ListGroup, [{
+  createClass$1(ListGroupUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           flush = _omit.flush,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'flush']);
-      var classes = mapToCssModules(classnames(className, 'list-group', flush ? 'list-group-flush' : false), cssModule);
+      var classes = mapToCssModules(classnames$1(className, 'list-group', flush ? 'list-group-flush' : false), cssModule);
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
-  return ListGroup;
+  return ListGroupUnstyled;
 }(React__default.Component);
-ListGroup.propTypes = {
+ListGroupUnstyled.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   flush: PropTypes.bool,
   className: PropTypes.string,
   cssModule: PropTypes.object,
   theme: PropTypes.object
 };
-ListGroup = styled__default(ListGroup).withConfig({
-  displayName: 'ListGroup__ListGroup'
+var ListGroup = styled__default(ListGroupUnstyled).withConfig({
+  displayName: 'ListGroup'
 })(['', ''], function (props) {
   return '\n    /* \n      Base class\n      Easily usable on ul, ol, or div.\n    */\n    \n    &.list-group {\n      display: flex;\n      flex-direction: column;\n      /* No need to set list-style: none; since .list-group-item is block level */\n      padding-left: 0;  /* reset padding because ul and ol */\n      margin-bottom: 0;\n    }\n    \n    \n    /* \n      Interactive list items\n      Use anchor or button elements instead of \'li\'s or \'div\'s to create interactive\n      list items. Includes an extra \'.active\' modifier class for selected items.\n    */\n    \n    & .list-group-item-action {\n      width: 100%; /* For \'button\'s (anchors become 100% by default though) */\n      color: ' + props.theme['$list-group-link-color'] + ';\n      text-align: inherit; /* For \'button\'s (anchors inherit) */\n    \n      /* Hover state */\n      ' + hoverFocus(props.theme['$enable-hover-media-query'], '\n          color: ' + props.theme['$list-group-link-hover-color'] + ';\n          text-decoration: none;\n          background-color: ' + props.theme['$list-group-hover-bg'] + ';\n        ') + ';\n      \n      &:active {\n        color: ' + props.theme['$list-group-link-active-color'] + ';\n        background-color: ' + props.theme['$list-group-link-active-bg'] + ';\n      }\n    }\n    \n    /* \n      Individual list items\n      Use on \'li\'s or \'div\'s within the \'.list-group\' parent.\n    */\n    \n    & .list-group-item {\n      position: relative;\n      display: flex;\n      flex-flow: row wrap;\n      align-items: center;\n      padding: ' + props.theme['$list-group-item-padding-y'] + ' ' + props.theme['$list-group-item-padding-x'] + ';\n      /* Place the border on the list items and negative margin up for better styling */\n      margin-bottom: -' + props.theme['$list-group-border-width'] + ';\n      background-color: ' + props.theme['$list-group-bg'] + ';\n      border: ' + props.theme['$list-group-border-width'] + ' solid ' + props.theme['$list-group-border-color'] + ';\n    \n      &:first-child {\n        ' + borderTopRadius(props.theme['$enable-rounded'], props.theme['$list-group-border-radius']) + '\n      }\n\n      &:last-child {\n        margin-bottom: 0;\n        ' + borderBottomRadius(props.theme['$enable-rounded'], props.theme['$list-group-border-radius']) + '\n      }\n      \n      ' + hoverFocus(props.theme['$enable-hover-media-query'], 'text-decoration: none;') + '\n        \n      &.disabled,\n      &:disabled {   \n        color: ' + props.theme['$list-group-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: ' + props.theme['$list-group-disabled-bg'] + ';\n      }\n    \n    \n      &.active {\n        z-index: 2; /* Place active items above their siblings for proper border styling */\n        color: ' + props.theme['$list-group-active-color'] + ';\n        background-color: ' + props.theme['$list-group-active-bg'] + ';\n        border-color: ' + props.theme['$list-group-active-border'] + ';     \n      }\n    }\n    \n    /* \n      Flush list items\n      Remove borders and border-radius to keep list group items edge-to-edge. Most\n      useful within other components (e.g., cards).\n    */\n\n    &.list-group-flush {\n      .list-group-item {\n        border-right: 0;\n        border-left: 0;\n        border-radius: 0;\n      }\n      \n      &:first-child {\n        .list-group-item:first-child {\n          border-top: 0;\n        }\n      }\n\n      &:last-child {\n        .list-group-item:last-child {\n          border-bottom: 0;\n        }\n      }\n    }\n    \n    \n    \n    /* Contextual variants\n    \n     Add modifier classes to change text and background color on individual items.\n     Organizationally, this must come after the \':hover\' states.\n    */\n    \n    ' + listGroupItemVariant(props.theme['$enable-hover-media-query'], 'success', props.theme['$state-success-bg'], props.theme['$state-success-text']) + '\n    ' + listGroupItemVariant(props.theme['$enable-hover-media-query'], 'info', props.theme['$state-info-bg'], props.theme['$state-info-text']) + '\n    ' + listGroupItemVariant(props.theme['$enable-hover-media-query'], 'warning', props.theme['$state-warning-bg'], props.theme['$state-warning-text']) + '\n    ' + listGroupItemVariant(props.theme['$enable-hover-media-query'], 'danger', props.theme['$state-danger-bg'], props.theme['$state-danger-text']) + '    \n  ';
 });
 ListGroup.defaultProps = defaultProps$78;
-var ListGroup$1 = ListGroup;
 
 var defaultProps$80 = {
   tag: 'li'
@@ -9597,7 +9624,7 @@ var ListGroupItem = function (_React$Component) {
           action = _props.action,
           color = _props.color,
           attributes = objectWithoutProperties(_props, ['className', 'tag', 'active', 'disabled', 'action', 'color']);
-      var classes = classnames(className, active ? 'active' : false, disabled ? 'disabled' : false, action ? 'list-group-item-action' : false, color ? 'list-group-item-' + color : false, 'list-group-item');
+      var classes = classnames$1(className, active ? 'active' : false, disabled ? 'disabled' : false, action ? 'list-group-item-action' : false, color ? 'list-group-item-' + color : false, 'list-group-item');
       if (disabled) {
         attributes.onClick = handleDisabledOnClick;
       }
@@ -9617,7 +9644,7 @@ ListGroupItem.propTypes = {
 ListGroupItem.defaultProps = defaultProps$80;
 
 var defaultProps$81 = {
-  tag: H5$1
+  tag: H5
 };
 var ListGroupItemHeading = function (_React$Component) {
   inherits(ListGroupItemHeading, _React$Component);
@@ -9632,7 +9659,7 @@ var ListGroupItemHeading = function (_React$Component) {
           className = _props.className,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'tag']);
-      var classes = classnames(className, 'list-group-item-heading');
+      var classes = classnames$1(className, 'list-group-item-heading');
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -9660,7 +9687,7 @@ var ListGroupItemHeading$2 = function (_React$Component) {
           className = _props.className,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'tag']);
-      var classes = classnames(className, 'list-group-item-text');
+      var classes = classnames$1(className, 'list-group-item-text');
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -9673,12 +9700,12 @@ ListGroupItemHeading$2.propTypes = {
 ListGroupItemHeading$2.defaultProps = defaultProps$82;
 
 var Map$2 = styled__default.map.withConfig({
-  displayName: 'Map__Map'
+  displayName: 'Map'
 })(['display:inline;']);
 
 var defaultProps$83 = { theme: bsTheme };
 var Mark = styled__default.mark.withConfig({
-  displayName: 'Mark__Mark'
+  displayName: 'Mark'
 })(['', ''], function (props) {
   return '\n    /* Reboot Scss */\n    padding: ' + props.theme['$mark-padding'] + ';\n    background-color: ' + props.theme['$mark-bg'] + ';\n  ';
 });
@@ -9687,16 +9714,16 @@ Mark.defaultProps = defaultProps$83;
 var defaultProps$84 = {
   theme: bsTheme
 };
-var Media = function (_React$Component) {
-  inherits(Media, _React$Component);
-  function Media() {
-    classCallCheck$1(this, Media);
-    return possibleConstructorReturn(this, (Media.__proto__ || Object.getPrototypeOf(Media)).apply(this, arguments));
+var MediaUnstyled = function (_React$Component) {
+  inherits(MediaUnstyled, _React$Component);
+  function MediaUnstyled() {
+    classCallCheck$1(this, MediaUnstyled);
+    return possibleConstructorReturn(this, (MediaUnstyled.__proto__ || Object.getPrototypeOf(MediaUnstyled)).apply(this, arguments));
   }
-  createClass$1(Media, [{
+  createClass$1(MediaUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           body = _omit.body,
           bottom = _omit.bottom,
           className = _omit.className,
@@ -9712,18 +9739,18 @@ var Media = function (_React$Component) {
           attributes = objectWithoutProperties(_omit, ['body', 'bottom', 'className', 'cssModule', 'heading', 'left', 'list', 'middle', 'object', 'right', 'tag', 'top']);
       var defaultTag = void 0;
       if (heading) {
-        defaultTag = H4$1;
+        defaultTag = H4;
       } else if (left || right) {
-        defaultTag = A$1;
+        defaultTag = A;
       } else if (object) {
-        defaultTag = Img$1;
+        defaultTag = Img;
       } else if (list) {
-        defaultTag = Ul$1;
+        defaultTag = Ul;
       } else {
         defaultTag = 'div';
       }
       var Tag = tag || defaultTag;
-      var classes = mapToCssModules(classnames(className, {
+      var classes = mapToCssModules(classnames$1(className, {
         'media-body': body,
         'media-heading': heading,
         'media-left': left,
@@ -9738,9 +9765,9 @@ var Media = function (_React$Component) {
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
-  return Media;
+  return MediaUnstyled;
 }(React__default.Component);
-Media.propTypes = {
+MediaUnstyled.propTypes = {
   theme: PropTypes.object,
   body: PropTypes.bool,
   bottom: PropTypes.bool,
@@ -9756,11 +9783,10 @@ Media.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   top: PropTypes.bool
 };
-Media = styled__default(Media).withConfig({
-  displayName: 'Media__Media'
+var Media = styled__default(MediaUnstyled).withConfig({
+  displayName: 'Media'
 })(['&.media,& .media{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;}& .media-body{-webkit-box-flex:1;-ms-flex:1 1 0%;flex:1 1 0%}', ''], media());
 Media.defaultProps = defaultProps$84;
-var Media$1 = Media;
 
 var propTypes$3 = {
   baseClass: PropTypes.string,
@@ -9768,36 +9794,49 @@ var propTypes$3 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object,
-  transitionAppearTimeout: PropTypes.number,
-  transitionEnterTimeout: PropTypes.number,
-  transitionLeaveTimeout: PropTypes.number,
-  transitionAppear: PropTypes.bool,
-  transitionEnter: PropTypes.bool,
-  transitionLeave: PropTypes.bool,
-  onLeave: PropTypes.func,
+  timeout: PropTypes.oneOfType([PropTypes.shape({
+    enter: PropTypes.number,
+    exit: PropTypes.number
+  }), PropTypes.number]),
+  appear: PropTypes.bool,
+  enter: PropTypes.bool,
+  exit: PropTypes.bool,
+  onExit: PropTypes.func,
   onEnter: PropTypes.func
 };
 var defaultProps$86 = {
   tag: 'div',
   baseClass: 'fade',
   baseClassIn: 'show',
-  transitionAppearTimeout: 0,
-  transitionEnterTimeout: 0,
-  transitionLeaveTimeout: 0,
-  transitionAppear: true,
-  transitionEnter: true,
-  transitionLeave: true
+  timeout: 0,
+  appear: true,
+  enter: true,
+  exit: true
 };
-var Fade$1 = function (_React$Component) {
+var Fade$2 = function (_React$Component) {
   inherits(Fade, _React$Component);
   function Fade(props) {
     classCallCheck$1(this, Fade);
     var _this = possibleConstructorReturn(this, (Fade.__proto__ || Object.getPrototypeOf(Fade)).call(this, props));
-    _this.state = {
-      mounted: !props.transitionAppear
+    _this.onEnter = function (cb) {
+      return function () {
+        cb();
+        if (_this.props.onEnter) {
+          _this.props.onEnter();
+        }
+      };
     };
-    _this.onLeave = _this.onLeave.bind(_this);
-    _this.onEnter = _this.onEnter.bind(_this);
+    _this.onExit = function (cb) {
+      return function () {
+        cb();
+        if (_this.props.onExit) {
+          _this.props.onExit();
+        }
+      };
+    };
+    _this.state = {
+      mounted: !props.appear
+    };
     _this.timers = [];
     return _this;
   }
@@ -9809,34 +9848,12 @@ var Fade$1 = function (_React$Component) {
       });
     }
   }, {
-    key: 'onEnter',
-    value: function onEnter(cb) {
-      var _this2 = this;
-      return function () {
-        cb();
-        if (_this2.props.onEnter) {
-          _this2.props.onEnter();
-        }
-      };
-    }
-  }, {
-    key: 'onLeave',
-    value: function onLeave(cb) {
-      var _this3 = this;
-      return function () {
-        cb();
-        if (_this3.props.onLeave) {
-          _this3.props.onLeave();
-        }
-      };
-    }
-  }, {
     key: 'componentWillAppear',
     value: function componentWillAppear(cb) {
-      if (!this.props.transitionAppear) {
+      if (!this.props.appear) {
         this.onEnter(cb)();
       }
-      this.timers.push(setTimeout(this.onEnter(cb), this.props.transitionAppearTimeout));
+      this.timers.push(setTimeout(this.onEnter(cb), this.props.timeout.enter || this.props.timeout));
     }
   }, {
     key: 'componentDidAppear',
@@ -9848,10 +9865,10 @@ var Fade$1 = function (_React$Component) {
   }, {
     key: 'componentWillEnter',
     value: function componentWillEnter(cb) {
-      if (!this.props.transitionEnter) {
+      if (!this.props.enter) {
         this.onEnter(cb)();
       }
-      this.timers.push(setTimeout(this.onEnter(cb), this.props.transitionEnterTimeout));
+      this.timers.push(setTimeout(this.onEnter(cb), this.props.timeout.enter || this.props.timeout));
     }
   }, {
     key: 'componentDidEnter',
@@ -9866,10 +9883,10 @@ var Fade$1 = function (_React$Component) {
       this.setState({
         mounted: false
       });
-      if (!this.props.transitionLeave) {
-        this.onLeave(cb)();
+      if (!this.props.exit) {
+        this.onExit(cb)();
       }
-      this.timers.push(setTimeout(this.onLeave(cb), this.props.transitionLeaveTimeout));
+      this.timers.push(setTimeout(this.onExit(cb), this.props.timeout.exit || this.props.timeout));
     }
   }, {
     key: 'render',
@@ -9879,8 +9896,8 @@ var Fade$1 = function (_React$Component) {
           baseClassIn = _props.baseClassIn,
           className = _props.className,
           Tag = _props.tag;
-      var attributes = lodash_omit(this.props, Object.keys(propTypes$3));
-      var classes = classnames(className, baseClass, this.state.mounted ? baseClassIn : false);
+      var attributes = lodash_omit$1(this.props, Object.keys(propTypes$3));
+      var classes = classnames$1(className, baseClass, this.state.mounted ? baseClassIn : false);
       return React__default.createElement(
         Tag,
         _extends({}, attributes, { className: classes }),
@@ -9890,8 +9907,8 @@ var Fade$1 = function (_React$Component) {
   }]);
   return Fade;
 }(React__default.Component);
-Fade$1.propTypes = propTypes$3;
-Fade$1.defaultProps = defaultProps$86;
+Fade$2.propTypes = propTypes$3;
+Fade$2.defaultProps = defaultProps$86;
 
 var defaultProps$85 = {
   isOpen: false,
@@ -9900,11 +9917,11 @@ var defaultProps$85 = {
   keyboard: true,
   zIndex: 1000
 };
-var Modal = function (_React$Component) {
-  inherits(Modal, _React$Component);
-  function Modal(props) {
-    classCallCheck$1(this, Modal);
-    var _this = possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this, props));
+var ModalUnstyled = function (_React$Component) {
+  inherits(ModalUnstyled, _React$Component);
+  function ModalUnstyled(props) {
+    classCallCheck$1(this, ModalUnstyled);
+    var _this = possibleConstructorReturn(this, (ModalUnstyled.__proto__ || Object.getPrototypeOf(ModalUnstyled)).call(this, props));
     _this.isTransitioning = false;
     _this.onEnter = function () {
       _this.isTransitioning = true;
@@ -9954,14 +9971,14 @@ var Modal = function (_React$Component) {
         _this._element = null;
       }
       var classes = document.body.className.replace('overflow', '');
-      document.body.className = mapToCssModules(classnames(classes).trim(), _this.props.cssModule);
+      document.body.className = mapToCssModules(classnames$1(classes).trim(), _this.props.cssModule);
       setScrollbarWidth(_this.originalBodyPadding);
     };
     _this.originalBodyPadding = null;
     _this.isBodyOverflowing = false;
     return _this;
   }
-  createClass$1(Modal, [{
+  createClass$1(ModalUnstyled, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       if (this.props.isOpen) {
@@ -9998,7 +10015,7 @@ var Modal = function (_React$Component) {
       this.originalBodyPadding = getOriginalBodyPadding();
       conditionallyUpdateScrollbar();
       document.body.appendChild(this._element);
-      document.body.className = mapToCssModules(classnames(classes, 'overflow'), this.props.cssModule);
+      document.body.className = mapToCssModules(classnames$1(classes, 'overflow'), this.props.cssModule);
       this.renderIntoSubtree();
     }
   }, {
@@ -10016,7 +10033,7 @@ var Modal = function (_React$Component) {
     value: function renderChildren() {
       var _classNames,
           _this2 = this;
-      var _omit = lodash_omit(this.props, ['isLocked', 'onUnlock', 'onBackdrop', 'keyboard', 'onEnter', 'onExit', 'zIndex']),
+      var _omit = lodash_omit$1(this.props, ['isLocked', 'onUnlock', 'onBackdrop', 'keyboard', 'onEnter', 'onExit', 'zIndex']),
           className = _omit.className,
           wrapClassName = _omit.wrapClassName,
           modalClassName = _omit.modalClassName,
@@ -10030,26 +10047,27 @@ var Modal = function (_React$Component) {
           attributes = objectWithoutProperties(_omit, ['className', 'wrapClassName', 'modalClassName', 'backdropClassName', 'contentClassName', 'cssModule', 'isOpen', 'size', 'backdrop', 'children']);
       return React__default.createElement(
         TransitionGroup,
-        { component: 'div', className: mapToCssModules(classnames(wrapClassName, className)) },
+        { component: 'div', className: mapToCssModules(classnames$1(wrapClassName, className)) },
         isOpen && React__default.createElement(
-          Fade$1,
+          Fade$2,
           {
             key: 'modal-dialog',
             onEnter: this.onEnter,
             onLeave: this.onExit,
+            timeout: '',
             transitionAppearTimeout: 300,
             transitionEnterTimeout: 300,
             transitionLeaveTimeout: 300,
             onClickCapture: this.handleBackdropClick,
             onKeyUp: this.handleEscape,
-            className: mapToCssModules(classnames('modal', modalClassName), cssModule),
+            className: mapToCssModules(classnames$1('modal', modalClassName), cssModule),
             style: { display: 'block' },
             tabIndex: '-1'
           },
           React__default.createElement(
             'div',
             _extends({
-              className: mapToCssModules(classnames('modal-dialog', (_classNames = {}, defineProperty(_classNames, 'modal-' + size, size), defineProperty(_classNames, 'show', isOpen), _classNames))),
+              className: mapToCssModules(classnames$1('modal-dialog', (_classNames = {}, defineProperty(_classNames, 'modal-' + size, size), defineProperty(_classNames, 'show', isOpen), _classNames))),
               role: 'document',
               ref: function ref(c) {
                 return _this2._dialog = c;
@@ -10057,17 +10075,15 @@ var Modal = function (_React$Component) {
             }, attributes),
             React__default.createElement(
               'div',
-              { className: mapToCssModules(classnames('modal-content', contentClassName), cssModule) },
+              { className: mapToCssModules(classnames$1('modal-content', contentClassName), cssModule) },
               children
             )
           )
         ),
-        isOpen && backdrop && React__default.createElement(Fade$1, {
+        isOpen && backdrop && React__default.createElement(Fade$2, {
           key: 'modal-backdrop',
-          transitionAppearTimeout: 150,
-          transitionEnterTimeout: 150,
-          transitionLeaveTimeout: 150,
-          className: mapToCssModules(classnames('modal-backdrop', backdropClassName), cssModule)
+          timeout: 150,
+          className: mapToCssModules(classnames$1('modal-backdrop', backdropClassName), cssModule)
         })
       );
     }
@@ -10077,9 +10093,9 @@ var Modal = function (_React$Component) {
       return null;
     }
   }]);
-  return Modal;
+  return ModalUnstyled;
 }(React__default.Component);
-Modal.propTypes = {
+ModalUnstyled.propTypes = {
   size: PropTypes.string,
   children: PropTypes.node,
   className: PropTypes.string,
@@ -10098,13 +10114,12 @@ Modal.propTypes = {
   cssModule: PropTypes.object,
   zIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
-Modal = styled__default(Modal).withConfig({
-  displayName: 'Modal__Modal'
+var Modal = styled__default(ModalUnstyled).withConfig({
+  displayName: 'Modal'
 })(['', ''], function (props) {
   return '\n    ' + rebootUtils.body(props.theme['$font-family-base'], props.theme['$font-size-base'], props.theme['$font-weight-base'], props.theme['$line-height-base'], props.theme['$body-color'], props.theme['$body-bg']) + '\n    & .modal {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal'] + ';\n      display: none;\n      outline: 0;\n      overflow-x: hidden;\n      overflow-y: auto;\n      \n      ' + fade(props.theme['$enable-transitions'], props.theme['$transition-fade']) + '\n      &.fade {\n        .modal-dialog {\n          ' + transition(props.theme['$enable-transitions'], props.theme['$modal-transition']) + '\n          transform: translate(0, -25%);\n        }\n      }\n      &.show {\n        .modal-dialog {\n          transform: translate(0, 0);\n        }\n      }\n    }\n    \n    & .modal-dialog {\n      position: relative;\n      width: auto;\n      margin: ' + props.theme['$modal-dialog-margin'] + ';\n    }\n    \n    \n    & .modal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$modal-content-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$modal-content-border-width'] + ' solid ' + props.theme['$modal-content-border-color'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius-lg']) + '\n      ' + boxShadow(props.theme['$enable-shadows'], props.theme['$modal-content-xs-box-shadow']) + '\n      outline: 0;\n    }\n    \n    & .modal-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal-backdrop'] + ';\n      background-color: ' + props.theme['$modal-backdrop-bg'] + ';\n      &.fade {\n        opacity: 0\n      }\n      &.show {\n        opacity: ' + props.theme['$modal-backdrop-opacity'] + ';\n      }\n    }\n      \n        \n    & .modal-header {\n      display: flex;\n      align-items: center;\n      justify-content: space-between;\n      padding: ' + props.theme['$modal-header-padding'] + ';\n      border-bottom: ' + props.theme['$modal-header-border-width'] + ' solid ' + props.theme['$modal-header-border-color'] + ';\n    }\n    \n    & .modal-title {\n      margin-bottom: 0;\n      line-height: ' + props.theme['$modal-title-line-height'] + ';\n    }\n    \n    & .modal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n    }\n    \n    & .modal-footer {\n      display: flex;\n      align-items: center;\n      justify-content: flex-end;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n      border-top: ' + props.theme['$modal-footer-border-width'] + ' solid ' + props.theme['$modal-footer-border-color'] + ';\n      // Easily place margin between footer elements\n      > :not(:first-child) { margin-left: .25rem; }\n      > :not(:last-child) { margin-right: .25rem; }\n    }\n    \n\n  \n    // Scale up the modal\n    ' + mediaBreakpointUp('sm', props.theme['$grid-breakpoints'], '\n        & .modal-dialog {\n          max-width: ' + props.theme['$modal-md'] + ';\n          margin: ' + props.theme['$modal-dialog-sm-up-margin-y'] + ' auto;\n        }\n      \n        & .modal-content {\n          ' + boxShadow(props.theme['$enable-shadows'], props.theme['$modal-content-sm-up-box-shadow']) + '\n        }\n      \n        & .modal-sm {\n          max-width: ' + props.theme['$modal-sm'] + ';\n        }\n      ') + '\n  \n\n    ' + mediaBreakpointUp('lg', props.theme['$grid-breakpoints'], '\n        & .modal-lg {\n           max-width:  ' + props.theme['$modal-lg'] + '; \n         }\n      ') + '\n  ';
 });
 Modal.defaultProps = defaultProps$85;
-var Modal$1 = Modal;
 
 var propTypes$4 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -10115,7 +10130,7 @@ var propTypes$4 = {
   children: PropTypes.node
 };
 var defaultProps$87 = {
-  tag: H4$1,
+  tag: H4,
   wrapTag: 'div'
 };
 var ModalHeader = function ModalHeader(props) {
@@ -10127,7 +10142,7 @@ var ModalHeader = function ModalHeader(props) {
       Tag = props.tag,
       WrapTag = props.wrapTag,
       attributes = objectWithoutProperties(props, ['className', 'cssModule', 'children', 'toggle', 'tag', 'wrapTag']);
-  var classes = mapToCssModules(classnames(className, 'modal-header'), cssModule);
+  var classes = mapToCssModules(classnames$1(className, 'modal-header'), cssModule);
   if (toggle) {
     closeButton = React__default.createElement(
       'button',
@@ -10167,7 +10182,7 @@ var ModalFooter = function ModalFooter(props) {
       Tag = props.tag,
       attributes = objectWithoutProperties(props, ['className', 'cssModule', 'tag']);
   return React__default.createElement(Tag, _extends({}, attributes, {
-    className: mapToCssModules(classnames(className, 'modal-footer'), cssModule)
+    className: mapToCssModules(classnames$1(className, 'modal-footer'), cssModule)
   }));
 };
 ModalFooter.propTypes = propTypes$5;
@@ -10187,7 +10202,7 @@ var ModalBody = function ModalBody(props) {
       Tag = props.tag,
       attributes = objectWithoutProperties(props, ['className', 'cssModule', 'tag']);
   return React__default.createElement(Tag, _extends({}, attributes, {
-    className: mapToCssModules(classnames(className, 'modal-body'), cssModule)
+    className: mapToCssModules(classnames$1(className, 'modal-body'), cssModule)
   }));
 };
 ModalBody.propTypes = propTypes$6;
@@ -10195,18 +10210,18 @@ ModalBody.defaultProps = defaultProps$89;
 
 var defaultProps$90 = {
   theme: bsTheme,
-  tag: Ul$1
+  tag: Ul
 };
-var Nav = function (_React$Component) {
-  inherits(Nav, _React$Component);
-  function Nav() {
-    classCallCheck$1(this, Nav);
-    return possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).apply(this, arguments));
+var NavUnstyled = function (_React$Component) {
+  inherits(NavUnstyled, _React$Component);
+  function NavUnstyled() {
+    classCallCheck$1(this, NavUnstyled);
+    return possibleConstructorReturn(this, (NavUnstyled.__proto__ || Object.getPrototypeOf(NavUnstyled)).apply(this, arguments));
   }
-  createClass$1(Nav, [{
+  createClass$1(NavUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           tabs = _omit.tabs,
@@ -10219,7 +10234,7 @@ var Nav = function (_React$Component) {
           navbar$$1 = _omit.navbar,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tabs', 'pills', 'fill', 'inline', 'stacked', 'vertical', 'justified', 'navbar', 'tag']);
-      var classes = mapToCssModules(classnames(className, navbar$$1 ? 'navbar-nav' : 'nav', {
+      var classes = mapToCssModules(classnames$1(className, navbar$$1 ? 'navbar-nav' : 'nav', {
         'nav-tabs': tabs,
         'nav-pills': pills,
         'nav-fill': fill,
@@ -10231,9 +10246,9 @@ var Nav = function (_React$Component) {
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
-  return Nav;
+  return NavUnstyled;
 }(React__default.Component);
-Nav.propTypes = {
+NavUnstyled.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object,
@@ -10247,13 +10262,12 @@ Nav.propTypes = {
   stacked: PropTypes.bool,
   navbar: PropTypes.bool
 };
-Nav = styled__default(Nav).withConfig({
-  displayName: 'Nav__Nav'
+var Nav = styled__default(NavUnstyled).withConfig({
+  displayName: 'Nav'
 })(['', ''], function (props) {
   return '\n    ' + nav(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n    \n    ' + navbar(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n  ';
 });
 Nav.defaultProps = defaultProps$90;
-var Nav$1 = Nav;
 
 var defaultProps$91 = {
   tag: 'li'
@@ -10272,7 +10286,7 @@ var NavItem = function (_React$Component) {
           cssModule = _props.cssModule,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
-      var classes = mapToCssModules(classnames(className, 'nav-item'), cssModule);
+      var classes = mapToCssModules(classnames$1(className, 'nav-item'), cssModule);
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -10286,7 +10300,7 @@ NavItem.propTypes = {
 NavItem.defaultProps = defaultProps$91;
 
 var defaultProps$92 = {
-  tag: A$1
+  tag: A
 };
 var NavLink = function (_React$Component) {
   inherits(NavLink, _React$Component);
@@ -10320,7 +10334,7 @@ var NavLink = function (_React$Component) {
           Tag = _props.tag,
           getRef = _props.getRef,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'active', 'tag', 'getRef']);
-      var classes = mapToCssModules(classnames(className, 'nav-link', {
+      var classes = mapToCssModules(classnames$1(className, 'nav-link', {
         disabled: attributes.disabled,
         active: active
       }), cssModule);
@@ -10343,62 +10357,61 @@ NavLink.defaultProps = defaultProps$92;
 
 var defaultProps$93 = { theme: bsTheme };
 var Ol = styled__default.ol.withConfig({
-  displayName: 'Ol__Ol'
+  displayName: 'Ol'
 })(['  ', ''], function (props) {
   return '\n    /* Type Scss */\n    &.list-unstyled {\n      ' + listUnstyled() + '\n    }\n\n    &.list-inline {\n      ' + listInline() + '\n    }\n\n    &.list-inline-item {\n      ' + listInlineItem(props.theme['$list-inline-padding']) + '\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n    margin-bottom: 1rem;\n\n    & ol,\n    & ul {\n      margin-bottom: 0;\n    }\n  ';
 });
 Ol.defaultProps = defaultProps$93;
 
 var Option = styled__default.option.withConfig({
-  displayName: 'Option__Option'
+  displayName: 'Option'
 })(['']);
 
-var Output = function (_React$Component) {
-  inherits(Output, _React$Component);
-  function Output() {
-    classCallCheck$1(this, Output);
-    return possibleConstructorReturn(this, (Output.__proto__ || Object.getPrototypeOf(Output)).apply(this, arguments));
+var OutputUnstyled = function (_React$Component) {
+  inherits(OutputUnstyled, _React$Component);
+  function OutputUnstyled() {
+    classCallCheck$1(this, OutputUnstyled);
+    return possibleConstructorReturn(this, (OutputUnstyled.__proto__ || Object.getPrototypeOf(OutputUnstyled)).apply(this, arguments));
   }
-  createClass$1(Output, [{
+  createClass$1(OutputUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           rest = objectWithoutProperties(_omit, ['className']);
       return React__default.createElement('output', _extends({
-        className: classnames(className, 'output')
+        className: classnames$1(className, 'output')
       }, rest));
     }
   }]);
-  return Output;
+  return OutputUnstyled;
 }(React__default.Component);
-Output.propTypes = {
+OutputUnstyled.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.object
 };
-Output = styled__default(Output).withConfig({
-  displayName: 'Output__Output'
+var Output = styled__default(OutputUnstyled).withConfig({
+  displayName: 'Output'
 })(['&.output{display:inline-block;}']);
-var Output$1 = Output;
 
 var defaultProps$94 = { theme: bsTheme };
-var P = function (_React$Component) {
-  inherits(P, _React$Component);
-  function P() {
-    classCallCheck$1(this, P);
-    return possibleConstructorReturn(this, (P.__proto__ || Object.getPrototypeOf(P)).apply(this, arguments));
+var PUnstyled = function (_React$Component) {
+  inherits(PUnstyled, _React$Component);
+  function PUnstyled() {
+    classCallCheck$1(this, PUnstyled);
+    return possibleConstructorReturn(this, (PUnstyled.__proto__ || Object.getPrototypeOf(PUnstyled)).apply(this, arguments));
   }
-  createClass$1(P, [{
+  createClass$1(PUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           lead = _omit.lead,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule', 'lead']);
-      var classes = mapToCssModules(classnames(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames$1(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
       return React__default.createElement(
         'p',
         _extends({ className: classes }, attributes),
@@ -10406,9 +10419,9 @@ var P = function (_React$Component) {
       );
     }
   }]);
-  return P;
+  return PUnstyled;
 }(React__default.Component);
-P.propTypes = {
+PUnstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   theme: PropTypes.object,
@@ -10416,40 +10429,39 @@ P.propTypes = {
   lead: PropTypes.bool,
   cssModule: PropTypes.object
 };
-P = styled__default(P).withConfig({
-  displayName: 'P__P'
+var P = styled__default(PUnstyled).withConfig({
+  displayName: 'P'
 })(['', ''], function (props) {
   return '\n    /* Type Scss */\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n    \n    &.h1{\n      font-size: ' + props.theme['$font-size-h1'] + ';\n      ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h2{\n      font-size: ' + props.theme['$font-size-h2'] + ';\n      ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h3{\n      font-size: ' + props.theme['$font-size-h3'] + ';\n      ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h4{\n      font-size: ' + props.theme['$font-size-h4'] + ';\n      ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h5{\n      font-size: ' + props.theme['$font-size-h5'] + ';\n      ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h6{\n      font-size: ' + props.theme['$font-size-h6'] + ';\n      ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;   \n    margin-bottom: 1rem;\n  ';
 });
 P.defaultProps = defaultProps$94;
-var P$1 = P;
 
 var defaultProps$95 = {
   theme: bsTheme,
   tag: 'ul'
 };
-var Pagination = function (_React$Component) {
-  inherits(Pagination, _React$Component);
-  function Pagination() {
-    classCallCheck$1(this, Pagination);
-    return possibleConstructorReturn(this, (Pagination.__proto__ || Object.getPrototypeOf(Pagination)).apply(this, arguments));
+var PaginationUnstyled = function (_React$Component) {
+  inherits(PaginationUnstyled, _React$Component);
+  function PaginationUnstyled() {
+    classCallCheck$1(this, PaginationUnstyled);
+    return possibleConstructorReturn(this, (PaginationUnstyled.__proto__ || Object.getPrototypeOf(PaginationUnstyled)).apply(this, arguments));
   }
-  createClass$1(Pagination, [{
+  createClass$1(PaginationUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           size = _omit.size,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'size']);
-      var classes = mapToCssModules(classnames(className, 'pagination', defineProperty({}, 'pagination-' + size, !!size)), cssModule);
+      var classes = mapToCssModules(classnames$1(className, 'pagination', defineProperty({}, 'pagination-' + size, !!size)), cssModule);
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
-  return Pagination;
+  return PaginationUnstyled;
 }(React__default.Component);
-Pagination.propTypes = {
+PaginationUnstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   cssModule: PropTypes.object,
@@ -10457,13 +10469,12 @@ Pagination.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   theme: PropTypes.object
 };
-Pagination = styled__default(Pagination).withConfig({
-  displayName: 'Pagination__Pagination'
+var Pagination = styled__default(PaginationUnstyled).withConfig({
+  displayName: 'Pagination'
 })(['', ''], function (props) {
   return '\n    ' + pagination(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$border-radius'], props.theme['$pagination-active-color'], props.theme['$pagination-active-bg'], props.theme['$pagination-active-border'], props.theme['$pagination-disabled-color'], props.theme['$cursor-disabled'], props.theme['$pagination-disabled-bg'], props.theme['$pagination-disabled-border'], props.theme['$pagination-padding-y'], props.theme['$pagination-padding-x'], props.theme['$pagination-line-height'], props.theme['$pagination-color'], props.theme['$pagination-bg'], props.theme['$pagination-border-width'], props.theme['$pagination-border-color'], props.theme['$pagination-hover-color'], props.theme['$pagination-hover-bg'], props.theme['$pagination-hover-border'], props.theme['$pagination-padding-y-lg'], props.theme['$pagination-padding-x-lg'], props.theme['$font-size-lg'], props.theme['$line-height-lg'], props.theme['$border-radius-lg'], props.theme['$pagination-padding-y-sm'], props.theme['$pagination-padding-x-sm'], props.theme['$font-size-sm'], props.theme['$line-height-sm'], props.theme['$border-radius-sm']) + '\n  ';
 });
 Pagination.defaultProps = defaultProps$95;
-var Pagination$1 = Pagination;
 
 var defaultProps$96 = {
   tag: 'li'
@@ -10484,7 +10495,7 @@ var PaginationItem = function (_React$Component) {
           disabled = _props.disabled,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['active', 'className', 'cssModule', 'disabled', 'tag']);
-      var classes = mapToCssModules(classnames(className, 'page-item', {
+      var classes = mapToCssModules(classnames$1(className, 'page-item', {
         active: active,
         disabled: disabled
       }), cssModule);
@@ -10504,7 +10515,7 @@ PaginationItem.propTypes = {
 PaginationItem.defaultProps = defaultProps$96;
 
 var defaultProps$97 = {
-  tag: A$1
+  tag: A
 };
 var PaginationLink = function (_React$Component) {
   inherits(PaginationLink, _React$Component);
@@ -10522,7 +10533,7 @@ var PaginationLink = function (_React$Component) {
           previous = _props.previous,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'next', 'previous', 'tag']);
-      var classes = mapToCssModules(classnames(className, 'page-link'), cssModule);
+      var classes = mapToCssModules(classnames$1(className, 'page-link'), cssModule);
       var defaultAriaLabel = void 0;
       if (previous) {
         defaultAriaLabel = 'Previous';
@@ -10579,7 +10590,7 @@ PaginationLink.defaultProps = defaultProps$97;
 
 var defaultProps$98 = { theme: bsTheme };
 var Pre = styled__default.pre.withConfig({
-  displayName: 'Pre__Pre'
+  displayName: 'Pre'
 })(['', ''], function (props) {
   return '\n    /* Blocks of code */\n    display: block;\n    margin-top: 0;\n    margin-bottom: 1rem;\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$pre-color'] + ';\n    \n    /* Enable scrollable blocks of code */\n    /* AJT This class was present in bootstrap/scss/code.scss  We must decide if this class should be a mixin or not! */\n    &.pre-scrollable {\n      max-height: ' + props.theme['$pre-scrollable-max-height'] + ';\n      overflow-y: scroll;\n    }\n\n  \n    /* Account for some code outputs that place code tags in pre tags */\n    code {\n      padding: 0;\n      font-size: inherit;\n      color: inherit;\n      background-color: transparent;\n      border-radius: 0;\n    }\n    \n    /* Reboot Scss */\n\n    /* Remove browser default top margin */\n    margin-top: 0;\n    /* Reset browser default of \'1em\' to use \'rem\'s */\n    margin-bottom: 1rem;\n    /* Normalize v4 removed this property, causing \'pre\' content to break out of wrapping code snippets */\n    overflow: auto;\n    \n    /* Bootstrap 4 does not place this css rule straight into Kbd tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
@@ -10588,29 +10599,29 @@ Pre.defaultProps = defaultProps$98;
 var defaultProps$99 = {
   theme: bsTheme
 };
-var Progress = function (_React$Component) {
-  inherits(Progress, _React$Component);
-  function Progress() {
-    classCallCheck$1(this, Progress);
-    return possibleConstructorReturn(this, (Progress.__proto__ || Object.getPrototypeOf(Progress)).apply(this, arguments));
+var ProgressUnstyled = function (_React$Component) {
+  inherits(ProgressUnstyled, _React$Component);
+  function ProgressUnstyled() {
+    classCallCheck$1(this, ProgressUnstyled);
+    return possibleConstructorReturn(this, (ProgressUnstyled.__proto__ || Object.getPrototypeOf(ProgressUnstyled)).apply(this, arguments));
   }
-  createClass$1(Progress, [{
+  createClass$1(ProgressUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           children = _omit.children,
           className = _omit.className,
           rest = objectWithoutProperties(_omit, ['children', 'className']);
       return React__default.createElement(
         'div',
-        _extends({ className: classnames('progress', className) }, rest),
+        _extends({ className: classnames$1('progress', className) }, rest),
         children
       );
     }
   }]);
-  return Progress;
+  return ProgressUnstyled;
 }(React__default.Component);
-Progress.propTypes = {
+ProgressUnstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   theme: PropTypes.object
@@ -10618,13 +10629,12 @@ Progress.propTypes = {
 var backgroundPositionKeyFrame = function backgroundPositionKeyFrame(props) {
   return styled.keyframes(['from{background-position:', ' 0;}to{background-position:0 0;}'], props.theme['$progress-height']);
 };
-Progress = styled__default(Progress).withConfig({
-  displayName: 'Progress__Progress'
+var Progress = styled__default(ProgressUnstyled).withConfig({
+  displayName: 'Progress'
 })(['', ''], function (props) {
   return '\n    \n    &.progress {\n      display: flex;\n      overflow: hidden; // force rounded corners by cropping it\n      font-size: ' + props.theme['$progress-font-size'] + ';\n      line-height: ' + props.theme['$progress-height'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$progress-bg'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$progress-border-radius']) + '\n      ' + getBackgroundUtilities(props.theme['$enable-hover-media-query'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$brand-inverse'], props.theme['$gray-lightest']) + '\n    }\n    \n    .progress-bar {\n      height: ' + props.theme['$progress-height'] + ';\n      line-height: ' + props.theme['$progress-height'] + ';\n      color: ' + props.theme['$progress-bar-color'] + ';\n      background-color: ' + props.theme['$progress-bar-bg'] + ';\n    }\n    \n    .progress-bar-striped {\n      ' + gradientStriped() + '\n      background-size: ' + props.theme['$progress-height'] + ' ' + props.theme['$progress-height'] + ';\n      background-repeat: repeat; /* Not present in bootstrap original but required to repeat the background */\n    }\n    \n    .progress-bar-animated {\n      animation: ' + backgroundPositionKeyFrame(props) + ' ' + props.theme['$progress-bar-animation-timing'] + ';\n    }\n\n  ';
 });
 Progress.defaultProps = defaultProps$99;
-var Progress$1 = Progress;
 
 var ProgressBar = function (_React$Component) {
   inherits(ProgressBar, _React$Component);
@@ -10660,7 +10670,7 @@ var ProgressBar = function (_React$Component) {
           striped = _props.striped,
           animated = _props.animated,
           rest = objectWithoutProperties(_props, ['children', 'color', 'className', 'cssModule', 'valueNow', 'valueMin', 'valueMax', 'height', 'striped', 'animated']);
-      var progressBarClasses = mapToCssModules(classnames(className, 'progress-bar', animated ? 'progress-bar-animated' : null, color ? 'bg-' + color : null, striped || animated ? 'progress-bar-striped' : null), cssModule);
+      var progressBarClasses = mapToCssModules(classnames$1(className, 'progress-bar', animated ? 'progress-bar-animated' : null, color ? 'bg-' + color : null, striped || animated ? 'progress-bar-striped' : null), cssModule);
       return React__default.createElement(
         'div',
         _extends({
@@ -10694,13 +10704,13 @@ ProgressBar.propTypes = {
 };
 
 var defaultProps$100 = { theme: bsTheme };
-var Row = function (_React$Component) {
-  inherits(Row, _React$Component);
-  function Row() {
-    classCallCheck$1(this, Row);
-    return possibleConstructorReturn(this, (Row.__proto__ || Object.getPrototypeOf(Row)).apply(this, arguments));
+var RowUnstyled = function (_React$Component) {
+  inherits(RowUnstyled, _React$Component);
+  function RowUnstyled() {
+    classCallCheck$1(this, RowUnstyled);
+    return possibleConstructorReturn(this, (RowUnstyled.__proto__ || Object.getPrototypeOf(RowUnstyled)).apply(this, arguments));
   }
-  createClass$1(Row, [{
+  createClass$1(RowUnstyled, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -10708,47 +10718,46 @@ var Row = function (_React$Component) {
           children = _props.children;
       return React__default.createElement(
         'div',
-        { className: classnames(className, 'row') },
+        { className: classnames$1(className, 'row') },
         children
       );
     }
   }]);
-  return Row;
+  return RowUnstyled;
 }(React__default.Component);
-Row.propTypes = {
+RowUnstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired
 };
-Row = styled__default(Row).withConfig({
-  displayName: 'Row__Row'
+var Row = styled__default(RowUnstyled).withConfig({
+  displayName: 'Row'
 })(['', ''], function (props) {
   return '\n    &.row {\n      ' + makeRow(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n    /*\n      Remove the negative margin from default .row, then the horizontal padding\n      from all immediate children columns (to prevent runaway style inheritance).\n    */\n\n    &.no-gutters {\n      margin-right: 0;\n      margin-left: 0;\n\n      > .col,\n      > [class*="col-"] {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n ';
 });
 Row.defaultProps = defaultProps$100;
-var Row$1 = Row;
 
 var Samp = styled__default.samp.withConfig({
-  displayName: 'Samp__Samp'
+  displayName: 'Samp'
 })(['font-family:monospace,monospace;font-size:1em;']);
 
 var Section = styled__default.section.withConfig({
-  displayName: 'Section__Section'
+  displayName: 'Section'
 })(['']);
 
-var Select = function (_React$Component) {
-  inherits(Select, _React$Component);
-  function Select() {
+var SelectUnstyled = function (_React$Component) {
+  inherits(SelectUnstyled, _React$Component);
+  function SelectUnstyled() {
     var _ref;
     var _temp, _this, _ret;
-    classCallCheck$1(this, Select);
+    classCallCheck$1(this, SelectUnstyled);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = Select.__proto__ || Object.getPrototypeOf(Select)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = SelectUnstyled.__proto__ || Object.getPrototypeOf(SelectUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       className: null
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(Select, [{
+  createClass$1(SelectUnstyled, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
       var nua = navigator.userAgent;
@@ -10766,47 +10775,46 @@ var Select = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme', 'className']),
+      var _omit = lodash_omit$1(this.props, ['theme', 'className']),
           children = _omit.children,
           rest = objectWithoutProperties(_omit, ['children']);
       return React__default.createElement(
         'select',
         _extends({
-          className: classnames(this.state.className, 'select')
+          className: classnames$1(this.state.className, 'select')
         }, rest),
         children
       );
     }
   }]);
-  return Select;
+  return SelectUnstyled;
 }(React__default.Component);
-Select.propTypes = {
+SelectUnstyled.propTypes = {
   theme: PropTypes.object,
   className: PropTypes.string,
   children: PropTypes.node.isRequired
 };
-Select = styled__default(Select).withConfig({
-  displayName: 'Select__Select'
+var Select = styled__default(SelectUnstyled).withConfig({
+  displayName: 'Select'
 })(['&.select{touch-action:manipulation;line-height:inherit;}&:disabled{color:graytext;}']);
-var Select$1 = Select;
 
 var defaultProps$101 = { theme: bsTheme };
-var Small = function (_React$Component) {
-  inherits(Small, _React$Component);
-  function Small() {
-    classCallCheck$1(this, Small);
-    return possibleConstructorReturn(this, (Small.__proto__ || Object.getPrototypeOf(Small)).apply(this, arguments));
+var SmallUnstyled = function (_React$Component) {
+  inherits(SmallUnstyled, _React$Component);
+  function SmallUnstyled() {
+    classCallCheck$1(this, SmallUnstyled);
+    return possibleConstructorReturn(this, (SmallUnstyled.__proto__ || Object.getPrototypeOf(SmallUnstyled)).apply(this, arguments));
   }
-  createClass$1(Small, [{
+  createClass$1(SmallUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule']);
-      var classes = mapToCssModules(classnames(className, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames$1(className, color ? 'text-' + color : false), cssModule);
       return React__default.createElement(
         'small',
         _extends({ className: classes }, attributes),
@@ -10814,40 +10822,39 @@ var Small = function (_React$Component) {
       );
     }
   }]);
-  return Small;
+  return SmallUnstyled;
 }(React__default.Component);
-Small.propTypes = {
+SmallUnstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   theme: PropTypes.object,
   color: PropTypes.string,
   cssModule: PropTypes.object
 };
-Small = styled__default(Small).withConfig({
-  displayName: 'Small__Small'
+var Small = styled__default(SmallUnstyled).withConfig({
+  displayName: 'Small'
 })(['', ''], function (props) {
   return '\n    /* Reboot Scss */\n    font-size: ' + props.theme['$small-font-size'] + ';\n    font-weight: normal;\n  ';
 });
 Small.defaultProps = defaultProps$101;
-var Small$1 = Small;
 
 var defaultProps$102 = { theme: bsTheme };
-var Strong = function (_React$Component) {
-  inherits(Strong, _React$Component);
-  function Strong() {
-    classCallCheck$1(this, Strong);
-    return possibleConstructorReturn(this, (Strong.__proto__ || Object.getPrototypeOf(Strong)).apply(this, arguments));
+var StrongUnstyled = function (_React$Component) {
+  inherits(StrongUnstyled, _React$Component);
+  function StrongUnstyled() {
+    classCallCheck$1(this, StrongUnstyled);
+    return possibleConstructorReturn(this, (StrongUnstyled.__proto__ || Object.getPrototypeOf(StrongUnstyled)).apply(this, arguments));
   }
-  createClass$1(Strong, [{
+  createClass$1(StrongUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule']);
-      var classes = mapToCssModules(classnames(className, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames$1(className, color ? 'text-' + color : false), cssModule);
       return React__default.createElement(
         'strong',
         _extends({ className: classes }, attributes),
@@ -10855,31 +10862,30 @@ var Strong = function (_React$Component) {
       );
     }
   }]);
-  return Strong;
+  return StrongUnstyled;
 }(React__default.Component);
-Strong.propTypes = {
+StrongUnstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   theme: PropTypes.object,
   color: PropTypes.string,
   cssModule: PropTypes.object
 };
-Strong = styled__default(Strong).withConfig({
-  displayName: 'Strong__Strong'
+var Strong = styled__default(StrongUnstyled).withConfig({
+  displayName: 'Strong'
 })(['font-weight:bolder;']);
 Strong.defaultProps = defaultProps$102;
-var Strong$1 = Strong;
 
 var Summary = styled__default.summary.withConfig({
-  displayName: 'Summary__Summary'
+  displayName: 'Summary'
 })(['touch-action:manipulation;']);
 
 var Sub = styled__default.sub.withConfig({
-  displayName: 'Sub__Sub'
+  displayName: 'Sub'
 })(['position:relative;font-size:75%;line-height:0;vertical-align:baseline;bottom:-.25em;']);
 
 var Sup = styled__default.sup.withConfig({
-  displayName: 'Sup__Sup'
+  displayName: 'Sup'
 })(['position:relative;font-size:75%;line-height:0;vertical-align:baseline;top:-.5em;']);
 
 var defaultProps$103 = {
@@ -10887,16 +10893,16 @@ var defaultProps$103 = {
   responsiveTag: 'div',
   theme: bsTheme
 };
-var Table = function (_React$Component) {
-  inherits(Table, _React$Component);
-  function Table() {
-    classCallCheck$1(this, Table);
-    return possibleConstructorReturn(this, (Table.__proto__ || Object.getPrototypeOf(Table)).apply(this, arguments));
+var TableUnstyled = function (_React$Component) {
+  inherits(TableUnstyled, _React$Component);
+  function TableUnstyled() {
+    classCallCheck$1(this, TableUnstyled);
+    return possibleConstructorReturn(this, (TableUnstyled.__proto__ || Object.getPrototypeOf(TableUnstyled)).apply(this, arguments));
   }
-  createClass$1(Table, [{
+  createClass$1(TableUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           size = _omit.size,
@@ -10909,7 +10915,7 @@ var Table = function (_React$Component) {
           Tag = _omit.tag,
           ResponsiveTag = _omit.responsiveTag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'size', 'bordered', 'striped', 'inverse', 'hover', 'reflow', 'responsive', 'tag', 'responsiveTag']);
-      var classes = mapToCssModules(classnames(className, 'table', size ? 'table-' + size : false,
+      var classes = mapToCssModules(classnames$1(className, 'table', size ? 'table-' + size : false,
       bordered ? 'table-bordered' : false, striped ? 'table-striped' : false, inverse ? 'table-inverse' : false, hover$$1 ? 'table-hover' : false, reflow ? 'table-reflow' : false), cssModule);
       var table = React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
       if (responsive) {
@@ -10922,9 +10928,9 @@ var Table = function (_React$Component) {
       return table;
     }
   }]);
-  return Table;
+  return TableUnstyled;
 }(React__default.Component);
-Table.propTypes = {
+TableUnstyled.propTypes = {
   theme: PropTypes.object,
   className: PropTypes.string,
   cssModule: PropTypes.object,
@@ -10938,16 +10944,15 @@ Table.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   responsiveTag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
-Table = styled__default(Table).withConfig({
-  displayName: 'Table__Table'
+var Table = styled__default(TableUnstyled).withConfig({
+  displayName: 'Table'
 })(['', ''], function (props) {
   return '\n    /*\n     Basic Bootstrap table\n    */\n    \n    &.table {\n      width: 100%;\n      max-width: 100%;\n      margin-bottom: ' + props.theme['$spacer'] + ';\n      background-color: ' + props.theme['$table-bg'] + ';\n\n      th,\n      td {\n        padding: ' + props.theme['$table-cell-padding'] + ';\n        vertical-align: top;\n        border-top: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      thead th {\n        vertical-align: bottom;\n        border-bottom: ' + index$1.math.multiply(2, props.theme['$table-border-width']) + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      tbody + tbody {\n        border-top: ' + index$1.math.multiply(2, props.theme['$table-border-width']) + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      .table {\n        background-color: ' + props.theme['$body-bg'] + ';\n      }\n    }\n    \n    \n    /*\n     Condensed table w/ half padding\n    */\n    \n    &.table-sm {\n      th,\n      td {\n        padding: ' + props.theme['$table-sm-cell-padding'] + ';\n      }\n    }\n    \n    \n    /* Bordered version\n     Add borders all around the table and between all the columns.\n    */\n    &.table-bordered {\n      border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n    \n      th,\n      td {\n        border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      thead {\n        th,\n        td {\n          border-bottom-width: ' + index$1.math.multiply(2, props.theme['$table-border-width']) + ';\n        }\n      }\n    }\n    \n    \n    /* Zebra-striping\n     Default zebra-stripe styles (alternating gray and transparent backgrounds)\n    */\n    \n    &.table-striped {\n      tbody tr:nth-of-type(odd) {\n        background-color: ' + props.theme['$table-bg-accent'] + ';\n      }\n    }\n    \n    \n    /* \n    Hover effect Placed here since it has to come after the potential zebra striping\n    */\n\n    \n    &.table-hover {\n      tbody tr {\n        ' + hover('\n          background-color: ' + props.theme['$table-bg-hover'] + ';\n        ') + '\n      }\n    }\n    \n    /* Table backgrounds\n    Exact selectors below required to override \'.table-striped\' and prevent\n    inheritance to nested tables.\n    */\n        \n    /* Generate the contextual variants */\n    ' + tableRowVariant('active', props.theme['$table-bg-active']) + '\n    ' + tableRowVariant('success', props.theme['$state-success-bg']) + '\n    ' + tableRowVariant('info', props.theme['$state-info-bg']) + '\n    ' + tableRowVariant('warning', props.theme['$state-warning-bg']) + '\n    ' + tableRowVariant('danger', props.theme['$state-danger-bg']) + '\n     \n    \n    /* Inverse styles\n    Same table markup, but inverted color scheme: dark background and light text.\n    */ \n    \n    & thead.thead-inverse {\n      th {\n        color: ' + props.theme['$table-inverse-color'] + ';\n        background-color: ' + props.theme['$table-inverse-bg'] + ';\n      }\n    }\n    \n    \n    & thead.thead-default {\n      th {\n        color: ' + props.theme['$table-head-color'] + ';\n        background-color: ' + props.theme['$table-head-bg'] + ';\n      }\n    }\n    \n    &.table-inverse {\n      color: ' + props.theme['$table-inverse-color'] + ';\n      background-color: ' + props.theme['$table-inverse-bg'] + ';\n    \n      th,\n      td,\n      thead th {\n        border-color: ' + props.theme['$table-inverse-border'] + ';\n      }\n    \n      &.table-bordered {\n        border: 0;\n      }\n      \n      &.table-striped {\n        tbody tr:nth-of-type(odd) {\n        background-color: ' + props.theme['$table-inverse-bg-accent'] + ';\n        }\n      }\n      \n      &.table-hover {\n        tbody tr {\n          ' + hover('\n            background-color: ' + props.theme['$table-inverse-bg-hover'] + ';\n          ') + '\n        }\n      }\n    }\n    \n    \n    \n    /* Responsive tables\n     Wrap your tables in \'.table-responsive\' and we\'ll make them mobile friendly\n     by enabling horizontal scrolling. Only applies <768px. Everything above that\n     will display normally.\n     */\n    \n    &.table-responsive {\n      display: block;\n      width: 100%;\n      overflow-x: auto;\n      -ms-overflow-style: -ms-autohiding-scrollbar; /* See https://github.com/twbs/bootstrap/pull/10057 */\n      &.table-bordered {\n        border: 0;\n      }\n    }\n    \n    \n    &.table-reflow {\n    \n      /* added bs4 missing tfoot rule */\n      thead, tfoot {\n        float: left;\n      }\n    \n      tbody {\n        display: block;\n        white-space: nowrap;\n      }\n    \n      th,\n      td {\n        border-top: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        border-left: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n    \n        &:last-child {\n          border-right: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        }\n      }\n    \n      thead,\n      tbody,\n      tfoot {\n        &:last-child {\n          tr:last-child th,\n          tr:last-child td {\n            border-bottom: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n          }\n        }\n      }\n    \n      tr {\n        float: left;\n    \n        th,\n        td {\n          display: block !important;\n          border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        }\n      }\n    }\n    \n      /* from reboot.scss */\n      th {\n        /* Centered by default, but left-align-ed to match the tds below. */\n        text-align: left;\n      }\n        \n\n      \n    /* Reboot Scss */\n    /* No longer part of Normalize since v4 */\n    border-collapse: collapse;\n    /*  Reset for nesting within parents with \'background-color\'. */\n    background-color: ' + props.theme['$table-bg'] + ';    \n    \n  ';
 });
 Table.defaultProps = defaultProps$103;
-var Table$1 = Table;
 
 var Tbody = styled__default.tbody.withConfig({
-  displayName: 'Tbody__Tbody'
+  displayName: 'Tbody'
 })(['']);
 
 var Thead = function (_React$Component) {
@@ -10965,7 +10970,7 @@ var Thead = function (_React$Component) {
           children = _props.children,
           defaultBg = _props.defaultBg,
           attributes = objectWithoutProperties(_props, ['className', 'inverse', 'children', 'defaultBg']);
-      var classes = classnames(className, inverse ? 'thead-inverse' : false, defaultBg ? 'thead-default' : false);
+      var classes = classnames$1(className, inverse ? 'thead-inverse' : false, defaultBg ? 'thead-default' : false);
       return React__default.createElement(
         'thead',
         _extends({ className: classes }, attributes),
@@ -10983,7 +10988,7 @@ Thead.propTypes = {
 };
 
 var Tfoot = styled__default.tfoot.withConfig({
-  displayName: 'Tfoot__Tfoot'
+  displayName: 'Tfoot'
 })(['']);
 
 var Tr = function (_React$Component) {
@@ -11000,7 +11005,7 @@ var Tr = function (_React$Component) {
           color = _props.color,
           children = _props.children,
           attributes = objectWithoutProperties(_props, ['className', 'color', 'children']);
-      var classes = classnames(className, color ? 'table-' + color : false);
+      var classes = classnames$1(className, color ? 'table-' + color : false);
       return React__default.createElement(
         'tr',
         _extends({ className: classes }, attributes),
@@ -11030,7 +11035,7 @@ var Th = function (_React$Component) {
           color = _props.color,
           children = _props.children,
           attributes = objectWithoutProperties(_props, ['className', 'color', 'children']);
-      var classes = classnames(className, color ? 'table-' + color : false);
+      var classes = classnames$1(className, color ? 'table-' + color : false);
       return React__default.createElement(
         'th',
         _extends({ className: classes }, attributes),
@@ -11060,7 +11065,7 @@ var Td = function (_React$Component) {
           color = _props.color,
           children = _props.children,
           attributes = objectWithoutProperties(_props, ['className', 'color', 'children']);
-      var classes = classnames(className, color ? 'table-' + color : false);
+      var classes = classnames$1(className, color ? 'table-' + color : false);
       return React__default.createElement(
         'td',
         _extends({ className: classes }, attributes),
@@ -11082,16 +11087,16 @@ var defaultProps$104 = {
   pill: false,
   tag: 'span'
 };
-var Badge = function (_React$Component) {
-  inherits(Badge, _React$Component);
-  function Badge() {
-    classCallCheck$1(this, Badge);
-    return possibleConstructorReturn(this, (Badge.__proto__ || Object.getPrototypeOf(Badge)).apply(this, arguments));
+var BadgeUnstyled = function (_React$Component) {
+  inherits(BadgeUnstyled, _React$Component);
+  function BadgeUnstyled() {
+    classCallCheck$1(this, BadgeUnstyled);
+    return possibleConstructorReturn(this, (BadgeUnstyled.__proto__ || Object.getPrototypeOf(BadgeUnstyled)).apply(this, arguments));
   }
-  createClass$1(Badge, [{
+  createClass$1(BadgeUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           color = _omit.color,
@@ -11099,15 +11104,15 @@ var Badge = function (_React$Component) {
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'color', 'pill', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'badge', defineProperty({
+        className: mapToCssModules(classnames$1(className, 'badge', defineProperty({
           pill: pill
         }, 'badge-' + color, color)), cssModule)
       }, attributes));
     }
   }]);
-  return Badge;
+  return BadgeUnstyled;
 }(React__default.Component);
-Badge.propTypes = {
+BadgeUnstyled.propTypes = {
   color: PropTypes.string,
   pill: PropTypes.bool,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -11115,16 +11120,15 @@ Badge.propTypes = {
   cssModule: PropTypes.object,
   theme: PropTypes.object
 };
-Badge = styled__default(Badge).withConfig({
-  displayName: 'Badge__Badge'
+var Badge = styled__default(BadgeUnstyled).withConfig({
+  displayName: 'Badge'
 })(['', ''], function (props) {
   return '\n    \n    /* Base class */\n    /* Requires one of the contextual, color modifier classes for \'color\' and */\n    /* \'background-color\'. */\n    \n    &.badge {\n      display: inline-block;\n      padding: ' + props.theme['$badge-padding-y'] + ' ' + props.theme['$badge-padding-x'] + ';\n      font-size: ' + props.theme['$badge-font-size'] + ';\n      font-weight: ' + props.theme['$badge-font-weight'] + ';\n      line-height: 1;\n      color: ' + props.theme['$badge-color'] + ';\n      text-align: center;\n      white-space: nowrap;\n      vertical-align: baseline;\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n    \n      /* Empty tags collapse automatically */\n      &:empty {\n        display: none;\n      }\n    }\n    \n    \n    /* scss-lint:disable QualifyingElement */\n    /* Add hover effects, but only for links */\n    &a {\n      ' + hoverFocus(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$badge-link-hover-color'] + ';\n        text-decoration: none;\n        cursor: pointer;\n      ') + '\n    }\n    /* scss-lint:enable QualifyingElement */\n    \n    /* Pill tags */\n    /* Make them extra rounded with a modifier to replace v3s badges. */\n    \n    &.badge-pill {\n      padding-right: ' + props.theme['$badge-pill-padding-x'] + ';\n      padding-left: ' + props.theme['$badge-pill-padding-x'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$badge-pill-border-radius']) + '\n    }\n    \n    /* Colors */\n    /* Contextual variations (linked tags get darker on :hover). */\n    \n    &.badge-default {\n      ' + badgeVariant(props.theme['$enable-hover-media-query'], props.theme['$badge-default-bg']) + '\n    }     \n    \n    &.badge-primary {\n      ' + badgeVariant(props.theme['$enable-hover-media-query'], props.theme['$badge-primary-bg']) + '\n    }\n    \n    &.badge-success {\n      ' + badgeVariant(props.theme['$enable-hover-media-query'], props.theme['$badge-success-bg']) + '\n    }\n    \n    &.badge-info {\n      ' + badgeVariant(props.theme['$enable-hover-media-query'], props.theme['$badge-info-bg']) + '\n    }\n    \n    &.badge-warning {\n      ' + badgeVariant(props.theme['$enable-hover-media-query'], props.theme['$badge-warning-bg']) + '\n    }\n    \n    &.badge-danger {\n      ' + badgeVariant(props.theme['$enable-hover-media-query'], props.theme['$badge-danger-bg']) + '\n    }\n  ';
 });
 Badge.defaultProps = defaultProps$104;
-var Badge$1 = Badge;
 
 var Textarea = styled__default.textarea.withConfig({
-  displayName: 'Textarea__Textarea'
+  displayName: 'Textarea'
 })(['touch-action:manipulation;line-height:inherit;resize:vertical;']);
 
 var DEFAULT_DELAYS = {
@@ -11271,8 +11275,8 @@ var TooltipUnstyled = function (_React$Component) {
       if (!this.props.isOpen) {
         return null;
       }
-      var attributes = lodash_omit(this.props, Object.keys(propTypes$7));
-      var classes = mapToCssModules(classnames('tooltip', this.props.className), this.props.cssModule);
+      var attributes = lodash_omit$1(this.props, Object.keys(propTypes$7));
+      var classes = mapToCssModules(classnames$1('tooltip', this.props.className), this.props.cssModule);
       var tetherConfig = this.getTetherConfig();
       var optional = {};
       if (this.state.focus === true) {
@@ -11300,7 +11304,7 @@ var TooltipUnstyled = function (_React$Component) {
 }(React__default.Component);
 TooltipUnstyled.propTypes = propTypes$7;
 var Tooltip = styled__default(TooltipUnstyled).withConfig({
-  displayName: 'Tooltip__Tooltip'
+  displayName: 'Tooltip'
 })(['', ''], function (props) {
   return '\n    &.tooltip {\n      position: absolute;\n      z-index: ' + props.theme['$zindex-tooltip'] + ';\n      display: block;\n      font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;\n      font-style: normal;\n      font-weight: 400;\n      letter-spacing: normal;\n      line-break: auto;\n      line-height: 1.5;\n      text-align: left;\n      text-align: start;\n      text-decoration: none;\n      text-shadow: none;\n      text-transform: none;\n      white-space: normal;\n      word-break: normal;\n      word-spacing: normal;\n      font-size: .875rem;\n      word-wrap: break-word;\n      opacity: 0\n    }\n    \n    &.tooltip.show {\n      opacity: ' + props.theme['$tooltip-opacity'] + '\n    }\n    \n    &.tooltip.bs-tether-element-attached-bottom,\n    &.tooltip.tooltip-top {\n      padding: 5px 0;\n      margin-top: -3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-bottom .tooltip-inner:before,\n    &.tooltip.tooltip-top .tooltip-inner:before {\n      bottom: 0;\n      left: 50%;\n      margin-left: -5px;\n      content: "";\n      border-width: 5px 5px 0;\n      border-top-color: #000\n    }\n    \n    &.tooltip.bs-tether-element-attached-left,\n    &.tooltip.tooltip-right {\n      padding: 0 5px;\n      margin-left: 3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-left .tooltip-inner:before,\n    &.tooltip.tooltip-right .tooltip-inner:before {\n      top: 50%;\n      left: 0;\n      margin-top: -5px;\n      content: "";\n      border-width: 5px 5px 5px 0;\n      border-right-color: #000\n    }\n    \n    &.tooltip.bs-tether-element-attached-top,\n    &.tooltip.tooltip-bottom {\n      padding: 5px 0;\n      margin-top: 3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-top .tooltip-inner:before,\n    &.tooltip.tooltip-bottom .tooltip-inner:before {\n      top: 0;\n      left: 50%;\n      margin-left: -5px;\n      content: "";\n      border-width: 0 5px 5px;\n      border-bottom-color: #000\n    }\n    \n    &.tooltip.bs-tether-element-attached-right,\n    &.tooltip.tooltip-left {\n      padding: 0 5px;\n      margin-left: -3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-right .tooltip-inner:before,\n    &.tooltip.tooltip-left .tooltip-inner:before {\n      top: 50%;\n      right: 0;\n      margin-top: -5px;\n      content: "";\n      border-width: 5px 0 5px 5px;\n      border-left-color: #000\n    }\n    \n    & .tooltip-inner {\n      max-width: ' + props.theme['$tooltip-max-width'] + ';\n      padding: ' + props.theme['$tooltip-padding-y'] + ' ' + props.theme['$tooltip-padding-x'] + ';\n      color: ' + props.theme['$tooltip-color'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$tooltip-bg'] + ';\n      border-radius: .25rem\n    }\n    \n    & .tooltip-inner:before {\n      position: absolute;\n      width: 0;\n      height: 0;\n      border-color: transparent;\n      border-style: solid\n    }\n  ';
 });
@@ -11528,7 +11532,7 @@ function composeAnimation(makeAnimation) {
     }, {
       key: 'render',
       value: function render() {
-        var _omit = lodash_omit(this.props, ['theme', 'duration', 'timingFunction', 'delay', 'iterations', 'direction', 'fillMode', 'playState', 'keyframes', 'distance', 'degree', 'perspective', 'backfaceVisibility', 'amplification', 'rotation', 'innerRef']),
+        var _omit = lodash_omit$1(this.props, ['theme', 'duration', 'timingFunction', 'delay', 'iterations', 'direction', 'fillMode', 'playState', 'keyframes', 'distance', 'degree', 'perspective', 'backfaceVisibility', 'amplification', 'rotation', 'innerRef']),
             className = _omit.className,
             children = _omit.children,
             rest = objectWithoutProperties(_omit, ['className', 'children']);
@@ -11536,7 +11540,7 @@ function composeAnimation(makeAnimation) {
           'span',
           _extends({
             style: this.state.styles,
-            className: classnames('d-inline-block', className)
+            className: classnames$1('d-inline-block', className)
           }, rest),
           children
         );
@@ -12363,16 +12367,16 @@ var defaultProps$106 = {
   theme: bsTheme,
   tag: 'div'
 };
-var Card = function (_React$Component) {
-  inherits(Card, _React$Component);
-  function Card() {
-    classCallCheck$1(this, Card);
-    return possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).apply(this, arguments));
+var CardUnstyled = function (_React$Component) {
+  inherits(CardUnstyled, _React$Component);
+  function CardUnstyled() {
+    classCallCheck$1(this, CardUnstyled);
+    return possibleConstructorReturn(this, (CardUnstyled.__proto__ || Object.getPrototypeOf(CardUnstyled)).apply(this, arguments));
   }
-  createClass$1(Card, [{
+  createClass$1(CardUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme', 'backgroundColor', 'borderColor', 'width']),
+      var _omit = lodash_omit$1(this.props, ['theme', 'backgroundColor', 'borderColor', 'width']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           color = _omit.color,
@@ -12382,16 +12386,16 @@ var Card = function (_React$Component) {
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'color', 'block', 'inverse', 'outline', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'card', {
+        className: mapToCssModules(classnames$1(className, 'card', {
           inverse: inverse,
           block: block
         }, 'card' + (outline ? '-outline' : '') + '-' + color), cssModule)
       }, attributes));
     }
   }]);
-  return Card;
+  return CardUnstyled;
 }(React__default.Component);
-Card.propTypes = {
+CardUnstyled.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.object,
   cssModule: PropTypes.object,
@@ -12404,130 +12408,126 @@ Card.propTypes = {
   backgroundColor: PropTypes.string,
   borderColor: PropTypes.string
 };
-Card = styled__default(Card).withConfig({
-  displayName: 'Card__Card'
+var Card = styled__default(CardUnstyled).withConfig({
+  displayName: 'Card'
 })(['', ''], function (props) {
   return '\n    \n    /*\n    Base styles\n    */\n    &.card {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$card-bg'] + ';\n      border: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n      \n      ' + ifThen(props.width, 'width: ' + props.width + ';') + '\n      ' + ifThen(props.backgroundColor, 'background-color: ' + props.backgroundColor + ';') + '\n      ' + ifThen(props.borderColor, 'border-color: ' + props.borderColor + ';') + '\n    }\n    \n    &.card-block,\n    & .card-block {\n      flex: 1 1 auto;\n      padding: ' + props.theme['$card-spacer-x'] + ';\n    }\n    \n    & .card-title {\n      margin-bottom: ' + props.theme['$card-spacer-y'] + ';\n    }\n    \n    & .card-subtitle {\n      margin-top: -' + props.theme['$card-margin-y-halved'] + ';\n      margin-bottom: 0;\n    }\n    \n    & .card-text:last-child {\n      margin-bottom: 0;\n    }\n   \n    & .card-link {\n      ' + hover('\n        text-decoration: none;\n      ') + '\n    \n      + .card-link {\n        margin-left: ' + props.theme['$card-spacer-x'] + ';\n      }\n    }\n    \n    &.card {\n      > .list-group:first-child {\n        .list-group-item:first-child {\n          ' + borderTopRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n        }\n      }\n    \n      > .list-group:last-child {\n        .list-group-item:last-child {\n          ' + borderBottomRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n        }\n      }\n    }\n    \n    \n    /*\n     Optional textual caps\n    */\n    \n    & .card-header {\n      padding: ' + props.theme['$card-spacer-y'] + ' ' + props.theme['$card-spacer-x'] + ';\n      margin-bottom: 0; /* Removes the default margin-bottom of <hN> */\n      background-color: ' + props.theme['$card-cap-bg'] + ';\n      border-bottom: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n    \n      &:first-child {\n        ' + borderRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner'], props.theme['$card-border-radius-inner'], '0', '0') + '\n      }\n    }\n    \n    & .card-footer {\n      padding: ' + props.theme['$card-spacer-y'] + ' ' + props.theme['$card-spacer-x'] + ';\n      background-color: ' + props.theme['$card-cap-bg'] + ';\n      border-top: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n    \n      &:last-child {\n        ' + borderRadius(props.theme['$enable-rounded'], '0', '0', props.theme['$card-border-radius-inner'], props.theme['$card-border-radius-inner']) + '\n      }\n    }\n    \n    \n    /*\n     Header navs\n    */\n    \n    & .card-header-tabs {\n      margin-right: -' + props.theme['$card-margin-x-halved'] + ';\n      margin-bottom: -' + props.theme['$card-spacer-y'] + ';\n      margin-left: -' + props.theme['$card-margin-x-halved'] + ';\n      border-bottom: 0;\n    }\n    \n    & .card-header-pills {\n      margin-right: -' + props.theme['$card-margin-x-halved'] + ';\n      margin-left: -' + props.theme['$card-margin-x-halved'] + ';\n    }\n    \n    \n    /*\n     Background variations\n    */\n    \n    &.card-primary {\n      ' + cardVariant(props.theme['$brand-primary'], props.theme['$brand-primary']) + '\n    }\n    &.card-success {\n      ' + cardVariant(props.theme['$brand-success'], props.theme['$brand-success']) + '\n    }\n    &.card-info {\n      ' + cardVariant(props.theme['$brand-info'], props.theme['$brand-info']) + '\n    }\n    &.card-warning {\n      ' + cardVariant(props.theme['$brand-warning'], props.theme['$brand-warning']) + '\n    }\n    &.card-danger {\n      ' + cardVariant(props.theme['$brand-danger'], props.theme['$brand-danger']) + '\n    }\n    \n    /* Remove all backgrounds */\n    &.card-outline-primary {\n      ' + cardOutlineVariant(props.theme['$btn-primary-bg']) + '\n    }\n    &.card-outline-secondary {\n      ' + cardOutlineVariant(props.theme['$btn-secondary-border']) + '\n    }\n    &.card-outline-info {\n      ' + cardOutlineVariant(props.theme['$btn-info-bg']) + '\n    }\n    &.card-outline-success {\n      ' + cardOutlineVariant(props.theme['$btn-success-bg']) + '\n    }\n    &.card-outline-warning {\n      ' + cardOutlineVariant(props.theme['$btn-warning-bg']) + '\n    }\n    &.card-outline-danger {\n      ' + cardOutlineVariant(props.theme['$btn-danger-bg']) + '\n    }\n    \n    /*\n     Inverse text within a card for use with dark backgrounds\n    */\n    \n    &.card-inverse {\n      ' + cardInverse(props.theme['$enable-hover-media-query'], props.theme['$card-link-hover-color']) + '\n    }\n    \n    /*\n     Blockquote\n    */\n    \n    & .card-blockquote {\n      padding: 0;\n      margin-bottom: 0;\n      border-left: 0;\n    }\n    \n    /* Card image */\n    & .card-img {\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n    \n    & .card-img-overlay {\n      position: absolute;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      padding: ' + props.theme['$card-img-overlay-padding'] + ';\n    }\n    \n    \n    \n    /* Card image caps */\n    & .card-img-top {\n      ' + borderTopRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n    \n    & .card-img-bottom {\n      ' + borderBottomRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n  ';
 });
 Card.defaultProps = defaultProps$106;
-var Card$1 = Card;
 
 var defaultProps$107 = {
   theme: bsTheme,
   tag: 'div'
 };
-var CardColumns = function (_React$Component) {
-  inherits(CardColumns, _React$Component);
-  function CardColumns() {
-    classCallCheck$1(this, CardColumns);
-    return possibleConstructorReturn(this, (CardColumns.__proto__ || Object.getPrototypeOf(CardColumns)).apply(this, arguments));
+var CardColumnsUnstyled = function (_React$Component) {
+  inherits(CardColumnsUnstyled, _React$Component);
+  function CardColumnsUnstyled() {
+    classCallCheck$1(this, CardColumnsUnstyled);
+    return possibleConstructorReturn(this, (CardColumnsUnstyled.__proto__ || Object.getPrototypeOf(CardColumnsUnstyled)).apply(this, arguments));
   }
-  createClass$1(CardColumns, [{
+  createClass$1(CardColumnsUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'card-columns'), cssModule)
+        className: mapToCssModules(classnames$1(className, 'card-columns'), cssModule)
       }, attributes));
     }
   }]);
-  return CardColumns;
+  return CardColumnsUnstyled;
 }(React__default.Component);
-CardColumns.propTypes = {
+CardColumnsUnstyled.propTypes = {
   className: PropTypes.string,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   theme: PropTypes.object,
   cssModule: PropTypes.object
 };
-CardColumns = styled__default(CardColumns).withConfig({
-  displayName: 'CardColumns__CardColumns'
+var CardColumns = styled__default(CardColumnsUnstyled).withConfig({
+  displayName: 'CardColumns'
 })(['', ''], function (props) {
   return '\n    ' + card(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + mediaBreakpointUp('sm', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count'] + ';\n          column-gap: ' + props.theme['$card-columns-gap'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin'] + ';\n          }\n        }\n      ') + '\n  ';
 });
 CardColumns.defaultProps = defaultProps$107;
-var CardColumns$1 = CardColumns;
 
 var defaultProps$108 = {
   theme: bsTheme,
   tag: 'div'
 };
-var CardDeck = function (_React$Component) {
-  inherits(CardDeck, _React$Component);
-  function CardDeck() {
-    classCallCheck$1(this, CardDeck);
-    return possibleConstructorReturn(this, (CardDeck.__proto__ || Object.getPrototypeOf(CardDeck)).apply(this, arguments));
+var CardDeckUnstyled = function (_React$Component) {
+  inherits(CardDeckUnstyled, _React$Component);
+  function CardDeckUnstyled() {
+    classCallCheck$1(this, CardDeckUnstyled);
+    return possibleConstructorReturn(this, (CardDeckUnstyled.__proto__ || Object.getPrototypeOf(CardDeckUnstyled)).apply(this, arguments));
   }
-  createClass$1(CardDeck, [{
+  createClass$1(CardDeckUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'card-deck'), cssModule)
+        className: mapToCssModules(classnames$1(className, 'card-deck'), cssModule)
       }, attributes));
     }
   }]);
-  return CardDeck;
+  return CardDeckUnstyled;
 }(React__default.Component);
-CardDeck.propTypes = {
+CardDeckUnstyled.propTypes = {
   className: PropTypes.string,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   theme: PropTypes.object,
   cssModule: PropTypes.object
 };
-CardDeck = styled__default(CardDeck).withConfig({
-  displayName: 'CardDeck__CardDeck'
+var CardDeck = styled__default(CardDeckUnstyled).withConfig({
+  displayName: 'CardDeck'
 })(['', ''], function (props) {
   return '\n    ' + card(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + mediaBreakpointUp('sm', props.theme['$grid-breakpoints'], '\n        &.card-deck {\n          display: flex;\n          flex-flow: row wrap;\n        \n          .card {\n            display: flex;\n            flex: 1 0 0;\n            flex-direction: column;  \n            &:not(:first-child) { margin-left: ' + props.theme['$card-deck-margin'] + '; }\n            &:not(:last-child) { margin-right: ' + props.theme['$card-deck-margin'] + '; }\n          }\n        }\n      ') + '\n  ';
 });
 CardDeck.defaultProps = defaultProps$108;
-var CardDeck$1 = CardDeck;
 
 var defaultProps$109 = {
   theme: bsTheme,
   tag: 'div'
 };
-var CardGroup = function (_React$Component) {
-  inherits(CardGroup, _React$Component);
-  function CardGroup() {
-    classCallCheck$1(this, CardGroup);
-    return possibleConstructorReturn(this, (CardGroup.__proto__ || Object.getPrototypeOf(CardGroup)).apply(this, arguments));
+var CardGroupUnstyled = function (_React$Component) {
+  inherits(CardGroupUnstyled, _React$Component);
+  function CardGroupUnstyled() {
+    classCallCheck$1(this, CardGroupUnstyled);
+    return possibleConstructorReturn(this, (CardGroupUnstyled.__proto__ || Object.getPrototypeOf(CardGroupUnstyled)).apply(this, arguments));
   }
-  createClass$1(CardGroup, [{
+  createClass$1(CardGroupUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'card-group'), cssModule)
+        className: mapToCssModules(classnames$1(className, 'card-group'), cssModule)
       }, attributes));
     }
   }]);
-  return CardGroup;
+  return CardGroupUnstyled;
 }(React__default.Component);
-CardGroup.propTypes = {
+CardGroupUnstyled.propTypes = {
   className: PropTypes.string,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   theme: PropTypes.object,
   cssModule: PropTypes.object
 };
-CardGroup = styled__default(CardGroup).withConfig({
-  displayName: 'CardGroup__CardGroup'
+var CardGroup = styled__default(CardGroupUnstyled).withConfig({
+  displayName: 'CardGroup'
 })(['', ''], function (props) {
   return '\n    ' + card(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    /*\n      Card group\n    */\n      ' + mediaBreakpointUp('sm', props.theme['$grid-breakpoints'], '\n          &.card-group {\n            display: flex;\n            flex-flow: row wrap;\n        \n            .card {\n              flex: 1 0 0;\n        \n              + .card {\n                margin-left: 0;\n                border-left: 0;\n              }\n        \n            ' + ifThen(props.theme['$enable-rounded'], '\n                &:first-child {\n                  ' + borderRightRadius(props.theme['$enable-rounded'], '0') + '\n                  .card-img-top {\n                    border-top-right-radius: 0;\n                  }\n                  \n                  .card-img-bottom {\n                    border-bottom-right-radius: 0;\n                  }\n                }\n              \n                &:last-child {\n                  ' + borderLeftRadius(props.theme['$enable-rounded'], '0') + '\n                  \n                  .card-img-top {\n                    border-top-left-radius: 0;\n                  }\n                  \n                  .card-img-bottom {\n                    border-bottom-left-radius: 0;\n                  }\n                }\n                \n                &:not(:first-child):not(:last-child) {\n                  border-radius: 0;\n        \n                  .card-img-top,\n                  .card-img-bottom {\n                    border-radius: 0;\n                  }\n                }\n              ') + '  \n          }\n        }\n      ') + '\n  ';
 });
 CardGroup.defaultProps = defaultProps$109;
-var CardGroup$1 = CardGroup;
 
 var defaultProps$110 = {
   tag: 'div'
@@ -12547,7 +12547,7 @@ var CardBlock = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'card-block'), cssModule)
+        className: mapToCssModules(classnames$1(className, 'card-block'), cssModule)
       }, attributes));
     }
   }]);
@@ -12578,7 +12578,7 @@ var CardFooter = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'card-footer'), cssModule)
+        className: mapToCssModules(classnames$1(className, 'card-footer'), cssModule)
       }, attributes));
     }
   }]);
@@ -12609,7 +12609,7 @@ var CardHeader = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'card-header'), cssModule)
+        className: mapToCssModules(classnames$1(className, 'card-header'), cssModule)
       }, attributes));
     }
   }]);
@@ -12648,7 +12648,7 @@ var CardImg = function (_React$Component) {
         cardImgClassName = 'card-img-bottom';
       }
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, cardImgClassName), cssModule)
+        className: mapToCssModules(classnames$1(className, cardImgClassName), cssModule)
       }, attributes));
     }
   }]);
@@ -12681,7 +12681,7 @@ var CardImgOverlay = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'card-img-overlay'), cssModule)
+        className: mapToCssModules(classnames$1(className, 'card-img-overlay'), cssModule)
       }, attributes));
     }
   }]);
@@ -12695,7 +12695,7 @@ CardImgOverlay.propTypes = {
 CardImgOverlay.defaultProps = defaultProps$114;
 
 var defaultProps$115 = {
-  tag: A$1
+  tag: A
 };
 var CardLink = function (_React$Component) {
   inherits(CardLink, _React$Component);
@@ -12713,7 +12713,7 @@ var CardLink = function (_React$Component) {
           getRef = _props.getRef,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag', 'getRef']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'card-link'), cssModule),
+        className: mapToCssModules(classnames$1(className, 'card-link'), cssModule),
         ref: getRef
       }, attributes));
     }
@@ -12729,7 +12729,7 @@ CardLink.propTypes = {
 CardLink.defaultProps = defaultProps$115;
 
 var defaultProps$116 = {
-  tag: H6$1
+  tag: H6
 };
 var CardSubtitle = function (_React$Component) {
   inherits(CardSubtitle, _React$Component);
@@ -12746,7 +12746,7 @@ var CardSubtitle = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'card-subtitle'), cssModule)
+        className: mapToCssModules(classnames$1(className, 'card-subtitle'), cssModule)
       }, attributes));
     }
   }]);
@@ -12777,7 +12777,7 @@ var CardText = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'card-text'), cssModule)
+        className: mapToCssModules(classnames$1(className, 'card-text'), cssModule)
       }, attributes));
     }
   }]);
@@ -12791,7 +12791,7 @@ CardText.propTypes = {
 CardText.defaultProps = defaultProps$117;
 
 var defaultProps$118 = {
-  tag: H4$1
+  tag: H4
 };
 var CardTitle = function (_React$Component) {
   inherits(CardTitle, _React$Component);
@@ -12808,7 +12808,7 @@ var CardTitle = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'card-title'), cssModule)
+        className: mapToCssModules(classnames$1(className, 'card-title'), cssModule)
       }, attributes));
     }
   }]);
@@ -12822,7 +12822,7 @@ CardTitle.propTypes = {
 CardTitle.defaultProps = defaultProps$118;
 
 var defaultProps$119 = {
-  tag: Blockquote$1
+  tag: Blockquote
 };
 var CardBlockquote = function (_React$Component) {
   inherits(CardBlockquote, _React$Component);
@@ -12839,7 +12839,7 @@ var CardBlockquote = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
       return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'card-blockquote'), cssModule)
+        className: mapToCssModules(classnames$1(className, 'card-blockquote'), cssModule)
       }, attributes));
     }
   }]);
@@ -12853,7 +12853,7 @@ CardBlockquote.propTypes = {
 CardBlockquote.defaultProps = defaultProps$119;
 
 var defaultProps$120 = {
-  tag: Card$1
+  tag: Card
 };
 var Accordion = function (_React$Component) {
   inherits(Accordion, _React$Component);
@@ -12895,7 +12895,7 @@ var Accordion = function (_React$Component) {
         CardHeader,
         { onClick: optional.onClick },
         React__default.createElement(
-          H5$1,
+          H5,
           null,
           heading
         )
@@ -12951,7 +12951,7 @@ var AccordionGroup = function (_React$Component) {
     key: 'render',
     value: function render() {
       var attributes = objectWithoutProperties(this.props, []);
-      var _omit = lodash_omit(attributes, ['activeAccordionName', 'onClick', 'headingComponent']),
+      var _omit = lodash_omit$1(attributes, ['activeAccordionName', 'onClick', 'headingComponent']),
           restAfterChildContext = objectWithoutProperties(_omit, []);
       return React__default.createElement('div', restAfterChildContext);
     }
@@ -12972,29 +12972,29 @@ var defaultProps$121 = {
   tag: 'form'
 };
 var selectBorderWidth = index$1.math.multiply(bsTheme['$border-width'], 2);
-var Form = function (_React$Component) {
-  inherits(Form, _React$Component);
-  function Form() {
-    classCallCheck$1(this, Form);
-    return possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).apply(this, arguments));
+var FormUnstyled = function (_React$Component) {
+  inherits(FormUnstyled, _React$Component);
+  function FormUnstyled() {
+    classCallCheck$1(this, FormUnstyled);
+    return possibleConstructorReturn(this, (FormUnstyled.__proto__ || Object.getPrototypeOf(FormUnstyled)).apply(this, arguments));
   }
-  createClass$1(Form, [{
+  createClass$1(FormUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           inline = _omit.inline,
           Tag = _omit.tag,
           getRef = _omit.getRef,
           rest = objectWithoutProperties(_omit, ['className', 'cssModule', 'inline', 'tag', 'getRef']);
-      var classes = mapToCssModules(classnames(className, inline ? 'form-inline' : false), cssModule);
+      var classes = mapToCssModules(classnames$1(className, inline ? 'form-inline' : false), cssModule);
       return React__default.createElement(Tag, _extends({ ref: getRef, className: classes }, rest));
     }
   }]);
-  return Form;
+  return FormUnstyled;
 }(React__default.Component);
-Form.propTypes = {
+FormUnstyled.propTypes = {
   children: PropTypes.node,
   theme: PropTypes.object,
   inline: PropTypes.bool,
@@ -13003,13 +13003,12 @@ Form.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-Form = styled__default(Form).withConfig({
-  displayName: 'Form__Form'
+var Form = styled__default(FormUnstyled).withConfig({
+  displayName: 'Form'
 })(['  ', ''], function (props) {
   return '\n    /*\n     Textual form controls\n    */\n\n    ' + formControl(props.theme['$enable-rounded'], props.theme['$enable-transitions'], props.theme['$enable-shadows'], props.theme['$input-height'], props.theme['$input-padding-y'], props.theme['$input-padding-x'], props.theme['$font-size-base'], props.theme['$input-line-height'], props.theme['$input-color'], props.theme['$input-bg'], props.theme['$input-border-radius'], props.theme['$input-btn-border-width'], props.theme['$input-border-color'], props.theme['$input-transition'], props.theme['$input-box-shadow'], props.theme['$input-color-focus'], props.theme['$input-bg-focus'], props.theme['$input-border-focus'], props.theme['$input-box-shadow-focus'], props.theme['$input-color-placeholder'], props.theme['$input-bg-disabled'], props.theme['$cursor-disabled']) + '\n    \n    select.form-control {\n      &:not([size]):not([multiple]) {\n        height: calc(' + props.theme['$input-height'] + ' + ' + selectBorderWidth + ');\n      }\n\n      &:focus::-ms-value {\n        /* Suppress the nested default white text on blue background highlight given to\n         the selected option text when the (still closed) <select> receives focus\n         in IE and (under certain conditions) Edge, as it looks bad and cannot be made to\n         match the appearance of the native widget.\n         See https://github.com/twbs/bootstrap/issues/19398.\n         */\n        color: ' + props.theme['$input-color'] + ';\n        background-color: ' + props.theme['$input-bg'] + ';\n      }\n    }\n\n    /* Make file inputs better match text inputs by forcing them to new lines. */\n    & .form-control-file,\n    .form-control-range {\n      display: block;\n    }\n\n    /*\n     Labels\n    */\n\n    /* For use with horizontal and inline forms, when you need the label text to */\n    /* align with the form controls. */\n    & .col-form-label {\n      padding-top: calc(' + props.theme['$input-padding-y'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      margin-bottom: 0; /* Override the \'<label>\' default */\n    }\n\n    & .col-form-label-lg {\n      padding-top: calc(' + props.theme['$input-padding-y-lg'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y-lg'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      font-size: ' + props.theme['$font-size-lg'] + ';\n    }\n\n    & .col-form-label-sm {\n      padding-top: calc(' + props.theme['$input-padding-y-sm'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y-sm'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      font-size: ' + props.theme['$font-size-sm'] + ';\n    }\n\n    /*\n     Legends\n    */\n\n    /* For use with horizontal and inline forms, when you need the legend text to */\n    /* be the same size as regular labels, and to align with the form controls. */\n    & .col-form-legend {\n      padding-top: ' + props.theme['$input-padding-y'] + ';\n      padding-bottom: ' + props.theme['$input-padding-y'] + ';\n      margin-bottom: 0;\n      font-size: ' + props.theme['$font-size-base'] + ';\n    }\n\n\n    /* Static form control text\n\n     Apply class to an element to make any string of text align with labels in a\n     horizontal form layout.\n    */\n\n    & .form-control-static {\n      padding-top: ' + props.theme['$input-padding-y'] + ';\n      padding-bottom: ' + props.theme['$input-padding-y'] + ';\n      margin-bottom: 0; /* match inputs if this class comes on inputs with default margins */\n      line-height: ' + props.theme['$input-line-height'] + ';\n      border: solid transparent;\n      border-width: ' + props.theme['$input-btn-border-width'] + ' 0;\n\n      &.form-control-sm,\n      &.form-control-lg {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n\n\n    /* Form control sizing\n\n     Build on .form-control with modifier classes to decrease or increase the\n     height and font-size of form controls.\n\n     The .form-group-* form-control variations are sadly duplicated to avoid the\n     issue documented in https://github.com/twbs/bootstrap/issues/15074.\n    */\n\n    & .form-control-sm {\n      padding: ' + props.theme['$input-padding-y-sm'] + ' ' + props.theme['$input-padding-x-sm'] + ';\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$input-border-radius-sm']) + '\n    }\n\n    select.form-control-sm {\n      &:not([size]):not([multiple]) {\n        height: ' + props.theme['$input-height-sm'] + ';\n      }\n    }\n\n    & .form-control-lg {\n      padding: ' + props.theme['$input-padding-y-lg'] + ' ' + props.theme['$input-padding-x-lg'] + ';\n      font-size: ' + props.theme['$font-size-lg'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$input-border-radius-lg']) + '\n    }\n\n    select.form-control-lg {\n      &:not([size]):not([multiple]) {\n        height: ' + props.theme['$input-height-lg'] + ';\n      }\n    }\n\n\n    /* Form groups Designed to help with the organization and spacing of vertical forms. For horizontal forms, use the predefined grid classes. */\n\n    &.form-group,\n     & .form-group {\n      margin-bottom: ' + props.theme['$form-group-margin-bottom'] + ';\n    }\n\n    & .form-text {\n      display: block;\n      margin-top: ' + props.theme['$form-text-margin-top'] + '\n    }\n\n\n    /* Checkboxes and radios Indent the labels to position radios/checkboxes as hanging controls. */\n\n    & .form-check {\n      position: relative;\n      display: block;\n      margin-bottom: ' + props.theme['$form-check-margin-bottom'] + ';\n\n      &.disabled {\n        .form-check-label {\n          color: ' + props.theme['$text-muted'] + ';\n          cursor: ' + props.theme['$cursor-disabled'] + ';\n        }\n      }\n    }\n\n    & .form-check-label {\n      padding-left: ' + props.theme['$form-check-input-gutter'] + ';\n      margin-bottom: 0; /* Override default <label> bottom margin */\n      cursor: pointer;\n    }\n\n    & .form-check-input {\n      position: absolute;\n      margin-top: ' + props.theme['$form-check-input-margin-y'] + ';\n      margin-left: -' + props.theme['$form-check-input-gutter'] + ';\n\n      &:only-child {\n        position: static;\n      }\n    }\n\n    /* Radios and checkboxes on same line */\n    & .form-check-inline {\n      display: inline-block;\n      .form-check-label {\n        vertical-align: middle;\n      }\n\n      + .form-check-inline {\n        margin-left: ' + props.theme['$form-check-inline-margin-x'] + ';\n      }\n\n      &.disabled {\n        color: ' + props.theme['$text-muted'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n      }\n    }\n\n\n    /* Form control feedback states Apply contextual and semantic states to individual form controls. */\n    & .form-control-feedback {\n      margin-top: ' + props.theme['$form-feedback-margin-top'] + ';\n    }\n\n    & .form-control-success,\n    & .form-control-warning,\n    & .form-control-danger {\n      padding-right: ' + index$1.math.multiply(props.theme['$input-padding-x'], 3) + ';\n      background-repeat: no-repeat;\n      background-position: center right ' + index$1.math.divide(props.theme['$input-height'], 4) + ';\n      background-size: ' + index$1.math.divide(props.theme['$input-height'], 2) + ' ' + index$1.math.divide(props.theme['$input-height'], 2) + ';\n    }\n\n    /* Form validation states */\n    & .has-success {\n      ' + formControlValidation(props.theme['$enable-shadows'], props.theme['$brand-success'], props.theme['$box-shadow']) + '\n\n      .form-control-success {\n        background-image: ' + props.theme['$form-icon-success'] + ';\n      }\n    }\n\n    & .has-warning {\n      ' + formControlValidation(props.theme['$enable-shadows'], props.theme['$brand-warning'], props.theme['$box-shadow']) + '\n\n      .form-control-warning {\n        background-image: ' + props.theme['$form-icon-warning'] + ';\n      }\n    }\n\n    & .has-danger {\n      ' + formControlValidation(props.theme['$enable-shadows'], props.theme['$brand-danger'], props.theme['$box-shadow']) + '\n\n      .form-control-danger {\n        background-image: ' + props.theme['$form-icon-danger'] + ';\n      }\n    }\n\n\n    /* Inline forms\n\n     Make forms appear inline(-block) by adding the .form-inline class. Inline\n     forms begin stacked on extra small (mobile) devices and then go inline when\n     viewports reach <768px.\n\n     Requires wrapping inputs and labels with .form-group for proper display of\n     default HTML form controls and our custom form controls (e.g., input groups).\n    */\n\n    &.form-inline {\n      display: flex;\n      flex-flow: row wrap;\n      align-items: center; /* Prevent shorter elements from growing to same height as others (e.g., small buttons growing to normal sized button height) */\n\n      & .form-check {\n         width: 100%;\n      }\n\n      /* Kick in the inline */\n      ' + mediaBreakpointUp('sm', props.theme['$grid-breakpoints'], '\n          label {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            margin-bottom: 0;\n          }\n          \n          /* Inline-block all the things for inline */\n          & .form-group {\n            display: flex;\n            flex: 0 0 auto;\n            flex-flow: row wrap;\n            margin-bottom: 0;\n          }\n      \n          /* Allow folks to *not* use .form-group */\n          & .form-control {\n            display: inline-block;\n            width: auto; /* Prevent labels from stacking above inputs in .form-group */\n            vertical-align: middle;\n          }\n      \n          /* Make static controls behave like regular ones */\n          & .form-control-static {\n            display: inline-block;\n          }\n      \n          & .input-group {\n            width: auto;\n          }\n          \n          & .form-control-label {\n             margin-bottom: 0;\n            vertical-align: middle;\n          }\n      \n          /* Remove default margin on radios/checkboxes that were used for stacking, and */\n          /*  then undo the floating of radios and checkboxes to match. */\n          & .form-check {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            width: auto;\n            margin-top: 0;\n            margin-bottom: 0;\n          }\n          & .form-check-label {\n            padding-left: 0;\n          }\n          & .form-check-input {\n            position: relative;\n            margin-left: 0;\n            margin-top: 0;\n            margin-right: ' + props.theme['$form-check-input-margin-x'] + ';\n          }\n          \n          /* Custom form controls */\n          & .custom-control {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            padding-left: 0;\n          }\n          \n          & .custom-control-indicator {\n            position: static;\n            display: inline-block;\n            margin-right: ' + props.theme['$form-check-input-margin-x'] + '; /* Flexbox alignment means we lose our HTML space here, so we compensate. */\n            vertical-align: text-bottom;\n          }\n          \n          /* Re-override the feedback icon. */\n          & .has-feedback .form-control-feedback {\n            top: 0;\n          }\n        ') + '\n    }\n    ' + customForms(props.theme['$enable-rounded'], props.theme['$enable-shadows'], props.theme['$custom-control-checked-indicator-box-shadow'], props.theme['$custom-control-active-indicator-box-shadow'], props.theme['$custom-control-indicator-box-shadow'], props.theme['$custom-checkbox-indeterminate-box-shadow'], props.theme['$custom-select-focus-box-shadow'], props.theme['$custom-file-focus-box-shadow'], props.theme['$custom-file-box-shadow'], props.theme['$custom-select-border-radius'], props.theme['$custom-file-border-radius'], props.theme['$custom-checkbox-radius'], props.theme['$input-bg'], props.theme['$custom-select-line-height'], props.theme['$line-height-base'], props.theme['$custom-control-gutter'], props.theme['$custom-control-spacer-x'], props.theme['$custom-control-checked-indicator-color'], props.theme['$custom-control-checked-indicator-bg'], props.theme['$custom-control-focus-indicator-box-shadow'], props.theme['$custom-control-active-indicator-color'], props.theme['$custom-control-active-indicator-bg'], props.theme['$custom-control-disabled-cursor'], props.theme['$custom-control-disabled-indicator-bg'], props.theme['$custom-control-disabled-description-color'], props.theme['$custom-control-indicator-size'], props.theme['$custom-control-indicator-bg'], props.theme['$custom-control-indicator-bg-size'], props.theme['$custom-checkbox-checked-icon'], props.theme['$custom-checkbox-indeterminate-bg'], props.theme['$custom-checkbox-indeterminate-icon'], props.theme['$custom-radio-radius'], props.theme['$custom-radio-checked-icon'], props.theme['$custom-control-spacer-y'], props.theme['$border-width'], props.theme['$input-height'], props.theme['$custom-select-padding-y'], props.theme['$custom-select-padding-x'], props.theme['$custom-select-indicator-padding'], props.theme['$custom-select-color'], props.theme['$custom-select-bg'], props.theme['$custom-select-indicator'], props.theme['$custom-select-bg-size'], props.theme['$custom-select-border-width'], props.theme['$custom-select-border-color'], props.theme['$custom-select-focus-border-color'], props.theme['$input-color'], props.theme['$custom-select-disabled-color'], props.theme['$cursor-disabled'], props.theme['$custom-select-disabled-bg'], props.theme['$custom-select-sm-font-size'], props.theme['$custom-file-width'], props.theme['$custom-file-height'], props.theme['$custom-file-padding-x'], props.theme['$custom-file-padding-y'], props.theme['$custom-file-line-height'], props.theme['$custom-file-color'], props.theme['$custom-file-bg'], props.theme['$custom-file-border-width'], props.theme['$custom-file-border-color'], props.theme['$custom-file-button-color'], props.theme['$custom-file-button-bg'], props.theme['$custom-file-text']) + '\n    & .row {\n      ' + makeRow(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n  ';
 });
 Form.defaultProps = defaultProps$121;
-var Form$1 = Form;
 
 var defaultProps$122 = {
   tag: 'div'
@@ -13033,7 +13032,7 @@ var FormGroup = function (_React$Component) {
           check = _props.check,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'row', 'disabled', 'inline', 'color', 'check', 'tag']);
-      var classes = mapToCssModules(classnames(className, color ? 'has-' + color : false, row ? 'row' : false, check ? 'form-check' : 'form-group', check && disabled ? 'disabled' : false, inline ? 'form-check-inline' : false), cssModule);
+      var classes = mapToCssModules(classnames$1(className, color ? 'has-' + color : false, row ? 'row' : false, check ? 'form-check' : 'form-group', check && disabled ? 'disabled' : false, inline ? 'form-check-inline' : false), cssModule);
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -13071,7 +13070,7 @@ var FormText = function (_React$Component) {
           color = _props.color,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'inline', 'color', 'tag']);
-      var classes = mapToCssModules(classnames(className, !inline ? 'form-text' : false, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames$1(className, !inline ? 'form-text' : false, color ? 'text-' + color : false), cssModule);
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -13104,7 +13103,7 @@ var FormFeedback = function (_React$Component) {
           cssModule = _props.cssModule,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
-      var classes = mapToCssModules(classnames(className, 'form-control-feedback'), cssModule);
+      var classes = mapToCssModules(classnames$1(className, 'form-control-feedback'), cssModule);
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -13133,10 +13132,10 @@ var FormCustom = function (_React$Component) {
           radio = _props.radio,
           children = _props.children,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'radio', 'children']);
-      var classes = mapToCssModules(classnames(className, 'custom-control', radio ? 'custom-radio' : 'custom-checkbox'), cssModule);
-      var CustomInput = radio ? React__default.createElement(Input$1, { type: 'radio', id: radio.id, name: radio.name, className: 'custom-control-input' }) : React__default.createElement(Input$1, { type: 'checkbox', className: 'custom-control-input' });
+      var classes = mapToCssModules(classnames$1(className, 'custom-control', radio ? 'custom-radio' : 'custom-checkbox'), cssModule);
+      var CustomInput = radio ? React__default.createElement(Input, { type: 'radio', id: radio.id, name: radio.name, className: 'custom-control-input' }) : React__default.createElement(Input, { type: 'checkbox', className: 'custom-control-input' });
       return React__default.createElement(
-        Label$1,
+        Label,
         _extends({ className: classes }, attributes),
         CustomInput,
         React__default.createElement('span', { className: 'custom-control-indicator' }),
@@ -13174,17 +13173,17 @@ var getToggleableClass = function getToggleableClass(toggleable) {
   }
   return 'navbar-toggleable-' + toggleable;
 };
-var Navbar = function (_React$Component) {
-  inherits(Navbar, _React$Component);
-  function Navbar() {
-    classCallCheck$1(this, Navbar);
-    return possibleConstructorReturn(this, (Navbar.__proto__ || Object.getPrototypeOf(Navbar)).apply(this, arguments));
+var NavbarUnstyled = function (_React$Component) {
+  inherits(NavbarUnstyled, _React$Component);
+  function NavbarUnstyled() {
+    classCallCheck$1(this, NavbarUnstyled);
+    return possibleConstructorReturn(this, (NavbarUnstyled.__proto__ || Object.getPrototypeOf(NavbarUnstyled)).apply(this, arguments));
   }
-  createClass$1(Navbar, [{
+  createClass$1(NavbarUnstyled, [{
     key: 'render',
     value: function render() {
       var _cn;
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           toggleable = _omit.toggleable,
           className = _omit.className,
           cssModule = _omit.cssModule,
@@ -13196,16 +13195,16 @@ var Navbar = function (_React$Component) {
           color = _omit.color,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['toggleable', 'className', 'cssModule', 'light', 'inverse', 'full', 'fixed', 'sticky', 'color', 'tag']);
-      var classes = mapToCssModules(classnames(className, 'navbar', getToggleableClass(toggleable), (_cn = {
+      var classes = mapToCssModules(classnames$1(className, 'navbar', getToggleableClass(toggleable), (_cn = {
         'navbar-light': light,
         'navbar-inverse': inverse
       }, defineProperty(_cn, 'bg-' + color, color), defineProperty(_cn, 'navbar-full', full), defineProperty(_cn, 'fixed-' + fixed, fixed), defineProperty(_cn, 'sticky-' + sticky, sticky), _cn)), cssModule);
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
-  return Navbar;
+  return NavbarUnstyled;
 }(React__default.Component);
-Navbar.propTypes = {
+NavbarUnstyled.propTypes = {
   light: PropTypes.bool,
   inverse: PropTypes.bool,
   full: PropTypes.bool,
@@ -13220,13 +13219,12 @@ Navbar.propTypes = {
   theme: PropTypes.object
 };
 
-Navbar = styled__default(Navbar).withConfig({
-  displayName: 'Navbar__Navbar'
+var Navbar = styled__default(NavbarUnstyled).withConfig({
+  displayName: 'Navbar'
 })(['', ''], function (props) {
   return '\n    ' + navbar(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + nav(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n  ';
 });
 Navbar.defaultProps = defaultProps$125;
-var Navbar$1 = Navbar;
 
 var propTypes$8 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -13241,7 +13239,7 @@ var NavbarBrand = function NavbarBrand(props) {
       cssModule = props.cssModule,
       Tag = props.tag,
       attributes = objectWithoutProperties(props, ['className', 'cssModule', 'tag']);
-  var classes = mapToCssModules(classnames(className, 'navbar-brand'), cssModule);
+  var classes = mapToCssModules(classnames$1(className, 'navbar-brand'), cssModule);
   return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
 };
 NavbarBrand.propTypes = propTypes$8;
@@ -13269,7 +13267,7 @@ var NavbarToggler = function NavbarToggler(props) {
       left = props.left,
       Tag = props.tag,
       attributes = objectWithoutProperties(props, ['className', 'cssModule', 'children', 'right', 'left', 'tag']);
-  var classes = mapToCssModules(classnames(className, 'navbar-toggler', right && 'navbar-toggler-right', left && 'navbar-toggler-left'), cssModule);
+  var classes = mapToCssModules(classnames$1(className, 'navbar-toggler', right && 'navbar-toggler-right', left && 'navbar-toggler-left'), cssModule);
   return React__default.createElement(
     Tag,
     _extends({}, attributes, { className: classes }),
@@ -13295,8 +13293,8 @@ var NavDropdown = function NavDropdown(props) {
       cssModule = props.cssModule,
       Tag = props.tag,
       attributes = objectWithoutProperties(props, ['className', 'cssModule', 'tag']);
-  var classes = mapToCssModules(classnames(className, 'nav-item'), cssModule);
-  return React__default.createElement(Dropdown$1, _extends({}, attributes, { tag: Tag, className: classes }));
+  var classes = mapToCssModules(classnames$1(className, 'nav-item'), cssModule);
+  return React__default.createElement(Dropdown, _extends({}, attributes, { tag: Tag, className: classes }));
 };
 NavDropdown.propTypes = propTypes$10;
 NavDropdown.defaultProps = defaultProps$128;
@@ -13304,72 +13302,74 @@ NavDropdown.defaultProps = defaultProps$128;
 var defaultProps$129 = {
   theme: bsTheme
 };
-var Container = function (_React$Component) {
-  inherits(Container, _React$Component);
-  function Container() {
-    classCallCheck$1(this, Container);
-    return possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).apply(this, arguments));
+var ContainerUnstyled = function (_React$Component) {
+  inherits(ContainerUnstyled, _React$Component);
+  function ContainerUnstyled() {
+    classCallCheck$1(this, ContainerUnstyled);
+    return possibleConstructorReturn(this, (ContainerUnstyled.__proto__ || Object.getPrototypeOf(ContainerUnstyled)).apply(this, arguments));
   }
-  createClass$1(Container, [{
+  createClass$1(ContainerUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
-      return React__default.createElement('div', _extends({ className: classnames(className, 'container') }, attributes));
+      return React__default.createElement('div', _extends({ className: classnames$1(className, 'container') }, attributes));
     }
   }]);
-  return Container;
+  return ContainerUnstyled;
 }(React__default.Component);
-Container.propTypes = {
+ContainerUnstyled.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.object
 };
-Container = styled__default(Container).withConfig({
-  displayName: 'Container__Container'
+var Container = styled__default(ContainerUnstyled).withConfig({
+  displayName: 'Container'
 })(['', ''], function (props) {
   return '\n    ' + makeContainer(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    \n    ' + makeContainerMaxWidths(props.theme['$enable-grid-classes'], props.theme['$container-max-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
 Container.defaultProps = defaultProps$129;
-var Container$1 = Container;
 
 var defaultProps$130 = {
   theme: bsTheme
 };
-var ContainerFluid = function (_React$Component) {
-  inherits(ContainerFluid, _React$Component);
-  function ContainerFluid() {
-    classCallCheck$1(this, ContainerFluid);
-    return possibleConstructorReturn(this, (ContainerFluid.__proto__ || Object.getPrototypeOf(ContainerFluid)).apply(this, arguments));
+var ContainerFluidUnstyled = function (_React$Component) {
+  inherits(ContainerFluidUnstyled, _React$Component);
+  function ContainerFluidUnstyled() {
+    classCallCheck$1(this, ContainerFluidUnstyled);
+    return possibleConstructorReturn(this, (ContainerFluidUnstyled.__proto__ || Object.getPrototypeOf(ContainerFluidUnstyled)).apply(this, arguments));
   }
-  createClass$1(ContainerFluid, [{
+  createClass$1(ContainerFluidUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
-      return React__default.createElement('div', _extends({ className: classnames(className, 'container-fluid') }, attributes));
+      return React__default.createElement('div', _extends({ className: classnames$1(className, 'container-fluid') }, attributes));
     }
   }]);
-  return ContainerFluid;
+  return ContainerFluidUnstyled;
 }(React__default.Component);
-ContainerFluid.propTypes = {
+ContainerFluidUnstyled.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.object
 };
-ContainerFluid = styled__default(ContainerFluid).withConfig({
-  displayName: 'ContainerFluid__ContainerFluid'
+var ContainerFluid = styled__default(ContainerFluidUnstyled).withConfig({
+  displayName: 'ContainerFluid'
 })(['', ''], function (props) {
   return '\n    ' + makeContainer(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n  ';
 });
 ContainerFluid.defaultProps = defaultProps$130;
-var ContainerFluid$1 = ContainerFluid;
 
+'use strict';
+
+'use strict';
 var ReactCurrentOwner = {
   current: null
 };
 var ReactCurrentOwner_1 = ReactCurrentOwner;
 
+'use strict';
 var validateFormat = function validateFormat(format) {};
 {
   validateFormat = function validateFormat(format) {
@@ -13398,6 +13398,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 }
 var invariant_1 = invariant;
 
+'use strict';
 function checkMask(value, bitmask) {
   return (value & bitmask) === bitmask;
 }
@@ -13478,11 +13479,13 @@ var DOMProperty = {
 };
 var DOMProperty_1 = DOMProperty;
 
+'use strict';
 var ReactDOMComponentFlags = {
   hasCachedChildNodes: 1 << 0
 };
 var ReactDOMComponentFlags_1 = ReactDOMComponentFlags;
 
+'use strict';
 var ATTR_NAME = DOMProperty_1.ID_ATTRIBUTE_NAME;
 var Flags = ReactDOMComponentFlags_1;
 var internalInstanceKey = '__reactInternalInstance$' + Math.random().toString(36).slice(2);
@@ -13590,6 +13593,7 @@ var ReactDOMComponentTree = {
 };
 var ReactDOMComponentTree_1 = ReactDOMComponentTree;
 
+'use strict';
 var ReactInstanceMap = {
   remove: function (key) {
     key._reactInternalInstance = undefined;
@@ -13611,6 +13615,7 @@ object-assign
 (c) Sindre Sorhus
 @license MIT
 */
+'use strict';
 var getOwnPropertySymbols = Object.getOwnPropertySymbols;
 var hasOwnProperty$1 = Object.prototype.hasOwnProperty;
 var propIsEnumerable = Object.prototype.propertyIsEnumerable;
@@ -13676,6 +13681,9 @@ var objectAssign = shouldUseNative() ? Object.assign : function (target, source)
 	return to;
 };
 
+'use strict';
+
+"use strict";
 function makeEmptyFunction(arg) {
   return function () {
     return arg;
@@ -13694,7 +13702,8 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 var emptyFunction_1 = emptyFunction;
 
-var warning$1 = emptyFunction_1;
+'use strict';
+var warning = emptyFunction_1;
 {
   var printWarning = function printWarning(format) {
     for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -13711,7 +13720,7 @@ var warning$1 = emptyFunction_1;
       throw new Error(message);
     } catch (x) {}
   };
-  warning$1 = function warning(condition, format) {
+  warning = function warning(condition, format) {
     if (format === undefined) {
       throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
     }
@@ -13726,12 +13735,13 @@ var warning$1 = emptyFunction_1;
     }
   };
 }
-var warning_1$2 = warning$1;
+var warning_1 = warning;
 
+'use strict';
 function warnNoop(publicInstance, callerName) {
   {
     var constructor = publicInstance.constructor;
-    warning_1$2(false, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op. Please check the code for the %s component.', callerName, callerName, constructor && (constructor.displayName || constructor.name) || 'ReactClass');
+    warning_1(false, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op. Please check the code for the %s component.', callerName, callerName, constructor && (constructor.displayName || constructor.name) || 'ReactClass');
   }
 }
 var ReactNoopUpdateQueue = {
@@ -13751,6 +13761,7 @@ var ReactNoopUpdateQueue = {
 };
 var ReactNoopUpdateQueue_1 = ReactNoopUpdateQueue;
 
+'use strict';
 var canDefineProperty$1 = false;
 {
   try {
@@ -13761,12 +13772,14 @@ var canDefineProperty$1 = false;
 }
 var canDefineProperty_1 = canDefineProperty$1;
 
+'use strict';
 var emptyObject = {};
 {
   Object.freeze(emptyObject);
 }
 var emptyObject_1 = emptyObject;
 
+'use strict';
 var lowPriorityWarning$1 = function () {};
 {
   var printWarning$1 = function (format) {
@@ -13798,6 +13811,7 @@ var lowPriorityWarning$1 = function () {};
 }
 var lowPriorityWarning_1 = lowPriorityWarning$1;
 
+'use strict';
 function ReactComponent(props, context, updater) {
   this.props = props;
   this.context = context;
@@ -13856,6 +13870,7 @@ var ReactBaseClasses = {
   PureComponent: ReactPureComponent
 };
 
+'use strict';
 var oneArgumentPooler = function (copyFieldsFrom) {
   var Klass = this;
   if (Klass.instancePool.length) {
@@ -13925,9 +13940,11 @@ var PooledClass = {
 };
 var PooledClass_1 = PooledClass;
 
+'use strict';
 var REACT_ELEMENT_TYPE = typeof Symbol === 'function' && Symbol['for'] && Symbol['for']('react.element') || 0xeac7;
 var ReactElementSymbol = REACT_ELEMENT_TYPE;
 
+'use strict';
 var hasOwnProperty$2 = Object.prototype.hasOwnProperty;
 var RESERVED_PROPS = {
   key: true,
@@ -13963,7 +13980,7 @@ function defineKeyPropWarningGetter(props, displayName) {
   var warnAboutAccessingKey = function () {
     if (!specialPropKeyWarningShown) {
       specialPropKeyWarningShown = true;
-      warning_1$2(false, '%s: `key` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
+      warning_1(false, '%s: `key` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
     }
   };
   warnAboutAccessingKey.isReactWarning = true;
@@ -13976,7 +13993,7 @@ function defineRefPropWarningGetter(props, displayName) {
   var warnAboutAccessingRef = function () {
     if (!specialPropRefWarningShown) {
       specialPropRefWarningShown = true;
-      warning_1$2(false, '%s: `ref` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
+      warning_1(false, '%s: `ref` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
     }
   };
   warnAboutAccessingRef.isReactWarning = true;
@@ -14143,6 +14160,7 @@ ReactElement.isValidElement = function (object) {
 };
 var ReactElement_1 = ReactElement;
 
+'use strict';
 var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
 var FAUX_ITERATOR_SYMBOL = '@@iterator';
 function getIteratorFn(maybeIterable) {
@@ -14153,6 +14171,7 @@ function getIteratorFn(maybeIterable) {
 }
 var getIteratorFn_1 = getIteratorFn;
 
+'use strict';
 function escape(key) {
   var escapeRegex = /[=:]/g;
   var escaperLookup = {
@@ -14181,6 +14200,7 @@ var KeyEscapeUtils = {
 };
 var KeyEscapeUtils_1 = KeyEscapeUtils;
 
+'use strict';
 var SEPARATOR = '.';
 var SUBSEPARATOR = ':';
 var didWarnAboutMaps = false;
@@ -14232,7 +14252,7 @@ function traverseAllChildrenImpl(children, nameSoFar, callback, traverseContext)
               mapsAsChildrenAddendum = ' Check the render method of `' + mapsAsChildrenOwnerName + '`.';
             }
           }
-          warning_1$2(didWarnAboutMaps, 'Using Maps as children is not yet fully supported. It is an ' + 'experimental feature that might be removed. Convert it to a ' + 'sequence / iterable of keyed ReactElements instead.%s', mapsAsChildrenAddendum);
+          warning_1(didWarnAboutMaps, 'Using Maps as children is not yet fully supported. It is an ' + 'experimental feature that might be removed. Convert it to a ' + 'sequence / iterable of keyed ReactElements instead.%s', mapsAsChildrenAddendum);
           didWarnAboutMaps = true;
         }
         while (!(step = iterator.next()).done) {
@@ -14272,6 +14292,7 @@ function traverseAllChildren(children, callback, traverseContext) {
 }
 var traverseAllChildren_1 = traverseAllChildren;
 
+'use strict';
 var twoArgumentPooler = PooledClass_1.twoArgumentPooler;
 var fourArgumentPooler = PooledClass_1.fourArgumentPooler;
 var userProvidedKeyEscapeRegex = /\/+/g;
@@ -14370,6 +14391,7 @@ var ReactChildren = {
 };
 var ReactChildren_1 = ReactChildren;
 
+'use strict';
 function isNative(fn) {
   var funcToString = Function.prototype.toString;
   var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -14488,7 +14510,7 @@ function describeID(id) {
   if (ownerID) {
     ownerName = ReactComponentTreeHook.getDisplayName(ownerID);
   }
-  warning_1$2(element, 'ReactComponentTreeHook: Missing React element for debugID %s when ' + 'building stack', id);
+  warning_1(element, 'ReactComponentTreeHook: Missing React element for debugID %s when ' + 'building stack', id);
   return describeComponentFrame(name, element && element._source, ownerName);
 }
 var ReactComponentTreeHook = {
@@ -14676,6 +14698,7 @@ var ReactComponentTreeHook = {
 };
 var ReactComponentTreeHook_1 = ReactComponentTreeHook;
 
+'use strict';
 var ReactPropTypeLocationNames = {};
 {
   ReactPropTypeLocationNames = {
@@ -14686,9 +14709,11 @@ var ReactPropTypeLocationNames = {};
 }
 var ReactPropTypeLocationNames_1 = ReactPropTypeLocationNames;
 
+'use strict';
 var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 var ReactPropTypesSecret_1 = ReactPropTypesSecret;
 
+'use strict';
 var ReactComponentTreeHook$1;
 if (typeof process !== 'undefined' && process.env && "development" === 'test') {
   ReactComponentTreeHook$1 = ReactComponentTreeHook_1;
@@ -14704,7 +14729,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
       } catch (ex) {
         error = ex;
       }
-      warning_1$2(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', ReactPropTypeLocationNames_1[location], typeSpecName, typeof error);
+      warning_1(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', ReactPropTypeLocationNames_1[location], typeSpecName, typeof error);
       if (error instanceof Error && !(error.message in loggedTypeFailures)) {
         loggedTypeFailures[error.message] = true;
         var componentStackInfo = '';
@@ -14718,13 +14743,14 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
             componentStackInfo = ReactComponentTreeHook$1.getCurrentStackAddendum(element);
           }
         }
-        warning_1$2(false, 'Failed %s type: %s%s', location, error.message, componentStackInfo);
+        warning_1(false, 'Failed %s type: %s%s', location, error.message, componentStackInfo);
       }
     }
   }
 }
 var checkReactTypeSpec_1 = checkReactTypeSpec;
 
+'use strict';
 function getDeclarationErrorAddendum() {
   if (ReactCurrentOwner_1.current) {
     var name = ReactCurrentOwner_1.current.getName();
@@ -14769,7 +14795,7 @@ function validateExplicitKey(element, parentType) {
   if (element && element._owner && element._owner !== ReactCurrentOwner_1.current) {
     childOwner = ' It was passed a child from ' + element._owner.getName() + '.';
   }
-  warning_1$2(false, 'Each child in an array or iterator should have a unique "key" prop.' + '%s%s See https://fb.me/react-warning-keys for more information.%s', currentComponentErrorInfo, childOwner, ReactComponentTreeHook_1.getCurrentStackAddendum(element));
+  warning_1(false, 'Each child in an array or iterator should have a unique "key" prop.' + '%s%s See https://fb.me/react-warning-keys for more information.%s', currentComponentErrorInfo, childOwner, ReactComponentTreeHook_1.getCurrentStackAddendum(element));
 }
 function validateChildKeys(node, parentType) {
   if (typeof node !== 'object') {
@@ -14811,7 +14837,7 @@ function validatePropTypes(element) {
     checkReactTypeSpec_1(componentClass.propTypes, element.props, 'prop', name, element, null);
   }
   if (typeof componentClass.getDefaultProps === 'function') {
-    warning_1$2(componentClass.getDefaultProps.isReactClassApproved, 'getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.');
+    warning_1(componentClass.getDefaultProps.isReactClassApproved, 'getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.');
   }
 }
 var ReactElementValidator$2 = {
@@ -14832,7 +14858,7 @@ var ReactElementValidator$2 = {
         info += ReactComponentTreeHook_1.getCurrentStackAddendum();
         var currentSource = props !== null && props !== undefined && props.__source !== undefined ? props.__source : null;
         ReactComponentTreeHook_1.pushNonStandardWarningStack(true, currentSource);
-        warning_1$2(false, 'React.createElement: type is invalid -- expected a string (for ' + 'built-in components) or a class/function (for composite ' + 'components) but got: %s.%s', type == null ? type : typeof type, info);
+        warning_1(false, 'React.createElement: type is invalid -- expected a string (for ' + 'built-in components) or a class/function (for composite ' + 'components) but got: %s.%s', type == null ? type : typeof type, info);
         ReactComponentTreeHook_1.popNonStandardWarningStack();
       }
     }
@@ -14878,6 +14904,7 @@ var ReactElementValidator$2 = {
 };
 var ReactElementValidator_1 = ReactElementValidator$2;
 
+'use strict';
 var createDOMFactory = ReactElement_1.createFactory;
 {
   var ReactElementValidator$1 = ReactElementValidator_1;
@@ -15019,12 +15046,14 @@ var ReactDOMFactories = {
 };
 var ReactDOMFactories_1 = ReactDOMFactories;
 
+'use strict';
 var ReactPropTypesSecret$2 = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 var ReactPropTypesSecret_1$2 = ReactPropTypesSecret$2;
 
+'use strict';
 {
   var invariant$2 = invariant_1;
-  var warning$2 = warning_1$2;
+  var warning$1 = warning_1;
   var ReactPropTypesSecret$3 = ReactPropTypesSecret_1$2;
   var loggedTypeFailures$1 = {};
 }
@@ -15039,11 +15068,11 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
         } catch (ex) {
           error = ex;
         }
-        warning$2(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
+        warning$1(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
         if (error instanceof Error && !(error.message in loggedTypeFailures$1)) {
           loggedTypeFailures$1[error.message] = true;
           var stack = getStack ? getStack() : '';
-          warning$2(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
+          warning$1(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
         }
       }
     }
@@ -15051,6 +15080,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 }
 var checkPropTypes_1 = checkPropTypes;
 
+'use strict';
 var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
   var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
   var FAUX_ITERATOR_SYMBOL = '@@iterator';
@@ -15113,7 +15143,7 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
             !manualPropTypeCallCache[cacheKey] &&
             manualPropTypeWarningCount < 3
           ) {
-            warning_1$2(
+            warning_1(
               false,
               'You are manually calling a React.PropTypes validation ' +
               'function for the `%s` prop on `%s`. This is deprecated ' +
@@ -15203,7 +15233,7 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
   }
   function createEnumTypeChecker(expectedValues) {
     if (!Array.isArray(expectedValues)) {
-      warning_1$2(false, 'Invalid argument supplied to oneOf, expected an instance of array.');
+      warning_1(false, 'Invalid argument supplied to oneOf, expected an instance of array.');
       return emptyFunction_1.thatReturnsNull;
     }
     function validate(props, propName, componentName, location, propFullName) {
@@ -15242,13 +15272,13 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
   }
   function createUnionTypeChecker(arrayOfTypeCheckers) {
     if (!Array.isArray(arrayOfTypeCheckers)) {
-      warning_1$2(false, 'Invalid argument supplied to oneOfType, expected an instance of array.');
+      warning_1(false, 'Invalid argument supplied to oneOfType, expected an instance of array.');
       return emptyFunction_1.thatReturnsNull;
     }
     for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
       var checker = arrayOfTypeCheckers[i];
       if (typeof checker !== 'function') {
-        warning_1$2(
+        warning_1(
           false,
           'Invalid argument supplid to oneOfType. Expected an array of check functions, but ' +
           'received %s at index %s.',
@@ -15406,18 +15436,22 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
   return ReactPropTypes;
 };
 
+'use strict';
 var factory_1 = function(isValidElement) {
   var throwOnDirectAccess = false;
   return factoryWithTypeCheckers(isValidElement, throwOnDirectAccess);
 };
 
+'use strict';
 var isValidElement = ReactElement_1.isValidElement;
 var ReactPropTypes = factory_1(isValidElement);
 
+'use strict';
 var ReactVersion = '15.6.1';
 
+'use strict';
 {
-  var warning$3 = warning_1$2;
+  var warning$2 = warning_1;
 }
 var MIXINS_KEY = 'mixins';
 function identity(fn) {
@@ -15508,7 +15542,7 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
     for (var propName in typeDef) {
       if (typeDef.hasOwnProperty(propName)) {
         {
-          warning$3(
+          warning$2(
             typeof typeDef[propName] === 'function',
             '%s: %s type `%s` is invalid; it must be a function, usually from ' +
               'React.PropTypes.',
@@ -15549,7 +15583,7 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
         var typeofSpec = typeof spec;
         var isMixinValid = typeofSpec === 'object' && spec !== null;
         {
-          warning$3(
+          warning$2(
             isMixinValid,
             "%s: You're attempting to include a mixin that is either null " +
               'or not an object. Check the mixins included by the component, ' +
@@ -15721,7 +15755,7 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
         }
         if (newThis !== component && newThis !== null) {
           {
-            warning$3(
+            warning$2(
               false,
               'bind(): React component methods may only be bound to the ' +
                 'component instance. See %s',
@@ -15730,7 +15764,7 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
           }
         } else if (!args.length) {
           {
-            warning$3(
+            warning$2(
               false,
               'bind(): You are binding a component method to the component. ' +
                 'React does this for you automatically in a high-performance ' +
@@ -15773,7 +15807,7 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
     },
     isMounted: function() {
       {
-        warning$3(
+        warning$2(
           this.__didWarnIsMounted,
           '%s: isMounted is deprecated. Instead, make sure to clean up ' +
             'subscriptions and pending requests in componentWillUnmount to ' +
@@ -15796,7 +15830,7 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
   function createClass(spec) {
     var Constructor = identity(function(props, context, updater) {
       {
-        warning$3(
+        warning$2(
           this instanceof Constructor,
           'Something is calling a React component directly. Use a factory or ' +
             'JSX instead. See: https://fb.me/react-legacyfactory'
@@ -15849,7 +15883,7 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
       'createClass(...): Class specification must implement a `render` method.'
     );
     {
-      warning$3(
+      warning$2(
         !Constructor.prototype.componentShouldUpdate,
         '%s has a method called ' +
           'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' +
@@ -15857,7 +15891,7 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
           'expected to return a value.',
         spec.displayName || 'A component'
       );
-      warning$3(
+      warning$2(
         !Constructor.prototype.componentWillRecieveProps,
         '%s has a method called ' +
           'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?',
@@ -15875,16 +15909,19 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
 }
 var factory_1$2 = factory$2;
 
+'use strict';
 var Component$1 = ReactBaseClasses.Component;
 var isValidElement$1 = ReactElement_1.isValidElement;
 var createClass$2 = factory_1$2(Component$1, isValidElement$1, ReactNoopUpdateQueue_1);
 
+'use strict';
 function onlyChild(children) {
   !ReactElement_1.isValidElement(children) ? invariant_1(false, 'React.Children.only expected to receive a single React element child.') : void 0;
   return children;
 }
 var onlyChild_1 = onlyChild;
 
+'use strict';
 var createElement = ReactElement_1.createElement;
 var createFactory = ReactElement_1.createFactory;
 var cloneElement = ReactElement_1.cloneElement;
@@ -15968,6 +16005,7 @@ var React$1 = {
 }
 var React_1 = React$1;
 
+'use strict';
 var ReactNodeTypes = {
   HOST: 0,
   COMPOSITE: 1,
@@ -15987,6 +16025,7 @@ var ReactNodeTypes = {
 };
 var ReactNodeTypes_1 = ReactNodeTypes;
 
+'use strict';
 function getHostComponentFromComposite(inst) {
   var type;
   while ((type = inst._renderedNodeType) === ReactNodeTypes_1.COMPOSITE) {
@@ -16000,11 +16039,12 @@ function getHostComponentFromComposite(inst) {
 }
 var getHostComponentFromComposite_1 = getHostComponentFromComposite;
 
+'use strict';
 function findDOMNode(componentOrElement) {
   {
     var owner = ReactCurrentOwner_1.current;
     if (owner !== null) {
-      warning_1$2(owner._warnedAboutRefsInRender, '%s is accessing findDOMNode inside its render(). ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', owner.getName() || 'A component');
+      warning_1(owner._warnedAboutRefsInRender, '%s is accessing findDOMNode inside its render(). ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', owner.getName() || 'A component');
       owner._warnedAboutRefsInRender = true;
     }
   }
@@ -16025,21 +16065,21 @@ function findDOMNode(componentOrElement) {
     invariant_1(false, 'Element appears to be neither ReactComponent nor DOMNode (keys: %s)', Object.keys(componentOrElement));
   }
 }
-var findDOMNode_1 = findDOMNode;
+var findDOMNode_1$1 = findDOMNode;
 
 var defaultProps$132 = {
   theme: bsTheme
 };
-var OffsetNav = function (_React$Component) {
-  inherits(OffsetNav, _React$Component);
-  function OffsetNav() {
-    classCallCheck$1(this, OffsetNav);
-    return possibleConstructorReturn(this, (OffsetNav.__proto__ || Object.getPrototypeOf(OffsetNav)).apply(this, arguments));
+var OffsetNavUnstyled = function (_React$Component) {
+  inherits(OffsetNavUnstyled, _React$Component);
+  function OffsetNavUnstyled() {
+    classCallCheck$1(this, OffsetNavUnstyled);
+    return possibleConstructorReturn(this, (OffsetNavUnstyled.__proto__ || Object.getPrototypeOf(OffsetNavUnstyled)).apply(this, arguments));
   }
-  createClass$1(OffsetNav, [{
+  createClass$1(OffsetNavUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme', 'elementWidth', 'animation-push']),
+      var _omit = lodash_omit$1(this.props, ['theme', 'elementWidth', 'animation-push']),
           className = _omit.className,
           children = _omit.children,
           active = _omit.active,
@@ -16050,20 +16090,20 @@ var OffsetNav = function (_React$Component) {
           menuRight = _omit['menu-right'],
           attributes = objectWithoutProperties(_omit, ['className', 'children', 'active', 'dismiss', 'menuClose', 'offsetColor', 'cssModule', 'menu-right']);
       var menuDirectionClassNames = menuRight ? 'menu-right' : 'menu-left';
-      var cssClasses = classnames(className, menuDirectionClassNames, defineProperty({}, 'bg-' + offsetColor, offsetColor));
+      var cssClasses = classnames$1(className, menuDirectionClassNames, defineProperty({}, 'bg-' + offsetColor, offsetColor));
       return React__default.createElement(
         'div',
         _extends({
-          className: mapToCssModules(classnames(cssClasses, { active: active }), cssModule)
+          className: mapToCssModules(classnames$1(cssClasses, { active: active }), cssModule)
         }, attributes),
-        menuClose && React__default.createElement(Close$1, { 'aria-label': 'Close', onDismiss: dismiss }),
+        menuClose && React__default.createElement(Close, { 'aria-label': 'Close', onDismiss: dismiss }),
         children
       );
     }
   }]);
-  return OffsetNav;
+  return OffsetNavUnstyled;
 }(React__default.Component);
-OffsetNav.propTypes = {
+OffsetNavUnstyled.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   active: PropTypes.bool,
@@ -16076,65 +16116,63 @@ OffsetNav.propTypes = {
   'animation-push': PropTypes.bool,
   cssModule: PropTypes.object
 };
-OffsetNav = styled__default(OffsetNav).withConfig({
-  displayName: 'OffsetNav__OffsetNav'
+var OffsetNav = styled__default(OffsetNavUnstyled).withConfig({
+  displayName: 'OffsetNav'
 })(['', ''], function (props) {
   return '\n    width: ' + (props.elementWidth ? props.elementWidth : props.theme['$menu-push-width']) + ';\n    height: 100%;\n    background-color: white;\n    z-index: ' + props.theme['$zindex-menu-push'] + ';\n  ';
 });
 OffsetNav.defaultProps = defaultProps$132;
-var OffsetNav$1 = OffsetNav;
 
-var OffsetNavPush = styled__default(OffsetNav$1).withConfig({
-  displayName: 'OffsetNavPush__OffsetNavPush'
+var OffsetNavPush = styled__default(OffsetNav).withConfig({
+  displayName: 'OffsetNavPush'
 })(['', ''], function (props) {
   return '\n    position: absolute;\n    top: 0;\n\n    ' + boxShadow(props.theme['$enable-shadows'], props.theme['$menu-offset-nav-box-shadow']) + '    \n\n    &.menu-left {\n      left: -' + props.theme['$menu-push-width'] + ';\n      ' + transition(props.theme['$enable-transitions'], props.theme['$menu-offset-nav-transition']) + '\n    }\n    \n    &.menu-right {\n      right: -' + props.theme['$menu-push-width'] + ';\n      ' + transition(props.theme['$enable-transitions'], props.theme['$menu-offset-nav-transition']) + '\n    }\n  ';
 });
 
-var OffsetNavSlide = styled__default(OffsetNav$1).withConfig({
-  displayName: 'OffsetNavSlide__OffsetNavSlide'
+var OffsetNavSlide = styled__default(OffsetNav).withConfig({
+  displayName: 'OffsetNavSlide'
 })(['', ''], function (props) {
   return '\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    ' + transition(props.theme['$enable-transitions'], props.theme['$menu-offset-nav-transition']) + '\n    ' + boxShadow(props.theme['$enable-shadows'], props.theme['$menu-offset-nav-box-shadow']) + '  \n    &.menu-left {\n      left: 0;\n      transform: translateX(-100%);\n      &.active {\n        transform: translateX(0);\n      }\n    }\n    \n    &.menu-right {\n      right: 0;\n      transform: translateX(100%);\n      &.active {\n        transform: translateX(0);\n      }\n    }\n\n  ';
 });
 
 var defaultProps$133 = { theme: bsTheme };
-var Overlay = function (_React$Component) {
-  inherits(Overlay, _React$Component);
-  function Overlay() {
-    classCallCheck$1(this, Overlay);
-    return possibleConstructorReturn(this, (Overlay.__proto__ || Object.getPrototypeOf(Overlay)).apply(this, arguments));
+var OverlayUnstyled = function (_React$Component) {
+  inherits(OverlayUnstyled, _React$Component);
+  function OverlayUnstyled() {
+    classCallCheck$1(this, OverlayUnstyled);
+    return possibleConstructorReturn(this, (OverlayUnstyled.__proto__ || Object.getPrototypeOf(OverlayUnstyled)).apply(this, arguments));
   }
-  createClass$1(Overlay, [{
+  createClass$1(OverlayUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           active = _omit.active,
           attributes = objectWithoutProperties(_omit, ['className', 'active']);
       return React__default.createElement('div', _extends({
-        className: classnames(className, 'fade', {
+        className: classnames$1(className, 'fade', {
           show: active
         })
       }, attributes));
     }
   }]);
-  return Overlay;
+  return OverlayUnstyled;
 }(React__default.Component);
-Overlay.propTypes = {
+OverlayUnstyled.propTypes = {
   className: PropTypes.string,
   active: PropTypes.bool,
   theme: PropTypes.object
 };
-Overlay = styled__default(Overlay).withConfig({
-  displayName: 'Overlay__Overlay'
+var Overlay = styled__default(OverlayUnstyled).withConfig({
+  displayName: 'Overlay'
 })(['', ''], function (props) {
   return '\n    position: fixed;\n    width: 100%;\n    height: 100%;\n    z-index: 1990;\n    background: rgba(0, 0, 0, 0.3);\n    transform: translate3d(100%, 0, 0);\n    ' + fade(props.theme['$enable-transitions'], props.theme['$transition-fade']) + '\n    &.show {\n      transform: translate3d(0, 0, 0);\n    }\n  ';
 });
 Overlay.defaultProps = defaultProps$133;
-var Overlay$1 = Overlay;
 
 var defaultProps$131 = {
   button: {
-    component: Button$1
+    component: Button
   },
   alwaysShow: false,
   theme: bsTheme,
@@ -16181,7 +16219,7 @@ var HeaderNavBar = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var componentAsANodeReact = findDOMNode_1(this);
+      var componentAsANodeReact = findDOMNode_1$1(this);
       var node = componentAsANodeReact.querySelector('.navbar.justify-content-between');
       var nodeHeight = node.clientHeight;
       var offsetNav = componentAsANodeReact.querySelector('.offset-nav-margin-top');
@@ -16192,7 +16230,7 @@ var HeaderNavBar = function (_React$Component) {
     value: function render() {
       var _cn,
           _this2 = this;
-      var _omit = lodash_omit(this.props, ['theme', 'belowHeader']),
+      var _omit = lodash_omit$1(this.props, ['theme', 'belowHeader']),
           className = _omit.className,
           children = _omit.children,
           cssModule = _omit.cssModule,
@@ -16212,18 +16250,18 @@ var HeaderNavBar = function (_React$Component) {
           alwaysShow = _omit.alwaysShow,
           shadowHeader = _omit.shadowHeader,
           attributesTemp = objectWithoutProperties(_omit, ['className', 'children', 'cssModule', 'button', 'noOverlay', 'menuClose', 'offsetNavWidth', 'nav-top', 'menu-right', 'animation-push', 'light', 'inverse', 'fixed', 'sticky', 'color', 'offsetColor', 'alwaysShow', 'shadowHeader']);
-      var _omit2 = lodash_omit(attributesTemp, ['onClick']),
+      var _omit2 = lodash_omit$1(attributesTemp, ['onClick']),
           attributes = objectWithoutProperties(_omit2, []);
       var ButtonToggle = button.component,
           classNameButton = button.className,
           restButton = objectWithoutProperties(button, ['component', 'className']);
-      var cssClasses = classnames('navbar', 'justify-content-between', className, (_cn = {
+      var cssClasses = classnames$1('navbar', 'justify-content-between', className, (_cn = {
         'flex-row': !alwaysShow,
         'navbar-light': light,
         'navbar-inverse': inverse
       }, defineProperty(_cn, 'bg-' + color, color), defineProperty(_cn, 'fixed-' + fixed, fixed), defineProperty(_cn, 'sticky-' + sticky, sticky), _cn));
       var buttonMenuRight = menuRight ? 'flex-last' : '';
-      var buttonClasses = classnames(buttonMenuRight, classNameButton, {
+      var buttonClasses = classnames$1(buttonMenuRight, classNameButton, {
         'navbar-toggler-icon p-3 my-auto cursor-pointer': !classNameButton
       });
       var OffsetMenuAnimated = animationPush ? React__default.createElement(
@@ -16256,10 +16294,10 @@ var HeaderNavBar = function (_React$Component) {
       return React__default.createElement(
         'div',
         null,
-        !noOverlay && React__default.createElement(Overlay$1, { active: this.state.show, onClick: this.handleClick }),
+        !noOverlay && React__default.createElement(Overlay, { active: this.state.show, onClick: this.handleClick }),
         React__default.createElement(
           Header,
-          _extends({ className: mapToCssModules(classnames(cssClasses), cssModule), shadowHeader: shadowHeader }, attributes, { innerRef: function innerRef(header) {
+          _extends({ className: mapToCssModules(classnames$1(cssClasses), cssModule), shadowHeader: shadowHeader }, attributes, { innerRef: function innerRef(header) {
               _this2.header = header;
             } }),
           !alwaysShow && React__default.createElement(ButtonToggle, _extends({ className: buttonClasses, onClick: this.handleClick }, restButton)),
@@ -16306,16 +16344,16 @@ HeaderNavBar.propTypes = {
 HeaderNavBar.defaultProps = defaultProps$131;
 
 var defaultProps$134 = { theme: bsTheme };
-var PageWrapper = function (_React$Component) {
-  inherits(PageWrapper, _React$Component);
-  function PageWrapper() {
-    classCallCheck$1(this, PageWrapper);
-    return possibleConstructorReturn(this, (PageWrapper.__proto__ || Object.getPrototypeOf(PageWrapper)).apply(this, arguments));
+var PageWrapperUnstyled = function (_React$Component) {
+  inherits(PageWrapperUnstyled, _React$Component);
+  function PageWrapperUnstyled() {
+    classCallCheck$1(this, PageWrapperUnstyled);
+    return possibleConstructorReturn(this, (PageWrapperUnstyled.__proto__ || Object.getPrototypeOf(PageWrapperUnstyled)).apply(this, arguments));
   }
-  createClass$1(PageWrapper, [{
+  createClass$1(PageWrapperUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
+      var _omit = lodash_omit$1(this.props, ['theme']),
           className = _omit.className,
           children = _omit.children;
       return React__default.createElement(
@@ -16328,20 +16366,19 @@ var PageWrapper = function (_React$Component) {
       );
     }
   }]);
-  return PageWrapper;
+  return PageWrapperUnstyled;
 }(React__default.Component);
-PageWrapper.propTypes = {
+PageWrapperUnstyled.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   theme: PropTypes.object
 };
-PageWrapper = styled__default(PageWrapper).withConfig({
-  displayName: 'PageWrapper__PageWrapper'
+var PageWrapper = styled__default(PageWrapperUnstyled).withConfig({
+  displayName: 'PageWrapper'
 })(['', ''], function (props) {
   return '\n    height: 100%;\n    transition: ' + props.theme['$menu-offset-nav-transition'] + ';\n    &.left { transform: translateX(220px); }\n    &.right { transform: translateX(-220px); }\n  ';
 });
 PageWrapper.defaultProps = defaultProps$134;
-var PageWrapper$1 = PageWrapper;
 
 exports.radius = borderRadius$1;
 exports.boxShadow = boxShadow;
@@ -16373,102 +16410,102 @@ exports.textUtils = textUtils;
 exports.visibilityUtils = visibilityUtils;
 exports.tetherAttachements = tetherAttachements;
 exports.theme = bsTheme;
-exports.makeTheme = makeTheme;
-exports.A = A$1;
+exports.makeTheme = makeTheme$$1;
+exports.A = A;
 exports.composeLink = composeLink;
-exports.Abbr = Abbr$1;
+exports.Abbr = Abbr;
 exports.Address = Address;
 exports.Alert = index$1$1;
 exports.Area = Area;
 exports.Article = Article;
-exports.Blockquote = Blockquote$1;
+exports.Blockquote = Blockquote;
 exports.BootstrapProvider = BootstrapProvider;
-exports.Breadcrumb = Breadcrumb$1;
+exports.Breadcrumb = Breadcrumb;
 exports.BreadcrumbItem = BreadcrumbItem;
-exports.Button = Button$1;
+exports.Button = Button;
 exports.ButtonDropdown = ButtonDropdown;
-exports.ButtonGroup = ButtonGroup$1;
-exports.ButtonToolbar = ButtonToolbar$1;
+exports.ButtonGroup = ButtonGroup;
+exports.ButtonToolbar = ButtonToolbar;
 exports.Caption = Caption;
-exports.Close = Close$1;
-exports.Code = Code$1;
-exports.Col = Col$1;
+exports.Close = Close;
+exports.Code = Code;
+exports.Col = Col;
 exports.Collapse = Collapse;
-exports.Dd = Dd$1;
-exports.Dfn = Dfn$1;
+exports.Dd = Dd;
+exports.Dfn = Dfn;
 exports.Details = Details;
-exports.Dl = Dl$1;
-exports.Dt = Dt$1;
-exports.Fade = index$2;
-exports.Fa = Fa$1;
+exports.Dl = Dl;
+exports.Dt = Dt;
+exports.Fade = Fade$1;
+exports.Fa = Fa;
 exports.FaStacked = FaStacked;
-exports.Fieldset = Fieldset$1;
+exports.Fieldset = Fieldset;
 exports.Footer = Footer;
-exports.H1 = H1$1;
-exports.H2 = H2$1;
-exports.H3 = H3$1;
-exports.H4 = H4$1;
-exports.H5 = H5$1;
-exports.H6 = H6$1;
+exports.H1 = H1;
+exports.H2 = H2;
+exports.H3 = H3;
+exports.H4 = H4;
+exports.H5 = H5;
+exports.H6 = H6;
 exports.Header = Header;
 exports.Hr = Hr;
-exports.Img = Img$1;
-exports.Figure = Figure$1;
-exports.FigCaption = FigCaption$1;
-exports.Input = Input$1;
-exports.InputGroup = InputGroup$1;
+exports.Img = Img;
+exports.Figure = Figure;
+exports.FigCaption = FigCaption;
+exports.Input = Input;
+exports.InputGroup = InputGroup;
 exports.InputGroupAddon = InputGroupAddon;
 exports.InputGroupButton = InputGroupButton;
 exports.IssueIcon = IssueIcon;
-exports.Kbd = Kbd$1;
-exports.Jumbotron = Jumbotron$1;
-exports.Label = Label$1;
+exports.Kbd = Kbd;
+exports.Jumbotron = Jumbotron;
+exports.Label = Label;
 exports.Legend = Legend;
-exports.Li = Li$1;
-exports.ListGroup = ListGroup$1;
+exports.Li = Li;
+exports.ListGroup = ListGroup;
 exports.ListGroupItem = ListGroupItem;
 exports.ListGroupItemHeading = ListGroupItemHeading;
 exports.ListGroupItemText = ListGroupItemHeading$2;
 exports.Map = Map$2;
 exports.Mark = Mark;
-exports.Media = Media$1;
-exports.Modal = Modal$1;
+exports.Media = Media;
+exports.Modal = Modal;
 exports.ModalBody = ModalBody;
 exports.ModalFooter = ModalFooter;
 exports.ModalHeader = ModalHeader;
-exports.Nav = Nav$1;
+exports.Nav = Nav;
 exports.NavLink = NavLink;
 exports.NavItem = NavItem;
 exports.Ol = Ol;
 exports.Option = Option;
-exports.Output = Output$1;
-exports.P = P$1;
-exports.Pagination = Pagination$1;
+exports.Output = Output;
+exports.P = P;
+exports.Pagination = Pagination;
 exports.PaginationItem = PaginationItem;
 exports.PaginationLink = PaginationLink;
 exports.Pre = Pre;
-exports.Progress = Progress$1;
+exports.Progress = Progress;
 exports.ProgressBar = ProgressBar;
-exports.Row = Row$1;
+exports.Row = Row;
 exports.Samp = Samp;
 exports.Section = Section;
-exports.Select = Select$1;
-exports.Small = Small$1;
-exports.Strong = Strong$1;
+exports.Select = Select;
+exports.Small = Small;
+exports.Strong = Strong;
 exports.Summary = Summary;
 exports.Sub = Sub;
 exports.Sup = Sup;
-exports.Table = Table$1;
+exports.Table = Table;
 exports.Tbody = Tbody;
 exports.Tfoot = Tfoot;
 exports.Thead = Thead;
 exports.Td = Td;
 exports.Th = Th;
 exports.Tr = Tr;
-exports.Badge = Badge$1;
+exports.Badge = Badge;
 exports.Textarea = Textarea;
 exports.Tooltip = Tooltip;
-exports.Ul = Ul$1;
+exports.Ul = Ul;
 exports.Blur = Blur;
 exports.Contrast = Contrast;
 exports.Brightness = Brightness;
@@ -16515,7 +16552,7 @@ exports.Flip = Flip;
 exports.FlipX = FlipX;
 exports.FlipY = FlipY;
 exports.Dropshadow = Dropshadow;
-exports.Card = Card$1;
+exports.Card = Card;
 exports.CardBlock = CardBlock;
 exports.CardFooter = CardFooter;
 exports.CardHeader = CardHeader;
@@ -16525,29 +16562,29 @@ exports.CardLink = CardLink;
 exports.CardSubtitle = CardSubtitle;
 exports.CardText = CardText;
 exports.CardTitle = CardTitle;
-exports.CardColumns = CardColumns$1;
-exports.CardDeck = CardDeck$1;
-exports.CardGroup = CardGroup$1;
+exports.CardColumns = CardColumns;
+exports.CardDeck = CardDeck;
+exports.CardGroup = CardGroup;
 exports.CardBlockquote = CardBlockquote;
 exports.Accordion = Accordion;
 exports.AccordionGroup = AccordionGroup;
-exports.Form = Form$1;
+exports.Form = Form;
 exports.FormGroup = FormGroup;
 exports.FormText = FormText;
 exports.FormFeedback = FormFeedback;
 exports.FormCustom = FormCustom;
-exports.Dropdown = Dropdown$1;
+exports.Dropdown = Dropdown;
 exports.DropdownItem = DropdownItem;
 exports.DropdownToggle = DropdownToggle;
 exports.DropdownMenu = DropdownMenu;
-exports.Navbar = Navbar$1;
+exports.Navbar = Navbar;
 exports.NavbarToggler = NavbarToggler;
 exports.NavbarBrand = NavbarBrand;
 exports.NavDropdown = NavDropdown;
-exports.Container = Container$1;
-exports.ContainerFluid = ContainerFluid$1;
+exports.Container = Container;
+exports.ContainerFluid = ContainerFluid;
 exports.HeaderNavBar = HeaderNavBar;
-exports.PageWrapper = PageWrapper$1;
+exports.PageWrapper = PageWrapper;
 exports.OffsetNavPush = OffsetNavPush;
 exports.OffsetNavSlide = OffsetNavSlide;
 

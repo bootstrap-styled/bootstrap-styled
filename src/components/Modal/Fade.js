@@ -10,13 +10,17 @@ const propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object,
-  transitionAppearTimeout: PropTypes.number,
-  transitionEnterTimeout: PropTypes.number,
-  transitionLeaveTimeout: PropTypes.number,
-  transitionAppear: PropTypes.bool,
-  transitionEnter: PropTypes.bool,
-  transitionLeave: PropTypes.bool,
-  onLeave: PropTypes.func,
+  timeout: PropTypes.oneOfType([
+    PropTypes.shape({
+      enter: PropTypes.number,
+      exit: PropTypes.number,
+    }),
+    PropTypes.number,
+  ]),
+  appear: PropTypes.bool,
+  enter: PropTypes.bool,
+  exit: PropTypes.bool,
+  onExit: PropTypes.func,
   onEnter: PropTypes.func,
 };
 
@@ -24,12 +28,10 @@ const defaultProps = {
   tag: 'div',
   baseClass: 'fade',
   baseClassIn: 'show',
-  transitionAppearTimeout: 0,
-  transitionEnterTimeout: 0,
-  transitionLeaveTimeout: 0,
-  transitionAppear: true,
-  transitionEnter: true,
-  transitionLeave: true
+  timeout: 0,
+  appear: true,
+  enter: true,
+  exit: true
 };
 
 class Fade extends React.Component {
@@ -37,11 +39,9 @@ class Fade extends React.Component {
     super(props);
 
     this.state = {
-      mounted: !props.transitionAppear,
+      mounted: !props.appear,
     };
 
-    this.onLeave = this.onLeave.bind(this);
-    this.onEnter = this.onEnter.bind(this);
     this.timers = [];
   }
 
@@ -49,7 +49,7 @@ class Fade extends React.Component {
     this.timers.forEach(timer => clearTimeout(timer));
   }
 
-  onEnter(cb) {
+  onEnter = (cb) => {
     return () => {
       cb();
       if (this.props.onEnter) {
@@ -58,21 +58,21 @@ class Fade extends React.Component {
     };
   }
 
-  onLeave(cb) {
+  onExit = (cb) => {
     return () => {
       cb();
-      if (this.props.onLeave) {
-        this.props.onLeave();
+      if (this.props.onExit) {
+        this.props.onExit();
       }
     };
   }
 
   componentWillAppear(cb) {
-    if (!this.props.transitionAppear) {
+    if (!this.props.appear) {
       this.onEnter(cb)();
     }
 
-    this.timers.push(setTimeout(this.onEnter(cb), this.props.transitionAppearTimeout));
+    this.timers.push(setTimeout(this.onEnter(cb), this.props.timeout.enter || this.props.timeout));
   }
 
   componentDidAppear() {
@@ -82,11 +82,11 @@ class Fade extends React.Component {
   }
 
   componentWillEnter(cb) {
-    if (!this.props.transitionEnter) {
+    if (!this.props.enter) {
       this.onEnter(cb)();
     }
 
-    this.timers.push(setTimeout(this.onEnter(cb), this.props.transitionEnterTimeout));
+    this.timers.push(setTimeout(this.onEnter(cb), this.props.timeout.enter || this.props.timeout));
   }
 
   componentDidEnter() {
@@ -100,12 +100,13 @@ class Fade extends React.Component {
       mounted: false
     });
 
-    if (!this.props.transitionLeave) {
-      this.onLeave(cb)();
+    if (!this.props.exit) {
+      this.onExit(cb)();
     }
 
-    this.timers.push(setTimeout(this.onLeave(cb), this.props.transitionLeaveTimeout));
+    this.timers.push(setTimeout(this.onExit(cb), this.props.timeout.exit || this.props.timeout));
   }
+
   render() {
     const {
       baseClass,

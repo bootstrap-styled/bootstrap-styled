@@ -32,7 +32,7 @@ describe('<PageWrapper />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('PageWrapper').length).toBe(1);
+    expect(renderedComponent.find('PageWrapperUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

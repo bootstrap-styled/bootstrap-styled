@@ -12,7 +12,7 @@ import { makeGridColumns } from '../../styled/mixins/grid-framework';
 
 const defaultProps = { theme: bsTheme };
 
-class Dt extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class DtUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -32,8 +32,7 @@ class Dt extends React.Component { // eslint-disable-line react/prefer-stateless
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Dt = styled(Dt)` 
+const Dt = styled(DtUnstyled)` 
   ${(props) => `
     /* Reboot Scss */
     font-weight: ${props.theme['$dt-font-weight']};

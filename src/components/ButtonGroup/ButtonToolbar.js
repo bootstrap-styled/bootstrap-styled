@@ -17,7 +17,7 @@ const defaultProps = {
   theme: bsTheme,
 };
 
-class ButtonToolbar extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class ButtonToolbarUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -48,8 +48,7 @@ class ButtonToolbar extends React.Component { // eslint-disable-line react/prefe
   }
 }
 
-// eslint-disable-next-line no-class-assign
-ButtonToolbar = styled(ButtonToolbar)`
+const ButtonToolbar = styled(ButtonToolbarUnstyled)`
   ${(props) => `
     ${buttonGroup(
       props.theme['$enable-shadows'],

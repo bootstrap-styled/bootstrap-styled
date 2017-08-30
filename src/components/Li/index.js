@@ -12,7 +12,7 @@ import { media as mediaCss } from '../../styled/mixins/media';
 
 const defaultProps = { theme: bsTheme };
 
-class Li extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class LiUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -64,8 +64,8 @@ class Li extends React.Component { // eslint-disable-line react/prefer-stateless
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Li = styled(Li)`
+
+const Li = styled(LiUnstyled)`
   ${(props) => `
     &.list-inline-item {
       display: inline-block;

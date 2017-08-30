@@ -18,7 +18,7 @@ import { navbar } from '../../styled/mixins/navbar';
 
 const defaultProps = { theme: bsTheme };
 
-class Ul extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class UlUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -52,8 +52,7 @@ class Ul extends React.Component { // eslint-disable-line react/prefer-stateless
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Ul = styled(Ul)`
+const Ul = styled(UlUnstyled)`
   ${(props) => `
     ${nav(
       props.theme['$enable-rounded'],

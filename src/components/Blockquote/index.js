@@ -17,7 +17,7 @@ const defaultProps = {
   theme: bsTheme,
 };
 
-class Blockquote extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class BlockquoteUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -47,8 +47,7 @@ class Blockquote extends React.Component { // eslint-disable-line react/prefer-s
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Blockquote = styled(Blockquote)` 
+const Blockquote = styled(BlockquoteUnstyled)` 
   ${(props) => `
     &.blockquote {
       padding: ${props.theme['$spacer-halved']} ${props.theme['$spacer']};

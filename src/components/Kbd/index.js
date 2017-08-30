@@ -13,7 +13,7 @@ import { boxShadow } from '../../styled/mixins/box-shadow';
 
 const defaultProps = { theme: bsTheme };
 
-class Kbd extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class KbdUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -39,8 +39,7 @@ class Kbd extends React.Component { // eslint-disable-line react/prefer-stateles
 
 }
 
-// eslint-disable-next-line no-class-assign
-Kbd = styled(Kbd)`
+const Kbd = styled(KbdUnstyled)`
   ${(props) => `
     /* User input typically entered via keyboard */
     padding: ${props.theme['$code-padding-y']} ${props.theme['$code-padding-x']};

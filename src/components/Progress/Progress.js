@@ -14,7 +14,7 @@ const defaultProps = {
   theme: bsTheme,
 };
 
-class Progress extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class ProgressUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -44,8 +44,7 @@ const backgroundPositionKeyFrame = (props) => keyframes`
   to { background-position: 0 0; }
 `;
 
-// eslint-disable-next-line no-class-assign
-Progress = styled(Progress)`
+const Progress = styled(ProgressUnstyled)`
   ${(props) => `
     
     &.progress {

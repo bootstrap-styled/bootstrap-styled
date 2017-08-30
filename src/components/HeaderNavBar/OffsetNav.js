@@ -15,7 +15,7 @@ const defaultProps = {
   theme: bsTheme,
 };
 
-class OffsetNav extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class OffsetNavUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -64,8 +64,7 @@ class OffsetNav extends React.Component { // eslint-disable-line react/prefer-st
   }
 }
 
-// eslint-disable-next-line no-class-assign
-OffsetNav = styled(OffsetNav)`
+const OffsetNav = styled(OffsetNavUnstyled)`
   ${(props) => `
     width: ${props.elementWidth ? props.elementWidth : props.theme['$menu-push-width']};
     height: 100%;

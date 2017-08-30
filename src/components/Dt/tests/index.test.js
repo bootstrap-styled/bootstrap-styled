@@ -25,7 +25,7 @@ describe('<Dt />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Dt').length).toBe(1);
+    expect(renderedComponent.find('DtUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

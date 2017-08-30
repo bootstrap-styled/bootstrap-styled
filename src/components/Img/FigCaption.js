@@ -14,7 +14,7 @@ const defaultProps = {
   theme: bsTheme,
 };
 
-class FigCaption extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class FigCaptionUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -48,8 +48,7 @@ class FigCaption extends React.Component { // eslint-disable-line react/prefer-s
 
 }
 
-// eslint-disable-next-line no-class-assign
-FigCaption = styled(FigCaption)`
+const FigCaption = styled(FigCaptionUnstyled)`
   ${(props) => `
     &.figure-caption {
       font-size: ${props.theme['$figure-caption-font-size']};

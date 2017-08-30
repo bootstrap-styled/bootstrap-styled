@@ -27,7 +27,7 @@ const defaultProps = {
   zIndex: 1000,
 };
 
-class Modal extends React.Component {
+class ModalUnstyled extends React.Component {
 
 
   static propTypes = {
@@ -203,6 +203,7 @@ class Modal extends React.Component {
             key="modal-dialog"
             onEnter={this.onEnter}
             onLeave={this.onExit}
+            timeout=""
             transitionAppearTimeout={300}
             transitionEnterTimeout={300}
             transitionLeaveTimeout={300}
@@ -230,9 +231,7 @@ class Modal extends React.Component {
         {isOpen && backdrop && (
           <Fade
             key="modal-backdrop"
-            transitionAppearTimeout={150}
-            transitionEnterTimeout={150}
-            transitionLeaveTimeout={150}
+            timeout={150}
             className={mapToCssModules(classNames('modal-backdrop', backdropClassName), cssModule)}
           />
         )}
@@ -245,8 +244,7 @@ class Modal extends React.Component {
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Modal = styled(Modal)`
+const Modal = styled(ModalUnstyled)`
   ${(props) => `
     ${rebootUtils.body(
       props.theme['$font-family-base'],

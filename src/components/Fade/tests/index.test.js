@@ -1,10 +1,11 @@
 /**
- * Testing our Fade comgit diff ponent
+ * Testing our Fade component
  */
 import { mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
 import Fade from '../index';
+
 const children = (<h1>Test</h1>);
 
 const renderComponentUsingTheme = (props = {}) => mount(
@@ -34,6 +35,6 @@ describe('<Fade />', () => {
       children,
       isOpen: false,
     });
-    expect(renderedComponent.contains(children)).toEqual(false);
+    expect(renderedComponent.find('Transition').props().in).toEqual(false);
   });
 });

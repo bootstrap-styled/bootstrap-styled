@@ -26,7 +26,7 @@ describe('<Abbr />', () => {
       title: 'abbr title',
       children,
     });
-    expect(renderedComponent.find('Abbr').length).toBe(1);
+    expect(renderedComponent.find('AbbrUnstyled').length).toBe(1);
   });
   it('should have an attribute title without a theme', () => {
     const renderedComponent = renderComponent({

@@ -41,7 +41,6 @@ const defaultProps = {
   },
 };
 
-// eslint-disable-next-line no-class-assign
 const UtilityProvider = styled.div`
   ${(props) => `
     ${rebootUtils.body(

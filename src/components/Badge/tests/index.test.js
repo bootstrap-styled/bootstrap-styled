@@ -21,13 +21,13 @@ const renderComponentUsingTheme = (props = {}) => mount(
 describe('<Badge />', () => {
   it('should render an <Badge> tag without a theme', () => {
     const renderedComponent = renderComponent();
-    expect(renderedComponent.find('Badge').length).toBe(1);
+    expect(renderedComponent.find('BadgeUnstyled').length).toBe(1);
   });
   it('should have an attribute pill without a theme', () => {
     const renderedComponent = renderComponent({
       pill: true,
     });
-    expect(renderedComponent.find('Badge').props().pill).toBe(true);
+    expect(renderedComponent.find('BadgeUnstyled').props().pill).toBe(true);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

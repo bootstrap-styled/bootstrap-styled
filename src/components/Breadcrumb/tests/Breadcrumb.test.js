@@ -25,7 +25,7 @@ describe('<Breadcrumb />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Breadcrumb').length).toBe(1);
+    expect(renderedComponent.find('BreadcrumbUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

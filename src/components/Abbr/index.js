@@ -15,7 +15,7 @@ const defaultProps = {
   theme: bsTheme,
 };
 
-class Abbr extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class AbbrUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -48,8 +48,7 @@ class Abbr extends React.Component { // eslint-disable-line react/prefer-statele
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Abbr = styled(Abbr)`
+const Abbr = styled(AbbrUnstyled)`
   /* Reboot Scss */
   /* Abbreviations and acronyms */
   &[title] {

@@ -4,7 +4,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import PropTypes from 'prop-types';
-import TransitionGroup from 'react-transition-group/TransitionGroup';
+import { TransitionGroup } from 'react-transition-group';
 
 import BootstrapProvider from '../../BootstrapProvider';
 
@@ -23,6 +23,7 @@ class Helper extends React.Component {
     showItem: PropTypes.bool,
     children: PropTypes.node,
   }
+
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
@@ -42,7 +43,7 @@ class Helper extends React.Component {
       <div>
         <button onClick={this.toggle}>Toggle</button>
         <TransitionGroup component="div">
-          { this.state.showItem ? this.props.children : null }
+          {this.state.showItem ? this.props.children : null}
         </TransitionGroup>
       </div>
     );
@@ -66,7 +67,7 @@ describe('<Fade />', () => {
     const renderedComponent = mount(
       <Helper showItem={isOpen} >
         <Fade key={Math.random()}>Yo!</Fade>
-        <Fade transitionAppear={false} transitionEnter={false} transitionLeave={false} key={Math.random()}>Yo 2!</Fade>
+        <Fade appear={false} enter={false} exit={false} key={Math.random()}>Yo 2!</Fade>
       </Helper>
     );
     expect(renderedComponent.find('div.fade').length).toBe(2);

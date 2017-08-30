@@ -30,7 +30,7 @@ describe('<FigCaption />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('FigCaption').length).toBe(1);
+    expect(renderedComponent.find('FigCaptionUnstyled').length).toBe(1);
   });
   it('should contain children without a theme', () => {
     const renderedComponent = renderComponent({

@@ -26,7 +26,7 @@ describe('<Progress />', () => {
     const renderedComponent = renderComponent({
       children: <ProgressBar />,
     });
-    expect(renderedComponent.find('Progress').length).toBe(1);
+    expect(renderedComponent.find('ProgressUnstyled').length).toBe(1);
   });
   it('should render a <Progress> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

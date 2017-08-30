@@ -7,7 +7,7 @@ import bsTheme from '../../theme';
 
 const defaultProps = { theme: bsTheme };
 
-class PageWrapper extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class PageWrapperUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -33,8 +33,7 @@ class PageWrapper extends React.Component { // eslint-disable-line react/prefer-
   }
 }
 
-// eslint-disable-next-line no-class-assign
-PageWrapper = styled(PageWrapper)`
+const PageWrapper = styled(PageWrapperUnstyled)`
   ${(props) => `
     height: 100%;
     transition: ${props.theme['$menu-offset-nav-transition']};

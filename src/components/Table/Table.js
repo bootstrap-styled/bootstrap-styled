@@ -20,7 +20,7 @@ const defaultProps = {
   theme: bsTheme,
 };
 
-class Table extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class TableUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -77,8 +77,7 @@ class Table extends React.Component { // eslint-disable-line react/prefer-statel
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Table = styled(Table)`
+const Table = styled(TableUnstyled)`
   ${(props) => `
     /*
      Basic Bootstrap table

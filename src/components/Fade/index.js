@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
-import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+import { CSSTransition } from 'react-transition-group';
 import omit from 'lodash.omit';
 import parseTransition from '../../utils/parseTransition';
 import themeBs from '../../theme';
 
 const defaultProps = {
   isOpen: true,
+  appear: true,
   theme: themeBs,
 };
 
@@ -18,48 +19,49 @@ class Fade extends React.Component { // eslint-disable-line react/prefer-statele
     children: PropTypes.node.isRequired,
     theme: PropTypes.object,
     isOpen: PropTypes.bool,
+    appear: PropTypes.bool,
+    timeout: PropTypes.oneOfType([
+      PropTypes.shape({
+        enter: PropTypes.number,
+        exit: PropTypes.number,
+      }),
+      PropTypes.number,
+    ]),
     /* eslint-enable react/no-unused-prop-types */
   }
 
   state = {
-    transitionEnterTimeout: null,
-    transitionAppearTimeout: null,
-    transitionLeaveTimeout: null,
+    timeout: null,
   }
 
   componentWillMount() {
-    const { theme } = this.props;
-    const userThemeTransitionList = parseTransition(theme['$transition-fade']);
+    const { theme, timeout } = this.props;
     this.setState({
-      transitionEnterTimeout: userThemeTransitionList[0].duration,
-      transitionAppearTimeout: userThemeTransitionList[0].duration,
-      transitionLeaveTimeout: userThemeTransitionList[0].duration,
+      timeout: timeout || parseTransition(theme['$transition-fade'])[0].duration,
     });
   }
 
   render() {
     const {
       children,
+      appear,
       isOpen,
       ...rest
-    } = omit(this.props, ['theme', 'innerRef']);
-
+    } = omit(this.props, ['theme', 'innerRef', 'timeout']);
     return (
-      <ReactCSSTransitionGroup
-        transitionAppearTimeout={this.state.transitionEnterTimeout}
-        transitionEnterTimeout={this.state.transitionAppearTimeout}
-        transitionLeaveTimeout={this.state.transitionLeaveTimeout}
-        transitionName={{
-          appear: 'fade',
-          appearActive: 'show',
+      <CSSTransition
+        in={isOpen}
+        appear={appear}
+        timeout={this.state.timeout}
+        classNames={{
           enter: 'fade',
           enterActive: 'show',
-          leave: 'fade',
+          exit: 'fade',
         }}
         {...rest}
       >
-        {isOpen ? children : null}
-      </ReactCSSTransitionGroup>
+        {children}
+      </CSSTransition>
     );
   }
 }

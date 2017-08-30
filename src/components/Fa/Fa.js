@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
 
-class Fa extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class FaUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     className: PropTypes.string,
     size: PropTypes.string,
@@ -30,8 +30,8 @@ class Fa extends React.Component { // eslint-disable-line react/prefer-stateless
     );
   }
 }
-// eslint-disable-next-line no-class-assign
-Fa = styled(Fa)`
+
+const Fa = styled(FaUnstyled)`
   &.fa-lg {
     vertical-align: -2%;
   }

@@ -6,8 +6,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled, { withTheme } from 'styled-components';
-import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+import { TransitionGroup } from 'react-transition-group';
 import omit from 'lodash.omit';
+import Fade from '../Fade';
 import themeBs from '../../theme';
 import { mapToCssModules } from '../../utils/tools';
 import Close from '../Close';
@@ -18,9 +19,6 @@ const defaultProps = {
   color: 'success',
   isOpen: true,
   tag: 'div',
-  transitionAppearTimeout: 150,
-  transitionEnterTimeout: 150,
-  transitionLeaveTimeout: 150,
   theme: themeBs,
 };
 
@@ -29,7 +27,7 @@ const FirstChild = ({ children }) => (
 );
 
 
-class Alert extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class AlertUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -39,10 +37,17 @@ class Alert extends React.Component { // eslint-disable-line react/prefer-statel
     color: PropTypes.string,
     isOpen: PropTypes.bool,
     toggle: PropTypes.func,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    transitionAppearTimeout: PropTypes.number,
-    transitionEnterTimeout: PropTypes.number,
-    transitionLeaveTimeout: PropTypes.number,
+    tag: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.string,
+    ]),
+    timeout: PropTypes.oneOfType([
+      PropTypes.shape({
+        enter: PropTypes.number,
+        exit: PropTypes.number,
+      }),
+      PropTypes.number,
+    ]),
     theme: PropTypes.object,
     /* eslint-enable react/no-unused-prop-types */
   }
@@ -54,11 +59,9 @@ class Alert extends React.Component { // eslint-disable-line react/prefer-statel
       tag: Tag,
       color,
       isOpen,
+      timeout,
       toggle,
       children,
-      transitionAppearTimeout,
-      transitionEnterTimeout,
-      transitionLeaveTimeout,
       ...attributes
     } = omit(this.props, ['theme']);
 
@@ -70,44 +73,31 @@ class Alert extends React.Component { // eslint-disable-line react/prefer-statel
     ), cssModule);
 
     const alert = (
-      <Tag {...attributes} className={classes} role="alert">
-        {toggle && <Close onDismiss={toggle} />}
-        {children}
-      </Tag>
+      <Fade isOpen={isOpen} timeout={timeout}>
+        <Tag {...attributes} className={classes} role="alert">
+          {toggle && <Close onDismiss={toggle} />}
+          {children}
+        </Tag>
+      </Fade>
     );
 
     return (
-      <ReactCSSTransitionGroup
+      <TransitionGroup
         component={FirstChild}
-        transitionName={{
-          appear: 'fade',
-          appearActive: 'show',
-          enter: 'fade',
-          enterActive: 'show',
-          leave: 'fade',
-          leaveActive: 'out',
-        }}
-        transitionAppear={transitionAppearTimeout > 0}
-        transitionAppearTimeout={transitionAppearTimeout}
-        transitionEnter={transitionEnterTimeout > 0}
-        transitionEnterTimeout={transitionEnterTimeout}
-        transitionLeave={transitionLeaveTimeout > 0}
-        transitionLeaveTimeout={transitionLeaveTimeout}
       >
         {isOpen ? alert : null}
-      </ReactCSSTransitionGroup>
+      </TransitionGroup>
     );
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Alert = styled(Alert)`
+const Alert = styled(AlertUnstyled)`
   ${(props) => `
     /*
     Base styles
     */
     
-    &.alert{
+    &.alert {
       padding: ${props.theme['$alert-padding-y']} ${props.theme['$alert-padding-x']};
       margin-bottom: ${props.theme['$alert-margin-bottom']};
       border: ${props.theme['$alert-border-width']} solid transparent;
@@ -139,28 +129,28 @@ Alert = styled(Alert)`
     }
     /* Alternate styles Generate contextual modifier classes for colorizing the alert. */
 
-    &.alert-success{
+    &.alert-success {
       ${alertVariant(
         props.theme['$alert-success-bg'],
         props.theme['$alert-success-border'],
         props.theme['$alert-success-text'],
       )}    
     }
-    &.alert-info{
+    &.alert-info {
       ${alertVariant(
         props.theme['$alert-info-bg'],
         props.theme['$alert-info-border'],
         props.theme['$alert-info-text'],
       )}
     } 
-    &.alert-warning{
+    &.alert-warning {
       ${alertVariant(
         props.theme['$alert-warning-bg'],
         props.theme['$alert-warning-border'],
         props.theme['$alert-warning-text'],
       )} 
     }
-    &.alert-danger{
+    &.alert-danger {
       ${alertVariant(
         props.theme['$alert-danger-bg'],
         props.theme['$alert-danger-border'],

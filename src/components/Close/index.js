@@ -9,7 +9,7 @@ import { hoverFocus } from '../../styled/mixins/hover';
 
 const defaultProps = { theme: bsTheme };
 
-class Close extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class CloseUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -48,8 +48,7 @@ class Close extends React.Component { // eslint-disable-line react/prefer-statel
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Close = styled(Close)`
+const Close = styled(CloseUnstyled)`
   ${(props) => `
     float: right;
     font-size: ${props.theme['$close-font-size']};

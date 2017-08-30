@@ -18,7 +18,7 @@ const defaultProps = {
   tag: 'div',
 };
 
-class CardColumns extends React.Component {// eslint-disable-line react/prefer-stateless-function
+class CardColumnsUnstyled extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -49,8 +49,7 @@ class CardColumns extends React.Component {// eslint-disable-line react/prefer-s
   }
 }
 
-// eslint-disable-next-line no-class-assign
-CardColumns = styled(CardColumns)`
+const CardColumns = styled(CardColumnsUnstyled)`
   ${(props) => `
     ${card(
       props.theme['$enable-rounded'],

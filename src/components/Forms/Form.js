@@ -25,7 +25,7 @@ const defaultProps = {
 
 const selectBorderWidth = unitUtils.math.multiply(bsTheme['$border-width'], 2);
 
-class Form extends React.Component {// eslint-disable-line react/prefer-stateless-function
+class FormUnstyled extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -60,8 +60,7 @@ class Form extends React.Component {// eslint-disable-line react/prefer-stateles
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Form = styled(Form)` 
+const Form = styled(FormUnstyled)` 
   ${(props) => `
     /*
      Textual form controls

@@ -26,7 +26,7 @@ describe('<CardColumns />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('CardColumns').length).toBe(1);
+    expect(renderedComponent.find('CardColumnsUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

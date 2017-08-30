@@ -16,7 +16,7 @@ const defaultProps = {
   theme: bsTheme,
 };
 
-class A extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class AUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -61,8 +61,7 @@ class A extends React.Component { // eslint-disable-line react/prefer-stateless-
   }
 }
 
-// eslint-disable-next-line no-class-assign
-A = styled(A)`
+const A = styled(AUnstyled)`
   ${(props) => `
     ${a(
       props.theme['$link-color'],

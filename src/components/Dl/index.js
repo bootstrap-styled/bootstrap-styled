@@ -12,7 +12,7 @@ import { makeRow } from '../../styled/mixins/grid';
 
 const defaultProps = { theme: bsTheme };
 
-class Dl extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class DlUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -33,8 +33,7 @@ class Dl extends React.Component { // eslint-disable-line react/prefer-stateless
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Dl = styled(Dl)` 
+const Dl = styled(DlUnstyled)` 
   /* Reboot Scss */
   margin-top: 0;
   margin-bottom: 1rem;

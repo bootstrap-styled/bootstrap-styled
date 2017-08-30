@@ -29,7 +29,7 @@ describe('<Li />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Li').length).toBe(1);
+    expect(renderedComponent.find('LiUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({
