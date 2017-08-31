@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
  - Upgraded `rollup-plugin-commonjs` from `v8.0.2` to `v8.2.0`.
  - Upgraded `rollup-watch` from `v4.0.0` to `v4.3.1`.
  - Added missing `react-transition-group` in `rollup.config.js` externals.
+ 
 ## [1.2.0] - 2017-06-20
 
  - Replaced webpack with rollup module bundler for es module.
