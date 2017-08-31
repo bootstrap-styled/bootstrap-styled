@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.3.0] - 2017-09-TBD
+## [1.2.2] - 2017-09-01
 
  - Added `mapToCssModules` to `HeaderNavBar` and `OffsetNav` components.
  - Added eslint rules `react/no-find-dom-node` since warning appears.
