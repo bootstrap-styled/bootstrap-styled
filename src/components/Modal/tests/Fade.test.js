@@ -4,7 +4,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import PropTypes from 'prop-types';
-import { TransitionGroup } from 'react-transition-group';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
 
 import BootstrapProvider from '../../BootstrapProvider';
 
@@ -67,7 +67,7 @@ describe('<Fade />', () => {
     const renderedComponent = mount(
       <Helper showItem={isOpen} >
         <Fade key={Math.random()}>Yo!</Fade>
-        <Fade appear={false} enter={false} exit={false} key={Math.random()}>Yo 2!</Fade>
+        <Fade transitionAppear={false} transitionEnter={false} transitionLeave={false} key={Math.random()}>Yo 2!</Fade>
       </Helper>
     );
     expect(renderedComponent.find('div.fade').length).toBe(2);

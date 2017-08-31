@@ -16,7 +16,7 @@ const renderComponentUsingTheme = (props = {}) => mount(
 describe('<Modal />', () => {
   it('should render an <Modal> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme();
-    expect(renderedComponent.find('Modal').length).toBe(1);
+    expect(renderedComponent.find('ModalUnstyled').length).toBe(1);
   });
 
   let isOpen;

@@ -10,7 +10,8 @@ All notable changes to this project will be documented in this file.
  - Corrected `gitlab-ci.yml` to push `/lib` and `/div` on `HEAD:dev`.
  - Upgraded `styled-components` from `v2.1.0` to `v2.1.2`.
  - Upgraded `babel-plugin-styled-components` from `v1.1.4` to `v1.2.0`.
- - Upgraded `react-transition-group` from `v1.1.2` to `v2.2.0`.
+ - Upgraded `react-transition-group` from `v1.1.2` to `v1.2.0`.
+ - Fixed `react-transition-group` version.
  - Upgraded `rollup` from `v0.43.0` to `v0.49.2`.
  - Upgraded `rollup-plugin-babel` from `v2.7.1` to `v3.0.2`.
  - Upgraded `rollup-plugin-commonjs` from `v8.0.2` to `v8.2.0`.

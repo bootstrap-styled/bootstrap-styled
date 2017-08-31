@@ -6,9 +6,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled, { withTheme } from 'styled-components';
-import { TransitionGroup } from 'react-transition-group';
+import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import omit from 'lodash.omit';
-import Fade from '../Fade';
 import themeBs from '../../theme';
 import { mapToCssModules } from '../../utils/tools';
 import Close from '../Close';
@@ -19,6 +18,9 @@ const defaultProps = {
   color: 'success',
   isOpen: true,
   tag: 'div',
+  transitionAppearTimeout: 150,
+  transitionEnterTimeout: 150,
+  transitionLeaveTimeout: 150,
   theme: themeBs,
 };
 
@@ -37,17 +39,10 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
     color: PropTypes.string,
     isOpen: PropTypes.bool,
     toggle: PropTypes.func,
-    tag: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.string,
-    ]),
-    timeout: PropTypes.oneOfType([
-      PropTypes.shape({
-        enter: PropTypes.number,
-        exit: PropTypes.number,
-      }),
-      PropTypes.number,
-    ]),
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    transitionAppearTimeout: PropTypes.number,
+    transitionEnterTimeout: PropTypes.number,
+    transitionLeaveTimeout: PropTypes.number,
     theme: PropTypes.object,
     /* eslint-enable react/no-unused-prop-types */
   }
@@ -59,9 +54,11 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
       tag: Tag,
       color,
       isOpen,
-      timeout,
       toggle,
       children,
+      transitionAppearTimeout,
+      transitionEnterTimeout,
+      transitionLeaveTimeout,
       ...attributes
     } = omit(this.props, ['theme']);
 
@@ -73,20 +70,32 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
     ), cssModule);
 
     const alert = (
-      <Fade isOpen={isOpen} timeout={timeout}>
-        <Tag {...attributes} className={classes} role="alert">
-          {toggle && <Close onDismiss={toggle} />}
-          {children}
-        </Tag>
-      </Fade>
+      <Tag {...attributes} className={classes} role="alert">
+        {toggle && <Close onDismiss={toggle} />}
+        {children}
+      </Tag>
     );
 
     return (
-      <TransitionGroup
+      <ReactCSSTransitionGroup
         component={FirstChild}
+        transitionName={{
+          appear: 'fade',
+          appearActive: 'show',
+          enter: 'fade',
+          enterActive: 'show',
+          leave: 'fade',
+          leaveActive: 'out',
+        }}
+        transitionAppear={transitionAppearTimeout > 0}
+        transitionAppearTimeout={transitionAppearTimeout}
+        transitionEnter={transitionEnterTimeout > 0}
+        transitionEnterTimeout={transitionEnterTimeout}
+        transitionLeave={transitionLeaveTimeout > 0}
+        transitionLeaveTimeout={transitionLeaveTimeout}
       >
         {isOpen ? alert : null}
-      </TransitionGroup>
+      </ReactCSSTransitionGroup>
     );
   }
 }

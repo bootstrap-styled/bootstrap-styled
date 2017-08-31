@@ -29,7 +29,6 @@ const defaultProps = {
 
 class ModalUnstyled extends React.Component {
 
-
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
     size: PropTypes.string,
@@ -203,7 +202,6 @@ class ModalUnstyled extends React.Component {
             key="modal-dialog"
             onEnter={this.onEnter}
             onLeave={this.onExit}
-            timeout=""
             transitionAppearTimeout={300}
             transitionEnterTimeout={300}
             transitionLeaveTimeout={300}
@@ -231,7 +229,9 @@ class ModalUnstyled extends React.Component {
         {isOpen && backdrop && (
           <Fade
             key="modal-backdrop"
-            timeout={150}
+            transitionAppearTimeout={150}
+            transitionEnterTimeout={150}
+            transitionLeaveTimeout={150}
             className={mapToCssModules(classNames('modal-backdrop', backdropClassName), cssModule)}
           />
         )}

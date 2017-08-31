@@ -5122,6 +5122,303 @@ var Address = styled.address.withConfig({
   displayName: 'Address'
 })(['margin-bottom:1rem;font-style:normal;line-height:inherit;']);
 
+var chainFunction = function chain(){
+  var len = arguments.length;
+  var args = [];
+  for (var i = 0; i < len; i++)
+    args[i] = arguments[i];
+  args = args.filter(function(fn){ return fn != null });
+  if (args.length === 0) return undefined
+  if (args.length === 1) return args[0]
+  return args.reduce(function(current, next){
+    return function chainedFunction() {
+      current.apply(this, arguments);
+      next.apply(this, arguments);
+    };
+  })
+};
+
+'use strict';
+var __DEV__ = "development" !== 'production';
+var warning = function() {};
+if (__DEV__) {
+  warning = function(condition, format, args) {
+    var len = arguments.length;
+    args = new Array(len > 2 ? len - 2 : 0);
+    for (var key = 2; key < len; key++) {
+      args[key - 2] = arguments[key];
+    }
+    if (format === undefined) {
+      throw new Error(
+        '`warning(condition, format, ...args)` requires a warning ' +
+        'message argument'
+      );
+    }
+    if (format.length < 10 || (/^[s\W]*$/).test(format)) {
+      throw new Error(
+        'The warning format should be able to uniquely identify this ' +
+        'warning. Please, use a more descriptive format than: ' + format
+      );
+    }
+    if (!condition) {
+      var argIndex = 0;
+      var message = 'Warning: ' +
+        format.replace(/%s/g, function() {
+          return args[argIndex++];
+        });
+      if (typeof console !== 'undefined') {
+        console.error(message);
+      }
+      try {
+        throw new Error(message);
+      } catch(x) {}
+    }
+  };
+}
+var warning_1 = warning;
+
+var ChildMapping = createCommonjsModule(function (module, exports) {
+'use strict';
+exports.__esModule = true;
+exports.getChildMapping = getChildMapping;
+exports.mergeChildMappings = mergeChildMappings;
+function getChildMapping(children) {
+  if (!children) {
+    return children;
+  }
+  var result = {};
+  React.Children.map(children, function (child) {
+    return child;
+  }).forEach(function (child) {
+    result[child.key] = child;
+  });
+  return result;
+}
+function mergeChildMappings(prev, next) {
+  prev = prev || {};
+  next = next || {};
+  function getValueForKey(key) {
+    if (next.hasOwnProperty(key)) {
+      return next[key];
+    }
+    return prev[key];
+  }
+  var nextKeysPending = {};
+  var pendingKeys = [];
+  for (var prevKey in prev) {
+    if (next.hasOwnProperty(prevKey)) {
+      if (pendingKeys.length) {
+        nextKeysPending[prevKey] = pendingKeys;
+        pendingKeys = [];
+      }
+    } else {
+      pendingKeys.push(prevKey);
+    }
+  }
+  var i = void 0;
+  var childMapping = {};
+  for (var nextKey in next) {
+    if (nextKeysPending.hasOwnProperty(nextKey)) {
+      for (i = 0; i < nextKeysPending[nextKey].length; i++) {
+        var pendingNextKey = nextKeysPending[nextKey][i];
+        childMapping[nextKeysPending[nextKey][i]] = getValueForKey(pendingNextKey);
+      }
+    }
+    childMapping[nextKey] = getValueForKey(nextKey);
+  }
+  for (i = 0; i < pendingKeys.length; i++) {
+    childMapping[pendingKeys[i]] = getValueForKey(pendingKeys[i]);
+  }
+  return childMapping;
+}
+});
+unwrapExports(ChildMapping);
+
+var TransitionGroup_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+exports.__esModule = true;
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _chainFunction2 = _interopRequireDefault(chainFunction);
+var _react2 = _interopRequireDefault(React);
+var _propTypes2 = _interopRequireDefault(PropTypes);
+var _warning2 = _interopRequireDefault(warning_1);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var propTypes = {
+  component: _propTypes2.default.any,
+  childFactory: _propTypes2.default.func,
+  children: _propTypes2.default.node
+};
+var defaultProps = {
+  component: 'span',
+  childFactory: function childFactory(child) {
+    return child;
+  }
+};
+var TransitionGroup = function (_React$Component) {
+  _inherits(TransitionGroup, _React$Component);
+  function TransitionGroup(props, context) {
+    _classCallCheck(this, TransitionGroup);
+    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props, context));
+    _this.performAppear = function (key, component) {
+      _this.currentlyTransitioningKeys[key] = true;
+      if (component.componentWillAppear) {
+        component.componentWillAppear(_this._handleDoneAppearing.bind(_this, key, component));
+      } else {
+        _this._handleDoneAppearing(key, component);
+      }
+    };
+    _this._handleDoneAppearing = function (key, component) {
+      if (component.componentDidAppear) {
+        component.componentDidAppear();
+      }
+      delete _this.currentlyTransitioningKeys[key];
+      var currentChildMapping = (0, ChildMapping.getChildMapping)(_this.props.children);
+      if (!currentChildMapping || !currentChildMapping.hasOwnProperty(key)) {
+        _this.performLeave(key, component);
+      }
+    };
+    _this.performEnter = function (key, component) {
+      _this.currentlyTransitioningKeys[key] = true;
+      if (component.componentWillEnter) {
+        component.componentWillEnter(_this._handleDoneEntering.bind(_this, key, component));
+      } else {
+        _this._handleDoneEntering(key, component);
+      }
+    };
+    _this._handleDoneEntering = function (key, component) {
+      if (component.componentDidEnter) {
+        component.componentDidEnter();
+      }
+      delete _this.currentlyTransitioningKeys[key];
+      var currentChildMapping = (0, ChildMapping.getChildMapping)(_this.props.children);
+      if (!currentChildMapping || !currentChildMapping.hasOwnProperty(key)) {
+        _this.performLeave(key, component);
+      }
+    };
+    _this.performLeave = function (key, component) {
+      _this.currentlyTransitioningKeys[key] = true;
+      if (component.componentWillLeave) {
+        component.componentWillLeave(_this._handleDoneLeaving.bind(_this, key, component));
+      } else {
+        _this._handleDoneLeaving(key, component);
+      }
+    };
+    _this._handleDoneLeaving = function (key, component) {
+      if (component.componentDidLeave) {
+        component.componentDidLeave();
+      }
+      delete _this.currentlyTransitioningKeys[key];
+      var currentChildMapping = (0, ChildMapping.getChildMapping)(_this.props.children);
+      if (currentChildMapping && currentChildMapping.hasOwnProperty(key)) {
+        _this.keysToEnter.push(key);
+      } else {
+        _this.setState(function (state) {
+          var newChildren = _extends({}, state.children);
+          delete newChildren[key];
+          return { children: newChildren };
+        });
+      }
+    };
+    _this.childRefs = Object.create(null);
+    _this.state = {
+      children: (0, ChildMapping.getChildMapping)(props.children)
+    };
+    return _this;
+  }
+  TransitionGroup.prototype.componentWillMount = function componentWillMount() {
+    this.currentlyTransitioningKeys = {};
+    this.keysToEnter = [];
+    this.keysToLeave = [];
+  };
+  TransitionGroup.prototype.componentDidMount = function componentDidMount() {
+    var initialChildMapping = this.state.children;
+    for (var key in initialChildMapping) {
+      if (initialChildMapping[key]) {
+        this.performAppear(key, this.childRefs[key]);
+      }
+    }
+  };
+  TransitionGroup.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    var nextChildMapping = (0, ChildMapping.getChildMapping)(nextProps.children);
+    var prevChildMapping = this.state.children;
+    this.setState({
+      children: (0, ChildMapping.mergeChildMappings)(prevChildMapping, nextChildMapping)
+    });
+    for (var key in nextChildMapping) {
+      var hasPrev = prevChildMapping && prevChildMapping.hasOwnProperty(key);
+      if (nextChildMapping[key] && !hasPrev && !this.currentlyTransitioningKeys[key]) {
+        this.keysToEnter.push(key);
+      }
+    }
+    for (var _key in prevChildMapping) {
+      var hasNext = nextChildMapping && nextChildMapping.hasOwnProperty(_key);
+      if (prevChildMapping[_key] && !hasNext && !this.currentlyTransitioningKeys[_key]) {
+        this.keysToLeave.push(_key);
+      }
+    }
+  };
+  TransitionGroup.prototype.componentDidUpdate = function componentDidUpdate() {
+    var _this2 = this;
+    var keysToEnter = this.keysToEnter;
+    this.keysToEnter = [];
+    keysToEnter.forEach(function (key) {
+      return _this2.performEnter(key, _this2.childRefs[key]);
+    });
+    var keysToLeave = this.keysToLeave;
+    this.keysToLeave = [];
+    keysToLeave.forEach(function (key) {
+      return _this2.performLeave(key, _this2.childRefs[key]);
+    });
+  };
+  TransitionGroup.prototype.render = function render() {
+    var _this3 = this;
+    var childrenToRender = [];
+    var _loop = function _loop(key) {
+      var child = _this3.state.children[key];
+      if (child) {
+        var isCallbackRef = typeof child.ref !== 'string';
+        var factoryChild = _this3.props.childFactory(child);
+        var ref = function ref(r) {
+          _this3.childRefs[key] = r;
+        };
+        (0, _warning2.default)(isCallbackRef, 'string refs are not supported on children of TransitionGroup and will be ignored. ' + 'Please use a callback ref instead: https://facebook.github.io/react/docs/refs-and-the-dom.html#the-ref-callback-attribute');
+        if (factoryChild === child && isCallbackRef) {
+          ref = (0, _chainFunction2.default)(child.ref, ref);
+        }
+        childrenToRender.push(_react2.default.cloneElement(factoryChild, {
+          key: key,
+          ref: ref
+        }));
+      }
+    };
+    for (var key in this.state.children) {
+      _loop(key);
+    }
+    var props = _extends({}, this.props);
+    delete props.transitionLeave;
+    delete props.transitionName;
+    delete props.transitionAppear;
+    delete props.transitionEnter;
+    delete props.childFactory;
+    delete props.transitionLeaveTimeout;
+    delete props.transitionEnterTimeout;
+    delete props.transitionAppearTimeout;
+    delete props.component;
+    return _react2.default.createElement(this.props.component, props, childrenToRender);
+  };
+  return TransitionGroup;
+}(_react2.default.Component);
+TransitionGroup.displayName = 'TransitionGroup';
+TransitionGroup.propTypes = propTypes;
+TransitionGroup.defaultProps = defaultProps;
+exports.default = TransitionGroup;
+module.exports = exports['default'];
+});
+var TransitionGroup = unwrapExports(TransitionGroup_1);
+
 var hasClass_1 = createCommonjsModule(function (module, exports) {
 "use strict";
 Object.defineProperty(exports, "__esModule", {
@@ -5155,11 +5452,157 @@ var removeClass = function removeClass(element, className) {
   if (element.classList) element.classList.remove(className);else element.className = element.className.replace(new RegExp('(^|\\s)' + className + '(?:\\s|$)', 'g'), '$1').replace(/\s+/g, ' ').replace(/^\s*|\s*$/g, '');
 };
 
+var inDOM = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+module.exports = exports['default'];
+});
+unwrapExports(inDOM);
+
+var requestAnimationFrame = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _inDOM2 = _interopRequireDefault(inDOM);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var vendors = ['', 'webkit', 'moz', 'o', 'ms'];
+var cancel = 'clearTimeout';
+var raf = fallback;
+var compatRaf = void 0;
+var getKey = function getKey(vendor, k) {
+  return vendor + (!vendor ? k : k[0].toUpperCase() + k.substr(1)) + 'AnimationFrame';
+};
+if (_inDOM2.default) {
+  vendors.some(function (vendor) {
+    var rafKey = getKey(vendor, 'request');
+    if (rafKey in window) {
+      cancel = getKey(vendor, 'cancel');
+      return raf = function raf(cb) {
+        return window[rafKey](cb);
+      };
+    }
+  });
+}
+var prev = new Date().getTime();
+function fallback(fn) {
+  var curr = new Date().getTime(),
+      ms = Math.max(0, 16 - (curr - prev)),
+      req = setTimeout(fn, ms);
+  prev = curr;
+  return req;
+}
+compatRaf = function compatRaf(cb) {
+  return raf(cb);
+};
+compatRaf.cancel = function (id) {
+  window[cancel] && typeof window[cancel] === 'function' && window[cancel](id);
+};
+exports.default = compatRaf;
+module.exports = exports['default'];
+});
+unwrapExports(requestAnimationFrame);
+
+var properties = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.animationEnd = exports.animationDelay = exports.animationTiming = exports.animationDuration = exports.animationName = exports.transitionEnd = exports.transitionDuration = exports.transitionDelay = exports.transitionTiming = exports.transitionProperty = exports.transform = undefined;
+var _inDOM2 = _interopRequireDefault(inDOM);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var transform = 'transform';
+var prefix = void 0,
+    transitionEnd = void 0,
+    animationEnd = void 0;
+var transitionProperty = void 0,
+    transitionDuration = void 0,
+    transitionTiming = void 0,
+    transitionDelay = void 0;
+var animationName = void 0,
+    animationDuration = void 0,
+    animationTiming = void 0,
+    animationDelay = void 0;
+if (_inDOM2.default) {
+  var _getTransitionPropert = getTransitionProperties();
+  prefix = _getTransitionPropert.prefix;
+  exports.transitionEnd = transitionEnd = _getTransitionPropert.transitionEnd;
+  exports.animationEnd = animationEnd = _getTransitionPropert.animationEnd;
+  exports.transform = transform = prefix + '-' + transform;
+  exports.transitionProperty = transitionProperty = prefix + '-transition-property';
+  exports.transitionDuration = transitionDuration = prefix + '-transition-duration';
+  exports.transitionDelay = transitionDelay = prefix + '-transition-delay';
+  exports.transitionTiming = transitionTiming = prefix + '-transition-timing-function';
+  exports.animationName = animationName = prefix + '-animation-name';
+  exports.animationDuration = animationDuration = prefix + '-animation-duration';
+  exports.animationTiming = animationTiming = prefix + '-animation-delay';
+  exports.animationDelay = animationDelay = prefix + '-animation-timing-function';
+}
+exports.transform = transform;
+exports.transitionProperty = transitionProperty;
+exports.transitionTiming = transitionTiming;
+exports.transitionDelay = transitionDelay;
+exports.transitionDuration = transitionDuration;
+exports.transitionEnd = transitionEnd;
+exports.animationName = animationName;
+exports.animationDuration = animationDuration;
+exports.animationTiming = animationTiming;
+exports.animationDelay = animationDelay;
+exports.animationEnd = animationEnd;
+exports.default = {
+  transform: transform,
+  end: transitionEnd,
+  property: transitionProperty,
+  timing: transitionTiming,
+  delay: transitionDelay,
+  duration: transitionDuration
+};
+function getTransitionProperties() {
+  var style = document.createElement('div').style;
+  var vendorMap = {
+    O: function O(e) {
+      return 'o' + e.toLowerCase();
+    },
+    Moz: function Moz(e) {
+      return e.toLowerCase();
+    },
+    Webkit: function Webkit(e) {
+      return 'webkit' + e;
+    },
+    ms: function ms(e) {
+      return 'MS' + e;
+    }
+  };
+  var vendors = Object.keys(vendorMap);
+  var transitionEnd = void 0,
+      animationEnd = void 0;
+  var prefix = '';
+  for (var i = 0; i < vendors.length; i++) {
+    var vendor = vendors[i];
+    if (vendor + 'TransitionProperty' in style) {
+      prefix = '-' + vendor.toLowerCase();
+      transitionEnd = vendorMap[vendor]('TransitionEnd');
+      animationEnd = vendorMap[vendor]('AnimationEnd');
+      break;
+    }
+  }
+  if (!transitionEnd && 'transitionProperty' in style) transitionEnd = 'transitionend';
+  if (!animationEnd && 'animationName' in style) animationEnd = 'animationend';
+  style = null;
+  return { animationEnd: animationEnd, transitionEnd: transitionEnd, prefix: prefix };
+}
+});
+unwrapExports(properties);
+
 var PropTypes$1 = createCommonjsModule(function (module, exports) {
 'use strict';
 exports.__esModule = true;
-exports.classNamesShape = exports.timeoutsShape = undefined;
+exports.nameShape = undefined;
 exports.transitionTimeout = transitionTimeout;
+var _react2 = _interopRequireDefault(React);
 var _propTypes2 = _interopRequireDefault(PropTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function transitionTimeout(transitionType) {
@@ -5176,680 +5619,241 @@ function transitionTimeout(transitionType) {
     return null;
   };
 }
-var timeoutsShape = exports.timeoutsShape = _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.shape({
-  enter: _propTypes2.default.number,
-  exit: _propTypes2.default.number
-}).isRequired]);
-var classNamesShape = exports.classNamesShape = _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.shape({
+var nameShape = exports.nameShape = _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.shape({
   enter: _propTypes2.default.string,
-  exit: _propTypes2.default.string,
+  leave: _propTypes2.default.string,
   active: _propTypes2.default.string
 }), _propTypes2.default.shape({
   enter: _propTypes2.default.string,
   enterActive: _propTypes2.default.string,
-  exit: _propTypes2.default.string,
-  exitActive: _propTypes2.default.string
+  leave: _propTypes2.default.string,
+  leaveActive: _propTypes2.default.string,
+  appear: _propTypes2.default.string,
+  appearActive: _propTypes2.default.string
 })]);
 });
 unwrapExports(PropTypes$1);
 
-var Transition_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-exports.__esModule = true;
-exports.EXITING = exports.ENTERED = exports.ENTERING = exports.EXITED = exports.UNMOUNTED = undefined;
-var PropTypes$$1 = _interopRequireWildcard(PropTypes);
-var _react2 = _interopRequireDefault(React);
-var _reactDom2 = _interopRequireDefault(ReactDOM);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-var UNMOUNTED = exports.UNMOUNTED = 'unmounted';
-var EXITED = exports.EXITED = 'exited';
-var ENTERING = exports.ENTERING = 'entering';
-var ENTERED = exports.ENTERED = 'entered';
-var EXITING = exports.EXITING = 'exiting';
-var Transition = function (_React$Component) {
-  _inherits(Transition, _React$Component);
-  function Transition(props, context) {
-    _classCallCheck(this, Transition);
-    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props, context));
-    var parentGroup = context.transitionGroup;
-    var appear = parentGroup && !parentGroup.isMounting ? props.enter : props.appear;
-    var initialStatus = void 0;
-    _this.nextStatus = null;
-    if (props.in) {
-      if (appear) {
-        initialStatus = EXITED;
-        _this.nextStatus = ENTERING;
-      } else {
-        initialStatus = ENTERED;
-      }
-    } else {
-      if (props.unmountOnExit || props.mountOnEnter) {
-        initialStatus = UNMOUNTED;
-      } else {
-        initialStatus = EXITED;
-      }
-    }
-    _this.state = { status: initialStatus };
-    _this.nextCallback = null;
-    return _this;
-  }
-  Transition.prototype.getChildContext = function getChildContext() {
-    return { transitionGroup: null };
-  };
-  Transition.prototype.componentDidMount = function componentDidMount() {
-    this.updateStatus(true);
-  };
-  Transition.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    var status = this.state.status;
-    if (nextProps.in) {
-      if (status === UNMOUNTED) {
-        this.setState({ status: EXITED });
-      }
-      if (status !== ENTERING && status !== ENTERED) {
-        this.nextStatus = ENTERING;
-      }
-    } else {
-      if (status === ENTERING || status === ENTERED) {
-        this.nextStatus = EXITING;
-      }
-    }
-  };
-  Transition.prototype.componentDidUpdate = function componentDidUpdate() {
-    this.updateStatus();
-  };
-  Transition.prototype.componentWillUnmount = function componentWillUnmount() {
-    this.cancelNextCallback();
-  };
-  Transition.prototype.getTimeouts = function getTimeouts() {
-    var timeout = this.props.timeout;
-    var exit = void 0,
-        enter = void 0,
-        appear = void 0;
-    exit = enter = appear = timeout;
-    if (timeout != null && typeof timeout !== 'number') {
-      exit = timeout.exit;
-      enter = timeout.enter;
-      appear = timeout.appear;
-    }
-    return { exit: exit, enter: enter, appear: appear };
-  };
-  Transition.prototype.updateStatus = function updateStatus() {
-    var mounting = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-    if (this.nextStatus !== null) {
-      this.cancelNextCallback();
-      var node = _reactDom2.default.findDOMNode(this);
-      if (this.nextStatus === ENTERING) {
-        this.performEnter(node, mounting);
-      } else {
-        this.performExit(node);
-      }
-      this.nextStatus = null;
-    } else if (this.props.unmountOnExit && this.state.status === EXITED) {
-      this.setState({ status: UNMOUNTED });
-    }
-  };
-  Transition.prototype.performEnter = function performEnter(node, mounting) {
-    var _this2 = this;
-    var enter = this.props.enter;
-    var appearing = this.context.transitionGroup ? this.context.transitionGroup.isMounting : mounting;
-    var timeouts = this.getTimeouts();
-    if (!mounting && !enter) {
-      this.safeSetState({ status: ENTERED }, function () {
-        _this2.props.onEntered(node);
-      });
-      return;
-    }
-    this.props.onEnter(node, appearing);
-    this.safeSetState({ status: ENTERING }, function () {
-      _this2.props.onEntering(node, appearing);
-      _this2.onTransitionEnd(node, timeouts.enter, function () {
-        _this2.safeSetState({ status: ENTERED }, function () {
-          _this2.props.onEntered(node, appearing);
-        });
-      });
-    });
-  };
-  Transition.prototype.performExit = function performExit(node) {
-    var _this3 = this;
-    var exit = this.props.exit;
-    var timeouts = this.getTimeouts();
-    if (!exit) {
-      this.safeSetState({ status: EXITED }, function () {
-        _this3.props.onExited(node);
-      });
-      return;
-    }
-    this.props.onExit(node);
-    this.safeSetState({ status: EXITING }, function () {
-      _this3.props.onExiting(node);
-      _this3.onTransitionEnd(node, timeouts.exit, function () {
-        _this3.safeSetState({ status: EXITED }, function () {
-          _this3.props.onExited(node);
-        });
-      });
-    });
-  };
-  Transition.prototype.cancelNextCallback = function cancelNextCallback() {
-    if (this.nextCallback !== null) {
-      this.nextCallback.cancel();
-      this.nextCallback = null;
-    }
-  };
-  Transition.prototype.safeSetState = function safeSetState(nextState, callback) {
-    this.setState(nextState, this.setNextCallback(callback));
-  };
-  Transition.prototype.setNextCallback = function setNextCallback(callback) {
-    var _this4 = this;
-    var active = true;
-    this.nextCallback = function (event) {
-      if (active) {
-        active = false;
-        _this4.nextCallback = null;
-        callback(event);
-      }
-    };
-    this.nextCallback.cancel = function () {
-      active = false;
-    };
-    return this.nextCallback;
-  };
-  Transition.prototype.onTransitionEnd = function onTransitionEnd(node, timeout, handler) {
-    this.setNextCallback(handler);
-    if (node) {
-      if (this.props.addEndListener) {
-        this.props.addEndListener(node, this.nextCallback);
-      }
-      if (timeout != null) {
-        setTimeout(this.nextCallback, timeout);
-      }
-    } else {
-      setTimeout(this.nextCallback, 0);
-    }
-  };
-  Transition.prototype.render = function render() {
-    var status = this.state.status;
-    if (status === UNMOUNTED) {
-      return null;
-    }
-    var _props = this.props,
-        children = _props.children,
-        childProps = _objectWithoutProperties(_props, ['children']);
-    delete childProps.in;
-    delete childProps.mountOnEnter;
-    delete childProps.unmountOnExit;
-    delete childProps.appear;
-    delete childProps.enter;
-    delete childProps.exit;
-    delete childProps.timeout;
-    delete childProps.addEndListener;
-    delete childProps.onEnter;
-    delete childProps.onEntering;
-    delete childProps.onEntered;
-    delete childProps.onExit;
-    delete childProps.onExiting;
-    delete childProps.onExited;
-    if (typeof children === 'function') {
-      return children(status, childProps);
-    }
-    var child = _react2.default.Children.only(children);
-    return _react2.default.cloneElement(child, childProps);
-  };
-  return Transition;
-}(_react2.default.Component);
-Transition.contextTypes = {
-  transitionGroup: PropTypes$$1.object
-};
-Transition.childContextTypes = {
-  transitionGroup: function transitionGroup() {}
-};
-Transition.propTypes = {
-  children: PropTypes$$1.oneOfType([PropTypes$$1.func.isRequired, PropTypes$$1.element.isRequired]).isRequired,
-  in: PropTypes$$1.bool,
-  mountOnEnter: PropTypes$$1.bool,
-  unmountOnExit: PropTypes$$1.bool,
-  appear: PropTypes$$1.bool,
-  enter: PropTypes$$1.bool,
-  exit: PropTypes$$1.bool,
-  timeout: function timeout(props) {
-    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
-    var pt = PropTypes$1.timeoutsShape;
-    if (!props.addEndListener) pt = pt.isRequired;
-    return pt.apply(undefined, [props].concat(args));
-  },
-  addEndListener: PropTypes$$1.func,
-  onEnter: PropTypes$$1.func,
-  onEntering: PropTypes$$1.func,
-  onEntered: PropTypes$$1.func,
-  onExit: PropTypes$$1.func,
-  onExiting: PropTypes$$1.func,
-  onExited: PropTypes$$1.func
-};
-function noop() {}
-Transition.defaultProps = {
-  in: false,
-  mountOnEnter: false,
-  unmountOnExit: false,
-  appear: false,
-  enter: true,
-  exit: true,
-  onEnter: noop,
-  onEntering: noop,
-  onEntered: noop,
-  onExit: noop,
-  onExiting: noop,
-  onExited: noop
-};
-Transition.UNMOUNTED = 0;
-Transition.EXITED = 1;
-Transition.ENTERING = 2;
-Transition.ENTERED = 3;
-Transition.EXITING = 4;
-exports.default = Transition;
-});
-unwrapExports(Transition_1);
-
-var CSSTransition_1 = createCommonjsModule(function (module, exports) {
+var CSSTransitionGroupChild_1 = createCommonjsModule(function (module, exports) {
 'use strict';
 exports.__esModule = true;
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-var PropTypes$$1 = _interopRequireWildcard(PropTypes);
 var _addClass2 = _interopRequireDefault(addClass_1);
 var _removeClass2 = _interopRequireDefault(removeClass);
+var _requestAnimationFrame2 = _interopRequireDefault(requestAnimationFrame);
 var _react2 = _interopRequireDefault(React);
-var _Transition2 = _interopRequireDefault(Transition_1);
+var _propTypes2 = _interopRequireDefault(PropTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-var addClass = function addClass(node, classes) {
-  return classes && classes.split(' ').forEach(function (c) {
-    return (0, _addClass2.default)(node, c);
-  });
+var events = [];
+if (properties.transitionEnd) events.push(properties.transitionEnd);
+if (properties.animationEnd) events.push(properties.animationEnd);
+function addEndListener(node, listener) {
+  if (events.length) {
+    events.forEach(function (e) {
+      return node.addEventListener(e, listener, false);
+    });
+  } else {
+    setTimeout(listener, 0);
+  }
+  return function () {
+    if (!events.length) return;
+    events.forEach(function (e) {
+      return node.removeEventListener(e, listener, false);
+    });
+  };
+}
+var propTypes = {
+  children: _propTypes2.default.node,
+  name: PropTypes$1.nameShape.isRequired,
+  appear: _propTypes2.default.bool,
+  enter: _propTypes2.default.bool,
+  leave: _propTypes2.default.bool,
+  appearTimeout: _propTypes2.default.number,
+  enterTimeout: _propTypes2.default.number,
+  leaveTimeout: _propTypes2.default.number
 };
-var removeClass$$1 = function removeClass$$1(node, classes) {
-  return classes && classes.split(' ').forEach(function (c) {
-    return (0, _removeClass2.default)(node, c);
-  });
-};
-var propTypes = _extends({}, _Transition2.default.propTypes, {
-  classNames: PropTypes$1.classNamesShape,
-  onEnter: PropTypes$$1.func,
-  onEntering: PropTypes$$1.func,
-  onEntered: PropTypes$$1.func,
-  onExit: PropTypes$$1.func,
-  onExiting: PropTypes$$1.func,
-  onExited: PropTypes$$1.func
-});
-var CSSTransition = function (_React$Component) {
-  _inherits(CSSTransition, _React$Component);
-  function CSSTransition() {
+var CSSTransitionGroupChild = function (_React$Component) {
+  _inherits(CSSTransitionGroupChild, _React$Component);
+  function CSSTransitionGroupChild() {
     var _temp, _this, _ret;
-    _classCallCheck(this, CSSTransition);
+    _classCallCheck(this, CSSTransitionGroupChild);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.onEnter = function (node, appearing) {
-      var _this$getClassNames = _this.getClassNames(appearing ? 'appear' : 'enter'),
-          className = _this$getClassNames.className;
-      _this.removeClasses(node, 'exit');
-      addClass(node, className);
-      if (_this.props.onEnter) {
-        _this.props.onEnter(node);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.componentWillAppear = function (done) {
+      if (_this.props.appear) {
+        _this.transition('appear', done, _this.props.appearTimeout);
+      } else {
+        done();
       }
-    }, _this.onEntering = function (node, appearing) {
-      var _this$getClassNames2 = _this.getClassNames(appearing ? 'appear' : 'enter'),
-          activeClassName = _this$getClassNames2.activeClassName;
-      _this.reflowAndAddClass(node, activeClassName);
-      if (_this.props.onEntering) {
-        _this.props.onEntering(node);
+    }, _this.componentWillEnter = function (done) {
+      if (_this.props.enter) {
+        _this.transition('enter', done, _this.props.enterTimeout);
+      } else {
+        done();
       }
-    }, _this.onEntered = function (node, appearing) {
-      _this.removeClasses(node, appearing ? 'appear' : 'enter');
-      if (_this.props.onEntered) {
-        _this.props.onEntered(node);
+    }, _this.componentWillLeave = function (done) {
+      if (_this.props.leave) {
+        _this.transition('leave', done, _this.props.leaveTimeout);
+      } else {
+        done();
       }
-    }, _this.onExit = function (node) {
-      var _this$getClassNames3 = _this.getClassNames('exit'),
-          className = _this$getClassNames3.className;
-      _this.removeClasses(node, 'appear');
-      _this.removeClasses(node, 'enter');
-      addClass(node, className);
-      if (_this.props.onExit) {
-        _this.props.onExit(node);
-      }
-    }, _this.onExiting = function (node) {
-      var _this$getClassNames4 = _this.getClassNames('exit'),
-          activeClassName = _this$getClassNames4.activeClassName;
-      _this.reflowAndAddClass(node, activeClassName);
-      if (_this.props.onExiting) {
-        _this.props.onExiting(node);
-      }
-    }, _this.onExited = function (node) {
-      _this.removeClasses(node, 'exit');
-      if (_this.props.onExited) {
-        _this.props.onExited(node);
-      }
-    }, _this.getClassNames = function (type) {
-      var classNames = _this.props.classNames;
-      var className = typeof classNames !== 'string' ? classNames[type] : classNames + '-' + type;
-      var activeClassName = typeof classNames !== 'string' ? classNames[type + 'Active'] : className + '-active';
-      return { className: className, activeClassName: activeClassName };
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
-  CSSTransition.prototype.removeClasses = function removeClasses(node, type) {
-    var _getClassNames = this.getClassNames(type),
-        className = _getClassNames.className,
-        activeClassName = _getClassNames.activeClassName;
-    className && removeClass$$1(node, className);
-    activeClassName && removeClass$$1(node, activeClassName);
+  CSSTransitionGroupChild.prototype.componentWillMount = function componentWillMount() {
+    this.classNameAndNodeQueue = [];
+    this.transitionTimeouts = [];
   };
-  CSSTransition.prototype.reflowAndAddClass = function reflowAndAddClass(node, className) {
-    node.scrollTop;
-    addClass(node, className);
+  CSSTransitionGroupChild.prototype.componentWillUnmount = function componentWillUnmount() {
+    this.unmounted = true;
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+    this.transitionTimeouts.forEach(function (timeout) {
+      clearTimeout(timeout);
+    });
+    this.classNameAndNodeQueue.length = 0;
   };
-  CSSTransition.prototype.render = function render() {
+  CSSTransitionGroupChild.prototype.transition = function transition(animationType, finishCallback, timeout) {
+    var node = (0, ReactDOM.findDOMNode)(this);
+    if (!node) {
+      if (finishCallback) {
+        finishCallback();
+      }
+      return;
+    }
+    var className = this.props.name[animationType] || this.props.name + '-' + animationType;
+    var activeClassName = this.props.name[animationType + 'Active'] || className + '-active';
+    var timer = null;
+    var removeListeners = void 0;
+    (0, _addClass2.default)(node, className);
+    this.queueClassAndNode(activeClassName, node);
+    var finish = function finish(e) {
+      if (e && e.target !== node) {
+        return;
+      }
+      clearTimeout(timer);
+      if (removeListeners) removeListeners();
+      (0, _removeClass2.default)(node, className);
+      (0, _removeClass2.default)(node, activeClassName);
+      if (removeListeners) removeListeners();
+      if (finishCallback) {
+        finishCallback();
+      }
+    };
+    if (timeout) {
+      timer = setTimeout(finish, timeout);
+      this.transitionTimeouts.push(timer);
+    } else if (properties.transitionEnd) {
+      removeListeners = addEndListener(node, finish);
+    }
+  };
+  CSSTransitionGroupChild.prototype.queueClassAndNode = function queueClassAndNode(className, node) {
+    var _this2 = this;
+    this.classNameAndNodeQueue.push({
+      className: className,
+      node: node
+    });
+    if (!this.rafHandle) {
+      this.rafHandle = (0, _requestAnimationFrame2.default)(function () {
+        return _this2.flushClassNameAndNodeQueue();
+      });
+    }
+  };
+  CSSTransitionGroupChild.prototype.flushClassNameAndNodeQueue = function flushClassNameAndNodeQueue() {
+    if (!this.unmounted) {
+      this.classNameAndNodeQueue.forEach(function (obj) {
+        obj.node.scrollTop;
+        (0, _addClass2.default)(obj.node, obj.className);
+      });
+    }
+    this.classNameAndNodeQueue.length = 0;
+    this.rafHandle = null;
+  };
+  CSSTransitionGroupChild.prototype.render = function render() {
     var props = _extends({}, this.props);
-    delete props.classNames;
-    return _react2.default.createElement(_Transition2.default, _extends({}, props, {
-      onEnter: this.onEnter,
-      onEntered: this.onEntered,
-      onEntering: this.onEntering,
-      onExit: this.onExit,
-      onExiting: this.onExiting,
-      onExited: this.onExited
-    }));
+    delete props.name;
+    delete props.appear;
+    delete props.enter;
+    delete props.leave;
+    delete props.appearTimeout;
+    delete props.enterTimeout;
+    delete props.leaveTimeout;
+    delete props.children;
+    return _react2.default.cloneElement(_react2.default.Children.only(this.props.children), props);
   };
-  return CSSTransition;
+  return CSSTransitionGroupChild;
 }(_react2.default.Component);
-CSSTransition.propTypes = propTypes;
-exports.default = CSSTransition;
+CSSTransitionGroupChild.displayName = 'CSSTransitionGroupChild';
+CSSTransitionGroupChild.propTypes = propTypes;
+exports.default = CSSTransitionGroupChild;
 module.exports = exports['default'];
 });
-unwrapExports(CSSTransition_1);
+unwrapExports(CSSTransitionGroupChild_1);
 
-var ChildMapping = createCommonjsModule(function (module, exports) {
-'use strict';
-exports.__esModule = true;
-exports.getChildMapping = getChildMapping;
-exports.mergeChildMappings = mergeChildMappings;
-function getChildMapping(children, mapFn) {
-  var mapper = function mapper(child) {
-    return mapFn && (0, React.isValidElement)(child) ? mapFn(child) : child;
-  };
-  var result = Object.create(null);
-  if (children) React.Children.map(children, function (c) {
-    return c;
-  }).forEach(function (child) {
-    result[child.key] = mapper(child);
-  });
-  return result;
-}
-function mergeChildMappings(prev, next) {
-  prev = prev || {};
-  next = next || {};
-  function getValueForKey(key) {
-    return key in next ? next[key] : prev[key];
-  }
-  var nextKeysPending = Object.create(null);
-  var pendingKeys = [];
-  for (var prevKey in prev) {
-    if (prevKey in next) {
-      if (pendingKeys.length) {
-        nextKeysPending[prevKey] = pendingKeys;
-        pendingKeys = [];
-      }
-    } else {
-      pendingKeys.push(prevKey);
-    }
-  }
-  var i = void 0;
-  var childMapping = {};
-  for (var nextKey in next) {
-    if (nextKeysPending[nextKey]) {
-      for (i = 0; i < nextKeysPending[nextKey].length; i++) {
-        var pendingNextKey = nextKeysPending[nextKey][i];
-        childMapping[nextKeysPending[nextKey][i]] = getValueForKey(pendingNextKey);
-      }
-    }
-    childMapping[nextKey] = getValueForKey(nextKey);
-  }
-  for (i = 0; i < pendingKeys.length; i++) {
-    childMapping[pendingKeys[i]] = getValueForKey(pendingKeys[i]);
-  }
-  return childMapping;
-}
-});
-unwrapExports(ChildMapping);
-
-var TransitionGroup_1 = createCommonjsModule(function (module, exports) {
+var CSSTransitionGroup_1 = createCommonjsModule(function (module, exports) {
 'use strict';
 exports.__esModule = true;
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-var _propTypes2 = _interopRequireDefault(PropTypes);
 var _react2 = _interopRequireDefault(React);
+var _propTypes2 = _interopRequireDefault(PropTypes);
+var _TransitionGroup2 = _interopRequireDefault(TransitionGroup_1);
+var _CSSTransitionGroupChild2 = _interopRequireDefault(CSSTransitionGroupChild_1);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-var values = Object.values || function (obj) {
-  return Object.keys(obj).map(function (k) {
-    return obj[k];
-  });
-};
 var propTypes = {
-  component: _propTypes2.default.any,
-  children: _propTypes2.default.node,
-  appear: _propTypes2.default.bool,
-  enter: _propTypes2.default.bool,
-  exit: _propTypes2.default.bool,
-  childFactory: _propTypes2.default.func
+  transitionName: PropTypes$1.nameShape.isRequired,
+  transitionAppear: _propTypes2.default.bool,
+  transitionEnter: _propTypes2.default.bool,
+  transitionLeave: _propTypes2.default.bool,
+  transitionAppearTimeout: (0, PropTypes$1.transitionTimeout)('Appear'),
+  transitionEnterTimeout: (0, PropTypes$1.transitionTimeout)('Enter'),
+  transitionLeaveTimeout: (0, PropTypes$1.transitionTimeout)('Leave')
 };
 var defaultProps = {
-  component: 'div',
-  childFactory: function childFactory(child) {
-    return child;
-  }
+  transitionAppear: false,
+  transitionEnter: true,
+  transitionLeave: true
 };
-var TransitionGroup = function (_React$Component) {
-  _inherits(TransitionGroup, _React$Component);
-  function TransitionGroup(props, context) {
-    _classCallCheck(this, TransitionGroup);
-    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props, context));
-    _this.handleExited = function (key, node, originalHandler) {
-      var currentChildMapping = (0, ChildMapping.getChildMapping)(_this.props.children);
-      if (key in currentChildMapping) return;
-      if (originalHandler) originalHandler(node);
-      _this.setState(function (state) {
-        var children = _extends({}, state.children);
-        delete children[key];
-        return { children: children };
-      });
-    };
-    _this.state = {
-      children: (0, ChildMapping.getChildMapping)(props.children, function (child) {
-        var onExited = function onExited(node) {
-          _this.handleExited(child.key, node, child.props.onExited);
-        };
-        return (0, React.cloneElement)(child, {
-          onExited: onExited,
-          in: true,
-          appear: _this.getProp(child, 'appear'),
-          enter: _this.getProp(child, 'enter'),
-          exit: _this.getProp(child, 'exit')
-        });
-      })
-    };
-    return _this;
-  }
-  TransitionGroup.prototype.getChildContext = function getChildContext() {
-    return {
-      transitionGroup: { isMounting: !this.appeared }
-    };
-  };
-  TransitionGroup.prototype.getProp = function getProp(child, prop) {
-    var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.props;
-    return props[prop] != null ? props[prop] : child.props[prop];
-  };
-  TransitionGroup.prototype.componentDidMount = function componentDidMount() {
-    this.appeared = true;
-  };
-  TransitionGroup.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    var _this2 = this;
-    var prevChildMapping = this.state.children;
-    var nextChildMapping = (0, ChildMapping.getChildMapping)(nextProps.children);
-    var children = (0, ChildMapping.mergeChildMappings)(prevChildMapping, nextChildMapping);
-    Object.keys(children).forEach(function (key) {
-      var child = children[key];
-      if (!(0, React.isValidElement)(child)) return;
-      var onExited = function onExited(node) {
-        _this2.handleExited(child.key, node, child.props.onExited);
-      };
-      var hasPrev = key in prevChildMapping;
-      var hasNext = key in nextChildMapping;
-      var prevChild = prevChildMapping[key];
-      var isLeaving = (0, React.isValidElement)(prevChild) && !prevChild.props.in;
-      if (hasNext && (!hasPrev || isLeaving)) {
-        children[key] = (0, React.cloneElement)(child, {
-          onExited: onExited,
-          in: true,
-          exit: _this2.getProp(child, 'exit', nextProps),
-          enter: _this2.getProp(child, 'enter', nextProps)
-        });
-      }
-      else if (!hasNext && hasPrev && !isLeaving) {
-          children[key] = (0, React.cloneElement)(child, { in: false });
-        }
-        else if (hasNext && hasPrev && (0, React.isValidElement)(prevChild)) {
-            children[key] = (0, React.cloneElement)(child, {
-              onExited: onExited,
-              in: prevChild.props.in,
-              exit: _this2.getProp(child, 'exit', nextProps),
-              enter: _this2.getProp(child, 'enter', nextProps)
-            });
-          }
-    });
-    this.setState({ children: children });
-  };
-  TransitionGroup.prototype.render = function render() {
-    var _props = this.props,
-        Component$$1 = _props.component,
-        childFactory = _props.childFactory,
-        props = _objectWithoutProperties(_props, ['component', 'childFactory']);
-    var children = this.state.children;
-    delete props.appear;
-    delete props.enter;
-    delete props.exit;
-    return _react2.default.createElement(
-      Component$$1,
-      props,
-      values(children).map(childFactory)
-    );
-  };
-  return TransitionGroup;
-}(_react2.default.Component);
-TransitionGroup.childContextTypes = {
-  transitionGroup: _propTypes2.default.object.isRequired
-};
-TransitionGroup.propTypes = propTypes;
-TransitionGroup.defaultProps = defaultProps;
-exports.default = TransitionGroup;
-module.exports = exports['default'];
-});
-var TransitionGroup = unwrapExports(TransitionGroup_1);
-
-var reactTransitionGroup = createCommonjsModule(function (module) {
-'use strict';
-var _CSSTransition2 = _interopRequireDefault(CSSTransition_1);
-var _TransitionGroup2 = _interopRequireDefault(TransitionGroup_1);
-var _Transition2 = _interopRequireDefault(Transition_1);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-module.exports = {
-  Transition: _Transition2.default,
-  TransitionGroup: _TransitionGroup2.default,
-  CSSTransition: _CSSTransition2.default
-};
-});
-unwrapExports(reactTransitionGroup);
-var reactTransitionGroup_2 = reactTransitionGroup.TransitionGroup;
-var reactTransitionGroup_3 = reactTransitionGroup.CSSTransition;
-
-var defaultProps$40 = {
-  isOpen: true,
-  appear: true,
-  theme: bsTheme
-};
-var Fade = function (_React$Component) {
-  inherits(Fade, _React$Component);
-  function Fade() {
-    var _ref;
+var CSSTransitionGroup = function (_React$Component) {
+  _inherits(CSSTransitionGroup, _React$Component);
+  function CSSTransitionGroup() {
     var _temp, _this, _ret;
-    classCallCheck$1(this, Fade);
+    _classCallCheck(this, CSSTransitionGroup);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = Fade.__proto__ || Object.getPrototypeOf(Fade)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      timeout: null
-    }, _temp), possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this._wrapChild = function (child) {
+      return _react2.default.createElement(_CSSTransitionGroupChild2.default, {
+        name: _this.props.transitionName,
+        appear: _this.props.transitionAppear,
+        enter: _this.props.transitionEnter,
+        leave: _this.props.transitionLeave,
+        appearTimeout: _this.props.transitionAppearTimeout,
+        enterTimeout: _this.props.transitionEnterTimeout,
+        leaveTimeout: _this.props.transitionLeaveTimeout
+      }, child);
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(Fade, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      var _props = this.props,
-          theme = _props.theme,
-          timeout = _props.timeout;
-      this.setState({
-        timeout: timeout || parseTransition(theme['$transition-fade'])[0].duration
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme', 'innerRef', 'timeout']),
-          children = _omit.children,
-          appear = _omit.appear,
-          isOpen = _omit.isOpen,
-          rest = objectWithoutProperties(_omit, ['children', 'appear', 'isOpen']);
-      return React.createElement(
-        reactTransitionGroup_3,
-        _extends({
-          'in': isOpen,
-          appear: appear,
-          timeout: this.state.timeout,
-          classNames: {
-            enter: 'fade',
-            enterActive: 'show',
-            exit: 'fade'
-          }
-        }, rest),
-        children
-      );
-    }
-  }]);
-  return Fade;
-}(React.Component);
-Fade.propTypes = {
-  children: PropTypes.node.isRequired,
-  theme: PropTypes.object,
-  isOpen: PropTypes.bool,
-  appear: PropTypes.bool,
-  timeout: PropTypes.oneOfType([PropTypes.shape({
-    enter: PropTypes.number,
-    exit: PropTypes.number
-  }), PropTypes.number])
-};
-Fade.defaultProps = defaultProps$40;
-var Fade$1 = withTheme(Fade);
+  CSSTransitionGroup.prototype.render = function render() {
+    return _react2.default.createElement(_TransitionGroup2.default, _extends({}, this.props, { childFactory: this._wrapChild }));
+  };
+  return CSSTransitionGroup;
+}(_react2.default.Component);
+CSSTransitionGroup.displayName = 'CSSTransitionGroup';
+CSSTransitionGroup.propTypes = propTypes;
+CSSTransitionGroup.defaultProps = defaultProps;
+exports.default = CSSTransitionGroup;
+module.exports = exports['default'];
+});
+var ReactCSSTransitionGroup = unwrapExports(CSSTransitionGroup_1);
 
-var defaultProps$41 = { theme: bsTheme };
+var defaultProps$40 = { theme: bsTheme };
 var CloseUnstyled = function (_React$Component) {
   inherits(CloseUnstyled, _React$Component);
   function CloseUnstyled() {
@@ -5899,12 +5903,15 @@ var Close = styled(CloseUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    float: right;\n    font-size: ' + props.theme['$close-font-size'] + ';\n    font-weight: ' + props.theme['$close-font-weight'] + ';\n    line-height: 1;\n    color: ' + props.theme['$close-color'] + ';\n    text-shadow: ' + props.theme['$close-text-shadow'] + ';\n    opacity: .2;\n    \n    &:focus {outline:0;}\n    \n    ' + hoverFocus(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$close-color'] + ';\n        text-decoration: none;\n        cursor: pointer;\n        opacity: .5;\n      ') + '\n    \n    /* Additional properties for button version\n     iOS requires the button element instead of an anchor tag.\n     If you want the anchor version, it requires \'href="#"\'.\n     See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile\n     */\n    \n    /* scss-lint:disable QualifyingElement */\n    &button.close {\n      padding: 0;\n      cursor: pointer;\n      background: transparent;\n      border: 0;\n      -webkit-appearance: none;\n    }\n    /* scss-lint:enable QualifyingElement */\n  ';
 });
-Close.defaultProps = defaultProps$41;
+Close.defaultProps = defaultProps$40;
 
 var defaultProps$39 = {
   color: 'success',
   isOpen: true,
   tag: 'div',
+  transitionAppearTimeout: 150,
+  transitionEnterTimeout: 150,
+  transitionLeaveTimeout: 150,
   theme: bsTheme
 };
 var FirstChild = function FirstChild(_ref) {
@@ -5926,25 +5933,37 @@ var AlertUnstyled = function (_React$Component) {
           Tag = _omit.tag,
           color = _omit.color,
           isOpen = _omit.isOpen,
-          timeout = _omit.timeout,
           toggle = _omit.toggle,
           children = _omit.children,
-          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'color', 'isOpen', 'timeout', 'toggle', 'children']);
+          transitionAppearTimeout = _omit.transitionAppearTimeout,
+          transitionEnterTimeout = _omit.transitionEnterTimeout,
+          transitionLeaveTimeout = _omit.transitionLeaveTimeout,
+          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'color', 'isOpen', 'toggle', 'children', 'transitionAppearTimeout', 'transitionEnterTimeout', 'transitionLeaveTimeout']);
       var classes = mapToCssModules(classnames$1(className, 'alert', 'alert-' + color, { 'alert-dismissible': toggle }), cssModule);
       var alert$$1 = React.createElement(
-        Fade$1,
-        { isOpen: isOpen, timeout: timeout },
-        React.createElement(
-          Tag,
-          _extends({}, attributes, { className: classes, role: 'alert' }),
-          toggle && React.createElement(Close, { onDismiss: toggle }),
-          children
-        )
+        Tag,
+        _extends({}, attributes, { className: classes, role: 'alert' }),
+        toggle && React.createElement(Close, { onDismiss: toggle }),
+        children
       );
       return React.createElement(
-        reactTransitionGroup_2,
+        ReactCSSTransitionGroup,
         {
-          component: FirstChild
+          component: FirstChild,
+          transitionName: {
+            appear: 'fade',
+            appearActive: 'show',
+            enter: 'fade',
+            enterActive: 'show',
+            leave: 'fade',
+            leaveActive: 'out'
+          },
+          transitionAppear: transitionAppearTimeout > 0,
+          transitionAppearTimeout: transitionAppearTimeout,
+          transitionEnter: transitionEnterTimeout > 0,
+          transitionEnterTimeout: transitionEnterTimeout,
+          transitionLeave: transitionLeaveTimeout > 0,
+          transitionLeaveTimeout: transitionLeaveTimeout
         },
         isOpen ? alert$$1 : null
       );
@@ -5960,10 +5979,9 @@ AlertUnstyled.propTypes = {
   isOpen: PropTypes.bool,
   toggle: PropTypes.func,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  timeout: PropTypes.oneOfType([PropTypes.shape({
-    enter: PropTypes.number,
-    exit: PropTypes.number
-  }), PropTypes.number]),
+  transitionAppearTimeout: PropTypes.number,
+  transitionEnterTimeout: PropTypes.number,
+  transitionLeaveTimeout: PropTypes.number,
   theme: PropTypes.object
 };
 var Alert = styled(AlertUnstyled).withConfig({
@@ -5982,7 +6000,7 @@ var Article = styled.article.withConfig({
   displayName: 'Article'
 })(['']);
 
-var defaultProps$42 = {
+var defaultProps$41 = {
   tag: 'blockquote',
   theme: bsTheme
 };
@@ -6020,9 +6038,9 @@ var Blockquote = styled(BlockquoteUnstyled).withConfig({
 })(['  ', ' '], function (props) {
   return '\n    &.blockquote {\n      padding: ' + props.theme['$spacer-halved'] + ' ' + props.theme['$spacer'] + ';\n      margin-bottom: ' + props.theme['$spacer'] + ';\n      font-size: ' + props.theme['$blockquote-font-size'] + ';\n      border-left: ' + props.theme['$blockquote-border-width'] + ' solid ' + props.theme['$blockquote-border-color'] + ';\n      \n      .blockquote-footer {\n        display: block;\n        font-size: 80%; \n        color: ' + props.theme['$blockquote-small-color'] + ';\n        &::before {\n          content: \'\\2014 \\00A0\';\n        }\n      }\n    }\n\n    &.blockquote-reverse {\n      padding-right: ' + props.theme['$spacer'] + ';\n      padding-left: 0;\n      text-align: right;\n      border-right: ' + props.theme['$blockquote-border-width'] + ' solid ' + props.theme['$blockquote-border-color'] + ';\n      border-left: 0;\n      \n      .blockquote-footer {\n        display: block;\n        font-size: 80%; \n        color: ' + props.theme['$blockquote-small-color'] + ';\n        &::before {\n          content: "";\n        }\n        &::after {\n          content: \'\\00A0 \\2014\';\n        }\n      }\n    }\n    \n    /* Reboot from bootstrap v4 */\n    margin: 0 0 1rem;\n ';
 });
-Blockquote.defaultProps = defaultProps$42;
+Blockquote.defaultProps = defaultProps$41;
 
-var defaultProps$43 = {
+var defaultProps$42 = {
   theme: bsTheme,
   utils: {
     align: true,
@@ -6049,7 +6067,7 @@ var UtilityProvider = styled.div.withConfig({
   )) + '\n    ' + ifThen(props.utils.text, textUtils.getTextUtilities(props.theme['$enable-hover-media-query'], props.theme['$grid-breakpoints'], props.theme['$font-weight-normal'], props.theme['$font-weight-bold'], props.theme['$text-muted'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$gray-dark'])) + '\n    ' + ifThen(props.utils.transition, transitionUtils.getTransitionUtilities(props.theme['$enable-transitions'], props.theme['$transition-fade'], props.theme['$transition-collapse'])) + '\n    ' + ifThen(props.utils.visibility, visibilityUtils.getVisibilityUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + ifThen(props.utils.position, positionUtils.getPositionUtilities(props.theme['$zindex-fixed'], props.theme['$zindex-sticky'])) + '\n    ' + ifThen(props.utils.sizing, sizingUtils.getSizingUtilities(props.theme['$sizes']
   )) + '\n  ';
 });
-UtilityProvider.defaultProps = defaultProps$43;
+UtilityProvider.defaultProps = defaultProps$42;
 
 var BootstrapProvider = function (_React$Component) {
   inherits(BootstrapProvider, _React$Component);
@@ -6126,7 +6144,7 @@ BootstrapProvider.propTypes = {
   })
 };
 
-var defaultProps$44 = {
+var defaultProps$43 = {
   theme: bsTheme,
   tag: 'ol'
 };
@@ -6162,9 +6180,9 @@ var Breadcrumb = styled(BreadcrumbUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    &.breadcrumb {\n      padding: ' + props.theme['$breadcrumb-padding-y'] + ' ' + props.theme['$breadcrumb-padding-x'] + ';\n      margin-bottom: ' + props.theme['$spacer-y'] + ';\n      list-style: none;\n      background-color: ' + props.theme['$breadcrumb-bg'] + ';\n \n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n            \n      ' + clearfix() + '\n    }\n\n    & .breadcrumb-item {\n      float: left;\n    \n      /* The separator between breadcrumbs (by default, a forward-slash: "/") */\n      + .breadcrumb-item::before {\n        display: inline-block; /* Suppress underlining of the separator in modern browsers */\n        padding-right: ' + props.theme['$breadcrumb-item-padding'] + ';\n        padding-left: ' + props.theme['$breadcrumb-item-padding'] + ';\n        color: ' + props.theme['$breadcrumb-divider-color'] + ';\n        content: ' + props.theme['$breadcrumb-divider'] + ';\n      }\n  \n      /* IE9-11 hack to properly handle hyperlink underlines for breadcrumbs built\n       without \'ul\'s. The \'::before\' pseudo-element generates an element\n       *within* the .breadcrumb-item and thereby inherits the \'text-decoration\'.\n      \n       To trick IE into suppressing the underline, we give the pseudo-element an\n       underline and then immediately remove it.\n      */\n      \n      + .breadcrumb-item:hover::before {\n        text-decoration: underline;\n      }\n      + .breadcrumb-item:hover::before {\n        text-decoration: none;\n      }\n    \n      &.active {\n        color: ' + props.theme['$breadcrumb-active-color'] + ';\n      }\n    }\n  ';
 });
-Breadcrumb.defaultProps = defaultProps$44;
+Breadcrumb.defaultProps = defaultProps$43;
 
-var defaultProps$45 = {
+var defaultProps$44 = {
   tag: 'li'
 };
 var BreadcrumbItem = function (_React$Component) {
@@ -6197,9 +6215,9 @@ BreadcrumbItem.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-BreadcrumbItem.defaultProps = defaultProps$45;
+BreadcrumbItem.defaultProps = defaultProps$44;
 
-var defaultProps$46 = {
+var defaultProps$45 = {
   theme: bsTheme,
   tag: 'button',
   color: 'secondary'
@@ -6279,7 +6297,7 @@ var Button = styled(ButtonUnstyled).withConfig({
 })(['', ' '], function (props) {
   return '\n    ' + button(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
-Button.defaultProps = defaultProps$46;
+Button.defaultProps = defaultProps$45;
 
 var propTypes$1 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -6288,7 +6306,7 @@ var propTypes$1 = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-var defaultProps$48 = {
+var defaultProps$47 = {
   tag: 'div'
 };
 var contextTypes = {
@@ -6304,7 +6322,7 @@ var DropdownMenu = function DropdownMenu(props, context) {
   return React.createElement(Tag, _extends({}, attributes, { tabIndex: '-1', 'aria-hidden': !context.isOpen, role: 'menu', className: classes }));
 };
 DropdownMenu.propTypes = propTypes$1;
-DropdownMenu.defaultProps = defaultProps$48;
+DropdownMenu.defaultProps = defaultProps$47;
 DropdownMenu.contextTypes = contextTypes;
 
 var tether$1 = createCommonjsModule(function (module, exports) {
@@ -7674,7 +7692,7 @@ return Tether;
 }));
 });
 
-var defaultProps$49 = {
+var defaultProps$48 = {
   isOpen: false,
   tetherRef: function tetherRef() {}
 };
@@ -7773,9 +7791,9 @@ TetherContent.propTypes = {
   tetherRef: PropTypes.func,
   style: PropTypes.node
 };
-TetherContent.defaultProps = defaultProps$49;
+TetherContent.defaultProps = defaultProps$48;
 
-var defaultProps$47 = {
+var defaultProps$46 = {
   isOpen: false,
   tag: 'div',
   theme: bsTheme
@@ -7946,9 +7964,9 @@ var Dropdown = styled(DropdownUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    &.dropup,\n    &.dropdown {\n      position: relative;\n    }\n\n    & .dropdown-hide {\n      display: none;\n    }\n    \n    & .dropdown-toggle {\n      /* Generate the caret automatically */\n      &::after {\n        display: inline-block;\n        width: 0;\n        height: 0;\n        margin-left: ' + props.theme['$caret-width'] + ';\n        vertical-align: middle;\n        content: \'\';\n        border-top: ' + props.theme['$caret-width'] + ' solid;\n        border-right: ' + props.theme['$caret-width'] + ' solid transparent;\n        border-left: ' + props.theme['$caret-width'] + ' solid transparent;\n      }\n\n      /* Prevent the focus on the dropdown toggle when closing dropdowns */\n      &:focus {\n        outline: 0;\n      }\n    }\n\n    &.dropup {\n      .dropdown-toggle {\n        &::after {\n          border-top: 0;\n          border-bottom: ' + props.theme['$caret-width'] + ' solid;\n        }\n      }\n    }\n\n    & .dropdown-menu {\n      clear: left;\n      position: absolute;\n      top: 100%;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown'] + ';\n      display: none; // none by default, but block on "open" of the menu\n      float: left;\n      min-width: ' + props.theme['$dropdown-min-width'] + ';\n      padding: ' + props.theme['$dropdown-padding-y'] + ' 0;\n      margin: ' + props.theme['$dropdown-margin-top'] + ' 0; /* override default ul */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      color: ' + props.theme['$body-color'] + ';\n      text-align: left; /* Ensures proper alignment if parent has it changed (e.g., modal footer) */\n      list-style: none;\n      background-color: ' + props.theme['$dropdown-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$dropdown-border-width'] + ' solid ' + props.theme['$dropdown-border-color'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n      ' + boxShadow(props.theme['$enable-shadows'], props.theme['$dropdown-box-shadow']) + '\n    }\n\n    /* mixin from bootstrap 4, see : scss/mixins/_nav-divider.css */\n    & .dropdown-divider {\n      ' + navDivider(props.theme['$spacer-y'], props.theme['$dropdown-divider-bg']) + '\n    }\n\n    & .dropdown-item {\n      display: block;\n      width: 100%; /* For <button>s */\n      padding: 3px ' + props.theme['$dropdown-item-padding-x'] + ';\n      clear: both;\n      font-weight: ' + props.theme['$font-weight-normal'] + ';\n      color: ' + props.theme['$dropdown-link-color'] + ';\n      text-align: inherit; /* For <button>s */\n      white-space: nowrap; /* prevent links from randomly breaking onto new lines */\n      background: none; /* For <button>s */\n      border: 0; /* For <button>s */\n\n      ' + hoverFocus(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$dropdown-link-hover-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-hover-bg'] + '\n      ') + '\n\n      &.active,\n      &:active {\n        color: ' + props.theme['$dropdown-link-active-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-active-bg'] + '\n      }\n\n      &.disabled,\n      &:disabled{\n        color: ' + props.theme['$dropdown-link-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: transparent;\n        ' + ifThen(props.theme['$enabled-gradients'], 'background-image: none; /* Remove CSS gradient */') + '\n      }\n    }\n\n    &.show {\n      /* show the menu */\n      &>.dropdown-menu {\n        display: block;\n      }\n\n      & > a {\n        outline: 0;\n      }\n    }\n\n\n    /* Menu positioning */\n\n    /* Add extra class to .dropdown-menu to flip the alignment of the dropdown*\n    /* menu with the parent. */\n    & .dropdown-menu-right {\n      right: 0;\n      left: auto; /* Reset the default from .dropdown-menu */\n    }\n\n    & .dropdown-menu-left {\n      right: auto;\n      left: 0;\n    }\n\n    /* Dropdown section headers */\n    & .dropdown-header {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    /* Dropdown section footers */\n    & .dropdown-footer {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    \n\n    /* Backdrop to catch body clicks on mobile, etc. */\n    & .dropdown-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown-backdrop'] + ';\n    }\n\n    /* Allow for dropdowns to go bottom up (aka, dropup-menu) */\n\n    /* Just add .dropup after the standard .dropdown class and you\'re set. */\n    /* TODO: abstract this so that the navbar fixed styles are not placed here? */\n\n    &.dropup {\n      .dropdown-menu {\n        top: auto;\n        bottom: 100%;\n        margin-bottom: ' + props.theme['$dropdown-margin-top'] + ';\n      }\n    }\n        \n    /* Added Mixin boutonGroup to enable dropdown to beneficiate from buttonGroup classes */\n    ' + buttonGroup(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-toolbar-margin'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
-Dropdown.defaultProps = defaultProps$47;
+Dropdown.defaultProps = defaultProps$46;
 
-var defaultProps$51 = { theme: bsTheme };
+var defaultProps$50 = { theme: bsTheme };
 var H6Unstyled = function (_React$Component) {
   inherits(H6Unstyled, _React$Component);
   function H6Unstyled() {
@@ -7988,9 +8006,9 @@ var H6 = styled(H6Unstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h6'] + ';\n    ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    \n    &.lead {\n     font-size: ' + props.theme['$lead-font-size'] + ';\n     font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-H6.defaultProps = defaultProps$51;
+H6.defaultProps = defaultProps$50;
 
-var defaultProps$50 = {
+var defaultProps$49 = {
   tag: 'button'
 };
 var DropdownItem = function (_React$Component) {
@@ -8065,9 +8083,9 @@ DropdownItem.propTypes = {
 DropdownItem.contextTypes = {
   toggle: PropTypes.func
 };
-DropdownItem.defaultProps = defaultProps$50;
+DropdownItem.defaultProps = defaultProps$49;
 
-var defaultProps$52 = {
+var defaultProps$51 = {
   'data-toggle': 'dropdown',
   'aria-haspopup': true,
   color: 'secondary'
@@ -8158,7 +8176,7 @@ DropdownToggle.contextTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired
 };
-DropdownToggle.defaultProps = defaultProps$52;
+DropdownToggle.defaultProps = defaultProps$51;
 
 var propTypes = {
   children: PropTypes.node,
@@ -8170,7 +8188,7 @@ var ButtonDropdown = function ButtonDropdown(props) {
 };
 ButtonDropdown.propTypes = propTypes;
 
-var defaultProps$53 = {
+var defaultProps$52 = {
   theme: bsTheme,
   tag: 'div',
   role: 'group'
@@ -8211,9 +8229,9 @@ var ButtonGroup = styled(ButtonGroupUnstyled).withConfig({
 })(['', '  '], function (props) {
   return '\n    ' + buttonGroup(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-toolbar-margin'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
-ButtonGroup.defaultProps = defaultProps$53;
+ButtonGroup.defaultProps = defaultProps$52;
 
-var defaultProps$54 = {
+var defaultProps$53 = {
   tag: 'div',
   role: 'toolbar',
   theme: bsTheme
@@ -8250,17 +8268,17 @@ var ButtonToolbar = styled(ButtonToolbarUnstyled).withConfig({
 })(['', '  '], function (props) {
   return '\n    ' + buttonGroup(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-toolbar-margin'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
-ButtonToolbar.defaultProps = defaultProps$54;
+ButtonToolbar.defaultProps = defaultProps$53;
 
-var defaultProps$55 = { theme: bsTheme };
+var defaultProps$54 = { theme: bsTheme };
 var Caption = styled.caption.withConfig({
   displayName: 'Caption'
 })(['', ''], function (props) {
   return '\n    padding-top: ' + props.theme['$table-cell-padding'] + ';\n    padding-bottom: ' + props.theme['$table-cell-padding'] + ';\n    color: ' + props.theme['$text-muted'] + ';\n    text-align: left;\n    caption-side: top;\n  ';
 });
-Caption.defaultProps = defaultProps$55;
+Caption.defaultProps = defaultProps$54;
 
-var defaultProps$56 = {
+var defaultProps$55 = {
   tag: 'code',
   theme: bsTheme
 };
@@ -8297,7 +8315,7 @@ var Code = styled(CodeUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    /* Inline code */\n    padding: ' + props.theme['$code-padding-y'] + ' ' + props.theme['$code-padding-x'] + ';\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$code-color'] + ';\n    background-color: ' + props.theme['$code-bg'] + ';\n    ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius']) + ';\n    \n    /* Streamline the style when inside anchors to avoid broken underline and more */\n    a > & {\n      padding: 0;\n      color: inherit;\n      background-color: inherit;\n    }\n    \n    /* Bootstrap 4 does not place this css rule straight into Code tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
-Code.defaultProps = defaultProps$56;
+Code.defaultProps = defaultProps$55;
 
 var colWidths = ['xs', 'sm', 'md', 'lg', 'xl'];
 var stringOrNumberProp = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
@@ -8307,7 +8325,7 @@ var columnProps = PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTyp
   pull: stringOrNumberProp,
   offset: stringOrNumberProp
 })]);
-var defaultProps$57 = {
+var defaultProps$56 = {
   theme: bsTheme,
   tag: 'div',
   widths: colWidths
@@ -8382,7 +8400,7 @@ var Col = styled(ColUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    ' + makeGridColumns(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-Col.defaultProps = defaultProps$57;
+Col.defaultProps = defaultProps$56;
 
 var SHOW = 'SHOW';
 var SHOWN = 'SHOWN';
@@ -8594,7 +8612,7 @@ Details.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-var defaultProps$58 = { theme: bsTheme };
+var defaultProps$57 = { theme: bsTheme };
 var DlUnstyled = function (_React$Component) {
   inherits(DlUnstyled, _React$Component);
   function DlUnstyled() {
@@ -8621,9 +8639,9 @@ var Dl = styled(DlUnstyled).withConfig({
 })(['  margin-top:0;margin-bottom:1rem;', ''], function (props) {
   return '\n    ' + makeRow(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n  ';
 });
-Dl.defaultProps = defaultProps$58;
+Dl.defaultProps = defaultProps$57;
 
-var defaultProps$59 = { theme: bsTheme };
+var defaultProps$58 = { theme: bsTheme };
 var DtUnstyled = function (_React$Component) {
   inherits(DtUnstyled, _React$Component);
   function DtUnstyled() {
@@ -8650,7 +8668,72 @@ var Dt = styled(DtUnstyled).withConfig({
 })(['  ', ''], function (props) {
   return '\n    /* Reboot Scss */\n    font-weight: ' + props.theme['$dt-font-weight'] + ';\n    ' + makeGridColumns(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-Dt.defaultProps = defaultProps$59;
+Dt.defaultProps = defaultProps$58;
+
+var defaultProps$59 = {
+  isOpen: true,
+  theme: bsTheme
+};
+var Fade = function (_React$Component) {
+  inherits(Fade, _React$Component);
+  function Fade() {
+    var _ref;
+    var _temp, _this, _ret;
+    classCallCheck$1(this, Fade);
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = Fade.__proto__ || Object.getPrototypeOf(Fade)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      transitionEnterTimeout: null,
+      transitionAppearTimeout: null,
+      transitionLeaveTimeout: null
+    }, _temp), possibleConstructorReturn(_this, _ret);
+  }
+  createClass$1(Fade, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var theme = this.props.theme;
+      var userThemeTransitionList = parseTransition(theme['$transition-fade']);
+      this.setState({
+        transitionEnterTimeout: userThemeTransitionList[0].duration,
+        transitionAppearTimeout: userThemeTransitionList[0].duration,
+        transitionLeaveTimeout: userThemeTransitionList[0].duration
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _omit = lodash_omit$1(this.props, ['theme', 'innerRef']),
+          children = _omit.children,
+          isOpen = _omit.isOpen,
+          rest = objectWithoutProperties(_omit, ['children', 'isOpen']);
+      return React.createElement(
+        ReactCSSTransitionGroup,
+        _extends({
+          transitionAppearTimeout: this.state.transitionEnterTimeout,
+          transitionEnterTimeout: this.state.transitionAppearTimeout,
+          transitionLeaveTimeout: this.state.transitionLeaveTimeout,
+          transitionName: {
+            appear: 'fade',
+            appearActive: 'show',
+            enter: 'fade',
+            enterActive: 'show',
+            leave: 'fade'
+          }
+        }, rest),
+        isOpen ? children : null
+      );
+    }
+  }]);
+  return Fade;
+}(React.Component);
+Fade.propTypes = {
+  children: PropTypes.node.isRequired,
+  theme: PropTypes.object,
+  isOpen: PropTypes.bool
+};
+Fade.defaultProps = defaultProps$59;
+var index$2 = withTheme(Fade);
 
 var FaUnstyled = function (_React$Component) {
   inherits(FaUnstyled, _React$Component);
@@ -9788,49 +9871,36 @@ var propTypes$3 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object,
-  timeout: PropTypes.oneOfType([PropTypes.shape({
-    enter: PropTypes.number,
-    exit: PropTypes.number
-  }), PropTypes.number]),
-  appear: PropTypes.bool,
-  enter: PropTypes.bool,
-  exit: PropTypes.bool,
-  onExit: PropTypes.func,
+  transitionAppearTimeout: PropTypes.number,
+  transitionEnterTimeout: PropTypes.number,
+  transitionLeaveTimeout: PropTypes.number,
+  transitionAppear: PropTypes.bool,
+  transitionEnter: PropTypes.bool,
+  transitionLeave: PropTypes.bool,
+  onLeave: PropTypes.func,
   onEnter: PropTypes.func
 };
 var defaultProps$86 = {
   tag: 'div',
   baseClass: 'fade',
   baseClassIn: 'show',
-  timeout: 0,
-  appear: true,
-  enter: true,
-  exit: true
+  transitionAppearTimeout: 0,
+  transitionEnterTimeout: 0,
+  transitionLeaveTimeout: 0,
+  transitionAppear: true,
+  transitionEnter: true,
+  transitionLeave: true
 };
-var Fade$2 = function (_React$Component) {
+var Fade$1 = function (_React$Component) {
   inherits(Fade, _React$Component);
   function Fade(props) {
     classCallCheck$1(this, Fade);
     var _this = possibleConstructorReturn(this, (Fade.__proto__ || Object.getPrototypeOf(Fade)).call(this, props));
-    _this.onEnter = function (cb) {
-      return function () {
-        cb();
-        if (_this.props.onEnter) {
-          _this.props.onEnter();
-        }
-      };
-    };
-    _this.onExit = function (cb) {
-      return function () {
-        cb();
-        if (_this.props.onExit) {
-          _this.props.onExit();
-        }
-      };
-    };
     _this.state = {
-      mounted: !props.appear
+      mounted: !props.transitionAppear
     };
+    _this.onLeave = _this.onLeave.bind(_this);
+    _this.onEnter = _this.onEnter.bind(_this);
     _this.timers = [];
     return _this;
   }
@@ -9842,12 +9912,34 @@ var Fade$2 = function (_React$Component) {
       });
     }
   }, {
+    key: 'onEnter',
+    value: function onEnter(cb) {
+      var _this2 = this;
+      return function () {
+        cb();
+        if (_this2.props.onEnter) {
+          _this2.props.onEnter();
+        }
+      };
+    }
+  }, {
+    key: 'onLeave',
+    value: function onLeave(cb) {
+      var _this3 = this;
+      return function () {
+        cb();
+        if (_this3.props.onLeave) {
+          _this3.props.onLeave();
+        }
+      };
+    }
+  }, {
     key: 'componentWillAppear',
     value: function componentWillAppear(cb) {
-      if (!this.props.appear) {
+      if (!this.props.transitionAppear) {
         this.onEnter(cb)();
       }
-      this.timers.push(setTimeout(this.onEnter(cb), this.props.timeout.enter || this.props.timeout));
+      this.timers.push(setTimeout(this.onEnter(cb), this.props.transitionAppearTimeout));
     }
   }, {
     key: 'componentDidAppear',
@@ -9859,10 +9951,10 @@ var Fade$2 = function (_React$Component) {
   }, {
     key: 'componentWillEnter',
     value: function componentWillEnter(cb) {
-      if (!this.props.enter) {
+      if (!this.props.transitionEnter) {
         this.onEnter(cb)();
       }
-      this.timers.push(setTimeout(this.onEnter(cb), this.props.timeout.enter || this.props.timeout));
+      this.timers.push(setTimeout(this.onEnter(cb), this.props.transitionEnterTimeout));
     }
   }, {
     key: 'componentDidEnter',
@@ -9877,10 +9969,10 @@ var Fade$2 = function (_React$Component) {
       this.setState({
         mounted: false
       });
-      if (!this.props.exit) {
-        this.onExit(cb)();
+      if (!this.props.transitionLeave) {
+        this.onLeave(cb)();
       }
-      this.timers.push(setTimeout(this.onExit(cb), this.props.timeout.exit || this.props.timeout));
+      this.timers.push(setTimeout(this.onLeave(cb), this.props.transitionLeaveTimeout));
     }
   }, {
     key: 'render',
@@ -9892,17 +9984,13 @@ var Fade$2 = function (_React$Component) {
           Tag = _props.tag;
       var attributes = lodash_omit$1(this.props, Object.keys(propTypes$3));
       var classes = classnames$1(className, baseClass, this.state.mounted ? baseClassIn : false);
-      return React.createElement(
-        Tag,
-        _extends({}, attributes, { className: classes }),
-        this.props.children
-      );
+      return React.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
   return Fade;
 }(React.Component);
-Fade$2.propTypes = propTypes$3;
-Fade$2.defaultProps = defaultProps$86;
+Fade$1.propTypes = propTypes$3;
+Fade$1.defaultProps = defaultProps$86;
 
 var defaultProps$85 = {
   isOpen: false,
@@ -10043,12 +10131,11 @@ var ModalUnstyled = function (_React$Component) {
         TransitionGroup,
         { component: 'div', className: mapToCssModules(classnames$1(wrapClassName, className)) },
         isOpen && React.createElement(
-          Fade$2,
+          Fade$1,
           {
             key: 'modal-dialog',
             onEnter: this.onEnter,
             onLeave: this.onExit,
-            timeout: '',
             transitionAppearTimeout: 300,
             transitionEnterTimeout: 300,
             transitionLeaveTimeout: 300,
@@ -10074,9 +10161,11 @@ var ModalUnstyled = function (_React$Component) {
             )
           )
         ),
-        isOpen && backdrop && React.createElement(Fade$2, {
+        isOpen && backdrop && React.createElement(Fade$1, {
           key: 'modal-backdrop',
-          timeout: 150,
+          transitionAppearTimeout: 150,
+          transitionEnterTimeout: 150,
+          transitionLeaveTimeout: 150,
           className: mapToCssModules(classnames$1('modal-backdrop', backdropClassName), cssModule)
         })
       );
@@ -13697,7 +13786,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 var emptyFunction_1 = emptyFunction;
 
 'use strict';
-var warning = emptyFunction_1;
+var warning$1 = emptyFunction_1;
 {
   var printWarning = function printWarning(format) {
     for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -13714,7 +13803,7 @@ var warning = emptyFunction_1;
       throw new Error(message);
     } catch (x) {}
   };
-  warning = function warning(condition, format) {
+  warning$1 = function warning(condition, format) {
     if (format === undefined) {
       throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
     }
@@ -13729,13 +13818,13 @@ var warning = emptyFunction_1;
     }
   };
 }
-var warning_1 = warning;
+var warning_1$2 = warning$1;
 
 'use strict';
 function warnNoop(publicInstance, callerName) {
   {
     var constructor = publicInstance.constructor;
-    warning_1(false, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op. Please check the code for the %s component.', callerName, callerName, constructor && (constructor.displayName || constructor.name) || 'ReactClass');
+    warning_1$2(false, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op. Please check the code for the %s component.', callerName, callerName, constructor && (constructor.displayName || constructor.name) || 'ReactClass');
   }
 }
 var ReactNoopUpdateQueue = {
@@ -13974,7 +14063,7 @@ function defineKeyPropWarningGetter(props, displayName) {
   var warnAboutAccessingKey = function () {
     if (!specialPropKeyWarningShown) {
       specialPropKeyWarningShown = true;
-      warning_1(false, '%s: `key` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
+      warning_1$2(false, '%s: `key` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
     }
   };
   warnAboutAccessingKey.isReactWarning = true;
@@ -13987,7 +14076,7 @@ function defineRefPropWarningGetter(props, displayName) {
   var warnAboutAccessingRef = function () {
     if (!specialPropRefWarningShown) {
       specialPropRefWarningShown = true;
-      warning_1(false, '%s: `ref` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
+      warning_1$2(false, '%s: `ref` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
     }
   };
   warnAboutAccessingRef.isReactWarning = true;
@@ -14246,7 +14335,7 @@ function traverseAllChildrenImpl(children, nameSoFar, callback, traverseContext)
               mapsAsChildrenAddendum = ' Check the render method of `' + mapsAsChildrenOwnerName + '`.';
             }
           }
-          warning_1(didWarnAboutMaps, 'Using Maps as children is not yet fully supported. It is an ' + 'experimental feature that might be removed. Convert it to a ' + 'sequence / iterable of keyed ReactElements instead.%s', mapsAsChildrenAddendum);
+          warning_1$2(didWarnAboutMaps, 'Using Maps as children is not yet fully supported. It is an ' + 'experimental feature that might be removed. Convert it to a ' + 'sequence / iterable of keyed ReactElements instead.%s', mapsAsChildrenAddendum);
           didWarnAboutMaps = true;
         }
         while (!(step = iterator.next()).done) {
@@ -14504,7 +14593,7 @@ function describeID(id) {
   if (ownerID) {
     ownerName = ReactComponentTreeHook.getDisplayName(ownerID);
   }
-  warning_1(element, 'ReactComponentTreeHook: Missing React element for debugID %s when ' + 'building stack', id);
+  warning_1$2(element, 'ReactComponentTreeHook: Missing React element for debugID %s when ' + 'building stack', id);
   return describeComponentFrame(name, element && element._source, ownerName);
 }
 var ReactComponentTreeHook = {
@@ -14723,7 +14812,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
       } catch (ex) {
         error = ex;
       }
-      warning_1(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', ReactPropTypeLocationNames_1[location], typeSpecName, typeof error);
+      warning_1$2(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', ReactPropTypeLocationNames_1[location], typeSpecName, typeof error);
       if (error instanceof Error && !(error.message in loggedTypeFailures)) {
         loggedTypeFailures[error.message] = true;
         var componentStackInfo = '';
@@ -14737,7 +14826,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
             componentStackInfo = ReactComponentTreeHook$1.getCurrentStackAddendum(element);
           }
         }
-        warning_1(false, 'Failed %s type: %s%s', location, error.message, componentStackInfo);
+        warning_1$2(false, 'Failed %s type: %s%s', location, error.message, componentStackInfo);
       }
     }
   }
@@ -14789,7 +14878,7 @@ function validateExplicitKey(element, parentType) {
   if (element && element._owner && element._owner !== ReactCurrentOwner_1.current) {
     childOwner = ' It was passed a child from ' + element._owner.getName() + '.';
   }
-  warning_1(false, 'Each child in an array or iterator should have a unique "key" prop.' + '%s%s See https://fb.me/react-warning-keys for more information.%s', currentComponentErrorInfo, childOwner, ReactComponentTreeHook_1.getCurrentStackAddendum(element));
+  warning_1$2(false, 'Each child in an array or iterator should have a unique "key" prop.' + '%s%s See https://fb.me/react-warning-keys for more information.%s', currentComponentErrorInfo, childOwner, ReactComponentTreeHook_1.getCurrentStackAddendum(element));
 }
 function validateChildKeys(node, parentType) {
   if (typeof node !== 'object') {
@@ -14831,7 +14920,7 @@ function validatePropTypes(element) {
     checkReactTypeSpec_1(componentClass.propTypes, element.props, 'prop', name, element, null);
   }
   if (typeof componentClass.getDefaultProps === 'function') {
-    warning_1(componentClass.getDefaultProps.isReactClassApproved, 'getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.');
+    warning_1$2(componentClass.getDefaultProps.isReactClassApproved, 'getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.');
   }
 }
 var ReactElementValidator$2 = {
@@ -14852,7 +14941,7 @@ var ReactElementValidator$2 = {
         info += ReactComponentTreeHook_1.getCurrentStackAddendum();
         var currentSource = props !== null && props !== undefined && props.__source !== undefined ? props.__source : null;
         ReactComponentTreeHook_1.pushNonStandardWarningStack(true, currentSource);
-        warning_1(false, 'React.createElement: type is invalid -- expected a string (for ' + 'built-in components) or a class/function (for composite ' + 'components) but got: %s.%s', type == null ? type : typeof type, info);
+        warning_1$2(false, 'React.createElement: type is invalid -- expected a string (for ' + 'built-in components) or a class/function (for composite ' + 'components) but got: %s.%s', type == null ? type : typeof type, info);
         ReactComponentTreeHook_1.popNonStandardWarningStack();
       }
     }
@@ -15047,7 +15136,7 @@ var ReactPropTypesSecret_1$2 = ReactPropTypesSecret$2;
 'use strict';
 {
   var invariant$2 = invariant_1;
-  var warning$1 = warning_1;
+  var warning$2 = warning_1$2;
   var ReactPropTypesSecret$3 = ReactPropTypesSecret_1$2;
   var loggedTypeFailures$1 = {};
 }
@@ -15062,11 +15151,11 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
         } catch (ex) {
           error = ex;
         }
-        warning$1(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
+        warning$2(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
         if (error instanceof Error && !(error.message in loggedTypeFailures$1)) {
           loggedTypeFailures$1[error.message] = true;
           var stack = getStack ? getStack() : '';
-          warning$1(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
+          warning$2(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
         }
       }
     }
@@ -15137,7 +15226,7 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
             !manualPropTypeCallCache[cacheKey] &&
             manualPropTypeWarningCount < 3
           ) {
-            warning_1(
+            warning_1$2(
               false,
               'You are manually calling a React.PropTypes validation ' +
               'function for the `%s` prop on `%s`. This is deprecated ' +
@@ -15227,7 +15316,7 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
   }
   function createEnumTypeChecker(expectedValues) {
     if (!Array.isArray(expectedValues)) {
-      warning_1(false, 'Invalid argument supplied to oneOf, expected an instance of array.');
+      warning_1$2(false, 'Invalid argument supplied to oneOf, expected an instance of array.');
       return emptyFunction_1.thatReturnsNull;
     }
     function validate(props, propName, componentName, location, propFullName) {
@@ -15266,13 +15355,13 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
   }
   function createUnionTypeChecker(arrayOfTypeCheckers) {
     if (!Array.isArray(arrayOfTypeCheckers)) {
-      warning_1(false, 'Invalid argument supplied to oneOfType, expected an instance of array.');
+      warning_1$2(false, 'Invalid argument supplied to oneOfType, expected an instance of array.');
       return emptyFunction_1.thatReturnsNull;
     }
     for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
       var checker = arrayOfTypeCheckers[i];
       if (typeof checker !== 'function') {
-        warning_1(
+        warning_1$2(
           false,
           'Invalid argument supplid to oneOfType. Expected an array of check functions, but ' +
           'received %s at index %s.',
@@ -15445,7 +15534,7 @@ var ReactVersion = '15.6.1';
 
 'use strict';
 {
-  var warning$2 = warning_1;
+  var warning$3 = warning_1$2;
 }
 var MIXINS_KEY = 'mixins';
 function identity(fn) {
@@ -15536,7 +15625,7 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
     for (var propName in typeDef) {
       if (typeDef.hasOwnProperty(propName)) {
         {
-          warning$2(
+          warning$3(
             typeof typeDef[propName] === 'function',
             '%s: %s type `%s` is invalid; it must be a function, usually from ' +
               'React.PropTypes.',
@@ -15577,7 +15666,7 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
         var typeofSpec = typeof spec;
         var isMixinValid = typeofSpec === 'object' && spec !== null;
         {
-          warning$2(
+          warning$3(
             isMixinValid,
             "%s: You're attempting to include a mixin that is either null " +
               'or not an object. Check the mixins included by the component, ' +
@@ -15749,7 +15838,7 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
         }
         if (newThis !== component && newThis !== null) {
           {
-            warning$2(
+            warning$3(
               false,
               'bind(): React component methods may only be bound to the ' +
                 'component instance. See %s',
@@ -15758,7 +15847,7 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
           }
         } else if (!args.length) {
           {
-            warning$2(
+            warning$3(
               false,
               'bind(): You are binding a component method to the component. ' +
                 'React does this for you automatically in a high-performance ' +
@@ -15801,7 +15890,7 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
     },
     isMounted: function() {
       {
-        warning$2(
+        warning$3(
           this.__didWarnIsMounted,
           '%s: isMounted is deprecated. Instead, make sure to clean up ' +
             'subscriptions and pending requests in componentWillUnmount to ' +
@@ -15824,7 +15913,7 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
   function createClass(spec) {
     var Constructor = identity(function(props, context, updater) {
       {
-        warning$2(
+        warning$3(
           this instanceof Constructor,
           'Something is calling a React component directly. Use a factory or ' +
             'JSX instead. See: https://fb.me/react-legacyfactory'
@@ -15877,7 +15966,7 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
       'createClass(...): Class specification must implement a `render` method.'
     );
     {
-      warning$2(
+      warning$3(
         !Constructor.prototype.componentShouldUpdate,
         '%s has a method called ' +
           'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' +
@@ -15885,7 +15974,7 @@ function factory$2(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
           'expected to return a value.',
         spec.displayName || 'A component'
       );
-      warning$2(
+      warning$3(
         !Constructor.prototype.componentWillRecieveProps,
         '%s has a method called ' +
           'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?',
@@ -16038,7 +16127,7 @@ function findDOMNode(componentOrElement) {
   {
     var owner = ReactCurrentOwner_1.current;
     if (owner !== null) {
-      warning_1(owner._warnedAboutRefsInRender, '%s is accessing findDOMNode inside its render(). ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', owner.getName() || 'A component');
+      warning_1$2(owner._warnedAboutRefsInRender, '%s is accessing findDOMNode inside its render(). ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', owner.getName() || 'A component');
       owner._warnedAboutRefsInRender = true;
     }
   }
@@ -16374,5 +16463,5 @@ var PageWrapper = styled(PageWrapperUnstyled).withConfig({
 });
 PageWrapper.defaultProps = defaultProps$134;
 
-export { borderRadius$1 as radius, boxShadow, breakpoints as bp, ifThen, ifElse, gradients as gradient, hover, srOnly, srOnlyFocusable, size, index$1 as unitMixins, transition, alignUtils, backgroundUtils, bordersUtils, clearfixUtils, cursorUtils, displayUtils, flexUtils, floatUtils, positionUtils, rebootUtils, screenreadersUtils, sizingUtils, spacingUtils, transitionUtils, textUtils, visibilityUtils, tetherAttachements, bsTheme as theme, makeTheme$$1 as makeTheme, A, composeLink, Abbr, Address, index$1$1 as Alert, Area, Article, Blockquote, BootstrapProvider, Breadcrumb, BreadcrumbItem, Button, ButtonDropdown, ButtonGroup, ButtonToolbar, Caption, Close, Code, Col, Collapse, Dd, Dfn, Details, Dl, Dt, Fade$1 as Fade, Fa, FaStacked, Fieldset, Footer, H1, H2, H3, H4, H5, H6, Header, Hr, Img, Figure, FigCaption, Input, InputGroup, InputGroupAddon, InputGroupButton, IssueIcon, Kbd, Jumbotron, Label, Legend, Li, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemHeading$2 as ListGroupItemText, Map$2 as Map, Mark, Media, Modal, ModalBody, ModalFooter, ModalHeader, Nav, NavLink, NavItem, Ol, Option, Output, P, Pagination, PaginationItem, PaginationLink, Pre, Progress, ProgressBar, Row, Samp, Section, Select, Small, Strong, Summary, Sub, Sup, Table, Tbody, Tfoot, Thead, Td, Th, Tr, Badge, Textarea, Tooltip, Ul, Blur, Contrast, Brightness, Grayscale, HueRotate, Invert, Opacity, Sepia, Saturate, Bounce, BounceDown, BounceUp, BounceLeft, BounceRight, Flash, RollOut, RollIn, Rubber, Swing, Zoom, Hinge, Pulse, ExpandUp, Entrance, Hatch, SlideUp, SlideDown, SlideRight, SlideLeft, SlideRightLeft, FadeIn, FadeInDown, FadeInUp, FadeInLeft, FadeInRight, RotateIn, RotateLeft, RotateRight, RotateUpLeft, RotateUpRight, LightIn, LightOut, Flip, FlipX, FlipY, Dropshadow, Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote, Accordion, AccordionGroup, Form, FormGroup, FormText, FormFeedback, FormCustom, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Navbar, NavbarToggler, NavbarBrand, NavDropdown, Container, ContainerFluid, HeaderNavBar, PageWrapper, OffsetNavPush, OffsetNavSlide };
+export { borderRadius$1 as radius, boxShadow, breakpoints as bp, ifThen, ifElse, gradients as gradient, hover, srOnly, srOnlyFocusable, size, index$1 as unitMixins, transition, alignUtils, backgroundUtils, bordersUtils, clearfixUtils, cursorUtils, displayUtils, flexUtils, floatUtils, positionUtils, rebootUtils, screenreadersUtils, sizingUtils, spacingUtils, transitionUtils, textUtils, visibilityUtils, tetherAttachements, bsTheme as theme, makeTheme$$1 as makeTheme, A, composeLink, Abbr, Address, index$1$1 as Alert, Area, Article, Blockquote, BootstrapProvider, Breadcrumb, BreadcrumbItem, Button, ButtonDropdown, ButtonGroup, ButtonToolbar, Caption, Close, Code, Col, Collapse, Dd, Dfn, Details, Dl, Dt, index$2 as Fade, Fa, FaStacked, Fieldset, Footer, H1, H2, H3, H4, H5, H6, Header, Hr, Img, Figure, FigCaption, Input, InputGroup, InputGroupAddon, InputGroupButton, IssueIcon, Kbd, Jumbotron, Label, Legend, Li, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemHeading$2 as ListGroupItemText, Map$2 as Map, Mark, Media, Modal, ModalBody, ModalFooter, ModalHeader, Nav, NavLink, NavItem, Ol, Option, Output, P, Pagination, PaginationItem, PaginationLink, Pre, Progress, ProgressBar, Row, Samp, Section, Select, Small, Strong, Summary, Sub, Sup, Table, Tbody, Tfoot, Thead, Td, Th, Tr, Badge, Textarea, Tooltip, Ul, Blur, Contrast, Brightness, Grayscale, HueRotate, Invert, Opacity, Sepia, Saturate, Bounce, BounceDown, BounceUp, BounceLeft, BounceRight, Flash, RollOut, RollIn, Rubber, Swing, Zoom, Hinge, Pulse, ExpandUp, Entrance, Hatch, SlideUp, SlideDown, SlideRight, SlideLeft, SlideRightLeft, FadeIn, FadeInDown, FadeInUp, FadeInLeft, FadeInRight, RotateIn, RotateLeft, RotateRight, RotateUpLeft, RotateUpRight, LightIn, LightOut, Flip, FlipX, FlipY, Dropshadow, Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote, Accordion, AccordionGroup, Form, FormGroup, FormText, FormFeedback, FormCustom, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Navbar, NavbarToggler, NavbarBrand, NavDropdown, Container, ContainerFluid, HeaderNavBar, PageWrapper, OffsetNavPush, OffsetNavSlide };
 //# sourceMappingURL=bootstrap-styled.es.js.map

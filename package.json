@@ -20,7 +20,7 @@
     "build:readme": "toctoc README.md -w",
     "build:dist:watch": "rollup -c --watch",
     "build:lib:watch": "npm run build:lib -- --watch",
-    "test": "echo \"npm run lint && npm run test:web\"",
+    "test": "npm run lint && npm run test:web",
     "test:web": "NODE_ENV=test TEST_REPORT_PATH=reports jest --coverage",
     "test:clean": "rimraf ./coverage",
     "test:watch": "npm run test -- --watch",
@@ -152,7 +152,7 @@
     "react-addons-test-utils": "^15.6.0",
     "react-dom": "^15.6.1",
     "react-test-renderer": "^15.6.1",
-    "react-transition-group": "^2.2.0",
+    "react-transition-group": "1.2.0",
     "rimraf": "^2.6.1",
     "rollup": "^0.49.2",
     "rollup-plugin-babel": "^3.0.2",
@@ -183,9 +183,9 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 95,
-        "branches": 93,
-        "functions": 94,
+        "statements": 96,
+        "branches": 94,
+        "functions": 95,
         "lines": 96
       }
     },
@@ -219,6 +219,6 @@
     "react-dom": "^15.6.1",
     "prop-types": "^15.5.10",
     "styled-components": "^2.1.2",
-    "react-transition-group": "^2.2.0"
+    "react-transition-group": "1.2.0"
   }
 }

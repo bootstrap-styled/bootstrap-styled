@@ -35,6 +35,6 @@ describe('<Fade />', () => {
       children,
       isOpen: false,
     });
-    expect(renderedComponent.find('Transition').props().in).toEqual(false);
+    expect(renderedComponent.contains(children)).toEqual(false);
   });
 });
