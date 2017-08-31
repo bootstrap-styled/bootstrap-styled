@@ -1,5 +1,4 @@
 node_modules
-packge-lock.json
 npm-debug.log
 tmp.json
 .DS_Store
