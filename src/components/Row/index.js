@@ -7,7 +7,7 @@ import { makeRow } from '../../styled/mixins/grid';
 
 const defaultProps = { theme };
 
-class Row extends React.Component {    // eslint-disable-line react/prefer-stateless-function
+class RowUnstyled extends React.Component {    // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
@@ -25,8 +25,7 @@ class Row extends React.Component {    // eslint-disable-line react/prefer-state
 
 }
 
-// eslint-disable-next-line no-class-assign
-Row = styled(Row)`
+const Row = styled(RowUnstyled)`
   ${(props) => `
     &.row {
       ${makeRow(

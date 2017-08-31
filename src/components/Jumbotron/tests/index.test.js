@@ -24,13 +24,12 @@ const renderComponentUsingTheme = (props = {}) => mount(
   </BootstrapProvider>
 );
 
-
 describe('<Jumbotron />', () => {
   it('should render an <Jumbotron> tag without a theme', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Jumbotron').length).toBe(1);
+    expect(renderedComponent.find('JumbotronUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

@@ -38,7 +38,7 @@ export const getColumnSizeClass = (isXs, colWidth, colSize) => {
   return isXs ? `col-${colSize}` : `col-${colWidth}-${colSize}`;
 };
 
-class Col extends React.Component {    // eslint-disable-line react/prefer-stateless-function
+class ColUnstyled extends React.Component {    // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -110,8 +110,7 @@ class Col extends React.Component {    // eslint-disable-line react/prefer-state
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Col = styled(Col)`
+const Col = styled(ColUnstyled)`
   ${(props) => `
     ${makeGridColumns(
       props.theme['$enable-grid-classes'],

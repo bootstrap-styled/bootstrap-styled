@@ -33,7 +33,7 @@ describe('<Output />', () => {
   it('should render an <Output> tag without a theme', () => {
     const renderedComponent = renderComponent({
     });
-    expect(renderedComponent.find('Output').length).toBe(1);
+    expect(renderedComponent.find('OutputUnstyled').length).toBe(1);
   });
   it('should render an <Output> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

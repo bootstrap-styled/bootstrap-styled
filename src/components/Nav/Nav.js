@@ -19,7 +19,7 @@ const defaultProps = {
   tag: Ul,
 };
 
-class Nav extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class NavUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -74,9 +74,7 @@ class Nav extends React.Component { // eslint-disable-line react/prefer-stateles
   }
 }
 
-
-// eslint-disable-next-line no-class-assign
-Nav = styled(Nav)`
+const Nav = styled(NavUnstyled)`
   ${(props) => `
     ${nav(
       props.theme['$enable-rounded'],

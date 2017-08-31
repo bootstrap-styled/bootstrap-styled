@@ -32,7 +32,7 @@ describe('<OffsetNav />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('OffsetNav').length).toBe(1);
+    expect(renderedComponent.find('OffsetNavUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

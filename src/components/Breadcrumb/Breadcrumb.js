@@ -17,7 +17,7 @@ const defaultProps = {
   tag: 'ol',
 };
 
-class Breadcrumb extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class BreadcrumbUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -45,8 +45,7 @@ class Breadcrumb extends React.Component { // eslint-disable-line react/prefer-s
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Breadcrumb = styled(Breadcrumb)`
+const Breadcrumb = styled(BreadcrumbUnstyled)`
   ${(props) => `
     &.breadcrumb {
       padding: ${props.theme['$breadcrumb-padding-y']} ${props.theme['$breadcrumb-padding-x']};

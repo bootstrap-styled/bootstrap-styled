@@ -30,7 +30,7 @@ describe('<Small />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Small').length).toBe(1);
+    expect(renderedComponent.find('SmallUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

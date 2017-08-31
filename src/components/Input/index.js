@@ -17,7 +17,7 @@ const defaultProps = {
   tag: 'p',
 };
 
-class Input extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class InputUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -88,8 +88,7 @@ class Input extends React.Component { // eslint-disable-line react/prefer-statel
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Input = styled(Input)`
+const Input = styled(InputUnstyled)`
   ${(props) => `
     /* Reboot Scss */
     touch-action: manipulation;

@@ -20,7 +20,7 @@ const defaultProps = {
   tag: Ul,
 };
 
-class ListGroup extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class ListGroupUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -53,8 +53,7 @@ class ListGroup extends React.Component { // eslint-disable-line react/prefer-st
   }
 }
 
-// eslint-disable-next-line no-class-assign
-ListGroup = styled(ListGroup)`
+const ListGroup = styled(ListGroupUnstyled)`
   ${(props) => `
     /* 
       Base class

@@ -19,7 +19,7 @@ const defaultProps = {
   theme: bsTheme,
 };
 
-class Media extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class MediaUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -93,8 +93,7 @@ class Media extends React.Component { // eslint-disable-line react/prefer-statel
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Media = styled(Media)`
+const Media = styled(MediaUnstyled)`
   &.media,
    & .media {
       display: -webkit-box;

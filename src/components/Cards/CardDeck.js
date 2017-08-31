@@ -18,7 +18,7 @@ const defaultProps = {
   tag: 'div',
 };
 
-class CardDeck extends React.Component {// eslint-disable-line react/prefer-stateless-function
+class CardDeckUnstyled extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -49,8 +49,7 @@ class CardDeck extends React.Component {// eslint-disable-line react/prefer-stat
   }
 }
 
-// eslint-disable-next-line no-class-assign
-CardDeck = styled(CardDeck)`
+const CardDeck = styled(CardDeckUnstyled)`
   ${(props) => `
     ${card(
       props.theme['$enable-rounded'],

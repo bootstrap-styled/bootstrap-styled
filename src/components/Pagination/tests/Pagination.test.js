@@ -34,7 +34,7 @@ describe('<Pagination />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Pagination').length).toBe(1);
+    expect(renderedComponent.find('PaginationUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

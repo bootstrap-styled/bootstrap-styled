@@ -9,7 +9,7 @@ import { typography } from '../../styled/mixins/typography';
 
 const defaultProps = { theme: bsTheme };
 
-class P extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class PUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -44,8 +44,8 @@ class P extends React.Component { // eslint-disable-line react/prefer-stateless-
     );
   }
 }
-// eslint-disable-next-line no-class-assign
-P = styled(P)`
+
+const P = styled(PUnstyled)`
   ${(props) => `
     /* Type Scss */
 

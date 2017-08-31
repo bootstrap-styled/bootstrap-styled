@@ -17,7 +17,7 @@ const defaultProps = {
   color: 'secondary',
 };
 
-class Button extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class ButtonUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -90,8 +90,7 @@ class Button extends React.Component { // eslint-disable-line react/prefer-state
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Button = styled(Button)`
+const Button = styled(ButtonUnstyled)`
   ${(props) => `
     ${button(
       props.theme['$enable-shadows'],

@@ -23,6 +23,7 @@ class Helper extends React.Component {
     showItem: PropTypes.bool,
     children: PropTypes.node,
   }
+
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
@@ -42,7 +43,7 @@ class Helper extends React.Component {
       <div>
         <button onClick={this.toggle}>Toggle</button>
         <TransitionGroup component="div">
-          { this.state.showItem ? this.props.children : null }
+          {this.state.showItem ? this.props.children : null}
         </TransitionGroup>
       </div>
     );

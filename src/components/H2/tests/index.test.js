@@ -30,7 +30,7 @@ describe('<H2 />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('H2').length).toBe(1);
+    expect(renderedComponent.find('H2Unstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

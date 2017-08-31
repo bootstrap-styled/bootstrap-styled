@@ -26,7 +26,7 @@ describe('<Card />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Card').length).toBe(1);
+    expect(renderedComponent.find('CardUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

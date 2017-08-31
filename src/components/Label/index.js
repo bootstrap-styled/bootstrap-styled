@@ -52,7 +52,7 @@ const defaultProps = {
   theme: bsTheme,
 };
 
-let Label = (props) => {  // eslint-disable-line
+let LabelUnstyled = (props) => {  // eslint-disable-line
   const {
     className,
     cssModule,
@@ -99,8 +99,7 @@ let Label = (props) => {  // eslint-disable-line
   );
 };
 
-// eslint-disable-next-line no-class-assign
-Label = styled(Label)`
+const Label = styled(LabelUnstyled)`
   ${(props) => `
     /* Reboot Scss */
     touch-action: manipulation;

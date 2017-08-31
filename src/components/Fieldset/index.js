@@ -9,7 +9,7 @@ import { makeRow } from '../../styled/mixins/grid';
 
 const defaultProps = { theme: bsTheme };
 
-class Fieldset extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class FieldsetUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -37,8 +37,7 @@ class Fieldset extends React.Component { // eslint-disable-line react/prefer-sta
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Fieldset = styled(Fieldset)`
+const Fieldset = styled(FieldsetUnstyled)`
   ${(props) => `
     min-width: 0;
     padding: 0;

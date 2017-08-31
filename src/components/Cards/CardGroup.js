@@ -20,7 +20,7 @@ const defaultProps = {
   tag: 'div',
 };
 
-class CardGroup extends React.Component {// eslint-disable-line react/prefer-stateless-function
+class CardGroupUnstyled extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -51,8 +51,7 @@ class CardGroup extends React.Component {// eslint-disable-line react/prefer-sta
   }
 }
 
-// eslint-disable-next-line no-class-assign
-CardGroup = styled(CardGroup)`
+const CardGroup = styled(CardGroupUnstyled)`
   ${(props) => `
     ${card(
       props.theme['$enable-rounded'],

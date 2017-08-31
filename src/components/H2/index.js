@@ -9,7 +9,7 @@ import { typography } from '../../styled/mixins/typography';
 
 const defaultProps = { theme: bsTheme };
 
-class H2 extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class H2Unstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -45,8 +45,8 @@ class H2 extends React.Component { // eslint-disable-line react/prefer-stateless
     );
   }
 }
-// eslint-disable-next-line no-class-assign
-H2 = styled(H2)`
+
+const H2 = styled(H2Unstyled)`
   ${(props) => `
 
     font-size: ${props.theme['$font-size-h2']};

@@ -29,7 +29,7 @@ const FirstChild = ({ children }) => (
 );
 
 
-class Alert extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class AlertUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -100,14 +100,13 @@ class Alert extends React.Component { // eslint-disable-line react/prefer-statel
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Alert = styled(Alert)`
+const Alert = styled(AlertUnstyled)`
   ${(props) => `
     /*
     Base styles
     */
     
-    &.alert{
+    &.alert {
       padding: ${props.theme['$alert-padding-y']} ${props.theme['$alert-padding-x']};
       margin-bottom: ${props.theme['$alert-margin-bottom']};
       border: ${props.theme['$alert-border-width']} solid transparent;
@@ -139,28 +138,28 @@ Alert = styled(Alert)`
     }
     /* Alternate styles Generate contextual modifier classes for colorizing the alert. */
 
-    &.alert-success{
+    &.alert-success {
       ${alertVariant(
         props.theme['$alert-success-bg'],
         props.theme['$alert-success-border'],
         props.theme['$alert-success-text'],
       )}    
     }
-    &.alert-info{
+    &.alert-info {
       ${alertVariant(
         props.theme['$alert-info-bg'],
         props.theme['$alert-info-border'],
         props.theme['$alert-info-text'],
       )}
     } 
-    &.alert-warning{
+    &.alert-warning {
       ${alertVariant(
         props.theme['$alert-warning-bg'],
         props.theme['$alert-warning-border'],
         props.theme['$alert-warning-text'],
       )} 
     }
-    &.alert-danger{
+    &.alert-danger {
       ${alertVariant(
         props.theme['$alert-danger-bg'],
         props.theme['$alert-danger-border'],

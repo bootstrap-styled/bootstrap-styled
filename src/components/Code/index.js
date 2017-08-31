@@ -15,7 +15,7 @@ const defaultProps = {
   theme: bsTheme,
 };
 
-class Code extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class CodeUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -42,8 +42,7 @@ class Code extends React.Component { // eslint-disable-line react/prefer-statele
 
 }
 
-// eslint-disable-next-line no-class-assign
-Code = styled(Code)`
+const Code = styled(CodeUnstyled)`
   ${(props) => `
     /* Inline code */
     padding: ${props.theme['$code-padding-y']} ${props.theme['$code-padding-x']};

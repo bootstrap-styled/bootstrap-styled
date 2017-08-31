@@ -24,19 +24,19 @@ describe('<ButtonGroup />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('ButtonGroup').length).toBe(1);
+    expect(renderedComponent.find('ButtonGroupUnstyled').length).toBe(1);
   });
   it('should have an attribute vertical without a theme', () => {
     const renderedComponent = renderComponent({
       vertical: true,
     });
-    expect(renderedComponent.find('ButtonGroup').props().vertical).toBe(true);
+    expect(renderedComponent.find('ButtonGroupUnstyled').props().vertical).toBe(true);
   });
   it('should have an attribute size without a theme', () => {
     const renderedComponent = renderComponent({
       size: 'sm',
     });
-    expect(renderedComponent.find('ButtonGroup').props().size).toBe('sm');
+    expect(renderedComponent.find('ButtonGroupUnstyled').props().size).toBe('sm');
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

@@ -49,7 +49,7 @@ describe('<Select />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Select').length).toBe(1);
+    expect(renderedComponent.find('SelectUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

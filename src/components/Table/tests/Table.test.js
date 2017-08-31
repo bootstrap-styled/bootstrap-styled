@@ -38,7 +38,7 @@ describe('<Table />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Table').length).toBe(1);
+    expect(renderedComponent.find('TableUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

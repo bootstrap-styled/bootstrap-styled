@@ -10,7 +10,7 @@ const defaultProps = {
   theme: bsTheme,
 };
 
-class ContainerFluid extends React.Component {    // eslint-disable-line react/prefer-stateless-function
+class ContainerFluidUnstyled extends React.Component {    // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -31,8 +31,7 @@ class ContainerFluid extends React.Component {    // eslint-disable-line react/p
   }
 }
 
-// eslint-disable-next-line no-class-assign
-ContainerFluid = styled(ContainerFluid)`
+const ContainerFluid = styled(ContainerFluidUnstyled)`
   ${(props) => `
     ${makeContainer(
       props.theme['$enable-grid-classes'],

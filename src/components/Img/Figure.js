@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
 
-class Figure extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class FigureUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -35,8 +35,7 @@ class Figure extends React.Component { // eslint-disable-line react/prefer-state
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Figure = styled(Figure)`
+const Figure = styled(FigureUnstyled)`
     
   &.figure {
     /* Ensures the captions text aligns with the image. */
