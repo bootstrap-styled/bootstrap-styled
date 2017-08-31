@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
@@ -29,7 +28,7 @@ const defaultProps = {
   transitionLeaveTimeout: 0,
   transitionAppear: true,
   transitionEnter: true,
-  transitionLeave: true
+  transitionLeave: true,
 };
 
 class Fade extends React.Component {
@@ -46,7 +45,7 @@ class Fade extends React.Component {
   }
 
   componentWillUnmount() {
-    this.timers.forEach(timer => clearTimeout(timer));
+    this.timers.forEach((timer) => clearTimeout(timer));
   }
 
   onEnter(cb) {
@@ -77,7 +76,7 @@ class Fade extends React.Component {
 
   componentDidAppear() {
     this.setState({
-      mounted: true
+      mounted: true,
     });
   }
 
@@ -91,13 +90,13 @@ class Fade extends React.Component {
 
   componentDidEnter() {
     this.setState({
-      mounted: true
+      mounted: true,
     });
   }
 
   componentWillLeave(cb) {
     this.setState({
-      mounted: false
+      mounted: false,
     });
 
     if (!this.props.transitionLeave) {
@@ -122,7 +121,7 @@ class Fade extends React.Component {
     );
 
     return (
-      <Tag {...attributes} className={classes}>{this.props.children}</Tag>
+      <Tag {...attributes} className={classes} />
     );
   }
 }

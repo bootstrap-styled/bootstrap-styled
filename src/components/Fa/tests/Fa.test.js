@@ -21,7 +21,7 @@ describe('<Fa />', () => {
     const renderedComponent = renderComponent({
       trash: true,
     });
-    expect(renderedComponent.find('Fa').length).toEqual(1);
+    expect(renderedComponent.find('FaUnstyled').length).toEqual(1);
   });
   it('should have class .fa-trash', () => {
     const renderedComponent = renderComponentUsingTheme({

@@ -28,7 +28,7 @@ describe('<Alert />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('Alert').length).toBe(1);
+    expect(renderedComponent.find('AlertUnstyled').length).toBe(1);
     expect(renderedComponent.find('div').length).toBe(1);
   });
   it('should have a className .alert by default and with a theme', () => {

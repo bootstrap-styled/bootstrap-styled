@@ -25,7 +25,7 @@ describe('<Dfn />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Dfn').length).toBe(1);
+    expect(renderedComponent.find('DfnUnstyled').length).toBe(1);
   });
   it('should render a <abbr> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

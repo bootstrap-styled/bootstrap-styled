@@ -35,7 +35,7 @@ describe('<Row />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Row').length).toBe(1);
+    expect(renderedComponent.find('RowUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

@@ -16,7 +16,7 @@ const defaultProps = {
   tag: 'ul',
 };
 
-class Pagination extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class PaginationUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -52,8 +52,7 @@ class Pagination extends React.Component { // eslint-disable-line react/prefer-s
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Pagination = styled(Pagination)`
+const Pagination = styled(PaginationUnstyled)`
   ${(props) => `
     ${pagination(
       props.theme['$enable-rounded'],

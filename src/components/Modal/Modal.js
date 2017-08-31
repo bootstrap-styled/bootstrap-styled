@@ -27,8 +27,7 @@ const defaultProps = {
   zIndex: 1000,
 };
 
-class Modal extends React.Component {
-
+class ModalUnstyled extends React.Component {
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -218,7 +217,7 @@ class Modal extends React.Component {
                 show: isOpen,
               }))}
               role="document"
-              ref={(c) => (this._dialog = c)} // eslint-disable-line no-underscore-dangle
+              ref={(c) => (this._dialog = c)} // eslint-disable-line
               {...attributes}
             >
               <div className={mapToCssModules(classNames('modal-content', contentClassName), cssModule)}>
@@ -245,8 +244,7 @@ class Modal extends React.Component {
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Modal = styled(Modal)`
+const Modal = styled(ModalUnstyled)`
   ${(props) => `
     ${rebootUtils.body(
       props.theme['$font-family-base'],

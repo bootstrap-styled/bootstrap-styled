@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import omit from 'lodash.omit';
 import { makeGridColumns } from '../../styled/mixins/grid-framework';
 
-class Dd extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class DdUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -30,8 +30,7 @@ class Dd extends React.Component { // eslint-disable-line react/prefer-stateless
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Dd = styled(Dd)` 
+const Dd = styled(DdUnstyled)` 
   /* _reboot.scss */
   margin-bottom: .5rem;
   margin-left: 0; /* Undo browser default */

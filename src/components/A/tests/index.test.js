@@ -33,7 +33,7 @@ describe('<A />', () => {
       target: '_blank',
       active,
     });
-    expect(renderedComponent.find('A').length).toBe(1);
+    expect(renderedComponent.find('AUnstyled').length).toBe(1);
   });
   it('should have an href attribute without a theme', () => {
     const renderedComponent = renderComponent({

@@ -18,7 +18,7 @@ const defaultProps = {
   tag: 'span',
 };
 
-class Badge extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class BadgeUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -53,8 +53,7 @@ class Badge extends React.Component { // eslint-disable-line react/prefer-statel
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Badge = styled(Badge)`
+const Badge = styled(BadgeUnstyled)`
   ${(props) => `
     
     /* Base class */

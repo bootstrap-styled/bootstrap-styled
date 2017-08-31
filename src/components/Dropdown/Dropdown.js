@@ -34,7 +34,7 @@ const defaultTetherConfig = {
   ],
 };
 
-class Dropdown extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class DropdownUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     disabled: PropTypes.bool,
@@ -197,8 +197,7 @@ class Dropdown extends React.Component { // eslint-disable-line react/prefer-sta
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Dropdown = styled(Dropdown)`
+const Dropdown = styled(DropdownUnstyled)`
   ${(props) => `
     &.dropup,
     &.dropdown {

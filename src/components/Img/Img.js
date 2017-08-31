@@ -21,7 +21,7 @@ const defaultProps = {
   theme: bsTheme,
   tag: 'img',
 };
-class Img extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class ImgUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -71,8 +71,7 @@ class Img extends React.Component { // eslint-disable-line react/prefer-stateles
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Img = styled(Img)`
+const Img = styled(ImgUnstyled)`
   ${(props) => `
     
     /* 

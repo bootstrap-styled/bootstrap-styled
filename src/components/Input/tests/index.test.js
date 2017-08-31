@@ -23,7 +23,7 @@ const renderComponentUsingTheme = (props = {}) => mount(
 describe('<Input />', () => {
   it('should render an <Input> tag without a theme', () => {
     const renderedComponent = renderComponent();
-    expect(renderedComponent.find('Input').length).toBe(1);
+    expect(renderedComponent.find('InputUnstyled').length).toBe(1);
   });
   it('should have an attribute type without a theme', () => {
     const renderedComponent = renderComponent({

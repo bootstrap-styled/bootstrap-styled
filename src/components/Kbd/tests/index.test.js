@@ -35,7 +35,7 @@ describe('<Kbd />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Kbd').length).toBe(1);
+    expect(renderedComponent.find('KbdUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

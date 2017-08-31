@@ -12,7 +12,7 @@ import bsTheme from '../../theme';
 import { mapToCssModules } from '../../utils/tools';
 const defaultProps = { theme: bsTheme };
 
-class Small extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class SmallUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -45,8 +45,7 @@ class Small extends React.Component { // eslint-disable-line react/prefer-statel
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Small = styled(Small)`
+const Small = styled(SmallUnstyled)`
   ${(props) => `
     /* Reboot Scss */
     font-size: ${props.theme['$small-font-size']};

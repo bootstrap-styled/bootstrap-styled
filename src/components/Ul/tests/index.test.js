@@ -30,7 +30,7 @@ describe('<Ul />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Ul').length).toBe(1);
+    expect(renderedComponent.find('UlUnstyled').length).toBe(1);
   });
 
   it('should have children without a theme', () => {

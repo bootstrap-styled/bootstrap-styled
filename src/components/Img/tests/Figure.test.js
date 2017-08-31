@@ -36,7 +36,7 @@ describe('<Figure />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Figure').length).toBe(1);
+    expect(renderedComponent.find('FigureUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

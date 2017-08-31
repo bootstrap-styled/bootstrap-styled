@@ -17,7 +17,7 @@ const defaultProps = {
   role: 'group',
 };
 
-class ButtonGroup extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class ButtonGroupUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -52,8 +52,7 @@ class ButtonGroup extends React.Component { // eslint-disable-line react/prefer-
   }
 }
 
-// eslint-disable-next-line no-class-assign
-ButtonGroup = styled(ButtonGroup)`
+const ButtonGroup = styled(ButtonGroupUnstyled)`
   ${(props) => `
     ${buttonGroup(
       props.theme['$enable-shadows'],

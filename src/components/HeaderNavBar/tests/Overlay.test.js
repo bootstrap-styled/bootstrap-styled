@@ -32,7 +32,7 @@ describe('<Overlay />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('Overlay').length).toBe(1);
+    expect(renderedComponent.find('OverlayUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

@@ -13,7 +13,7 @@ import { mapToCssModules } from '../../utils/tools';
 
 const defaultProps = { theme: bsTheme };
 
-class Strong extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class StrongUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -46,8 +46,7 @@ class Strong extends React.Component { // eslint-disable-line react/prefer-state
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Strong = styled(Strong)`
+const Strong = styled(StrongUnstyled)`
   font-weight: bolder; /* Add the correct font weight in Chrome, Edge, and Safari */
 `;
 

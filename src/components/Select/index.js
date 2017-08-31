@@ -6,7 +6,7 @@ import cn from 'classnames';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
 
-class Select extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class SelectUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -52,8 +52,7 @@ class Select extends React.Component { // eslint-disable-line react/prefer-state
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Select = styled(Select)`
+const Select = styled(SelectUnstyled)`
   &.select {
     touch-action: manipulation;
     line-height: inherit;

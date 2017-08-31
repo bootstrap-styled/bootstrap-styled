@@ -22,7 +22,7 @@ const renderComponentUsingTheme = (props = {}) => mount(
 describe('<Form />', () => {
   it('should render an <Form> tag without a theme', () => {
     const renderedComponent = renderComponent();
-    expect(renderedComponent.find('Form').length).toBe(1);
+    expect(renderedComponent.find('FormUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

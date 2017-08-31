@@ -29,7 +29,7 @@ describe('<InputGroup />', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('InputGroup').length).toBe(1);
+    expect(renderedComponent.find('InputGroupUnstyled').length).toBe(1);
   });
   it('should have children without a theme', () => {
     const renderedComponent = renderComponent({

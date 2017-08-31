@@ -22,7 +22,7 @@ describe('<Img />', () => {
       alt: 'test-alt',
       src: 'src-test',
     });
-    expect(renderedComponent.find('Img').length).toBe(1);
+    expect(renderedComponent.find('ImgUnstyled').length).toBe(1);
   });
   it('should render a <Img> tag with a theme', () => {
     const renderedComponentTheme = renderComponentUsingTheme({

@@ -18,7 +18,7 @@ const defaultProps = {
   tag: 'div',
 };
 
-class Jumbotron extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class JumbotronUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -51,8 +51,7 @@ class Jumbotron extends React.Component { // eslint-disable-line react/prefer-st
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Jumbotron = styled(Jumbotron)`
+const Jumbotron = styled(JumbotronUnstyled)`
   ${(props) => `
     &.jumbotron {
       padding: ${props.theme['$jumbotron-padding']} calc(${props.theme['$jumbotron-padding']} / 2);

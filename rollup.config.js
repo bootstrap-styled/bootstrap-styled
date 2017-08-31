@@ -15,13 +15,13 @@ const mode = prod ? 'production' : 'development';
 
 console.log(`Creating ${mode} bundle...`);
 
-const targets = prod ?
+const output = prod ?
 [
-  { dest: `dist/${pkg.name}.min.js`, format: 'umd' },
+  { file: `dist/${pkg.name}.min.js`, format: 'umd' },
 ] :
 [
-  { dest: `dist/${pkg.name}.js`, format: 'umd' },
-  { dest: `dist/${pkg.name}.es.js`, format: 'es' },
+  { file: `dist/${pkg.name}.js`, format: 'umd' },
+  { file: `dist/${pkg.name}.es.js`, format: 'es' },
 ];
 
 const plugins = [
@@ -59,12 +59,12 @@ const plugins = [
 if (prod) plugins.push(uglify(), visualizer({ filename: './bundle-stats.html' }));
 
 export default {
-  entry: 'src/index.js',
-  sourceMap: true,
-  moduleName: pkg.name,
-  external: ['react', 'react-dom', 'prop-types', 'styled-components'],
+  input: 'src/index.js',
+  sourcemap: true,
+  name: pkg.name,
+  external: ['react', 'react-dom', 'prop-types', 'styled-components', 'react-transition-group'],
   exports: 'named',
-  targets,
+  output,
   plugins,
-  globals: { react: 'React', 'react-dom': 'ReactDom', 'prop-types': 'PropTypes', 'styled-components': 'styled' },
+  globals: { react: 'React', 'react-dom': 'ReactDom', 'prop-types': 'PropTypes', 'styled-components': 'styled', 'react-transition-group': 'ReactTransitionGroup' },
 };

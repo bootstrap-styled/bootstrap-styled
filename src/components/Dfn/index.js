@@ -7,7 +7,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-class Dfn extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class DfnUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
@@ -25,8 +25,7 @@ class Dfn extends React.Component { // eslint-disable-line react/prefer-stateles
   }
 }
 
-// eslint-disable-next-line no-class-assign
-Dfn = styled(Dfn)`
+const Dfn = styled(DfnUnstyled)`
   font-style: italic; /* Add the correct font style in Android 4.3- */
 `;
 
