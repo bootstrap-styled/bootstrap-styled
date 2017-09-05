@@ -31,6 +31,7 @@ export {
   textUtils,
   visibilityUtils,
 } from './utilities';
+export { default as parseTransition } from './utils/parseTransition';
 // Useful meta-data
 export { tetherAttachements } from './utils/tools';
 // 0. Configuration

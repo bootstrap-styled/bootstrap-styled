@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.1] - 2017-TBD-TBD
+
+ - Added `parseTransition` to exports.
+
 ## [1.3.0] - 2017-09-01
 
  - Added `mapToCssModules` to `HeaderNavBar` and `OffsetNav` components.
