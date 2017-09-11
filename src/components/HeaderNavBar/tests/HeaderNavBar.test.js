@@ -116,12 +116,12 @@ describe('<HeaderNavBar />', () => {
     });
     expect(renderedComponent.find('HeaderNavBar').props()['fixed-bottom']).toBe(true);
   });
-  it('should have state show by default if props alwaysShow', () => {
+  it('should have state show by default if props showMenu', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      alwaysShow: true,
+      showMenu: true,
     });
-    expect(renderedComponent.find('OffsetNav').props().active).toEqual(true);
+    expect(renderedComponent.find('OffsetNav').props().showMenu).toBe(true);
   });
   it('should render an <HeaderNavBar> with a props shadowHeader tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

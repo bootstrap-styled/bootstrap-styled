@@ -15,7 +15,7 @@ const defaultProps = {
   button: {
     component: Button,
   },
-  alwaysShow: false,
+  showMenu: false,
   theme: bsTheme,
   noOverlay: false,
   belowHeader: false,
@@ -29,7 +29,10 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
     theme: PropTypes.object,
-    alwaysShow: PropTypes.bool,
+    showMenu: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool,
+    ]),
     onClick: PropTypes.func,
     belowHeader: PropTypes.bool,
     shadowHeader: PropTypes.bool,
@@ -60,8 +63,8 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
   };
 
   componentWillMount() {
-    const { alwaysShow } = this.props;
-    if (alwaysShow) {
+    const { showMenu } = this.props;
+    if (showMenu) {
       this.setState({ show: true });
     }
   }
@@ -113,7 +116,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       sticky,
       color,
       offsetColor,
-      alwaysShow,
+      showMenu,
       shadowHeader,
       ...attributesTemp
     } = omit(this.props, ['theme', 'belowHeader']);
@@ -129,7 +132,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     } = button;
 
     const cssClasses = cn('navbar', 'justify-content-between', className, {
-      'flex-row': !alwaysShow,
+      'flex-row': !showMenu,
       'navbar-light': light,
       'navbar-inverse': inverse,
       [`bg-${color}`]: color,
@@ -141,17 +144,19 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
 
     const buttonClasses = cn(buttonMenuRight, classNameButton, {
       'navbar-toggler-icon p-3 my-auto cursor-pointer': !classNameButton,
+      [`d-${showMenu}-none`]: showMenu,
     });
 
     const OffsetMenuAnimated = animationPush ? (
       <OffsetNavPush
         className="offset-nav-margin-top"
         elementWidth={offsetNavWidth}
+        showMenu={showMenu}
         active={this.state.show}
         offsetColor={offsetColor}
         menu-right={menuRight}
         animation-push={animationPush}
-        menuClose={menuClose}
+        menuClose={noOverlay && menuClose}
         dismiss={this.handleClick}
       >
         {children}
@@ -160,11 +165,12 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       <OffsetNavSlide
         className="offset-nav-margin-top"
         elementWidth={offsetNavWidth}
+        showMenu={showMenu}
         active={this.state.show}
         offsetColor={offsetColor}
         menu-right={menuRight}
         animation-push={animationPush}
-        menuClose={menuClose}
+        menuClose={noOverlay && menuClose}
         dismiss={this.handleClick}
       >
         {children}
@@ -175,7 +181,7 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       <div>
         {!noOverlay && (<Overlay active={this.state.show} onClick={this.handleClick} />)}
         <Header className={mapToCssModules(cn(cssClasses), cssModule)} shadowHeader={shadowHeader} {...attributes} innerRef={(header) => { this.header = header; }}>
-          {!alwaysShow && (<ButtonToggle className={buttonClasses} onClick={this.handleClick} {...restButton} />)}
+          <ButtonToggle className={buttonClasses} onClick={this.handleClick} {...restButton} />
           {navTop && (<div>{navTop}</div>)}
         </Header>
         {OffsetMenuAnimated}
@@ -187,4 +193,3 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
 
 HeaderNavBar.defaultProps = defaultProps;
 export default HeaderNavBar;
-
