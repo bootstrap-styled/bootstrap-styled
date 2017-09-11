@@ -42,7 +42,7 @@ class DropdownUnstyled extends React.Component { // eslint-disable-line react/pr
     group: PropTypes.bool,
     isOpen: PropTypes.bool,
     size: PropTypes.string,
-    tag: PropTypes.string,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     tether: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
     toggle: PropTypes.func,
     children: PropTypes.node,

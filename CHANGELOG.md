@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [1.3.1] - 2017-TBD-TBD
 
  - Added `parseTransition` to exports.
+ - Corrected `tag` propTypes in `<Dropdown />`. 
 
 ## [1.3.0] - 2017-09-01
 
