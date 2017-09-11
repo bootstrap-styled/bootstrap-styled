@@ -16139,7 +16139,7 @@ var OffsetNavUnstyled = function (_React$Component) {
   createClass$1(OffsetNavUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme', 'elementWidth', 'animation-push']),
+      var _omit = lodash_omit$1(this.props, ['theme', 'elementWidth', 'animation-push', 'showMenu']),
           className = _omit.className,
           children = _omit.children,
           active = _omit.active,
@@ -16169,6 +16169,7 @@ OffsetNavUnstyled.propTypes = {
   active: PropTypes.bool,
   dismiss: PropTypes.func,
   menuClose: PropTypes.bool,
+  showMenu: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   elementWidth: PropTypes.string,
   theme: PropTypes.object,
   offsetColor: PropTypes.string,
@@ -16179,7 +16180,7 @@ OffsetNavUnstyled.propTypes = {
 var OffsetNav = styled(OffsetNavUnstyled).withConfig({
   displayName: 'OffsetNav'
 })(['', ''], function (props) {
-  return '\n    width: ' + (props.elementWidth ? props.elementWidth : props.theme['$menu-push-width']) + ';\n    height: 100%;\n    background-color: white;\n    z-index: ' + props.theme['$zindex-menu-push'] + ';\n  ';
+  return '\n    width: ' + (props.elementWidth ? props.elementWidth : props.theme['$menu-push-width']) + ';\n    height: 100%;\n    background-color: white;\n    z-index: ' + props.theme['$zindex-menu-push'] + ';\n    ' + ifThen(props.showMenu, mediaBreakpointUp(props.showMenu, props.theme['$grid-breakpoints'], 'position: absolute;\n            top: 0;')) + '\n  ';
 });
 OffsetNav.defaultProps = defaultProps$132;
 
@@ -16234,7 +16235,7 @@ var defaultProps$131 = {
   button: {
     component: Button
   },
-  alwaysShow: false,
+  showMenu: false,
   theme: bsTheme,
   noOverlay: false,
   belowHeader: false,
@@ -16271,8 +16272,8 @@ var HeaderNavBar = function (_React$Component) {
   createClass$1(HeaderNavBar, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      var alwaysShow = this.props.alwaysShow;
-      if (alwaysShow) {
+      var showMenu = this.props.showMenu;
+      if (showMenu) {
         this.setState({ show: true });
       }
     }
@@ -16307,33 +16308,34 @@ var HeaderNavBar = function (_React$Component) {
           sticky = _omit.sticky,
           color = _omit.color,
           offsetColor = _omit.offsetColor,
-          alwaysShow = _omit.alwaysShow,
+          showMenu = _omit.showMenu,
           shadowHeader = _omit.shadowHeader,
-          attributesTemp = objectWithoutProperties(_omit, ['className', 'children', 'cssModule', 'button', 'noOverlay', 'menuClose', 'offsetNavWidth', 'nav-top', 'menu-right', 'animation-push', 'light', 'inverse', 'fixed', 'sticky', 'color', 'offsetColor', 'alwaysShow', 'shadowHeader']);
+          attributesTemp = objectWithoutProperties(_omit, ['className', 'children', 'cssModule', 'button', 'noOverlay', 'menuClose', 'offsetNavWidth', 'nav-top', 'menu-right', 'animation-push', 'light', 'inverse', 'fixed', 'sticky', 'color', 'offsetColor', 'showMenu', 'shadowHeader']);
       var _omit2 = lodash_omit$1(attributesTemp, ['onClick']),
           attributes = objectWithoutProperties(_omit2, []);
       var ButtonToggle = button.component,
           classNameButton = button.className,
           restButton = objectWithoutProperties(button, ['component', 'className']);
       var cssClasses = classnames$1('navbar', 'justify-content-between', className, (_cn = {
-        'flex-row': !alwaysShow,
+        'flex-row': !showMenu,
         'navbar-light': light,
         'navbar-inverse': inverse
       }, defineProperty(_cn, 'bg-' + color, color), defineProperty(_cn, 'fixed-' + fixed, fixed), defineProperty(_cn, 'sticky-' + sticky, sticky), _cn));
       var buttonMenuRight = menuRight ? 'flex-last' : '';
-      var buttonClasses = classnames$1(buttonMenuRight, classNameButton, {
+      var buttonClasses = classnames$1(buttonMenuRight, classNameButton, defineProperty({
         'navbar-toggler-icon p-3 my-auto cursor-pointer': !classNameButton
-      });
+      }, 'd-' + showMenu + '-none', showMenu));
       var OffsetMenuAnimated = animationPush ? React.createElement(
         OffsetNavPush,
         {
           className: 'offset-nav-margin-top',
           elementWidth: offsetNavWidth,
+          showMenu: showMenu,
           active: this.state.show,
           offsetColor: offsetColor,
           'menu-right': menuRight,
           'animation-push': animationPush,
-          menuClose: menuClose,
+          menuClose: noOverlay && menuClose,
           dismiss: this.handleClick
         },
         children
@@ -16342,11 +16344,12 @@ var HeaderNavBar = function (_React$Component) {
         {
           className: 'offset-nav-margin-top',
           elementWidth: offsetNavWidth,
+          showMenu: showMenu,
           active: this.state.show,
           offsetColor: offsetColor,
           'menu-right': menuRight,
           'animation-push': animationPush,
-          menuClose: menuClose,
+          menuClose: noOverlay && menuClose,
           dismiss: this.handleClick
         },
         children
@@ -16360,7 +16363,7 @@ var HeaderNavBar = function (_React$Component) {
           _extends({ className: mapToCssModules(classnames$1(cssClasses), cssModule), shadowHeader: shadowHeader }, attributes, { innerRef: function innerRef(header) {
               _this2.header = header;
             } }),
-          !alwaysShow && React.createElement(ButtonToggle, _extends({ className: buttonClasses, onClick: this.handleClick }, restButton)),
+          React.createElement(ButtonToggle, _extends({ className: buttonClasses, onClick: this.handleClick }, restButton)),
           navTop && React.createElement(
             'div',
             null,
@@ -16377,7 +16380,7 @@ HeaderNavBar.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
   theme: PropTypes.object,
-  alwaysShow: PropTypes.bool,
+  showMenu: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onClick: PropTypes.func,
   belowHeader: PropTypes.bool,
   shadowHeader: PropTypes.bool,
