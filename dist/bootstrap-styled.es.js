@@ -4732,7 +4732,6 @@ function stubArray() {
 }
 var lodash_omit$1 = omit;
 
-var babelHelpers = {};
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
   return typeof obj;
 } : function (obj) {
@@ -4962,28 +4961,6 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-babelHelpers;
 
 var defaultProps$37 = {
   theme: bsTheme
@@ -7947,7 +7924,7 @@ DropdownUnstyled.propTypes = {
   group: PropTypes.bool,
   isOpen: PropTypes.bool,
   size: PropTypes.string,
-  tag: PropTypes.string,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   tether: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   toggle: PropTypes.func,
   children: PropTypes.node,
