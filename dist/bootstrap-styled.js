@@ -16497,6 +16497,7 @@ exports.spacingUtils = spacingUtils;
 exports.transitionUtils = transitionUtils;
 exports.textUtils = textUtils;
 exports.visibilityUtils = visibilityUtils;
+exports.parseTransition = parseTransition;
 exports.tetherAttachements = tetherAttachements;
 exports.theme = bsTheme;
 exports.makeTheme = makeTheme$$1;
