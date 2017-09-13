@@ -14,3 +14,4 @@ export { default as spacingUtils } from './styled/utilities/spacing';
 export { default as transitionUtils } from './styled/utilities/transition';
 export { default as textUtils } from './styled/utilities/text';
 export { default as visibilityUtils } from './styled/utilities/visibility';
+export { unitUtils } from 'math-utils';
