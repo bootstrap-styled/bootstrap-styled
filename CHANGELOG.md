@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.3.1] - 2017-TBD-TBD
+## [1.3.1] - 2017-09-13
 
  - Added `parseTransition` to exports.
  - Replaced props `alwaysShow` by `showMenu` and improved props validation and rendering of menu to `<HeaderNavBar />`
