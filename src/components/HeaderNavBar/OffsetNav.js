@@ -10,6 +10,8 @@ import omit from 'lodash.omit';
 import bsTheme from '../../theme';
 import Close from '../Close';
 import { mapToCssModules } from '../../utils/tools';
+import { ifThen } from '../../styled/mixins/conditional';
+import { mediaBreakpointUp } from '../../styled/mixins/breakpoints';
 
 const defaultProps = {
   theme: bsTheme,
@@ -24,6 +26,10 @@ class OffsetNavUnstyled extends React.Component { // eslint-disable-line react/p
     active: PropTypes.bool,
     dismiss: PropTypes.func,
     menuClose: PropTypes.bool,
+    showMenu: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool,
+    ]),
     elementWidth: PropTypes.string,
     theme: PropTypes.object,
     offsetColor: PropTypes.string,
@@ -44,7 +50,7 @@ class OffsetNavUnstyled extends React.Component { // eslint-disable-line react/p
       cssModule,
       'menu-right': menuRight,
       ...attributes
-    } = omit(this.props, ['theme', 'elementWidth', 'animation-push']);
+    } = omit(this.props, ['theme', 'elementWidth', 'animation-push', 'showMenu']);
 
     const menuDirectionClassNames = menuRight ? 'menu-right' : 'menu-left';
 
@@ -70,10 +76,18 @@ const OffsetNav = styled(OffsetNavUnstyled)`
     height: 100%;
     background-color: white;
     z-index: ${props.theme['$zindex-menu-push']};
+    ${ifThen(
+      props.showMenu,
+      mediaBreakpointUp(
+        props.showMenu,
+        props.theme['$grid-breakpoints'],
+        `position: absolute;
+            top: 0;`
+      )
+    )}
   `}
 `;
 
 OffsetNav.defaultProps = defaultProps;
 
 export default OffsetNav;
-

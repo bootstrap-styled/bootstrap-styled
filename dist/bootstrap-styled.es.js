@@ -4732,7 +4732,6 @@ function stubArray() {
 }
 var lodash_omit$1 = omit;
 
-var babelHelpers = {};
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
   return typeof obj;
 } : function (obj) {
@@ -4962,28 +4961,6 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-babelHelpers;
 
 var defaultProps$37 = {
   theme: bsTheme
@@ -7947,7 +7924,7 @@ DropdownUnstyled.propTypes = {
   group: PropTypes.bool,
   isOpen: PropTypes.bool,
   size: PropTypes.string,
-  tag: PropTypes.string,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   tether: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   toggle: PropTypes.func,
   children: PropTypes.node,
@@ -16162,7 +16139,7 @@ var OffsetNavUnstyled = function (_React$Component) {
   createClass$1(OffsetNavUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme', 'elementWidth', 'animation-push']),
+      var _omit = lodash_omit$1(this.props, ['theme', 'elementWidth', 'animation-push', 'showMenu']),
           className = _omit.className,
           children = _omit.children,
           active = _omit.active,
@@ -16192,6 +16169,7 @@ OffsetNavUnstyled.propTypes = {
   active: PropTypes.bool,
   dismiss: PropTypes.func,
   menuClose: PropTypes.bool,
+  showMenu: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   elementWidth: PropTypes.string,
   theme: PropTypes.object,
   offsetColor: PropTypes.string,
@@ -16202,7 +16180,7 @@ OffsetNavUnstyled.propTypes = {
 var OffsetNav = styled(OffsetNavUnstyled).withConfig({
   displayName: 'OffsetNav'
 })(['', ''], function (props) {
-  return '\n    width: ' + (props.elementWidth ? props.elementWidth : props.theme['$menu-push-width']) + ';\n    height: 100%;\n    background-color: white;\n    z-index: ' + props.theme['$zindex-menu-push'] + ';\n  ';
+  return '\n    width: ' + (props.elementWidth ? props.elementWidth : props.theme['$menu-push-width']) + ';\n    height: 100%;\n    background-color: white;\n    z-index: ' + props.theme['$zindex-menu-push'] + ';\n    ' + ifThen(props.showMenu, mediaBreakpointUp(props.showMenu, props.theme['$grid-breakpoints'], 'position: absolute;\n            top: 0;')) + '\n  ';
 });
 OffsetNav.defaultProps = defaultProps$132;
 
@@ -16257,7 +16235,7 @@ var defaultProps$131 = {
   button: {
     component: Button
   },
-  alwaysShow: false,
+  showMenu: false,
   theme: bsTheme,
   noOverlay: false,
   belowHeader: false,
@@ -16294,8 +16272,8 @@ var HeaderNavBar = function (_React$Component) {
   createClass$1(HeaderNavBar, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      var alwaysShow = this.props.alwaysShow;
-      if (alwaysShow) {
+      var showMenu = this.props.showMenu;
+      if (showMenu) {
         this.setState({ show: true });
       }
     }
@@ -16330,33 +16308,34 @@ var HeaderNavBar = function (_React$Component) {
           sticky = _omit.sticky,
           color = _omit.color,
           offsetColor = _omit.offsetColor,
-          alwaysShow = _omit.alwaysShow,
+          showMenu = _omit.showMenu,
           shadowHeader = _omit.shadowHeader,
-          attributesTemp = objectWithoutProperties(_omit, ['className', 'children', 'cssModule', 'button', 'noOverlay', 'menuClose', 'offsetNavWidth', 'nav-top', 'menu-right', 'animation-push', 'light', 'inverse', 'fixed', 'sticky', 'color', 'offsetColor', 'alwaysShow', 'shadowHeader']);
+          attributesTemp = objectWithoutProperties(_omit, ['className', 'children', 'cssModule', 'button', 'noOverlay', 'menuClose', 'offsetNavWidth', 'nav-top', 'menu-right', 'animation-push', 'light', 'inverse', 'fixed', 'sticky', 'color', 'offsetColor', 'showMenu', 'shadowHeader']);
       var _omit2 = lodash_omit$1(attributesTemp, ['onClick']),
           attributes = objectWithoutProperties(_omit2, []);
       var ButtonToggle = button.component,
           classNameButton = button.className,
           restButton = objectWithoutProperties(button, ['component', 'className']);
       var cssClasses = classnames$1('navbar', 'justify-content-between', className, (_cn = {
-        'flex-row': !alwaysShow,
+        'flex-row': !showMenu,
         'navbar-light': light,
         'navbar-inverse': inverse
       }, defineProperty(_cn, 'bg-' + color, color), defineProperty(_cn, 'fixed-' + fixed, fixed), defineProperty(_cn, 'sticky-' + sticky, sticky), _cn));
       var buttonMenuRight = menuRight ? 'flex-last' : '';
-      var buttonClasses = classnames$1(buttonMenuRight, classNameButton, {
+      var buttonClasses = classnames$1(buttonMenuRight, classNameButton, defineProperty({
         'navbar-toggler-icon p-3 my-auto cursor-pointer': !classNameButton
-      });
+      }, 'd-' + showMenu + '-none', showMenu));
       var OffsetMenuAnimated = animationPush ? React.createElement(
         OffsetNavPush,
         {
           className: 'offset-nav-margin-top',
           elementWidth: offsetNavWidth,
+          showMenu: showMenu,
           active: this.state.show,
           offsetColor: offsetColor,
           'menu-right': menuRight,
           'animation-push': animationPush,
-          menuClose: menuClose,
+          menuClose: noOverlay && menuClose,
           dismiss: this.handleClick
         },
         children
@@ -16365,11 +16344,12 @@ var HeaderNavBar = function (_React$Component) {
         {
           className: 'offset-nav-margin-top',
           elementWidth: offsetNavWidth,
+          showMenu: showMenu,
           active: this.state.show,
           offsetColor: offsetColor,
           'menu-right': menuRight,
           'animation-push': animationPush,
-          menuClose: menuClose,
+          menuClose: noOverlay && menuClose,
           dismiss: this.handleClick
         },
         children
@@ -16383,7 +16363,7 @@ var HeaderNavBar = function (_React$Component) {
           _extends({ className: mapToCssModules(classnames$1(cssClasses), cssModule), shadowHeader: shadowHeader }, attributes, { innerRef: function innerRef(header) {
               _this2.header = header;
             } }),
-          !alwaysShow && React.createElement(ButtonToggle, _extends({ className: buttonClasses, onClick: this.handleClick }, restButton)),
+          React.createElement(ButtonToggle, _extends({ className: buttonClasses, onClick: this.handleClick }, restButton)),
           navTop && React.createElement(
             'div',
             null,
@@ -16400,7 +16380,7 @@ HeaderNavBar.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
   theme: PropTypes.object,
-  alwaysShow: PropTypes.bool,
+  showMenu: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onClick: PropTypes.func,
   belowHeader: PropTypes.bool,
   shadowHeader: PropTypes.bool,
@@ -16463,5 +16443,5 @@ var PageWrapper = styled(PageWrapperUnstyled).withConfig({
 });
 PageWrapper.defaultProps = defaultProps$134;
 
-export { borderRadius$1 as radius, boxShadow, breakpoints as bp, ifThen, ifElse, gradients as gradient, hover, srOnly, srOnlyFocusable, size, index$1 as unitMixins, transition, alignUtils, backgroundUtils, bordersUtils, clearfixUtils, cursorUtils, displayUtils, flexUtils, floatUtils, positionUtils, rebootUtils, screenreadersUtils, sizingUtils, spacingUtils, transitionUtils, textUtils, visibilityUtils, tetherAttachements, bsTheme as theme, makeTheme$$1 as makeTheme, A, composeLink, Abbr, Address, index$1$1 as Alert, Area, Article, Blockquote, BootstrapProvider, Breadcrumb, BreadcrumbItem, Button, ButtonDropdown, ButtonGroup, ButtonToolbar, Caption, Close, Code, Col, Collapse, Dd, Dfn, Details, Dl, Dt, index$2 as Fade, Fa, FaStacked, Fieldset, Footer, H1, H2, H3, H4, H5, H6, Header, Hr, Img, Figure, FigCaption, Input, InputGroup, InputGroupAddon, InputGroupButton, IssueIcon, Kbd, Jumbotron, Label, Legend, Li, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemHeading$2 as ListGroupItemText, Map$2 as Map, Mark, Media, Modal, ModalBody, ModalFooter, ModalHeader, Nav, NavLink, NavItem, Ol, Option, Output, P, Pagination, PaginationItem, PaginationLink, Pre, Progress, ProgressBar, Row, Samp, Section, Select, Small, Strong, Summary, Sub, Sup, Table, Tbody, Tfoot, Thead, Td, Th, Tr, Badge, Textarea, Tooltip, Ul, Blur, Contrast, Brightness, Grayscale, HueRotate, Invert, Opacity, Sepia, Saturate, Bounce, BounceDown, BounceUp, BounceLeft, BounceRight, Flash, RollOut, RollIn, Rubber, Swing, Zoom, Hinge, Pulse, ExpandUp, Entrance, Hatch, SlideUp, SlideDown, SlideRight, SlideLeft, SlideRightLeft, FadeIn, FadeInDown, FadeInUp, FadeInLeft, FadeInRight, RotateIn, RotateLeft, RotateRight, RotateUpLeft, RotateUpRight, LightIn, LightOut, Flip, FlipX, FlipY, Dropshadow, Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote, Accordion, AccordionGroup, Form, FormGroup, FormText, FormFeedback, FormCustom, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Navbar, NavbarToggler, NavbarBrand, NavDropdown, Container, ContainerFluid, HeaderNavBar, PageWrapper, OffsetNavPush, OffsetNavSlide };
+export { borderRadius$1 as radius, boxShadow, breakpoints as bp, ifThen, ifElse, gradients as gradient, hover, srOnly, srOnlyFocusable, size, index$1 as unitMixins, transition, alignUtils, backgroundUtils, bordersUtils, clearfixUtils, cursorUtils, displayUtils, flexUtils, floatUtils, positionUtils, rebootUtils, screenreadersUtils, sizingUtils, spacingUtils, transitionUtils, textUtils, visibilityUtils, parseTransition, tetherAttachements, bsTheme as theme, makeTheme$$1 as makeTheme, A, composeLink, Abbr, Address, index$1$1 as Alert, Area, Article, Blockquote, BootstrapProvider, Breadcrumb, BreadcrumbItem, Button, ButtonDropdown, ButtonGroup, ButtonToolbar, Caption, Close, Code, Col, Collapse, Dd, Dfn, Details, Dl, Dt, index$2 as Fade, Fa, FaStacked, Fieldset, Footer, H1, H2, H3, H4, H5, H6, Header, Hr, Img, Figure, FigCaption, Input, InputGroup, InputGroupAddon, InputGroupButton, IssueIcon, Kbd, Jumbotron, Label, Legend, Li, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemHeading$2 as ListGroupItemText, Map$2 as Map, Mark, Media, Modal, ModalBody, ModalFooter, ModalHeader, Nav, NavLink, NavItem, Ol, Option, Output, P, Pagination, PaginationItem, PaginationLink, Pre, Progress, ProgressBar, Row, Samp, Section, Select, Small, Strong, Summary, Sub, Sup, Table, Tbody, Tfoot, Thead, Td, Th, Tr, Badge, Textarea, Tooltip, Ul, Blur, Contrast, Brightness, Grayscale, HueRotate, Invert, Opacity, Sepia, Saturate, Bounce, BounceDown, BounceUp, BounceLeft, BounceRight, Flash, RollOut, RollIn, Rubber, Swing, Zoom, Hinge, Pulse, ExpandUp, Entrance, Hatch, SlideUp, SlideDown, SlideRight, SlideLeft, SlideRightLeft, FadeIn, FadeInDown, FadeInUp, FadeInLeft, FadeInRight, RotateIn, RotateLeft, RotateRight, RotateUpLeft, RotateUpRight, LightIn, LightOut, Flip, FlipX, FlipY, Dropshadow, Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote, Accordion, AccordionGroup, Form, FormGroup, FormText, FormFeedback, FormCustom, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Navbar, NavbarToggler, NavbarBrand, NavDropdown, Container, ContainerFluid, HeaderNavBar, PageWrapper, OffsetNavPush, OffsetNavSlide };
 //# sourceMappingURL=bootstrap-styled.es.js.map

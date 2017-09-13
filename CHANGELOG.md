@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.1] - 2017-09-13
+
+ - Added `parseTransition` to exports.
+ - Replaced props `alwaysShow` by `showMenu` and improved props validation and rendering of menu to `<HeaderNavBar />`
+ - Corrected `tag` propTypes in `<Dropdown />`. 
+
 ## [1.3.0] - 2017-09-01
 
  - Added `mapToCssModules` to `HeaderNavBar` and `OffsetNav` components.
