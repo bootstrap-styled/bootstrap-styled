@@ -10,7 +10,6 @@ export {
   srOnly,
   srOnlyFocusable,
   size,
-  unitMixins,
   transition,
 } from './mixins';
 export {
@@ -29,6 +28,7 @@ export {
   spacingUtils,
   transitionUtils,
   textUtils,
+  unitUtils as unit,
   visibilityUtils,
 } from './utilities';
 export { default as parseTransition } from './utils/parseTransition';

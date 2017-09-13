@@ -10,7 +10,6 @@ export { default as buttonGroupMixins } from './styled/mixins/buttonGroup';
 export { default as cardsMixins } from './styled/mixins/cards';
 export { clearfix } from './styled/mixins/clearfix';
 export { ifElse, ifThen } from './styled/mixins/conditional';
-export { unitUtils as unitMixins } from 'math-utils';
 export { default as floatMixins } from './styled/mixins/float';
 export { default as formsMixins } from './styled/mixins/forms';
 export { default as customformsMixins } from './styled/mixins/customForms';
