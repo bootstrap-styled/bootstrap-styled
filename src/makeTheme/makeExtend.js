@@ -43,7 +43,7 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
   v['$menu-offset-nav-bg-color'] = u['$menu-offset-nav-bg-color'] || 'white';
 
   // Overlay
-  v['$overlay-bg-color'] = u['$overlay-bg-color'] || 'rgba(0, 0, 0, 0.3)';
+  v['$overlay-bg'] = u['$overlay-bg-color'] || 'rgba(0, 0, 0, 0.3)';
 
   // Zindex
   v['$zindex-menu-push'] = u['$zindex-menu-push'] || '2000';
