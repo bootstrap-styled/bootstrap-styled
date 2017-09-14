@@ -74,7 +74,7 @@ const OffsetNav = styled(OffsetNavUnstyled)`
   ${(props) => `
     width: ${props.elementWidth ? props.elementWidth : props.theme['$menu-push-width']};
     height: 100%;
-    background-color: white;
+    background-color: ${props.theme['$menu-offset-nav-bg-color']};
     z-index: ${props.theme['$zindex-menu-push']};
     ${ifThen(
       props.showMenu,

@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.4] - 2017-09-xx
+
+- Added variable $menu-offset-nav-bg-color to the OffsetNav.
+
+
 ## [1.3.3] - 2017-09-14
 
 - body overflow class replaced `overflow` with `overflow-x`.
