@@ -1,3 +1,4 @@
+import { rebootUtils } from './utilities';
 // -1. Mixins et Utilities (export everything)
 export {
   radius,
@@ -31,6 +32,8 @@ export {
   unitUtils as unit,
   visibilityUtils,
 } from './utilities';
+const { getGlobalStyleNoBootstrapProvider, getGlobalStyles } = rebootUtils;
+export { getGlobalStyleNoBootstrapProvider, getGlobalStyles };
 export { default as parseTransition } from './utils/parseTransition';
 // Useful meta-data
 export { tetherAttachements } from './utils/tools';

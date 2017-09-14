@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.3] - 2017-09-14
+
+- body overflow class replaced `overflow` with `overflow-x`.
+- mixin `body` improved in `<Modal />` and `<UtilityProvider />`.
+- `getGlobalStyleNoBootrapProvider` added in reboot utils for those who don't use `<BootstrapProvider />`
+- `getGlobalStyles` is now for those who use `<BootstrapProvider />`.
+- Upgraded `rollup` from `v0.49.2` to `v0.49.3`.
+- Upgraded `rollup-plugin-commonjs` from `v8.2.0` to `v8.2.1`.
+
 ## [1.3.2] - 2017-09-13
 
 - Renamed export of `unitMixins` in `unit`.
