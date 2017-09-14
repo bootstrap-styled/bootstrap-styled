@@ -42,6 +42,9 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
   v['$menu-offset-nav-box-shadow'] = u['$menu-offset-nav-box-shadow'] || 'rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px';
   v['$menu-offset-nav-bg-color'] = u['$menu-offset-nav-bg-color'] || 'white';
 
+  // Overlay
+  v['$overlay-bg-color'] = u['$overlay-bg-color'] || 'rgba(0, 0, 0, 0.3)';
+
   // Zindex
   v['$zindex-menu-push'] = u['$zindex-menu-push'] || '2000';
 

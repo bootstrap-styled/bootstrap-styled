@@ -47,7 +47,7 @@ const Overlay = styled(OverlayUnstyled)`
     width: 100%;
     height: 100%;
     z-index: 1990;
-    background: rgba(0, 0, 0, 0.3);
+    background: ${props.theme['$overlay-bg-color']};
     transform: translate3d(100%, 0, 0);
     ${fade(
       props.theme['$enable-transitions'],
