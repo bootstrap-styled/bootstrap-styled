@@ -75,6 +75,9 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
     const nodeHeight = node.clientHeight;
     const offsetNav = componentAsANodeReact.querySelector('.offset-nav-margin-top');
     this.props.belowHeader ? (offsetNav.style.marginTop = `${nodeHeight}px`) : null; // eslint-disable-line no-unused-expressions
+    const sheet = document.createElement('style');
+    sheet.innerHTML = 'body.overflow {overflow-x: hidden;}';
+    document.body.appendChild(sheet);
   }
 
   handleClick = (e) => {
@@ -84,17 +87,17 @@ class HeaderNavBar extends React.Component { // eslint-disable-line react/prefer
       onClick(e);
     }
     this.setState({ show: !show });
-
-    // add .overflow class to body when triggered
-    document.body.classList.toggle('overflow');
-
+    // reset original to body by removing overflow class in order to avoid toggling bugs.
+    document.body.classList.remove('overflow');
     //  menu-push animation
     if (animationPush) {
       menuRight ? ( // eslint-disable-line no-unused-expressions
         document.getElementById('wrapper').classList.toggle('right')
       ) : (
-        document.getElementById('wrapper').classList.toggle('left')
-      );
+        // add .overflow class to body when triggered on left side
+        document.getElementById('wrapper').classList.toggle('left') &&
+        document.body.classList.toggle('overflow')
+    );
     }
   };
 

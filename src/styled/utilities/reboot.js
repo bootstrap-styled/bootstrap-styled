@@ -5,14 +5,8 @@ import bsTheme from '../../theme';
  *
  * This utility MUST return only things that can ONLY be injected in global styles
  */
-export function getGlobalStyles(
-  fontFamilyBase = bsTheme['$font-family-base'],
-  fontSizeBase = bsTheme['$font-size-base'],
-  fontWeightBase = bsTheme['$font-weight-base'],
-  lineHeightBase = bsTheme['$line-height-base'],
-  bodyColor = bsTheme['$body-color'],
-  bodyBg = bsTheme['$body-bg'],
-) {
+
+export function getGlobalStyles() {
   return `
     html {
       ${html()}
@@ -25,6 +19,19 @@ export function getGlobalStyles(
     @-ms-viewport { 
       ${ie10FixViewport()} 
     }
+  `;
+}
+
+export function getGlobalStyleNoBootstrapProvider(
+  fontFamilyBase = bsTheme['$font-family-base'],
+  fontSizeBase = bsTheme['$font-size-base'],
+  fontWeightBase = bsTheme['$font-weight-base'],
+  lineHeightBase = bsTheme['$line-height-base'],
+  bodyColor = bsTheme['$body-color'],
+  bodyBg = bsTheme['$body-bg'],
+) {
+  return `
+    ${getGlobalStyles()}
     body {
       ${body(
         fontFamilyBase,
@@ -34,19 +41,6 @@ export function getGlobalStyles(
         bodyColor,
         bodyBg,
       )} 
-      ${bodyUtils()}
-    }
-    [tabindex="-1"]:focus {
-      ${tabIndex()}
-    }
-    svg:not(:root) {
-      ${svg()}
-    }
-    [hidden] {
-      ${ie10FixHidden()}
-    }
-    ::-webkit-file-upload-button {
-      ${webkitFileUploadButton()}
     }
   `;
 }
@@ -105,13 +99,28 @@ export function body(
     line-height: ${lineHeightBase};
     color: ${bodyColor};
     background-color: ${bodyBg};
+    
+    ${bodyUtils()}
+    
+    [tabindex="-1"]:focus {
+      ${tabIndex()}
+    }
+    svg:not(:root) {
+      ${svg()}
+    }
+    [hidden] {
+      ${ie10FixHidden()}
+    }
+    ::-webkit-file-upload-button {
+      ${webkitFileUploadButton()}
+    }
   `;
 }
 
 export function bodyUtils() {
   return `
     &.overflow {
-      overflow: hidden;
+      overflow-x: hidden;
     }
   `;
 }
@@ -159,5 +168,6 @@ export default {
   svg,
   ie10FixHidden,
   getGlobalStyles,
+  getGlobalStyleNoBootstrapProvider,
   webkitFileUploadButton,
 };

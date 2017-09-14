@@ -5,7 +5,7 @@ import { boxShadow } from '../../styled/mixins/box-shadow';
 
 const OffsetNavPush = styled(OffsetNav)`
   ${(props) => `
-    position: absolute;
+    position: fixed;
     top: 0;
 
     ${boxShadow(
@@ -22,7 +22,8 @@ const OffsetNavPush = styled(OffsetNav)`
     }
     
     &.menu-right {
-      right: -${props.theme['$menu-push-width']};
+      right: 0px;
+      transform: translateX(100%);
       ${transition(
         props.theme['$enable-transitions'],
         props.theme['$menu-offset-nav-transition'],
