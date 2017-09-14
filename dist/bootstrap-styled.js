@@ -16197,7 +16197,7 @@ OffsetNav.defaultProps = defaultProps$132;
 var OffsetNavPush = styled__default(OffsetNav).withConfig({
   displayName: 'OffsetNavPush'
 })(['', ''], function (props) {
-  return '\n    position: absolute;\n    top: 0;\n\n    ' + boxShadow(props.theme['$enable-shadows'], props.theme['$menu-offset-nav-box-shadow']) + '    \n\n    &.menu-left {\n      left: -' + props.theme['$menu-push-width'] + ';\n      ' + transition(props.theme['$enable-transitions'], props.theme['$menu-offset-nav-transition']) + '\n    }\n    \n    &.menu-right {\n      right: -' + props.theme['$menu-push-width'] + ';\n      ' + transition(props.theme['$enable-transitions'], props.theme['$menu-offset-nav-transition']) + '\n    }\n  ';
+  return '\n    position: fixed;\n    top: 0;\n\n    ' + boxShadow(props.theme['$enable-shadows'], props.theme['$menu-offset-nav-box-shadow']) + '    \n\n    &.menu-left {\n      left: -' + props.theme['$menu-push-width'] + ';\n      ' + transition(props.theme['$enable-transitions'], props.theme['$menu-offset-nav-transition']) + '\n    }\n    \n    &.menu-right {\n      right: 0px;\n      transform: translateX(100%);\n      ' + transition(props.theme['$enable-transitions'], props.theme['$menu-offset-nav-transition']) + '\n    }\n  ';
 });
 
 var OffsetNavSlide = styled__default(OffsetNav).withConfig({
@@ -16272,10 +16272,11 @@ var HeaderNavBar = function (_React$Component) {
         onClick(e);
       }
       _this.setState({ show: !show });
-      document.body.classList.toggle('overflow');
+      document.body.classList.remove('overflow');
       if (animationPush) {
         menuRight ?
-        document.getElementById('wrapper').classList.toggle('right') : document.getElementById('wrapper').classList.toggle('left');
+        document.getElementById('wrapper').classList.toggle('right') :
+        document.getElementById('wrapper').classList.toggle('left') && document.body.classList.toggle('overflow');
       }
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
@@ -16295,6 +16296,9 @@ var HeaderNavBar = function (_React$Component) {
       var nodeHeight = node.clientHeight;
       var offsetNav = componentAsANodeReact.querySelector('.offset-nav-margin-top');
       this.props.belowHeader ? offsetNav.style.marginTop = nodeHeight + 'px' : null;
+      var sheet = document.createElement('style');
+      sheet.innerHTML = 'body.overflow {overflow-x: hidden;}';
+      document.body.appendChild(sheet);
     }
   }, {
     key: 'render',
