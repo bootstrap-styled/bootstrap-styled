@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - `getGlobalStyles` is now for those who use `<BootstrapProvider />`.
 - Upgraded `rollup` from `v0.49.2` to `v0.49.3`.
 - Upgraded `rollup-plugin-commonjs` from `v8.2.0` to `v8.2.1`.
+- Improved HeaderNavBar css, properly displays push menus.
 
 ## [1.3.2] - 2017-09-13
 

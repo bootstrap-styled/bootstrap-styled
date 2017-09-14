@@ -146,7 +146,39 @@ describe('<HeaderNavBar />', () => {
       },
     });
     expect(renderedComponent.find('Button').length).toBe(1);
-    expect(renderedComponent.find('button').at(0).hasClass('btn-test')).toEqual(true);
+    expect(renderedComponent.find('button').at(0).hasClass('btn-test')).toBe(true);
+  });
+  it('should render an <HeaderNavBar> with a props menuClose', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      menuClose: true,
+    });
+    expect(renderedComponent.find('HeaderNavBar').props().menuClose).toBe(true);
+  });
+  it('should render an <HeaderNavBar> with offsetNavSlide by default', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      'animation-push': false,
+    });
+    expect(renderedComponent.find('HeaderNavBar').props()['animation-push']).toBe(false);
+    expect(renderedComponent.find('OffsetNavSlide').length).toEqual(1);
+  });
+  it('should render an <HeaderNavBar> with a props animation-push and set OffsetNavPush', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      'animation-push': true,
+    });
+    expect(renderedComponent.find('HeaderNavBar').props()['animation-push']).toBe(true);
+    expect(renderedComponent.find('OffsetNavPush').length).toEqual(1);
+  });
+  it('should render an <HeaderNavBar> with a props animation-push right', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      'animation-push': true,
+      'menu-right': true,
+    });
+    expect(renderedComponent.find('HeaderNavBar').props()['animation-push']).toBe(true);
+    expect(renderedComponent.find('HeaderNavBar').props()['menu-right']).toBe(true);
   });
   it('should render an <HeaderNavBar> with a click that changes the props active of Overlay and OffsetNav', () => {
     const renderedComponent = renderComponentUsingTheme({
@@ -155,6 +187,14 @@ describe('<HeaderNavBar />', () => {
     renderedComponent.find('button').at(0).simulate('click');
     expect(renderedComponent.find('Overlay').props().active).toEqual(true);
     expect(renderedComponent.find('OffsetNav').props().active).toEqual(true);
+  });
+  it('should render an <HeaderNavBar> with an onClick function', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      onClick: jest.fn(),
+    });
+    renderedComponent.find('button').at(0).simulate('click');
+    expect(renderedComponent.find('HeaderNavBar').props().onClick).toHaveBeenCalled();
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
