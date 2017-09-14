@@ -2735,6 +2735,7 @@ function makeExtend() {
   v['$menu-transition-duration'] = u['$menu-transition-duration'] || '.6s';
   v['$menu-offset-nav-transition'] = u['$menu-offset-nav-transition'] || 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms';
   v['$menu-offset-nav-box-shadow'] = u['$menu-offset-nav-box-shadow'] || 'rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px';
+  v['$menu-offset-nav-bg-color'] = u['$menu-offset-nav-bg-color'] || 'white';
   v['$zindex-menu-push'] = u['$zindex-menu-push'] || '2000';
   v['$motion-duration'] = u['$motion-duration'] || {
     xs: '200ms',
@@ -16184,7 +16185,7 @@ OffsetNavUnstyled.propTypes = {
 var OffsetNav = styled(OffsetNavUnstyled).withConfig({
   displayName: 'OffsetNav'
 })(['', ''], function (props) {
-  return '\n    width: ' + (props.elementWidth ? props.elementWidth : props.theme['$menu-push-width']) + ';\n    height: 100%;\n    background-color: white;\n    z-index: ' + props.theme['$zindex-menu-push'] + ';\n    ' + ifThen(props.showMenu, mediaBreakpointUp(props.showMenu, props.theme['$grid-breakpoints'], 'position: absolute;\n            top: 0;')) + '\n  ';
+  return '\n    width: ' + (props.elementWidth ? props.elementWidth : props.theme['$menu-push-width']) + ';\n    height: 100%;\n    background-color: ' + props.theme['$menu-offset-nav-bg-color'] + ';\n    z-index: ' + props.theme['$zindex-menu-push'] + ';\n    ' + ifThen(props.showMenu, mediaBreakpointUp(props.showMenu, props.theme['$grid-breakpoints'], 'position: absolute;\n            top: 0;')) + '\n  ';
 });
 OffsetNav.defaultProps = defaultProps$132;
 
