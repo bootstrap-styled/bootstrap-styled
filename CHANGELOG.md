@@ -11,6 +11,8 @@ All notable changes to this project will be documented in this file.
 - Upgraded `rollup` from `v0.49.2` to `v0.49.3`.
 - Upgraded `rollup-plugin-commonjs` from `v8.2.0` to `v8.2.1`.
 - Improved HeaderNavBar css, properly displays push menus.
+- `npm run build` now does not trigger `npm run test`.
+- CI: job test now trigger `npm run test` before sending to sonarqube.
 
 ## [1.3.2] - 2017-09-13
 
