@@ -2744,6 +2744,7 @@ function makeExtend() {
   v['$menu-offset-nav-bg-color'] = u['$menu-offset-nav-bg-color'] || 'white';
   v['$overlay-bg'] = u['$overlay-bg-color'] || 'rgba(0, 0, 0, 0.3)';
   v['$zindex-menu-push'] = u['$zindex-menu-push'] || '2000';
+  v['$zindex-overlay'] = u['$zindex-overlay'] || '2050';
   v['$motion-duration'] = u['$motion-duration'] || {
     xs: '200ms',
     sm: '300ms',
@@ -16239,7 +16240,7 @@ OverlayUnstyled.propTypes = {
 var Overlay = styled__default(OverlayUnstyled).withConfig({
   displayName: 'Overlay'
 })(['', ''], function (props) {
-  return '\n    position: fixed;\n    width: 100%;\n    height: 100%;\n    z-index: 1990;\n    background: ' + props.theme['$overlay-bg'] + ';\n    transform: translate3d(100%, 0, 0);\n    ' + fade(props.theme['$enable-transitions'], props.theme['$transition-fade']) + '\n    &.show {\n      transform: translate3d(0, 0, 0);\n    }\n  ';
+  return '\n    position: fixed;\n    top: 0;\n    width: 100%;\n    height: 100%;\n    z-index: ' + props.theme['$zindex-overlay'] + ';\n    background: ' + props.theme['$overlay-bg'] + ';\n    transform: translate3d(100%, 0, 0);\n    ' + fade(props.theme['$enable-transitions'], props.theme['$transition-fade']) + '\n    &.show {\n      transform: translate3d(0, 0, 0);\n    }\n  ';
 });
 Overlay.defaultProps = defaultProps$133;
 
