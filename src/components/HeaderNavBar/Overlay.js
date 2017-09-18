@@ -44,9 +44,10 @@ class OverlayUnstyled extends React.Component { // eslint-disable-line react/pre
 const Overlay = styled(OverlayUnstyled)`
   ${(props) => `
     position: fixed;
+    top: 0;
     width: 100%;
     height: 100%;
-    z-index: 1990;
+    z-index: ${props.theme['$zindex-overlay']};
     background: ${props.theme['$overlay-bg']};
     transform: translate3d(100%, 0, 0);
     ${fade(

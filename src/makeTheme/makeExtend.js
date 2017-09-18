@@ -47,6 +47,7 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
 
   // Zindex
   v['$zindex-menu-push'] = u['$zindex-menu-push'] || '2000';
+  v['$zindex-overlay'] = u['$zindex-overlay'] || '2050';
 
   // Motion
 
