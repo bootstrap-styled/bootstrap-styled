@@ -2,7 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.3.4] - 2017-09-xx
+## [1.3.5] - 2017-09-xx
+
+- Added css rules to Overlay + $zindex-overlay variable.
+
+
+## [1.3.4] - 2017-09-19
 
 - Added variable $menu-offset-nav-bg-color to the OffsetNav.
 - Added variable $overlay-bg to the Overlay. 
