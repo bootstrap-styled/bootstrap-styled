@@ -2,16 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.3.5] - 2017-09-xx
+## [1.3.5] - 2017-09-25
 
 - Added css rules to Overlay + $zindex-overlay variable.
-
+- Renamed folder `Forms` into `Form`.
+- Added props inline to animation with default value to true.
+- /!\ Move up all components to `src` folder.
+- /!\ Move up all motion in `motion` folder.
+- Replaced `jasmin.clock` with jest [timer-mock](https://facebook.github.io/jest/docs/en/timer-mocks.html).
+- Upgrade `babel-cli` from 6.24.1 to 6.26.0. 
+- Upgrade `babel-core` from 6.24.1 to 6.26.0. 
+- Upgrade `babel-jest` from 20.0.3 to 21.0.2. 
+- Upgrade `babel-plugin-transform-es2015-modules-commonjs` from 6.24.1 to 6.26.0.
+- Upgrade `babel-plugin-transform-react-remove-prop-types` from 0.4.6 to 0.4.8.
+- Upgrade `babel-preset-env` from 1.4.0 to 1.6.0.
+- Upgrade `enzyme` from 2.8.2 to 2.9.1.
+- Upgrade `jest-cli` from 19.0.1 to 21.1.0.
+- Upgrade `jest-sonar-reporter` from 1.1.1 to 1.3.0.
+- Remove fix `utils/fix`.
 
 ## [1.3.4] - 2017-09-19
 
 - Added variable $menu-offset-nav-bg-color to the OffsetNav.
 - Added variable $overlay-bg to the Overlay. 
-
 
 ## [1.3.3] - 2017-09-14
 
