@@ -10,7 +10,8 @@ All notable changes to this project will be documented in this file.
   - Extract directory utils `tools` into package: [bootstrap-styled-utils](https://module.kopaxgroup.com/styled-components/bootstrap-styled-utils).
   - Extract mixins and utilities into package: [bootstrap-styled-mixins](https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins).
 - Motion components are removed.
-  - Extract motion components into package: [bootstrap-styled-motion](https://module.kopaxgroup.com/styled-components/bootstrap-styled-motion)
+  - Motion variables are also removed.
+  - Motion components and variables moved to separate package: [bootstrap-styled-motion](https://module.kopaxgroup.com/styled-components/bootstrap-styled-motion)
 - Add dependency [bootstrap-styled-utils](https://module.kopaxgroup.com/styled-components/bootstrap-styled-utils) v0.0.6.
 - Add dependency [bootstrap-styled-mixins](https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins) v0.0.5.
 - Added css rules to `<Overlay />` and added `$zindex-overlay` variable.
