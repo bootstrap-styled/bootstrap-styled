@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2017-09-25
+
+- /!\ Move up all components within `src/components/` into `src/`.
+- /!\ Reorganize `index.js` imports (API broken).
+- Utilities, mixing have now their own packages.
+  - Extract directory utils `tools` into package: [bootstrap-styled-utils](https://module.kopaxgroup.com/styled-components/bootstrap-styled-utils).
+  - Extract mixins and utilities into package: [bootstrap-styled-mixins](https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins).
+- Motion components are removed.
+  - Extract motion components into package: [bootstrap-styled-motion](https://module.kopaxgroup.com/styled-components/bootstrap-styled-motion)
+- Add dependency [bootstrap-styled-utils](https://module.kopaxgroup.com/styled-components/bootstrap-styled-utils) v0.0.6.
+- Add dependency [bootstrap-styled-mixins](https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins) v0.0.5.
+- Added css rules to `<Overlay />` and added `$zindex-overlay` variable.
+- Folder `Forms` renamed `Form`.
+- Added props `inline` to motion component with default value `true`.
+- Replaced `jasmin.clock` with jest [timer-mock](https://facebook.github.io/jest/docs/en/timer-mocks.html).
+- Upgrade `math-utils` from 0.3.0 to 0.3.1.
+- Upgrade `color` from 1.0.3 to 2.5.0.
+- Upgrade `rollup` from 0.49.3 to 0.50.0.
+- Upgrade `sinon` from 2.3.2 to 3.3.0.  
+- Upgrade `babel-cli` from 6.24.1 to 6.26.0. 
+- Upgrade `babel-core` from 6.24.1 to 6.26.0. 
+- Upgrade `babel-jest` from 20.0.3 to 21.0.2. 
+- Upgrade `babel-plugin-transform-es2015-modules-commonjs` from 6.24.1 to 6.26.0.
+- Upgrade `babel-plugin-transform-react-remove-prop-types` from 0.4.6 to 0.4.8.
+- Upgrade `babel-preset-env` from 1.4.0 to 1.6.0.
+- Upgrade `enzyme` from 2.8.2 to 2.9.1.
+- Upgrade `jest-cli` from 19.0.1 to 21.1.0.
+- Upgrade `jest-sonar-reporter` from 1.1.1 to 1.3.0.
+- **prebuild** script does not trigger `npm run test` anymore.
+- Remove fix `utils/fix`.
+- CI: display minimized js size on build.
+
+## [1.3.4] - 2017-09-19
+
+- Added variable $menu-offset-nav-bg-color to the OffsetNav.
+- Added variable $overlay-bg to the Overlay. 
+
 ## [1.3.3] - 2017-09-14
 
 - body overflow class replaced `overflow` with `overflow-x`.

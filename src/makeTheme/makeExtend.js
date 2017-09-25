@@ -1,6 +1,6 @@
 import Color from 'color';
-import { unitUtils } from 'math-utils';
-import { assertAscending } from '../styled/mixins/variables';
+import unitUtils from 'bootstrap-styled-utils/lib/unitUtils';
+import { assertAscending } from 'bootstrap-styled-mixins/lib/variables';
 import makeOriginal from './makeOriginal';
 const { rmUnit, UNIT } = unitUtils;
 /**
@@ -40,9 +40,14 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
   v['$menu-transition-duration'] = u['$menu-transition-duration'] || '.6s';
   v['$menu-offset-nav-transition'] = u['$menu-offset-nav-transition'] || 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms';
   v['$menu-offset-nav-box-shadow'] = u['$menu-offset-nav-box-shadow'] || 'rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px';
+  v['$menu-offset-nav-bg-color'] = u['$menu-offset-nav-bg-color'] || 'white';
+
+  // Overlay
+  v['$overlay-bg'] = u['$overlay-bg-color'] || 'rgba(0, 0, 0, 0.3)';
 
   // Zindex
   v['$zindex-menu-push'] = u['$zindex-menu-push'] || '2000';
+  v['$zindex-overlay'] = u['$zindex-overlay'] || '2050';
 
   // Motion
 

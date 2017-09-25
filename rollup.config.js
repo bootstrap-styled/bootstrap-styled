@@ -48,10 +48,10 @@ const plugins = [
   inject({
     process: processShim,
   }),
-  babel(Object.assign({
+  babel({
     plugins: ['external-helpers'],
     exclude: 'node_modules/**',
-  })),
+  }),
   json(),
   cleanup(),
 ];

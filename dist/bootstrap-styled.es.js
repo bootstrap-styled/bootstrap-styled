@@ -3,37 +3,6 @@ import PropTypes from 'prop-types';
 import styled, { ThemeProvider, keyframes, withTheme } from 'styled-components';
 import ReactDOM from 'react-dom';
 
-function getAlignUtilities() {
-  return "\n   " + alignBaseline() + "\n   " + alignTop() + "\n   " + alignMiddle() + "\n   " + alignBottom() + "\n   " + alignTextBottom() + "\n   " + alignTextTop() + "\n  ";
-}
-function alignBaseline() {
-  return "\n    .align-baseline { vertical-align: baseline !important; } /* Browser default */\n  ";
-}
-function alignTop() {
-  return "\n    .align-top { vertical-align: top !important; }\n  ";
-}
-function alignMiddle() {
-  return "\n    .align-middle { vertical-align: middle !important; }\n  ";
-}
-function alignBottom() {
-  return "\n    .align-bottom { vertical-align: bottom !important; }\n  ";
-}
-function alignTextBottom() {
-  return "\n    .align-text-bottom { vertical-align: text-bottom !important; }\n  ";
-}
-function alignTextTop() {
-  return "\n    .align-text-top { vertical-align: text-top !important; }\n  ";
-}
-var alignUtils = {
-  getAlignUtilities: getAlignUtilities,
-  alignBaseline: alignBaseline,
-  alignTop: alignTop,
-  alignMiddle: alignMiddle,
-  alignBottom: alignBottom,
-  alignTextBottom: alignTextBottom,
-  alignTextTop: alignTextTop
-};
-
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function commonjsRequire () {
@@ -1485,8 +1454,8 @@ Color.prototype = {
 		return hsl;
 	},
 	mix: function (mixinColor, weight) {
-		var color1 = this.rgb();
-		var color2 = mixinColor.rgb();
+		var color1 = mixinColor.rgb();
+		var color2 = this.rgb();
 		var p = weight === undefined ? 0.5 : weight;
 		var w = 2 * p - 1;
 		var a = color1.alpha() - color2.alpha();
@@ -1570,300 +1539,320 @@ function zeroArray(arr, length) {
 }
 var color = Color;
 
-var defaultProps$2 = {
-  '$enable-hover-media-query': false
+var unitUtils = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var UnitUtils = function UnitUtils() {
+  var _this = this;
+  _classCallCheck(this, UnitUtils);
+  this.UNIT = {
+    EM: 'em',
+    REM: 'rem',
+    PX: 'px',
+    PERCENT: '%'
+  };
+  this.math = {
+    addition: function addition(a, b) {
+      var unit = this.detectUnit(a) || this.detectUnit(b);
+      return this.rmUnit(a) + this.rmUnit(b) + unit;
+    }.bind(this),
+    subtract: function subtract(a, b) {
+      var unit = this.detectUnit(a) || this.detectUnit(b);
+      return this.rmUnit(a) - this.rmUnit(b) + unit;
+    }.bind(this),
+    multiply: function multiply(a, b) {
+      var unit = this.detectUnit(a) || this.detectUnit(b);
+      return this.rmUnit(a) * this.rmUnit(b) + unit;
+    }.bind(this),
+    divide: function divide(a, b) {
+      var unit = this.detectUnit(a) || this.detectUnit(b);
+      return this.rmUnit(a) / this.rmUnit(b) + unit;
+    }.bind(this)
+  };
+  this.detectUnit = function (value) {
+    var ext = void 0;
+    var valueStr = value.toString();
+    if (valueStr.match(_this.UNIT.PX)) {
+      ext = _this.UNIT.PX;
+    } else if (valueStr.match(_this.UNIT.REM)) {
+      ext = _this.UNIT.REM;
+    } else if (valueStr.match(_this.UNIT.EM)) {
+      ext = _this.UNIT.EM;
+    } else if (valueStr.match(_this.UNIT.PERCENT)) {
+      ext = _this.UNIT.PERCENT;
+    } else if (!isNaN(value)) {
+      return null;
+    } else {
+      throw new Error('detectUnit can\'t find unit for ' + value);
+    }
+    return ext;
+  };
+  this.rmUnit = function (value, unit) {
+    var valueStr = value.toString();
+    var ext = unit || _this.detectUnit(valueStr);
+    var number = valueStr.replace(ext, '');
+    return parseFloat(number);
+  };
+  this.toPercent = function (value) {
+    var total = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100;
+    var decimal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 2;
+    return '' + Math.floor(value / total * 100 * Math.pow(10, decimal)) / Math.pow(10, decimal) + _this.UNIT.PERCENT;
+  };
 };
-function hover(content) {
-  return '\n    &:hover { ' + content + ' }\n  ';
-}
-function hoverFocus() {
-  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$2['$enable-hover-media-query'];
-  var content = arguments[1];
-  if (enableHoverMediaQuery) {
-    return ' \n      &:focus { ' + content + ' }\n      ' + hover(content) + '\n    ';
-  }
-  return '\n    &:focus,\n    &:hover {\n      ' + content + '\n    }\n  ';
-}
-function plainHoverFocus() {
-  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$2['$enable-hover-media-query'];
-  var content = arguments[1];
-  if (enableHoverMediaQuery) {
-    return '\n      &, &:focus {\n        ' + content + '\n      }\n      ' + hover(content) + '\n    ';
-  }
-  return ' \n    &, &:focus, &:hover {\n      ' + content + '\n    }\n  ';
-}
-function hoverFocusActive() {
-  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$2['$enable-hover-media-query'];
-  var content = arguments[1];
-  if (enableHoverMediaQuery) {
-    return '\n      &:focus,\n      &:active {\n        ' + content + '\n      }\n      ' + hover(content) + '\n    ';
-  }
-  return '\n    &:focus, &:active, &:hover {\n     ' + content + '\n    }\n  ';
-}
-hover.focus = hoverFocus;
-hover.plainFocus = plainHoverFocus;
-hover.activeFocus = hoverFocusActive;
+exports.default = new UnitUtils();
+module.exports = exports['default'];
+});
+var unitUtils$1 = unwrapExports(unitUtils);
 
-var defaultProps$1 = {
-  '$enable-hover-media-query': false
-};
-function bgVariant() {
-  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$1['$enable-hover-media-query'];
-  var selector = arguments[1];
-  var bgColor = arguments[2];
-  return '\n    ' + selector + ' {\n      background-color: ' + bgColor + ' !important;\n    }\n    a' + selector + ' {\n      ' + hoverFocus(enableHoverMediaQuery, 'background-color: ' + color(bgColor).darken(0.2).rgb() + ' !important;') + '\n    }\n  ';
-}
+var process = { argv: [], env: {} };
 
-var defaultProps = {
-  '$enable-hover-media-query': false,
-  '$brand-primary': '#0275d8',
-  '$brand-success': '#5cb85c',
-  '$brand-info': '#5bc0de',
-  '$brand-warning': '#f0ad4e',
-  '$brand-danger': '#d9543f',
-  '$brand-inverse': '#373a3c',
-  '$gray-lightest': '#f7f7f9'
-};
-function getBackgroundUtilities() {
-  var $enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
-  var $brandPrimary = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-primary'];
-  var $brandSuccess = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$brand-success'];
-  var $brandInfo = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$brand-info'];
-  var $brandWarning = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$brand-warning'];
-  var $brandDanger = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$brand-danger'];
-  var $brandInverse = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$brand-inverse'];
-  var $grayLightest = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$gray-lightest'];
-  return '\n    ' + bgVariant($enableHoverMediaQuery, '.bg-primary', $brandPrimary) + '\n    ' + bgVariant($enableHoverMediaQuery, '.bg-success', $brandSuccess) + '\n    ' + bgVariant($enableHoverMediaQuery, '.bg-info', $brandInfo) + '\n    ' + bgVariant($enableHoverMediaQuery, '.bg-warning', $brandWarning) + '\n    ' + bgVariant($enableHoverMediaQuery, '.bg-danger', $brandDanger) + '\n    ' + bgVariant($enableHoverMediaQuery, '.bg-inverse', $brandInverse) + '\n    ' + bgVariant($enableHoverMediaQuery, '.bg-faded', $grayLightest) + '\n  ';
-}
-var bgPrimary = function bgPrimary($enableHoverMediaQuery) {
-  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-primary'];
-  return bgVariant($enableHoverMediaQuery, '.bg-primary', bgColor);
-};
-var bgSuccess = function bgSuccess($enableHoverMediaQuery) {
-  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-success'];
-  return bgVariant($enableHoverMediaQuery, '.bg-success', bgColor);
-};
-var bgInfo = function bgInfo($enableHoverMediaQuery) {
-  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-info'];
-  return bgVariant($enableHoverMediaQuery, '.bg-info', bgColor);
-};
-var bgWarning = function bgWarning($enableHoverMediaQuery) {
-  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-warning'];
-  return bgVariant($enableHoverMediaQuery, '.bg-warning', bgColor);
-};
-var bgDanger = function bgDanger($enableHoverMediaQuery) {
-  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-danger'];
-  return bgVariant($enableHoverMediaQuery, '.bg-danger', bgColor);
-};
-var bgInverse = function bgInverse($enableHoverMediaQuery) {
-  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-inverse'];
-  return bgVariant($enableHoverMediaQuery, '.bg-inverse', bgColor);
-};
-var bgFaded = function bgFaded($enableHoverMediaQuery) {
-  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$gray-lightest'];
-  return bgVariant($enableHoverMediaQuery, '.bg-faded', bgColor);
-};
-var backgroundUtils = {
-  defaultProps: defaultProps,
-  getBackgroundUtilities: getBackgroundUtilities,
-  bgFaded: bgFaded,
-  bgPrimary: bgPrimary,
-  bgSuccess: bgSuccess,
-  bgInfo: bgInfo,
-  bgWarning: bgWarning,
-  bgDanger: bgDanger,
-  bgInverse: bgInverse
-};
-
-var defaultProps$4 = {
-  '$border-radius': '.25rem',
-  '$enable-rounded': true
-};
-function borderRadius() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$4['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$4['$border-radius'];
-  if (enableRounded) {
-    return '\n      border-radius: ' + radius + ';\n    ';
+function getTetherAttachments(placement) {
+  switch (placement) {
+    case 'top':
+    case 'top center':
+      return {
+        attachment: 'bottom center',
+        targetAttachment: 'top center'
+      };
+    case 'bottom':
+    case 'bottom center':
+      return {
+        attachment: 'top center',
+        targetAttachment: 'bottom center'
+      };
+    case 'left':
+    case 'left center':
+      return {
+        attachment: 'middle right',
+        targetAttachment: 'middle left'
+      };
+    case 'right':
+    case 'right center':
+      return {
+        attachment: 'middle left',
+        targetAttachment: 'middle right'
+      };
+    case 'top left':
+      return {
+        attachment: 'bottom left',
+        targetAttachment: 'top left'
+      };
+    case 'top right':
+      return {
+        attachment: 'bottom right',
+        targetAttachment: 'top right'
+      };
+    case 'bottom left':
+      return {
+        attachment: 'top left',
+        targetAttachment: 'bottom left'
+      };
+    case 'bottom right':
+      return {
+        attachment: 'top right',
+        targetAttachment: 'bottom right'
+      };
+    case 'right top':
+      return {
+        attachment: 'top left',
+        targetAttachment: 'top right'
+      };
+    case 'right bottom':
+      return {
+        attachment: 'bottom left',
+        targetAttachment: 'bottom right'
+      };
+    case 'left top':
+      return {
+        attachment: 'top right',
+        targetAttachment: 'top left'
+      };
+    case 'left bottom':
+      return {
+        attachment: 'bottom right',
+        targetAttachment: 'bottom left'
+      };
+    default:
+      return {
+        attachment: 'top center',
+        targetAttachment: 'bottom center'
+      };
   }
-  return '';
 }
-function borderTopRadius() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$4['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$4['$border-radius'];
-  if (enableRounded) {
-    return '\n      border-top-right-radius: ' + radius + ';\n      border-top-left-radius: ' + radius + ';\n    ';
+var tetherAttachements = ['top', 'bottom', 'left', 'right', 'top left', 'top center', 'top right', 'right top', 'right middle', 'right bottom', 'bottom right', 'bottom center', 'bottom left', 'left top', 'left middle', 'left bottom'];
+function getScrollbarWidth() {
+  var scrollDiv = document.createElement('div');
+  scrollDiv.style.position = 'absolute';
+  scrollDiv.style.top = '-9999px';
+  scrollDiv.style.width = '50px';
+  scrollDiv.style.height = '50px';
+  scrollDiv.style.overflow = 'scroll';
+  document.body.appendChild(scrollDiv);
+  var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+  document.body.removeChild(scrollDiv);
+  return scrollbarWidth;
+}
+function setScrollbarWidth(padding) {
+  document.body.style.paddingRight = padding > 0 ? padding + 'px' : null;
+}
+function isBodyOverflowing() {
+  return document.body.clientWidth < window.innerWidth;
+}
+function getOriginalBodyPadding() {
+  return parseInt(window.getComputedStyle(document.body, null).getPropertyValue('padding-right') || 0, 10);
+}
+function conditionallyUpdateScrollbar() {
+  var scrollbarWidth = getScrollbarWidth();
+  var fixedContent = document.querySelectorAll('.navbar-fixed-top, .navbar-fixed-bottom, .is-fixed')[0];
+  var bodyPadding = fixedContent ? parseInt(fixedContent.style.paddingRight || 0, 10) : 0;
+  if (isBodyOverflowing()) {
+    setScrollbarWidth(bodyPadding + scrollbarWidth);
   }
-  return '';
 }
-function borderRightRadius() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$4['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$4['$border-radius'];
-  if (enableRounded) {
-    return '\n      border-bottom-right-radius: ' + radius + ';\n      border-top-right-radius: ' + radius + ';\n    ';
+function toHashCode(str) {
+  var hash = 0;
+  if (str.length === 0) {
+    return hash;
   }
-  return '';
-}
-function borderBottomRadius() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$4['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$4['$border-radius'];
-  if (enableRounded) {
-    return '\n      border-bottom-right-radius: ' + radius + ';\n      border-bottom-left-radius: ' + radius + ';\n    ';
+  for (var i = 0; i < str.length; i += 1) {
+    var char = str.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash = hash & hash;
   }
-  return '';
+  return hash;
 }
-function borderLeftRadius() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$4['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$4['$border-radius'];
-  if (enableRounded) {
-    return '\n      border-bottom-left-radius: ' + radius + ';\n      border-top-left-radius: ' + radius + ';\n    ';
+var parseTransition = function parseTransition(transitions) {
+  if (!transitions) {
+    return [];
   }
-  return '';
-}
-var borderRadius$1 = {
-  defaultProps: defaultProps$4,
-  all: borderRadius,
-  top: borderTopRadius,
-  right: borderRightRadius,
-  bottom: borderBottomRadius,
-  left: borderLeftRadius
+  var sample = transitions;
+  var RULE_DELIMITER = ',';
+  var PROPERTY_DELIMITER = ' ';
+  var MS_UNIT = 'ms';
+  var TMP_STR = 'TMP';
+  var DEFAULT_PROPERTY = 'all';
+  var DEFAULT_DURATION = 0;
+  var DEFAULT_TIMING_FUNCTION = 'ease';
+  var DEFAULT_DELAY = 0;
+  var BEZIER_REGEX = /cubic-bezier\([^\)]+\)/gi;
+  var cubicBezierList = transitions.match(BEZIER_REGEX);
+  if (cubicBezierList) {
+    sample = sample.replace(BEZIER_REGEX, TMP_STR);
+  }
+  var transitionList = sample.split(RULE_DELIMITER).map(function (rule) {
+    var properties = rule.trim().split(PROPERTY_DELIMITER);
+    return {
+      property: properties[0] || DEFAULT_PROPERTY,
+      duration: properties[1] && !(properties[1].indexOf(MS_UNIT) !== -1) ? parseFloat(properties[1]) * 1000 : parseFloat(properties[1]) || DEFAULT_DURATION,
+      timingFunction: properties[2] && properties[2] !== TMP_STR ? properties[2] : cubicBezierList ? cubicBezierList.shift() : DEFAULT_TIMING_FUNCTION,
+      delay: properties[3] && !(properties[3].indexOf(MS_UNIT) !== -1) ? parseFloat(properties[3]) * 1000 : parseFloat(properties[3]) || DEFAULT_DELAY
+    };
+  });
+  return transitionList;
 };
-
-var defaultProps$3 = {
-  '$border-radius': '.25rem',
-  '$enable-rounded': true
-};
-function getBordersUtilities() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$3['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$3['$border-radius'];
-  return '\n    ' + rounded(enableRounded, radius) + '\n    ' + roundedTop(enableRounded, radius) + '\n    ' + roundedRight(enableRounded, radius) + '\n    ' + roundedBottom(enableRounded, radius) + '\n    ' + roundedLeft(enableRounded, radius) + '\n    ' + roundedCircle() + '\n    ' + resetRounded() + '\n    ' + resetRoundedTop() + '\n    ' + resetRoundedRight() + '\n    ' + resetRoundedLeft() + '\n    ' + resetRoundedBottom() + '\n    ' + resetBorder() + '\n    ' + resetBorderTop() + '\n    ' + resetBorderRight() + '\n    ' + resetBorderLeft() + '\n    ' + resetBorderBottom() + '\n  ';
-}
-function rounded() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$3['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$3['$border-radius'];
-  return '\n    .rounded {\n      ' + borderRadius(enableRounded, radius) + '\n    }\n  ';
-}
-function roundedTop() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$3['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$3['$border-radius'];
-  return '\n    .rounded-top {\n      ' + borderTopRadius(enableRounded, radius) + '\n    }\n  ';
-}
-function roundedRight() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$3['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$3['$border-radius'];
-  return '\n    .rounded-right {\n      ' + borderRightRadius(enableRounded, radius) + '\n    }\n  ';
-}
-function roundedBottom() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$3['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$3['$border-radius'];
-  return '\n    .rounded-bottom {\n      ' + borderBottomRadius(enableRounded, radius) + '\n    }\n  ';
-}
-function roundedLeft() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$3['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$3['$border-radius'];
-  return '\n    .rounded-left {\n      ' + borderLeftRadius(enableRounded, radius) + '\n    }\n  ';
-}
-function roundedCircle() {
-  return '\n    .rounded-circle {\n      border-radius: 50%;\n    }\n  ';
-}
-function resetBorder() {
-  return '\n    .border-0 {\n      border: 0 !important;\n    }\n  ';
-}
-function resetBorderTop() {
-  return '\n    .border-top-0 {\n      border-top: 0 !important;\n    }\n  ';
-}
-function resetBorderRight() {
-  return '\n    .border-right-0 {\n      border-right: 0 !important;\n    }\n  ';
-}
-function resetBorderBottom() {
-  return '\n    .border-bottom-0 {\n      border-bottom: 0 !important;\n    }\n  ';
-}
-function resetBorderLeft() {
-  return '\n    .border-left-0 {\n      border-left: 0 !important;\n    }\n  ';
-}
-function resetRounded() {
-  return '\n    .rounded-0 {\n      border-radius: 0 !important;\n    }\n  ';
-}
-function resetRoundedTop() {
-  return '\n    .rounded-top-0 {\n      border-top-left-radius: 0 !important;\n      border-top-right-radius: 0 !important;\n    }\n  ';
-}
-function resetRoundedBottom() {
-  return '\n    .rounded-bottom-0 {\n      border-bottom-left-radius: 0 !important;\n      border-bottom-right-radius: 0 !important;\n    }\n  ';
-}
-function resetRoundedLeft() {
-  return '\n    .rounded-left-0 {\n      border-bottom-left-radius: 0 !important;\n      border-top-left-radius: 0 !important;\n    }\n  ';
-}
-function resetRoundedRight() {
-  return '\n    .rounded-right-0 {\n      border-bottom-right-radius: 0 !important;\n      border-top-right-radius: 0 !important;\n    }\n  ';
-}
-var bordersUtils = {
-  defaultProps: defaultProps$3,
-  getBordersUtilities: getBordersUtilities,
-  rounded: rounded,
-  roundedTop: roundedTop,
-  roundedRight: roundedRight,
-  roundedBottom: roundedBottom,
-  roundedLeft: roundedLeft,
-  roundedCircle: roundedCircle
-};
-
-function clearfix() {
-  return "\n    &::after {\n      content: \"\";\n      display: table;\n      clear: both;\n    }\n  ";
-}
-
-function getClearfixUtilities() {
-  return '\n   ' + getClearfix() + '\n  ';
-}
-function getClearfix() {
-  return '\n    .clearfix {\n      ' + clearfix() + '\n    }\n  ';
-}
-var clearfixUtils = {
-  getClearfixUtilities: getClearfixUtilities,
-  getClearfix: getClearfix
-};
-
-function getCursorUtilities() {
-  return "\n    .cursor-alias {\n      cursor: alias;\n    }\n    \n    .cursor-all-scroll {\n      cursor: all-scroll;\n    }\n    \n    .cursor-auto {\n      cursor: auto;\n    }\n    \n    .cursor-cell {\n      cursor: cell;\n    }\n    \n    .cursor-context-menu {\n      cursor: context-menu;\n    }\n    \n    .cursor-col-resize {\n      cursor: col-resize;\n    }\n    \n    .cursor-copy {\n      cursor: copy;\n    }\n    \n    .cursor-crosshair {\n      cursor: crosshair;\n    }\n    \n    .cursor-default {\n      cursor: default;\n    }\n    \n    .cursor-e-resize {\n      cursor: e-resize;\n    }\n    \n    .cursor-ew-resize {\n      cursor: ew-resize;\n    }\n    \n    .cursor-grab {\n      cursor: grab;\n    }\n    \n    .cursor-grabbing {\n      cursor: grabbing;\n    }\n    \n    .cursor-help {\n      cursor: help;\n    }\n    \n    .cursor-move {\n      cursor: move;\n    }\n    \n    .cursor-n-resize {\n      cursor: n-resize;\n    }\n    \n    .cursor-ne-resize {\n      cursor: ne-resize;\n    }\n    \n    .cursor-nesw-resize {\n      cursor: nesw-resize;\n    }\n    \n    .cursor-ns-resize {\n      cursor: ns-resize;\n    }\n    \n    .cursor-nw-resize {\n      cursor: nw-resize;\n    }\n    \n    .cursor-nwse-resize {\n      cursor: nwse-resize;\n    }\n    \n    .cursor-no-drop {\n      cursor: no-drop;\n    }\n    \n    .cursor-none {\n      cursor: none;\n    }\n    \n    .cursor-not-allowed {\n      cursor: not-allowed;\n    }\n    \n    .cursor-pointer {\n      cursor: pointer;\n    }\n    \n    .cursor-progress {\n      cursor: progress;\n    }\n    \n    .cursor-row-resize {\n      cursor: row-resize;\n    }\n    \n    .cursor-s-resize {\n      cursor: s-resize;\n    }\n    \n    .cursor-se-resize {\n      cursor: se-resize;\n    }\n    \n    .cursor-sw-resize {\n      cursor: sw-resize;\n    }\n    \n    .cursor-text {\n      cursor: text;\n    }\n    \n    .cursor-vertical-text {\n      cursor: vertical-text;\n    }\n    \n    .cursor-w-resize {\n      cursor: w-resize;\n    }\n    \n    .cursor-wait {\n      cursor: wait;\n    }\n    \n    .cursor-zoom-in {\n      cursor: zoom-in;\n    }\n    \n    .cursor-zoom-out {\n      cursor: zoom-out;\n    }\n    \n    .cursor-initial {\n      cursor: initial;\n    }\n  ";
-}
-var cursorUtils = {
-  getCursorUtilities: getCursorUtilities
-};
-
+var asyncGenerator = function () {
+  function AwaitValue(value) {
+    this.value = value;
+  }
+  function AsyncGenerator(gen) {
+    var front, back;
+    function send(key, arg) {
+      return new Promise(function (resolve, reject) {
+        var request = {
+          key: key,
+          arg: arg,
+          resolve: resolve,
+          reject: reject,
+          next: null
+        };
+        if (back) {
+          back = back.next = request;
+        } else {
+          front = back = request;
+          resume(key, arg);
+        }
+      });
+    }
+    function resume(key, arg) {
+      try {
+        var result = gen[key](arg);
+        var value = result.value;
+        if (value instanceof AwaitValue) {
+          Promise.resolve(value.value).then(function (arg) {
+            resume("next", arg);
+          }, function (arg) {
+            resume("throw", arg);
+          });
+        } else {
+          settle(result.done ? "return" : "normal", result.value);
+        }
+      } catch (err) {
+        settle("throw", err);
+      }
+    }
+    function settle(type, value) {
+      switch (type) {
+        case "return":
+          front.resolve({
+            value: value,
+            done: true
+          });
+          break;
+        case "throw":
+          front.reject(value);
+          break;
+        default:
+          front.resolve({
+            value: value,
+            done: false
+          });
+          break;
+      }
+      front = front.next;
+      if (front) {
+        resume(front.key, front.arg);
+      } else {
+        back = null;
+      }
+    }
+    this._invoke = send;
+    if (typeof gen.return !== "function") {
+      this.return = undefined;
+    }
+  }
+  if (typeof Symbol === "function" && Symbol.asyncIterator) {
+    AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
+      return this;
+    };
+  }
+  AsyncGenerator.prototype.next = function (arg) {
+    return this._invoke("next", arg);
+  };
+  AsyncGenerator.prototype.throw = function (arg) {
+    return this._invoke("throw", arg);
+  };
+  AsyncGenerator.prototype.return = function (arg) {
+    return this._invoke("return", arg);
+  };
+  return {
+    wrap: function (fn) {
+      return function () {
+        return new AsyncGenerator(fn.apply(this, arguments));
+      };
+    },
+    await: function (value) {
+      return new AwaitValue(value);
+    }
+  };
+}();
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
-var createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-  return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-var RangeUtils = function () {
-  function RangeUtils() {
-    classCallCheck(this, RangeUtils);
-  }
-  createClass(RangeUtils, [{
-    key: "mapBetween",
-    value: function mapBetween(valueNow, valueMin, valueMax) {
-      var rangeMin = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-      var rangeMax = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 100;
-      return (rangeMax - rangeMin) * (valueNow - valueMin) / (valueMax - valueMin) + rangeMin;
-    }
-  }]);
-  return RangeUtils;
-}();
-var index = new RangeUtils();
 var UnitUtils = function UnitUtils() {
   var _this = this;
   classCallCheck(this, UnitUtils);
@@ -1921,201 +1910,35 @@ var UnitUtils = function UnitUtils() {
     return '' + Math.floor(value / total * 100 * Math.pow(10, decimal)) / Math.pow(10, decimal) + _this.UNIT.PERCENT;
   };
 };
-var index$1 = new UnitUtils();
+var index = new UnitUtils();
+var dummy = {};
 
-var defaultProps$6 = {
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  }
-};
-function breakpointNext(name) {
-  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$6['$grid-breakpoints'];
-  var breakpointNames = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Object.keys(breakpoints);
-  var n = breakpointNames.indexOf(name);
-  if (n !== -1 && n + 1 < breakpointNames.length) {
-    return breakpointNames[n + 1];
-  }
-  return null;
-}
-function breakpointMin(name) {
-  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$6['$grid-breakpoints'];
-  var min = breakpoints[name];
-  return min !== '0' ? min : null;
-}
-function breakpointMax(name) {
-  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$6['$grid-breakpoints'];
-  var next = breakpointNext(name, breakpoints);
-  if (next) {
-    var min = index$1.rmUnit(breakpointMin(next, breakpoints), index$1.UNIT.PX);
-    return (min - 1).toString() + index$1.UNIT.PX;
-  }
-  return null;
-}
-function breakpointInfix(name) {
-  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$6['$grid-breakpoints'];
-  return breakpointMin(name, breakpoints) == null ? '' : '-' + name;
-}
-function mediaBreakpointUp(name) {
-  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$6['$grid-breakpoints'];
-  var content = arguments[2];
-  var min = breakpointMin(name, breakpoints);
-  if (min) {
-    return '\n      @media (min-width: ' + min + ') {\n        ' + content + '\n      }\n    ';
-  }
-  return '\n    ' + content + '\n  ';
-}
-function mediaBreakpointDown(name) {
-  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$6['$grid-breakpoints'];
-  var content = arguments[2];
-  var max = breakpointMax(name, breakpoints);
-  if (max) {
-    return '\n      @media (max-width: ' + max + ') {\n        ' + content + '\n      }\n    ';
-  }
-  return '\n    ' + content + '\n  ';
-}
-function mediaBreakpointBetween(lower, upper) {
-  var breakpoints = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$6['$grid-breakpoints'];
-  var content = arguments[3];
-  var min = breakpointMin(lower, breakpoints);
-  var max = breakpointMax(upper, breakpoints);
-  if (min && max) {
-    return '\n      @media (min-width: ' + min + ') and (max-width: ' + max + ') {\n        ' + content + '\n      }\n    ';
-  } else if (min) {
-    return '\n      @media (min-width: ' + min + ') {\n        ' + content + '\n      }\n    ';
-  } else if (max) {
-    return '\n      @media (max-width: ' + max + ') {\n        ' + content + '\n      }\n    ';
-  }
-  return '\n    ' + content + '\n  ';
-}
-function mediaBreakpointOnly(name) {
-  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$6['$grid-breakpoints'];
-  var content = arguments[2];
-  return mediaBreakpointBetween(name, name, breakpoints, content);
-}
-var breakpoints = {
-  defaultProps: defaultProps$6,
-  up: mediaBreakpointUp,
-  down: mediaBreakpointDown,
-  between: mediaBreakpointBetween,
-  only: mediaBreakpointOnly
-};
 
-var defaultProps$5 = {
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  }
-};
-function getDisplayUtilities() {
-  var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$5['$grid-breakpoints'];
-  var utilityList = [];
-  Object.keys(gridBreakpoints).forEach(function (breakpoint) {
-    var infix = breakpointInfix(breakpoint, gridBreakpoints);
-    utilityList.push('\n      ' + mediaBreakpointUp(breakpoint, gridBreakpoints, '\n        .d' + infix + '-none { display: none !important; }\n        .d' + infix + '-inline { display: inline !important; }\n        .d' + infix + '-inline-block { display: inline-block !important; }\n        .d' + infix + '-block { display: block !important; }\n        .d' + infix + '-table { display: table !important; }\n        .d' + infix + '-table-cell { display: table-cell !important; }\n        .d' + infix + '-flex { display: flex !important; }\n        .d' + infix + '-inline-flex { display: inline-flex !important; }\n      ') + '\n    ');
-  });
-  utilityList.push('\n    .d-print-block {\n      display: none !important;\n    \n      @media print {\n        display: block !important;\n      }\n    }\n    \n    .d-print-inline {\n      display: none !important;\n    \n      @media print {\n        display: inline !important;\n      }\n    }\n    \n    .d-print-inline-block {\n      display: none !important;\n    \n      @media print {\n        display: inline-block !important;\n      }\n    }\n    \n    .d-print-none {\n      @media print {\n        display: none !important;\n      }\n    }\n  ');
-  return utilityList.join('\n');
-}
-var displayUtils = {
-  defaultProps: defaultProps$5,
-  getDisplayUtilities: getDisplayUtilities
-};
 
-var defaultProps$7 = {
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  }
-};
-function getFlexUtilities() {
-  var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$7['$grid-breakpoints'];
-  var flexUtilityList = [];
-  Object.keys(gridBreakpoints).forEach(function (breakpoint) {
-    var infix = breakpointInfix(breakpoint, gridBreakpoints);
-    flexUtilityList.push('\n      /* Flex column reordering */\n      ' + mediaBreakpointUp(breakpoint, gridBreakpoints, '\n        .flex' + infix + '-first { order: -1; }\n        .flex' + infix + '-last { order: 1; }\n        .flex' + infix + '-unordered { order: 0; }\n      ') + '\n  \n      /* Flex direction */ \n      ' + mediaBreakpointUp(breakpoint, gridBreakpoints, '\n        .flex' + infix + '-row            { flex-direction: row !important; }\n        .flex' + infix + '-column         { flex-direction: column !important; }\n        .flex' + infix + '-row-reverse    { flex-direction: row-reverse !important; }\n        .flex' + infix + '-column-reverse { flex-direction: column-reverse !important; }\n      ') + '\n      \n      /* Flex wrap */ \n      ' + mediaBreakpointUp(breakpoint, gridBreakpoints, '\n        .flex' + infix + '-wrap         { flex-wrap: wrap !important; }\n        .flex' + infix + '-nowrap       { flex-wrap: nowrap !important; }\n        .flex' + infix + '-wrap-reverse { flex-wrap: wrap-reverse !important; }\n      ') + '\n      /* Flex justify-content */ \n      ' + mediaBreakpointUp(breakpoint, gridBreakpoints, '\n        .justify-content' + infix + '-start   { justify-content: flex-start !important; }\n        .justify-content' + infix + '-end     { justify-content: flex-end !important; }\n        .justify-content' + infix + '-center  { justify-content: center !important; }\n        .justify-content' + infix + '-between { justify-content: space-between !important; }\n        .justify-content' + infix + '-around  { justify-content: space-around !important; }\n      ') + '\n      /* Flex align-items */ \n      ' + mediaBreakpointUp(breakpoint, gridBreakpoints, '\n        .align-items' + infix + '-start    { align-items: flex-start !important; }\n        .align-items' + infix + '-end      { align-items: flex-end !important; }\n        .align-items' + infix + '-center   { align-items: center !important; }\n        .align-items' + infix + '-baseline { align-items: baseline !important; }\n        .align-items' + infix + '-stretch  { align-items: stretch !important; }\n      ') + '\n      /* Flex align-content */ \n      ' + mediaBreakpointUp(breakpoint, gridBreakpoints, '\n        .align-content' + infix + '-start   { align-content: flex-start !important; }\n        .align-content' + infix + '-end     { align-content: flex-end !important; }\n        .align-content' + infix + '-center  { align-content: center !important; }\n        .align-content' + infix + '-between { align-content: space-between !important; }\n        .align-content' + infix + '-around  { align-content: space-around !important; }\n        .align-content' + infix + '-stretch { align-content: stretch !important; }\n      ') + '\n      /* Flex align-self */ \n      ' + mediaBreakpointUp(breakpoint, gridBreakpoints, '\n        .align-self' + infix + '-auto     { align-self: auto !important; }\n        .align-self' + infix + '-start    { align-self: flex-start !important; }\n        .align-self' + infix + '-end      { align-self: flex-end !important; }\n        .align-self' + infix + '-center   { align-self: center !important; }\n        .align-self' + infix + '-baseline { align-self: baseline !important; }\n        .align-self' + infix + '-stretch  { align-self: stretch !important; }\n      ') + ' \n    ');
-  });
-  return flexUtilityList.join('\n');
-}
-var flexUtils = {
-  defaultProps: defaultProps$7,
-  getFlexUtilities: getFlexUtilities
-};
+var bootstrapStyledUtils_es = Object.freeze({
+	conditionallyUpdateScrollbar: conditionallyUpdateScrollbar,
+	getOriginalBodyPadding: getOriginalBodyPadding,
+	getScrollbarWidth: getScrollbarWidth,
+	getTetherAttachments: getTetherAttachments,
+	isBodyOverflowing: isBodyOverflowing,
+	setScrollbarWidth: setScrollbarWidth,
+	tetherAttachements: tetherAttachements,
+	toHashCode: toHashCode,
+	parseTransition: parseTransition,
+	unitUtils: index,
+	default: dummy
+});
 
-function floatLeft() {
-  return "\n    float: left !important;\n  ";
-}
-function floatRight() {
-  return "\n    float: right !important;\n  ";
-}
-function floatNone() {
-  return "\n    float: none !important;\n  ";
-}
+var _bootstrapStyledUtils = ( bootstrapStyledUtils_es && dummy ) || bootstrapStyledUtils_es;
 
-var defaultProps$8 = {
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  }
-};
-function getFloatUtilities() {
-  var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$8['$grid-breakpoints'];
-  var floatUtilityList = [];
-  Object.keys(gridBreakpoints).forEach(function (breakpoint) {
-    var infix = breakpointInfix(breakpoint, gridBreakpoints);
-    var floatUtility = mediaBreakpointUp(breakpoint, gridBreakpoints, '\n      .float' + infix + '-left {\n        ' + floatLeft() + '\n      }\n      .float' + infix + '-right {\n        ' + floatRight() + '\n      }\n      .float' + infix + '-none {\n        ' + floatNone() + '\n      }\n    ');
-    floatUtilityList.push(floatUtility);
-  });
-  return floatUtilityList.join('\n');
-}
-var floatUtils = {
-  defaultProps: defaultProps$8,
-  getFloatUtilities: getFloatUtilities
-};
-
-var defaultProps$9 = {
-  '$zindex-fixed': '1030',
-  '$zindex-sticky': '1030'
-};
-function getPositionUtilities() {
-  var zindexFixed = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$9['$zindex-fixed'];
-  var zindexSticky = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$9['$zindex-sticky'];
-  return '\n    ' + fixedTop(zindexFixed) + '\n    ' + fixedBottom(zindexFixed) + '\n    ' + stickTop(zindexSticky) + '\n  ';
-}
-function fixedTop() {
-  var zindexFixed = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$9['$zindex-fixed'];
-  return '\n  .fixed-top {\n    position: fixed !important;\n    top: 0;\n    right: 0;\n    left: 0;\n    z-index: ' + zindexFixed + ';\n  }\n  ';
-}
-function fixedBottom() {
-  var zindexFixed = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$9['$zindex-fixed'];
-  return '\n    .fixed-bottom {\n      position: fixed !important;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + zindexFixed + ';\n    }\n  ';
-}
-function stickTop() {
-  var zindexSticky = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$9['$zindex-sticky'];
-  return '\n    .sticky-top {\n      position: sticky !important;\n      top: 0;\n      z-index: ' + zindexSticky + ';\n    }\n  ';
-}
-var positionUtils = {
-  defaultProps: defaultProps$9,
-  getPositionUtilities: getPositionUtilities,
-  fixedTop: fixedTop,
-  fixedBottom: fixedBottom,
-  stickTop: stickTop
-};
-
-var process = { argv: [], env: {} };
-
+var variables = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.assertAscending = assertAscending;
+exports.assertStartAtZero = assertStartAtZero;
+exports.comparable = comparable;
 function assertAscending(map, mapName) {
   var prevKey = void 0;
   var prevNum = void 0;
@@ -2123,12 +1946,12 @@ function assertAscending(map, mapName) {
   Object.keys(map).forEach(function (key) {
     var num = map[key];
     if (prevNum == null) {
-    } else if (!comparable(index$1.rmUnit(prevNum), index$1.rmUnit(num))) {
+    } else if (!comparable(_bootstrapStyledUtils.unitUtils.rmUnit(prevNum), _bootstrapStyledUtils.unitUtils.rmUnit(num))) {
       if (process.env.NODE !== 'test') {
         console.warn('Potentially invalid value for ' + mapName + ': This map must be in ascending order, but key \'' + key + '\' has value ' + num + ' whose unit makes it incomparable to ' + prevNum + ', the value of the previous key \'' + prevKey + '\' !');
       }
       asserted = false;
-    } else if (index$1.rmUnit(prevNum) >= index$1.rmUnit(num)) {
+    } else if (_bootstrapStyledUtils.unitUtils.rmUnit(prevNum) >= _bootstrapStyledUtils.unitUtils.rmUnit(num)) {
       if (process.env.NODE !== 'test') {
         console.warn('Invalid value for ' + mapName + ': This map must be in ascending order, but key \'' + key + '\' has value ' + num + ' which isn\'t greater than ' + prevNum + ', the value of the previous key \'' + prevKey + '\' !');
       }
@@ -2143,7 +1966,7 @@ function assertStartAtZero(map) {
   var values = Object.keys(map).map(function (key) {
     return map[key];
   });
-  var firstValue = index$1.rmUnit(values[0]);
+  var firstValue = _bootstrapStyledUtils.unitUtils.rmUnit(values[0]);
   var asserted = true;
   if (firstValue !== 0) {
     if (process.env.NODE !== 'test') {
@@ -2156,14 +1979,23 @@ function assertStartAtZero(map) {
 function comparable(a, b) {
   return !isNaN(a + b);
 }
+exports.default = {
+  assertAscending: assertAscending,
+  assertStartAtZero: assertStartAtZero,
+  comparable: comparable
+};
+});
+unwrapExports(variables);
+var variables_1 = variables.assertAscending;
+var variables_2 = variables.assertStartAtZero;
 
 function allowFalseValue(userValue, defaultValue) {
   return userValue === false ? userValue : userValue || defaultValue;
 }
 
-var detectUnit = index$1.detectUnit;
-var rmUnit = index$1.rmUnit;
-var UNIT = index$1.UNIT;
+var detectUnit = unitUtils$1.detectUnit;
+var rmUnit = unitUtils$1.rmUnit;
+var UNIT = unitUtils$1.UNIT;
 function makeOriginal() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var v = {};
@@ -2247,15 +2079,15 @@ function makeOriginal() {
     lg: '992px',
     xl: '1200px'
   };
-  assertAscending(v['$grid-breakpoints'], '$grid-breakpoints');
-  assertStartAtZero(v['$grid-breakpoints']);
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
   v['$container-max-widths'] = u['$container-max-widths'] || {
     sm: '540px',
     md: '720px',
     lg: '960px',
     xl: '1140px'
   };
-  assertAscending(v['$container-max-widths'], '$container-max-widths');
+  variables_1(v['$container-max-widths'], '$container-max-widths');
   v['$grid-columns'] = u['$grid-columns'] || '12';
   v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
   v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
@@ -2715,8 +2547,8 @@ function makeOriginal() {
   return Object.assign({}, u, v);
 }
 
-var rmUnit$1 = index$1.rmUnit;
-var UNIT$1 = index$1.UNIT;
+var rmUnit$1 = unitUtils$1.rmUnit;
+var UNIT$1 = unitUtils$1.UNIT;
 function makeExtend() {
   var original = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : makeOriginal();
   var userTheme = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -2735,7 +2567,10 @@ function makeExtend() {
   v['$menu-transition-duration'] = u['$menu-transition-duration'] || '.6s';
   v['$menu-offset-nav-transition'] = u['$menu-offset-nav-transition'] || 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms';
   v['$menu-offset-nav-box-shadow'] = u['$menu-offset-nav-box-shadow'] || 'rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px';
+  v['$menu-offset-nav-bg-color'] = u['$menu-offset-nav-bg-color'] || 'white';
+  v['$overlay-bg'] = u['$overlay-bg-color'] || 'rgba(0, 0, 0, 0.3)';
   v['$zindex-menu-push'] = u['$zindex-menu-push'] || '2000';
+  v['$zindex-overlay'] = u['$zindex-overlay'] || '2050';
   v['$motion-duration'] = u['$motion-duration'] || {
     xs: '200ms',
     sm: '300ms',
@@ -2807,7 +2642,7 @@ function makeExtend() {
     xl: 1.8,
     xxl: 2
   };
-  assertAscending(v['$motion-amplification'], '$motion-amplification');
+  variables_1(v['$motion-amplification'], '$motion-amplification');
   v['$motion-degree'] = u['$motion-degree'] || {
     xs: '45deg',
     sm: '90deg',
@@ -2883,1282 +2718,7 @@ function makeTheme$1() {
 var bsTheme = makeTheme$1();
 var makeTheme$$1 = makeTheme$1;
 
-function getGlobalStyles$1() {
-  return '\n    html {\n      ' + html() + '\n    }\n    *,\n    *::before,\n    *::after {\n      ' + boxSizing() + '\n    }\n    @-ms-viewport { \n      ' + ie10FixViewport() + ' \n    }\n  ';
-}
-function getGlobalStyleNoBootstrapProvider$1() {
-  var fontFamilyBase = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : bsTheme['$font-family-base'];
-  var fontSizeBase = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : bsTheme['$font-size-base'];
-  var fontWeightBase = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : bsTheme['$font-weight-base'];
-  var lineHeightBase = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : bsTheme['$line-height-base'];
-  var bodyColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : bsTheme['$body-color'];
-  var bodyBg = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : bsTheme['$body-bg'];
-  return '\n    ' + getGlobalStyles$1() + '\n    body {\n      ' + body(fontFamilyBase, fontSizeBase, fontWeightBase, lineHeightBase, bodyColor, bodyBg) + ' \n    }\n  ';
-}
-function html() {
-  return '\n    box-sizing: border-box;\n    font-family: sans-serif;\n    line-height: 1.15;\n    -ms-text-size-adjust: 100%;\n    -webkit-text-size-adjust: 100%;\n    -ms-overflow-style: scrollbar;\n    -webkit-tap-highlight-color: rgba(0,0,0,0);\n  ';
-}
-function boxSizing() {
-  return '\n    box-sizing: inherit;\n  ';
-}
-function ie10FixViewport() {
-  return '\n    width: device-width;\n  ';
-}
-function body() {
-  var fontFamilyBase = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : bsTheme['$font-family-base'];
-  var fontSizeBase = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : bsTheme['$font-size-base'];
-  var fontWeightBase = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : bsTheme['$font-weight-base'];
-  var lineHeightBase = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : bsTheme['$line-height-base'];
-  var bodyColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : bsTheme['$body-color'];
-  var bodyBg = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : bsTheme['$body-bg'];
-  return '\n    margin: 0;\n    font-family: ' + fontFamilyBase + ';\n    font-size: ' + fontSizeBase + ';\n    font-weight: ' + fontWeightBase + ';\n    line-height: ' + lineHeightBase + ';\n    color: ' + bodyColor + ';\n    background-color: ' + bodyBg + ';\n    \n    ' + bodyUtils() + '\n    \n    [tabindex="-1"]:focus {\n      ' + tabIndex() + '\n    }\n    svg:not(:root) {\n      ' + svg() + '\n    }\n    [hidden] {\n      ' + ie10FixHidden() + '\n    }\n    ::-webkit-file-upload-button {\n      ' + webkitFileUploadButton() + '\n    }\n  ';
-}
-function bodyUtils() {
-  return '\n    &.overflow {\n      overflow-x: hidden;\n    }\n  ';
-}
-function tabIndex() {
-  return '\n    outline: none !important;\n  ';
-}
-function svg() {
-  return '\n    overflow: hidden;\n  ';
-}
-function ie10FixHidden() {
-  return '\n    display: none !important;\n  ';
-}
-function webkitFileUploadButton() {
-  return '\n    font: inherit;\n    -webkit-appearance: button;\n  ';
-}
-var rebootUtils = {
-  html: html,
-  boxSizing: boxSizing,
-  ie10FixViewport: ie10FixViewport,
-  body: body,
-  bodyUtils: bodyUtils,
-  tabIndex: tabIndex,
-  svg: svg,
-  ie10FixHidden: ie10FixHidden,
-  getGlobalStyles: getGlobalStyles$1,
-  getGlobalStyleNoBootstrapProvider: getGlobalStyleNoBootstrapProvider$1,
-  webkitFileUploadButton: webkitFileUploadButton
-};
-
-function srOnly() {
-  return "\n    position: absolute !important;\n    width: 1px;\n    height: 1px;\n    padding: 0;\n    margin: -1px;\n    overflow: hidden;\n    clip: rect(0,0,0,0);\n    border: 0;\n  ";
-}
-function srOnlyFocusable() {
-  return "\n    &:active,\n    &:focus {\n      position: static;\n      width: auto;\n      height: auto;\n      margin: 0;\n      overflow: visible;\n      clip: auto;\n    }\n  ";
-}
-
-function getScreenReadersUtilities() {
-  return '\n    .sr-only {\n      ' + srOnly() + '\n    }\n    \n    .sr-only-focusable {\n      ' + srOnlyFocusable() + '\n    }\n  ';
-}
-var screenreadersUtils = {
-  getScreenReadersUtilities: getScreenReadersUtilities
-};
-
-var defaultProps$10 = {
-  $sizes: {
-    25: '25%',
-    50: '50%',
-    75: '75%',
-    100: '100%'
-  }
-};
-function getSizingUtilities() {
-  var sizes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$10['$sizes'];
-  var abbrev = {
-    width: 'w',
-    height: 'h'
-  };
-  var sizingList = [];
-  Object.keys(abbrev).forEach(function (cssProp) {
-    Object.keys(sizes).forEach(function (size) {
-      sizingList.push('\n        .' + abbrev[cssProp] + '-' + size + ' { ' + cssProp + ': ' + sizes[size] + ' !important; }\n      ');
-    });
-  });
-  return '\n    ' + sizingList.join('\n') + '\n    .mw-100 { max-width: 100% !important; }\n    .mh-100 { max-height: 100% !important; }\n  ';
-}
-var sizingUtils = {
-  defaultProps: defaultProps$10,
-  getSizingUtilities: getSizingUtilities
-};
-
-var defaultProps$11 = {
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  },
-  '$zindex-navbar-fixed': '1030',
-  '$spacers': {
-    0: {
-      x: 0,
-      y: 0
-    },
-    1: {
-      x: '0.25rem',
-      y: '0.25rem'
-    },
-    2: {
-      x: '0.5rem',
-      y: '0.5rem'
-    },
-    3: {
-      x: '1rem',
-      y: '1rem'
-    },
-    4: {
-      x: '1.5rem',
-      y: '1.5rem'
-    },
-    5: {
-      x: '3rem',
-      y: '3rem'
-    }
-  }
-};
-function getSpacingUtilities()
-{
-  var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$11['$grid-breakpoints'];
-  var spacers = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$11['$spacers'];
-  var abbrevs = {
-    margin: 'm',
-    padding: 'p'
-  };
-  var spacingUtilityList = [];
-  var infixList = [];
-  Object.keys(gridBreakpoints).forEach(function (breakpoint) {
-    var infix = breakpointInfix(breakpoint, gridBreakpoints);
-    infixList.push(infix);
-    Object.keys(abbrevs).forEach(function (prop) {
-      var abbrev = abbrevs[prop];
-      Object.keys(spacers).forEach(function (size) {
-        var lengths = spacers[size];
-        spacingUtilityList.push(mediaBreakpointUp(breakpoint, gridBreakpoints, '\n          .' + abbrev + infix + '-' + size + ' { ' + prop + ':        ' + lengths.y + ' ' + lengths.x + ' !important; } /* a = All sides */\n          .' + abbrev + 't' + infix + '-' + size + ' { ' + prop + '-top:    ' + lengths.y + ' !important; }\n          .' + abbrev + 'r' + infix + '-' + size + ' { ' + prop + '-right:  ' + lengths.x + ' !important; }\n          .' + abbrev + 'b' + infix + '-' + size + ' { ' + prop + '-bottom: ' + lengths.y + ' !important; }\n          .' + abbrev + 'l' + infix + '-' + size + ' { ' + prop + '-left:   ' + lengths.x + ' !important; }\n          .' + abbrev + 'x' + infix + '-' + size + ' {\n            ' + prop + '-right:  ' + lengths.x + ' !important;\n            ' + prop + '-left:   ' + lengths.x + ' !important;\n          }\n          .' + abbrev + 'y' + infix + '-' + size + ' {\n            ' + prop + '-top:    ' + lengths.y + ' !important;\n            ' + prop + '-bottom: ' + lengths.y + ' !important;\n          }\n        '));
-      });
-    });
-  });
-  var infixUtilityList = infixList.map(function (infix) {
-    return '\n    .m' + infix + '-auto  { margin:        auto !important; }\n    .mt' + infix + '-auto { margin-top:    auto !important; }\n    .mr' + infix + '-auto { margin-right:  auto !important; }\n    .mb' + infix + '-auto { margin-bottom: auto !important; }\n    .ml' + infix + '-auto { margin-left:   auto !important; }\n    .mx' + infix + '-auto {\n      margin-right: auto !important;\n      margin-left:  auto !important;\n    }\n    .my' + infix + '-auto {\n      margin-top:    auto !important;\n      margin-bottom: auto !important;\n    }\n  ';
-  });
-  return '\n    ' + infixUtilityList.join('\n') + '\n    ' + spacingUtilityList.join('\n') + '\n  ';
-}
-var spacingUtils = {
-  defaultProps: defaultProps$11,
-  getSpacingUtilities: getSpacingUtilities
-};
-
-function parseTransition(transitions) {
-  if (!transitions) {
-    return [];
-  }
-  var sample = transitions;
-  var RULE_DELIMITER = ',';
-  var PROPERTY_DELIMITER = ' ';
-  var MS_UNIT = 'ms';
-  var TMP_STR = 'TMP';
-  var DEFAULT_PROPERTY = 'all';
-  var DEFAULT_DURATION = 0;
-  var DEFAULT_TIMING_FUNCTION = 'ease';
-  var DEFAULT_DELAY = 0;
-  var BEZIER_REGEX = /cubic-bezier\([^\)]+\)/gi;
-  var cubicBezierList = transitions.match(BEZIER_REGEX);
-  if (cubicBezierList) {
-    sample = sample.replace(BEZIER_REGEX, TMP_STR);
-  }
-  var transitionList = sample.split(RULE_DELIMITER).map(function (rule) {
-    var properties = rule.trim().split(PROPERTY_DELIMITER);
-    return {
-      property: properties[0] || DEFAULT_PROPERTY,
-      duration: properties[1] && !(properties[1].indexOf(MS_UNIT) !== -1) ? parseFloat(properties[1]) * 1000 : parseFloat(properties[1]) || DEFAULT_DURATION,
-      timingFunction: properties[2] && properties[2] !== TMP_STR ? properties[2] : cubicBezierList ? cubicBezierList.shift() : DEFAULT_TIMING_FUNCTION,
-      delay: properties[3] && !(properties[3].indexOf(MS_UNIT) !== -1) ? parseFloat(properties[3]) * 1000 : parseFloat(properties[3]) || DEFAULT_DELAY
-    };
-  });
-  return transitionList;
-}
-
-var defaultProps$13 = bsTheme;
-function transition() {
-  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$13['$enable-transitions'];
-  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    args[_key - 1] = arguments[_key];
-  }
-  if (enableTransitions && args.length) {
-    return '\n      transition: ' + args.join(' ') + ';\n    ';
-  }
-  return '';
-}
-
-var defaultProps$12 = bsTheme;
-function getTransitionUtilities() {
-  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$12['$enable-transitions'];
-  var transitionFade = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$12['$transition-fade'];
-  var transitionCollapse = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$12['$transition-collapse'];
-  return '\n    ' + fade(enableTransitions, transitionFade) + '\n    ' + collapse(enableTransitions, transitionCollapse) + '\n  ';
-}
-function fade() {
-  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$12['$enable-transitions'];
-  var transitionFade = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$12['$transition-fade'];
-  return '\n    .fade,\n     &.fade {\n      opacity: 0;\n      ' + transition(enableTransitions, transitionFade) + '\n    \n      &.show {\n        opacity: 1;\n      }\n    }\n  ';
-}
-function collapse() {
-  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$12['$enable-transitions'];
-  var transitionCollapse = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$12['$transition-collapse'];
-  return '\n    .collapse {\n      display: none;\n      &.show {\n        display: block;\n      }\n    }\n    \n    tr {\n      &.collapse.show {\n        display: table-row;\n      }\n    }\n    \n    tbody {\n      &.collapse.show {\n        display: table-row-group;\n      }\n    }\n    \n    .collapsing {\n      position: relative;\n      height: 0;\n      overflow: hidden;\n      ' + transition(enableTransitions, transitionCollapse) + '\n    }\n  ';
-}
-
-var transitionUtils = {
-  defaultProps: defaultProps$12,
-  getTransitionUtilities: getTransitionUtilities,
-  fade: fade,
-  collapse: collapse
-};
-
-function textTruncate() {
-  return "\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  ";
-}
-
-function textHide() {
-  return "\n    font: 0/0 a;\n    color: transparent;\n    text-shadow: none;\n    background-color: transparent;\n    border: 0;\n  ";
-}
-
-var defaultProps$15 = {
-  '$enable-hover-media-query': false
-};
-function textEmphasisVariant() {
-  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$15['$enable-hover-media-query'];
-  var parent = arguments[1];
-  var textColor = arguments[2];
-  return '\n    ' + parent + ' {\n      color: ' + textColor + ' !important;\n    }\n    a' + parent + ' {\n      ' + hoverFocus(enableHoverMediaQuery, 'color: ' + color(textColor).darken(0.20).rgb() + ' !important;') + '\n    }\n  ';
-}
-
-var defaultProps$14 = {
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  },
-  '$enable-hover-media-query': false,
-  '$font-weight-normal': 'normal',
-  '$font-weight-bold': 'bold',
-  '$text-muted': '#818a91',
-  '$brand-primary': '#0275d8',
-  '$brand-success': '#5cb85c',
-  '$brand-info': '#5bc0de',
-  '$brand-warning': '#f0ad4e',
-  '$brand-danger': '#d9534f',
-  '$gray-dark': '#373a3c'
-};
-function getTextUtilities() {
-  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$14['$enable-hover-media-query'];
-  var gridBreakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$14['$grid-breakpoints'];
-  var fontWeightNormal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$14['$font-weight-normal'];
-  var fontWeightBold = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps$14['$font-weight-bold'];
-  var textMuted = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps$14['$text-muted'];
-  var brandPrimary = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps$14['$brand-primary'];
-  var brandSuccess = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps$14['$brand-success'];
-  var brandInfo = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps$14['$brand-info'];
-  var brandWarning = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps$14['$brand-warning'];
-  var brandDanger = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps$14['$brand-danger'];
-  var grayDark = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps$14['$gray-dark'];
-  var responseAlignmentList = [];
-  Object.keys(gridBreakpoints).forEach(function (bp) {
-    var infix = breakpointInfix(bp, gridBreakpoints);
-    var responsiveAlignement = mediaBreakpointUp(bp, gridBreakpoints, '\n      .text' + infix + '-left { text-align: left !important; }\n      .text' + infix + '-right  { text-align: right !important; }\n      .text' + infix + '-center { text-align: center !important; }\n    ');
-    responseAlignmentList.push(responsiveAlignement);
-  });
-  return '\n    /* Text */\n\n    /* Alignment */\n\n    .text-justify        { text-align: justify !important; }\n    .text-nowrap         { white-space: nowrap !important; }\n    .text-truncate       { ' + textTruncate() + ' }\n\n    /* Responsive alignment */\n\n    ' + responseAlignmentList.join('\n') + '\n\n    /* Transformation */\n\n    .text-lowercase      { text-transform: lowercase !important; }\n    .text-uppercase      { text-transform: uppercase !important; }\n    .text-capitalize     { text-transform: capitalize !important; }\n\n    /* Weight and italics */\n\n    .font-weight-normal  { font-weight: ' + fontWeightNormal + '; }\n    .font-weight-bold    { font-weight: ' + fontWeightBold + '; }\n    .font-italic         { font-style: italic; }\n\n    /* Contextual colors */\n\n    .text-white {\n      color: #fff !important;\n    }\n\n    ' + textEmphasisVariant(enableHoverMediaQuery, '.text-muted', textMuted) + '\n\n    ' + textEmphasisVariant(enableHoverMediaQuery, '.text-primary', brandPrimary) + '\n\n    ' + textEmphasisVariant(enableHoverMediaQuery, '.text-success', brandSuccess) + '\n\n    ' + textEmphasisVariant(enableHoverMediaQuery, '.text-info', brandInfo) + '\n\n    ' + textEmphasisVariant(enableHoverMediaQuery, '.text-warning', brandWarning) + '\n\n    ' + textEmphasisVariant(enableHoverMediaQuery, '.text-danger', brandDanger) + '\n\n    /* Font color */\n\n    ' + textEmphasisVariant(enableHoverMediaQuery, '.text-gray-dark', grayDark) + '\n\n    /* Misc */\n\n    .text-hide {\n      ' + textHide() + '\n    }\n\n  ';
-}
-var textUtils = {
-  defaultProps: defaultProps$14,
-  getTextUtilities: getTextUtilities
-};
-
-function invisible(visibility) {
-  return "\n    visibility: " + visibility + " !important;\n  ";
-}
-
-function getVisibilityUtilities() {
-  return '\n    .visible {\n      ' + invisible('visible') + '\n    }\n    \n    .invisible {\n      ' + invisible('hidden') + '\n    }\n   \n  ';
-}
-var visibilityUtils = {
-  getVisibilityUtilities: getVisibilityUtilities
-};
-
-function tabFocus() {
-  return "\n    /* WebKit-specific. Other browsers will keep their default outline style. */\n    /* (Initially tried to also force default via 'outline: initial', */\n    /* but that seems to erroneously remove the outline in Firefox altogether.) */\n    outline: 5px auto -webkit-focus-ring-color;\n    outline-offset: -2px;\n  ";
-}
-
-var defaultProps$16 = {
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  },
-  '$link-color': '#0275d8',
-  '$link-decoration': 'none',
-  '$link-hover-color': '#014C8D',
-  '$link-hover-decoration': 'underline',
-  '$enable-hover-media-query': false
-};
-function a() {
-  var $linkColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$16['$link-color'];
-  var $linkDecoration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$16['$link-decoration'];
-  var $linkHoverColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$16['$link-hover-color'];
-  var $linkHoverDecoration = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps$16['$link-hover-decoration'];
-  var $enableHoverMediaQuery = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps$16['$enable-hover-media-query'];
-  return '\n    color: ' + $linkColor + ';\n    text-decoration: ' + $linkDecoration + ';\n    background-color: transparent;\n    -webkit-text-decoration-skip: objects;\n  \n    ' + hoverFocus($enableHoverMediaQuery, '\n        color: ' + $linkHoverColor + ';\n        text-decoration: ' + $linkHoverDecoration + ';\n      ') + '\n    \n    &:focus {\n      ' + tabFocus() + '\n    }\n\n    a:not([href]):not([tabindex]) {\n      color: inherit;\n      text-decoration: none;\n      \n      ' + hoverFocus($enableHoverMediaQuery, '\n          color: inherit;\n          text-decoration: none;\n        ') + '\n\n      &:focus {\n        outline: 0;\n      }\n    }\n  ';
-}
-
-function alertVariant(background, border, bodyColor) {
-  return '\n    background-color: ' + background + ';\n    border-color: ' + border + ';\n    color: ' + bodyColor + ';\n  \n    hr {\n      border-top-color: ' + color(border).darken(0.5).toString() + ';\n    }\n    .alert-link {\n      color: ' + color(bodyColor).darken(0.1).toString() + ';\n    }\n  ';
-}
-
-var defaultProps$17 = {
-  '$enable-hover-mediaQuery': false
-};
-function badgeVariant() {
-  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$17['$enable-hover-mediaQuery'];
-  var badgeColor = arguments[1];
-  return '\n    background-color: ' + badgeColor + ';\n    \n    &[href] {\n      ' + hoverFocus(enableHoverMediaQuery, 'background-color: ' + color(badgeColor).darken(0.1).toString() + ';') + '\n    }\n  ';
-}
-
-var defaultProps$18 = {
-  '$enable-shadows': false
-};
-function boxShadow() {
-  var enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$18['$enable-shadows'];
-  if (enableShadows) {
-    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
-    return '\n      box-shadow: ' + args.join(' ') + ';\n    ';
-  }
-  return '';
-}
-
-function ifThen(conditions, returnTrue) {
-  return ifElse(conditions, returnTrue, '');
-}
-function ifElse(conditions, returnTrue, returnFalse) {
-  return conditions ? returnTrue : returnFalse;
-}
-
-var defaultProps$19 = bsTheme;
-function buttonVariant() {
-  var enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$19['$enable-shadows'];
-  var buttonColor = arguments[1];
-  var background = arguments[2];
-  var border = arguments[3];
-  var btnActiveBoxShadow = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps$19['$btn-active-box-shadow'];
-  var btnBoxShadow = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps$19['$btn-box-shadow'];
-  var activeBackground = color(background).darken(0.2).toString();
-  var activeBorder = color(border).darken(0.12).toString();
-  return '\n    color: ' + buttonColor + ';\n    background-color: ' + background + ';\n    border-color: ' + border + ';\n    ' + boxShadow(enableShadows, btnBoxShadow) + '\n  \n    ' + hover('\n      color: ' + buttonColor + ';\n      background-color: ' + activeBackground + ';\n      border-color: ' + activeBorder + ';\n    ') + '\n  \n    &:focus,\n    &.focus {\n      ' + ifElse('box-shadow: ' + btnBoxShadow + ', 0 0 0 2px ' + color(border).alpha(0.5).toString() + ';', 'box-shadow: 0 0 0 2px ' + color(border).alpha(0.5).toString() + ';') + '\n    }\n  \n    /* Disabled comes first so active can properly restyle */\n    &.disabled,\n    &:disabled {\n      background-color: ' + background + ';\n      border-color: ' + border + ';\n    }\n    \n    &:active,\n    &.active,\n    .show > &.dropdown-toggle {\n      color: ' + buttonColor + ';\n      background-color: ' + activeBackground + ';\n      background-image: none;\n      border-color: ' + activeBorder + ';\n      ' + boxShadow(enableShadows, btnActiveBoxShadow) + '\n    }\n  ';
-}
-function buttonOutlineVariant(buttonColor) {
-  var buttonColorHover = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#fff';
-  return '\n    color: ' + buttonColor + ';\n    background-image: none;\n    background-color: transparent;\n    border-color: ' + buttonColor + ';\n  \n    ' + hover('\n      color: ' + buttonColorHover + ';\n      background-color: ' + buttonColor + ';\n      border-color: ' + buttonColor + ';\n    ') + '\n  \n    &:focus,\n    &.focus {\n      box-shadow: 0 0 0 2px ' + color(buttonColor).alpha(0.5).toString() + ';\n    }\n  \n    &.disabled,\n    &:disabled {\n      color: ' + buttonColor + ';\n      border-color: transparent;\n    }\n    \n    &:active,\n    &.active,\n    & .open > &.dropdown-toggle {\n      color: ' + buttonColorHover + ';\n      background-color: ' + buttonColor + ';\n      border-color: ' + buttonColor + ';\n    }\n  ';
-}
-function buttonSize() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$19['$enable-rounded'];
-  var paddingY = arguments[1];
-  var paddingX = arguments[2];
-  var fontSize = arguments[3];
-  var btnBorderRadius = arguments[4];
-  return '\n    padding: ' + paddingY + ' ' + paddingX + ';\n    font-size: ' + fontSize + ';\n    ' + borderRadius(enableRounded, btnBorderRadius) + '\n  ';
-}
-function button() {
-  var $enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$19['$enable-shadows'];
-  var $enableHoverMediaQuery = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$19['$enable-hover-media-query'];
-  var $enableTransitions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$19['$enable-transitions'];
-  var $enableRounded = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps$19['$enable-rounded'];
-  var $fontWeightNormal = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps$19['$font-weight-normal'];
-  var $btnFontWeight = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps$19['$btn-font-weight'];
-  var $btnLineHeight = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps$19['$btn-line-height'];
-  var $btnTransition = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps$19['$btn-transition'];
-  var $inputBtnBorderWidth = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps$19['$input-btn-border-width'];
-  var $btnPaddingX = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps$19['$btn-padding-x'];
-  var $btnPaddingY = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps$19['$btn-padding-y'];
-  var $fontSizeBase = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps$19['$font-size-base'];
-  var $btnBorderRadius = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps$19['$btn-border-radius'];
-  var $btnBoxShadow = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : defaultProps$19['$btn-box-shadow'];
-  var $btnFocusBoxShadow = arguments.length > 14 && arguments[14] !== undefined ? arguments[14] : defaultProps$19['$btn-focus-box-shadow'];
-  var $btnActiveBoxShadow = arguments.length > 15 && arguments[15] !== undefined ? arguments[15] : defaultProps$19['$btn-active-box-shadow'];
-  var $cursorDisabled = arguments.length > 16 && arguments[16] !== undefined ? arguments[16] : defaultProps$19['$cursor-disabled'];
-  var $linkColor = arguments.length > 17 && arguments[17] !== undefined ? arguments[17] : defaultProps$19['$link-color'];
-  var $linkHoverColor = arguments.length > 18 && arguments[18] !== undefined ? arguments[18] : defaultProps$19['$link-hover-color'];
-  var $linkHoverDecoration = arguments.length > 19 && arguments[19] !== undefined ? arguments[19] : defaultProps$19['$link-hover-decoration'];
-  var $btnLinkDisabledColor = arguments.length > 20 && arguments[20] !== undefined ? arguments[20] : defaultProps$19['$btn-link-disabled-color'];
-  var $btnPaddingXLg = arguments.length > 21 && arguments[21] !== undefined ? arguments[21] : defaultProps$19['$btn-padding-x-lg'];
-  var $btnPaddingYLg = arguments.length > 22 && arguments[22] !== undefined ? arguments[22] : defaultProps$19['$btn-padding-y-lg'];
-  var $fontSizeLg = arguments.length > 23 && arguments[23] !== undefined ? arguments[23] : defaultProps$19['$font-size-lg'];
-  var $btnBorderRadiusLg = arguments.length > 24 && arguments[24] !== undefined ? arguments[24] : defaultProps$19['$btn-border-radius-lg'];
-  var $btnPaddingXSm = arguments.length > 25 && arguments[25] !== undefined ? arguments[25] : defaultProps$19['$btn-padding-x-sm'];
-  var $btnPaddingYSm = arguments.length > 26 && arguments[26] !== undefined ? arguments[26] : defaultProps$19['$btn-padding-y-sm'];
-  var $fontSizeSm = arguments.length > 27 && arguments[27] !== undefined ? arguments[27] : defaultProps$19['$font-size-sm'];
-  var $btnBorderRadiusSm = arguments.length > 28 && arguments[28] !== undefined ? arguments[28] : defaultProps$19['$btn-border-radius-sm'];
-  var $btnBlockSpacingY = arguments.length > 29 && arguments[29] !== undefined ? arguments[29] : defaultProps$19['$btn-block-spacing-y'];
-  var $btnPrimaryColor = arguments.length > 30 && arguments[30] !== undefined ? arguments[30] : defaultProps$19['$btn-primary-color'];
-  var $btnPrimaryBg = arguments.length > 31 && arguments[31] !== undefined ? arguments[31] : defaultProps$19['$btn-primary-bg'];
-  var $btnPrimaryBorder = arguments.length > 32 && arguments[32] !== undefined ? arguments[32] : defaultProps$19['$btn-primary-border'];
-  var $btnSecondaryColor = arguments.length > 33 && arguments[33] !== undefined ? arguments[33] : defaultProps$19['$btn-secondary-color'];
-  var $btnSecondaryBg = arguments.length > 34 && arguments[34] !== undefined ? arguments[34] : defaultProps$19['$btn-secondary-bg'];
-  var $btnSecondaryBorder = arguments.length > 35 && arguments[35] !== undefined ? arguments[35] : defaultProps$19['$btn-secondary-border'];
-  var $btnInfoColor = arguments.length > 36 && arguments[36] !== undefined ? arguments[36] : defaultProps$19['$btn-info-color'];
-  var $btnInfoBg = arguments.length > 37 && arguments[37] !== undefined ? arguments[37] : defaultProps$19['$btn-info-bg'];
-  var $btnInfoBorder = arguments.length > 38 && arguments[38] !== undefined ? arguments[38] : defaultProps$19['$btn-info-border'];
-  var $btnSuccessColor = arguments.length > 39 && arguments[39] !== undefined ? arguments[39] : defaultProps$19['$btn-success-color'];
-  var $btnSuccessBg = arguments.length > 40 && arguments[40] !== undefined ? arguments[40] : defaultProps$19['$btn-success-bg'];
-  var $btnSuccessBorder = arguments.length > 41 && arguments[41] !== undefined ? arguments[41] : defaultProps$19['$btn-success-border'];
-  var $btnWarningColor = arguments.length > 42 && arguments[42] !== undefined ? arguments[42] : defaultProps$19['$btn-warning-color'];
-  var $btnWarningBg = arguments.length > 43 && arguments[43] !== undefined ? arguments[43] : defaultProps$19['$btn-warning-bg'];
-  var $btnWarningBorder = arguments.length > 44 && arguments[44] !== undefined ? arguments[44] : defaultProps$19['$btn-warning-border'];
-  var $btnDangerColor = arguments.length > 45 && arguments[45] !== undefined ? arguments[45] : defaultProps$19['$btn-danger-color'];
-  var $btnDangerBg = arguments.length > 46 && arguments[46] !== undefined ? arguments[46] : defaultProps$19['$btn-danger-bg'];
-  var $btnDangerBorder = arguments.length > 47 && arguments[47] !== undefined ? arguments[47] : defaultProps$19['$btn-danger-border'];
-  return '\n  \n    font-family: inherit;\n    \n    &.btn {\n      display: inline-block;\n      font-weight: ' + $btnFontWeight + ';\n      line-height: ' + $btnLineHeight + ';\n      text-align: center;\n      white-space: nowrap;\n      vertical-align: middle;\n      user-select: none;\n      border: ' + $inputBtnBorderWidth + ' solid transparent;\n      ' + buttonSize($enableRounded, $btnPaddingY, $btnPaddingX, $fontSizeBase, $btnBorderRadius) + '\n      ' + transition($enableTransitions, $btnTransition) + '\n     \n      ' + hoverFocus($enableHoverMediaQuery, 'text-decoration: none;') + '\n\n      &:focus,\n      &.focus {\n        outline: 0;\n        box-shadow: ' + $btnFocusBoxShadow + ';\n      }\n\n      &.disabled,\n      &:disabled {\n        cursor: ' + $cursorDisabled + ';\n        opacity: .65;\n        ' + boxShadow($enableShadows, 'none') + '\n      }  \n\n      &:active,\n      &.active {\n        background-image: none;\n        ' + boxShadow($enableShadows, $btnFocusBoxShadow, $btnActiveBoxShadow) + '\n      }\n    }\n    \n    a.btn.disabled,\n    fieldset[disabled] a.btn {\n      pointer-events: none;\n    }\n   \n   \n    /* Alternate buttons */\n   \n    &.btn-primary {\n      ' + buttonVariant($enableShadows, $btnPrimaryColor, $btnPrimaryBg, $btnPrimaryBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-secondary {\n      ' + buttonVariant($enableShadows, $btnSecondaryColor, $btnSecondaryBg, $btnSecondaryBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-info {\n      ' + buttonVariant($enableShadows, $btnInfoColor, $btnInfoBg, $btnInfoBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-success {\n      ' + buttonVariant($enableShadows, $btnSuccessColor, $btnSuccessBg, $btnSuccessBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-warning {\n      ' + buttonVariant($enableShadows, $btnWarningColor, $btnWarningBg, $btnWarningBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-danger {\n      ' + buttonVariant($enableShadows, $btnDangerColor, $btnDangerBg, $btnDangerBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n   \n    &.btn-outline-primary {\n      ' + buttonOutlineVariant($btnPrimaryBg, $btnPrimaryColor) + '\n    }    \n    &.btn-outline-secondary {\n      ' + buttonOutlineVariant($btnSecondaryBorder, $btnSecondaryColor) + '\n    }    \n    &.btn-outline-info {\n      ' + buttonOutlineVariant($btnInfoBg, $btnInfoColor) + '\n    }    \n    &.btn-outline-success {\n      ' + buttonOutlineVariant($btnSuccessBg, $btnSuccessColor) + '\n    }\n    &.btn-outline-warning {\n      ' + buttonOutlineVariant($btnWarningBg, $btnWarningColor) + '\n    }\n    &.btn-outline-danger {\n      ' + buttonOutlineVariant($btnDangerBg, $btnDangerColor) + '\n    }\n   \n    /*\n     Link buttons\n    */\n   \n    &.btn-link {\n      font-weight: ' + $fontWeightNormal + ';\n      color: ' + $linkColor + ';\n      border-radius: 0;\n   \n      &,\n      &:active,\n      &.active,\n      &:disabled {\n        background-color: transparent;\n        ' + boxShadow($enableShadows, 'none') + '\n      }\n     \n      &,\n      &:focus,\n      &:active {\n        border-color: transparent;\n      }\n     \n      ' + hover('\n        border-color: transparent;\n      ') + '\n     \n      ' + hoverFocus($enableHoverMediaQuery, '\n          color: ' + $linkHoverColor + ';\n          text-decoration: ' + $linkHoverDecoration + ';\n          background-color: transparent;\n        ') + '\n     \n      &:disabled {\n        color: ' + $btnLinkDisabledColor + ';\n        ' + hoverFocus($enableHoverMediaQuery, '\n            text-decoration: none;\n          ') + '\n      }\n    }\n  \n  \n    /*\n     Button Sizes\n    */\n   \n    &.btn-lg {\n      /* line-height: ensure even-numbered height of button next to large input */\n      ' + buttonSize($enableRounded, $btnPaddingYLg, $btnPaddingXLg, $fontSizeLg, $btnBorderRadiusLg) + '\n    }\n   \n    &.btn-sm {\n      /* line-height: ensure proper height of button next to small input */\n      ' + buttonSize($enableRounded, $btnPaddingYSm, $btnPaddingXSm, $fontSizeSm, $btnBorderRadiusSm) + '\n    }\n   \n   \n    /*\n     Block button\n    */\n   \n    &.btn-block {\n      display: block;\n      width: 100%;\n    }\n   \n    /* Vertically space out multiple block buttons */\n    &.btn-block + .btn-block {\n      margin-top: ' + $btnBlockSpacingY + ';\n    }\n   \n    /* Specificity overrides */\n    input[type="submit"],\n    input[type="reset"],\n    input[type="button"] {\n      &.btn-block {\n        width: 100%;\n      }\n    }\n   \n    /* Reboot Scss */\n    touch-action: manipulation;\n    line-height: inherit;\n    &:focus{\n      outline: 1px dotted;\n      outline: 5px auto -webkit-focus-ring-color;\n    }\n    \n    &[type="button"],\n    &[type="reset"],\n    &[type="submit"] {\n      -webkit-appearance: button;\n    }\n    \n    &::-moz-focus-inner,\n    &[type="button"]::-moz-focus-inner,\n    &[type="reset"]::-moz-focus-inner,\n    &[type="submit"]::-moz-focus-inner {\n      padding: 0;\n      border-style: none;\n    }\n\n  ';
-}
-
-var defaultProps$20 = {
-  '$enable-shadows': true,
-  '$enable-rounded': true,
-  '$input-btn-border-width': '1px',
-  '$btn-toolbar-margin': '.5rem',
-  '$btn-padding-x': '1rem',
-  '$btn-active-box-shadow': 'inset 0 3px 5px rgba(0,0,0,.125)',
-  '$btn-padding-x-lg': '1.5rem',
-  '$btn-padding-y-lg': '.75rem',
-  '$font-size-lg': '1.25rem',
-  '$btn-border-radius-lg': '.3rem',
-  '$btn-padding-y-sm': '.25rem',
-  '$btn-padding-x-sm': '.5rem',
-  '$font-size-sm': '.875rem',
-  '$btn-border-radius-sm': '.2rem',
-  '$btn-border-width': '1px'
-};
-function buttonGroup() {
-  var $enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$20['$enable-shadows'];
-  var $enableRounded = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$20['$enable-rounded'];
-  var $inputBtnBorderWidth = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$20['$input-btn-border-width'];
-  var $btnPaddingX = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps$20['$btn-padding-x'];
-  var $btnActiveBoxShadow = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps$20['$btn-active-box-shadow'];
-  var $btnPaddingXLg = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps$20['$btn-padding-x-lg'];
-  var $btnPaddingYLg = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps$20['$btn-padding-y-lg'];
-  var $fontSizeLg = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps$20['$font-size-lg'];
-  var $btnBorderRadiusLg = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps$20['$btn-border-radius-lg'];
-  var $btnPaddingXSm = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps$20['$btn-padding-x-sm'];
-  var $btnPaddingYSm = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps$20['$btn-padding-y-sm'];
-  var $fontSizeSm = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps$20['$font-size-sm'];
-  var $btnBorderRadiusSm = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : defaultProps$20['$btn-border-radius-sm'];
-  return ' \n    /*  Make the div behave like a button */\n    &.btn-group,\n    & .btn-group,\n    &.btn-group-vertical,\n    & .btn-group-vertical {\n      position: relative;\n      display: inline-flex;\n      vertical-align: middle; /* match .btn alignment given font-size hack above */\n    \n      > .btn {\n        position: relative;\n        flex: 0 1 auto;\n        margin-bottom: 0;\n    \n        /* Bring the "active" button to the front */\n        &:focus,\n        &:active,\n        &.active {\n          z-index: 2;\n        }\n        ' + hover('\n          z-index: 2;\n        ') + '\n      }\n    }\n    \n    /*  Prevent double borders when buttons are next to each other */\n    &.btn-group,\n    & .btn-group {\n      .btn + .btn,\n      .btn + .btn-group,\n      .btn-group + .btn,\n      .btn-group + .btn-group {\n        margin-left: -' + $inputBtnBorderWidth + ';\n      }\n    }\n    \n    /* Optional: Group multiple button groups together for a toolbar */\n    &.btn-toolbar,\n    & .btn-toolbar {\n      display: flex;\n      flex-wrap: wrap;\n      justify-content: flex-start;\n    \n      .input-group {\n        width: auto;\n      }\n    }\n     \n    &.btn-group,\n    & .btn-group {\n      > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {\n        border-radius: 0;\n      }\n    }\n    \n    /* Set corners individual because sometimes a single button can be in a .btn-group and we need :first-child and :last-child to both match */\n    &.btn-group,\n    & .btn-group {\n      > .btn:first-child {\n        margin-left: 0;\n    \n        &:not(:last-child):not(.dropdown-toggle) {\n          ' + borderRightRadius($enableRounded, '0') + '\n        }\n      }\n    }\n    /* Need .dropdown-toggle since :last-child does not apply given a .dropdown-menu immediately after it */\n    &.btn-group > .btn:last-child:not(:first-child),\n    & .btn-group > .btn:last-child:not(:first-child),\n    &.btn-group > .dropdown-toggle:not(:first-child),\n    & .btn-group > .dropdown-toggle:not(:first-child) {\n      ' + borderLeftRadius($enableRounded, '0') + '\n    }\n    \n    /* Custom edits for including btn-groups within btn-groups (useful for including dropdown buttons within a btn-group) */\n    &.btn-group > .btn-group,\n    & .btn-group > .btn-group {\n      float: left;\n    }\n    &.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn,\n    & .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {\n      border-radius: 0;\n    }\n    &.btn-group > .btn-group:first-child:not(:last-child),\n    & .btn-group > .btn-group:first-child:not(:last-child) {\n      > .btn:last-child,\n      > .dropdown-toggle {\n        ' + borderRightRadius($enableRounded, '0') + '\n      }\n    }\n    &.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child,\n    & .btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {\n      ' + borderLeftRadius($enableRounded, '0') + '\n    }\n    \n    /* On active and open, do not show outline */\n    &.btn-group .dropdown-toggle:active,\n    & .btn-group .dropdown-toggle:active,\n    &.btn-group.open .dropdown-toggle,\n    & .btn-group.open .dropdown-toggle {\n      outline: 0;\n    }\n    \n    \n    /* \n    Sizing Remix the default button sizing classes into new ones for easier manipulation.\n    */\n    \n    &.btn-group-sm > .btn,\n    & .btn-group-sm > .btn { \n      ' + buttonSize($enableRounded, $btnPaddingYSm, $btnPaddingXSm, $fontSizeSm, $btnBorderRadiusSm) + '\n    }\n    &.btn-group-lg > .btn,\n    & .btn-group-lg > .btn {\n      ' + buttonSize($enableRounded, $btnPaddingYLg, $btnPaddingXLg, $fontSizeLg, $btnBorderRadiusLg) + '\n    }\n    \n    \n    /*\n     Split button dropdowns\n    */\n    \n    & .btn + .dropdown-toggle-split {\n      padding-right: ' + index$1.math.multiply($btnPaddingX, 0.75) + ';\n      padding-left: ' + index$1.math.multiply($btnPaddingX, 0.75) + ';\n    \n      &::after {\n        margin-left: 0;\n      }\n    }\n    \n    & .btn-sm + .dropdown-toggle-split {\n      padding-right: ' + index$1.math.multiply($btnPaddingXSm, 0.75) + ';\n      padding-left: ' + index$1.math.multiply($btnPaddingXSm, 0.75) + ';\n    }\n    \n    & .btn-lg + .dropdown-toggle-split {\n      padding-right: ' + index$1.math.multiply($btnPaddingXLg, 0.75) + ';\n      padding-left: ' + index$1.math.multiply($btnPaddingXLg, 0.75) + ';\n    }\n    \n    \n    /* The clickable button for toggling the menu */\n    /* Remove the gradient and set the same inset shadow as the :active state */\n    &.btn-group.open .dropdown-toggle {\n      ' + boxShadow($enableShadows, $btnActiveBoxShadow) + '\n    \n      /* Show no shadow for .btn-link since it has no other button styles. */\n      &.btn-link {\n        ' + boxShadow($enableShadows, 'none') + '\n      }\n    }\n\n    /*\n     Vertical button groups\n    */\n    \n    &.btn-group-vertical,\n    & .btn-group-vertical {\n      display: inline-flex;\n      flex-direction: column;\n      align-items: flex-start;\n      justify-content: center;\n    \n      .btn,\n      .btn-group {\n        width: 100%;\n      }\n      \n      > .btn + .btn,\n      > .btn + .btn-group,\n      > .btn-group + .btn,\n      > .btn-group + .btn-group {\n        margin-top: -' + $inputBtnBorderWidth + ';\n        margin-left: 0;\n      }\n    }\n    \n    &.btn-group-vertical > .btn,\n    & .btn-group-vertical > .btn {\n      &:not(:first-child):not(:last-child) {\n        border-radius: 0;\n      }\n      &:first-child:not(:last-child) {\n        ' + borderBottomRadius($enableRounded, '0') + '\n      }\n      &:last-child:not(:first-child) {\n        ' + borderTopRadius($enableRounded, '0') + '\n      }\n    }\n    \n    &.btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn,\n    & .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {\n      border-radius: 0;\n    }\n    \n    &.btn-group-vertical > .btn-group:first-child:not(:last-child),\n    & .btn-group-vertical > .btn-group:first-child:not(:last-child) {\n      > .btn:last-child,\n      > .dropdown-toggle {\n        ' + borderBottomRadius($enableRounded, '0') + '      \n      }\n    }\n    &.btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child,\n    & .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child {\n      ' + borderTopRadius($enableRounded, '0') + '\n    }\n    \n    &.btn-group {\n      > .btn,\n      > .btn-group > .btn {\n        input[type="radio"],\n        input[type="checkbox"] {\n          position: absolute;\n          clip: rect(0,0,0,0);\n          pointer-events: none;\n        }\n      }\n    }\n  ';
-}
-
-var defaultProps$21 = bsTheme;
-function cardVariant(cardBackground, cardBorder) {
-  return '\n    background-color: ' + cardBackground + ';\n    border-color: ' + cardBorder + ';\n  \n    & .card-header,\n    & .card-footer {\n      background-color: transparent;\n    }\n  ';
-}
-function cardOutlineVariant(cardColor) {
-  return '\n    background-color: transparent;\n    border-color: ' + cardColor + ';\n  ';
-}
-function cardInverse() {
-  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$21['$enable-hover-media-query'];
-  var cardLinkHoverColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$21['$card-link-hover-color'];
-  return '\n    color: rgba(255,255,255,.65);\n    & .card-header,\n    & .card-footer {\n      background-color: transparent;\n      border-color: rgba(255,255,255,.2);\n    }\n    & .card-header,\n    & .card-footer,\n    & .card-title,\n    & .card-blockquote {\n      color: #fff;\n    }\n    & .card-link,\n    & .card-text,\n    & .card-subtitle,\n    & .card-blockquote .blockquote-footer {\n      color: rgba(255,255,255,.65);\n    }\n    \n    & .card-link {\n      ' + hoverFocus(enableHoverMediaQuery, 'color: ' + cardLinkHoverColor + ';') + '\n    }\n  ';
-}
-function card($enableRounded, $enableHoverMediaQuery, $cardSpacerY, $cardSpacerX, $cardBg, $cardBorderWidth, $cardBorderColor, $cardBorderRadius, $cardMarginYHalved, $cardMarginXHalved, $cardCapBg, $cardBorderRadiusInner, $brandPrimary, $brandSuccess, $brandInfo, $brandWarning, $brandDanger, $btnPrimaryBg, $btnSecondaryBorder, $btnInfoBg, $btnSuccessBg, $btnWarningBg, $btnDangerBg, $cardLinkHoverColor, $cardImgOverlayPadding) {
-  return '\n    & .card {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + $cardBg + ';\n      border: ' + $cardBorderWidth + ' solid ' + $cardBorderColor + ';\n      ' + borderRadius($enableRounded, $cardBorderRadius) + '\n    }\n    \n    & .card-block {\n      flex: 1 1 auto;\n\n      padding: ' + $cardSpacerX + ';\n    }\n    \n    & .card-title {\n      margin-bottom: ' + $cardSpacerY + ';\n    }\n    \n    & .card-subtitle {\n      margin-top: -' + $cardMarginYHalved + ';\n      margin-bottom: 0;\n    }\n    \n    & .card-text:last-child {\n      margin-bottom: 0;\n    }\n   \n    & .card-link {\n      ' + hover('\n        text-decoration: none;\n      ') + '\n    \n      + .card-link {\n        margin-left: ' + $cardSpacerX + ';\n      }\n    }\n    \n    & .card{\n      > .list-group:first-child {\n        .list-group-item:first-child {\n          ' + borderTopRadius($enableRounded, $cardBorderRadius) + '\n        }\n      }\n    \n      > .list-group:last-child {\n        .list-group-item:last-child {\n          ' + borderBottomRadius($enableRounded, $cardBorderRadius) + '\n        }\n      }\n    }\n    \n    & .card-header {\n      padding: ' + $cardSpacerY + ' ' + $cardSpacerX + ';\n      margin-bottom: 0;\n      background-color: ' + $cardCapBg + ';\n      border-bottom: ' + $cardBorderWidth + ' solid ' + $cardBorderColor + ';\n    \n      &:first-child {\n        ' + borderRadius($enableRounded, $cardBorderRadiusInner, $cardBorderRadiusInner, '0', '0') + '\n      }\n    }\n    \n    & .card-footer {\n      padding: ' + $cardSpacerY + ' ' + $cardSpacerX + ';\n      background-color: ' + $cardCapBg + ';\n      border-top: ' + $cardBorderWidth + ' solid ' + $cardBorderColor + ';\n    \n      &:last-child {\n        ' + borderRadius($enableRounded, '0', '0', $cardBorderRadiusInner, $cardBorderRadiusInner) + '\n      }\n    }\n\n    & .card-header-tabs {\n      margin-right: -' + $cardMarginXHalved + ';\n      margin-bottom: -' + $cardSpacerY + ';\n      margin-left: -' + $cardMarginXHalved + ';\n      border-bottom: 0;\n    }\n    \n    & .card-header-pills {\n      margin-right: -' + $cardMarginXHalved + ';\n      margin-left: -' + $cardMarginXHalved + ';\n    }\n    \n    & .card-primary {\n      ' + cardVariant($brandPrimary, $brandPrimary) + '\n    }\n    & .card-success {\n      ' + cardVariant($brandSuccess, $brandSuccess) + '\n    }\n    & .card-info {\n      ' + cardVariant($brandInfo, $brandInfo) + '\n    }\n    & .card-warning {\n      ' + cardVariant($brandWarning, $brandWarning) + '\n    }\n    & .card-danger {\n      ' + cardVariant($brandDanger, $brandDanger) + '\n    }\n    \n    & .card-outline-primary {\n      ' + cardOutlineVariant($btnPrimaryBg) + '\n    }\n    & .card-outline-secondary {\n      ' + cardOutlineVariant($btnSecondaryBorder) + '\n    }\n    & .card-outline-info {\n      ' + cardOutlineVariant($btnInfoBg) + '\n    }\n    & .card-outline-success {\n      ' + cardOutlineVariant($btnSuccessBg) + '\n    }\n    & .card-outline-warning {\n      ' + cardOutlineVariant($btnWarningBg) + '\n    }\n    & .card-outline-danger {\n      ' + cardOutlineVariant($btnDangerBg) + '\n    }\n        \n    & .card-inverse {\n      ' + cardInverse($enableHoverMediaQuery, $cardLinkHoverColor) + '\n    }\n\n    & .card-blockquote {\n      padding: 0;\n      margin-bottom: 0;\n      border-left: 0;\n    }\n    \n    & .card-img {\n      ' + borderRadius($enableRounded, $cardBorderRadiusInner) + '\n    }\n    \n    & .card-img-overlay {\n      position: absolute;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      padding: ' + $cardImgOverlayPadding + ';\n    }\n\n    & .card-img-top {\n      ' + borderTopRadius($enableRounded, $cardBorderRadiusInner) + '\n    }\n    \n    & .card-img-bottom {\n      ' + borderBottomRadius($enableRounded, $cardBorderRadiusInner) + '\n    }\n  ';
-}
-
-var defaultProps$22 = bsTheme;
-function formControl() {
-  var $enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$22['$enable-rounded'];
-  var $enableTransitions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$22['$enable-transitions'];
-  var $enableShadows = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$22['$enable-shadows'];
-  var $inputHeight = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps$22['$input-height'];
-  var $inputPaddingY = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps$22['$input-padding-y'];
-  var $inputPaddingX = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps$22['$input-padding-x'];
-  var $fontSizeBase = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps$22['$font-size-base'];
-  var $inputLineHeight = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps$22['$input-line-height'];
-  var $inputColor = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps$22['$input-color'];
-  var $inputBg = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps$22['$input-bg'];
-  var $inputBorderRadius = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps$22['$input-border-radius'];
-  var $inputBtnBorderWidth = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps$22['$input-btn-border-width'];
-  var $inputBorderColor = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps$22['$input-border-color'];
-  var $inputTransition = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : defaultProps$22['$input-transition'];
-  var $inputBoxShadow = arguments.length > 14 && arguments[14] !== undefined ? arguments[14] : defaultProps$22['$input-box-shadow'];
-  var $inputColorFocus = arguments.length > 15 && arguments[15] !== undefined ? arguments[15] : defaultProps$22['$input-color-focus'];
-  var $inputBgFocus = arguments.length > 16 && arguments[16] !== undefined ? arguments[16] : defaultProps$22['$input-bg-focus'];
-  var $inputBorderFocus = arguments.length > 17 && arguments[17] !== undefined ? arguments[17] : defaultProps$22['$input-border-focus'];
-  var $inputBoxShadowFocus = arguments.length > 18 && arguments[18] !== undefined ? arguments[18] : defaultProps$22['$input-box-shadow-focus'];
-  var $inputColorPlaceholder = arguments.length > 19 && arguments[19] !== undefined ? arguments[19] : defaultProps$22['$input-color-placeholder'];
-  var $inputBgDisabled = arguments.length > 20 && arguments[20] !== undefined ? arguments[20] : defaultProps$22['$input-bg-disabled'];
-  var $cursorDisabled = arguments.length > 21 && arguments[21] !== undefined ? arguments[21] : defaultProps$22['$cursor-disabled'];
-  return '\n      & .form-control {\n        display: block;\n        width: 100%;\n  \n        /* Make inputs at least the height of their button counterpart (base line-height + padding + border) */\n        /* height: ' + $inputHeight + '; */\n  \n        padding: ' + $inputPaddingY + ' ' + $inputPaddingX + ';\n        font-size: ' + $fontSizeBase + ';\n        line-height: ' + $inputLineHeight + ';\n        color: ' + $inputColor + ';\n        background-color: ' + $inputBg + ';\n  \n        /* Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214. */\n        background-image: none;\n        background-clip: padding-box;\n        /* Note: This has no effect on selects in some browsers, due to the limited stylability of selects in CSS. */\n        ' + ($enableRounded ? 'border-radius: ' + $inputBorderRadius + ';' : 'border-radius: 0;') + ' /* Manually use the if/else instead of the mixin to account for iOS override */\n        border: ' + $inputBtnBorderWidth + ' solid ' + $inputBorderColor + ';\n        ' + transition($enableTransitions, $inputTransition) + '\n        ' + boxShadow($enableShadows, $inputBoxShadow) + '\n  \n        /* Unstyle the caret on selects in IE10+. */\n        &::-ms-expand {\n          background-color: transparent;\n          border: 0;\n        }\n  \n        /* Customize the :focus state to imitate native WebKit styles. */\n        ' + formControlFocus($enableShadows, $inputColorFocus, $inputBgFocus, $inputBorderFocus, $inputBoxShadowFocus) + '\n  \n        /* Placeholder */\n        &::placeholder {\n          color: ' + $inputColorPlaceholder + ';\n          /* Override Firefox unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526. */\n          opacity: 1;\n        }\n  \n        /* Disabled and read-only inputs\n         HTML5 says that controls under a fieldset > legend:first-child will not be\n         disabled if the fieldset is disabled. Due to implementation difficulty, we\n         do not honor that edge case; we style them as disabled anyway.\n         */\n  \n        &:disabled,\n        &[readonly] {\n          background-color:' + $inputBgDisabled + ';\n          /* iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655. */\n          opacity: 1;\n        }\n  \n        &:disabled {\n          cursor: ' + $cursorDisabled + ';\n        }\n      }\n  ';
-}
-function formControlValidation() {
-  var enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$22['$enable-shadows'];
-  var formColor = arguments[1];
-  var inputBoxShadow = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$22['$input-box-shadow'];
-  return '\n    /* Color the label and help text */\n    & .form-control-feedback,\n    & .form-control-label,\n    & .col-form-label,\n    & .form-check-label,\n    & .custom-control {\n      color: ' + formColor + ';\n    }\n  \n    /* Set the border and box shadow on specific inputs to match */\n      \n    & .form-control,\n    & .custom-select,\n    & .custom-file-control {\n      border-color: ' + formColor + ';\n  \n      &:focus {\n        ' + boxShadow(enableShadows, inputBoxShadow + ', 0 0 6px ' + color(formColor).lighten(0.2).toString()) + '\n      }\n    }\n  \n    /* Set validation states also for addons */\n    .input-group-addon {\n      color: ' + formColor + ';\n      border-color: ' + formColor + ';\n      background-color: ' + color(formColor).lighten(0.40).toString() + ';\n    }\n  ';
-}
-function formControlFocus() {
-  var enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$22['$enable-shadows'];
-  var inputColorFocus = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$22['$input-color-focus'];
-  var inputBgFocus = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$22['$input-bg-focus'];
-  var inputBorderFocus = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps$22['$input-border-focus'];
-  var inputBoxShadowFocus = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps$22['$input-box-shadow-focus'];
-  return '\n    &:focus {\n      color: ' + inputColorFocus + ';\n      background-color: ' + inputBgFocus + ';\n      border-color: ' + inputBorderFocus + ';\n      outline: none;\n      ' + boxShadow(enableShadows, inputBoxShadowFocus) + '\n    }\n  ';
-}
-
-var defaultProps$23 = {
-  '$enable-rounded': true,
-  '$enable-shadows': false,
-  '$custom-control-checked-indicator-box-shadow': 'none',
-  '$custom-control-active-indicator-box-shadow': 'none',
-  '$custom-control-indicator-box-shadow': 'inset 0 .25rem .25rem rgba(0, 0, 0, 0.1)',
-  '$custom-checkbox-indeterminate-box-shadow': 'none',
-  '$custom-select-focus-box-shadow': 'inset 0 1px 2px rgba(0, 0, 0, 0.75), 0 0 5px rgba(hsl(207.79999999999995, 98.2%, 53.4%), .5)',
-  '$custom-file-focus-box-shadow': '0 0 0 .075rem #fff, 0 0 0 .2rem #0275d8',
-  '$custom-file-box-shadow': 'inset 0 .2rem .4rem rgba(0, 0, 0, 0.05)',
-  '$custom-select-border-radius': '.25rem',
-  '$custom-file-border-radius': '.25rem',
-  '$input-bg': '#fff',
-  '$custom-select-line-height': '1.25px',
-  '$line-height-base': '1.5',
-  '$custom-control-gutter': '1.5rem',
-  '$custom-control-spacer-x': '1rem',
-  '$custom-control-checked-indicator-color': '#fff',
-  '$custom-control-checked-indicator-bg': '#0275d8',
-  '$custom-control-focus-indicator-box-shadow': '0 0 0 1px #fff, 0 0 0 3px #0275d8',
-  '$custom-control-active-indicator-color': '#fff',
-  '$custom-control-active-indicator-bg': 'hsl(207.79999999999995, 98.2%, 57.7%)',
-  '$custom-control-disabled-cursor': 'not-allowed',
-  '$custom-control-disabled-indicator-bg': '#eceeef',
-  '$custom-control-disabled-description-color': '#636c72',
-  '$custom-control-indicator-size': '1rem',
-  '$custom-control-indicator-bg': '#ddd',
-  '$custom-control-indicator-bg-size': '50% 50%',
-  '$custom-checkbox-checked-icon': 'url("data:image/svg+xml;charset=utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 8 8\'%3E%3Cpath fill=\'#fff\' d=\'M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z\'/%3E%3C/svg%3E")',
-  '$custom-checkbox-indeterminate-bg': '#0275d8',
-  '$custom-checkbox-indeterminate-icon': 'url("data:image/svg+xml;charset=utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 4 4\'%3E%3Cpath stroke=\'#fff\' d=\'M0 2h4\'/%3E%3C/svg%3E")',
-  '$custom-radio-radius': '50%',
-  '$custom-radio-checked-icon': 'url("data:image/svg+xml;charset=utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'-4 -4 8 8\'%3E%3Ccircle r=\'3\' fill=\'#fff\'/%3E%3C/svg%3E")',
-  '$custom-control-spacer-y': '.25rem',
-  '$border-width': '1px',
-  '$input-height': '2.5rem',
-  '$custom-select-padding-y': '.375rem',
-  '$custom-select-padding-x': '.75rem ',
-  '$custom-select-indicator-padding': '1rem',
-  '$custom-select-color': '#464a4c',
-  '$custom-select-bg': '#fff',
-  '$custom-select-indicator': 'url("data:image/svg+xml;charset=utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 4 5\'%3E%3Cpath fill=\'#333\' d=\'M2 0L0 2h4zm0 5L0 3h4z\'/%3E%3C/svg%3E")',
-  '$custom-select-bg-size': '8px 10px',
-  '$custom-select-border-width': '1px',
-  '$custom-select-border-color': 'rgba(0, 0, 0, 0.15)',
-  '$custom-select-focus-border-color': 'hsl(207.79999999999995, 98.2%, 53.4%)',
-  '$input-color': '#464a4c',
-  '$custom-select-disabled-color': '#636c72',
-  '$cursor-disabled': 'not-allowed',
-  '$custom-select-disabled-bg': '#eceeef',
-  '$custom-select-sm-font-size': '75%',
-  '$custom-file-width': '14rem',
-  '$custom-file-height': '2.5rem',
-  '$custom-file-padding-x': '.5rem',
-  '$custom-file-padding-y': '1rem',
-  '$custom-file-line-height': '1.5',
-  '$custom-file-color': '#464a4c',
-  '$custom-file-bg': '#fff',
-  '$custom-file-border-width': '1px',
-  '$custom-file-border-color': 'rgba(0, 0, 0, 0.15)',
-  '$custom-file-button-color': '#464a4c',
-  '$custom-file-button-bg': '#eceeef',
-  '$custom-checkbox-radius': '.25rem',
-  '$custom-file-text': {
-    'placeholder': {
-      'en': 'Choose file...'
-    },
-    'button-label': {
-      'en': 'Browse'
-    }
-  }
-};
-function customForms() {
-  var $enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$23['$enable-rounded'];
-  var $enableShadows = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$23['$enable-shadows'];
-  var $customControlCheckedIndicatorBoxShadow = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$23['$custom-control-checked-indicator-box-shadow'];
-  var $customControlActiveIndicatorBoxShadow = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps$23['$custom-control-active-indicator-box-shadow'];
-  var $customControlIndicatorBoxShadow = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps$23['$custom-control-indicator-box-shadow'];
-  var $customCheckboxIndeterminateBoxShadow = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps$23['$custom-checkbox-indeterminate-box-shadow'];
-  var $customSelectFocusBoxShadow = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps$23['$custom-select-focus-box-shadow'];
-  var $customFileFocusBoxShadow = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps$23['$custom-file-focus-box-shadow'];
-  var $customFileBoxShadow = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps$23['$custom-file-box-shadow'];
-  var $customSelectBorderRadius = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps$23['$custom-select-border-radius'];
-  var $customFileBorderRadius = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps$23['$custom-file-border-radius'];
-  var $customCheckboxRadius = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps$23['$custom-checkbox-radius'];
-  var $inputBg = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps$23['$input-bg'];
-  var $customSelectLineHeight = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : defaultProps$23['$custom-select-line-height'];
-  var $lineHeightBase = arguments.length > 14 && arguments[14] !== undefined ? arguments[14] : defaultProps$23['$line-height-base'];
-  var $customControlGutter = arguments.length > 15 && arguments[15] !== undefined ? arguments[15] : defaultProps$23['$custom-control-gutter'];
-  var $customControlSpacerX = arguments.length > 16 && arguments[16] !== undefined ? arguments[16] : defaultProps$23['$custom-control-spacer-x'];
-  var $customControlCheckedIndicatorColor = arguments.length > 17 && arguments[17] !== undefined ? arguments[17] : defaultProps$23['$custom-control-checked-indicator-color'];
-  var $customControlCheckedIndicatorBg = arguments.length > 18 && arguments[18] !== undefined ? arguments[18] : defaultProps$23['$custom-control-checked-indicator-bg'];
-  var $customControlFocusIndicatorBoxShadow = arguments.length > 19 && arguments[19] !== undefined ? arguments[19] : defaultProps$23['$custom-control-focus-indicator-box-shadow'];
-  var $customControlActiveIndicatorColor = arguments.length > 20 && arguments[20] !== undefined ? arguments[20] : defaultProps$23['$custom-control-active-indicator-color'];
-  var $customControlActiveIndicatorBg = arguments.length > 21 && arguments[21] !== undefined ? arguments[21] : defaultProps$23['$custom-control-active-indicator-bg'];
-  var $customControlDisabledCursor = arguments.length > 22 && arguments[22] !== undefined ? arguments[22] : defaultProps$23['$custom-control-disabled-cursor'];
-  var $customControlDisabledIndicatorBg = arguments.length > 23 && arguments[23] !== undefined ? arguments[23] : defaultProps$23['$custom-control-disabled-indicator-bg'];
-  var $customControlDisabledDescriptionColor = arguments.length > 24 && arguments[24] !== undefined ? arguments[24] : defaultProps$23['$custom-control-disabled-description-color'];
-  var $customControlIndicatorSize = arguments.length > 25 && arguments[25] !== undefined ? arguments[25] : defaultProps$23['$custom-control-indicator-size'];
-  var $customControlIndicatorBg = arguments.length > 26 && arguments[26] !== undefined ? arguments[26] : defaultProps$23['$custom-control-indicator-bg'];
-  var $customControlIndicatorBgSize = arguments.length > 27 && arguments[27] !== undefined ? arguments[27] : defaultProps$23['$custom-control-indicator-bg-size'];
-  var $customCheckboxCheckedIcon = arguments.length > 28 && arguments[28] !== undefined ? arguments[28] : defaultProps$23['$custom-checkbox-checked-icon'];
-  var $customCheckboxIndeterminateBg = arguments.length > 29 && arguments[29] !== undefined ? arguments[29] : defaultProps$23['$custom-checkbox-indeterminate-bg'];
-  var $customCheckboxIndeterminateIcon = arguments.length > 30 && arguments[30] !== undefined ? arguments[30] : defaultProps$23['$custom-checkbox-indeterminate-icon'];
-  var $customRadioRadius = arguments.length > 31 && arguments[31] !== undefined ? arguments[31] : defaultProps$23['$custom-radio-radius'];
-  var $customRadioCheckedIcon = arguments.length > 32 && arguments[32] !== undefined ? arguments[32] : defaultProps$23['$custom-radio-checked-icon'];
-  var $customControlSpacerY = arguments.length > 33 && arguments[33] !== undefined ? arguments[33] : defaultProps$23['$custom-control-spacer-y'];
-  var $borderWidth = arguments.length > 34 && arguments[34] !== undefined ? arguments[34] : defaultProps$23['$border-width'];
-  var $inputHeight = arguments.length > 35 && arguments[35] !== undefined ? arguments[35] : defaultProps$23['$input-height'];
-  var $customSelectPaddingY = arguments.length > 36 && arguments[36] !== undefined ? arguments[36] : defaultProps$23['$custom-select-padding-y'];
-  var $customSelectPaddingX = arguments.length > 37 && arguments[37] !== undefined ? arguments[37] : defaultProps$23['$custom-select-padding-x'];
-  var $customSelectIndicatorPadding = arguments.length > 38 && arguments[38] !== undefined ? arguments[38] : defaultProps$23['$custom-select-indicator-padding'];
-  var $customSelectColor = arguments.length > 39 && arguments[39] !== undefined ? arguments[39] : defaultProps$23['$custom-select-color'];
-  var $customSelectBg = arguments.length > 40 && arguments[40] !== undefined ? arguments[40] : defaultProps$23['$custom-select-bg'];
-  var $customSelectIndicator = arguments.length > 41 && arguments[41] !== undefined ? arguments[41] : defaultProps$23['$custom-select-indicator'];
-  var $customSelectBgSize = arguments.length > 42 && arguments[42] !== undefined ? arguments[42] : defaultProps$23['$custom-select-bg-size'];
-  var $customSelectBorderWidth = arguments.length > 43 && arguments[43] !== undefined ? arguments[43] : defaultProps$23['$custom-select-border-width'];
-  var $customSelectBorderColor = arguments.length > 44 && arguments[44] !== undefined ? arguments[44] : defaultProps$23['$custom-select-border-color'];
-  var $customSelectFocusBorderColor = arguments.length > 45 && arguments[45] !== undefined ? arguments[45] : defaultProps$23['$custom-select-focus-border-color'];
-  var $inputColor = arguments.length > 46 && arguments[46] !== undefined ? arguments[46] : defaultProps$23['$input-color'];
-  var $customSelectDisabledColor = arguments.length > 47 && arguments[47] !== undefined ? arguments[47] : defaultProps$23['$custom-select-disabled-color'];
-  var $cursorDisabled = arguments.length > 48 && arguments[48] !== undefined ? arguments[48] : defaultProps$23['$cursor-disabled'];
-  var $customSelectDisabledBg = arguments.length > 49 && arguments[49] !== undefined ? arguments[49] : defaultProps$23['$custom-select-disabled-bg'];
-  var $customSelectSmFontSize = arguments.length > 50 && arguments[50] !== undefined ? arguments[50] : defaultProps$23['$custom-select-sm-font-size'];
-  var $customFileWidth = arguments.length > 51 && arguments[51] !== undefined ? arguments[51] : defaultProps$23['$custom-file-width'];
-  var $customFileHeight = arguments.length > 52 && arguments[52] !== undefined ? arguments[52] : defaultProps$23['$custom-file-height'];
-  var $customFilePaddingX = arguments.length > 53 && arguments[53] !== undefined ? arguments[53] : defaultProps$23['$custom-file-padding-x'];
-  var $customFilePaddingY = arguments.length > 54 && arguments[54] !== undefined ? arguments[54] : defaultProps$23['$custom-file-padding-y'];
-  var $customFileLineHeight = arguments.length > 55 && arguments[55] !== undefined ? arguments[55] : defaultProps$23['$custom-file-line-height'];
-  var $customFileColor = arguments.length > 56 && arguments[56] !== undefined ? arguments[56] : defaultProps$23['$custom-file-color'];
-  var $customFileBg = arguments.length > 57 && arguments[57] !== undefined ? arguments[57] : defaultProps$23['$custom-file-bg'];
-  var $customFileBorderWidth = arguments.length > 58 && arguments[58] !== undefined ? arguments[58] : defaultProps$23['$custom-file-border-width'];
-  var $customFileBorderColor = arguments.length > 59 && arguments[59] !== undefined ? arguments[59] : defaultProps$23['$custom-file-border-color'];
-  var $customFileButtonColor = arguments.length > 60 && arguments[60] !== undefined ? arguments[60] : defaultProps$23['$custom-file-button-color'];
-  var $customFileButtonBg = arguments.length > 61 && arguments[61] !== undefined ? arguments[61] : defaultProps$23['$custom-file-button-bg'];
-  var $customFileText = arguments.length > 62 && arguments[62] !== undefined ? arguments[62] : defaultProps$23['$custom-file-text'];
-  var customFileControlBeforeList = [];
-  Object.keys($customFileText.placeholder).forEach(function ($lang) {
-    customFileControlBeforeList.push('\n      &:lang(' + $lang + ')::after {\n        content: "' + $customFileText.placeholder[$lang] + '";\n      }   \n    ');
-  });
-  var customFileControlAfterList = [];
-  Object.keys($customFileText['button-label']).forEach(function ($lang) {
-    customFileControlAfterList.push('\n      &:lang(' + $lang + ')::before {\n        content: "' + $customFileText['button-label'][$lang] + '";\n      }\n    ');
-  });
-  var selectBorderWidth = index$1.math.multiply($borderWidth, 2);
-  var customSelectPaddingRight = index$1.math.addition($customSelectPaddingY, $customSelectIndicatorPadding);
-  var lineHeightBaseMinusCustomControlIndicatorSize = index$1.math.subtract($lineHeightBase, $customControlIndicatorSize);
-  return '\n    /* Embedded icons from Open Iconic. */\n    /* Released under MIT and copyright 2014 Waybury. */\n    /* https://useiconic.com/open */\n    \n    \n    /* Checkboxes and radios */\n    /* Base class takes care of all the key behavioral aspects. */\n    \n    & .custom-control {\n      position: relative;\n      display: inline-flex;\n      min-height: calc(1rem * ' + $lineHeightBase + ');\n      padding-left: ' + $customControlGutter + ';\n      margin-right: ' + $customControlSpacerX + ';\n    }\n    \n    & .custom-control-input {\n      position: absolute;\n      z-index: -1; /* Put the input behind the label so it does not overlay text */\n      opacity: 0;\n    \n      &:checked ~ .custom-control-indicator {\n        color: ' + $customControlCheckedIndicatorColor + ';\n        background-color: ' + $customControlCheckedIndicatorBg + ';\n        ' + boxShadow($enableShadows, $customControlCheckedIndicatorBoxShadow) + '\n      }\n    \n      &:focus ~ .custom-control-indicator {\n        /* the mixin is not used here to make sure there is feedback */\n        box-shadow: ' + $customControlFocusIndicatorBoxShadow + ';\n      }\n    \n      &:active ~ .custom-control-indicator {\n        color: ' + $customControlActiveIndicatorColor + ';\n        background-color: ' + $customControlActiveIndicatorBg + ';\n        ' + boxShadow($enableShadows, $customControlActiveIndicatorBoxShadow) + '\n      }\n    \n      &:disabled {\n        ~ .custom-control-indicator {\n          cursor: ' + $customControlDisabledCursor + ';\n          background-color: ' + $customControlDisabledIndicatorBg + ';\n        }\n    \n        ~ .custom-control-description {\n          color: ' + $customControlDisabledDescriptionColor + ';\n          cursor: ' + $customControlDisabledCursor + ';\n        }\n      }\n    }\n    \n    /* Custom indicator */\n    /* Generates a shadow element to create our makeshift checkbox/radio background. */\n    \n    & .custom-control-indicator {\n      position: absolute;\n      top: calc(' + lineHeightBaseMinusCustomControlIndicatorSize + ' / 2);\n      left: 0;\n      display: block;\n      width: ' + $customControlIndicatorSize + ';\n      height: ' + $customControlIndicatorSize + ';\n      pointer-events: none;\n      user-select: none;\n      background-color: ' + $customControlIndicatorBg + ';\n      background-repeat: no-repeat;\n      background-position: center center;\n      background-size: ' + $customControlIndicatorBgSize + ';\n      ' + boxShadow($enableShadows, $customControlIndicatorBoxShadow) + '\n    }\n    \n    /* Checkboxes */\n    /* Tweak just a few things for checkboxes.  */\n    \n    & .custom-checkbox {\n      & .custom-control-indicator {\n        ' + borderRadius($enableRounded, $customCheckboxRadius) + '\n      }\n    \n      & .custom-control-input:checked ~ .custom-control-indicator {\n        background-image: ' + $customCheckboxCheckedIcon + ';\n      }\n    \n      & .custom-control-input.indeterminate ~ .custom-control-indicator {\n        background-color: ' + $customCheckboxIndeterminateBg + ';\n        background-image: ' + $customCheckboxIndeterminateIcon + ';\n        ' + boxShadow($enableShadows, $customCheckboxIndeterminateBoxShadow) + '\n      }\n    }\n    \n    /* Radios */\n    /* Tweak just a few things for radios. */\n    \n    & .custom-radio {\n      & .custom-control-indicator {\n        border-radius: ' + $customRadioRadius + ';\n      }\n    \n      & .custom-control-input:checked ~ .custom-control-indicator {\n        background-image: ' + $customRadioCheckedIcon + ';\n      }\n    }\n    \n    \n    /* Layout options */\n    /* By default radios and checkboxes are inline-block with no additional spacing */\n    /* set. Use these optional classes to tweak the layout. */\n    \n    & .custom-controls-stacked {\n      display: flex;\n      flex-direction: column;\n    \n      & .custom-control {\n        margin-bottom: ' + $customControlSpacerY + ';\n    \n        + & .custom-control {\n          margin-left: 0;\n        }\n      }\n    }\n    \n    \n    /* Select */\n    /* Replaces the browser default select with a custom one, mostly pulled from */\n    /* http://primercss.io. */\n    \n    & .custom-select {\n      display: inline-block;\n      max-width: 100%;\n      height: calc(' + $inputHeight + ' + ' + selectBorderWidth + ');\n      padding: ' + $customSelectPaddingY + ' ' + customSelectPaddingRight + ' ' + $customSelectPaddingY + ' ' + $customSelectPaddingX + ';\n      line-height: ' + $customSelectLineHeight + ';\n      color: ' + $customSelectColor + ';\n      vertical-align: middle;\n      background: ' + $customSelectBg + ' ' + $customSelectIndicator + ' no-repeat right ' + $customSelectPaddingX + ' center;\n      background-size: ' + $customSelectBgSize + ';\n      border: ' + $customSelectBorderWidth + ' solid ' + $customSelectBorderColor + ';\n      ' + borderRadius($enableRounded, $customSelectBorderRadius) + '\n      /* Use vendor prefixes as appearance is not part of the CSS spec.  */\n      -moz-appearance: none;\n      -webkit-appearance: none;\n    \n      &:focus {\n        border-color: ' + $customSelectFocusBorderColor + ';\n        outline: none;\n        ' + boxShadow($enableShadows, $customSelectFocusBoxShadow) + '\n    \n        ::-ms-value {\n          /* For visual consistency with other platforms/browsers, */\n          /* supress the default white text on blue background highlight given to */\n          /* the selected option text when the (still closed) <select> receives focus */\n          /* in IE and (under certain conditions) Edge. */\n          /* See https://github.com/twbs/bootstrap/issues/19398. */\n          color: ' + $inputColor + ';\n          background-color: ' + $inputBg + ';\n        }\n      }\n    \n      &:disabled {\n        color: ' + $customSelectDisabledColor + ';\n        cursor: ' + $cursorDisabled + ';\n        background-color: ' + $customSelectDisabledBg + ';\n      }\n    \n      /* Hides the default caret in IE11 */\n      ::-ms-expand {\n        opacity: 0;\n      }\n    }\n    \n    & .custom-select-sm {\n      padding-top: ' + $customSelectPaddingY + ';\n      padding-bottom: ' + $customSelectPaddingY + ';\n      font-size: ' + $customSelectSmFontSize + ';\n    \n      /* &:not([multiple]) { */\n      /*   height: 26px; */\n      /*   min-height: 26px; */\n      /* } */\n    }\n    \n    \n    /* File */\n    /* Custom file input. */\n    \n    & .custom-file {\n      position: relative;\n      display: inline-block;\n      max-width: 100%;\n      height: ' + $customFileHeight + ';\n      margin-bottom: 0;\n    }\n    \n    & .custom-file-input {\n      min-width: ' + $customFileWidth + ';\n      max-width: 100%;\n      height: ' + $customFileHeight + ';\n      margin: 0;\n      opacity: 0;\n    \n      &:focus ~ .custom-file-control {\n        ' + boxShadow($enableShadows, $customFileFocusBoxShadow) + '\n      }\n    }\n    \n    & .custom-file-control {\n      position: absolute;\n      top: 0;\n      right: 0;\n      left: 0;\n      z-index: 5;\n      height: ' + $customFileHeight + ';\n      padding: ' + $customFilePaddingX + ' ' + $customFilePaddingY + ';\n      line-height: ' + $customFileLineHeight + ';\n      color: ' + $customFileColor + ';\n      pointer-events: none;\n      user-select: none;\n      background-color: ' + $customFileBg + ';\n      border: ' + $customFileBorderWidth + ' solid ' + $customFileBorderColor + ';\n      ' + borderRadius($enableRounded, $customFileBorderRadius) + '\n      ' + boxShadow($enableShadows, $customFileBoxShadow) + '\n      \n      ' + customFileControlBeforeList.join('\n') + '\n    \n      &::before {\n        position: absolute;\n        top: ' + $customFileBorderWidth + ';\n        right: ' + $customFileBorderWidth + ';\n        bottom: ' + $customFileBorderWidth + ';\n        z-index: 6;\n        display: block;\n        height: ' + $customFileHeight + ';\n        padding: ' + $customFilePaddingX + ' ' + $customFilePaddingY + ';\n        line-height: ' + $customFileLineHeight + ';\n        color: ' + $customFileButtonColor + ';\n        background-color: ' + $customFileButtonBg + ';\n        border: ' + $customFileBorderWidth + ' solid ' + $customFileBorderColor + ';\n        ' + borderRadius(0, $enableRounded, $customFileBorderRadius, $customFileBorderRadius, 0) + '\n      }\n\n      ' + customFileControlAfterList.join('\n') + '\n    }\n  ';
-}
-
-function gradientX() {
-  var startColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#555';
-  var endColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#333';
-  var startPercent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '0%';
-  var endPercent = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '100%';
-  return '\n    background-image: linear-gradient(to right, ' + startColor + ' ' + startPercent + ', ' + endColor + ' ' + endPercent + ');\n    background-repeat: repeat-x;\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#{ie-hex-str(' + startColor + ')}\', endColorstr=\'#{ie-hex-str(' + endColor + ')}\', GradientType=1); // IE9\n  ';
-}
-function gradientY() {
-  var startColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#555';
-  var endColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#333';
-  var startPercent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '0%';
-  var endPercent = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '100%';
-  return '\n    background-image: linear-gradient(to bottom, ' + startColor + ' ' + startPercent + ', ' + endColor + ' ' + endPercent + ');\n    background-repeat: repeat-x;\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#{ie-hex-str(' + startColor + ')}\', endColorstr=\'#{ie-hex-str(' + endColor + ')}\', GradientType=0); // IE9\n  ';
-}
-function gradientDirectional() {
-  var startColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#555';
-  var endColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#333';
-  var deg = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '45deg';
-  return '\n    background-repeat: repeat-x;\n    background-image: linear-gradient(' + deg + ', ' + startColor + ', ' + endColor + ');\n  ';
-}
-function gradientXThreeColors() {
-  var startColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#00b3ee';
-  var midColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#7a43b6';
-  var colorStop = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '50%';
-  var endColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '#c3325f';
-  return '\n    background-image: linear-gradient(to right, ' + startColor + ', ' + midColor + ' ' + colorStop + ', ' + endColor + ');\n    background-repeat: no-repeat;\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#{ie-hex-str(' + startColor + ')}\', endColorstr=\'#{ie-hex-str(' + endColor + ')}\', GradientType=1); // IE9 gets no color-stop at all for proper fallback\n  ';
-}
-function gradientYThreeColors() {
-  var startColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#00b3ee';
-  var midColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#7a43b6';
-  var colorStop = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '50%';
-  var endColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '#c3325f';
-  return '\n    background-image: linear-gradient(' + startColor + ', ' + midColor + ' ' + colorStop + ', ' + endColor + ');\n    background-repeat: no-repeat;\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#{ie-hex-str(' + startColor + ')}\', endColorstr=\'#{ie-hex-str(' + endColor + ')}\', GradientType=0); // IE9 gets no color-stop at all for proper fallback\n  ';
-}
-function gradientRadial() {
-  var innerColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#555';
-  var outerColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#333';
-  return '\n    background-image: radial-gradient(circle, ' + innerColor + ', ' + outerColor + ');\n    background-repeat: no-repeat;\n  ';
-}
-function gradientStriped() {
-  var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'rgba(255,255,255,.15)';
-  var angle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '45deg';
-  return '\n    background-image: linear-gradient(' + angle + ', ' + color + ' 25%, transparent 25%, transparent 50%, ' + color + ' 50%, ' + color + ' 75%, transparent 75%, transparent);\n  ';
-}
-var gradients = {
-  x: gradientX,
-  y: gradientY,
-  directional: gradientDirectional,
-  xThreeColors: gradientXThreeColors,
-  yThreeColors: gradientYThreeColors,
-  radial: gradientRadial,
-  striped: gradientStriped
-};
-
-var defaultProps$24 = {
-  '$grid-gutter-widths': {
-    xs: '30px',
-    sm: '30px',
-    md: '30px',
-    lg: '30px',
-    xl: '30px'
-  },
-  '$container-max-widths': {
-    sm: '540px',
-    md: '720px',
-    lg: '960px',
-    xl: '1140px'
-  },
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  },
-  '$grid-columns': 12,
-  '$enable-grid-classes': true
-};
-function makeContainer() {
-  var enableGridClasses = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$24['$enable-grid-classes'];
-  var gridGutterWidths = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$24['$grid-gutter-widths'];
-  if (enableGridClasses) {
-    var columns = [];
-    Object.keys(gridGutterWidths).forEach(function (breakpoint) {
-      var gutter = gridGutterWidths[breakpoint];
-      var column = mediaBreakpointUp(breakpoint, gutter, '\n        padding-right: ' + index$1.rmUnit(gutter) / 2 + index$1.detectUnit(gutter) + ';\n        padding-left:  ' + index$1.rmUnit(gutter) / 2 + index$1.detectUnit(gutter) + ';\n      ');
-      columns.push(column);
-    });
-    return '\n      position: relative;\n      margin-left: auto;\n      margin-right: auto;    \n      ' + columns.join('\n') + '\n    ';
-  }
-  return '';
-}
-function makeContainerMaxWidths() {
-  var enableGridClasses = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$24['$enable-grid-classes'];
-  var containerMaxWidths = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$24['$container-max-widths'];
-  var gridBreakpoints = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$24['$grid-breakpoints'];
-  if (enableGridClasses) {
-    var maximumWidthList = [];
-    Object.keys(containerMaxWidths).forEach(function (breakpoint) {
-      var maximumWidth = mediaBreakpointUp(breakpoint, gridBreakpoints, '\n        width: ' + containerMaxWidths[breakpoint] + ';\n        max-width: 100%;\n      ');
-      maximumWidthList.push(maximumWidth);
-    });
-    return '\n      ' + maximumWidthList.join('\n') + '\n    ';
-  }
-  return '';
-}
-function makeGutters() {
-  var gridGutterWidths = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$24['$grid-gutter-widths'];
-  var breakpoints$$1 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$24['$grid-breakpoints'];
-  var gutterList = [];
-  Object.keys(gridGutterWidths).forEach(function (breakpoint) {
-    var gutterValue = gridGutterWidths[breakpoint];
-    gutterValue = '' + index$1.rmUnit(gutterValue) / 2 + index$1.detectUnit(gutterValue);
-    var gutter = mediaBreakpointUp(breakpoint, breakpoints$$1, '\n      padding-right: ' + gutterValue + ';\n      padding-left:  ' + gutterValue + ';\n    ');
-    gutterList.push(gutter);
-  });
-  return '\n    ' + gutterList.join('\n') + '\n  ';
-}
-function makeRow() {
-  var enableGridClasses = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$24['$enable-grid-classes'];
-  var gridGutterWidths = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$24['$grid-gutter-widths'];
-  if (enableGridClasses) {
-    var rowList = [];
-    Object.keys(gridGutterWidths).forEach(function (breakpoint) {
-      var gutter = gridGutterWidths[breakpoint];
-      gutter = '' + index$1.rmUnit(gutter) / -2 + index$1.detectUnit(gutter);
-      var row = '\n        margin-right: ' + gutter + ';\n        margin-left:  ' + gutter + ';\n      ';
-      rowList.push(row);
-    });
-    return '\n      display: flex;\n      flex-wrap: wrap;\n      ' + rowList.join('\n') + '\n    ';
-  }
-  return '';
-}
-
-function makeCol(size) {
-  var columns = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$24['$grid-columns'];
-  return '\n    flex: 0 0 ' + index$1.toPercent(size, columns) + ';\n    /* Add a \'max-width\' to ensure content within each column does not blow out */\n    /* the width of the column. Applies to IE10+ and Firefox. Chrome and Safari */\n    /* do not appear to require this. */\n    max-width: ' + index$1.toPercent(size, columns) + ';\n  ';
-}
-function makeColOffset($size) {
-  var columns = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$24['$grid-columns'];
-  return '\n    margin-left: ' + index$1.toPercent($size, columns) + ';\n  ';
-}
-function makeColPush(size) {
-  var columns = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$24['$grid-columns'];
-  return '\n    left: ' + (size > 0 ? index$1.toPercent(size, columns) : 'auto') + ';\n  ';
-}
-function makeColPull(size) {
-  var columns = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$24['$grid-columns'];
-  return '\n    right: ' + (size > 0 ? index$1.toPercent(size, columns) : 'auto') + ';\n  ';
-}
-function makeColModifier(type, size, columns) {
-  var TYPE = {
-    PUSH: 'push',
-    PULL: 'pull',
-    OFFSET: 'offset'
-  };
-  var modifier = '';
-  if (type === TYPE.PUSH) {
-    modifier = makeColPush(size, columns);
-  } else if (type === TYPE.PULL) {
-    modifier = makeColPull(size, columns);
-  } else if (type === TYPE.OFFSET) {
-    modifier = makeColOffset(size, columns);
-  }
-  return '\n    ' + modifier + '\n  ';
-}
-
-var defaultProps$25 = {
-  '$grid-gutter-widths': {
-    xs: '30px',
-    sm: '30px',
-    md: '30px',
-    lg: '30px',
-    xl: '30px'
-  },
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  },
-  '$grid-columns': 12,
-  '$enable-grid-classes': true
-};
-function getGridColumn() {
-  var gridGutterWidths = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$25['$grid-gutter-widths'];
-  var breakpoints$$1 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$25['$grid-breakpoints'];
-  return '\n    position: relative;\n    width: 100%;\n    min-height: 1px; /* Prevent columns from collapsing when empty */\n    ' + makeGutters(gridGutterWidths, breakpoints$$1) + '\n  ';
-}
-function getColumnGridColumn() {
-  var gridColumns = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$25['$grid-columns'];
-  var gridBreakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$25['$grid-breakpoints'];
-  var gridGutterWidths = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$25['$grid-gutter-widths'];
-  var breakpoint = arguments[3];
-  var columnList = [];
-  var infix = breakpointInfix(breakpoint, gridBreakpoints);
-  for (var i = 1; i <= gridColumns; i += 1) {
-    var column = '\n      &.col' + infix + '-' + i + ',\n       & .col' + infix + '-' + i + '{\n        ' + getGridColumn(gridColumns, gridGutterWidths, gridBreakpoints) + '\n      }\n    ';
-    columnList.push(column);
-  }
-  return '\n    /* Allow columns to stretch full width below their breakpoints */\n    &.col' + infix + ',\n     & .col' + infix + '{\n      ' + getGridColumn(gridColumns, gridGutterWidths, gridBreakpoints) + '\n    }\n\n    ' + columnList.join('\n') + '\n  ';
-}
-function getMediaBreakpointUp() {
-  var gridColumns = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$25['$grid-columns'];
-  var gridBreakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$25['$grid-breakpoints'];
-  var breakpoint = arguments[2];
-  var infix = breakpointInfix(breakpoint, gridBreakpoints);
-  var basic = '\n    &.col' + infix + ',\n     & .col' + infix + '{\n      flex-basis: 0;\n      flex-grow: 1;\n      max-width: 100%;\n    }\n    &.col' + infix + '-auto,\n     & .col' + infix + '-auto{\n      flex: 0 0 auto;\n      width: auto;\n    }\n  ';
-  var columnList = [];
-  for (var i = 1; i <= gridColumns; i += 1) {
-    var column = '\n      &.col' + infix + '-' + i + ',\n       & .col' + infix + '-' + i + '{\n        ' + makeCol(i, gridColumns) + '\n      }\n    ';
-    columnList.push(column);
-  }
-  var modifierList = ['pull', 'push'];
-  var columnModifierList = [];
-  modifierList.forEach(function (modifier) {
-    for (var _i = 0; _i <= gridColumns; _i += 1) {
-      var columnModifier = '\n        &.' + modifier + infix + '-' + _i + ',\n         & .' + modifier + infix + '-' + _i + '{\n          ' + makeColModifier(modifier, _i, gridColumns) + '\n        }\n      ';
-      columnModifierList.push(columnModifier);
-    }
-  });
-  var offsetColumnList = [];
-  for (var _i2 = 0; _i2 <= gridColumns - 1; _i2 += 1) {
-    if (infix !== 1 || _i2 !== 0) {
-      var offsetColumn = '\n        &.offset' + infix + '-' + _i2 + ',\n         & .offset' + infix + '-' + _i2 + '{\n          ' + makeColModifier('offset', _i2, gridColumns) + '\n        }\n      ';
-      offsetColumnList.push(offsetColumn);
-    }
-  }
-  return mediaBreakpointUp(breakpoint, gridBreakpoints, '\n    ' + basic + '\n    ' + columnList.join('\n') + '\n    ' + columnModifierList.join('\n') + '\n    ' + offsetColumnList.join('\n') + '\n  ');
-}
-function makeGridColumns() {
-  var enableGridClasses = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$25['$enable-grid-classes'];
-  var gridColumns = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$25['$grid-columns'];
-  var gridGutterWidths = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$25['$grid-gutter-widths'];
-  var gridBreakpoints = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps$25['$grid-breakpoints'];
-  if (enableGridClasses) {
-    var gridColumnList = [];
-    Object.keys(gridBreakpoints).forEach(function (breakpoint) {
-      var gridColumn = '\n        ' + getColumnGridColumn(gridColumns, gridBreakpoints, gridGutterWidths, breakpoint) + '\n        ' + getMediaBreakpointUp(gridColumns, gridBreakpoints, breakpoint) + '\n      ';
-      gridColumnList.push(gridColumn);
-    });
-    return '\n      ' + gridColumnList.join('\n') + '\n    ';
-  }
-  return '';
-}
-
-var defaultProps$26 = {
-  '$enable-hover-media-query': false
-};
-function listGroupItemVariant() {
-  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$26['$enable-hover-media-query'];
-  var state = arguments[1];
-  var background = arguments[2];
-  var listColor = arguments[3];
-  return '\n    & .list-group-item-' + state + ' {\n      color: ' + listColor + ';\n      background-color: ' + background + ';\n    }\n  \n    & a.list-group-item-' + state + ',\n    button.list-group-item-' + state + ' {\n      color: ' + listColor + ';\n  \n      .list-group-item-heading {\n        color: inherit;\n      }\n  \n      ' + hoverFocus(enableHoverMediaQuery, 'color: ' + listColor + ';\n        background-color: ' + color(background).darken(0.05).toString() + ';') + '\n  \n      &.active {\n        ' + plainHoverFocus(enableHoverMediaQuery, 'color: #fff;\n          background-color: ' + listColor + ';\n          border-color: ' + listColor + ';') + '\n      }\n    }\n  ';
-}
-
-function listUnstyled() {
-  return '\n    padding-left: 0;\n    list-style: none;\n  ';
-}
-function listInline() {
-  return listUnstyled();
-}
-function listInlineItem() {
-  var listInlinePadding = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : bsTheme['$list-inline-padding'];
-  return '\n    display: inline-block;\n  \n    &:not(:last-child) {\n      margin-right: ' + listInlinePadding + ';\n    }\n  ';
-}
-
-var defaultProps$28 = {
-  '$enable-rounded': true,
-  '$enable-hover-media-query': false,
-  '$nav-link-padding': '.5em 1em',
-  '$nav-disabled-link-color': '#636c72',
-  '$cursor-disabled': 'not-allowed',
-  '$nav-tabs-border-width': '1px',
-  '$nav-tabs-border-color': '#ddd',
-  '$nav-tabs-border-radius': '.25rem',
-  '$nav-tabs-link-hover-border-color': '#eceeef',
-  '$nav-tabs-active-link-hover-color': '#464a4c',
-  '$nav-tabs-active-link-hover-bg': '#fff',
-  '$nav-tabs-active-link-hover-border-color': '#ddd',
-  '$nav-pills-border-radius': '.25rem',
-  '$nav-pills-active-link-color': '#fff',
-  '$nav-pills-active-link-bg': '#0275d8'
-};
-function nav() {
-  var $enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$28['$enable-rounded'];
-  var $enableHoverMediaQuery = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$28['$enable-hover-media-query'];
-  var $navLinkPadding = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$28['$nav-link-padding'];
-  var $navDisabledLinkColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps$28['$nav-disabled-link-color'];
-  var $cursorDisabled = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps$28['$cursor-disabled'];
-  var $navTabBorderWidth = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps$28['$nav-tabs-border-width'];
-  var $navTabsBorderColor = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps$28['$nav-tabs-border-color'];
-  var $navTabsBorderRadius = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps$28['$nav-tabs-border-radius'];
-  var $navTabsLinkHoverBorderColor = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps$28['$nav-tabs-link-hover-border-color'];
-  var $navTabsActiveLinkHoverColor = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps$28['$nav-tabs-active-link-hover-color'];
-  var $navTabsActiveLinkHoverBg = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps$28['$nav-tabs-active-link-hover-bg'];
-  var $navTabsActiveLinkHoverBorderColor = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps$28['$nav-tabs-active-link-hover-border-color'];
-  var $navPillsBorderRadius = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps$28['$nav-pills-border-radius'];
-  var $navPillsActiveLinkColor = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : defaultProps$28['$nav-pills-active-link-color'];
-  var $navPillsActiveLinkBg = arguments.length > 14 && arguments[14] !== undefined ? arguments[14] : defaultProps$28['$nav-pills-active-link-bg'];
-  return '\n    &.nav {\n      display: flex;\n      padding-left: 0;\n      margin-bottom: 0;\n      list-style: none;\n    }\n    \n    & .nav-link {\n      display: block;\n      padding: ' + $navLinkPadding + ';\n      \n      ' + hoverFocus($enableHoverMediaQuery, 'text-decoration: none;') + '\n\n      /* Disabled state lightens text and removes hover tab effects */\n      &.disabled {\n        color: ' + $navDisabledLinkColor + ';\n        cursor: ' + $cursorDisabled + '; \n      }\n    }\n        \n    /*\n     Tabs\n    */\n    \n    &.nav-tabs {\n      border-bottom: ' + $navTabBorderWidth + ' solid ' + $navTabsBorderColor + ';\n      & .nav-item {\n        margin-bottom: -' + $navTabBorderWidth + ';\n      }\n   \n      & .nav-link {\n        border: ' + $navTabBorderWidth + ' solid transparent;\n        ' + borderTopRadius($enableRounded, $navTabsBorderRadius) + '\n      \n        ' + hoverFocus($enableHoverMediaQuery, '\n            border-color: ' + $navTabsLinkHoverBorderColor + ' ' + $navTabsLinkHoverBorderColor + ' ' + $navTabsBorderColor + ';\n          ') + '\n      \n        &.disabled {\n          color: ' + $navDisabledLinkColor + ';\n          background-color: transparent;\n          border-color: transparent;\n        }\n      }\n      \n      & .nav-link.active,\n      .nav-item.open .nav-link {\n        color: ' + $navTabsActiveLinkHoverColor + ';\n        background-color: ' + $navTabsActiveLinkHoverBg + ';\n        border-color: ' + $navTabsActiveLinkHoverBorderColor + ' ' + $navTabsActiveLinkHoverBorderColor + ' transparent;\n      }\n      \n      & .dropdown-menu {\n        /* Make dropdown border overlap tab border */\n        margin-top: -' + $navTabBorderWidth + ';\n        /* Remove the top rounded corners here since there is a hard edge above the menu */\n        ' + borderTopRadius($enableRounded, '0') + '\n      }\n    }\n    \n    /*\n     Pills\n    */\n    \n    &.nav-pills {\n      .nav-link {\n        ' + borderRadius($enableRounded, $navPillsBorderRadius) + '\n      }\n\n      .nav-link.active,\n      .nav-item.show .nav-link {\n        color: ' + $navPillsActiveLinkColor + ';\n        background-color: ' + $navPillsActiveLinkBg + ';\n      }\n    }\n\n    /*\n      Justified variants\n    */\n    \n    &.nav-fill {\n      .nav-item {\n        flex: 1 1 auto;\n        text-align: center;\n      }\n    }\n    \n    &.nav-justified {\n      .nav-item {\n        flex: 1 1 100%;\n        text-align: center;\n      }\n    }\n    \n    /* Hide tabbable panes to start, show them when .active */\n    &.tab-content {\n      > .tab-pane {\n        display: none;\n      }\n      > .active {\n        display: block;\n      }\n    }\n  ';
-}
-
-var defaultProps$30 = {
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  }
-};
-function navbarToggleable() {
-  var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$30['$grid-breakpoints'];
-  var navbarBreakpointList = [];
-  Object.keys(gridBreakpoints).forEach(function (breakpoint) {
-    var next = breakpointNext(breakpoint, gridBreakpoints);
-    var infix = breakpointInfix(breakpoint, gridBreakpoints);
-    var navbarBreakpoint = '\n      &.navbar-toggleable' + infix + ' {\n        ' + mediaBreakpointDown(breakpoint, gridBreakpoints, '\n          .navbar-nav {\n            .dropdown-menu {\n              position: static;\n              float: none;\n            }\n          }\n\n          > .container {\n            padding-right: 0;\n            padding-left: 0;\n          }\n        ') + '\n        ' + mediaBreakpointUp(next, gridBreakpoints, '\n          flex-direction: row;\n          flex-wrap: nowrap;\n          align-items: center;\n  \n          .navbar-nav {\n            flex-direction: row;\n  \n            .nav-link {\n              padding-right: .5rem;\n              padding-left: .5rem;\n            }\n          }\n  \n          /* For nesting containers, have to redeclare for alignment purposes */\n          > .container {\n            display: flex;\n            flex-wrap: nowrap;\n            align-items: center;\n          }\n  \n          .navbar-collapse {\n            display: flex !important;\n            width: 100%;\n\n           }\n           \n          .navbar-toggler {\n            display: none;\n          }\n        ') + '\n      }\n    ';
-    navbarBreakpointList.push(navbarBreakpoint);
-  });
-  return '\n    ' + navbarBreakpointList.join('\n') + '\n  ';
-}
-
-var defaultProps$29 = {
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  },
-  '$enable-rounded': true,
-  '$enable-hover-media-query': false,
-  '$navbar-padding-y': '0.5rem',
-  '$navbar-padding-x': '1rem',
-  '$zindex-navbar': '1000',
-  '$zindex-navbar-fixed': '1030',
-  '$zindex-navbar-sticky': '1030',
-  '$navbar-brand-padding-y': '.25rem',
-  '$font-size-lg': '1.25rem',
-  '$navbar-divider-padding-y': '.425rem',
-  '$navbar-toggler-padding-y': '.5rem',
-  '$navbar-toggler-padding-x': '.75rem',
-  '$navbar-toggler-font-size': '1.25rem',
-  '$border-width': '1px',
-  '$navbar-toggler-border-radius': '.25rem',
-  '$navbar-light-active-color': 'rgba(0,0,0,.9)',
-  '$navbar-light-color': 'rgba(0,0,0,.5)',
-  '$navbar-light-hover-color': 'rgba(0,0,0,.7)',
-  '$navbar-light-toggler-border': 'rgba(0,0,0,.1)',
-  '$navbar-light-toggler-bg': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(0,0,0,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')',
-  '$navbar-light-disabled-color': 'rgba(0, 0, 0, 0.3)',
-  '$navbar-inverse-active-color': 'rgba(255,255,255,1)',
-  '$navbar-inverse-color': 'rgba(255,255,255,.5)',
-  '$navbar-inverse-hover-color': 'rgba(255,255,255,.75)',
-  '$navbar-inverse-toggler-border': 'rgba(255,255,255,.1)',
-  '$navbar-inverse-toggler-bg': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')',
-  '$navbar-inverse-disabled-color': 'rgba(255, 255, 255, 0.25)'
-};
-function navbar() {
-  var $gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$29['$grid-breakpoints'];
-  var $enableRounded = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$29['$enable-rounded'];
-  var $enableHoverMediaQuery = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$29['$enable-hover-media-query'];
-  var $navbarPaddingY = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps$29['$navbar-padding-y'];
-  var $navbarPaddingX = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps$29['$navbar-padding-x'];
-  var $zindexNavbar = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps$29['$zindex-navbar'];
-  var $zindexNavbarFixed = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps$29['$zindex-navbar-fixed'];
-  var $zindexNavbarSticky = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps$29['$zindex-navbar-sticky'];
-  var $navbarBrandPaddingY = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps$29['$navbar-brand-padding-y'];
-  var $fontSizeLg = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps$29['$font-size-lg'];
-  var $navbarDividerPaddingY = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps$29['$navbar-divider-padding-y'];
-  var $navbarTogglerPaddingY = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps$29['$navbar-toggler-padding-y'];
-  var $navbarTogglerPaddingX = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps$29['$navbar-toggler-padding-x'];
-  var $navbarTogglerFontSize = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : defaultProps$29['$navbar-toggler-font-size'];
-  var $borderWidth = arguments.length > 14 && arguments[14] !== undefined ? arguments[14] : defaultProps$29['$border-width'];
-  var $navbarTogglerBorderRadius = arguments.length > 15 && arguments[15] !== undefined ? arguments[15] : defaultProps$29['$navbar-toggler-border-radius'];
-  var $navbarLightActiveColor = arguments.length > 16 && arguments[16] !== undefined ? arguments[16] : defaultProps$29['$navbar-light-active-color'];
-  var $navbarLightColor = arguments.length > 17 && arguments[17] !== undefined ? arguments[17] : defaultProps$29['$navbar-light-color'];
-  var $navbarLightHoverColor = arguments.length > 18 && arguments[18] !== undefined ? arguments[18] : defaultProps$29['$navbar-light-hover-color'];
-  var $navbarLightTogglerBorder = arguments.length > 19 && arguments[19] !== undefined ? arguments[19] : defaultProps$29['$navbar-light-toggler-border'];
-  var $navbarLightDisabledColor = arguments.length > 20 && arguments[20] !== undefined ? arguments[20] : defaultProps$29['$navbar-light-disabled-color'];
-  var $navbarLightTogglerBg = arguments.length > 21 && arguments[21] !== undefined ? arguments[21] : defaultProps$29['$navbar-light-toggler-bg'];
-  var $navbarInverseActiveColor = arguments.length > 22 && arguments[22] !== undefined ? arguments[22] : defaultProps$29['$navbar-inverse-active-color'];
-  var $navbarInverseColor = arguments.length > 23 && arguments[23] !== undefined ? arguments[23] : defaultProps$29['$navbar-inverse-color'];
-  var $navbarInverseHoverColor = arguments.length > 24 && arguments[24] !== undefined ? arguments[24] : defaultProps$29['$navbar-inverse-hover-color'];
-  var $navbarInverseTogglerBorder = arguments.length > 25 && arguments[25] !== undefined ? arguments[25] : defaultProps$29['$navbar-inverse-toggler-border'];
-  var $navbarInverseTogglerBg = arguments.length > 26 && arguments[26] !== undefined ? arguments[26] : defaultProps$29['$navbar-inverse-toggler-bg'];
-  var $navbarInverseDisabledColor = arguments.length > 27 && arguments[27] !== undefined ? arguments[27] : defaultProps$29['$navbar-inverse-disabled-color'];
-  return '\n    /* Wrapper and base class\n\n     Provide a static navbar from which we expand to create full-width, fixed, and\n     other navbar variations.\n    */\n\n    &.navbar {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      padding: ' + $navbarPaddingY + ' ' + $navbarPaddingX + ';\n    }\n    \n    /*\n     Brand/project name\n    */\n\n    & .navbar-brand {\n      display: inline-block;\n      padding-top: ' + $navbarBrandPaddingY + ';\n      padding-bottom: ' + $navbarBrandPaddingY + ';\n      margin-right: ' + $navbarPaddingX + ';\n      font-size: ' + $fontSizeLg + ';\n      line-height: inherit;\n      white-space: nowrap;\n\n      ' + hoverFocus($enableHoverMediaQuery, 'text-decoration: none;') + '\n    }\n    \n    /* Navigation\n\n     Custom navbar navigation built on the base .nav styles.\n    */\n\n    &.navbar-nav,\n    & .navbar-nav {\n      display: flex;\n      flex-direction: column; /* cannot use inherit to get the .navbars value */\n      padding-left: 0;\n      margin-bottom: 0;\n      list-style: none;\n    \n      .nav-link {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n    \n    /* Navbar text  */\n\n    & .navbar-text {\n      display: inline-block;\n      padding-top:    .425rem;\n      padding-bottom: .425rem;\n    }\n\n\n    /* Navbar toggle\n\n     Custom button for toggling the .navbar-collapse, powered by the collapse\n     Bootstrap JavaScript plugin.\n    */\n\n    & .navbar-toggler {\n      align-self: flex-start; \n      padding: ' + $navbarTogglerPaddingY + ' ' + $navbarTogglerPaddingX + ';\n      font-size: ' + $navbarTogglerFontSize + ';\n      line-height: 1;\n      background: transparent;\n      border: ' + $borderWidth + ' solid transparent;\n      ' + borderRadius($enableRounded, $navbarTogglerBorderRadius) + '\n\n      ' + hoverFocus($enableHoverMediaQuery, 'text-decoration: none;') + '\n    }\n    \n    /* Keep as a separate element so folks can easily override it with another icon or image file as needed. */\n    & .navbar-toggler-icon {\n      display: inline-block;\n      width: 1.5em;\n      height: 1.5em;\n      vertical-align: middle;\n      content: "";\n      background: no-repeat center center;\n      background-size: 100% 100%;\n    }\n    \n    /* Use position on the toggler to prevent it from being auto placed as a flex item and allow easy placement. */\n    & .navbar-toggler-left {\n      position: absolute;\n      left: ' + $navbarPaddingX + ';\n    }\n    & .navbar-toggler-right {\n      position: absolute;\n      right: ' + $navbarPaddingX + ';\n    }\n\n    /* Dark links against a light background */\n    &.navbar-light {\n      .navbar-brand,\n      .navbar-toggler {\n        color: ' + $navbarLightActiveColor + ';\n\n        ' + hoverFocus($enableHoverMediaQuery, 'color: ' + $navbarLightActiveColor + ';') + '\n      }\n\n      .navbar-nav {\n        .nav-link {\n          color: ' + $navbarLightColor + ';\n\n\n          ' + hoverFocus($enableHoverMediaQuery, 'color: ' + $navbarLightHoverColor + ';') + '\n\n          &.disabled {\n            color: ' + $navbarLightDisabledColor + ';\n          }\n        }\n\n\n        .open > .nav-link,\n        .active > .nav-link,\n        .nav-link.open,\n        .nav-link.active {\n          color: ' + $navbarLightActiveColor + ';\n        }\n      }\n\n      .navbar-toggler {\n        border-color: ' + $navbarLightTogglerBorder + ';\n      }\n      .navbar-toggler-icon {\n        background-image: ' + $navbarLightTogglerBg + ';\n      }\n  \n      .navbar-text {\n        color: ' + $navbarLightColor + ';\n      }\n    }\n      \n\n    /* White links against a dark background */\n    &.navbar-inverse {\n      .navbar-brand,\n      .navbar-toggler {\n        color: ' + $navbarInverseActiveColor + ';\n\n        ' + hoverFocus($enableHoverMediaQuery, 'color: ' + $navbarInverseActiveColor + ';') + '\n      }\n\n      .navbar-nav {\n        .nav-link {\n          color: ' + $navbarInverseColor + ';\n\n          ' + hoverFocus($enableHoverMediaQuery, 'color: ' + $navbarInverseHoverColor + ';') + '\n          \n          &.disabled {\n            color: ' + $navbarInverseDisabledColor + ';\n          }\n        }\n\n        .open > .nav-link,\n        .active > .nav-link,\n        .nav-link.open,\n        .nav-link.active {\n          color: ' + $navbarInverseActiveColor + ';\n        }\n      }\n\n      .navbar-toggler {\n        border-color: ' + $navbarInverseTogglerBorder + ';\n      }\n      \n      .navbar-toggler-icon {\n        background-image: ' + $navbarInverseTogglerBg + ';\n      }\n    \n      .navbar-text {\n        color: ' + $navbarInverseColor + ';\n      }\n    }\n    \n\n    ' + navbarToggleable($gridBreakpoints) + '\n    \n    /* DELETED IN LATEST BOOTSTRAP VERSINO */\n    \n    /* Navbar alignment options\n\n     Display the navbar across the entirety of the page or fixed it to the top or\n     bottom of the page.\n    */\n\n    /* A static, full width modifier with no rounded corners. */\n    &.navbar-full {\n      z-index: ' + $zindexNavbar + ';\n\n      ' + mediaBreakpointUp('sm', $gridBreakpoints, borderRadius($enableRounded, '0')) + '\n    }\n\n      /* Fix the top/bottom navbars when screen real estate supports it */\n    &.navbar-fixed-top,\n    &.navbar-fixed-bottom {\n      position: fixed;\n      right: 0;\n      left: 0;\n      z-index: ' + $zindexNavbarFixed + ';\n\n      /*  Undo the rounded corners */\n      ' + mediaBreakpointUp('sm', $gridBreakpoints, borderRadius($enableRounded, '0')) + '\n    }\n\n    &.navbar-fixed-top {\n      top: 0;\n    }\n\n    &.navbar-fixed-bottom {\n      bottom: 0;\n    }\n\n    /* position sticky does not seem to be working AJT*/\n\n    &.navbar-sticky-top {\n      position: sticky;\n      top: 0;\n      z-index: ' + $zindexNavbarSticky + ';\n      width: 100%;\n\n        /*  Undo the rounded corners */\n      ' + mediaBreakpointUp('sm', $gridBreakpoints, borderRadius($enableRounded, '0')) + '\n    }\n\n    & .navbar-divider {\n      float: left;\n      width: ' + $borderWidth + ';\n      padding-top: ' + $navbarDividerPaddingY + ';\n      padding-bottom: ' + $navbarDividerPaddingY + ';\n      margin-right: ' + $navbarPaddingX + ';\n      margin-left:  ' + $navbarPaddingX + ';\n      overflow: hidden;\n\n      &::before {\n        content: \'\0a0\';\n      }\n    }\n  ';
-}
-
-var defaultProps$31 = {
-  '$spacer-y': '1rem'
-};
-function navDivider() {
-  var spacerY = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$31['$spacer-y'];
-  var dividerColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#e5e5e5';
-  var marginY = '' + index$1.rmUnit(spacerY, index$1.UNIT.REM) / 2 + index$1.UNIT.REM;
-  return '\n    height: 1px;\n    margin: calc(' + marginY + ' / 2) 0;\n    overflow: hidden;\n    background-color: ' + dividerColor + ';\n  ';
-}
-
-var defaultProps$33 = bsTheme;
-function paginationSize() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$33['$enable-rounded'];
-  var paddingY = arguments[1];
-  var paddingX = arguments[2];
-  var fontSize = arguments[3];
-  var borderRadiusPagination = arguments[4];
-  return paginationSizeBootstrap(enableRounded, paddingY, paddingX, fontSize, null, borderRadiusPagination);
-}
-function paginationSizeBootstrap() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$33['$enable-rounded'];
-  var paddingY = arguments[1];
-  var paddingX = arguments[2];
-  var fontSize = arguments[3];
-  var borderRadiusPagination = arguments[5];
-  return '\n    .page-link {\n      padding: ' + paddingY + ' ' + paddingX + ';\n      font-size: ' + fontSize + ';\n    }\n  \n    .page-item {\n      &:first-child {\n        .page-link {\n          ' + borderLeftRadius(enableRounded, borderRadiusPagination) + '\n        }\n      }\n      &:last-child {\n        .page-link {\n          ' + borderRightRadius(enableRounded, borderRadiusPagination) + '\n        }\n      }\n    }\n  ';
-}
-function pagination($enableRounded, $enableHoverMediaQuery, $borderRadius, $paginationActiveColor, $paginationActiveBg, $paginationActiveBorder, $paginationDisabledColor, $cursorDisabled, $paginationDisabledBg, $paginationDisabledBorder, $paginationPaddingY, $paginationPaddingX, $paginationLineHeight, $paginationColor, $paginationBg, $paginationBorderWidth, $paginationBorderColor, $paginationHoverColor, $paginationHoverBg, $paginationHoverBorder, $paginationPaddingYLg, $paginationPaddingXLg, $fontSizeLg, $lineHeightLg, $borderRadiusLg, $paginationPaddingYSm, $paginationPaddingXSm, $fontSizeSm, $lineHeightSm, $borderRadiusSm) {
-  return '\n  &.pagination {\n    display: flex;\n    padding-left: 0;\n    list-style: none; \n    ' + borderRadius($enableRounded) + '\n  }\n  \n  & .page-item {\n    &:first-child {\n      .page-link {\n        margin-left: 0;\n        ' + borderLeftRadius($enableRounded, $borderRadius) + '\n      }\n    }\n    &:last-child {\n      .page-link {\n      ' + borderRightRadius($enableRounded, $borderRadius) + '\n      }\n    }\n  \n    &.active .page-link {\n      z-index: 2;\n      color: ' + $paginationActiveColor + ';\n      background-color: ' + $paginationActiveBg + ';\n      border-color: ' + $paginationActiveBorder + ';\n    }\n  \n    &.disabled .page-link {\n      color: ' + $paginationDisabledColor + ';\n      pointer-events: none;\n      cursor: ' + $cursorDisabled + ';\n      background-color: ' + $paginationDisabledBg + ';\n      border-color: ' + $paginationDisabledBorder + ';\n    }\n  }\n  \n  & .page-link {\n    position: relative;\n    display: block;\n    padding: ' + $paginationPaddingY + ' ' + $paginationPaddingX + ';\n    margin-left: -1px;\n    line-height: ' + $paginationLineHeight + ';\n    color: ' + $paginationColor + ';\n    background-color: ' + $paginationBg + ';\n    border: ' + $paginationBorderWidth + ' solid ' + $paginationBorderColor + ';\n    \n    ' + hoverFocus($enableHoverMediaQuery, '\n        color: ' + $paginationHoverColor + ';\n        text-decoration: none;\n        background-color: ' + $paginationHoverBg + ';\n        border-color: ' + $paginationHoverBorder + ';\n      ') + '\n  }\n  \n  /* Sizing */\n  &.pagination-lg {\n    ' + paginationSize($enableRounded, $paginationPaddingYLg, $paginationPaddingXLg, $fontSizeLg, $lineHeightLg, $borderRadiusLg) + '\n  }\n  \n  &.pagination-sm {\n    ' + paginationSize($enableRounded, $paginationPaddingYSm, $paginationPaddingXSm, $fontSizeSm, $lineHeightSm, $borderRadiusSm) + '\n  }\n  ';
-}
-
-function size(width) {
-  var height = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : width;
-  return "\n    width: " + width + ";\n    height: " + height + ";\n  ";
-}
-
-function tableRowVariant(state, background) {
-  var hoverBackground = color(background).darken(0.05).toString();
-  return '\n  /* Exact selectors below required to override \'.table-striped\' and prevent */\n  /* inheritance to nested tables. */\n  & .table-' + state + ' {\n    &,\n    > th,\n    > td {\n      background-color: ' + background + ';\n    }\n  }\n\n  /* Hover states for \'.table-hover\' */\n  /* Note: this is not available for cells or rows within \'thead\' or \'tfoot\'. */\n  &.table-hover {\n\n    .table-' + state + ' {\n      ' + hover('\n        background-color: ' + hoverBackground + ';\n\n        > td,\n        > th {\n          background-color: ' + hoverBackground + ';\n        }\n      ') + '\n    }\n  }\n  ';
-}
-
-var defaultProps$35 = {
-  '$headings-margin-bottom': '0.5rem',
-  '$headings-font-family': 'inherit',
-  '$headings-font-weight': '500',
-  '$headings-line-height': '1.1',
-  '$headings-color': 'inherit',
-  '$display1-size': '6rem',
-  '$display2-size': '5.5rem',
-  '$display3-size': '4.5rem',
-  '$display4-size': '3.5rem',
-  '$display1-weight': '300',
-  '$display2-weight': '300',
-  '$display3-weight': '300',
-  '$display4-weight': '300'
-};
-function typography() {
-  var $headingsMarginBottom = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps$35['$headings-margin-bottom'];
-  var $headingsFontFamily = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps$35['$headings-font-family'];
-  var $headingsFontWeight = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps$35['$headings-font-weight'];
-  var $headingsLineHeight = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps$35['$headings-line-height'];
-  var $headingsColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps$35['$headings-color'];
-  var $display1Size = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps$35['$display1-size'];
-  var $display2Size = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps$35['$display2-size'];
-  var $display3Size = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps$35['$display3-size'];
-  var $display4Size = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps$35['$display4-size'];
-  var $display1Weight = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps$35['$display1-weight'];
-  var $display2Weight = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps$35['$display2-weight'];
-  var $display3Weight = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps$35['$display3-weight'];
-  var $display4Weight = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps$35['$display4-weight'];
-  return '\n    margin-bottom: ' + $headingsMarginBottom + ';\n    font-family: ' + $headingsFontFamily + ';\n    font-weight: ' + $headingsFontWeight + ';\n    line-height: ' + $headingsLineHeight + ';\n    color: ' + $headingsColor + ';\n    \n    /* Type Scss */\n\n    &.display-1 {\n      font-size: ' + $display1Size + ';\n      font-weight: ' + $display1Weight + ';\n      line-height: ' + $headingsLineHeight + ';\n\n    }\n    \n    &.display-2 {\n      font-size: ' + $display2Size + ';\n      font-weight: ' + $display2Weight + ';\n      line-height: ' + $headingsLineHeight + ';\n    }\n    \n    &.display-3 {\n      font-size: ' + $display3Size + ';\n      font-weight: ' + $display3Weight + ';\n      line-height: ' + $headingsLineHeight + ';\n    }\n    \n    &.display-4 {\n      font-size: ' + $display4Size + ';\n      font-weight: ' + $display4Weight + ';\n        line-height: ' + $headingsLineHeight + ';\n    }\n  ';
-}
-
-function mapToCssModules(className, cssModule) {
-  if (!cssModule) return className;
-  return className.split(' ').map(function (c) {
-    return cssModule[c] || c;
-  }).join(' ');
-}
-
-function getTetherAttachments(placement) {
-  switch (placement) {
-    case 'top':
-    case 'top center':
-      return {
-        attachment: 'bottom center',
-        targetAttachment: 'top center'
-      };
-    case 'bottom':
-    case 'bottom center':
-      return {
-        attachment: 'top center',
-        targetAttachment: 'bottom center'
-      };
-    case 'left':
-    case 'left center':
-      return {
-        attachment: 'middle right',
-        targetAttachment: 'middle left'
-      };
-    case 'right':
-    case 'right center':
-      return {
-        attachment: 'middle left',
-        targetAttachment: 'middle right'
-      };
-    case 'top left':
-      return {
-        attachment: 'bottom left',
-        targetAttachment: 'top left'
-      };
-    case 'top right':
-      return {
-        attachment: 'bottom right',
-        targetAttachment: 'top right'
-      };
-    case 'bottom left':
-      return {
-        attachment: 'top left',
-        targetAttachment: 'bottom left'
-      };
-    case 'bottom right':
-      return {
-        attachment: 'top right',
-        targetAttachment: 'bottom right'
-      };
-    case 'right top':
-      return {
-        attachment: 'top left',
-        targetAttachment: 'top right'
-      };
-    case 'right bottom':
-      return {
-        attachment: 'bottom left',
-        targetAttachment: 'bottom right'
-      };
-    case 'left top':
-      return {
-        attachment: 'top right',
-        targetAttachment: 'top left'
-      };
-    case 'left bottom':
-      return {
-        attachment: 'bottom right',
-        targetAttachment: 'bottom left'
-      };
-    default:
-      return {
-        attachment: 'top center',
-        targetAttachment: 'bottom center'
-      };
-  }
-}
-var tetherAttachements = ['top', 'bottom', 'left', 'right', 'top left', 'top center', 'top right', 'right top', 'right middle', 'right bottom', 'bottom right', 'bottom center', 'bottom left', 'left top', 'left middle', 'left bottom'];
-function getScrollbarWidth() {
-  var scrollDiv = document.createElement('div');
-  scrollDiv.style.position = 'absolute';
-  scrollDiv.style.top = '-9999px';
-  scrollDiv.style.width = '50px';
-  scrollDiv.style.height = '50px';
-  scrollDiv.style.overflow = 'scroll';
-  document.body.appendChild(scrollDiv);
-  var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-  document.body.removeChild(scrollDiv);
-  return scrollbarWidth;
-}
-function setScrollbarWidth(padding) {
-  document.body.style.paddingRight = padding > 0 ? padding + 'px' : null;
-}
-function isBodyOverflowing() {
-  return document.body.clientWidth < window.innerWidth;
-}
-function getOriginalBodyPadding() {
-  return parseInt(window.getComputedStyle(document.body, null).getPropertyValue('padding-right') || 0, 10);
-}
-function conditionallyUpdateScrollbar() {
-  var scrollbarWidth = getScrollbarWidth();
-  var fixedContent = document.querySelectorAll('.navbar-fixed-top, .navbar-fixed-bottom, .is-fixed')[0];
-  var bodyPadding = fixedContent ? parseInt(fixedContent.style.paddingRight || 0, 10) : 0;
-  if (isBodyOverflowing()) {
-    setScrollbarWidth(bodyPadding + scrollbarWidth);
-  }
-}
-function toHashCode(str) {
-  var hash = 0;
-  if (str.length === 0) {
-    return hash;
-  }
-  for (var i = 0; i < str.length; i += 1) {
-    var char = str.charCodeAt(i);
-    hash = (hash << 5) - hash + char;
-    hash = hash & hash;
-  }
-  return hash;
-}
-
-var classnames$1 = createCommonjsModule(function (module) {
+var classnames = createCommonjsModule(function (module) {
 (function () {
 	'use strict';
 	var hasOwn = {}.hasOwnProperty;
@@ -4734,7 +3294,412 @@ var omit = baseRest(function(object, props) {
 function stubArray() {
   return [];
 }
-var lodash_omit$1 = omit;
+var lodash_omit = omit;
+
+function mapToCssModules(className, cssModule) {
+  if (!cssModule) return className;
+  return className.split(' ').map(function (c) {
+    return cssModule[c] || c;
+  }).join(' ');
+}
+
+var tabFocus_1 = createCommonjsModule(function (module, exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.tabFocus = tabFocus;
+function tabFocus() {
+  return "\n    /* WebKit-specific. Other browsers will keep their default outline style. */\n    /* (Initially tried to also force default via 'outline: initial', */\n    /* but that seems to erroneously remove the outline in Firefox altogether.) */\n    outline: 5px auto -webkit-focus-ring-color;\n    outline-offset: -2px;\n  ";
+}
+exports.default = {
+  tabFocus: tabFocus
+};
+});
+unwrapExports(tabFocus_1);
+
+var hover_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.hover = hover;
+exports.hoverFocus = hoverFocus;
+exports.plainHoverFocus = plainHoverFocus;
+exports.hoverFocusActive = hoverFocusActive;
+var defaultProps = exports.defaultProps = {
+  '$enable-hover-media-query': false
+};
+function hover(content) {
+  return '\n    &:hover { ' + content + ' }\n  ';
+}
+function hoverFocus() {
+  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
+  var content = arguments[1];
+  if (enableHoverMediaQuery) {
+    return ' \n      &:focus { ' + content + ' }\n      ' + hover(content) + '\n    ';
+  }
+  return '\n    &:focus,\n    &:hover {\n      ' + content + '\n    }\n  ';
+}
+function plainHoverFocus() {
+  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
+  var content = arguments[1];
+  if (enableHoverMediaQuery) {
+    return '\n      &, &:focus {\n        ' + content + '\n      }\n      ' + hover(content) + '\n    ';
+  }
+  return ' \n    &, &:focus, &:hover {\n      ' + content + '\n    }\n  ';
+}
+function hoverFocusActive() {
+  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
+  var content = arguments[1];
+  if (enableHoverMediaQuery) {
+    return '\n      &:focus,\n      &:active {\n        ' + content + '\n      }\n      ' + hover(content) + '\n    ';
+  }
+  return '\n    &:focus, &:active, &:hover {\n     ' + content + '\n    }\n  ';
+}
+hover.focus = hoverFocus;
+hover.plainFocus = plainHoverFocus;
+hover.activeFocus = hoverFocusActive;
+exports.default = {
+  defaultProps: defaultProps,
+  hover: hover,
+  hoverFocus: hoverFocus,
+  plainHoverFocus: plainHoverFocus,
+  hoverFocusActive: hoverFocusActive
+};
+});
+unwrapExports(hover_1);
+var hover_2 = hover_1.hover;
+var hover_3 = hover_1.hoverFocus;
+var hover_5 = hover_1.hoverFocusActive;
+
+var a_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.a = a;
+var defaultProps = exports.defaultProps = {
+  '$grid-breakpoints': {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  },
+  '$link-color': '#0275d8',
+  '$link-decoration': 'none',
+  '$link-hover-color': '#014C8D',
+  '$link-hover-decoration': 'underline',
+  '$enable-hover-media-query': false
+};
+function a() {
+  var $linkColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$link-color'];
+  var $linkDecoration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$link-decoration'];
+  var $linkHoverColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$link-hover-color'];
+  var $linkHoverDecoration = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$link-hover-decoration'];
+  var $enableHoverMediaQuery = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$enable-hover-media-query'];
+  return '\n    color: ' + $linkColor + ';\n    text-decoration: ' + $linkDecoration + ';\n    background-color: transparent;\n    -webkit-text-decoration-skip: objects;\n  \n    ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, '\n      color: ' + $linkHoverColor + ';\n      text-decoration: ' + $linkHoverDecoration + ';\n    ') + '\n    \n    &:focus {\n      ' + (0, tabFocus_1.tabFocus)() + '\n    }\n\n    a:not([href]):not([tabindex]) {\n      color: inherit;\n      text-decoration: none;\n      \n      ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, '\n        color: inherit;\n        text-decoration: none;\n      ') + '\n\n      &:focus {\n        outline: 0;\n      }\n    }\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  a: a
+};
+});
+unwrapExports(a_1);
+var a_3 = a_1.a;
+
+var borderRadius_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.borderRadius = borderRadius;
+exports.borderTopRadius = borderTopRadius;
+exports.borderRightRadius = borderRightRadius;
+exports.borderBottomRadius = borderBottomRadius;
+exports.borderLeftRadius = borderLeftRadius;
+var defaultProps = exports.defaultProps = {
+  '$border-radius': '.25rem',
+  '$enable-rounded': true
+};
+function borderRadius() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+  if (enableRounded) {
+    return '\n      border-radius: ' + radius + ';\n    ';
+  }
+  return '';
+}
+function borderTopRadius() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+  if (enableRounded) {
+    return '\n      border-top-right-radius: ' + radius + ';\n      border-top-left-radius: ' + radius + ';\n    ';
+  }
+  return '';
+}
+function borderRightRadius() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+  if (enableRounded) {
+    return '\n      border-bottom-right-radius: ' + radius + ';\n      border-top-right-radius: ' + radius + ';\n    ';
+  }
+  return '';
+}
+function borderBottomRadius() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+  if (enableRounded) {
+    return '\n      border-bottom-right-radius: ' + radius + ';\n      border-bottom-left-radius: ' + radius + ';\n    ';
+  }
+  return '';
+}
+function borderLeftRadius() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+  if (enableRounded) {
+    return '\n      border-bottom-left-radius: ' + radius + ';\n      border-top-left-radius: ' + radius + ';\n    ';
+  }
+  return '';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  all: borderRadius,
+  top: borderTopRadius,
+  right: borderRightRadius,
+  bottom: borderBottomRadius,
+  left: borderLeftRadius
+};
+});
+unwrapExports(borderRadius_1);
+var borderRadius_2 = borderRadius_1.borderRadius;
+var borderRadius_3 = borderRadius_1.borderTopRadius;
+var borderRadius_4 = borderRadius_1.borderRightRadius;
+var borderRadius_5 = borderRadius_1.borderBottomRadius;
+var borderRadius_6 = borderRadius_1.borderLeftRadius;
+
+var boxShadow_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.boxShadow = boxShadow;
+var defaultProps = exports.defaultProps = {
+  '$enable-shadows': false
+};
+function boxShadow() {
+  var enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-shadows'];
+  if (enableShadows) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+    return '\n      box-shadow: ' + args.join(' ') + ';\n    ';
+  }
+  return '';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  boxShadow: boxShadow
+};
+});
+unwrapExports(boxShadow_1);
+var boxShadow_2 = boxShadow_1.boxShadow;
+
+var transition_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.transition = transition;
+var defaultProps = exports.defaultProps = {
+  '$enable-transitions': true
+};
+function transition() {
+  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
+  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    args[_key - 1] = arguments[_key];
+  }
+  if (enableTransitions && args.length) {
+    return '\n      transition: ' + args.join(' ') + ';\n    ';
+  }
+  return '';
+}
+exports.default = {
+  transition: transition
+};
+});
+unwrapExports(transition_1);
+var transition_2 = transition_1.transition;
+
+var conditional = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ifThen = ifThen;
+exports.ifElse = ifElse;
+function ifThen(conditions, returnTrue) {
+  return ifElse(conditions, returnTrue, '');
+}
+function ifElse(conditions, returnTrue, returnFalse) {
+  return conditions ? returnTrue : returnFalse;
+}
+exports.default = {
+  ifThen: ifThen,
+  ifElse: ifElse
+};
+});
+unwrapExports(conditional);
+var conditional_1 = conditional.ifThen;
+
+var buttons = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.buttonVariant = buttonVariant;
+exports.buttonOutlineVariant = buttonOutlineVariant;
+exports.buttonSize = buttonSize;
+exports.button = button;
+var _color2 = _interopRequireDefault(color);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var defaultProps = exports.defaultProps = {
+  '$enable-shadows': true,
+  '$enable-hover-media-query': false,
+  '$enable-transitions': true,
+  '$enable-rounded': true,
+  '$font-weight-normal': 'normal',
+  '$btn-font-weight': 'normal',
+  '$btn-line-height': '1.25',
+  '$btn-transition': 'all .2s ease-in-out',
+  '$input-btn-border-width': '1px',
+  '$btn-padding-x': '1rem',
+  '$btn-padding-y': '.5rem',
+  '$font-size-base': '1rem',
+  '$btn-border-radius': '.25rem',
+  '$btn-box-shadow': 'inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075)',
+  '$btn-focus-box-shadow': '0 0 0 2px rgba(2, 117, 216, 0.25)',
+  '$btn-active-box-shadow': 'inset 0 3px 5px rgba(0, 0, 0, 0.125)',
+  '$cursor-disabled': 'not-allowed',
+  '$link-color': '#0275d8',
+  '$link-hover-color': 'hsl(207.79999999999995, 98.2%, 27.8%)',
+  '$link-hover-decoration': 'underline',
+  '$btn-link-disabled-color': '#636c72',
+  '$btn-padding-x-lg': '1.5rem',
+  '$btn-padding-y-lg': '.75rem',
+  '$font-size-lg': '1.25rem',
+  '$btn-border-radius-lg': '.3rem',
+  '$btn-padding-x-sm': '.5rem',
+  '$btn-padding-y-sm': '.25rem',
+  '$font-size-sm': '.875rem',
+  '$btn-border-radius-sm': '.2rem',
+  '$btn-block-spacing-y': '.5rem',
+  '$btn-primary-color': '#fff',
+  '$btn-primary-bg': '#0275d8',
+  '$btn-primary-border': '#0275d8',
+  '$btn-secondary-color': '#292b2c',
+  '$btn-secondary-bg': '#fff',
+  '$btn-secondary-border': '#ccc',
+  '$btn-info-color': '#fff',
+  '$btn-info-bg': '#5bc0de',
+  '$btn-info-border': '#5bc0de',
+  '$btn-success-color': '#fff',
+  '$btn-success-bg': '#5cb85c',
+  '$btn-success-border': '#5cb85c',
+  '$btn-warning-color': '#fff',
+  '$btn-warning-bg': '#f0ad4e',
+  '$btn-warning-border': '#f0ad4e',
+  '$btn-danger-color': '#fff',
+  '$btn-danger-bg': '#d9534f',
+  '$btn-danger-border': '#d9534f'
+};
+function buttonVariant() {
+  var enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-shadows'];
+  var buttonColor = arguments[1];
+  var background = arguments[2];
+  var border = arguments[3];
+  var btnActiveBoxShadow = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$btn-active-box-shadow'];
+  var btnBoxShadow = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$btn-box-shadow'];
+  var activeBackground = (0, _color2.default)(background).darken(0.2).toString();
+  var activeBorder = (0, _color2.default)(border).darken(0.12).toString();
+  return '\n    color: ' + buttonColor + ';\n    background-color: ' + background + ';\n    border-color: ' + border + ';\n    ' + (0, boxShadow_1.boxShadow)(enableShadows, btnBoxShadow) + '\n  \n    ' + (0, hover_1.hover)('\n      color: ' + buttonColor + ';\n      background-color: ' + activeBackground + ';\n      border-color: ' + activeBorder + ';\n    ') + '\n  \n    &:focus,\n    &.focus {\n      ' + (0, conditional.ifElse)('\n        box-shadow: ' + btnBoxShadow + ', 0 0 0 2px ' + (0, _color2.default)(border).alpha(0.5).toString() + ';\n      ', '\n        box-shadow: 0 0 0 2px ' + (0, _color2.default)(border).alpha(0.5).toString() + ';\n      ') + '\n    }\n  \n    /* Disabled comes first so active can properly restyle */\n    &.disabled,\n    &:disabled {\n      background-color: ' + background + ';\n      border-color: ' + border + ';\n    }\n    \n    &:active,\n    &.active,\n    .show > &.dropdown-toggle {\n      color: ' + buttonColor + ';\n      background-color: ' + activeBackground + ';\n      background-image: none;\n      border-color: ' + activeBorder + ';\n      ' + (0, boxShadow_1.boxShadow)(enableShadows, btnActiveBoxShadow) + '\n    }\n  ';
+}
+function buttonOutlineVariant(buttonColor) {
+  var buttonColorHover = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#fff';
+  return '\n    color: ' + buttonColor + ';\n    background-image: none;\n    background-color: transparent;\n    border-color: ' + buttonColor + ';\n  \n    ' + (0, hover_1.hover)('\n      color: ' + buttonColorHover + ';\n      background-color: ' + buttonColor + ';\n      border-color: ' + buttonColor + ';\n    ') + '\n  \n    &:focus,\n    &.focus {\n      box-shadow: 0 0 0 2px ' + (0, _color2.default)(buttonColor).alpha(0.5).toString() + ';\n    }\n  \n    &.disabled,\n    &:disabled {\n      color: ' + buttonColor + ';\n      border-color: transparent;\n    }\n    \n    &:active,\n    &.active,\n    & .open > &.dropdown-toggle {\n      color: ' + buttonColorHover + ';\n      background-color: ' + buttonColor + ';\n      border-color: ' + buttonColor + ';\n    }\n  ';
+}
+function buttonSize() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var paddingY = arguments[1];
+  var paddingX = arguments[2];
+  var fontSize = arguments[3];
+  var btnBorderRadius = arguments[4];
+  return '\n    padding: ' + paddingY + ' ' + paddingX + ';\n    font-size: ' + fontSize + ';\n    ' + (0, borderRadius_1.borderRadius)(enableRounded, btnBorderRadius) + '\n  ';
+}
+function button() {
+  var $enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-shadows'];
+  var $enableHoverMediaQuery = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$enable-hover-media-query'];
+  var $enableTransitions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$enable-transitions'];
+  var $enableRounded = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$enable-rounded'];
+  var $fontWeightNormal = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$font-weight-normal'];
+  var $btnFontWeight = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$btn-font-weight'];
+  var $btnLineHeight = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$btn-line-height'];
+  var $btnTransition = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$btn-transition'];
+  var $inputBtnBorderWidth = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps['$input-btn-border-width'];
+  var $btnPaddingX = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps['$btn-padding-x'];
+  var $btnPaddingY = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps['$btn-padding-y'];
+  var $fontSizeBase = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps['$font-size-base'];
+  var $btnBorderRadius = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps['$btn-border-radius'];
+  var $btnBoxShadow = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : defaultProps['$btn-box-shadow'];
+  var $btnFocusBoxShadow = arguments.length > 14 && arguments[14] !== undefined ? arguments[14] : defaultProps['$btn-focus-box-shadow'];
+  var $btnActiveBoxShadow = arguments.length > 15 && arguments[15] !== undefined ? arguments[15] : defaultProps['$btn-active-box-shadow'];
+  var $cursorDisabled = arguments.length > 16 && arguments[16] !== undefined ? arguments[16] : defaultProps['$cursor-disabled'];
+  var $linkColor = arguments.length > 17 && arguments[17] !== undefined ? arguments[17] : defaultProps['$link-color'];
+  var $linkHoverColor = arguments.length > 18 && arguments[18] !== undefined ? arguments[18] : defaultProps['$link-hover-color'];
+  var $linkHoverDecoration = arguments.length > 19 && arguments[19] !== undefined ? arguments[19] : defaultProps['$link-hover-decoration'];
+  var $btnLinkDisabledColor = arguments.length > 20 && arguments[20] !== undefined ? arguments[20] : defaultProps['$btn-link-disabled-color'];
+  var $btnPaddingXLg = arguments.length > 21 && arguments[21] !== undefined ? arguments[21] : defaultProps['$btn-padding-x-lg'];
+  var $btnPaddingYLg = arguments.length > 22 && arguments[22] !== undefined ? arguments[22] : defaultProps['$btn-padding-y-lg'];
+  var $fontSizeLg = arguments.length > 23 && arguments[23] !== undefined ? arguments[23] : defaultProps['$font-size-lg'];
+  var $btnBorderRadiusLg = arguments.length > 24 && arguments[24] !== undefined ? arguments[24] : defaultProps['$btn-border-radius-lg'];
+  var $btnPaddingXSm = arguments.length > 25 && arguments[25] !== undefined ? arguments[25] : defaultProps['$btn-padding-x-sm'];
+  var $btnPaddingYSm = arguments.length > 26 && arguments[26] !== undefined ? arguments[26] : defaultProps['$btn-padding-y-sm'];
+  var $fontSizeSm = arguments.length > 27 && arguments[27] !== undefined ? arguments[27] : defaultProps['$font-size-sm'];
+  var $btnBorderRadiusSm = arguments.length > 28 && arguments[28] !== undefined ? arguments[28] : defaultProps['$btn-border-radius-sm'];
+  var $btnBlockSpacingY = arguments.length > 29 && arguments[29] !== undefined ? arguments[29] : defaultProps['$btn-block-spacing-y'];
+  var $btnPrimaryColor = arguments.length > 30 && arguments[30] !== undefined ? arguments[30] : defaultProps['$btn-primary-color'];
+  var $btnPrimaryBg = arguments.length > 31 && arguments[31] !== undefined ? arguments[31] : defaultProps['$btn-primary-bg'];
+  var $btnPrimaryBorder = arguments.length > 32 && arguments[32] !== undefined ? arguments[32] : defaultProps['$btn-primary-border'];
+  var $btnSecondaryColor = arguments.length > 33 && arguments[33] !== undefined ? arguments[33] : defaultProps['$btn-secondary-color'];
+  var $btnSecondaryBg = arguments.length > 34 && arguments[34] !== undefined ? arguments[34] : defaultProps['$btn-secondary-bg'];
+  var $btnSecondaryBorder = arguments.length > 35 && arguments[35] !== undefined ? arguments[35] : defaultProps['$btn-secondary-border'];
+  var $btnInfoColor = arguments.length > 36 && arguments[36] !== undefined ? arguments[36] : defaultProps['$btn-info-color'];
+  var $btnInfoBg = arguments.length > 37 && arguments[37] !== undefined ? arguments[37] : defaultProps['$btn-info-bg'];
+  var $btnInfoBorder = arguments.length > 38 && arguments[38] !== undefined ? arguments[38] : defaultProps['$btn-info-border'];
+  var $btnSuccessColor = arguments.length > 39 && arguments[39] !== undefined ? arguments[39] : defaultProps['$btn-success-color'];
+  var $btnSuccessBg = arguments.length > 40 && arguments[40] !== undefined ? arguments[40] : defaultProps['$btn-success-bg'];
+  var $btnSuccessBorder = arguments.length > 41 && arguments[41] !== undefined ? arguments[41] : defaultProps['$btn-success-border'];
+  var $btnWarningColor = arguments.length > 42 && arguments[42] !== undefined ? arguments[42] : defaultProps['$btn-warning-color'];
+  var $btnWarningBg = arguments.length > 43 && arguments[43] !== undefined ? arguments[43] : defaultProps['$btn-warning-bg'];
+  var $btnWarningBorder = arguments.length > 44 && arguments[44] !== undefined ? arguments[44] : defaultProps['$btn-warning-border'];
+  var $btnDangerColor = arguments.length > 45 && arguments[45] !== undefined ? arguments[45] : defaultProps['$btn-danger-color'];
+  var $btnDangerBg = arguments.length > 46 && arguments[46] !== undefined ? arguments[46] : defaultProps['$btn-danger-bg'];
+  var $btnDangerBorder = arguments.length > 47 && arguments[47] !== undefined ? arguments[47] : defaultProps['$btn-danger-border'];
+  return '\n  \n    font-family: inherit;\n    \n    &.btn {\n      display: inline-block;\n      font-weight: ' + $btnFontWeight + ';\n      line-height: ' + $btnLineHeight + ';\n      text-align: center;\n      white-space: nowrap;\n      vertical-align: middle;\n      user-select: none;\n      border: ' + $inputBtnBorderWidth + ' solid transparent;\n      ' + buttonSize($enableRounded, $btnPaddingY, $btnPaddingX, $fontSizeBase, $btnBorderRadius) + '\n      ' + (0, transition_1.transition)($enableTransitions, $btnTransition) + '\n      ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'text-decoration: none;') + '\n\n      &:focus,\n      &.focus {\n        outline: 0;\n        box-shadow: ' + $btnFocusBoxShadow + ';\n      }\n\n      &.disabled,\n      &:disabled {\n        cursor: ' + $cursorDisabled + ';\n        opacity: .65;\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, 'none') + '\n      }  \n\n      &:active,\n      &.active {\n        background-image: none;\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $btnFocusBoxShadow, $btnActiveBoxShadow) + '\n      }\n    }\n    \n    a.btn.disabled,\n    fieldset[disabled] a.btn {\n      pointer-events: none;\n    }\n   \n   \n    /* Alternate buttons */\n   \n    &.btn-primary {\n      ' + buttonVariant($enableShadows, $btnPrimaryColor, $btnPrimaryBg, $btnPrimaryBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-secondary {\n      ' + buttonVariant($enableShadows, $btnSecondaryColor, $btnSecondaryBg, $btnSecondaryBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-info {\n      ' + buttonVariant($enableShadows, $btnInfoColor, $btnInfoBg, $btnInfoBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-success {\n      ' + buttonVariant($enableShadows, $btnSuccessColor, $btnSuccessBg, $btnSuccessBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-warning {\n      ' + buttonVariant($enableShadows, $btnWarningColor, $btnWarningBg, $btnWarningBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-danger {\n      ' + buttonVariant($enableShadows, $btnDangerColor, $btnDangerBg, $btnDangerBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n   \n    &.btn-outline-primary {\n      ' + buttonOutlineVariant($btnPrimaryBg, $btnPrimaryColor) + '\n    }    \n    &.btn-outline-secondary {\n      ' + buttonOutlineVariant($btnSecondaryBorder, $btnSecondaryColor) + '\n    }    \n    &.btn-outline-info {\n      ' + buttonOutlineVariant($btnInfoBg, $btnInfoColor) + '\n    }    \n    &.btn-outline-success {\n      ' + buttonOutlineVariant($btnSuccessBg, $btnSuccessColor) + '\n    }\n    &.btn-outline-warning {\n      ' + buttonOutlineVariant($btnWarningBg, $btnWarningColor) + '\n    }\n    &.btn-outline-danger {\n      ' + buttonOutlineVariant($btnDangerBg, $btnDangerColor) + '\n    }\n   \n    /*\n     Link buttons\n    */\n   \n    &.btn-link {\n      font-weight: ' + $fontWeightNormal + ';\n      color: ' + $linkColor + ';\n      border-radius: 0;\n   \n      &,\n      &:active,\n      &.active,\n      &:disabled {\n        background-color: transparent;\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, 'none') + '\n      }\n     \n      &,\n      &:focus,\n      &:active {\n        border-color: transparent;\n      }\n     \n      ' + (0, hover_1.hover)('border-color: transparent;') + '\n     \n      ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, '\n        color: ' + $linkHoverColor + ';\n        text-decoration: ' + $linkHoverDecoration + ';\n        background-color: transparent;\n      ') + '\n     \n      &:disabled {\n        color: ' + $btnLinkDisabledColor + ';\n        ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, '\n          text-decoration: none;\n        ') + '\n      }\n    }\n  \n  \n    /*\n     Button Sizes\n    */\n   \n    &.btn-lg {\n      /* line-height: ensure even-numbered height of button next to large input */\n      ' + buttonSize($enableRounded, $btnPaddingYLg, $btnPaddingXLg, $fontSizeLg, $btnBorderRadiusLg) + '\n    }\n   \n    &.btn-sm {\n      /* line-height: ensure proper height of button next to small input */\n      ' + buttonSize($enableRounded, $btnPaddingYSm, $btnPaddingXSm, $fontSizeSm, $btnBorderRadiusSm) + '\n    }\n   \n   \n    /*\n     Block button\n    */\n   \n    &.btn-block {\n      display: block;\n      width: 100%;\n    }\n   \n    /* Vertically space out multiple block buttons */\n    &.btn-block + .btn-block {\n      margin-top: ' + $btnBlockSpacingY + ';\n    }\n   \n    /* Specificity overrides */\n    input[type="submit"],\n    input[type="reset"],\n    input[type="button"] {\n      &.btn-block {\n        width: 100%;\n      }\n    }\n   \n    /* Reboot Scss */\n    touch-action: manipulation;\n    line-height: inherit;\n    &:focus{\n      outline: 1px dotted;\n      outline: 5px auto -webkit-focus-ring-color;\n    }\n    \n    &[type="button"],\n    &[type="reset"],\n    &[type="submit"] {\n      -webkit-appearance: button;\n    }\n    \n    &::-moz-focus-inner,\n    &[type="button"]::-moz-focus-inner,\n    &[type="reset"]::-moz-focus-inner,\n    &[type="submit"]::-moz-focus-inner {\n      padding: 0;\n      border-style: none;\n    }\n\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  buttonVariant: buttonVariant,
+  buttonOutlineVariant: buttonOutlineVariant,
+  buttonSize: buttonSize,
+  button: button
+};
+});
+unwrapExports(buttons);
+var buttons_5 = buttons.button;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
   return typeof obj;
@@ -4746,7 +3711,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 
 
-var asyncGenerator = function () {
+var asyncGenerator$1 = function () {
   function AwaitValue(value) {
     this.value = value;
   }
@@ -4869,7 +3834,7 @@ var classCallCheck$1 = function (instance, Constructor) {
   }
 };
 
-var createClass$1 = function () {
+var createClass = function () {
   function defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -4966,7 +3931,7 @@ var possibleConstructorReturn = function (self, call) {
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
 
-var defaultProps$37 = {
+var defaultProps$1 = {
   theme: bsTheme
 };
 function composeLink(RouterLink) {
@@ -4976,10 +3941,10 @@ function composeLink(RouterLink) {
       classCallCheck$1(this, Link);
       return possibleConstructorReturn(this, (Link.__proto__ || Object.getPrototypeOf(Link)).apply(this, arguments));
     }
-    createClass$1(Link, [{
+    createClass(Link, [{
       key: 'render',
       value: function render() {
-        var _omit = lodash_omit$1(this.props, ['theme']),
+        var _omit = lodash_omit(this.props, ['theme']),
             className = _omit.className,
             to = _omit.to,
             attributes = objectWithoutProperties(_omit, ['className', 'to']);
@@ -4996,13 +3961,13 @@ function composeLink(RouterLink) {
   Link = styled(Link).withConfig({
     displayName: 'composeLink__Link'
   })(['', ''], function (props) {
-    return '\n      ' + a(props.theme['$link-color'], props.theme['$link-decoration'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$enable-hover-media-query']) + '\n    \n      ' + button(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n    ';
+    return '\n      ' + a_3(props.theme['$link-color'], props.theme['$link-decoration'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$enable-hover-media-query']) + '\n    \n      ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n    ';
   });
-  Link.defaultProps = defaultProps$37;
+  Link.defaultProps = defaultProps$1;
   return Link;
 }
 
-var defaultProps$36 = {
+var defaultProps = {
   tag: 'a',
   theme: bsTheme
 };
@@ -5019,10 +3984,10 @@ var AUnstyled = function (_React$Component) {
       focus: false
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(AUnstyled, [{
+  createClass(AUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           active = _omit.active,
           disabled = _omit.disabled,
@@ -5032,7 +3997,7 @@ var AUnstyled = function (_React$Component) {
           attributes = objectWithoutProperties(_omit, ['className', 'active', 'disabled', 'cssModule', 'color', 'tag']);
       var focus = this.state.focus;
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, defineProperty({
+        className: mapToCssModules(classnames(className, defineProperty({
           focus: focus,
           active: active,
           disabled: disabled
@@ -5054,11 +4019,11 @@ AUnstyled.propTypes = {
 var A = styled(AUnstyled).withConfig({
   displayName: 'A'
 })(['', ''], function (props) {
-  return '\n    ' + a(props.theme['$link-color'], props.theme['$link-decoration'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$enable-hover-media-query']) + '\n  ';
+  return '\n    ' + a_3(props.theme['$link-color'], props.theme['$link-decoration'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$enable-hover-media-query']) + '\n  ';
 });
-A.defaultProps = defaultProps$36;
+A.defaultProps = defaultProps;
 
-var defaultProps$38 = {
+var defaultProps$2 = {
   tag: 'abbr',
   theme: bsTheme
 };
@@ -5068,17 +4033,17 @@ var AbbrUnstyled = function (_React$Component) {
     classCallCheck$1(this, AbbrUnstyled);
     return possibleConstructorReturn(this, (AbbrUnstyled.__proto__ || Object.getPrototypeOf(AbbrUnstyled)).apply(this, arguments));
   }
-  createClass$1(AbbrUnstyled, [{
+  createClass(AbbrUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           initialism = _omit.initialism,
           title = _omit.title,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'initialism', 'title', 'tag']);
       return React.createElement(Tag, _extends({
-        className: classnames$1(className, {
+        className: classnames(className, {
           initialism: initialism
         }),
         title: title
@@ -5097,7 +4062,7 @@ AbbrUnstyled.propTypes = {
 var Abbr = styled(AbbrUnstyled).withConfig({
   displayName: 'Abbr'
 })(['&[title]{text-decoration:underline;text-decoration:underline dotted;cursor:help;border-bottom:0;}&.initialism{font-size:90%;text-transform:uppercase;}']);
-Abbr.defaultProps = defaultProps$38;
+Abbr.defaultProps = defaultProps$2;
 
 var Address = styled.address.withConfig({
   displayName: 'Address'
@@ -5834,17 +4799,35 @@ module.exports = exports['default'];
 });
 var ReactCSSTransitionGroup = unwrapExports(CSSTransitionGroup_1);
 
-var defaultProps$40 = { theme: bsTheme };
+var alert = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.alertVariant = alertVariant;
+var _color2 = _interopRequireDefault(color);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function alertVariant(background, border, bodyColor) {
+  return '\n    background-color: ' + background + ';\n    border-color: ' + border + ';\n    color: ' + bodyColor + ';\n  \n    hr {\n      border-top-color: ' + (0, _color2.default)(border).darken(0.5).toString() + ';\n    }\n    .alert-link {\n      color: ' + (0, _color2.default)(bodyColor).darken(0.1).toString() + ';\n    }\n  ';
+}
+exports.default = {
+  alertVariant: alertVariant
+};
+});
+unwrapExports(alert);
+var alert_1 = alert.alertVariant;
+
+var defaultProps$4 = { theme: bsTheme };
 var CloseUnstyled = function (_React$Component) {
   inherits(CloseUnstyled, _React$Component);
   function CloseUnstyled() {
     classCallCheck$1(this, CloseUnstyled);
     return possibleConstructorReturn(this, (CloseUnstyled.__proto__ || Object.getPrototypeOf(CloseUnstyled)).apply(this, arguments));
   }
-  createClass$1(CloseUnstyled, [{
+  createClass(CloseUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           srOnly = _omit['sr-only'],
           onDismiss = _omit.onDismiss,
@@ -5854,7 +4837,7 @@ var CloseUnstyled = function (_React$Component) {
       return React.createElement(
         'button',
         _extends({
-          className: mapToCssModules(classnames$1(className, 'close', {
+          className: mapToCssModules(classnames(className, 'close', {
             'sr-only': srOnly
           }), cssModule),
           type: 'button',
@@ -5882,11 +4865,11 @@ CloseUnstyled.propTypes = {
 var Close = styled(CloseUnstyled).withConfig({
   displayName: 'Close'
 })(['', ''], function (props) {
-  return '\n    float: right;\n    font-size: ' + props.theme['$close-font-size'] + ';\n    font-weight: ' + props.theme['$close-font-weight'] + ';\n    line-height: 1;\n    color: ' + props.theme['$close-color'] + ';\n    text-shadow: ' + props.theme['$close-text-shadow'] + ';\n    opacity: .2;\n    \n    &:focus {outline:0;}\n    \n    ' + hoverFocus(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$close-color'] + ';\n        text-decoration: none;\n        cursor: pointer;\n        opacity: .5;\n      ') + '\n    \n    /* Additional properties for button version\n     iOS requires the button element instead of an anchor tag.\n     If you want the anchor version, it requires \'href="#"\'.\n     See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile\n     */\n    \n    /* scss-lint:disable QualifyingElement */\n    &button.close {\n      padding: 0;\n      cursor: pointer;\n      background: transparent;\n      border: 0;\n      -webkit-appearance: none;\n    }\n    /* scss-lint:enable QualifyingElement */\n  ';
+  return '\n    float: right;\n    font-size: ' + props.theme['$close-font-size'] + ';\n    font-weight: ' + props.theme['$close-font-weight'] + ';\n    line-height: 1;\n    color: ' + props.theme['$close-color'] + ';\n    text-shadow: ' + props.theme['$close-text-shadow'] + ';\n    opacity: .2;\n    \n    &:focus {outline:0;}\n    \n    ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$close-color'] + ';\n        text-decoration: none;\n        cursor: pointer;\n        opacity: .5;\n      ') + '\n    \n    /* Additional properties for button version\n     iOS requires the button element instead of an anchor tag.\n     If you want the anchor version, it requires \'href="#"\'.\n     See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile\n     */\n    \n    /* scss-lint:disable QualifyingElement */\n    &button.close {\n      padding: 0;\n      cursor: pointer;\n      background: transparent;\n      border: 0;\n      -webkit-appearance: none;\n    }\n    /* scss-lint:enable QualifyingElement */\n  ';
 });
-Close.defaultProps = defaultProps$40;
+Close.defaultProps = defaultProps$4;
 
-var defaultProps$39 = {
+var defaultProps$3 = {
   color: 'success',
   isOpen: true,
   tag: 'div',
@@ -5905,10 +4888,10 @@ var AlertUnstyled = function (_React$Component) {
     classCallCheck$1(this, AlertUnstyled);
     return possibleConstructorReturn(this, (AlertUnstyled.__proto__ || Object.getPrototypeOf(AlertUnstyled)).apply(this, arguments));
   }
-  createClass$1(AlertUnstyled, [{
+  createClass(AlertUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
@@ -5920,7 +4903,7 @@ var AlertUnstyled = function (_React$Component) {
           transitionEnterTimeout = _omit.transitionEnterTimeout,
           transitionLeaveTimeout = _omit.transitionLeaveTimeout,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'color', 'isOpen', 'toggle', 'children', 'transitionAppearTimeout', 'transitionEnterTimeout', 'transitionLeaveTimeout']);
-      var classes = mapToCssModules(classnames$1(className, 'alert', 'alert-' + color, { 'alert-dismissible': toggle }), cssModule);
+      var classes = mapToCssModules(classnames(className, 'alert', 'alert-' + color, { 'alert-dismissible': toggle }), cssModule);
       var alert$$1 = React.createElement(
         Tag,
         _extends({}, attributes, { className: classes, role: 'alert' }),
@@ -5968,10 +4951,10 @@ AlertUnstyled.propTypes = {
 var Alert = styled(AlertUnstyled).withConfig({
   displayName: 'Alert'
 })(['', ''], function (props) {
-  return '\n    /*\n    Base styles\n    */\n    \n    &.alert {\n      padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n      margin-bottom: ' + props.theme['$alert-margin-bottom'] + ';\n      border: ' + props.theme['$alert-border-width'] + ' solid transparent;\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$alert-border-radius']) + '\n    }\n    \n    /* Headings for larger alerts */\n    &.alert-heading {\n      /* Specified to prevent conflicts of changing $headings-color */\n      color: inherit;\n    }\n    \n    /* Provide class for links that match alerts */\n    & .alert-link { \n      font-weight: ' + props.theme['$alert-link-font-weight'] + ';\n    }\n    \n    /* Dismissible alerts Expand the right padding and account for the close buttons positioning. */\n    \n    &.alert-dismissible {    \n      /* Adjust close link position */\n      & .close {\n        position: relative;\n        top: -' + props.theme['$alert-padding-y'] + ';\n        right: -' + props.theme['$alert-padding-x'] + ';\n        padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n        color: inherit;\n      }\n    }\n    /* Alternate styles Generate contextual modifier classes for colorizing the alert. */\n\n    &.alert-success {\n      ' + alertVariant(props.theme['$alert-success-bg'], props.theme['$alert-success-border'], props.theme['$alert-success-text']) + '    \n    }\n    &.alert-info {\n      ' + alertVariant(props.theme['$alert-info-bg'], props.theme['$alert-info-border'], props.theme['$alert-info-text']) + '\n    } \n    &.alert-warning {\n      ' + alertVariant(props.theme['$alert-warning-bg'], props.theme['$alert-warning-border'], props.theme['$alert-warning-text']) + ' \n    }\n    &.alert-danger {\n      ' + alertVariant(props.theme['$alert-danger-bg'], props.theme['$alert-danger-border'], props.theme['$alert-danger-text']) + ' \n    }\n  ';
+  return '\n    /*\n    Base styles\n    */\n    \n    &.alert {\n      padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n      margin-bottom: ' + props.theme['$alert-margin-bottom'] + ';\n      border: ' + props.theme['$alert-border-width'] + ' solid transparent;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$alert-border-radius']) + '\n    }\n    \n    /* Headings for larger alerts */\n    &.alert-heading {\n      /* Specified to prevent conflicts of changing $headings-color */\n      color: inherit;\n    }\n    \n    /* Provide class for links that match alerts */\n    & .alert-link { \n      font-weight: ' + props.theme['$alert-link-font-weight'] + ';\n    }\n    \n    /* Dismissible alerts Expand the right padding and account for the close buttons positioning. */\n    \n    &.alert-dismissible {    \n      /* Adjust close link position */\n      & .close {\n        position: relative;\n        top: -' + props.theme['$alert-padding-y'] + ';\n        right: -' + props.theme['$alert-padding-x'] + ';\n        padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n        color: inherit;\n      }\n    }\n    /* Alternate styles Generate contextual modifier classes for colorizing the alert. */\n\n    &.alert-success {\n      ' + alert_1(props.theme['$alert-success-bg'], props.theme['$alert-success-border'], props.theme['$alert-success-text']) + '    \n    }\n    &.alert-info {\n      ' + alert_1(props.theme['$alert-info-bg'], props.theme['$alert-info-border'], props.theme['$alert-info-text']) + '\n    } \n    &.alert-warning {\n      ' + alert_1(props.theme['$alert-warning-bg'], props.theme['$alert-warning-border'], props.theme['$alert-warning-text']) + ' \n    }\n    &.alert-danger {\n      ' + alert_1(props.theme['$alert-danger-bg'], props.theme['$alert-danger-border'], props.theme['$alert-danger-text']) + ' \n    }\n  ';
 });
-Alert.defaultProps = defaultProps$39;
-var index$1$1 = withTheme(Alert);
+Alert.defaultProps = defaultProps$3;
+var index$1 = withTheme(Alert);
 
 var Area = styled.area.withConfig({
   displayName: 'Area'
@@ -5981,7 +4964,7 @@ var Article = styled.article.withConfig({
   displayName: 'Article'
 })(['']);
 
-var defaultProps$41 = {
+var defaultProps$5 = {
   tag: 'blockquote',
   theme: bsTheme
 };
@@ -5991,16 +4974,16 @@ var BlockquoteUnstyled = function (_React$Component) {
     classCallCheck$1(this, BlockquoteUnstyled);
     return possibleConstructorReturn(this, (BlockquoteUnstyled.__proto__ || Object.getPrototypeOf(BlockquoteUnstyled)).apply(this, arguments));
   }
-  createClass$1(BlockquoteUnstyled, [{
+  createClass(BlockquoteUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           reverse = _omit.reverse,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'reverse', 'tag']);
       return React.createElement(Tag, _extends({
-        className: classnames$1(className, 'blockquote', {
+        className: classnames(className, 'blockquote', {
           'blockquote-reverse': reverse
         })
       }, attributes));
@@ -6019,9 +5002,984 @@ var Blockquote = styled(BlockquoteUnstyled).withConfig({
 })(['  ', ' '], function (props) {
   return '\n    &.blockquote {\n      padding: ' + props.theme['$spacer-halved'] + ' ' + props.theme['$spacer'] + ';\n      margin-bottom: ' + props.theme['$spacer'] + ';\n      font-size: ' + props.theme['$blockquote-font-size'] + ';\n      border-left: ' + props.theme['$blockquote-border-width'] + ' solid ' + props.theme['$blockquote-border-color'] + ';\n      \n      .blockquote-footer {\n        display: block;\n        font-size: 80%; \n        color: ' + props.theme['$blockquote-small-color'] + ';\n        &::before {\n          content: \'\\2014 \\00A0\';\n        }\n      }\n    }\n\n    &.blockquote-reverse {\n      padding-right: ' + props.theme['$spacer'] + ';\n      padding-left: 0;\n      text-align: right;\n      border-right: ' + props.theme['$blockquote-border-width'] + ' solid ' + props.theme['$blockquote-border-color'] + ';\n      border-left: 0;\n      \n      .blockquote-footer {\n        display: block;\n        font-size: 80%; \n        color: ' + props.theme['$blockquote-small-color'] + ';\n        &::before {\n          content: "";\n        }\n        &::after {\n          content: \'\\00A0 \\2014\';\n        }\n      }\n    }\n    \n    /* Reboot from bootstrap v4 */\n    margin: 0 0 1rem;\n ';
 });
-Blockquote.defaultProps = defaultProps$41;
+Blockquote.defaultProps = defaultProps$5;
 
-var defaultProps$42 = {
+var align = createCommonjsModule(function (module, exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getAlignUtilities = getAlignUtilities;
+exports.alignBaseline = alignBaseline;
+exports.alignTop = alignTop;
+exports.alignMiddle = alignMiddle;
+exports.alignBottom = alignBottom;
+exports.alignTextBottom = alignTextBottom;
+exports.alignTextTop = alignTextTop;
+function getAlignUtilities() {
+  return "\n   " + alignBaseline() + "\n   " + alignTop() + "\n   " + alignMiddle() + "\n   " + alignBottom() + "\n   " + alignTextBottom() + "\n   " + alignTextTop() + "\n  ";
+}
+function alignBaseline() {
+  return "\n    .align-baseline { vertical-align: baseline !important; } /* Browser default */\n  ";
+}
+function alignTop() {
+  return "\n    .align-top { vertical-align: top !important; }\n  ";
+}
+function alignMiddle() {
+  return "\n    .align-middle { vertical-align: middle !important; }\n  ";
+}
+function alignBottom() {
+  return "\n    .align-bottom { vertical-align: bottom !important; }\n  ";
+}
+function alignTextBottom() {
+  return "\n    .align-text-bottom { vertical-align: text-bottom !important; }\n  ";
+}
+function alignTextTop() {
+  return "\n    .align-text-top { vertical-align: text-top !important; }\n  ";
+}
+exports.default = {
+  getAlignUtilities: getAlignUtilities,
+  alignBaseline: alignBaseline,
+  alignTop: alignTop,
+  alignMiddle: alignMiddle,
+  alignBottom: alignBottom,
+  alignTextBottom: alignTextBottom,
+  alignTextTop: alignTextTop
+};
+});
+var alignUtils = unwrapExports(align);
+
+var backgroundVariant = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.bgVariant = bgVariant;
+var _color2 = _interopRequireDefault(color);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var defaultProps = exports.defaultProps = {
+  '$enable-hover-media-query': false
+};
+function bgVariant() {
+  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
+  var selector = arguments[1];
+  var bgColor = arguments[2];
+  return '\n    ' + selector + ' {\n      background-color: ' + bgColor + ' !important;\n    }\n    a' + selector + ' {\n      ' + (0, hover_1.hoverFocus)(enableHoverMediaQuery, 'background-color: ' + (0, _color2.default)(bgColor).darken(0.2).rgb() + ' !important;') + '\n    }\n  ';
+}
+exports.default = {
+  bgVariant: bgVariant
+};
+});
+unwrapExports(backgroundVariant);
+
+var background = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.bgFaded = exports.bgInverse = exports.bgDanger = exports.bgWarning = exports.bgInfo = exports.bgSuccess = exports.bgPrimary = exports.defaultProps = undefined;
+exports.getBackgroundUtilities = getBackgroundUtilities;
+var defaultProps = exports.defaultProps = {
+  '$enable-hover-media-query': false,
+  '$brand-primary': '#0275d8',
+  '$brand-success': '#5cb85c',
+  '$brand-info': '#5bc0de',
+  '$brand-warning': '#f0ad4e',
+  '$brand-danger': '#d9543f',
+  '$brand-inverse': '#373a3c',
+  '$gray-lightest': '#f7f7f9'
+};
+function getBackgroundUtilities() {
+  var $enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
+  var $brandPrimary = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-primary'];
+  var $brandSuccess = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$brand-success'];
+  var $brandInfo = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$brand-info'];
+  var $brandWarning = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$brand-warning'];
+  var $brandDanger = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$brand-danger'];
+  var $brandInverse = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$brand-inverse'];
+  var $grayLightest = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$gray-lightest'];
+  return '\n    ' + (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-primary', $brandPrimary) + '\n    ' + (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-success', $brandSuccess) + '\n    ' + (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-info', $brandInfo) + '\n    ' + (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-warning', $brandWarning) + '\n    ' + (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-danger', $brandDanger) + '\n    ' + (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-inverse', $brandInverse) + '\n    ' + (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-faded', $grayLightest) + '\n  ';
+}
+var bgPrimary = exports.bgPrimary = function bgPrimary($enableHoverMediaQuery) {
+  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-primary'];
+  return (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-primary', bgColor);
+};
+var bgSuccess = exports.bgSuccess = function bgSuccess($enableHoverMediaQuery) {
+  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-success'];
+  return (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-success', bgColor);
+};
+var bgInfo = exports.bgInfo = function bgInfo($enableHoverMediaQuery) {
+  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-info'];
+  return (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-info', bgColor);
+};
+var bgWarning = exports.bgWarning = function bgWarning($enableHoverMediaQuery) {
+  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-warning'];
+  return (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-warning', bgColor);
+};
+var bgDanger = exports.bgDanger = function bgDanger($enableHoverMediaQuery) {
+  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-danger'];
+  return (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-danger', bgColor);
+};
+var bgInverse = exports.bgInverse = function bgInverse($enableHoverMediaQuery) {
+  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-inverse'];
+  return (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-inverse', bgColor);
+};
+var bgFaded = exports.bgFaded = function bgFaded($enableHoverMediaQuery) {
+  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$gray-lightest'];
+  return (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-faded', bgColor);
+};
+exports.default = {
+  defaultProps: defaultProps,
+  getBackgroundUtilities: getBackgroundUtilities,
+  bgFaded: bgFaded,
+  bgPrimary: bgPrimary,
+  bgSuccess: bgSuccess,
+  bgInfo: bgInfo,
+  bgWarning: bgWarning,
+  bgDanger: bgDanger,
+  bgInverse: bgInverse
+};
+});
+var backgroundUtils = unwrapExports(background);
+var background_9 = background.getBackgroundUtilities;
+
+var borders = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.getBordersUtilities = getBordersUtilities;
+exports.rounded = rounded;
+exports.roundedTop = roundedTop;
+exports.roundedRight = roundedRight;
+exports.roundedBottom = roundedBottom;
+exports.roundedLeft = roundedLeft;
+exports.roundedCircle = roundedCircle;
+exports.resetBorder = resetBorder;
+exports.resetBorderTop = resetBorderTop;
+exports.resetBorderRight = resetBorderRight;
+exports.resetBorderBottom = resetBorderBottom;
+exports.resetBorderLeft = resetBorderLeft;
+exports.resetRounded = resetRounded;
+exports.resetRoundedTop = resetRoundedTop;
+exports.resetRoundedBottom = resetRoundedBottom;
+exports.resetRoundedLeft = resetRoundedLeft;
+exports.resetRoundedRight = resetRoundedRight;
+var defaultProps = exports.defaultProps = {
+  '$border-radius': '.25rem',
+  '$enable-rounded': true
+};
+function getBordersUtilities() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+  return '\n    ' + rounded(enableRounded, radius) + '\n    ' + roundedTop(enableRounded, radius) + '\n    ' + roundedRight(enableRounded, radius) + '\n    ' + roundedBottom(enableRounded, radius) + '\n    ' + roundedLeft(enableRounded, radius) + '\n    ' + roundedCircle() + '\n    ' + resetRounded() + '\n    ' + resetRoundedTop() + '\n    ' + resetRoundedRight() + '\n    ' + resetRoundedLeft() + '\n    ' + resetRoundedBottom() + '\n    ' + resetBorder() + '\n    ' + resetBorderTop() + '\n    ' + resetBorderRight() + '\n    ' + resetBorderLeft() + '\n    ' + resetBorderBottom() + '\n  ';
+}
+function rounded() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+  return '\n    .rounded {\n      ' + (0, borderRadius_1.borderRadius)(enableRounded, radius) + '\n    }\n  ';
+}
+function roundedTop() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+  return '\n    .rounded-top {\n      ' + (0, borderRadius_1.borderTopRadius)(enableRounded, radius) + '\n    }\n  ';
+}
+function roundedRight() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+  return '\n    .rounded-right {\n      ' + (0, borderRadius_1.borderRightRadius)(enableRounded, radius) + '\n    }\n  ';
+}
+function roundedBottom() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+  return '\n    .rounded-bottom {\n      ' + (0, borderRadius_1.borderBottomRadius)(enableRounded, radius) + '\n    }\n  ';
+}
+function roundedLeft() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+  return '\n    .rounded-left {\n      ' + (0, borderRadius_1.borderLeftRadius)(enableRounded, radius) + '\n    }\n  ';
+}
+function roundedCircle() {
+  return '\n    .rounded-circle {\n      border-radius: 50%;\n    }\n  ';
+}
+function resetBorder() {
+  return '\n    .border-0 {\n      border: 0 !important;\n    }\n  ';
+}
+function resetBorderTop() {
+  return '\n    .border-top-0 {\n      border-top: 0 !important;\n    }\n  ';
+}
+function resetBorderRight() {
+  return '\n    .border-right-0 {\n      border-right: 0 !important;\n    }\n  ';
+}
+function resetBorderBottom() {
+  return '\n    .border-bottom-0 {\n      border-bottom: 0 !important;\n    }\n  ';
+}
+function resetBorderLeft() {
+  return '\n    .border-left-0 {\n      border-left: 0 !important;\n    }\n  ';
+}
+function resetRounded() {
+  return '\n    .rounded-0 {\n      border-radius: 0 !important;\n    }\n  ';
+}
+function resetRoundedTop() {
+  return '\n    .rounded-top-0 {\n      border-top-left-radius: 0 !important;\n      border-top-right-radius: 0 !important;\n    }\n  ';
+}
+function resetRoundedBottom() {
+  return '\n    .rounded-bottom-0 {\n      border-bottom-left-radius: 0 !important;\n      border-bottom-right-radius: 0 !important;\n    }\n  ';
+}
+function resetRoundedLeft() {
+  return '\n    .rounded-left-0 {\n      border-bottom-left-radius: 0 !important;\n      border-top-left-radius: 0 !important;\n    }\n  ';
+}
+function resetRoundedRight() {
+  return '\n    .rounded-right-0 {\n      border-bottom-right-radius: 0 !important;\n      border-top-right-radius: 0 !important;\n    }\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  getBordersUtilities: getBordersUtilities,
+  rounded: rounded,
+  roundedTop: roundedTop,
+  roundedRight: roundedRight,
+  roundedBottom: roundedBottom,
+  roundedLeft: roundedLeft,
+  roundedCircle: roundedCircle
+};
+});
+var bordersUtils = unwrapExports(borders);
+
+var clearfix_1$1 = createCommonjsModule(function (module, exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.clearfix = clearfix;
+function clearfix() {
+  return "\n    &::after {\n      content: \"\";\n      display: table;\n      clear: both;\n    }\n  ";
+}
+exports.default = {
+  clearfix: clearfix
+};
+});
+unwrapExports(clearfix_1$1);
+var clearfix_2$1 = clearfix_1$1.clearfix;
+
+var clearfix = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getClearfixUtilities = getClearfixUtilities;
+exports.getClearfix = getClearfix;
+function getClearfixUtilities() {
+  return '\n   ' + getClearfix() + '\n  ';
+}
+function getClearfix() {
+  return '\n    .clearfix {\n      ' + (0, clearfix_1$1.clearfix)() + '\n    }\n  ';
+}
+exports.default = {
+  getClearfixUtilities: getClearfixUtilities,
+  getClearfix: getClearfix
+};
+});
+var clearfixUtils = unwrapExports(clearfix);
+
+var cursor = createCommonjsModule(function (module, exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getCursorUtilities = getCursorUtilities;
+function getCursorUtilities() {
+  return "\n    .cursor-alias {\n      cursor: alias;\n    }\n    \n    .cursor-all-scroll {\n      cursor: all-scroll;\n    }\n    \n    .cursor-auto {\n      cursor: auto;\n    }\n    \n    .cursor-cell {\n      cursor: cell;\n    }\n    \n    .cursor-context-menu {\n      cursor: context-menu;\n    }\n    \n    .cursor-col-resize {\n      cursor: col-resize;\n    }\n    \n    .cursor-copy {\n      cursor: copy;\n    }\n    \n    .cursor-crosshair {\n      cursor: crosshair;\n    }\n    \n    .cursor-default {\n      cursor: default;\n    }\n    \n    .cursor-e-resize {\n      cursor: e-resize;\n    }\n    \n    .cursor-ew-resize {\n      cursor: ew-resize;\n    }\n    \n    .cursor-grab {\n      cursor: grab;\n    }\n    \n    .cursor-grabbing {\n      cursor: grabbing;\n    }\n    \n    .cursor-help {\n      cursor: help;\n    }\n    \n    .cursor-move {\n      cursor: move;\n    }\n    \n    .cursor-n-resize {\n      cursor: n-resize;\n    }\n    \n    .cursor-ne-resize {\n      cursor: ne-resize;\n    }\n    \n    .cursor-nesw-resize {\n      cursor: nesw-resize;\n    }\n    \n    .cursor-ns-resize {\n      cursor: ns-resize;\n    }\n    \n    .cursor-nw-resize {\n      cursor: nw-resize;\n    }\n    \n    .cursor-nwse-resize {\n      cursor: nwse-resize;\n    }\n    \n    .cursor-no-drop {\n      cursor: no-drop;\n    }\n    \n    .cursor-none {\n      cursor: none;\n    }\n    \n    .cursor-not-allowed {\n      cursor: not-allowed;\n    }\n    \n    .cursor-pointer {\n      cursor: pointer;\n    }\n    \n    .cursor-progress {\n      cursor: progress;\n    }\n    \n    .cursor-row-resize {\n      cursor: row-resize;\n    }\n    \n    .cursor-s-resize {\n      cursor: s-resize;\n    }\n    \n    .cursor-se-resize {\n      cursor: se-resize;\n    }\n    \n    .cursor-sw-resize {\n      cursor: sw-resize;\n    }\n    \n    .cursor-text {\n      cursor: text;\n    }\n    \n    .cursor-vertical-text {\n      cursor: vertical-text;\n    }\n    \n    .cursor-w-resize {\n      cursor: w-resize;\n    }\n    \n    .cursor-wait {\n      cursor: wait;\n    }\n    \n    .cursor-zoom-in {\n      cursor: zoom-in;\n    }\n    \n    .cursor-zoom-out {\n      cursor: zoom-out;\n    }\n    \n    .cursor-initial {\n      cursor: initial;\n    }\n  ";
+}
+exports.default = {
+  getCursorUtilities: getCursorUtilities
+};
+});
+var cursorUtils = unwrapExports(cursor);
+
+var breakpoints = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.breakpointNext = breakpointNext;
+exports.breakpointMin = breakpointMin;
+exports.breakpointMax = breakpointMax;
+exports.breakpointInfix = breakpointInfix;
+exports.mediaBreakpointUp = mediaBreakpointUp;
+exports.mediaBreakpointDown = mediaBreakpointDown;
+exports.mediaBreakpointBetween = mediaBreakpointBetween;
+exports.mediaBreakpointOnly = mediaBreakpointOnly;
+var defaultProps = exports.defaultProps = {
+  '$grid-breakpoints': {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  }
+};
+function breakpointNext(name) {
+  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var breakpointNames = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Object.keys(breakpoints);
+  var n = breakpointNames.indexOf(name);
+  if (n !== -1 && n + 1 < breakpointNames.length) {
+    return breakpointNames[n + 1];
+  }
+  return null;
+}
+function breakpointMin(name) {
+  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var min = breakpoints[name];
+  return min !== '0' ? min : null;
+}
+function breakpointMax(name) {
+  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var next = breakpointNext(name, breakpoints);
+  if (next) {
+    var min = _bootstrapStyledUtils.unitUtils.rmUnit(breakpointMin(next, breakpoints), _bootstrapStyledUtils.unitUtils.UNIT.PX);
+    return (min - 1).toString() + _bootstrapStyledUtils.unitUtils.UNIT.PX;
+  }
+  return null;
+}
+function breakpointInfix(name) {
+  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  return breakpointMin(name, breakpoints) == null ? '' : '-' + name;
+}
+function mediaBreakpointUp(name) {
+  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var content = arguments[2];
+  var min = breakpointMin(name, breakpoints);
+  if (min) {
+    return '\n      @media (min-width: ' + min + ') {\n        ' + content + '\n      }\n    ';
+  }
+  return '\n    ' + content + '\n  ';
+}
+function mediaBreakpointDown(name) {
+  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var content = arguments[2];
+  var max = breakpointMax(name, breakpoints);
+  if (max) {
+    return '\n      @media (max-width: ' + max + ') {\n        ' + content + '\n      }\n    ';
+  }
+  return '\n    ' + content + '\n  ';
+}
+function mediaBreakpointBetween(lower, upper) {
+  var breakpoints = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$grid-breakpoints'];
+  var content = arguments[3];
+  var min = breakpointMin(lower, breakpoints);
+  var max = breakpointMax(upper, breakpoints);
+  if (min && max) {
+    return '\n      @media (min-width: ' + min + ') and (max-width: ' + max + ') {\n        ' + content + '\n      }\n    ';
+  } else if (min) {
+    return '\n      @media (min-width: ' + min + ') {\n        ' + content + '\n      }\n    ';
+  } else if (max) {
+    return '\n      @media (max-width: ' + max + ') {\n        ' + content + '\n      }\n    ';
+  }
+  return '\n    ' + content + '\n  ';
+}
+function mediaBreakpointOnly(name) {
+  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var content = arguments[2];
+  return mediaBreakpointBetween(name, name, breakpoints, content);
+}
+exports.default = {
+  defaultProps: defaultProps,
+  up: mediaBreakpointUp,
+  down: mediaBreakpointDown,
+  between: mediaBreakpointBetween,
+  only: mediaBreakpointOnly
+};
+});
+unwrapExports(breakpoints);
+var breakpoints_6 = breakpoints.mediaBreakpointUp;
+
+var display = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.getDisplayUtilities = getDisplayUtilities;
+var defaultProps = exports.defaultProps = {
+  '$grid-breakpoints': {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  }
+};
+function getDisplayUtilities() {
+  var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-breakpoints'];
+  var utilityList = [];
+  Object.keys(gridBreakpoints).forEach(function (breakpoint) {
+    var infix = (0, breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
+    utilityList.push('\n      ' + (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .d' + infix + '-none { display: none !important; }\n        .d' + infix + '-inline { display: inline !important; }\n        .d' + infix + '-inline-block { display: inline-block !important; }\n        .d' + infix + '-block { display: block !important; }\n        .d' + infix + '-table { display: table !important; }\n        .d' + infix + '-table-cell { display: table-cell !important; }\n        .d' + infix + '-flex { display: flex !important; }\n        .d' + infix + '-inline-flex { display: inline-flex !important; }\n      ') + '\n    ');
+  });
+  utilityList.push('\n    .d-print-block {\n      display: none !important;\n    \n      @media print {\n        display: block !important;\n      }\n    }\n    \n    .d-print-inline {\n      display: none !important;\n    \n      @media print {\n        display: inline !important;\n      }\n    }\n    \n    .d-print-inline-block {\n      display: none !important;\n    \n      @media print {\n        display: inline-block !important;\n      }\n    }\n    \n    .d-print-none {\n      @media print {\n        display: none !important;\n      }\n    }\n  ');
+  return utilityList.join('\n');
+}
+exports.default = {
+  defaultProps: defaultProps,
+  getDisplayUtilities: getDisplayUtilities
+};
+});
+var displayUtils = unwrapExports(display);
+
+var flex = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.getFlexUtilities = getFlexUtilities;
+var defaultProps = exports.defaultProps = {
+  '$grid-breakpoints': {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  }
+};
+function getFlexUtilities() {
+  var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-breakpoints'];
+  var flexUtilityList = [];
+  Object.keys(gridBreakpoints).forEach(function (breakpoint) {
+    var infix = (0, breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
+    flexUtilityList.push('\n      /* Flex column reordering */\n      ' + (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .flex' + infix + '-first { order: -1; }\n        .flex' + infix + '-last { order: 1; }\n        .flex' + infix + '-unordered { order: 0; }\n      ') + '\n  \n      /* Flex direction */ \n      ' + (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .flex' + infix + '-row            { flex-direction: row !important; }\n        .flex' + infix + '-column         { flex-direction: column !important; }\n        .flex' + infix + '-row-reverse    { flex-direction: row-reverse !important; }\n        .flex' + infix + '-column-reverse { flex-direction: column-reverse !important; }\n      ') + '\n      \n      /* Flex wrap */ \n      ' + (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .flex' + infix + '-wrap         { flex-wrap: wrap !important; }\n        .flex' + infix + '-nowrap       { flex-wrap: nowrap !important; }\n        .flex' + infix + '-wrap-reverse { flex-wrap: wrap-reverse !important; }\n      ') + '\n      /* Flex justify-content */ \n      ' + (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .justify-content' + infix + '-start   { justify-content: flex-start !important; }\n        .justify-content' + infix + '-end     { justify-content: flex-end !important; }\n        .justify-content' + infix + '-center  { justify-content: center !important; }\n        .justify-content' + infix + '-between { justify-content: space-between !important; }\n        .justify-content' + infix + '-around  { justify-content: space-around !important; }\n      ') + '\n      /* Flex align-items */ \n      ' + (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .align-items' + infix + '-start    { align-items: flex-start !important; }\n        .align-items' + infix + '-end      { align-items: flex-end !important; }\n        .align-items' + infix + '-center   { align-items: center !important; }\n        .align-items' + infix + '-baseline { align-items: baseline !important; }\n        .align-items' + infix + '-stretch  { align-items: stretch !important; }\n      ') + '\n      /* Flex align-content */ \n      ' + (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .align-content' + infix + '-start   { align-content: flex-start !important; }\n        .align-content' + infix + '-end     { align-content: flex-end !important; }\n        .align-content' + infix + '-center  { align-content: center !important; }\n        .align-content' + infix + '-between { align-content: space-between !important; }\n        .align-content' + infix + '-around  { align-content: space-around !important; }\n        .align-content' + infix + '-stretch { align-content: stretch !important; }\n      ') + '\n      /* Flex align-self */ \n      ' + (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .align-self' + infix + '-auto     { align-self: auto !important; }\n        .align-self' + infix + '-start    { align-self: flex-start !important; }\n        .align-self' + infix + '-end      { align-self: flex-end !important; }\n        .align-self' + infix + '-center   { align-self: center !important; }\n        .align-self' + infix + '-baseline { align-self: baseline !important; }\n        .align-self' + infix + '-stretch  { align-self: stretch !important; }\n      ') + ' \n    ');
+  });
+  return flexUtilityList.join('\n');
+}
+exports.default = {
+  defaultProps: defaultProps,
+  getFlexUtilities: getFlexUtilities
+};
+});
+var flexUtils = unwrapExports(flex);
+
+var float_1$1 = createCommonjsModule(function (module, exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.floatLeft = floatLeft;
+exports.floatRight = floatRight;
+exports.floatNone = floatNone;
+function floatLeft() {
+  return "\n    float: left !important;\n  ";
+}
+function floatRight() {
+  return "\n    float: right !important;\n  ";
+}
+function floatNone() {
+  return "\n    float: none !important;\n  ";
+}
+exports.default = {
+  floatLeft: floatLeft,
+  floatRight: floatRight,
+  floatNone: floatNone
+};
+});
+unwrapExports(float_1$1);
+
+var float_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.getFloatUtilities = getFloatUtilities;
+var defaultProps = exports.defaultProps = {
+  '$grid-breakpoints': {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  }
+};
+function getFloatUtilities() {
+  var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-breakpoints'];
+  var floatUtilityList = [];
+  Object.keys(gridBreakpoints).forEach(function (breakpoint) {
+    var infix = (0, breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
+    var floatUtility = (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n      .float' + infix + '-left {\n        ' + (0, float_1$1.floatLeft)() + '\n      }\n      .float' + infix + '-right {\n        ' + (0, float_1$1.floatRight)() + '\n      }\n      .float' + infix + '-none {\n        ' + (0, float_1$1.floatNone)() + '\n      }\n    ');
+    floatUtilityList.push(floatUtility);
+  });
+  return floatUtilityList.join('\n');
+}
+exports.default = {
+  defaultProps: defaultProps,
+  getFloatUtilities: getFloatUtilities
+};
+});
+var floatUtils = unwrapExports(float_1);
+
+var position = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getPositionUtilities = getPositionUtilities;
+exports.fixedTop = fixedTop;
+exports.fixedBottom = fixedBottom;
+exports.stickTop = stickTop;
+var defaultProps = exports.defaultProps = {
+  '$zindex-fixed': '1030',
+  '$zindex-sticky': '1030'
+};
+function getPositionUtilities() {
+  var zindexFixed = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$zindex-fixed'];
+  var zindexSticky = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$zindex-sticky'];
+  return '\n    ' + fixedTop(zindexFixed) + '\n    ' + fixedBottom(zindexFixed) + '\n    ' + stickTop(zindexSticky) + '\n  ';
+}
+function fixedTop() {
+  var zindexFixed = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$zindex-fixed'];
+  return '\n  .fixed-top {\n    position: fixed !important;\n    top: 0;\n    right: 0;\n    left: 0;\n    z-index: ' + zindexFixed + ';\n  }\n  ';
+}
+function fixedBottom() {
+  var zindexFixed = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$zindex-fixed'];
+  return '\n    .fixed-bottom {\n      position: fixed !important;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + zindexFixed + ';\n    }\n  ';
+}
+function stickTop() {
+  var zindexSticky = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$zindex-sticky'];
+  return '\n    .sticky-top {\n      position: sticky !important;\n      top: 0;\n      z-index: ' + zindexSticky + ';\n    }\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  getPositionUtilities: getPositionUtilities,
+  fixedTop: fixedTop,
+  fixedBottom: fixedBottom,
+  stickTop: stickTop
+};
+});
+var positionUtils = unwrapExports(position);
+
+var reboot = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getGlobalStyles = getGlobalStyles;
+exports.getGlobalStyleNoBootstrapProvider = getGlobalStyleNoBootstrapProvider;
+exports.html = html;
+exports.boxSizing = boxSizing;
+exports.ie10FixViewport = ie10FixViewport;
+exports.body = body;
+exports.bodyUtils = bodyUtils;
+exports.tabIndex = tabIndex;
+exports.svg = svg;
+exports.ie10FixHidden = ie10FixHidden;
+exports.webkitFileUploadButton = webkitFileUploadButton;
+var defaultProps = exports.defaultProps = {
+  '$font-family-base': '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  '$font-size-base': '1rem',
+  '$font-weight-base': '1.5',
+  '$line-height-base': '1.5',
+  '$body-color': '#292b2c',
+  '$body-bg': '#fff'
+};
+function getGlobalStyles() {
+  return '\n    html {\n      ' + html() + '\n    }\n    *,\n    *::before,\n    *::after {\n      ' + boxSizing() + '\n    }\n    @-ms-viewport { \n      ' + ie10FixViewport() + ' \n    }\n  ';
+}
+function getGlobalStyleNoBootstrapProvider() {
+  var fontFamilyBase = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$font-family-base'];
+  var fontSizeBase = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$font-size-base'];
+  var fontWeightBase = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$font-weight-base'];
+  var lineHeightBase = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$line-height-base'];
+  var bodyColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$body-color'];
+  var bodyBg = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$body-bg'];
+  return '\n  ' + getGlobalStyles() + '\n  body {\n  ' + body(fontFamilyBase, fontSizeBase, fontWeightBase, lineHeightBase, bodyColor, bodyBg) + ' \n}';
+}
+function html() {
+  return '\n    box-sizing: border-box;\n    font-family: sans-serif;\n    line-height: 1.15;\n    -ms-text-size-adjust: 100%;\n    -webkit-text-size-adjust: 100%;\n    -ms-overflow-style: scrollbar;\n    -webkit-tap-highlight-color: rgba(0,0,0,0);\n  ';
+}
+function boxSizing() {
+  return '\n    box-sizing: inherit;\n  ';
+}
+function ie10FixViewport() {
+  return '\n    width: device-width;\n  ';
+}
+function body() {
+  var fontFamilyBase = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$font-family-base'];
+  var fontSizeBase = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$font-size-base'];
+  var fontWeightBase = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$font-weight-base'];
+  var lineHeightBase = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$line-height-base'];
+  var bodyColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$body-color'];
+  var bodyBg = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$body-bg'];
+  return '\n    margin: 0;\n    font-family: ' + fontFamilyBase + ';\n    font-size: ' + fontSizeBase + ';\n    font-weight: ' + fontWeightBase + ';\n    line-height: ' + lineHeightBase + ';\n    color: ' + bodyColor + ';\n    background-color: ' + bodyBg + ';\n    \n    ' + bodyUtils() + '\n    \n    [tabindex="-1"]:focus {\n      ' + tabIndex() + '\n    }\n    svg:not(:root) {\n      ' + svg() + '\n    }\n    [hidden] {\n      ' + ie10FixHidden() + '\n    }\n    ::-webkit-file-upload-button {\n      ' + webkitFileUploadButton() + '\n    }\n  ';
+}
+function bodyUtils() {
+  return '\n    &.overflow {\n      overflow-x: hidden;\n    }\n  ';
+}
+function tabIndex() {
+  return '\n    outline: none !important;\n  ';
+}
+function svg() {
+  return '\n    overflow: hidden;\n  ';
+}
+function ie10FixHidden() {
+  return '\n    display: none !important;\n  ';
+}
+function webkitFileUploadButton() {
+  return '\n    font: inherit;\n    -webkit-appearance: button;\n  ';
+}
+exports.default = {
+  html: html,
+  boxSizing: boxSizing,
+  ie10FixViewport: ie10FixViewport,
+  body: body,
+  bodyUtils: bodyUtils,
+  tabIndex: tabIndex,
+  svg: svg,
+  ie10FixHidden: ie10FixHidden,
+  getGlobalStyles: getGlobalStyles,
+  getGlobalStyleNoBootstrapProvider: getGlobalStyleNoBootstrapProvider,
+  webkitFileUploadButton: webkitFileUploadButton
+};
+});
+var rebootUtils = unwrapExports(reboot);
+
+var screenReader = createCommonjsModule(function (module, exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.srOnly = srOnly;
+exports.srOnlyFocusable = srOnlyFocusable;
+function srOnly() {
+  return "\n    position: absolute !important;\n    width: 1px;\n    height: 1px;\n    padding: 0;\n    margin: -1px;\n    overflow: hidden;\n    clip: rect(0,0,0,0);\n    border: 0;\n  ";
+}
+function srOnlyFocusable() {
+  return "\n    &:active,\n    &:focus {\n      position: static;\n      width: auto;\n      height: auto;\n      margin: 0;\n      overflow: visible;\n      clip: auto;\n    }\n  ";
+}
+exports.default = {
+  srOnly: srOnly,
+  srOnlyFocusable: srOnlyFocusable
+};
+});
+unwrapExports(screenReader);
+
+var screenreaders = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getScreenReadersUtilities = getScreenReadersUtilities;
+function getScreenReadersUtilities() {
+  return '\n    .sr-only {\n      ' + (0, screenReader.srOnly)() + '\n    }\n    \n    .sr-only-focusable {\n      ' + (0, screenReader.srOnlyFocusable)() + '\n    }\n  ';
+}
+exports.default = {
+  getScreenReadersUtilities: getScreenReadersUtilities
+};
+});
+var screenreadersUtils = unwrapExports(screenreaders);
+
+var sizing = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getSizingUtilities = getSizingUtilities;
+var defaultProps = exports.defaultProps = {
+  $sizes: {
+    25: '25%',
+    50: '50%',
+    75: '75%',
+    100: '100%'
+  }
+};
+function getSizingUtilities() {
+  var sizes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$sizes'];
+  var abbrev = {
+    width: 'w',
+    height: 'h'
+  };
+  var sizingList = [];
+  Object.keys(abbrev).forEach(function (cssProp) {
+    Object.keys(sizes).forEach(function (size) {
+      sizingList.push('\n        .' + abbrev[cssProp] + '-' + size + ' { ' + cssProp + ': ' + sizes[size] + ' !important; }\n      ');
+    });
+  });
+  return '\n    ' + sizingList.join('\n') + '\n    .mw-100 { max-width: 100% !important; }\n    .mh-100 { max-height: 100% !important; }\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  getSizingUtilities: getSizingUtilities
+};
+});
+var sizingUtils = unwrapExports(sizing);
+
+var spacing = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.getSpacingUtilities = getSpacingUtilities;
+var defaultProps = exports.defaultProps = {
+  '$grid-breakpoints': {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  },
+  '$zindex-navbar-fixed': '1030',
+  '$spacers': {
+    0: {
+      x: 0,
+      y: 0
+    },
+    1: {
+      x: '0.25rem',
+      y: '0.25rem'
+    },
+    2: {
+      x: '0.5rem',
+      y: '0.5rem'
+    },
+    3: {
+      x: '1rem',
+      y: '1rem'
+    },
+    4: {
+      x: '1.5rem',
+      y: '1.5rem'
+    },
+    5: {
+      x: '3rem',
+      y: '3rem'
+    }
+  }
+};
+function getSpacingUtilities()
+{
+  var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-breakpoints'];
+  var spacers = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$spacers'];
+  var abbrevs = {
+    margin: 'm',
+    padding: 'p'
+  };
+  var spacingUtilityList = [];
+  var infixList = [];
+  Object.keys(gridBreakpoints).forEach(function (breakpoint) {
+    var infix = (0, breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
+    infixList.push(infix);
+    Object.keys(abbrevs).forEach(function (prop) {
+      var abbrev = abbrevs[prop];
+      Object.keys(spacers).forEach(function (size) {
+        var lengths = spacers[size];
+        spacingUtilityList.push((0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n          .' + abbrev + infix + '-' + size + ' { ' + prop + ':        ' + lengths.y + ' ' + lengths.x + ' !important; } /* a = All sides */\n          .' + abbrev + 't' + infix + '-' + size + ' { ' + prop + '-top:    ' + lengths.y + ' !important; }\n          .' + abbrev + 'r' + infix + '-' + size + ' { ' + prop + '-right:  ' + lengths.x + ' !important; }\n          .' + abbrev + 'b' + infix + '-' + size + ' { ' + prop + '-bottom: ' + lengths.y + ' !important; }\n          .' + abbrev + 'l' + infix + '-' + size + ' { ' + prop + '-left:   ' + lengths.x + ' !important; }\n          .' + abbrev + 'x' + infix + '-' + size + ' {\n            ' + prop + '-right:  ' + lengths.x + ' !important;\n            ' + prop + '-left:   ' + lengths.x + ' !important;\n          }\n          .' + abbrev + 'y' + infix + '-' + size + ' {\n            ' + prop + '-top:    ' + lengths.y + ' !important;\n            ' + prop + '-bottom: ' + lengths.y + ' !important;\n          }\n        '));
+      });
+    });
+  });
+  var infixUtilityList = infixList.map(function (infix) {
+    return '\n    .m' + infix + '-auto  { margin:        auto !important; }\n    .mt' + infix + '-auto { margin-top:    auto !important; }\n    .mr' + infix + '-auto { margin-right:  auto !important; }\n    .mb' + infix + '-auto { margin-bottom: auto !important; }\n    .ml' + infix + '-auto { margin-left:   auto !important; }\n    .mx' + infix + '-auto {\n      margin-right: auto !important;\n      margin-left:  auto !important;\n    }\n    .my' + infix + '-auto {\n      margin-top:    auto !important;\n      margin-bottom: auto !important;\n    }\n  ';
+  });
+  return '\n    ' + infixUtilityList.join('\n') + '\n    ' + spacingUtilityList.join('\n') + '\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  getSpacingUtilities: getSpacingUtilities
+};
+});
+var spacingUtils = unwrapExports(spacing);
+
+var textTruncate_1 = createCommonjsModule(function (module, exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.textTruncate = textTruncate;
+function textTruncate() {
+  return "\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  ";
+}
+exports.default = {
+  textTruncate: textTruncate
+};
+});
+unwrapExports(textTruncate_1);
+
+var textHide_1 = createCommonjsModule(function (module, exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.textHide = textHide;
+function textHide() {
+  return "\n    font: 0/0 a;\n    color: transparent;\n    text-shadow: none;\n    background-color: transparent;\n    border: 0;\n  ";
+}
+exports.default = {
+  textHide: textHide
+};
+});
+unwrapExports(textHide_1);
+
+var textEmphasis = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.textEmphasisVariant = textEmphasisVariant;
+var _color2 = _interopRequireDefault(color);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var defaultProps = exports.defaultProps = {
+  '$enable-hover-media-query': false
+};
+function textEmphasisVariant() {
+  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
+  var parent = arguments[1];
+  var textColor = arguments[2];
+  return '\n  ' + parent + ' {\n    color: ' + textColor + ' !important;\n  }\n  a' + parent + ' {\n  ' + (0, hover_1.hoverFocus)(enableHoverMediaQuery, 'color: ' + (0, _color2.default)(textColor).darken(0.20).rgb() + ' !important;') + '\n  }\n';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  textEmphasisVariant: textEmphasisVariant
+};
+});
+unwrapExports(textEmphasis);
+
+var text = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.getTextUtilities = getTextUtilities;
+var defaultProps = exports.defaultProps = {
+  '$grid-breakpoints': {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  },
+  '$enable-hover-media-query': false,
+  '$font-weight-normal': 'normal',
+  '$font-weight-bold': 'bold',
+  '$text-muted': '#818a91',
+  '$brand-primary': '#0275d8',
+  '$brand-success': '#5cb85c',
+  '$brand-info': '#5bc0de',
+  '$brand-warning': '#f0ad4e',
+  '$brand-danger': '#d9534f',
+  '$gray-dark': '#373a3c'
+};
+function getTextUtilities() {
+  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
+  var gridBreakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var fontWeightNormal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$font-weight-normal'];
+  var fontWeightBold = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$font-weight-bold'];
+  var textMuted = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$text-muted'];
+  var brandPrimary = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$brand-primary'];
+  var brandSuccess = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$brand-success'];
+  var brandInfo = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$brand-info'];
+  var brandWarning = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps['$brand-warning'];
+  var brandDanger = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps['$brand-danger'];
+  var grayDark = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps['$gray-dark'];
+  var responseAlignmentList = [];
+  Object.keys(gridBreakpoints).forEach(function (bp) {
+    var infix = (0, breakpoints.breakpointInfix)(bp, gridBreakpoints);
+    var responsiveAlignement = (0, breakpoints.mediaBreakpointUp)(bp, gridBreakpoints, '\n      .text' + infix + '-left { text-align: left !important; }\n      .text' + infix + '-right  { text-align: right !important; }\n      .text' + infix + '-center { text-align: center !important; }\n    ');
+    responseAlignmentList.push(responsiveAlignement);
+  });
+  return '\n    /* Text */\n\n    /* Alignment */\n\n    .text-justify        { text-align: justify !important; }\n    .text-nowrap         { white-space: nowrap !important; }\n    .text-truncate       { ' + (0, textTruncate_1.textTruncate)() + ' }\n\n    /* Responsive alignment */\n\n    ' + responseAlignmentList.join('\n') + '\n\n    /* Transformation */\n\n    .text-lowercase      { text-transform: lowercase !important; }\n    .text-uppercase      { text-transform: uppercase !important; }\n    .text-capitalize     { text-transform: capitalize !important; }\n\n    /* Weight and italics */\n\n    .font-weight-normal  { font-weight: ' + fontWeightNormal + '; }\n    .font-weight-bold    { font-weight: ' + fontWeightBold + '; }\n    .font-italic         { font-style: italic; }\n\n    /* Contextual colors */\n\n    .text-white {\n      color: #fff !important;\n    }\n\n    ' + (0, textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-muted', textMuted) + '\n\n    ' + (0, textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-primary', brandPrimary) + '\n\n    ' + (0, textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-success', brandSuccess) + '\n\n    ' + (0, textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-info', brandInfo) + '\n\n    ' + (0, textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-warning', brandWarning) + '\n\n    ' + (0, textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-danger', brandDanger) + '\n\n    /* Font color */\n\n    ' + (0, textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-gray-dark', grayDark) + '\n\n    /* Misc */\n\n    .text-hide {\n      ' + (0, textHide_1.textHide)() + '\n    }\n\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  getTextUtilities: getTextUtilities
+};
+});
+var textUtils = unwrapExports(text);
+
+var transition$1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.getTransitionUtilities = getTransitionUtilities;
+exports.fade = fade;
+exports.collapse = collapse;
+exports.getReactTransition = getReactTransition;
+var defaultProps = exports.defaultProps = {
+  '$enable-transitions': true,
+  '$transition-fade': 'opacity .15s linear',
+  '$transition-collapse': 'height .35s ease'
+};
+function getTransitionUtilities() {
+  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
+  var transitionFade = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$transition-fade'];
+  var transitionCollapse = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$transition-collapse'];
+  return '\n    ' + fade(enableTransitions, transitionFade) + '\n    ' + collapse(enableTransitions, transitionCollapse) + '\n  ';
+}
+function fade() {
+  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
+  var transitionFade = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$transition-fade'];
+  return '\n    .fade,\n     &.fade {\n      opacity: 0;\n      ' + (0, transition_1.transition)(enableTransitions, transitionFade) + '\n    \n      &.show {\n        opacity: 1;\n      }\n    }\n  ';
+}
+function collapse() {
+  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
+  var transitionCollapse = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$transition-collapse'];
+  return '\n    .collapse {\n      display: none;\n      &.show {\n        display: block;\n      }\n    }\n    \n    tr {\n      &.collapse.show {\n        display: table-row;\n      }\n    }\n    \n    tbody {\n      &.collapse.show {\n        display: table-row-group;\n      }\n    }\n    \n    .collapsing {\n      position: relative;\n      height: 0;\n      overflow: hidden;\n      ' + (0, transition_1.transition)(enableTransitions, transitionCollapse) + '\n    }\n  ';
+}
+function getReactTransition(enableTransition, transition) {
+  var transitionList = (0, _bootstrapStyledUtils.parseTransition)(transition);
+  var _transitionList$ = transitionList[0],
+      property = _transitionList$.property,
+      duration = _transitionList$.duration,
+      timingFunction = _transitionList$.timingFunction,
+      delay = _transitionList$.delay;
+  return (0, transition_1.transition)(enableTransition, property + ' ' + duration + 'ms ' + timingFunction + ' ' + delay + 'ms');
+}
+exports.default = {
+  defaultProps: defaultProps,
+  getTransitionUtilities: getTransitionUtilities,
+  getReactTransition: getReactTransition,
+  fade: fade,
+  collapse: collapse
+};
+});
+var transitionUtils = unwrapExports(transition$1);
+var transition_3$1 = transition$1.fade;
+
+var visibility$1 = createCommonjsModule(function (module, exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.invisible = invisible;
+function invisible(visibility) {
+  return "\n    visibility: " + visibility + " !important;\n  ";
+}
+exports.default = {
+  invisible: invisible
+};
+});
+unwrapExports(visibility$1);
+
+var visibility = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getVisibilityUtilities = getVisibilityUtilities;
+function getVisibilityUtilities() {
+  return '\n    .visible {\n      ' + (0, visibility$1.invisible)('visible') + '\n    }\n    \n    .invisible {\n      ' + (0, visibility$1.invisible)('hidden') + '\n    }\n   \n  ';
+}
+exports.default = {
+  getVisibilityUtilities: getVisibilityUtilities
+};
+});
+var visibilityUtils = unwrapExports(visibility);
+
+var defaultProps$6 = {
   theme: bsTheme,
   utils: {
     align: true,
@@ -6044,11 +6002,11 @@ var defaultProps$42 = {
 var UtilityProvider = styled.div.withConfig({
   displayName: 'UtilityProvider'
 })(['', ''], function (props) {
-  return '\n    ' + rebootUtils.body(props.theme['$font-family-base'], props.theme['$font-size-base'], props.theme['$font-weight-base'], props.theme['$line-height-base'], props.theme['$body-color'], props.theme['$body-bg']) + '\n    ' + ifThen(props.utils.align, alignUtils.getAlignUtilities()) + '\n    ' + ifThen(props.utils.background, backgroundUtils.getBackgroundUtilities(props.theme['$enable-hover-media-query'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$brand-inverse'], props.theme['$gray-lightest'])) + '\n    ' + ifThen(props.utils.border, bordersUtils.getBordersUtilities(props.theme['$enable-rounded'], props.theme['$border-radius'])) + '\n    ' + ifThen(props.utils.clearfix, clearfixUtils.getClearfixUtilities()) + '\n    ' + ifThen(props.utils.cursor, cursorUtils.getCursorUtilities()) + '\n    ' + ifThen(props.utils.display, displayUtils.getDisplayUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + ifThen(props.utils.flex, flexUtils.getFlexUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + ifThen(props.utils.float, floatUtils.getFloatUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + ifThen(props.utils.screenreaders, screenreadersUtils.getScreenReadersUtilities()) + '\n    ' + ifThen(props.utils.spacing, spacingUtils.getSpacingUtilities(props.theme['$grid-breakpoints'], props.theme['$zindex-navbar-fixed'], props.theme['$spacers']
-  )) + '\n    ' + ifThen(props.utils.text, textUtils.getTextUtilities(props.theme['$enable-hover-media-query'], props.theme['$grid-breakpoints'], props.theme['$font-weight-normal'], props.theme['$font-weight-bold'], props.theme['$text-muted'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$gray-dark'])) + '\n    ' + ifThen(props.utils.transition, transitionUtils.getTransitionUtilities(props.theme['$enable-transitions'], props.theme['$transition-fade'], props.theme['$transition-collapse'])) + '\n    ' + ifThen(props.utils.visibility, visibilityUtils.getVisibilityUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + ifThen(props.utils.position, positionUtils.getPositionUtilities(props.theme['$zindex-fixed'], props.theme['$zindex-sticky'])) + '\n    ' + ifThen(props.utils.sizing, sizingUtils.getSizingUtilities(props.theme['$sizes']
+  return '\n    ' + rebootUtils.body(props.theme['$font-family-base'], props.theme['$font-size-base'], props.theme['$font-weight-base'], props.theme['$line-height-base'], props.theme['$body-color'], props.theme['$body-bg']) + '\n    ' + conditional_1(props.utils.align, alignUtils.getAlignUtilities()) + '\n    ' + conditional_1(props.utils.background, backgroundUtils.getBackgroundUtilities(props.theme['$enable-hover-media-query'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$brand-inverse'], props.theme['$gray-lightest'])) + '\n    ' + conditional_1(props.utils.border, bordersUtils.getBordersUtilities(props.theme['$enable-rounded'], props.theme['$border-radius'])) + '\n    ' + conditional_1(props.utils.clearfix, clearfixUtils.getClearfixUtilities()) + '\n    ' + conditional_1(props.utils.cursor, cursorUtils.getCursorUtilities()) + '\n    ' + conditional_1(props.utils.display, displayUtils.getDisplayUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + conditional_1(props.utils.flex, flexUtils.getFlexUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + conditional_1(props.utils.float, floatUtils.getFloatUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + conditional_1(props.utils.screenreaders, screenreadersUtils.getScreenReadersUtilities()) + '\n    ' + conditional_1(props.utils.spacing, spacingUtils.getSpacingUtilities(props.theme['$grid-breakpoints'], props.theme['$zindex-navbar-fixed'], props.theme['$spacers']
+  )) + '\n    ' + conditional_1(props.utils.text, textUtils.getTextUtilities(props.theme['$enable-hover-media-query'], props.theme['$grid-breakpoints'], props.theme['$font-weight-normal'], props.theme['$font-weight-bold'], props.theme['$text-muted'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$gray-dark'])) + '\n    ' + conditional_1(props.utils.transition, transitionUtils.getTransitionUtilities(props.theme['$enable-transitions'], props.theme['$transition-fade'], props.theme['$transition-collapse'])) + '\n    ' + conditional_1(props.utils.visibility, visibilityUtils.getVisibilityUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + conditional_1(props.utils.position, positionUtils.getPositionUtilities(props.theme['$zindex-fixed'], props.theme['$zindex-sticky'])) + '\n    ' + conditional_1(props.utils.sizing, sizingUtils.getSizingUtilities(props.theme['$sizes']
   )) + '\n  ';
 });
-UtilityProvider.defaultProps = defaultProps$42;
+UtilityProvider.defaultProps = defaultProps$6;
 
 var BootstrapProvider = function (_React$Component) {
   inherits(BootstrapProvider, _React$Component);
@@ -6063,7 +6021,7 @@ var BootstrapProvider = function (_React$Component) {
       isWindowPhone8Fixed: null
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(BootstrapProvider, [{
+  createClass(BootstrapProvider, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.windowPhone8Fix();
@@ -6125,7 +6083,7 @@ BootstrapProvider.propTypes = {
   })
 };
 
-var defaultProps$43 = {
+var defaultProps$7 = {
   theme: bsTheme,
   tag: 'ol'
 };
@@ -6135,16 +6093,16 @@ var BreadcrumbUnstyled = function (_React$Component) {
     classCallCheck$1(this, BreadcrumbUnstyled);
     return possibleConstructorReturn(this, (BreadcrumbUnstyled.__proto__ || Object.getPrototypeOf(BreadcrumbUnstyled)).apply(this, arguments));
   }
-  createClass$1(BreadcrumbUnstyled, [{
+  createClass(BreadcrumbUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'breadcrumb'), cssModule)
+        className: mapToCssModules(classnames(className, 'breadcrumb'), cssModule)
       }, attributes));
     }
   }]);
@@ -6159,11 +6117,11 @@ BreadcrumbUnstyled.propTypes = {
 var Breadcrumb = styled(BreadcrumbUnstyled).withConfig({
   displayName: 'Breadcrumb'
 })(['', ''], function (props) {
-  return '\n    &.breadcrumb {\n      padding: ' + props.theme['$breadcrumb-padding-y'] + ' ' + props.theme['$breadcrumb-padding-x'] + ';\n      margin-bottom: ' + props.theme['$spacer-y'] + ';\n      list-style: none;\n      background-color: ' + props.theme['$breadcrumb-bg'] + ';\n \n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n            \n      ' + clearfix() + '\n    }\n\n    & .breadcrumb-item {\n      float: left;\n    \n      /* The separator between breadcrumbs (by default, a forward-slash: "/") */\n      + .breadcrumb-item::before {\n        display: inline-block; /* Suppress underlining of the separator in modern browsers */\n        padding-right: ' + props.theme['$breadcrumb-item-padding'] + ';\n        padding-left: ' + props.theme['$breadcrumb-item-padding'] + ';\n        color: ' + props.theme['$breadcrumb-divider-color'] + ';\n        content: ' + props.theme['$breadcrumb-divider'] + ';\n      }\n  \n      /* IE9-11 hack to properly handle hyperlink underlines for breadcrumbs built\n       without \'ul\'s. The \'::before\' pseudo-element generates an element\n       *within* the .breadcrumb-item and thereby inherits the \'text-decoration\'.\n      \n       To trick IE into suppressing the underline, we give the pseudo-element an\n       underline and then immediately remove it.\n      */\n      \n      + .breadcrumb-item:hover::before {\n        text-decoration: underline;\n      }\n      + .breadcrumb-item:hover::before {\n        text-decoration: none;\n      }\n    \n      &.active {\n        color: ' + props.theme['$breadcrumb-active-color'] + ';\n      }\n    }\n  ';
+  return '\n    &.breadcrumb {\n      padding: ' + props.theme['$breadcrumb-padding-y'] + ' ' + props.theme['$breadcrumb-padding-x'] + ';\n      margin-bottom: ' + props.theme['$spacer-y'] + ';\n      list-style: none;\n      background-color: ' + props.theme['$breadcrumb-bg'] + ';\n \n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n            \n      ' + clearfix_2$1() + '\n    }\n\n    & .breadcrumb-item {\n      float: left;\n    \n      /* The separator between breadcrumbs (by default, a forward-slash: "/") */\n      + .breadcrumb-item::before {\n        display: inline-block; /* Suppress underlining of the separator in modern browsers */\n        padding-right: ' + props.theme['$breadcrumb-item-padding'] + ';\n        padding-left: ' + props.theme['$breadcrumb-item-padding'] + ';\n        color: ' + props.theme['$breadcrumb-divider-color'] + ';\n        content: ' + props.theme['$breadcrumb-divider'] + ';\n      }\n  \n      /* IE9-11 hack to properly handle hyperlink underlines for breadcrumbs built\n       without \'ul\'s. The \'::before\' pseudo-element generates an element\n       *within* the .breadcrumb-item and thereby inherits the \'text-decoration\'.\n      \n       To trick IE into suppressing the underline, we give the pseudo-element an\n       underline and then immediately remove it.\n      */\n      \n      + .breadcrumb-item:hover::before {\n        text-decoration: underline;\n      }\n      + .breadcrumb-item:hover::before {\n        text-decoration: none;\n      }\n    \n      &.active {\n        color: ' + props.theme['$breadcrumb-active-color'] + ';\n      }\n    }\n  ';
 });
-Breadcrumb.defaultProps = defaultProps$43;
+Breadcrumb.defaultProps = defaultProps$7;
 
-var defaultProps$44 = {
+var defaultProps$8 = {
   tag: 'li'
 };
 var BreadcrumbItem = function (_React$Component) {
@@ -6172,7 +6130,7 @@ var BreadcrumbItem = function (_React$Component) {
     classCallCheck$1(this, BreadcrumbItem);
     return possibleConstructorReturn(this, (BreadcrumbItem.__proto__ || Object.getPrototypeOf(BreadcrumbItem)).apply(this, arguments));
   }
-  createClass$1(BreadcrumbItem, [{
+  createClass(BreadcrumbItem, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -6182,7 +6140,7 @@ var BreadcrumbItem = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'active', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'breadcrumb-item', {
+        className: mapToCssModules(classnames(className, 'breadcrumb-item', {
           active: active
         }), cssModule)
       }, attributes));
@@ -6196,9 +6154,9 @@ BreadcrumbItem.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-BreadcrumbItem.defaultProps = defaultProps$44;
+BreadcrumbItem.defaultProps = defaultProps$8;
 
-var defaultProps$45 = {
+var defaultProps$9 = {
   theme: bsTheme,
   tag: 'button',
   color: 'secondary'
@@ -6222,11 +6180,11 @@ var ButtonUnstyled = function (_React$Component) {
       }
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(ButtonUnstyled, [{
+  createClass(ButtonUnstyled, [{
     key: 'render',
     value: function render() {
       var _cn;
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           active = _omit.active,
           disabled = _omit.disabled,
           block = _omit.block,
@@ -6239,7 +6197,7 @@ var ButtonUnstyled = function (_React$Component) {
           getRef = _omit.getRef,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['active', 'disabled', 'block', 'className', 'cssModule', 'dropup', 'color', 'outline', 'size', 'getRef', 'tag']);
-      var classes = mapToCssModules(classnames$1(className, 'btn', (_cn = {
+      var classes = mapToCssModules(classnames(className, 'btn', (_cn = {
         dropup: dropup,
         active: active,
         disabled: disabled
@@ -6276,9 +6234,80 @@ ButtonUnstyled.propTypes = {
 var Button = styled(ButtonUnstyled).withConfig({
   displayName: 'Button'
 })(['', ' '], function (props) {
-  return '\n    ' + button(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
+  return '\n    ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
-Button.defaultProps = defaultProps$45;
+Button.defaultProps = defaultProps$9;
+
+var navDivider_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.navDivider = navDivider;
+var defaultProps = exports.defaultProps = {
+  '$spacer-y': '1rem'
+};
+function navDivider() {
+  var spacerY = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$spacer-y'];
+  var dividerColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#e5e5e5';
+  var marginY = '' + _bootstrapStyledUtils.unitUtils.rmUnit(spacerY, _bootstrapStyledUtils.unitUtils.UNIT.REM) / 2 + _bootstrapStyledUtils.unitUtils.UNIT.REM;
+  return '\n    height: 1px;\n    margin: calc(' + marginY + ' / 2) 0;\n    overflow: hidden;\n    background-color: ' + dividerColor + ';\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  navDivider: navDivider
+};
+});
+unwrapExports(navDivider_1);
+var navDivider_3 = navDivider_1.navDivider;
+
+var buttonGroup_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.buttonGroup = buttonGroup;
+var defaultProps = exports.defaultProps = {
+  '$enable-shadows': true,
+  '$enable-rounded': true,
+  '$input-btn-border-width': '1px',
+  '$btn-padding-x': '1rem',
+  '$btn-active-box-shadow': 'inset 0 3px 5px rgba(0,0,0,.125)',
+  '$btn-padding-x-lg': '1.5rem',
+  '$btn-padding-y-lg': '.75rem',
+  '$font-size-lg': '1.25rem',
+  '$btn-border-radius-lg': '.3rem',
+  '$btn-padding-y-sm': '.25rem',
+  '$btn-padding-x-sm': '.5rem',
+  '$font-size-sm': '.875rem',
+  '$btn-border-radius-sm': '.2rem',
+  '$btn-border-width': '1px'
+};
+function buttonGroup() {
+  var $enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-shadows'];
+  var $enableRounded = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$enable-rounded'];
+  var $inputBtnBorderWidth = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$input-btn-border-width'];
+  var $btnPaddingX = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$btn-padding-x'];
+  var $btnActiveBoxShadow = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$btn-active-box-shadow'];
+  var $btnPaddingXLg = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$btn-padding-x-lg'];
+  var $btnPaddingYLg = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$btn-padding-y-lg'];
+  var $fontSizeLg = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$font-size-lg'];
+  var $btnBorderRadiusLg = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps['$btn-border-radius-lg'];
+  var $btnPaddingXSm = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps['$btn-padding-x-sm'];
+  var $btnPaddingYSm = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps['$btn-padding-y-sm'];
+  var $fontSizeSm = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps['$font-size-sm'];
+  var $btnBorderRadiusSm = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps['$btn-border-radius-sm'];
+  return ' \n    /*  Make the div behave like a button */\n    &.btn-group,\n    & .btn-group,\n    &.btn-group-vertical,\n    & .btn-group-vertical {\n      position: relative;\n      display: inline-flex;\n      vertical-align: middle; /* match .btn alignment given font-size hack above */\n    \n      > .btn {\n        position: relative;\n        flex: 0 1 auto;\n        margin-bottom: 0;\n    \n        /* Bring the "active" button to the front */\n        &:focus,\n        &:active,\n        &.active {\n          z-index: 2;\n        }\n        ' + (0, hover_1.hover)('\n          z-index: 2;\n        ') + '\n      }\n    }\n    \n    /*  Prevent double borders when buttons are next to each other */\n    &.btn-group,\n    & .btn-group {\n      .btn + .btn,\n      .btn + .btn-group,\n      .btn-group + .btn,\n      .btn-group + .btn-group {\n        margin-left: -' + $inputBtnBorderWidth + ';\n      }\n    }\n    \n    /* Optional: Group multiple button groups together for a toolbar */\n    &.btn-toolbar,\n    & .btn-toolbar {\n      display: flex;\n      flex-wrap: wrap;\n      justify-content: flex-start;\n    \n      .input-group {\n        width: auto;\n      }\n    }\n     \n    &.btn-group,\n    & .btn-group {\n      > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {\n        border-radius: 0;\n      }\n    }\n    \n    /* Set corners individual because sometimes a single button can be in a .btn-group and we need :first-child and :last-child to both match */\n    &.btn-group,\n    & .btn-group {\n      > .btn:first-child {\n        margin-left: 0;\n    \n        &:not(:last-child):not(.dropdown-toggle) {\n          ' + (0, borderRadius_1.borderRightRadius)($enableRounded, '0') + '\n        }\n      }\n    }\n    /* Need .dropdown-toggle since :last-child does not apply given a .dropdown-menu immediately after it */\n    &.btn-group > .btn:last-child:not(:first-child),\n    & .btn-group > .btn:last-child:not(:first-child),\n    &.btn-group > .dropdown-toggle:not(:first-child),\n    & .btn-group > .dropdown-toggle:not(:first-child) {\n      ' + (0, borderRadius_1.borderLeftRadius)($enableRounded, '0') + '\n    }\n    \n    /* Custom edits for including btn-groups within btn-groups (useful for including dropdown buttons within a btn-group) */\n    &.btn-group > .btn-group,\n    & .btn-group > .btn-group {\n      float: left;\n    }\n    &.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn,\n    & .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {\n      border-radius: 0;\n    }\n    &.btn-group > .btn-group:first-child:not(:last-child),\n    & .btn-group > .btn-group:first-child:not(:last-child) {\n      > .btn:last-child,\n      > .dropdown-toggle {\n        ' + (0, borderRadius_1.borderRightRadius)($enableRounded, '0') + '\n      }\n    }\n    &.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child,\n    & .btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {\n      ' + (0, borderRadius_1.borderLeftRadius)($enableRounded, '0') + '\n    }\n    \n    /* On active and open, do not show outline */\n    &.btn-group .dropdown-toggle:active,\n    & .btn-group .dropdown-toggle:active,\n    &.btn-group.open .dropdown-toggle,\n    & .btn-group.open .dropdown-toggle {\n      outline: 0;\n    }\n    \n    \n    /* \n    Sizing Remix the default button sizing classes into new ones for easier manipulation.\n    */\n    \n    &.btn-group-sm > .btn,\n    & .btn-group-sm > .btn { \n      ' + (0, buttons.buttonSize)($enableRounded, $btnPaddingYSm, $btnPaddingXSm, $fontSizeSm, $btnBorderRadiusSm) + '\n    }\n    &.btn-group-lg > .btn,\n    & .btn-group-lg > .btn {\n      ' + (0, buttons.buttonSize)($enableRounded, $btnPaddingYLg, $btnPaddingXLg, $fontSizeLg, $btnBorderRadiusLg) + '\n    }\n    \n    /*\n     Split button dropdowns\n    */\n    \n    & .btn + .dropdown-toggle-split {\n      padding-right: ' + _bootstrapStyledUtils.unitUtils.math.multiply($btnPaddingX, 0.75) + ';\n      padding-left: ' + _bootstrapStyledUtils.unitUtils.math.multiply($btnPaddingX, 0.75) + ';\n    \n      &::after {\n        margin-left: 0;\n      }\n    }\n    \n    & .btn-sm + .dropdown-toggle-split {\n      padding-right: ' + _bootstrapStyledUtils.unitUtils.math.multiply($btnPaddingXSm, 0.75) + ';\n      padding-left: ' + _bootstrapStyledUtils.unitUtils.math.multiply($btnPaddingXSm, 0.75) + ';\n    }\n    \n    & .btn-lg + .dropdown-toggle-split {\n      padding-right: ' + _bootstrapStyledUtils.unitUtils.math.multiply($btnPaddingXLg, 0.75) + ';\n      padding-left: ' + _bootstrapStyledUtils.unitUtils.math.multiply($btnPaddingXLg, 0.75) + ';\n    }\n    \n    \n    /* The clickable button for toggling the menu */\n    /* Remove the gradient and set the same inset shadow as the :active state */\n    &.btn-group.open .dropdown-toggle {\n      ' + (0, boxShadow_1.boxShadow)($enableShadows, $btnActiveBoxShadow) + '\n    \n      /* Show no shadow for .btn-link since it has no other button styles. */\n      &.btn-link {\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, 'none') + '\n      }\n    }\n\n    /*\n     Vertical button groups\n    */\n    \n    &.btn-group-vertical,\n    & .btn-group-vertical {\n      display: inline-flex;\n      flex-direction: column;\n      align-items: flex-start;\n      justify-content: center;\n    \n      .btn,\n      .btn-group {\n        width: 100%;\n      }\n      \n      > .btn + .btn,\n      > .btn + .btn-group,\n      > .btn-group + .btn,\n      > .btn-group + .btn-group {\n        margin-top: -' + $inputBtnBorderWidth + ';\n        margin-left: 0;\n      }\n    }\n    \n    &.btn-group-vertical > .btn,\n    & .btn-group-vertical > .btn {\n      &:not(:first-child):not(:last-child) {\n        border-radius: 0;\n      }\n      &:first-child:not(:last-child) {\n        ' + (0, borderRadius_1.borderBottomRadius)($enableRounded, '0') + '\n      }\n      &:last-child:not(:first-child) {\n        ' + (0, borderRadius_1.borderTopRadius)($enableRounded, '0') + '\n      }\n    }\n    \n    &.btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn,\n    & .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {\n      border-radius: 0;\n    }\n    \n    &.btn-group-vertical > .btn-group:first-child:not(:last-child),\n    & .btn-group-vertical > .btn-group:first-child:not(:last-child) {\n      > .btn:last-child,\n      > .dropdown-toggle {\n        ' + (0, borderRadius_1.borderBottomRadius)($enableRounded, '0') + '      \n      }\n    }\n    &.btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child,\n    & .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child {\n      ' + (0, borderRadius_1.borderTopRadius)($enableRounded, '0') + '\n    }\n    \n    &.btn-group {\n      > .btn,\n      > .btn-group > .btn {\n        input[type="radio"],\n        input[type="checkbox"] {\n          position: absolute;\n          clip: rect(0,0,0,0);\n          pointer-events: none;\n        }\n      }\n    }\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  buttonGroup: buttonGroup
+};
+});
+unwrapExports(buttonGroup_1);
+var buttonGroup_3 = buttonGroup_1.buttonGroup;
 
 var propTypes$1 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -6287,7 +6316,7 @@ var propTypes$1 = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-var defaultProps$47 = {
+var defaultProps$11 = {
   tag: 'div'
 };
 var contextTypes = {
@@ -6299,14 +6328,14 @@ var DropdownMenu = function DropdownMenu(props, context) {
       right = props.right,
       Tag = props.tag,
       attributes = objectWithoutProperties(props, ['className', 'cssModule', 'right', 'tag']);
-  var classes = mapToCssModules(classnames$1(className, 'dropdown-menu', { 'dropdown-menu-right': right }), cssModule);
+  var classes = mapToCssModules(classnames(className, 'dropdown-menu', { 'dropdown-menu-right': right }), cssModule);
   return React.createElement(Tag, _extends({}, attributes, { tabIndex: '-1', 'aria-hidden': !context.isOpen, role: 'menu', className: classes }));
 };
 DropdownMenu.propTypes = propTypes$1;
-DropdownMenu.defaultProps = defaultProps$47;
+DropdownMenu.defaultProps = defaultProps$11;
 DropdownMenu.contextTypes = contextTypes;
 
-var tether$1 = createCommonjsModule(function (module, exports) {
+var tether = createCommonjsModule(function (module, exports) {
 (function(root, factory) {
   if (typeof undefined === 'function' && undefined.amd) {
     undefined(factory);
@@ -7673,7 +7702,7 @@ return Tether;
 }));
 });
 
-var defaultProps$48 = {
+var defaultProps$12 = {
   isOpen: false,
   tetherRef: function tetherRef() {}
 };
@@ -7698,7 +7727,7 @@ var TetherContent = function (_React$Component) {
       _this.hide();
     }, _this.getTarget = function () {
       var target = _this.props.tether.target;
-      if (lodash_omit$1(target)) {
+      if (lodash_omit(target)) {
         return target();
       }
       return target;
@@ -7736,7 +7765,7 @@ var TetherContent = function (_React$Component) {
       _this.element.className = _this.props.className;
       document.body.appendChild(_this.element);
       _this.renderIntoSubtree();
-      _this.tether = new tether$1(_this.getTetherConfig());
+      _this.tether = new tether(_this.getTetherConfig());
       _this.props.tetherRef(_this.tether);
       _this.tether.position();
       _this.element.childNodes[0].focus();
@@ -7754,7 +7783,7 @@ var TetherContent = function (_React$Component) {
       return React.cloneElement(children, { style: style });
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(TetherContent, [{
+  createClass(TetherContent, [{
     key: 'render',
     value: function render() {
       return null;
@@ -7772,9 +7801,9 @@ TetherContent.propTypes = {
   tetherRef: PropTypes.func,
   style: PropTypes.node
 };
-TetherContent.defaultProps = defaultProps$48;
+TetherContent.defaultProps = defaultProps$12;
 
-var defaultProps$46 = {
+var defaultProps$10 = {
   isOpen: false,
   tag: 'div',
   theme: bsTheme
@@ -7831,7 +7860,7 @@ var DropdownUnstyled = function (_React$Component) {
       return _this.props.toggle();
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(DropdownUnstyled, [{
+  createClass(DropdownUnstyled, [{
     key: 'getChildContext',
     value: function getChildContext() {
       return {
@@ -7899,7 +7928,7 @@ var DropdownUnstyled = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _cn;
-      var _omit = lodash_omit$1(this.props, ['toggle', 'tether', 'theme']),
+      var _omit = lodash_omit(this.props, ['toggle', 'tether', 'theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           dropup = _omit.dropup,
@@ -7908,7 +7937,7 @@ var DropdownUnstyled = function (_React$Component) {
           Tag = _omit.tag,
           isOpen = _omit.isOpen,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'dropup', 'group', 'size', 'tag', 'isOpen']);
-      var classes = mapToCssModules(classnames$1(className, (_cn = {
+      var classes = mapToCssModules(classnames(className, (_cn = {
         'btn-group': group
       }, defineProperty(_cn, 'btn-group-' + size, !!size), defineProperty(_cn, 'dropdown', !group), defineProperty(_cn, 'show', isOpen), defineProperty(_cn, 'dropup', dropup), _cn)), cssModule);
       return React.createElement(
@@ -7943,28 +7972,73 @@ DropdownUnstyled.childContextTypes = {
 var Dropdown = styled(DropdownUnstyled).withConfig({
   displayName: 'Dropdown'
 })(['', ''], function (props) {
-  return '\n    &.dropup,\n    &.dropdown {\n      position: relative;\n    }\n\n    & .dropdown-hide {\n      display: none;\n    }\n    \n    & .dropdown-toggle {\n      /* Generate the caret automatically */\n      &::after {\n        display: inline-block;\n        width: 0;\n        height: 0;\n        margin-left: ' + props.theme['$caret-width'] + ';\n        vertical-align: middle;\n        content: \'\';\n        border-top: ' + props.theme['$caret-width'] + ' solid;\n        border-right: ' + props.theme['$caret-width'] + ' solid transparent;\n        border-left: ' + props.theme['$caret-width'] + ' solid transparent;\n      }\n\n      /* Prevent the focus on the dropdown toggle when closing dropdowns */\n      &:focus {\n        outline: 0;\n      }\n    }\n\n    &.dropup {\n      .dropdown-toggle {\n        &::after {\n          border-top: 0;\n          border-bottom: ' + props.theme['$caret-width'] + ' solid;\n        }\n      }\n    }\n\n    & .dropdown-menu {\n      clear: left;\n      position: absolute;\n      top: 100%;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown'] + ';\n      display: none; // none by default, but block on "open" of the menu\n      float: left;\n      min-width: ' + props.theme['$dropdown-min-width'] + ';\n      padding: ' + props.theme['$dropdown-padding-y'] + ' 0;\n      margin: ' + props.theme['$dropdown-margin-top'] + ' 0; /* override default ul */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      color: ' + props.theme['$body-color'] + ';\n      text-align: left; /* Ensures proper alignment if parent has it changed (e.g., modal footer) */\n      list-style: none;\n      background-color: ' + props.theme['$dropdown-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$dropdown-border-width'] + ' solid ' + props.theme['$dropdown-border-color'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n      ' + boxShadow(props.theme['$enable-shadows'], props.theme['$dropdown-box-shadow']) + '\n    }\n\n    /* mixin from bootstrap 4, see : scss/mixins/_nav-divider.css */\n    & .dropdown-divider {\n      ' + navDivider(props.theme['$spacer-y'], props.theme['$dropdown-divider-bg']) + '\n    }\n\n    & .dropdown-item {\n      display: block;\n      width: 100%; /* For <button>s */\n      padding: 3px ' + props.theme['$dropdown-item-padding-x'] + ';\n      clear: both;\n      font-weight: ' + props.theme['$font-weight-normal'] + ';\n      color: ' + props.theme['$dropdown-link-color'] + ';\n      text-align: inherit; /* For <button>s */\n      white-space: nowrap; /* prevent links from randomly breaking onto new lines */\n      background: none; /* For <button>s */\n      border: 0; /* For <button>s */\n\n      ' + hoverFocus(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$dropdown-link-hover-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-hover-bg'] + '\n      ') + '\n\n      &.active,\n      &:active {\n        color: ' + props.theme['$dropdown-link-active-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-active-bg'] + '\n      }\n\n      &.disabled,\n      &:disabled{\n        color: ' + props.theme['$dropdown-link-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: transparent;\n        ' + ifThen(props.theme['$enabled-gradients'], 'background-image: none; /* Remove CSS gradient */') + '\n      }\n    }\n\n    &.show {\n      /* show the menu */\n      &>.dropdown-menu {\n        display: block;\n      }\n\n      & > a {\n        outline: 0;\n      }\n    }\n\n\n    /* Menu positioning */\n\n    /* Add extra class to .dropdown-menu to flip the alignment of the dropdown*\n    /* menu with the parent. */\n    & .dropdown-menu-right {\n      right: 0;\n      left: auto; /* Reset the default from .dropdown-menu */\n    }\n\n    & .dropdown-menu-left {\n      right: auto;\n      left: 0;\n    }\n\n    /* Dropdown section headers */\n    & .dropdown-header {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    /* Dropdown section footers */\n    & .dropdown-footer {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    \n\n    /* Backdrop to catch body clicks on mobile, etc. */\n    & .dropdown-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown-backdrop'] + ';\n    }\n\n    /* Allow for dropdowns to go bottom up (aka, dropup-menu) */\n\n    /* Just add .dropup after the standard .dropdown class and you\'re set. */\n    /* TODO: abstract this so that the navbar fixed styles are not placed here? */\n\n    &.dropup {\n      .dropdown-menu {\n        top: auto;\n        bottom: 100%;\n        margin-bottom: ' + props.theme['$dropdown-margin-top'] + ';\n      }\n    }\n        \n    /* Added Mixin boutonGroup to enable dropdown to beneficiate from buttonGroup classes */\n    ' + buttonGroup(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-toolbar-margin'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
+  return '\n    &.dropup,\n    &.dropdown {\n      position: relative;\n    }\n\n    & .dropdown-hide {\n      display: none;\n    }\n    \n    & .dropdown-toggle {\n      /* Generate the caret automatically */\n      &::after {\n        display: inline-block;\n        width: 0;\n        height: 0;\n        margin-left: ' + props.theme['$caret-width'] + ';\n        vertical-align: middle;\n        content: \'\';\n        border-top: ' + props.theme['$caret-width'] + ' solid;\n        border-right: ' + props.theme['$caret-width'] + ' solid transparent;\n        border-left: ' + props.theme['$caret-width'] + ' solid transparent;\n      }\n\n      /* Prevent the focus on the dropdown toggle when closing dropdowns */\n      &:focus {\n        outline: 0;\n      }\n    }\n\n    &.dropup {\n      .dropdown-toggle {\n        &::after {\n          border-top: 0;\n          border-bottom: ' + props.theme['$caret-width'] + ' solid;\n        }\n      }\n    }\n\n    & .dropdown-menu {\n      clear: left;\n      position: absolute;\n      top: 100%;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown'] + ';\n      display: none; // none by default, but block on "open" of the menu\n      float: left;\n      min-width: ' + props.theme['$dropdown-min-width'] + ';\n      padding: ' + props.theme['$dropdown-padding-y'] + ' 0;\n      margin: ' + props.theme['$dropdown-margin-top'] + ' 0; /* override default ul */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      color: ' + props.theme['$body-color'] + ';\n      text-align: left; /* Ensures proper alignment if parent has it changed (e.g., modal footer) */\n      list-style: none;\n      background-color: ' + props.theme['$dropdown-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$dropdown-border-width'] + ' solid ' + props.theme['$dropdown-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$dropdown-box-shadow']) + '\n    }\n\n    /* mixin from bootstrap 4, see : scss/mixins/_nav-divider.css */\n    & .dropdown-divider {\n      ' + navDivider_3(props.theme['$spacer-y'], props.theme['$dropdown-divider-bg']) + '\n    }\n\n    & .dropdown-item {\n      display: block;\n      width: 100%; /* For <button>s */\n      padding: 3px ' + props.theme['$dropdown-item-padding-x'] + ';\n      clear: both;\n      font-weight: ' + props.theme['$font-weight-normal'] + ';\n      color: ' + props.theme['$dropdown-link-color'] + ';\n      text-align: inherit; /* For <button>s */\n      white-space: nowrap; /* prevent links from randomly breaking onto new lines */\n      background: none; /* For <button>s */\n      border: 0; /* For <button>s */\n\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$dropdown-link-hover-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-hover-bg'] + '\n      ') + '\n\n      &.active,\n      &:active {\n        color: ' + props.theme['$dropdown-link-active-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-active-bg'] + '\n      }\n\n      &.disabled,\n      &:disabled{\n        color: ' + props.theme['$dropdown-link-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: transparent;\n        ' + conditional_1(props.theme['$enabled-gradients'], 'background-image: none; /* Remove CSS gradient */') + '\n      }\n    }\n\n    &.show {\n      /* show the menu */\n      &>.dropdown-menu {\n        display: block;\n      }\n\n      & > a {\n        outline: 0;\n      }\n    }\n\n\n    /* Menu positioning */\n\n    /* Add extra class to .dropdown-menu to flip the alignment of the dropdown*\n    /* menu with the parent. */\n    & .dropdown-menu-right {\n      right: 0;\n      left: auto; /* Reset the default from .dropdown-menu */\n    }\n\n    & .dropdown-menu-left {\n      right: auto;\n      left: 0;\n    }\n\n    /* Dropdown section headers */\n    & .dropdown-header {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    /* Dropdown section footers */\n    & .dropdown-footer {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    \n\n    /* Backdrop to catch body clicks on mobile, etc. */\n    & .dropdown-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown-backdrop'] + ';\n    }\n\n    /* Allow for dropdowns to go bottom up (aka, dropup-menu) */\n\n    /* Just add .dropup after the standard .dropdown class and you\'re set. */\n    /* TODO: abstract this so that the navbar fixed styles are not placed here? */\n\n    &.dropup {\n      .dropdown-menu {\n        top: auto;\n        bottom: 100%;\n        margin-bottom: ' + props.theme['$dropdown-margin-top'] + ';\n      }\n    }\n        \n    /* Added Mixin boutonGroup to enable dropdown to beneficiate from buttonGroup classes */\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
-Dropdown.defaultProps = defaultProps$46;
+Dropdown.defaultProps = defaultProps$10;
 
-var defaultProps$50 = { theme: bsTheme };
+var typography_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.typography = typography;
+var defaultProps = exports.defaultProps = {
+  '$headings-margin-bottom': '0.5rem',
+  '$headings-font-family': 'inherit',
+  '$headings-font-weight': '500',
+  '$headings-line-height': '1.1',
+  '$headings-color': 'inherit',
+  '$display1-size': '6rem',
+  '$display2-size': '5.5rem',
+  '$display3-size': '4.5rem',
+  '$display4-size': '3.5rem',
+  '$display1-weight': '300',
+  '$display2-weight': '300',
+  '$display3-weight': '300',
+  '$display4-weight': '300'
+};
+function typography() {
+  var $headingsMarginBottom = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$headings-margin-bottom'];
+  var $headingsFontFamily = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$headings-font-family'];
+  var $headingsFontWeight = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$headings-font-weight'];
+  var $headingsLineHeight = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$headings-line-height'];
+  var $headingsColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$headings-color'];
+  var $display1Size = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$display1-size'];
+  var $display2Size = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$display2-size'];
+  var $display3Size = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$display3-size'];
+  var $display4Size = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps['$display4-size'];
+  var $display1Weight = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps['$display1-weight'];
+  var $display2Weight = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps['$display2-weight'];
+  var $display3Weight = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps['$display3-weight'];
+  var $display4Weight = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps['$display4-weight'];
+  return '\n    margin-bottom: ' + $headingsMarginBottom + ';\n    font-family: ' + $headingsFontFamily + ';\n    font-weight: ' + $headingsFontWeight + ';\n    line-height: ' + $headingsLineHeight + ';\n    color: ' + $headingsColor + ';\n    \n    /* Type Scss */\n\n    &.display-1 {\n      font-size: ' + $display1Size + ';\n      font-weight: ' + $display1Weight + ';\n      line-height: ' + $headingsLineHeight + ';\n\n    }\n    \n    &.display-2 {\n      font-size: ' + $display2Size + ';\n      font-weight: ' + $display2Weight + ';\n      line-height: ' + $headingsLineHeight + ';\n    }\n    \n    &.display-3 {\n      font-size: ' + $display3Size + ';\n      font-weight: ' + $display3Weight + ';\n      line-height: ' + $headingsLineHeight + ';\n    }\n    \n    &.display-4 {\n      font-size: ' + $display4Size + ';\n      font-weight: ' + $display4Weight + ';\n        line-height: ' + $headingsLineHeight + ';\n    }\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  typography: typography
+};
+});
+unwrapExports(typography_1);
+var typography_2 = typography_1.typography;
+
+var defaultProps$14 = { theme: bsTheme };
 var H6Unstyled = function (_React$Component) {
   inherits(H6Unstyled, _React$Component);
   function H6Unstyled() {
     classCallCheck$1(this, H6Unstyled);
     return possibleConstructorReturn(this, (H6Unstyled.__proto__ || Object.getPrototypeOf(H6Unstyled)).apply(this, arguments));
   }
-  createClass$1(H6Unstyled, [{
+  createClass(H6Unstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           lead = _omit.lead,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule', 'lead']);
-      var classes = mapToCssModules(classnames$1(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
       return React.createElement(
         'h6',
         _extends({ className: classes }, attributes),
@@ -7985,11 +8059,11 @@ H6Unstyled.propTypes = {
 var H6 = styled(H6Unstyled).withConfig({
   displayName: 'H6'
 })(['', ''], function (props) {
-  return '\n    font-size: ' + props.theme['$font-size-h6'] + ';\n    ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    \n    &.lead {\n     font-size: ' + props.theme['$lead-font-size'] + ';\n     font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;\n  ';
+  return '\n    font-size: ' + props.theme['$font-size-h6'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    \n    &.lead {\n     font-size: ' + props.theme['$lead-font-size'] + ';\n     font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-H6.defaultProps = defaultProps$50;
+H6.defaultProps = defaultProps$14;
 
-var defaultProps$49 = {
+var defaultProps$13 = {
   tag: 'button'
 };
 var DropdownItem = function (_React$Component) {
@@ -8017,7 +8091,7 @@ var DropdownItem = function (_React$Component) {
       return '0';
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(DropdownItem, [{
+  createClass(DropdownItem, [{
     key: 'render',
     value: function render() {
       var tabIndex = this.getTabIndex();
@@ -8029,7 +8103,7 @@ var DropdownItem = function (_React$Component) {
           Tag = _props.tag,
           header = _props.header,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'divider', 'disabled', 'tag', 'header']);
-      var classes = mapToCssModules(classnames$1(className, {
+      var classes = mapToCssModules(classnames(className, {
         disabled: disabled,
         'dropdown-item': !divider && !header,
         'dropdown-header': header,
@@ -8064,9 +8138,9 @@ DropdownItem.propTypes = {
 DropdownItem.contextTypes = {
   toggle: PropTypes.func
 };
-DropdownItem.defaultProps = defaultProps$49;
+DropdownItem.defaultProps = defaultProps$13;
 
-var defaultProps$51 = {
+var defaultProps$15 = {
   'data-toggle': 'dropdown',
   'aria-haspopup': true,
   color: 'secondary'
@@ -8094,7 +8168,7 @@ var DropdownToggle = function (_React$Component) {
       _this.context.toggle();
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(DropdownToggle, [{
+  createClass(DropdownToggle, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -8106,7 +8180,7 @@ var DropdownToggle = function (_React$Component) {
           tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'caret', 'split', 'nav', 'tag']);
       var ariaLabel = attributes['aria-label'] || 'Toggle Dropdown';
-      var classes = mapToCssModules(classnames$1(className, {
+      var classes = mapToCssModules(classnames(className, {
         'dropdown-toggle': caret || split,
         'dropdown-toggle-split': split,
         active: this.context.isOpen,
@@ -8157,7 +8231,7 @@ DropdownToggle.contextTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired
 };
-DropdownToggle.defaultProps = defaultProps$51;
+DropdownToggle.defaultProps = defaultProps$15;
 
 var propTypes = {
   children: PropTypes.node,
@@ -8169,7 +8243,7 @@ var ButtonDropdown = function ButtonDropdown(props) {
 };
 ButtonDropdown.propTypes = propTypes;
 
-var defaultProps$52 = {
+var defaultProps$16 = {
   theme: bsTheme,
   tag: 'div',
   role: 'group'
@@ -8180,10 +8254,10 @@ var ButtonGroupUnstyled = function (_React$Component) {
     classCallCheck$1(this, ButtonGroupUnstyled);
     return possibleConstructorReturn(this, (ButtonGroupUnstyled.__proto__ || Object.getPrototypeOf(ButtonGroupUnstyled)).apply(this, arguments));
   }
-  createClass$1(ButtonGroupUnstyled, [{
+  createClass(ButtonGroupUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           size = _omit.size,
@@ -8191,7 +8265,7 @@ var ButtonGroupUnstyled = function (_React$Component) {
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'size', 'vertical', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, vertical ? 'btn-group-vertical' : 'btn-group', defineProperty({}, 'btn-group-' + size, size)), cssModule)
+        className: mapToCssModules(classnames(className, vertical ? 'btn-group-vertical' : 'btn-group', defineProperty({}, 'btn-group-' + size, size)), cssModule)
       }, attributes));
     }
   }]);
@@ -8208,11 +8282,11 @@ ButtonGroupUnstyled.propTypes = {
 var ButtonGroup = styled(ButtonGroupUnstyled).withConfig({
   displayName: 'ButtonGroup'
 })(['', '  '], function (props) {
-  return '\n    ' + buttonGroup(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-toolbar-margin'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
+  return '\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
-ButtonGroup.defaultProps = defaultProps$52;
+ButtonGroup.defaultProps = defaultProps$16;
 
-var defaultProps$53 = {
+var defaultProps$17 = {
   tag: 'div',
   role: 'toolbar',
   theme: bsTheme
@@ -8223,16 +8297,16 @@ var ButtonToolbarUnstyled = function (_React$Component) {
     classCallCheck$1(this, ButtonToolbarUnstyled);
     return possibleConstructorReturn(this, (ButtonToolbarUnstyled.__proto__ || Object.getPrototypeOf(ButtonToolbarUnstyled)).apply(this, arguments));
   }
-  createClass$1(ButtonToolbarUnstyled, [{
+  createClass(ButtonToolbarUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'btn-toolbar'), cssModule)
+        className: mapToCssModules(classnames(className, 'btn-toolbar'), cssModule)
       }, attributes));
     }
   }]);
@@ -8247,19 +8321,19 @@ ButtonToolbarUnstyled.propTypes = {
 var ButtonToolbar = styled(ButtonToolbarUnstyled).withConfig({
   displayName: 'ButtonToolbar'
 })(['', '  '], function (props) {
-  return '\n    ' + buttonGroup(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-toolbar-margin'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
+  return '\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
-ButtonToolbar.defaultProps = defaultProps$53;
+ButtonToolbar.defaultProps = defaultProps$17;
 
-var defaultProps$54 = { theme: bsTheme };
+var defaultProps$18 = { theme: bsTheme };
 var Caption = styled.caption.withConfig({
   displayName: 'Caption'
 })(['', ''], function (props) {
   return '\n    padding-top: ' + props.theme['$table-cell-padding'] + ';\n    padding-bottom: ' + props.theme['$table-cell-padding'] + ';\n    color: ' + props.theme['$text-muted'] + ';\n    text-align: left;\n    caption-side: top;\n  ';
 });
-Caption.defaultProps = defaultProps$54;
+Caption.defaultProps = defaultProps$18;
 
-var defaultProps$55 = {
+var defaultProps$19 = {
   tag: 'code',
   theme: bsTheme
 };
@@ -8269,10 +8343,10 @@ var CodeUnstyled = function (_React$Component) {
     classCallCheck$1(this, CodeUnstyled);
     return possibleConstructorReturn(this, (CodeUnstyled.__proto__ || Object.getPrototypeOf(CodeUnstyled)).apply(this, arguments));
   }
-  createClass$1(CodeUnstyled, [{
+  createClass(CodeUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           children = _omit.children,
           Tag = _omit.tag,
@@ -8294,9 +8368,266 @@ CodeUnstyled.propTypes = {
 var Code = styled(CodeUnstyled).withConfig({
   displayName: 'Code'
 })(['', ''], function (props) {
-  return '\n    /* Inline code */\n    padding: ' + props.theme['$code-padding-y'] + ' ' + props.theme['$code-padding-x'] + ';\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$code-color'] + ';\n    background-color: ' + props.theme['$code-bg'] + ';\n    ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius']) + ';\n    \n    /* Streamline the style when inside anchors to avoid broken underline and more */\n    a > & {\n      padding: 0;\n      color: inherit;\n      background-color: inherit;\n    }\n    \n    /* Bootstrap 4 does not place this css rule straight into Code tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
+  return '\n    /* Inline code */\n    padding: ' + props.theme['$code-padding-y'] + ' ' + props.theme['$code-padding-x'] + ';\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$code-color'] + ';\n    background-color: ' + props.theme['$code-bg'] + ';\n    ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + ';\n    \n    /* Streamline the style when inside anchors to avoid broken underline and more */\n    a > & {\n      padding: 0;\n      color: inherit;\n      background-color: inherit;\n    }\n    \n    /* Bootstrap 4 does not place this css rule straight into Code tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
-Code.defaultProps = defaultProps$55;
+Code.defaultProps = defaultProps$19;
+
+var grid = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.makeContainer = makeContainer;
+exports.makeContainerMaxWidths = makeContainerMaxWidths;
+exports.makeGutters = makeGutters;
+exports.makeRow = makeRow;
+exports.makeColReady = makeColReady;
+exports.makeCol = makeCol;
+exports.makeColOffset = makeColOffset;
+exports.makeColPush = makeColPush;
+exports.makeColPull = makeColPull;
+exports.makeColModifier = makeColModifier;
+var defaultProps = exports.defaultProps = {
+  '$grid-gutter-widths': {
+    xs: '30px',
+    sm: '30px',
+    md: '30px',
+    lg: '30px',
+    xl: '30px'
+  },
+  '$container-max-widths': {
+    sm: '540px',
+    md: '720px',
+    lg: '960px',
+    xl: '1140px'
+  },
+  '$grid-breakpoints': {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  },
+  '$grid-columns': 12,
+  '$enable-grid-classes': true
+};
+function makeContainer() {
+  var enableGridClasses = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-grid-classes'];
+  var gridGutterWidths = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-gutter-widths'];
+  if (enableGridClasses) {
+    var columns = [];
+    Object.keys(gridGutterWidths).forEach(function (breakpoint) {
+      var gutter = gridGutterWidths[breakpoint];
+      var column = (0, breakpoints.mediaBreakpointUp)(breakpoint, gutter, '\n        padding-right: ' + _bootstrapStyledUtils.unitUtils.rmUnit(gutter) / 2 + _bootstrapStyledUtils.unitUtils.detectUnit(gutter) + ';\n        padding-left:  ' + _bootstrapStyledUtils.unitUtils.rmUnit(gutter) / 2 + _bootstrapStyledUtils.unitUtils.detectUnit(gutter) + ';\n      ');
+      columns.push(column);
+    });
+    return '\n      position: relative;\n      margin-left: auto;\n      margin-right: auto;    \n      ' + columns.join('\n') + '\n    ';
+  }
+  return '';
+}
+function makeContainerMaxWidths() {
+  var enableGridClasses = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-grid-classes'];
+  var containerMaxWidths = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$container-max-widths'];
+  var gridBreakpoints = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$grid-breakpoints'];
+  if (enableGridClasses) {
+    var maximumWidthList = [];
+    Object.keys(containerMaxWidths).forEach(function (breakpoint) {
+      var maximumWidth = (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        width: ' + containerMaxWidths[breakpoint] + ';\n        max-width: 100%;\n      ');
+      maximumWidthList.push(maximumWidth);
+    });
+    return '\n      ' + maximumWidthList.join('\n') + '\n    ';
+  }
+  return '';
+}
+function makeGutters() {
+  var gridGutterWidths = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-gutter-widths'];
+  var breakpoints$$2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var gutterList = [];
+  Object.keys(gridGutterWidths).forEach(function (breakpoint) {
+    var gutterValue = gridGutterWidths[breakpoint];
+    gutterValue = '' + _bootstrapStyledUtils.unitUtils.rmUnit(gutterValue) / 2 + _bootstrapStyledUtils.unitUtils.detectUnit(gutterValue);
+    var gutter = (0, breakpoints.mediaBreakpointUp)(breakpoint, breakpoints$$2, '\n      padding-right: ' + gutterValue + ';\n      padding-left:  ' + gutterValue + ';\n    ');
+    gutterList.push(gutter);
+  });
+  return '\n    ' + gutterList.join('\n') + '\n  ';
+}
+function makeRow() {
+  var enableGridClasses = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-grid-classes'];
+  var gridGutterWidths = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-gutter-widths'];
+  if (enableGridClasses) {
+    var rowList = [];
+    Object.keys(gridGutterWidths).forEach(function (breakpoint) {
+      var gutter = gridGutterWidths[breakpoint];
+      gutter = '' + _bootstrapStyledUtils.unitUtils.rmUnit(gutter) / -2 + _bootstrapStyledUtils.unitUtils.detectUnit(gutter);
+      var row = '\n        margin-right: ' + gutter + ';\n        margin-left:  ' + gutter + ';\n      ';
+      rowList.push(row);
+    });
+    return '\n      display: flex;\n      flex-wrap: wrap;\n      ' + rowList.join('\n') + '\n    ';
+  }
+  return '';
+}
+function makeColReady() {
+  var gridGutterWidths = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-gutter-widths'];
+  var colReadyList = [];
+  Object.keys(gridGutterWidths).forEach(function (breakpoint) {
+    var gutter = gridGutterWidths[breakpoint];
+    gutter = '' + _bootstrapStyledUtils.unitUtils.rmUnit(gutter) / 2 + _bootstrapStyledUtils.unitUtils.detectUnit(gutter);
+    var colReady = (0, breakpoints.mediaBreakpointUp)(breakpoint, gridGutterWidths, '\n      padding-right: ' + gutter + ';\n      padding-left:  ' + gutter + ';\n    ');
+    colReadyList.push(colReady);
+  });
+  return '\n    position: relative;\n    /* Prevent columns from becoming too narrow when at smaller grid tiers by */\n    /* always setting \'width: 100%;\'. This works because we use \'flex\' values */\n    /* later on to override this initial width. */\n    min-height: 1px; /* Prevent collapsing */\n    width: 100%;\n    ' + colReadyList.join('\n') + '\n  ';
+}
+function makeCol(size) {
+  var columns = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-columns'];
+  return '\n    flex: 0 0 ' + _bootstrapStyledUtils.unitUtils.toPercent(size, columns) + ';\n    /* Add a \'max-width\' to ensure content within each column does not blow out */\n    /* the width of the column. Applies to IE10+ and Firefox. Chrome and Safari */\n    /* do not appear to require this. */\n    max-width: ' + _bootstrapStyledUtils.unitUtils.toPercent(size, columns) + ';\n  ';
+}
+function makeColOffset($size) {
+  var columns = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-columns'];
+  return '\n    margin-left: ' + _bootstrapStyledUtils.unitUtils.toPercent($size, columns) + ';\n  ';
+}
+function makeColPush(size) {
+  var columns = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-columns'];
+  return '\n    left: ' + (size > 0 ? _bootstrapStyledUtils.unitUtils.toPercent(size, columns) : 'auto') + ';\n  ';
+}
+function makeColPull(size) {
+  var columns = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-columns'];
+  return '\n    right: ' + (size > 0 ? _bootstrapStyledUtils.unitUtils.toPercent(size, columns) : 'auto') + ';\n  ';
+}
+function makeColModifier(type, size, columns) {
+  var TYPE = {
+    PUSH: 'push',
+    PULL: 'pull',
+    OFFSET: 'offset'
+  };
+  var modifier = '';
+  if (type === TYPE.PUSH) {
+    modifier = makeColPush(size, columns);
+  } else if (type === TYPE.PULL) {
+    modifier = makeColPull(size, columns);
+  } else if (type === TYPE.OFFSET) {
+    modifier = makeColOffset(size, columns);
+  }
+  return '\n    ' + modifier + '\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  makeContainer: makeContainer,
+  makeContainerMaxWidths: makeContainerMaxWidths,
+  makeGutters: makeGutters,
+  makeRow: makeRow,
+  makeColReady: makeColReady,
+  makeCol: makeCol,
+  makeColOffset: makeColOffset,
+  makeColPush: makeColPush,
+  makeColPull: makeColPull,
+  makeColModifier: makeColModifier
+};
+});
+unwrapExports(grid);
+var grid_2 = grid.makeContainer;
+var grid_3 = grid.makeContainerMaxWidths;
+var grid_5 = grid.makeRow;
+
+var gridFramework = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.getGridColumn = getGridColumn;
+exports.getColumnGridColumn = getColumnGridColumn;
+exports.getMediaBreakpointUp = getMediaBreakpointUp;
+exports.makeGridColumns = makeGridColumns;
+var defaultProps = exports.defaultProps = {
+  '$grid-gutter-widths': {
+    xs: '30px',
+    sm: '30px',
+    md: '30px',
+    lg: '30px',
+    xl: '30px'
+  },
+  '$grid-breakpoints': {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  },
+  '$grid-columns': 12,
+  '$enable-grid-classes': true
+};
+function getGridColumn() {
+  var gridGutterWidths = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-gutter-widths'];
+  var breakpoints$$2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  return '\n    position: relative;\n    width: 100%;\n    min-height: 1px; /* Prevent columns from collapsing when empty */\n    ' + (0, grid.makeGutters)(gridGutterWidths, breakpoints$$2) + '\n  ';
+}
+function getColumnGridColumn() {
+  var gridColumns = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-columns'];
+  var gridBreakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var gridGutterWidths = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$grid-gutter-widths'];
+  var breakpoint = arguments[3];
+  var columnList = [];
+  var infix = (0, breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
+  for (var i = 1; i <= gridColumns; i += 1) {
+    var column = '\n      &.col' + infix + '-' + i + ',\n       & .col' + infix + '-' + i + '{\n        ' + getGridColumn(gridGutterWidths, gridBreakpoints) + '\n      }\n    ';
+    columnList.push(column);
+  }
+  return '\n    /* Allow columns to stretch full width below their breakpoints */\n    &.col' + infix + ',\n     & .col' + infix + '{\n      ' + getGridColumn(gridGutterWidths, gridBreakpoints) + '\n    }\n\n    ' + columnList.join('\n') + '\n  ';
+}
+function getMediaBreakpointUp() {
+  var gridColumns = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-columns'];
+  var gridBreakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var breakpoint = arguments[2];
+  var infix = (0, breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
+  var basic = '\n    &.col' + infix + ',\n     & .col' + infix + '{\n      flex-basis: 0;\n      flex-grow: 1;\n      max-width: 100%;\n    }\n    &.col' + infix + '-auto,\n     & .col' + infix + '-auto{\n      flex: 0 0 auto;\n      width: auto;\n    }\n  ';
+  var columnList = [];
+  for (var i = 1; i <= gridColumns; i += 1) {
+    var column = '\n      &.col' + infix + '-' + i + ',\n       & .col' + infix + '-' + i + '{\n        ' + (0, grid.makeCol)(i, gridColumns) + '\n      }\n    ';
+    columnList.push(column);
+  }
+  var modifierList = ['pull', 'push'];
+  var columnModifierList = [];
+  modifierList.forEach(function (modifier) {
+    for (var _i = 0; _i <= gridColumns; _i += 1) {
+      var columnModifier = '\n        &.' + modifier + infix + '-' + _i + ',\n         & .' + modifier + infix + '-' + _i + '{\n          ' + (0, grid.makeColModifier)(modifier, _i, gridColumns) + '\n        }\n      ';
+      columnModifierList.push(columnModifier);
+    }
+  });
+  var offsetColumnList = [];
+  for (var _i2 = 0; _i2 <= gridColumns - 1; _i2 += 1) {
+    if (infix !== 1 || _i2 !== 0) {
+      var offsetColumn = '\n        &.offset' + infix + '-' + _i2 + ',\n         & .offset' + infix + '-' + _i2 + '{\n          ' + (0, grid.makeColModifier)('offset', _i2, gridColumns) + '\n        }\n      ';
+      offsetColumnList.push(offsetColumn);
+    }
+  }
+  return (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n    ' + basic + '\n    ' + columnList.join('\n') + '\n    ' + columnModifierList.join('\n') + '\n    ' + offsetColumnList.join('\n') + '\n  ');
+}
+function makeGridColumns() {
+  var enableGridClasses = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-grid-classes'];
+  var gridColumns = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-columns'];
+  var gridGutterWidths = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$grid-gutter-widths'];
+  var gridBreakpoints = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$grid-breakpoints'];
+  if (enableGridClasses) {
+    var gridColumnList = [];
+    Object.keys(gridBreakpoints).forEach(function (breakpoint) {
+      var gridColumn = '\n        ' + getColumnGridColumn(gridColumns, gridBreakpoints, gridGutterWidths, breakpoint) + '\n        ' + getMediaBreakpointUp(gridColumns, gridBreakpoints, breakpoint) + '\n      ';
+      gridColumnList.push(gridColumn);
+    });
+    return '\n      ' + gridColumnList.join('\n') + '\n    ';
+  }
+  return '';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  getGridColumn: getGridColumn,
+  getColumnGridColumn: getColumnGridColumn,
+  getMediaBreakpointUp: getMediaBreakpointUp,
+  makeGridColumns: makeGridColumns
+};
+});
+unwrapExports(gridFramework);
+var gridFramework_5 = gridFramework.makeGridColumns;
 
 var colWidths = ['xs', 'sm', 'md', 'lg', 'xl'];
 var stringOrNumberProp = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
@@ -8306,7 +8637,7 @@ var columnProps = PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTyp
   pull: stringOrNumberProp,
   offset: stringOrNumberProp
 })]);
-var defaultProps$56 = {
+var defaultProps$20 = {
   theme: bsTheme,
   tag: 'div',
   widths: colWidths
@@ -8325,11 +8656,11 @@ var ColUnstyled = function (_React$Component) {
     classCallCheck$1(this, ColUnstyled);
     return possibleConstructorReturn(this, (ColUnstyled.__proto__ || Object.getPrototypeOf(ColUnstyled)).apply(this, arguments));
   }
-  createClass$1(ColUnstyled, [{
+  createClass(ColUnstyled, [{
     key: 'render',
     value: function render() {
       var _this2 = this;
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           widths = _omit.widths,
@@ -8351,14 +8682,14 @@ var ColUnstyled = function (_React$Component) {
           var _cn;
           var colSizeInterfix = isXs ? '-' : '-' + colWidth + '-';
           colClass = getColumnSizeClass(isXs, colWidth, columnProp.size);
-          colClasses.push(mapToCssModules(classnames$1((_cn = {}, defineProperty(_cn, colClass, columnProp.size || columnProp.size === ''), defineProperty(_cn, 'push' + colSizeInterfix + columnProp.push, columnProp.push), defineProperty(_cn, 'pull' + colSizeInterfix + columnProp.pull, columnProp.pull), defineProperty(_cn, 'offset' + colSizeInterfix + columnProp.offset, columnProp.offset), _cn))), cssModule);
+          colClasses.push(mapToCssModules(classnames((_cn = {}, defineProperty(_cn, colClass, columnProp.size || columnProp.size === ''), defineProperty(_cn, 'push' + colSizeInterfix + columnProp.push, columnProp.push), defineProperty(_cn, 'pull' + colSizeInterfix + columnProp.pull, columnProp.pull), defineProperty(_cn, 'offset' + colSizeInterfix + columnProp.offset, columnProp.offset), _cn))), cssModule);
         } else {
           colClass = getColumnSizeClass(isXs, colWidth, columnProp);
           colClasses.push(colClass);
         }
       });
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, colClasses), cssModule)
+        className: mapToCssModules(classnames(className, colClasses), cssModule)
       }, attributes));
     }
   }]);
@@ -8379,9 +8710,9 @@ ColUnstyled.propTypes = {
 var Col = styled(ColUnstyled).withConfig({
   displayName: 'Col'
 })(['', ''], function (props) {
-  return '\n    ' + makeGridColumns(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
+  return '\n    ' + gridFramework_5(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-Col.defaultProps = defaultProps$56;
+Col.defaultProps = defaultProps$20;
 
 var SHOW = 'SHOW';
 var SHOWN = 'SHOWN';
@@ -8399,7 +8730,7 @@ var Collapse = function (_Component) {
     _this.element = null;
     return _this;
   }
-  createClass$1(Collapse, [{
+  createClass(Collapse, [{
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       var _this2 = this;
@@ -8465,7 +8796,7 @@ var Collapse = function (_Component) {
     key: 'render',
     value: function render() {
       var _this3 = this;
-      var _omit = lodash_omit$1(this.props, ['isOpen', 'theme', 'delay', 'onOpened', 'onClosed']),
+      var _omit = lodash_omit(this.props, ['isOpen', 'theme', 'delay', 'onOpened', 'onClosed']),
           navbar = _omit.navbar,
           className = _omit.className,
           cssModule = _omit.cssModule,
@@ -8482,7 +8813,7 @@ var Collapse = function (_Component) {
       } else if (collapse === HIDDEN) {
         collapseClass = 'collapse';
       }
-      var classes = mapToCssModules(classnames$1(className, collapseClass, navbar && 'navbar-collapse'), cssModule);
+      var classes = mapToCssModules(classnames(className, collapseClass, navbar && 'navbar-collapse'), cssModule);
       var style = height === null ? null : { height: height };
       return React.createElement(Tag, _extends({}, attributes, {
         style: _extends({}, attributes.style, style),
@@ -8523,10 +8854,10 @@ var DdUnstyled = function (_React$Component) {
     classCallCheck$1(this, DdUnstyled);
     return possibleConstructorReturn(this, (DdUnstyled.__proto__ || Object.getPrototypeOf(DdUnstyled)).apply(this, arguments));
   }
-  createClass$1(DdUnstyled, [{
+  createClass(DdUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
       return React.createElement('dd', _extends({ className: className }, attributes));
@@ -8541,7 +8872,7 @@ DdUnstyled.propTypes = {
 var Dd = styled(DdUnstyled).withConfig({
   displayName: 'Dd'
 })(['  margin-bottom:.5rem;margin-left:0;', ''], function (props) {
-  return '\n    ' + makeGridColumns(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
+  return '\n    ' + gridFramework_5(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
 
 var DfnUnstyled = function (_React$Component) {
@@ -8550,7 +8881,7 @@ var DfnUnstyled = function (_React$Component) {
     classCallCheck$1(this, DfnUnstyled);
     return possibleConstructorReturn(this, (DfnUnstyled.__proto__ || Object.getPrototypeOf(DfnUnstyled)).apply(this, arguments));
   }
-  createClass$1(DfnUnstyled, [{
+  createClass(DfnUnstyled, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -8577,7 +8908,7 @@ var Details = function (_React$Component) {
     classCallCheck$1(this, Details);
     return possibleConstructorReturn(this, (Details.__proto__ || Object.getPrototypeOf(Details)).apply(this, arguments));
   }
-  createClass$1(Details, [{
+  createClass(Details, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -8593,17 +8924,17 @@ Details.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-var defaultProps$57 = { theme: bsTheme };
+var defaultProps$21 = { theme: bsTheme };
 var DlUnstyled = function (_React$Component) {
   inherits(DlUnstyled, _React$Component);
   function DlUnstyled() {
     classCallCheck$1(this, DlUnstyled);
     return possibleConstructorReturn(this, (DlUnstyled.__proto__ || Object.getPrototypeOf(DlUnstyled)).apply(this, arguments));
   }
-  createClass$1(DlUnstyled, [{
+  createClass(DlUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
       return React.createElement('dl', _extends({ className: className }, attributes));
@@ -8618,21 +8949,21 @@ DlUnstyled.propTypes = {
 var Dl = styled(DlUnstyled).withConfig({
   displayName: 'Dl'
 })(['  margin-top:0;margin-bottom:1rem;', ''], function (props) {
-  return '\n    ' + makeRow(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n  ';
+  return '\n    ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n  ';
 });
-Dl.defaultProps = defaultProps$57;
+Dl.defaultProps = defaultProps$21;
 
-var defaultProps$58 = { theme: bsTheme };
+var defaultProps$22 = { theme: bsTheme };
 var DtUnstyled = function (_React$Component) {
   inherits(DtUnstyled, _React$Component);
   function DtUnstyled() {
     classCallCheck$1(this, DtUnstyled);
     return possibleConstructorReturn(this, (DtUnstyled.__proto__ || Object.getPrototypeOf(DtUnstyled)).apply(this, arguments));
   }
-  createClass$1(DtUnstyled, [{
+  createClass(DtUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
       return React.createElement('dt', _extends({ className: className }, attributes));
@@ -8647,11 +8978,11 @@ DtUnstyled.propTypes = {
 var Dt = styled(DtUnstyled).withConfig({
   displayName: 'Dt'
 })(['  ', ''], function (props) {
-  return '\n    /* Reboot Scss */\n    font-weight: ' + props.theme['$dt-font-weight'] + ';\n    ' + makeGridColumns(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
+  return '\n    /* Reboot Scss */\n    font-weight: ' + props.theme['$dt-font-weight'] + ';\n    ' + gridFramework_5(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-Dt.defaultProps = defaultProps$58;
+Dt.defaultProps = defaultProps$22;
 
-var defaultProps$59 = {
+var defaultProps$23 = {
   isOpen: true,
   theme: bsTheme
 };
@@ -8670,7 +9001,7 @@ var Fade = function (_React$Component) {
       transitionLeaveTimeout: null
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(Fade, [{
+  createClass(Fade, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
       var theme = this.props.theme;
@@ -8684,7 +9015,7 @@ var Fade = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme', 'innerRef']),
+      var _omit = lodash_omit(this.props, ['theme', 'innerRef']),
           children = _omit.children,
           isOpen = _omit.isOpen,
           rest = objectWithoutProperties(_omit, ['children', 'isOpen']);
@@ -8713,7 +9044,7 @@ Fade.propTypes = {
   theme: PropTypes.object,
   isOpen: PropTypes.bool
 };
-Fade.defaultProps = defaultProps$59;
+Fade.defaultProps = defaultProps$23;
 var index$2 = withTheme(Fade);
 
 var FaUnstyled = function (_React$Component) {
@@ -8722,7 +9053,7 @@ var FaUnstyled = function (_React$Component) {
     classCallCheck$1(this, FaUnstyled);
     return possibleConstructorReturn(this, (FaUnstyled.__proto__ || Object.getPrototypeOf(FaUnstyled)).apply(this, arguments));
   }
-  createClass$1(FaUnstyled, [{
+  createClass(FaUnstyled, [{
     key: 'render',
     value: function render() {
       var _cn;
@@ -8731,9 +9062,9 @@ var FaUnstyled = function (_React$Component) {
           size = _props.size,
           color = _props.color,
           attributes = objectWithoutProperties(_props, ['className', 'size', 'color']);
-      var classes = classnames$1(className, 'fa', (_cn = {}, defineProperty(_cn, 'text-' + color, color), defineProperty(_cn, 'fa-' + size, size), _cn));
+      var classes = classnames(className, 'fa', (_cn = {}, defineProperty(_cn, 'text-' + color, color), defineProperty(_cn, 'fa-' + size, size), _cn));
       return React.createElement('i', {
-        className: classnames$1(classes, Object.keys(attributes).map(function (key) {
+        className: classnames(classes, Object.keys(attributes).map(function (key) {
           return 'fa-' + key;
         }))
       });
@@ -8756,7 +9087,7 @@ var FaStacked = function (_React$Component) {
     classCallCheck$1(this, FaStacked);
     return possibleConstructorReturn(this, (FaStacked.__proto__ || Object.getPrototypeOf(FaStacked)).apply(this, arguments));
   }
-  createClass$1(FaStacked, [{
+  createClass(FaStacked, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -8764,7 +9095,7 @@ var FaStacked = function (_React$Component) {
           size = _props.size,
           attributes = objectWithoutProperties(_props, ['className', 'size']);
       return React.createElement('span', _extends({
-        className: classnames$1(className, 'fa-stack', defineProperty({}, 'fa-' + size, size))
+        className: classnames(className, 'fa-stack', defineProperty({}, 'fa-' + size, size))
       }, attributes));
     }
   }]);
@@ -8775,17 +9106,17 @@ FaStacked.propTypes = {
   size: PropTypes.string
 };
 
-var defaultProps$60 = { theme: bsTheme };
+var defaultProps$24 = { theme: bsTheme };
 var FieldsetUnstyled = function (_React$Component) {
   inherits(FieldsetUnstyled, _React$Component);
   function FieldsetUnstyled() {
     classCallCheck$1(this, FieldsetUnstyled);
     return possibleConstructorReturn(this, (FieldsetUnstyled.__proto__ || Object.getPrototypeOf(FieldsetUnstyled)).apply(this, arguments));
   }
-  createClass$1(FieldsetUnstyled, [{
+  createClass(FieldsetUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           children = _omit.children,
           rest = objectWithoutProperties(_omit, ['className', 'children']);
@@ -8808,32 +9139,32 @@ FieldsetUnstyled.propTypes = {
 var Fieldset = styled(FieldsetUnstyled).withConfig({
   displayName: 'Fieldset'
 })(['', ''], function (props) {
-  return '\n    min-width: 0;\n    padding: 0;\n    margin: 0;\n    border: 0;\n\n    & .row {\n      ' + makeRow(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n\n  ';
+  return '\n    min-width: 0;\n    padding: 0;\n    margin: 0;\n    border: 0;\n\n    & .row {\n      ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n\n  ';
 });
-Fieldset.defaultProps = defaultProps$60;
+Fieldset.defaultProps = defaultProps$24;
 
 var Footer = styled.footer.withConfig({
   displayName: 'Footer'
 })(['']);
 
-var defaultProps$61 = { theme: bsTheme };
+var defaultProps$25 = { theme: bsTheme };
 var H1Unstyled = function (_React$Component) {
   inherits(H1Unstyled, _React$Component);
   function H1Unstyled() {
     classCallCheck$1(this, H1Unstyled);
     return possibleConstructorReturn(this, (H1Unstyled.__proto__ || Object.getPrototypeOf(H1Unstyled)).apply(this, arguments));
   }
-  createClass$1(H1Unstyled, [{
+  createClass(H1Unstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           lead = _omit.lead,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule', 'lead']);
-      var classes = mapToCssModules(classnames$1(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
       return React.createElement(
         'h1',
         _extends({ className: classes }, attributes),
@@ -8854,28 +9185,28 @@ H1Unstyled.propTypes = {
 var H1 = styled(H1Unstyled).withConfig({
   displayName: 'H1'
 })(['', ''], function (props) {
-  return '\n    font-size: ' + props.theme['$font-size-h1'] + ';\n    ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
+  return '\n    font-size: ' + props.theme['$font-size-h1'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-H1.defaultProps = defaultProps$61;
+H1.defaultProps = defaultProps$25;
 
-var defaultProps$62 = { theme: bsTheme };
+var defaultProps$26 = { theme: bsTheme };
 var H2Unstyled = function (_React$Component) {
   inherits(H2Unstyled, _React$Component);
   function H2Unstyled() {
     classCallCheck$1(this, H2Unstyled);
     return possibleConstructorReturn(this, (H2Unstyled.__proto__ || Object.getPrototypeOf(H2Unstyled)).apply(this, arguments));
   }
-  createClass$1(H2Unstyled, [{
+  createClass(H2Unstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           lead = _omit.lead,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule', 'lead']);
-      var classes = mapToCssModules(classnames$1(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
       return React.createElement(
         'h2',
         _extends({ className: classes }, attributes),
@@ -8896,28 +9227,28 @@ H2Unstyled.propTypes = {
 var H2 = styled(H2Unstyled).withConfig({
   displayName: 'H2'
 })(['', ''], function (props) {
-  return '\n\n    font-size: ' + props.theme['$font-size-h2'] + ';\n    ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
+  return '\n\n    font-size: ' + props.theme['$font-size-h2'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-H2.defaultProps = defaultProps$62;
+H2.defaultProps = defaultProps$26;
 
-var defaultProps$63 = { theme: bsTheme };
+var defaultProps$27 = { theme: bsTheme };
 var H3Unstyled = function (_React$Component) {
   inherits(H3Unstyled, _React$Component);
   function H3Unstyled() {
     classCallCheck$1(this, H3Unstyled);
     return possibleConstructorReturn(this, (H3Unstyled.__proto__ || Object.getPrototypeOf(H3Unstyled)).apply(this, arguments));
   }
-  createClass$1(H3Unstyled, [{
+  createClass(H3Unstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           lead = _omit.lead,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule', 'lead']);
-      var classes = mapToCssModules(classnames$1(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
       return React.createElement(
         'h3',
         _extends({ className: classes }, attributes),
@@ -8938,28 +9269,28 @@ H3Unstyled.propTypes = {
 var H3 = styled(H3Unstyled).withConfig({
   displayName: 'H3'
 })(['', ''], function (props) {
-  return '\n    font-size: ' + props.theme['$font-size-h3'] + ';\n    ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
+  return '\n    font-size: ' + props.theme['$font-size-h3'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-H3.defaultProps = defaultProps$63;
+H3.defaultProps = defaultProps$27;
 
-var defaultProps$64 = { theme: bsTheme };
+var defaultProps$28 = { theme: bsTheme };
 var H4Unstyled = function (_React$Component) {
   inherits(H4Unstyled, _React$Component);
   function H4Unstyled() {
     classCallCheck$1(this, H4Unstyled);
     return possibleConstructorReturn(this, (H4Unstyled.__proto__ || Object.getPrototypeOf(H4Unstyled)).apply(this, arguments));
   }
-  createClass$1(H4Unstyled, [{
+  createClass(H4Unstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           lead = _omit.lead,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule', 'lead']);
-      var classes = mapToCssModules(classnames$1(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
       return React.createElement(
         'h4',
         _extends({ className: classes }, attributes),
@@ -8980,28 +9311,28 @@ H4Unstyled.propTypes = {
 var H4 = styled(H4Unstyled).withConfig({
   displayName: 'H4'
 })(['', ''], function (props) {
-  return '\n    font-size: ' + props.theme['$font-size-h4'] + ';\n    ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
+  return '\n    font-size: ' + props.theme['$font-size-h4'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-H4.defaultProps = defaultProps$64;
+H4.defaultProps = defaultProps$28;
 
-var defaultProps$65 = { theme: bsTheme };
+var defaultProps$29 = { theme: bsTheme };
 var H5Unstyled = function (_React$Component) {
   inherits(H5Unstyled, _React$Component);
   function H5Unstyled() {
     classCallCheck$1(this, H5Unstyled);
     return possibleConstructorReturn(this, (H5Unstyled.__proto__ || Object.getPrototypeOf(H5Unstyled)).apply(this, arguments));
   }
-  createClass$1(H5Unstyled, [{
+  createClass(H5Unstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           lead = _omit.lead,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule', 'lead']);
-      var classes = mapToCssModules(classnames$1(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
       return React.createElement(
         'h5',
         _extends({ className: classes }, attributes),
@@ -9022,19 +9353,135 @@ H5Unstyled.propTypes = {
 var H5 = styled(H5Unstyled).withConfig({
   displayName: 'H5'
 })(['', ''], function (props) {
-  return '\n    font-size: ' + props.theme['$font-size-h5'] + ';\n    ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n \n    &.lead {\n     font-size: ' + props.theme['$lead-font-size'] + ';\n     font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
+  return '\n    font-size: ' + props.theme['$font-size-h5'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n \n    &.lead {\n     font-size: ' + props.theme['$lead-font-size'] + ';\n     font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-H5.defaultProps = defaultProps$65;
+H5.defaultProps = defaultProps$29;
 
-var defaultProps$66 = { theme: bsTheme };
+var navbarToggleable_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.navbarToggleable = navbarToggleable;
+var defaultProps = exports.defaultProps = {
+  '$grid-breakpoints': {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  }
+};
+function navbarToggleable() {
+  var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-breakpoints'];
+  var navbarBreakpointList = [];
+  Object.keys(gridBreakpoints).forEach(function (breakpoint) {
+    var next = (0, breakpoints.breakpointNext)(breakpoint, gridBreakpoints);
+    var infix = (0, breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
+    var navbarBreakpoint = '\n      &.navbar-toggleable' + infix + ' {\n        ' + (0, breakpoints.mediaBreakpointDown)(breakpoint, gridBreakpoints, '\n          .navbar-nav {\n            .dropdown-menu {\n              position: static;\n              float: none;\n            }\n          }\n\n          > .container {\n            padding-right: 0;\n            padding-left: 0;\n          }\n        ') + '\n        ' + (0, breakpoints.mediaBreakpointUp)(next, gridBreakpoints, '\n          flex-direction: row;\n          flex-wrap: nowrap;\n          align-items: center;\n  \n          .navbar-nav {\n            flex-direction: row;\n  \n            .nav-link {\n              padding-right: .5rem;\n              padding-left: .5rem;\n            }\n          }\n  \n          /* For nesting containers, have to redeclare for alignment purposes */\n          > .container {\n            display: flex;\n            flex-wrap: nowrap;\n            align-items: center;\n          }\n  \n          .navbar-collapse {\n            display: flex !important;\n            width: 100%;\n\n           }\n           \n          .navbar-toggler {\n            display: none;\n          }\n        ') + '\n      }\n    ';
+    navbarBreakpointList.push(navbarBreakpoint);
+  });
+  return '\n    ' + navbarBreakpointList.join('\n') + '\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  navbarToggleable: navbarToggleable
+};
+});
+unwrapExports(navbarToggleable_1);
+
+var navbar_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.navbar = navbar;
+var defaultProps = exports.defaultProps = {
+  '$grid-breakpoints': {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  },
+  '$enable-rounded': true,
+  '$enable-hover-media-query': false,
+  '$navbar-padding-y': '0.5rem',
+  '$navbar-padding-x': '1rem',
+  '$zindex-navbar': '1000',
+  '$zindex-navbar-fixed': '1030',
+  '$zindex-navbar-sticky': '1030',
+  '$navbar-brand-padding-y': '.25rem',
+  '$font-size-lg': '1.25rem',
+  '$navbar-divider-padding-y': '.425rem',
+  '$navbar-toggler-padding-y': '.5rem',
+  '$navbar-toggler-padding-x': '.75rem',
+  '$navbar-toggler-font-size': '1.25rem',
+  '$border-width': '1px',
+  '$navbar-toggler-border-radius': '.25rem',
+  '$navbar-light-active-color': 'rgba(0,0,0,.9)',
+  '$navbar-light-color': 'rgba(0,0,0,.5)',
+  '$navbar-light-hover-color': 'rgba(0,0,0,.7)',
+  '$navbar-light-toggler-border': 'rgba(0,0,0,.1)',
+  '$navbar-light-toggler-bg': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(0,0,0,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')',
+  '$navbar-light-disabled-color': 'rgba(0, 0, 0, 0.3)',
+  '$navbar-inverse-active-color': 'rgba(255,255,255,1)',
+  '$navbar-inverse-color': 'rgba(255,255,255,.5)',
+  '$navbar-inverse-hover-color': 'rgba(255,255,255,.75)',
+  '$navbar-inverse-toggler-border': 'rgba(255,255,255,.1)',
+  '$navbar-inverse-toggler-bg': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')',
+  '$navbar-inverse-disabled-color': 'rgba(255, 255, 255, 0.25)'
+};
+function navbar() {
+  var $gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-breakpoints'];
+  var $enableRounded = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$enable-rounded'];
+  var $enableHoverMediaQuery = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$enable-hover-media-query'];
+  var $navbarPaddingY = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$navbar-padding-y'];
+  var $navbarPaddingX = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$navbar-padding-x'];
+  var $zindexNavbar = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$zindex-navbar'];
+  var $zindexNavbarFixed = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$zindex-navbar-fixed'];
+  var $zindexNavbarSticky = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$zindex-navbar-sticky'];
+  var $navbarBrandPaddingY = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps['$navbar-brand-padding-y'];
+  var $fontSizeLg = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps['$font-size-lg'];
+  var $navbarDividerPaddingY = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps['$navbar-divider-padding-y'];
+  var $navbarTogglerPaddingY = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps['$navbar-toggler-padding-y'];
+  var $navbarTogglerPaddingX = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps['$navbar-toggler-padding-x'];
+  var $navbarTogglerFontSize = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : defaultProps['$navbar-toggler-font-size'];
+  var $borderWidth = arguments.length > 14 && arguments[14] !== undefined ? arguments[14] : defaultProps['$border-width'];
+  var $navbarTogglerBorderRadius = arguments.length > 15 && arguments[15] !== undefined ? arguments[15] : defaultProps['$navbar-toggler-border-radius'];
+  var $navbarLightActiveColor = arguments.length > 16 && arguments[16] !== undefined ? arguments[16] : defaultProps['$navbar-light-active-color'];
+  var $navbarLightColor = arguments.length > 17 && arguments[17] !== undefined ? arguments[17] : defaultProps['$navbar-light-color'];
+  var $navbarLightHoverColor = arguments.length > 18 && arguments[18] !== undefined ? arguments[18] : defaultProps['$navbar-light-hover-color'];
+  var $navbarLightTogglerBorder = arguments.length > 19 && arguments[19] !== undefined ? arguments[19] : defaultProps['$navbar-light-toggler-border'];
+  var $navbarLightDisabledColor = arguments.length > 20 && arguments[20] !== undefined ? arguments[20] : defaultProps['$navbar-light-disabled-color'];
+  var $navbarLightTogglerBg = arguments.length > 21 && arguments[21] !== undefined ? arguments[21] : defaultProps['$navbar-light-toggler-bg'];
+  var $navbarInverseActiveColor = arguments.length > 22 && arguments[22] !== undefined ? arguments[22] : defaultProps['$navbar-inverse-active-color'];
+  var $navbarInverseColor = arguments.length > 23 && arguments[23] !== undefined ? arguments[23] : defaultProps['$navbar-inverse-color'];
+  var $navbarInverseHoverColor = arguments.length > 24 && arguments[24] !== undefined ? arguments[24] : defaultProps['$navbar-inverse-hover-color'];
+  var $navbarInverseTogglerBorder = arguments.length > 25 && arguments[25] !== undefined ? arguments[25] : defaultProps['$navbar-inverse-toggler-border'];
+  var $navbarInverseTogglerBg = arguments.length > 26 && arguments[26] !== undefined ? arguments[26] : defaultProps['$navbar-inverse-toggler-bg'];
+  var $navbarInverseDisabledColor = arguments.length > 27 && arguments[27] !== undefined ? arguments[27] : defaultProps['$navbar-inverse-disabled-color'];
+  return '\n    /* Wrapper and base class\n\n     Provide a static navbar from which we expand to create full-width, fixed, and\n     other navbar variations.\n    */\n\n    &.navbar {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      padding: ' + $navbarPaddingY + ' ' + $navbarPaddingX + ';\n    }\n    \n    /*\n     Brand/project name\n    */\n\n    & .navbar-brand {\n      display: inline-block;\n      padding-top: ' + $navbarBrandPaddingY + ';\n      padding-bottom: ' + $navbarBrandPaddingY + ';\n      margin-right: ' + $navbarPaddingX + ';\n      font-size: ' + $fontSizeLg + ';\n      line-height: inherit;\n      white-space: nowrap;\n      ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'text-decoration: none;') + '\n    }\n    \n    /* Navigation\n\n     Custom navbar navigation built on the base .nav styles.\n    */\n\n    &.navbar-nav,\n    & .navbar-nav {\n      display: flex;\n      flex-direction: column; /* cannot use inherit to get the .navbars value */\n      padding-left: 0;\n      margin-bottom: 0;\n      list-style: none;\n    \n      .nav-link {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n    \n    /* Navbar text  */\n\n    & .navbar-text {\n      display: inline-block;\n      padding-top:    .425rem;\n      padding-bottom: .425rem;\n    }\n\n\n    /* Navbar toggle\n\n     Custom button for toggling the .navbar-collapse, powered by the collapse\n     Bootstrap JavaScript plugin.\n    */\n\n    & .navbar-toggler {\n      align-self: flex-start; \n      padding: ' + $navbarTogglerPaddingY + ' ' + $navbarTogglerPaddingX + ';\n      font-size: ' + $navbarTogglerFontSize + ';\n      line-height: 1;\n      background: transparent;\n      border: ' + $borderWidth + ' solid transparent;\n      ' + (0, borderRadius_1.borderRadius)($enableRounded, $navbarTogglerBorderRadius) + '\n      ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'text-decoration: none;') + '\n    }\n    \n    /* Keep as a separate element so folks can easily override it with another icon or image file as needed. */\n    & .navbar-toggler-icon {\n      display: inline-block;\n      width: 1.5em;\n      height: 1.5em;\n      vertical-align: middle;\n      content: "";\n      background: no-repeat center center;\n      background-size: 100% 100%;\n    }\n    \n    /* Use position on the toggler to prevent it from being auto placed as a flex item and allow easy placement. */\n    & .navbar-toggler-left {\n      position: absolute;\n      left: ' + $navbarPaddingX + ';\n    }\n    & .navbar-toggler-right {\n      position: absolute;\n      right: ' + $navbarPaddingX + ';\n    }\n\n    /* Dark links against a light background */\n    &.navbar-light {\n      .navbar-brand,\n      .navbar-toggler {\n        color: ' + $navbarLightActiveColor + ';\n\n        ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'color: ' + $navbarLightActiveColor + ';') + '\n      }\n\n      .navbar-nav {\n        .nav-link {\n          color: ' + $navbarLightColor + ';\n          ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'color: ' + $navbarLightHoverColor + ';') + '\n          &.disabled {\n            color: ' + $navbarLightDisabledColor + ';\n          }\n        }\n\n        .open > .nav-link,\n        .active > .nav-link,\n        .nav-link.open,\n        .nav-link.active {\n          color: ' + $navbarLightActiveColor + ';\n        }\n      }\n\n      .navbar-toggler {\n        border-color: ' + $navbarLightTogglerBorder + ';\n      }\n      .navbar-toggler-icon {\n        background-image: ' + $navbarLightTogglerBg + ';\n      }\n  \n      .navbar-text {\n        color: ' + $navbarLightColor + ';\n      }\n    }\n      \n\n    /* White links against a dark background */\n    &.navbar-inverse {\n      .navbar-brand,\n      .navbar-toggler {\n        color: ' + $navbarInverseActiveColor + ';\n        ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'color: ' + $navbarInverseActiveColor + ';') + '\n      }\n\n      .navbar-nav {\n        .nav-link {\n          color: ' + $navbarInverseColor + ';\n          ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'color: ' + $navbarInverseHoverColor + ';') + '\n          &.disabled {\n            color: ' + $navbarInverseDisabledColor + ';\n          }\n        }\n\n        .open > .nav-link,\n        .active > .nav-link,\n        .nav-link.open,\n        .nav-link.active {\n          color: ' + $navbarInverseActiveColor + ';\n        }\n      }\n\n      .navbar-toggler {\n        border-color: ' + $navbarInverseTogglerBorder + ';\n      }\n      \n      .navbar-toggler-icon {\n        background-image: ' + $navbarInverseTogglerBg + ';\n      }\n    \n      .navbar-text {\n        color: ' + $navbarInverseColor + ';\n      }\n    }\n    \n\n    ' + (0, navbarToggleable_1.navbarToggleable)($gridBreakpoints) + '\n    \n    /* DELETED IN LATEST BOOTSTRAP VERSINO */\n    \n    /* Navbar alignment options\n\n     Display the navbar across the entirety of the page or fixed it to the top or\n     bottom of the page.\n    */\n\n    /* A static, full width modifier with no rounded corners. */\n    &.navbar-full {\n      z-index: ' + $zindexNavbar + ';\n      ' + (0, breakpoints.mediaBreakpointUp)('sm', $gridBreakpoints, (0, borderRadius_1.borderRadius)($enableRounded, '0')) + '\n    }\n\n      /* Fix the top/bottom navbars when screen real estate supports it */\n    &.navbar-fixed-top,\n    &.navbar-fixed-bottom {\n      position: fixed;\n      right: 0;\n      left: 0;\n      z-index: ' + $zindexNavbarFixed + ';\n      /*  Undo the rounded corners */\n      ' + (0, breakpoints.mediaBreakpointUp)('sm', $gridBreakpoints, (0, borderRadius_1.borderRadius)($enableRounded, '0')) + '\n    }\n\n    &.navbar-fixed-top {\n      top: 0;\n    }\n\n    &.navbar-fixed-bottom {\n      bottom: 0;\n    }\n\n    /* position sticky does not seem to be working AJT*/\n\n    &.navbar-sticky-top {\n      position: sticky;\n      top: 0;\n      z-index: ' + $zindexNavbarSticky + ';\n      width: 100%;\n\n        /*  Undo the rounded corners */\n      ' + (0, breakpoints.mediaBreakpointUp)('sm', $gridBreakpoints, (0, borderRadius_1.borderRadius)($enableRounded, '0')) + '\n    }\n\n    & .navbar-divider {\n      float: left;\n      width: ' + $borderWidth + ';\n      padding-top: ' + $navbarDividerPaddingY + ';\n      padding-bottom: ' + $navbarDividerPaddingY + ';\n      margin-right: ' + $navbarPaddingX + ';\n      margin-left:  ' + $navbarPaddingX + ';\n      overflow: hidden;\n\n      &::before {\n        content: \'\0a0\';\n      }\n    }\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  navbar: navbar
+};
+});
+unwrapExports(navbar_1);
+var navbar_3 = navbar_1.navbar;
+
+var defaultProps$30 = { theme: bsTheme };
 var Header = styled.header.withConfig({
   displayName: 'Header'
 })(['', '  '], function (props) {
-  return '\n    ' + navbar(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + ifThen(props.shadowHeader, 'box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);') + '\n  ';
+  return '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + conditional_1(props.shadowHeader, 'box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);') + '\n  ';
 });
-Header.defaultProps = defaultProps$66;
+Header.defaultProps = defaultProps$30;
 
-var defaultProps$67 = {
+var defaultProps$31 = {
   theme: bsTheme
 };
 var Hr = styled.hr.withConfig({
@@ -9042,13 +9489,30 @@ var Hr = styled.hr.withConfig({
 })(['', ''], function (props) {
   return '\n    margin-top: ' + props.theme['$spacer-y'] + ';\n    margin-bottom: ' + props.theme['$spacer-y'] + ';\n    border: 0;\n    border-top: ' + props.theme['$hr-border-width'] + ' solid ' + props.theme['$hr-border-color'] + ';\n  ';
 });
-Hr.defaultProps = defaultProps$67;
+Hr.defaultProps = defaultProps$31;
 
+var image = createCommonjsModule(function (module, exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.imgFluid = imgFluid;
+exports.imgRetina = imgRetina;
 function imgFluid() {
   return "\n    /* Part 1: Set a maximum relative to the parent */\n    max-width: 100%;\n    /* Part 2: Override the height to auto, otherwise images will be stretched */\n    /* when setting a width and height attribute on the img element. */\n    height: auto;\n  ";
 }
+function imgRetina(file1x, file2x, width1x, height1x) {
+  return "\n    background-image: url(" + file1x + ");\n\n    /* Autoprefixer takes care of adding -webkit-min-device-pixel-ratio and -o-min-device-pixel-ratio, */\n    /* but doesn't convert dppx=>dpi. */\n    /* There's no such thing as unprefixed min-device-pixel-ratio since it's nonstandard. */\n    /* Compatibility info: http://caniuse.com/#feat=css-media-resolution */\n    @media only screen and (min-resolution: 192dpi), /* IE9-11 don't support dppx */\n      only screen and (min-resolution: 2dppx) { /* Standardized */\n        background-image: url(" + file2x + ");\n        background-size: " + width1x + " " + height1x + ";\n    }\n  ";
+}
+exports.default = {
+  imgFluid: imgFluid,
+  imgRetina: imgRetina
+};
+});
+unwrapExports(image);
+var image_1 = image.imgFluid;
 
-var defaultProps$68 = {
+var defaultProps$32 = {
   theme: bsTheme,
   tag: 'img'
 };
@@ -9058,10 +9522,10 @@ var ImgUnstyled = function (_React$Component) {
     classCallCheck$1(this, ImgUnstyled);
     return possibleConstructorReturn(this, (ImgUnstyled.__proto__ || Object.getPrototypeOf(ImgUnstyled)).apply(this, arguments));
   }
-  createClass$1(ImgUnstyled, [{
+  createClass(ImgUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           src = _omit.src,
           alt = _omit.alt,
@@ -9071,7 +9535,7 @@ var ImgUnstyled = function (_React$Component) {
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'src', 'alt', 'fluid', 'figure', 'thumbnail', 'cssModule', 'tag']);
-      var classes = mapToCssModules(classnames$1(className, fluid ? 'img-fluid' : false, thumbnail ? 'img-thumbnail' : false, figure ? 'figure-img' : false), cssModule);
+      var classes = mapToCssModules(classnames(className, fluid ? 'img-fluid' : false, thumbnail ? 'img-thumbnail' : false, figure ? 'figure-img' : false), cssModule);
       return React.createElement(Tag, _extends({
         className: classes,
         src: src,
@@ -9095,9 +9559,9 @@ ImgUnstyled.propTypes = {
 var Img = styled(ImgUnstyled).withConfig({
   displayName: 'Img'
 })(['', ''], function (props) {
-  return '\n    \n    /* \n      Responsive images (ensure images does not scale beyond their parents)\n      This is purposefully opt-in via an explicit class rather than being the default for all <img>.\n      We previously tried the "images are responsive by default" approach in Bootstrap v2,\n      and abandoned it in Bootstrap v3 because it breaks lots of third-party widgets (including Google Maps)\n      which we are not expecting the images within themselves to be involuntarily resized.\n      See also https://github.com/twbs/bootstrap/issues/18178\n    */\n    \n    &.img-fluid {\n      ' + imgFluid() + '\n    }\n    \n    \n     /* Image thumbnails */ \n    &.img-thumbnail {\n      padding: ' + props.theme['$thumbnail-padding'] + ';\n      background-color: ' + props.theme['$thumbnail-bg'] + ';\n      border: ' + props.theme['$thumbnail-border-width'] + ' solid ' + props.theme['$thumbnail-border-color'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$thumbnail-border-radius']) + '\n      ' + transition(props.theme['$enable-transitions'], props.theme['$thumbnail-transition']) + '\n      ' + boxShadow(props.theme['$enable-shadows'], props.theme['$thumbnail-box-shadow']) + '\n      /* Keep them at most 100% wide */\n      ' + imgFluid() + '\n    }\n   \n    &.figure-img {\n      margin-bottom: ' + props.theme['$spacer-halved'] + ';\n      line-height: 1;\n    }\n    \n    /* Reboot Scss */\n    \n    /*\n     By default, <img> are inline-block. This assumes that, and vertically\n     centers them. This will not apply should you reset them to block level.\n    */\n    vertical-align: middle;\n    /*\n     Note: <img> are deliberately not made responsive by default.\n     For the rationale behind this, see the comments on the .img-fluid class.\n    */\n  ';
+  return '\n    \n    /* \n      Responsive images (ensure images does not scale beyond their parents)\n      This is purposefully opt-in via an explicit class rather than being the default for all <img>.\n      We previously tried the "images are responsive by default" approach in Bootstrap v2,\n      and abandoned it in Bootstrap v3 because it breaks lots of third-party widgets (including Google Maps)\n      which we are not expecting the images within themselves to be involuntarily resized.\n      See also https://github.com/twbs/bootstrap/issues/18178\n    */\n    \n    &.img-fluid {\n      ' + image_1() + '\n    }\n    \n    \n     /* Image thumbnails */ \n    &.img-thumbnail {\n      padding: ' + props.theme['$thumbnail-padding'] + ';\n      background-color: ' + props.theme['$thumbnail-bg'] + ';\n      border: ' + props.theme['$thumbnail-border-width'] + ' solid ' + props.theme['$thumbnail-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$thumbnail-border-radius']) + '\n      ' + transition_2(props.theme['$enable-transitions'], props.theme['$thumbnail-transition']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$thumbnail-box-shadow']) + '\n      /* Keep them at most 100% wide */\n      ' + image_1() + '\n    }\n   \n    &.figure-img {\n      margin-bottom: ' + props.theme['$spacer-halved'] + ';\n      line-height: 1;\n    }\n    \n    /* Reboot Scss */\n    \n    /*\n     By default, <img> are inline-block. This assumes that, and vertically\n     centers them. This will not apply should you reset them to block level.\n    */\n    vertical-align: middle;\n    /*\n     Note: <img> are deliberately not made responsive by default.\n     For the rationale behind this, see the comments on the .img-fluid class.\n    */\n  ';
 });
-Img.defaultProps = defaultProps$68;
+Img.defaultProps = defaultProps$32;
 
 var FigureUnstyled = function (_React$Component) {
   inherits(FigureUnstyled, _React$Component);
@@ -9105,16 +9569,16 @@ var FigureUnstyled = function (_React$Component) {
     classCallCheck$1(this, FigureUnstyled);
     return possibleConstructorReturn(this, (FigureUnstyled.__proto__ || Object.getPrototypeOf(FigureUnstyled)).apply(this, arguments));
   }
-  createClass$1(FigureUnstyled, [{
+  createClass(FigureUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           children = _omit.children,
           rest = objectWithoutProperties(_omit, ['className', 'children']);
       return React.createElement(
         'figure',
-        _extends({ className: classnames$1('figure', className) }, rest),
+        _extends({ className: classnames('figure', className) }, rest),
         children
       );
     }
@@ -9130,7 +9594,7 @@ var Figure = styled(FigureUnstyled).withConfig({
   displayName: 'Figure'
 })(['&.figure{display:inline-block;}margin:0 0 1rem;']);
 
-var defaultProps$69 = {
+var defaultProps$33 = {
   theme: bsTheme
 };
 var FigCaptionUnstyled = function (_React$Component) {
@@ -9139,15 +9603,15 @@ var FigCaptionUnstyled = function (_React$Component) {
     classCallCheck$1(this, FigCaptionUnstyled);
     return possibleConstructorReturn(this, (FigCaptionUnstyled.__proto__ || Object.getPrototypeOf(FigCaptionUnstyled)).apply(this, arguments));
   }
-  createClass$1(FigCaptionUnstyled, [{
+  createClass(FigCaptionUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           children = _omit.children,
           right = _omit.right,
           rest = objectWithoutProperties(_omit, ['className', 'children', 'right']);
-      var classes = classnames$1('figure-caption', className, right ? 'text-right' : null);
+      var classes = classnames('figure-caption', className, right ? 'text-right' : null);
       return React.createElement(
         'figcaption',
         _extends({
@@ -9170,9 +9634,9 @@ var FigCaption = styled(FigCaptionUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    &.figure-caption {\n      font-size: ' + props.theme['$figure-caption-font-size'] + ';\n      color: ' + props.theme['$figure-caption-color'] + ';\n    }\n  ';
 });
-FigCaption.defaultProps = defaultProps$69;
+FigCaption.defaultProps = defaultProps$33;
 
-var defaultProps$70 = {
+var defaultProps$34 = {
   theme: bsTheme,
   type: 'text',
   tag: 'p'
@@ -9183,10 +9647,10 @@ var InputUnstyled = function (_React$Component) {
     classCallCheck$1(this, InputUnstyled);
     return possibleConstructorReturn(this, (InputUnstyled.__proto__ || Object.getPrototypeOf(InputUnstyled)).apply(this, arguments));
   }
-  createClass$1(InputUnstyled, [{
+  createClass(InputUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           type = _omit.type,
@@ -9215,7 +9679,7 @@ var InputUnstyled = function (_React$Component) {
           formControlClass = 'form-check-input';
         }
       }
-      var classes = mapToCssModules(classnames$1(className, state ? 'form-control-' + state : false, size ? 'form-control-' + size : false, formControlClass), cssModule);
+      var classes = mapToCssModules(classnames(className, state ? 'form-control-' + state : false, size ? 'form-control-' + size : false, formControlClass), cssModule);
       if (Tag === 'input') {
         attributes.type = type;
       }
@@ -9242,11 +9706,109 @@ InputUnstyled.propTypes = {
 var Input = styled(InputUnstyled).withConfig({
   displayName: 'Input'
 })(['', ''], function (props) {
-  return '\n    /* Reboot Scss */\n    touch-action: manipulation;\n    \n    &[type="radio"],\n    &[type="checkbox"] {\n      box-sizing: border-box; /* 1. Add the correct box sizing in IE 10- */\n      padding: 0; /* 2. Remove the padding in IE 10- */\n      /*\n       Apply a disabled cursor for radios and checkboxes.\n       Note: Neither radios nor checkboxes can be readonly.\n      */\n   \n      &:disabled {\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n      }\n    }\n    \n    /* Normalize includes font: inherit;, so font-family. font-size, etc are */\n    /* properly inherited. However, line-height is not inherited there. */\n    line-height: inherit;\n   \n    &.disabled {\n      cursor: ' + props.theme['$cursor-disabled'] + ';\n    }\n   \n    &[type="date"],\n    &[type="time"],\n    &[type="datetime-local"],\n    &[type="month"] {\n    /* Remove the default appearance of temporal inputs to avoid a Mobile Safari\n       bug where setting a custom line-height prevents text from being vertically\n       centered within the input.\n       Bug report: https://github.com/twbs/bootstrap/issues/11266\n     */\n      -webkit-appearance: listbox;\n    }\n      \n    /* Correct the cursor style of increment and decrement buttons in Chrome. */\n    &[type="number"]::-webkit-inner-spin-button,\n    &[type="number"]::-webkit-outer-spin-button {\n      height: auto;\n    }\n    \n    &[type="search"] {\n      /* This overrides the extra rounded corners on search inputs in iOS so that our\n      .form-control class can properly style them. Note that this cannot simply\n       be added to .form-control as it is not specific enough. For details, see\n       https://github.com/twbs/bootstrap/issues/11586.\n       */\n      outline-offset: -2px; /* 2. Correct the outline style in Safari. */\n      -webkit-appearance: none;\n    }\n    \n    /* Remove the inner padding and cancel buttons in Chrome and Safari on macOS. */\n    &[type="search"]::-webkit-search-cancel-button,\n    &[type="search"]::-webkit-search-decoration {\n      -webkit-appearance: none;\n    }\n    \n    ' + button(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
+  return '\n    /* Reboot Scss */\n    touch-action: manipulation;\n    \n    &[type="radio"],\n    &[type="checkbox"] {\n      box-sizing: border-box; /* 1. Add the correct box sizing in IE 10- */\n      padding: 0; /* 2. Remove the padding in IE 10- */\n      /*\n       Apply a disabled cursor for radios and checkboxes.\n       Note: Neither radios nor checkboxes can be readonly.\n      */\n   \n      &:disabled {\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n      }\n    }\n    \n    /* Normalize includes font: inherit;, so font-family. font-size, etc are */\n    /* properly inherited. However, line-height is not inherited there. */\n    line-height: inherit;\n   \n    &.disabled {\n      cursor: ' + props.theme['$cursor-disabled'] + ';\n    }\n   \n    &[type="date"],\n    &[type="time"],\n    &[type="datetime-local"],\n    &[type="month"] {\n    /* Remove the default appearance of temporal inputs to avoid a Mobile Safari\n       bug where setting a custom line-height prevents text from being vertically\n       centered within the input.\n       Bug report: https://github.com/twbs/bootstrap/issues/11266\n     */\n      -webkit-appearance: listbox;\n    }\n      \n    /* Correct the cursor style of increment and decrement buttons in Chrome. */\n    &[type="number"]::-webkit-inner-spin-button,\n    &[type="number"]::-webkit-outer-spin-button {\n      height: auto;\n    }\n    \n    &[type="search"] {\n      /* This overrides the extra rounded corners on search inputs in iOS so that our\n      .form-control class can properly style them. Note that this cannot simply\n       be added to .form-control as it is not specific enough. For details, see\n       https://github.com/twbs/bootstrap/issues/11586.\n       */\n      outline-offset: -2px; /* 2. Correct the outline style in Safari. */\n      -webkit-appearance: none;\n    }\n    \n    /* Remove the inner padding and cancel buttons in Chrome and Safari on macOS. */\n    &[type="search"]::-webkit-search-cancel-button,\n    &[type="search"]::-webkit-search-decoration {\n      -webkit-appearance: none;\n    }\n    \n    ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
-Input.defaultProps = defaultProps$70;
+Input.defaultProps = defaultProps$34;
 
-var defaultProps$71 = {
+var forms = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.formControl = formControl;
+exports.formControlValidation = formControlValidation;
+exports.formControlFocus = formControlFocus;
+exports.inputSize = inputSize;
+var _color2 = _interopRequireDefault(color);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var defaultProps = exports.defaultProps = {
+  '$enable-rounded': true,
+  '$enable-transitions': true,
+  '$enable-shadows': false,
+  '$input-height': '2.5rem',
+  '$input-padding-y': '.5rem',
+  '$input-padding-x': '.75rem',
+  '$font-size-base': '1rem',
+  '$input-line-height': '1.25',
+  '$input-color': '#464a4c',
+  '$input-bg': '#fff',
+  '$input-border-radius': '.25rem',
+  '$input-btn-border-width': '1px',
+  '$input-border-color': 'rgba(0, 0, 0, 0.15)',
+  '$input-transition': 'border-color ease-in-out .15s, box-shadow ease-in-out .15s',
+  '$input-box-shadow': 'inset 0 1px 1px rgba(0, 0, 0, 0.075)',
+  '$input-color-focus': '#464a4c',
+  '$input-bg-focus': '#fff',
+  '$input-border-focus': 'hsl(207.79999999999995, 98.2%, 53.4%)',
+  '$input-box-shadow-focus': 'inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(hsl(207.79999999999995, 98.2%, 53.4%),.6)',
+  '$input-color-placeholder': '#636c72',
+  '$input-bg-disabled': '#eceeef',
+  '$cursor-disabled': 'not-allowed'
+};
+function formControl() {
+  var $enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var $enableTransitions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$enable-transitions'];
+  var $enableShadows = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$enable-shadows'];
+  var $inputHeight = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$input-height'];
+  var $inputPaddingY = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$input-padding-y'];
+  var $inputPaddingX = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$input-padding-x'];
+  var $fontSizeBase = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$font-size-base'];
+  var $inputLineHeight = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$input-line-height'];
+  var $inputColor = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps['$input-color'];
+  var $inputBg = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps['$input-bg'];
+  var $inputBorderRadius = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps['$input-border-radius'];
+  var $inputBtnBorderWidth = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps['$input-btn-border-width'];
+  var $inputBorderColor = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps['$input-border-color'];
+  var $inputTransition = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : defaultProps['$input-transition'];
+  var $inputBoxShadow = arguments.length > 14 && arguments[14] !== undefined ? arguments[14] : defaultProps['$input-box-shadow'];
+  var $inputColorFocus = arguments.length > 15 && arguments[15] !== undefined ? arguments[15] : defaultProps['$input-color-focus'];
+  var $inputBgFocus = arguments.length > 16 && arguments[16] !== undefined ? arguments[16] : defaultProps['$input-bg-focus'];
+  var $inputBorderFocus = arguments.length > 17 && arguments[17] !== undefined ? arguments[17] : defaultProps['$input-border-focus'];
+  var $inputBoxShadowFocus = arguments.length > 18 && arguments[18] !== undefined ? arguments[18] : defaultProps['$input-box-shadow-focus'];
+  var $inputColorPlaceholder = arguments.length > 19 && arguments[19] !== undefined ? arguments[19] : defaultProps['$input-color-placeholder'];
+  var $inputBgDisabled = arguments.length > 20 && arguments[20] !== undefined ? arguments[20] : defaultProps['$input-bg-disabled'];
+  var $cursorDisabled = arguments.length > 21 && arguments[21] !== undefined ? arguments[21] : defaultProps['$cursor-disabled'];
+  return '\n      & .form-control {\n        display: block;\n        width: 100%;\n  \n        /* Make inputs at least the height of their button counterpart (base line-height + padding + border) */\n        /* height: ' + $inputHeight + '; */\n  \n        padding: ' + $inputPaddingY + ' ' + $inputPaddingX + ';\n        font-size: ' + $fontSizeBase + ';\n        line-height: ' + $inputLineHeight + ';\n        color: ' + $inputColor + ';\n        background-color: ' + $inputBg + ';\n  \n        /* Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214. */\n        background-image: none;\n        background-clip: padding-box;\n        /* Note: This has no effect on selects in some browsers, due to the limited stylability of selects in CSS. */\n        ' + ($enableRounded ? 'border-radius: ' + $inputBorderRadius + ';' : 'border-radius: 0;') + ' /* Manually use the if/else instead of the mixin to account for iOS override */\n        border: ' + $inputBtnBorderWidth + ' solid ' + $inputBorderColor + ';\n        ' + (0, transition_1.transition)($enableTransitions, $inputTransition) + '\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $inputBoxShadow) + '\n  \n        /* Unstyle the caret on selects in IE10+. */\n        &::-ms-expand {\n          background-color: transparent;\n          border: 0;\n        }\n  \n        /* Customize the :focus state to imitate native WebKit styles. */\n        ' + formControlFocus($enableShadows, $inputColorFocus, $inputBgFocus, $inputBorderFocus, $inputBoxShadowFocus) + '\n  \n        /* Placeholder */\n        &::placeholder {\n          color: ' + $inputColorPlaceholder + ';\n          /* Override Firefox unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526. */\n          opacity: 1;\n        }\n  \n        /* Disabled and read-only inputs\n         HTML5 says that controls under a fieldset > legend:first-child will not be\n         disabled if the fieldset is disabled. Due to implementation difficulty, we\n         do not honor that edge case; we style them as disabled anyway.\n         */\n  \n        &:disabled,\n        &[readonly] {\n          background-color:' + $inputBgDisabled + ';\n          /* iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655. */\n          opacity: 1;\n        }\n  \n        &:disabled {\n          cursor: ' + $cursorDisabled + ';\n        }\n      }\n  ';
+}
+function formControlValidation() {
+  var enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-shadows'];
+  var formColor = arguments[1];
+  var inputBoxShadow = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$input-box-shadow'];
+  return '\n    /* Color the label and help text */\n    & .form-control-feedback,\n    & .form-control-label,\n    & .col-form-label,\n    & .form-check-label,\n    & .custom-control {\n      color: ' + formColor + ';\n    }\n  \n    /* Set the border and box shadow on specific inputs to match */\n      \n    & .form-control,\n    & .custom-select,\n    & .custom-file-control {\n      border-color: ' + formColor + ';\n  \n      &:focus {\n        ' + (0, boxShadow_1.boxShadow)(enableShadows, inputBoxShadow + ', 0 0 6px ' + (0, _color2.default)(formColor).lighten(0.2).toString()) + '\n      }\n    }\n  \n    /* Set validation states also for addons */\n    .input-group-addon {\n      color: ' + formColor + ';\n      border-color: ' + formColor + ';\n      background-color: ' + (0, _color2.default)(formColor).lighten(0.40).toString() + ';\n    }\n  ';
+}
+function formControlFocus() {
+  var enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-shadows'];
+  var inputColorFocus = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$input-color-focus'];
+  var inputBgFocus = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$input-bg-focus'];
+  var inputBorderFocus = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$input-border-focus'];
+  var inputBoxShadowFocus = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$input-box-shadow-focus'];
+  return '\n    &:focus {\n      color: ' + inputColorFocus + ';\n      background-color: ' + inputBgFocus + ';\n      border-color: ' + inputBorderFocus + ';\n      outline: none;\n      ' + (0, boxShadow_1.boxShadow)(enableShadows, inputBoxShadowFocus) + '\n    }\n  ';
+}
+function inputSize() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var parent = arguments[1];
+  var inputHeight = arguments[2];
+  var paddingY = arguments[3];
+  var paddingX = arguments[4];
+  var fontSize = arguments[5];
+  var lineHeight = arguments[6];
+  var inputBorderRadius = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$input-border-radius'];
+  return '\n    ' + parent + ' {\n      height: ' + inputHeight + ';\n      padding: ' + paddingY + ' ' + paddingX + ';\n      font-size: ' + fontSize + ';\n      line-height: ' + lineHeight + ';\n      ' + (0, borderRadius_1.borderRadius)(enableRounded, inputBorderRadius) + '\n    }\n  \n    select' + parent + ' {\n      height: ' + inputHeight + ';\n      line-height: ' + inputHeight + ';\n    }\n  \n    textarea' + parent + ',\n      select[multiple]' + parent + ' {\n      height: auto;\n    }\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  formControl: formControl,
+  formControlValidation: formControlValidation,
+  formControlFocus: formControlFocus,
+  inputSize: inputSize
+};
+});
+unwrapExports(forms);
+var forms_2 = forms.formControl;
+var forms_3 = forms.formControlValidation;
+
+var defaultProps$35 = {
   theme: bsTheme,
   tag: 'div'
 };
@@ -9256,16 +9818,16 @@ var InputGroupUnstyled = function (_React$Component) {
     classCallCheck$1(this, InputGroupUnstyled);
     return possibleConstructorReturn(this, (InputGroupUnstyled.__proto__ || Object.getPrototypeOf(InputGroupUnstyled)).apply(this, arguments));
   }
-  createClass$1(InputGroupUnstyled, [{
+  createClass(InputGroupUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           size = _omit.size,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'size']);
-      var classes = mapToCssModules(classnames$1(className, 'input-group', size ? 'input-group-' + size : null), cssModule);
+      var classes = mapToCssModules(classnames(className, 'input-group', size ? 'input-group-' + size : null), cssModule);
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -9281,11 +9843,11 @@ InputGroupUnstyled.propTypes = {
 var InputGroup = styled(InputGroupUnstyled).withConfig({
   displayName: 'InputGroup'
 })(['', ''], function (props) {
-  return '\n    /*\n     Base styles\n    */\n   \n    &.input-group {\n      position: relative;\n      display: flex;\n      width: 100%;\n\n      .form-control {\n        /* \n          Ensure that the input is always above the *appended* addon button for\n          proper border colors.\n        */\n        \n        position: relative;\n        z-index: 2;\n        flex: 1 1 auto;\n        /* Add width 1% and flex-basis auto to ensure that button will not wrap out */\n        /* the column. Applies to IE Edge+ and Firefox. Chrome does not require this. */\n        width: 1%;\n        margin-bottom: 0;\n        \n        ' + hoverFocusActive(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n      }\n    }\n    \n    & .input-group-addon,\n    & .input-group-btn,\n    &.input-group .form-control {\n      /* Vertically centers the content of the addons within the input group */\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n\n\n      &:not(:first-child):not(:last-child) {\n        ' + borderRadius(props.theme['$enable-rounded'], '0') + '\n      }\n    }\n   \n    & .input-group-addon,\n    & .input-group-btn {\n\n      white-space: nowrap;\n      vertical-align: middle; /* Match the inputs */\n    }\n   \n   \n    /* Sizing options\n    Remix the default form control sizing classes into new ones for easier\n    manipulation.\n    */\n   \n    &.input-group-lg > .form-control,\n    &.input-group-lg > .input-group-addon,\n    &.input-group-lg > .input-group-btn > .btn {\n      padding: ' + props.theme['$input-padding-y-lg'] + ' ' + props.theme['$input-padding-x-lg'] + ';\n      font-size: ' + props.theme['$font-size-lg'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$input-border-radius-lg']) + '\n    }\n    \n    &.input-group-sm > .form-control,\n    &.input-group-sm > .input-group-addon,\n    &.input-group-sm > .input-group-btn > .btn {\n      padding: ' + props.theme['$input-padding-y-sm'] + ' ' + props.theme['$input-padding-x-sm'] + ';\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$input-border-radius-sm']) + '\n    }\n   \n   \n    /*\n    Text input groups\n    */\n   \n    & .input-group-addon {\n      padding: ' + props.theme['$input-padding-y'] + ' ' + props.theme['$input-padding-x'] + ';\n      margin-bottom: 0; /* Allow use of <label> elements by overriding our default margin-bottom */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      font-weight: normal;\n      line-height: ' + props.theme['$input-line-height'] + ';\n      color: ' + props.theme['$input-color'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$input-group-addon-bg'] + ';\n      border: ' + props.theme['$input-btn-border-width'] + ' solid ' + props.theme['$input-group-addon-border-color'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$input-border-radius']) + '\n   \n      /* \n      Nuke default margins from checkboxes and radios to vertically center within.\n      */\n      input[type="radio"],\n      input[type="checkbox"] {\n        margin-top: 0;\n      }\n    }\n   \n   \n    /*\n     Reset rounded corners\n    */\n   \n    &.input-group .form-control:not(:last-child),\n    & .input-group-addon:not(:last-child),\n    & .input-group-btn:not(:last-child) > .btn,\n    & .input-group-btn:not(:last-child) > .btn-group > .btn,\n    & .input-group-btn:not(:last-child) > .dropdown-toggle,\n    & .input-group-btn:not(:first-child) > .btn:not(:last-child):not(.dropdown-toggle),\n    & .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn {\n      ' + borderRightRadius(props.theme['$enable-rounded'], '0') + '\n    }\n    & .input-group-addon:not(:last-child) {\n      border-right: 0;\n    }\n    &.input-group .form-control:not(:first-child),\n    & .input-group-addon:not(:first-child),\n    & .input-group-btn:not(:first-child) > .btn,\n    & .input-group-btn:not(:first-child) > .btn-group > .btn,\n    & .input-group-btn:not(:first-child) > .dropdown-toggle,\n    & .input-group-btn:not(:last-child) > .btn:not(:first-child),\n    & .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn {\n      ' + borderLeftRadius(props.theme['$enable-rounded'], '0') + '\n    }\n    & .form-control + .input-group-addon:not(:first-child) {\n      border-left: 0;\n    }\n   \n    /*\n     Button input groups\n    */\n   \n    & .input-group-btn {\n      position: relative;\n      /* Jankily prevent input button groups from wrapping with white-space and\n      font-size in combination with inline-block on buttons.\n      */\n      font-size: 0;\n      white-space: nowrap;\n   \n      /* Negative margin for spacing, position for bringing hovered/focused/actived\n      element above the siblings.\n      */\n      > .btn {\n        position: relative;\n        /* Vertically stretch the button and center its content */\n        flex: 1;\n        \n        + .btn {\n          margin-left: -' + props.theme['$input-btn-border-width'] + ';\n        }\n        \n        /* Bring the active button to the front */\n        ' + hoverFocusActive(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n      }\n   \n      /* Negative margin to only have a single, shared border between the two */\n      &:not(:last-child) {\n        > .btn,\n        > .btn-group {\n          margin-right: -' + props.theme['$input-btn-border-width'] + ';\n        }\n      }\n      &:not(:first-child) {\n        > .btn,\n        > .btn-group {\n          z-index: 2;\n          margin-left: -' + props.theme['$input-btn-border-width'] + ';\n          /* Because specificity */\n          ' + hoverFocusActive(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n        }\n      }\n    }\n    \n   /* Added So that Inputs in InputGroup grab the same .form-control class as in Component Form Not Bs4 */\n   ' + formControl(props.theme['$enable-rounded'], props.theme['$enable-transitions'], props.theme['$enable-shadows'], props.theme['$input-height'], props.theme['$input-padding-y'], props.theme['$input-padding-x'], props.theme['$font-size-base'], props.theme['$input-line-height'], props.theme['$input-color'], props.theme['$input-bg'], props.theme['$input-border-radius'], props.theme['$input-btn-border-width'], props.theme['$input-border-color'], props.theme['$input-transition'], props.theme['$input-box-shadow'], props.theme['$input-color-focus'], props.theme['$input-bg-focus'], props.theme['$input-border-focus'], props.theme['$input-box-shadow-focus'], props.theme['$input-color-placeholder'], props.theme['$input-bg-disabled'], props.theme['$cursor-disabled']) + '\n    \n  ';
+  return '\n    /*\n     Base styles\n    */\n   \n    &.input-group {\n      position: relative;\n      display: flex;\n      width: 100%;\n\n      .form-control {\n        /* \n          Ensure that the input is always above the *appended* addon button for\n          proper border colors.\n        */\n        \n        position: relative;\n        z-index: 2;\n        flex: 1 1 auto;\n        /* Add width 1% and flex-basis auto to ensure that button will not wrap out */\n        /* the column. Applies to IE Edge+ and Firefox. Chrome does not require this. */\n        width: 1%;\n        margin-bottom: 0;\n        \n        ' + hover_5(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n      }\n    }\n    \n    & .input-group-addon,\n    & .input-group-btn,\n    &.input-group .form-control {\n      /* Vertically centers the content of the addons within the input group */\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n\n\n      &:not(:first-child):not(:last-child) {\n        ' + borderRadius_2(props.theme['$enable-rounded'], '0') + '\n      }\n    }\n   \n    & .input-group-addon,\n    & .input-group-btn {\n\n      white-space: nowrap;\n      vertical-align: middle; /* Match the inputs */\n    }\n   \n   \n    /* Sizing options\n    Remix the default form control sizing classes into new ones for easier\n    manipulation.\n    */\n   \n    &.input-group-lg > .form-control,\n    &.input-group-lg > .input-group-addon,\n    &.input-group-lg > .input-group-btn > .btn {\n      padding: ' + props.theme['$input-padding-y-lg'] + ' ' + props.theme['$input-padding-x-lg'] + ';\n      font-size: ' + props.theme['$font-size-lg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-lg']) + '\n    }\n    \n    &.input-group-sm > .form-control,\n    &.input-group-sm > .input-group-addon,\n    &.input-group-sm > .input-group-btn > .btn {\n      padding: ' + props.theme['$input-padding-y-sm'] + ' ' + props.theme['$input-padding-x-sm'] + ';\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-sm']) + '\n    }\n   \n   \n    /*\n    Text input groups\n    */\n   \n    & .input-group-addon {\n      padding: ' + props.theme['$input-padding-y'] + ' ' + props.theme['$input-padding-x'] + ';\n      margin-bottom: 0; /* Allow use of <label> elements by overriding our default margin-bottom */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      font-weight: normal;\n      line-height: ' + props.theme['$input-line-height'] + ';\n      color: ' + props.theme['$input-color'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$input-group-addon-bg'] + ';\n      border: ' + props.theme['$input-btn-border-width'] + ' solid ' + props.theme['$input-group-addon-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius']) + '\n   \n      /* \n      Nuke default margins from checkboxes and radios to vertically center within.\n      */\n      input[type="radio"],\n      input[type="checkbox"] {\n        margin-top: 0;\n      }\n    }\n   \n   \n    /*\n     Reset rounded corners\n    */\n   \n    &.input-group .form-control:not(:last-child),\n    & .input-group-addon:not(:last-child),\n    & .input-group-btn:not(:last-child) > .btn,\n    & .input-group-btn:not(:last-child) > .btn-group > .btn,\n    & .input-group-btn:not(:last-child) > .dropdown-toggle,\n    & .input-group-btn:not(:first-child) > .btn:not(:last-child):not(.dropdown-toggle),\n    & .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn {\n      ' + borderRadius_4(props.theme['$enable-rounded'], '0') + '\n    }\n    & .input-group-addon:not(:last-child) {\n      border-right: 0;\n    }\n    &.input-group .form-control:not(:first-child),\n    & .input-group-addon:not(:first-child),\n    & .input-group-btn:not(:first-child) > .btn,\n    & .input-group-btn:not(:first-child) > .btn-group > .btn,\n    & .input-group-btn:not(:first-child) > .dropdown-toggle,\n    & .input-group-btn:not(:last-child) > .btn:not(:first-child),\n    & .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn {\n      ' + borderRadius_6(props.theme['$enable-rounded'], '0') + '\n    }\n    & .form-control + .input-group-addon:not(:first-child) {\n      border-left: 0;\n    }\n   \n    /*\n     Button input groups\n    */\n   \n    & .input-group-btn {\n      position: relative;\n      /* Jankily prevent input button groups from wrapping with white-space and\n      font-size in combination with inline-block on buttons.\n      */\n      font-size: 0;\n      white-space: nowrap;\n   \n      /* Negative margin for spacing, position for bringing hovered/focused/actived\n      element above the siblings.\n      */\n      > .btn {\n        position: relative;\n        /* Vertically stretch the button and center its content */\n        flex: 1;\n        \n        + .btn {\n          margin-left: -' + props.theme['$input-btn-border-width'] + ';\n        }\n        \n        /* Bring the active button to the front */\n        ' + hover_5(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n      }\n   \n      /* Negative margin to only have a single, shared border between the two */\n      &:not(:last-child) {\n        > .btn,\n        > .btn-group {\n          margin-right: -' + props.theme['$input-btn-border-width'] + ';\n        }\n      }\n      &:not(:first-child) {\n        > .btn,\n        > .btn-group {\n          z-index: 2;\n          margin-left: -' + props.theme['$input-btn-border-width'] + ';\n          /* Because specificity */\n          ' + hover_5(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n        }\n      }\n    }\n    \n   /* Added So that Inputs in InputGroup grab the same .form-control class as in Component Form Not Bs4 */\n   ' + forms_2(props.theme['$enable-rounded'], props.theme['$enable-transitions'], props.theme['$enable-shadows'], props.theme['$input-height'], props.theme['$input-padding-y'], props.theme['$input-padding-x'], props.theme['$font-size-base'], props.theme['$input-line-height'], props.theme['$input-color'], props.theme['$input-bg'], props.theme['$input-border-radius'], props.theme['$input-btn-border-width'], props.theme['$input-border-color'], props.theme['$input-transition'], props.theme['$input-box-shadow'], props.theme['$input-color-focus'], props.theme['$input-bg-focus'], props.theme['$input-border-focus'], props.theme['$input-box-shadow-focus'], props.theme['$input-color-placeholder'], props.theme['$input-bg-disabled'], props.theme['$cursor-disabled']) + '\n    \n  ';
 });
-InputGroup.defaultProps = defaultProps$71;
+InputGroup.defaultProps = defaultProps$35;
 
-var defaultProps$72 = {
+var defaultProps$36 = {
   tag: 'div'
 };
 var InputGroupAddon = function (_React$Component) {
@@ -9294,7 +9856,7 @@ var InputGroupAddon = function (_React$Component) {
     classCallCheck$1(this, InputGroupAddon);
     return possibleConstructorReturn(this, (InputGroupAddon.__proto__ || Object.getPrototypeOf(InputGroupAddon)).apply(this, arguments));
   }
-  createClass$1(InputGroupAddon, [{
+  createClass(InputGroupAddon, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -9302,7 +9864,7 @@ var InputGroupAddon = function (_React$Component) {
           cssModule = _props.cssModule,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
-      var classes = mapToCssModules(classnames$1(className, 'input-group-addon'), cssModule);
+      var classes = mapToCssModules(classnames(className, 'input-group-addon'), cssModule);
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -9313,9 +9875,9 @@ InputGroupAddon.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-InputGroupAddon.defaultProps = defaultProps$72;
+InputGroupAddon.defaultProps = defaultProps$36;
 
-var defaultProps$73 = {
+var defaultProps$37 = {
   tag: 'div'
 };
 var InputGroupButton = function (_React$Component) {
@@ -9324,7 +9886,7 @@ var InputGroupButton = function (_React$Component) {
     classCallCheck$1(this, InputGroupButton);
     return possibleConstructorReturn(this, (InputGroupButton.__proto__ || Object.getPrototypeOf(InputGroupButton)).apply(this, arguments));
   }
-  createClass$1(InputGroupButton, [{
+  createClass(InputGroupButton, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -9336,7 +9898,7 @@ var InputGroupButton = function (_React$Component) {
           groupAttributes = _props.groupAttributes,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag', 'children', 'groupClassName', 'groupAttributes']);
       if (typeof children === 'string') {
-        var groupClasses = mapToCssModules(classnames$1(groupClassName, 'input-group-btn'), cssModule);
+        var groupClasses = mapToCssModules(classnames(groupClassName, 'input-group-btn'), cssModule);
         return React.createElement(
           Tag,
           _extends({}, groupAttributes, { className: groupClasses }),
@@ -9347,7 +9909,7 @@ var InputGroupButton = function (_React$Component) {
           )
         );
       }
-      var classes = mapToCssModules(classnames$1(className, 'input-group-btn'), cssModule);
+      var classes = mapToCssModules(classnames(className, 'input-group-btn'), cssModule);
       return React.createElement(
         Tag,
         _extends({}, attributes, { className: classes }),
@@ -9365,7 +9927,7 @@ InputGroupButton.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-InputGroupButton.defaultProps = defaultProps$73;
+InputGroupButton.defaultProps = defaultProps$37;
 
 function IssueIcon(props) {
   return React.createElement(
@@ -9382,17 +9944,17 @@ IssueIcon.propTypes = {
   className: PropTypes.string
 };
 
-var defaultProps$74 = { theme: bsTheme };
+var defaultProps$38 = { theme: bsTheme };
 var KbdUnstyled = function (_React$Component) {
   inherits(KbdUnstyled, _React$Component);
   function KbdUnstyled() {
     classCallCheck$1(this, KbdUnstyled);
     return possibleConstructorReturn(this, (KbdUnstyled.__proto__ || Object.getPrototypeOf(KbdUnstyled)).apply(this, arguments));
   }
-  createClass$1(KbdUnstyled, [{
+  createClass(KbdUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           children = _omit.children,
           rest = objectWithoutProperties(_omit, ['className', 'children']);
@@ -9413,11 +9975,11 @@ KbdUnstyled.propTypes = {
 var Kbd = styled(KbdUnstyled).withConfig({
   displayName: 'Kbd'
 })(['', ''], function (props) {
-  return '\n    /* User input typically entered via keyboard */\n    padding: ' + props.theme['$code-padding-y'] + ' ' + props.theme['$code-padding-x'] + ';\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$kbd-color'] + ';\n    background-color: ' + props.theme['$kbd-bg'] + ';\n    ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius-sm']) + '\n    ' + boxShadow(props.theme['$enable-shadows'], props.theme['$kbd-box-shadow']) + '\n    \n    & kbd {\n      padding: 0;\n      font-size: 100%;\n      font-weight: ' + props.theme['$nested-kbd-font-weight'] + ';\n      ' + boxShadow(props.theme['$enable-shadows'], 'none') + '\n    }\n    \n    /* Bootstrap 4 does not place this css rule straight into Kbd tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
+  return '\n    /* User input typically entered via keyboard */\n    padding: ' + props.theme['$code-padding-y'] + ' ' + props.theme['$code-padding-x'] + ';\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$kbd-color'] + ';\n    background-color: ' + props.theme['$kbd-bg'] + ';\n    ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius-sm']) + '\n    ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$kbd-box-shadow']) + '\n    \n    & kbd {\n      padding: 0;\n      font-size: 100%;\n      font-weight: ' + props.theme['$nested-kbd-font-weight'] + ';\n      ' + boxShadow_2(props.theme['$enable-shadows'], 'none') + '\n    }\n    \n    /* Bootstrap 4 does not place this css rule straight into Kbd tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
-Kbd.defaultProps = defaultProps$74;
+Kbd.defaultProps = defaultProps$38;
 
-var defaultProps$75 = {
+var defaultProps$39 = {
   theme: bsTheme,
   tag: 'div'
 };
@@ -9427,16 +9989,16 @@ var JumbotronUnstyled = function (_React$Component) {
     classCallCheck$1(this, JumbotronUnstyled);
     return possibleConstructorReturn(this, (JumbotronUnstyled.__proto__ || Object.getPrototypeOf(JumbotronUnstyled)).apply(this, arguments));
   }
-  createClass$1(JumbotronUnstyled, [{
+  createClass(JumbotronUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           fluid = _omit.fluid,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'fluid']);
-      var classes = mapToCssModules(classnames$1(className, 'jumbotron', fluid ? 'jumbotron-fluid' : false), cssModule);
+      var classes = mapToCssModules(classnames(className, 'jumbotron', fluid ? 'jumbotron-fluid' : false), cssModule);
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -9452,9 +10014,9 @@ JumbotronUnstyled.propTypes = {
 var Jumbotron = styled(JumbotronUnstyled).withConfig({
   displayName: 'Jumbotron'
 })(['', ''], function (props) {
-  return '\n    &.jumbotron {\n      padding: ' + props.theme['$jumbotron-padding'] + ' calc(' + props.theme['$jumbotron-padding'] + ' / 2);\n      margin-bottom: ' + props.theme['$jumbotron-padding'] + ';\n      background-color: ' + props.theme['$jumbotron-bg'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius-lg']) + '\n    \n      ' + mediaBreakpointUp('sm', props.theme['$grid-breakpoints'], 'padding: calc(' + props.theme['$jumbotron-padding'] + ' * 2) ' + props.theme['$jumbotron-padding'] + ';') + '  \n    }\n\n    & .jumbotron-hr {\n      border-top-color: ' + color(props.theme['$jumbotron-bg']).darken(0.1).toString() + ';\n    }\n    \n    &.jumbotron-fluid {\n      padding-right: 0;\n      padding-left: 0;\n      ' + borderRadius(props.theme['$enable-rounded'], '0') + '\n    }\n  ';
+  return '\n    &.jumbotron {\n      padding: ' + props.theme['$jumbotron-padding'] + ' calc(' + props.theme['$jumbotron-padding'] + ' / 2);\n      margin-bottom: ' + props.theme['$jumbotron-padding'] + ';\n      background-color: ' + props.theme['$jumbotron-bg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius-lg']) + '\n    \n      ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], 'padding: calc(' + props.theme['$jumbotron-padding'] + ' * 2) ' + props.theme['$jumbotron-padding'] + ';') + '  \n    }\n\n    & .jumbotron-hr {\n      border-top-color: ' + color(props.theme['$jumbotron-bg']).darken(0.1).toString() + ';\n    }\n    \n    &.jumbotron-fluid {\n      padding-right: 0;\n      padding-left: 0;\n      ' + borderRadius_2(props.theme['$enable-rounded'], '0') + '\n    }\n  ';
 });
-Jumbotron.defaultProps = defaultProps$75;
+Jumbotron.defaultProps = defaultProps$39;
 
 var colSizes = ['xs', 'sm', 'md', 'lg', 'xl'];
 var stringOrNumberProp$1 = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
@@ -9482,12 +10044,12 @@ var propTypes$2 = {
   xl: columnProps$1,
   theme: PropTypes.object
 };
-var defaultProps$76 = {
+var defaultProps$40 = {
   tag: 'label',
   theme: bsTheme
 };
 var LabelUnstyled = function LabelUnstyled(props) {
-  var _omit = lodash_omit$1(props, ['theme']),
+  var _omit = lodash_omit(props, ['theme']),
       className = _omit.className,
       cssModule = _omit.cssModule,
       hidden = _omit.hidden,
@@ -9504,41 +10066,53 @@ var LabelUnstyled = function LabelUnstyled(props) {
     delete attributes[colSize];
     if (columnProp && columnProp.size) {
       var _cn;
-      colClasses.push(mapToCssModules(classnames$1((_cn = {}, defineProperty(_cn, 'col-' + colSize + '-' + columnProp.size, columnProp.size), defineProperty(_cn, 'push-' + colSize + '-' + columnProp.push, columnProp.push), defineProperty(_cn, 'pull-' + colSize + '-' + columnProp.pull, columnProp.pull), defineProperty(_cn, 'offset-' + colSize + '-' + columnProp.offset, columnProp.offset), _cn))), cssModule);
+      colClasses.push(mapToCssModules(classnames((_cn = {}, defineProperty(_cn, 'col-' + colSize + '-' + columnProp.size, columnProp.size), defineProperty(_cn, 'push-' + colSize + '-' + columnProp.push, columnProp.push), defineProperty(_cn, 'pull-' + colSize + '-' + columnProp.pull, columnProp.pull), defineProperty(_cn, 'offset-' + colSize + '-' + columnProp.offset, columnProp.offset), _cn))), cssModule);
     } else if (columnProp) {
       colClasses.push('col-' + colSize + '-' + columnProp);
     }
   });
-  var classes = mapToCssModules(classnames$1(className, hidden ? 'sr-only' : false, check ? 'form-check-' + (inline ? 'inline' : 'label') : false, check && inline && disabled ? 'disabled' : false, size ? 'col-form-label-' + size : false, colClasses, colClasses.length ? 'col-form-label' : false), cssModule);
+  var classes = mapToCssModules(classnames(className, hidden ? 'sr-only' : false, check ? 'form-check-' + (inline ? 'inline' : 'label') : false, check && inline && disabled ? 'disabled' : false, size ? 'col-form-label-' + size : false, colClasses, colClasses.length ? 'col-form-label' : false), cssModule);
   return React.createElement(Tag, _extends({ htmlFor: htmlFor }, attributes, { className: classes }));
 };
 var Label = styled(LabelUnstyled).withConfig({
   displayName: 'Label'
 })(['', ''], function (props) {
-  return '\n    /* Reboot Scss */\n    touch-action: manipulation;\n    /* Allow labels to use margin for spacing. */\n    display: inline-block;\n    margin-bottom: .5rem;\n\n    ' + button(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
+  return '\n    /* Reboot Scss */\n    touch-action: manipulation;\n    /* Allow labels to use margin for spacing. */\n    display: inline-block;\n    margin-bottom: .5rem;\n\n    ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
 Label.propTypes = propTypes$2;
-Label.defaultProps = defaultProps$76;
+Label.defaultProps = defaultProps$40;
 
 var Legend = styled.legend.withConfig({
   displayName: 'Legend'
 })(['display:block;width:100%;padding:0;margin-bottom:.5rem;font-size:1.5rem;line-height:inherit;']);
 
+var media_1 = createCommonjsModule(function (module, exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.media = media;
 function media() {
   return "\n   &.media {\n    display: flex;\n    align-items: flex-start;\n  }\n  \n  & .media-body {\n    flex: 1;\n  }\n  ";
 }
+exports.default = {
+  media: media
+};
+});
+unwrapExports(media_1);
+var media_2 = media_1.media;
 
-var defaultProps$77 = { theme: bsTheme };
+var defaultProps$41 = { theme: bsTheme };
 var LiUnstyled = function (_React$Component) {
   inherits(LiUnstyled, _React$Component);
   function LiUnstyled() {
     classCallCheck$1(this, LiUnstyled);
     return possibleConstructorReturn(this, (LiUnstyled.__proto__ || Object.getPrototypeOf(LiUnstyled)).apply(this, arguments));
   }
-  createClass$1(LiUnstyled, [{
+  createClass(LiUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           children = _omit.children,
           inline = _omit.inline,
@@ -9548,7 +10122,7 @@ var LiUnstyled = function (_React$Component) {
           dropdownHeader = _omit['dropdown-header'],
           dropdownFooter = _omit['dropdown-footer'],
           attributes = objectWithoutProperties(_omit, ['className', 'children', 'inline', 'separator', 'media', 'dropdown-item', 'dropdown-header', 'dropdown-footer']);
-      var classes = classnames$1(className, separator ? 'dropdown-divider' : false, dropdownItem ? 'dropdown-item' : false, dropdownItem ? 'dropdown-item' : false, dropdownHeader ? 'dropdown-header' : false, dropdownFooter ? 'dropdown-footer' : false, inline ? 'list-inline-item' : false, media$$1 ? 'media' : false);
+      var classes = classnames(className, separator ? 'dropdown-divider' : false, dropdownItem ? 'dropdown-item' : false, dropdownItem ? 'dropdown-item' : false, dropdownHeader ? 'dropdown-header' : false, dropdownFooter ? 'dropdown-footer' : false, inline ? 'list-inline-item' : false, media$$1 ? 'media' : false);
       return React.createElement(
         'li',
         _extends({
@@ -9576,27 +10150,135 @@ LiUnstyled.propTypes = {
 var Li = styled(LiUnstyled).withConfig({
   displayName: 'Li'
 })(['', ''], function (props) {
-  return '\n    &.list-inline-item {\n      display: inline-block;\n    \n      &:not(:last-child) {\n        margin-right: ' + props.theme['$list-inline-padding'] + ';\n      }\n    }\n    \n    ' + media() + '\n  ';
+  return '\n    &.list-inline-item {\n      display: inline-block;\n    \n      &:not(:last-child) {\n        margin-right: ' + props.theme['$list-inline-padding'] + ';\n      }\n    }\n    \n    ' + media_2() + '\n  ';
 });
-Li.defaultProps = defaultProps$77;
+Li.defaultProps = defaultProps$41;
 
-var defaultProps$79 = { theme: bsTheme };
+var listGroup = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.listGroupItemVariant = listGroupItemVariant;
+var _color2 = _interopRequireDefault(color);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var defaultProps = exports.defaultProps = {
+  '$enable-hover-media-query': false
+};
+function listGroupItemVariant() {
+  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
+  var state = arguments[1];
+  var background = arguments[2];
+  var listColor = arguments[3];
+  return '\n    & .list-group-item-' + state + ' {\n      color: ' + listColor + ';\n      background-color: ' + background + ';\n    }\n  \n    & a.list-group-item-' + state + ',\n    button.list-group-item-' + state + ' {\n      color: ' + listColor + ';\n  \n      .list-group-item-heading {\n        color: inherit;\n      }\n  \n      ' + (0, hover_1.hoverFocus)(enableHoverMediaQuery, '\n        color: ' + listColor + ';\n        background-color: ' + (0, _color2.default)(background).darken(0.05).toString() + ';\n      ') + '\n  \n      &.active {\n        ' + (0, hover_1.plainHoverFocus)(enableHoverMediaQuery, '\n          color: #fff;\n          background-color: ' + listColor + ';\n          border-color: ' + listColor + ';\n        ') + '\n      }\n    }\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  listGroupItemVariant: listGroupItemVariant
+};
+});
+unwrapExports(listGroup);
+var listGroup_2 = listGroup.listGroupItemVariant;
+
+var nav_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.nav = nav;
+var defaultProps = exports.defaultProps = {
+  '$enable-rounded': true,
+  '$enable-hover-media-query': false,
+  '$nav-link-padding': '.5em 1em',
+  '$nav-disabled-link-color': '#636c72',
+  '$cursor-disabled': 'not-allowed',
+  '$nav-tabs-border-width': '1px',
+  '$nav-tabs-border-color': '#ddd',
+  '$nav-tabs-border-radius': '.25rem',
+  '$nav-tabs-link-hover-border-color': '#eceeef',
+  '$nav-tabs-active-link-hover-color': '#464a4c',
+  '$nav-tabs-active-link-hover-bg': '#fff',
+  '$nav-tabs-active-link-hover-border-color': '#ddd',
+  '$nav-pills-border-radius': '.25rem',
+  '$nav-pills-active-link-color': '#fff',
+  '$nav-pills-active-link-bg': '#0275d8'
+};
+function nav() {
+  var $enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var $enableHoverMediaQuery = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$enable-hover-media-query'];
+  var $navLinkPadding = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$nav-link-padding'];
+  var $navDisabledLinkColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$nav-disabled-link-color'];
+  var $cursorDisabled = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$cursor-disabled'];
+  var $navTabBorderWidth = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$nav-tabs-border-width'];
+  var $navTabsBorderColor = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$nav-tabs-border-color'];
+  var $navTabsBorderRadius = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$nav-tabs-border-radius'];
+  var $navTabsLinkHoverBorderColor = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps['$nav-tabs-link-hover-border-color'];
+  var $navTabsActiveLinkHoverColor = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps['$nav-tabs-active-link-hover-color'];
+  var $navTabsActiveLinkHoverBg = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps['$nav-tabs-active-link-hover-bg'];
+  var $navTabsActiveLinkHoverBorderColor = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps['$nav-tabs-active-link-hover-border-color'];
+  var $navPillsBorderRadius = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps['$nav-pills-border-radius'];
+  var $navPillsActiveLinkColor = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : defaultProps['$nav-pills-active-link-color'];
+  var $navPillsActiveLinkBg = arguments.length > 14 && arguments[14] !== undefined ? arguments[14] : defaultProps['$nav-pills-active-link-bg'];
+  return '\n    &.nav {\n      display: flex;\n      padding-left: 0;\n      margin-bottom: 0;\n      list-style: none;\n    }\n    \n    & .nav-link {\n      display: block;\n      padding: ' + $navLinkPadding + ';\n      ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'text-decoration: none;') + '\n      /* Disabled state lightens text and removes hover tab effects */\n      &.disabled {\n        color: ' + $navDisabledLinkColor + ';\n        cursor: ' + $cursorDisabled + '; \n      }\n    }\n        \n    /*\n     Tabs\n    */\n    \n    &.nav-tabs {\n      border-bottom: ' + $navTabBorderWidth + ' solid ' + $navTabsBorderColor + ';\n      & .nav-item {\n        margin-bottom: -' + $navTabBorderWidth + ';\n      }\n   \n      & .nav-link {\n        border: ' + $navTabBorderWidth + ' solid transparent;\n        ' + (0, borderRadius_1.borderTopRadius)($enableRounded, $navTabsBorderRadius) + '\n        ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, '\n          border-color: ' + $navTabsLinkHoverBorderColor + ' ' + $navTabsLinkHoverBorderColor + ' ' + $navTabsBorderColor + ';\n        ') + '\n      \n        &.disabled {\n          color: ' + $navDisabledLinkColor + ';\n          background-color: transparent;\n          border-color: transparent;\n        }\n      }\n      \n      & .nav-link.active,\n      .nav-item.open .nav-link {\n        color: ' + $navTabsActiveLinkHoverColor + ';\n        background-color: ' + $navTabsActiveLinkHoverBg + ';\n        border-color: ' + $navTabsActiveLinkHoverBorderColor + ' ' + $navTabsActiveLinkHoverBorderColor + ' transparent;\n      }\n      \n      & .dropdown-menu {\n        /* Make dropdown border overlap tab border */\n        margin-top: -' + $navTabBorderWidth + ';\n        /* Remove the top rounded corners here since there is a hard edge above the menu */\n        ' + (0, borderRadius_1.borderTopRadius)($enableRounded, '0') + '\n      }\n    }\n    \n    /*\n     Pills\n    */\n    \n    &.nav-pills {\n      .nav-link {\n        ' + (0, borderRadius_1.borderRadius)($enableRounded, $navPillsBorderRadius) + '\n      }\n\n      .nav-link.active,\n      .nav-item.show .nav-link {\n        color: ' + $navPillsActiveLinkColor + ';\n        background-color: ' + $navPillsActiveLinkBg + ';\n      }\n    }\n\n    /*\n      Justified variants\n    */\n    \n    &.nav-fill {\n      .nav-item {\n        flex: 1 1 auto;\n        text-align: center;\n      }\n    }\n    \n    &.nav-justified {\n      .nav-item {\n        flex: 1 1 100%;\n        text-align: center;\n      }\n    }\n    \n    /* Hide tabbable panes to start, show them when .active */\n    &.tab-content {\n      > .tab-pane {\n        display: none;\n      }\n      > .active {\n        display: block;\n      }\n    }\n  ';
+}
+exports.default = {
+  nav: nav
+};
+});
+unwrapExports(nav_1);
+var nav_3 = nav_1.nav;
+
+var lists = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.listUnstyled = listUnstyled;
+exports.listInline = listInline;
+exports.listInlineItem = listInlineItem;
+var defaultProps = exports.defaultProps = {
+  '$list-inline-padding': '5px'
+};
+function listUnstyled() {
+  return '\n    padding-left: 0;\n    list-style: none;\n  ';
+}
+function listInline() {
+  return listUnstyled();
+}
+function listInlineItem() {
+  var listInlinePadding = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$list-inline-padding'];
+  return '\n    display: inline-block;\n  \n    &:not(:last-child) {\n      margin-right: ' + listInlinePadding + ';\n    }\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  listInline: listInline,
+  listUnstyled: listUnstyled
+};
+});
+unwrapExports(lists);
+var lists_1 = lists.listUnstyled;
+var lists_2 = lists.listInline;
+var lists_3 = lists.listInlineItem;
+
+var defaultProps$43 = { theme: bsTheme };
 var UlUnstyled = function (_React$Component) {
   inherits(UlUnstyled, _React$Component);
   function UlUnstyled() {
     classCallCheck$1(this, UlUnstyled);
     return possibleConstructorReturn(this, (UlUnstyled.__proto__ || Object.getPrototypeOf(UlUnstyled)).apply(this, arguments));
   }
-  createClass$1(UlUnstyled, [{
+  createClass(UlUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           inline = _omit.inline,
           unstyled = _omit.unstyled,
           children = _omit.children,
           rest = objectWithoutProperties(_omit, ['className', 'inline', 'unstyled', 'children']);
-      var classes = classnames$1(className, inline ? 'list-inline' : false, unstyled ? 'list-unstyled' : false);
+      var classes = classnames(className, inline ? 'list-inline' : false, unstyled ? 'list-unstyled' : false);
       return React.createElement(
         'ul',
         _extends({ className: classes }, rest),
@@ -9616,11 +10298,11 @@ UlUnstyled.propTypes = {
 var Ul = styled(UlUnstyled).withConfig({
   displayName: 'Ul'
 })(['', ''], function (props) {
-  return '\n    ' + nav(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n    ' + navbar(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n\n    /* Type Scss */\n    &.list-unstyled {\n      ' + listUnstyled() + '\n    }\n\n    &.list-inline {\n      ' + listInline() + '\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;\n    margin-bottom: 1rem;\n  \n    & ol,\n    & ul {\n      margin-bottom: 0;\n    }\n  ';
+  return '\n    ' + nav_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n\n    /* Type Scss */\n    &.list-unstyled {\n      ' + lists_1() + '\n    }\n\n    &.list-inline {\n      ' + lists_2() + '\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;\n    margin-bottom: 1rem;\n  \n    & ol,\n    & ul {\n      margin-bottom: 0;\n    }\n  ';
 });
-Ul.defaultProps = defaultProps$79;
+Ul.defaultProps = defaultProps$43;
 
-var defaultProps$78 = {
+var defaultProps$42 = {
   theme: bsTheme,
   tag: Ul
 };
@@ -9630,16 +10312,16 @@ var ListGroupUnstyled = function (_React$Component) {
     classCallCheck$1(this, ListGroupUnstyled);
     return possibleConstructorReturn(this, (ListGroupUnstyled.__proto__ || Object.getPrototypeOf(ListGroupUnstyled)).apply(this, arguments));
   }
-  createClass$1(ListGroupUnstyled, [{
+  createClass(ListGroupUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           flush = _omit.flush,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'flush']);
-      var classes = mapToCssModules(classnames$1(className, 'list-group', flush ? 'list-group-flush' : false), cssModule);
+      var classes = mapToCssModules(classnames(className, 'list-group', flush ? 'list-group-flush' : false), cssModule);
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -9655,11 +10337,11 @@ ListGroupUnstyled.propTypes = {
 var ListGroup = styled(ListGroupUnstyled).withConfig({
   displayName: 'ListGroup'
 })(['', ''], function (props) {
-  return '\n    /* \n      Base class\n      Easily usable on ul, ol, or div.\n    */\n    \n    &.list-group {\n      display: flex;\n      flex-direction: column;\n      /* No need to set list-style: none; since .list-group-item is block level */\n      padding-left: 0;  /* reset padding because ul and ol */\n      margin-bottom: 0;\n    }\n    \n    \n    /* \n      Interactive list items\n      Use anchor or button elements instead of \'li\'s or \'div\'s to create interactive\n      list items. Includes an extra \'.active\' modifier class for selected items.\n    */\n    \n    & .list-group-item-action {\n      width: 100%; /* For \'button\'s (anchors become 100% by default though) */\n      color: ' + props.theme['$list-group-link-color'] + ';\n      text-align: inherit; /* For \'button\'s (anchors inherit) */\n    \n      /* Hover state */\n      ' + hoverFocus(props.theme['$enable-hover-media-query'], '\n          color: ' + props.theme['$list-group-link-hover-color'] + ';\n          text-decoration: none;\n          background-color: ' + props.theme['$list-group-hover-bg'] + ';\n        ') + ';\n      \n      &:active {\n        color: ' + props.theme['$list-group-link-active-color'] + ';\n        background-color: ' + props.theme['$list-group-link-active-bg'] + ';\n      }\n    }\n    \n    /* \n      Individual list items\n      Use on \'li\'s or \'div\'s within the \'.list-group\' parent.\n    */\n    \n    & .list-group-item {\n      position: relative;\n      display: flex;\n      flex-flow: row wrap;\n      align-items: center;\n      padding: ' + props.theme['$list-group-item-padding-y'] + ' ' + props.theme['$list-group-item-padding-x'] + ';\n      /* Place the border on the list items and negative margin up for better styling */\n      margin-bottom: -' + props.theme['$list-group-border-width'] + ';\n      background-color: ' + props.theme['$list-group-bg'] + ';\n      border: ' + props.theme['$list-group-border-width'] + ' solid ' + props.theme['$list-group-border-color'] + ';\n    \n      &:first-child {\n        ' + borderTopRadius(props.theme['$enable-rounded'], props.theme['$list-group-border-radius']) + '\n      }\n\n      &:last-child {\n        margin-bottom: 0;\n        ' + borderBottomRadius(props.theme['$enable-rounded'], props.theme['$list-group-border-radius']) + '\n      }\n      \n      ' + hoverFocus(props.theme['$enable-hover-media-query'], 'text-decoration: none;') + '\n        \n      &.disabled,\n      &:disabled {   \n        color: ' + props.theme['$list-group-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: ' + props.theme['$list-group-disabled-bg'] + ';\n      }\n    \n    \n      &.active {\n        z-index: 2; /* Place active items above their siblings for proper border styling */\n        color: ' + props.theme['$list-group-active-color'] + ';\n        background-color: ' + props.theme['$list-group-active-bg'] + ';\n        border-color: ' + props.theme['$list-group-active-border'] + ';     \n      }\n    }\n    \n    /* \n      Flush list items\n      Remove borders and border-radius to keep list group items edge-to-edge. Most\n      useful within other components (e.g., cards).\n    */\n\n    &.list-group-flush {\n      .list-group-item {\n        border-right: 0;\n        border-left: 0;\n        border-radius: 0;\n      }\n      \n      &:first-child {\n        .list-group-item:first-child {\n          border-top: 0;\n        }\n      }\n\n      &:last-child {\n        .list-group-item:last-child {\n          border-bottom: 0;\n        }\n      }\n    }\n    \n    \n    \n    /* Contextual variants\n    \n     Add modifier classes to change text and background color on individual items.\n     Organizationally, this must come after the \':hover\' states.\n    */\n    \n    ' + listGroupItemVariant(props.theme['$enable-hover-media-query'], 'success', props.theme['$state-success-bg'], props.theme['$state-success-text']) + '\n    ' + listGroupItemVariant(props.theme['$enable-hover-media-query'], 'info', props.theme['$state-info-bg'], props.theme['$state-info-text']) + '\n    ' + listGroupItemVariant(props.theme['$enable-hover-media-query'], 'warning', props.theme['$state-warning-bg'], props.theme['$state-warning-text']) + '\n    ' + listGroupItemVariant(props.theme['$enable-hover-media-query'], 'danger', props.theme['$state-danger-bg'], props.theme['$state-danger-text']) + '    \n  ';
+  return '\n    /* \n      Base class\n      Easily usable on ul, ol, or div.\n    */\n    \n    &.list-group {\n      display: flex;\n      flex-direction: column;\n      /* No need to set list-style: none; since .list-group-item is block level */\n      padding-left: 0;  /* reset padding because ul and ol */\n      margin-bottom: 0;\n    }\n    \n    \n    /* \n      Interactive list items\n      Use anchor or button elements instead of \'li\'s or \'div\'s to create interactive\n      list items. Includes an extra \'.active\' modifier class for selected items.\n    */\n    \n    & .list-group-item-action {\n      width: 100%; /* For \'button\'s (anchors become 100% by default though) */\n      color: ' + props.theme['$list-group-link-color'] + ';\n      text-align: inherit; /* For \'button\'s (anchors inherit) */\n    \n      /* Hover state */\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n          color: ' + props.theme['$list-group-link-hover-color'] + ';\n          text-decoration: none;\n          background-color: ' + props.theme['$list-group-hover-bg'] + ';\n        ') + ';\n      \n      &:active {\n        color: ' + props.theme['$list-group-link-active-color'] + ';\n        background-color: ' + props.theme['$list-group-link-active-bg'] + ';\n      }\n    }\n    \n    /* \n      Individual list items\n      Use on \'li\'s or \'div\'s within the \'.list-group\' parent.\n    */\n    \n    & .list-group-item {\n      position: relative;\n      display: flex;\n      flex-flow: row wrap;\n      align-items: center;\n      padding: ' + props.theme['$list-group-item-padding-y'] + ' ' + props.theme['$list-group-item-padding-x'] + ';\n      /* Place the border on the list items and negative margin up for better styling */\n      margin-bottom: -' + props.theme['$list-group-border-width'] + ';\n      background-color: ' + props.theme['$list-group-bg'] + ';\n      border: ' + props.theme['$list-group-border-width'] + ' solid ' + props.theme['$list-group-border-color'] + ';\n    \n      &:first-child {\n        ' + borderRadius_3(props.theme['$enable-rounded'], props.theme['$list-group-border-radius']) + '\n      }\n\n      &:last-child {\n        margin-bottom: 0;\n        ' + borderRadius_5(props.theme['$enable-rounded'], props.theme['$list-group-border-radius']) + '\n      }\n      \n      ' + hover_3(props.theme['$enable-hover-media-query'], 'text-decoration: none;') + '\n        \n      &.disabled,\n      &:disabled {   \n        color: ' + props.theme['$list-group-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: ' + props.theme['$list-group-disabled-bg'] + ';\n      }\n    \n    \n      &.active {\n        z-index: 2; /* Place active items above their siblings for proper border styling */\n        color: ' + props.theme['$list-group-active-color'] + ';\n        background-color: ' + props.theme['$list-group-active-bg'] + ';\n        border-color: ' + props.theme['$list-group-active-border'] + ';     \n      }\n    }\n    \n    /* \n      Flush list items\n      Remove borders and border-radius to keep list group items edge-to-edge. Most\n      useful within other components (e.g., cards).\n    */\n\n    &.list-group-flush {\n      .list-group-item {\n        border-right: 0;\n        border-left: 0;\n        border-radius: 0;\n      }\n      \n      &:first-child {\n        .list-group-item:first-child {\n          border-top: 0;\n        }\n      }\n\n      &:last-child {\n        .list-group-item:last-child {\n          border-bottom: 0;\n        }\n      }\n    }\n    \n    \n    \n    /* Contextual variants\n    \n     Add modifier classes to change text and background color on individual items.\n     Organizationally, this must come after the \':hover\' states.\n    */\n    \n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'success', props.theme['$state-success-bg'], props.theme['$state-success-text']) + '\n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'info', props.theme['$state-info-bg'], props.theme['$state-info-text']) + '\n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'warning', props.theme['$state-warning-bg'], props.theme['$state-warning-text']) + '\n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'danger', props.theme['$state-danger-bg'], props.theme['$state-danger-text']) + '    \n  ';
 });
-ListGroup.defaultProps = defaultProps$78;
+ListGroup.defaultProps = defaultProps$42;
 
-var defaultProps$80 = {
+var defaultProps$44 = {
   tag: 'li'
 };
 var handleDisabledOnClick = function handleDisabledOnClick(e) {
@@ -9671,7 +10353,7 @@ var ListGroupItem = function (_React$Component) {
     classCallCheck$1(this, ListGroupItem);
     return possibleConstructorReturn(this, (ListGroupItem.__proto__ || Object.getPrototypeOf(ListGroupItem)).apply(this, arguments));
   }
-  createClass$1(ListGroupItem, [{
+  createClass(ListGroupItem, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -9682,7 +10364,7 @@ var ListGroupItem = function (_React$Component) {
           action = _props.action,
           color = _props.color,
           attributes = objectWithoutProperties(_props, ['className', 'tag', 'active', 'disabled', 'action', 'color']);
-      var classes = classnames$1(className, active ? 'active' : false, disabled ? 'disabled' : false, action ? 'list-group-item-action' : false, color ? 'list-group-item-' + color : false, 'list-group-item');
+      var classes = classnames(className, active ? 'active' : false, disabled ? 'disabled' : false, action ? 'list-group-item-action' : false, color ? 'list-group-item-' + color : false, 'list-group-item');
       if (disabled) {
         attributes.onClick = handleDisabledOnClick;
       }
@@ -9699,9 +10381,9 @@ ListGroupItem.propTypes = {
   action: PropTypes.bool,
   className: PropTypes.any
 };
-ListGroupItem.defaultProps = defaultProps$80;
+ListGroupItem.defaultProps = defaultProps$44;
 
-var defaultProps$81 = {
+var defaultProps$45 = {
   tag: H5
 };
 var ListGroupItemHeading = function (_React$Component) {
@@ -9710,14 +10392,14 @@ var ListGroupItemHeading = function (_React$Component) {
     classCallCheck$1(this, ListGroupItemHeading);
     return possibleConstructorReturn(this, (ListGroupItemHeading.__proto__ || Object.getPrototypeOf(ListGroupItemHeading)).apply(this, arguments));
   }
-  createClass$1(ListGroupItemHeading, [{
+  createClass(ListGroupItemHeading, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
           className = _props.className,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'tag']);
-      var classes = classnames$1(className, 'list-group-item-heading');
+      var classes = classnames(className, 'list-group-item-heading');
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -9727,9 +10409,9 @@ ListGroupItemHeading.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.any
 };
-ListGroupItemHeading.defaultProps = defaultProps$81;
+ListGroupItemHeading.defaultProps = defaultProps$45;
 
-var defaultProps$82 = {
+var defaultProps$46 = {
   tag: 'p'
 };
 var ListGroupItemHeading$2 = function (_React$Component) {
@@ -9738,14 +10420,14 @@ var ListGroupItemHeading$2 = function (_React$Component) {
     classCallCheck$1(this, ListGroupItemHeading);
     return possibleConstructorReturn(this, (ListGroupItemHeading.__proto__ || Object.getPrototypeOf(ListGroupItemHeading)).apply(this, arguments));
   }
-  createClass$1(ListGroupItemHeading, [{
+  createClass(ListGroupItemHeading, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
           className = _props.className,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'tag']);
-      var classes = classnames$1(className, 'list-group-item-text');
+      var classes = classnames(className, 'list-group-item-text');
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -9755,21 +10437,21 @@ ListGroupItemHeading$2.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.any
 };
-ListGroupItemHeading$2.defaultProps = defaultProps$82;
+ListGroupItemHeading$2.defaultProps = defaultProps$46;
 
 var Map$2 = styled.map.withConfig({
   displayName: 'Map'
 })(['display:inline;']);
 
-var defaultProps$83 = { theme: bsTheme };
+var defaultProps$47 = { theme: bsTheme };
 var Mark = styled.mark.withConfig({
   displayName: 'Mark'
 })(['', ''], function (props) {
   return '\n    /* Reboot Scss */\n    padding: ' + props.theme['$mark-padding'] + ';\n    background-color: ' + props.theme['$mark-bg'] + ';\n  ';
 });
-Mark.defaultProps = defaultProps$83;
+Mark.defaultProps = defaultProps$47;
 
-var defaultProps$84 = {
+var defaultProps$48 = {
   theme: bsTheme
 };
 var MediaUnstyled = function (_React$Component) {
@@ -9778,10 +10460,10 @@ var MediaUnstyled = function (_React$Component) {
     classCallCheck$1(this, MediaUnstyled);
     return possibleConstructorReturn(this, (MediaUnstyled.__proto__ || Object.getPrototypeOf(MediaUnstyled)).apply(this, arguments));
   }
-  createClass$1(MediaUnstyled, [{
+  createClass(MediaUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           body = _omit.body,
           bottom = _omit.bottom,
           className = _omit.className,
@@ -9808,7 +10490,7 @@ var MediaUnstyled = function (_React$Component) {
         defaultTag = 'div';
       }
       var Tag = tag || defaultTag;
-      var classes = mapToCssModules(classnames$1(className, {
+      var classes = mapToCssModules(classnames(className, {
         'media-body': body,
         'media-heading': heading,
         'media-left': left,
@@ -9843,8 +10525,8 @@ MediaUnstyled.propTypes = {
 };
 var Media = styled(MediaUnstyled).withConfig({
   displayName: 'Media'
-})(['&.media,& .media{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;}& .media-body{-webkit-box-flex:1;-ms-flex:1 1 0%;flex:1 1 0%}', ''], media());
-Media.defaultProps = defaultProps$84;
+})(['&.media,& .media{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;}& .media-body{-webkit-box-flex:1;-ms-flex:1 1 0%;flex:1 1 0%}', ''], media_2());
+Media.defaultProps = defaultProps$48;
 
 var propTypes$3 = {
   baseClass: PropTypes.string,
@@ -9861,7 +10543,7 @@ var propTypes$3 = {
   onLeave: PropTypes.func,
   onEnter: PropTypes.func
 };
-var defaultProps$86 = {
+var defaultProps$50 = {
   tag: 'div',
   baseClass: 'fade',
   baseClassIn: 'show',
@@ -9885,7 +10567,7 @@ var Fade$1 = function (_React$Component) {
     _this.timers = [];
     return _this;
   }
-  createClass$1(Fade, [{
+  createClass(Fade, [{
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       this.timers.forEach(function (timer) {
@@ -9963,17 +10645,17 @@ var Fade$1 = function (_React$Component) {
           baseClassIn = _props.baseClassIn,
           className = _props.className,
           Tag = _props.tag;
-      var attributes = lodash_omit$1(this.props, Object.keys(propTypes$3));
-      var classes = classnames$1(className, baseClass, this.state.mounted ? baseClassIn : false);
+      var attributes = lodash_omit(this.props, Object.keys(propTypes$3));
+      var classes = classnames(className, baseClass, this.state.mounted ? baseClassIn : false);
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
   return Fade;
 }(React.Component);
 Fade$1.propTypes = propTypes$3;
-Fade$1.defaultProps = defaultProps$86;
+Fade$1.defaultProps = defaultProps$50;
 
-var defaultProps$85 = {
+var defaultProps$49 = {
   isOpen: false,
   isLocked: false,
   backdrop: true,
@@ -10034,14 +10716,14 @@ var ModalUnstyled = function (_React$Component) {
         _this._element = null;
       }
       var classes = document.body.className.replace('overflow', '');
-      document.body.className = mapToCssModules(classnames$1(classes).trim(), _this.props.cssModule);
+      document.body.className = mapToCssModules(classnames(classes).trim(), _this.props.cssModule);
       setScrollbarWidth(_this.originalBodyPadding);
     };
     _this.originalBodyPadding = null;
     _this.isBodyOverflowing = false;
     return _this;
   }
-  createClass$1(ModalUnstyled, [{
+  createClass(ModalUnstyled, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       if (this.props.isOpen) {
@@ -10078,7 +10760,7 @@ var ModalUnstyled = function (_React$Component) {
       this.originalBodyPadding = getOriginalBodyPadding();
       conditionallyUpdateScrollbar();
       document.body.appendChild(this._element);
-      document.body.className = mapToCssModules(classnames$1(classes, 'overflow'), this.props.cssModule);
+      document.body.className = mapToCssModules(classnames(classes, 'overflow'), this.props.cssModule);
       this.renderIntoSubtree();
     }
   }, {
@@ -10096,7 +10778,7 @@ var ModalUnstyled = function (_React$Component) {
     value: function renderChildren() {
       var _classNames,
           _this2 = this;
-      var _omit = lodash_omit$1(this.props, ['isLocked', 'onUnlock', 'onBackdrop', 'keyboard', 'onEnter', 'onExit', 'zIndex']),
+      var _omit = lodash_omit(this.props, ['isLocked', 'onUnlock', 'onBackdrop', 'keyboard', 'onEnter', 'onExit', 'zIndex']),
           className = _omit.className,
           wrapClassName = _omit.wrapClassName,
           modalClassName = _omit.modalClassName,
@@ -10110,7 +10792,7 @@ var ModalUnstyled = function (_React$Component) {
           attributes = objectWithoutProperties(_omit, ['className', 'wrapClassName', 'modalClassName', 'backdropClassName', 'contentClassName', 'cssModule', 'isOpen', 'size', 'backdrop', 'children']);
       return React.createElement(
         TransitionGroup,
-        { component: 'div', className: mapToCssModules(classnames$1(wrapClassName, className)) },
+        { component: 'div', className: mapToCssModules(classnames(wrapClassName, className)) },
         isOpen && React.createElement(
           Fade$1,
           {
@@ -10122,14 +10804,14 @@ var ModalUnstyled = function (_React$Component) {
             transitionLeaveTimeout: 300,
             onClickCapture: this.handleBackdropClick,
             onKeyUp: this.handleEscape,
-            className: mapToCssModules(classnames$1('modal', modalClassName), cssModule),
+            className: mapToCssModules(classnames('modal', modalClassName), cssModule),
             style: { display: 'block' },
             tabIndex: '-1'
           },
           React.createElement(
             'div',
             _extends({
-              className: mapToCssModules(classnames$1('modal-dialog', (_classNames = {}, defineProperty(_classNames, 'modal-' + size, size), defineProperty(_classNames, 'show', isOpen), _classNames))),
+              className: mapToCssModules(classnames('modal-dialog', (_classNames = {}, defineProperty(_classNames, 'modal-' + size, size), defineProperty(_classNames, 'show', isOpen), _classNames))),
               role: 'document',
               ref: function ref(c) {
                 return _this2._dialog = c;
@@ -10137,7 +10819,7 @@ var ModalUnstyled = function (_React$Component) {
             }, attributes),
             React.createElement(
               'div',
-              { className: mapToCssModules(classnames$1('modal-content', contentClassName), cssModule) },
+              { className: mapToCssModules(classnames('modal-content', contentClassName), cssModule) },
               children
             )
           )
@@ -10147,7 +10829,7 @@ var ModalUnstyled = function (_React$Component) {
           transitionAppearTimeout: 150,
           transitionEnterTimeout: 150,
           transitionLeaveTimeout: 150,
-          className: mapToCssModules(classnames$1('modal-backdrop', backdropClassName), cssModule)
+          className: mapToCssModules(classnames('modal-backdrop', backdropClassName), cssModule)
         })
       );
     }
@@ -10181,9 +10863,9 @@ ModalUnstyled.propTypes = {
 var Modal = styled(ModalUnstyled).withConfig({
   displayName: 'Modal'
 })(['', ''], function (props) {
-  return '\n    ' + rebootUtils.body(props.theme['$font-family-base'], props.theme['$font-size-base'], props.theme['$font-weight-base'], props.theme['$line-height-base'], props.theme['$body-color'], props.theme['$body-bg']) + '\n    & .modal {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal'] + ';\n      display: none;\n      outline: 0;\n      overflow-x: hidden;\n      overflow-y: auto;\n      \n      ' + fade(props.theme['$enable-transitions'], props.theme['$transition-fade']) + '\n      &.fade {\n        .modal-dialog {\n          ' + transition(props.theme['$enable-transitions'], props.theme['$modal-transition']) + '\n          transform: translate(0, -25%);\n        }\n      }\n      &.show {\n        .modal-dialog {\n          transform: translate(0, 0);\n        }\n      }\n    }\n    \n    & .modal-dialog {\n      position: relative;\n      width: auto;\n      margin: ' + props.theme['$modal-dialog-margin'] + ';\n    }\n    \n    \n    & .modal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$modal-content-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$modal-content-border-width'] + ' solid ' + props.theme['$modal-content-border-color'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius-lg']) + '\n      ' + boxShadow(props.theme['$enable-shadows'], props.theme['$modal-content-xs-box-shadow']) + '\n      outline: 0;\n    }\n    \n    & .modal-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal-backdrop'] + ';\n      background-color: ' + props.theme['$modal-backdrop-bg'] + ';\n      &.fade {\n        opacity: 0\n      }\n      &.show {\n        opacity: ' + props.theme['$modal-backdrop-opacity'] + ';\n      }\n    }\n      \n        \n    & .modal-header {\n      display: flex;\n      align-items: center;\n      justify-content: space-between;\n      padding: ' + props.theme['$modal-header-padding'] + ';\n      border-bottom: ' + props.theme['$modal-header-border-width'] + ' solid ' + props.theme['$modal-header-border-color'] + ';\n    }\n    \n    & .modal-title {\n      margin-bottom: 0;\n      line-height: ' + props.theme['$modal-title-line-height'] + ';\n    }\n    \n    & .modal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n    }\n    \n    & .modal-footer {\n      display: flex;\n      align-items: center;\n      justify-content: flex-end;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n      border-top: ' + props.theme['$modal-footer-border-width'] + ' solid ' + props.theme['$modal-footer-border-color'] + ';\n      // Easily place margin between footer elements\n      > :not(:first-child) { margin-left: .25rem; }\n      > :not(:last-child) { margin-right: .25rem; }\n    }\n    \n\n  \n    // Scale up the modal\n    ' + mediaBreakpointUp('sm', props.theme['$grid-breakpoints'], '\n        & .modal-dialog {\n          max-width: ' + props.theme['$modal-md'] + ';\n          margin: ' + props.theme['$modal-dialog-sm-up-margin-y'] + ' auto;\n        }\n      \n        & .modal-content {\n          ' + boxShadow(props.theme['$enable-shadows'], props.theme['$modal-content-sm-up-box-shadow']) + '\n        }\n      \n        & .modal-sm {\n          max-width: ' + props.theme['$modal-sm'] + ';\n        }\n      ') + '\n  \n\n    ' + mediaBreakpointUp('lg', props.theme['$grid-breakpoints'], '\n        & .modal-lg {\n           max-width:  ' + props.theme['$modal-lg'] + '; \n         }\n      ') + '\n  ';
+  return '\n    ' + rebootUtils.body(props.theme['$font-family-base'], props.theme['$font-size-base'], props.theme['$font-weight-base'], props.theme['$line-height-base'], props.theme['$body-color'], props.theme['$body-bg']) + '\n    & .modal {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal'] + ';\n      display: none;\n      outline: 0;\n      overflow-x: hidden;\n      overflow-y: auto;\n      \n      ' + transition_3$1(props.theme['$enable-transitions'], props.theme['$transition-fade']) + '\n      &.fade {\n        .modal-dialog {\n          ' + transition_2(props.theme['$enable-transitions'], props.theme['$modal-transition']) + '\n          transform: translate(0, -25%);\n        }\n      }\n      &.show {\n        .modal-dialog {\n          transform: translate(0, 0);\n        }\n      }\n    }\n    \n    & .modal-dialog {\n      position: relative;\n      width: auto;\n      margin: ' + props.theme['$modal-dialog-margin'] + ';\n    }\n    \n    \n    & .modal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$modal-content-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$modal-content-border-width'] + ' solid ' + props.theme['$modal-content-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius-lg']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$modal-content-xs-box-shadow']) + '\n      outline: 0;\n    }\n    \n    & .modal-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal-backdrop'] + ';\n      background-color: ' + props.theme['$modal-backdrop-bg'] + ';\n      &.fade {\n        opacity: 0\n      }\n      &.show {\n        opacity: ' + props.theme['$modal-backdrop-opacity'] + ';\n      }\n    }\n      \n        \n    & .modal-header {\n      display: flex;\n      align-items: center;\n      justify-content: space-between;\n      padding: ' + props.theme['$modal-header-padding'] + ';\n      border-bottom: ' + props.theme['$modal-header-border-width'] + ' solid ' + props.theme['$modal-header-border-color'] + ';\n    }\n    \n    & .modal-title {\n      margin-bottom: 0;\n      line-height: ' + props.theme['$modal-title-line-height'] + ';\n    }\n    \n    & .modal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n    }\n    \n    & .modal-footer {\n      display: flex;\n      align-items: center;\n      justify-content: flex-end;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n      border-top: ' + props.theme['$modal-footer-border-width'] + ' solid ' + props.theme['$modal-footer-border-color'] + ';\n      // Easily place margin between footer elements\n      > :not(:first-child) { margin-left: .25rem; }\n      > :not(:last-child) { margin-right: .25rem; }\n    }\n    \n\n  \n    // Scale up the modal\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        & .modal-dialog {\n          max-width: ' + props.theme['$modal-md'] + ';\n          margin: ' + props.theme['$modal-dialog-sm-up-margin-y'] + ' auto;\n        }\n      \n        & .modal-content {\n          ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$modal-content-sm-up-box-shadow']) + '\n        }\n      \n        & .modal-sm {\n          max-width: ' + props.theme['$modal-sm'] + ';\n        }\n      ') + '\n  \n\n    ' + breakpoints_6('lg', props.theme['$grid-breakpoints'], '\n        & .modal-lg {\n           max-width:  ' + props.theme['$modal-lg'] + '; \n         }\n      ') + '\n  ';
 });
-Modal.defaultProps = defaultProps$85;
+Modal.defaultProps = defaultProps$49;
 
 var propTypes$4 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -10193,7 +10875,7 @@ var propTypes$4 = {
   cssModule: PropTypes.object,
   children: PropTypes.node
 };
-var defaultProps$87 = {
+var defaultProps$51 = {
   tag: H4,
   wrapTag: 'div'
 };
@@ -10206,7 +10888,7 @@ var ModalHeader = function ModalHeader(props) {
       Tag = props.tag,
       WrapTag = props.wrapTag,
       attributes = objectWithoutProperties(props, ['className', 'cssModule', 'children', 'toggle', 'tag', 'wrapTag']);
-  var classes = mapToCssModules(classnames$1(className, 'modal-header'), cssModule);
+  var classes = mapToCssModules(classnames(className, 'modal-header'), cssModule);
   if (toggle) {
     closeButton = React.createElement(
       'button',
@@ -10230,14 +10912,14 @@ var ModalHeader = function ModalHeader(props) {
   );
 };
 ModalHeader.propTypes = propTypes$4;
-ModalHeader.defaultProps = defaultProps$87;
+ModalHeader.defaultProps = defaultProps$51;
 
 var propTypes$5 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-var defaultProps$88 = {
+var defaultProps$52 = {
   tag: 'div'
 };
 var ModalFooter = function ModalFooter(props) {
@@ -10246,18 +10928,18 @@ var ModalFooter = function ModalFooter(props) {
       Tag = props.tag,
       attributes = objectWithoutProperties(props, ['className', 'cssModule', 'tag']);
   return React.createElement(Tag, _extends({}, attributes, {
-    className: mapToCssModules(classnames$1(className, 'modal-footer'), cssModule)
+    className: mapToCssModules(classnames(className, 'modal-footer'), cssModule)
   }));
 };
 ModalFooter.propTypes = propTypes$5;
-ModalFooter.defaultProps = defaultProps$88;
+ModalFooter.defaultProps = defaultProps$52;
 
 var propTypes$6 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-var defaultProps$89 = {
+var defaultProps$53 = {
   tag: 'div'
 };
 var ModalBody = function ModalBody(props) {
@@ -10266,13 +10948,13 @@ var ModalBody = function ModalBody(props) {
       Tag = props.tag,
       attributes = objectWithoutProperties(props, ['className', 'cssModule', 'tag']);
   return React.createElement(Tag, _extends({}, attributes, {
-    className: mapToCssModules(classnames$1(className, 'modal-body'), cssModule)
+    className: mapToCssModules(classnames(className, 'modal-body'), cssModule)
   }));
 };
 ModalBody.propTypes = propTypes$6;
-ModalBody.defaultProps = defaultProps$89;
+ModalBody.defaultProps = defaultProps$53;
 
-var defaultProps$90 = {
+var defaultProps$54 = {
   theme: bsTheme,
   tag: Ul
 };
@@ -10282,10 +10964,10 @@ var NavUnstyled = function (_React$Component) {
     classCallCheck$1(this, NavUnstyled);
     return possibleConstructorReturn(this, (NavUnstyled.__proto__ || Object.getPrototypeOf(NavUnstyled)).apply(this, arguments));
   }
-  createClass$1(NavUnstyled, [{
+  createClass(NavUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           tabs = _omit.tabs,
@@ -10298,7 +10980,7 @@ var NavUnstyled = function (_React$Component) {
           navbar$$1 = _omit.navbar,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tabs', 'pills', 'fill', 'inline', 'stacked', 'vertical', 'justified', 'navbar', 'tag']);
-      var classes = mapToCssModules(classnames$1(className, navbar$$1 ? 'navbar-nav' : 'nav', {
+      var classes = mapToCssModules(classnames(className, navbar$$1 ? 'navbar-nav' : 'nav', {
         'nav-tabs': tabs,
         'nav-pills': pills,
         'nav-fill': fill,
@@ -10329,11 +11011,11 @@ NavUnstyled.propTypes = {
 var Nav = styled(NavUnstyled).withConfig({
   displayName: 'Nav'
 })(['', ''], function (props) {
-  return '\n    ' + nav(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n    \n    ' + navbar(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n  ';
+  return '\n    ' + nav_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n    \n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n  ';
 });
-Nav.defaultProps = defaultProps$90;
+Nav.defaultProps = defaultProps$54;
 
-var defaultProps$91 = {
+var defaultProps$55 = {
   tag: 'li'
 };
 var NavItem = function (_React$Component) {
@@ -10342,7 +11024,7 @@ var NavItem = function (_React$Component) {
     classCallCheck$1(this, NavItem);
     return possibleConstructorReturn(this, (NavItem.__proto__ || Object.getPrototypeOf(NavItem)).apply(this, arguments));
   }
-  createClass$1(NavItem, [{
+  createClass(NavItem, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -10350,7 +11032,7 @@ var NavItem = function (_React$Component) {
           cssModule = _props.cssModule,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
-      var classes = mapToCssModules(classnames$1(className, 'nav-item'), cssModule);
+      var classes = mapToCssModules(classnames(className, 'nav-item'), cssModule);
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -10361,9 +11043,9 @@ NavItem.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-NavItem.defaultProps = defaultProps$91;
+NavItem.defaultProps = defaultProps$55;
 
-var defaultProps$92 = {
+var defaultProps$56 = {
   tag: A
 };
 var NavLink = function (_React$Component) {
@@ -10374,7 +11056,7 @@ var NavLink = function (_React$Component) {
     _this.onClick = _this.onClick.bind(_this);
     return _this;
   }
-  createClass$1(NavLink, [{
+  createClass(NavLink, [{
     key: 'onClick',
     value: function onClick(e) {
       if (this.props.disabled) {
@@ -10398,7 +11080,7 @@ var NavLink = function (_React$Component) {
           Tag = _props.tag,
           getRef = _props.getRef,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'active', 'tag', 'getRef']);
-      var classes = mapToCssModules(classnames$1(className, 'nav-link', {
+      var classes = mapToCssModules(classnames(className, 'nav-link', {
         disabled: attributes.disabled,
         active: active
       }), cssModule);
@@ -10417,15 +11099,15 @@ NavLink.propTypes = {
   onClick: PropTypes.func,
   href: PropTypes.any
 };
-NavLink.defaultProps = defaultProps$92;
+NavLink.defaultProps = defaultProps$56;
 
-var defaultProps$93 = { theme: bsTheme };
+var defaultProps$57 = { theme: bsTheme };
 var Ol = styled.ol.withConfig({
   displayName: 'Ol'
 })(['  ', ''], function (props) {
-  return '\n    /* Type Scss */\n    &.list-unstyled {\n      ' + listUnstyled() + '\n    }\n\n    &.list-inline {\n      ' + listInline() + '\n    }\n\n    &.list-inline-item {\n      ' + listInlineItem(props.theme['$list-inline-padding']) + '\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n    margin-bottom: 1rem;\n\n    & ol,\n    & ul {\n      margin-bottom: 0;\n    }\n  ';
+  return '\n    /* Type Scss */\n    &.list-unstyled {\n      ' + lists_1() + '\n    }\n\n    &.list-inline {\n      ' + lists_2() + '\n    }\n\n    &.list-inline-item {\n      ' + lists_3(props.theme['$list-inline-padding']) + '\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n    margin-bottom: 1rem;\n\n    & ol,\n    & ul {\n      margin-bottom: 0;\n    }\n  ';
 });
-Ol.defaultProps = defaultProps$93;
+Ol.defaultProps = defaultProps$57;
 
 var Option = styled.option.withConfig({
   displayName: 'Option'
@@ -10437,14 +11119,14 @@ var OutputUnstyled = function (_React$Component) {
     classCallCheck$1(this, OutputUnstyled);
     return possibleConstructorReturn(this, (OutputUnstyled.__proto__ || Object.getPrototypeOf(OutputUnstyled)).apply(this, arguments));
   }
-  createClass$1(OutputUnstyled, [{
+  createClass(OutputUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           rest = objectWithoutProperties(_omit, ['className']);
       return React.createElement('output', _extends({
-        className: classnames$1(className, 'output')
+        className: classnames(className, 'output')
       }, rest));
     }
   }]);
@@ -10458,24 +11140,24 @@ var Output = styled(OutputUnstyled).withConfig({
   displayName: 'Output'
 })(['&.output{display:inline-block;}']);
 
-var defaultProps$94 = { theme: bsTheme };
+var defaultProps$58 = { theme: bsTheme };
 var PUnstyled = function (_React$Component) {
   inherits(PUnstyled, _React$Component);
   function PUnstyled() {
     classCallCheck$1(this, PUnstyled);
     return possibleConstructorReturn(this, (PUnstyled.__proto__ || Object.getPrototypeOf(PUnstyled)).apply(this, arguments));
   }
-  createClass$1(PUnstyled, [{
+  createClass(PUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           lead = _omit.lead,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule', 'lead']);
-      var classes = mapToCssModules(classnames$1(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames(className, lead ? 'lead' : false, color ? 'text-' + color : false), cssModule);
       return React.createElement(
         'p',
         _extends({ className: classes }, attributes),
@@ -10496,11 +11178,100 @@ PUnstyled.propTypes = {
 var P = styled(PUnstyled).withConfig({
   displayName: 'P'
 })(['', ''], function (props) {
-  return '\n    /* Type Scss */\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n    \n    &.h1{\n      font-size: ' + props.theme['$font-size-h1'] + ';\n      ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h2{\n      font-size: ' + props.theme['$font-size-h2'] + ';\n      ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h3{\n      font-size: ' + props.theme['$font-size-h3'] + ';\n      ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h4{\n      font-size: ' + props.theme['$font-size-h4'] + ';\n      ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h5{\n      font-size: ' + props.theme['$font-size-h5'] + ';\n      ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h6{\n      font-size: ' + props.theme['$font-size-h6'] + ';\n      ' + typography(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;   \n    margin-bottom: 1rem;\n  ';
+  return '\n    /* Type Scss */\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n    \n    &.h1{\n      font-size: ' + props.theme['$font-size-h1'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h2{\n      font-size: ' + props.theme['$font-size-h2'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h3{\n      font-size: ' + props.theme['$font-size-h3'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h4{\n      font-size: ' + props.theme['$font-size-h4'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h5{\n      font-size: ' + props.theme['$font-size-h5'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h6{\n      font-size: ' + props.theme['$font-size-h6'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;   \n    margin-bottom: 1rem;\n  ';
 });
-P.defaultProps = defaultProps$94;
+P.defaultProps = defaultProps$58;
 
-var defaultProps$95 = {
+var paginations = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.paginationSize = exports.defaultProps = undefined;
+exports.pagination = pagination;
+var defaultProps = exports.defaultProps = {
+  '$enable-rounded': true,
+  '$enable-hover-media-query': false,
+  '$border-radius': '.25rem',
+  '$pagination-active-color': '#fff',
+  '$pagination-active-bg': '#0275d8',
+  '$pagination-active-border': '#0275d8',
+  '$pagination-disabled-color': '#636c72',
+  '$cursor-disabled': 'not-allowed',
+  '$pagination-disabled-bg': '#fff',
+  '$pagination-disabled-border': '#ddd',
+  '$pagination-padding-y': '.5rem',
+  '$pagination-padding-x': '.75rem',
+  '$pagination-line-height': '1.25',
+  '$pagination-color': '#0275d8',
+  '$pagination-bg': '#fff',
+  '$pagination-border-width': '1px',
+  '$pagination-border-color': '#ddd',
+  '$pagination-hover-color': 'hsl(207.79999999999995, 98.2%, 27.8%)',
+  '$pagination-hover-bg': '#eceeef',
+  '$pagination-hover-border': '#ddd',
+  '$pagination-padding-y-lg': '.75rem',
+  '$pagination-padding-x-lg': '1.5rem',
+  '$font-size-lg': '1.25rem',
+  '$line-height-lg': '1.3',
+  '$border-radius-lg': '.3rem',
+  '$pagination-padding-y-sm': '.25rem',
+  '$pagination-padding-x-sm': '.5rem',
+  '$font-size-sm': '.875rem',
+  '$line-height-sm': '1.5',
+  '$border-radius-sm': '.2rem'
+};
+var paginationSize = exports.paginationSize = function paginationSize() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var paddingY = arguments[1];
+  var paddingX = arguments[2];
+  var fontSize = arguments[3];
+  var borderRadiusPagination = arguments[4];
+  return '\n  .page-link {\n    padding: ' + paddingY + ' ' + paddingX + ';\n    font-size: ' + fontSize + ';\n  }\n\n  .page-item {\n    &:first-child {\n      .page-link {\n        ' + (0, borderRadius_1.borderLeftRadius)(enableRounded, borderRadiusPagination) + '\n      }\n    }\n    &:last-child {\n      .page-link {\n        ' + (0, borderRadius_1.borderRightRadius)(enableRounded, borderRadiusPagination) + '\n      }\n    }\n  }\n';
+};
+function pagination() {
+  var $enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var $enableHoverMediaQuery = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$enable-hover-media-query'];
+  var $borderRadius = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$border-radius'];
+  var $paginationActiveColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$pagination-active-color'];
+  var $paginationActiveBg = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$pagination-active-bg'];
+  var $paginationActiveBorder = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$pagination-active-border'];
+  var $paginationDisabledColor = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$pagination-disabled-color'];
+  var $cursorDisabled = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$cursor-disabled'];
+  var $paginationDisabledBg = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps['$pagination-disabled-bg'];
+  var $paginationDisabledBorder = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps['$pagination-disabled-border'];
+  var $paginationPaddingY = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps['$pagination-padding-y'];
+  var $paginationPaddingX = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps['$pagination-padding-x'];
+  var $paginationLineHeight = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps['$pagination-line-height'];
+  var $paginationColor = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : defaultProps['$pagination-color'];
+  var $paginationBg = arguments.length > 14 && arguments[14] !== undefined ? arguments[14] : defaultProps['$pagination-bg'];
+  var $paginationBorderWidth = arguments.length > 15 && arguments[15] !== undefined ? arguments[15] : defaultProps['$pagination-border-width'];
+  var $paginationBorderColor = arguments.length > 16 && arguments[16] !== undefined ? arguments[16] : defaultProps['$pagination-border-color'];
+  var $paginationHoverColor = arguments.length > 17 && arguments[17] !== undefined ? arguments[17] : defaultProps['$pagination-hover-color'];
+  var $paginationHoverBg = arguments.length > 18 && arguments[18] !== undefined ? arguments[18] : defaultProps['$pagination-hover-bg'];
+  var $paginationHoverBorder = arguments.length > 19 && arguments[19] !== undefined ? arguments[19] : defaultProps['$pagination-hover-border'];
+  var $paginationPaddingYLg = arguments.length > 20 && arguments[20] !== undefined ? arguments[20] : defaultProps['$pagination-padding-y-lg'];
+  var $paginationPaddingXLg = arguments.length > 21 && arguments[21] !== undefined ? arguments[21] : defaultProps['$pagination-padding-x-lg'];
+  var $fontSizeLg = arguments.length > 22 && arguments[22] !== undefined ? arguments[22] : defaultProps['$font-size-lg'];
+  var $lineHeightLg = arguments.length > 23 && arguments[23] !== undefined ? arguments[23] : defaultProps['$line-height-lg'];
+  var $borderRadiusLg = arguments.length > 24 && arguments[24] !== undefined ? arguments[24] : defaultProps['$border-radius-lg'];
+  var $paginationPaddingYSm = arguments.length > 25 && arguments[25] !== undefined ? arguments[25] : defaultProps['$pagination-padding-y-sm'];
+  var $paginationPaddingXSm = arguments.length > 26 && arguments[26] !== undefined ? arguments[26] : defaultProps['$pagination-padding-x-sm'];
+  var $fontSizeSm = arguments.length > 27 && arguments[27] !== undefined ? arguments[27] : defaultProps['$font-size-sm'];
+  var $lineHeightSm = arguments.length > 28 && arguments[28] !== undefined ? arguments[28] : defaultProps['$line-height-sm'];
+  var $borderRadiusSm = arguments.length > 29 && arguments[29] !== undefined ? arguments[29] : defaultProps['$border-radius-sm'];
+  return '\n  &.pagination {\n    display: flex;\n    padding-left: 0;\n    list-style: none; \n    ' + (0, borderRadius_1.borderRadius)($enableRounded) + '\n  }\n  \n  & .page-item {\n    &:first-child {\n      .page-link {\n        margin-left: 0;\n        ' + (0, borderRadius_1.borderLeftRadius)($enableRounded, $borderRadius) + '\n      }\n    }\n    &:last-child {\n      .page-link {\n      ' + (0, borderRadius_1.borderRightRadius)($enableRounded, $borderRadius) + '\n      }\n    }\n  \n    &.active .page-link {\n      z-index: 2;\n      color: ' + $paginationActiveColor + ';\n      background-color: ' + $paginationActiveBg + ';\n      border-color: ' + $paginationActiveBorder + ';\n    }\n  \n    &.disabled .page-link {\n      color: ' + $paginationDisabledColor + ';\n      pointer-events: none;\n      cursor: ' + $cursorDisabled + ';\n      background-color: ' + $paginationDisabledBg + ';\n      border-color: ' + $paginationDisabledBorder + ';\n    }\n  }\n  \n  & .page-link {\n    position: relative;\n    display: block;\n    padding: ' + $paginationPaddingY + ' ' + $paginationPaddingX + ';\n    margin-left: -1px;\n    line-height: ' + $paginationLineHeight + ';\n    color: ' + $paginationColor + ';\n    background-color: ' + $paginationBg + ';\n    border: ' + $paginationBorderWidth + ' solid ' + $paginationBorderColor + ';\n    \n    ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, '\n      color: ' + $paginationHoverColor + ';\n      text-decoration: none;\n      background-color: ' + $paginationHoverBg + ';\n      border-color: ' + $paginationHoverBorder + ';\n    ') + '\n  }\n  \n  /* Sizing */\n  &.pagination-lg {\n  ' + paginationSize($enableRounded, $paginationPaddingYLg, $paginationPaddingXLg, $fontSizeLg, $lineHeightLg, $borderRadiusLg) + '\n  }\n  \n  &.pagination-sm {\n  ' + paginationSize($enableRounded, $paginationPaddingYSm, $paginationPaddingXSm, $fontSizeSm, $lineHeightSm, $borderRadiusSm) + '\n  }\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  paginationSize: paginationSize,
+  pagination: pagination
+};
+});
+unwrapExports(paginations);
+var paginations_3 = paginations.pagination;
+
+var defaultProps$59 = {
   theme: bsTheme,
   tag: 'ul'
 };
@@ -10510,16 +11281,16 @@ var PaginationUnstyled = function (_React$Component) {
     classCallCheck$1(this, PaginationUnstyled);
     return possibleConstructorReturn(this, (PaginationUnstyled.__proto__ || Object.getPrototypeOf(PaginationUnstyled)).apply(this, arguments));
   }
-  createClass$1(PaginationUnstyled, [{
+  createClass(PaginationUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           size = _omit.size,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'size']);
-      var classes = mapToCssModules(classnames$1(className, 'pagination', defineProperty({}, 'pagination-' + size, !!size)), cssModule);
+      var classes = mapToCssModules(classnames(className, 'pagination', defineProperty({}, 'pagination-' + size, !!size)), cssModule);
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -10536,11 +11307,11 @@ PaginationUnstyled.propTypes = {
 var Pagination = styled(PaginationUnstyled).withConfig({
   displayName: 'Pagination'
 })(['', ''], function (props) {
-  return '\n    ' + pagination(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$border-radius'], props.theme['$pagination-active-color'], props.theme['$pagination-active-bg'], props.theme['$pagination-active-border'], props.theme['$pagination-disabled-color'], props.theme['$cursor-disabled'], props.theme['$pagination-disabled-bg'], props.theme['$pagination-disabled-border'], props.theme['$pagination-padding-y'], props.theme['$pagination-padding-x'], props.theme['$pagination-line-height'], props.theme['$pagination-color'], props.theme['$pagination-bg'], props.theme['$pagination-border-width'], props.theme['$pagination-border-color'], props.theme['$pagination-hover-color'], props.theme['$pagination-hover-bg'], props.theme['$pagination-hover-border'], props.theme['$pagination-padding-y-lg'], props.theme['$pagination-padding-x-lg'], props.theme['$font-size-lg'], props.theme['$line-height-lg'], props.theme['$border-radius-lg'], props.theme['$pagination-padding-y-sm'], props.theme['$pagination-padding-x-sm'], props.theme['$font-size-sm'], props.theme['$line-height-sm'], props.theme['$border-radius-sm']) + '\n  ';
+  return '\n    ' + paginations_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$border-radius'], props.theme['$pagination-active-color'], props.theme['$pagination-active-bg'], props.theme['$pagination-active-border'], props.theme['$pagination-disabled-color'], props.theme['$cursor-disabled'], props.theme['$pagination-disabled-bg'], props.theme['$pagination-disabled-border'], props.theme['$pagination-padding-y'], props.theme['$pagination-padding-x'], props.theme['$pagination-line-height'], props.theme['$pagination-color'], props.theme['$pagination-bg'], props.theme['$pagination-border-width'], props.theme['$pagination-border-color'], props.theme['$pagination-hover-color'], props.theme['$pagination-hover-bg'], props.theme['$pagination-hover-border'], props.theme['$pagination-padding-y-lg'], props.theme['$pagination-padding-x-lg'], props.theme['$font-size-lg'], props.theme['$line-height-lg'], props.theme['$border-radius-lg'], props.theme['$pagination-padding-y-sm'], props.theme['$pagination-padding-x-sm'], props.theme['$font-size-sm'], props.theme['$line-height-sm'], props.theme['$border-radius-sm']) + '\n  ';
 });
-Pagination.defaultProps = defaultProps$95;
+Pagination.defaultProps = defaultProps$59;
 
-var defaultProps$96 = {
+var defaultProps$60 = {
   tag: 'li'
 };
 var PaginationItem = function (_React$Component) {
@@ -10549,7 +11320,7 @@ var PaginationItem = function (_React$Component) {
     classCallCheck$1(this, PaginationItem);
     return possibleConstructorReturn(this, (PaginationItem.__proto__ || Object.getPrototypeOf(PaginationItem)).apply(this, arguments));
   }
-  createClass$1(PaginationItem, [{
+  createClass(PaginationItem, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -10559,7 +11330,7 @@ var PaginationItem = function (_React$Component) {
           disabled = _props.disabled,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['active', 'className', 'cssModule', 'disabled', 'tag']);
-      var classes = mapToCssModules(classnames$1(className, 'page-item', {
+      var classes = mapToCssModules(classnames(className, 'page-item', {
         active: active,
         disabled: disabled
       }), cssModule);
@@ -10576,9 +11347,9 @@ PaginationItem.propTypes = {
   disabled: PropTypes.bool,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
-PaginationItem.defaultProps = defaultProps$96;
+PaginationItem.defaultProps = defaultProps$60;
 
-var defaultProps$97 = {
+var defaultProps$61 = {
   tag: A
 };
 var PaginationLink = function (_React$Component) {
@@ -10587,7 +11358,7 @@ var PaginationLink = function (_React$Component) {
     classCallCheck$1(this, PaginationLink);
     return possibleConstructorReturn(this, (PaginationLink.__proto__ || Object.getPrototypeOf(PaginationLink)).apply(this, arguments));
   }
-  createClass$1(PaginationLink, [{
+  createClass(PaginationLink, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -10597,7 +11368,7 @@ var PaginationLink = function (_React$Component) {
           previous = _props.previous,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'next', 'previous', 'tag']);
-      var classes = mapToCssModules(classnames$1(className, 'page-link'), cssModule);
+      var classes = mapToCssModules(classnames(className, 'page-link'), cssModule);
       var defaultAriaLabel = void 0;
       if (previous) {
         defaultAriaLabel = 'Previous';
@@ -10650,17 +11421,86 @@ PaginationLink.propTypes = {
   previous: PropTypes.bool,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
-PaginationLink.defaultProps = defaultProps$97;
+PaginationLink.defaultProps = defaultProps$61;
 
-var defaultProps$98 = { theme: bsTheme };
+var defaultProps$62 = { theme: bsTheme };
 var Pre = styled.pre.withConfig({
   displayName: 'Pre'
 })(['', ''], function (props) {
   return '\n    /* Blocks of code */\n    display: block;\n    margin-top: 0;\n    margin-bottom: 1rem;\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$pre-color'] + ';\n    \n    /* Enable scrollable blocks of code */\n    /* AJT This class was present in bootstrap/scss/code.scss  We must decide if this class should be a mixin or not! */\n    &.pre-scrollable {\n      max-height: ' + props.theme['$pre-scrollable-max-height'] + ';\n      overflow-y: scroll;\n    }\n\n  \n    /* Account for some code outputs that place code tags in pre tags */\n    code {\n      padding: 0;\n      font-size: inherit;\n      color: inherit;\n      background-color: transparent;\n      border-radius: 0;\n    }\n    \n    /* Reboot Scss */\n\n    /* Remove browser default top margin */\n    margin-top: 0;\n    /* Reset browser default of \'1em\' to use \'rem\'s */\n    margin-bottom: 1rem;\n    /* Normalize v4 removed this property, causing \'pre\' content to break out of wrapping code snippets */\n    overflow: auto;\n    \n    /* Bootstrap 4 does not place this css rule straight into Kbd tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
-Pre.defaultProps = defaultProps$98;
+Pre.defaultProps = defaultProps$62;
 
-var defaultProps$99 = {
+var gradients = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.gradientX = gradientX;
+exports.gradientY = gradientY;
+exports.gradientDirectional = gradientDirectional;
+exports.gradientXThreeColors = gradientXThreeColors;
+exports.gradientYThreeColors = gradientYThreeColors;
+exports.gradientRadial = gradientRadial;
+exports.gradientStriped = gradientStriped;
+function gradientX() {
+  var startColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#555';
+  var endColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#333';
+  var startPercent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '0%';
+  var endPercent = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '100%';
+  return '\n    background-image: linear-gradient(to right, ' + startColor + ' ' + startPercent + ', ' + endColor + ' ' + endPercent + ');\n    background-repeat: repeat-x;\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#{ie-hex-str(' + startColor + ')}\', endColorstr=\'#{ie-hex-str(' + endColor + ')}\', GradientType=1); // IE9\n  ';
+}
+function gradientY() {
+  var startColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#555';
+  var endColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#333';
+  var startPercent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '0%';
+  var endPercent = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '100%';
+  return '\n    background-image: linear-gradient(to bottom, ' + startColor + ' ' + startPercent + ', ' + endColor + ' ' + endPercent + ');\n    background-repeat: repeat-x;\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#{ie-hex-str(' + startColor + ')}\', endColorstr=\'#{ie-hex-str(' + endColor + ')}\', GradientType=0); // IE9\n  ';
+}
+function gradientDirectional() {
+  var startColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#555';
+  var endColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#333';
+  var deg = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '45deg';
+  return '\n    background-repeat: repeat-x;\n    background-image: linear-gradient(' + deg + ', ' + startColor + ', ' + endColor + ');\n  ';
+}
+function gradientXThreeColors() {
+  var startColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#00b3ee';
+  var midColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#7a43b6';
+  var colorStop = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '50%';
+  var endColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '#c3325f';
+  return '\n    background-image: linear-gradient(to right, ' + startColor + ', ' + midColor + ' ' + colorStop + ', ' + endColor + ');\n    background-repeat: no-repeat;\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#{ie-hex-str(' + startColor + ')}\', endColorstr=\'#{ie-hex-str(' + endColor + ')}\', GradientType=1); // IE9 gets no color-stop at all for proper fallback\n  ';
+}
+function gradientYThreeColors() {
+  var startColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#00b3ee';
+  var midColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#7a43b6';
+  var colorStop = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '50%';
+  var endColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '#c3325f';
+  return '\n    background-image: linear-gradient(' + startColor + ', ' + midColor + ' ' + colorStop + ', ' + endColor + ');\n    background-repeat: no-repeat;\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#{ie-hex-str(' + startColor + ')}\', endColorstr=\'#{ie-hex-str(' + endColor + ')}\', GradientType=0); // IE9 gets no color-stop at all for proper fallback\n  ';
+}
+function gradientRadial() {
+  var innerColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#555';
+  var outerColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#333';
+  return '\n    background-image: radial-gradient(circle, ' + innerColor + ', ' + outerColor + ');\n    background-repeat: no-repeat;\n  ';
+}
+function gradientStriped() {
+  var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'rgba(255,255,255,.15)';
+  var angle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '45deg';
+  return '\n    background-image: linear-gradient(' + angle + ', ' + color + ' 25%, transparent 25%, transparent 50%, ' + color + ' 50%, ' + color + ' 75%, transparent 75%, transparent);\n  ';
+}
+exports.default = {
+  x: gradientX,
+  y: gradientY,
+  directional: gradientDirectional,
+  xThreeColors: gradientXThreeColors,
+  yThreeColors: gradientYThreeColors,
+  radial: gradientRadial,
+  striped: gradientStriped
+};
+});
+unwrapExports(gradients);
+var gradients_7 = gradients.gradientStriped;
+
+var defaultProps$63 = {
   theme: bsTheme
 };
 var ProgressUnstyled = function (_React$Component) {
@@ -10669,16 +11509,16 @@ var ProgressUnstyled = function (_React$Component) {
     classCallCheck$1(this, ProgressUnstyled);
     return possibleConstructorReturn(this, (ProgressUnstyled.__proto__ || Object.getPrototypeOf(ProgressUnstyled)).apply(this, arguments));
   }
-  createClass$1(ProgressUnstyled, [{
+  createClass(ProgressUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           children = _omit.children,
           className = _omit.className,
           rest = objectWithoutProperties(_omit, ['children', 'className']);
       return React.createElement(
         'div',
-        _extends({ className: classnames$1('progress', className) }, rest),
+        _extends({ className: classnames('progress', className) }, rest),
         children
       );
     }
@@ -10696,9 +11536,141 @@ var backgroundPositionKeyFrame = function backgroundPositionKeyFrame(props) {
 var Progress = styled(ProgressUnstyled).withConfig({
   displayName: 'Progress'
 })(['', ''], function (props) {
-  return '\n    \n    &.progress {\n      display: flex;\n      overflow: hidden; // force rounded corners by cropping it\n      font-size: ' + props.theme['$progress-font-size'] + ';\n      line-height: ' + props.theme['$progress-height'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$progress-bg'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$progress-border-radius']) + '\n      ' + getBackgroundUtilities(props.theme['$enable-hover-media-query'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$brand-inverse'], props.theme['$gray-lightest']) + '\n    }\n    \n    .progress-bar {\n      height: ' + props.theme['$progress-height'] + ';\n      line-height: ' + props.theme['$progress-height'] + ';\n      color: ' + props.theme['$progress-bar-color'] + ';\n      background-color: ' + props.theme['$progress-bar-bg'] + ';\n    }\n    \n    .progress-bar-striped {\n      ' + gradientStriped() + '\n      background-size: ' + props.theme['$progress-height'] + ' ' + props.theme['$progress-height'] + ';\n      background-repeat: repeat; /* Not present in bootstrap original but required to repeat the background */\n    }\n    \n    .progress-bar-animated {\n      animation: ' + backgroundPositionKeyFrame(props) + ' ' + props.theme['$progress-bar-animation-timing'] + ';\n    }\n\n  ';
+  return '\n    \n    &.progress {\n      display: flex;\n      overflow: hidden; // force rounded corners by cropping it\n      font-size: ' + props.theme['$progress-font-size'] + ';\n      line-height: ' + props.theme['$progress-height'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$progress-bg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$progress-border-radius']) + '\n      ' + background_9(props.theme['$enable-hover-media-query'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$brand-inverse'], props.theme['$gray-lightest']) + '\n    }\n    \n    .progress-bar {\n      height: ' + props.theme['$progress-height'] + ';\n      line-height: ' + props.theme['$progress-height'] + ';\n      color: ' + props.theme['$progress-bar-color'] + ';\n      background-color: ' + props.theme['$progress-bar-bg'] + ';\n    }\n    \n    .progress-bar-striped {\n      ' + gradients_7() + '\n      background-size: ' + props.theme['$progress-height'] + ' ' + props.theme['$progress-height'] + ';\n      background-repeat: repeat; /* Not present in bootstrap original but required to repeat the background */\n    }\n    \n    .progress-bar-animated {\n      animation: ' + backgroundPositionKeyFrame(props) + ' ' + props.theme['$progress-bar-animation-timing'] + ';\n    }\n\n  ';
 });
-Progress.defaultProps = defaultProps$99;
+Progress.defaultProps = defaultProps$63;
+
+var asyncGenerator$2 = function () {
+  function AwaitValue(value) {
+    this.value = value;
+  }
+  function AsyncGenerator(gen) {
+    var front, back;
+    function send(key, arg) {
+      return new Promise(function (resolve, reject) {
+        var request = {
+          key: key,
+          arg: arg,
+          resolve: resolve,
+          reject: reject,
+          next: null
+        };
+        if (back) {
+          back = back.next = request;
+        } else {
+          front = back = request;
+          resume(key, arg);
+        }
+      });
+    }
+    function resume(key, arg) {
+      try {
+        var result = gen[key](arg);
+        var value = result.value;
+        if (value instanceof AwaitValue) {
+          Promise.resolve(value.value).then(function (arg) {
+            resume("next", arg);
+          }, function (arg) {
+            resume("throw", arg);
+          });
+        } else {
+          settle(result.done ? "return" : "normal", result.value);
+        }
+      } catch (err) {
+        settle("throw", err);
+      }
+    }
+    function settle(type, value) {
+      switch (type) {
+        case "return":
+          front.resolve({
+            value: value,
+            done: true
+          });
+          break;
+        case "throw":
+          front.reject(value);
+          break;
+        default:
+          front.resolve({
+            value: value,
+            done: false
+          });
+          break;
+      }
+      front = front.next;
+      if (front) {
+        resume(front.key, front.arg);
+      } else {
+        back = null;
+      }
+    }
+    this._invoke = send;
+    if (typeof gen.return !== "function") {
+      this.return = undefined;
+    }
+  }
+  if (typeof Symbol === "function" && Symbol.asyncIterator) {
+    AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
+      return this;
+    };
+  }
+  AsyncGenerator.prototype.next = function (arg) {
+    return this._invoke("next", arg);
+  };
+  AsyncGenerator.prototype.throw = function (arg) {
+    return this._invoke("throw", arg);
+  };
+  AsyncGenerator.prototype.return = function (arg) {
+    return this._invoke("return", arg);
+  };
+  return {
+    wrap: function (fn) {
+      return function () {
+        return new AsyncGenerator(fn.apply(this, arguments));
+      };
+    },
+    await: function (value) {
+      return new AwaitValue(value);
+    }
+  };
+}();
+var classCallCheck$2 = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+var createClass$1 = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+var RangeUtils = function () {
+  function RangeUtils() {
+    classCallCheck$2(this, RangeUtils);
+  }
+  createClass$1(RangeUtils, [{
+    key: "mapBetween",
+    value: function mapBetween(valueNow, valueMin, valueMax) {
+      var rangeMin = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+      var rangeMax = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 100;
+      return (rangeMax - rangeMin) * (valueNow - valueMin) / (valueMax - valueMin) + rangeMin;
+    }
+  }]);
+  return RangeUtils;
+}();
+var index$3 = new RangeUtils();
 
 var ProgressBar = function (_React$Component) {
   inherits(ProgressBar, _React$Component);
@@ -10714,10 +11686,10 @@ var ProgressBar = function (_React$Component) {
       classNameProgressBar: ''
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(ProgressBar, [{
+  createClass(ProgressBar, [{
     key: 'getWidth',
     value: function getWidth(valueNow, valueMin, valueMax) {
-      return index.mapBetween(valueNow, valueMin, valueMax) + '%';
+      return index$3.mapBetween(valueNow, valueMin, valueMax) + '%';
     }
   }, {
     key: 'render',
@@ -10734,7 +11706,7 @@ var ProgressBar = function (_React$Component) {
           striped = _props.striped,
           animated = _props.animated,
           rest = objectWithoutProperties(_props, ['children', 'color', 'className', 'cssModule', 'valueNow', 'valueMin', 'valueMax', 'height', 'striped', 'animated']);
-      var progressBarClasses = mapToCssModules(classnames$1(className, 'progress-bar', animated ? 'progress-bar-animated' : null, color ? 'bg-' + color : null, striped || animated ? 'progress-bar-striped' : null), cssModule);
+      var progressBarClasses = mapToCssModules(classnames(className, 'progress-bar', animated ? 'progress-bar-animated' : null, color ? 'bg-' + color : null, striped || animated ? 'progress-bar-striped' : null), cssModule);
       return React.createElement(
         'div',
         _extends({
@@ -10767,14 +11739,14 @@ ProgressBar.propTypes = {
   color: PropTypes.string
 };
 
-var defaultProps$100 = { theme: bsTheme };
+var defaultProps$64 = { theme: bsTheme };
 var RowUnstyled = function (_React$Component) {
   inherits(RowUnstyled, _React$Component);
   function RowUnstyled() {
     classCallCheck$1(this, RowUnstyled);
     return possibleConstructorReturn(this, (RowUnstyled.__proto__ || Object.getPrototypeOf(RowUnstyled)).apply(this, arguments));
   }
-  createClass$1(RowUnstyled, [{
+  createClass(RowUnstyled, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -10782,7 +11754,7 @@ var RowUnstyled = function (_React$Component) {
           children = _props.children;
       return React.createElement(
         'div',
-        { className: classnames$1(className, 'row') },
+        { className: classnames(className, 'row') },
         children
       );
     }
@@ -10796,9 +11768,9 @@ RowUnstyled.propTypes = {
 var Row = styled(RowUnstyled).withConfig({
   displayName: 'Row'
 })(['', ''], function (props) {
-  return '\n    &.row {\n      ' + makeRow(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n    /*\n      Remove the negative margin from default .row, then the horizontal padding\n      from all immediate children columns (to prevent runaway style inheritance).\n    */\n\n    &.no-gutters {\n      margin-right: 0;\n      margin-left: 0;\n\n      > .col,\n      > [class*="col-"] {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n ';
+  return '\n    &.row {\n      ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n    /*\n      Remove the negative margin from default .row, then the horizontal padding\n      from all immediate children columns (to prevent runaway style inheritance).\n    */\n\n    &.no-gutters {\n      margin-right: 0;\n      margin-left: 0;\n\n      > .col,\n      > [class*="col-"] {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n ';
 });
-Row.defaultProps = defaultProps$100;
+Row.defaultProps = defaultProps$64;
 
 var Samp = styled.samp.withConfig({
   displayName: 'Samp'
@@ -10821,7 +11793,7 @@ var SelectUnstyled = function (_React$Component) {
       className: null
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(SelectUnstyled, [{
+  createClass(SelectUnstyled, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
       var nua = navigator.userAgent;
@@ -10839,13 +11811,13 @@ var SelectUnstyled = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme', 'className']),
+      var _omit = lodash_omit(this.props, ['theme', 'className']),
           children = _omit.children,
           rest = objectWithoutProperties(_omit, ['children']);
       return React.createElement(
         'select',
         _extends({
-          className: classnames$1(this.state.className, 'select')
+          className: classnames(this.state.className, 'select')
         }, rest),
         children
       );
@@ -10862,23 +11834,23 @@ var Select = styled(SelectUnstyled).withConfig({
   displayName: 'Select'
 })(['&.select{touch-action:manipulation;line-height:inherit;}&:disabled{color:graytext;}']);
 
-var defaultProps$101 = { theme: bsTheme };
+var defaultProps$65 = { theme: bsTheme };
 var SmallUnstyled = function (_React$Component) {
   inherits(SmallUnstyled, _React$Component);
   function SmallUnstyled() {
     classCallCheck$1(this, SmallUnstyled);
     return possibleConstructorReturn(this, (SmallUnstyled.__proto__ || Object.getPrototypeOf(SmallUnstyled)).apply(this, arguments));
   }
-  createClass$1(SmallUnstyled, [{
+  createClass(SmallUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule']);
-      var classes = mapToCssModules(classnames$1(className, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames(className, color ? 'text-' + color : false), cssModule);
       return React.createElement(
         'small',
         _extends({ className: classes }, attributes),
@@ -10900,25 +11872,25 @@ var Small = styled(SmallUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    /* Reboot Scss */\n    font-size: ' + props.theme['$small-font-size'] + ';\n    font-weight: normal;\n  ';
 });
-Small.defaultProps = defaultProps$101;
+Small.defaultProps = defaultProps$65;
 
-var defaultProps$102 = { theme: bsTheme };
+var defaultProps$66 = { theme: bsTheme };
 var StrongUnstyled = function (_React$Component) {
   inherits(StrongUnstyled, _React$Component);
   function StrongUnstyled() {
     classCallCheck$1(this, StrongUnstyled);
     return possibleConstructorReturn(this, (StrongUnstyled.__proto__ || Object.getPrototypeOf(StrongUnstyled)).apply(this, arguments));
   }
-  createClass$1(StrongUnstyled, [{
+  createClass(StrongUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           color = _omit.color,
           children = _omit.children,
           cssModule = _omit.cssModule,
           attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule']);
-      var classes = mapToCssModules(classnames$1(className, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames(className, color ? 'text-' + color : false), cssModule);
       return React.createElement(
         'strong',
         _extends({ className: classes }, attributes),
@@ -10938,7 +11910,7 @@ StrongUnstyled.propTypes = {
 var Strong = styled(StrongUnstyled).withConfig({
   displayName: 'Strong'
 })(['font-weight:bolder;']);
-Strong.defaultProps = defaultProps$102;
+Strong.defaultProps = defaultProps$66;
 
 var Summary = styled.summary.withConfig({
   displayName: 'Summary'
@@ -10952,7 +11924,26 @@ var Sup = styled.sup.withConfig({
   displayName: 'Sup'
 })(['position:relative;font-size:75%;line-height:0;vertical-align:baseline;top:-.5em;']);
 
-var defaultProps$103 = {
+var tableRow = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.tableRowVariant = tableRowVariant;
+var _color2 = _interopRequireDefault(color);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function tableRowVariant(state, background) {
+  var hoverBackground = (0, _color2.default)(background).darken(0.05).toString();
+  return '\n  /* Exact selectors below required to override \'.table-striped\' and prevent */\n  /* inheritance to nested tables. */\n  & .table-' + state + ' {\n    &,\n    > th,\n    > td {\n      background-color: ' + background + ';\n    }\n  }\n\n  /* Hover states for \'.table-hover\' */\n  /* Note: this is not available for cells or rows within \'thead\' or \'tfoot\'. */\n  &.table-hover {\n\n    .table-' + state + ' {\n      ' + (0, hover_1.hover)('\n        background-color: ' + hoverBackground + ';\n\n        > td,\n        > th {\n          background-color: ' + hoverBackground + ';\n        }\n      ') + '\n    }\n  }\n  ';
+}
+exports.default = {
+  tableRowVariant: tableRowVariant
+};
+});
+unwrapExports(tableRow);
+var tableRow_1 = tableRow.tableRowVariant;
+
+var defaultProps$67 = {
   tag: 'table',
   responsiveTag: 'div',
   theme: bsTheme
@@ -10963,10 +11954,10 @@ var TableUnstyled = function (_React$Component) {
     classCallCheck$1(this, TableUnstyled);
     return possibleConstructorReturn(this, (TableUnstyled.__proto__ || Object.getPrototypeOf(TableUnstyled)).apply(this, arguments));
   }
-  createClass$1(TableUnstyled, [{
+  createClass(TableUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           size = _omit.size,
@@ -10979,7 +11970,7 @@ var TableUnstyled = function (_React$Component) {
           Tag = _omit.tag,
           ResponsiveTag = _omit.responsiveTag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'size', 'bordered', 'striped', 'inverse', 'hover', 'reflow', 'responsive', 'tag', 'responsiveTag']);
-      var classes = mapToCssModules(classnames$1(className, 'table', size ? 'table-' + size : false,
+      var classes = mapToCssModules(classnames(className, 'table', size ? 'table-' + size : false,
       bordered ? 'table-bordered' : false, striped ? 'table-striped' : false, inverse ? 'table-inverse' : false, hover$$1 ? 'table-hover' : false, reflow ? 'table-reflow' : false), cssModule);
       var table = React.createElement(Tag, _extends({}, attributes, { className: classes }));
       if (responsive) {
@@ -11011,9 +12002,9 @@ TableUnstyled.propTypes = {
 var Table = styled(TableUnstyled).withConfig({
   displayName: 'Table'
 })(['', ''], function (props) {
-  return '\n    /*\n     Basic Bootstrap table\n    */\n    \n    &.table {\n      width: 100%;\n      max-width: 100%;\n      margin-bottom: ' + props.theme['$spacer'] + ';\n      background-color: ' + props.theme['$table-bg'] + ';\n\n      th,\n      td {\n        padding: ' + props.theme['$table-cell-padding'] + ';\n        vertical-align: top;\n        border-top: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      thead th {\n        vertical-align: bottom;\n        border-bottom: ' + index$1.math.multiply(2, props.theme['$table-border-width']) + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      tbody + tbody {\n        border-top: ' + index$1.math.multiply(2, props.theme['$table-border-width']) + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      .table {\n        background-color: ' + props.theme['$body-bg'] + ';\n      }\n    }\n    \n    \n    /*\n     Condensed table w/ half padding\n    */\n    \n    &.table-sm {\n      th,\n      td {\n        padding: ' + props.theme['$table-sm-cell-padding'] + ';\n      }\n    }\n    \n    \n    /* Bordered version\n     Add borders all around the table and between all the columns.\n    */\n    &.table-bordered {\n      border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n    \n      th,\n      td {\n        border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      thead {\n        th,\n        td {\n          border-bottom-width: ' + index$1.math.multiply(2, props.theme['$table-border-width']) + ';\n        }\n      }\n    }\n    \n    \n    /* Zebra-striping\n     Default zebra-stripe styles (alternating gray and transparent backgrounds)\n    */\n    \n    &.table-striped {\n      tbody tr:nth-of-type(odd) {\n        background-color: ' + props.theme['$table-bg-accent'] + ';\n      }\n    }\n    \n    \n    /* \n    Hover effect Placed here since it has to come after the potential zebra striping\n    */\n\n    \n    &.table-hover {\n      tbody tr {\n        ' + hover('\n          background-color: ' + props.theme['$table-bg-hover'] + ';\n        ') + '\n      }\n    }\n    \n    /* Table backgrounds\n    Exact selectors below required to override \'.table-striped\' and prevent\n    inheritance to nested tables.\n    */\n        \n    /* Generate the contextual variants */\n    ' + tableRowVariant('active', props.theme['$table-bg-active']) + '\n    ' + tableRowVariant('success', props.theme['$state-success-bg']) + '\n    ' + tableRowVariant('info', props.theme['$state-info-bg']) + '\n    ' + tableRowVariant('warning', props.theme['$state-warning-bg']) + '\n    ' + tableRowVariant('danger', props.theme['$state-danger-bg']) + '\n     \n    \n    /* Inverse styles\n    Same table markup, but inverted color scheme: dark background and light text.\n    */ \n    \n    & thead.thead-inverse {\n      th {\n        color: ' + props.theme['$table-inverse-color'] + ';\n        background-color: ' + props.theme['$table-inverse-bg'] + ';\n      }\n    }\n    \n    \n    & thead.thead-default {\n      th {\n        color: ' + props.theme['$table-head-color'] + ';\n        background-color: ' + props.theme['$table-head-bg'] + ';\n      }\n    }\n    \n    &.table-inverse {\n      color: ' + props.theme['$table-inverse-color'] + ';\n      background-color: ' + props.theme['$table-inverse-bg'] + ';\n    \n      th,\n      td,\n      thead th {\n        border-color: ' + props.theme['$table-inverse-border'] + ';\n      }\n    \n      &.table-bordered {\n        border: 0;\n      }\n      \n      &.table-striped {\n        tbody tr:nth-of-type(odd) {\n        background-color: ' + props.theme['$table-inverse-bg-accent'] + ';\n        }\n      }\n      \n      &.table-hover {\n        tbody tr {\n          ' + hover('\n            background-color: ' + props.theme['$table-inverse-bg-hover'] + ';\n          ') + '\n        }\n      }\n    }\n    \n    \n    \n    /* Responsive tables\n     Wrap your tables in \'.table-responsive\' and we\'ll make them mobile friendly\n     by enabling horizontal scrolling. Only applies <768px. Everything above that\n     will display normally.\n     */\n    \n    &.table-responsive {\n      display: block;\n      width: 100%;\n      overflow-x: auto;\n      -ms-overflow-style: -ms-autohiding-scrollbar; /* See https://github.com/twbs/bootstrap/pull/10057 */\n      &.table-bordered {\n        border: 0;\n      }\n    }\n    \n    \n    &.table-reflow {\n    \n      /* added bs4 missing tfoot rule */\n      thead, tfoot {\n        float: left;\n      }\n    \n      tbody {\n        display: block;\n        white-space: nowrap;\n      }\n    \n      th,\n      td {\n        border-top: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        border-left: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n    \n        &:last-child {\n          border-right: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        }\n      }\n    \n      thead,\n      tbody,\n      tfoot {\n        &:last-child {\n          tr:last-child th,\n          tr:last-child td {\n            border-bottom: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n          }\n        }\n      }\n    \n      tr {\n        float: left;\n    \n        th,\n        td {\n          display: block !important;\n          border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        }\n      }\n    }\n    \n      /* from reboot.scss */\n      th {\n        /* Centered by default, but left-align-ed to match the tds below. */\n        text-align: left;\n      }\n        \n\n      \n    /* Reboot Scss */\n    /* No longer part of Normalize since v4 */\n    border-collapse: collapse;\n    /*  Reset for nesting within parents with \'background-color\'. */\n    background-color: ' + props.theme['$table-bg'] + ';    \n    \n  ';
+  return '\n    /*\n     Basic Bootstrap table\n    */\n    \n    &.table {\n      width: 100%;\n      max-width: 100%;\n      margin-bottom: ' + props.theme['$spacer'] + ';\n      background-color: ' + props.theme['$table-bg'] + ';\n\n      th,\n      td {\n        padding: ' + props.theme['$table-cell-padding'] + ';\n        vertical-align: top;\n        border-top: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      thead th {\n        vertical-align: bottom;\n        border-bottom: ' + unitUtils$1.math.multiply(2, props.theme['$table-border-width']) + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      tbody + tbody {\n        border-top: ' + unitUtils$1.math.multiply(2, props.theme['$table-border-width']) + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      .table {\n        background-color: ' + props.theme['$body-bg'] + ';\n      }\n    }\n    \n    \n    /*\n     Condensed table w/ half padding\n    */\n    \n    &.table-sm {\n      th,\n      td {\n        padding: ' + props.theme['$table-sm-cell-padding'] + ';\n      }\n    }\n    \n    \n    /* Bordered version\n     Add borders all around the table and between all the columns.\n    */\n    &.table-bordered {\n      border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n    \n      th,\n      td {\n        border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      thead {\n        th,\n        td {\n          border-bottom-width: ' + unitUtils$1.math.multiply(2, props.theme['$table-border-width']) + ';\n        }\n      }\n    }\n    \n    \n    /* Zebra-striping\n     Default zebra-stripe styles (alternating gray and transparent backgrounds)\n    */\n    \n    &.table-striped {\n      tbody tr:nth-of-type(odd) {\n        background-color: ' + props.theme['$table-bg-accent'] + ';\n      }\n    }\n    \n    \n    /* \n    Hover effect Placed here since it has to come after the potential zebra striping\n    */\n\n    \n    &.table-hover {\n      tbody tr {\n        ' + hover_2('\n          background-color: ' + props.theme['$table-bg-hover'] + ';\n        ') + '\n      }\n    }\n    \n    /* Table backgrounds\n    Exact selectors below required to override \'.table-striped\' and prevent\n    inheritance to nested tables.\n    */\n        \n    /* Generate the contextual variants */\n    ' + tableRow_1('active', props.theme['$table-bg-active']) + '\n    ' + tableRow_1('success', props.theme['$state-success-bg']) + '\n    ' + tableRow_1('info', props.theme['$state-info-bg']) + '\n    ' + tableRow_1('warning', props.theme['$state-warning-bg']) + '\n    ' + tableRow_1('danger', props.theme['$state-danger-bg']) + '\n     \n    \n    /* Inverse styles\n    Same table markup, but inverted color scheme: dark background and light text.\n    */ \n    \n    & thead.thead-inverse {\n      th {\n        color: ' + props.theme['$table-inverse-color'] + ';\n        background-color: ' + props.theme['$table-inverse-bg'] + ';\n      }\n    }\n    \n    \n    & thead.thead-default {\n      th {\n        color: ' + props.theme['$table-head-color'] + ';\n        background-color: ' + props.theme['$table-head-bg'] + ';\n      }\n    }\n    \n    &.table-inverse {\n      color: ' + props.theme['$table-inverse-color'] + ';\n      background-color: ' + props.theme['$table-inverse-bg'] + ';\n    \n      th,\n      td,\n      thead th {\n        border-color: ' + props.theme['$table-inverse-border'] + ';\n      }\n    \n      &.table-bordered {\n        border: 0;\n      }\n      \n      &.table-striped {\n        tbody tr:nth-of-type(odd) {\n        background-color: ' + props.theme['$table-inverse-bg-accent'] + ';\n        }\n      }\n      \n      &.table-hover {\n        tbody tr {\n          ' + hover_2('\n            background-color: ' + props.theme['$table-inverse-bg-hover'] + ';\n          ') + '\n        }\n      }\n    }\n    \n    \n    \n    /* Responsive tables\n     Wrap your tables in \'.table-responsive\' and we\'ll make them mobile friendly\n     by enabling horizontal scrolling. Only applies <768px. Everything above that\n     will display normally.\n     */\n    \n    &.table-responsive {\n      display: block;\n      width: 100%;\n      overflow-x: auto;\n      -ms-overflow-style: -ms-autohiding-scrollbar; /* See https://github.com/twbs/bootstrap/pull/10057 */\n      &.table-bordered {\n        border: 0;\n      }\n    }\n    \n    \n    &.table-reflow {\n    \n      /* added bs4 missing tfoot rule */\n      thead, tfoot {\n        float: left;\n      }\n    \n      tbody {\n        display: block;\n        white-space: nowrap;\n      }\n    \n      th,\n      td {\n        border-top: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        border-left: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n    \n        &:last-child {\n          border-right: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        }\n      }\n    \n      thead,\n      tbody,\n      tfoot {\n        &:last-child {\n          tr:last-child th,\n          tr:last-child td {\n            border-bottom: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n          }\n        }\n      }\n    \n      tr {\n        float: left;\n    \n        th,\n        td {\n          display: block !important;\n          border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        }\n      }\n    }\n    \n      /* from reboot.scss */\n      th {\n        /* Centered by default, but left-align-ed to match the tds below. */\n        text-align: left;\n      }\n        \n\n      \n    /* Reboot Scss */\n    /* No longer part of Normalize since v4 */\n    border-collapse: collapse;\n    /*  Reset for nesting within parents with \'background-color\'. */\n    background-color: ' + props.theme['$table-bg'] + ';    \n    \n  ';
 });
-Table.defaultProps = defaultProps$103;
+Table.defaultProps = defaultProps$67;
 
 var Tbody = styled.tbody.withConfig({
   displayName: 'Tbody'
@@ -11025,7 +12016,7 @@ var Thead = function (_React$Component) {
     classCallCheck$1(this, Thead);
     return possibleConstructorReturn(this, (Thead.__proto__ || Object.getPrototypeOf(Thead)).apply(this, arguments));
   }
-  createClass$1(Thead, [{
+  createClass(Thead, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -11034,7 +12025,7 @@ var Thead = function (_React$Component) {
           children = _props.children,
           defaultBg = _props.defaultBg,
           attributes = objectWithoutProperties(_props, ['className', 'inverse', 'children', 'defaultBg']);
-      var classes = classnames$1(className, inverse ? 'thead-inverse' : false, defaultBg ? 'thead-default' : false);
+      var classes = classnames(className, inverse ? 'thead-inverse' : false, defaultBg ? 'thead-default' : false);
       return React.createElement(
         'thead',
         _extends({ className: classes }, attributes),
@@ -11061,7 +12052,7 @@ var Tr = function (_React$Component) {
     classCallCheck$1(this, Tr);
     return possibleConstructorReturn(this, (Tr.__proto__ || Object.getPrototypeOf(Tr)).apply(this, arguments));
   }
-  createClass$1(Tr, [{
+  createClass(Tr, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -11069,7 +12060,7 @@ var Tr = function (_React$Component) {
           color = _props.color,
           children = _props.children,
           attributes = objectWithoutProperties(_props, ['className', 'color', 'children']);
-      var classes = classnames$1(className, color ? 'table-' + color : false);
+      var classes = classnames(className, color ? 'table-' + color : false);
       return React.createElement(
         'tr',
         _extends({ className: classes }, attributes),
@@ -11091,7 +12082,7 @@ var Th = function (_React$Component) {
     classCallCheck$1(this, Th);
     return possibleConstructorReturn(this, (Th.__proto__ || Object.getPrototypeOf(Th)).apply(this, arguments));
   }
-  createClass$1(Th, [{
+  createClass(Th, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -11099,7 +12090,7 @@ var Th = function (_React$Component) {
           color = _props.color,
           children = _props.children,
           attributes = objectWithoutProperties(_props, ['className', 'color', 'children']);
-      var classes = classnames$1(className, color ? 'table-' + color : false);
+      var classes = classnames(className, color ? 'table-' + color : false);
       return React.createElement(
         'th',
         _extends({ className: classes }, attributes),
@@ -11121,7 +12112,7 @@ var Td = function (_React$Component) {
     classCallCheck$1(this, Td);
     return possibleConstructorReturn(this, (Td.__proto__ || Object.getPrototypeOf(Td)).apply(this, arguments));
   }
-  createClass$1(Td, [{
+  createClass(Td, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -11129,7 +12120,7 @@ var Td = function (_React$Component) {
           color = _props.color,
           children = _props.children,
           attributes = objectWithoutProperties(_props, ['className', 'color', 'children']);
-      var classes = classnames$1(className, color ? 'table-' + color : false);
+      var classes = classnames(className, color ? 'table-' + color : false);
       return React.createElement(
         'td',
         _extends({ className: classes }, attributes),
@@ -11145,7 +12136,32 @@ Td.propTypes = {
   children: PropTypes.node
 };
 
-var defaultProps$104 = {
+var badge = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.badgeVariant = badgeVariant;
+var _color2 = _interopRequireDefault(color);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var defaultProps = exports.defaultProps = {
+  '$enable-hover-mediaQuery': false
+};
+function badgeVariant() {
+  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-mediaQuery'];
+  var badgeColor = arguments[1];
+  return '\n    background-color: ' + badgeColor + ';\n    \n    &[href] {\n      ' + (0, hover_1.hoverFocus)(enableHoverMediaQuery, 'background-color: ' + (0, _color2.default)(badgeColor).darken(0.1).toString() + ';') + '\n    }\n  ';
+}
+exports.default = {
+  defaultProps: defaultProps,
+  badgeVariant: badgeVariant
+};
+});
+unwrapExports(badge);
+var badge_2 = badge.badgeVariant;
+
+var defaultProps$68 = {
   theme: bsTheme,
   color: 'default',
   pill: false,
@@ -11157,10 +12173,10 @@ var BadgeUnstyled = function (_React$Component) {
     classCallCheck$1(this, BadgeUnstyled);
     return possibleConstructorReturn(this, (BadgeUnstyled.__proto__ || Object.getPrototypeOf(BadgeUnstyled)).apply(this, arguments));
   }
-  createClass$1(BadgeUnstyled, [{
+  createClass(BadgeUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           color = _omit.color,
@@ -11168,7 +12184,7 @@ var BadgeUnstyled = function (_React$Component) {
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'color', 'pill', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'badge', defineProperty({
+        className: mapToCssModules(classnames(className, 'badge', defineProperty({
           pill: pill
         }, 'badge-' + color, color)), cssModule)
       }, attributes));
@@ -11187,9 +12203,9 @@ BadgeUnstyled.propTypes = {
 var Badge = styled(BadgeUnstyled).withConfig({
   displayName: 'Badge'
 })(['', ''], function (props) {
-  return '\n    \n    /* Base class */\n    /* Requires one of the contextual, color modifier classes for \'color\' and */\n    /* \'background-color\'. */\n    \n    &.badge {\n      display: inline-block;\n      padding: ' + props.theme['$badge-padding-y'] + ' ' + props.theme['$badge-padding-x'] + ';\n      font-size: ' + props.theme['$badge-font-size'] + ';\n      font-weight: ' + props.theme['$badge-font-weight'] + ';\n      line-height: 1;\n      color: ' + props.theme['$badge-color'] + ';\n      text-align: center;\n      white-space: nowrap;\n      vertical-align: baseline;\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n    \n      /* Empty tags collapse automatically */\n      &:empty {\n        display: none;\n      }\n    }\n    \n    \n    /* scss-lint:disable QualifyingElement */\n    /* Add hover effects, but only for links */\n    &a {\n      ' + hoverFocus(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$badge-link-hover-color'] + ';\n        text-decoration: none;\n        cursor: pointer;\n      ') + '\n    }\n    /* scss-lint:enable QualifyingElement */\n    \n    /* Pill tags */\n    /* Make them extra rounded with a modifier to replace v3s badges. */\n    \n    &.badge-pill {\n      padding-right: ' + props.theme['$badge-pill-padding-x'] + ';\n      padding-left: ' + props.theme['$badge-pill-padding-x'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$badge-pill-border-radius']) + '\n    }\n    \n    /* Colors */\n    /* Contextual variations (linked tags get darker on :hover). */\n    \n    &.badge-default {\n      ' + badgeVariant(props.theme['$enable-hover-media-query'], props.theme['$badge-default-bg']) + '\n    }     \n    \n    &.badge-primary {\n      ' + badgeVariant(props.theme['$enable-hover-media-query'], props.theme['$badge-primary-bg']) + '\n    }\n    \n    &.badge-success {\n      ' + badgeVariant(props.theme['$enable-hover-media-query'], props.theme['$badge-success-bg']) + '\n    }\n    \n    &.badge-info {\n      ' + badgeVariant(props.theme['$enable-hover-media-query'], props.theme['$badge-info-bg']) + '\n    }\n    \n    &.badge-warning {\n      ' + badgeVariant(props.theme['$enable-hover-media-query'], props.theme['$badge-warning-bg']) + '\n    }\n    \n    &.badge-danger {\n      ' + badgeVariant(props.theme['$enable-hover-media-query'], props.theme['$badge-danger-bg']) + '\n    }\n  ';
+  return '\n    \n    /* Base class */\n    /* Requires one of the contextual, color modifier classes for \'color\' and */\n    /* \'background-color\'. */\n    \n    &.badge {\n      display: inline-block;\n      padding: ' + props.theme['$badge-padding-y'] + ' ' + props.theme['$badge-padding-x'] + ';\n      font-size: ' + props.theme['$badge-font-size'] + ';\n      font-weight: ' + props.theme['$badge-font-weight'] + ';\n      line-height: 1;\n      color: ' + props.theme['$badge-color'] + ';\n      text-align: center;\n      white-space: nowrap;\n      vertical-align: baseline;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n    \n      /* Empty tags collapse automatically */\n      &:empty {\n        display: none;\n      }\n    }\n    \n    \n    /* scss-lint:disable QualifyingElement */\n    /* Add hover effects, but only for links */\n    &a {\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$badge-link-hover-color'] + ';\n        text-decoration: none;\n        cursor: pointer;\n      ') + '\n    }\n    /* scss-lint:enable QualifyingElement */\n    \n    /* Pill tags */\n    /* Make them extra rounded with a modifier to replace v3s badges. */\n    \n    &.badge-pill {\n      padding-right: ' + props.theme['$badge-pill-padding-x'] + ';\n      padding-left: ' + props.theme['$badge-pill-padding-x'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$badge-pill-border-radius']) + '\n    }\n    \n    /* Colors */\n    /* Contextual variations (linked tags get darker on :hover). */\n    \n    &.badge-default {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-default-bg']) + '\n    }     \n    \n    &.badge-primary {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-primary-bg']) + '\n    }\n    \n    &.badge-success {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-success-bg']) + '\n    }\n    \n    &.badge-info {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-info-bg']) + '\n    }\n    \n    &.badge-warning {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-warning-bg']) + '\n    }\n    \n    &.badge-danger {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-danger-bg']) + '\n    }\n  ';
 });
-Badge.defaultProps = defaultProps$104;
+Badge.defaultProps = defaultProps$68;
 
 var Textarea = styled.textarea.withConfig({
   displayName: 'Textarea'
@@ -11199,7 +12215,7 @@ var DEFAULT_DELAYS = {
   shape: 0,
   hide: 250
 };
-var defaultProps$105 = {
+var defaultProps$69 = {
   isOpen: false,
   placement: 'bottom',
   delay: DEFAULT_DELAYS,
@@ -11333,14 +12349,14 @@ var TooltipUnstyled = function (_React$Component) {
       });
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(TooltipUnstyled, [{
+  createClass(TooltipUnstyled, [{
     key: 'render',
     value: function render() {
       if (!this.props.isOpen) {
         return null;
       }
-      var attributes = lodash_omit$1(this.props, Object.keys(propTypes$7));
-      var classes = mapToCssModules(classnames$1('tooltip', this.props.className), this.props.cssModule);
+      var attributes = lodash_omit(this.props, Object.keys(propTypes$7));
+      var classes = mapToCssModules(classnames('tooltip', this.props.className), this.props.cssModule);
       var tetherConfig = this.getTetherConfig();
       var optional = {};
       if (this.state.focus === true) {
@@ -11372,1062 +12388,99 @@ var Tooltip = styled(TooltipUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    &.tooltip {\n      position: absolute;\n      z-index: ' + props.theme['$zindex-tooltip'] + ';\n      display: block;\n      font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;\n      font-style: normal;\n      font-weight: 400;\n      letter-spacing: normal;\n      line-break: auto;\n      line-height: 1.5;\n      text-align: left;\n      text-align: start;\n      text-decoration: none;\n      text-shadow: none;\n      text-transform: none;\n      white-space: normal;\n      word-break: normal;\n      word-spacing: normal;\n      font-size: .875rem;\n      word-wrap: break-word;\n      opacity: 0\n    }\n    \n    &.tooltip.show {\n      opacity: ' + props.theme['$tooltip-opacity'] + '\n    }\n    \n    &.tooltip.bs-tether-element-attached-bottom,\n    &.tooltip.tooltip-top {\n      padding: 5px 0;\n      margin-top: -3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-bottom .tooltip-inner:before,\n    &.tooltip.tooltip-top .tooltip-inner:before {\n      bottom: 0;\n      left: 50%;\n      margin-left: -5px;\n      content: "";\n      border-width: 5px 5px 0;\n      border-top-color: #000\n    }\n    \n    &.tooltip.bs-tether-element-attached-left,\n    &.tooltip.tooltip-right {\n      padding: 0 5px;\n      margin-left: 3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-left .tooltip-inner:before,\n    &.tooltip.tooltip-right .tooltip-inner:before {\n      top: 50%;\n      left: 0;\n      margin-top: -5px;\n      content: "";\n      border-width: 5px 5px 5px 0;\n      border-right-color: #000\n    }\n    \n    &.tooltip.bs-tether-element-attached-top,\n    &.tooltip.tooltip-bottom {\n      padding: 5px 0;\n      margin-top: 3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-top .tooltip-inner:before,\n    &.tooltip.tooltip-bottom .tooltip-inner:before {\n      top: 0;\n      left: 50%;\n      margin-left: -5px;\n      content: "";\n      border-width: 0 5px 5px;\n      border-bottom-color: #000\n    }\n    \n    &.tooltip.bs-tether-element-attached-right,\n    &.tooltip.tooltip-left {\n      padding: 0 5px;\n      margin-left: -3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-right .tooltip-inner:before,\n    &.tooltip.tooltip-left .tooltip-inner:before {\n      top: 50%;\n      right: 0;\n      margin-top: -5px;\n      content: "";\n      border-width: 5px 0 5px 5px;\n      border-left-color: #000\n    }\n    \n    & .tooltip-inner {\n      max-width: ' + props.theme['$tooltip-max-width'] + ';\n      padding: ' + props.theme['$tooltip-padding-y'] + ' ' + props.theme['$tooltip-padding-x'] + ';\n      color: ' + props.theme['$tooltip-color'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$tooltip-bg'] + ';\n      border-radius: .25rem\n    }\n    \n    & .tooltip-inner:before {\n      position: absolute;\n      width: 0;\n      height: 0;\n      border-color: transparent;\n      border-style: solid\n    }\n  ';
 });
-Tooltip.defaultProps = defaultProps$105;
+Tooltip.defaultProps = defaultProps$69;
 
-function makeBlur(_ref) {
-  var distance = _ref.distance;
-  return {
-    '0%': {
-      filter: 'blur(0px)'
-    },
-    '100%': {
-      filter: 'blur(' + distance + ')'
-    }
-  };
+var cards = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.cardVariant = cardVariant;
+exports.cardOutlineVariant = cardOutlineVariant;
+exports.cardInverse = cardInverse;
+exports.card = card;
+var defaultProps = exports.defaultProps = {
+  '$enable-rounded': true,
+  '$enable-hover-media-query': false,
+  '$card-spacer-x': '1.25rem',
+  '$card-spacer-y': '.75rem',
+  '$card-bg': '#fff',
+  '$card-border-width': '1px',
+  '$card-border-color': 'rgba(0, 0, 0, 0.125)',
+  '$card-border-radius': '.25rem',
+  '$card-margin-y-halved': '0.375rem',
+  '$card-margin-x-halved': '0.625rem',
+  '$card-cap-bg': '#f7f7f9',
+  '$card-border-radius-inner': 'calc(.25rem - 1px)',
+  '$brand-primary': '#0275d8',
+  '$brand-success': '#5cb85c',
+  '$brand-info': '#5bc0de',
+  '$brand-warning': '#f0ad4e',
+  '$brand-danger': '#d9534f',
+  '$btn-primary-bg': '#0275d8',
+  '$btn-secondary-border': '#ccc',
+  '$btn-info-bg': '#5bc0de',
+  '$btn-success-bg': '#5cb85c',
+  '$btn-warning-bg': '#f0ad4e',
+  '$btn-danger-bg': '#d9534f',
+  '$card-link-hover-color': '#fff',
+  '$card-img-overlay-padding': '1.25rem'
+};
+function cardVariant(cardBackground, cardBorder) {
+  return '\n    background-color: ' + cardBackground + ';\n    border-color: ' + cardBorder + ';\n  \n    & .card-header,\n    & .card-footer {\n      background-color: transparent;\n    }\n  ';
 }
-function makeOpacity(_ref2) {
-  var amplification = _ref2.amplification;
-  return {
-    '0%': {
-      filter: 'opacity(0%)'
-    },
-    '100%': {
-      filter: 'opacity(' + amplification * 100 + '%)'
-    }
-  };
+function cardOutlineVariant(cardColor) {
+  return '\n    background-color: transparent;\n    border-color: ' + cardColor + ';\n  ';
 }
-function makeContrast(_ref3) {
-  var amplification = _ref3.amplification;
-  return {
-    '0%': {
-      filter: 'contrast(0%)'
-    },
-    '100%': {
-      filter: 'contrast(' + amplification * 100 + '%)'
-    }
-  };
+function cardInverse() {
+  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
+  var cardLinkHoverColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$card-link-hover-color'];
+  return '\n    color: rgba(255,255,255,.65);\n    & .card-header,\n    & .card-footer {\n      background-color: transparent;\n      border-color: rgba(255,255,255,.2);\n    }\n    & .card-header,\n    & .card-footer,\n    & .card-title,\n    & .card-blockquote {\n      color: #fff;\n    }\n    & .card-link,\n    & .card-text,\n    & .card-subtitle,\n    & .card-blockquote .blockquote-footer {\n      color: rgba(255,255,255,.65);\n    }\n    \n    & .card-link {\n      ' + (0, hover_1.hoverFocus)(enableHoverMediaQuery, 'color: ' + cardLinkHoverColor + ';') + '\n    }\n  ';
 }
-function makeBrightness(_ref4) {
-  var amplification = _ref4.amplification;
-  return {
-    '0%': {
-      filter: 'brightness(0%)'
-    },
-    '100%': {
-      filter: 'brightness(' + amplification * 100 + '%)'
-    }
-  };
+function card() {
+  var $enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var $enableHoverMediaQuery = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$enable-hover-media-query'];
+  var $cardSpacerY = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$card-spacer-y'];
+  var $cardSpacerX = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$card-spacer-x'];
+  var $cardBg = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$card-bg'];
+  var $cardBorderWidth = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$card-border-width'];
+  var $cardBorderColor = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$card-border-color'];
+  var $cardBorderRadius = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$card-border-radius'];
+  var $cardMarginYHalved = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps['$card-margin-y-halved'];
+  var $cardMarginXHalved = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps['$card-margin-x-halved'];
+  var $cardCapBg = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps['$card-cap-bg'];
+  var $cardBorderRadiusInner = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps['$card-border-radius-inner'];
+  var $brandPrimary = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps['$brand-primary'];
+  var $brandSuccess = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : defaultProps['$brand-success'];
+  var $brandInfo = arguments.length > 14 && arguments[14] !== undefined ? arguments[14] : defaultProps['$brand-info'];
+  var $brandWarning = arguments.length > 15 && arguments[15] !== undefined ? arguments[15] : defaultProps['$brand-warning'];
+  var $brandDanger = arguments.length > 16 && arguments[16] !== undefined ? arguments[16] : defaultProps['$brand-danger'];
+  var $btnPrimaryBg = arguments.length > 17 && arguments[17] !== undefined ? arguments[17] : defaultProps['$btn-primary-bg'];
+  var $btnSecondaryBorder = arguments.length > 18 && arguments[18] !== undefined ? arguments[18] : defaultProps['$btn-secondary-border'];
+  var $btnInfoBg = arguments.length > 19 && arguments[19] !== undefined ? arguments[19] : defaultProps['$btn-info-bg'];
+  var $btnSuccessBg = arguments.length > 20 && arguments[20] !== undefined ? arguments[20] : defaultProps['$btn-success-bg'];
+  var $btnWarningBg = arguments.length > 21 && arguments[21] !== undefined ? arguments[21] : defaultProps['$btn-warning-bg'];
+  var $btnDangerBg = arguments.length > 22 && arguments[22] !== undefined ? arguments[22] : defaultProps['$btn-danger-bg'];
+  var $cardLinkHoverColor = arguments.length > 23 && arguments[23] !== undefined ? arguments[23] : defaultProps['$card-link-hover-color'];
+  var $cardImgOverlayPadding = arguments.length > 24 && arguments[24] !== undefined ? arguments[24] : defaultProps['$card-img-overlay-padding'];
+  return '\n    & .card {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + $cardBg + ';\n      border: ' + $cardBorderWidth + ' solid ' + $cardBorderColor + ';\n      ' + (0, borderRadius_1.borderRadius)($enableRounded, $cardBorderRadius) + '\n    }\n    \n    & .card-block {\n      flex: 1 1 auto;\n\n      padding: ' + $cardSpacerX + ';\n    }\n    \n    & .card-title {\n      margin-bottom: ' + $cardSpacerY + ';\n    }\n    \n    & .card-subtitle {\n      margin-top: -' + $cardMarginYHalved + ';\n      margin-bottom: 0;\n    }\n    \n    & .card-text:last-child {\n      margin-bottom: 0;\n    }\n   \n    & .card-link {\n      ' + (0, hover_1.hover)('text-decoration: none;') + '\n    \n      + .card-link {\n        margin-left: ' + $cardSpacerX + ';\n      }\n    }\n    \n    & .card{\n      > .list-group:first-child {\n        .list-group-item:first-child {\n          ' + (0, borderRadius_1.borderTopRadius)($enableRounded, $cardBorderRadius) + '\n        }\n      }\n    \n      > .list-group:last-child {\n        .list-group-item:last-child {\n          ' + (0, borderRadius_1.borderBottomRadius)($enableRounded, $cardBorderRadius) + '\n        }\n      }\n    }\n    \n    & .card-header {\n      padding: ' + $cardSpacerY + ' ' + $cardSpacerX + ';\n      margin-bottom: 0;\n      background-color: ' + $cardCapBg + ';\n      border-bottom: ' + $cardBorderWidth + ' solid ' + $cardBorderColor + ';\n    \n      &:first-child {\n        ' + (0, borderRadius_1.borderRadius)($enableRounded, $cardBorderRadiusInner, $cardBorderRadiusInner, '0', '0') + '\n      }\n    }\n    \n    & .card-footer {\n      padding: ' + $cardSpacerY + ' ' + $cardSpacerX + ';\n      background-color: ' + $cardCapBg + ';\n      border-top: ' + $cardBorderWidth + ' solid ' + $cardBorderColor + ';\n    \n      &:last-child {\n        ' + (0, borderRadius_1.borderRadius)($enableRounded, '0', '0', $cardBorderRadiusInner, $cardBorderRadiusInner) + '\n      }\n    }\n\n    & .card-header-tabs {\n      margin-right: -' + $cardMarginXHalved + ';\n      margin-bottom: -' + $cardSpacerY + ';\n      margin-left: -' + $cardMarginXHalved + ';\n      border-bottom: 0;\n    }\n    \n    & .card-header-pills {\n      margin-right: -' + $cardMarginXHalved + ';\n      margin-left: -' + $cardMarginXHalved + ';\n    }\n    \n    & .card-primary {\n      ' + cardVariant($brandPrimary, $brandPrimary) + '\n    }\n    & .card-success {\n      ' + cardVariant($brandSuccess, $brandSuccess) + '\n    }\n    & .card-info {\n      ' + cardVariant($brandInfo, $brandInfo) + '\n    }\n    & .card-warning {\n      ' + cardVariant($brandWarning, $brandWarning) + '\n    }\n    & .card-danger {\n      ' + cardVariant($brandDanger, $brandDanger) + '\n    }\n    \n    & .card-outline-primary {\n      ' + cardOutlineVariant($btnPrimaryBg) + '\n    }\n    & .card-outline-secondary {\n      ' + cardOutlineVariant($btnSecondaryBorder) + '\n    }\n    & .card-outline-info {\n      ' + cardOutlineVariant($btnInfoBg) + '\n    }\n    & .card-outline-success {\n      ' + cardOutlineVariant($btnSuccessBg) + '\n    }\n    & .card-outline-warning {\n      ' + cardOutlineVariant($btnWarningBg) + '\n    }\n    & .card-outline-danger {\n      ' + cardOutlineVariant($btnDangerBg) + '\n    }\n        \n    & .card-inverse {\n      ' + cardInverse($enableHoverMediaQuery, $cardLinkHoverColor) + '\n    }\n\n    & .card-blockquote {\n      padding: 0;\n      margin-bottom: 0;\n      border-left: 0;\n    }\n    \n    & .card-img {\n      ' + (0, borderRadius_1.borderRadius)($enableRounded, $cardBorderRadiusInner) + '\n    }\n    \n    & .card-img-overlay {\n      position: absolute;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      padding: ' + $cardImgOverlayPadding + ';\n    }\n\n    & .card-img-top {\n      ' + (0, borderRadius_1.borderTopRadius)($enableRounded, $cardBorderRadiusInner) + '\n    }\n    \n    & .card-img-bottom {\n      ' + (0, borderRadius_1.borderBottomRadius)($enableRounded, $cardBorderRadiusInner) + '\n    }\n  ';
 }
-function makeGrayscale(_ref5) {
-  var amplification = _ref5.amplification;
-  return {
-    '0%': {
-      filter: 'grayscale(0%)'
-    },
-    '100%': {
-      filter: 'grayscale(' + amplification * 100 + '%)'
-    }
-  };
-}
-function makeHueRotate(_ref6) {
-  var rotation = _ref6.rotation;
-  return {
-    '0%': {
-      filter: 'hue-rotate(0deg)'
-    },
-    '100%': {
-      filter: 'hue-rotate(' + rotation + ')'
-    }
-  };
-}
-function makeInvert(_ref7) {
-  var amplification = _ref7.amplification;
-  return {
-    '0%': {
-      filter: 'invert(0%)'
-    },
-    '100%': {
-      filter: 'invert(' + amplification * 100 + '%)'
-    }
-  };
-}
-function makeSaturate(_ref8) {
-  var amplification = _ref8.amplification;
-  return {
-    '0%': {
-      filter: 'saturate(0%)'
-    },
-    '100%': {
-      filter: 'saturate(' + amplification * 8 + '%)'
-    }
-  };
-}
-function makeSepia(_ref9) {
-  var amplification = _ref9.amplification;
-  return {
-    '0%': {
-      filter: 'sepia(0%)'
-    },
-    '100%': {
-      filter: 'sepia(' + amplification * 100 + '%)'
-    }
-  };
-}
-function makeDropshadow(_ref10) {
-  var amplification = _ref10.amplification;
-  return {
-    '0%': {
-      filter: 'drop-shadow(0px 0px 0px #000)'
-    },
-    '100%': {
-      filter: 'drop-shadow(' + amplification * 5 + 'px ' + amplification * 5 + 'px ' + amplification * 5 + 'px #000)'
-    }
-  };
-}
+exports.default = {
+  defaultProps: defaultProps,
+  cardVariant: cardVariant,
+  cardOutlineVariant: cardOutlineVariant,
+  cardInverse: cardInverse,
+  card: card
+};
+});
+unwrapExports(cards);
+var cards_2 = cards.cardVariant;
+var cards_3 = cards.cardOutlineVariant;
+var cards_4 = cards.cardInverse;
+var cards_5 = cards.card;
 
-var TYPE_ROTATE = 'TYPE_ROTATE';
-
-var keyframeRefList = [];
-function toKeyframeString(obj) {
-  var keyframeStr = '';
-  Object.keys(obj).forEach(function (step) {
-    keyframeStr += step + '{';
-    Object.keys(obj[step]).forEach(function (cssAttr) {
-      keyframeStr += cssAttr + ':' + obj[step][cssAttr] + ';';
-    });
-    keyframeStr += '}';
-  });
-  return keyframeStr;
-}
-function makeKeyframe(make, options) {
-  var userKeyframes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  var MAX_KEYFRAMES = 50;
-  var merge = make(options);
-  Object.keys(userKeyframes).forEach(function (key) {
-    merge[key] = Object.assign({}, merge[key], userKeyframes[key]);
-  });
-  var hashCode = toHashCode(JSON.stringify(merge));
-  var filtered = keyframeRefList.filter(function (keyframeRef) {
-    return keyframeRef.hashCode === hashCode;
-  });
-  if (filtered.length) {
-    return filtered[0].name;
-  }
-  var keyframeStr = toKeyframeString(merge);
-  var name = keyframes(['', ''], keyframeStr);
-  keyframeRefList.push({
-    name: name,
-    hashCode: hashCode
-  });
-  if (keyframeRefList.length > MAX_KEYFRAMES) {
-    console.warn('You might have done a mistake because of current keyframes injection count. You currently have ' + keyframeRefList.length + ' keyframes in your page.');
-  }
-  return name;
-}
-
-function composeAnimation(makeAnimation) {
-  var HOC = function (_React$Component) {
-    inherits(HOC, _React$Component);
-    function HOC() {
-      var _ref;
-      var _temp, _this, _ret;
-      classCallCheck$1(this, HOC);
-      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-      return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = HOC.__proto__ || Object.getPrototypeOf(HOC)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-        defaults: {},
-        styles: {}
-      }, _this.componentWillMount = function () {
-        _this.updateDefaultsFromTheme(_this.updateAnimationStyles);
-      }, _this.updateDefaultsFromTheme = function (cb) {
-        var theme = _this.props.theme;
-        _this.setState({
-          defaults: {
-            duration: theme['$motion-duration']['md'],
-            timingFunction: theme['$motion-timing-function']['ease'],
-            delay: theme['$motion-delay']['xs'],
-            direction: theme['$motion-direction']['normal'],
-            iterations: theme['$motion-iterations']['xs'],
-            fillMode: theme['$motion-fill-mode']['none'],
-            playState: theme['$motion-play-state']['running'],
-            distance: theme['$motion-distance']['md'],
-            rotation: theme['$motion-degree']['md'],
-            perspective: theme['$motion-perspective']['xs'],
-            backfaceVisibility: theme['$motion-backface-visibility']['hidden'],
-            amplification: theme['$motion-amplification']['md']
-          }
-        }, cb);
-      }, _this.updateAnimationStyles = function () {
-        var props = _this.props;
-        var defaults$$1 = _this.state.defaults;
-        var duration = props.duration || defaults$$1.duration;
-        var timingFunction = props.timingFunction || defaults$$1.timingFunction;
-        var delay = props.delay || defaults$$1.delay;
-        var direction = props.direction || defaults$$1.direction;
-        var iterations = props.iterations || defaults$$1.iterations;
-        var fillMode = props.fillMode || defaults$$1.fillMode;
-        var playState = props.playState || defaults$$1.playState;
-        var distance = props.distance || defaults$$1.distance;
-        var rotation = props.degree || defaults$$1.rotation;
-        var perspective = props.perspective || defaults$$1.perspective;
-        var backfaceVisibility = props.backfaceVisibility || defaults$$1.backfaceVisibility;
-        var amplification = props.amplification || defaults$$1.amplification;
-        var keyframeName = makeKeyframe(_this.makeAnimation, { distance: distance, rotation: rotation, perspective: perspective, amplification: amplification }, props.keyframes);
-        var styles = {};
-        styles.animation = keyframeName + ' ' + duration + ' ' + timingFunction + ' ' + delay + ' ' + iterations + ' ' + direction + ' ' + fillMode + ' ' + playState;
-        if (TYPE_ROTATE === _this.makeAnimation.type) {
-          styles.backfaceVisibility = backfaceVisibility;
-        }
-        _this.setState({
-          styles: styles
-        });
-      }, _this.makeAnimation = makeAnimation, _temp), possibleConstructorReturn(_this, _ret);
-    }
-    createClass$1(HOC, [{
-      key: 'componentWillReceiveProps',
-      value: function componentWillReceiveProps(newProps) {
-        if (toHashCode(newProps.theme) !== toHashCode(this.props.theme)) {
-          this.updateDefaultsFromTheme(this.updateAnimationStyles);
-        } else {
-          this.updateAnimationStyles();
-        }
-      }
-    }, {
-      key: 'render',
-      value: function render() {
-        var _omit = lodash_omit$1(this.props, ['theme', 'duration', 'timingFunction', 'delay', 'iterations', 'direction', 'fillMode', 'playState', 'keyframes', 'distance', 'degree', 'perspective', 'backfaceVisibility', 'amplification', 'rotation', 'innerRef']),
-            className = _omit.className,
-            children = _omit.children,
-            rest = objectWithoutProperties(_omit, ['className', 'children']);
-        return React.createElement(
-          'span',
-          _extends({
-            style: this.state.styles,
-            className: classnames$1('d-inline-block', className)
-          }, rest),
-          children
-        );
-      }
-    }]);
-    return HOC;
-  }(React.Component);
-  HOC.propTypes = {
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string,
-    theme: PropTypes.object.isRequired,
-    duration: PropTypes.string,
-    timingFunction: PropTypes.string,
-    delay: PropTypes.string,
-    direction: PropTypes.string,
-    iterations: PropTypes.string,
-    fillMode: PropTypes.string,
-    playState: PropTypes.string,
-    keyframes: PropTypes.object,
-    distance: PropTypes.string,
-    degree: PropTypes.string,
-    perspective: PropTypes.string,
-    backfaceVisibility: PropTypes.string,
-    amplification: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-  };
-  return withTheme(HOC);
-}
-
-function composeAmplification(AbstractAnim, variableName) {
-  var Amplification = function Amplification(props) {
-    var amplification = props.amplification,
-        theme = props.theme,
-        rest = objectWithoutProperties(props, ['amplification', 'theme']);
-    return React.createElement(AbstractAnim, _extends({
-      amplification: amplification || theme[variableName]
-    }, rest));
-  };
-  Amplification.propTypes = {
-    theme: PropTypes.object,
-    amplification: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-  };
-  return withTheme(Amplification);
-}
-
-function composeRotation(AbstractAnim, variableName) {
-  var Rotation = function Rotation(props) {
-    var rotation = props.rotation,
-        theme = props.theme,
-        rest = objectWithoutProperties(props, ['rotation', 'theme']);
-    var degree = rotation || theme[variableName];
-    if (!isNaN(rotation) || degree.indexOf('deg') === -1) {
-      degree = parseInt(degree, 10).toString() + 'deg';
-    }
-    return React.createElement(AbstractAnim, _extends({
-      rotation: degree
-    }, rest));
-  };
-  Rotation.propTypes = {
-    theme: PropTypes.object,
-    rotation: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  };
-  return withTheme(Rotation);
-}
-
-function composeDistance(AbstractAnim, variableName) {
-  var Distance = function Distance(props) {
-    var distance = props.distance,
-        theme = props.theme,
-        rest = objectWithoutProperties(props, ['distance', 'theme']);
-    return React.createElement(AbstractAnim, _extends({
-      distance: distance || theme[variableName]
-    }, rest));
-  };
-  Distance.propTypes = {
-    theme: PropTypes.object,
-    distance: PropTypes.string
-  };
-  return withTheme(Distance);
-}
-
-var Blur = composeDistance(composeAnimation(makeBlur), '$motion-blur-distance');
-var Contrast = composeAmplification(composeAnimation(makeContrast), '$motion-contrast-amplification');
-var Brightness = composeAmplification(composeAnimation(makeBrightness), '$motion-brightness-amplification');
-var Grayscale = composeAmplification(composeAnimation(makeGrayscale), '$motion-grayscale-amplification');
-var HueRotate = composeRotation(composeAnimation(makeHueRotate), '$motion-hue-rotate-rotation');
-var Invert = composeAmplification(composeAnimation(makeInvert), '$motion-invert-amplification');
-var Opacity = composeAmplification(composeAnimation(makeOpacity), '$motion-opacity-amplification');
-var Saturate = composeAmplification(composeAnimation(makeSaturate), '$motion-saturate-amplification');
-var Sepia = composeAmplification(composeAnimation(makeSepia), '$motion-sepia-amplification');
-var Dropshadow = composeAmplification(composeAnimation(makeDropshadow), '$motion-drop-shadow-amplification');
-
-function makeBounce() {
-  return {
-    from: {
-      'animation-timing-function': 'cubic-bezier(0.200, 0.620, 0.340, 1.000)'
-    },
-    '0%': {
-      opacity: 0,
-      transform: 'scale3d(.3, .3, .3)'
-    },
-    '20%': {
-      transform: 'scale3d(1.1, 1.1, 1.1)'
-    },
-    '40%': {
-      transform: 'scale3d(.9, .9, .9)'
-    },
-    '60%': {
-      opacity: 1,
-      transform: 'scale3d(1.1, 1.1, 1.1)'
-    },
-    '80%': {
-      transform: 'scale3d(.97, .97, .97)'
-    },
-    to: {
-      opacity: 1,
-      transform: 'scale3d(1, 1, 1)'
-    }
-  };
-}
-function makeBounceDown(_ref) {
-  var distance = _ref.distance;
-  return {
-    from: {
-      'animation-timing-function': 'cubic-bezier(0.200, 0.620, 0.340, 1.000)'
-    },
-    '0%': {
-      transform: 'translate3d(0, -' + distance + ', 0)'
-    },
-    '60%': {
-      transform: 'translate3d(0, 25px, 0)'
-    },
-    '75%': {
-      transform: 'translate3d(0, -15px, 0)'
-    },
-    '90%': {
-      transform: 'translate3d(0, 5px, 0)'
-    },
-    to: {
-      transform: 'translate3d(0, 0, 0)'
-    }
-  };
-}
-function makeBounceUp(_ref2) {
-  var distance = _ref2.distance;
-  return {
-    from: {
-      'animation-timing-function': 'cubic-bezier(0.200, 0.620, 0.340, 1.000)'
-    },
-    '0%': {
-      transform: 'translate3d(0, ' + distance + ', 0)'
-    },
-    '60%': {
-      transform: 'translate3d(0, -25px, 0)'
-    },
-    '75%': {
-      transform: 'translate3d(0, 10px, 0)'
-    },
-    '90%': {
-      transform: 'translate3d(0, -5px, 0)'
-    },
-    to: {
-      transform: 'translate3d(0, 0, 0)'
-    }
-  };
-}
-function makeBounceLeft(_ref3) {
-  var distance = _ref3.distance;
-  return {
-    'from, 60% 75% 90%, to': {
-      'animation-timing-function': 'cubic-bezier(0.200, 0.620, 0.340, 1.000)'
-    },
-    '0%': {
-      opacity: 0,
-      transform: 'translate3d(-' + distance + ', 0, 0)'
-    },
-    '60%': {
-      opacity: 1,
-      transform: 'translate3d(25px, 0, 0)'
-    },
-    '75%': {
-      transform: 'translate3d(-10px, 0, 0)'
-    },
-    '90%': {
-      transform: 'translate3d(5px, 0, 0)'
-    },
-    to: {
-      transform: 'none'
-    }
-  };
-}
-function makeBounceRight(_ref4) {
-  var distance = _ref4.distance;
-  return {
-    'from, 60% 75% 90%, to': {
-      'animation-timing-function': 'cubic-bezier(0.200, 0.620, 0.340, 1.000)'
-    },
-    '0%': {
-      opacity: 0,
-      transform: 'translate3d(' + distance + ', 0, 0)'
-    },
-    '60%': {
-      opacity: 1,
-      transform: 'translate3d(-25px, 0, 0)'
-    },
-    '75%': {
-      transform: 'translate3d(10px, 0, 0)'
-    },
-    '90%': {
-      transform: 'translate3d(-5px, 0, 0)'
-    },
-    to: {
-      transform: 'none'
-    }
-  };
-}
-
-var Bounce = composeAmplification(composeAnimation(makeBounce), '$motion-bounce-amplification');
-var BounceDown = composeDistance(composeAnimation(makeBounceDown), '$motion-bounce-down-distance');
-var BounceUp = composeDistance(composeAnimation(makeBounceUp), '$motion-bounce-up-distance');
-var BounceLeft = composeDistance(composeAnimation(makeBounceLeft), '$motion-bounce-left-distance');
-var BounceRight = composeDistance(composeAnimation(makeBounceRight), '$motion-bounce-right-distance');
-
-function makeFadeIn() {
-  return {
-    '0%': {
-      opacity: 0
-    },
-    '100%': {
-      opacity: 1
-    }
-  };
-}
-function makeFadeLeft(_ref) {
-  var distance = _ref.distance;
-  return {
-    from: {
-      opacity: 0,
-      transform: 'translate3d(-' + distance + ', 0, 0)'
-    },
-    to: {
-      opacity: 1,
-      transform: 'none'
-    }
-  };
-}
-function makeFadeRight(_ref2) {
-  var distance = _ref2.distance;
-  return {
-    from: {
-      opacity: 0,
-      transform: 'translate3d(' + distance + ', 0, 0)'
-    },
-    to: {
-      opacity: 1,
-      transform: 'none'
-    }
-  };
-}
-function makeFadeDown(_ref3) {
-  var distance = _ref3.distance;
-  return {
-    from: {
-      opacity: 0,
-      transform: 'translate3d(0, -' + distance + ', 0)'
-    },
-    to: {
-      opacity: 1,
-      transform: 'none'
-    }
-  };
-}
-function makeFadeUp(_ref4) {
-  var distance = _ref4.distance;
-  return {
-    from: {
-      opacity: 0,
-      transform: 'translate3d(0, ' + distance + ', 0)'
-    },
-    to: {
-      opacity: 1,
-      transform: 'none'
-    }
-  };
-}
-
-var FadeIn = composeAnimation(makeFadeIn);
-var FadeInDown = composeDistance(composeAnimation(makeFadeDown), '$motion-fade-in-down-distance');
-var FadeInUp = composeDistance(composeAnimation(makeFadeUp), '$motion-fade-in-up-distance');
-var FadeInLeft = composeDistance(composeAnimation(makeFadeLeft), '$motion-fade-in-left-distance');
-var FadeInRight = composeDistance(composeAnimation(makeFadeRight), '$motion-fade-in-right-distance');
-
-function makeFlip(_ref) {
-  var perspective = _ref.perspective;
-  return {
-    from: {
-      transform: 'perspective(' + perspective + ') rotate3d(0, 1, 0, -360deg)',
-      'animation-timing-function': 'ease-out'
-    },
-    '40%': {
-      transform: 'perspective(' + perspective + ') translate3d(0, 0, 150px) rotate3d(0, 1, 0, -190deg)',
-      'animation-timing-function': 'ease-out'
-    },
-    '50%': {
-      transform: 'perspective(' + perspective + ') translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170px)',
-      'animation-timing-function': 'ease-in'
-    },
-    '80%': {
-      transform: 'perspective(' + perspective + ') scale3d(.90, .90, .90)',
-      'animation-timing-function': 'ease-in'
-    },
-    to: {
-      transform: 'perspective(' + perspective + ')',
-      'animation-timing-function': 'ease-in'
-    }
-  };
-}
-makeFlip.type = TYPE_ROTATE;
-function makeFlipX(_ref2) {
-  var perspective = _ref2.perspective;
-  return {
-    from: {
-      transform: 'perspective(' + perspective + ') rotate3d(1, 0, 0, 90deg)',
-      'animation-timing-function': 'ease-in',
-      opacity: 0
-    },
-    '40%': {
-      transform: 'perspective(' + perspective + ') rotate3d(1, 0, 0, -20deg)',
-      'animation-timing-function': 'ease-in'
-    },
-    '60%': {
-      transform: 'perspective(' + perspective + ') rotate3d(1, 0, 0, 10deg)',
-      opacity: 1
-    },
-    '80%': {
-      transform: 'perspective(' + perspective + ') rotate3d(1, 0, 0, -5deg)'
-    },
-    to: {
-      transform: 'perspective(' + perspective + ')'
-    }
-  };
-}
-makeFlipX.type = TYPE_ROTATE;
-function makeFlipY(_ref3) {
-  var perspective = _ref3.perspective;
-  return {
-    from: {
-      transform: 'perspective(' + perspective + ') rotate3d(0, 1, 0, 90deg)',
-      'animation-timing-function': 'ease-in',
-      opacity: 0
-    },
-    '40%': {
-      transform: 'perspective(' + perspective + ') rotate3d(0, 1, 0, -20deg)',
-      'animation-timing-function': 'ease-in'
-    },
-    '60%': {
-      transform: 'perspective(' + perspective + ') rotate3d(0, 1, 0, 10deg)',
-      opacity: 1
-    },
-    '80%': {
-      transform: 'perspective(' + perspective + ') rotate3d(0, 1, 0, -5deg)'
-    },
-    to: {
-      transform: 'perspective(' + perspective + ')'
-    }
-  };
-}
-makeFlipY.type = TYPE_ROTATE;
-
-function composePerspective(AbstractAnim, variableName) {
-  var Perspective = function Perspective(props) {
-    var perspective = props.perspective,
-        theme = props.theme,
-        rest = objectWithoutProperties(props, ['perspective', 'theme']);
-    return React.createElement(AbstractAnim, _extends({
-      perspective: perspective || theme[variableName]
-    }, rest));
-  };
-  Perspective.propTypes = {
-    theme: PropTypes.object,
-    perspective: PropTypes.string
-  };
-  return withTheme(Perspective);
-}
-
-var Flip = composePerspective(composeAnimation(makeFlip), '$motion-flip-perspective');
-var FlipX = composePerspective(composeAnimation(makeFlipX), '$motion-flip-perspective');
-var FlipY = composePerspective(composeAnimation(makeFlipY), '$motion-flip-perspective');
-
-function makeLightIn(_ref) {
-  var distance = _ref.distance,
-      rotation = _ref.rotation;
-  return {
-    from: {
-      transform: 'translate3d(' + distance + ', 0, 0) skew(-' + rotation + ')',
-      opacity: 0
-    },
-    '40%': {
-      transform: 'skew(20deg)',
-      opacity: 1
-    },
-    '80%': {
-      transform: 'skew(-5deg)',
-      opacity: 1
-    },
-    to: {
-      transform: 'none',
-      opacity: 1
-    }
-  };
-}
-function makeLightOut(_ref2) {
-  var distance = _ref2.distance,
-      rotation = _ref2.rotation;
-  return {
-    from: {
-      opacity: 1
-    },
-    '40%': {
-      transform: 'skew(20deg)',
-      opacity: 1
-    },
-    '80%': {
-      transform: 'skew(-5deg)',
-      opacity: 1
-    },
-    to: {
-      transform: 'translate3d(-' + distance + ', 0, 0) skew(' + rotation + ')',
-      opacity: 0
-    }
-  };
-}
-
-var LightIn = composeRotation(composeDistance(composeAnimation(makeLightIn), '$motion-light-in-distance'), '$motion-light-in-rotation');
-var LightOut = composeRotation(composeDistance(composeAnimation(makeLightOut), '$motion-light-out-distance'), '$motion-light-out-rotation');
-
-function makeRotateIn(_ref) {
-  var rotation = _ref.rotation;
-  return {
-    from: {
-      'transform-origin': 'center',
-      transform: 'rotate3d(0, 0, 1, -' + rotation + ')',
-      opacity: 0
-    },
-    to: {
-      transform: 'none',
-      opacity: 1
-    }
-  };
-}
-makeRotateIn.type = TYPE_ROTATE;
-function makeRotateLeft(_ref2) {
-  var rotation = _ref2.rotation;
-  return {
-    from: {
-      'transform-origin': 'left bottom',
-      transform: 'rotate3d(0, 0, 1, -' + rotation + ')',
-      opacity: 0
-    },
-    to: {
-      'transform-origin': 'left bottom',
-      transform: 'none',
-      opacity: 1
-    }
-  };
-}
-makeRotateLeft.type = TYPE_ROTATE;
-function makeRotateRight(_ref3) {
-  var rotation = _ref3.rotation;
-  return {
-    from: {
-      'transform-origin': 'right bottom',
-      transform: 'rotate3d(0, 0, 1, ' + rotation + ')',
-      opacity: 0
-    },
-    to: {
-      'transform-origin': 'right bottom',
-      transform: 'none',
-      opacity: 1
-    }
-  };
-}
-makeRotateRight.type = TYPE_ROTATE;
-function makeRotateUpLeft(_ref4) {
-  var rotation = _ref4.rotation;
-  return {
-    from: {
-      'transform-origin': 'left bottom',
-      transform: 'rotate3d(0, 0, 1, ' + rotation + ')',
-      opacity: 0
-    },
-    to: {
-      'transform-origin': 'left bottom',
-      transform: 'none',
-      opacity: 1
-    }
-  };
-}
-makeRotateUpLeft.type = TYPE_ROTATE;
-function makeRotateUpRight(_ref5) {
-  var rotation = _ref5.rotation;
-  return {
-    from: {
-      'transform-origin': 'right bottom',
-      transform: 'rotate3d(0, 0, 1, -' + rotation + ')',
-      opacity: 0
-    },
-    to: {
-      'transform-origin': 'right bottom',
-      transform: 'none',
-      opacity: 1
-    }
-  };
-}
-makeRotateUpRight.type = TYPE_ROTATE;
-
-var RotateIn = composeRotation(composeAnimation(makeRotateIn), '$motion-rotate-in-rotation');
-var RotateLeft = composeRotation(composeAnimation(makeRotateLeft), '$motion-rotate-left-rotation');
-var RotateRight = composeRotation(composeAnimation(makeRotateRight), '$motion-rotate-right-rotation');
-var RotateUpLeft = composeRotation(composeAnimation(makeRotateUpRight), '$motion-rotate-up-left-rotation');
-var RotateUpRight = composeRotation(composeAnimation(makeRotateUpLeft), '$motion-rotate-up-right-rotation');
-
-function makeSlideDown(_ref) {
-  var distance = _ref.distance;
-  return {
-    from: {
-      transform: 'translate3d(0, -' + distance + ', 0)'
-    },
-    to: {
-      transform: 'translate3d(0, 0, 0)'
-    }
-  };
-}
-function makeSlideUp(_ref2) {
-  var distance = _ref2.distance;
-  return {
-    from: {
-      transform: 'translate3d(0, ' + distance + ', 0)'
-    },
-    to: {
-      transform: 'translate3d(0, 0, 0)'
-    }
-  };
-}
-function makeSlideLeft(_ref3) {
-  var distance = _ref3.distance;
-  return {
-    from: {
-      transform: 'translate3d(-' + distance + ', 0, 0)'
-    },
-    to: {
-      transform: 'translate3d(0, 0, 0)'
-    }
-  };
-}
-function makeSlideRight(_ref4) {
-  var distance = _ref4.distance;
-  return {
-    from: {
-      transform: 'translate3d(' + distance + ', 0, 0)'
-    },
-    to: {
-      transform: 'translate3d(0, 0, 0)'
-    }
-  };
-}
-function makeSlideRightLeft(_ref5) {
-  var distance = _ref5.distance;
-  return {
-    from: {
-      transform: 'translate3d(0, 0, 0)'
-    },
-    '50%': {
-      transform: 'translate3d(' + distance + ', 0, 0)'
-    },
-    to: {
-      transform: 'translate3d(0, 0, 0)'
-    }
-  };
-}
-
-var SlideUp = composeDistance(composeAnimation(makeSlideDown), '$motion-slide-up-distance');
-var SlideDown = composeDistance(composeAnimation(makeSlideUp), '$motion-slide-down-distance');
-var SlideRight = composeDistance(composeAnimation(makeSlideRight), '$motion-slide-right-distance');
-var SlideLeft = composeDistance(composeAnimation(makeSlideLeft), '$motion-slide-left-distance');
-var SlideRightLeft = composeDistance(composeAnimation(makeSlideRightLeft), '$motion-slide-right-left-distance');
-
-function makeFlash() {
-  return {
-    from: {
-      opacity: 1
-    },
-    '25%': {
-      opacity: 0
-    },
-    '50%': {
-      opacity: 1
-    },
-    '75%': {
-      opacity: 0
-    },
-    to: {
-      opacity: 1
-    }
-  };
-}
-function makeRollIn(_ref) {
-  var distance = _ref.distance,
-      amplification = _ref.amplification;
-  return {
-    from: {
-      transform: 'translate3d(-' + distance + ', 0, 0) rotate3d(0, 0, 1, -' + amplification * 120 + 'deg)',
-      opacity: 0
-    },
-    to: {
-      transform: 'none',
-      opacity: 1
-    }
-  };
-}
-makeRollIn.type = TYPE_ROTATE;
-function makeRollOut(_ref2) {
-  var distance = _ref2.distance,
-      amplification = _ref2.amplification;
-  return {
-    from: {
-      opacity: 1
-    },
-    to: {
-      transform: 'translate3d(' + distance + ', 0, 0) rotate3d(0, 0, 1, ' + amplification * 120 + 'deg)',
-      opacity: 0
-    }
-  };
-}
-makeRollOut.type = TYPE_ROTATE;
-function makeRubber(_ref3) {
-  var amplification = _ref3.amplification;
-  return {
-    from: {
-      transform: 'scale3d(1, 1, 1)'
-    },
-    '30%': {
-      transform: 'scale3d(' + amplification * 1.25 + ', ' + amplification * 0.75 + ', ' + amplification * 1 + ')'
-    },
-    '40%': {
-      transform: 'scale3d(' + amplification * 0.75 + ', ' + amplification * 1.25 + ', ' + amplification * 1 + ')'
-    },
-    '50%': {
-      transform: 'scale3d(' + amplification * 1.15 + ', ' + amplification * 0.85 + ', ' + amplification * 1 + ')'
-    },
-    '65%': {
-      transform: 'scale3d(' + amplification * 0.95 + ', ' + amplification * 1.05 + ', ' + amplification * 1 + ')'
-    },
-    '75%': {
-      transform: 'scale3d(' + amplification * 1.05 + ', ' + amplification * 0.95 + ', ' + amplification * 1 + ')'
-    },
-    to: {
-      transform: 'scale3d(1, 1, 1)'
-    }
-  };
-}
-function makeSwing(_ref4) {
-  var amplification = _ref4.amplification;
-  return {
-    '20%': {
-      transform: 'rotate3d(0, 0, 1, ' + amplification * 15 + 'deg)'
-    },
-    '40%': {
-      transform: 'rotate3d(0, 0, 1, -' + amplification * 10 + 'deg)'
-    },
-    '60%': {
-      transform: 'rotate3d(0, 0, 1, ' + amplification * 5 + 'deg)'
-    },
-    '80%': {
-      transform: 'rotate3d(0, 0, 1, -' + amplification * 5 + 'deg)'
-    },
-    to: {
-      transform: 'rotate3d(0, 0, 1, 0deg)'
-    }
-  };
-}
-makeSwing.type = TYPE_ROTATE;
-function makeZoom(_ref5) {
-  var amplification = _ref5.amplification;
-  return {
-    from: {
-      opacity: 0,
-      transform: 'scale3d(' + amplification * 0.4 + ', ' + amplification * 0.4 + ', ' + amplification * 0.4 + ')'
-    },
-    to: {
-      opacity: 1
-    }
-  };
-}
-function makeHinge(_ref6) {
-  var amplification = _ref6.amplification;
-  return {
-    from: {
-      'transform-origin': 'top-left',
-      'animation-timing-function': 'ease-in-out',
-      opacity: 1
-    },
-    '20%, 40%': {
-      'transform-origin': 'top-left',
-      transform: 'rotate(0, 0, 1, ' + amplification * 80 + 'deg)',
-      'animation-timing-function': 'ease-in-out',
-      opacity: 1
-    },
-    '60%, 80%': {
-      'transform-origin': 'top-left',
-      transform: 'rotate(0, 0, 1, ' + amplification * 20 + 'deg)',
-      'animation-timing-function': 'ease-in-out',
-      opacity: 1
-    },
-    to: {
-      transform: 'translate3d(0, ' + amplification * 700 + 'px, 0)',
-      opacity: 0
-    }
-  };
-}
-function makePulse(_ref7) {
-  var amplification = _ref7.amplification;
-  return {
-    from: {
-      transform: 'scale3d(1, 1, 1)'
-    },
-    '50%': {
-      transform: 'scale3d(' + amplification * 1.4 + ', ' + amplification * 1.4 + ', ' + amplification * 1.4 + ')'
-    },
-    to: {
-      transform: 'scale3d(1, 1, 1)'
-    }
-  };
-}
-function makeExpandUp(_ref8) {
-  var amplification = _ref8.amplification;
-  return {
-    '0%': {
-      transform: 'translateY(100%) scale(' + amplification * 0.6 + ') scaleY(' + amplification * 0.5 + ')'
-    },
-    '60%': {
-      transform: 'translateY(-' + amplification * 7 + '%) scaleY(' + amplification * 1.12 + ')'
-    },
-    '75%': {
-      transform: 'translateY(' + amplification * 3 + '%)'
-    },
-    '100%': {
-      transform: 'translateY(0%) scale(' + amplification * 1 + ') scaleY(' + amplification * 1 + ')'
-    }
-  };
-}
-function makeEntrance(_ref9) {
-  var amplification = _ref9.amplification;
-  return {
-    '0%': {
-      transform: 'scale(' + amplification * 0.3 + ') rotate(' + amplification * 6 + 'deg) translateX(-' + amplification * 30 + '%) translateY(' + amplification * 30 + '%)',
-      opacity: 0.1
-    },
-    '30%': {
-      transform: 'scale(' + amplification * 1.03 + ') rotate(-' + amplification * 2 + 'deg) translateX(' + amplification * 2 + '%) translateY(-' + amplification * 2 + '%)',
-      opacity: 1
-    },
-    '45%': {
-      transform: 'scale(' + amplification * 0.98 + ')',
-      opacity: 1
-    },
-    '60%': {
-      transform: 'scale(' + amplification * 1.01 + ')',
-      opacity: 1
-    },
-    '75%': {
-      transform: 'scale(' + amplification * 0.99 + ')',
-      opacity: 1
-    },
-    '90%': {
-      transform: 'scale(' + amplification * 1.01 + ')',
-      opacity: 1
-    },
-    '100%': {
-      transform: 'scale(1)',
-      opacity: 1
-    }
-  };
-}
-function makeHatch(_ref10) {
-  var amplification = _ref10.amplification;
-  return {
-    '0%': {
-      transform: 'scaleY(0.6)'
-    },
-    '20%': {
-      transform: 'rotate(-' + amplification * 2 + 'deg) scaleY(' + amplification * 1.05 + ')'
-    },
-    '35%': {
-      transform: 'rotate(' + amplification * 2 + 'deg) scaleY(' + amplification + ')'
-    },
-    '50%': {
-      transform: 'rotate(-' + amplification + 'deg)'
-    },
-    '65%': {
-      transform: 'rotate(' + amplification + 'deg)'
-    },
-    '80%': {
-      transform: 'rotate(-' + amplification + 'deg)'
-    },
-    '100%': {
-      transform: 'none'
-    }
-  };
-}
-
-var Flash = composeAnimation(makeFlash);
-var RollOut = composeDistance(composeAmplification(composeAnimation(makeRollOut), '$motion-roll-out-amplification'), '$motion-roll-out-distance');
-var RollIn = composeDistance(composeAmplification(composeAnimation(makeRollIn), '$motion-roll-in-amplification'), '$motion-roll-in-distance');
-var Rubber = composeAmplification(composeAnimation(makeRubber), '$motion-rubber-amplification');
-var Swing = composeAmplification(composeAnimation(makeSwing), '$motion-swing-amplification');
-var Zoom = composeAmplification(composeAnimation(makeZoom), '$motion-zoom-amplification');
-var Hinge = composeAmplification(composeAnimation(makeHinge), '$motion-hinge-amplification');
-var Pulse = composeAmplification(composeAnimation(makePulse), '$motion-pulse-amplification');
-var ExpandUp = composeAmplification(composeAnimation(makeExpandUp), '$motion-expand-up-amplification');
-var Entrance = composeAmplification(composeAnimation(makeEntrance), '$motion-entrance-amplification');
-var Hatch = composeAmplification(composeAnimation(makeHatch), '$motion-hatch-amplification');
-
-var defaultProps$106 = {
+var defaultProps$70 = {
   theme: bsTheme,
   tag: 'div'
 };
@@ -12437,10 +12490,10 @@ var CardUnstyled = function (_React$Component) {
     classCallCheck$1(this, CardUnstyled);
     return possibleConstructorReturn(this, (CardUnstyled.__proto__ || Object.getPrototypeOf(CardUnstyled)).apply(this, arguments));
   }
-  createClass$1(CardUnstyled, [{
+  createClass(CardUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme', 'backgroundColor', 'borderColor', 'width']),
+      var _omit = lodash_omit(this.props, ['theme', 'backgroundColor', 'borderColor', 'width']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           color = _omit.color,
@@ -12450,7 +12503,7 @@ var CardUnstyled = function (_React$Component) {
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'color', 'block', 'inverse', 'outline', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'card', {
+        className: mapToCssModules(classnames(className, 'card', {
           inverse: inverse,
           block: block
         }, 'card' + (outline ? '-outline' : '') + '-' + color), cssModule)
@@ -12475,11 +12528,11 @@ CardUnstyled.propTypes = {
 var Card = styled(CardUnstyled).withConfig({
   displayName: 'Card'
 })(['', ''], function (props) {
-  return '\n    \n    /*\n    Base styles\n    */\n    &.card {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$card-bg'] + ';\n      border: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n      \n      ' + ifThen(props.width, 'width: ' + props.width + ';') + '\n      ' + ifThen(props.backgroundColor, 'background-color: ' + props.backgroundColor + ';') + '\n      ' + ifThen(props.borderColor, 'border-color: ' + props.borderColor + ';') + '\n    }\n    \n    &.card-block,\n    & .card-block {\n      flex: 1 1 auto;\n      padding: ' + props.theme['$card-spacer-x'] + ';\n    }\n    \n    & .card-title {\n      margin-bottom: ' + props.theme['$card-spacer-y'] + ';\n    }\n    \n    & .card-subtitle {\n      margin-top: -' + props.theme['$card-margin-y-halved'] + ';\n      margin-bottom: 0;\n    }\n    \n    & .card-text:last-child {\n      margin-bottom: 0;\n    }\n   \n    & .card-link {\n      ' + hover('\n        text-decoration: none;\n      ') + '\n    \n      + .card-link {\n        margin-left: ' + props.theme['$card-spacer-x'] + ';\n      }\n    }\n    \n    &.card {\n      > .list-group:first-child {\n        .list-group-item:first-child {\n          ' + borderTopRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n        }\n      }\n    \n      > .list-group:last-child {\n        .list-group-item:last-child {\n          ' + borderBottomRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n        }\n      }\n    }\n    \n    \n    /*\n     Optional textual caps\n    */\n    \n    & .card-header {\n      padding: ' + props.theme['$card-spacer-y'] + ' ' + props.theme['$card-spacer-x'] + ';\n      margin-bottom: 0; /* Removes the default margin-bottom of <hN> */\n      background-color: ' + props.theme['$card-cap-bg'] + ';\n      border-bottom: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n    \n      &:first-child {\n        ' + borderRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner'], props.theme['$card-border-radius-inner'], '0', '0') + '\n      }\n    }\n    \n    & .card-footer {\n      padding: ' + props.theme['$card-spacer-y'] + ' ' + props.theme['$card-spacer-x'] + ';\n      background-color: ' + props.theme['$card-cap-bg'] + ';\n      border-top: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n    \n      &:last-child {\n        ' + borderRadius(props.theme['$enable-rounded'], '0', '0', props.theme['$card-border-radius-inner'], props.theme['$card-border-radius-inner']) + '\n      }\n    }\n    \n    \n    /*\n     Header navs\n    */\n    \n    & .card-header-tabs {\n      margin-right: -' + props.theme['$card-margin-x-halved'] + ';\n      margin-bottom: -' + props.theme['$card-spacer-y'] + ';\n      margin-left: -' + props.theme['$card-margin-x-halved'] + ';\n      border-bottom: 0;\n    }\n    \n    & .card-header-pills {\n      margin-right: -' + props.theme['$card-margin-x-halved'] + ';\n      margin-left: -' + props.theme['$card-margin-x-halved'] + ';\n    }\n    \n    \n    /*\n     Background variations\n    */\n    \n    &.card-primary {\n      ' + cardVariant(props.theme['$brand-primary'], props.theme['$brand-primary']) + '\n    }\n    &.card-success {\n      ' + cardVariant(props.theme['$brand-success'], props.theme['$brand-success']) + '\n    }\n    &.card-info {\n      ' + cardVariant(props.theme['$brand-info'], props.theme['$brand-info']) + '\n    }\n    &.card-warning {\n      ' + cardVariant(props.theme['$brand-warning'], props.theme['$brand-warning']) + '\n    }\n    &.card-danger {\n      ' + cardVariant(props.theme['$brand-danger'], props.theme['$brand-danger']) + '\n    }\n    \n    /* Remove all backgrounds */\n    &.card-outline-primary {\n      ' + cardOutlineVariant(props.theme['$btn-primary-bg']) + '\n    }\n    &.card-outline-secondary {\n      ' + cardOutlineVariant(props.theme['$btn-secondary-border']) + '\n    }\n    &.card-outline-info {\n      ' + cardOutlineVariant(props.theme['$btn-info-bg']) + '\n    }\n    &.card-outline-success {\n      ' + cardOutlineVariant(props.theme['$btn-success-bg']) + '\n    }\n    &.card-outline-warning {\n      ' + cardOutlineVariant(props.theme['$btn-warning-bg']) + '\n    }\n    &.card-outline-danger {\n      ' + cardOutlineVariant(props.theme['$btn-danger-bg']) + '\n    }\n    \n    /*\n     Inverse text within a card for use with dark backgrounds\n    */\n    \n    &.card-inverse {\n      ' + cardInverse(props.theme['$enable-hover-media-query'], props.theme['$card-link-hover-color']) + '\n    }\n    \n    /*\n     Blockquote\n    */\n    \n    & .card-blockquote {\n      padding: 0;\n      margin-bottom: 0;\n      border-left: 0;\n    }\n    \n    /* Card image */\n    & .card-img {\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n    \n    & .card-img-overlay {\n      position: absolute;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      padding: ' + props.theme['$card-img-overlay-padding'] + ';\n    }\n    \n    \n    \n    /* Card image caps */\n    & .card-img-top {\n      ' + borderTopRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n    \n    & .card-img-bottom {\n      ' + borderBottomRadius(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n  ';
+  return '\n    \n    /*\n    Base styles\n    */\n    &.card {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$card-bg'] + ';\n      border: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n      \n      ' + conditional_1(props.width, 'width: ' + props.width + ';') + '\n      ' + conditional_1(props.backgroundColor, 'background-color: ' + props.backgroundColor + ';') + '\n      ' + conditional_1(props.borderColor, 'border-color: ' + props.borderColor + ';') + '\n    }\n    \n    &.card-block,\n    & .card-block {\n      flex: 1 1 auto;\n      padding: ' + props.theme['$card-spacer-x'] + ';\n    }\n    \n    & .card-title {\n      margin-bottom: ' + props.theme['$card-spacer-y'] + ';\n    }\n    \n    & .card-subtitle {\n      margin-top: -' + props.theme['$card-margin-y-halved'] + ';\n      margin-bottom: 0;\n    }\n    \n    & .card-text:last-child {\n      margin-bottom: 0;\n    }\n   \n    & .card-link {\n      ' + hover_2('\n        text-decoration: none;\n      ') + '\n    \n      + .card-link {\n        margin-left: ' + props.theme['$card-spacer-x'] + ';\n      }\n    }\n    \n    &.card {\n      > .list-group:first-child {\n        .list-group-item:first-child {\n          ' + borderRadius_3(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n        }\n      }\n    \n      > .list-group:last-child {\n        .list-group-item:last-child {\n          ' + borderRadius_5(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n        }\n      }\n    }\n    \n    \n    /*\n     Optional textual caps\n    */\n    \n    & .card-header {\n      padding: ' + props.theme['$card-spacer-y'] + ' ' + props.theme['$card-spacer-x'] + ';\n      margin-bottom: 0; /* Removes the default margin-bottom of <hN> */\n      background-color: ' + props.theme['$card-cap-bg'] + ';\n      border-bottom: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n    \n      &:first-child {\n        ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner'], props.theme['$card-border-radius-inner'], '0', '0') + '\n      }\n    }\n    \n    & .card-footer {\n      padding: ' + props.theme['$card-spacer-y'] + ' ' + props.theme['$card-spacer-x'] + ';\n      background-color: ' + props.theme['$card-cap-bg'] + ';\n      border-top: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n    \n      &:last-child {\n        ' + borderRadius_2(props.theme['$enable-rounded'], '0', '0', props.theme['$card-border-radius-inner'], props.theme['$card-border-radius-inner']) + '\n      }\n    }\n    \n    \n    /*\n     Header navs\n    */\n    \n    & .card-header-tabs {\n      margin-right: -' + props.theme['$card-margin-x-halved'] + ';\n      margin-bottom: -' + props.theme['$card-spacer-y'] + ';\n      margin-left: -' + props.theme['$card-margin-x-halved'] + ';\n      border-bottom: 0;\n    }\n    \n    & .card-header-pills {\n      margin-right: -' + props.theme['$card-margin-x-halved'] + ';\n      margin-left: -' + props.theme['$card-margin-x-halved'] + ';\n    }\n    \n    \n    /*\n     Background variations\n    */\n    \n    &.card-primary {\n      ' + cards_2(props.theme['$brand-primary'], props.theme['$brand-primary']) + '\n    }\n    &.card-success {\n      ' + cards_2(props.theme['$brand-success'], props.theme['$brand-success']) + '\n    }\n    &.card-info {\n      ' + cards_2(props.theme['$brand-info'], props.theme['$brand-info']) + '\n    }\n    &.card-warning {\n      ' + cards_2(props.theme['$brand-warning'], props.theme['$brand-warning']) + '\n    }\n    &.card-danger {\n      ' + cards_2(props.theme['$brand-danger'], props.theme['$brand-danger']) + '\n    }\n    \n    /* Remove all backgrounds */\n    &.card-outline-primary {\n      ' + cards_3(props.theme['$btn-primary-bg']) + '\n    }\n    &.card-outline-secondary {\n      ' + cards_3(props.theme['$btn-secondary-border']) + '\n    }\n    &.card-outline-info {\n      ' + cards_3(props.theme['$btn-info-bg']) + '\n    }\n    &.card-outline-success {\n      ' + cards_3(props.theme['$btn-success-bg']) + '\n    }\n    &.card-outline-warning {\n      ' + cards_3(props.theme['$btn-warning-bg']) + '\n    }\n    &.card-outline-danger {\n      ' + cards_3(props.theme['$btn-danger-bg']) + '\n    }\n    \n    /*\n     Inverse text within a card for use with dark backgrounds\n    */\n    \n    &.card-inverse {\n      ' + cards_4(props.theme['$enable-hover-media-query'], props.theme['$card-link-hover-color']) + '\n    }\n    \n    /*\n     Blockquote\n    */\n    \n    & .card-blockquote {\n      padding: 0;\n      margin-bottom: 0;\n      border-left: 0;\n    }\n    \n    /* Card image */\n    & .card-img {\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n    \n    & .card-img-overlay {\n      position: absolute;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      padding: ' + props.theme['$card-img-overlay-padding'] + ';\n    }\n    \n    \n    \n    /* Card image caps */\n    & .card-img-top {\n      ' + borderRadius_3(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n    \n    & .card-img-bottom {\n      ' + borderRadius_5(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n  ';
 });
-Card.defaultProps = defaultProps$106;
+Card.defaultProps = defaultProps$70;
 
-var defaultProps$107 = {
+var defaultProps$71 = {
   theme: bsTheme,
   tag: 'div'
 };
@@ -12489,16 +12542,16 @@ var CardColumnsUnstyled = function (_React$Component) {
     classCallCheck$1(this, CardColumnsUnstyled);
     return possibleConstructorReturn(this, (CardColumnsUnstyled.__proto__ || Object.getPrototypeOf(CardColumnsUnstyled)).apply(this, arguments));
   }
-  createClass$1(CardColumnsUnstyled, [{
+  createClass(CardColumnsUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'card-columns'), cssModule)
+        className: mapToCssModules(classnames(className, 'card-columns'), cssModule)
       }, attributes));
     }
   }]);
@@ -12513,11 +12566,11 @@ CardColumnsUnstyled.propTypes = {
 var CardColumns = styled(CardColumnsUnstyled).withConfig({
   displayName: 'CardColumns'
 })(['', ''], function (props) {
-  return '\n    ' + card(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + mediaBreakpointUp('sm', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count'] + ';\n          column-gap: ' + props.theme['$card-columns-gap'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin'] + ';\n          }\n        }\n      ') + '\n  ';
+  return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count'] + ';\n          column-gap: ' + props.theme['$card-columns-gap'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin'] + ';\n          }\n        }\n      ') + '\n  ';
 });
-CardColumns.defaultProps = defaultProps$107;
+CardColumns.defaultProps = defaultProps$71;
 
-var defaultProps$108 = {
+var defaultProps$72 = {
   theme: bsTheme,
   tag: 'div'
 };
@@ -12527,16 +12580,16 @@ var CardDeckUnstyled = function (_React$Component) {
     classCallCheck$1(this, CardDeckUnstyled);
     return possibleConstructorReturn(this, (CardDeckUnstyled.__proto__ || Object.getPrototypeOf(CardDeckUnstyled)).apply(this, arguments));
   }
-  createClass$1(CardDeckUnstyled, [{
+  createClass(CardDeckUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'card-deck'), cssModule)
+        className: mapToCssModules(classnames(className, 'card-deck'), cssModule)
       }, attributes));
     }
   }]);
@@ -12551,11 +12604,11 @@ CardDeckUnstyled.propTypes = {
 var CardDeck = styled(CardDeckUnstyled).withConfig({
   displayName: 'CardDeck'
 })(['', ''], function (props) {
-  return '\n    ' + card(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + mediaBreakpointUp('sm', props.theme['$grid-breakpoints'], '\n        &.card-deck {\n          display: flex;\n          flex-flow: row wrap;\n        \n          .card {\n            display: flex;\n            flex: 1 0 0;\n            flex-direction: column;  \n            &:not(:first-child) { margin-left: ' + props.theme['$card-deck-margin'] + '; }\n            &:not(:last-child) { margin-right: ' + props.theme['$card-deck-margin'] + '; }\n          }\n        }\n      ') + '\n  ';
+  return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        &.card-deck {\n          display: flex;\n          flex-flow: row wrap;\n        \n          .card {\n            display: flex;\n            flex: 1 0 0;\n            flex-direction: column;  \n            &:not(:first-child) { margin-left: ' + props.theme['$card-deck-margin'] + '; }\n            &:not(:last-child) { margin-right: ' + props.theme['$card-deck-margin'] + '; }\n          }\n        }\n      ') + '\n  ';
 });
-CardDeck.defaultProps = defaultProps$108;
+CardDeck.defaultProps = defaultProps$72;
 
-var defaultProps$109 = {
+var defaultProps$73 = {
   theme: bsTheme,
   tag: 'div'
 };
@@ -12565,16 +12618,16 @@ var CardGroupUnstyled = function (_React$Component) {
     classCallCheck$1(this, CardGroupUnstyled);
     return possibleConstructorReturn(this, (CardGroupUnstyled.__proto__ || Object.getPrototypeOf(CardGroupUnstyled)).apply(this, arguments));
   }
-  createClass$1(CardGroupUnstyled, [{
+  createClass(CardGroupUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'card-group'), cssModule)
+        className: mapToCssModules(classnames(className, 'card-group'), cssModule)
       }, attributes));
     }
   }]);
@@ -12589,11 +12642,11 @@ CardGroupUnstyled.propTypes = {
 var CardGroup = styled(CardGroupUnstyled).withConfig({
   displayName: 'CardGroup'
 })(['', ''], function (props) {
-  return '\n    ' + card(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    /*\n      Card group\n    */\n      ' + mediaBreakpointUp('sm', props.theme['$grid-breakpoints'], '\n          &.card-group {\n            display: flex;\n            flex-flow: row wrap;\n        \n            .card {\n              flex: 1 0 0;\n        \n              + .card {\n                margin-left: 0;\n                border-left: 0;\n              }\n        \n            ' + ifThen(props.theme['$enable-rounded'], '\n                &:first-child {\n                  ' + borderRightRadius(props.theme['$enable-rounded'], '0') + '\n                  .card-img-top {\n                    border-top-right-radius: 0;\n                  }\n                  \n                  .card-img-bottom {\n                    border-bottom-right-radius: 0;\n                  }\n                }\n              \n                &:last-child {\n                  ' + borderLeftRadius(props.theme['$enable-rounded'], '0') + '\n                  \n                  .card-img-top {\n                    border-top-left-radius: 0;\n                  }\n                  \n                  .card-img-bottom {\n                    border-bottom-left-radius: 0;\n                  }\n                }\n                \n                &:not(:first-child):not(:last-child) {\n                  border-radius: 0;\n        \n                  .card-img-top,\n                  .card-img-bottom {\n                    border-radius: 0;\n                  }\n                }\n              ') + '  \n          }\n        }\n      ') + '\n  ';
+  return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    /*\n      Card group\n    */\n      ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n          &.card-group {\n            display: flex;\n            flex-flow: row wrap;\n        \n            .card {\n              flex: 1 0 0;\n        \n              + .card {\n                margin-left: 0;\n                border-left: 0;\n              }\n        \n            ' + conditional_1(props.theme['$enable-rounded'], '\n                &:first-child {\n                  ' + borderRadius_4(props.theme['$enable-rounded'], '0') + '\n                  .card-img-top {\n                    border-top-right-radius: 0;\n                  }\n                  \n                  .card-img-bottom {\n                    border-bottom-right-radius: 0;\n                  }\n                }\n              \n                &:last-child {\n                  ' + borderRadius_6(props.theme['$enable-rounded'], '0') + '\n                  \n                  .card-img-top {\n                    border-top-left-radius: 0;\n                  }\n                  \n                  .card-img-bottom {\n                    border-bottom-left-radius: 0;\n                  }\n                }\n                \n                &:not(:first-child):not(:last-child) {\n                  border-radius: 0;\n        \n                  .card-img-top,\n                  .card-img-bottom {\n                    border-radius: 0;\n                  }\n                }\n              ') + '  \n          }\n        }\n      ') + '\n  ';
 });
-CardGroup.defaultProps = defaultProps$109;
+CardGroup.defaultProps = defaultProps$73;
 
-var defaultProps$110 = {
+var defaultProps$74 = {
   tag: 'div'
 };
 var CardBlock = function (_React$Component) {
@@ -12602,7 +12655,7 @@ var CardBlock = function (_React$Component) {
     classCallCheck$1(this, CardBlock);
     return possibleConstructorReturn(this, (CardBlock.__proto__ || Object.getPrototypeOf(CardBlock)).apply(this, arguments));
   }
-  createClass$1(CardBlock, [{
+  createClass(CardBlock, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -12611,7 +12664,7 @@ var CardBlock = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'card-block'), cssModule)
+        className: mapToCssModules(classnames(className, 'card-block'), cssModule)
       }, attributes));
     }
   }]);
@@ -12622,9 +12675,9 @@ CardBlock.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-CardBlock.defaultProps = defaultProps$110;
+CardBlock.defaultProps = defaultProps$74;
 
-var defaultProps$111 = {
+var defaultProps$75 = {
   tag: 'div'
 };
 var CardFooter = function (_React$Component) {
@@ -12633,7 +12686,7 @@ var CardFooter = function (_React$Component) {
     classCallCheck$1(this, CardFooter);
     return possibleConstructorReturn(this, (CardFooter.__proto__ || Object.getPrototypeOf(CardFooter)).apply(this, arguments));
   }
-  createClass$1(CardFooter, [{
+  createClass(CardFooter, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -12642,7 +12695,7 @@ var CardFooter = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'card-footer'), cssModule)
+        className: mapToCssModules(classnames(className, 'card-footer'), cssModule)
       }, attributes));
     }
   }]);
@@ -12653,9 +12706,9 @@ CardFooter.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-CardFooter.defaultProps = defaultProps$111;
+CardFooter.defaultProps = defaultProps$75;
 
-var defaultProps$112 = {
+var defaultProps$76 = {
   tag: 'div'
 };
 var CardHeader = function (_React$Component) {
@@ -12664,7 +12717,7 @@ var CardHeader = function (_React$Component) {
     classCallCheck$1(this, CardHeader);
     return possibleConstructorReturn(this, (CardHeader.__proto__ || Object.getPrototypeOf(CardHeader)).apply(this, arguments));
   }
-  createClass$1(CardHeader, [{
+  createClass(CardHeader, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -12673,7 +12726,7 @@ var CardHeader = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'card-header'), cssModule)
+        className: mapToCssModules(classnames(className, 'card-header'), cssModule)
       }, attributes));
     }
   }]);
@@ -12684,9 +12737,9 @@ CardHeader.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-CardHeader.defaultProps = defaultProps$112;
+CardHeader.defaultProps = defaultProps$76;
 
-var defaultProps$113 = {
+var defaultProps$77 = {
   tag: 'img'
 };
 var CardImg = function (_React$Component) {
@@ -12695,7 +12748,7 @@ var CardImg = function (_React$Component) {
     classCallCheck$1(this, CardImg);
     return possibleConstructorReturn(this, (CardImg.__proto__ || Object.getPrototypeOf(CardImg)).apply(this, arguments));
   }
-  createClass$1(CardImg, [{
+  createClass(CardImg, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -12712,7 +12765,7 @@ var CardImg = function (_React$Component) {
         cardImgClassName = 'card-img-bottom';
       }
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, cardImgClassName), cssModule)
+        className: mapToCssModules(classnames(className, cardImgClassName), cssModule)
       }, attributes));
     }
   }]);
@@ -12725,9 +12778,9 @@ CardImg.propTypes = {
   top: PropTypes.bool,
   bottom: PropTypes.bool
 };
-CardImg.defaultProps = defaultProps$113;
+CardImg.defaultProps = defaultProps$77;
 
-var defaultProps$114 = {
+var defaultProps$78 = {
   tag: 'div'
 };
 var CardImgOverlay = function (_React$Component) {
@@ -12736,7 +12789,7 @@ var CardImgOverlay = function (_React$Component) {
     classCallCheck$1(this, CardImgOverlay);
     return possibleConstructorReturn(this, (CardImgOverlay.__proto__ || Object.getPrototypeOf(CardImgOverlay)).apply(this, arguments));
   }
-  createClass$1(CardImgOverlay, [{
+  createClass(CardImgOverlay, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -12745,7 +12798,7 @@ var CardImgOverlay = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'card-img-overlay'), cssModule)
+        className: mapToCssModules(classnames(className, 'card-img-overlay'), cssModule)
       }, attributes));
     }
   }]);
@@ -12756,9 +12809,9 @@ CardImgOverlay.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-CardImgOverlay.defaultProps = defaultProps$114;
+CardImgOverlay.defaultProps = defaultProps$78;
 
-var defaultProps$115 = {
+var defaultProps$79 = {
   tag: A
 };
 var CardLink = function (_React$Component) {
@@ -12767,7 +12820,7 @@ var CardLink = function (_React$Component) {
     classCallCheck$1(this, CardLink);
     return possibleConstructorReturn(this, (CardLink.__proto__ || Object.getPrototypeOf(CardLink)).apply(this, arguments));
   }
-  createClass$1(CardLink, [{
+  createClass(CardLink, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -12777,7 +12830,7 @@ var CardLink = function (_React$Component) {
           getRef = _props.getRef,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag', 'getRef']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'card-link'), cssModule),
+        className: mapToCssModules(classnames(className, 'card-link'), cssModule),
         ref: getRef
       }, attributes));
     }
@@ -12790,9 +12843,9 @@ CardLink.propTypes = {
   cssModule: PropTypes.object,
   getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
-CardLink.defaultProps = defaultProps$115;
+CardLink.defaultProps = defaultProps$79;
 
-var defaultProps$116 = {
+var defaultProps$80 = {
   tag: H6
 };
 var CardSubtitle = function (_React$Component) {
@@ -12801,7 +12854,7 @@ var CardSubtitle = function (_React$Component) {
     classCallCheck$1(this, CardSubtitle);
     return possibleConstructorReturn(this, (CardSubtitle.__proto__ || Object.getPrototypeOf(CardSubtitle)).apply(this, arguments));
   }
-  createClass$1(CardSubtitle, [{
+  createClass(CardSubtitle, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -12810,7 +12863,7 @@ var CardSubtitle = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'card-subtitle'), cssModule)
+        className: mapToCssModules(classnames(className, 'card-subtitle'), cssModule)
       }, attributes));
     }
   }]);
@@ -12821,9 +12874,9 @@ CardSubtitle.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-CardSubtitle.defaultProps = defaultProps$116;
+CardSubtitle.defaultProps = defaultProps$80;
 
-var defaultProps$117 = {
+var defaultProps$81 = {
   tag: 'p'
 };
 var CardText = function (_React$Component) {
@@ -12832,7 +12885,7 @@ var CardText = function (_React$Component) {
     classCallCheck$1(this, CardText);
     return possibleConstructorReturn(this, (CardText.__proto__ || Object.getPrototypeOf(CardText)).apply(this, arguments));
   }
-  createClass$1(CardText, [{
+  createClass(CardText, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -12841,7 +12894,7 @@ var CardText = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'card-text'), cssModule)
+        className: mapToCssModules(classnames(className, 'card-text'), cssModule)
       }, attributes));
     }
   }]);
@@ -12852,9 +12905,9 @@ CardText.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-CardText.defaultProps = defaultProps$117;
+CardText.defaultProps = defaultProps$81;
 
-var defaultProps$118 = {
+var defaultProps$82 = {
   tag: H4
 };
 var CardTitle = function (_React$Component) {
@@ -12863,7 +12916,7 @@ var CardTitle = function (_React$Component) {
     classCallCheck$1(this, CardTitle);
     return possibleConstructorReturn(this, (CardTitle.__proto__ || Object.getPrototypeOf(CardTitle)).apply(this, arguments));
   }
-  createClass$1(CardTitle, [{
+  createClass(CardTitle, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -12872,7 +12925,7 @@ var CardTitle = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'card-title'), cssModule)
+        className: mapToCssModules(classnames(className, 'card-title'), cssModule)
       }, attributes));
     }
   }]);
@@ -12883,9 +12936,9 @@ CardTitle.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-CardTitle.defaultProps = defaultProps$118;
+CardTitle.defaultProps = defaultProps$82;
 
-var defaultProps$119 = {
+var defaultProps$83 = {
   tag: Blockquote
 };
 var CardBlockquote = function (_React$Component) {
@@ -12894,7 +12947,7 @@ var CardBlockquote = function (_React$Component) {
     classCallCheck$1(this, CardBlockquote);
     return possibleConstructorReturn(this, (CardBlockquote.__proto__ || Object.getPrototypeOf(CardBlockquote)).apply(this, arguments));
   }
-  createClass$1(CardBlockquote, [{
+  createClass(CardBlockquote, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -12903,7 +12956,7 @@ var CardBlockquote = function (_React$Component) {
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames$1(className, 'card-blockquote'), cssModule)
+        className: mapToCssModules(classnames(className, 'card-blockquote'), cssModule)
       }, attributes));
     }
   }]);
@@ -12914,9 +12967,9 @@ CardBlockquote.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-CardBlockquote.defaultProps = defaultProps$119;
+CardBlockquote.defaultProps = defaultProps$83;
 
-var defaultProps$120 = {
+var defaultProps$84 = {
   tag: Card
 };
 var Accordion = function (_React$Component) {
@@ -12925,7 +12978,7 @@ var Accordion = function (_React$Component) {
     classCallCheck$1(this, Accordion);
     return possibleConstructorReturn(this, (Accordion.__proto__ || Object.getPrototypeOf(Accordion)).apply(this, arguments));
   }
-  createClass$1(Accordion, [{
+  createClass(Accordion, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -12988,7 +13041,7 @@ Accordion.propTypes = {
 Accordion.contextTypes = {
   accordionGroup: PropTypes.object
 };
-Accordion.defaultProps = defaultProps$120;
+Accordion.defaultProps = defaultProps$84;
 
 var AccordionGroup = function (_React$Component) {
   inherits(AccordionGroup, _React$Component);
@@ -12996,7 +13049,7 @@ var AccordionGroup = function (_React$Component) {
     classCallCheck$1(this, AccordionGroup);
     return possibleConstructorReturn(this, (AccordionGroup.__proto__ || Object.getPrototypeOf(AccordionGroup)).apply(this, arguments));
   }
-  createClass$1(AccordionGroup, [{
+  createClass(AccordionGroup, [{
     key: 'getChildContext',
     value: function getChildContext() {
       var _props = this.props,
@@ -13015,7 +13068,7 @@ var AccordionGroup = function (_React$Component) {
     key: 'render',
     value: function render() {
       var attributes = objectWithoutProperties(this.props, []);
-      var _omit = lodash_omit$1(attributes, ['activeAccordionName', 'onClick', 'headingComponent']),
+      var _omit = lodash_omit(attributes, ['activeAccordionName', 'onClick', 'headingComponent']),
           restAfterChildContext = objectWithoutProperties(_omit, []);
       return React.createElement('div', restAfterChildContext);
     }
@@ -13031,28 +13084,191 @@ AccordionGroup.childContextTypes = {
   accordionGroup: PropTypes.object
 };
 
-var defaultProps$121 = {
+var customForms_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.customForms = customForms;
+var defaultProps = exports.defaultProps = {
+  '$enable-rounded': true,
+  '$enable-shadows': false,
+  '$custom-control-checked-indicator-box-shadow': 'none',
+  '$custom-control-active-indicator-box-shadow': 'none',
+  '$custom-control-indicator-box-shadow': 'inset 0 .25rem .25rem rgba(0, 0, 0, 0.1)',
+  '$custom-checkbox-indeterminate-box-shadow': 'none',
+  '$custom-select-focus-box-shadow': 'inset 0 1px 2px rgba(0, 0, 0, 0.75), 0 0 5px rgba(hsl(207.79999999999995, 98.2%, 53.4%), .5)',
+  '$custom-file-focus-box-shadow': '0 0 0 .075rem #fff, 0 0 0 .2rem #0275d8',
+  '$custom-file-box-shadow': 'inset 0 .2rem .4rem rgba(0, 0, 0, 0.05)',
+  '$custom-select-border-radius': '.25rem',
+  '$custom-file-border-radius': '.25rem',
+  '$input-bg': '#fff',
+  '$custom-select-line-height': '1.25px',
+  '$line-height-base': '1.5',
+  '$custom-control-gutter': '1.5rem',
+  '$custom-control-spacer-x': '1rem',
+  '$custom-control-checked-indicator-color': '#fff',
+  '$custom-control-checked-indicator-bg': '#0275d8',
+  '$custom-control-focus-indicator-box-shadow': '0 0 0 1px #fff, 0 0 0 3px #0275d8',
+  '$custom-control-active-indicator-color': '#fff',
+  '$custom-control-active-indicator-bg': 'hsl(207.79999999999995, 98.2%, 57.7%)',
+  '$custom-control-disabled-cursor': 'not-allowed',
+  '$custom-control-disabled-indicator-bg': '#eceeef',
+  '$custom-control-disabled-description-color': '#636c72',
+  '$custom-control-indicator-size': '1rem',
+  '$custom-control-indicator-bg': '#ddd',
+  '$custom-control-indicator-bg-size': '50% 50%',
+  '$custom-checkbox-checked-icon': 'url("data:image/svg+xml;charset=utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 8 8\'%3E%3Cpath fill=\'#fff\' d=\'M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z\'/%3E%3C/svg%3E")',
+  '$custom-checkbox-indeterminate-bg': '#0275d8',
+  '$custom-checkbox-indeterminate-icon': 'url("data:image/svg+xml;charset=utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 4 4\'%3E%3Cpath stroke=\'#fff\' d=\'M0 2h4\'/%3E%3C/svg%3E")',
+  '$custom-radio-radius': '50%',
+  '$custom-radio-checked-icon': 'url("data:image/svg+xml;charset=utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'-4 -4 8 8\'%3E%3Ccircle r=\'3\' fill=\'#fff\'/%3E%3C/svg%3E")',
+  '$custom-control-spacer-y': '.25rem',
+  '$border-width': '1px',
+  '$input-height': '2.5rem',
+  '$custom-select-padding-y': '.375rem',
+  '$custom-select-padding-x': '.75rem ',
+  '$custom-select-indicator-padding': '1rem',
+  '$custom-select-color': '#464a4c',
+  '$custom-select-bg': '#fff',
+  '$custom-select-indicator': 'url("data:image/svg+xml;charset=utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 4 5\'%3E%3Cpath fill=\'#333\' d=\'M2 0L0 2h4zm0 5L0 3h4z\'/%3E%3C/svg%3E")',
+  '$custom-select-bg-size': '8px 10px',
+  '$custom-select-border-width': '1px',
+  '$custom-select-border-color': 'rgba(0, 0, 0, 0.15)',
+  '$custom-select-focus-border-color': 'hsl(207.79999999999995, 98.2%, 53.4%)',
+  '$input-color': '#464a4c',
+  '$custom-select-disabled-color': '#636c72',
+  '$cursor-disabled': 'not-allowed',
+  '$custom-select-disabled-bg': '#eceeef',
+  '$custom-select-sm-font-size': '75%',
+  '$custom-file-width': '14rem',
+  '$custom-file-height': '2.5rem',
+  '$custom-file-padding-x': '.5rem',
+  '$custom-file-padding-y': '1rem',
+  '$custom-file-line-height': '1.5',
+  '$custom-file-color': '#464a4c',
+  '$custom-file-bg': '#fff',
+  '$custom-file-border-width': '1px',
+  '$custom-file-border-color': 'rgba(0, 0, 0, 0.15)',
+  '$custom-file-button-color': '#464a4c',
+  '$custom-file-button-bg': '#eceeef',
+  '$custom-checkbox-radius': '.25rem',
+  '$custom-file-text': {
+    'placeholder': {
+      'en': 'Choose file...'
+    },
+    'button-label': {
+      'en': 'Browse'
+    }
+  }
+};
+function customForms() {
+  var $enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var $enableShadows = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$enable-shadows'];
+  var $customControlCheckedIndicatorBoxShadow = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$custom-control-checked-indicator-box-shadow'];
+  var $customControlActiveIndicatorBoxShadow = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$custom-control-active-indicator-box-shadow'];
+  var $customControlIndicatorBoxShadow = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$custom-control-indicator-box-shadow'];
+  var $customCheckboxIndeterminateBoxShadow = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$custom-checkbox-indeterminate-box-shadow'];
+  var $customSelectFocusBoxShadow = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$custom-select-focus-box-shadow'];
+  var $customFileFocusBoxShadow = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$custom-file-focus-box-shadow'];
+  var $customFileBoxShadow = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps['$custom-file-box-shadow'];
+  var $customSelectBorderRadius = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps['$custom-select-border-radius'];
+  var $customFileBorderRadius = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps['$custom-file-border-radius'];
+  var $customCheckboxRadius = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps['$custom-checkbox-radius'];
+  var $inputBg = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps['$input-bg'];
+  var $customSelectLineHeight = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : defaultProps['$custom-select-line-height'];
+  var $lineHeightBase = arguments.length > 14 && arguments[14] !== undefined ? arguments[14] : defaultProps['$line-height-base'];
+  var $customControlGutter = arguments.length > 15 && arguments[15] !== undefined ? arguments[15] : defaultProps['$custom-control-gutter'];
+  var $customControlSpacerX = arguments.length > 16 && arguments[16] !== undefined ? arguments[16] : defaultProps['$custom-control-spacer-x'];
+  var $customControlCheckedIndicatorColor = arguments.length > 17 && arguments[17] !== undefined ? arguments[17] : defaultProps['$custom-control-checked-indicator-color'];
+  var $customControlCheckedIndicatorBg = arguments.length > 18 && arguments[18] !== undefined ? arguments[18] : defaultProps['$custom-control-checked-indicator-bg'];
+  var $customControlFocusIndicatorBoxShadow = arguments.length > 19 && arguments[19] !== undefined ? arguments[19] : defaultProps['$custom-control-focus-indicator-box-shadow'];
+  var $customControlActiveIndicatorColor = arguments.length > 20 && arguments[20] !== undefined ? arguments[20] : defaultProps['$custom-control-active-indicator-color'];
+  var $customControlActiveIndicatorBg = arguments.length > 21 && arguments[21] !== undefined ? arguments[21] : defaultProps['$custom-control-active-indicator-bg'];
+  var $customControlDisabledCursor = arguments.length > 22 && arguments[22] !== undefined ? arguments[22] : defaultProps['$custom-control-disabled-cursor'];
+  var $customControlDisabledIndicatorBg = arguments.length > 23 && arguments[23] !== undefined ? arguments[23] : defaultProps['$custom-control-disabled-indicator-bg'];
+  var $customControlDisabledDescriptionColor = arguments.length > 24 && arguments[24] !== undefined ? arguments[24] : defaultProps['$custom-control-disabled-description-color'];
+  var $customControlIndicatorSize = arguments.length > 25 && arguments[25] !== undefined ? arguments[25] : defaultProps['$custom-control-indicator-size'];
+  var $customControlIndicatorBg = arguments.length > 26 && arguments[26] !== undefined ? arguments[26] : defaultProps['$custom-control-indicator-bg'];
+  var $customControlIndicatorBgSize = arguments.length > 27 && arguments[27] !== undefined ? arguments[27] : defaultProps['$custom-control-indicator-bg-size'];
+  var $customCheckboxCheckedIcon = arguments.length > 28 && arguments[28] !== undefined ? arguments[28] : defaultProps['$custom-checkbox-checked-icon'];
+  var $customCheckboxIndeterminateBg = arguments.length > 29 && arguments[29] !== undefined ? arguments[29] : defaultProps['$custom-checkbox-indeterminate-bg'];
+  var $customCheckboxIndeterminateIcon = arguments.length > 30 && arguments[30] !== undefined ? arguments[30] : defaultProps['$custom-checkbox-indeterminate-icon'];
+  var $customRadioRadius = arguments.length > 31 && arguments[31] !== undefined ? arguments[31] : defaultProps['$custom-radio-radius'];
+  var $customRadioCheckedIcon = arguments.length > 32 && arguments[32] !== undefined ? arguments[32] : defaultProps['$custom-radio-checked-icon'];
+  var $customControlSpacerY = arguments.length > 33 && arguments[33] !== undefined ? arguments[33] : defaultProps['$custom-control-spacer-y'];
+  var $borderWidth = arguments.length > 34 && arguments[34] !== undefined ? arguments[34] : defaultProps['$border-width'];
+  var $inputHeight = arguments.length > 35 && arguments[35] !== undefined ? arguments[35] : defaultProps['$input-height'];
+  var $customSelectPaddingY = arguments.length > 36 && arguments[36] !== undefined ? arguments[36] : defaultProps['$custom-select-padding-y'];
+  var $customSelectPaddingX = arguments.length > 37 && arguments[37] !== undefined ? arguments[37] : defaultProps['$custom-select-padding-x'];
+  var $customSelectIndicatorPadding = arguments.length > 38 && arguments[38] !== undefined ? arguments[38] : defaultProps['$custom-select-indicator-padding'];
+  var $customSelectColor = arguments.length > 39 && arguments[39] !== undefined ? arguments[39] : defaultProps['$custom-select-color'];
+  var $customSelectBg = arguments.length > 40 && arguments[40] !== undefined ? arguments[40] : defaultProps['$custom-select-bg'];
+  var $customSelectIndicator = arguments.length > 41 && arguments[41] !== undefined ? arguments[41] : defaultProps['$custom-select-indicator'];
+  var $customSelectBgSize = arguments.length > 42 && arguments[42] !== undefined ? arguments[42] : defaultProps['$custom-select-bg-size'];
+  var $customSelectBorderWidth = arguments.length > 43 && arguments[43] !== undefined ? arguments[43] : defaultProps['$custom-select-border-width'];
+  var $customSelectBorderColor = arguments.length > 44 && arguments[44] !== undefined ? arguments[44] : defaultProps['$custom-select-border-color'];
+  var $customSelectFocusBorderColor = arguments.length > 45 && arguments[45] !== undefined ? arguments[45] : defaultProps['$custom-select-focus-border-color'];
+  var $inputColor = arguments.length > 46 && arguments[46] !== undefined ? arguments[46] : defaultProps['$input-color'];
+  var $customSelectDisabledColor = arguments.length > 47 && arguments[47] !== undefined ? arguments[47] : defaultProps['$custom-select-disabled-color'];
+  var $cursorDisabled = arguments.length > 48 && arguments[48] !== undefined ? arguments[48] : defaultProps['$cursor-disabled'];
+  var $customSelectDisabledBg = arguments.length > 49 && arguments[49] !== undefined ? arguments[49] : defaultProps['$custom-select-disabled-bg'];
+  var $customSelectSmFontSize = arguments.length > 50 && arguments[50] !== undefined ? arguments[50] : defaultProps['$custom-select-sm-font-size'];
+  var $customFileWidth = arguments.length > 51 && arguments[51] !== undefined ? arguments[51] : defaultProps['$custom-file-width'];
+  var $customFileHeight = arguments.length > 52 && arguments[52] !== undefined ? arguments[52] : defaultProps['$custom-file-height'];
+  var $customFilePaddingX = arguments.length > 53 && arguments[53] !== undefined ? arguments[53] : defaultProps['$custom-file-padding-x'];
+  var $customFilePaddingY = arguments.length > 54 && arguments[54] !== undefined ? arguments[54] : defaultProps['$custom-file-padding-y'];
+  var $customFileLineHeight = arguments.length > 55 && arguments[55] !== undefined ? arguments[55] : defaultProps['$custom-file-line-height'];
+  var $customFileColor = arguments.length > 56 && arguments[56] !== undefined ? arguments[56] : defaultProps['$custom-file-color'];
+  var $customFileBg = arguments.length > 57 && arguments[57] !== undefined ? arguments[57] : defaultProps['$custom-file-bg'];
+  var $customFileBorderWidth = arguments.length > 58 && arguments[58] !== undefined ? arguments[58] : defaultProps['$custom-file-border-width'];
+  var $customFileBorderColor = arguments.length > 59 && arguments[59] !== undefined ? arguments[59] : defaultProps['$custom-file-border-color'];
+  var $customFileButtonColor = arguments.length > 60 && arguments[60] !== undefined ? arguments[60] : defaultProps['$custom-file-button-color'];
+  var $customFileButtonBg = arguments.length > 61 && arguments[61] !== undefined ? arguments[61] : defaultProps['$custom-file-button-bg'];
+  var $customFileText = arguments.length > 62 && arguments[62] !== undefined ? arguments[62] : defaultProps['$custom-file-text'];
+  var customFileControlBeforeList = [];
+  Object.keys($customFileText.placeholder).forEach(function ($lang) {
+    customFileControlBeforeList.push('\n      &:lang(' + $lang + ')::after {\n        content: "' + $customFileText.placeholder[$lang] + '";\n      }   \n    ');
+  });
+  var customFileControlAfterList = [];
+  Object.keys($customFileText['button-label']).forEach(function ($lang) {
+    customFileControlAfterList.push('\n      &:lang(' + $lang + ')::before {\n        content: "' + $customFileText['button-label'][$lang] + '";\n      }\n    ');
+  });
+  var selectBorderWidth = _bootstrapStyledUtils.unitUtils.math.multiply($borderWidth, 2);
+  var customSelectPaddingRight = _bootstrapStyledUtils.unitUtils.math.addition($customSelectPaddingY, $customSelectIndicatorPadding);
+  var lineHeightBaseMinusCustomControlIndicatorSize = _bootstrapStyledUtils.unitUtils.math.subtract($lineHeightBase, $customControlIndicatorSize);
+  return '\n    /* Embedded icons from Open Iconic. */\n    /* Released under MIT and copyright 2014 Waybury. */\n    /* https://useiconic.com/open */\n    \n    \n    /* Checkboxes and radios */\n    /* Base class takes care of all the key behavioral aspects. */\n    \n    & .custom-control {\n      position: relative;\n      display: inline-flex;\n      min-height: calc(1rem * ' + $lineHeightBase + ');\n      padding-left: ' + $customControlGutter + ';\n      margin-right: ' + $customControlSpacerX + ';\n    }\n    \n    & .custom-control-input {\n      position: absolute;\n      z-index: -1; /* Put the input behind the label so it does not overlay text */\n      opacity: 0;\n    \n      &:checked ~ .custom-control-indicator {\n        color: ' + $customControlCheckedIndicatorColor + ';\n        background-color: ' + $customControlCheckedIndicatorBg + ';\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $customControlCheckedIndicatorBoxShadow) + '\n      }\n    \n      &:focus ~ .custom-control-indicator {\n        /* the mixin is not used here to make sure there is feedback */\n        box-shadow: ' + $customControlFocusIndicatorBoxShadow + ';\n      }\n    \n      &:active ~ .custom-control-indicator {\n        color: ' + $customControlActiveIndicatorColor + ';\n        background-color: ' + $customControlActiveIndicatorBg + ';\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $customControlActiveIndicatorBoxShadow) + '\n      }\n    \n      &:disabled {\n        ~ .custom-control-indicator {\n          cursor: ' + $customControlDisabledCursor + ';\n          background-color: ' + $customControlDisabledIndicatorBg + ';\n        }\n    \n        ~ .custom-control-description {\n          color: ' + $customControlDisabledDescriptionColor + ';\n          cursor: ' + $customControlDisabledCursor + ';\n        }\n      }\n    }\n    \n    /* Custom indicator */\n    /* Generates a shadow element to create our makeshift checkbox/radio background. */\n    \n    & .custom-control-indicator {\n      position: absolute;\n      top: calc(' + lineHeightBaseMinusCustomControlIndicatorSize + ' / 2);\n      left: 0;\n      display: block;\n      width: ' + $customControlIndicatorSize + ';\n      height: ' + $customControlIndicatorSize + ';\n      pointer-events: none;\n      user-select: none;\n      background-color: ' + $customControlIndicatorBg + ';\n      background-repeat: no-repeat;\n      background-position: center center;\n      background-size: ' + $customControlIndicatorBgSize + ';\n      ' + (0, boxShadow_1.boxShadow)($enableShadows, $customControlIndicatorBoxShadow) + '\n    }\n    \n    /* Checkboxes */\n    /* Tweak just a few things for checkboxes.  */\n    \n    & .custom-checkbox {\n      & .custom-control-indicator {\n        ' + (0, borderRadius_1.borderRadius)($enableRounded, $customCheckboxRadius) + '\n      }\n    \n      & .custom-control-input:checked ~ .custom-control-indicator {\n        background-image: ' + $customCheckboxCheckedIcon + ';\n      }\n    \n      & .custom-control-input.indeterminate ~ .custom-control-indicator {\n        background-color: ' + $customCheckboxIndeterminateBg + ';\n        background-image: ' + $customCheckboxIndeterminateIcon + ';\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $customCheckboxIndeterminateBoxShadow) + '\n      }\n    }\n    \n    /* Radios */\n    /* Tweak just a few things for radios. */\n    \n    & .custom-radio {\n      & .custom-control-indicator {\n        border-radius: ' + $customRadioRadius + ';\n      }\n    \n      & .custom-control-input:checked ~ .custom-control-indicator {\n        background-image: ' + $customRadioCheckedIcon + ';\n      }\n    }\n    \n    \n    /* Layout options */\n    /* By default radios and checkboxes are inline-block with no additional spacing */\n    /* set. Use these optional classes to tweak the layout. */\n    \n    & .custom-controls-stacked {\n      display: flex;\n      flex-direction: column;\n    \n      & .custom-control {\n        margin-bottom: ' + $customControlSpacerY + ';\n    \n        + & .custom-control {\n          margin-left: 0;\n        }\n      }\n    }\n    \n    \n    /* Select */\n    /* Replaces the browser default select with a custom one, mostly pulled from */\n    /* http://primercss.io. */\n    \n    & .custom-select {\n      display: inline-block;\n      max-width: 100%;\n      height: calc(' + $inputHeight + ' + ' + selectBorderWidth + ');\n      padding: ' + $customSelectPaddingY + ' ' + customSelectPaddingRight + ' ' + $customSelectPaddingY + ' ' + $customSelectPaddingX + ';\n      line-height: ' + $customSelectLineHeight + ';\n      color: ' + $customSelectColor + ';\n      vertical-align: middle;\n      background: ' + $customSelectBg + ' ' + $customSelectIndicator + ' no-repeat right ' + $customSelectPaddingX + ' center;\n      background-size: ' + $customSelectBgSize + ';\n      border: ' + $customSelectBorderWidth + ' solid ' + $customSelectBorderColor + ';\n      ' + (0, borderRadius_1.borderRadius)($enableRounded, $customSelectBorderRadius) + '\n      /* Use vendor prefixes as appearance is not part of the CSS spec.  */\n      -moz-appearance: none;\n      -webkit-appearance: none;\n    \n      &:focus {\n        border-color: ' + $customSelectFocusBorderColor + ';\n        outline: none;\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $customSelectFocusBoxShadow) + '\n    \n        ::-ms-value {\n          /* For visual consistency with other platforms/browsers, */\n          /* supress the default white text on blue background highlight given to */\n          /* the selected option text when the (still closed) <select> receives focus */\n          /* in IE and (under certain conditions) Edge. */\n          /* See https://github.com/twbs/bootstrap/issues/19398. */\n          color: ' + $inputColor + ';\n          background-color: ' + $inputBg + ';\n        }\n      }\n    \n      &:disabled {\n        color: ' + $customSelectDisabledColor + ';\n        cursor: ' + $cursorDisabled + ';\n        background-color: ' + $customSelectDisabledBg + ';\n      }\n    \n      /* Hides the default caret in IE11 */\n      ::-ms-expand {\n        opacity: 0;\n      }\n    }\n    \n    & .custom-select-sm {\n      padding-top: ' + $customSelectPaddingY + ';\n      padding-bottom: ' + $customSelectPaddingY + ';\n      font-size: ' + $customSelectSmFontSize + ';\n    \n      /* &:not([multiple]) { */\n      /*   height: 26px; */\n      /*   min-height: 26px; */\n      /* } */\n    }\n    \n    \n    /* File */\n    /* Custom file input. */\n    \n    & .custom-file {\n      position: relative;\n      display: inline-block;\n      max-width: 100%;\n      height: ' + $customFileHeight + ';\n      margin-bottom: 0;\n    }\n    \n    & .custom-file-input {\n      min-width: ' + $customFileWidth + ';\n      max-width: 100%;\n      height: ' + $customFileHeight + ';\n      margin: 0;\n      opacity: 0;\n    \n      &:focus ~ .custom-file-control {\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $customFileFocusBoxShadow) + '\n      }\n    }\n    \n    & .custom-file-control {\n      position: absolute;\n      top: 0;\n      right: 0;\n      left: 0;\n      z-index: 5;\n      height: ' + $customFileHeight + ';\n      padding: ' + $customFilePaddingX + ' ' + $customFilePaddingY + ';\n      line-height: ' + $customFileLineHeight + ';\n      color: ' + $customFileColor + ';\n      pointer-events: none;\n      user-select: none;\n      background-color: ' + $customFileBg + ';\n      border: ' + $customFileBorderWidth + ' solid ' + $customFileBorderColor + ';\n      ' + (0, borderRadius_1.borderRadius)($enableRounded, $customFileBorderRadius) + '\n      ' + (0, boxShadow_1.boxShadow)($enableShadows, $customFileBoxShadow) + '\n      \n      ' + customFileControlBeforeList.join('\n') + '\n    \n      &::before {\n        position: absolute;\n        top: ' + $customFileBorderWidth + ';\n        right: ' + $customFileBorderWidth + ';\n        bottom: ' + $customFileBorderWidth + ';\n        z-index: 6;\n        display: block;\n        height: ' + $customFileHeight + ';\n        padding: ' + $customFilePaddingX + ' ' + $customFilePaddingY + ';\n        line-height: ' + $customFileLineHeight + ';\n        color: ' + $customFileButtonColor + ';\n        background-color: ' + $customFileButtonBg + ';\n        border: ' + $customFileBorderWidth + ' solid ' + $customFileBorderColor + ';\n        ' + (0, borderRadius_1.borderRadius)(0, $enableRounded, $customFileBorderRadius, $customFileBorderRadius, 0) + '\n      }\n\n      ' + customFileControlAfterList.join('\n') + '\n    }\n  ';
+}
+exports.default = {
+  customForms: customForms
+};
+});
+unwrapExports(customForms_1);
+var customForms_3 = customForms_1.customForms;
+
+var defaultProps$85 = {
   theme: bsTheme,
   tag: 'form'
 };
-var selectBorderWidth = index$1.math.multiply(bsTheme['$border-width'], 2);
+var selectBorderWidth = unitUtils$1.math.multiply(bsTheme['$border-width'], 2);
 var FormUnstyled = function (_React$Component) {
   inherits(FormUnstyled, _React$Component);
   function FormUnstyled() {
     classCallCheck$1(this, FormUnstyled);
     return possibleConstructorReturn(this, (FormUnstyled.__proto__ || Object.getPrototypeOf(FormUnstyled)).apply(this, arguments));
   }
-  createClass$1(FormUnstyled, [{
+  createClass(FormUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           inline = _omit.inline,
           Tag = _omit.tag,
           getRef = _omit.getRef,
           rest = objectWithoutProperties(_omit, ['className', 'cssModule', 'inline', 'tag', 'getRef']);
-      var classes = mapToCssModules(classnames$1(className, inline ? 'form-inline' : false), cssModule);
+      var classes = mapToCssModules(classnames(className, inline ? 'form-inline' : false), cssModule);
       return React.createElement(Tag, _extends({ ref: getRef, className: classes }, rest));
     }
   }]);
@@ -13070,11 +13286,11 @@ FormUnstyled.propTypes = {
 var Form = styled(FormUnstyled).withConfig({
   displayName: 'Form'
 })(['  ', ''], function (props) {
-  return '\n    /*\n     Textual form controls\n    */\n\n    ' + formControl(props.theme['$enable-rounded'], props.theme['$enable-transitions'], props.theme['$enable-shadows'], props.theme['$input-height'], props.theme['$input-padding-y'], props.theme['$input-padding-x'], props.theme['$font-size-base'], props.theme['$input-line-height'], props.theme['$input-color'], props.theme['$input-bg'], props.theme['$input-border-radius'], props.theme['$input-btn-border-width'], props.theme['$input-border-color'], props.theme['$input-transition'], props.theme['$input-box-shadow'], props.theme['$input-color-focus'], props.theme['$input-bg-focus'], props.theme['$input-border-focus'], props.theme['$input-box-shadow-focus'], props.theme['$input-color-placeholder'], props.theme['$input-bg-disabled'], props.theme['$cursor-disabled']) + '\n    \n    select.form-control {\n      &:not([size]):not([multiple]) {\n        height: calc(' + props.theme['$input-height'] + ' + ' + selectBorderWidth + ');\n      }\n\n      &:focus::-ms-value {\n        /* Suppress the nested default white text on blue background highlight given to\n         the selected option text when the (still closed) <select> receives focus\n         in IE and (under certain conditions) Edge, as it looks bad and cannot be made to\n         match the appearance of the native widget.\n         See https://github.com/twbs/bootstrap/issues/19398.\n         */\n        color: ' + props.theme['$input-color'] + ';\n        background-color: ' + props.theme['$input-bg'] + ';\n      }\n    }\n\n    /* Make file inputs better match text inputs by forcing them to new lines. */\n    & .form-control-file,\n    .form-control-range {\n      display: block;\n    }\n\n    /*\n     Labels\n    */\n\n    /* For use with horizontal and inline forms, when you need the label text to */\n    /* align with the form controls. */\n    & .col-form-label {\n      padding-top: calc(' + props.theme['$input-padding-y'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      margin-bottom: 0; /* Override the \'<label>\' default */\n    }\n\n    & .col-form-label-lg {\n      padding-top: calc(' + props.theme['$input-padding-y-lg'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y-lg'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      font-size: ' + props.theme['$font-size-lg'] + ';\n    }\n\n    & .col-form-label-sm {\n      padding-top: calc(' + props.theme['$input-padding-y-sm'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y-sm'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      font-size: ' + props.theme['$font-size-sm'] + ';\n    }\n\n    /*\n     Legends\n    */\n\n    /* For use with horizontal and inline forms, when you need the legend text to */\n    /* be the same size as regular labels, and to align with the form controls. */\n    & .col-form-legend {\n      padding-top: ' + props.theme['$input-padding-y'] + ';\n      padding-bottom: ' + props.theme['$input-padding-y'] + ';\n      margin-bottom: 0;\n      font-size: ' + props.theme['$font-size-base'] + ';\n    }\n\n\n    /* Static form control text\n\n     Apply class to an element to make any string of text align with labels in a\n     horizontal form layout.\n    */\n\n    & .form-control-static {\n      padding-top: ' + props.theme['$input-padding-y'] + ';\n      padding-bottom: ' + props.theme['$input-padding-y'] + ';\n      margin-bottom: 0; /* match inputs if this class comes on inputs with default margins */\n      line-height: ' + props.theme['$input-line-height'] + ';\n      border: solid transparent;\n      border-width: ' + props.theme['$input-btn-border-width'] + ' 0;\n\n      &.form-control-sm,\n      &.form-control-lg {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n\n\n    /* Form control sizing\n\n     Build on .form-control with modifier classes to decrease or increase the\n     height and font-size of form controls.\n\n     The .form-group-* form-control variations are sadly duplicated to avoid the\n     issue documented in https://github.com/twbs/bootstrap/issues/15074.\n    */\n\n    & .form-control-sm {\n      padding: ' + props.theme['$input-padding-y-sm'] + ' ' + props.theme['$input-padding-x-sm'] + ';\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$input-border-radius-sm']) + '\n    }\n\n    select.form-control-sm {\n      &:not([size]):not([multiple]) {\n        height: ' + props.theme['$input-height-sm'] + ';\n      }\n    }\n\n    & .form-control-lg {\n      padding: ' + props.theme['$input-padding-y-lg'] + ' ' + props.theme['$input-padding-x-lg'] + ';\n      font-size: ' + props.theme['$font-size-lg'] + ';\n      ' + borderRadius(props.theme['$enable-rounded'], props.theme['$input-border-radius-lg']) + '\n    }\n\n    select.form-control-lg {\n      &:not([size]):not([multiple]) {\n        height: ' + props.theme['$input-height-lg'] + ';\n      }\n    }\n\n\n    /* Form groups Designed to help with the organization and spacing of vertical forms. For horizontal forms, use the predefined grid classes. */\n\n    &.form-group,\n     & .form-group {\n      margin-bottom: ' + props.theme['$form-group-margin-bottom'] + ';\n    }\n\n    & .form-text {\n      display: block;\n      margin-top: ' + props.theme['$form-text-margin-top'] + '\n    }\n\n\n    /* Checkboxes and radios Indent the labels to position radios/checkboxes as hanging controls. */\n\n    & .form-check {\n      position: relative;\n      display: block;\n      margin-bottom: ' + props.theme['$form-check-margin-bottom'] + ';\n\n      &.disabled {\n        .form-check-label {\n          color: ' + props.theme['$text-muted'] + ';\n          cursor: ' + props.theme['$cursor-disabled'] + ';\n        }\n      }\n    }\n\n    & .form-check-label {\n      padding-left: ' + props.theme['$form-check-input-gutter'] + ';\n      margin-bottom: 0; /* Override default <label> bottom margin */\n      cursor: pointer;\n    }\n\n    & .form-check-input {\n      position: absolute;\n      margin-top: ' + props.theme['$form-check-input-margin-y'] + ';\n      margin-left: -' + props.theme['$form-check-input-gutter'] + ';\n\n      &:only-child {\n        position: static;\n      }\n    }\n\n    /* Radios and checkboxes on same line */\n    & .form-check-inline {\n      display: inline-block;\n      .form-check-label {\n        vertical-align: middle;\n      }\n\n      + .form-check-inline {\n        margin-left: ' + props.theme['$form-check-inline-margin-x'] + ';\n      }\n\n      &.disabled {\n        color: ' + props.theme['$text-muted'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n      }\n    }\n\n\n    /* Form control feedback states Apply contextual and semantic states to individual form controls. */\n    & .form-control-feedback {\n      margin-top: ' + props.theme['$form-feedback-margin-top'] + ';\n    }\n\n    & .form-control-success,\n    & .form-control-warning,\n    & .form-control-danger {\n      padding-right: ' + index$1.math.multiply(props.theme['$input-padding-x'], 3) + ';\n      background-repeat: no-repeat;\n      background-position: center right ' + index$1.math.divide(props.theme['$input-height'], 4) + ';\n      background-size: ' + index$1.math.divide(props.theme['$input-height'], 2) + ' ' + index$1.math.divide(props.theme['$input-height'], 2) + ';\n    }\n\n    /* Form validation states */\n    & .has-success {\n      ' + formControlValidation(props.theme['$enable-shadows'], props.theme['$brand-success'], props.theme['$box-shadow']) + '\n\n      .form-control-success {\n        background-image: ' + props.theme['$form-icon-success'] + ';\n      }\n    }\n\n    & .has-warning {\n      ' + formControlValidation(props.theme['$enable-shadows'], props.theme['$brand-warning'], props.theme['$box-shadow']) + '\n\n      .form-control-warning {\n        background-image: ' + props.theme['$form-icon-warning'] + ';\n      }\n    }\n\n    & .has-danger {\n      ' + formControlValidation(props.theme['$enable-shadows'], props.theme['$brand-danger'], props.theme['$box-shadow']) + '\n\n      .form-control-danger {\n        background-image: ' + props.theme['$form-icon-danger'] + ';\n      }\n    }\n\n\n    /* Inline forms\n\n     Make forms appear inline(-block) by adding the .form-inline class. Inline\n     forms begin stacked on extra small (mobile) devices and then go inline when\n     viewports reach <768px.\n\n     Requires wrapping inputs and labels with .form-group for proper display of\n     default HTML form controls and our custom form controls (e.g., input groups).\n    */\n\n    &.form-inline {\n      display: flex;\n      flex-flow: row wrap;\n      align-items: center; /* Prevent shorter elements from growing to same height as others (e.g., small buttons growing to normal sized button height) */\n\n      & .form-check {\n         width: 100%;\n      }\n\n      /* Kick in the inline */\n      ' + mediaBreakpointUp('sm', props.theme['$grid-breakpoints'], '\n          label {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            margin-bottom: 0;\n          }\n          \n          /* Inline-block all the things for inline */\n          & .form-group {\n            display: flex;\n            flex: 0 0 auto;\n            flex-flow: row wrap;\n            margin-bottom: 0;\n          }\n      \n          /* Allow folks to *not* use .form-group */\n          & .form-control {\n            display: inline-block;\n            width: auto; /* Prevent labels from stacking above inputs in .form-group */\n            vertical-align: middle;\n          }\n      \n          /* Make static controls behave like regular ones */\n          & .form-control-static {\n            display: inline-block;\n          }\n      \n          & .input-group {\n            width: auto;\n          }\n          \n          & .form-control-label {\n             margin-bottom: 0;\n            vertical-align: middle;\n          }\n      \n          /* Remove default margin on radios/checkboxes that were used for stacking, and */\n          /*  then undo the floating of radios and checkboxes to match. */\n          & .form-check {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            width: auto;\n            margin-top: 0;\n            margin-bottom: 0;\n          }\n          & .form-check-label {\n            padding-left: 0;\n          }\n          & .form-check-input {\n            position: relative;\n            margin-left: 0;\n            margin-top: 0;\n            margin-right: ' + props.theme['$form-check-input-margin-x'] + ';\n          }\n          \n          /* Custom form controls */\n          & .custom-control {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            padding-left: 0;\n          }\n          \n          & .custom-control-indicator {\n            position: static;\n            display: inline-block;\n            margin-right: ' + props.theme['$form-check-input-margin-x'] + '; /* Flexbox alignment means we lose our HTML space here, so we compensate. */\n            vertical-align: text-bottom;\n          }\n          \n          /* Re-override the feedback icon. */\n          & .has-feedback .form-control-feedback {\n            top: 0;\n          }\n        ') + '\n    }\n    ' + customForms(props.theme['$enable-rounded'], props.theme['$enable-shadows'], props.theme['$custom-control-checked-indicator-box-shadow'], props.theme['$custom-control-active-indicator-box-shadow'], props.theme['$custom-control-indicator-box-shadow'], props.theme['$custom-checkbox-indeterminate-box-shadow'], props.theme['$custom-select-focus-box-shadow'], props.theme['$custom-file-focus-box-shadow'], props.theme['$custom-file-box-shadow'], props.theme['$custom-select-border-radius'], props.theme['$custom-file-border-radius'], props.theme['$custom-checkbox-radius'], props.theme['$input-bg'], props.theme['$custom-select-line-height'], props.theme['$line-height-base'], props.theme['$custom-control-gutter'], props.theme['$custom-control-spacer-x'], props.theme['$custom-control-checked-indicator-color'], props.theme['$custom-control-checked-indicator-bg'], props.theme['$custom-control-focus-indicator-box-shadow'], props.theme['$custom-control-active-indicator-color'], props.theme['$custom-control-active-indicator-bg'], props.theme['$custom-control-disabled-cursor'], props.theme['$custom-control-disabled-indicator-bg'], props.theme['$custom-control-disabled-description-color'], props.theme['$custom-control-indicator-size'], props.theme['$custom-control-indicator-bg'], props.theme['$custom-control-indicator-bg-size'], props.theme['$custom-checkbox-checked-icon'], props.theme['$custom-checkbox-indeterminate-bg'], props.theme['$custom-checkbox-indeterminate-icon'], props.theme['$custom-radio-radius'], props.theme['$custom-radio-checked-icon'], props.theme['$custom-control-spacer-y'], props.theme['$border-width'], props.theme['$input-height'], props.theme['$custom-select-padding-y'], props.theme['$custom-select-padding-x'], props.theme['$custom-select-indicator-padding'], props.theme['$custom-select-color'], props.theme['$custom-select-bg'], props.theme['$custom-select-indicator'], props.theme['$custom-select-bg-size'], props.theme['$custom-select-border-width'], props.theme['$custom-select-border-color'], props.theme['$custom-select-focus-border-color'], props.theme['$input-color'], props.theme['$custom-select-disabled-color'], props.theme['$cursor-disabled'], props.theme['$custom-select-disabled-bg'], props.theme['$custom-select-sm-font-size'], props.theme['$custom-file-width'], props.theme['$custom-file-height'], props.theme['$custom-file-padding-x'], props.theme['$custom-file-padding-y'], props.theme['$custom-file-line-height'], props.theme['$custom-file-color'], props.theme['$custom-file-bg'], props.theme['$custom-file-border-width'], props.theme['$custom-file-border-color'], props.theme['$custom-file-button-color'], props.theme['$custom-file-button-bg'], props.theme['$custom-file-text']) + '\n    & .row {\n      ' + makeRow(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n  ';
+  return '\n    /*\n     Textual form controls\n    */\n\n    ' + forms_2(props.theme['$enable-rounded'], props.theme['$enable-transitions'], props.theme['$enable-shadows'], props.theme['$input-height'], props.theme['$input-padding-y'], props.theme['$input-padding-x'], props.theme['$font-size-base'], props.theme['$input-line-height'], props.theme['$input-color'], props.theme['$input-bg'], props.theme['$input-border-radius'], props.theme['$input-btn-border-width'], props.theme['$input-border-color'], props.theme['$input-transition'], props.theme['$input-box-shadow'], props.theme['$input-color-focus'], props.theme['$input-bg-focus'], props.theme['$input-border-focus'], props.theme['$input-box-shadow-focus'], props.theme['$input-color-placeholder'], props.theme['$input-bg-disabled'], props.theme['$cursor-disabled']) + '\n    \n    select.form-control {\n      &:not([size]):not([multiple]) {\n        height: calc(' + props.theme['$input-height'] + ' + ' + selectBorderWidth + ');\n      }\n\n      &:focus::-ms-value {\n        /* Suppress the nested default white text on blue background highlight given to\n         the selected option text when the (still closed) <select> receives focus\n         in IE and (under certain conditions) Edge, as it looks bad and cannot be made to\n         match the appearance of the native widget.\n         See https://github.com/twbs/bootstrap/issues/19398.\n         */\n        color: ' + props.theme['$input-color'] + ';\n        background-color: ' + props.theme['$input-bg'] + ';\n      }\n    }\n\n    /* Make file inputs better match text inputs by forcing them to new lines. */\n    & .form-control-file,\n    .form-control-range {\n      display: block;\n    }\n\n    /*\n     Labels\n    */\n\n    /* For use with horizontal and inline forms, when you need the label text to */\n    /* align with the form controls. */\n    & .col-form-label {\n      padding-top: calc(' + props.theme['$input-padding-y'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      margin-bottom: 0; /* Override the \'<label>\' default */\n    }\n\n    & .col-form-label-lg {\n      padding-top: calc(' + props.theme['$input-padding-y-lg'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y-lg'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      font-size: ' + props.theme['$font-size-lg'] + ';\n    }\n\n    & .col-form-label-sm {\n      padding-top: calc(' + props.theme['$input-padding-y-sm'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y-sm'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      font-size: ' + props.theme['$font-size-sm'] + ';\n    }\n\n    /*\n     Legends\n    */\n\n    /* For use with horizontal and inline forms, when you need the legend text to */\n    /* be the same size as regular labels, and to align with the form controls. */\n    & .col-form-legend {\n      padding-top: ' + props.theme['$input-padding-y'] + ';\n      padding-bottom: ' + props.theme['$input-padding-y'] + ';\n      margin-bottom: 0;\n      font-size: ' + props.theme['$font-size-base'] + ';\n    }\n\n\n    /* Static form control text\n\n     Apply class to an element to make any string of text align with labels in a\n     horizontal form layout.\n    */\n\n    & .form-control-static {\n      padding-top: ' + props.theme['$input-padding-y'] + ';\n      padding-bottom: ' + props.theme['$input-padding-y'] + ';\n      margin-bottom: 0; /* match inputs if this class comes on inputs with default margins */\n      line-height: ' + props.theme['$input-line-height'] + ';\n      border: solid transparent;\n      border-width: ' + props.theme['$input-btn-border-width'] + ' 0;\n\n      &.form-control-sm,\n      &.form-control-lg {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n\n\n    /* Form control sizing\n\n     Build on .form-control with modifier classes to decrease or increase the\n     height and font-size of form controls.\n\n     The .form-group-* form-control variations are sadly duplicated to avoid the\n     issue documented in https://github.com/twbs/bootstrap/issues/15074.\n    */\n\n    & .form-control-sm {\n      padding: ' + props.theme['$input-padding-y-sm'] + ' ' + props.theme['$input-padding-x-sm'] + ';\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-sm']) + '\n    }\n\n    select.form-control-sm {\n      &:not([size]):not([multiple]) {\n        height: ' + props.theme['$input-height-sm'] + ';\n      }\n    }\n\n    & .form-control-lg {\n      padding: ' + props.theme['$input-padding-y-lg'] + ' ' + props.theme['$input-padding-x-lg'] + ';\n      font-size: ' + props.theme['$font-size-lg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-lg']) + '\n    }\n\n    select.form-control-lg {\n      &:not([size]):not([multiple]) {\n        height: ' + props.theme['$input-height-lg'] + ';\n      }\n    }\n\n\n    /* Form groups Designed to help with the organization and spacing of vertical forms. For horizontal forms, use the predefined grid classes. */\n\n    &.form-group,\n     & .form-group {\n      margin-bottom: ' + props.theme['$form-group-margin-bottom'] + ';\n    }\n\n    & .form-text {\n      display: block;\n      margin-top: ' + props.theme['$form-text-margin-top'] + '\n    }\n\n\n    /* Checkboxes and radios Indent the labels to position radios/checkboxes as hanging controls. */\n\n    & .form-check {\n      position: relative;\n      display: block;\n      margin-bottom: ' + props.theme['$form-check-margin-bottom'] + ';\n\n      &.disabled {\n        .form-check-label {\n          color: ' + props.theme['$text-muted'] + ';\n          cursor: ' + props.theme['$cursor-disabled'] + ';\n        }\n      }\n    }\n\n    & .form-check-label {\n      padding-left: ' + props.theme['$form-check-input-gutter'] + ';\n      margin-bottom: 0; /* Override default <label> bottom margin */\n      cursor: pointer;\n    }\n\n    & .form-check-input {\n      position: absolute;\n      margin-top: ' + props.theme['$form-check-input-margin-y'] + ';\n      margin-left: -' + props.theme['$form-check-input-gutter'] + ';\n\n      &:only-child {\n        position: static;\n      }\n    }\n\n    /* Radios and checkboxes on same line */\n    & .form-check-inline {\n      display: inline-block;\n      .form-check-label {\n        vertical-align: middle;\n      }\n\n      + .form-check-inline {\n        margin-left: ' + props.theme['$form-check-inline-margin-x'] + ';\n      }\n\n      &.disabled {\n        color: ' + props.theme['$text-muted'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n      }\n    }\n\n\n    /* Form control feedback states Apply contextual and semantic states to individual form controls. */\n    & .form-control-feedback {\n      margin-top: ' + props.theme['$form-feedback-margin-top'] + ';\n    }\n\n    & .form-control-success,\n    & .form-control-warning,\n    & .form-control-danger {\n      padding-right: ' + unitUtils$1.math.multiply(props.theme['$input-padding-x'], 3) + ';\n      background-repeat: no-repeat;\n      background-position: center right ' + unitUtils$1.math.divide(props.theme['$input-height'], 4) + ';\n      background-size: ' + unitUtils$1.math.divide(props.theme['$input-height'], 2) + ' ' + unitUtils$1.math.divide(props.theme['$input-height'], 2) + ';\n    }\n\n    /* Form validation states */\n    & .has-success {\n      ' + forms_3(props.theme['$enable-shadows'], props.theme['$brand-success'], props.theme['$box-shadow']) + '\n\n      .form-control-success {\n        background-image: ' + props.theme['$form-icon-success'] + ';\n      }\n    }\n\n    & .has-warning {\n      ' + forms_3(props.theme['$enable-shadows'], props.theme['$brand-warning'], props.theme['$box-shadow']) + '\n\n      .form-control-warning {\n        background-image: ' + props.theme['$form-icon-warning'] + ';\n      }\n    }\n\n    & .has-danger {\n      ' + forms_3(props.theme['$enable-shadows'], props.theme['$brand-danger'], props.theme['$box-shadow']) + '\n\n      .form-control-danger {\n        background-image: ' + props.theme['$form-icon-danger'] + ';\n      }\n    }\n\n\n    /* Inline forms\n\n     Make forms appear inline(-block) by adding the .form-inline class. Inline\n     forms begin stacked on extra small (mobile) devices and then go inline when\n     viewports reach <768px.\n\n     Requires wrapping inputs and labels with .form-group for proper display of\n     default HTML form controls and our custom form controls (e.g., input groups).\n    */\n\n    &.form-inline {\n      display: flex;\n      flex-flow: row wrap;\n      align-items: center; /* Prevent shorter elements from growing to same height as others (e.g., small buttons growing to normal sized button height) */\n\n      & .form-check {\n         width: 100%;\n      }\n\n      /* Kick in the inline */\n      ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n          label {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            margin-bottom: 0;\n          }\n          \n          /* Inline-block all the things for inline */\n          & .form-group {\n            display: flex;\n            flex: 0 0 auto;\n            flex-flow: row wrap;\n            margin-bottom: 0;\n          }\n      \n          /* Allow folks to *not* use .form-group */\n          & .form-control {\n            display: inline-block;\n            width: auto; /* Prevent labels from stacking above inputs in .form-group */\n            vertical-align: middle;\n          }\n      \n          /* Make static controls behave like regular ones */\n          & .form-control-static {\n            display: inline-block;\n          }\n      \n          & .input-group {\n            width: auto;\n          }\n          \n          & .form-control-label {\n             margin-bottom: 0;\n            vertical-align: middle;\n          }\n      \n          /* Remove default margin on radios/checkboxes that were used for stacking, and */\n          /*  then undo the floating of radios and checkboxes to match. */\n          & .form-check {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            width: auto;\n            margin-top: 0;\n            margin-bottom: 0;\n          }\n          & .form-check-label {\n            padding-left: 0;\n          }\n          & .form-check-input {\n            position: relative;\n            margin-left: 0;\n            margin-top: 0;\n            margin-right: ' + props.theme['$form-check-input-margin-x'] + ';\n          }\n          \n          /* Custom form controls */\n          & .custom-control {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            padding-left: 0;\n          }\n          \n          & .custom-control-indicator {\n            position: static;\n            display: inline-block;\n            margin-right: ' + props.theme['$form-check-input-margin-x'] + '; /* Flexbox alignment means we lose our HTML space here, so we compensate. */\n            vertical-align: text-bottom;\n          }\n          \n          /* Re-override the feedback icon. */\n          & .has-feedback .form-control-feedback {\n            top: 0;\n          }\n        ') + '\n    }\n    ' + customForms_3(props.theme['$enable-rounded'], props.theme['$enable-shadows'], props.theme['$custom-control-checked-indicator-box-shadow'], props.theme['$custom-control-active-indicator-box-shadow'], props.theme['$custom-control-indicator-box-shadow'], props.theme['$custom-checkbox-indeterminate-box-shadow'], props.theme['$custom-select-focus-box-shadow'], props.theme['$custom-file-focus-box-shadow'], props.theme['$custom-file-box-shadow'], props.theme['$custom-select-border-radius'], props.theme['$custom-file-border-radius'], props.theme['$custom-checkbox-radius'], props.theme['$input-bg'], props.theme['$custom-select-line-height'], props.theme['$line-height-base'], props.theme['$custom-control-gutter'], props.theme['$custom-control-spacer-x'], props.theme['$custom-control-checked-indicator-color'], props.theme['$custom-control-checked-indicator-bg'], props.theme['$custom-control-focus-indicator-box-shadow'], props.theme['$custom-control-active-indicator-color'], props.theme['$custom-control-active-indicator-bg'], props.theme['$custom-control-disabled-cursor'], props.theme['$custom-control-disabled-indicator-bg'], props.theme['$custom-control-disabled-description-color'], props.theme['$custom-control-indicator-size'], props.theme['$custom-control-indicator-bg'], props.theme['$custom-control-indicator-bg-size'], props.theme['$custom-checkbox-checked-icon'], props.theme['$custom-checkbox-indeterminate-bg'], props.theme['$custom-checkbox-indeterminate-icon'], props.theme['$custom-radio-radius'], props.theme['$custom-radio-checked-icon'], props.theme['$custom-control-spacer-y'], props.theme['$border-width'], props.theme['$input-height'], props.theme['$custom-select-padding-y'], props.theme['$custom-select-padding-x'], props.theme['$custom-select-indicator-padding'], props.theme['$custom-select-color'], props.theme['$custom-select-bg'], props.theme['$custom-select-indicator'], props.theme['$custom-select-bg-size'], props.theme['$custom-select-border-width'], props.theme['$custom-select-border-color'], props.theme['$custom-select-focus-border-color'], props.theme['$input-color'], props.theme['$custom-select-disabled-color'], props.theme['$cursor-disabled'], props.theme['$custom-select-disabled-bg'], props.theme['$custom-select-sm-font-size'], props.theme['$custom-file-width'], props.theme['$custom-file-height'], props.theme['$custom-file-padding-x'], props.theme['$custom-file-padding-y'], props.theme['$custom-file-line-height'], props.theme['$custom-file-color'], props.theme['$custom-file-bg'], props.theme['$custom-file-border-width'], props.theme['$custom-file-border-color'], props.theme['$custom-file-button-color'], props.theme['$custom-file-button-bg'], props.theme['$custom-file-text']) + '\n    & .row {\n      ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n  ';
 });
-Form.defaultProps = defaultProps$121;
+Form.defaultProps = defaultProps$85;
 
-var defaultProps$122 = {
+var defaultProps$86 = {
   tag: 'div'
 };
 var FormGroup = function (_React$Component) {
@@ -13083,7 +13299,7 @@ var FormGroup = function (_React$Component) {
     classCallCheck$1(this, FormGroup);
     return possibleConstructorReturn(this, (FormGroup.__proto__ || Object.getPrototypeOf(FormGroup)).apply(this, arguments));
   }
-  createClass$1(FormGroup, [{
+  createClass(FormGroup, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -13096,7 +13312,7 @@ var FormGroup = function (_React$Component) {
           check = _props.check,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'row', 'disabled', 'inline', 'color', 'check', 'tag']);
-      var classes = mapToCssModules(classnames$1(className, color ? 'has-' + color : false, row ? 'row' : false, check ? 'form-check' : 'form-group', check && disabled ? 'disabled' : false, inline ? 'form-check-inline' : false), cssModule);
+      var classes = mapToCssModules(classnames(className, color ? 'has-' + color : false, row ? 'row' : false, check ? 'form-check' : 'form-group', check && disabled ? 'disabled' : false, inline ? 'form-check-inline' : false), cssModule);
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -13113,9 +13329,9 @@ FormGroup.propTypes = {
   color: PropTypes.string,
   row: PropTypes.bool
 };
-FormGroup.defaultProps = defaultProps$122;
+FormGroup.defaultProps = defaultProps$86;
 
-var defaultProps$123 = {
+var defaultProps$87 = {
   tag: 'small'
 };
 var FormText = function (_React$Component) {
@@ -13124,7 +13340,7 @@ var FormText = function (_React$Component) {
     classCallCheck$1(this, FormText);
     return possibleConstructorReturn(this, (FormText.__proto__ || Object.getPrototypeOf(FormText)).apply(this, arguments));
   }
-  createClass$1(FormText, [{
+  createClass(FormText, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -13134,7 +13350,7 @@ var FormText = function (_React$Component) {
           color = _props.color,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'inline', 'color', 'tag']);
-      var classes = mapToCssModules(classnames$1(className, !inline ? 'form-text' : false, color ? 'text-' + color : false), cssModule);
+      var classes = mapToCssModules(classnames(className, !inline ? 'form-text' : false, color ? 'text-' + color : false), cssModule);
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -13148,9 +13364,9 @@ FormText.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-FormText.defaultProps = defaultProps$123;
+FormText.defaultProps = defaultProps$87;
 
-var defaultProps$124 = {
+var defaultProps$88 = {
   tag: 'div'
 };
 var FormFeedback = function (_React$Component) {
@@ -13159,7 +13375,7 @@ var FormFeedback = function (_React$Component) {
     classCallCheck$1(this, FormFeedback);
     return possibleConstructorReturn(this, (FormFeedback.__proto__ || Object.getPrototypeOf(FormFeedback)).apply(this, arguments));
   }
-  createClass$1(FormFeedback, [{
+  createClass(FormFeedback, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -13167,7 +13383,7 @@ var FormFeedback = function (_React$Component) {
           cssModule = _props.cssModule,
           Tag = _props.tag,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag']);
-      var classes = mapToCssModules(classnames$1(className, 'form-control-feedback'), cssModule);
+      var classes = mapToCssModules(classnames(className, 'form-control-feedback'), cssModule);
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
@@ -13179,7 +13395,7 @@ FormFeedback.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-FormFeedback.defaultProps = defaultProps$124;
+FormFeedback.defaultProps = defaultProps$88;
 
 var FormCustom = function (_React$Component) {
   inherits(FormCustom, _React$Component);
@@ -13187,7 +13403,7 @@ var FormCustom = function (_React$Component) {
     classCallCheck$1(this, FormCustom);
     return possibleConstructorReturn(this, (FormCustom.__proto__ || Object.getPrototypeOf(FormCustom)).apply(this, arguments));
   }
-  createClass$1(FormCustom, [{
+  createClass(FormCustom, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -13196,7 +13412,7 @@ var FormCustom = function (_React$Component) {
           radio = _props.radio,
           children = _props.children,
           attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'radio', 'children']);
-      var classes = mapToCssModules(classnames$1(className, 'custom-control', radio ? 'custom-radio' : 'custom-checkbox'), cssModule);
+      var classes = mapToCssModules(classnames(className, 'custom-control', radio ? 'custom-radio' : 'custom-checkbox'), cssModule);
       var CustomInput = radio ? React.createElement(Input, { type: 'radio', id: radio.id, name: radio.name, className: 'custom-control-input' }) : React.createElement(Input, { type: 'checkbox', className: 'custom-control-input' });
       return React.createElement(
         Label,
@@ -13223,7 +13439,7 @@ FormCustom.propTypes = {
   })
 };
 
-var defaultProps$125 = {
+var defaultProps$89 = {
   tag: 'nav',
   role: 'navigation',
   toggleable: false,
@@ -13243,11 +13459,11 @@ var NavbarUnstyled = function (_React$Component) {
     classCallCheck$1(this, NavbarUnstyled);
     return possibleConstructorReturn(this, (NavbarUnstyled.__proto__ || Object.getPrototypeOf(NavbarUnstyled)).apply(this, arguments));
   }
-  createClass$1(NavbarUnstyled, [{
+  createClass(NavbarUnstyled, [{
     key: 'render',
     value: function render() {
       var _cn;
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           toggleable = _omit.toggleable,
           className = _omit.className,
           cssModule = _omit.cssModule,
@@ -13259,7 +13475,7 @@ var NavbarUnstyled = function (_React$Component) {
           color = _omit.color,
           Tag = _omit.tag,
           attributes = objectWithoutProperties(_omit, ['toggleable', 'className', 'cssModule', 'light', 'inverse', 'full', 'fixed', 'sticky', 'color', 'tag']);
-      var classes = mapToCssModules(classnames$1(className, 'navbar', getToggleableClass(toggleable), (_cn = {
+      var classes = mapToCssModules(classnames(className, 'navbar', getToggleableClass(toggleable), (_cn = {
         'navbar-light': light,
         'navbar-inverse': inverse
       }, defineProperty(_cn, 'bg-' + color, color), defineProperty(_cn, 'navbar-full', full), defineProperty(_cn, 'fixed-' + fixed, fixed), defineProperty(_cn, 'sticky-' + sticky, sticky), _cn)), cssModule);
@@ -13286,16 +13502,16 @@ NavbarUnstyled.propTypes = {
 var Navbar = styled(NavbarUnstyled).withConfig({
   displayName: 'Navbar'
 })(['', ''], function (props) {
-  return '\n    ' + navbar(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + nav(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n  ';
+  return '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + nav_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n  ';
 });
-Navbar.defaultProps = defaultProps$125;
+Navbar.defaultProps = defaultProps$89;
 
 var propTypes$8 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-var defaultProps$126 = {
+var defaultProps$90 = {
   tag: 'a'
 };
 var NavbarBrand = function NavbarBrand(props) {
@@ -13303,11 +13519,11 @@ var NavbarBrand = function NavbarBrand(props) {
       cssModule = props.cssModule,
       Tag = props.tag,
       attributes = objectWithoutProperties(props, ['className', 'cssModule', 'tag']);
-  var classes = mapToCssModules(classnames$1(className, 'navbar-brand'), cssModule);
+  var classes = mapToCssModules(classnames(className, 'navbar-brand'), cssModule);
   return React.createElement(Tag, _extends({}, attributes, { className: classes }));
 };
 NavbarBrand.propTypes = propTypes$8;
-NavbarBrand.defaultProps = defaultProps$126;
+NavbarBrand.defaultProps = defaultProps$90;
 
 var propTypes$9 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -13318,7 +13534,7 @@ var propTypes$9 = {
   right: PropTypes.bool,
   left: PropTypes.bool
 };
-var defaultProps$127 = {
+var defaultProps$91 = {
   tag: 'button',
   type: 'button'
 };
@@ -13331,7 +13547,7 @@ var NavbarToggler = function NavbarToggler(props) {
       left = props.left,
       Tag = props.tag,
       attributes = objectWithoutProperties(props, ['className', 'cssModule', 'children', 'right', 'left', 'tag']);
-  var classes = mapToCssModules(classnames$1(className, 'navbar-toggler', right && 'navbar-toggler-right', left && 'navbar-toggler-left'), cssModule);
+  var classes = mapToCssModules(classnames(className, 'navbar-toggler', right && 'navbar-toggler-right', left && 'navbar-toggler-left'), cssModule);
   return React.createElement(
     Tag,
     _extends({}, attributes, { className: classes }),
@@ -13339,7 +13555,7 @@ var NavbarToggler = function NavbarToggler(props) {
   );
 };
 NavbarToggler.propTypes = propTypes$9;
-NavbarToggler.defaultProps = defaultProps$127;
+NavbarToggler.defaultProps = defaultProps$91;
 
 var propTypes$10 = {
   children: PropTypes.node,
@@ -13349,7 +13565,7 @@ var propTypes$10 = {
   toggle: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired
 };
-var defaultProps$128 = {
+var defaultProps$92 = {
   tag: 'li'
 };
 var NavDropdown = function NavDropdown(props) {
@@ -13357,13 +13573,13 @@ var NavDropdown = function NavDropdown(props) {
       cssModule = props.cssModule,
       Tag = props.tag,
       attributes = objectWithoutProperties(props, ['className', 'cssModule', 'tag']);
-  var classes = mapToCssModules(classnames$1(className, 'nav-item'), cssModule);
+  var classes = mapToCssModules(classnames(className, 'nav-item'), cssModule);
   return React.createElement(Dropdown, _extends({}, attributes, { tag: Tag, className: classes }));
 };
 NavDropdown.propTypes = propTypes$10;
-NavDropdown.defaultProps = defaultProps$128;
+NavDropdown.defaultProps = defaultProps$92;
 
-var defaultProps$129 = {
+var defaultProps$93 = {
   theme: bsTheme
 };
 var ContainerUnstyled = function (_React$Component) {
@@ -13372,13 +13588,13 @@ var ContainerUnstyled = function (_React$Component) {
     classCallCheck$1(this, ContainerUnstyled);
     return possibleConstructorReturn(this, (ContainerUnstyled.__proto__ || Object.getPrototypeOf(ContainerUnstyled)).apply(this, arguments));
   }
-  createClass$1(ContainerUnstyled, [{
+  createClass(ContainerUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
-      return React.createElement('div', _extends({ className: classnames$1(className, 'container') }, attributes));
+      return React.createElement('div', _extends({ className: classnames(className, 'container') }, attributes));
     }
   }]);
   return ContainerUnstyled;
@@ -13390,11 +13606,11 @@ ContainerUnstyled.propTypes = {
 var Container = styled(ContainerUnstyled).withConfig({
   displayName: 'Container'
 })(['', ''], function (props) {
-  return '\n    ' + makeContainer(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    \n    ' + makeContainerMaxWidths(props.theme['$enable-grid-classes'], props.theme['$container-max-widths'], props.theme['$grid-breakpoints']) + '\n  ';
+  return '\n    ' + grid_2(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    \n    ' + grid_3(props.theme['$enable-grid-classes'], props.theme['$container-max-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-Container.defaultProps = defaultProps$129;
+Container.defaultProps = defaultProps$93;
 
-var defaultProps$130 = {
+var defaultProps$94 = {
   theme: bsTheme
 };
 var ContainerFluidUnstyled = function (_React$Component) {
@@ -13403,13 +13619,13 @@ var ContainerFluidUnstyled = function (_React$Component) {
     classCallCheck$1(this, ContainerFluidUnstyled);
     return possibleConstructorReturn(this, (ContainerFluidUnstyled.__proto__ || Object.getPrototypeOf(ContainerFluidUnstyled)).apply(this, arguments));
   }
-  createClass$1(ContainerFluidUnstyled, [{
+  createClass(ContainerFluidUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
-      return React.createElement('div', _extends({ className: classnames$1(className, 'container-fluid') }, attributes));
+      return React.createElement('div', _extends({ className: classnames(className, 'container-fluid') }, attributes));
     }
   }]);
   return ContainerFluidUnstyled;
@@ -13421,9 +13637,9 @@ ContainerFluidUnstyled.propTypes = {
 var ContainerFluid = styled(ContainerFluidUnstyled).withConfig({
   displayName: 'ContainerFluid'
 })(['', ''], function (props) {
-  return '\n    ' + makeContainer(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n  ';
+  return '\n    ' + grid_2(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n  ';
 });
-ContainerFluid.defaultProps = defaultProps$130;
+ContainerFluid.defaultProps = defaultProps$94;
 
 'use strict';
 
@@ -16129,9 +16345,9 @@ function findDOMNode(componentOrElement) {
     invariant_1(false, 'Element appears to be neither ReactComponent nor DOMNode (keys: %s)', Object.keys(componentOrElement));
   }
 }
-var findDOMNode_1$1 = findDOMNode;
+var findDOMNode_1 = findDOMNode;
 
-var defaultProps$132 = {
+var defaultProps$96 = {
   theme: bsTheme
 };
 var OffsetNavUnstyled = function (_React$Component) {
@@ -16140,10 +16356,10 @@ var OffsetNavUnstyled = function (_React$Component) {
     classCallCheck$1(this, OffsetNavUnstyled);
     return possibleConstructorReturn(this, (OffsetNavUnstyled.__proto__ || Object.getPrototypeOf(OffsetNavUnstyled)).apply(this, arguments));
   }
-  createClass$1(OffsetNavUnstyled, [{
+  createClass(OffsetNavUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme', 'elementWidth', 'animation-push', 'showMenu']),
+      var _omit = lodash_omit(this.props, ['theme', 'elementWidth', 'animation-push', 'showMenu']),
           className = _omit.className,
           children = _omit.children,
           active = _omit.active,
@@ -16154,11 +16370,11 @@ var OffsetNavUnstyled = function (_React$Component) {
           menuRight = _omit['menu-right'],
           attributes = objectWithoutProperties(_omit, ['className', 'children', 'active', 'dismiss', 'menuClose', 'offsetColor', 'cssModule', 'menu-right']);
       var menuDirectionClassNames = menuRight ? 'menu-right' : 'menu-left';
-      var cssClasses = classnames$1(className, menuDirectionClassNames, defineProperty({}, 'bg-' + offsetColor, offsetColor));
+      var cssClasses = classnames(className, menuDirectionClassNames, defineProperty({}, 'bg-' + offsetColor, offsetColor));
       return React.createElement(
         'div',
         _extends({
-          className: mapToCssModules(classnames$1(cssClasses, { active: active }), cssModule)
+          className: mapToCssModules(classnames(cssClasses, { active: active }), cssModule)
         }, attributes),
         menuClose && React.createElement(Close, { 'aria-label': 'Close', onDismiss: dismiss }),
         children
@@ -16184,38 +16400,38 @@ OffsetNavUnstyled.propTypes = {
 var OffsetNav = styled(OffsetNavUnstyled).withConfig({
   displayName: 'OffsetNav'
 })(['', ''], function (props) {
-  return '\n    width: ' + (props.elementWidth ? props.elementWidth : props.theme['$menu-push-width']) + ';\n    height: 100%;\n    background-color: white;\n    z-index: ' + props.theme['$zindex-menu-push'] + ';\n    ' + ifThen(props.showMenu, mediaBreakpointUp(props.showMenu, props.theme['$grid-breakpoints'], 'position: absolute;\n            top: 0;')) + '\n  ';
+  return '\n    width: ' + (props.elementWidth ? props.elementWidth : props.theme['$menu-push-width']) + ';\n    height: 100%;\n    background-color: ' + props.theme['$menu-offset-nav-bg-color'] + ';\n    z-index: ' + props.theme['$zindex-menu-push'] + ';\n    ' + conditional_1(props.showMenu, breakpoints_6(props.showMenu, props.theme['$grid-breakpoints'], 'position: absolute;\n            top: 0;')) + '\n  ';
 });
-OffsetNav.defaultProps = defaultProps$132;
+OffsetNav.defaultProps = defaultProps$96;
 
 var OffsetNavPush = styled(OffsetNav).withConfig({
   displayName: 'OffsetNavPush'
 })(['', ''], function (props) {
-  return '\n    position: fixed;\n    top: 0;\n\n    ' + boxShadow(props.theme['$enable-shadows'], props.theme['$menu-offset-nav-box-shadow']) + '    \n\n    &.menu-left {\n      left: -' + props.theme['$menu-push-width'] + ';\n      ' + transition(props.theme['$enable-transitions'], props.theme['$menu-offset-nav-transition']) + '\n    }\n    \n    &.menu-right {\n      right: 0px;\n      transform: translateX(100%);\n      ' + transition(props.theme['$enable-transitions'], props.theme['$menu-offset-nav-transition']) + '\n    }\n  ';
+  return '\n    position: fixed;\n    top: 0;\n\n    ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$menu-offset-nav-box-shadow']) + '    \n\n    &.menu-left {\n      left: -' + props.theme['$menu-push-width'] + ';\n      ' + transition_2(props.theme['$enable-transitions'], props.theme['$menu-offset-nav-transition']) + '\n    }\n    \n    &.menu-right {\n      right: 0px;\n      transform: translateX(100%);\n      ' + transition_2(props.theme['$enable-transitions'], props.theme['$menu-offset-nav-transition']) + '\n    }\n  ';
 });
 
 var OffsetNavSlide = styled(OffsetNav).withConfig({
   displayName: 'OffsetNavSlide'
 })(['', ''], function (props) {
-  return '\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    ' + transition(props.theme['$enable-transitions'], props.theme['$menu-offset-nav-transition']) + '\n    ' + boxShadow(props.theme['$enable-shadows'], props.theme['$menu-offset-nav-box-shadow']) + '  \n    &.menu-left {\n      left: 0;\n      transform: translateX(-100%);\n      &.active {\n        transform: translateX(0);\n      }\n    }\n    \n    &.menu-right {\n      right: 0;\n      transform: translateX(100%);\n      &.active {\n        transform: translateX(0);\n      }\n    }\n\n  ';
+  return '\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    ' + transition_2(props.theme['$enable-transitions'], props.theme['$menu-offset-nav-transition']) + '\n    ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$menu-offset-nav-box-shadow']) + '  \n    &.menu-left {\n      left: 0;\n      transform: translateX(-100%);\n      &.active {\n        transform: translateX(0);\n      }\n    }\n    \n    &.menu-right {\n      right: 0;\n      transform: translateX(100%);\n      &.active {\n        transform: translateX(0);\n      }\n    }\n\n  ';
 });
 
-var defaultProps$133 = { theme: bsTheme };
+var defaultProps$97 = { theme: bsTheme };
 var OverlayUnstyled = function (_React$Component) {
   inherits(OverlayUnstyled, _React$Component);
   function OverlayUnstyled() {
     classCallCheck$1(this, OverlayUnstyled);
     return possibleConstructorReturn(this, (OverlayUnstyled.__proto__ || Object.getPrototypeOf(OverlayUnstyled)).apply(this, arguments));
   }
-  createClass$1(OverlayUnstyled, [{
+  createClass(OverlayUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           active = _omit.active,
           attributes = objectWithoutProperties(_omit, ['className', 'active']);
       return React.createElement('div', _extends({
-        className: classnames$1(className, 'fade', {
+        className: classnames(className, 'fade', {
           show: active
         })
       }, attributes));
@@ -16231,11 +16447,11 @@ OverlayUnstyled.propTypes = {
 var Overlay = styled(OverlayUnstyled).withConfig({
   displayName: 'Overlay'
 })(['', ''], function (props) {
-  return '\n    position: fixed;\n    width: 100%;\n    height: 100%;\n    z-index: 1990;\n    background: rgba(0, 0, 0, 0.3);\n    transform: translate3d(100%, 0, 0);\n    ' + fade(props.theme['$enable-transitions'], props.theme['$transition-fade']) + '\n    &.show {\n      transform: translate3d(0, 0, 0);\n    }\n  ';
+  return '\n    position: fixed;\n    top: 0;\n    width: 100%;\n    height: 100%;\n    z-index: ' + props.theme['$zindex-overlay'] + ';\n    background: ' + props.theme['$overlay-bg'] + ';\n    transform: translate3d(100%, 0, 0);\n    ' + transition_3$1(props.theme['$enable-transitions'], props.theme['$transition-fade']) + '\n    &.show {\n      transform: translate3d(0, 0, 0);\n    }\n  ';
 });
-Overlay.defaultProps = defaultProps$133;
+Overlay.defaultProps = defaultProps$97;
 
-var defaultProps$131 = {
+var defaultProps$95 = {
   button: {
     component: Button
   },
@@ -16274,7 +16490,7 @@ var HeaderNavBar = function (_React$Component) {
       }
     }, _temp), possibleConstructorReturn(_this, _ret);
   }
-  createClass$1(HeaderNavBar, [{
+  createClass(HeaderNavBar, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
       var showMenu = this.props.showMenu;
@@ -16285,7 +16501,7 @@ var HeaderNavBar = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var componentAsANodeReact = findDOMNode_1$1(this);
+      var componentAsANodeReact = findDOMNode_1(this);
       var node = componentAsANodeReact.querySelector('.navbar.justify-content-between');
       var nodeHeight = node.clientHeight;
       var offsetNav = componentAsANodeReact.querySelector('.offset-nav-margin-top');
@@ -16299,7 +16515,7 @@ var HeaderNavBar = function (_React$Component) {
     value: function render() {
       var _cn,
           _this2 = this;
-      var _omit = lodash_omit$1(this.props, ['theme', 'belowHeader']),
+      var _omit = lodash_omit(this.props, ['theme', 'belowHeader']),
           className = _omit.className,
           children = _omit.children,
           cssModule = _omit.cssModule,
@@ -16319,18 +16535,18 @@ var HeaderNavBar = function (_React$Component) {
           showMenu = _omit.showMenu,
           shadowHeader = _omit.shadowHeader,
           attributesTemp = objectWithoutProperties(_omit, ['className', 'children', 'cssModule', 'button', 'noOverlay', 'menuClose', 'offsetNavWidth', 'nav-top', 'menu-right', 'animation-push', 'light', 'inverse', 'fixed', 'sticky', 'color', 'offsetColor', 'showMenu', 'shadowHeader']);
-      var _omit2 = lodash_omit$1(attributesTemp, ['onClick']),
+      var _omit2 = lodash_omit(attributesTemp, ['onClick']),
           attributes = objectWithoutProperties(_omit2, []);
       var ButtonToggle = button.component,
           classNameButton = button.className,
           restButton = objectWithoutProperties(button, ['component', 'className']);
-      var cssClasses = classnames$1('navbar', 'justify-content-between', className, (_cn = {
+      var cssClasses = classnames('navbar', 'justify-content-between', className, (_cn = {
         'flex-row': !showMenu,
         'navbar-light': light,
         'navbar-inverse': inverse
       }, defineProperty(_cn, 'bg-' + color, color), defineProperty(_cn, 'fixed-' + fixed, fixed), defineProperty(_cn, 'sticky-' + sticky, sticky), _cn));
       var buttonMenuRight = menuRight ? 'flex-last' : '';
-      var buttonClasses = classnames$1(buttonMenuRight, classNameButton, defineProperty({
+      var buttonClasses = classnames(buttonMenuRight, classNameButton, defineProperty({
         'navbar-toggler-icon p-3 my-auto cursor-pointer': !classNameButton
       }, 'd-' + showMenu + '-none', showMenu));
       var OffsetMenuAnimated = animationPush ? React.createElement(
@@ -16368,7 +16584,7 @@ var HeaderNavBar = function (_React$Component) {
         !noOverlay && React.createElement(Overlay, { active: this.state.show, onClick: this.handleClick }),
         React.createElement(
           Header,
-          _extends({ className: mapToCssModules(classnames$1(cssClasses), cssModule), shadowHeader: shadowHeader }, attributes, { innerRef: function innerRef(header) {
+          _extends({ className: mapToCssModules(classnames(cssClasses), cssModule), shadowHeader: shadowHeader }, attributes, { innerRef: function innerRef(header) {
               _this2.header = header;
             } }),
           React.createElement(ButtonToggle, _extends({ className: buttonClasses, onClick: this.handleClick }, restButton)),
@@ -16412,19 +16628,19 @@ HeaderNavBar.propTypes = {
   'menu-right': PropTypes.bool,
   'animation-push': PropTypes.bool
 };
-HeaderNavBar.defaultProps = defaultProps$131;
+HeaderNavBar.defaultProps = defaultProps$95;
 
-var defaultProps$134 = { theme: bsTheme };
+var defaultProps$98 = { theme: bsTheme };
 var PageWrapperUnstyled = function (_React$Component) {
   inherits(PageWrapperUnstyled, _React$Component);
   function PageWrapperUnstyled() {
     classCallCheck$1(this, PageWrapperUnstyled);
     return possibleConstructorReturn(this, (PageWrapperUnstyled.__proto__ || Object.getPrototypeOf(PageWrapperUnstyled)).apply(this, arguments));
   }
-  createClass$1(PageWrapperUnstyled, [{
+  createClass(PageWrapperUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit$1(this.props, ['theme']),
+      var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           children = _omit.children;
       return React.createElement(
@@ -16449,10 +16665,7 @@ var PageWrapper = styled(PageWrapperUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    height: 100%;\n    transition: ' + props.theme['$menu-offset-nav-transition'] + ';\n    &.left { transform: translateX(220px); }\n    &.right { transform: translateX(-220px); }\n  ';
 });
-PageWrapper.defaultProps = defaultProps$134;
+PageWrapper.defaultProps = defaultProps$98;
 
-var getGlobalStyleNoBootstrapProvider = rebootUtils.getGlobalStyleNoBootstrapProvider;
-var getGlobalStyles = rebootUtils.getGlobalStyles;
-
-export { getGlobalStyleNoBootstrapProvider, getGlobalStyles, borderRadius$1 as radius, boxShadow, breakpoints as bp, ifThen, ifElse, gradients as gradient, hover, srOnly, srOnlyFocusable, size, transition, alignUtils, backgroundUtils, bordersUtils, clearfixUtils, cursorUtils, displayUtils, flexUtils, floatUtils, positionUtils, rebootUtils, screenreadersUtils, sizingUtils, spacingUtils, transitionUtils, textUtils, index$1 as unit, visibilityUtils, parseTransition, tetherAttachements, bsTheme as theme, makeTheme$$1 as makeTheme, A, composeLink, Abbr, Address, index$1$1 as Alert, Area, Article, Blockquote, BootstrapProvider, Breadcrumb, BreadcrumbItem, Button, ButtonDropdown, ButtonGroup, ButtonToolbar, Caption, Close, Code, Col, Collapse, Dd, Dfn, Details, Dl, Dt, index$2 as Fade, Fa, FaStacked, Fieldset, Footer, H1, H2, H3, H4, H5, H6, Header, Hr, Img, Figure, FigCaption, Input, InputGroup, InputGroupAddon, InputGroupButton, IssueIcon, Kbd, Jumbotron, Label, Legend, Li, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemHeading$2 as ListGroupItemText, Map$2 as Map, Mark, Media, Modal, ModalBody, ModalFooter, ModalHeader, Nav, NavLink, NavItem, Ol, Option, Output, P, Pagination, PaginationItem, PaginationLink, Pre, Progress, ProgressBar, Row, Samp, Section, Select, Small, Strong, Summary, Sub, Sup, Table, Tbody, Tfoot, Thead, Td, Th, Tr, Badge, Textarea, Tooltip, Ul, Blur, Contrast, Brightness, Grayscale, HueRotate, Invert, Opacity, Sepia, Saturate, Bounce, BounceDown, BounceUp, BounceLeft, BounceRight, Flash, RollOut, RollIn, Rubber, Swing, Zoom, Hinge, Pulse, ExpandUp, Entrance, Hatch, SlideUp, SlideDown, SlideRight, SlideLeft, SlideRightLeft, FadeIn, FadeInDown, FadeInUp, FadeInLeft, FadeInRight, RotateIn, RotateLeft, RotateRight, RotateUpLeft, RotateUpRight, LightIn, LightOut, Flip, FlipX, FlipY, Dropshadow, Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote, Accordion, AccordionGroup, Form, FormGroup, FormText, FormFeedback, FormCustom, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Navbar, NavbarToggler, NavbarBrand, NavDropdown, Container, ContainerFluid, HeaderNavBar, PageWrapper, OffsetNavPush, OffsetNavSlide };
+export { bsTheme as theme, makeTheme$$1 as makeTheme, A, composeLink, Abbr, Address, index$1 as Alert, Area, Article, Blockquote, BootstrapProvider, Breadcrumb, BreadcrumbItem, Button, ButtonDropdown, ButtonGroup, ButtonToolbar, Caption, Close, Code, Col, Collapse, Dd, Dfn, Details, Dl, Dt, index$2 as Fade, Fa, FaStacked, Fieldset, Footer, H1, H2, H3, H4, H5, H6, Header, Hr, Img, Figure, FigCaption, Input, InputGroup, InputGroupAddon, InputGroupButton, IssueIcon, Kbd, Jumbotron, Label, Legend, Li, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemHeading$2 as ListGroupItemText, Map$2 as Map, Mark, Media, Modal, ModalBody, ModalFooter, ModalHeader, Nav, NavLink, NavItem, Ol, Option, Output, P, Pagination, PaginationItem, PaginationLink, Pre, Progress, ProgressBar, Row, Samp, Section, Select, Small, Strong, Summary, Sub, Sup, Table, Tbody, Tfoot, Thead, Td, Th, Tr, Badge, Textarea, Tooltip, Ul, Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote, Accordion, AccordionGroup, Form, FormGroup, FormText, FormFeedback, FormCustom, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Navbar, NavbarToggler, NavbarBrand, NavDropdown, Container, ContainerFluid, HeaderNavBar, PageWrapper, OffsetNavPush, OffsetNavSlide };
 //# sourceMappingURL=bootstrap-styled.es.js.map
