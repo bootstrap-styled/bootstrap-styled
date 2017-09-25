@@ -7,10 +7,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import mapToCssModules from 'map-to-css-modules';
+import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
+import { clearfix } from 'bootstrap-styled-mixins/lib/clearfix';
 import bsTheme from '../theme';
-import { mapToCssModules } from '../utils/tools';
-import { borderRadius } from '../styled/mixins/border-radius';
-import { clearfix } from '../styled/mixins/clearfix';
 
 const defaultProps = {
   theme: bsTheme,

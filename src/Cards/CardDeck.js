@@ -8,10 +8,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
+import mapToCssModules from 'map-to-css-modules';
+import { card } from 'bootstrap-styled-mixins/lib/cards';
 import bsTheme from '../theme';
-import { mapToCssModules } from '../utils/tools';
-import { mediaBreakpointUp } from '../styled/mixins/breakpoints';
-import { card } from '../styled/mixins/cards';
 
 const defaultProps = {
   theme: bsTheme,

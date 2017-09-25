@@ -5,9 +5,9 @@ import cn from 'classnames';
 import styled from 'styled-components';
 import themeBs from '../theme';
 import omit from 'lodash.omit';
-import { mapToCssModules } from '../utils/tools';
-import { navbar } from '../styled/mixins/navbar';
-import { nav } from '../styled/mixins/nav';
+import mapToCssModules from 'map-to-css-modules';
+import { navbar } from 'bootstrap-styled-mixins/lib/navbar';
+import { nav } from 'bootstrap-styled-mixins/lib/nav';
 
 const defaultProps = {
   tag: 'nav',

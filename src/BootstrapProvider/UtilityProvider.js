@@ -1,24 +1,22 @@
 import styled from 'styled-components';
+import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
+import alignUtils from 'bootstrap-styled-mixins/lib/utilities/align';
+import backgroundUtils from 'bootstrap-styled-mixins/lib/utilities/background';
+import bordersUtils from 'bootstrap-styled-mixins/lib/utilities/borders';
+import clearfixUtils from 'bootstrap-styled-mixins/lib/utilities/clearfix';
+import cursorUtils from 'bootstrap-styled-mixins/lib/utilities/cursor';
+import displayUtils from 'bootstrap-styled-mixins/lib/utilities/display';
+import flexUtils from 'bootstrap-styled-mixins/lib/utilities/flex';
+import floatUtils from 'bootstrap-styled-mixins/lib/utilities/float';
+import positionUtils from 'bootstrap-styled-mixins/lib/utilities/position';
+import rebootUtils from 'bootstrap-styled-mixins/lib/utilities/reboot';
+import screenreadersUtils from 'bootstrap-styled-mixins/lib/utilities/screenreaders';
+import sizingUtils from 'bootstrap-styled-mixins/lib/utilities/sizing';
+import spacingUtils from 'bootstrap-styled-mixins/lib/utilities/spacing';
+import textUtils from 'bootstrap-styled-mixins/lib/utilities/text';
+import transitionUtils from 'bootstrap-styled-mixins/lib/utilities/transition';
+import visibilityUtils from 'bootstrap-styled-mixins/lib/utilities/visibility';
 import theme from '../theme';
-import { ifThen } from '../mixins';
-import {
-  alignUtils,
-  backgroundUtils,
-  bordersUtils,
-  clearfixUtils,
-  cursorUtils,
-  displayUtils,
-  flexUtils,
-  floatUtils,
-  positionUtils,
-  screenreadersUtils,
-  sizingUtils,
-  spacingUtils,
-  textUtils,
-  transitionUtils,
-  visibilityUtils,
-  rebootUtils,
-} from '../utilities';
 
 const defaultProps = {
   theme,

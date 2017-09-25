@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+import { transition } from 'bootstrap-styled-mixins/lib/transition';
+import { boxShadow } from 'bootstrap-styled-mixins/lib/box-shadow';
 import OffsetNav from './OffsetNav';
-import { transition } from '../styled/mixins/transition';
-import { boxShadow } from '../styled/mixins/box-shadow';
 
 const OffsetNavSlide = styled(OffsetNav)`
   ${(props) => `

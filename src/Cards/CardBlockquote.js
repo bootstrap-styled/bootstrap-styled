@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import { mapToCssModules } from '../utils/tools';
+import mapToCssModules from 'map-to-css-modules';
 import Blockquote from '../Blockquote';
 
 const defaultProps = {

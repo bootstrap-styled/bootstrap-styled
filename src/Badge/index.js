@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
+import mapToCssModules from 'map-to-css-modules';
+import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
+import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
+import { badgeVariant } from 'bootstrap-styled-mixins/lib/badge';
 import bsTheme from '../theme';
-import { mapToCssModules } from '../utils/tools';
-import { hoverFocus } from '../styled/mixins/hover';
-import { borderRadius } from '../styled/mixins/border-radius';
-import { badgeVariant } from '../styled/mixins/badge';
 
 const defaultProps = {
   theme: bsTheme,

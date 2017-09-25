@@ -7,12 +7,12 @@ import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import { unitUtils } from 'math-utils';
+import unitUtils from 'bootstrap-styled-utils/lib/unitUtils';
 import omit from 'lodash.omit';
-import { mapToCssModules } from '../utils/tools';
+import mapToCssModules from 'map-to-css-modules';
+import { tableRowVariant } from 'bootstrap-styled-mixins/lib/table-row';
+import { hover as hoverMixin } from 'bootstrap-styled-mixins/lib/hover';
 import bsTheme from '../theme';
-import { tableRowVariant } from '../styled/mixins/table-row';
-import { hover as hoverMixin } from '../styled/mixins/hover';
 
 const defaultProps = {
   tag: 'table',

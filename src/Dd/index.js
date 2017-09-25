@@ -7,7 +7,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
-import { makeGridColumns } from '../styled/mixins/grid-framework';
+import { makeGridColumns } from 'bootstrap-styled-mixins/lib/grid-framework';
 
 class DdUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 

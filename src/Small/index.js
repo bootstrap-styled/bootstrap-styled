@@ -8,8 +8,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import mapToCssModules from 'map-to-css-modules';
 import bsTheme from '../theme';
-import { mapToCssModules } from '../utils/tools';
 const defaultProps = { theme: bsTheme };
 
 class SmallUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function

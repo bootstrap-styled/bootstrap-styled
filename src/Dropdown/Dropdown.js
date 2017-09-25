@@ -8,14 +8,14 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import mapToCssModules from 'map-to-css-modules';
+import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
+import { boxShadow } from 'bootstrap-styled-mixins/lib/box-shadow';
+import { navDivider } from 'bootstrap-styled-mixins/lib/nav-divider';
+import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
+import { buttonGroup } from 'bootstrap-styled-mixins/lib/buttonGroup';
+import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
 import bsTheme from '../theme';
-import { mapToCssModules } from '../utils/tools';
-import { borderRadius } from '../styled/mixins/border-radius';
-import { boxShadow } from '../styled/mixins/box-shadow';
-import { navDivider } from '../styled/mixins/nav-divider';
-import { hoverFocus } from '../styled/mixins/hover';
-import { buttonGroup } from '../styled/mixins/buttonGroup';
-import { ifThen } from '../styled/mixins/conditional';
 import DropdownMenu from './DropdownMenu';
 import TetherContent from '../TetherContent';
 
@@ -374,7 +374,6 @@ const Dropdown = styled(DropdownUnstyled)`
   props.theme['$enable-shadows'],
   props.theme['$enable-rounded'],
   props.theme['$input-btn-border-width'],
-  props.theme['$btn-toolbar-margin'],
   props.theme['$btn-padding-x'],
   props.theme['$btn-active-box-shadow'],
   props.theme['$btn-padding-x-lg'],

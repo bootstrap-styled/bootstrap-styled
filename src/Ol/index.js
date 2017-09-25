@@ -7,8 +7,8 @@
  */
 
 import styled from 'styled-components';
+import { listUnstyled, listInline, listInlineItem } from 'bootstrap-styled-mixins/lib/lists';
 import theme from '../theme';
-import { listUnstyled, listInline, listInlineItem } from '../styled/mixins/lists';
 
 const defaultProps = { theme };
 

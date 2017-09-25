@@ -8,11 +8,11 @@ import cn from 'classnames';
 import styled, { withTheme } from 'styled-components';
 import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import omit from 'lodash.omit';
+import mapToCssModules from 'map-to-css-modules';
+import { alertVariant } from 'bootstrap-styled-mixins/lib/alert';
+import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import themeBs from '../theme';
-import { mapToCssModules } from '../utils/tools';
 import Close from '../Close';
-import { alertVariant } from '../styled/mixins/alert';
-import { borderRadius } from '../styled/mixins/border-radius';
 
 const defaultProps = {
   color: 'success',

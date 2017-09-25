@@ -7,8 +7,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import { media as mediaCss } from 'bootstrap-styled-mixins/lib/media';
 import bsTheme from '../theme';
-import { media as mediaCss } from '../styled/mixins/media';
 
 const defaultProps = { theme: bsTheme };
 

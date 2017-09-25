@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+import { navbar } from 'bootstrap-styled-mixins/lib/navbar';
+import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
 import theme from '../theme';
-import { navbar } from '../styled/mixins/navbar';
-import { ifThen } from '../styled/mixins/conditional';
 
 const defaultProps = { theme };
 

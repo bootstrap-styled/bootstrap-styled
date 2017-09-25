@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import { makeContainer } from 'bootstrap-styled-mixins/lib/grid';
 import bsTheme from '../theme';
-import { makeContainer } from '../styled/mixins/grid';
 
 const defaultProps = {
   theme: bsTheme,

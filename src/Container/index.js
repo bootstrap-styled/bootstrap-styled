@@ -3,9 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import { makeContainer, makeContainerMaxWidths } from 'bootstrap-styled-mixins/lib/grid';
 import bsTheme from '../theme';
 
-import { makeContainer, makeContainerMaxWidths } from '../styled/mixins/grid';
 
 const defaultProps = {
   theme: bsTheme,

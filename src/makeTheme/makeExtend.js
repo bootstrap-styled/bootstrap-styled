@@ -1,6 +1,6 @@
 import Color from 'color';
-import { unitUtils } from 'math-utils';
-import { assertAscending } from '../styled/mixins/variables';
+import unitUtils from 'bootstrap-styled-utils/lib/unitUtils';
+import { assertAscending } from 'bootstrap-styled-mixins/lib/variables';
 import makeOriginal from './makeOriginal';
 const { rmUnit, UNIT } = unitUtils;
 /**

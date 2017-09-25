@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import omit from 'lodash.omit';
 import styled, { keyframes } from 'styled-components';
+import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
+import { getBackgroundUtilities } from 'bootstrap-styled-mixins/lib/utilities/background';
+import { gradientStriped } from 'bootstrap-styled-mixins/lib/gradients';
 import bsTheme from '../theme';
-import { borderRadius } from '../styled/mixins/border-radius';
-import { getBackgroundUtilities } from '../styled/utilities/background';
-import { gradientStriped } from '../styled/mixins/gradients';
 
 const defaultProps = {
   theme: bsTheme,

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import mapToCssModules from 'map-to-css-modules';
+import { typography } from 'bootstrap-styled-mixins/lib/typography';
 import bsTheme from '../theme';
-import { mapToCssModules } from '../utils/tools';
-import { typography } from '../styled/mixins/typography';
 
 const defaultProps = { theme: bsTheme };
 

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash.omit';
-import bsTheme from '../theme';
 
-import { mapToCssModules } from '../utils/tools';
+import mapToCssModules from 'map-to-css-modules';
+import bsTheme from '../theme';
 
 const SHOW = 'SHOW';
 const SHOWN = 'SHOWN';

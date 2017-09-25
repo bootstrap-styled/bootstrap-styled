@@ -8,12 +8,12 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import mapToCssModules from 'map-to-css-modules';
+import { hover } from 'bootstrap-styled-mixins/lib/hover';
+import { borderRadius, borderTopRadius, borderBottomRadius } from 'bootstrap-styled-mixins/lib/border-radius';
+import { cardVariant, cardOutlineVariant, cardInverse } from 'bootstrap-styled-mixins/lib/cards';
+import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
 import bsTheme from '../theme';
-import { mapToCssModules } from '../utils/tools';
-import { hover } from '../styled/mixins/hover';
-import { borderRadius, borderTopRadius, borderBottomRadius } from '../styled/mixins/border-radius';
-import { cardVariant, cardOutlineVariant, cardInverse } from '../styled/mixins/cards';
-import { ifThen } from '../styled/mixins/conditional';
 
 const defaultProps = {
   theme: bsTheme,

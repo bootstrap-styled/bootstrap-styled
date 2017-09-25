@@ -11,10 +11,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import { nav } from 'bootstrap-styled-mixins/lib/nav';
+import { listUnstyled, listInline } from 'bootstrap-styled-mixins/lib/lists';
+import { navbar } from 'bootstrap-styled-mixins/lib/navbar';
 import bsTheme from '../theme';
-import { nav } from '../styled/mixins/nav';
-import { listUnstyled, listInline } from '../styled/mixins/lists';
-import { navbar } from '../styled/mixins/navbar';
 
 const defaultProps = { theme: bsTheme };
 

@@ -55,6 +55,7 @@ build_dev:
   script:
     - npm install
     - npm run build
+    - du -h dist/*.min.js
     # release dist and lib
     - git add dist/ lib/
     - git commit -m "new release dist and lib" || echo "no change detected"
@@ -80,6 +81,7 @@ build:
   script:
     - npm install
     - npm run build
+    - du -h dist/*.min.js
   cache:
     key: ${CI_BUILD_REF_NAME}
     paths:

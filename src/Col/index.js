@@ -3,9 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import { makeGridColumns } from 'bootstrap-styled-mixins/lib/grid-framework';
+import mapToCssModules from 'map-to-css-modules';
 import themeBs from '../theme';
-import { mapToCssModules } from '../utils/tools';
-import { makeGridColumns } from '../styled/mixins/grid-framework';
 
 const colWidths = ['xs', 'sm', 'md', 'lg', 'xl'];
 const stringOrNumberProp = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);

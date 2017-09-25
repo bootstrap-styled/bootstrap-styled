@@ -9,15 +9,15 @@ import {
   getOriginalBodyPadding,
   conditionallyUpdateScrollbar,
   setScrollbarWidth,
-  mapToCssModules,
-} from '../utils/tools';
+} from 'bootstrap-styled-utils';
+import mapToCssModules from 'map-to-css-modules';
+import { transition } from 'bootstrap-styled-mixins/lib/transition';
+import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
+import { boxShadow } from 'bootstrap-styled-mixins/lib/box-shadow';
+import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
+import { fade } from 'bootstrap-styled-mixins/lib//utilities/transition';
+import rebootUtils from 'bootstrap-styled-mixins/lib/utilities/reboot';
 import Fade from './Fade';
-import { transition } from '../styled/mixins/transition';
-import { borderRadius } from '../styled/mixins/border-radius';
-import { boxShadow } from '../styled/mixins/box-shadow';
-import { mediaBreakpointUp } from '../styled/mixins/breakpoints';
-import { fade } from '../styled/utilities/transition';
-import { rebootUtils } from '../utilities';
 
 const defaultProps = {
   isOpen: false,

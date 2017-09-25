@@ -8,11 +8,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import mapToCssModules from 'map-to-css-modules';
+import { borderTopRadius, borderBottomRadius } from 'bootstrap-styled-mixins/lib/border-radius';
+import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
+import { listGroupItemVariant } from 'bootstrap-styled-mixins/lib/list-group';
 import bsTheme from '../theme';
-import { mapToCssModules } from '../utils/tools';
-import { borderTopRadius, borderBottomRadius } from '../styled/mixins/border-radius';
-import { hoverFocus } from '../styled/mixins/hover';
-import { listGroupItemVariant } from '../styled/mixins/list-group';
 import Ul from '../Ul/index';
 
 const defaultProps = {

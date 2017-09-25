@@ -8,8 +8,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import { fade } from 'bootstrap-styled-mixins/lib/utilities/transition';
 import bsTheme from '../theme';
-import { fade } from '../styled/utilities/transition';
 
 const defaultProps = { theme: bsTheme };
 

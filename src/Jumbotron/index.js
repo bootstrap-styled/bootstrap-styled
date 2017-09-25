@@ -8,10 +8,10 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import Color from 'color';
 import omit from 'lodash.omit';
+import mapToCssModules from 'map-to-css-modules';
+import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
+import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
 import bsTheme from '../theme';
-import { mapToCssModules } from '../utils/tools';
-import { borderRadius } from '../styled/mixins/border-radius';
-import { mediaBreakpointUp } from '../styled/mixins/breakpoints';
 
 const defaultProps = {
   theme: bsTheme,

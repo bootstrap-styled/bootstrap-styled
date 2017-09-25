@@ -7,11 +7,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import mapToCssModules from 'map-to-css-modules';
+import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
+import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
 import bsTheme from '../theme';
 import Close from '../Close';
-import { mapToCssModules } from '../utils/tools';
-import { ifThen } from '../styled/mixins/conditional';
-import { mediaBreakpointUp } from '../styled/mixins/breakpoints';
 
 const defaultProps = {
   theme: bsTheme,

@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
-import bsTheme from '../theme';
 
-import { mapToCssModules } from '../utils/tools';
-import { a } from '../styled/mixins/a';
+import mapToCssModules from 'map-to-css-modules';
+import { a } from 'bootstrap-styled-mixins/lib/a';
+import bsTheme from '../theme';
 
 const defaultProps = {
   tag: 'a',

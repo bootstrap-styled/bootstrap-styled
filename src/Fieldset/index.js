@@ -4,8 +4,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
+import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
 import bsTheme from '../theme';
-import { makeRow } from '../styled/mixins/grid';
 
 const defaultProps = { theme: bsTheme };
 

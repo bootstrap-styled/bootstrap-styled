@@ -10,12 +10,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import mapToCssModules from 'map-to-css-modules';
+import { imgFluid } from 'bootstrap-styled-mixins/lib/image';
+import { boxShadow } from 'bootstrap-styled-mixins/lib/box-shadow';
+import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
+import { transition } from 'bootstrap-styled-mixins/lib/transition';
 import bsTheme from '../theme';
-import { mapToCssModules } from '../utils/tools';
-import { imgFluid } from '../styled/mixins/image';
-import { boxShadow } from '../styled/mixins/box-shadow';
-import { borderRadius } from '../styled/mixins/border-radius';
-import { transition } from '../styled/mixins/transition';
 
 const defaultProps = {
   theme: bsTheme,

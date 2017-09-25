@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
+import mapToCssModules from 'map-to-css-modules';
+import { buttonGroup } from 'bootstrap-styled-mixins/lib/buttonGroup';
 import bsTheme from '../theme';
-import { mapToCssModules } from '../utils/tools';
-import { buttonGroup } from '../styled/mixins/buttonGroup';
 
 const defaultProps = {
   tag: 'div',
@@ -54,7 +54,6 @@ const ButtonToolbar = styled(ButtonToolbarUnstyled)`
       props.theme['$enable-shadows'],
       props.theme['$enable-rounded'],
       props.theme['$input-btn-border-width'],
-      props.theme['$btn-toolbar-margin'],
       props.theme['$btn-padding-x'],
       props.theme['$btn-active-box-shadow'],
       props.theme['$btn-padding-x-lg'],

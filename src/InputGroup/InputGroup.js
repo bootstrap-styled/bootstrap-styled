@@ -8,11 +8,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import mapToCssModules from 'map-to-css-modules';
+import { hoverFocusActive } from 'bootstrap-styled-mixins/lib/hover';
+import { borderRadius, borderLeftRadius, borderRightRadius } from 'bootstrap-styled-mixins/lib/border-radius';
+import { formControl } from 'bootstrap-styled-mixins/lib/forms';
 import bsTheme from '../theme';
-import { mapToCssModules } from '../utils/tools';
-import { hoverFocusActive } from '../styled/mixins/hover';
-import { borderRadius, borderLeftRadius, borderRightRadius } from '../styled/mixins/border-radius';
-import { formControl } from '../styled/mixins/forms';
 
 const defaultProps = {
   theme: bsTheme,

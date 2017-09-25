@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import findDOMNode from 'react-dom/lib/findDOMNode';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import mapToCssModules from 'map-to-css-modules';
 import bsTheme from '../theme';
 import Button from '../Button';
 import Header from '../Header';
 import OffsetNavPush from './OffsetNavPush';
 import OffsetNavSlide from './OffsetNavSlide';
 import Overlay from './Overlay';
-import { mapToCssModules } from '../utils/tools';
 
 const defaultProps = {
   button: {

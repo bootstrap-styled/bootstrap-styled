@@ -1,13 +1,10 @@
-/*
- * Kopax Ltd Copyright (c) 2016.
- */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
+import { a } from 'bootstrap-styled-mixins/lib/a';
+import { button } from 'bootstrap-styled-mixins/lib/buttons';
 import bsTheme from '../theme';
-import { a } from '../styled/mixins/a';
-import { button } from '../styled/mixins/buttons';
 
 const defaultProps = {
   theme: bsTheme,

@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
 import theme from '../theme';
-import { makeRow } from '../styled/mixins/grid';
 
 const defaultProps = { theme };
 

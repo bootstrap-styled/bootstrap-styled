@@ -8,10 +8,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import mapToCssModules from 'map-to-css-modules';
+import { nav } from 'bootstrap-styled-mixins/lib/nav';
+import { navbar as navbarMixin } from 'bootstrap-styled-mixins/lib/navbar';
 import bsTheme from '../theme';
-import { mapToCssModules } from '../utils/tools';
-import { nav } from '../styled/mixins/nav';
-import { navbar as navbarMixin } from '../styled/mixins/navbar';
 import Ul from '../Ul';
 
 const defaultProps = {

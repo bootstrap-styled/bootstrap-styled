@@ -1,42 +1,3 @@
-import { rebootUtils } from './utilities';
-// -1. Mixins et Utilities (export everything)
-export {
-  radius,
-  boxShadow,
-  bp,
-  ifThen,
-  ifElse,
-  gradient,
-  hover,
-  srOnly,
-  srOnlyFocusable,
-  size,
-  transition,
-} from './mixins';
-export {
-  alignUtils,
-  backgroundUtils,
-  bordersUtils,
-  clearfixUtils,
-  cursorUtils,
-  displayUtils,
-  flexUtils,
-  floatUtils,
-  positionUtils,
-  rebootUtils,
-  screenreadersUtils,
-  sizingUtils,
-  spacingUtils,
-  transitionUtils,
-  textUtils,
-  unitUtils as unit,
-  visibilityUtils,
-} from './utilities';
-const { getGlobalStyleNoBootstrapProvider, getGlobalStyles } = rebootUtils;
-export { getGlobalStyleNoBootstrapProvider, getGlobalStyles };
-export { default as parseTransition } from './utils/parseTransition';
-// Useful meta-data
-export { tetherAttachements } from './utils/tools';
 // 0. Configuration
 export { default as theme, makeTheme } from './theme';
 // 1. Atoms
@@ -109,7 +70,6 @@ export { default as Badge } from './Badge';
 export { default as Textarea } from './Textarea';
 export { default as Tooltip } from './Tooltip';
 export { default as Ul } from './Ul';
-export { Blur, Contrast, Brightness, Grayscale, HueRotate, Invert, Opacity, Sepia, Saturate, Bounce, BounceDown, BounceUp, BounceLeft, BounceRight, Flash, RollOut, RollIn, Rubber, Swing, Zoom, Hinge, Pulse, ExpandUp, Entrance, Hatch, SlideUp, SlideDown, SlideRight, SlideLeft, SlideRightLeft, FadeIn, FadeInDown, FadeInUp, FadeInLeft, FadeInRight, RotateIn, RotateLeft, RotateRight, RotateUpLeft, RotateUpRight, LightIn, LightOut, Flip, FlipX, FlipY, Dropshadow } from './motion/index';
 
 // 2. Molecules
 export { default as Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote } from './Cards';

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
+import mapToCssModules from 'map-to-css-modules';
+import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
 import bsTheme from '../theme';
-import { mapToCssModules } from '../utils/tools';
-import { hoverFocus } from '../styled/mixins/hover';
 
 const defaultProps = { theme: bsTheme };
 
