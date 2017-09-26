@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file.
   - Motion variables are also removed.
   - Motion components and variables moved to separate package: [bootstrap-styled-motion](https://module.kopaxgroup.com/styled-components/bootstrap-styled-motion)
 - Add dependency [bootstrap-styled-utils](https://module.kopaxgroup.com/styled-components/bootstrap-styled-utils) v0.0.6.
-- Add dependency [bootstrap-styled-mixins](https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins) v0.0.5.
+- Add dependency [bootstrap-styled-mixins](https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins) v1.0.0.
 - Added css rules to `<Overlay />` and added `$zindex-overlay` variable.
 - Folder `Forms` renamed `Form`.
 - Added props `inline` to motion component with default value `true`.

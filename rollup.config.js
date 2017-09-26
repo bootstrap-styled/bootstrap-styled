@@ -66,5 +66,5 @@ export default {
   exports: 'named',
   output,
   plugins,
-  globals: { react: 'React', 'react-dom': 'ReactDom', 'prop-types': 'PropTypes', 'styled-components': 'styled', 'react-transition-group': 'ReactTransitionGroup' },
+  globals: { react: 'React', 'react-dom': 'ReactDom', 'prop-types': 'PropTypes', 'styled-components': 'styled', 'react-transition-group': 'ReactTransitionGroup', color: 'Color' },
 };
