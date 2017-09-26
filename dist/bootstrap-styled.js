@@ -5195,6 +5195,8 @@ exports.default = {
 };
 });
 var rebootUtils = unwrapExports(reboot);
+var reboot_1 = reboot.getGlobalStyles;
+var reboot_2 = reboot.getGlobalStyleNoBootstrapProvider;
 
 var screenReader = createCommonjsModule(function (module, exports) {
 "use strict";
@@ -16562,6 +16564,8 @@ exports.HeaderNavBar = HeaderNavBar;
 exports.PageWrapper = PageWrapper;
 exports.OffsetNavPush = OffsetNavPush;
 exports.OffsetNavSlide = OffsetNavSlide;
+exports.getGlobalStyles = reboot_1;
+exports.getGlobalStyleNoBootstrapProvider = reboot_2;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

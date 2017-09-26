@@ -81,3 +81,6 @@ export { default as Navbar, NavbarToggler, NavbarBrand, NavDropdown } from './Na
 export { default as Container } from './Container';
 export { default as ContainerFluid } from './ContainerFluid';
 export { default as HeaderNavBar, PageWrapper, OffsetNavPush, OffsetNavSlide } from './HeaderNavBar';
+// 4. extra
+export { getGlobalStyles, getGlobalStyleNoBootstrapProvider } from 'bootstrap-styled-mixins/lib/utilities/reboot';
+
