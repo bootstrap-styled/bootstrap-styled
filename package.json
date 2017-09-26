@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-styled",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Bootstrap Styled",
   "main": "lib/index.js",
   "jsnext:main": "dist/bootstrap-styled.es.js",
@@ -207,10 +207,10 @@
     "lint-staged"
   ],
   "dependencies": {
-    "bootstrap-styled-mixins": "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled-mixins.git#v0.0.5",
+    "bootstrap-styled-mixins": "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled-mixins.git#v1.0.0",
     "bootstrap-styled-utils": "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled-utils.git#v0.0.6",
     "classnames": "^2.2.5",
-    "color": "^2.0.0",
+    "color": "^1.0.3",
     "lodash.omit": "^4.5.0",
     "map-to-css-modules": "^1.0.6",
     "math-utils": "git+ssh://git@module.kopaxgroup.com:20024/dev-tools/math-utils.git#v0.3.1",
