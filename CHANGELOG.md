@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.4.0] - 2017-09-25
+## [1.4.0] - 2017-09-26
 
 - /!\ Move up all components within `src/components/` into `src/`.
 - /!\ Reorganize `index.js` imports (API broken).
@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
 - Motion components are removed.
   - Motion variables are also removed.
   - Motion components and variables moved to separate package: [bootstrap-styled-motion](https://module.kopaxgroup.com/styled-components/bootstrap-styled-motion)
-- Add dependency [bootstrap-styled-utils](https://module.kopaxgroup.com/styled-components/bootstrap-styled-utils) v0.0.6.
+- Add dependency [bootstrap-styled-utils](https://module.kopaxgroup.com/styled-components/bootstrap-styled-utils) v1.0.0.
 - Add dependency [bootstrap-styled-mixins](https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins) v1.0.0.
 - Added css rules to `<Overlay />` and added `$zindex-overlay` variable.
 - Folder `Forms` renamed `Form`.
