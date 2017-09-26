@@ -3510,370 +3510,6 @@ exports.default = {
 unwrapExports(a_1);
 var a_3 = a_1.a;
 
-'use strict';
-var _slice$1 = [].slice;
-var skippedModels$1 = [
-	'keyword',
-	'gray',
-	'hex'
-];
-var hashedModelKeys$1 = {};
-Object.keys(colorConvert).forEach(function (model) {
-	hashedModelKeys$1[_slice$1.call(colorConvert[model].labels).sort().join('')] = model;
-});
-var limiters$1 = {};
-function Color$2(obj, model) {
-	if (!(this instanceof Color$2)) {
-		return new Color$2(obj, model);
-	}
-	if (model && model in skippedModels$1) {
-		model = null;
-	}
-	if (model && !(model in colorConvert)) {
-		throw new Error('Unknown model: ' + model);
-	}
-	var i;
-	var channels;
-	if (!obj) {
-		this.model = 'rgb';
-		this.color = [0, 0, 0];
-		this.valpha = 1;
-	} else if (obj instanceof Color$2) {
-		this.model = obj.model;
-		this.color = obj.color.slice();
-		this.valpha = obj.valpha;
-	} else if (typeof obj === 'string') {
-		var result = colorString.get(obj);
-		if (result === null) {
-			throw new Error('Unable to parse color from string: ' + obj);
-		}
-		this.model = result.model;
-		channels = colorConvert[this.model].channels;
-		this.color = result.value.slice(0, channels);
-		this.valpha = typeof result.value[channels] === 'number' ? result.value[channels] : 1;
-	} else if (obj.length) {
-		this.model = model || 'rgb';
-		channels = colorConvert[this.model].channels;
-		var newArr = _slice$1.call(obj, 0, channels);
-		this.color = zeroArray$1(newArr, channels);
-		this.valpha = typeof obj[channels] === 'number' ? obj[channels] : 1;
-	} else if (typeof obj === 'number') {
-		obj &= 0xFFFFFF;
-		this.model = 'rgb';
-		this.color = [
-			(obj >> 16) & 0xFF,
-			(obj >> 8) & 0xFF,
-			obj & 0xFF
-		];
-		this.valpha = 1;
-	} else {
-		this.valpha = 1;
-		var keys = Object.keys(obj);
-		if ('alpha' in obj) {
-			keys.splice(keys.indexOf('alpha'), 1);
-			this.valpha = typeof obj.alpha === 'number' ? obj.alpha : 0;
-		}
-		var hashedKeys = keys.sort().join('');
-		if (!(hashedKeys in hashedModelKeys$1)) {
-			throw new Error('Unable to parse color from object: ' + JSON.stringify(obj));
-		}
-		this.model = hashedModelKeys$1[hashedKeys];
-		var labels = colorConvert[this.model].labels;
-		var color = [];
-		for (i = 0; i < labels.length; i++) {
-			color.push(obj[labels[i]]);
-		}
-		this.color = zeroArray$1(color);
-	}
-	if (limiters$1[this.model]) {
-		channels = colorConvert[this.model].channels;
-		for (i = 0; i < channels; i++) {
-			var limit = limiters$1[this.model][i];
-			if (limit) {
-				this.color[i] = limit(this.color[i]);
-			}
-		}
-	}
-	this.valpha = Math.max(0, Math.min(1, this.valpha));
-	if (Object.freeze) {
-		Object.freeze(this);
-	}
-}
-Color$2.prototype = {
-	toString: function () {
-		return this.string();
-	},
-	toJSON: function () {
-		return this[this.model]();
-	},
-	string: function (places) {
-		var self = this.model in colorString.to ? this : this.rgb();
-		self = self.round(typeof places === 'number' ? places : 1);
-		var args = self.valpha === 1 ? self.color : self.color.concat(this.valpha);
-		return colorString.to[self.model](args);
-	},
-	percentString: function (places) {
-		var self = this.rgb().round(typeof places === 'number' ? places : 1);
-		var args = self.valpha === 1 ? self.color : self.color.concat(this.valpha);
-		return colorString.to.rgb.percent(args);
-	},
-	array: function () {
-		return this.valpha === 1 ? this.color.slice() : this.color.concat(this.valpha);
-	},
-	object: function () {
-		var result = {};
-		var channels = colorConvert[this.model].channels;
-		var labels = colorConvert[this.model].labels;
-		for (var i = 0; i < channels; i++) {
-			result[labels[i]] = this.color[i];
-		}
-		if (this.valpha !== 1) {
-			result.alpha = this.valpha;
-		}
-		return result;
-	},
-	unitArray: function () {
-		var rgb = this.rgb().color;
-		rgb[0] /= 255;
-		rgb[1] /= 255;
-		rgb[2] /= 255;
-		if (this.valpha !== 1) {
-			rgb.push(this.valpha);
-		}
-		return rgb;
-	},
-	unitObject: function () {
-		var rgb = this.rgb().object();
-		rgb.r /= 255;
-		rgb.g /= 255;
-		rgb.b /= 255;
-		if (this.valpha !== 1) {
-			rgb.alpha = this.valpha;
-		}
-		return rgb;
-	},
-	round: function (places) {
-		places = Math.max(places || 0, 0);
-		return new Color$2(this.color.map(roundToPlace$1(places)).concat(this.valpha), this.model);
-	},
-	alpha: function (val) {
-		if (arguments.length) {
-			return new Color$2(this.color.concat(Math.max(0, Math.min(1, val))), this.model);
-		}
-		return this.valpha;
-	},
-	red: getset$1('rgb', 0, maxfn$1(255)),
-	green: getset$1('rgb', 1, maxfn$1(255)),
-	blue: getset$1('rgb', 2, maxfn$1(255)),
-	hue: getset$1(['hsl', 'hsv', 'hsl', 'hwb', 'hcg'], 0, function (val) { return ((val % 360) + 360) % 360; }),
-	saturationl: getset$1('hsl', 1, maxfn$1(100)),
-	lightness: getset$1('hsl', 2, maxfn$1(100)),
-	saturationv: getset$1('hsv', 1, maxfn$1(100)),
-	value: getset$1('hsv', 2, maxfn$1(100)),
-	chroma: getset$1('hcg', 1, maxfn$1(100)),
-	gray: getset$1('hcg', 2, maxfn$1(100)),
-	white: getset$1('hwb', 1, maxfn$1(100)),
-	wblack: getset$1('hwb', 2, maxfn$1(100)),
-	cyan: getset$1('cmyk', 0, maxfn$1(100)),
-	magenta: getset$1('cmyk', 1, maxfn$1(100)),
-	yellow: getset$1('cmyk', 2, maxfn$1(100)),
-	black: getset$1('cmyk', 3, maxfn$1(100)),
-	x: getset$1('xyz', 0, maxfn$1(100)),
-	y: getset$1('xyz', 1, maxfn$1(100)),
-	z: getset$1('xyz', 2, maxfn$1(100)),
-	l: getset$1('lab', 0, maxfn$1(100)),
-	a: getset$1('lab', 1),
-	b: getset$1('lab', 2),
-	keyword: function (val) {
-		if (arguments.length) {
-			return new Color$2(val);
-		}
-		return colorConvert[this.model].keyword(this.color);
-	},
-	hex: function (val) {
-		if (arguments.length) {
-			return new Color$2(val);
-		}
-		return colorString.to.hex(this.rgb().round().color);
-	},
-	rgbNumber: function () {
-		var rgb = this.rgb().color;
-		return ((rgb[0] & 0xFF) << 16) | ((rgb[1] & 0xFF) << 8) | (rgb[2] & 0xFF);
-	},
-	luminosity: function () {
-		var rgb = this.rgb().color;
-		var lum = [];
-		for (var i = 0; i < rgb.length; i++) {
-			var chan = rgb[i] / 255;
-			lum[i] = (chan <= 0.03928) ? chan / 12.92 : Math.pow(((chan + 0.055) / 1.055), 2.4);
-		}
-		return 0.2126 * lum[0] + 0.7152 * lum[1] + 0.0722 * lum[2];
-	},
-	contrast: function (color2) {
-		var lum1 = this.luminosity();
-		var lum2 = color2.luminosity();
-		if (lum1 > lum2) {
-			return (lum1 + 0.05) / (lum2 + 0.05);
-		}
-		return (lum2 + 0.05) / (lum1 + 0.05);
-	},
-	level: function (color2) {
-		var contrastRatio = this.contrast(color2);
-		if (contrastRatio >= 7.1) {
-			return 'AAA';
-		}
-		return (contrastRatio >= 4.5) ? 'AA' : '';
-	},
-	dark: function () {
-		var rgb = this.rgb().color;
-		var yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
-		return yiq < 128;
-	},
-	light: function () {
-		return !this.dark();
-	},
-	negate: function () {
-		var rgb = this.rgb();
-		for (var i = 0; i < 3; i++) {
-			rgb.color[i] = 255 - rgb.color[i];
-		}
-		return rgb;
-	},
-	lighten: function (ratio) {
-		var hsl = this.hsl();
-		hsl.color[2] += hsl.color[2] * ratio;
-		return hsl;
-	},
-	darken: function (ratio) {
-		var hsl = this.hsl();
-		hsl.color[2] -= hsl.color[2] * ratio;
-		return hsl;
-	},
-	saturate: function (ratio) {
-		var hsl = this.hsl();
-		hsl.color[1] += hsl.color[1] * ratio;
-		return hsl;
-	},
-	desaturate: function (ratio) {
-		var hsl = this.hsl();
-		hsl.color[1] -= hsl.color[1] * ratio;
-		return hsl;
-	},
-	whiten: function (ratio) {
-		var hwb = this.hwb();
-		hwb.color[1] += hwb.color[1] * ratio;
-		return hwb;
-	},
-	blacken: function (ratio) {
-		var hwb = this.hwb();
-		hwb.color[2] += hwb.color[2] * ratio;
-		return hwb;
-	},
-	grayscale: function () {
-		var rgb = this.rgb().color;
-		var val = rgb[0] * 0.3 + rgb[1] * 0.59 + rgb[2] * 0.11;
-		return Color$2.rgb(val, val, val);
-	},
-	fade: function (ratio) {
-		return this.alpha(this.valpha - (this.valpha * ratio));
-	},
-	opaquer: function (ratio) {
-		return this.alpha(this.valpha + (this.valpha * ratio));
-	},
-	rotate: function (degrees) {
-		var hsl = this.hsl();
-		var hue = hsl.color[0];
-		hue = (hue + degrees) % 360;
-		hue = hue < 0 ? 360 + hue : hue;
-		hsl.color[0] = hue;
-		return hsl;
-	},
-	mix: function (mixinColor, weight) {
-		var color1 = this.rgb();
-		var color2 = mixinColor.rgb();
-		var p = weight === undefined ? 0.5 : weight;
-		var w = 2 * p - 1;
-		var a = color1.alpha() - color2.alpha();
-		var w1 = (((w * a === -1) ? w : (w + a) / (1 + w * a)) + 1) / 2.0;
-		var w2 = 1 - w1;
-		return Color$2.rgb(
-				w1 * color1.red() + w2 * color2.red(),
-				w1 * color1.green() + w2 * color2.green(),
-				w1 * color1.blue() + w2 * color2.blue(),
-				color1.alpha() * p + color2.alpha() * (1 - p));
-	}
-};
-Object.keys(colorConvert).forEach(function (model) {
-	if (skippedModels$1.indexOf(model) !== -1) {
-		return;
-	}
-	var channels = colorConvert[model].channels;
-	Color$2.prototype[model] = function () {
-		if (this.model === model) {
-			return new Color$2(this);
-		}
-		if (arguments.length) {
-			return new Color$2(arguments, model);
-		}
-		var newAlpha = typeof arguments[channels] === 'number' ? channels : this.valpha;
-		return new Color$2(assertArray$1(colorConvert[this.model][model].raw(this.color)).concat(newAlpha), model);
-	};
-	Color$2[model] = function (color) {
-		if (typeof color === 'number') {
-			color = zeroArray$1(_slice$1.call(arguments), channels);
-		}
-		return new Color$2(color, model);
-	};
-});
-function roundTo$1(num, places) {
-	return Number(num.toFixed(places));
-}
-function roundToPlace$1(places) {
-	return function (num) {
-		return roundTo$1(num, places);
-	};
-}
-function getset$1(model, channel, modifier) {
-	model = Array.isArray(model) ? model : [model];
-	model.forEach(function (m) {
-		(limiters$1[m] || (limiters$1[m] = []))[channel] = modifier;
-	});
-	model = model[0];
-	return function (val) {
-		var result;
-		if (arguments.length) {
-			if (modifier) {
-				val = modifier(val);
-			}
-			result = this[model]();
-			result.color[channel] = val;
-			return result;
-		}
-		result = this[model]().color[channel];
-		if (modifier) {
-			result = modifier(result);
-		}
-		return result;
-	};
-}
-function maxfn$1(max) {
-	return function (v) {
-		return Math.max(0, Math.min(max, v));
-	};
-}
-function assertArray$1(val) {
-	return Array.isArray(val) ? val : [val];
-}
-function zeroArray$1(arr, length) {
-	for (var i = 0; i < length; i++) {
-		if (typeof arr[i] !== 'number') {
-			arr[i] = 0;
-		}
-	}
-	return arr;
-}
-var color$1 = Color$2;
-
 var borderRadius_1 = createCommonjsModule(function (module, exports) {
 'use strict';
 Object.defineProperty(exports, "__esModule", {
@@ -4028,7 +3664,7 @@ exports.buttonVariant = buttonVariant;
 exports.buttonOutlineVariant = buttonOutlineVariant;
 exports.buttonSize = buttonSize;
 exports.button = button;
-var _color2 = _interopRequireDefault(color$1);
+var _color2 = _interopRequireDefault(color);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var defaultProps = exports.defaultProps = {
   '$enable-shadows': true,
@@ -5039,7 +4675,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.alertVariant = alertVariant;
-var _color2 = _interopRequireDefault(color$1);
+var _color2 = _interopRequireDefault(color);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function alertVariant(background, border, bodyColor) {
   return '\n    background-color: ' + background + ';\n    border-color: ' + border + ';\n    color: ' + bodyColor + ';\n  \n    hr {\n      border-top-color: ' + (0, _color2.default)(border).darken(0.5).toString() + ';\n    }\n    .alert-link {\n      color: ' + (0, _color2.default)(bodyColor).darken(0.1).toString() + ';\n    }\n  ';
@@ -5290,7 +4926,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.defaultProps = undefined;
 exports.bgVariant = bgVariant;
-var _color2 = _interopRequireDefault(color$1);
+var _color2 = _interopRequireDefault(color);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var defaultProps = exports.defaultProps = {
   '$enable-hover-media-query': false
@@ -6061,7 +5697,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.defaultProps = undefined;
 exports.textEmphasisVariant = textEmphasisVariant;
-var _color2 = _interopRequireDefault(color$1);
+var _color2 = _interopRequireDefault(color);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var defaultProps = exports.defaultProps = {
   '$enable-hover-media-query': false
@@ -9954,7 +9590,7 @@ exports.formControl = formControl;
 exports.formControlValidation = formControlValidation;
 exports.formControlFocus = formControlFocus;
 exports.inputSize = inputSize;
-var _color2 = _interopRequireDefault(color$1);
+var _color2 = _interopRequireDefault(color);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var defaultProps = exports.defaultProps = {
   '$enable-rounded': true,
@@ -10395,7 +10031,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.defaultProps = undefined;
 exports.listGroupItemVariant = listGroupItemVariant;
-var _color2 = _interopRequireDefault(color$1);
+var _color2 = _interopRequireDefault(color);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var defaultProps = exports.defaultProps = {
   '$enable-hover-media-query': false
@@ -12164,7 +11800,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.tableRowVariant = tableRowVariant;
-var _color2 = _interopRequireDefault(color$1);
+var _color2 = _interopRequireDefault(color);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function tableRowVariant(state, background) {
   var hoverBackground = (0, _color2.default)(background).darken(0.05).toString();
@@ -12377,7 +12013,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.defaultProps = undefined;
 exports.badgeVariant = badgeVariant;
-var _color2 = _interopRequireDefault(color$1);
+var _color2 = _interopRequireDefault(color);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var defaultProps = exports.defaultProps = {
   '$enable-hover-mediaQuery': false
@@ -15577,7 +15213,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
       if (typeSpecs.hasOwnProperty(typeSpecName)) {
         var error;
         try {
-          invariant$2(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', componentName || 'React class', location, typeSpecName);
+          invariant$2(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, typeof typeSpecs[typeSpecName]);
           error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret$3);
         } catch (ex) {
           error = ex;
@@ -15621,7 +15257,8 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
     objectOf: createObjectOfTypeChecker,
     oneOf: createEnumTypeChecker,
     oneOfType: createUnionTypeChecker,
-    shape: createShapeTypeChecker
+    shape: createShapeTypeChecker,
+    exact: createStrictShapeTypeChecker,
   };
   function is(x, y) {
     if (x === y) {
@@ -15794,7 +15431,7 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
       if (typeof checker !== 'function') {
         warning_1$2(
           false,
-          'Invalid argument supplid to oneOfType. Expected an array of check functions, but ' +
+          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
           'received %s at index %s.',
           getPostfixForTypeWarning(checker),
           i
@@ -15833,6 +15470,32 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
         var checker = shapeTypes[key];
         if (!checker) {
           continue;
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1$2);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createStrictShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      var allKeys = objectAssign({}, props[propName], shapeTypes);
+      for (var key in allKeys) {
+        var checker = shapeTypes[key];
+        if (!checker) {
+          return new PropTypeError(
+            'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
+            '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
+            '\nValid keys: ' +  JSON.stringify(Object.keys(shapeTypes), null, '  ')
+          );
         }
         var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1$2);
         if (error) {
@@ -15961,7 +15624,7 @@ var isValidElement = ReactElement_1.isValidElement;
 var ReactPropTypes = factory_1(isValidElement);
 
 'use strict';
-var ReactVersion = '15.6.1';
+var ReactVersion = '15.6.2';
 
 'use strict';
 {
