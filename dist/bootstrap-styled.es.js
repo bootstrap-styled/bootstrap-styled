@@ -1609,328 +1609,6 @@ var unitUtils$1 = unwrapExports(unitUtils);
 
 var process = { argv: [], env: {} };
 
-function getTetherAttachments(placement) {
-  switch (placement) {
-    case 'top':
-    case 'top center':
-      return {
-        attachment: 'bottom center',
-        targetAttachment: 'top center'
-      };
-    case 'bottom':
-    case 'bottom center':
-      return {
-        attachment: 'top center',
-        targetAttachment: 'bottom center'
-      };
-    case 'left':
-    case 'left center':
-      return {
-        attachment: 'middle right',
-        targetAttachment: 'middle left'
-      };
-    case 'right':
-    case 'right center':
-      return {
-        attachment: 'middle left',
-        targetAttachment: 'middle right'
-      };
-    case 'top left':
-      return {
-        attachment: 'bottom left',
-        targetAttachment: 'top left'
-      };
-    case 'top right':
-      return {
-        attachment: 'bottom right',
-        targetAttachment: 'top right'
-      };
-    case 'bottom left':
-      return {
-        attachment: 'top left',
-        targetAttachment: 'bottom left'
-      };
-    case 'bottom right':
-      return {
-        attachment: 'top right',
-        targetAttachment: 'bottom right'
-      };
-    case 'right top':
-      return {
-        attachment: 'top left',
-        targetAttachment: 'top right'
-      };
-    case 'right bottom':
-      return {
-        attachment: 'bottom left',
-        targetAttachment: 'bottom right'
-      };
-    case 'left top':
-      return {
-        attachment: 'top right',
-        targetAttachment: 'top left'
-      };
-    case 'left bottom':
-      return {
-        attachment: 'bottom right',
-        targetAttachment: 'bottom left'
-      };
-    default:
-      return {
-        attachment: 'top center',
-        targetAttachment: 'bottom center'
-      };
-  }
-}
-var tetherAttachements = ['top', 'bottom', 'left', 'right', 'top left', 'top center', 'top right', 'right top', 'right middle', 'right bottom', 'bottom right', 'bottom center', 'bottom left', 'left top', 'left middle', 'left bottom'];
-function getScrollbarWidth() {
-  var scrollDiv = document.createElement('div');
-  scrollDiv.style.position = 'absolute';
-  scrollDiv.style.top = '-9999px';
-  scrollDiv.style.width = '50px';
-  scrollDiv.style.height = '50px';
-  scrollDiv.style.overflow = 'scroll';
-  document.body.appendChild(scrollDiv);
-  var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-  document.body.removeChild(scrollDiv);
-  return scrollbarWidth;
-}
-function setScrollbarWidth(padding) {
-  document.body.style.paddingRight = padding > 0 ? padding + 'px' : null;
-}
-function isBodyOverflowing() {
-  return document.body.clientWidth < window.innerWidth;
-}
-function getOriginalBodyPadding() {
-  return parseInt(window.getComputedStyle(document.body, null).getPropertyValue('padding-right') || 0, 10);
-}
-function conditionallyUpdateScrollbar() {
-  var scrollbarWidth = getScrollbarWidth();
-  var fixedContent = document.querySelectorAll('.navbar-fixed-top, .navbar-fixed-bottom, .is-fixed')[0];
-  var bodyPadding = fixedContent ? parseInt(fixedContent.style.paddingRight || 0, 10) : 0;
-  if (isBodyOverflowing()) {
-    setScrollbarWidth(bodyPadding + scrollbarWidth);
-  }
-}
-function toHashCode(str) {
-  var hash = 0;
-  if (str.length === 0) {
-    return hash;
-  }
-  for (var i = 0; i < str.length; i += 1) {
-    var char = str.charCodeAt(i);
-    hash = (hash << 5) - hash + char;
-    hash = hash & hash;
-  }
-  return hash;
-}
-var parseTransition = function parseTransition(transitions) {
-  if (!transitions) {
-    return [];
-  }
-  var sample = transitions;
-  var RULE_DELIMITER = ',';
-  var PROPERTY_DELIMITER = ' ';
-  var MS_UNIT = 'ms';
-  var TMP_STR = 'TMP';
-  var DEFAULT_PROPERTY = 'all';
-  var DEFAULT_DURATION = 0;
-  var DEFAULT_TIMING_FUNCTION = 'ease';
-  var DEFAULT_DELAY = 0;
-  var BEZIER_REGEX = /cubic-bezier\([^\)]+\)/gi;
-  var cubicBezierList = transitions.match(BEZIER_REGEX);
-  if (cubicBezierList) {
-    sample = sample.replace(BEZIER_REGEX, TMP_STR);
-  }
-  var transitionList = sample.split(RULE_DELIMITER).map(function (rule) {
-    var properties = rule.trim().split(PROPERTY_DELIMITER);
-    return {
-      property: properties[0] || DEFAULT_PROPERTY,
-      duration: properties[1] && !(properties[1].indexOf(MS_UNIT) !== -1) ? parseFloat(properties[1]) * 1000 : parseFloat(properties[1]) || DEFAULT_DURATION,
-      timingFunction: properties[2] && properties[2] !== TMP_STR ? properties[2] : cubicBezierList ? cubicBezierList.shift() : DEFAULT_TIMING_FUNCTION,
-      delay: properties[3] && !(properties[3].indexOf(MS_UNIT) !== -1) ? parseFloat(properties[3]) * 1000 : parseFloat(properties[3]) || DEFAULT_DELAY
-    };
-  });
-  return transitionList;
-};
-var asyncGenerator = function () {
-  function AwaitValue(value) {
-    this.value = value;
-  }
-  function AsyncGenerator(gen) {
-    var front, back;
-    function send(key, arg) {
-      return new Promise(function (resolve, reject) {
-        var request = {
-          key: key,
-          arg: arg,
-          resolve: resolve,
-          reject: reject,
-          next: null
-        };
-        if (back) {
-          back = back.next = request;
-        } else {
-          front = back = request;
-          resume(key, arg);
-        }
-      });
-    }
-    function resume(key, arg) {
-      try {
-        var result = gen[key](arg);
-        var value = result.value;
-        if (value instanceof AwaitValue) {
-          Promise.resolve(value.value).then(function (arg) {
-            resume("next", arg);
-          }, function (arg) {
-            resume("throw", arg);
-          });
-        } else {
-          settle(result.done ? "return" : "normal", result.value);
-        }
-      } catch (err) {
-        settle("throw", err);
-      }
-    }
-    function settle(type, value) {
-      switch (type) {
-        case "return":
-          front.resolve({
-            value: value,
-            done: true
-          });
-          break;
-        case "throw":
-          front.reject(value);
-          break;
-        default:
-          front.resolve({
-            value: value,
-            done: false
-          });
-          break;
-      }
-      front = front.next;
-      if (front) {
-        resume(front.key, front.arg);
-      } else {
-        back = null;
-      }
-    }
-    this._invoke = send;
-    if (typeof gen.return !== "function") {
-      this.return = undefined;
-    }
-  }
-  if (typeof Symbol === "function" && Symbol.asyncIterator) {
-    AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
-      return this;
-    };
-  }
-  AsyncGenerator.prototype.next = function (arg) {
-    return this._invoke("next", arg);
-  };
-  AsyncGenerator.prototype.throw = function (arg) {
-    return this._invoke("throw", arg);
-  };
-  AsyncGenerator.prototype.return = function (arg) {
-    return this._invoke("return", arg);
-  };
-  return {
-    wrap: function (fn) {
-      return function () {
-        return new AsyncGenerator(fn.apply(this, arguments));
-      };
-    },
-    await: function (value) {
-      return new AwaitValue(value);
-    }
-  };
-}();
-var classCallCheck = function (instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-};
-var UnitUtils = function UnitUtils() {
-  var _this = this;
-  classCallCheck(this, UnitUtils);
-  this.UNIT = {
-    EM: 'em',
-    REM: 'rem',
-    PX: 'px',
-    PERCENT: '%'
-  };
-  this.math = {
-    addition: function addition(a, b) {
-      var unit = this.detectUnit(a) || this.detectUnit(b);
-      return this.rmUnit(a) + this.rmUnit(b) + unit;
-    }.bind(this),
-    subtract: function subtract(a, b) {
-      var unit = this.detectUnit(a) || this.detectUnit(b);
-      return this.rmUnit(a) - this.rmUnit(b) + unit;
-    }.bind(this),
-    multiply: function multiply(a, b) {
-      var unit = this.detectUnit(a) || this.detectUnit(b);
-      return this.rmUnit(a) * this.rmUnit(b) + unit;
-    }.bind(this),
-    divide: function divide(a, b) {
-      var unit = this.detectUnit(a) || this.detectUnit(b);
-      return this.rmUnit(a) / this.rmUnit(b) + unit;
-    }.bind(this)
-  };
-  this.detectUnit = function (value) {
-    var ext = void 0;
-    var valueStr = value.toString();
-    if (valueStr.match(_this.UNIT.PX)) {
-      ext = _this.UNIT.PX;
-    } else if (valueStr.match(_this.UNIT.REM)) {
-      ext = _this.UNIT.REM;
-    } else if (valueStr.match(_this.UNIT.EM)) {
-      ext = _this.UNIT.EM;
-    } else if (valueStr.match(_this.UNIT.PERCENT)) {
-      ext = _this.UNIT.PERCENT;
-    } else if (!isNaN(value)) {
-      return null;
-    } else {
-      throw new Error('detectUnit can\'t find unit for ' + value);
-    }
-    return ext;
-  };
-  this.rmUnit = function (value, unit) {
-    var valueStr = value.toString();
-    var ext = unit || _this.detectUnit(valueStr);
-    var number = valueStr.replace(ext, '');
-    return parseFloat(number);
-  };
-  this.toPercent = function (value) {
-    var total = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100;
-    var decimal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 2;
-    return '' + Math.floor(value / total * 100 * Math.pow(10, decimal)) / Math.pow(10, decimal) + _this.UNIT.PERCENT;
-  };
-};
-var index = new UnitUtils();
-var dummy = {};
-
-
-
-var bootstrapStyledUtils_es = Object.freeze({
-	conditionallyUpdateScrollbar: conditionallyUpdateScrollbar,
-	getOriginalBodyPadding: getOriginalBodyPadding,
-	getScrollbarWidth: getScrollbarWidth,
-	getTetherAttachments: getTetherAttachments,
-	isBodyOverflowing: isBodyOverflowing,
-	setScrollbarWidth: setScrollbarWidth,
-	tetherAttachements: tetherAttachements,
-	toHashCode: toHashCode,
-	parseTransition: parseTransition,
-	unitUtils: index,
-	default: dummy
-});
-
-var _bootstrapStyledUtils = ( bootstrapStyledUtils_es && dummy ) || bootstrapStyledUtils_es;
-
 var variables = createCommonjsModule(function (module, exports) {
 'use strict';
 Object.defineProperty(exports, "__esModule", {
@@ -1939,6 +1617,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.assertAscending = assertAscending;
 exports.assertStartAtZero = assertStartAtZero;
 exports.comparable = comparable;
+var _unitUtils2 = _interopRequireDefault(unitUtils);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function assertAscending(map, mapName) {
   var prevKey = void 0;
   var prevNum = void 0;
@@ -1946,12 +1626,12 @@ function assertAscending(map, mapName) {
   Object.keys(map).forEach(function (key) {
     var num = map[key];
     if (prevNum == null) {
-    } else if (!comparable(_bootstrapStyledUtils.unitUtils.rmUnit(prevNum), _bootstrapStyledUtils.unitUtils.rmUnit(num))) {
+    } else if (!comparable(_unitUtils2.default.rmUnit(prevNum), _unitUtils2.default.rmUnit(num))) {
       if (process.env.NODE !== 'test') {
         console.warn('Potentially invalid value for ' + mapName + ': This map must be in ascending order, but key \'' + key + '\' has value ' + num + ' whose unit makes it incomparable to ' + prevNum + ', the value of the previous key \'' + prevKey + '\' !');
       }
       asserted = false;
-    } else if (_bootstrapStyledUtils.unitUtils.rmUnit(prevNum) >= _bootstrapStyledUtils.unitUtils.rmUnit(num)) {
+    } else if (_unitUtils2.default.rmUnit(prevNum) >= _unitUtils2.default.rmUnit(num)) {
       if (process.env.NODE !== 'test') {
         console.warn('Invalid value for ' + mapName + ': This map must be in ascending order, but key \'' + key + '\' has value ' + num + ' which isn\'t greater than ' + prevNum + ', the value of the previous key \'' + prevKey + '\' !');
       }
@@ -1966,7 +1646,7 @@ function assertStartAtZero(map) {
   var values = Object.keys(map).map(function (key) {
     return map[key];
   });
-  var firstValue = _bootstrapStyledUtils.unitUtils.rmUnit(values[0]);
+  var firstValue = _unitUtils2.default.rmUnit(values[0]);
   var asserted = true;
   if (firstValue !== 0) {
     if (process.env.NODE !== 'test') {
@@ -2557,7 +2237,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 
 
-var asyncGenerator$1 = function () {
+var asyncGenerator = function () {
   function AwaitValue(value) {
     this.value = value;
   }
@@ -2674,7 +2354,7 @@ var asyncGenerator$1 = function () {
 
 
 
-var classCallCheck$1 = function (instance, Constructor) {
+var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
@@ -3802,7 +3482,7 @@ function composeLink(RouterLink) {
   var Link = function (_React$Component) {
     inherits(Link, _React$Component);
     function Link() {
-      classCallCheck$1(this, Link);
+      classCallCheck(this, Link);
       return possibleConstructorReturn(this, (Link.__proto__ || Object.getPrototypeOf(Link)).apply(this, arguments));
     }
     createClass(Link, [{
@@ -3840,7 +3520,7 @@ var AUnstyled = function (_React$Component) {
   function AUnstyled() {
     var _ref;
     var _temp, _this, _ret;
-    classCallCheck$1(this, AUnstyled);
+    classCallCheck(this, AUnstyled);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
@@ -3894,7 +3574,7 @@ var defaultProps$2 = {
 var AbbrUnstyled = function (_React$Component) {
   inherits(AbbrUnstyled, _React$Component);
   function AbbrUnstyled() {
-    classCallCheck$1(this, AbbrUnstyled);
+    classCallCheck(this, AbbrUnstyled);
     return possibleConstructorReturn(this, (AbbrUnstyled.__proto__ || Object.getPrototypeOf(AbbrUnstyled)).apply(this, arguments));
   }
   createClass(AbbrUnstyled, [{
@@ -4685,7 +4365,7 @@ var defaultProps$4 = { theme: bsTheme };
 var CloseUnstyled = function (_React$Component) {
   inherits(CloseUnstyled, _React$Component);
   function CloseUnstyled() {
-    classCallCheck$1(this, CloseUnstyled);
+    classCallCheck(this, CloseUnstyled);
     return possibleConstructorReturn(this, (CloseUnstyled.__proto__ || Object.getPrototypeOf(CloseUnstyled)).apply(this, arguments));
   }
   createClass(CloseUnstyled, [{
@@ -4749,7 +4429,7 @@ var FirstChild = function FirstChild(_ref) {
 var AlertUnstyled = function (_React$Component) {
   inherits(AlertUnstyled, _React$Component);
   function AlertUnstyled() {
-    classCallCheck$1(this, AlertUnstyled);
+    classCallCheck(this, AlertUnstyled);
     return possibleConstructorReturn(this, (AlertUnstyled.__proto__ || Object.getPrototypeOf(AlertUnstyled)).apply(this, arguments));
   }
   createClass(AlertUnstyled, [{
@@ -4818,7 +4498,7 @@ var Alert = styled(AlertUnstyled).withConfig({
   return '\n    /*\n    Base styles\n    */\n    \n    &.alert {\n      padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n      margin-bottom: ' + props.theme['$alert-margin-bottom'] + ';\n      border: ' + props.theme['$alert-border-width'] + ' solid transparent;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$alert-border-radius']) + '\n    }\n    \n    /* Headings for larger alerts */\n    &.alert-heading {\n      /* Specified to prevent conflicts of changing $headings-color */\n      color: inherit;\n    }\n    \n    /* Provide class for links that match alerts */\n    & .alert-link { \n      font-weight: ' + props.theme['$alert-link-font-weight'] + ';\n    }\n    \n    /* Dismissible alerts Expand the right padding and account for the close buttons positioning. */\n    \n    &.alert-dismissible {    \n      /* Adjust close link position */\n      & .close {\n        position: relative;\n        top: -' + props.theme['$alert-padding-y'] + ';\n        right: -' + props.theme['$alert-padding-x'] + ';\n        padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n        color: inherit;\n      }\n    }\n    /* Alternate styles Generate contextual modifier classes for colorizing the alert. */\n\n    &.alert-success {\n      ' + alert_1(props.theme['$alert-success-bg'], props.theme['$alert-success-border'], props.theme['$alert-success-text']) + '    \n    }\n    &.alert-info {\n      ' + alert_1(props.theme['$alert-info-bg'], props.theme['$alert-info-border'], props.theme['$alert-info-text']) + '\n    } \n    &.alert-warning {\n      ' + alert_1(props.theme['$alert-warning-bg'], props.theme['$alert-warning-border'], props.theme['$alert-warning-text']) + ' \n    }\n    &.alert-danger {\n      ' + alert_1(props.theme['$alert-danger-bg'], props.theme['$alert-danger-border'], props.theme['$alert-danger-text']) + ' \n    }\n  ';
 });
 Alert.defaultProps = defaultProps$3;
-var index$1 = withTheme(Alert);
+var index = withTheme(Alert);
 
 var Area = styled.area.withConfig({
   displayName: 'Area'
@@ -4835,7 +4515,7 @@ var defaultProps$5 = {
 var BlockquoteUnstyled = function (_React$Component) {
   inherits(BlockquoteUnstyled, _React$Component);
   function BlockquoteUnstyled() {
-    classCallCheck$1(this, BlockquoteUnstyled);
+    classCallCheck(this, BlockquoteUnstyled);
     return possibleConstructorReturn(this, (BlockquoteUnstyled.__proto__ || Object.getPrototypeOf(BlockquoteUnstyled)).apply(this, arguments));
   }
   createClass(BlockquoteUnstyled, [{
@@ -5176,6 +4856,8 @@ exports.mediaBreakpointUp = mediaBreakpointUp;
 exports.mediaBreakpointDown = mediaBreakpointDown;
 exports.mediaBreakpointBetween = mediaBreakpointBetween;
 exports.mediaBreakpointOnly = mediaBreakpointOnly;
+var _unitUtils2 = _interopRequireDefault(unitUtils);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var defaultProps = exports.defaultProps = {
   '$grid-breakpoints': {
     xs: '0',
@@ -5203,8 +4885,8 @@ function breakpointMax(name) {
   var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
   var next = breakpointNext(name, breakpoints);
   if (next) {
-    var min = _bootstrapStyledUtils.unitUtils.rmUnit(breakpointMin(next, breakpoints), _bootstrapStyledUtils.unitUtils.UNIT.PX);
-    return (min - 1).toString() + _bootstrapStyledUtils.unitUtils.UNIT.PX;
+    var min = _unitUtils2.default.rmUnit(breakpointMin(next, breakpoints), _unitUtils2.default.UNIT.PX);
+    return (min - 1).toString() + _unitUtils2.default.UNIT.PX;
   }
   return null;
 }
@@ -5762,6 +5444,45 @@ exports.default = {
 });
 var textUtils = unwrapExports(text);
 
+var parseTransition_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var parseTransition = function parseTransition(transitions) {
+  if (!transitions) {
+    return [];
+  }
+  var sample = transitions;
+  var RULE_DELIMITER = ',';
+  var PROPERTY_DELIMITER = ' ';
+  var MS_UNIT = 'ms';
+  var TMP_STR = 'TMP';
+  var DEFAULT_PROPERTY = 'all';
+  var DEFAULT_DURATION = 0;
+  var DEFAULT_TIMING_FUNCTION = 'ease';
+  var DEFAULT_DELAY = 0;
+  var BEZIER_REGEX = /cubic-bezier\([^\)]+\)/gi;
+  var cubicBezierList = transitions.match(BEZIER_REGEX);
+  if (cubicBezierList) {
+    sample = sample.replace(BEZIER_REGEX, TMP_STR);
+  }
+  var transitionList = sample.split(RULE_DELIMITER).map(function (rule) {
+    var properties = rule.trim().split(PROPERTY_DELIMITER);
+    return {
+      property: properties[0] || DEFAULT_PROPERTY,
+      duration: properties[1] && !(properties[1].indexOf(MS_UNIT) !== -1) ? parseFloat(properties[1]) * 1000 : parseFloat(properties[1]) || DEFAULT_DURATION,
+      timingFunction: properties[2] && properties[2] !== TMP_STR ? properties[2] : cubicBezierList ? cubicBezierList.shift() : DEFAULT_TIMING_FUNCTION,
+      delay: properties[3] && !(properties[3].indexOf(MS_UNIT) !== -1) ? parseFloat(properties[3]) * 1000 : parseFloat(properties[3]) || DEFAULT_DELAY
+    };
+  });
+  return transitionList;
+};
+exports.default = parseTransition;
+module.exports = exports['default'];
+});
+var parseTransition = unwrapExports(parseTransition_1);
+
 var transition$1 = createCommonjsModule(function (module, exports) {
 'use strict';
 Object.defineProperty(exports, "__esModule", {
@@ -5772,6 +5493,8 @@ exports.getTransitionUtilities = getTransitionUtilities;
 exports.fade = fade;
 exports.collapse = collapse;
 exports.getReactTransition = getReactTransition;
+var _parseTransition2 = _interopRequireDefault(parseTransition_1);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var defaultProps = exports.defaultProps = {
   '$enable-transitions': true,
   '$transition-fade': 'opacity .15s linear',
@@ -5794,7 +5517,7 @@ function collapse() {
   return '\n    .collapse {\n      display: none;\n      &.show {\n        display: block;\n      }\n    }\n    \n    tr {\n      &.collapse.show {\n        display: table-row;\n      }\n    }\n    \n    tbody {\n      &.collapse.show {\n        display: table-row-group;\n      }\n    }\n    \n    .collapsing {\n      position: relative;\n      height: 0;\n      overflow: hidden;\n      ' + (0, transition_1.transition)(enableTransitions, transitionCollapse) + '\n    }\n  ';
 }
 function getReactTransition(enableTransition, transition) {
-  var transitionList = (0, _bootstrapStyledUtils.parseTransition)(transition);
+  var transitionList = (0, _parseTransition2.default)(transition);
   var _transitionList$ = transitionList[0],
       property = _transitionList$.property,
       duration = _transitionList$.duration,
@@ -5877,7 +5600,7 @@ var BootstrapProvider = function (_React$Component) {
   function BootstrapProvider() {
     var _ref;
     var _temp, _this, _ret;
-    classCallCheck$1(this, BootstrapProvider);
+    classCallCheck(this, BootstrapProvider);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
@@ -5954,7 +5677,7 @@ var defaultProps$7 = {
 var BreadcrumbUnstyled = function (_React$Component) {
   inherits(BreadcrumbUnstyled, _React$Component);
   function BreadcrumbUnstyled() {
-    classCallCheck$1(this, BreadcrumbUnstyled);
+    classCallCheck(this, BreadcrumbUnstyled);
     return possibleConstructorReturn(this, (BreadcrumbUnstyled.__proto__ || Object.getPrototypeOf(BreadcrumbUnstyled)).apply(this, arguments));
   }
   createClass(BreadcrumbUnstyled, [{
@@ -5991,7 +5714,7 @@ var defaultProps$8 = {
 var BreadcrumbItem = function (_React$Component) {
   inherits(BreadcrumbItem, _React$Component);
   function BreadcrumbItem() {
-    classCallCheck$1(this, BreadcrumbItem);
+    classCallCheck(this, BreadcrumbItem);
     return possibleConstructorReturn(this, (BreadcrumbItem.__proto__ || Object.getPrototypeOf(BreadcrumbItem)).apply(this, arguments));
   }
   createClass(BreadcrumbItem, [{
@@ -6030,7 +5753,7 @@ var ButtonUnstyled = function (_React$Component) {
   function ButtonUnstyled() {
     var _ref;
     var _temp, _this, _ret;
-    classCallCheck$1(this, ButtonUnstyled);
+    classCallCheck(this, ButtonUnstyled);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
@@ -6109,13 +5832,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.defaultProps = undefined;
 exports.navDivider = navDivider;
+var _unitUtils2 = _interopRequireDefault(unitUtils);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var defaultProps = exports.defaultProps = {
   '$spacer-y': '1rem'
 };
 function navDivider() {
   var spacerY = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$spacer-y'];
   var dividerColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#e5e5e5';
-  var marginY = '' + _bootstrapStyledUtils.unitUtils.rmUnit(spacerY, _bootstrapStyledUtils.unitUtils.UNIT.REM) / 2 + _bootstrapStyledUtils.unitUtils.UNIT.REM;
+  var marginY = '' + _unitUtils2.default.rmUnit(spacerY, _unitUtils2.default.UNIT.REM) / 2 + _unitUtils2.default.UNIT.REM;
   return '\n    height: 1px;\n    margin: calc(' + marginY + ' / 2) 0;\n    overflow: hidden;\n    background-color: ' + dividerColor + ';\n  ';
 }
 exports.default = {
@@ -6133,6 +5858,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.defaultProps = undefined;
 exports.buttonGroup = buttonGroup;
+var _unitUtils2 = _interopRequireDefault(unitUtils);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var defaultProps = exports.defaultProps = {
   '$enable-shadows': true,
   '$enable-rounded': true,
@@ -6163,7 +5890,7 @@ function buttonGroup() {
   var $btnPaddingYSm = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps['$btn-padding-y-sm'];
   var $fontSizeSm = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps['$font-size-sm'];
   var $btnBorderRadiusSm = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps['$btn-border-radius-sm'];
-  return ' \n    /*  Make the div behave like a button */\n    &.btn-group,\n    & .btn-group,\n    &.btn-group-vertical,\n    & .btn-group-vertical {\n      position: relative;\n      display: inline-flex;\n      vertical-align: middle; /* match .btn alignment given font-size hack above */\n    \n      > .btn {\n        position: relative;\n        flex: 0 1 auto;\n        margin-bottom: 0;\n    \n        /* Bring the "active" button to the front */\n        &:focus,\n        &:active,\n        &.active {\n          z-index: 2;\n        }\n        ' + (0, hover_1.hover)('\n          z-index: 2;\n        ') + '\n      }\n    }\n    \n    /*  Prevent double borders when buttons are next to each other */\n    &.btn-group,\n    & .btn-group {\n      .btn + .btn,\n      .btn + .btn-group,\n      .btn-group + .btn,\n      .btn-group + .btn-group {\n        margin-left: -' + $inputBtnBorderWidth + ';\n      }\n    }\n    \n    /* Optional: Group multiple button groups together for a toolbar */\n    &.btn-toolbar,\n    & .btn-toolbar {\n      display: flex;\n      flex-wrap: wrap;\n      justify-content: flex-start;\n    \n      .input-group {\n        width: auto;\n      }\n    }\n     \n    &.btn-group,\n    & .btn-group {\n      > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {\n        border-radius: 0;\n      }\n    }\n    \n    /* Set corners individual because sometimes a single button can be in a .btn-group and we need :first-child and :last-child to both match */\n    &.btn-group,\n    & .btn-group {\n      > .btn:first-child {\n        margin-left: 0;\n    \n        &:not(:last-child):not(.dropdown-toggle) {\n          ' + (0, borderRadius_1.borderRightRadius)($enableRounded, '0') + '\n        }\n      }\n    }\n    /* Need .dropdown-toggle since :last-child does not apply given a .dropdown-menu immediately after it */\n    &.btn-group > .btn:last-child:not(:first-child),\n    & .btn-group > .btn:last-child:not(:first-child),\n    &.btn-group > .dropdown-toggle:not(:first-child),\n    & .btn-group > .dropdown-toggle:not(:first-child) {\n      ' + (0, borderRadius_1.borderLeftRadius)($enableRounded, '0') + '\n    }\n    \n    /* Custom edits for including btn-groups within btn-groups (useful for including dropdown buttons within a btn-group) */\n    &.btn-group > .btn-group,\n    & .btn-group > .btn-group {\n      float: left;\n    }\n    &.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn,\n    & .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {\n      border-radius: 0;\n    }\n    &.btn-group > .btn-group:first-child:not(:last-child),\n    & .btn-group > .btn-group:first-child:not(:last-child) {\n      > .btn:last-child,\n      > .dropdown-toggle {\n        ' + (0, borderRadius_1.borderRightRadius)($enableRounded, '0') + '\n      }\n    }\n    &.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child,\n    & .btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {\n      ' + (0, borderRadius_1.borderLeftRadius)($enableRounded, '0') + '\n    }\n    \n    /* On active and open, do not show outline */\n    &.btn-group .dropdown-toggle:active,\n    & .btn-group .dropdown-toggle:active,\n    &.btn-group.open .dropdown-toggle,\n    & .btn-group.open .dropdown-toggle {\n      outline: 0;\n    }\n    \n    \n    /* \n    Sizing Remix the default button sizing classes into new ones for easier manipulation.\n    */\n    \n    &.btn-group-sm > .btn,\n    & .btn-group-sm > .btn { \n      ' + (0, buttons.buttonSize)($enableRounded, $btnPaddingYSm, $btnPaddingXSm, $fontSizeSm, $btnBorderRadiusSm) + '\n    }\n    &.btn-group-lg > .btn,\n    & .btn-group-lg > .btn {\n      ' + (0, buttons.buttonSize)($enableRounded, $btnPaddingYLg, $btnPaddingXLg, $fontSizeLg, $btnBorderRadiusLg) + '\n    }\n    \n    /*\n     Split button dropdowns\n    */\n    \n    & .btn + .dropdown-toggle-split {\n      padding-right: ' + _bootstrapStyledUtils.unitUtils.math.multiply($btnPaddingX, 0.75) + ';\n      padding-left: ' + _bootstrapStyledUtils.unitUtils.math.multiply($btnPaddingX, 0.75) + ';\n    \n      &::after {\n        margin-left: 0;\n      }\n    }\n    \n    & .btn-sm + .dropdown-toggle-split {\n      padding-right: ' + _bootstrapStyledUtils.unitUtils.math.multiply($btnPaddingXSm, 0.75) + ';\n      padding-left: ' + _bootstrapStyledUtils.unitUtils.math.multiply($btnPaddingXSm, 0.75) + ';\n    }\n    \n    & .btn-lg + .dropdown-toggle-split {\n      padding-right: ' + _bootstrapStyledUtils.unitUtils.math.multiply($btnPaddingXLg, 0.75) + ';\n      padding-left: ' + _bootstrapStyledUtils.unitUtils.math.multiply($btnPaddingXLg, 0.75) + ';\n    }\n    \n    \n    /* The clickable button for toggling the menu */\n    /* Remove the gradient and set the same inset shadow as the :active state */\n    &.btn-group.open .dropdown-toggle {\n      ' + (0, boxShadow_1.boxShadow)($enableShadows, $btnActiveBoxShadow) + '\n    \n      /* Show no shadow for .btn-link since it has no other button styles. */\n      &.btn-link {\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, 'none') + '\n      }\n    }\n\n    /*\n     Vertical button groups\n    */\n    \n    &.btn-group-vertical,\n    & .btn-group-vertical {\n      display: inline-flex;\n      flex-direction: column;\n      align-items: flex-start;\n      justify-content: center;\n    \n      .btn,\n      .btn-group {\n        width: 100%;\n      }\n      \n      > .btn + .btn,\n      > .btn + .btn-group,\n      > .btn-group + .btn,\n      > .btn-group + .btn-group {\n        margin-top: -' + $inputBtnBorderWidth + ';\n        margin-left: 0;\n      }\n    }\n    \n    &.btn-group-vertical > .btn,\n    & .btn-group-vertical > .btn {\n      &:not(:first-child):not(:last-child) {\n        border-radius: 0;\n      }\n      &:first-child:not(:last-child) {\n        ' + (0, borderRadius_1.borderBottomRadius)($enableRounded, '0') + '\n      }\n      &:last-child:not(:first-child) {\n        ' + (0, borderRadius_1.borderTopRadius)($enableRounded, '0') + '\n      }\n    }\n    \n    &.btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn,\n    & .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {\n      border-radius: 0;\n    }\n    \n    &.btn-group-vertical > .btn-group:first-child:not(:last-child),\n    & .btn-group-vertical > .btn-group:first-child:not(:last-child) {\n      > .btn:last-child,\n      > .dropdown-toggle {\n        ' + (0, borderRadius_1.borderBottomRadius)($enableRounded, '0') + '      \n      }\n    }\n    &.btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child,\n    & .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child {\n      ' + (0, borderRadius_1.borderTopRadius)($enableRounded, '0') + '\n    }\n    \n    &.btn-group {\n      > .btn,\n      > .btn-group > .btn {\n        input[type="radio"],\n        input[type="checkbox"] {\n          position: absolute;\n          clip: rect(0,0,0,0);\n          pointer-events: none;\n        }\n      }\n    }\n  ';
+  return ' \n    /*  Make the div behave like a button */\n    &.btn-group,\n    & .btn-group,\n    &.btn-group-vertical,\n    & .btn-group-vertical {\n      position: relative;\n      display: inline-flex;\n      vertical-align: middle; /* match .btn alignment given font-size hack above */\n    \n      > .btn {\n        position: relative;\n        flex: 0 1 auto;\n        margin-bottom: 0;\n    \n        /* Bring the "active" button to the front */\n        &:focus,\n        &:active,\n        &.active {\n          z-index: 2;\n        }\n        ' + (0, hover_1.hover)('\n          z-index: 2;\n        ') + '\n      }\n    }\n    \n    /*  Prevent double borders when buttons are next to each other */\n    &.btn-group,\n    & .btn-group {\n      .btn + .btn,\n      .btn + .btn-group,\n      .btn-group + .btn,\n      .btn-group + .btn-group {\n        margin-left: -' + $inputBtnBorderWidth + ';\n      }\n    }\n    \n    /* Optional: Group multiple button groups together for a toolbar */\n    &.btn-toolbar,\n    & .btn-toolbar {\n      display: flex;\n      flex-wrap: wrap;\n      justify-content: flex-start;\n    \n      .input-group {\n        width: auto;\n      }\n    }\n     \n    &.btn-group,\n    & .btn-group {\n      > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {\n        border-radius: 0;\n      }\n    }\n    \n    /* Set corners individual because sometimes a single button can be in a .btn-group and we need :first-child and :last-child to both match */\n    &.btn-group,\n    & .btn-group {\n      > .btn:first-child {\n        margin-left: 0;\n    \n        &:not(:last-child):not(.dropdown-toggle) {\n          ' + (0, borderRadius_1.borderRightRadius)($enableRounded, '0') + '\n        }\n      }\n    }\n    /* Need .dropdown-toggle since :last-child does not apply given a .dropdown-menu immediately after it */\n    &.btn-group > .btn:last-child:not(:first-child),\n    & .btn-group > .btn:last-child:not(:first-child),\n    &.btn-group > .dropdown-toggle:not(:first-child),\n    & .btn-group > .dropdown-toggle:not(:first-child) {\n      ' + (0, borderRadius_1.borderLeftRadius)($enableRounded, '0') + '\n    }\n    \n    /* Custom edits for including btn-groups within btn-groups (useful for including dropdown buttons within a btn-group) */\n    &.btn-group > .btn-group,\n    & .btn-group > .btn-group {\n      float: left;\n    }\n    &.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn,\n    & .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {\n      border-radius: 0;\n    }\n    &.btn-group > .btn-group:first-child:not(:last-child),\n    & .btn-group > .btn-group:first-child:not(:last-child) {\n      > .btn:last-child,\n      > .dropdown-toggle {\n        ' + (0, borderRadius_1.borderRightRadius)($enableRounded, '0') + '\n      }\n    }\n    &.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child,\n    & .btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {\n      ' + (0, borderRadius_1.borderLeftRadius)($enableRounded, '0') + '\n    }\n    \n    /* On active and open, do not show outline */\n    &.btn-group .dropdown-toggle:active,\n    & .btn-group .dropdown-toggle:active,\n    &.btn-group.open .dropdown-toggle,\n    & .btn-group.open .dropdown-toggle {\n      outline: 0;\n    }\n    \n    \n    /* \n    Sizing Remix the default button sizing classes into new ones for easier manipulation.\n    */\n    \n    &.btn-group-sm > .btn,\n    & .btn-group-sm > .btn { \n      ' + (0, buttons.buttonSize)($enableRounded, $btnPaddingYSm, $btnPaddingXSm, $fontSizeSm, $btnBorderRadiusSm) + '\n    }\n    &.btn-group-lg > .btn,\n    & .btn-group-lg > .btn {\n      ' + (0, buttons.buttonSize)($enableRounded, $btnPaddingYLg, $btnPaddingXLg, $fontSizeLg, $btnBorderRadiusLg) + '\n    }\n    \n    /*\n     Split button dropdowns\n    */\n    \n    & .btn + .dropdown-toggle-split {\n      padding-right: ' + _unitUtils2.default.math.multiply($btnPaddingX, 0.75) + ';\n      padding-left: ' + _unitUtils2.default.math.multiply($btnPaddingX, 0.75) + ';\n    \n      &::after {\n        margin-left: 0;\n      }\n    }\n    \n    & .btn-sm + .dropdown-toggle-split {\n      padding-right: ' + _unitUtils2.default.math.multiply($btnPaddingXSm, 0.75) + ';\n      padding-left: ' + _unitUtils2.default.math.multiply($btnPaddingXSm, 0.75) + ';\n    }\n    \n    & .btn-lg + .dropdown-toggle-split {\n      padding-right: ' + _unitUtils2.default.math.multiply($btnPaddingXLg, 0.75) + ';\n      padding-left: ' + _unitUtils2.default.math.multiply($btnPaddingXLg, 0.75) + ';\n    }\n    \n    \n    /* The clickable button for toggling the menu */\n    /* Remove the gradient and set the same inset shadow as the :active state */\n    &.btn-group.open .dropdown-toggle {\n      ' + (0, boxShadow_1.boxShadow)($enableShadows, $btnActiveBoxShadow) + '\n    \n      /* Show no shadow for .btn-link since it has no other button styles. */\n      &.btn-link {\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, 'none') + '\n      }\n    }\n\n    /*\n     Vertical button groups\n    */\n    \n    &.btn-group-vertical,\n    & .btn-group-vertical {\n      display: inline-flex;\n      flex-direction: column;\n      align-items: flex-start;\n      justify-content: center;\n    \n      .btn,\n      .btn-group {\n        width: 100%;\n      }\n      \n      > .btn + .btn,\n      > .btn + .btn-group,\n      > .btn-group + .btn,\n      > .btn-group + .btn-group {\n        margin-top: -' + $inputBtnBorderWidth + ';\n        margin-left: 0;\n      }\n    }\n    \n    &.btn-group-vertical > .btn,\n    & .btn-group-vertical > .btn {\n      &:not(:first-child):not(:last-child) {\n        border-radius: 0;\n      }\n      &:first-child:not(:last-child) {\n        ' + (0, borderRadius_1.borderBottomRadius)($enableRounded, '0') + '\n      }\n      &:last-child:not(:first-child) {\n        ' + (0, borderRadius_1.borderTopRadius)($enableRounded, '0') + '\n      }\n    }\n    \n    &.btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn,\n    & .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {\n      border-radius: 0;\n    }\n    \n    &.btn-group-vertical > .btn-group:first-child:not(:last-child),\n    & .btn-group-vertical > .btn-group:first-child:not(:last-child) {\n      > .btn:last-child,\n      > .dropdown-toggle {\n        ' + (0, borderRadius_1.borderBottomRadius)($enableRounded, '0') + '      \n      }\n    }\n    &.btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child,\n    & .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child {\n      ' + (0, borderRadius_1.borderTopRadius)($enableRounded, '0') + '\n    }\n    \n    &.btn-group {\n      > .btn,\n      > .btn-group > .btn {\n        input[type="radio"],\n        input[type="checkbox"] {\n          position: absolute;\n          clip: rect(0,0,0,0);\n          pointer-events: none;\n        }\n      }\n    }\n  ';
 }
 exports.default = {
   defaultProps: defaultProps,
@@ -7575,7 +7302,7 @@ var TetherContent = function (_React$Component) {
   function TetherContent() {
     var _ref;
     var _temp, _this, _ret;
-    classCallCheck$1(this, TetherContent);
+    classCallCheck(this, TetherContent);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
@@ -7682,7 +7409,7 @@ var DropdownUnstyled = function (_React$Component) {
   function DropdownUnstyled() {
     var _ref;
     var _temp, _this, _ret;
-    classCallCheck$1(this, DropdownUnstyled);
+    classCallCheck(this, DropdownUnstyled);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
@@ -7889,7 +7616,7 @@ var defaultProps$14 = { theme: bsTheme };
 var H6Unstyled = function (_React$Component) {
   inherits(H6Unstyled, _React$Component);
   function H6Unstyled() {
-    classCallCheck$1(this, H6Unstyled);
+    classCallCheck(this, H6Unstyled);
     return possibleConstructorReturn(this, (H6Unstyled.__proto__ || Object.getPrototypeOf(H6Unstyled)).apply(this, arguments));
   }
   createClass(H6Unstyled, [{
@@ -7935,7 +7662,7 @@ var DropdownItem = function (_React$Component) {
   function DropdownItem() {
     var _ref;
     var _temp, _this, _ret;
-    classCallCheck$1(this, DropdownItem);
+    classCallCheck(this, DropdownItem);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
@@ -8014,7 +7741,7 @@ var DropdownToggle = function (_React$Component) {
   function DropdownToggle() {
     var _ref;
     var _temp, _this, _ret;
-    classCallCheck$1(this, DropdownToggle);
+    classCallCheck(this, DropdownToggle);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
@@ -8115,7 +7842,7 @@ var defaultProps$16 = {
 var ButtonGroupUnstyled = function (_React$Component) {
   inherits(ButtonGroupUnstyled, _React$Component);
   function ButtonGroupUnstyled() {
-    classCallCheck$1(this, ButtonGroupUnstyled);
+    classCallCheck(this, ButtonGroupUnstyled);
     return possibleConstructorReturn(this, (ButtonGroupUnstyled.__proto__ || Object.getPrototypeOf(ButtonGroupUnstyled)).apply(this, arguments));
   }
   createClass(ButtonGroupUnstyled, [{
@@ -8158,7 +7885,7 @@ var defaultProps$17 = {
 var ButtonToolbarUnstyled = function (_React$Component) {
   inherits(ButtonToolbarUnstyled, _React$Component);
   function ButtonToolbarUnstyled() {
-    classCallCheck$1(this, ButtonToolbarUnstyled);
+    classCallCheck(this, ButtonToolbarUnstyled);
     return possibleConstructorReturn(this, (ButtonToolbarUnstyled.__proto__ || Object.getPrototypeOf(ButtonToolbarUnstyled)).apply(this, arguments));
   }
   createClass(ButtonToolbarUnstyled, [{
@@ -8204,7 +7931,7 @@ var defaultProps$19 = {
 var CodeUnstyled = function (_React$Component) {
   inherits(CodeUnstyled, _React$Component);
   function CodeUnstyled() {
-    classCallCheck$1(this, CodeUnstyled);
+    classCallCheck(this, CodeUnstyled);
     return possibleConstructorReturn(this, (CodeUnstyled.__proto__ || Object.getPrototypeOf(CodeUnstyled)).apply(this, arguments));
   }
   createClass(CodeUnstyled, [{
@@ -8252,6 +7979,8 @@ exports.makeColOffset = makeColOffset;
 exports.makeColPush = makeColPush;
 exports.makeColPull = makeColPull;
 exports.makeColModifier = makeColModifier;
+var _unitUtils2 = _interopRequireDefault(unitUtils);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var defaultProps = exports.defaultProps = {
   '$grid-gutter-widths': {
     xs: '30px',
@@ -8283,7 +8012,7 @@ function makeContainer() {
     var columns = [];
     Object.keys(gridGutterWidths).forEach(function (breakpoint) {
       var gutter = gridGutterWidths[breakpoint];
-      var column = (0, breakpoints.mediaBreakpointUp)(breakpoint, gutter, '\n        padding-right: ' + _bootstrapStyledUtils.unitUtils.rmUnit(gutter) / 2 + _bootstrapStyledUtils.unitUtils.detectUnit(gutter) + ';\n        padding-left:  ' + _bootstrapStyledUtils.unitUtils.rmUnit(gutter) / 2 + _bootstrapStyledUtils.unitUtils.detectUnit(gutter) + ';\n      ');
+      var column = (0, breakpoints.mediaBreakpointUp)(breakpoint, gutter, '\n        padding-right: ' + _unitUtils2.default.rmUnit(gutter) / 2 + _unitUtils2.default.detectUnit(gutter) + ';\n        padding-left:  ' + _unitUtils2.default.rmUnit(gutter) / 2 + _unitUtils2.default.detectUnit(gutter) + ';\n      ');
       columns.push(column);
     });
     return '\n      position: relative;\n      margin-left: auto;\n      margin-right: auto;    \n      ' + columns.join('\n') + '\n    ';
@@ -8310,7 +8039,7 @@ function makeGutters() {
   var gutterList = [];
   Object.keys(gridGutterWidths).forEach(function (breakpoint) {
     var gutterValue = gridGutterWidths[breakpoint];
-    gutterValue = '' + _bootstrapStyledUtils.unitUtils.rmUnit(gutterValue) / 2 + _bootstrapStyledUtils.unitUtils.detectUnit(gutterValue);
+    gutterValue = '' + _unitUtils2.default.rmUnit(gutterValue) / 2 + _unitUtils2.default.detectUnit(gutterValue);
     var gutter = (0, breakpoints.mediaBreakpointUp)(breakpoint, breakpoints$$2, '\n      padding-right: ' + gutterValue + ';\n      padding-left:  ' + gutterValue + ';\n    ');
     gutterList.push(gutter);
   });
@@ -8323,7 +8052,7 @@ function makeRow() {
     var rowList = [];
     Object.keys(gridGutterWidths).forEach(function (breakpoint) {
       var gutter = gridGutterWidths[breakpoint];
-      gutter = '' + _bootstrapStyledUtils.unitUtils.rmUnit(gutter) / -2 + _bootstrapStyledUtils.unitUtils.detectUnit(gutter);
+      gutter = '' + _unitUtils2.default.rmUnit(gutter) / -2 + _unitUtils2.default.detectUnit(gutter);
       var row = '\n        margin-right: ' + gutter + ';\n        margin-left:  ' + gutter + ';\n      ';
       rowList.push(row);
     });
@@ -8336,7 +8065,7 @@ function makeColReady() {
   var colReadyList = [];
   Object.keys(gridGutterWidths).forEach(function (breakpoint) {
     var gutter = gridGutterWidths[breakpoint];
-    gutter = '' + _bootstrapStyledUtils.unitUtils.rmUnit(gutter) / 2 + _bootstrapStyledUtils.unitUtils.detectUnit(gutter);
+    gutter = '' + _unitUtils2.default.rmUnit(gutter) / 2 + _unitUtils2.default.detectUnit(gutter);
     var colReady = (0, breakpoints.mediaBreakpointUp)(breakpoint, gridGutterWidths, '\n      padding-right: ' + gutter + ';\n      padding-left:  ' + gutter + ';\n    ');
     colReadyList.push(colReady);
   });
@@ -8344,19 +8073,19 @@ function makeColReady() {
 }
 function makeCol(size) {
   var columns = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-columns'];
-  return '\n    flex: 0 0 ' + _bootstrapStyledUtils.unitUtils.toPercent(size, columns) + ';\n    /* Add a \'max-width\' to ensure content within each column does not blow out */\n    /* the width of the column. Applies to IE10+ and Firefox. Chrome and Safari */\n    /* do not appear to require this. */\n    max-width: ' + _bootstrapStyledUtils.unitUtils.toPercent(size, columns) + ';\n  ';
+  return '\n    flex: 0 0 ' + _unitUtils2.default.toPercent(size, columns) + ';\n    /* Add a \'max-width\' to ensure content within each column does not blow out */\n    /* the width of the column. Applies to IE10+ and Firefox. Chrome and Safari */\n    /* do not appear to require this. */\n    max-width: ' + _unitUtils2.default.toPercent(size, columns) + ';\n  ';
 }
 function makeColOffset($size) {
   var columns = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-columns'];
-  return '\n    margin-left: ' + _bootstrapStyledUtils.unitUtils.toPercent($size, columns) + ';\n  ';
+  return '\n    margin-left: ' + _unitUtils2.default.toPercent($size, columns) + ';\n  ';
 }
 function makeColPush(size) {
   var columns = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-columns'];
-  return '\n    left: ' + (size > 0 ? _bootstrapStyledUtils.unitUtils.toPercent(size, columns) : 'auto') + ';\n  ';
+  return '\n    left: ' + (size > 0 ? _unitUtils2.default.toPercent(size, columns) : 'auto') + ';\n  ';
 }
 function makeColPull(size) {
   var columns = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-columns'];
-  return '\n    right: ' + (size > 0 ? _bootstrapStyledUtils.unitUtils.toPercent(size, columns) : 'auto') + ';\n  ';
+  return '\n    right: ' + (size > 0 ? _unitUtils2.default.toPercent(size, columns) : 'auto') + ';\n  ';
 }
 function makeColModifier(type, size, columns) {
   var TYPE = {
@@ -8517,7 +8246,7 @@ var getColumnSizeClass = function getColumnSizeClass(isXs, colWidth, colSize) {
 var ColUnstyled = function (_React$Component) {
   inherits(ColUnstyled, _React$Component);
   function ColUnstyled() {
-    classCallCheck$1(this, ColUnstyled);
+    classCallCheck(this, ColUnstyled);
     return possibleConstructorReturn(this, (ColUnstyled.__proto__ || Object.getPrototypeOf(ColUnstyled)).apply(this, arguments));
   }
   createClass(ColUnstyled, [{
@@ -8585,7 +8314,7 @@ var HIDDEN = 'HIDDEN';
 var Collapse = function (_Component) {
   inherits(Collapse, _Component);
   function Collapse(props) {
-    classCallCheck$1(this, Collapse);
+    classCallCheck(this, Collapse);
     var _this = possibleConstructorReturn(this, (Collapse.__proto__ || Object.getPrototypeOf(Collapse)).call(this, props));
     _this.state = {
       collapse: props.isOpen ? SHOWN : HIDDEN,
@@ -8715,7 +8444,7 @@ Collapse.defaultProps = {
 var DdUnstyled = function (_React$Component) {
   inherits(DdUnstyled, _React$Component);
   function DdUnstyled() {
-    classCallCheck$1(this, DdUnstyled);
+    classCallCheck(this, DdUnstyled);
     return possibleConstructorReturn(this, (DdUnstyled.__proto__ || Object.getPrototypeOf(DdUnstyled)).apply(this, arguments));
   }
   createClass(DdUnstyled, [{
@@ -8742,7 +8471,7 @@ var Dd = styled(DdUnstyled).withConfig({
 var DfnUnstyled = function (_React$Component) {
   inherits(DfnUnstyled, _React$Component);
   function DfnUnstyled() {
-    classCallCheck$1(this, DfnUnstyled);
+    classCallCheck(this, DfnUnstyled);
     return possibleConstructorReturn(this, (DfnUnstyled.__proto__ || Object.getPrototypeOf(DfnUnstyled)).apply(this, arguments));
   }
   createClass(DfnUnstyled, [{
@@ -8769,7 +8498,7 @@ var Dfn = styled(DfnUnstyled).withConfig({
 var Details = function (_React$Component) {
   inherits(Details, _React$Component);
   function Details() {
-    classCallCheck$1(this, Details);
+    classCallCheck(this, Details);
     return possibleConstructorReturn(this, (Details.__proto__ || Object.getPrototypeOf(Details)).apply(this, arguments));
   }
   createClass(Details, [{
@@ -8792,7 +8521,7 @@ var defaultProps$21 = { theme: bsTheme };
 var DlUnstyled = function (_React$Component) {
   inherits(DlUnstyled, _React$Component);
   function DlUnstyled() {
-    classCallCheck$1(this, DlUnstyled);
+    classCallCheck(this, DlUnstyled);
     return possibleConstructorReturn(this, (DlUnstyled.__proto__ || Object.getPrototypeOf(DlUnstyled)).apply(this, arguments));
   }
   createClass(DlUnstyled, [{
@@ -8821,7 +8550,7 @@ var defaultProps$22 = { theme: bsTheme };
 var DtUnstyled = function (_React$Component) {
   inherits(DtUnstyled, _React$Component);
   function DtUnstyled() {
-    classCallCheck$1(this, DtUnstyled);
+    classCallCheck(this, DtUnstyled);
     return possibleConstructorReturn(this, (DtUnstyled.__proto__ || Object.getPrototypeOf(DtUnstyled)).apply(this, arguments));
   }
   createClass(DtUnstyled, [{
@@ -8855,7 +8584,7 @@ var Fade = function (_React$Component) {
   function Fade() {
     var _ref;
     var _temp, _this, _ret;
-    classCallCheck$1(this, Fade);
+    classCallCheck(this, Fade);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
@@ -8909,12 +8638,12 @@ Fade.propTypes = {
   isOpen: PropTypes.bool
 };
 Fade.defaultProps = defaultProps$23;
-var index$2 = withTheme(Fade);
+var index$1 = withTheme(Fade);
 
 var FaUnstyled = function (_React$Component) {
   inherits(FaUnstyled, _React$Component);
   function FaUnstyled() {
-    classCallCheck$1(this, FaUnstyled);
+    classCallCheck(this, FaUnstyled);
     return possibleConstructorReturn(this, (FaUnstyled.__proto__ || Object.getPrototypeOf(FaUnstyled)).apply(this, arguments));
   }
   createClass(FaUnstyled, [{
@@ -8948,7 +8677,7 @@ var Fa = styled(FaUnstyled).withConfig({
 var FaStacked = function (_React$Component) {
   inherits(FaStacked, _React$Component);
   function FaStacked() {
-    classCallCheck$1(this, FaStacked);
+    classCallCheck(this, FaStacked);
     return possibleConstructorReturn(this, (FaStacked.__proto__ || Object.getPrototypeOf(FaStacked)).apply(this, arguments));
   }
   createClass(FaStacked, [{
@@ -8974,7 +8703,7 @@ var defaultProps$24 = { theme: bsTheme };
 var FieldsetUnstyled = function (_React$Component) {
   inherits(FieldsetUnstyled, _React$Component);
   function FieldsetUnstyled() {
-    classCallCheck$1(this, FieldsetUnstyled);
+    classCallCheck(this, FieldsetUnstyled);
     return possibleConstructorReturn(this, (FieldsetUnstyled.__proto__ || Object.getPrototypeOf(FieldsetUnstyled)).apply(this, arguments));
   }
   createClass(FieldsetUnstyled, [{
@@ -9015,7 +8744,7 @@ var defaultProps$25 = { theme: bsTheme };
 var H1Unstyled = function (_React$Component) {
   inherits(H1Unstyled, _React$Component);
   function H1Unstyled() {
-    classCallCheck$1(this, H1Unstyled);
+    classCallCheck(this, H1Unstyled);
     return possibleConstructorReturn(this, (H1Unstyled.__proto__ || Object.getPrototypeOf(H1Unstyled)).apply(this, arguments));
   }
   createClass(H1Unstyled, [{
@@ -9057,7 +8786,7 @@ var defaultProps$26 = { theme: bsTheme };
 var H2Unstyled = function (_React$Component) {
   inherits(H2Unstyled, _React$Component);
   function H2Unstyled() {
-    classCallCheck$1(this, H2Unstyled);
+    classCallCheck(this, H2Unstyled);
     return possibleConstructorReturn(this, (H2Unstyled.__proto__ || Object.getPrototypeOf(H2Unstyled)).apply(this, arguments));
   }
   createClass(H2Unstyled, [{
@@ -9099,7 +8828,7 @@ var defaultProps$27 = { theme: bsTheme };
 var H3Unstyled = function (_React$Component) {
   inherits(H3Unstyled, _React$Component);
   function H3Unstyled() {
-    classCallCheck$1(this, H3Unstyled);
+    classCallCheck(this, H3Unstyled);
     return possibleConstructorReturn(this, (H3Unstyled.__proto__ || Object.getPrototypeOf(H3Unstyled)).apply(this, arguments));
   }
   createClass(H3Unstyled, [{
@@ -9141,7 +8870,7 @@ var defaultProps$28 = { theme: bsTheme };
 var H4Unstyled = function (_React$Component) {
   inherits(H4Unstyled, _React$Component);
   function H4Unstyled() {
-    classCallCheck$1(this, H4Unstyled);
+    classCallCheck(this, H4Unstyled);
     return possibleConstructorReturn(this, (H4Unstyled.__proto__ || Object.getPrototypeOf(H4Unstyled)).apply(this, arguments));
   }
   createClass(H4Unstyled, [{
@@ -9183,7 +8912,7 @@ var defaultProps$29 = { theme: bsTheme };
 var H5Unstyled = function (_React$Component) {
   inherits(H5Unstyled, _React$Component);
   function H5Unstyled() {
-    classCallCheck$1(this, H5Unstyled);
+    classCallCheck(this, H5Unstyled);
     return possibleConstructorReturn(this, (H5Unstyled.__proto__ || Object.getPrototypeOf(H5Unstyled)).apply(this, arguments));
   }
   createClass(H5Unstyled, [{
@@ -9383,7 +9112,7 @@ var defaultProps$32 = {
 var ImgUnstyled = function (_React$Component) {
   inherits(ImgUnstyled, _React$Component);
   function ImgUnstyled() {
-    classCallCheck$1(this, ImgUnstyled);
+    classCallCheck(this, ImgUnstyled);
     return possibleConstructorReturn(this, (ImgUnstyled.__proto__ || Object.getPrototypeOf(ImgUnstyled)).apply(this, arguments));
   }
   createClass(ImgUnstyled, [{
@@ -9430,7 +9159,7 @@ Img.defaultProps = defaultProps$32;
 var FigureUnstyled = function (_React$Component) {
   inherits(FigureUnstyled, _React$Component);
   function FigureUnstyled() {
-    classCallCheck$1(this, FigureUnstyled);
+    classCallCheck(this, FigureUnstyled);
     return possibleConstructorReturn(this, (FigureUnstyled.__proto__ || Object.getPrototypeOf(FigureUnstyled)).apply(this, arguments));
   }
   createClass(FigureUnstyled, [{
@@ -9464,7 +9193,7 @@ var defaultProps$33 = {
 var FigCaptionUnstyled = function (_React$Component) {
   inherits(FigCaptionUnstyled, _React$Component);
   function FigCaptionUnstyled() {
-    classCallCheck$1(this, FigCaptionUnstyled);
+    classCallCheck(this, FigCaptionUnstyled);
     return possibleConstructorReturn(this, (FigCaptionUnstyled.__proto__ || Object.getPrototypeOf(FigCaptionUnstyled)).apply(this, arguments));
   }
   createClass(FigCaptionUnstyled, [{
@@ -9508,7 +9237,7 @@ var defaultProps$34 = {
 var InputUnstyled = function (_React$Component) {
   inherits(InputUnstyled, _React$Component);
   function InputUnstyled() {
-    classCallCheck$1(this, InputUnstyled);
+    classCallCheck(this, InputUnstyled);
     return possibleConstructorReturn(this, (InputUnstyled.__proto__ || Object.getPrototypeOf(InputUnstyled)).apply(this, arguments));
   }
   createClass(InputUnstyled, [{
@@ -9679,7 +9408,7 @@ var defaultProps$35 = {
 var InputGroupUnstyled = function (_React$Component) {
   inherits(InputGroupUnstyled, _React$Component);
   function InputGroupUnstyled() {
-    classCallCheck$1(this, InputGroupUnstyled);
+    classCallCheck(this, InputGroupUnstyled);
     return possibleConstructorReturn(this, (InputGroupUnstyled.__proto__ || Object.getPrototypeOf(InputGroupUnstyled)).apply(this, arguments));
   }
   createClass(InputGroupUnstyled, [{
@@ -9717,7 +9446,7 @@ var defaultProps$36 = {
 var InputGroupAddon = function (_React$Component) {
   inherits(InputGroupAddon, _React$Component);
   function InputGroupAddon() {
-    classCallCheck$1(this, InputGroupAddon);
+    classCallCheck(this, InputGroupAddon);
     return possibleConstructorReturn(this, (InputGroupAddon.__proto__ || Object.getPrototypeOf(InputGroupAddon)).apply(this, arguments));
   }
   createClass(InputGroupAddon, [{
@@ -9747,7 +9476,7 @@ var defaultProps$37 = {
 var InputGroupButton = function (_React$Component) {
   inherits(InputGroupButton, _React$Component);
   function InputGroupButton() {
-    classCallCheck$1(this, InputGroupButton);
+    classCallCheck(this, InputGroupButton);
     return possibleConstructorReturn(this, (InputGroupButton.__proto__ || Object.getPrototypeOf(InputGroupButton)).apply(this, arguments));
   }
   createClass(InputGroupButton, [{
@@ -9812,7 +9541,7 @@ var defaultProps$38 = { theme: bsTheme };
 var KbdUnstyled = function (_React$Component) {
   inherits(KbdUnstyled, _React$Component);
   function KbdUnstyled() {
-    classCallCheck$1(this, KbdUnstyled);
+    classCallCheck(this, KbdUnstyled);
     return possibleConstructorReturn(this, (KbdUnstyled.__proto__ || Object.getPrototypeOf(KbdUnstyled)).apply(this, arguments));
   }
   createClass(KbdUnstyled, [{
@@ -9850,7 +9579,7 @@ var defaultProps$39 = {
 var JumbotronUnstyled = function (_React$Component) {
   inherits(JumbotronUnstyled, _React$Component);
   function JumbotronUnstyled() {
-    classCallCheck$1(this, JumbotronUnstyled);
+    classCallCheck(this, JumbotronUnstyled);
     return possibleConstructorReturn(this, (JumbotronUnstyled.__proto__ || Object.getPrototypeOf(JumbotronUnstyled)).apply(this, arguments));
   }
   createClass(JumbotronUnstyled, [{
@@ -9970,7 +9699,7 @@ var defaultProps$41 = { theme: bsTheme };
 var LiUnstyled = function (_React$Component) {
   inherits(LiUnstyled, _React$Component);
   function LiUnstyled() {
-    classCallCheck$1(this, LiUnstyled);
+    classCallCheck(this, LiUnstyled);
     return possibleConstructorReturn(this, (LiUnstyled.__proto__ || Object.getPrototypeOf(LiUnstyled)).apply(this, arguments));
   }
   createClass(LiUnstyled, [{
@@ -10130,7 +9859,7 @@ var defaultProps$43 = { theme: bsTheme };
 var UlUnstyled = function (_React$Component) {
   inherits(UlUnstyled, _React$Component);
   function UlUnstyled() {
-    classCallCheck$1(this, UlUnstyled);
+    classCallCheck(this, UlUnstyled);
     return possibleConstructorReturn(this, (UlUnstyled.__proto__ || Object.getPrototypeOf(UlUnstyled)).apply(this, arguments));
   }
   createClass(UlUnstyled, [{
@@ -10173,7 +9902,7 @@ var defaultProps$42 = {
 var ListGroupUnstyled = function (_React$Component) {
   inherits(ListGroupUnstyled, _React$Component);
   function ListGroupUnstyled() {
-    classCallCheck$1(this, ListGroupUnstyled);
+    classCallCheck(this, ListGroupUnstyled);
     return possibleConstructorReturn(this, (ListGroupUnstyled.__proto__ || Object.getPrototypeOf(ListGroupUnstyled)).apply(this, arguments));
   }
   createClass(ListGroupUnstyled, [{
@@ -10214,7 +9943,7 @@ var handleDisabledOnClick = function handleDisabledOnClick(e) {
 var ListGroupItem = function (_React$Component) {
   inherits(ListGroupItem, _React$Component);
   function ListGroupItem() {
-    classCallCheck$1(this, ListGroupItem);
+    classCallCheck(this, ListGroupItem);
     return possibleConstructorReturn(this, (ListGroupItem.__proto__ || Object.getPrototypeOf(ListGroupItem)).apply(this, arguments));
   }
   createClass(ListGroupItem, [{
@@ -10253,7 +9982,7 @@ var defaultProps$45 = {
 var ListGroupItemHeading = function (_React$Component) {
   inherits(ListGroupItemHeading, _React$Component);
   function ListGroupItemHeading() {
-    classCallCheck$1(this, ListGroupItemHeading);
+    classCallCheck(this, ListGroupItemHeading);
     return possibleConstructorReturn(this, (ListGroupItemHeading.__proto__ || Object.getPrototypeOf(ListGroupItemHeading)).apply(this, arguments));
   }
   createClass(ListGroupItemHeading, [{
@@ -10281,7 +10010,7 @@ var defaultProps$46 = {
 var ListGroupItemHeading$2 = function (_React$Component) {
   inherits(ListGroupItemHeading, _React$Component);
   function ListGroupItemHeading() {
-    classCallCheck$1(this, ListGroupItemHeading);
+    classCallCheck(this, ListGroupItemHeading);
     return possibleConstructorReturn(this, (ListGroupItemHeading.__proto__ || Object.getPrototypeOf(ListGroupItemHeading)).apply(this, arguments));
   }
   createClass(ListGroupItemHeading, [{
@@ -10321,7 +10050,7 @@ var defaultProps$48 = {
 var MediaUnstyled = function (_React$Component) {
   inherits(MediaUnstyled, _React$Component);
   function MediaUnstyled() {
-    classCallCheck$1(this, MediaUnstyled);
+    classCallCheck(this, MediaUnstyled);
     return possibleConstructorReturn(this, (MediaUnstyled.__proto__ || Object.getPrototypeOf(MediaUnstyled)).apply(this, arguments));
   }
   createClass(MediaUnstyled, [{
@@ -10392,6 +10121,141 @@ var Media = styled(MediaUnstyled).withConfig({
 })(['&.media,& .media{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;}& .media-body{-webkit-box-flex:1;-ms-flex:1 1 0%;flex:1 1 0%}', ''], media_2());
 Media.defaultProps = defaultProps$48;
 
+var tools = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getTetherAttachments = getTetherAttachments;
+exports.getScrollbarWidth = getScrollbarWidth;
+exports.setScrollbarWidth = setScrollbarWidth;
+exports.isBodyOverflowing = isBodyOverflowing;
+exports.getOriginalBodyPadding = getOriginalBodyPadding;
+exports.conditionallyUpdateScrollbar = conditionallyUpdateScrollbar;
+exports.toHashCode = toHashCode;
+function getTetherAttachments(placement) {
+  switch (placement) {
+    case 'top':
+    case 'top center':
+      return {
+        attachment: 'bottom center',
+        targetAttachment: 'top center'
+      };
+    case 'bottom':
+    case 'bottom center':
+      return {
+        attachment: 'top center',
+        targetAttachment: 'bottom center'
+      };
+    case 'left':
+    case 'left center':
+      return {
+        attachment: 'middle right',
+        targetAttachment: 'middle left'
+      };
+    case 'right':
+    case 'right center':
+      return {
+        attachment: 'middle left',
+        targetAttachment: 'middle right'
+      };
+    case 'top left':
+      return {
+        attachment: 'bottom left',
+        targetAttachment: 'top left'
+      };
+    case 'top right':
+      return {
+        attachment: 'bottom right',
+        targetAttachment: 'top right'
+      };
+    case 'bottom left':
+      return {
+        attachment: 'top left',
+        targetAttachment: 'bottom left'
+      };
+    case 'bottom right':
+      return {
+        attachment: 'top right',
+        targetAttachment: 'bottom right'
+      };
+    case 'right top':
+      return {
+        attachment: 'top left',
+        targetAttachment: 'top right'
+      };
+    case 'right bottom':
+      return {
+        attachment: 'bottom left',
+        targetAttachment: 'bottom right'
+      };
+    case 'left top':
+      return {
+        attachment: 'top right',
+        targetAttachment: 'top left'
+      };
+    case 'left bottom':
+      return {
+        attachment: 'bottom right',
+        targetAttachment: 'bottom left'
+      };
+    default:
+      return {
+        attachment: 'top center',
+        targetAttachment: 'bottom center'
+      };
+  }
+}
+var tetherAttachements = exports.tetherAttachements = ['top', 'bottom', 'left', 'right', 'top left', 'top center', 'top right', 'right top', 'right middle', 'right bottom', 'bottom right', 'bottom center', 'bottom left', 'left top', 'left middle', 'left bottom'];
+function getScrollbarWidth() {
+  var scrollDiv = document.createElement('div');
+  scrollDiv.style.position = 'absolute';
+  scrollDiv.style.top = '-9999px';
+  scrollDiv.style.width = '50px';
+  scrollDiv.style.height = '50px';
+  scrollDiv.style.overflow = 'scroll';
+  document.body.appendChild(scrollDiv);
+  var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+  document.body.removeChild(scrollDiv);
+  return scrollbarWidth;
+}
+function setScrollbarWidth(padding) {
+  document.body.style.paddingRight = padding > 0 ? padding + 'px' : null;
+}
+function isBodyOverflowing() {
+  return document.body.clientWidth < window.innerWidth;
+}
+function getOriginalBodyPadding() {
+  return parseInt(window.getComputedStyle(document.body, null).getPropertyValue('padding-right') || 0, 10);
+}
+function conditionallyUpdateScrollbar() {
+  var scrollbarWidth = getScrollbarWidth();
+  var fixedContent = document.querySelectorAll('.navbar-fixed-top, .navbar-fixed-bottom, .is-fixed')[0];
+  var bodyPadding = fixedContent ? parseInt(fixedContent.style.paddingRight || 0, 10) : 0;
+  if (isBodyOverflowing()) {
+    setScrollbarWidth(bodyPadding + scrollbarWidth);
+  }
+}
+function toHashCode(str) {
+  var hash = 0;
+  if (str.length === 0) {
+    return hash;
+  }
+  for (var i = 0; i < str.length; i += 1) {
+    var char = str.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash = hash & hash;
+  }
+  return hash;
+}
+});
+unwrapExports(tools);
+var tools_1 = tools.getTetherAttachments;
+var tools_3 = tools.setScrollbarWidth;
+var tools_5 = tools.getOriginalBodyPadding;
+var tools_6 = tools.conditionallyUpdateScrollbar;
+var tools_8 = tools.tetherAttachements;
+
 var propTypes$3 = {
   baseClass: PropTypes.string,
   baseClassIn: PropTypes.string,
@@ -10421,7 +10285,7 @@ var defaultProps$50 = {
 var Fade$1 = function (_React$Component) {
   inherits(Fade, _React$Component);
   function Fade(props) {
-    classCallCheck$1(this, Fade);
+    classCallCheck(this, Fade);
     var _this = possibleConstructorReturn(this, (Fade.__proto__ || Object.getPrototypeOf(Fade)).call(this, props));
     _this.state = {
       mounted: !props.transitionAppear
@@ -10529,7 +10393,7 @@ var defaultProps$49 = {
 var ModalUnstyled = function (_React$Component) {
   inherits(ModalUnstyled, _React$Component);
   function ModalUnstyled(props) {
-    classCallCheck$1(this, ModalUnstyled);
+    classCallCheck(this, ModalUnstyled);
     var _this = possibleConstructorReturn(this, (ModalUnstyled.__proto__ || Object.getPrototypeOf(ModalUnstyled)).call(this, props));
     _this.isTransitioning = false;
     _this.onEnter = function () {
@@ -10581,7 +10445,7 @@ var ModalUnstyled = function (_React$Component) {
       }
       var classes = document.body.className.replace('overflow', '');
       document.body.className = mapToCssModules(classnames(classes).trim(), _this.props.cssModule);
-      setScrollbarWidth(_this.originalBodyPadding);
+      tools_3(_this.originalBodyPadding);
     };
     _this.originalBodyPadding = null;
     _this.isBodyOverflowing = false;
@@ -10621,8 +10485,8 @@ var ModalUnstyled = function (_React$Component) {
       this._element.setAttribute('tabindex', '-1');
       this._element.style.position = 'relative';
       this._element.style.zIndex = this.props.zIndex;
-      this.originalBodyPadding = getOriginalBodyPadding();
-      conditionallyUpdateScrollbar();
+      this.originalBodyPadding = tools_5();
+      tools_6();
       document.body.appendChild(this._element);
       document.body.className = mapToCssModules(classnames(classes, 'overflow'), this.props.cssModule);
       this.renderIntoSubtree();
@@ -10825,7 +10689,7 @@ var defaultProps$54 = {
 var NavUnstyled = function (_React$Component) {
   inherits(NavUnstyled, _React$Component);
   function NavUnstyled() {
-    classCallCheck$1(this, NavUnstyled);
+    classCallCheck(this, NavUnstyled);
     return possibleConstructorReturn(this, (NavUnstyled.__proto__ || Object.getPrototypeOf(NavUnstyled)).apply(this, arguments));
   }
   createClass(NavUnstyled, [{
@@ -10885,7 +10749,7 @@ var defaultProps$55 = {
 var NavItem = function (_React$Component) {
   inherits(NavItem, _React$Component);
   function NavItem() {
-    classCallCheck$1(this, NavItem);
+    classCallCheck(this, NavItem);
     return possibleConstructorReturn(this, (NavItem.__proto__ || Object.getPrototypeOf(NavItem)).apply(this, arguments));
   }
   createClass(NavItem, [{
@@ -10915,7 +10779,7 @@ var defaultProps$56 = {
 var NavLink = function (_React$Component) {
   inherits(NavLink, _React$Component);
   function NavLink(props) {
-    classCallCheck$1(this, NavLink);
+    classCallCheck(this, NavLink);
     var _this = possibleConstructorReturn(this, (NavLink.__proto__ || Object.getPrototypeOf(NavLink)).call(this, props));
     _this.onClick = _this.onClick.bind(_this);
     return _this;
@@ -10980,7 +10844,7 @@ var Option = styled.option.withConfig({
 var OutputUnstyled = function (_React$Component) {
   inherits(OutputUnstyled, _React$Component);
   function OutputUnstyled() {
-    classCallCheck$1(this, OutputUnstyled);
+    classCallCheck(this, OutputUnstyled);
     return possibleConstructorReturn(this, (OutputUnstyled.__proto__ || Object.getPrototypeOf(OutputUnstyled)).apply(this, arguments));
   }
   createClass(OutputUnstyled, [{
@@ -11008,7 +10872,7 @@ var defaultProps$58 = { theme: bsTheme };
 var PUnstyled = function (_React$Component) {
   inherits(PUnstyled, _React$Component);
   function PUnstyled() {
-    classCallCheck$1(this, PUnstyled);
+    classCallCheck(this, PUnstyled);
     return possibleConstructorReturn(this, (PUnstyled.__proto__ || Object.getPrototypeOf(PUnstyled)).apply(this, arguments));
   }
   createClass(PUnstyled, [{
@@ -11142,7 +11006,7 @@ var defaultProps$59 = {
 var PaginationUnstyled = function (_React$Component) {
   inherits(PaginationUnstyled, _React$Component);
   function PaginationUnstyled() {
-    classCallCheck$1(this, PaginationUnstyled);
+    classCallCheck(this, PaginationUnstyled);
     return possibleConstructorReturn(this, (PaginationUnstyled.__proto__ || Object.getPrototypeOf(PaginationUnstyled)).apply(this, arguments));
   }
   createClass(PaginationUnstyled, [{
@@ -11181,7 +11045,7 @@ var defaultProps$60 = {
 var PaginationItem = function (_React$Component) {
   inherits(PaginationItem, _React$Component);
   function PaginationItem() {
-    classCallCheck$1(this, PaginationItem);
+    classCallCheck(this, PaginationItem);
     return possibleConstructorReturn(this, (PaginationItem.__proto__ || Object.getPrototypeOf(PaginationItem)).apply(this, arguments));
   }
   createClass(PaginationItem, [{
@@ -11219,7 +11083,7 @@ var defaultProps$61 = {
 var PaginationLink = function (_React$Component) {
   inherits(PaginationLink, _React$Component);
   function PaginationLink() {
-    classCallCheck$1(this, PaginationLink);
+    classCallCheck(this, PaginationLink);
     return possibleConstructorReturn(this, (PaginationLink.__proto__ || Object.getPrototypeOf(PaginationLink)).apply(this, arguments));
   }
   createClass(PaginationLink, [{
@@ -11370,7 +11234,7 @@ var defaultProps$63 = {
 var ProgressUnstyled = function (_React$Component) {
   inherits(ProgressUnstyled, _React$Component);
   function ProgressUnstyled() {
-    classCallCheck$1(this, ProgressUnstyled);
+    classCallCheck(this, ProgressUnstyled);
     return possibleConstructorReturn(this, (ProgressUnstyled.__proto__ || Object.getPrototypeOf(ProgressUnstyled)).apply(this, arguments));
   }
   createClass(ProgressUnstyled, [{
@@ -11404,7 +11268,7 @@ var Progress = styled(ProgressUnstyled).withConfig({
 });
 Progress.defaultProps = defaultProps$63;
 
-var asyncGenerator$2 = function () {
+var asyncGenerator$1 = function () {
   function AwaitValue(value) {
     this.value = value;
   }
@@ -11499,7 +11363,7 @@ var asyncGenerator$2 = function () {
     }
   };
 }();
-var classCallCheck$2 = function (instance, Constructor) {
+var classCallCheck$1 = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
@@ -11522,7 +11386,7 @@ var createClass$1 = function () {
 }();
 var RangeUtils = function () {
   function RangeUtils() {
-    classCallCheck$2(this, RangeUtils);
+    classCallCheck$1(this, RangeUtils);
   }
   createClass$1(RangeUtils, [{
     key: "mapBetween",
@@ -11534,14 +11398,14 @@ var RangeUtils = function () {
   }]);
   return RangeUtils;
 }();
-var index$3 = new RangeUtils();
+var index$2 = new RangeUtils();
 
 var ProgressBar = function (_React$Component) {
   inherits(ProgressBar, _React$Component);
   function ProgressBar() {
     var _ref;
     var _temp, _this, _ret;
-    classCallCheck$1(this, ProgressBar);
+    classCallCheck(this, ProgressBar);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
@@ -11553,7 +11417,7 @@ var ProgressBar = function (_React$Component) {
   createClass(ProgressBar, [{
     key: 'getWidth',
     value: function getWidth(valueNow, valueMin, valueMax) {
-      return index$3.mapBetween(valueNow, valueMin, valueMax) + '%';
+      return index$2.mapBetween(valueNow, valueMin, valueMax) + '%';
     }
   }, {
     key: 'render',
@@ -11607,7 +11471,7 @@ var defaultProps$64 = { theme: bsTheme };
 var RowUnstyled = function (_React$Component) {
   inherits(RowUnstyled, _React$Component);
   function RowUnstyled() {
-    classCallCheck$1(this, RowUnstyled);
+    classCallCheck(this, RowUnstyled);
     return possibleConstructorReturn(this, (RowUnstyled.__proto__ || Object.getPrototypeOf(RowUnstyled)).apply(this, arguments));
   }
   createClass(RowUnstyled, [{
@@ -11649,7 +11513,7 @@ var SelectUnstyled = function (_React$Component) {
   function SelectUnstyled() {
     var _ref;
     var _temp, _this, _ret;
-    classCallCheck$1(this, SelectUnstyled);
+    classCallCheck(this, SelectUnstyled);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
@@ -11702,7 +11566,7 @@ var defaultProps$65 = { theme: bsTheme };
 var SmallUnstyled = function (_React$Component) {
   inherits(SmallUnstyled, _React$Component);
   function SmallUnstyled() {
-    classCallCheck$1(this, SmallUnstyled);
+    classCallCheck(this, SmallUnstyled);
     return possibleConstructorReturn(this, (SmallUnstyled.__proto__ || Object.getPrototypeOf(SmallUnstyled)).apply(this, arguments));
   }
   createClass(SmallUnstyled, [{
@@ -11742,7 +11606,7 @@ var defaultProps$66 = { theme: bsTheme };
 var StrongUnstyled = function (_React$Component) {
   inherits(StrongUnstyled, _React$Component);
   function StrongUnstyled() {
-    classCallCheck$1(this, StrongUnstyled);
+    classCallCheck(this, StrongUnstyled);
     return possibleConstructorReturn(this, (StrongUnstyled.__proto__ || Object.getPrototypeOf(StrongUnstyled)).apply(this, arguments));
   }
   createClass(StrongUnstyled, [{
@@ -11815,7 +11679,7 @@ var defaultProps$67 = {
 var TableUnstyled = function (_React$Component) {
   inherits(TableUnstyled, _React$Component);
   function TableUnstyled() {
-    classCallCheck$1(this, TableUnstyled);
+    classCallCheck(this, TableUnstyled);
     return possibleConstructorReturn(this, (TableUnstyled.__proto__ || Object.getPrototypeOf(TableUnstyled)).apply(this, arguments));
   }
   createClass(TableUnstyled, [{
@@ -11877,7 +11741,7 @@ var Tbody = styled.tbody.withConfig({
 var Thead = function (_React$Component) {
   inherits(Thead, _React$Component);
   function Thead() {
-    classCallCheck$1(this, Thead);
+    classCallCheck(this, Thead);
     return possibleConstructorReturn(this, (Thead.__proto__ || Object.getPrototypeOf(Thead)).apply(this, arguments));
   }
   createClass(Thead, [{
@@ -11913,7 +11777,7 @@ var Tfoot = styled.tfoot.withConfig({
 var Tr = function (_React$Component) {
   inherits(Tr, _React$Component);
   function Tr() {
-    classCallCheck$1(this, Tr);
+    classCallCheck(this, Tr);
     return possibleConstructorReturn(this, (Tr.__proto__ || Object.getPrototypeOf(Tr)).apply(this, arguments));
   }
   createClass(Tr, [{
@@ -11943,7 +11807,7 @@ Tr.propTypes = {
 var Th = function (_React$Component) {
   inherits(Th, _React$Component);
   function Th() {
-    classCallCheck$1(this, Th);
+    classCallCheck(this, Th);
     return possibleConstructorReturn(this, (Th.__proto__ || Object.getPrototypeOf(Th)).apply(this, arguments));
   }
   createClass(Th, [{
@@ -11973,7 +11837,7 @@ Th.propTypes = {
 var Td = function (_React$Component) {
   inherits(Td, _React$Component);
   function Td() {
-    classCallCheck$1(this, Td);
+    classCallCheck(this, Td);
     return possibleConstructorReturn(this, (Td.__proto__ || Object.getPrototypeOf(Td)).apply(this, arguments));
   }
   createClass(Td, [{
@@ -12034,7 +11898,7 @@ var defaultProps$68 = {
 var BadgeUnstyled = function (_React$Component) {
   inherits(BadgeUnstyled, _React$Component);
   function BadgeUnstyled() {
-    classCallCheck$1(this, BadgeUnstyled);
+    classCallCheck(this, BadgeUnstyled);
     return possibleConstructorReturn(this, (BadgeUnstyled.__proto__ || Object.getPrototypeOf(BadgeUnstyled)).apply(this, arguments));
   }
   createClass(BadgeUnstyled, [{
@@ -12095,7 +11959,7 @@ var defaultTetherConfig$1 = {
   constraints: [{ to: 'scrollParent', attachment: 'together none' }, { to: 'window', attachment: 'together none' }]
 };
 var propTypes$7 = {
-  placement: PropTypes.oneOf(tetherAttachements),
+  placement: PropTypes.oneOf(tools_8),
   target: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   isOpen: PropTypes.bool,
   disabled: PropTypes.bool,
@@ -12112,7 +11976,7 @@ var TooltipUnstyled = function (_React$Component) {
   function TooltipUnstyled() {
     var _ref;
     var _temp, _this, _ret;
-    classCallCheck$1(this, TooltipUnstyled);
+    classCallCheck(this, TooltipUnstyled);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
@@ -12161,7 +12025,7 @@ var TooltipUnstyled = function (_React$Component) {
       }
       return document.getElementById(target);
     }, _this.getTetherConfig = function () {
-      var attachments = getTetherAttachments(_this.props.placement);
+      var attachments = tools_1(_this.props.placement);
       return _extends({}, defaultTetherConfig$1, attachments, {
         target: _this.getTarget
       }, _this.props.tether);
@@ -12351,7 +12215,7 @@ var defaultProps$70 = {
 var CardUnstyled = function (_React$Component) {
   inherits(CardUnstyled, _React$Component);
   function CardUnstyled() {
-    classCallCheck$1(this, CardUnstyled);
+    classCallCheck(this, CardUnstyled);
     return possibleConstructorReturn(this, (CardUnstyled.__proto__ || Object.getPrototypeOf(CardUnstyled)).apply(this, arguments));
   }
   createClass(CardUnstyled, [{
@@ -12403,7 +12267,7 @@ var defaultProps$71 = {
 var CardColumnsUnstyled = function (_React$Component) {
   inherits(CardColumnsUnstyled, _React$Component);
   function CardColumnsUnstyled() {
-    classCallCheck$1(this, CardColumnsUnstyled);
+    classCallCheck(this, CardColumnsUnstyled);
     return possibleConstructorReturn(this, (CardColumnsUnstyled.__proto__ || Object.getPrototypeOf(CardColumnsUnstyled)).apply(this, arguments));
   }
   createClass(CardColumnsUnstyled, [{
@@ -12441,7 +12305,7 @@ var defaultProps$72 = {
 var CardDeckUnstyled = function (_React$Component) {
   inherits(CardDeckUnstyled, _React$Component);
   function CardDeckUnstyled() {
-    classCallCheck$1(this, CardDeckUnstyled);
+    classCallCheck(this, CardDeckUnstyled);
     return possibleConstructorReturn(this, (CardDeckUnstyled.__proto__ || Object.getPrototypeOf(CardDeckUnstyled)).apply(this, arguments));
   }
   createClass(CardDeckUnstyled, [{
@@ -12479,7 +12343,7 @@ var defaultProps$73 = {
 var CardGroupUnstyled = function (_React$Component) {
   inherits(CardGroupUnstyled, _React$Component);
   function CardGroupUnstyled() {
-    classCallCheck$1(this, CardGroupUnstyled);
+    classCallCheck(this, CardGroupUnstyled);
     return possibleConstructorReturn(this, (CardGroupUnstyled.__proto__ || Object.getPrototypeOf(CardGroupUnstyled)).apply(this, arguments));
   }
   createClass(CardGroupUnstyled, [{
@@ -12516,7 +12380,7 @@ var defaultProps$74 = {
 var CardBlock = function (_React$Component) {
   inherits(CardBlock, _React$Component);
   function CardBlock() {
-    classCallCheck$1(this, CardBlock);
+    classCallCheck(this, CardBlock);
     return possibleConstructorReturn(this, (CardBlock.__proto__ || Object.getPrototypeOf(CardBlock)).apply(this, arguments));
   }
   createClass(CardBlock, [{
@@ -12547,7 +12411,7 @@ var defaultProps$75 = {
 var CardFooter = function (_React$Component) {
   inherits(CardFooter, _React$Component);
   function CardFooter() {
-    classCallCheck$1(this, CardFooter);
+    classCallCheck(this, CardFooter);
     return possibleConstructorReturn(this, (CardFooter.__proto__ || Object.getPrototypeOf(CardFooter)).apply(this, arguments));
   }
   createClass(CardFooter, [{
@@ -12578,7 +12442,7 @@ var defaultProps$76 = {
 var CardHeader = function (_React$Component) {
   inherits(CardHeader, _React$Component);
   function CardHeader() {
-    classCallCheck$1(this, CardHeader);
+    classCallCheck(this, CardHeader);
     return possibleConstructorReturn(this, (CardHeader.__proto__ || Object.getPrototypeOf(CardHeader)).apply(this, arguments));
   }
   createClass(CardHeader, [{
@@ -12609,7 +12473,7 @@ var defaultProps$77 = {
 var CardImg = function (_React$Component) {
   inherits(CardImg, _React$Component);
   function CardImg() {
-    classCallCheck$1(this, CardImg);
+    classCallCheck(this, CardImg);
     return possibleConstructorReturn(this, (CardImg.__proto__ || Object.getPrototypeOf(CardImg)).apply(this, arguments));
   }
   createClass(CardImg, [{
@@ -12650,7 +12514,7 @@ var defaultProps$78 = {
 var CardImgOverlay = function (_React$Component) {
   inherits(CardImgOverlay, _React$Component);
   function CardImgOverlay() {
-    classCallCheck$1(this, CardImgOverlay);
+    classCallCheck(this, CardImgOverlay);
     return possibleConstructorReturn(this, (CardImgOverlay.__proto__ || Object.getPrototypeOf(CardImgOverlay)).apply(this, arguments));
   }
   createClass(CardImgOverlay, [{
@@ -12681,7 +12545,7 @@ var defaultProps$79 = {
 var CardLink = function (_React$Component) {
   inherits(CardLink, _React$Component);
   function CardLink() {
-    classCallCheck$1(this, CardLink);
+    classCallCheck(this, CardLink);
     return possibleConstructorReturn(this, (CardLink.__proto__ || Object.getPrototypeOf(CardLink)).apply(this, arguments));
   }
   createClass(CardLink, [{
@@ -12715,7 +12579,7 @@ var defaultProps$80 = {
 var CardSubtitle = function (_React$Component) {
   inherits(CardSubtitle, _React$Component);
   function CardSubtitle() {
-    classCallCheck$1(this, CardSubtitle);
+    classCallCheck(this, CardSubtitle);
     return possibleConstructorReturn(this, (CardSubtitle.__proto__ || Object.getPrototypeOf(CardSubtitle)).apply(this, arguments));
   }
   createClass(CardSubtitle, [{
@@ -12746,7 +12610,7 @@ var defaultProps$81 = {
 var CardText = function (_React$Component) {
   inherits(CardText, _React$Component);
   function CardText() {
-    classCallCheck$1(this, CardText);
+    classCallCheck(this, CardText);
     return possibleConstructorReturn(this, (CardText.__proto__ || Object.getPrototypeOf(CardText)).apply(this, arguments));
   }
   createClass(CardText, [{
@@ -12777,7 +12641,7 @@ var defaultProps$82 = {
 var CardTitle = function (_React$Component) {
   inherits(CardTitle, _React$Component);
   function CardTitle() {
-    classCallCheck$1(this, CardTitle);
+    classCallCheck(this, CardTitle);
     return possibleConstructorReturn(this, (CardTitle.__proto__ || Object.getPrototypeOf(CardTitle)).apply(this, arguments));
   }
   createClass(CardTitle, [{
@@ -12808,7 +12672,7 @@ var defaultProps$83 = {
 var CardBlockquote = function (_React$Component) {
   inherits(CardBlockquote, _React$Component);
   function CardBlockquote() {
-    classCallCheck$1(this, CardBlockquote);
+    classCallCheck(this, CardBlockquote);
     return possibleConstructorReturn(this, (CardBlockquote.__proto__ || Object.getPrototypeOf(CardBlockquote)).apply(this, arguments));
   }
   createClass(CardBlockquote, [{
@@ -12839,7 +12703,7 @@ var defaultProps$84 = {
 var Accordion = function (_React$Component) {
   inherits(Accordion, _React$Component);
   function Accordion() {
-    classCallCheck$1(this, Accordion);
+    classCallCheck(this, Accordion);
     return possibleConstructorReturn(this, (Accordion.__proto__ || Object.getPrototypeOf(Accordion)).apply(this, arguments));
   }
   createClass(Accordion, [{
@@ -12910,7 +12774,7 @@ Accordion.defaultProps = defaultProps$84;
 var AccordionGroup = function (_React$Component) {
   inherits(AccordionGroup, _React$Component);
   function AccordionGroup() {
-    classCallCheck$1(this, AccordionGroup);
+    classCallCheck(this, AccordionGroup);
     return possibleConstructorReturn(this, (AccordionGroup.__proto__ || Object.getPrototypeOf(AccordionGroup)).apply(this, arguments));
   }
   createClass(AccordionGroup, [{
@@ -12955,6 +12819,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.defaultProps = undefined;
 exports.customForms = customForms;
+var _unitUtils2 = _interopRequireDefault(unitUtils);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var defaultProps = exports.defaultProps = {
   '$enable-rounded': true,
   '$enable-shadows': false,
@@ -13099,9 +12965,9 @@ function customForms() {
   Object.keys($customFileText['button-label']).forEach(function ($lang) {
     customFileControlAfterList.push('\n      &:lang(' + $lang + ')::before {\n        content: "' + $customFileText['button-label'][$lang] + '";\n      }\n    ');
   });
-  var selectBorderWidth = _bootstrapStyledUtils.unitUtils.math.multiply($borderWidth, 2);
-  var customSelectPaddingRight = _bootstrapStyledUtils.unitUtils.math.addition($customSelectPaddingY, $customSelectIndicatorPadding);
-  var lineHeightBaseMinusCustomControlIndicatorSize = _bootstrapStyledUtils.unitUtils.math.subtract($lineHeightBase, $customControlIndicatorSize);
+  var selectBorderWidth = _unitUtils2.default.math.multiply($borderWidth, 2);
+  var customSelectPaddingRight = _unitUtils2.default.math.addition($customSelectPaddingY, $customSelectIndicatorPadding);
+  var lineHeightBaseMinusCustomControlIndicatorSize = _unitUtils2.default.math.subtract($lineHeightBase, $customControlIndicatorSize);
   return '\n    /* Embedded icons from Open Iconic. */\n    /* Released under MIT and copyright 2014 Waybury. */\n    /* https://useiconic.com/open */\n    \n    \n    /* Checkboxes and radios */\n    /* Base class takes care of all the key behavioral aspects. */\n    \n    & .custom-control {\n      position: relative;\n      display: inline-flex;\n      min-height: calc(1rem * ' + $lineHeightBase + ');\n      padding-left: ' + $customControlGutter + ';\n      margin-right: ' + $customControlSpacerX + ';\n    }\n    \n    & .custom-control-input {\n      position: absolute;\n      z-index: -1; /* Put the input behind the label so it does not overlay text */\n      opacity: 0;\n    \n      &:checked ~ .custom-control-indicator {\n        color: ' + $customControlCheckedIndicatorColor + ';\n        background-color: ' + $customControlCheckedIndicatorBg + ';\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $customControlCheckedIndicatorBoxShadow) + '\n      }\n    \n      &:focus ~ .custom-control-indicator {\n        /* the mixin is not used here to make sure there is feedback */\n        box-shadow: ' + $customControlFocusIndicatorBoxShadow + ';\n      }\n    \n      &:active ~ .custom-control-indicator {\n        color: ' + $customControlActiveIndicatorColor + ';\n        background-color: ' + $customControlActiveIndicatorBg + ';\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $customControlActiveIndicatorBoxShadow) + '\n      }\n    \n      &:disabled {\n        ~ .custom-control-indicator {\n          cursor: ' + $customControlDisabledCursor + ';\n          background-color: ' + $customControlDisabledIndicatorBg + ';\n        }\n    \n        ~ .custom-control-description {\n          color: ' + $customControlDisabledDescriptionColor + ';\n          cursor: ' + $customControlDisabledCursor + ';\n        }\n      }\n    }\n    \n    /* Custom indicator */\n    /* Generates a shadow element to create our makeshift checkbox/radio background. */\n    \n    & .custom-control-indicator {\n      position: absolute;\n      top: calc(' + lineHeightBaseMinusCustomControlIndicatorSize + ' / 2);\n      left: 0;\n      display: block;\n      width: ' + $customControlIndicatorSize + ';\n      height: ' + $customControlIndicatorSize + ';\n      pointer-events: none;\n      user-select: none;\n      background-color: ' + $customControlIndicatorBg + ';\n      background-repeat: no-repeat;\n      background-position: center center;\n      background-size: ' + $customControlIndicatorBgSize + ';\n      ' + (0, boxShadow_1.boxShadow)($enableShadows, $customControlIndicatorBoxShadow) + '\n    }\n    \n    /* Checkboxes */\n    /* Tweak just a few things for checkboxes.  */\n    \n    & .custom-checkbox {\n      & .custom-control-indicator {\n        ' + (0, borderRadius_1.borderRadius)($enableRounded, $customCheckboxRadius) + '\n      }\n    \n      & .custom-control-input:checked ~ .custom-control-indicator {\n        background-image: ' + $customCheckboxCheckedIcon + ';\n      }\n    \n      & .custom-control-input.indeterminate ~ .custom-control-indicator {\n        background-color: ' + $customCheckboxIndeterminateBg + ';\n        background-image: ' + $customCheckboxIndeterminateIcon + ';\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $customCheckboxIndeterminateBoxShadow) + '\n      }\n    }\n    \n    /* Radios */\n    /* Tweak just a few things for radios. */\n    \n    & .custom-radio {\n      & .custom-control-indicator {\n        border-radius: ' + $customRadioRadius + ';\n      }\n    \n      & .custom-control-input:checked ~ .custom-control-indicator {\n        background-image: ' + $customRadioCheckedIcon + ';\n      }\n    }\n    \n    \n    /* Layout options */\n    /* By default radios and checkboxes are inline-block with no additional spacing */\n    /* set. Use these optional classes to tweak the layout. */\n    \n    & .custom-controls-stacked {\n      display: flex;\n      flex-direction: column;\n    \n      & .custom-control {\n        margin-bottom: ' + $customControlSpacerY + ';\n    \n        + & .custom-control {\n          margin-left: 0;\n        }\n      }\n    }\n    \n    \n    /* Select */\n    /* Replaces the browser default select with a custom one, mostly pulled from */\n    /* http://primercss.io. */\n    \n    & .custom-select {\n      display: inline-block;\n      max-width: 100%;\n      height: calc(' + $inputHeight + ' + ' + selectBorderWidth + ');\n      padding: ' + $customSelectPaddingY + ' ' + customSelectPaddingRight + ' ' + $customSelectPaddingY + ' ' + $customSelectPaddingX + ';\n      line-height: ' + $customSelectLineHeight + ';\n      color: ' + $customSelectColor + ';\n      vertical-align: middle;\n      background: ' + $customSelectBg + ' ' + $customSelectIndicator + ' no-repeat right ' + $customSelectPaddingX + ' center;\n      background-size: ' + $customSelectBgSize + ';\n      border: ' + $customSelectBorderWidth + ' solid ' + $customSelectBorderColor + ';\n      ' + (0, borderRadius_1.borderRadius)($enableRounded, $customSelectBorderRadius) + '\n      /* Use vendor prefixes as appearance is not part of the CSS spec.  */\n      -moz-appearance: none;\n      -webkit-appearance: none;\n    \n      &:focus {\n        border-color: ' + $customSelectFocusBorderColor + ';\n        outline: none;\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $customSelectFocusBoxShadow) + '\n    \n        ::-ms-value {\n          /* For visual consistency with other platforms/browsers, */\n          /* supress the default white text on blue background highlight given to */\n          /* the selected option text when the (still closed) <select> receives focus */\n          /* in IE and (under certain conditions) Edge. */\n          /* See https://github.com/twbs/bootstrap/issues/19398. */\n          color: ' + $inputColor + ';\n          background-color: ' + $inputBg + ';\n        }\n      }\n    \n      &:disabled {\n        color: ' + $customSelectDisabledColor + ';\n        cursor: ' + $cursorDisabled + ';\n        background-color: ' + $customSelectDisabledBg + ';\n      }\n    \n      /* Hides the default caret in IE11 */\n      ::-ms-expand {\n        opacity: 0;\n      }\n    }\n    \n    & .custom-select-sm {\n      padding-top: ' + $customSelectPaddingY + ';\n      padding-bottom: ' + $customSelectPaddingY + ';\n      font-size: ' + $customSelectSmFontSize + ';\n    \n      /* &:not([multiple]) { */\n      /*   height: 26px; */\n      /*   min-height: 26px; */\n      /* } */\n    }\n    \n    \n    /* File */\n    /* Custom file input. */\n    \n    & .custom-file {\n      position: relative;\n      display: inline-block;\n      max-width: 100%;\n      height: ' + $customFileHeight + ';\n      margin-bottom: 0;\n    }\n    \n    & .custom-file-input {\n      min-width: ' + $customFileWidth + ';\n      max-width: 100%;\n      height: ' + $customFileHeight + ';\n      margin: 0;\n      opacity: 0;\n    \n      &:focus ~ .custom-file-control {\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $customFileFocusBoxShadow) + '\n      }\n    }\n    \n    & .custom-file-control {\n      position: absolute;\n      top: 0;\n      right: 0;\n      left: 0;\n      z-index: 5;\n      height: ' + $customFileHeight + ';\n      padding: ' + $customFilePaddingX + ' ' + $customFilePaddingY + ';\n      line-height: ' + $customFileLineHeight + ';\n      color: ' + $customFileColor + ';\n      pointer-events: none;\n      user-select: none;\n      background-color: ' + $customFileBg + ';\n      border: ' + $customFileBorderWidth + ' solid ' + $customFileBorderColor + ';\n      ' + (0, borderRadius_1.borderRadius)($enableRounded, $customFileBorderRadius) + '\n      ' + (0, boxShadow_1.boxShadow)($enableShadows, $customFileBoxShadow) + '\n      \n      ' + customFileControlBeforeList.join('\n') + '\n    \n      &::before {\n        position: absolute;\n        top: ' + $customFileBorderWidth + ';\n        right: ' + $customFileBorderWidth + ';\n        bottom: ' + $customFileBorderWidth + ';\n        z-index: 6;\n        display: block;\n        height: ' + $customFileHeight + ';\n        padding: ' + $customFilePaddingX + ' ' + $customFilePaddingY + ';\n        line-height: ' + $customFileLineHeight + ';\n        color: ' + $customFileButtonColor + ';\n        background-color: ' + $customFileButtonBg + ';\n        border: ' + $customFileBorderWidth + ' solid ' + $customFileBorderColor + ';\n        ' + (0, borderRadius_1.borderRadius)(0, $enableRounded, $customFileBorderRadius, $customFileBorderRadius, 0) + '\n      }\n\n      ' + customFileControlAfterList.join('\n') + '\n    }\n  ';
 }
 exports.default = {
@@ -13119,7 +12985,7 @@ var selectBorderWidth = unitUtils$1.math.multiply(bsTheme['$border-width'], 2);
 var FormUnstyled = function (_React$Component) {
   inherits(FormUnstyled, _React$Component);
   function FormUnstyled() {
-    classCallCheck$1(this, FormUnstyled);
+    classCallCheck(this, FormUnstyled);
     return possibleConstructorReturn(this, (FormUnstyled.__proto__ || Object.getPrototypeOf(FormUnstyled)).apply(this, arguments));
   }
   createClass(FormUnstyled, [{
@@ -13160,7 +13026,7 @@ var defaultProps$86 = {
 var FormGroup = function (_React$Component) {
   inherits(FormGroup, _React$Component);
   function FormGroup() {
-    classCallCheck$1(this, FormGroup);
+    classCallCheck(this, FormGroup);
     return possibleConstructorReturn(this, (FormGroup.__proto__ || Object.getPrototypeOf(FormGroup)).apply(this, arguments));
   }
   createClass(FormGroup, [{
@@ -13201,7 +13067,7 @@ var defaultProps$87 = {
 var FormText = function (_React$Component) {
   inherits(FormText, _React$Component);
   function FormText() {
-    classCallCheck$1(this, FormText);
+    classCallCheck(this, FormText);
     return possibleConstructorReturn(this, (FormText.__proto__ || Object.getPrototypeOf(FormText)).apply(this, arguments));
   }
   createClass(FormText, [{
@@ -13236,7 +13102,7 @@ var defaultProps$88 = {
 var FormFeedback = function (_React$Component) {
   inherits(FormFeedback, _React$Component);
   function FormFeedback() {
-    classCallCheck$1(this, FormFeedback);
+    classCallCheck(this, FormFeedback);
     return possibleConstructorReturn(this, (FormFeedback.__proto__ || Object.getPrototypeOf(FormFeedback)).apply(this, arguments));
   }
   createClass(FormFeedback, [{
@@ -13264,7 +13130,7 @@ FormFeedback.defaultProps = defaultProps$88;
 var FormCustom = function (_React$Component) {
   inherits(FormCustom, _React$Component);
   function FormCustom() {
-    classCallCheck$1(this, FormCustom);
+    classCallCheck(this, FormCustom);
     return possibleConstructorReturn(this, (FormCustom.__proto__ || Object.getPrototypeOf(FormCustom)).apply(this, arguments));
   }
   createClass(FormCustom, [{
@@ -13320,7 +13186,7 @@ var getToggleableClass = function getToggleableClass(toggleable) {
 var NavbarUnstyled = function (_React$Component) {
   inherits(NavbarUnstyled, _React$Component);
   function NavbarUnstyled() {
-    classCallCheck$1(this, NavbarUnstyled);
+    classCallCheck(this, NavbarUnstyled);
     return possibleConstructorReturn(this, (NavbarUnstyled.__proto__ || Object.getPrototypeOf(NavbarUnstyled)).apply(this, arguments));
   }
   createClass(NavbarUnstyled, [{
@@ -13449,7 +13315,7 @@ var defaultProps$93 = {
 var ContainerUnstyled = function (_React$Component) {
   inherits(ContainerUnstyled, _React$Component);
   function ContainerUnstyled() {
-    classCallCheck$1(this, ContainerUnstyled);
+    classCallCheck(this, ContainerUnstyled);
     return possibleConstructorReturn(this, (ContainerUnstyled.__proto__ || Object.getPrototypeOf(ContainerUnstyled)).apply(this, arguments));
   }
   createClass(ContainerUnstyled, [{
@@ -13480,7 +13346,7 @@ var defaultProps$94 = {
 var ContainerFluidUnstyled = function (_React$Component) {
   inherits(ContainerFluidUnstyled, _React$Component);
   function ContainerFluidUnstyled() {
-    classCallCheck$1(this, ContainerFluidUnstyled);
+    classCallCheck(this, ContainerFluidUnstyled);
     return possibleConstructorReturn(this, (ContainerFluidUnstyled.__proto__ || Object.getPrototypeOf(ContainerFluidUnstyled)).apply(this, arguments));
   }
   createClass(ContainerFluidUnstyled, [{
@@ -15207,7 +15073,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
       if (typeSpecs.hasOwnProperty(typeSpecName)) {
         var error;
         try {
-          invariant$2(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, typeof typeSpecs[typeSpecName]);
+          invariant$2(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', componentName || 'React class', location, typeSpecName);
           error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret$3);
         } catch (ex) {
           error = ex;
@@ -15251,8 +15117,7 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
     objectOf: createObjectOfTypeChecker,
     oneOf: createEnumTypeChecker,
     oneOfType: createUnionTypeChecker,
-    shape: createShapeTypeChecker,
-    exact: createStrictShapeTypeChecker,
+    shape: createShapeTypeChecker
   };
   function is(x, y) {
     if (x === y) {
@@ -15425,7 +15290,7 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
       if (typeof checker !== 'function') {
         warning_1$2(
           false,
-          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
+          'Invalid argument supplid to oneOfType. Expected an array of check functions, but ' +
           'received %s at index %s.',
           getPostfixForTypeWarning(checker),
           i
@@ -15464,32 +15329,6 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
         var checker = shapeTypes[key];
         if (!checker) {
           continue;
-        }
-        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1$2);
-        if (error) {
-          return error;
-        }
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-  function createStrictShapeTypeChecker(shapeTypes) {
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      var propType = getPropType(propValue);
-      if (propType !== 'object') {
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-      }
-      var allKeys = objectAssign({}, props[propName], shapeTypes);
-      for (var key in allKeys) {
-        var checker = shapeTypes[key];
-        if (!checker) {
-          return new PropTypeError(
-            'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
-            '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
-            '\nValid keys: ' +  JSON.stringify(Object.keys(shapeTypes), null, '  ')
-          );
         }
         var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1$2);
         if (error) {
@@ -15618,7 +15457,7 @@ var isValidElement = ReactElement_1.isValidElement;
 var ReactPropTypes = factory_1(isValidElement);
 
 'use strict';
-var ReactVersion = '15.6.2';
+var ReactVersion = '15.6.1';
 
 'use strict';
 {
@@ -16244,7 +16083,7 @@ var defaultProps$96 = {
 var OffsetNavUnstyled = function (_React$Component) {
   inherits(OffsetNavUnstyled, _React$Component);
   function OffsetNavUnstyled() {
-    classCallCheck$1(this, OffsetNavUnstyled);
+    classCallCheck(this, OffsetNavUnstyled);
     return possibleConstructorReturn(this, (OffsetNavUnstyled.__proto__ || Object.getPrototypeOf(OffsetNavUnstyled)).apply(this, arguments));
   }
   createClass(OffsetNavUnstyled, [{
@@ -16311,7 +16150,7 @@ var defaultProps$97 = { theme: bsTheme };
 var OverlayUnstyled = function (_React$Component) {
   inherits(OverlayUnstyled, _React$Component);
   function OverlayUnstyled() {
-    classCallCheck$1(this, OverlayUnstyled);
+    classCallCheck(this, OverlayUnstyled);
     return possibleConstructorReturn(this, (OverlayUnstyled.__proto__ || Object.getPrototypeOf(OverlayUnstyled)).apply(this, arguments));
   }
   createClass(OverlayUnstyled, [{
@@ -16357,7 +16196,7 @@ var HeaderNavBar = function (_React$Component) {
   function HeaderNavBar() {
     var _ref;
     var _temp, _this, _ret;
-    classCallCheck$1(this, HeaderNavBar);
+    classCallCheck(this, HeaderNavBar);
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
@@ -16525,7 +16364,7 @@ var defaultProps$98 = { theme: bsTheme };
 var PageWrapperUnstyled = function (_React$Component) {
   inherits(PageWrapperUnstyled, _React$Component);
   function PageWrapperUnstyled() {
-    classCallCheck$1(this, PageWrapperUnstyled);
+    classCallCheck(this, PageWrapperUnstyled);
     return possibleConstructorReturn(this, (PageWrapperUnstyled.__proto__ || Object.getPrototypeOf(PageWrapperUnstyled)).apply(this, arguments));
   }
   createClass(PageWrapperUnstyled, [{
@@ -16558,5 +16397,5 @@ var PageWrapper = styled(PageWrapperUnstyled).withConfig({
 });
 PageWrapper.defaultProps = defaultProps$98;
 
-export { bsTheme as theme, makeTheme$$1 as makeTheme, A, composeLink, Abbr, Address, index$1 as Alert, Area, Article, Blockquote, BootstrapProvider, Breadcrumb, BreadcrumbItem, Button, ButtonDropdown, ButtonGroup, ButtonToolbar, Caption, Close, Code, Col, Collapse, Dd, Dfn, Details, Dl, Dt, index$2 as Fade, Fa, FaStacked, Fieldset, Footer, H1, H2, H3, H4, H5, H6, Header, Hr, Img, Figure, FigCaption, Input, InputGroup, InputGroupAddon, InputGroupButton, IssueIcon, Kbd, Jumbotron, Label, Legend, Li, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemHeading$2 as ListGroupItemText, Map$2 as Map, Mark, Media, Modal, ModalBody, ModalFooter, ModalHeader, Nav, NavLink, NavItem, Ol, Option, Output, P, Pagination, PaginationItem, PaginationLink, Pre, Progress, ProgressBar, Row, Samp, Section, Select, Small, Strong, Summary, Sub, Sup, Table, Tbody, Tfoot, Thead, Td, Th, Tr, Badge, Textarea, Tooltip, Ul, Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote, Accordion, AccordionGroup, Form, FormGroup, FormText, FormFeedback, FormCustom, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Navbar, NavbarToggler, NavbarBrand, NavDropdown, Container, ContainerFluid, HeaderNavBar, PageWrapper, OffsetNavPush, OffsetNavSlide };
+export { bsTheme as theme, makeTheme$$1 as makeTheme, A, composeLink, Abbr, Address, index as Alert, Area, Article, Blockquote, BootstrapProvider, Breadcrumb, BreadcrumbItem, Button, ButtonDropdown, ButtonGroup, ButtonToolbar, Caption, Close, Code, Col, Collapse, Dd, Dfn, Details, Dl, Dt, index$1 as Fade, Fa, FaStacked, Fieldset, Footer, H1, H2, H3, H4, H5, H6, Header, Hr, Img, Figure, FigCaption, Input, InputGroup, InputGroupAddon, InputGroupButton, IssueIcon, Kbd, Jumbotron, Label, Legend, Li, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemHeading$2 as ListGroupItemText, Map$2 as Map, Mark, Media, Modal, ModalBody, ModalFooter, ModalHeader, Nav, NavLink, NavItem, Ol, Option, Output, P, Pagination, PaginationItem, PaginationLink, Pre, Progress, ProgressBar, Row, Samp, Section, Select, Small, Strong, Summary, Sub, Sup, Table, Tbody, Tfoot, Thead, Td, Th, Tr, Badge, Textarea, Tooltip, Ul, Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote, Accordion, AccordionGroup, Form, FormGroup, FormText, FormFeedback, FormCustom, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Navbar, NavbarToggler, NavbarBrand, NavDropdown, Container, ContainerFluid, HeaderNavBar, PageWrapper, OffsetNavPush, OffsetNavSlide };
 //# sourceMappingURL=bootstrap-styled.es.js.map

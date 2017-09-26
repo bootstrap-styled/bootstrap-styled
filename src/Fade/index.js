@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
 import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import omit from 'lodash.omit';
-import { parseTransition } from 'bootstrap-styled-utils';
+import parseTransition from 'bootstrap-styled-utils/lib/parseTransition';
 import themeBs from '../theme';
 
 const defaultProps = {
