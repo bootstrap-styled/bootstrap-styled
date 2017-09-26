@@ -41,6 +41,12 @@ const plugins = [
   nodeResolve(),
   commonjs({
     include: 'node_modules/**',
+    namedExports: {
+      // left-hand side can be an absolute path, a path
+      // relative to the current directory, or the name
+      // of a module in node_modules
+      'bootstrap-styled-utils': ['named'],
+    },
   }),
   replace({
     'process.env.NODE_ENV': JSON.stringify(prod ? 'production' : 'development'),

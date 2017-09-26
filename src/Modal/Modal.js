@@ -9,7 +9,7 @@ import {
   getOriginalBodyPadding,
   conditionallyUpdateScrollbar,
   setScrollbarWidth,
-} from 'bootstrap-styled-utils';
+} from 'bootstrap-styled-utils/lib/tools';
 import mapToCssModules from 'map-to-css-modules';
 import { transition } from 'bootstrap-styled-mixins/lib/transition';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
