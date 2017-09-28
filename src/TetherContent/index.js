@@ -104,7 +104,7 @@ class TetherContent extends React.Component {// eslint-disable-line react/prefer
     this.tether = new Tether(this.getTetherConfig());
     this.props.tetherRef(this.tether);
     this.tether.position();
-    this.element.childNodes[0].focus();
+    // this.element.childNodes[0].focus();
   }
 
   toggle = (e) => {

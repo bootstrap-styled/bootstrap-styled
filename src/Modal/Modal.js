@@ -175,7 +175,9 @@ class ModalUnstyled extends React.Component {
 
     // check if modal should receive focus
     if (this._focus) {  // eslint-disable-line no-underscore-dangle
-      this._dialog.parentNode.focus();  // eslint-disable-line no-underscore-dangle
+      if (this._dialog && this._dialog.parentNode && typeof this._dialog.parentNode.focus === 'function') { // eslint-disable-line no-underscore-dangle
+        this._dialog.parentNode.focus(); // eslint-disable-line no-underscore-dangle
+      }
       this._focus = false;  // eslint-disable-line no-underscore-dangle
     }
   }

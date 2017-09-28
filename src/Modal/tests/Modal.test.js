@@ -7,6 +7,8 @@ import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
 import Modal from '../Modal';
 
+const children = <span>Yo!</span>;
+
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
     <Modal {...props} />
@@ -30,51 +32,42 @@ describe('<Modal />', () => {
   it('should render with the class "modal-dialog"', () => {
     isOpen = true;
     const wrapper = mount(
-      <Modal isOpen={isOpen} onBackdrop={toggle}>
-        Yo!
-      </Modal>
+      <Modal isOpen={isOpen} onBackdrop={toggle} />
     );
-
-    expect(wrapper.children().length).toBe(0);
     expect(document.getElementsByClassName('modal-dialog').length).toBe(1);
     wrapper.unmount();
   });
-
   it('should render with the backdrop with the class "modal-backdrop" by default', () => {
     isOpen = true;
     const wrapper = mount(
-      <Modal isOpen={isOpen} onBackdrop={toggle}>
-        Yo!
-      </Modal>
+      <Modal isOpen={isOpen} onBackdrop={toggle} />
     );
-
-    expect(wrapper.children().length).toBe(0);
     expect(document.getElementsByClassName('modal-backdrop').length).toBe(1);
     wrapper.unmount();
   });
-
+  it('should render with no children', () => {
+    isOpen = true;
+    const wrapper = mount(
+      <Modal isOpen={isOpen} onBackdrop={toggle}>
+        {children}
+      </Modal>
+    );
+    expect(wrapper.find('ModalUnstyled').contains(children)).toBe(false);
+    wrapper.unmount();
+  });
   it('should render with the backdrop with the class "modal-backdrop" when backdrop is "static"', () => {
     isOpen = true;
     const wrapper = mount(
-      <Modal isOpen={isOpen} onBackdrop={toggle} backdrop="static">
-        Yo!
-      </Modal>
+      <Modal isOpen={isOpen} onBackdrop={toggle} backdrop="static" />
     );
-
-    expect(wrapper.children().length).toBe(0);
     expect(document.getElementsByClassName('modal-backdrop').length).toBe(1);
     wrapper.unmount();
   });
-
   it('should not render with the backdrop with the class "modal-backdrop" when backdrop is "false"', () => {
     isOpen = true;
     const wrapper = mount(
-      <Modal isOpen={isOpen} onBackdrop={toggle} backdrop={false}>
-        Yo!
-      </Modal>
+      <Modal isOpen={isOpen} onBackdrop={toggle} backdrop={false} />
     );
-
-    expect(wrapper.children().length).toBe(0);
     expect(document.getElementsByClassName('modal-dialog').length).toBe(1);
     expect(document.getElementsByClassName('modal-backdrop').length).toBe(0);
     wrapper.unmount();
@@ -83,12 +76,8 @@ describe('<Modal />', () => {
   it('should render with class "modal-dialog" and have custom class name if provided', () => {
     isOpen = true;
     const wrapper = mount(
-      <Modal isOpen={isOpen} onBackdrop={toggle} className="my-custom-modal">
-        Yo!
-      </Modal>
+      <Modal isOpen={isOpen} onBackdrop={toggle} className="my-custom-modal" />
     );
-
-    expect(wrapper.children().length).toBe(0);
     expect(document.getElementsByClassName('modal-dialog').length).toBe(1);
     expect(document.getElementsByClassName('my-custom-modal').length).toBe(1);
     wrapper.unmount();
@@ -97,12 +86,8 @@ describe('<Modal />', () => {
   it('should render with class "modal" and have custom class name if provided with modalClassName', () => {
     isOpen = true;
     const wrapper = mount(
-      <Modal isOpen={isOpen} onBackdrop={toggle} modalClassName="my-custom-modal">
-        Yo!
-      </Modal>
+      <Modal isOpen={isOpen} onBackdrop={toggle} modalClassName="my-custom-modal" />
     );
-
-    expect(wrapper.children().length).toBe(0);
     expect(document.querySelectorAll('.modal.my-custom-modal').length).toBe(1);
     wrapper.unmount();
   });
@@ -110,12 +95,8 @@ describe('<Modal />', () => {
   it('should render with custom class name if provided with wrapClassName', () => {
     isOpen = true;
     const wrapper = mount(
-      <Modal isOpen={isOpen} onBackdrop={toggle} wrapClassName="my-custom-modal">
-        Yo!
-      </Modal>
+      <Modal isOpen={isOpen} onBackdrop={toggle} wrapClassName="my-custom-modal" />
     );
-
-    expect(wrapper.children().length).toBe(0);
     expect(document.getElementsByClassName('my-custom-modal').length).toBe(1);
     wrapper.unmount();
   });
@@ -123,12 +104,8 @@ describe('<Modal />', () => {
   it('should render with class "modal-content" and have custom class name if provided with contentClassName', () => {
     isOpen = true;
     const wrapper = mount(
-      <Modal isOpen={isOpen} onBackdrop={toggle} contentClassName="my-custom-modal">
-        Yo!
-      </Modal>
+      <Modal isOpen={isOpen} onBackdrop={toggle} contentClassName="my-custom-modal" />
     );
-
-    expect(wrapper.children().length).toBe(0);
     expect(document.querySelectorAll('.modal-content.my-custom-modal').length).toBe(1);
     wrapper.unmount();
   });
@@ -136,12 +113,8 @@ describe('<Modal />', () => {
   it('should render with class "modal-backdrop" and have custom class name if provided with backdropClassName', () => {
     isOpen = true;
     const wrapper = mount(
-      <Modal isOpen={isOpen} onBackdrop={toggle} backdropClassName="my-custom-modal">
-        Yo!
-      </Modal>
+      <Modal isOpen={isOpen} onBackdrop={toggle} backdropClassName="my-custom-modal" />
     );
-
-    expect(wrapper.children().length).toBe(0);
     expect(document.querySelectorAll('.modal-backdrop.my-custom-modal').length).toBe(1);
     wrapper.unmount();
   });
@@ -149,12 +122,8 @@ describe('<Modal />', () => {
   it('should render with the class modal-md when size is passed', () => {
     isOpen = true;
     const wrapper = mount(
-      <Modal isOpen={isOpen} onBackdrop={toggle} size="md">
-        Yo!
-      </Modal>
+      <Modal isOpen={isOpen} onBackdrop={toggle} size="md" />
     );
-
-    expect(wrapper.children().length).toBe(0);
     expect(document.getElementsByClassName('modal-dialog').length).toBe(1);
     expect(document.getElementsByClassName('modal-md').length).toBe(1);
     wrapper.unmount();
@@ -163,12 +132,8 @@ describe('<Modal />', () => {
   it('should render modal when isOpen is true', () => {
     isOpen = true;
     const wrapper = mount(
-      <Modal isOpen={isOpen} onBackdrop={toggle}>
-        Yo!
-      </Modal>
+      <Modal isOpen={isOpen} onBackdrop={toggle} />
     );
-
-    expect(wrapper.children().length).toBe(0);
     expect(document.getElementsByClassName('modal').length).toBe(1);
     expect(document.getElementsByClassName('modal-backdrop').length).toBe(1);
     wrapper.unmount();
@@ -176,12 +141,8 @@ describe('<Modal />', () => {
 
   it('should not render modal when isOpen is false', () => {
     const wrapper = mount(
-      <Modal isOpen={isOpen} onBackdrop={toggle}>
-        Yo!
-      </Modal>
+      <Modal isOpen={isOpen} onBackdrop={toggle} />
     );
-
-    expect(wrapper.children().length).toBe(0);
     expect(document.getElementsByClassName('modal').length).toBe(0);
     expect(document.getElementsByClassName('modal-backdrop').length).toBe(0);
     wrapper.unmount();
@@ -191,13 +152,9 @@ describe('<Modal />', () => {
     const wrapper = mount(
       <div>
         <button onClick={toggle} />
-        <Modal isOpen={isOpen} onBackdrop={toggle}>
-          Yo!
-        </Modal>
+        <Modal isOpen={isOpen} onBackdrop={toggle} />
       </div>
     );
-
-    expect(isOpen).toBe(false);
     expect(document.getElementsByClassName('modal').length).toBe(0);
     expect(document.getElementsByClassName('modal-backdrop').length).toBe(0);
     wrapper.find('button').simulate('click');

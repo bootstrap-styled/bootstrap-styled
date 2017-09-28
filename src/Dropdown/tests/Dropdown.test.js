@@ -61,7 +61,7 @@ describe('Dropdown', () => {
     expect(renderedComponent.find('.dropdown').length).toBe(1);
   });
 
-  it('should render multiple children when isOpen is true', () => {
+  it('should render children when isOpen is true', () => {
     isOpen = true;
     const renderedComponent = mount(
       <Dropdown isOpen={isOpen} toggle={toggle}>
@@ -73,9 +73,9 @@ describe('Dropdown', () => {
     );
 
     expect(renderedComponent.find('.btn').text()).toBe('Toggle');
-    expect(renderedComponent.find('.dropdown').length).toBe(1);
-    expect(renderedComponent.find('.dropdown-item').length).toBe(1);
-    expect(renderedComponent.children().length).toBe(2);
+    expect(renderedComponent.find('Dropdown').length).toBe(1);
+    expect(renderedComponent.find('DropdownItem').length).toBe(1);
+    expect(renderedComponent.children().length).toBe(1);
   });
 
   it('should not call props.toggle when disabled ', () => {

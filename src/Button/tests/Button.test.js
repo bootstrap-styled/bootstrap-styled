@@ -74,7 +74,7 @@ describe('<Button />', () => {
     const renderedComponent = renderComponentUsingTheme({
       size: 'sm',
     });
-    expect(renderedComponent.find('Button').hasClass('btn-sm')).toBe(true);
+    expect(renderedComponent.find('button').hasClass('btn-sm')).toBe(true);
     expect(renderedComponent.find('Button').props().size).toBe('sm');
   });
   it('should have an attribute block with a theme', () => {

@@ -33,7 +33,7 @@ describe('<Fa />', () => {
     const renderedComponent = renderComponentUsingTheme({
       trash: true,
     });
-    expect(renderedComponent.find('[trash]').length).toBe(0);
+    expect(renderedComponent.find('i').find('[trash]').length).toBe(0);
   });
   it('should render an <Fa> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

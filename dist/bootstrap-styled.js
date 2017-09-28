@@ -10495,7 +10495,9 @@ var ModalUnstyled = function (_React$Component) {
       ReactDOM.unstable_renderSubtreeIntoContainer(this, this.renderChildren(), this._element
       );
       if (this._focus) {
-        this._dialog.parentNode.focus();
+        if (this._dialog && this._dialog.parentNode && typeof this._dialog.parentNode.focus === 'function') {
+          this._dialog.parentNode.focus();
+        }
         this._focus = false;
       }
     }

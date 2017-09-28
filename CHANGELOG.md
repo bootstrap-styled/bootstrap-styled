@@ -5,7 +5,26 @@ All notable changes to this project will be documented in this file.
 ## [1.4.1] - 2017-xx-xx
 
 - Deleted HeaderNavBar -> find it in the module navigation-bar instead
-
+- In package.json
+  - Added `rollup-umd` to scripts.
+  - Updated Keywords and Author.
+  - Added dependency `enzyme-adapter-react-16` v.1.0.0.
+  - Added dependency `raf` v.3.3.2.
+  - Upgraded `enzyme` from 2.9.1 to 3.0.0.
+  - Upgraded `prop-types` from 15.5.10 to 15.6.0.
+  - Upgraded `react` from 15.6.1 to 16.0.0.
+  - Upgraded `react-dom` from 15.6.1 to 16.0.0.
+  - Upgraded `react-test-renderer` from 15.6.1 to 16.0.0.
+  - Upgraded `rimraf` from 2.6.1 to 2.6.2.
+  - Added `setFiles` & `setupTestFrameworkScriptFile` to jest config.
+- Created `internals/testing/test-bundler.js` following new `enzyme` version 3.0.0.
+- In rollup.config.js
+  - Added `immutable` to nameExports.
+  - Moved `json()` config from below the `babel()` one to above.
+- Fixed tests all around due to new version of `react` and `enzyme`.
+- Added fix to `Modal` after new `react` version created bug.
+- Decreasd `test coverage` for functions from 93 to 92.
+  
 ## [1.4.0] - 2017-09-26
 
 - /!\ Move up all components within `src/components/` into `src/`.
