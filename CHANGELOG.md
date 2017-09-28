@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.1] - 2017-xx-xx
+
+- Deleted HeaderNavBar -> find it in the module navigation-bar instead
+
 ## [1.4.0] - 2017-09-26
 
 - /!\ Move up all components within `src/components/` into `src/`.
