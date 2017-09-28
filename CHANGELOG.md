@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file.
   - Moved `json()` config from below the `babel()` one to above.
 - Fixed tests all around due to new version of `react` and `enzyme`.
 - Added fix to `Modal` after new `react` version created bug.
-- Decreasd `test coverage` for functions from 93 to 92.
+- Decreased `test coverage` for functions from 93 to 92.
   
 ## [1.4.0] - 2017-09-26
 
