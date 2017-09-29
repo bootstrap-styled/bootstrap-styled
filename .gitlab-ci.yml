@@ -1,4 +1,4 @@
-image: kopaxgroup/node7-jdk8-sonarscanner2:latest
+image: kopaxgroup/node8-jdk8-sonarscanner2:latest
 
 variables:
   GIT_STRATEGY: none
