@@ -6,7 +6,7 @@ import inject from 'rollup-plugin-inject';
 import babel from 'rollup-plugin-babel';
 import json from 'rollup-plugin-json';
 import uglify from 'rollup-plugin-uglify';
-import cleanup from 'rollup-plugin-cleanup';
+// import cleanup from 'rollup-plugin-cleanup';
 import visualizer from 'rollup-plugin-visualizer';
 import pkg from './package.json';
 const processShim = '\0process-shim';
@@ -59,7 +59,7 @@ const plugins = [
     plugins: ['external-helpers'],
     exclude: 'node_modules/**',
   }),
-  cleanup(),
+  // cleanup(),
 ];
 
 if (prod) plugins.push(uglify(), visualizer({ filename: './bundle-stats.html' }));
