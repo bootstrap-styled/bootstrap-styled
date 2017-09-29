@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.4.1] - 2017-xx-xx
+## [1.4.1] - 2017-09-29
 
 - Deleted HeaderNavBar -> find it in the module navigation-bar instead
 - In package.json
