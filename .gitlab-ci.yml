@@ -137,7 +137,7 @@ release:
     - git push --tags
     # prepare next dev version
     - git checkout dev
-    - npm version patch
+    - npm version patch -m "preparing next version %s"
     - git push origin HEAD:dev
   dependencies:
     - build
