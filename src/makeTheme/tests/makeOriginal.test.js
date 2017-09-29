@@ -1,4 +1,4 @@
-import { fromJS } from 'immutable';
+import { fromJS } from 'immutable/';
 import makeOriginal from '../makeOriginal';
 
 describe('makeOriginal', () => {

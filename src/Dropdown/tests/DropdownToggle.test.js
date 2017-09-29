@@ -49,13 +49,13 @@ describe('<DropdownToggle />', () => {
     const renderedComponent = renderComponentUsingTheme({
       caret: true,
     });
-    expect(renderedComponent.find('[data-toggle="dropdown"]').hasClass('dropdown-toggle')).toBe(true);
+    expect(renderedComponent.find('Button').hasClass('dropdown-toggle')).toBe(true);
   });
 
   it('should render a split', () => {
     const renderedComponent = renderComponentUsingTheme({
       split: true,
     });
-    expect(renderedComponent.find('[data-toggle="dropdown"]').hasClass('dropdown-toggle-split')).toBe(true);
+    expect(renderedComponent.find('Button').hasClass('dropdown-toggle-split')).toBe(true);
   });
 });

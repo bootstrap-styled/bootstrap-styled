@@ -1,5 +1,4 @@
 import React from 'react';
-import findDOMNode from 'react-dom/lib/findDOMNode';
 import { mount } from 'enzyme';
 import { TooltipUnstyled as Tooltip } from '../index';
 
@@ -45,10 +44,8 @@ describe('Tooltip', () => {
       </Tooltip>,
       { attachTo: container }
     );
-    const instance = wrapper.instance();
     const tooltips = document.getElementsByClassName('tooltip');
 
-    expect(findDOMNode(instance)).toBe(null); // eslint-disable-line react/no-find-dom-node
     expect(document.body.querySelectorAll('.tooltip.show').length).toBe(0);
     expect(target.className).toBe('');
     expect(tooltips.length).toBe(0);
@@ -63,10 +60,8 @@ describe('Tooltip', () => {
       </Tooltip>,
       { attachTo: container }
     );
-    const instance = wrapper.instance();
     const tooltips = document.getElementsByClassName('tooltip');
 
-    expect(findDOMNode(instance)).toBe(null); // eslint-disable-line react/no-find-dom-node
     expect(document.body.querySelectorAll('.tooltip.show').length).toBe(1);
     expect(target.className.indexOf('bs-tether-target') > -1).toBe(true);
     expect(tooltips.length).toBe(1);
@@ -82,10 +77,8 @@ describe('Tooltip', () => {
       </Tooltip>,
       { attachTo: container }
     );
-    const instance = wrapper.instance();
     const tooltips = document.getElementsByClassName('tooltip');
 
-    expect(findDOMNode(instance)).toBe(null); // eslint-disable-line react/no-find-dom-node
     expect(document.body.querySelectorAll('.tooltip.show').length).toBe(1);
     expect(target.className.indexOf('bs-tether-target') > -1).toBe(true);
     expect(tooltips.length).toBe(1);

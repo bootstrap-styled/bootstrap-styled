@@ -1,4 +1,4 @@
-import { fromJS } from 'immutable';
+import { fromJS } from 'immutable/';
 import theme, { makeTheme } from '../theme';
 
 describe('theme', () => {

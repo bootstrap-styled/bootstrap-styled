@@ -6,7 +6,7 @@ import inject from 'rollup-plugin-inject';
 import babel from 'rollup-plugin-babel';
 import json from 'rollup-plugin-json';
 import uglify from 'rollup-plugin-uglify';
-import cleanup from 'rollup-plugin-cleanup';
+// import cleanup from 'rollup-plugin-cleanup';
 import visualizer from 'rollup-plugin-visualizer';
 import pkg from './package.json';
 const processShim = '\0process-shim';
@@ -15,14 +15,13 @@ const mode = prod ? 'production' : 'development';
 
 console.log(`Creating ${mode} bundle...`);
 
-const output = prod ?
-[
+const output = prod ? [
   { file: `dist/${pkg.name}.min.js`, format: 'umd' },
-] :
-[
+] : [
   { file: `dist/${pkg.name}.js`, format: 'umd' },
   { file: `dist/${pkg.name}.es.js`, format: 'es' },
 ];
+
 
 const plugins = [
   // Unlike Webpack and Browserify, Rollup doesn't automatically shim Node
@@ -46,6 +45,7 @@ const plugins = [
       // relative to the current directory, or the name
       // of a module in node_modules
       'bootstrap-styled-utils': ['named'],
+      immutable: ['fromJS'],
     },
   }),
   replace({
@@ -54,12 +54,12 @@ const plugins = [
   inject({
     process: processShim,
   }),
+  json(),
   babel({
     plugins: ['external-helpers'],
     exclude: 'node_modules/**',
   }),
-  json(),
-  cleanup(),
+  // cleanup(),
 ];
 
 if (prod) plugins.push(uglify(), visualizer({ filename: './bundle-stats.html' }));
