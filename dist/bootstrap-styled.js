@@ -7357,7 +7357,6 @@ var TetherContent = function (_React$Component) {
       _this.tether = new tether(_this.getTetherConfig());
       _this.props.tetherRef(_this.tether);
       _this.tether.position();
-      _this.element.childNodes[0].focus();
     }, _this.toggle = function (e) {
       if (_this.props.disabled) {
         return e && e.preventDefault();
