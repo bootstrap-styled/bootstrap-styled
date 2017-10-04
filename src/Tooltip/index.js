@@ -230,6 +230,7 @@ export class TooltipUnstyled extends React.Component {
           onMouseOver={this.onMouseOverTooltipContent}
           onMouseLeave={this.onMouseLeaveTooltipContent}
           onFocus={this.handleFocus}
+          tabIndex="-1"
           {...optional}
         />
       </TetherContent>
