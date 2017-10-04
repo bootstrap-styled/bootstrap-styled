@@ -2372,12 +2372,12 @@ function makeOriginal() {
   v['$font-weight-base'] = u['$font-weight-base'] || v['$font-weight-normal'];
   v['$line-height-base'] = u['$line-height-base'] || '1.5';
 
-  v['$font-size-h1'] = '2.5rem';
-  v['$font-size-h2'] = '2rem';
-  v['$font-size-h3'] = '1.75rem';
-  v['$font-size-h4'] = '1.5rem';
-  v['$font-size-h5'] = '1.25rem';
-  v['$font-size-h6'] = '1rem';
+  v['$font-size-h1'] = u['$font-size-h1'] || '2.5rem';
+  v['$font-size-h2'] = u['$font-size-h2'] || '2rem';
+  v['$font-size-h3'] = u['$font-size-h3'] || '1.75rem';
+  v['$font-size-h4'] = u['$font-size-h4'] || '1.5rem';
+  v['$font-size-h5'] = u['$font-size-h5'] || '1.25rem';
+  v['$font-size-h6'] = u['$font-size-h6'] || '1rem';
 
   v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit(v['$spacer'], UNIT.REM) / 2 + UNIT.REM;
   v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
@@ -2385,15 +2385,16 @@ function makeOriginal() {
   v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
   v['$headings-color'] = u['$headings-color'] || 'inherit';
 
-  v['$display1-size'] = '6rem';
-  v['$display2-size'] = '5.5rem';
-  v['$display3-size'] = '4.5rem';
-  v['$display4-size'] = '3.5rem';
+  v['$display1-size'] = u['$display1-size'] || '6rem';
+  v['$display2-size'] = u['$display2-size'] || '5.5rem';
+  v['$display3-size'] = u['$display3-size'] || '4.5rem';
+  v['$display4-size'] = u['$display4-size'] || '3.5rem';
 
-  v['$display1-weight'] = '300';
-  v['$display2-weight'] = '300';
-  v['$display3-weight'] = '300';
-  v['$display4-weight'] = '300';
+  v['$display1-weight'] = u['$display1-weight'] || '300';
+  v['$display2-weight'] = u['$display2-weight'] || '300';
+  v['$display3-weight'] = u['$display3-weight'] || '300';
+  v['$display4-weight'] = u['$display4-weight'] || '300';
+
   v['$display-line-height'] = u['$display-line-height'] || v['$headings-line-height'];
 
   v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
