@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.2] - 2017-xx-xx
+
+- Fixed props `block` and `color` in Cards to be properly applied.
+
 ## [1.4.1] - 2017-09-29
 
 - Deleted HeaderNavBar -> find it in the module navigation-bar instead

@@ -52,10 +52,16 @@ class CardUnstyled extends React.Component {// eslint-disable-line react/prefer-
 
     return (
       <Tag
-        className={mapToCssModules(cn(className, 'card', {
-          inverse,
-          block,
-        }, `card${outline ? '-outline' : ''}-${color}`), cssModule)}
+        className={mapToCssModules(cn(
+          className,
+          'card',
+          {
+            inverse,
+            'card-block': block,
+            [`card-${color}`]: color,
+            [`card-${outline ? '-outline' : ''}-${color}`]: outline,
+          }
+        ), cssModule)}
         {...attributes}
       />
     );

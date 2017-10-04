@@ -10482,6 +10482,7 @@ var TetherContent = function (_React$Component) {
 
     return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = TetherContent.__proto__ || Object.getPrototypeOf(TetherContent)).call.apply(_ref, [this].concat(args))), _this), _this.componentDidMount = function () {
       _this.handleProps();
+      console.log('1243');
     }, _this.componentDidUpdate = function (prevProps) {
       if (_this.props.isOpen !== prevProps.isOpen) {
         _this.handleProps();
@@ -10540,6 +10541,7 @@ var TetherContent = function (_React$Component) {
       _this.tether = new tether(_this.getTetherConfig());
       _this.props.tetherRef(_this.tether);
       _this.tether.position();
+      console.log('123');
     }, _this.toggle = function (e) {
       if (_this.props.disabled) {
         return e && e.preventDefault();
@@ -16776,6 +16778,7 @@ var CardUnstyled = function (_React$Component) {
   createClass(CardUnstyled, [{
     key: 'render',
     value: function render() {
+      var _cn;
       var _omit = lodash_omit(this.props, ['theme', 'backgroundColor', 'borderColor', 'width']),
           className = _omit.className,
           cssModule = _omit.cssModule,
@@ -16787,10 +16790,10 @@ var CardUnstyled = function (_React$Component) {
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'color', 'block', 'inverse', 'outline', 'tag']);
 
       return React.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'card', {
+        className: mapToCssModules(classnames(className, 'card', (_cn = {
           inverse: inverse,
-          block: block
-        }, 'card' + (outline ? '-outline' : '') + '-' + color), cssModule)
+          'card-block': block
+        }, defineProperty(_cn, 'card-' + color, color), defineProperty(_cn, 'card-' + (outline ? '-outline' : '') + '-' + color, outline), _cn)), cssModule)
       }, attributes));
     } // eslint-disable-line react/prefer-stateless-function
 
