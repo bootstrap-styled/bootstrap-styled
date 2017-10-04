@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [1.4.2] - 2017-xx-xx
 
+- Added possibility to override original variables `$font-size-h1` to `$font-size-h6`.
+- Added possibility to override original variables `$display1-size` to `f$display4-size`.
+- Added possibility to override original variables `$display1-weight` to `$display4-weight`.
 - Fixed props `block` and `color` in Cards to be properly applied.
 
 ## [1.4.1] - 2017-09-29
