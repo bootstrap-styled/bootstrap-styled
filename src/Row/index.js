@@ -1,25 +1,42 @@
-import styled from 'styled-components';
-import cn from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import cn from 'classnames';
+import mapToCssModules from 'map-to-css-modules';
 import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
-import theme from '../theme';
+import themeBs from '../theme';
 
-const defaultProps = { theme };
+const defaultProps = {
+  theme: themeBs,
+  tag: 'div',
+};
 
 class RowUnstyled extends React.Component {    // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     className: PropTypes.string,
-    children: PropTypes.node.isRequired,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    noGutters: PropTypes.bool,
+    cssModule: PropTypes.object,
   }
 
   render() {
-    const { className, children } = this.props; // eslint-disable-line no-unused-vars
+    const {
+      className,
+      cssModule,
+      noGutters,
+      tag: Tag,
+      ...attributes
+    } = this.props; // eslint-disable-line no-unused-vars
+
+    const classes = mapToCssModules(cn(
+      className,
+      noGutters ? 'no-gutters' : null,
+      'row'
+    ), cssModule);
+
     return (
-      <div className={cn(className, 'row')}>
-        {children}
-      </div>
+      <Tag {...attributes} className={classes} />
     );
   }
 
