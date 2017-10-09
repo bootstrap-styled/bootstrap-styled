@@ -15814,7 +15814,10 @@ ProgressBar.propTypes = {
 
 };
 
-var defaultProps$64 = { theme: bsTheme };
+var defaultProps$64 = {
+  theme: bsTheme,
+  tag: 'div'
+};
 
 var RowUnstyled = function (_React$Component) {
   inherits(RowUnstyled, _React$Component);
@@ -15829,13 +15832,14 @@ var RowUnstyled = function (_React$Component) {
     value: function render() {
       var _props = this.props,
           className = _props.className,
-          children = _props.children; // eslint-disable-line no-unused-vars
+          cssModule = _props.cssModule,
+          noGutters = _props.noGutters,
+          Tag = _props.tag,
+          attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'noGutters', 'tag']); // eslint-disable-line no-unused-vars
 
-      return React__default.createElement(
-        'div',
-        { className: classnames(className, 'row') },
-        children
-      );
+      var classes = mapToCssModules(classnames(className, noGutters ? 'no-gutters' : null, 'row'), cssModule);
+
+      return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
     } // eslint-disable-line react/prefer-stateless-function
 
   }]);
@@ -15844,7 +15848,9 @@ var RowUnstyled = function (_React$Component) {
 
 RowUnstyled.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node.isRequired
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  noGutters: PropTypes.bool,
+  cssModule: PropTypes.object
 };
 
 
