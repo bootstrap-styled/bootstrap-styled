@@ -293,8 +293,8 @@ export default function makeOriginal(userTheme = {}) {
   //
   // Define common padding and border radius sizes and more.
 
-  v['$line-height-lg'] = u['$line-height-lg'] || '1.3';
-  v['$line-height-sm'] = u['$line-height-sm'] || '1.5';
+  v['$line-height-lg'] = u['$line-height-lg'] || '1.6';
+  v['$line-height-sm'] = u['$line-height-sm'] || '1.3';
 
   v['$border-radius'] = u['$border-radius'] || '.25rem';
   v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';

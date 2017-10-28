@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - Added possibility to override original variables `$font-size-h1` to `$font-size-h6`.
 - Added possibility to override original variables `$display1-size` to `f$display4-size`.
 - Added possibility to override original variables `$display1-weight` to `$display4-weight`.
+- Fixed variables `$line-height-lg` and `$line-height-sm` so that they display accurate relative values.
 - Fixed props `block` and `color` in Cards to be properly applied.
 - Updated Row Component added `noGutters`, `cssModules` and `tag` props.
 
