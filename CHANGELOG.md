@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - Fixed variables `$line-height-lg` and `$line-height-sm` so that they display accurate relative values.
 - Fixed props `block` and `color` in Cards to be properly applied.
 - Updated Row Component added `noGutters`, `cssModules` and `tag` props.
+- Updated Badge Component so that `pill` props displays `badge-pill` css correctly.
 
 ## [1.4.1] - 2017-09-29
 
