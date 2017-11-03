@@ -2425,8 +2425,8 @@ function makeOriginal() {
   //
   // Define common padding and border radius sizes and more.
 
-  v['$line-height-lg'] = u['$line-height-lg'] || '1.3';
-  v['$line-height-sm'] = u['$line-height-sm'] || '1.5';
+  v['$line-height-lg'] = u['$line-height-lg'] || '1.6';
+  v['$line-height-sm'] = u['$line-height-sm'] || '1.3';
 
   v['$border-radius'] = u['$border-radius'] || '.25rem';
   v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
@@ -16421,7 +16421,7 @@ var BadgeUnstyled = function (_React$Component) {
 
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'badge', defineProperty({
-          pill: pill
+          'badge-pill': pill
         }, 'badge-' + color, color)), cssModule)
       }, attributes));
     } // eslint-disable-line react/prefer-stateless-function
