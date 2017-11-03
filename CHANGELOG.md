@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - Fixed props `block` and `color` in Cards to be properly applied.
 - Updated Row Component added `noGutters`, `cssModules` and `tag` props.
 - Updated Badge Component so that `pill` props displays `badge-pill` css correctly.
+- Removed a css rule from `Form` that would make an InputSelect way to large.
 
 ## [1.4.1] - 2017-09-29
 

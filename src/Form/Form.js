@@ -23,8 +23,6 @@ const defaultProps = {
   tag: 'form',
 };
 
-const selectBorderWidth = unitUtils.math.multiply(bsTheme['$border-width'], 2);
-
 class FormUnstyled extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
@@ -92,10 +90,6 @@ const Form = styled(FormUnstyled)`
     )}
     
     select.form-control {
-      &:not([size]):not([multiple]) {
-        height: calc(${props.theme['$input-height']} + ${selectBorderWidth});
-      }
-
       &:focus::-ms-value {
         /* Suppress the nested default white text on blue background highlight given to
          the selected option text when the (still closed) <select> receives focus
