@@ -130,14 +130,14 @@ release:
   stage: release
   script:
     # create branch for release version
-    - git checkout -b v${PACKAGE_VERSION}
-    - git push origin v${PACKAGE_VERSION}
+    - git checkout -b ${PACKAGE_VERSION}
+    - git push origin ${PACKAGE_VERSION}
     # tag version
-    - git tag -a -m "new version v${PACKAGE_VERSION}" v${PACKAGE_VERSION}
+    - git tag -a -m "new version ${PACKAGE_VERSION}" ${PACKAGE_VERSION}
     - git push --tags
     # prepare next dev version
     - git checkout dev
-    - npm version patch
+    - npm version patch -m "preparing next version %s"
     - git push origin HEAD:dev
   dependencies:
     - build

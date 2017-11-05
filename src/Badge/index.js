@@ -44,7 +44,7 @@ class BadgeUnstyled extends React.Component { // eslint-disable-line react/prefe
     return (
       <Tag
         className={mapToCssModules(cn(className, 'badge', {
-          pill,
+          'badge-pill': pill,
           [`badge-${color}`]: color,
         }), cssModule)}
         {...attributes}

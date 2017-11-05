@@ -11,21 +11,13 @@ import Row from '../index';
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Row
-    className={props.className}
-  >
-    {props.children}
-  </Row>
+  <Row {...props} />
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <ThemeProvider theme={theme}>
-    <Row
-      className={props.className}
-    >
-      {props.children}
-    </Row>
+    <Row {...props} />
   </ThemeProvider>
 );
 
@@ -55,5 +47,11 @@ describe('<Row />', () => {
       children,
     });
     expect(renderedComponent.contains(children)).toEqual(true);
+  });
+  it('should have props noGutters with a theme', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      noGutters: true,
+    });
+    expect(renderedComponent.find('div').hasClass('no-gutters')).toBe(true);
   });
 });
