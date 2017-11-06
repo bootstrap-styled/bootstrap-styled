@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.4.2] - 2017-xx-xx
+## [1.4.3] - 2017-xx-xx
+
+- Added variable `$label-margin-bottom` to component `Label`.
+
+## [1.4.2] - 2017-11-06
 
 - Upgrade dependency [babel-plugin-styled-components](https://www.npmjs.com/package/babel-plugin-styled-components) from ^1.2.0 to ^1.3.0.
 - Upgrade dependency [styled-components](https://www.npmjs.com/package/styled-components) from ^2.1.2 to ^2.2.3.

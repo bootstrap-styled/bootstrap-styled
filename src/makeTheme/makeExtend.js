@@ -31,6 +31,8 @@ export default function makeExtend(original = makeOriginal(), userTheme = {}) {
   v['$navbar-max-height'] = u['$navbar-max-height'] || '400px';
   v['$navbar-height'] = u['$navbar-height'] || '70px';
 
+  // Label
+  v['$label-margin'] = u['$label-margin'] || '.5rem';
 
   return {
     ...u,
