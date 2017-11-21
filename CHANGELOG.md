@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 - Removed `isLocked` props from `Modal`.
 - Updated some z-index values to assure front position to `Modal` component.
+- Automatically add CHANGELOG next todo on release.
 
 ## [1.4.3] - 2017-xx-xx
 
