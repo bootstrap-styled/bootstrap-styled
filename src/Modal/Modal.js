@@ -21,10 +21,9 @@ import Fade from './Fade';
 
 const defaultProps = {
   isOpen: false,
-  isLocked: false,
   backdrop: true,
   keyboard: true,
-  zIndex: 1000,
+  zIndex: 2000,
 };
 
 class ModalUnstyled extends React.Component {
@@ -40,8 +39,6 @@ class ModalUnstyled extends React.Component {
     contentClassName: PropTypes.string,
     /* eslint-enable react/no-unused-prop-types */
     isOpen: PropTypes.bool,
-    isLocked: PropTypes.bool,
-    onUnlock: PropTypes.func,
     onBackdrop: PropTypes.func,
     keyboard: PropTypes.bool,
     backdrop: PropTypes.oneOfType([
@@ -57,12 +54,9 @@ class ModalUnstyled extends React.Component {
     ]),
   };
 
-  isTransitioning = false;  // eslint-disable-line react/sort-comp
-
   constructor(props) {
     super(props);
     this.originalBodyPadding = null;
-    this.isBodyOverflowing = false;
   }
 
   componentDidMount() {
@@ -82,14 +76,13 @@ class ModalUnstyled extends React.Component {
   }
 
   componentWillUnmount() {
-    this.onExit();
+    this.destroy();
+    if (this.props.onExit) {
+      this.props.onExit();
+    }
   }
 
   onEnter = () => {
-    this.isTransitioning = true;
-    if (this.props.isLocked && this.props.onUnlock) {
-      this.props.onUnlock();
-    }
     if (this.props.onEnter) {
       this.props.onEnter();
     }
@@ -97,27 +90,20 @@ class ModalUnstyled extends React.Component {
 
   onExit = () => {
     this.destroy();
-    this.isTransitioning = false;
-    if (this.props.isLocked && this.props.onUnlock) {
-      this.props.onUnlock();
-    }
     if (this.props.onExit) {
       this.props.onExit();
     }
   }
 
   handleEscape = (e) => {
-    if (this.props.backdrop !== true) return;
-    this.isTransitioning = false;
-    if (!this.isTransitioning && this.props.keyboard && e.keyCode === 27 && this.props.onBackdrop) {
+    if (this.props.keyboard && e.keyCode === 27 && this.props.onBackdrop) {
       this.props.onBackdrop();
     }
   }
 
   handleBackdropClick = (e) => {
     if (this.props.backdrop !== true) return;
-    this.isTransitioning = false;
-    if (!this.isTransitioning && this.props.backdrop && e.target && !this._dialog.contains(e.target) && this.props.onBackdrop) {  // eslint-disable-line no-underscore-dangle
+    if (this.props.backdrop && e.target && !this._dialog.contains(e.target) && this.props.onBackdrop) {  // eslint-disable-line no-underscore-dangle
       this.props.onBackdrop();
     }
   }
@@ -148,6 +134,10 @@ class ModalUnstyled extends React.Component {
   }
 
   show() {
+    if (this._dialog) { // eslint-disable-line no-underscore-dangle
+      this.props.onBackdrop(true);
+      return;
+    }
     const classes = document.body.className;
     this._element = document.createElement('div');  // eslint-disable-line no-underscore-dangle
     this._element.setAttribute('tabindex', '-1'); // eslint-disable-line no-underscore-dangle
@@ -352,7 +342,7 @@ const Modal = styled(ModalUnstyled)`
   
     // Scale up the modal
     ${mediaBreakpointUp('sm', props.theme['$grid-breakpoints'],
-      `
+  `
         & .modal-dialog {
           max-width: ${props.theme['$modal-md']};
           margin: ${props.theme['$modal-dialog-sm-up-margin-y']} auto;
@@ -366,16 +356,16 @@ const Modal = styled(ModalUnstyled)`
           max-width: ${props.theme['$modal-sm']};
         }
       `
-    )}
+)}
   
 
     ${mediaBreakpointUp('lg', props.theme['$grid-breakpoints'],
-      `
+  `
         & .modal-lg {
            max-width:  ${props.theme['$modal-lg']}; 
          }
       `
-    )}
+)}
   `}
 `;
 
