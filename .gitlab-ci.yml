@@ -138,7 +138,16 @@ release:
     # prepare next dev version
     - git checkout dev
     - git reset HEAD --hard
-    - npm version patch -m "preparing next version %s"
+    - git pull origin dev
+    - VERSION=$(npm version patch -m "preparing next version %s")
+    - DATE=`date +%Y-%m-??`
+    - PATTERN="All notable changes to this project will be documented in this file"
+    - sed -i "/$PATTERN/a- TODO":" write change before preparing next tag" CHANGELOG.md
+    - sed -i "/$PATTERN/G" CHANGELOG.md
+    - sed -i "/$PATTERN/a## [$VERSION] - $DATE" CHANGELOG.md
+    - sed -i "/$PATTERN/G" CHANGELOG.md
+    - git add -A
+    - git commit -m "Add todo next version $VERSION in CHANGELOG.md"
     - git push origin HEAD:dev
   dependencies:
     - build

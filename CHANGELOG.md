@@ -2,12 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.4.4] - 2017-xx-xx
+## [1.4.4] - 2017-11-xx
 
 - Removed `isLocked` props from `Modal`.
 - Updated some z-index values to assure front position to `Modal` component.
+- Automatically add CHANGELOG next todo on release.
 
-## [1.4.3] - 2017-xx-xx
+## [1.4.3] - 2017-11-10
 
 - Added variable `$label-margin-bottom` to component `Label`.
 
