@@ -6890,13 +6890,14 @@ Close.defaultProps = defaultProps$4;
  * Alert component
  */
 
+console.log(themeAlert);
 var defaultProps$3 = {
   color: 'success',
   isOpen: true,
   tag: 'div',
-  transitionAppearTimeout: 150,
-  transitionEnterTimeout: 150,
-  transitionLeaveTimeout: 150,
+  transitionAppear: 150,
+  transitionEnter: 150,
+  transitionLeave: 150,
   theme: themeAlert
 };
 
