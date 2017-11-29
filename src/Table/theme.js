@@ -14,14 +14,6 @@ export const makeTheme = (userTheme = {}) => {
   const v = {};
   const u = userTheme;
 
-  // Spacing
-  //
-  // Control the default styling of most Bootstrap elements by modifying these
-  // variables. Mostly focused on spacing.
-  // You can add more entries to the v['$spacers'] map, should you need more variation.
-
-  v['$spacer'] = u['$spacer'] || '1rem';
-
   // Colors
   //
   // Grayscale and colors for use across Bootstrap.
@@ -36,7 +28,12 @@ export const makeTheme = (userTheme = {}) => {
   v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
 
   // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
 
+  v['$spacer'] = u['$spacer'] || '1rem';
   v['$border-width'] = u['$border-width'] || '1px';
 
   // Body

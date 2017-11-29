@@ -15,7 +15,7 @@ import { imgFluid } from 'bootstrap-styled-mixins/lib/image';
 import { boxShadow } from 'bootstrap-styled-mixins/lib/box-shadow';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { transition } from 'bootstrap-styled-mixins/lib/transition';
-import themeImg from '../theme';
+import themeImg from './theme';
 
 const defaultProps = {
   theme: themeImg,

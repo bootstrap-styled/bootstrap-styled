@@ -10,7 +10,6 @@ class SelectUnstyled extends React.Component { // eslint-disable-line react/pref
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
-    theme: PropTypes.object,
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
     /* eslint-enable react/no-unused-prop-types */
@@ -39,7 +38,7 @@ class SelectUnstyled extends React.Component { // eslint-disable-line react/pref
     const {
       children,
       ...rest
-    } = omit(this.props, ['theme', 'className']);
+    } = omit(this.props, ['className']);
 
     return (
       <select

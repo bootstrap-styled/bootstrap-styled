@@ -8,7 +8,7 @@ import styled, { keyframes } from 'styled-components';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { getBackgroundUtilities } from 'bootstrap-styled-mixins/lib/utilities/background';
 import { gradientStriped } from 'bootstrap-styled-mixins/lib/gradients';
-import themeProgress from '../theme';
+import themeProgress from './theme';
 
 const defaultProps = {
   theme: themeProgress,
