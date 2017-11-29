@@ -40,9 +40,9 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
     isOpen: PropTypes.bool,
     toggle: PropTypes.func,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    transitionAppearTimeout: PropTypes.number,
-    transitionEnterTimeout: PropTypes.number,
-    transitionLeaveTimeout: PropTypes.number,
+    transitionAppear: PropTypes.number,
+    transitionEnter: PropTypes.number,
+    transitionLeave: PropTypes.number,
     theme: PropTypes.object,
     /* eslint-enable react/no-unused-prop-types */
   }
@@ -56,9 +56,9 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
       isOpen,
       toggle,
       children,
-      transitionAppearTimeout,
-      transitionEnterTimeout,
-      transitionLeaveTimeout,
+      transitionAppear,
+      transitionEnter,
+      transitionLeave,
       ...attributes
     } = omit(this.props, ['theme']);
 
@@ -87,12 +87,12 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
           leave: 'fade',
           leaveActive: 'out',
         }}
-        transitionAppear={transitionAppearTimeout > 0}
-        transitionAppearTimeout={transitionAppearTimeout}
-        transitionEnter={transitionEnterTimeout > 0}
-        transitionEnterTimeout={transitionEnterTimeout}
-        transitionLeave={transitionLeaveTimeout > 0}
-        transitionLeaveTimeout={transitionLeaveTimeout}
+        transitionAppear={transitionAppear > 0}
+        transitionAppearTimeout={transitionAppear}
+        transitionEnter={transitionEnter > 0}
+        transitionEnterTimeout={transitionEnter}
+        transitionLeave={transitionLeave > 0}
+        transitionLeaveTimeout={transitionLeave}
       >
         {isOpen ? alert : null}
       </ReactCSSTransitionGroup>

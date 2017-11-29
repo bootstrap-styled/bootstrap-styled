@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
-import themeBlockquote from '../theme';
+import themeBlockquote from './theme';
 
 const defaultProps = {
   tag: 'blockquote',

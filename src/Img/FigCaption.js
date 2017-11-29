@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
-import bsTheme from '../theme';
+import bsTheme from './theme';
 
 const defaultProps = {
   theme: bsTheme,

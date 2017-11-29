@@ -21,17 +21,18 @@ export const makeTheme = (userTheme = {}) => {
 
   v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
 
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+  // Create grayscale
+
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+
   // Components
   //
   // Define common padding and border radius sizes and more.
 
   v['$border-radius'] = u['$border-radius'] || '.25rem';
-
-  // Colors
-  //
-  // Grayscale and brand colors for use across Bootstrap.
-  // Create grayscale
-  v['$gray-light'] = u['$gray-light'] || '#636c72';
 
   // Spacing
   //

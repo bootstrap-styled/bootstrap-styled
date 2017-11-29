@@ -5,7 +5,7 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { typography } from 'bootstrap-styled-mixins/lib/typography';
-import themeH5 from '../theme';
+import themeH5 from './theme';
 
 const defaultProps = { theme: themeH5 };
 

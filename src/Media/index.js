@@ -7,23 +7,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
-import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { media } from 'bootstrap-styled-mixins/lib/media';
-import bsTheme from '../theme';
 import A from '../A';
 import Img from '../Img';
 import Ul from '../Ul';
 import H4 from '../H4';
-const defaultProps = {
-  theme: bsTheme,
-};
 
 class MediaUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
-    theme: PropTypes.object,
     body: PropTypes.bool,
     bottom: PropTypes.bool,
     children: PropTypes.node,
@@ -55,7 +49,7 @@ class MediaUnstyled extends React.Component { // eslint-disable-line react/prefe
       tag,
       top,
       ...attributes
-    } = omit(this.props, ['theme']);
+    } = this.props;
 
     let defaultTag;
     if (heading) {
@@ -111,7 +105,5 @@ const Media = styled(MediaUnstyled)`
   }
   ${media()}
 `;
-
-Media.defaultProps = defaultProps;
 
 export default Media;

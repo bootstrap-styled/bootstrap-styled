@@ -11,7 +11,7 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
-import themeJumbotron from '../theme';
+import themeJumbotron from './theme';
 
 const defaultProps = {
   theme: themeJumbotron,
