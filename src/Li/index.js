@@ -8,9 +8,9 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
 import { media as mediaCss } from 'bootstrap-styled-mixins/lib/media';
-import themeLi from './theme';
+import { makeTheme } from './theme';
 
-const defaultProps = { theme: themeLi };
+const defaultProps = { theme: makeTheme() };
 
 class LiUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 

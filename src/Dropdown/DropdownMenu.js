@@ -4,11 +4,11 @@ import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
 const propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   children: PropTypes.node.isRequired,
-  right: PropTypes.bool,
   className: PropTypes.string,
   cssModule: PropTypes.object,
+  right: PropTypes.bool,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
 };
 
 const defaultProps = {

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import omit from 'lodash.omit';
 import { parseTransition } from 'bootstrap-styled-utils';
 import mapToCssModules from 'map-to-css-modules';
-import themeCollapse from './theme';
+import { makeTheme } from './theme';
 
 const SHOW = 'SHOW';
 const SHOWN = 'SHOWN';
@@ -16,23 +16,23 @@ class Collapse extends Component {
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.node,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     cssModule: PropTypes.object,
-    navbar: PropTypes.bool,
-    /* eslint-enable react/no-unused-prop-types */
-    isOpen: PropTypes.bool,
     delay: PropTypes.oneOfType([
       PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
       PropTypes.number,
     ]),
+    isOpen: PropTypes.bool,
+    navbar: PropTypes.bool,
+    /* eslint-enable react/no-unused-prop-types */
     onOpened: PropTypes.func,
     onClosed: PropTypes.func,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     theme: PropTypes.object,
   };
 
   static defaultProps = {
     isOpen: false,
-    theme: themeCollapse,
+    theme: makeTheme(),
     tag: 'div',
     delay: {
       show: null,

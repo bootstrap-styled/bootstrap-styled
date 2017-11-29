@@ -18,7 +18,7 @@ import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
 import { fade } from 'bootstrap-styled-mixins/lib//utilities/transition';
 import rebootUtils from 'bootstrap-styled-mixins/lib/utilities/reboot';
 import Fade from './Fade';
-import themeModal from './theme';
+import { makeTheme } from './theme';
 
 const defaultProps = {
   isOpen: false,
@@ -26,7 +26,7 @@ const defaultProps = {
   backdrop: true,
   keyboard: true,
   zIndex: 1000,
-  theme: themeModal,
+  theme: makeTheme(),
 };
 
 class ModalUnstyled extends React.Component {

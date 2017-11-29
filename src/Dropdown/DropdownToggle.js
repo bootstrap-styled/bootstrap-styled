@@ -4,26 +4,27 @@ import classNames from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import Button from '../Button';
 import A from '../A';
+
 const defaultProps = {
-  'data-toggle': 'dropdown',
   'aria-haspopup': true,
+  'data-toggle': 'dropdown',
   color: 'secondary',
 };
 
 class DropdownToggle extends React.Component {
 
   static propTypes = {
+    'aria-haspopup': PropTypes.bool,
     caret: PropTypes.bool,
     children: PropTypes.node,
     className: PropTypes.string,
     cssModule: PropTypes.object,
+    'data-toggle': PropTypes.string,
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
-    'data-toggle': PropTypes.string,
-    'aria-haspopup': PropTypes.bool,
+    nav: PropTypes.bool,
     split: PropTypes.bool,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    nav: PropTypes.bool,
   };
 
   static contextTypes = {

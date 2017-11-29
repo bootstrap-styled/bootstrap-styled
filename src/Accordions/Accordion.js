@@ -12,17 +12,22 @@ import H5 from '../H5';
 
 const defaultProps = {
   tag: Card,
+  delay: 350,
 };
 
 class Accordion extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    children: PropTypes.node.isRequired,
     className: PropTypes.string,
+    delay: PropTypes.oneOfType([
+      PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
+      PropTypes.number,
+    ]),
     heading: PropTypes.oneOfType([
       PropTypes.node,
       PropTypes.string,
     ]),
-    children: PropTypes.node.isRequired,
     name: PropTypes.string,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   }
@@ -39,6 +44,7 @@ class Accordion extends React.Component { // eslint-disable-line react/prefer-st
       children,
       heading,
       tag: Tag,
+      delay,
       ...attributes
     } = this.props;
 
@@ -65,7 +71,7 @@ class Accordion extends React.Component { // eslint-disable-line react/prefer-st
     return (
       <Tag className={className} {...attributes}>
         {accordionHeading}
-        <Collapse isOpen={optional.isOpened}>
+        <Collapse delay={delay} isOpen={optional.isOpened}>
           {children}
         </Collapse>
       </Tag>

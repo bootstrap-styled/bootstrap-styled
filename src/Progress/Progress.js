@@ -8,10 +8,10 @@ import styled, { keyframes } from 'styled-components';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { getBackgroundUtilities } from 'bootstrap-styled-mixins/lib/utilities/background';
 import { gradientStriped } from 'bootstrap-styled-mixins/lib/gradients';
-import themeProgress from './theme';
+import { makeTheme } from './theme';
 
 const defaultProps = {
-  theme: themeProgress,
+  theme: makeTheme(),
 };
 
 class ProgressUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function

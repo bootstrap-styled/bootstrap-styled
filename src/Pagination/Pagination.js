@@ -9,11 +9,11 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { pagination } from 'bootstrap-styled-mixins/lib/paginations';
-import themePagination from './theme';
+import { makeTheme } from './theme';
 
 const defaultProps = {
-  theme: themePagination,
   tag: 'ul',
+  theme: makeTheme(),
 };
 
 class PaginationUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function

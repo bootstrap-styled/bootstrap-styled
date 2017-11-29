@@ -13,11 +13,11 @@ import { hover } from 'bootstrap-styled-mixins/lib/hover';
 import { borderRadius, borderTopRadius, borderBottomRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { cardVariant, cardOutlineVariant, cardInverse } from 'bootstrap-styled-mixins/lib/cards';
 import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
-import themeCards from './theme';
+import { makeTheme } from './theme';
 
 const defaultProps = {
-  theme: themeCards,
   tag: 'div',
+  theme: makeTheme(),
 };
 
 class CardUnstyled extends React.Component {// eslint-disable-line react/prefer-stateless-function

@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import omit from 'lodash.omit';
 import { makeContainer } from 'bootstrap-styled-mixins/lib/grid';
-import themeContainerFluid from './theme';
+import { makeTheme } from './theme';
 
 const defaultProps = {
-  theme: themeContainerFluid,
+  theme: makeTheme(),
 };
 
 class ContainerFluidUnstyled extends React.Component {    // eslint-disable-line react/prefer-stateless-function

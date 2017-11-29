@@ -11,17 +11,18 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { alertVariant } from 'bootstrap-styled-mixins/lib/alert';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
-import themeAlert from './theme';
+import { makeTheme } from './theme';
+
 import Close from '../Close';
 
 const defaultProps = {
   color: 'success',
   isOpen: true,
   tag: 'div',
-  transitionAppearTimeout: 150,
-  transitionEnterTimeout: 150,
-  transitionLeaveTimeout: 150,
-  theme: themeAlert,
+  theme: makeTheme(),
+  transitionAppear: 150,
+  transitionEnter: 150,
+  transitionLeave: 150,
 };
 
 const FirstChild = ({ children }) => (

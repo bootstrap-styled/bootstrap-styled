@@ -12,12 +12,12 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { tableRowVariant } from 'bootstrap-styled-mixins/lib/table-row';
 import { hover as hoverMixin } from 'bootstrap-styled-mixins/lib/hover';
-import themeTable from './theme';
+import { makeTheme } from './theme';
 
 const defaultProps = {
   tag: 'table',
   responsiveTag: 'div',
-  theme: themeTable,
+  theme: makeTheme(),
 };
 
 class TableUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function

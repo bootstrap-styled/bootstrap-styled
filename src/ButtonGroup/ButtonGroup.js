@@ -9,12 +9,12 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { buttonGroup } from 'bootstrap-styled-mixins/lib/buttonGroup';
-import themeButtonGroup from './theme';
+import { makeTheme } from './theme';
 
 const defaultProps = {
-  theme: themeButtonGroup,
-  tag: 'div',
   role: 'group',
+  tag: 'div',
+  theme: makeTheme(),
 };
 
 class ButtonGroupUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function

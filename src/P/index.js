@@ -5,9 +5,9 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { typography } from 'bootstrap-styled-mixins/lib/typography';
-import themeP from './theme';
+import { makeTheme } from './theme';
 
-const defaultProps = { theme: themeP };
+const defaultProps = { theme: makeTheme() };
 
 class PUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 

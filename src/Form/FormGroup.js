@@ -16,15 +16,15 @@ const defaultProps = {
 class FormGroup extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    inline: PropTypes.bool,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     className: PropTypes.string,
-    cssModule: PropTypes.object,
-    disabled: PropTypes.bool,
     check: PropTypes.bool,
     color: PropTypes.string,
+    cssModule: PropTypes.object,
+    disabled: PropTypes.bool,
+    getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    inline: PropTypes.bool,
     row: PropTypes.bool,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   }
 
   render() {

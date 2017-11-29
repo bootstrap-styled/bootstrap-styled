@@ -23,9 +23,9 @@ class CardColumnsUnstyled extends React.Component {// eslint-disable-line react/
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
+    cssModule: PropTypes.object,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     theme: PropTypes.object,
-    cssModule: PropTypes.object,
     /* eslint-enable react/no-unused-prop-types */
   }
 

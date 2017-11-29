@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { navbar } from 'bootstrap-styled-mixins/lib/navbar';
 import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
-import theme from '../theme';
+import { makeTheme } from './theme';
 
-const defaultProps = { theme };
+const defaultProps = { theme: makeTheme() };
 
 const Header = styled.header`
   ${(props) => `

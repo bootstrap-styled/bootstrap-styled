@@ -17,9 +17,9 @@ class FormFeedback extends React.Component {// eslint-disable-line react/prefer-
 
   static propTypes = {
     children: PropTypes.node,
-    tag: PropTypes.string,
     className: PropTypes.string,
     cssModule: PropTypes.object,
+    tag: PropTypes.string,
   }
 
   render() {
