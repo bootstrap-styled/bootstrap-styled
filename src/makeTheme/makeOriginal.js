@@ -108,7 +108,6 @@ export default function makeOriginal(userTheme = {}) {
   v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
   v['$enable-print-styles'] = allowFalseValue(u['$enable-print-styles'], true);
 
-
   // Spacing
   //
   // Control the default styling of most Bootstrap elements by modifying these
@@ -282,9 +281,6 @@ export default function makeOriginal(userTheme = {}) {
   v['$mark-padding'] = u['$mark-padding'] || '.2em';
 
   v['$dt-font-weight'] = u['$dt-font-weight'] || v['$font-weight-bold'];
-
-  v['$kbd-box-shadow'] = u['$kbd-box-shadow'] || `inset 0 -.1rem 0 ${Color(v['$black']).alpha(0.25).toString()}`;
-  v['$nested-kbd-font-weight'] = u['$nested-kbd-font-weight'] || v['$font-weight-bold'];
 
   v['$list-inline-padding'] = u['$list-inline-padding'] || '5px';
 
@@ -694,6 +690,7 @@ export default function makeOriginal(userTheme = {}) {
   v['$card-columns-count'] = u['$card-columns-count'] || '3';
   v['$card-columns-gap'] = u['$card-columns-gap'] || '1.25rem';
   v['$card-columns-margin'] = u['$card-columns-margin'] || v['$card-spacer-y'];
+
   // Tooltips
 
   v['$tooltip-max-width'] = u['$tooltip-max-width'] || '200px';
@@ -918,6 +915,8 @@ export default function makeOriginal(userTheme = {}) {
 
   v['$kbd-color'] = u['$kbd-color'] || v['$white'];
   v['$kbd-bg'] = u['$kbd-bg'] || v['$gray-dark'];
+  v['$kbd-box-shadow'] = u['$kbd-box-shadow'] || `inset 0 -.1rem 0 ${Color(v['$black']).alpha(0.25).toString()}`;
+  v['$nested-kbd-font-weight'] = u['$nested-kbd-font-weight'] || v['$font-weight-bold'];
 
   v['$pre-color'] = u['$pre-color'] || v['$gray-dark'];
   v['$pre-scrollable-max-height'] = u['$pre-scrollable-max-height'] || '340px';
