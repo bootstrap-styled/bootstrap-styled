@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import bsTheme from '../theme';
+import themeHr from './theme';
 
 const defaultProps = {
-  theme: bsTheme,
+  theme: themeHr,
 };
 
 const Hr = styled.hr`

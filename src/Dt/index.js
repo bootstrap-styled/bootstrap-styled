@@ -8,9 +8,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
 import { makeGridColumns } from 'bootstrap-styled-mixins/lib/grid-framework';
-import bsTheme from '../theme';
+import themeDt from '../theme';
 
-const defaultProps = { theme: bsTheme };
+const defaultProps = { theme: themeDt };
 
 class DtUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 

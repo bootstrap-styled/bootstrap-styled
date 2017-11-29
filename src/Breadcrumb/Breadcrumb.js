@@ -10,10 +10,10 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { clearfix } from 'bootstrap-styled-mixins/lib/clearfix';
-import bsTheme from '../theme';
+import themeBreadcrumb from './theme';
 
 const defaultProps = {
-  theme: bsTheme,
+  theme: themeBreadcrumb,
   tag: 'ol',
 };
 

@@ -1,5 +1,5 @@
 /**
- * ButtonGroup
+ * ButtonToolbar
  */
 
 import React from 'react';

@@ -9,10 +9,10 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { pagination } from 'bootstrap-styled-mixins/lib/paginations';
-import bsTheme from '../theme';
+import themePagination from './theme';
 
 const defaultProps = {
-  theme: bsTheme,
+  theme: themePagination,
   tag: 'ul',
 };
 

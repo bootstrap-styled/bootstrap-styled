@@ -15,14 +15,14 @@ import { navDivider } from 'bootstrap-styled-mixins/lib/nav-divider';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
 import { buttonGroup } from 'bootstrap-styled-mixins/lib/buttonGroup';
 import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
-import bsTheme from '../theme';
+import themeDropdown from './theme';
 import DropdownMenu from './DropdownMenu';
 import TetherContent from '../TetherContent';
 
 const defaultProps = {
   isOpen: false,
   tag: 'div',
-  theme: bsTheme,
+  theme: themeDropdown,
 };
 
 const defaultTetherConfig = {
@@ -294,9 +294,9 @@ const Dropdown = styled(DropdownUnstyled)`
         color: ${props.theme['$dropdown-link-disabled-color']};
         cursor: ${props.theme['$cursor-disabled']};
         background-color: transparent;
-        ${ifThen(props.theme['$enabled-gradients'],
-  'background-image: none; /* Remove CSS gradient */'
-)}
+        ${ifThen(props.theme['$enable-gradients'],
+          'background-image: none; /* Remove CSS gradient */'
+        )}
       }
     }
 

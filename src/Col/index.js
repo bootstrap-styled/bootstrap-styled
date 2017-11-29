@@ -5,7 +5,7 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import { makeGridColumns } from 'bootstrap-styled-mixins/lib/grid-framework';
 import mapToCssModules from 'map-to-css-modules';
-import themeBs from '../theme';
+import themeCol from './theme';
 
 const colWidths = ['xs', 'sm', 'md', 'lg', 'xl'];
 const stringOrNumberProp = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
@@ -23,7 +23,7 @@ const columnProps = PropTypes.oneOfType([
 ]);
 
 const defaultProps = {
-  theme: themeBs,
+  theme: themeCol,
   tag: 'div',
   widths: colWidths,
 };

@@ -50,6 +50,6 @@ describe('<ModalHeader />', () => {
 
     expect(renderedComponent.hasClass('other')).toBe(true);
     expect(renderedComponent.hasClass('modal-header')).toBe(true);
-    expect(renderedComponent.find('button.close').length).toBe(1);
+    expect(renderedComponent.find('Close').length).toBe(1);
   });
 });

@@ -11,7 +11,7 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { alertVariant } from 'bootstrap-styled-mixins/lib/alert';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
-import themeBs from '../theme';
+import themeAlert from './theme';
 import Close from '../Close';
 
 const defaultProps = {
@@ -21,7 +21,7 @@ const defaultProps = {
   transitionAppearTimeout: 150,
   transitionEnterTimeout: 150,
   transitionLeaveTimeout: 150,
-  theme: themeBs,
+  theme: themeAlert,
 };
 
 const FirstChild = ({ children }) => (

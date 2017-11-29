@@ -5,9 +5,9 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
-import bsTheme from '../theme';
+import themeClose from './theme';
 
-const defaultProps = { theme: bsTheme };
+const defaultProps = { theme: themeClose };
 
 class CloseUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -77,7 +77,7 @@ const Close = styled(CloseUnstyled)`
      */
     
     /* scss-lint:disable QualifyingElement */
-    &button.close {
+    &.close {
       padding: 0;
       cursor: pointer;
       background: transparent;

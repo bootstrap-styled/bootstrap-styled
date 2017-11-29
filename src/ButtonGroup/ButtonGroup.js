@@ -9,10 +9,10 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { buttonGroup } from 'bootstrap-styled-mixins/lib/buttonGroup';
-import bsTheme from '../theme';
+import themeButtonGroup from './theme';
 
 const defaultProps = {
-  theme: bsTheme,
+  theme: themeButtonGroup,
   tag: 'div',
   role: 'group',
 };
@@ -75,3 +75,4 @@ const ButtonGroup = styled(ButtonGroupUnstyled)`
 ButtonGroup.defaultProps = defaultProps;
 
 export default ButtonGroup;
+

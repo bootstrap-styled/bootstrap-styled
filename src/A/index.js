@@ -9,11 +9,11 @@ import omit from 'lodash.omit';
 
 import mapToCssModules from 'map-to-css-modules';
 import { a } from 'bootstrap-styled-mixins/lib/a';
-import bsTheme from '../theme';
+import themeA from './theme';
 
 const defaultProps = {
   tag: 'a',
-  theme: bsTheme,
+  theme: themeA,
 };
 
 class AUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function

@@ -12,12 +12,12 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { tableRowVariant } from 'bootstrap-styled-mixins/lib/table-row';
 import { hover as hoverMixin } from 'bootstrap-styled-mixins/lib/hover';
-import bsTheme from '../theme';
+import themeTable from './theme';
 
 const defaultProps = {
   tag: 'table',
   responsiveTag: 'div',
-  theme: bsTheme,
+  theme: themeTable,
 };
 
 class TableUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -228,8 +228,6 @@ const Table = styled(TableUnstyled)`
       }
     }
     
-    
-    
     /* Responsive tables
      Wrap your tables in '.table-responsive' and we'll make them mobile friendly
      by enabling horizontal scrolling. Only applies <768px. Everything above that
@@ -245,7 +243,6 @@ const Table = styled(TableUnstyled)`
         border: 0;
       }
     }
-    
     
     &.table-reflow {
     
@@ -291,13 +288,11 @@ const Table = styled(TableUnstyled)`
       }
     }
     
-      /* from reboot.scss */
-      th {
-        /* Centered by default, but left-align-ed to match the tds below. */
-        text-align: left;
-      }
-        
-
+    /* from reboot.scss */
+    th {
+      /* Centered by default, but left-align-ed to match the tds below. */
+      text-align: left;
+    }
       
     /* Reboot Scss */
     /* No longer part of Normalize since v4 */
