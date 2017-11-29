@@ -15,6 +15,11 @@ export const makeTheme = (userTheme = {}) => {
   const v = {};
   const u = userTheme;
 
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
   // Start with assigning color names to specific hex values.
   v['$blue'] = u['$blue'] || '#0275d8';
 
@@ -27,10 +32,6 @@ export const makeTheme = (userTheme = {}) => {
   v['$link-hover-color'] = u['$link-hover-color'] || Color(v['$link-color']).darken(0.35).toString();
   v['$link-hover-decoration'] = u['$link-hover-decoration'] || 'underline';
 
-  // Options
-  //
-  // Quickly modify global styling by enabling or disabling optional features.
-  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
 
   return Object.assign({}, u, v);
 };

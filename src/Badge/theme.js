@@ -14,6 +14,15 @@ export const makeTheme = (userTheme = {}) => {
   const v = {};
   const u = userTheme;
 
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Color
+
   // Start with assigning color names to specific hex values.
   v['$white'] = u['$white'] || '#fff';
   v['$blue'] = u['$blue'] || '#0275d8';
@@ -31,13 +40,6 @@ export const makeTheme = (userTheme = {}) => {
   v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
   v['$brand-danger'] = u['$brand-danger'] || v['$red'];
   v['$brand-inverse'] = u['$brand-inverse'] || v['$gray-dark'];
-
-  // Options
-  //
-  // Quickly modify global styling by enabling or disabling optional features.
-
-  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
-  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
 
   // Components
   //
