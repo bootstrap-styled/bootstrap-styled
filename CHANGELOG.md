@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - Updated Badge Component so that `pill` props displays `badge-pill` css correctly.
 - Removed a css rule from `Form` that would make an InputSelect way to large.
 - Changed script CI config for auto version bumping.
+- Add makeTheme for each components using theme
 
 ## [1.4.1] - 2017-09-29
 
