@@ -282,6 +282,9 @@ export default function makeOriginal(userTheme = {}) {
 
   v['$dt-font-weight'] = u['$dt-font-weight'] || v['$font-weight-bold'];
 
+  v['$kbd-box-shadow'] = u['$kbd-box-shadow'] || `inset 0 -.1rem 0 ${Color(v['$black']).alpha(0.25).toString()}`;
+  v['$nested-kbd-font-weight'] = u['$nested-kbd-font-weight'] || v['$font-weight-bold'];
+
   v['$list-inline-padding'] = u['$list-inline-padding'] || '5px';
 
 
@@ -915,8 +918,6 @@ export default function makeOriginal(userTheme = {}) {
 
   v['$kbd-color'] = u['$kbd-color'] || v['$white'];
   v['$kbd-bg'] = u['$kbd-bg'] || v['$gray-dark'];
-  v['$kbd-box-shadow'] = u['$kbd-box-shadow'] || `inset 0 -.1rem 0 ${Color(v['$black']).alpha(0.25).toString()}`;
-  v['$nested-kbd-font-weight'] = u['$nested-kbd-font-weight'] || v['$font-weight-bold'];
 
   v['$pre-color'] = u['$pre-color'] || v['$gray-dark'];
   v['$pre-scrollable-max-height'] = u['$pre-scrollable-max-height'] || '340px';
