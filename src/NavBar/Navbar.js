@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
-import themeBs from '../theme';
+import themeNavbar from '../theme';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { navbar } from 'bootstrap-styled-mixins/lib/navbar';
@@ -13,7 +13,7 @@ const defaultProps = {
   tag: 'nav',
   role: 'navigation',
   toggleable: false,
-  theme: themeBs,
+  theme: themeNavbar,
 };
 
 const getToggleableClass = (toggleable) => { // eslint-disable-line react/prefer-stateless-function

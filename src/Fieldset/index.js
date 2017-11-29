@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
 import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
-import bsTheme from '../theme';
+import themeFieldset from './theme';
 
-const defaultProps = { theme: bsTheme };
+const defaultProps = { theme: themeFieldset };
 
 class FieldsetUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 

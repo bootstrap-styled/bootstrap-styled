@@ -9,7 +9,7 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { button } from 'bootstrap-styled-mixins/lib/buttons';
-import bsTheme from '../theme';
+import themeLabel from './theme';
 
 const colSizes = ['xs', 'sm', 'md', 'lg', 'xl'];
 
@@ -49,7 +49,7 @@ const propTypes = {
 
 const defaultProps = {
   tag: 'label',
-  theme: bsTheme,
+  theme: themeLabel,
 };
 
 let LabelUnstyled = (props) => {  // eslint-disable-line
@@ -105,7 +105,7 @@ const Label = styled(LabelUnstyled)`
     touch-action: manipulation;
     /* Allow labels to use margin for spacing. */
     display: inline-block;
-    margin-bottom: ${props.theme['$label-margin-bottom']};
+    margin-bottom: .5rem;
 
     ${button(
       props.theme['$enable-shadows'],

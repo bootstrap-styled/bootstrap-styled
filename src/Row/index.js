@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
-import themeBs from '../theme';
+import themeRow from './theme';
 
 const defaultProps = {
-  theme: themeBs,
+  theme: themeRow,
   tag: 'div',
 };
 

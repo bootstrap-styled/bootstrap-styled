@@ -10,11 +10,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
-import bsTheme from '../theme';
+import themeBlockquote from '../theme';
 
 const defaultProps = {
   tag: 'blockquote',
-  theme: bsTheme,
+  theme: themeBlockquote,
 };
 
 class BlockquoteUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function

@@ -9,10 +9,10 @@ import mapToCssModules from 'map-to-css-modules';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { badgeVariant } from 'bootstrap-styled-mixins/lib/badge';
-import bsTheme from '../theme';
+import themeBadge from './theme';
 
 const defaultProps = {
-  theme: bsTheme,
+  theme: themeBadge,
   color: 'default',
   pill: false,
   tag: 'span',

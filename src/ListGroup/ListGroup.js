@@ -12,11 +12,11 @@ import mapToCssModules from 'map-to-css-modules';
 import { borderTopRadius, borderBottomRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
 import { listGroupItemVariant } from 'bootstrap-styled-mixins/lib/list-group';
-import bsTheme from '../theme';
+import themeListGroup from './theme';
 import Ul from '../Ul/index';
 
 const defaultProps = {
-  theme: bsTheme,
+  theme: themeListGroup,
   tag: Ul,
 };
 
@@ -202,7 +202,7 @@ const ListGroup = styled(ListGroupUnstyled)`
       'danger',
       props.theme['$state-danger-bg'],
       props.theme['$state-danger-text'],
-    )}    
+    )}
   `}
 `;
 

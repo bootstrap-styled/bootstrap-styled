@@ -2,17 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.4.4] - 2017-11-xx
-
-- Removed `isLocked` props from `Modal`.
-- Updated some z-index values to assure front position to `Modal` component.
-- Automatically add CHANGELOG next todo on release.
-
-## [1.4.3] - 2017-11-10
-
-- Added variable `$label-margin-bottom` to component `Label`.
-
-## [1.4.2] - 2017-11-06
+## [1.4.2] - 2017-xx-xx
 
 - Upgrade dependency [babel-plugin-styled-components](https://www.npmjs.com/package/babel-plugin-styled-components) from ^1.2.0 to ^1.3.0.
 - Upgrade dependency [styled-components](https://www.npmjs.com/package/styled-components) from ^2.1.2 to ^2.2.3.
@@ -26,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - Updated Badge Component so that `pill` props displays `badge-pill` css correctly.
 - Removed a css rule from `Form` that would make an InputSelect way to large.
 - Changed script CI config for auto version bumping.
+- Add makeTheme for each components using theme
 
 ## [1.4.1] - 2017-09-29
 

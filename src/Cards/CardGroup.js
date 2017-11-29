@@ -13,10 +13,10 @@ import { borderRightRadius, borderLeftRadius } from 'bootstrap-styled-mixins/lib
 import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
 import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
 import { card } from 'bootstrap-styled-mixins/lib/cards';
-import bsTheme from '../theme';
+import themeCards from './theme';
 
 const defaultProps = {
-  theme: bsTheme,
+  theme: themeCards,
   tag: 'div',
 };
 

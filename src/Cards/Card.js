@@ -13,10 +13,10 @@ import { hover } from 'bootstrap-styled-mixins/lib/hover';
 import { borderRadius, borderTopRadius, borderBottomRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { cardVariant, cardOutlineVariant, cardInverse } from 'bootstrap-styled-mixins/lib/cards';
 import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
-import bsTheme from '../theme';
+import themeCards from './theme';
 
 const defaultProps = {
-  theme: bsTheme,
+  theme: themeCards,
   tag: 'div',
 };
 

@@ -16,10 +16,10 @@ import { formControl, formControlValidation } from 'bootstrap-styled-mixins/lib/
 import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
 import { customForms } from 'bootstrap-styled-mixins/lib/customForms';
 import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
-import bsTheme from '../theme';
+import themeForm from '../theme';
 
 const defaultProps = {
-  theme: bsTheme,
+  theme: themeForm,
   tag: 'form',
 };
 

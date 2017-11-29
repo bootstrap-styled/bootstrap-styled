@@ -14,9 +14,9 @@ import omit from 'lodash.omit';
 import { nav } from 'bootstrap-styled-mixins/lib/nav';
 import { listUnstyled, listInline } from 'bootstrap-styled-mixins/lib/lists';
 import { navbar } from 'bootstrap-styled-mixins/lib/navbar';
-import bsTheme from '../theme';
+import themeUl from './theme';
 
-const defaultProps = { theme: bsTheme };
+const defaultProps = { theme: themeUl };
 
 class UlUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -75,18 +75,18 @@ const Ul = styled(UlUnstyled)`
       props.theme['$grid-breakpoints'],
       props.theme['$enable-rounded'],
       props.theme['$enable-hover-media-query'],
+      props.theme['$font-size-lg'],
+      props.theme['$border-width'],
       props.theme['$navbar-padding-y'],
       props.theme['$navbar-padding-x'],
       props.theme['$zindex-navbar'],
       props.theme['$zindex-navbar-fixed'],
       props.theme['$zindex-navbar-sticky'],
       props.theme['$navbar-brand-padding-y'],
-      props.theme['$font-size-lg'],
       props.theme['$navbar-divider-padding-y'],
       props.theme['$navbar-toggler-padding-y'],
       props.theme['$navbar-toggler-padding-x'],
       props.theme['$navbar-toggler-font-size'],
-      props.theme['$border-width'],
       props.theme['$navbar-toggler-border-radius'],
       props.theme['$navbar-light-active-color'],
       props.theme['$navbar-light-color'],

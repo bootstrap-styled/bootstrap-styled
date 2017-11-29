@@ -9,10 +9,10 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { button } from 'bootstrap-styled-mixins/lib/buttons';
-import bsTheme from '../theme';
+import themeInput from './theme';
 
 const defaultProps = {
-  theme: bsTheme,
+  theme: themeInput,
   type: 'text',
   tag: 'p',
 };

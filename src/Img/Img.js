@@ -15,10 +15,10 @@ import { imgFluid } from 'bootstrap-styled-mixins/lib/image';
 import { boxShadow } from 'bootstrap-styled-mixins/lib/box-shadow';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { transition } from 'bootstrap-styled-mixins/lib/transition';
-import bsTheme from '../theme';
+import themeImg from '../theme';
 
 const defaultProps = {
-  theme: bsTheme,
+  theme: themeImg,
   tag: 'img',
 };
 class ImgUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -94,17 +94,17 @@ const Img = styled(ImgUnstyled)`
       background-color: ${props.theme['$thumbnail-bg']};
       border: ${props.theme['$thumbnail-border-width']} solid ${props.theme['$thumbnail-border-color']};
       ${borderRadius(
-  props.theme['$enable-rounded'],
-  props.theme['$thumbnail-border-radius']
-)}
+        props.theme['$enable-rounded'],
+        props.theme['$thumbnail-border-radius']
+      )}
       ${transition(
-  props.theme['$enable-transitions'],
-  props.theme['$thumbnail-transition']
-)}
+        props.theme['$enable-transitions'],
+        props.theme['$thumbnail-transition']
+      )}
       ${boxShadow(
-  props.theme['$enable-shadows'],
-  props.theme['$thumbnail-box-shadow']
-)}
+        props.theme['$enable-shadows'],
+        props.theme['$thumbnail-box-shadow']
+      )}
       /* Keep them at most 100% wide */
       ${imgFluid()}
     }

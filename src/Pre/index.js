@@ -4,9 +4,9 @@
 
 
 import styled from 'styled-components';
-import bsTheme from '../theme';
+import themePre from './theme';
 
-const defaultProps = { theme: bsTheme };
+const defaultProps = { theme: themePre };
 
 const Pre = styled.pre`
   ${(props) => `

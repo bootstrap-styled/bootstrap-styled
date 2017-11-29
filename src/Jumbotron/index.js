@@ -11,10 +11,10 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
-import bsTheme from '../theme';
+import themeJumbotron from '../theme';
 
 const defaultProps = {
-  theme: bsTheme,
+  theme: themeJumbotron,
   tag: 'div',
 };
 

@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import omit from 'lodash.omit';
 import { makeContainer, makeContainerMaxWidths } from 'bootstrap-styled-mixins/lib/grid';
-import bsTheme from '../theme';
+import themeContainer from './theme';
 
 
 const defaultProps = {
-  theme: bsTheme,
+  theme: themeContainer,
 };
 
 class ContainerUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
