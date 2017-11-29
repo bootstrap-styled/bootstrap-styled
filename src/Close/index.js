@@ -5,20 +5,20 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
-import themeClose from './theme';
+import { makeTheme } from './theme';
 
-const defaultProps = { theme: themeClose };
+const defaultProps = { theme: makeTheme() };
 
 class CloseUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
-    theme: PropTypes.object,
-    'sr-only': PropTypes.bool,
     className: PropTypes.string,
     closeLabel: PropTypes.string,
     cssModule: PropTypes.object,
     onDismiss: PropTypes.func.isRequired,
+    'sr-only': PropTypes.bool,
+    theme: PropTypes.object,
     /* eslint-enable react/no-unused-prop-types */
   }
 

@@ -10,11 +10,11 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { clearfix } from 'bootstrap-styled-mixins/lib/clearfix';
-import themeBreadcrumb from './theme';
+import { makeTheme } from './theme';
 
 const defaultProps = {
-  theme: themeBreadcrumb,
   tag: 'ol',
+  theme: makeTheme(),
 };
 
 class BreadcrumbUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function

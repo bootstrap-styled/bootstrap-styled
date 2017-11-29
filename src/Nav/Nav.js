@@ -11,12 +11,12 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { nav } from 'bootstrap-styled-mixins/lib/nav';
 import { navbar as navbarMixin } from 'bootstrap-styled-mixins/lib/navbar';
-import themeNav from './theme';
+import { makeTheme } from './theme';
 import Ul from '../Ul';
 
 const defaultProps = {
-  theme: themeNav,
   tag: Ul,
+  theme: makeTheme(),
 };
 
 class NavUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function

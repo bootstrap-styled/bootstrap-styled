@@ -9,12 +9,12 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { button } from 'bootstrap-styled-mixins/lib/buttons';
-import bsTheme from './theme';
+import { makeTheme } from './theme';
 
 const defaultProps = {
-  theme: bsTheme,
   tag: 'button',
   color: 'secondary',
+  theme: makeTheme(),
 };
 
 class ButtonUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function

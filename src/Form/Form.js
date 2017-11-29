@@ -16,11 +16,11 @@ import { formControl, formControlValidation } from 'bootstrap-styled-mixins/lib/
 import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
 import { customForms } from 'bootstrap-styled-mixins/lib/customForms';
 import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
-import themeForm from './theme';
+import { makeTheme } from './theme';
 
 const defaultProps = {
-  theme: themeForm,
   tag: 'form',
+  theme: makeTheme(),
 };
 
 class FormUnstyled extends React.Component {// eslint-disable-line react/prefer-stateless-function

@@ -12,11 +12,12 @@ import mapToCssModules from 'map-to-css-modules';
 import { hoverFocusActive } from 'bootstrap-styled-mixins/lib/hover';
 import { borderRadius, borderLeftRadius, borderRightRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { formControl } from 'bootstrap-styled-mixins/lib/forms';
-import themeInputGroup from './theme';
+import { makeTheme } from './theme';
+
 
 const defaultProps = {
-  theme: themeInputGroup,
   tag: 'div',
+  theme: makeTheme(),
 };
 
 

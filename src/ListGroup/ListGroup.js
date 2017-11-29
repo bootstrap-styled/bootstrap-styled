@@ -12,12 +12,12 @@ import mapToCssModules from 'map-to-css-modules';
 import { borderTopRadius, borderBottomRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
 import { listGroupItemVariant } from 'bootstrap-styled-mixins/lib/list-group';
-import themeListGroup from './theme';
+import { makeTheme } from './theme';
 import Ul from '../Ul/index';
 
 const defaultProps = {
-  theme: themeListGroup,
   tag: Ul,
+  theme: makeTheme(),
 };
 
 class ListGroupUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function

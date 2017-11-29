@@ -14,9 +14,9 @@ import omit from 'lodash.omit';
 import { nav } from 'bootstrap-styled-mixins/lib/nav';
 import { listUnstyled, listInline } from 'bootstrap-styled-mixins/lib/lists';
 import { navbar } from 'bootstrap-styled-mixins/lib/navbar';
-import themeUl from './theme';
+import { makeTheme } from './theme';
 
-const defaultProps = { theme: themeUl };
+const defaultProps = { theme: makeTheme() };
 
 class UlUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 

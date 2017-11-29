@@ -10,8 +10,8 @@ import styled from 'styled-components';
 class DfnUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    className: PropTypes.string,
     children: PropTypes.node,
+    className: PropTypes.string,
   }
 
   render() {

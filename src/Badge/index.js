@@ -9,13 +9,13 @@ import mapToCssModules from 'map-to-css-modules';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { badgeVariant } from 'bootstrap-styled-mixins/lib/badge';
-import themeBadge from './theme';
+import { makeTheme } from './theme';
 
 const defaultProps = {
-  theme: themeBadge,
   color: 'default',
   pill: false,
   tag: 'span',
+  theme: makeTheme(),
 };
 
 class BadgeUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function

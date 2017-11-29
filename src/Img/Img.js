@@ -15,28 +15,29 @@ import { imgFluid } from 'bootstrap-styled-mixins/lib/image';
 import { boxShadow } from 'bootstrap-styled-mixins/lib/box-shadow';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { transition } from 'bootstrap-styled-mixins/lib/transition';
-import themeImg from './theme';
+import { makeTheme } from './theme';
 
 const defaultProps = {
-  theme: themeImg,
   tag: 'img',
+  theme: makeTheme(),
+
 };
 class ImgUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
+    alt: PropTypes.string.isRequired,
+    className: PropTypes.string,
+    cssModule: PropTypes.object,
+    fluid: PropTypes.bool,
+    figure: PropTypes.bool,
     src: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.object,
     ]).isRequired,
-    alt: PropTypes.string.isRequired,
-    fluid: PropTypes.bool,
-    figure: PropTypes.bool,
-    thumbnail: PropTypes.bool,
-    className: PropTypes.string,
-    theme: PropTypes.object,
-    cssModule: PropTypes.object,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    theme: PropTypes.object,
+    thumbnail: PropTypes.bool,
     /* eslint-enable react/no-unused-prop-types */
   }
 

@@ -5,20 +5,20 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { typography } from 'bootstrap-styled-mixins/lib/typography';
-import themeH3 from './theme';
+import { makeTheme } from './theme';
 
-const defaultProps = { theme: themeH3 };
+const defaultProps = { theme: makeTheme() };
 
 class H3Unstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
     children: PropTypes.node,
-    lead: PropTypes.bool,
-    theme: PropTypes.object,
+    className: PropTypes.string,
     color: PropTypes.string,
     cssModule: PropTypes.object,
+    lead: PropTypes.bool,
+    theme: PropTypes.object,
     /* eslint-enable react/no-unused-prop-types */
   }
 

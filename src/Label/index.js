@@ -9,7 +9,7 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { button } from 'bootstrap-styled-mixins/lib/buttons';
-import themeLabel from './theme';
+import { makeTheme } from './theme';
 
 const colSizes = ['xs', 'sm', 'md', 'lg', 'xl'];
 
@@ -28,16 +28,16 @@ const columnProps = PropTypes.oneOfType([
 
 const propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  children: PropTypes.node,
-  hidden: PropTypes.bool,
   check: PropTypes.bool,
-  inline: PropTypes.bool,
-  disabled: PropTypes.bool,
-  size: PropTypes.string,
-  for: PropTypes.string,
-  tag: PropTypes.string,
+  children: PropTypes.node,
   className: PropTypes.string,
   cssModule: PropTypes.object,
+  disabled: PropTypes.bool,
+  for: PropTypes.string,
+  hidden: PropTypes.bool,
+  inline: PropTypes.bool,
+  size: PropTypes.string,
+  tag: PropTypes.string,
   xs: columnProps,
   sm: columnProps,
   md: columnProps,
@@ -49,7 +49,7 @@ const propTypes = {
 
 const defaultProps = {
   tag: 'label',
-  theme: themeLabel,
+  theme: makeTheme(),
 };
 
 let LabelUnstyled = (props) => {  // eslint-disable-line

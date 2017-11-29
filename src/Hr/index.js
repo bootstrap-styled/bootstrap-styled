@@ -1,9 +1,7 @@
 import styled from 'styled-components';
-import themeHr from './theme';
+import { makeTheme } from './theme';
 
-const defaultProps = {
-  theme: themeHr,
-};
+const defaultProps = { theme: makeTheme() };
 
 const Hr = styled.hr`
   ${(props) => `

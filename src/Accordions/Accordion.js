@@ -17,12 +17,12 @@ const defaultProps = {
 class Accordion extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    children: PropTypes.node.isRequired,
     className: PropTypes.string,
     heading: PropTypes.oneOfType([
       PropTypes.node,
       PropTypes.string,
     ]),
-    children: PropTypes.node.isRequired,
     name: PropTypes.string,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   }

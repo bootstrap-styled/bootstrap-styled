@@ -11,13 +11,13 @@ class DropdownItem extends React.Component {
 
   static propTypes = {
     children: PropTypes.node,
-    disabled: PropTypes.bool,
-    divider: PropTypes.bool,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    header: PropTypes.bool,
-    onClick: PropTypes.func,
     className: PropTypes.string,
     cssModule: PropTypes.object,
+    disabled: PropTypes.bool,
+    divider: PropTypes.bool,
+    header: PropTypes.bool,
+    onClick: PropTypes.func,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   };
 
   static contextTypes = {

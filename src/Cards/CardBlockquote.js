@@ -11,9 +11,9 @@ const defaultProps = {
 class CardBlockquote extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     className: PropTypes.string,
     cssModule: PropTypes.object,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   };
 
   render() {

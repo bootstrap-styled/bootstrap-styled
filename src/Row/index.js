@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
-import themeRow from './theme';
+import { makeTheme } from './theme';
 
 const defaultProps = {
-  theme: themeRow,
   tag: 'div',
+  theme: makeTheme(),
 };
 
 class RowUnstyled extends React.Component {    // eslint-disable-line react/prefer-stateless-function

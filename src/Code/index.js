@@ -8,11 +8,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
-import themeCode from './theme';
+import { makeTheme } from './theme';
 
 const defaultProps = {
   tag: 'code',
-  theme: themeCode,
+  theme: makeTheme(),
 };
 
 class CodeUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
