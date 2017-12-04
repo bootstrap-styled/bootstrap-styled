@@ -21,6 +21,7 @@ class FormCustom extends React.Component {// eslint-disable-line react/prefer-st
       id: PropTypes.string,
       name: PropTypes.string,
     }),
+    defaultChecked: PropTypes.bool,
   }
 
   render() {
@@ -29,6 +30,7 @@ class FormCustom extends React.Component {// eslint-disable-line react/prefer-st
       cssModule,
       radio,
       children,
+      defaultChecked,
       ...attributes
     } = this.props;
 
@@ -39,9 +41,9 @@ class FormCustom extends React.Component {// eslint-disable-line react/prefer-st
     ), cssModule);
 
     const CustomInput = radio ? (
-      <Input type="radio" id={radio.id} name={radio.name} className="custom-control-input" />
+      <Input defaultChecked={defaultChecked} type="radio" id={radio.id} name={radio.name} className="custom-control-input" />
     ) : (
-      <Input type="checkbox" className="custom-control-input" />
+      <Input defaultChecked={defaultChecked} type="checkbox" className="custom-control-input" />
     );
     return (
       <Label className={classes} {...attributes}>

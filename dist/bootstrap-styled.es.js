@@ -21627,12 +21627,13 @@ var FormCustom = function (_React$Component) {
           cssModule = _props.cssModule,
           radio = _props.radio,
           children = _props.children,
-          attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'radio', 'children']);
+          defaultChecked = _props.defaultChecked,
+          attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'radio', 'children', 'defaultChecked']);
 
 
       var classes = mapToCssModules(classnames(className, 'custom-control', radio ? 'custom-radio' : 'custom-checkbox'), cssModule);
 
-      var CustomInput = radio ? React.createElement(Input, { type: 'radio', id: radio.id, name: radio.name, className: 'custom-control-input' }) : React.createElement(Input, { type: 'checkbox', className: 'custom-control-input' });
+      var CustomInput = radio ? React.createElement(Input, { defaultChecked: defaultChecked, type: 'radio', id: radio.id, name: radio.name, className: 'custom-control-input' }) : React.createElement(Input, { defaultChecked: defaultChecked, type: 'checkbox', className: 'custom-control-input' });
       return React.createElement(
         Label,
         _extends({ className: classes }, attributes),
@@ -21657,7 +21658,8 @@ FormCustom.propTypes = {
   radio: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string
-  })
+  }),
+  defaultChecked: PropTypes.bool
 };
 
 /*
