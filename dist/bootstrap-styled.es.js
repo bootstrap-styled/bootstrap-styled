@@ -3315,7 +3315,7 @@ function makeTheme$1() {
 /**
  * default export is a default theme
  */
-var theme = makeTheme$1();
+var bsTheme = makeTheme$1();
 
 /**
  * utility use to extend bootstrap-styled default theme
@@ -5048,7 +5048,7 @@ var makeTheme$2 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeA = makeTheme$2();
+makeTheme$2();
 
 var borderRadius_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -5400,7 +5400,7 @@ unwrapExports(buttons);
 var buttons_5 = buttons.button;
 
 var defaultProps$1 = {
-  theme: theme
+  theme: bsTheme
 };
 
 function composeLink(RouterLink) {
@@ -5451,7 +5451,7 @@ function composeLink(RouterLink) {
  */
 var defaultProps = {
   tag: 'a',
-  theme: themeA
+  theme: makeTheme$2()
 };
 
 var AUnstyled = function (_React$Component) {
@@ -6772,7 +6772,7 @@ var makeTheme$3 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeAlert = makeTheme$3();
+makeTheme$3();
 
 var detectUnit$1 = unitUtils$1.detectUnit;
 var rmUnit$2 = unitUtils$1.rmUnit;
@@ -6821,9 +6821,9 @@ var makeTheme$4 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeClose = makeTheme$4();
+makeTheme$4();
 
-var defaultProps$4 = { theme: themeClose };
+var defaultProps$4 = { theme: makeTheme$4() };
 
 var CloseUnstyled = function (_React$Component) {
   inherits(CloseUnstyled, _React$Component);
@@ -6868,12 +6868,12 @@ var CloseUnstyled = function (_React$Component) {
 
 CloseUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  theme: PropTypes.object,
-  'sr-only': PropTypes.bool,
   className: PropTypes.string,
   closeLabel: PropTypes.string,
   cssModule: PropTypes.object,
-  onDismiss: PropTypes.func.isRequired
+  onDismiss: PropTypes.func.isRequired,
+  'sr-only': PropTypes.bool,
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -6890,15 +6890,14 @@ Close.defaultProps = defaultProps$4;
  * Alert component
  */
 
-console.log(themeAlert);
 var defaultProps$3 = {
   color: 'success',
   isOpen: true,
   tag: 'div',
+  theme: makeTheme$3(),
   transitionAppear: 150,
   transitionEnter: 150,
-  transitionLeave: 150,
-  theme: themeAlert
+  transitionLeave: 150
 };
 
 var FirstChild = function FirstChild(_ref) {
@@ -7058,7 +7057,7 @@ var makeTheme$5 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeBlockquote = makeTheme$5();
+makeTheme$5();
 
 /* eslint dot-notation: 'off' */
 
@@ -7069,7 +7068,7 @@ var themeBlockquote = makeTheme$5();
 
 var defaultProps$5 = {
   tag: 'blockquote',
-  theme: themeBlockquote
+  theme: makeTheme$5()
 };
 
 var BlockquoteUnstyled = function (_React$Component) {
@@ -8488,7 +8487,7 @@ exports.default = {
 var visibilityUtils = unwrapExports(visibility);
 
 var defaultProps$6 = {
-  theme: theme,
+  theme: bsTheme,
   utils: {
     align: true,
     background: true,
@@ -8562,12 +8561,12 @@ var BootstrapProvider = function (_React$Component) {
     value: function render() {
       var _props = this.props,
           children = _props.children,
-          theme$$1 = _props.theme,
+          theme = _props.theme,
           utils = _props.utils;
 
       return React.createElement(
         ThemeProvider,
-        { theme: makeTheme$$1(theme$$1) },
+        { theme: makeTheme$$1(theme) },
         React.createElement(
           UtilityProvider,
           { utils: utils },
@@ -8580,7 +8579,7 @@ var BootstrapProvider = function (_React$Component) {
 }(React.Component);
 
 BootstrapProvider.defaultProps = {
-  theme: theme
+  theme: bsTheme
 };
 BootstrapProvider.propTypes = {
   children: PropTypes.node,
@@ -8665,15 +8664,15 @@ var makeTheme$6 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeBreadcrumb = makeTheme$6();
+makeTheme$6();
 
 /**
  * A Breadcrumb
  */
 
 var defaultProps$7 = {
-  theme: themeBreadcrumb,
-  tag: 'ol'
+  tag: 'ol',
+  theme: makeTheme$6()
 };
 
 var BreadcrumbUnstyled = function (_React$Component) {
@@ -8755,10 +8754,10 @@ var BreadcrumbItem = function (_React$Component) {
 }(React.Component);
 
 BreadcrumbItem.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   active: PropTypes.bool,
   className: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
 
@@ -8883,16 +8882,16 @@ var makeTheme$7 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var bsTheme = makeTheme$7();
+makeTheme$7();
 
 /**
  * A button with natures
  */
 
 var defaultProps$9 = {
-  theme: bsTheme,
   tag: 'button',
-  color: 'secondary'
+  color: 'secondary',
+  theme: makeTheme$7()
 };
 
 var ButtonUnstyled = function (_React$Component) {
@@ -9228,14 +9227,14 @@ var makeTheme$8 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeDropdown = makeTheme$8();
+makeTheme$8();
 
 var propTypes$1 = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   children: PropTypes.node.isRequired,
-  right: PropTypes.bool,
   className: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  right: PropTypes.bool,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
 var defaultProps$11 = {
@@ -11142,12 +11141,12 @@ TetherContent.defaultProps = defaultProps$12;
 var defaultProps$10 = {
   isOpen: false,
   tag: 'div',
-  theme: themeDropdown
+  theme: makeTheme$8()
 };
 
 var defaultTetherConfig = {
-  classPrefix: 'bs-tether',
   classes: { element: 'dropdown', enabled: 'show' },
+  classPrefix: 'bs-tether',
   constraints: [{ to: 'scrollParent', attachment: 'together none' }, { to: 'window', attachment: 'together none' }]
 };
 
@@ -11214,8 +11213,8 @@ var DropdownUnstyled = function (_React$Component) {
     key: 'getChildContext',
     value: function getChildContext() {
       return {
-        toggle: this.props.toggle,
-        isOpen: this.props.isOpen
+        isOpen: this.props.isOpen,
+        toggle: this.props.toggle
       };
     }
   }, {
@@ -11312,6 +11311,9 @@ var DropdownUnstyled = function (_React$Component) {
 }(React.Component);
 
 DropdownUnstyled.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  cssModule: PropTypes.object,
   disabled: PropTypes.bool,
   dropup: PropTypes.bool,
   group: PropTypes.bool,
@@ -11320,14 +11322,11 @@ DropdownUnstyled.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   tether: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   toggle: PropTypes.func,
-  children: PropTypes.node,
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
   theme: PropTypes.object
 };
 DropdownUnstyled.childContextTypes = {
-  toggle: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired
+  isOpen: PropTypes.bool.isRequired,
+  toggle: PropTypes.func.isRequired
 };
 
 
@@ -11455,9 +11454,9 @@ var makeTheme$9 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeH6 = makeTheme$9();
+makeTheme$9();
 
-var defaultProps$14 = { theme: themeH6 };
+var defaultProps$14 = { theme: makeTheme$9() };
 
 var H6Unstyled = function (_React$Component) {
   inherits(H6Unstyled, _React$Component);
@@ -11493,12 +11492,12 @@ var H6Unstyled = function (_React$Component) {
 
 H6Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node,
-  lead: PropTypes.bool,
-  theme: PropTypes.object,
+  className: PropTypes.string,
   color: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  lead: PropTypes.bool,
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -11589,13 +11588,13 @@ var DropdownItem = function (_React$Component) {
 
 DropdownItem.propTypes = {
   children: PropTypes.node,
+  className: PropTypes.string,
+  cssModule: PropTypes.object,
   disabled: PropTypes.bool,
   divider: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   header: PropTypes.bool,
   onClick: PropTypes.func,
-  className: PropTypes.string,
-  cssModule: PropTypes.object
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 DropdownItem.contextTypes = {
   toggle: PropTypes.func
@@ -11605,8 +11604,8 @@ DropdownItem.contextTypes = {
 DropdownItem.defaultProps = defaultProps$13;
 
 var defaultProps$15 = {
-  'data-toggle': 'dropdown',
   'aria-haspopup': true,
+  'data-toggle': 'dropdown',
   color: 'secondary'
 };
 
@@ -11694,17 +11693,17 @@ var DropdownToggle = function (_React$Component) {
 }(React.Component);
 
 DropdownToggle.propTypes = {
+  'aria-haspopup': PropTypes.bool,
   caret: PropTypes.bool,
   children: PropTypes.node,
   className: PropTypes.string,
   cssModule: PropTypes.object,
+  'data-toggle': PropTypes.string,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
-  'data-toggle': PropTypes.string,
-  'aria-haspopup': PropTypes.bool,
+  nav: PropTypes.bool,
   split: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  nav: PropTypes.bool
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 DropdownToggle.contextTypes = {
   isOpen: PropTypes.bool.isRequired,
@@ -11720,8 +11719,8 @@ DropdownToggle.defaultProps = defaultProps$15;
 
 var propTypes = {
   children: PropTypes.node,
-  toggle: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired
+  isOpen: PropTypes.bool.isRequired,
+  toggle: PropTypes.func.isRequired
 };
 
 var ButtonDropdown = function ButtonDropdown(props) {
@@ -11805,16 +11804,16 @@ var makeTheme$10 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeButtonGroup = makeTheme$10();
+makeTheme$10();
 
 /**
  * ButtonGroup
  */
 
 var defaultProps$16 = {
-  theme: themeButtonGroup,
+  role: 'group',
   tag: 'div',
-  role: 'group'
+  theme: makeTheme$10()
 };
 
 var ButtonGroupUnstyled = function (_React$Component) {
@@ -11872,7 +11871,7 @@ ButtonGroup.defaultProps = defaultProps$16;
 var defaultProps$17 = {
   tag: 'div',
   role: 'toolbar',
-  theme: theme
+  theme: bsTheme
 };
 
 var ButtonToolbarUnstyled = function (_React$Component) {
@@ -11953,11 +11952,11 @@ var makeTheme$11 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeCaption = makeTheme$11();
+makeTheme$11();
 
 /* A Caption (Box) */
 
-var defaultProps$18 = { theme: themeCaption };
+var defaultProps$18 = { theme: makeTheme$11() };
 
 var Caption = styled.caption.withConfig({
   displayName: 'Caption'
@@ -12016,7 +12015,7 @@ var makeTheme$12 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeCode = makeTheme$12();
+makeTheme$12();
 
 /**
  * Code component
@@ -12024,7 +12023,7 @@ var themeCode = makeTheme$12();
 
 var defaultProps$19 = {
   tag: 'code',
-  theme: themeCode
+  theme: makeTheme$12()
 };
 
 var CodeUnstyled = function (_React$Component) {
@@ -12444,7 +12443,7 @@ var makeTheme$13 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeCol = makeTheme$13();
+makeTheme$13();
 
 var colWidths = ['xs', 'sm', 'md', 'lg', 'xl'];
 var stringOrNumberProp = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
@@ -12457,8 +12456,8 @@ var columnProps = PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTyp
 })]);
 
 var defaultProps$20 = {
-  theme: themeCol,
   tag: 'div',
+  theme: makeTheme$13(),
   widths: colWidths
 };
 
@@ -12793,7 +12792,7 @@ var makeTheme$14 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeCollapse = makeTheme$14();
+makeTheme$14();
 
 var SHOW = 'SHOW';
 var SHOWN = 'SHOWN';
@@ -12972,19 +12971,19 @@ var Collapse = function (_Component) {
 Collapse.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.node,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   cssModule: PropTypes.object,
+  delay: PropTypes.oneOfType([PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }), PropTypes.number]),
+  isOpen: PropTypes.bool,
   navbar: PropTypes.bool,
   /* eslint-enable react/no-unused-prop-types */
-  isOpen: PropTypes.bool,
-  delay: PropTypes.oneOfType([PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }), PropTypes.number]),
   onOpened: PropTypes.func,
   onClosed: PropTypes.func,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   theme: PropTypes.object
 };
 Collapse.defaultProps = {
   isOpen: false,
-  theme: themeCollapse,
+  theme: makeTheme$14(),
   tag: 'div',
   delay: {
     show: null,
@@ -13048,7 +13047,7 @@ var makeTheme$15 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeDd = makeTheme$15();
+makeTheme$15();
 
 /**
  * Definition Description
@@ -13056,7 +13055,7 @@ var themeDd = makeTheme$15();
  */
 
 var defaultProps$21 = {
-  theme: themeDd
+  theme: makeTheme$15()
 };
 
 var DdUnstyled = function (_React$Component) {
@@ -13126,8 +13125,8 @@ var DfnUnstyled = function (_React$Component) {
 }(React.Component);
 
 DfnUnstyled.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node
+  children: PropTypes.node,
+  className: PropTypes.string
 };
 
 
@@ -13158,8 +13157,8 @@ var Details = function (_React$Component) {
 }(React.Component);
 
 Details.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string
 };
 
 /**
@@ -13200,14 +13199,14 @@ var makeTheme$16 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeDl = makeTheme$16();
+makeTheme$16();
 
 /**
  *Definition List
  *
  */
 
-var defaultProps$22 = { theme: themeDl };
+var defaultProps$22 = { theme: makeTheme$16() };
 
 var DlUnstyled = function (_React$Component) {
   inherits(DlUnstyled, _React$Component);
@@ -13308,14 +13307,14 @@ var makeTheme$17 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeDt = makeTheme$17();
+makeTheme$17();
 
 /**
  * Description Term
  *
  */
 
-var defaultProps$23 = { theme: themeDt };
+var defaultProps$23 = { theme: makeTheme$17() };
 
 var DtUnstyled = function (_React$Component) {
   inherits(DtUnstyled, _React$Component);
@@ -13472,11 +13471,11 @@ var makeTheme$18 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeFieldset = makeTheme$18();
+makeTheme$18();
 
 /* A Fieldset (Box) */
 
-var defaultProps$24 = { theme: themeFieldset };
+var defaultProps$24 = { theme: makeTheme$18() };
 
 var FieldsetUnstyled = function (_React$Component) {
   inherits(FieldsetUnstyled, _React$Component);
@@ -13509,9 +13508,9 @@ var FieldsetUnstyled = function (_React$Component) {
 
 FieldsetUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  theme: PropTypes.object,
+  children: PropTypes.node.isRequired,
   className: PropTypes.string,
-  children: PropTypes.node.isRequired
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -13600,9 +13599,9 @@ var makeTheme$19 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeH1 = makeTheme$19();
+makeTheme$19();
 
-var defaultProps$25 = { theme: themeH1 };
+var defaultProps$25 = { theme: makeTheme$19() };
 
 var H1Unstyled = function (_React$Component) {
   inherits(H1Unstyled, _React$Component);
@@ -13638,12 +13637,13 @@ var H1Unstyled = function (_React$Component) {
 
 H1Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node,
-  lead: PropTypes.bool,
-  theme: PropTypes.object,
+  className: PropTypes.string,
   color: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  lead: PropTypes.bool,
+  theme: PropTypes.object
+
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -13722,9 +13722,9 @@ var makeTheme$20 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeH2 = makeTheme$20();
+makeTheme$20();
 
-var defaultProps$26 = { theme: themeH2 };
+var defaultProps$26 = { theme: makeTheme$20() };
 
 var H2Unstyled = function (_React$Component) {
   inherits(H2Unstyled, _React$Component);
@@ -13760,12 +13760,12 @@ var H2Unstyled = function (_React$Component) {
 
 H2Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node,
-  lead: PropTypes.bool,
-  theme: PropTypes.object,
+  className: PropTypes.string,
   color: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  lead: PropTypes.bool,
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -13844,9 +13844,9 @@ var makeTheme$21 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeH3 = makeTheme$21();
+makeTheme$21();
 
-var defaultProps$27 = { theme: themeH3 };
+var defaultProps$27 = { theme: makeTheme$21() };
 
 var H3Unstyled = function (_React$Component) {
   inherits(H3Unstyled, _React$Component);
@@ -13882,12 +13882,12 @@ var H3Unstyled = function (_React$Component) {
 
 H3Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node,
-  lead: PropTypes.bool,
-  theme: PropTypes.object,
+  className: PropTypes.string,
   color: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  lead: PropTypes.bool,
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -13966,9 +13966,9 @@ var makeTheme$22 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeH4 = makeTheme$22();
+makeTheme$22();
 
-var defaultProps$28 = { theme: themeH4 };
+var defaultProps$28 = { theme: makeTheme$22() };
 
 var H4Unstyled = function (_React$Component) {
   inherits(H4Unstyled, _React$Component);
@@ -14004,12 +14004,12 @@ var H4Unstyled = function (_React$Component) {
 
 H4Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node,
-  lead: PropTypes.bool,
-  theme: PropTypes.object,
+  className: PropTypes.string,
   color: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  lead: PropTypes.bool,
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -14088,9 +14088,9 @@ var makeTheme$23 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeH5 = makeTheme$23();
+makeTheme$23();
 
-var defaultProps$29 = { theme: themeH5 };
+var defaultProps$29 = { theme: makeTheme$23() };
 
 var H5Unstyled = function (_React$Component) {
   inherits(H5Unstyled, _React$Component);
@@ -14126,12 +14126,12 @@ var H5Unstyled = function (_React$Component) {
 
 H5Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node,
-  lead: PropTypes.bool,
-  theme: PropTypes.object,
+  className: PropTypes.string,
   color: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  lead: PropTypes.bool,
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -14283,7 +14283,100 @@ exports.default = {
 unwrapExports(navbar_1);
 var navbar_3 = navbar_1.navbar;
 
-var defaultProps$30 = { theme: theme };
+/**
+ * BOOTSTRAP THEME HEADER
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$24 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  // Spacing
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Navbar
+
+  v['$navbar-padding-x'] = u['$navbar-padding-x'] || v['$spacer'];
+  v['$navbar-padding-y'] = u['$navbar-padding-y'] || v['$spacer-halved'];
+
+  // Mixin navbar
+  //
+  // From module bootstrap-styled-mixins: https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins/blob/master/src/navbar.js
+
+  v['$zindex-navbar'] = u['$zindex-navbar'] || '1000';
+  v['$zindex-navbar-fixed'] = u['$zindex-navbar-fixed'] || '1030';
+  v['$zindex-navbar-sticky'] = u['$zindex-navbar-sticky'] || '1030';
+  v['$navbar-brand-padding-y'] = u['$navbar-brand-padding-y'] || '.25rem';
+
+  v['$navbar-divider-padding-y'] = u['$navbar-brand-padding-y'] || '.425rem';
+  v['$navbar-toggler-padding-y'] = u['$navbar-toggler-padding-y'] || '.5rem';
+  v['$navbar-toggler-padding-x'] = u['$navbar-toggler-padding-x'] || '.75rem';
+  v['$navbar-toggler-font-size'] = u['$navbar-toggler-font-size'] || '1.25rem';
+
+  v['$navbar-toggler-border-radius'] = u['$navbar-toggler-border-radius'] || '.25rem';
+  v['$navbar-light-active-color'] = u['$navbar-light-active-color'] || 'rgba(0,0,0,.9)';
+  v['$navbar-light-color'] = u['$navbar-light-color'] || 'rgba(0,0,0,.5)';
+  v['$navbar-light-hover-color'] = u['$navbar-light-hover-color'] || 'rgba(0,0,0,.7)';
+  v['$navbar-light-toggler-border'] = u['$navbar-light-toggler-border'] || 'rgba(0,0,0,.1)';
+  v['$navbar-light-disabled-color'] = u['$navbar-light-disabled-color'] || 'rgba(0, 0, 0, 0.3)';
+  v['$navbar-light-toggler-bg'] = u['$navbar-light-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(0,0,0,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-active-color'] = u['$navbar-inverse-active-color'] || 'rgba(255,255,255,1)';
+  v['$navbar-inverse-color'] = u['$navbar-inverse-color'] || 'rgba(255,255,255,.5)';
+  v['$navbar-inverse-hover-color'] = u['$navbar-inverse-hover-color'] || 'rgba(255,255,255,.75)';
+  v['$navbar-inverse-toggler-border'] = u['$navbar-inverse-toggler-border'] || 'rgba(255,255,255,.1)';
+  v['$navbar-inverse-toggler-bg'] = u['$navbar-inverse-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-disabled-color'] = u['$navbar-inverse-disabled-color'] || 'rgba(255, 255, 255, 0.25)';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$24();
+
+var defaultProps$30 = { theme: makeTheme$24() };
 
 var Header = styled.header.withConfig({
   displayName: 'Header'
@@ -14299,7 +14392,7 @@ Header.defaultProps = defaultProps$30;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$24 = function makeTheme() {
+var makeTheme$25 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -14335,11 +14428,9 @@ var makeTheme$24 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeHr = makeTheme$24();
+makeTheme$25();
 
-var defaultProps$31 = {
-  theme: themeHr
-};
+var defaultProps$31 = { theme: makeTheme$25() };
 
 var Hr = styled.hr.withConfig({
   displayName: 'Hr'
@@ -14396,7 +14487,7 @@ var UNIT$10 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$25 = function makeTheme() {
+var makeTheme$26 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -14446,7 +14537,7 @@ var makeTheme$25 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var bsTheme$1 = makeTheme$25();
+makeTheme$26();
 
 /**
  *
@@ -14456,8 +14547,9 @@ var bsTheme$1 = makeTheme$25();
  */
 
 var defaultProps$32 = {
-  theme: bsTheme$1,
-  tag: 'img'
+  tag: 'img',
+  theme: makeTheme$26()
+
 };
 
 var ImgUnstyled = function (_React$Component) {
@@ -14497,15 +14589,15 @@ var ImgUnstyled = function (_React$Component) {
 
 ImgUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  src: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   alt: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  cssModule: PropTypes.object,
   fluid: PropTypes.bool,
   figure: PropTypes.bool,
-  thumbnail: PropTypes.bool,
-  className: PropTypes.string,
+  src: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   theme: PropTypes.object,
-  cssModule: PropTypes.object,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+  thumbnail: PropTypes.bool
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -14554,8 +14646,8 @@ var FigureUnstyled = function (_React$Component) {
 
 FigureUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -14569,7 +14661,7 @@ var Figure = styled(FigureUnstyled).withConfig({
  */
 
 var defaultProps$33 = {
-  theme: bsTheme$1
+  theme: makeTheme$26()
 };
 
 var FigCaptionUnstyled = function (_React$Component) {
@@ -14605,10 +14697,10 @@ var FigCaptionUnstyled = function (_React$Component) {
 
 FigCaptionUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node,
-  theme: PropTypes.object,
-  right: PropTypes.bool
+  className: PropTypes.string,
+  right: PropTypes.bool,
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -14627,7 +14719,7 @@ FigCaption.defaultProps = defaultProps$33;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$26 = function makeTheme() {
+var makeTheme$27 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -14742,16 +14834,16 @@ var makeTheme$26 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeInput = makeTheme$26();
+makeTheme$27();
 
 /**
  * Input component
  */
 
 var defaultProps$34 = {
-  theme: themeInput,
-  type: 'text',
-  tag: 'p'
+  tag: 'p',
+  theme: makeTheme$27(),
+  type: 'text'
 };
 
 var InputUnstyled = function (_React$Component) {
@@ -14986,7 +15078,7 @@ var UNIT$11 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$27 = function makeTheme() {
+var makeTheme$28 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -15079,7 +15171,7 @@ var makeTheme$27 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeInputGroup = makeTheme$27();
+makeTheme$28();
 
 /**
  * InputGroup Component
@@ -15087,8 +15179,8 @@ var themeInputGroup = makeTheme$27();
  *
  */
 var defaultProps$35 = {
-  theme: themeInputGroup,
-  tag: 'div'
+  tag: 'div',
+  theme: makeTheme$28()
 };
 
 var InputGroupUnstyled = function (_React$Component) {
@@ -15174,9 +15266,9 @@ var InputGroupAddon = function (_React$Component) {
 }(React.Component);
 
 InputGroupAddon.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
 
@@ -15277,7 +15369,7 @@ IssueIcon.propTypes = {
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$28 = function makeTheme() {
+var makeTheme$29 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -15323,13 +15415,13 @@ var makeTheme$28 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var bsTheme$2 = makeTheme$28();
+makeTheme$29();
 
 /**
  * Kbd component
  */
 
-var defaultProps$38 = { theme: bsTheme$2 };
+var defaultProps$38 = { theme: makeTheme$29() };
 
 var KbdUnstyled = function (_React$Component) {
   inherits(KbdUnstyled, _React$Component);
@@ -15360,8 +15452,8 @@ var KbdUnstyled = function (_React$Component) {
 
 KbdUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node,
+  className: PropTypes.string,
   theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
@@ -15381,7 +15473,7 @@ Kbd.defaultProps = defaultProps$38;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$29 = function makeTheme() {
+var makeTheme$30 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -15432,15 +15524,15 @@ var makeTheme$29 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeJumbotron = makeTheme$29();
+makeTheme$30();
 
 /**
  * A Jumbotron (Slider)
  */
 
 var defaultProps$39 = {
-  theme: themeJumbotron,
-  tag: 'div'
+  tag: 'div',
+  theme: makeTheme$30()
 };
 
 var JumbotronUnstyled = function (_React$Component) {
@@ -15472,10 +15564,10 @@ var JumbotronUnstyled = function (_React$Component) {
 
 JumbotronUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  fluid: PropTypes.bool,
   className: PropTypes.string,
   cssModule: PropTypes.object,
+  fluid: PropTypes.bool,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
@@ -15495,7 +15587,7 @@ Jumbotron.defaultProps = defaultProps$39;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$30 = function makeTheme() {
+var makeTheme$31 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -15625,7 +15717,7 @@ var makeTheme$30 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeLabel = makeTheme$30();
+makeTheme$31();
 
 /**
  * Label component
@@ -15644,16 +15736,16 @@ var columnProps$1 = PropTypes.oneOfType([PropTypes.string, PropTypes.number, Pro
 
 var propTypes$2 = {
   /* eslint-disable react/no-unused-prop-types */
-  children: PropTypes.node,
-  hidden: PropTypes.bool,
   check: PropTypes.bool,
-  inline: PropTypes.bool,
-  disabled: PropTypes.bool,
-  size: PropTypes.string,
-  for: PropTypes.string,
-  tag: PropTypes.string,
+  children: PropTypes.node,
   className: PropTypes.string,
   cssModule: PropTypes.object,
+  disabled: PropTypes.bool,
+  for: PropTypes.string,
+  hidden: PropTypes.bool,
+  inline: PropTypes.bool,
+  size: PropTypes.string,
+  tag: PropTypes.string,
   xs: columnProps$1,
   sm: columnProps$1,
   md: columnProps$1,
@@ -15665,7 +15757,7 @@ var propTypes$2 = {
 
 var defaultProps$40 = {
   tag: 'label',
-  theme: themeLabel
+  theme: makeTheme$31()
 };
 
 var LabelUnstyled = function LabelUnstyled(props) {
@@ -15743,7 +15835,7 @@ var media_2 = media_1.media;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$31 = function makeTheme() {
+var makeTheme$32 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -15761,13 +15853,13 @@ var makeTheme$31 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeLi = makeTheme$31();
+makeTheme$32();
 
 /**
  * A list item.
  */
 
-var defaultProps$41 = { theme: themeLi };
+var defaultProps$41 = { theme: makeTheme$32() };
 
 var LiUnstyled = function (_React$Component) {
   inherits(LiUnstyled, _React$Component);
@@ -15875,7 +15967,7 @@ var listGroup_2 = listGroup.listGroupItemVariant;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$32 = function makeTheme() {
+var makeTheme$33 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -15953,7 +16045,7 @@ var makeTheme$32 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeListGroup = makeTheme$32();
+makeTheme$33();
 
 var nav_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -16058,7 +16150,7 @@ var lists_3 = lists.listInlineItem;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$33 = function makeTheme() {
+var makeTheme$34 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -16189,7 +16281,7 @@ var makeTheme$33 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeUl = makeTheme$33();
+makeTheme$34();
 
 /**
  * Unordered List Tabs and Pills
@@ -16199,7 +16291,7 @@ var themeUl = makeTheme$33();
  *
  */
 
-var defaultProps$43 = { theme: themeUl };
+var defaultProps$43 = { theme: makeTheme$34() };
 
 var UlUnstyled = function (_React$Component) {
   inherits(UlUnstyled, _React$Component);
@@ -16255,8 +16347,8 @@ Ul.defaultProps = defaultProps$43;
  */
 
 var defaultProps$42 = {
-  theme: themeListGroup,
-  tag: Ul
+  tag: Ul,
+  theme: makeTheme$33()
 };
 
 var ListGroupUnstyled = function (_React$Component) {
@@ -16463,7 +16555,7 @@ var Map$1 = styled.map.withConfig({
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$34 = function makeTheme() {
+var makeTheme$35 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -16486,13 +16578,13 @@ var makeTheme$34 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var markTheme = makeTheme$34();
+makeTheme$35();
 
 /**
  * Mark component
  */
 
-var defaultProps$47 = { markTheme: markTheme };
+var defaultProps$47 = { theme: makeTheme$35() };
 
 var Mark = styled.mark.withConfig({
   displayName: 'Mark'
@@ -16893,7 +16985,7 @@ Fade.defaultProps = defaultProps$49;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$35 = function makeTheme() {
+var makeTheme$36 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -16989,7 +17081,7 @@ var makeTheme$35 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeModal = makeTheme$35();
+makeTheme$36();
 
 var defaultProps$48 = {
   isOpen: false,
@@ -16997,7 +17089,7 @@ var defaultProps$48 = {
   backdrop: true,
   keyboard: true,
   zIndex: 1000,
-  theme: themeModal
+  theme: makeTheme$36()
 };
 
 var ModalUnstyled = function (_React$Component) {
@@ -17344,7 +17436,7 @@ ModalBody.defaultProps = defaultProps$52;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$36 = function makeTheme() {
+var makeTheme$37 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -17475,7 +17567,7 @@ var makeTheme$36 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeNav = makeTheme$36();
+makeTheme$37();
 
 /**
  * Nav Component
@@ -17483,8 +17575,8 @@ var themeNav = makeTheme$36();
  *
  */
 var defaultProps$53 = {
-  theme: themeNav,
-  tag: Ul
+  tag: Ul,
+  theme: makeTheme$37()
 };
 
 var NavUnstyled = function (_React$Component) {
@@ -17679,7 +17771,7 @@ NavLink.defaultProps = defaultProps$55;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$37 = function makeTheme() {
+var makeTheme$38 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -17697,7 +17789,7 @@ var makeTheme$37 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeOl = makeTheme$37();
+makeTheme$38();
 
 /**
  * Ordered List Tabs and Pills
@@ -17707,7 +17799,7 @@ var themeOl = makeTheme$37();
  *
  */
 
-var defaultProps$56 = { themeOl: themeOl };
+var defaultProps$56 = { theme: makeTheme$38() };
 
 var Ol = styled.ol.withConfig({
   displayName: 'Ol'
@@ -17771,7 +17863,7 @@ var UNIT$12 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$38 = function makeTheme() {
+var makeTheme$39 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -17851,9 +17943,9 @@ var makeTheme$38 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeP = makeTheme$38();
+makeTheme$39();
 
-var defaultProps$57 = { theme: themeP };
+var defaultProps$57 = { theme: makeTheme$39() };
 
 var PUnstyled = function (_React$Component) {
   inherits(PUnstyled, _React$Component);
@@ -18013,7 +18105,7 @@ var paginations_3 = paginations.pagination;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$39 = function makeTheme() {
+var makeTheme$40 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -18080,15 +18172,15 @@ var makeTheme$39 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themePagination = makeTheme$39();
+makeTheme$40();
 
 /**
  * A Pagination
  */
 
 var defaultProps$58 = {
-  theme: themePagination,
-  tag: 'ul'
+  tag: 'ul',
+  theme: makeTheme$40()
 };
 
 var PaginationUnstyled = function (_React$Component) {
@@ -18291,7 +18383,7 @@ PaginationLink.defaultProps = defaultProps$60;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$40 = function makeTheme() {
+var makeTheme$41 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -18316,13 +18408,13 @@ var makeTheme$40 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themePre = makeTheme$40();
+makeTheme$41();
 
 /**
  * Pre component
  */
 
-var defaultProps$61 = { theme: themePre };
+var defaultProps$61 = { theme: makeTheme$41() };
 
 var Pre = styled.pre.withConfig({
   displayName: 'Pre'
@@ -18433,7 +18525,7 @@ var gradients_7 = gradients.gradientStriped;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$41 = function makeTheme() {
+var makeTheme$42 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -18480,12 +18572,12 @@ var makeTheme$41 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeProgress = makeTheme$41();
+makeTheme$42();
 
 /* Progress */
 
 var defaultProps$62 = {
-  theme: themeProgress
+  theme: makeTheme$42()
 };
 
 var ProgressUnstyled = function (_React$Component) {
@@ -18778,7 +18870,7 @@ ProgressBar.propTypes = {
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$42 = function makeTheme() {
+var makeTheme$43 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -18811,11 +18903,11 @@ var makeTheme$42 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeRow = makeTheme$42();
+makeTheme$43();
 
 var defaultProps$63 = {
-  theme: themeRow,
-  tag: 'div'
+  tag: 'div',
+  theme: makeTheme$43()
 };
 
 var RowUnstyled = function (_React$Component) {
@@ -18948,7 +19040,7 @@ var Select = styled(SelectUnstyled).withConfig({
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$43 = function makeTheme() {
+var makeTheme$44 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -18965,13 +19057,13 @@ var makeTheme$43 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeSmall = makeTheme$43();
+makeTheme$44();
 
 /**
  * Small component
  */
 
-var defaultProps$64 = { theme: themeSmall };
+var defaultProps$64 = { theme: makeTheme$44() };
 
 var SmallUnstyled = function (_React$Component) {
   inherits(SmallUnstyled, _React$Component);
@@ -19121,7 +19213,7 @@ var tableRow_1 = tableRow.tableRowVariant;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$44 = function makeTheme() {
+var makeTheme$45 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -19197,7 +19289,7 @@ var makeTheme$44 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeTable = makeTheme$44();
+makeTheme$45();
 
 /* eslint-disable quote-props, dot-notation */
 /**
@@ -19207,7 +19299,7 @@ var themeTable = makeTheme$44();
 var defaultProps$65 = {
   tag: 'table',
   responsiveTag: 'div',
-  theme: themeTable
+  theme: makeTheme$45()
 };
 
 var TableUnstyled = function (_React$Component) {
@@ -19500,7 +19592,7 @@ var badge_2 = badge.badgeVariant;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$45 = function makeTheme() {
+var makeTheme$46 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -19575,15 +19667,15 @@ var makeTheme$45 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeBadge = makeTheme$45();
+makeTheme$46();
 
 /* Badge (Text Format) */
 
 var defaultProps$66 = {
-  theme: themeBadge,
   color: 'default',
   pill: false,
-  tag: 'span'
+  tag: 'span',
+  theme: makeTheme$46()
 };
 
 var BadgeUnstyled = function (_React$Component) {
@@ -19646,7 +19738,7 @@ var Textarea = styled.textarea.withConfig({
 })(['touch-action:manipulation;line-height:inherit;resize:vertical;']);
 
 /**
- * A Tooltip component
+ * A Tooltip tag
  */
 
 var DEFAULT_DELAYS = {
@@ -19965,7 +20057,7 @@ var UNIT$13 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$46 = function makeTheme() {
+var makeTheme$47 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -20073,7 +20165,7 @@ var makeTheme$46 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeCards = makeTheme$46();
+var themeCards = makeTheme$47();
 
 /**
  * Card Component
@@ -20081,8 +20173,8 @@ var themeCards = makeTheme$46();
  *
  */
 var defaultProps$68 = {
-  theme: themeCards,
-  tag: 'div'
+  tag: 'div',
+  theme: makeTheme$47()
 };
 
 var CardUnstyled = function (_React$Component) {
@@ -20184,9 +20276,9 @@ var CardColumnsUnstyled = function (_React$Component) {
 CardColumnsUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
+  cssModule: PropTypes.object,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  theme: PropTypes.object,
-  cssModule: PropTypes.object
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -20339,9 +20431,9 @@ var CardBlock = function (_React$Component) {
 }(React.Component);
 
 CardBlock.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
 
@@ -20713,9 +20805,9 @@ var CardBlockquote = function (_React$Component) {
 }(React.Component);
 
 CardBlockquote.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
 
@@ -20731,7 +20823,8 @@ CardBlockquote.defaultProps = defaultProps$81;
  *
  */
 var defaultProps$82 = {
-  tag: Card
+  tag: Card,
+  delay: 350
 };
 
 var Accordion = function (_React$Component) {
@@ -20754,7 +20847,8 @@ var Accordion = function (_React$Component) {
           children = _props.children,
           heading = _props.heading,
           Tag = _props.tag,
-          attributes = objectWithoutProperties(_props, ['className', 'name', 'children', 'heading', 'tag']);
+          delay = _props.delay,
+          attributes = objectWithoutProperties(_props, ['className', 'name', 'children', 'heading', 'tag', 'delay']);
       var _context$accordionGro = this.context.accordionGroup,
           activeAccordionName = _context$accordionGro.activeAccordionName,
           onClick = _context$accordionGro.onClick,
@@ -20792,7 +20886,7 @@ var Accordion = function (_React$Component) {
         accordionHeading,
         React.createElement(
           Collapse,
-          { isOpen: optional.isOpened },
+          { delay: delay, isOpen: optional.isOpened },
           children
         )
       );
@@ -20802,9 +20896,10 @@ var Accordion = function (_React$Component) {
 }(React.Component);
 
 Accordion.propTypes = {
-  className: PropTypes.string,
-  heading: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  delay: PropTypes.oneOfType([PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }), PropTypes.number]),
+  heading: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   name: PropTypes.string,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
@@ -21063,7 +21158,7 @@ var UNIT$14 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$47 = function makeTheme() {
+var makeTheme$48 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -21293,7 +21388,7 @@ var makeTheme$47 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeForm = makeTheme$47();
+makeTheme$48();
 
 /* eslint-disable quote-props, dot-notation */
 /**
@@ -21302,8 +21397,8 @@ var themeForm = makeTheme$47();
  *
  */
 var defaultProps$83 = {
-  theme: themeForm,
-  tag: 'form'
+  tag: 'form',
+  theme: makeTheme$48()
 };
 
 var FormUnstyled = function (_React$Component) {
@@ -21398,15 +21493,15 @@ var FormGroup = function (_React$Component) {
 }(React.Component);
 
 FormGroup.propTypes = {
-  inline: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
-  cssModule: PropTypes.object,
-  disabled: PropTypes.bool,
   check: PropTypes.bool,
   color: PropTypes.string,
-  row: PropTypes.bool
+  cssModule: PropTypes.object,
+  disabled: PropTypes.bool,
+  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  inline: PropTypes.bool,
+  row: PropTypes.bool,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
 
@@ -21502,9 +21597,9 @@ var FormFeedback = function (_React$Component) {
 
 FormFeedback.propTypes = {
   children: PropTypes.node,
-  tag: PropTypes.string,
   className: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  tag: PropTypes.string
 };
 
 
@@ -21532,12 +21627,13 @@ var FormCustom = function (_React$Component) {
           cssModule = _props.cssModule,
           radio = _props.radio,
           children = _props.children,
-          attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'radio', 'children']);
+          defaultChecked = _props.defaultChecked,
+          attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'radio', 'children', 'defaultChecked']);
 
 
       var classes = mapToCssModules(classnames(className, 'custom-control', radio ? 'custom-radio' : 'custom-checkbox'), cssModule);
 
-      var CustomInput = radio ? React.createElement(Input, { type: 'radio', id: radio.id, name: radio.name, className: 'custom-control-input' }) : React.createElement(Input, { type: 'checkbox', className: 'custom-control-input' });
+      var CustomInput = radio ? React.createElement(Input, { defaultChecked: defaultChecked, type: 'radio', id: radio.id, name: radio.name, className: 'custom-control-input' }) : React.createElement(Input, { defaultChecked: defaultChecked, type: 'checkbox', className: 'custom-control-input' });
       return React.createElement(
         Label,
         _extends({ className: classes }, attributes),
@@ -21562,7 +21658,8 @@ FormCustom.propTypes = {
   radio: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string
-  })
+  }),
+  defaultChecked: PropTypes.bool
 };
 
 /*
@@ -21575,7 +21672,7 @@ FormCustom.propTypes = {
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$48 = function makeTheme() {
+var makeTheme$49 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -21702,17 +21799,18 @@ var makeTheme$48 = function makeTheme() {
   v['$navbar-inverse-toggler-border'] = u['$navbar-inverse-toggler-border'] || 'rgba(255,255,255,.1)';
   v['$navbar-inverse-toggler-bg'] = u['$navbar-inverse-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
   v['$navbar-inverse-disabled-color'] = u['$navbar-inverse-disabled-color'] || 'rgba(255, 255, 255, 0.25)';
+
   return Object.assign({}, u, v);
 };
 
-var themeNavbar = makeTheme$48();
+makeTheme$49();
 
 /* eslint-disable */
 var defaultProps$87 = {
   tag: 'nav',
   role: 'navigation',
   toggleable: false,
-  theme: themeNavbar
+  theme: makeTheme$49()
 };
 
 var getToggleableClass = function getToggleableClass(toggleable) {
@@ -21886,7 +21984,7 @@ NavDropdown.defaultProps = defaultProps$90;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$49 = function makeTheme() {
+var makeTheme$50 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -21931,10 +22029,10 @@ var makeTheme$49 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeContainer = makeTheme$49();
+makeTheme$50();
 
 var defaultProps$91 = {
-  theme: themeContainer
+  theme: makeTheme$50()
 };
 
 var ContainerUnstyled = function (_React$Component) {
@@ -21981,7 +22079,7 @@ Container.defaultProps = defaultProps$91;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$50 = function makeTheme() {
+var makeTheme$51 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -22013,10 +22111,10 @@ var makeTheme$50 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-var themeContainerFluid = makeTheme$50();
+makeTheme$51();
 
 var defaultProps$92 = {
-  theme: themeContainerFluid
+  theme: makeTheme$51()
 };
 
 var ContainerFluidUnstyled = function (_React$Component) {
@@ -22059,5 +22157,5 @@ ContainerFluid.defaultProps = defaultProps$92;
 
 // 0. Configuration
 
-export { theme, makeTheme$$1 as makeTheme, A, composeLink, Abbr, Address, index as Alert, Area, Article, Blockquote, BootstrapProvider, Breadcrumb, BreadcrumbItem, Button, ButtonDropdown, ButtonGroup, ButtonToolbar, Caption, Close, Code, Col, Collapse, Dd, Dfn, Details, Dl, Dt, Fa, FaStacked, Fieldset, Footer, H1, H2, H3, H4, H5, H6, Header, Hr, Img, Figure, FigCaption, Input, InputGroup, InputGroupAddon, InputGroupButton, IssueIcon, Kbd, Jumbotron, Label, Legend, Li, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemHeading$2 as ListGroupItemText, Map$1 as Map, Mark, Media, Modal, ModalBody, ModalFooter, ModalHeader, Nav, NavLink, NavItem, Ol, Option, Output, P, Pagination, PaginationItem, PaginationLink, Pre, Progress, ProgressBar, Row, Samp, Section, Select, Small, Strong, Summary, Sub, Sup, Table, Tbody, Tfoot, Thead, Td, Th, Tr, Badge, Textarea, Tooltip, Ul, Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote, Accordion, AccordionGroup, Form, FormGroup, FormText, FormFeedback, FormCustom, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Navbar, NavbarToggler, NavbarBrand, NavDropdown, Container, ContainerFluid, reboot_1 as getGlobalStyles, reboot_2 as getGlobalStyleNoBootstrapProvider };
+export { bsTheme as theme, makeTheme$$1 as makeTheme, A, composeLink, Abbr, Address, index as Alert, Area, Article, Blockquote, BootstrapProvider, Breadcrumb, BreadcrumbItem, Button, ButtonDropdown, ButtonGroup, ButtonToolbar, Caption, Close, Code, Col, Collapse, Dd, Dfn, Details, Dl, Dt, Fa, FaStacked, Fieldset, Footer, H1, H2, H3, H4, H5, H6, Header, Hr, Img, Figure, FigCaption, Input, InputGroup, InputGroupAddon, InputGroupButton, IssueIcon, Kbd, Jumbotron, Label, Legend, Li, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemHeading$2 as ListGroupItemText, Map$1 as Map, Mark, Media, Modal, ModalBody, ModalFooter, ModalHeader, Nav, NavLink, NavItem, Ol, Option, Output, P, Pagination, PaginationItem, PaginationLink, Pre, Progress, ProgressBar, Row, Samp, Section, Select, Small, Strong, Summary, Sub, Sup, Table, Tbody, Tfoot, Thead, Td, Th, Tr, Badge, Textarea, Tooltip, Ul, Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote, Accordion, AccordionGroup, Form, FormGroup, FormText, FormFeedback, FormCustom, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Navbar, NavbarToggler, NavbarBrand, NavDropdown, Container, ContainerFluid, reboot_1 as getGlobalStyles, reboot_2 as getGlobalStyleNoBootstrapProvider };
 //# sourceMappingURL=bootstrap-styled.es.js.map
