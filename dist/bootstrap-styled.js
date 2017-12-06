@@ -21188,6 +21188,7 @@ var makeTheme$48 = function makeTheme() {
   v['$green'] = u['$green'] || '#5cb85c';
   v['$blue'] = u['$blue'] || '#0275d8';
   v['$teal'] = u['$teal'] || '#5bc0de';
+  v['$black'] = u['$black'] || '#000';
 
   // Reassign color vars to semantic color scheme
   v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
