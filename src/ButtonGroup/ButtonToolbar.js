@@ -11,13 +11,14 @@ import mapToCssModules from 'map-to-css-modules';
 import { buttonGroup } from 'bootstrap-styled-mixins/lib/buttonGroup';
 import bsTheme from '../theme';
 
-const defaultProps = {
-  tag: 'div',
-  role: 'toolbar',
-  theme: bsTheme,
-};
 
 class ButtonToolbarUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'div',
+    role: 'toolbar',
+    theme: bsTheme,
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -67,7 +68,5 @@ const ButtonToolbar = styled(ButtonToolbarUnstyled)`
     )}
   `}  
 `;
-
-ButtonToolbar.defaultProps = defaultProps;
 
 export default ButtonToolbar;

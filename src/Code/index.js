@@ -10,12 +10,13 @@ import omit from 'lodash.omit';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { makeTheme } from './theme';
 
-const defaultProps = {
-  tag: 'code',
-  theme: makeTheme(),
-};
 
 class CodeUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'code',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -62,8 +63,6 @@ const Code = styled(CodeUnstyled)`
     font-family: ${props.theme['$font-family-monospace']};
   `}
 `;
-
-Code.defaultProps = defaultProps;
 
 export default Code;
 

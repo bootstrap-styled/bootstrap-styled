@@ -7,9 +7,12 @@ import mapToCssModules from 'map-to-css-modules';
 import { typography } from 'bootstrap-styled-mixins/lib/typography';
 import { makeTheme } from './theme';
 
-const defaultProps = { theme: makeTheme() };
 
 class H2Unstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -75,7 +78,5 @@ const H2 = styled(H2Unstyled)`
     margin-top: 0;
   `}
 `;
-
-H2.defaultProps = defaultProps;
 
 export default H2;

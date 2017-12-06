@@ -11,13 +11,14 @@ import mapToCssModules from 'map-to-css-modules';
 import { buttonGroup } from 'bootstrap-styled-mixins/lib/buttonGroup';
 import { makeTheme } from './theme';
 
-const defaultProps = {
-  role: 'group',
-  tag: 'div',
-  theme: makeTheme(),
-};
 
 class ButtonGroupUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    role: 'group',
+    tag: 'div',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -71,8 +72,6 @@ const ButtonGroup = styled(ButtonGroupUnstyled)`
     )}
   `}  
 `;
-
-ButtonGroup.defaultProps = defaultProps;
 
 export default ButtonGroup;
 

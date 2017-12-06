@@ -20,16 +20,17 @@ import rebootUtils from 'bootstrap-styled-mixins/lib/utilities/reboot';
 import Fade from './Fade';
 import { makeTheme } from './theme';
 
-const defaultProps = {
-  isOpen: false,
-  isLocked: false,
-  backdrop: true,
-  keyboard: true,
-  zIndex: 1000,
-  theme: makeTheme(),
-};
 
 class ModalUnstyled extends React.Component {
+
+  static defaultProps = {
+    isOpen: false,
+    isLocked: false,
+    backdrop: true,
+    keyboard: true,
+    zIndex: 1000,
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     theme: PropTypes.object,
@@ -381,8 +382,5 @@ const Modal = styled(ModalUnstyled)`
     )}
   `}
 `;
-
-
-Modal.defaultProps = defaultProps;
 
 export default Modal;

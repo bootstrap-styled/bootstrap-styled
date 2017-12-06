@@ -15,12 +15,13 @@ import { listGroupItemVariant } from 'bootstrap-styled-mixins/lib/list-group';
 import { makeTheme } from './theme';
 import Ul from '../Ul/index';
 
-const defaultProps = {
-  tag: Ul,
-  theme: makeTheme(),
-};
 
 class ListGroupUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: Ul,
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -205,8 +206,6 @@ const ListGroup = styled(ListGroupUnstyled)`
     )}
   `}
 `;
-
-ListGroup.defaultProps = defaultProps;
 
 export default ListGroup;
 

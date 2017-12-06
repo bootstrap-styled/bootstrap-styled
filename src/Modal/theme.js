@@ -24,6 +24,18 @@ export const makeTheme = (userTheme = {}) => {
   v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
   v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
 
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
   // Grid breakpoints
   //
   // Define the minimum dimensions at which your layout will change,
@@ -39,6 +51,14 @@ export const makeTheme = (userTheme = {}) => {
   assertAscending(v['$grid-breakpoints'], '$grid-breakpoints');
   assertStartAtZero(v['$grid-breakpoints']);
 
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
   // Body
   //
   // Settings for the `<body>` element.
@@ -48,6 +68,7 @@ export const makeTheme = (userTheme = {}) => {
 
   // Fonts
 
+  v['$font-family-sans-serif'] = u['$font-family-sans-serif'] || '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
   v['$font-family-base'] = u['$font-family-base'] || v['$font-family-sans-serif'];
   v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
   v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';

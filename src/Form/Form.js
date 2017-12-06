@@ -18,12 +18,13 @@ import { customForms } from 'bootstrap-styled-mixins/lib/customForms';
 import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
 import { makeTheme } from './theme';
 
-const defaultProps = {
-  tag: 'form',
-  theme: makeTheme(),
-};
 
 class FormUnstyled extends React.Component {// eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'form',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -65,29 +66,29 @@ const Form = styled(FormUnstyled)`
     */
 
     ${formControl(
-      props.theme['$enable-rounded'],
-      props.theme['$enable-transitions'],
-      props.theme['$enable-shadows'],
-      props.theme['$input-height'],
-      props.theme['$input-padding-y'],
-      props.theme['$input-padding-x'],
-      props.theme['$font-size-base'],
-      props.theme['$input-line-height'],
-      props.theme['$input-color'],
-      props.theme['$input-bg'],
-      props.theme['$input-border-radius'],
-      props.theme['$input-btn-border-width'],
-      props.theme['$input-border-color'],
-      props.theme['$input-transition'],
-      props.theme['$input-box-shadow'],
-      props.theme['$input-color-focus'],
-      props.theme['$input-bg-focus'],
-      props.theme['$input-border-focus'],
-      props.theme['$input-box-shadow-focus'],
-      props.theme['$input-color-placeholder'],
-      props.theme['$input-bg-disabled'],
-      props.theme['$cursor-disabled'],
-    )}
+  props.theme['$enable-rounded'],
+  props.theme['$enable-transitions'],
+  props.theme['$enable-shadows'],
+  props.theme['$input-height'],
+  props.theme['$input-padding-y'],
+  props.theme['$input-padding-x'],
+  props.theme['$font-size-base'],
+  props.theme['$input-line-height'],
+  props.theme['$input-color'],
+  props.theme['$input-bg'],
+  props.theme['$input-border-radius'],
+  props.theme['$input-btn-border-width'],
+  props.theme['$input-border-color'],
+  props.theme['$input-transition'],
+  props.theme['$input-box-shadow'],
+  props.theme['$input-color-focus'],
+  props.theme['$input-bg-focus'],
+  props.theme['$input-border-focus'],
+  props.theme['$input-box-shadow-focus'],
+  props.theme['$input-color-placeholder'],
+  props.theme['$input-bg-disabled'],
+  props.theme['$cursor-disabled'],
+)}
     
     select.form-control {
       &:focus::-ms-value {
@@ -181,9 +182,9 @@ const Form = styled(FormUnstyled)`
       padding: ${props.theme['$input-padding-y-sm']} ${props.theme['$input-padding-x-sm']};
       font-size: ${props.theme['$font-size-sm']};
       ${borderRadius(
-        props.theme['$enable-rounded'],
-        props.theme['$input-border-radius-sm']
-      )}
+  props.theme['$enable-rounded'],
+  props.theme['$input-border-radius-sm']
+)}
     }
 
     select.form-control-sm {
@@ -196,9 +197,9 @@ const Form = styled(FormUnstyled)`
       padding: ${props.theme['$input-padding-y-lg']} ${props.theme['$input-padding-x-lg']};
       font-size: ${props.theme['$font-size-lg']};
       ${borderRadius(
-        props.theme['$enable-rounded'],
-        props.theme['$input-border-radius-lg']
-      )}
+  props.theme['$enable-rounded'],
+  props.theme['$input-border-radius-lg']
+)}
     }
 
     select.form-control-lg {
@@ -407,82 +408,80 @@ const Form = styled(FormUnstyled)`
             top: 0;
           }
         `
-      )}
+)}
     }
     ${customForms(
-        props.theme['$enable-rounded'],
-        props.theme['$enable-shadows'],
-        props.theme['$custom-control-checked-indicator-box-shadow'],
-        props.theme['$custom-control-active-indicator-box-shadow'],
-        props.theme['$custom-control-indicator-box-shadow'],
-        props.theme['$custom-checkbox-indeterminate-box-shadow'],
-        props.theme['$custom-select-focus-box-shadow'],
-        props.theme['$custom-file-focus-box-shadow'],
-        props.theme['$custom-file-box-shadow'],
-        props.theme['$custom-select-border-radius'],
-        props.theme['$custom-file-border-radius'],
-        props.theme['$custom-checkbox-radius'],
-        props.theme['$input-bg'],
-        props.theme['$custom-select-line-height'],
-        props.theme['$line-height-base'],
-        props.theme['$custom-control-gutter'],
-        props.theme['$custom-control-spacer-x'],
-        props.theme['$custom-control-checked-indicator-color'],
-        props.theme['$custom-control-checked-indicator-bg'],
-        props.theme['$custom-control-focus-indicator-box-shadow'],
-        props.theme['$custom-control-active-indicator-color'],
-        props.theme['$custom-control-active-indicator-bg'],
-        props.theme['$custom-control-disabled-cursor'],
-        props.theme['$custom-control-disabled-indicator-bg'],
-        props.theme['$custom-control-disabled-description-color'],
-        props.theme['$custom-control-indicator-size'],
-        props.theme['$custom-control-indicator-bg'],
-        props.theme['$custom-control-indicator-bg-size'],
-        props.theme['$custom-checkbox-checked-icon'],
-        props.theme['$custom-checkbox-indeterminate-bg'],
-        props.theme['$custom-checkbox-indeterminate-icon'],
-        props.theme['$custom-radio-radius'],
-        props.theme['$custom-radio-checked-icon'],
-        props.theme['$custom-control-spacer-y'],
-        props.theme['$border-width'],
-        props.theme['$input-height'],
-        props.theme['$custom-select-padding-y'],
-        props.theme['$custom-select-padding-x'],
-        props.theme['$custom-select-indicator-padding'],
-        props.theme['$custom-select-color'],
-        props.theme['$custom-select-bg'],
-        props.theme['$custom-select-indicator'],
-        props.theme['$custom-select-bg-size'],
-        props.theme['$custom-select-border-width'],
-        props.theme['$custom-select-border-color'],
-        props.theme['$custom-select-focus-border-color'],
-        props.theme['$input-color'],
-        props.theme['$custom-select-disabled-color'],
-        props.theme['$cursor-disabled'],
-        props.theme['$custom-select-disabled-bg'],
-        props.theme['$custom-select-sm-font-size'],
-        props.theme['$custom-file-width'],
-        props.theme['$custom-file-height'],
-        props.theme['$custom-file-padding-x'],
-        props.theme['$custom-file-padding-y'],
-        props.theme['$custom-file-line-height'],
-        props.theme['$custom-file-color'],
-        props.theme['$custom-file-bg'],
-        props.theme['$custom-file-border-width'],
-        props.theme['$custom-file-border-color'],
-        props.theme['$custom-file-button-color'],
-        props.theme['$custom-file-button-bg'],
-        props.theme['$custom-file-text'],
-      )}
+  props.theme['$enable-rounded'],
+  props.theme['$enable-shadows'],
+  props.theme['$custom-control-checked-indicator-box-shadow'],
+  props.theme['$custom-control-active-indicator-box-shadow'],
+  props.theme['$custom-control-indicator-box-shadow'],
+  props.theme['$custom-checkbox-indeterminate-box-shadow'],
+  props.theme['$custom-select-focus-box-shadow'],
+  props.theme['$custom-file-focus-box-shadow'],
+  props.theme['$custom-file-box-shadow'],
+  props.theme['$custom-select-border-radius'],
+  props.theme['$custom-file-border-radius'],
+  props.theme['$custom-checkbox-radius'],
+  props.theme['$input-bg'],
+  props.theme['$custom-select-line-height'],
+  props.theme['$line-height-base'],
+  props.theme['$custom-control-gutter'],
+  props.theme['$custom-control-spacer-x'],
+  props.theme['$custom-control-checked-indicator-color'],
+  props.theme['$custom-control-checked-indicator-bg'],
+  props.theme['$custom-control-focus-indicator-box-shadow'],
+  props.theme['$custom-control-active-indicator-color'],
+  props.theme['$custom-control-active-indicator-bg'],
+  props.theme['$custom-control-disabled-cursor'],
+  props.theme['$custom-control-disabled-indicator-bg'],
+  props.theme['$custom-control-disabled-description-color'],
+  props.theme['$custom-control-indicator-size'],
+  props.theme['$custom-control-indicator-bg'],
+  props.theme['$custom-control-indicator-bg-size'],
+  props.theme['$custom-checkbox-checked-icon'],
+  props.theme['$custom-checkbox-indeterminate-bg'],
+  props.theme['$custom-checkbox-indeterminate-icon'],
+  props.theme['$custom-radio-radius'],
+  props.theme['$custom-radio-checked-icon'],
+  props.theme['$custom-control-spacer-y'],
+  props.theme['$border-width'],
+  props.theme['$input-height'],
+  props.theme['$custom-select-padding-y'],
+  props.theme['$custom-select-padding-x'],
+  props.theme['$custom-select-indicator-padding'],
+  props.theme['$custom-select-color'],
+  props.theme['$custom-select-bg'],
+  props.theme['$custom-select-indicator'],
+  props.theme['$custom-select-bg-size'],
+  props.theme['$custom-select-border-width'],
+  props.theme['$custom-select-border-color'],
+  props.theme['$custom-select-focus-border-color'],
+  props.theme['$input-color'],
+  props.theme['$custom-select-disabled-color'],
+  props.theme['$cursor-disabled'],
+  props.theme['$custom-select-disabled-bg'],
+  props.theme['$custom-select-sm-font-size'],
+  props.theme['$custom-file-width'],
+  props.theme['$custom-file-height'],
+  props.theme['$custom-file-padding-x'],
+  props.theme['$custom-file-padding-y'],
+  props.theme['$custom-file-line-height'],
+  props.theme['$custom-file-color'],
+  props.theme['$custom-file-bg'],
+  props.theme['$custom-file-border-width'],
+  props.theme['$custom-file-border-color'],
+  props.theme['$custom-file-button-color'],
+  props.theme['$custom-file-button-bg'],
+  props.theme['$custom-file-text'],
+)}
     & .row {
       ${makeRow(
-        props.theme['$enable-grid-classes'],
-        props.theme['$grid-gutter-widths'],
-      )}
+  props.theme['$enable-grid-classes'],
+  props.theme['$grid-gutter-widths'],
+)}
     }
   `}
 `;
-
-Form.defaultProps = defaultProps;
 
 export default Form;

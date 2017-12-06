@@ -10,11 +10,12 @@ import omit from 'lodash.omit';
 import { makeGridColumns } from 'bootstrap-styled-mixins/lib/grid-framework';
 import { makeTheme } from './theme';
 
-const defaultProps = {
-  theme: makeTheme(),
-};
 
 class DdUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -48,7 +49,5 @@ const Dd = styled(DdUnstyled)`
     )}
   `}
 `;
-
-Dd.defaultProps = defaultProps;
 
 export default Dd;

@@ -14,13 +14,19 @@ import { tableRowVariant } from 'bootstrap-styled-mixins/lib/table-row';
 import { hover as hoverMixin } from 'bootstrap-styled-mixins/lib/hover';
 import { makeTheme } from './theme';
 
-const defaultProps = {
-  tag: 'table',
-  responsiveTag: 'div',
-  theme: makeTheme(),
-};
+// const defaultProps = {
+//   tag: 'table',
+//   responsiveTag: 'div',
+//   theme: makeTheme(),
+// };
 
 class TableUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'table',
+    responsiveTag: 'div',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -303,6 +309,6 @@ const Table = styled(TableUnstyled)`
   `}
 `;
 
-Table.defaultProps = defaultProps;
+// Table.defaultProps = defaultProps;
 
 export default Table;

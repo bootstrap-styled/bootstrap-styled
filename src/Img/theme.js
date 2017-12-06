@@ -26,6 +26,20 @@ export const makeTheme = (userTheme = {}) => {
   v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
   v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
 
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-bg'] = u['$body-bg'] || v['$white'];
+
   // Spacing
   //
   // Control the default styling of most Bootstrap elements by modifying these
@@ -38,6 +52,15 @@ export const makeTheme = (userTheme = {}) => {
   // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
   v['$spacer-halved'] = u['$spacer-halved'] || ((rmUnit(v['$spacer'], UNIT.REM) / 2) + UNIT.REM);
   // =============================================================================================================
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
 
   // Image thumbnails
 

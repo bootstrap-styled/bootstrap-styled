@@ -11,14 +11,14 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
 import { card } from 'bootstrap-styled-mixins/lib/cards';
-import themeCards from './theme';
-
-const defaultProps = {
-  theme: themeCards,
-  tag: 'div',
-};
+import { makeTheme } from './theme';
 
 class CardColumnsUnstyled extends React.Component {// eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'div',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -98,7 +98,5 @@ const CardColumns = styled(CardColumnsUnstyled)`
     )}
   `}
 `;
-
-CardColumns.defaultProps = defaultProps;
 
 export default CardColumns;

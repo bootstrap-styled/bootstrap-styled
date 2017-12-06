@@ -34,9 +34,16 @@ export const makeTheme = (userTheme = {}) => {
 
   // Create grayscale
   v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
 
   // Reassign color vars to semantic color scheme
   v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
 
   // Progress bars
 

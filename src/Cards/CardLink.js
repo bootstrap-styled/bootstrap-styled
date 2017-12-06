@@ -4,11 +4,12 @@ import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import A from '../A';
 
-const defaultProps = {
-  tag: A,
-};
 
 class CardLink extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: A,
+  };
 
   static propTypes = {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -38,7 +39,5 @@ class CardLink extends React.Component { // eslint-disable-line react/prefer-sta
     );
   }
 }
-
-CardLink.defaultProps = defaultProps;
 
 export default CardLink;

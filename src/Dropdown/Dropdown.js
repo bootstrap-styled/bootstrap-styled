@@ -19,11 +19,6 @@ import { makeTheme } from './theme';
 import DropdownMenu from './DropdownMenu';
 import TetherContent from '../TetherContent';
 
-const defaultProps = {
-  isOpen: false,
-  tag: 'div',
-  theme: makeTheme(),
-};
 
 const defaultTetherConfig = {
   classes: { element: 'dropdown', enabled: 'show' },
@@ -35,6 +30,12 @@ const defaultTetherConfig = {
 };
 
 class DropdownUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    isOpen: false,
+    tag: 'div',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     children: PropTypes.node,
@@ -371,23 +372,21 @@ const Dropdown = styled(DropdownUnstyled)`
         
     /* Added Mixin boutonGroup to enable dropdown to beneficiate from buttonGroup classes */
     ${buttonGroup(
-  props.theme['$enable-shadows'],
-  props.theme['$enable-rounded'],
-  props.theme['$input-btn-border-width'],
-  props.theme['$btn-padding-x'],
-  props.theme['$btn-active-box-shadow'],
-  props.theme['$btn-padding-x-lg'],
-  props.theme['$btn-padding-y-lg'],
-  props.theme['$font-size-lg'],
-  props.theme['$btn-border-radius-lg'],
-  props.theme['$btn-padding-x-sm'],
-  props.theme['$btn-padding-y-sm'],
-  props.theme['$font-size-sm'],
-  props.theme['$btn-border-radius-sm']
-)}
+      props.theme['$enable-shadows'],
+      props.theme['$enable-rounded'],
+      props.theme['$input-btn-border-width'],
+      props.theme['$btn-padding-x'],
+      props.theme['$btn-active-box-shadow'],
+      props.theme['$btn-padding-x-lg'],
+      props.theme['$btn-padding-y-lg'],
+      props.theme['$font-size-lg'],
+      props.theme['$btn-border-radius-lg'],
+      props.theme['$btn-padding-x-sm'],
+      props.theme['$btn-padding-y-sm'],
+      props.theme['$font-size-sm'],
+      props.theme['$btn-border-radius-sm']
+    )}
   `}
 `;
-
-Dropdown.defaultProps = defaultProps;
 
 export default Dropdown;

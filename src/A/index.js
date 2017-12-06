@@ -11,12 +11,12 @@ import mapToCssModules from 'map-to-css-modules';
 import { a } from 'bootstrap-styled-mixins/lib/a';
 import { makeTheme } from './theme';
 
-const defaultProps = {
-  tag: 'a',
-  theme: makeTheme(),
-};
-
 class AUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'a',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -72,8 +72,6 @@ const A = styled(AUnstyled)`
     )}
   `}
 `;
-
-A.defaultProps = defaultProps;
 
 export default A;
 

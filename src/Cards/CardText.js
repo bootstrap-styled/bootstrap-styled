@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
-const defaultProps = {
-  tag: 'p',
-};
 
 class CardText extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'p',
+  };
 
   static propTypes = {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -34,7 +35,5 @@ class CardText extends React.Component { // eslint-disable-line react/prefer-sta
     );
   }
 }
-
-CardText.defaultProps = defaultProps;
 
 export default CardText;

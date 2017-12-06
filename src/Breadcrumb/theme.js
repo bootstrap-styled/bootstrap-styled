@@ -27,6 +27,7 @@ export const makeTheme = (userTheme = {}) => {
   // Create grayscale
 
   v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
 
   // Components
   //
