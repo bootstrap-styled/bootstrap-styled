@@ -2,13 +2,13 @@
  * Testing our Table component
  */
 
-import {
-  // shallow,
-  mount,
-} from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
 import Table from '../Table';
+import { makeTheme } from '../theme';
+
+const theme = makeTheme();
 
 const children = (
   <tbody>
@@ -20,11 +20,11 @@ const children = (
   </tbody>
 );
 
-// const renderComponent = (props = {}) => shallow(
-//   <Table {...props}>
-//     {children}
-//   </Table>
-// );
+const renderComponent = (props = {}) => shallow(
+  <Table theme={theme} {...props}>
+    {children}
+  </Table>
+);
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
@@ -37,19 +37,19 @@ const renderComponentUsingTheme = (props = {}) => mount(
 
 
 describe('<Table />', () => {
-  // it('should render an <Table> tag without a theme', () => {
-  //   const renderedComponent = renderComponent({
-  //     children,
-  //   });
-  //   expect(renderedComponent.find('TableUnstyled').length).toBe(1);
-  // });
-  // it('should have children without a theme', () => {
-  //   const renderedComponent = renderComponent({
-  //     children,
-  //   });
-  //   expect(renderedComponent.contains(children)).toEqual(true);
-  // });
-  it('should render an <Table> tag with a theme', () => {
+  it('should render an <Table /> tag without a <BootstrapProvider />', () => {
+    const renderedComponent = renderComponent({
+      children,
+    });
+    expect(renderedComponent.find('TableUnstyled').length).toBe(1);
+  });
+  it('should have children without a <BootstrapProvider />', () => {
+    const renderedComponent = renderComponent({
+      children,
+    });
+    expect(renderedComponent.contains(children)).toEqual(true);
+  });
+  it('should render an <Table /> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
