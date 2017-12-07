@@ -241,7 +241,6 @@ export const makeTheme = (userTheme = {}) => {
     },
   };
 
-
   // Form validation icons*
   v['$form-icon-success-color'] = u['$form-icon-success-color'] || v['$brand-success'];
   v['$form-icon-success'] = u['$form-icon-success'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="${v['$form-icon-success-color']}" d="M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z"/%3E%3C/svg%3E')`;

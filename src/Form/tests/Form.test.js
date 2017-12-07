@@ -2,16 +2,15 @@ import { shallow, mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
 import Form from '../Form';
-import { makeTheme } from '../theme';
-
-const theme = makeTheme();
 
 const children = (<h1>Test</h1>);
 
 const renderComponent = (props = {}) => shallow(
-  <Form theme={theme} {...props}>
-    {children}
-  </Form>
+  <BootstrapProvider>
+    <Form {...props}>
+      {children}
+    </Form>
+  </BootstrapProvider>
 );
 
 const renderComponentUsingTheme = (props = {}) => mount(
@@ -25,7 +24,7 @@ const renderComponentUsingTheme = (props = {}) => mount(
 describe('<Form />', () => {
   it('should render an <Form /> tag without a <BootstrapProvider />', () => {
     const renderedComponent = renderComponent();
-    expect(renderedComponent.find('FormUnstyled').length).toBe(1);
+    expect(renderedComponent.find('Form').length).toBe(1);
   });
   it('should have children without a <BootstrapProvider />', () => {
     const renderedComponent = renderComponent({

@@ -6,9 +6,6 @@ import { shallow, mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
 import Table from '../Table';
-import { makeTheme } from '../theme';
-
-const theme = makeTheme();
 
 const children = (
   <tbody>
@@ -21,29 +18,27 @@ const children = (
 );
 
 const renderComponent = (props = {}) => shallow(
-  <Table theme={theme} {...props}>
-    {children}
-  </Table>
+  <BootstrapProvider>
+    <Table {...props} />
+  </BootstrapProvider>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Table {...props}>
-      {children}
-    </Table>
+    <Table {...props} />
   </BootstrapProvider>
 );
 
 
 describe('<Table />', () => {
-  it('should render an <Table /> tag without a <BootstrapProvider />', () => {
+  it('should render an <Table /> tag', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('TableUnstyled').length).toBe(1);
+    expect(renderedComponent.find('Table').length).toBe(1);
   });
-  it('should have children without a <BootstrapProvider />', () => {
+  it('should have children', () => {
     const renderedComponent = renderComponent({
       children,
     });

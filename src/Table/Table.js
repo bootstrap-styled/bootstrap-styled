@@ -14,11 +14,6 @@ import { tableRowVariant } from 'bootstrap-styled-mixins/lib/table-row';
 import { hover as hoverMixin } from 'bootstrap-styled-mixins/lib/hover';
 import { makeTheme } from './theme';
 
-// const defaultProps = {
-//   tag: 'table',
-//   responsiveTag: 'div',
-//   theme: makeTheme(),
-// };
 
 class TableUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -88,7 +83,6 @@ const Table = styled(TableUnstyled)`
     /*
      Basic Bootstrap table
     */
-    
     &.table {
       width: 100%;
       max-width: 100%;
@@ -104,11 +98,11 @@ const Table = styled(TableUnstyled)`
     
       thead th {
         vertical-align: bottom;
-        border-bottom: ${unitUtils.math.multiply(2, props.theme['$table-border-width'])} solid ${props.theme['$table-border-color']};
+        border-bottom: ${unitUtils.math.multiply(props.theme['$table-border-width'], 2)} solid ${props.theme['$table-border-color']};
       }
     
       tbody + tbody {
-        border-top: ${unitUtils.math.multiply(2, props.theme['$table-border-width'])} solid ${props.theme['$table-border-color']};
+        border-top: ${unitUtils.math.multiply(props.theme['$table-border-width'], 2)} solid ${props.theme['$table-border-color']};
       }
     
       .table {
@@ -308,7 +302,5 @@ const Table = styled(TableUnstyled)`
     
   `}
 `;
-
-// Table.defaultProps = defaultProps;
 
 export default Table;
