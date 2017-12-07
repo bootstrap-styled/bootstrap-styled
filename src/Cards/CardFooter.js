@@ -4,11 +4,11 @@ import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
 
-const defaultProps = {
-  tag: 'div',
-};
-
 class CardFooter extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'div',
+  };
 
   static propTypes = {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -35,7 +35,5 @@ class CardFooter extends React.Component { // eslint-disable-line react/prefer-s
     );
   }
 }
-
-CardFooter.defaultProps = defaultProps;
 
 export default CardFooter;

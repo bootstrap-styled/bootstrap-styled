@@ -5,13 +5,14 @@ import mapToCssModules from 'map-to-css-modules';
 import Button from '../Button';
 import A from '../A';
 
-const defaultProps = {
-  'aria-haspopup': true,
-  'data-toggle': 'dropdown',
-  color: 'secondary',
-};
 
 class DropdownToggle extends React.Component {
+
+  static defaultProps = {
+    'aria-haspopup': true,
+    'data-toggle': 'dropdown',
+    color: 'secondary',
+  };
 
   static propTypes = {
     'aria-haspopup': PropTypes.bool,
@@ -87,7 +88,5 @@ class DropdownToggle extends React.Component {
     );
   }
 }
-
-DropdownToggle.defaultProps = defaultProps;
 
 export default DropdownToggle;

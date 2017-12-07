@@ -12,12 +12,13 @@ import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { clearfix } from 'bootstrap-styled-mixins/lib/clearfix';
 import { makeTheme } from './theme';
 
-const defaultProps = {
-  tag: 'ol',
-  theme: makeTheme(),
-};
 
 class BreadcrumbUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'ol',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -94,7 +95,5 @@ const Breadcrumb = styled(BreadcrumbUnstyled)`
     }
   `}
 `;
-
-Breadcrumb.defaultProps = defaultProps;
 
 export default Breadcrumb;

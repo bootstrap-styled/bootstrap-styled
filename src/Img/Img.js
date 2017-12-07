@@ -17,12 +17,13 @@ import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { transition } from 'bootstrap-styled-mixins/lib/transition';
 import { makeTheme } from './theme';
 
-const defaultProps = {
-  tag: 'img',
-  theme: makeTheme(),
 
-};
 class ImgUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'img',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -128,7 +129,5 @@ const Img = styled(ImgUnstyled)`
     */
   `}
 `;
-
-Img.defaultProps = defaultProps;
 
 export default Img;

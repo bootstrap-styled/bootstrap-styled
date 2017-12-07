@@ -18,35 +18,33 @@ const children = (
 );
 
 const renderComponent = (props = {}) => shallow(
-  <Table {...props}>
-    {children}
-  </Table>
+  <BootstrapProvider>
+    <Table {...props} />
+  </BootstrapProvider>
 );
 
 
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
-    <Table {...props}>
-      {children}
-    </Table>
+    <Table {...props} />
   </BootstrapProvider>
 );
 
 
 describe('<Table />', () => {
-  it('should render an <Table> tag without a theme', () => {
+  it('should render an <Table /> tag', () => {
     const renderedComponent = renderComponent({
       children,
     });
-    expect(renderedComponent.find('TableUnstyled').length).toBe(1);
+    expect(renderedComponent.find('Table').length).toBe(1);
   });
-  it('should have children without a theme', () => {
+  it('should have children', () => {
     const renderedComponent = renderComponent({
       children,
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
-  it('should render an <Table> tag with a theme', () => {
+  it('should render an <Table /> tag with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });

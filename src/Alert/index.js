@@ -15,22 +15,21 @@ import { makeTheme } from './theme';
 
 import Close from '../Close';
 
-const defaultProps = {
-  color: 'success',
-  isOpen: true,
-  tag: 'div',
-  theme: makeTheme(),
-  transitionAppear: 150,
-  transitionEnter: 150,
-  transitionLeave: 150,
-};
-
 const FirstChild = ({ children }) => (
   React.Children.toArray(children)[0] || null
 );
 
-
 class AlertUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    color: 'success',
+    isOpen: true,
+    tag: 'div',
+    theme: makeTheme(),
+    transitionAppear: 150,
+    transitionEnter: 150,
+    transitionLeave: 150,
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -169,8 +168,6 @@ const Alert = styled(AlertUnstyled)`
     }
   `}
 `;
-
-Alert.defaultProps = defaultProps;
 
 export default withTheme(Alert);
 

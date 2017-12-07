@@ -11,13 +11,14 @@ import mapToCssModules from 'map-to-css-modules';
 import { button } from 'bootstrap-styled-mixins/lib/buttons';
 import { makeTheme } from './theme';
 
-const defaultProps = {
-  tag: 'button',
-  color: 'secondary',
-  theme: makeTheme(),
-};
 
 class ButtonUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'button',
+    color: 'secondary',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -144,7 +145,5 @@ const Button = styled(ButtonUnstyled)`
     )}
  `} 
 `;
-
-Button.defaultProps = defaultProps;
 
 export default Button;

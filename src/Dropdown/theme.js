@@ -37,6 +37,7 @@ export const makeTheme = (userTheme = {}) => {
 
   // Create grayscale
   v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
   v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
   v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
 
@@ -51,6 +52,7 @@ export const makeTheme = (userTheme = {}) => {
 
   v['$spacer'] = u['$spacer'] || '1rem';
   v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
+  v['$border-width'] = u['$border-width'] || '1px';
 
   // Fonts
   //
@@ -74,9 +76,10 @@ export const makeTheme = (userTheme = {}) => {
   v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
   v['$caret-width'] = u['$caret-width'] || '.3em';
   v['$line-height-lg'] = u['$line-height-lg'] || '1.6';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
 
   // Forms
-
   v['$input-padding-y-lg'] = u['$input-padding-y-lg'] || '.75rem';
 
   // Dropdowns

@@ -15,13 +15,12 @@ import { formControl } from 'bootstrap-styled-mixins/lib/forms';
 import { makeTheme } from './theme';
 
 
-const defaultProps = {
-  tag: 'div',
-  theme: makeTheme(),
-};
-
-
 class InputGroupUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'div',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -282,7 +281,5 @@ const InputGroup = styled(InputGroupUnstyled)`
     )}
   `}
 `;
-
-InputGroup.defaultProps = defaultProps;
 
 export default InputGroup;

@@ -9,11 +9,12 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
-const defaultProps = {
-  tag: 'div',
-};
 
 class FormGroup extends React.Component {// eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'div',
+  };
 
   static propTypes = {
     className: PropTypes.string,
@@ -54,7 +55,5 @@ class FormGroup extends React.Component {// eslint-disable-line react/prefer-sta
     );
   }
 }
-
-FormGroup.defaultProps = defaultProps;
 
 export default FormGroup;

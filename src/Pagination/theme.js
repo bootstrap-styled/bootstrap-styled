@@ -1,3 +1,4 @@
+import Color from 'color';
 import { allowFalseValue } from '../makeTheme/utils';
 /**
  * BOOTSTRAP THEME PAGINATION
@@ -21,6 +22,26 @@ export const makeTheme = (userTheme = {}) => {
   v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
   v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
 
+  // Colors
+  //
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
   // Components
   //
   // Define common padding and border radius sizes and more.
@@ -39,6 +60,13 @@ export const makeTheme = (userTheme = {}) => {
 
   v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
   v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
+
+  // Links
+  //
+  // Style anchor elements.
+
+  v['$link-color'] = u['$link-color'] || v['$brand-primary'];
+  v['$link-hover-color'] = u['$link-hover-color'] || Color(v['$link-color']).darken(0.35).toString();
 
   // Pagination
 

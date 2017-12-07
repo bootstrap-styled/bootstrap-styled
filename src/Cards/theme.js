@@ -55,6 +55,7 @@ export const makeTheme = (userTheme = {}) => {
 
   // Create grayscale
   v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
 
   // Reassign color vars to semantic color scheme
   v['$brand-primary'] = u['$brand-primary'] || v['$blue'];

@@ -8,11 +8,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 
-const defaultProps = {
-  tag: 'abbr',
-};
-
 class AbbrUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'abbr',
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -61,8 +61,6 @@ const Abbr = styled(AbbrUnstyled)`
     text-transform: uppercase;
   }
 `;
-
-Abbr.defaultProps = defaultProps;
 
 export default Abbr;
 

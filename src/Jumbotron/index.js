@@ -14,12 +14,12 @@ import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
 import { makeTheme } from './theme';
 
 
-const defaultProps = {
-  tag: 'div',
-  theme: makeTheme(),
-};
-
 class JumbotronUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'div',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -83,7 +83,5 @@ const Jumbotron = styled(JumbotronUnstyled)`
     }
   `}
 `;
-
-Jumbotron.defaultProps = defaultProps;
 
 export default Jumbotron;

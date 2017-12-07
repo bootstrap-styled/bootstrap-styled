@@ -7,11 +7,12 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
-const defaultProps = {
-  tag: 'li',
-};
 
 class PaginationItem extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'li',
+  };
 
   static propTypes = {
     active: PropTypes.bool,
@@ -46,7 +47,5 @@ class PaginationItem extends React.Component { // eslint-disable-line react/pref
     );
   }
 }
-
-PaginationItem.defaultProps = defaultProps;
 
 export default PaginationItem;

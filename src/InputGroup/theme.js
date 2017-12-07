@@ -37,6 +37,7 @@ export const makeTheme = (userTheme = {}) => {
 
   // Start with assigning color names to specific hex values.
 
+  v['$white'] = u['$white'] || '#fff';
   v['$black'] = u['$black'] || '#000';
   v['$blue'] = u['$blue'] || '#0275d8';
 
@@ -58,6 +59,13 @@ export const makeTheme = (userTheme = {}) => {
   v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
   v['$font-size-xs'] = u['$font-size-xs'] || '.75rem';
   v['$line-height-base'] = u['$line-height-base'] || '1.5';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
 
   // Forms
 

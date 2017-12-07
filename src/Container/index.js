@@ -7,11 +7,11 @@ import { makeContainer, makeContainerMaxWidths } from 'bootstrap-styled-mixins/l
 import { makeTheme } from './theme';
 
 
-const defaultProps = {
-  theme: makeTheme(),
-};
-
 class ContainerUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -46,8 +46,6 @@ const Container = styled(ContainerUnstyled)`
     )}
   `}
 `;
-
-Container.defaultProps = defaultProps;
 
 export default Container;
 

@@ -5405,7 +5405,7 @@ exports.default = {
 unwrapExports(buttons);
 var buttons_5 = buttons.button;
 
-var defaultProps$1 = {
+var defaultProps = {
   theme: bsTheme
 };
 
@@ -5448,18 +5448,13 @@ function composeLink(RouterLink) {
   })(['', ''], function (props) {
     return '\n      ' + a_3(props.theme['$link-color'], props.theme['$link-decoration'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$enable-hover-media-query']) + '\n    \n      ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n    ';
   });
-  Link.defaultProps = defaultProps$1;
+  Link.defaultProps = defaultProps;
   return Link;
 }
 
 /**
  * A link to a certain page, an anchor tag
  */
-var defaultProps = {
-  tag: 'a',
-  theme: makeTheme$2()
-};
-
 var AUnstyled = function (_React$Component) {
   inherits(AUnstyled, _React$Component);
 
@@ -5506,6 +5501,10 @@ var AUnstyled = function (_React$Component) {
   return AUnstyled;
 }(React__default.Component);
 
+AUnstyled.defaultProps = {
+  tag: 'a',
+  theme: makeTheme$2()
+};
 AUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -5525,15 +5524,9 @@ var A = styled__default(AUnstyled).withConfig({
   return '\n    ' + a_3(props.theme['$enable-hover-media-query'], props.theme['$link-color'], props.theme['$link-decoration'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration']) + '\n  ';
 });
 
-A.defaultProps = defaultProps;
-
 /**
  * Abbr component
  */
-
-var defaultProps$2 = {
-  tag: 'abbr'
-};
 
 var AbbrUnstyled = function (_React$Component) {
   inherits(AbbrUnstyled, _React$Component);
@@ -5545,6 +5538,8 @@ var AbbrUnstyled = function (_React$Component) {
 
   createClass(AbbrUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -5560,12 +5555,14 @@ var AbbrUnstyled = function (_React$Component) {
         }),
         title: title
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return AbbrUnstyled;
 }(React__default.Component);
 
+AbbrUnstyled.defaultProps = {
+  tag: 'abbr'
+};
 AbbrUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -5579,8 +5576,6 @@ AbbrUnstyled.propTypes = {
 var Abbr = styled__default(AbbrUnstyled).withConfig({
   displayName: 'Abbr'
 })(['&[title]{text-decoration:underline;text-decoration:underline dotted;cursor:help;border-bottom:0;}&.initialism{font-size:90%;text-transform:uppercase;}']);
-
-Abbr.defaultProps = defaultProps$2;
 
 /**
  * Address component
@@ -6829,8 +6824,6 @@ var makeTheme$4 = function makeTheme() {
 
 makeTheme$4();
 
-var defaultProps$4 = { theme: makeTheme$4() };
-
 var CloseUnstyled = function (_React$Component) {
   inherits(CloseUnstyled, _React$Component);
 
@@ -6841,6 +6834,8 @@ var CloseUnstyled = function (_React$Component) {
 
   createClass(CloseUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -6866,12 +6861,14 @@ var CloseUnstyled = function (_React$Component) {
           '\xD7'
         )
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CloseUnstyled;
 }(React__default.Component);
 
+CloseUnstyled.defaultProps = {
+  theme: makeTheme$4()
+};
 CloseUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -6890,21 +6887,9 @@ var Close = styled__default(CloseUnstyled).withConfig({
   return '\n    float: right;\n    font-size: ' + props.theme['$close-font-size'] + ';\n    font-weight: ' + props.theme['$close-font-weight'] + ';\n    line-height: 1;\n    color: ' + props.theme['$close-color'] + ';\n    text-shadow: ' + props.theme['$close-text-shadow'] + ';\n    opacity: .2;\n    \n    &:focus {outline:0;}\n    \n    ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$close-color'] + ';\n        text-decoration: none;\n        cursor: pointer;\n        opacity: .5;\n      ') + '\n    \n    /* Additional properties for button version\n     iOS requires the button element instead of an anchor tag.\n     If you want the anchor version, it requires \'href="#"\'.\n     See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile\n     */\n    \n    /* scss-lint:disable QualifyingElement */\n    &.close {\n      padding: 0;\n      cursor: pointer;\n      background: transparent;\n      border: 0;\n      -webkit-appearance: none;\n    }\n    /* scss-lint:enable QualifyingElement */\n  ';
 });
 
-Close.defaultProps = defaultProps$4;
-
 /**
  * Alert component
  */
-
-var defaultProps$3 = {
-  color: 'success',
-  isOpen: true,
-  tag: 'div',
-  theme: makeTheme$3(),
-  transitionAppear: 150,
-  transitionEnter: 150,
-  transitionLeave: 150
-};
 
 var FirstChild = function FirstChild(_ref) {
   var children = _ref.children;
@@ -6921,6 +6906,8 @@ var AlertUnstyled = function (_React$Component) {
 
   createClass(AlertUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -6965,12 +6952,20 @@ var AlertUnstyled = function (_React$Component) {
         },
         isOpen ? alert$$1 : null
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return AlertUnstyled;
 }(React__default.Component);
 
+AlertUnstyled.defaultProps = {
+  color: 'success',
+  isOpen: true,
+  tag: 'div',
+  theme: makeTheme$3(),
+  transitionAppear: 150,
+  transitionEnter: 150,
+  transitionLeave: 150
+};
 AlertUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
@@ -6993,8 +6988,6 @@ var Alert = styled__default(AlertUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    /*\n    Base styles\n    */\n    \n    &.alert {\n      padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n      margin-bottom: ' + props.theme['$alert-margin-bottom'] + ';\n      border: ' + props.theme['$alert-border-width'] + ' solid transparent;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$alert-border-radius']) + '\n    }\n    \n    /* Headings for larger alerts */\n    &.alert-heading {\n      /* Specified to prevent conflicts of changing $headings-color */\n      color: inherit;\n    }\n    \n    /* Provide class for links that match alerts */\n    & .alert-link { \n      font-weight: ' + props.theme['$alert-link-font-weight'] + ';\n    }\n    \n    /* Dismissible alerts Expand the right padding and account for the close buttons positioning. */\n    \n    &.alert-dismissible {    \n      /* Adjust close link position */\n      & .close {\n        position: relative;\n        top: -' + props.theme['$alert-padding-y'] + ';\n        right: -' + props.theme['$alert-padding-x'] + ';\n        padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n        color: inherit;\n      }\n    }\n    /* Alternate styles Generate contextual modifier classes for colorizing the alert. */\n\n    &.alert-success {\n      ' + alert_1(props.theme['$alert-success-bg'], props.theme['$alert-success-border'], props.theme['$alert-success-text']) + '    \n    }\n    &.alert-info {\n      ' + alert_1(props.theme['$alert-info-bg'], props.theme['$alert-info-border'], props.theme['$alert-info-text']) + '\n    } \n    &.alert-warning {\n      ' + alert_1(props.theme['$alert-warning-bg'], props.theme['$alert-warning-border'], props.theme['$alert-warning-text']) + ' \n    }\n    &.alert-danger {\n      ' + alert_1(props.theme['$alert-danger-bg'], props.theme['$alert-danger-border'], props.theme['$alert-danger-text']) + ' \n    }\n  ';
 });
-
-Alert.defaultProps = defaultProps$3;
 
 var index = styled.withTheme(Alert);
 
@@ -7072,11 +7065,6 @@ makeTheme$5();
  *
  */
 
-var defaultProps$5 = {
-  tag: 'blockquote',
-  theme: makeTheme$5()
-};
-
 var BlockquoteUnstyled = function (_React$Component) {
   inherits(BlockquoteUnstyled, _React$Component);
 
@@ -7087,6 +7075,7 @@ var BlockquoteUnstyled = function (_React$Component) {
 
   createClass(BlockquoteUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -7099,12 +7088,15 @@ var BlockquoteUnstyled = function (_React$Component) {
           'blockquote-reverse': reverse
         })
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return BlockquoteUnstyled;
 }(React__default.Component);
 
+BlockquoteUnstyled.defaultProps = {
+  tag: 'blockquote',
+  theme: makeTheme$5()
+};
 BlockquoteUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -7120,8 +7112,6 @@ var Blockquote = styled__default(BlockquoteUnstyled).withConfig({
 })(['  ', ' '], function (props) {
   return '\n    &.blockquote {\n      padding: ' + props.theme['$spacer-halved'] + ' ' + props.theme['$spacer'] + ';\n      margin-bottom: ' + props.theme['$spacer'] + ';\n      font-size: ' + props.theme['$blockquote-font-size'] + ';\n      border-left: ' + props.theme['$blockquote-border-width'] + ' solid ' + props.theme['$blockquote-border-color'] + ';\n      \n      .blockquote-footer {\n        display: block;\n        font-size: 80%; \n        color: ' + props.theme['$blockquote-small-color'] + ';\n        &::before {\n          content: \'\\2014 \\00A0\';\n        }\n      }\n    }\n\n    &.blockquote-reverse {\n      padding-right: ' + props.theme['$spacer'] + ';\n      padding-left: 0;\n      text-align: right;\n      border-right: ' + props.theme['$blockquote-border-width'] + ' solid ' + props.theme['$blockquote-border-color'] + ';\n      border-left: 0;\n      \n      .blockquote-footer {\n        display: block;\n        font-size: 80%; \n        color: ' + props.theme['$blockquote-small-color'] + ';\n        &::before {\n          content: "";\n        }\n        &::after {\n          content: \'\\00A0 \\2014\';\n        }\n      }\n    }\n    \n    /* Reboot from bootstrap v4 */\n    margin: 0 0 1rem;\n ';
 });
-
-Blockquote.defaultProps = defaultProps$5;
 
 var align = createCommonjsModule(function (module, exports) {
 "use strict";
@@ -8492,7 +8482,7 @@ exports.default = {
 
 var visibilityUtils = unwrapExports(visibility);
 
-var defaultProps$6 = {
+var defaultProps$1 = {
   theme: bsTheme,
   utils: {
     align: true,
@@ -8521,7 +8511,7 @@ var UtilityProvider = styled__default.div.withConfig({
   )) + '\n  ';
 });
 
-UtilityProvider.defaultProps = defaultProps$6;
+UtilityProvider.defaultProps = defaultProps$1;
 
 var BootstrapProvider = function (_React$Component) {
   inherits(BootstrapProvider, _React$Component);
@@ -8638,6 +8628,7 @@ var makeTheme$6 = function makeTheme() {
   // Create grayscale
 
   v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
 
   // Components
   //
@@ -8676,11 +8667,6 @@ makeTheme$6();
  * A Breadcrumb
  */
 
-var defaultProps$7 = {
-  tag: 'ol',
-  theme: makeTheme$6()
-};
-
 var BreadcrumbUnstyled = function (_React$Component) {
   inherits(BreadcrumbUnstyled, _React$Component);
 
@@ -8691,6 +8677,8 @@ var BreadcrumbUnstyled = function (_React$Component) {
 
   createClass(BreadcrumbUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -8701,12 +8689,15 @@ var BreadcrumbUnstyled = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'breadcrumb'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return BreadcrumbUnstyled;
 }(React__default.Component);
 
+BreadcrumbUnstyled.defaultProps = {
+  tag: 'ol',
+  theme: makeTheme$6()
+};
 BreadcrumbUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -8723,12 +8714,6 @@ var Breadcrumb = styled__default(BreadcrumbUnstyled).withConfig({
   return '\n    &.breadcrumb {\n      padding: ' + props.theme['$breadcrumb-padding-y'] + ' ' + props.theme['$breadcrumb-padding-x'] + ';\n      margin-bottom: ' + props.theme['$spacer-y'] + ';\n      list-style: none;\n      background-color: ' + props.theme['$breadcrumb-bg'] + ';\n \n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n            \n      ' + clearfix_2$1() + '\n    }\n\n    & .breadcrumb-item {\n      float: left;\n    \n      /* The separator between breadcrumbs (by default, a forward-slash: "/") */\n      + .breadcrumb-item::before {\n        display: inline-block; /* Suppress underlining of the separator in modern browsers */\n        padding-right: ' + props.theme['$breadcrumb-item-padding'] + ';\n        padding-left: ' + props.theme['$breadcrumb-item-padding'] + ';\n        color: ' + props.theme['$breadcrumb-divider-color'] + ';\n        content: ' + props.theme['$breadcrumb-divider'] + ';\n      }\n  \n      /* IE9-11 hack to properly handle hyperlink underlines for breadcrumbs built\n       without \'ul\'s. The \'::before\' pseudo-element generates an element\n       *within* the .breadcrumb-item and thereby inherits the \'text-decoration\'.\n      \n       To trick IE into suppressing the underline, we give the pseudo-element an\n       underline and then immediately remove it.\n      */\n      \n      + .breadcrumb-item:hover::before {\n        text-decoration: underline;\n      }\n      + .breadcrumb-item:hover::before {\n        text-decoration: none;\n      }\n    \n      &.active {\n        color: ' + props.theme['$breadcrumb-active-color'] + ';\n      }\n    }\n  ';
 });
 
-Breadcrumb.defaultProps = defaultProps$7;
-
-var defaultProps$8 = {
-  tag: 'li'
-};
-
 var BreadcrumbItem = function (_React$Component) {
   inherits(BreadcrumbItem, _React$Component);
 
@@ -8739,6 +8724,8 @@ var BreadcrumbItem = function (_React$Component) {
 
   createClass(BreadcrumbItem, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -8753,21 +8740,20 @@ var BreadcrumbItem = function (_React$Component) {
           active: active
         }), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return BreadcrumbItem;
 }(React__default.Component);
 
+BreadcrumbItem.defaultProps = {
+  tag: 'li'
+};
 BreadcrumbItem.propTypes = {
   active: PropTypes.bool,
   className: PropTypes.string,
   cssModule: PropTypes.object,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
-
-
-BreadcrumbItem.defaultProps = defaultProps$8;
 
 /*
  * Kopax Ltd Copyright (c) 2016.
@@ -8811,6 +8797,7 @@ var makeTheme$7 = function makeTheme() {
 
   // Create grayscale
   v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
 
   // Reassign color vars to semantic color scheme
   v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
@@ -8894,12 +8881,6 @@ makeTheme$7();
  * A button with natures
  */
 
-var defaultProps$9 = {
-  tag: 'button',
-  color: 'secondary',
-  theme: makeTheme$7()
-};
-
 var ButtonUnstyled = function (_React$Component) {
   inherits(ButtonUnstyled, _React$Component);
 
@@ -8969,6 +8950,11 @@ var ButtonUnstyled = function (_React$Component) {
   return ButtonUnstyled;
 }(React__default.Component);
 
+ButtonUnstyled.defaultProps = {
+  tag: 'button',
+  color: 'secondary',
+  theme: makeTheme$7()
+};
 ButtonUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   active: PropTypes.bool,
@@ -8993,8 +8979,6 @@ var Button = styled__default(ButtonUnstyled).withConfig({
 })(['', ' '], function (props) {
   return '\n    ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
-
-Button.defaultProps = defaultProps$9;
 
 var navDivider_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -9141,6 +9125,7 @@ var makeTheme$8 = function makeTheme() {
 
   // Create grayscale
   v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
   v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
   v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
 
@@ -9155,6 +9140,7 @@ var makeTheme$8 = function makeTheme() {
 
   v['$spacer'] = u['$spacer'] || '1rem';
   v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
+  v['$border-width'] = u['$border-width'] || '1px';
 
   // Fonts
   //
@@ -9178,9 +9164,10 @@ var makeTheme$8 = function makeTheme() {
   v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
   v['$caret-width'] = u['$caret-width'] || '.3em';
   v['$line-height-lg'] = u['$line-height-lg'] || '1.6';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
 
   // Forms
-
   v['$input-padding-y-lg'] = u['$input-padding-y-lg'] || '.75rem';
 
   // Dropdowns
@@ -9243,7 +9230,7 @@ var propTypes$1 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
-var defaultProps$11 = {
+var defaultProps$2 = {
   tag: 'div'
 };
 
@@ -9264,7 +9251,7 @@ var DropdownMenu = function DropdownMenu(props, context) {
 };
 
 DropdownMenu.propTypes = propTypes$1;
-DropdownMenu.defaultProps = defaultProps$11;
+DropdownMenu.defaultProps = defaultProps$2;
 DropdownMenu.contextTypes = contextTypes;
 
 var tether = createCommonjsModule(function (module, exports) {
@@ -11021,11 +11008,6 @@ return Tether;
  * A Tether Content component
  */
 
-var defaultProps$12 = {
-  isOpen: false,
-  tetherRef: function tetherRef() {}
-};
-
 var TetherContent = function (_React$Component) {
   inherits(TetherContent, _React$Component);
 
@@ -11126,6 +11108,10 @@ var TetherContent = function (_React$Component) {
   return TetherContent;
 }(React__default.Component);
 
+TetherContent.defaultProps = {
+  isOpen: false,
+  tetherRef: function tetherRef() {}
+};
 TetherContent.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
@@ -11137,18 +11123,9 @@ TetherContent.propTypes = {
   style: PropTypes.node
 };
 
-
-TetherContent.defaultProps = defaultProps$12;
-
 /**
  * Dropdown
  */
-
-var defaultProps$10 = {
-  isOpen: false,
-  tag: 'div',
-  theme: makeTheme$8()
-};
 
 var defaultTetherConfig = {
   classes: { element: 'dropdown', enabled: 'show' },
@@ -11316,6 +11293,11 @@ var DropdownUnstyled = function (_React$Component) {
   return DropdownUnstyled;
 }(React__default.Component);
 
+DropdownUnstyled.defaultProps = {
+  isOpen: false,
+  tag: 'div',
+  theme: makeTheme$8()
+};
 DropdownUnstyled.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
@@ -11341,8 +11323,6 @@ var Dropdown = styled__default(DropdownUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    &.dropup,\n    &.dropdown {\n      position: relative;\n    }\n\n    & .dropdown-hide {\n      display: none;\n    }\n    \n    & .dropdown-toggle {\n      /* Generate the caret automatically */\n      &::after {\n        display: inline-block;\n        width: 0;\n        height: 0;\n        margin-left: ' + props.theme['$caret-width'] + ';\n        vertical-align: middle;\n        content: \'\';\n        border-top: ' + props.theme['$caret-width'] + ' solid;\n        border-right: ' + props.theme['$caret-width'] + ' solid transparent;\n        border-left: ' + props.theme['$caret-width'] + ' solid transparent;\n      }\n\n      /* Prevent the focus on the dropdown toggle when closing dropdowns */\n      &:focus {\n        outline: 0;\n      }\n    }\n\n    &.dropup {\n      .dropdown-toggle {\n        &::after {\n          border-top: 0;\n          border-bottom: ' + props.theme['$caret-width'] + ' solid;\n        }\n      }\n    }\n\n    & .dropdown-menu {\n      clear: left;\n      position: absolute;\n      top: 100%;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown'] + ';\n      display: none; // none by default, but block on "open" of the menu\n      float: left;\n      min-width: ' + props.theme['$dropdown-min-width'] + ';\n      padding: ' + props.theme['$dropdown-padding-y'] + ' 0;\n      margin: ' + props.theme['$dropdown-margin-top'] + ' 0; /* override default ul */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      color: ' + props.theme['$body-color'] + ';\n      text-align: left; /* Ensures proper alignment if parent has it changed (e.g., modal footer) */\n      list-style: none;\n      background-color: ' + props.theme['$dropdown-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$dropdown-border-width'] + ' solid ' + props.theme['$dropdown-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$dropdown-box-shadow']) + '\n    }\n\n    /* mixin from bootstrap 4, see : scss/mixins/_nav-divider.css */\n    & .dropdown-divider {\n      ' + navDivider_3(props.theme['$spacer-y'], props.theme['$dropdown-divider-bg']) + '\n    }\n\n    & .dropdown-item {\n      display: block;\n      width: 100%; /* For <button>s */\n      padding: 3px ' + props.theme['$dropdown-item-padding-x'] + ';\n      clear: both;\n      font-weight: ' + props.theme['$font-weight-normal'] + ';\n      color: ' + props.theme['$dropdown-link-color'] + ';\n      text-align: inherit; /* For <button>s */\n      white-space: nowrap; /* prevent links from randomly breaking onto new lines */\n      background: none; /* For <button>s */\n      border: 0; /* For <button>s */\n\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$dropdown-link-hover-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-hover-bg'] + '\n      ') + '\n\n      &.active,\n      &:active {\n        color: ' + props.theme['$dropdown-link-active-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-active-bg'] + '\n      }\n\n      &.disabled,\n      &:disabled{\n        color: ' + props.theme['$dropdown-link-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: transparent;\n        ' + conditional_1(props.theme['$enable-gradients'], 'background-image: none; /* Remove CSS gradient */') + '\n      }\n    }\n\n    &.show {\n      /* show the menu */\n      &>.dropdown-menu {\n        display: block;\n      }\n\n      & > a {\n        outline: 0;\n      }\n    }\n\n\n    /* Menu positioning */\n\n    /* Add extra class to .dropdown-menu to flip the alignment of the dropdown*\n    /* menu with the parent. */\n    & .dropdown-menu-right {\n      right: 0;\n      left: auto; /* Reset the default from .dropdown-menu */\n    }\n\n    & .dropdown-menu-left {\n      right: auto;\n      left: 0;\n    }\n\n    /* Dropdown section headers */\n    & .dropdown-header {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    /* Dropdown section footers */\n    & .dropdown-footer {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    \n\n    /* Backdrop to catch body clicks on mobile, etc. */\n    & .dropdown-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown-backdrop'] + ';\n    }\n\n    /* Allow for dropdowns to go bottom up (aka, dropup-menu) */\n\n    /* Just add .dropup after the standard .dropdown class and you\'re set. */\n    /* TODO: abstract this so that the navbar fixed styles are not placed here? */\n\n    &.dropup {\n      .dropdown-menu {\n        top: auto;\n        bottom: 100%;\n        margin-bottom: ' + props.theme['$dropdown-margin-top'] + ';\n      }\n    }\n        \n    /* Added Mixin boutonGroup to enable dropdown to beneficiate from buttonGroup classes */\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
-
-Dropdown.defaultProps = defaultProps$10;
 
 var typography_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -11462,8 +11442,6 @@ var makeTheme$9 = function makeTheme() {
 
 makeTheme$9();
 
-var defaultProps$14 = { theme: makeTheme$9() };
-
 var H6Unstyled = function (_React$Component) {
   inherits(H6Unstyled, _React$Component);
 
@@ -11474,6 +11452,8 @@ var H6Unstyled = function (_React$Component) {
 
   createClass(H6Unstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -11490,12 +11470,14 @@ var H6Unstyled = function (_React$Component) {
         _extends({ className: classes }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return H6Unstyled;
 }(React__default.Component);
 
+H6Unstyled.defaultProps = {
+  theme: makeTheme$9()
+};
 H6Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
@@ -11513,12 +11495,6 @@ var H6 = styled__default(H6Unstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h6'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    \n    &.lead {\n     font-size: ' + props.theme['$lead-font-size'] + ';\n     font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-
-H6.defaultProps = defaultProps$14;
-
-var defaultProps$13 = {
-  tag: 'button'
-};
 
 var DropdownItem = function (_React$Component) {
   inherits(DropdownItem, _React$Component);
@@ -11592,6 +11568,9 @@ var DropdownItem = function (_React$Component) {
   return DropdownItem;
 }(React__default.Component);
 
+DropdownItem.defaultProps = {
+  tag: 'button'
+};
 DropdownItem.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
@@ -11604,15 +11583,6 @@ DropdownItem.propTypes = {
 };
 DropdownItem.contextTypes = {
   toggle: PropTypes.func
-};
-
-
-DropdownItem.defaultProps = defaultProps$13;
-
-var defaultProps$15 = {
-  'aria-haspopup': true,
-  'data-toggle': 'dropdown',
-  color: 'secondary'
 };
 
 var DropdownToggle = function (_React$Component) {
@@ -11698,6 +11668,11 @@ var DropdownToggle = function (_React$Component) {
   return DropdownToggle;
 }(React__default.Component);
 
+DropdownToggle.defaultProps = {
+  'aria-haspopup': true,
+  'data-toggle': 'dropdown',
+  color: 'secondary'
+};
 DropdownToggle.propTypes = {
   'aria-haspopup': PropTypes.bool,
   caret: PropTypes.bool,
@@ -11715,9 +11690,6 @@ DropdownToggle.contextTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired
 };
-
-
-DropdownToggle.defaultProps = defaultProps$15;
 
 /*
  * Kopax Ltd Copyright (c) 2016.
@@ -11816,12 +11788,6 @@ makeTheme$10();
  * ButtonGroup
  */
 
-var defaultProps$16 = {
-  role: 'group',
-  tag: 'div',
-  theme: makeTheme$10()
-};
-
 var ButtonGroupUnstyled = function (_React$Component) {
   inherits(ButtonGroupUnstyled, _React$Component);
 
@@ -11832,6 +11798,8 @@ var ButtonGroupUnstyled = function (_React$Component) {
 
   createClass(ButtonGroupUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -11844,12 +11812,16 @@ var ButtonGroupUnstyled = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, vertical ? 'btn-group-vertical' : 'btn-group', defineProperty({}, 'btn-group-' + size, size)), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ButtonGroupUnstyled;
 }(React__default.Component);
 
+ButtonGroupUnstyled.defaultProps = {
+  role: 'group',
+  tag: 'div',
+  theme: makeTheme$10()
+};
 ButtonGroupUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -11868,17 +11840,9 @@ var ButtonGroup = styled__default(ButtonGroupUnstyled).withConfig({
   return '\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
 
-ButtonGroup.defaultProps = defaultProps$16;
-
 /**
  * ButtonToolbar
  */
-
-var defaultProps$17 = {
-  tag: 'div',
-  role: 'toolbar',
-  theme: bsTheme
-};
 
 var ButtonToolbarUnstyled = function (_React$Component) {
   inherits(ButtonToolbarUnstyled, _React$Component);
@@ -11890,6 +11854,8 @@ var ButtonToolbarUnstyled = function (_React$Component) {
 
   createClass(ButtonToolbarUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -11900,12 +11866,16 @@ var ButtonToolbarUnstyled = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'btn-toolbar'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ButtonToolbarUnstyled;
 }(React__default.Component);
 
+ButtonToolbarUnstyled.defaultProps = {
+  tag: 'div',
+  role: 'toolbar',
+  theme: bsTheme
+};
 ButtonToolbarUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -11921,8 +11891,6 @@ var ButtonToolbar = styled__default(ButtonToolbarUnstyled).withConfig({
 })(['', '  '], function (props) {
   return '\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
-
-ButtonToolbar.defaultProps = defaultProps$17;
 
 /**
  * BOOTSTRAP THEME CAPTION TAG
@@ -11962,7 +11930,7 @@ makeTheme$11();
 
 /* A Caption (Box) */
 
-var defaultProps$18 = { theme: makeTheme$11() };
+var defaultProps$3 = { theme: makeTheme$11() };
 
 var Caption = styled__default.caption.withConfig({
   displayName: 'Caption'
@@ -11970,7 +11938,7 @@ var Caption = styled__default.caption.withConfig({
   return '\n    padding-top: ' + props.theme['$table-cell-padding'] + ';\n    padding-bottom: ' + props.theme['$table-cell-padding'] + ';\n    color: ' + props.theme['$text-muted'] + ';\n    text-align: left;\n    caption-side: top;\n  ';
 });
 
-Caption.defaultProps = defaultProps$18;
+Caption.defaultProps = defaultProps$3;
 
 /**
  * BOOTSTRAP THEME CODE
@@ -12027,11 +11995,6 @@ makeTheme$12();
  * Code component
  */
 
-var defaultProps$19 = {
-  tag: 'code',
-  theme: makeTheme$12()
-};
-
 var CodeUnstyled = function (_React$Component) {
   inherits(CodeUnstyled, _React$Component);
 
@@ -12042,6 +12005,8 @@ var CodeUnstyled = function (_React$Component) {
 
   createClass(CodeUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -12054,12 +12019,15 @@ var CodeUnstyled = function (_React$Component) {
         _extends({ className: className }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CodeUnstyled;
 }(React__default.Component);
 
+CodeUnstyled.defaultProps = {
+  tag: 'code',
+  theme: makeTheme$12()
+};
 CodeUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -12074,8 +12042,6 @@ var Code = styled__default(CodeUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    /* Inline code */\n    padding: ' + props.theme['$code-padding-y'] + ' ' + props.theme['$code-padding-x'] + ';\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$code-color'] + ';\n    background-color: ' + props.theme['$code-bg'] + ';\n    ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + ';\n    \n    /* Streamline the style when inside anchors to avoid broken underline and more */\n    a > & {\n      padding: 0;\n      color: inherit;\n      background-color: inherit;\n    }\n    \n    /* Bootstrap 4 does not place this css rule straight into Code tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
-
-Code.defaultProps = defaultProps$19;
 
 var grid = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -12461,12 +12427,6 @@ var columnProps = PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTyp
   offset: stringOrNumberProp
 })]);
 
-var defaultProps$20 = {
-  tag: 'div',
-  theme: makeTheme$13(),
-  widths: colWidths
-};
-
 var getColumnSizeClass = function getColumnSizeClass(isXs, colWidth, colSize) {
   if (colSize === true || colSize === '') {
     return isXs ? '' : 'col-' + colWidth;
@@ -12487,6 +12447,8 @@ var ColUnstyled = function (_React$Component) {
 
   createClass(ColUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _this2 = this;
 
@@ -12531,12 +12493,16 @@ var ColUnstyled = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, colClasses), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ColUnstyled;
 }(React__default.Component);
 
+ColUnstyled.defaultProps = {
+  tag: 'div',
+  theme: makeTheme$13(),
+  widths: colWidths
+};
 ColUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -12558,8 +12524,6 @@ var Col = styled__default(ColUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    ' + gridFramework_5(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-
-Col.defaultProps = defaultProps$20;
 
 var parseTransition$1 = function parseTransition(transitions) {
   if (!transitions) {
@@ -13060,10 +13024,6 @@ makeTheme$15();
  *
  */
 
-var defaultProps$21 = {
-  theme: makeTheme$15()
-};
-
 var DdUnstyled = function (_React$Component) {
   inherits(DdUnstyled, _React$Component);
 
@@ -13074,18 +13034,22 @@ var DdUnstyled = function (_React$Component) {
 
   createClass(DdUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
 
       return React__default.createElement('dd', _extends({ className: className }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return DdUnstyled;
 }(React__default.Component);
 
+DdUnstyled.defaultProps = {
+  theme: makeTheme$15()
+};
 DdUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -13099,8 +13063,6 @@ var Dd = styled__default(DdUnstyled).withConfig({
 })(['  margin-bottom:.5rem;margin-left:0;', ''], function (props) {
   return '\n    ' + gridFramework_5(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-
-Dd.defaultProps = defaultProps$21;
 
 /**
  * Dfn component
@@ -13212,8 +13174,6 @@ makeTheme$16();
  *
  */
 
-var defaultProps$22 = { theme: makeTheme$16() };
-
 var DlUnstyled = function (_React$Component) {
   inherits(DlUnstyled, _React$Component);
 
@@ -13224,18 +13184,22 @@ var DlUnstyled = function (_React$Component) {
 
   createClass(DlUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
 
       return React__default.createElement('dl', _extends({ className: className }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return DlUnstyled;
 }(React__default.Component);
 
+DlUnstyled.defaultProps = {
+  theme: makeTheme$16()
+};
 DlUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -13249,8 +13213,6 @@ var Dl = styled__default(DlUnstyled).withConfig({
 })(['  margin-top:0;margin-bottom:1rem;', ''], function (props) {
   return '\n    ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n  ';
 });
-
-Dl.defaultProps = defaultProps$22;
 
 /**
  * BOOTSTRAP THEME DT
@@ -13320,8 +13282,6 @@ makeTheme$17();
  *
  */
 
-var defaultProps$23 = { theme: makeTheme$17() };
-
 var DtUnstyled = function (_React$Component) {
   inherits(DtUnstyled, _React$Component);
 
@@ -13332,18 +13292,22 @@ var DtUnstyled = function (_React$Component) {
 
   createClass(DtUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
 
       return React__default.createElement('dt', _extends({ className: className }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return DtUnstyled;
 }(React__default.Component);
 
+DtUnstyled.defaultProps = {
+  theme: makeTheme$17()
+};
 DtUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -13357,8 +13321,6 @@ var Dt = styled__default(DtUnstyled).withConfig({
 })(['  ', ''], function (props) {
   return '\n    /* Reboot Scss */\n    font-weight: ' + props.theme['$dt-font-weight'] + ';\n    ' + gridFramework_5(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-
-Dt.defaultProps = defaultProps$23;
 
 var FaUnstyled = function (_React$Component) {
   inherits(FaUnstyled, _React$Component);
@@ -13481,8 +13443,6 @@ makeTheme$18();
 
 /* A Fieldset (Box) */
 
-var defaultProps$24 = { theme: makeTheme$18() };
-
 var FieldsetUnstyled = function (_React$Component) {
   inherits(FieldsetUnstyled, _React$Component);
 
@@ -13493,6 +13453,8 @@ var FieldsetUnstyled = function (_React$Component) {
 
   createClass(FieldsetUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -13506,12 +13468,14 @@ var FieldsetUnstyled = function (_React$Component) {
         }, rest),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return FieldsetUnstyled;
 }(React__default.Component);
 
+FieldsetUnstyled.defaultProps = {
+  theme: makeTheme$18()
+};
 FieldsetUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node.isRequired,
@@ -13526,8 +13490,6 @@ var Fieldset = styled__default(FieldsetUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    min-width: 0;\n    padding: 0;\n    margin: 0;\n    border: 0;\n\n    & .row {\n      ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n\n  ';
 });
-
-Fieldset.defaultProps = defaultProps$24;
 
 /**
  * Footer Component
@@ -13607,8 +13569,6 @@ var makeTheme$19 = function makeTheme() {
 
 makeTheme$19();
 
-var defaultProps$25 = { theme: makeTheme$19() };
-
 var H1Unstyled = function (_React$Component) {
   inherits(H1Unstyled, _React$Component);
 
@@ -13619,6 +13579,8 @@ var H1Unstyled = function (_React$Component) {
 
   createClass(H1Unstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -13635,12 +13597,14 @@ var H1Unstyled = function (_React$Component) {
         _extends({ className: classes }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return H1Unstyled;
 }(React__default.Component);
 
+H1Unstyled.defaultProps = {
+  theme: makeTheme$19()
+};
 H1Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
@@ -13659,8 +13623,6 @@ var H1 = styled__default(H1Unstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h1'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-
-H1.defaultProps = defaultProps$25;
 
 var rmUnit$7 = unitUtils$1.rmUnit;
 var UNIT$6 = unitUtils$1.UNIT;
@@ -13730,8 +13692,6 @@ var makeTheme$20 = function makeTheme() {
 
 makeTheme$20();
 
-var defaultProps$26 = { theme: makeTheme$20() };
-
 var H2Unstyled = function (_React$Component) {
   inherits(H2Unstyled, _React$Component);
 
@@ -13742,6 +13702,8 @@ var H2Unstyled = function (_React$Component) {
 
   createClass(H2Unstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -13758,12 +13720,14 @@ var H2Unstyled = function (_React$Component) {
         _extends({ className: classes }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return H2Unstyled;
 }(React__default.Component);
 
+H2Unstyled.defaultProps = {
+  theme: makeTheme$20()
+};
 H2Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
@@ -13781,8 +13745,6 @@ var H2 = styled__default(H2Unstyled).withConfig({
 })(['', ''], function (props) {
   return '\n\n    font-size: ' + props.theme['$font-size-h2'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-
-H2.defaultProps = defaultProps$26;
 
 var rmUnit$8 = unitUtils$1.rmUnit;
 var UNIT$7 = unitUtils$1.UNIT;
@@ -13852,8 +13814,6 @@ var makeTheme$21 = function makeTheme() {
 
 makeTheme$21();
 
-var defaultProps$27 = { theme: makeTheme$21() };
-
 var H3Unstyled = function (_React$Component) {
   inherits(H3Unstyled, _React$Component);
 
@@ -13864,6 +13824,8 @@ var H3Unstyled = function (_React$Component) {
 
   createClass(H3Unstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -13880,12 +13842,14 @@ var H3Unstyled = function (_React$Component) {
         _extends({ className: classes }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return H3Unstyled;
 }(React__default.Component);
 
+H3Unstyled.defaultProps = {
+  theme: makeTheme$21()
+};
 H3Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
@@ -13903,8 +13867,6 @@ var H3 = styled__default(H3Unstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h3'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-
-H3.defaultProps = defaultProps$27;
 
 var rmUnit$9 = unitUtils$1.rmUnit;
 var UNIT$8 = unitUtils$1.UNIT;
@@ -13974,8 +13936,6 @@ var makeTheme$22 = function makeTheme() {
 
 makeTheme$22();
 
-var defaultProps$28 = { theme: makeTheme$22() };
-
 var H4Unstyled = function (_React$Component) {
   inherits(H4Unstyled, _React$Component);
 
@@ -13986,6 +13946,8 @@ var H4Unstyled = function (_React$Component) {
 
   createClass(H4Unstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -14002,12 +13964,14 @@ var H4Unstyled = function (_React$Component) {
         _extends({ className: classes }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return H4Unstyled;
 }(React__default.Component);
 
+H4Unstyled.defaultProps = {
+  theme: makeTheme$22()
+};
 H4Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
@@ -14025,8 +13989,6 @@ var H4 = styled__default(H4Unstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h4'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-
-H4.defaultProps = defaultProps$28;
 
 var rmUnit$10 = unitUtils$1.rmUnit;
 var UNIT$9 = unitUtils$1.UNIT;
@@ -14096,8 +14058,6 @@ var makeTheme$23 = function makeTheme() {
 
 makeTheme$23();
 
-var defaultProps$29 = { theme: makeTheme$23() };
-
 var H5Unstyled = function (_React$Component) {
   inherits(H5Unstyled, _React$Component);
 
@@ -14108,6 +14068,8 @@ var H5Unstyled = function (_React$Component) {
 
   createClass(H5Unstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -14124,12 +14086,14 @@ var H5Unstyled = function (_React$Component) {
         _extends({ className: classes }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return H5Unstyled;
 }(React__default.Component);
 
+H5Unstyled.defaultProps = {
+  theme: makeTheme$23()
+};
 H5Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
@@ -14147,8 +14111,6 @@ var H5 = styled__default(H5Unstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h5'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n \n    &.lead {\n     font-size: ' + props.theme['$lead-font-size'] + ';\n     font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-
-H5.defaultProps = defaultProps$29;
 
 var navbarToggleable_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -14382,7 +14344,7 @@ var makeTheme$24 = function makeTheme() {
 
 makeTheme$24();
 
-var defaultProps$30 = { theme: makeTheme$24() };
+var defaultProps$4 = { theme: makeTheme$24() };
 
 var Header = styled__default.header.withConfig({
   displayName: 'Header'
@@ -14390,7 +14352,7 @@ var Header = styled__default.header.withConfig({
   return '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + conditional_1(props.shadowHeader, 'box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);') + '\n  ';
 });
 
-Header.defaultProps = defaultProps$30;
+Header.defaultProps = defaultProps$4;
 
 /**
  * BOOTSTRAP THEME HR
@@ -14436,7 +14398,7 @@ var makeTheme$25 = function makeTheme() {
 
 makeTheme$25();
 
-var defaultProps$31 = { theme: makeTheme$25() };
+var defaultProps$5 = { theme: makeTheme$25() };
 
 var Hr = styled__default.hr.withConfig({
   displayName: 'Hr'
@@ -14444,7 +14406,7 @@ var Hr = styled__default.hr.withConfig({
   return '\n    margin-top: ' + props.theme['$spacer-y'] + ';\n    margin-bottom: ' + props.theme['$spacer-y'] + ';\n    border: 0;\n    border-top: ' + props.theme['$hr-border-width'] + ' solid ' + props.theme['$hr-border-color'] + ';\n  ';
 });
 
-Hr.defaultProps = defaultProps$31;
+Hr.defaultProps = defaultProps$5;
 
 var image = createCommonjsModule(function (module, exports) {
 "use strict";
@@ -14512,6 +14474,20 @@ var makeTheme$26 = function makeTheme() {
   v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
   v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
 
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-bg'] = u['$body-bg'] || v['$white'];
+
   // Spacing
   //
   // Control the default styling of most Bootstrap elements by modifying these
@@ -14524,6 +14500,14 @@ var makeTheme$26 = function makeTheme() {
   // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
   v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$11(v['$spacer'], UNIT$10.REM) / 2 + UNIT$10.REM;
   // =============================================================================================================
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
 
   // Image thumbnails
 
@@ -14552,12 +14536,6 @@ makeTheme$26();
  * Renders an image, enforcing the usage of the alt='' tag
  */
 
-var defaultProps$32 = {
-  tag: 'img',
-  theme: makeTheme$26()
-
-};
-
 var ImgUnstyled = function (_React$Component) {
   inherits(ImgUnstyled, _React$Component);
 
@@ -14568,6 +14546,8 @@ var ImgUnstyled = function (_React$Component) {
 
   createClass(ImgUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -14587,12 +14567,15 @@ var ImgUnstyled = function (_React$Component) {
         src: src,
         alt: alt
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ImgUnstyled;
 }(React__default.Component);
 
+ImgUnstyled.defaultProps = {
+  tag: 'img',
+  theme: makeTheme$26()
+};
 ImgUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   alt: PropTypes.string.isRequired,
@@ -14613,8 +14596,6 @@ var Img = styled__default(ImgUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    \n    /* \n      Responsive images (ensure images does not scale beyond their parents)\n      This is purposefully opt-in via an explicit class rather than being the default for all <img>.\n      We previously tried the "images are responsive by default" approach in Bootstrap v2,\n      and abandoned it in Bootstrap v3 because it breaks lots of third-party widgets (including Google Maps)\n      which we are not expecting the images within themselves to be involuntarily resized.\n      See also https://github.com/twbs/bootstrap/issues/18178\n    */\n    \n    &.img-fluid {\n      ' + image_1() + '\n    }\n    \n    \n     /* Image thumbnails */ \n    &.img-thumbnail {\n      padding: ' + props.theme['$thumbnail-padding'] + ';\n      background-color: ' + props.theme['$thumbnail-bg'] + ';\n      border: ' + props.theme['$thumbnail-border-width'] + ' solid ' + props.theme['$thumbnail-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$thumbnail-border-radius']) + '\n      ' + transition_2(props.theme['$enable-transitions'], props.theme['$thumbnail-transition']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$thumbnail-box-shadow']) + '\n      /* Keep them at most 100% wide */\n      ' + image_1() + '\n    }\n   \n    &.figure-img {\n      margin-bottom: ' + props.theme['$spacer-halved'] + ';\n      line-height: 1;\n    }\n    \n    /* Reboot Scss */\n    \n    /*\n     By default, <img> are inline-block. This assumes that, and vertically\n     centers them. This will not apply should you reset them to block level.\n    */\n    vertical-align: middle;\n    /*\n     Note: <img> are deliberately not made responsive by default.\n     For the rationale behind this, see the comments on the .img-fluid class.\n    */\n  ';
 });
-
-Img.defaultProps = defaultProps$32;
 
 /**
  * Figure Component
@@ -14666,10 +14647,6 @@ var Figure = styled__default(FigureUnstyled).withConfig({
  * FigCaption component
  */
 
-var defaultProps$33 = {
-  theme: makeTheme$26()
-};
-
 var FigCaptionUnstyled = function (_React$Component) {
   inherits(FigCaptionUnstyled, _React$Component);
 
@@ -14680,6 +14657,8 @@ var FigCaptionUnstyled = function (_React$Component) {
 
   createClass(FigCaptionUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -14695,12 +14674,14 @@ var FigCaptionUnstyled = function (_React$Component) {
         }, rest),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return FigCaptionUnstyled;
 }(React__default.Component);
 
+FigCaptionUnstyled.defaultProps = {
+  theme: makeTheme$26()
+};
 FigCaptionUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
@@ -14716,8 +14697,6 @@ var FigCaption = styled__default(FigCaptionUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    &.figure-caption {\n      font-size: ' + props.theme['$figure-caption-font-size'] + ';\n      color: ' + props.theme['$figure-caption-color'] + ';\n    }\n  ';
 });
-
-FigCaption.defaultProps = defaultProps$33;
 
 /**
  * BOOTSTRAP THEME INPUT
@@ -14846,12 +14825,6 @@ makeTheme$27();
  * Input component
  */
 
-var defaultProps$34 = {
-  tag: 'p',
-  theme: makeTheme$27(),
-  type: 'text'
-};
-
 var InputUnstyled = function (_React$Component) {
   inherits(InputUnstyled, _React$Component);
 
@@ -14862,6 +14835,8 @@ var InputUnstyled = function (_React$Component) {
 
   createClass(InputUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -14902,12 +14877,16 @@ var InputUnstyled = function (_React$Component) {
         attributes.type = type;
       }
       return React__default.createElement(Tag, _extends({}, attributes, { ref: getRef, className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return InputUnstyled;
 }(React__default.Component);
 
+InputUnstyled.defaultProps = {
+  tag: 'p',
+  theme: makeTheme$27(),
+  type: 'text'
+};
 InputUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
@@ -14932,8 +14911,6 @@ var Input = styled__default(InputUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    /* Reboot Scss */\n    touch-action: manipulation;\n    \n    &[type="radio"],\n    &[type="checkbox"] {\n      box-sizing: border-box; /* 1. Add the correct box sizing in IE 10- */\n      padding: 0; /* 2. Remove the padding in IE 10- */\n      /*\n       Apply a disabled cursor for radios and checkboxes.\n       Note: Neither radios nor checkboxes can be readonly.\n      */\n   \n      &:disabled {\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n      }\n    }\n    \n    /* Normalize includes font: inherit;, so font-family. font-size, etc are */\n    /* properly inherited. However, line-height is not inherited there. */\n    line-height: inherit;\n   \n    &.disabled {\n      cursor: ' + props.theme['$cursor-disabled'] + ';\n    }\n   \n    &[type="date"],\n    &[type="time"],\n    &[type="datetime-local"],\n    &[type="month"] {\n    /* Remove the default appearance of temporal inputs to avoid a Mobile Safari\n       bug where setting a custom line-height prevents text from being vertically\n       centered within the input.\n       Bug report: https://github.com/twbs/bootstrap/issues/11266\n     */\n      -webkit-appearance: listbox;\n    }\n      \n    /* Correct the cursor style of increment and decrement buttons in Chrome. */\n    &[type="number"]::-webkit-inner-spin-button,\n    &[type="number"]::-webkit-outer-spin-button {\n      height: auto;\n    }\n    \n    &[type="search"] {\n      /* This overrides the extra rounded corners on search inputs in iOS so that our\n      .form-control class can properly style them. Note that this cannot simply\n       be added to .form-control as it is not specific enough. For details, see\n       https://github.com/twbs/bootstrap/issues/11586.\n       */\n      outline-offset: -2px; /* 2. Correct the outline style in Safari. */\n      -webkit-appearance: none;\n    }\n    \n    /* Remove the inner padding and cancel buttons in Chrome and Safari on macOS. */\n    &[type="search"]::-webkit-search-cancel-button,\n    &[type="search"]::-webkit-search-decoration {\n      -webkit-appearance: none;\n    }\n    \n    ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
-
-Input.defaultProps = defaultProps$34;
 
 var forms = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -15114,6 +15091,7 @@ var makeTheme$28 = function makeTheme() {
 
   // Start with assigning color names to specific hex values.
 
+  v['$white'] = u['$white'] || '#fff';
   v['$black'] = u['$black'] || '#000';
   v['$blue'] = u['$blue'] || '#0275d8';
 
@@ -15135,6 +15113,13 @@ var makeTheme$28 = function makeTheme() {
   v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
   v['$font-size-xs'] = u['$font-size-xs'] || '.75rem';
   v['$line-height-base'] = u['$line-height-base'] || '1.5';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
 
   // Forms
 
@@ -15184,11 +15169,6 @@ makeTheme$28();
  *
  *
  */
-var defaultProps$35 = {
-  tag: 'div',
-  theme: makeTheme$28()
-};
-
 var InputGroupUnstyled = function (_React$Component) {
   inherits(InputGroupUnstyled, _React$Component);
 
@@ -15199,6 +15179,8 @@ var InputGroupUnstyled = function (_React$Component) {
 
   createClass(InputGroupUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -15210,12 +15192,15 @@ var InputGroupUnstyled = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, 'input-group', size ? 'input-group-' + size : null), cssModule);
 
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return InputGroupUnstyled;
 }(React__default.Component);
 
+InputGroupUnstyled.defaultProps = {
+  tag: 'div',
+  theme: makeTheme$28()
+};
 InputGroupUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -15233,17 +15218,11 @@ var InputGroup = styled__default(InputGroupUnstyled).withConfig({
   return '\n    /*\n     Base styles\n    */\n   \n    &.input-group {\n      position: relative;\n      display: flex;\n      width: 100%;\n\n      .form-control {\n        /* \n          Ensure that the input is always above the *appended* addon button for\n          proper border colors.\n        */\n        \n        position: relative;\n        z-index: 2;\n        flex: 1 1 auto;\n        /* Add width 1% and flex-basis auto to ensure that button will not wrap out */\n        /* the column. Applies to IE Edge+ and Firefox. Chrome does not require this. */\n        width: 1%;\n        margin-bottom: 0;\n        \n        ' + hover_5(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n      }\n    }\n    \n    & .input-group-addon,\n    & .input-group-btn,\n    &.input-group .form-control {\n      /* Vertically centers the content of the addons within the input group */\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n\n\n      &:not(:first-child):not(:last-child) {\n        ' + borderRadius_2(props.theme['$enable-rounded'], '0') + '\n      }\n    }\n   \n    & .input-group-addon,\n    & .input-group-btn {\n\n      white-space: nowrap;\n      vertical-align: middle; /* Match the inputs */\n    }\n   \n   \n    /* Sizing options\n    Remix the default form control sizing classes into new ones for easier\n    manipulation.\n    */\n   \n    &.input-group-lg > .form-control,\n    &.input-group-lg > .input-group-addon,\n    &.input-group-lg > .input-group-btn > .btn {\n      padding: ' + props.theme['$input-padding-y-lg'] + ' ' + props.theme['$input-padding-x-lg'] + ';\n      font-size: ' + props.theme['$font-size-lg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-lg']) + '\n    }\n    \n    &.input-group-sm > .form-control,\n    &.input-group-sm > .input-group-addon,\n    &.input-group-sm > .input-group-btn > .btn {\n      padding: ' + props.theme['$input-padding-y-sm'] + ' ' + props.theme['$input-padding-x-sm'] + ';\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-sm']) + '\n    }\n   \n   \n    /*\n    Text input groups\n    */\n   \n    & .input-group-addon {\n      padding: ' + props.theme['$input-padding-y'] + ' ' + props.theme['$input-padding-x'] + ';\n      margin-bottom: 0; /* Allow use of <label> elements by overriding our default margin-bottom */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      font-weight: normal;\n      line-height: ' + props.theme['$input-line-height'] + ';\n      color: ' + props.theme['$input-color'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$input-group-addon-bg'] + ';\n      border: ' + props.theme['$input-btn-border-width'] + ' solid ' + props.theme['$input-group-addon-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius']) + '\n   \n      /* \n      Nuke default margins from checkboxes and radios to vertically center within.\n      */\n      input[type="radio"],\n      input[type="checkbox"] {\n        margin-top: 0;\n      }\n    }\n   \n   \n    /*\n     Reset rounded corners\n    */\n   \n    &.input-group .form-control:not(:last-child),\n    & .input-group-addon:not(:last-child),\n    & .input-group-btn:not(:last-child) > .btn,\n    & .input-group-btn:not(:last-child) > .btn-group > .btn,\n    & .input-group-btn:not(:last-child) > .dropdown-toggle,\n    & .input-group-btn:not(:first-child) > .btn:not(:last-child):not(.dropdown-toggle),\n    & .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn {\n      ' + borderRadius_4(props.theme['$enable-rounded'], '0') + '\n    }\n    & .input-group-addon:not(:last-child) {\n      border-right: 0;\n    }\n    &.input-group .form-control:not(:first-child),\n    & .input-group-addon:not(:first-child),\n    & .input-group-btn:not(:first-child) > .btn,\n    & .input-group-btn:not(:first-child) > .btn-group > .btn,\n    & .input-group-btn:not(:first-child) > .dropdown-toggle,\n    & .input-group-btn:not(:last-child) > .btn:not(:first-child),\n    & .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn {\n      ' + borderRadius_6(props.theme['$enable-rounded'], '0') + '\n    }\n    & .form-control + .input-group-addon:not(:first-child) {\n      border-left: 0;\n    }\n   \n    /*\n     Button input groups\n    */\n   \n    & .input-group-btn {\n      position: relative;\n      /* Jankily prevent input button groups from wrapping with white-space and\n      font-size in combination with inline-block on buttons.\n      */\n      font-size: 0;\n      white-space: nowrap;\n   \n      /* Negative margin for spacing, position for bringing hovered/focused/actived\n      element above the siblings.\n      */\n      > .btn {\n        position: relative;\n        /* Vertically stretch the button and center its content */\n        flex: 1;\n        \n        + .btn {\n          margin-left: -' + props.theme['$input-btn-border-width'] + ';\n        }\n        \n        /* Bring the active button to the front */\n        ' + hover_5(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n      }\n   \n      /* Negative margin to only have a single, shared border between the two */\n      &:not(:last-child) {\n        > .btn,\n        > .btn-group {\n          margin-right: -' + props.theme['$input-btn-border-width'] + ';\n        }\n      }\n      &:not(:first-child) {\n        > .btn,\n        > .btn-group {\n          z-index: 2;\n          margin-left: -' + props.theme['$input-btn-border-width'] + ';\n          /* Because specificity */\n          ' + hover_5(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n        }\n      }\n    }\n    \n   /* Added So that Inputs in InputGroup grab the same .form-control class as in Component Form Not Bs4 */\n   ' + forms_2(props.theme['$enable-rounded'], props.theme['$enable-transitions'], props.theme['$enable-shadows'], props.theme['$input-height'], props.theme['$input-padding-y'], props.theme['$input-padding-x'], props.theme['$font-size-base'], props.theme['$input-line-height'], props.theme['$input-color'], props.theme['$input-bg'], props.theme['$input-border-radius'], props.theme['$input-btn-border-width'], props.theme['$input-border-color'], props.theme['$input-transition'], props.theme['$input-box-shadow'], props.theme['$input-color-focus'], props.theme['$input-bg-focus'], props.theme['$input-border-focus'], props.theme['$input-box-shadow-focus'], props.theme['$input-color-placeholder'], props.theme['$input-bg-disabled'], props.theme['$cursor-disabled']) + '\n  ';
 });
 
-InputGroup.defaultProps = defaultProps$35;
-
 /**
  * InputGroup Component
  *
  *
  */
-var defaultProps$36 = {
-  tag: 'div'
-};
-
 var InputGroupAddon = function (_React$Component) {
   inherits(InputGroupAddon, _React$Component);
 
@@ -15254,6 +15233,8 @@ var InputGroupAddon = function (_React$Component) {
 
   createClass(InputGroupAddon, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -15265,30 +15246,25 @@ var InputGroupAddon = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, 'input-group-addon'), cssModule);
 
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return InputGroupAddon;
 }(React__default.Component);
 
+InputGroupAddon.defaultProps = {
+  tag: 'div'
+};
 InputGroupAddon.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
-
-InputGroupAddon.defaultProps = defaultProps$36;
-
 /**
  * InputGroup Component
  *
  *
  */
-var defaultProps$37 = {
-  tag: 'div'
-};
-
 var InputGroupButton = function (_React$Component) {
   inherits(InputGroupButton, _React$Component);
 
@@ -15299,6 +15275,8 @@ var InputGroupButton = function (_React$Component) {
 
   createClass(InputGroupButton, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -15331,12 +15309,14 @@ var InputGroupButton = function (_React$Component) {
         _extends({}, attributes, { className: classes }),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return InputGroupButton;
 }(React__default.Component);
 
+InputGroupButton.defaultProps = {
+  tag: 'div'
+};
 InputGroupButton.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   children: PropTypes.node,
@@ -15345,9 +15325,6 @@ InputGroupButton.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-
-
-InputGroupButton.defaultProps = defaultProps$37;
 
 /*
  * Kopax Ltd Copyright (c) 2016.
@@ -15427,8 +15404,6 @@ makeTheme$29();
  * Kbd component
  */
 
-var defaultProps$38 = { theme: makeTheme$29() };
-
 var KbdUnstyled = function (_React$Component) {
   inherits(KbdUnstyled, _React$Component);
 
@@ -15439,6 +15414,8 @@ var KbdUnstyled = function (_React$Component) {
 
   createClass(KbdUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -15450,12 +15427,14 @@ var KbdUnstyled = function (_React$Component) {
         _extends({ className: className }, rest),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return KbdUnstyled;
 }(React__default.Component);
 
+KbdUnstyled.defaultProps = {
+  theme: makeTheme$29()
+};
 KbdUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
@@ -15470,8 +15449,6 @@ var Kbd = styled__default(KbdUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    /* User input typically entered via keyboard */\n    padding: ' + props.theme['$code-padding-y'] + ' ' + props.theme['$code-padding-x'] + ';\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$kbd-color'] + ';\n    background-color: ' + props.theme['$kbd-bg'] + ';\n    ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius-sm']) + '\n    ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$kbd-box-shadow']) + '\n    \n    & kbd {\n      padding: 0;\n      font-size: 100%;\n      font-weight: ' + props.theme['$nested-kbd-font-weight'] + ';\n      ' + boxShadow_2(props.theme['$enable-shadows'], 'none') + '\n    }\n    \n    /* Bootstrap 4 does not place this css rule straight into Kbd tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
-
-Kbd.defaultProps = defaultProps$38;
 
 /**
  * BOOTSTRAP THEME JUMBOTRON
@@ -15536,11 +15513,6 @@ makeTheme$30();
  * A Jumbotron (Slider)
  */
 
-var defaultProps$39 = {
-  tag: 'div',
-  theme: makeTheme$30()
-};
-
 var JumbotronUnstyled = function (_React$Component) {
   inherits(JumbotronUnstyled, _React$Component);
 
@@ -15551,6 +15523,8 @@ var JumbotronUnstyled = function (_React$Component) {
 
   createClass(JumbotronUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -15562,12 +15536,15 @@ var JumbotronUnstyled = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, 'jumbotron', fluid ? 'jumbotron-fluid' : false), cssModule);
 
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return JumbotronUnstyled;
 }(React__default.Component);
 
+JumbotronUnstyled.defaultProps = {
+  tag: 'div',
+  theme: makeTheme$30()
+};
 JumbotronUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -15584,8 +15561,6 @@ var Jumbotron = styled__default(JumbotronUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    &.jumbotron {\n      padding: ' + props.theme['$jumbotron-padding'] + ' calc(' + props.theme['$jumbotron-padding'] + ' / 2);\n      margin-bottom: ' + props.theme['$jumbotron-padding'] + ';\n      background-color: ' + props.theme['$jumbotron-bg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius-lg']) + '\n    \n      ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], 'padding: calc(' + props.theme['$jumbotron-padding'] + ' * 2) ' + props.theme['$jumbotron-padding'] + ';') + '  \n    }\n\n    & .jumbotron-hr {\n      border-top-color: ' + color(props.theme['$jumbotron-bg']).darken(0.1).toString() + ';\n    }\n    \n    &.jumbotron-fluid {\n      padding-right: 0;\n      padding-left: 0;\n      ' + borderRadius_2(props.theme['$enable-rounded'], '0') + '\n    }\n  ';
 });
-
-Jumbotron.defaultProps = defaultProps$39;
 
 /**
  * BOOTSTRAP THEME LABEL
@@ -15761,7 +15736,7 @@ var propTypes$2 = {
   /* eslint-enable react/no-unused-prop-types */
 };
 
-var defaultProps$40 = {
+var defaultProps$6 = {
   tag: 'label',
   theme: makeTheme$31()
 };
@@ -15808,7 +15783,7 @@ var Label = styled__default(LabelUnstyled).withConfig({
 });
 
 Label.propTypes = propTypes$2;
-Label.defaultProps = defaultProps$40;
+Label.defaultProps = defaultProps$6;
 
 /* A Legend (Box) */
 
@@ -15865,8 +15840,6 @@ makeTheme$32();
  * A list item.
  */
 
-var defaultProps$41 = { theme: makeTheme$32() };
-
 var LiUnstyled = function (_React$Component) {
   inherits(LiUnstyled, _React$Component);
 
@@ -15877,6 +15850,8 @@ var LiUnstyled = function (_React$Component) {
 
   createClass(LiUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -15897,12 +15872,14 @@ var LiUnstyled = function (_React$Component) {
         }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return LiUnstyled;
 }(React__default.Component);
 
+LiUnstyled.defaultProps = {
+  theme: makeTheme$32()
+};
 LiUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
@@ -15925,8 +15902,6 @@ var Li = styled__default(LiUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    &.list-inline-item {\n      display: inline-block;\n    \n      &:not(:last-child) {\n        margin-right: ' + props.theme['$list-inline-padding'] + ';\n      }\n    }\n    \n    ' + media_2() + '\n  ';
 });
-
-Li.defaultProps = defaultProps$41;
 
 var listGroup = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -15996,12 +15971,42 @@ var makeTheme$33 = function makeTheme() {
   // Grayscale and brand colors for use across Bootstrap.
 
   // Start with assigning color names to specific hex values.
+
+  v['$white'] = u['$white'] || '#fff';
   v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
 
   // Create grayscale
+  v['$gray'] = u['$gray'] || '#464a4c';
   v['$gray-light'] = u['$gray-light'] || '#636c72';
   v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
   v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$component-active-color'] = u['$component-active-color'] || v['$white'];
+  v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
 
   // List group
 
@@ -16297,8 +16302,6 @@ makeTheme$34();
  *
  */
 
-var defaultProps$43 = { theme: makeTheme$34() };
-
 var UlUnstyled = function (_React$Component) {
   inherits(UlUnstyled, _React$Component);
 
@@ -16309,6 +16312,8 @@ var UlUnstyled = function (_React$Component) {
 
   createClass(UlUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -16323,12 +16328,14 @@ var UlUnstyled = function (_React$Component) {
         _extends({ className: classes }, rest),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return UlUnstyled;
 }(React__default.Component);
 
+UlUnstyled.defaultProps = {
+  theme: makeTheme$34()
+};
 UlUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node.isRequired,
@@ -16346,16 +16353,9 @@ var Ul = styled__default(UlUnstyled).withConfig({
   return '\n    ' + nav_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$font-size-lg'], props.theme['$border-width'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n\n    /* Type Scss */\n    &.list-unstyled {\n      ' + lists_1() + '\n    }\n\n    &.list-inline {\n      ' + lists_2() + '\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;\n    margin-bottom: 1rem;\n  \n    & ol,\n    & ul {\n      margin-bottom: 0;\n    }\n  ';
 });
 
-Ul.defaultProps = defaultProps$43;
-
 /**
  * ListGroup component
  */
-
-var defaultProps$42 = {
-  tag: Ul,
-  theme: makeTheme$33()
-};
 
 var ListGroupUnstyled = function (_React$Component) {
   inherits(ListGroupUnstyled, _React$Component);
@@ -16367,6 +16367,8 @@ var ListGroupUnstyled = function (_React$Component) {
 
   createClass(ListGroupUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -16378,12 +16380,15 @@ var ListGroupUnstyled = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, 'list-group', flush ? 'list-group-flush' : false), cssModule);
 
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ListGroupUnstyled;
 }(React__default.Component);
 
+ListGroupUnstyled.defaultProps = {
+  tag: Ul,
+  theme: makeTheme$33()
+};
 ListGroupUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -16401,15 +16406,9 @@ var ListGroup = styled__default(ListGroupUnstyled).withConfig({
   return '\n    /* \n      Base class\n      Easily usable on ul, ol, or div.\n    */\n    \n    &.list-group {\n      display: flex;\n      flex-direction: column;\n      /* No need to set list-style: none; since .list-group-item is block level */\n      padding-left: 0;  /* reset padding because ul and ol */\n      margin-bottom: 0;\n    }\n    \n    \n    /* \n      Interactive list items\n      Use anchor or button elements instead of \'li\'s or \'div\'s to create interactive\n      list items. Includes an extra \'.active\' modifier class for selected items.\n    */\n    \n    & .list-group-item-action {\n      width: 100%; /* For \'button\'s (anchors become 100% by default though) */\n      color: ' + props.theme['$list-group-link-color'] + ';\n      text-align: inherit; /* For \'button\'s (anchors inherit) */\n    \n      /* Hover state */\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n          color: ' + props.theme['$list-group-link-hover-color'] + ';\n          text-decoration: none;\n          background-color: ' + props.theme['$list-group-hover-bg'] + ';\n        ') + ';\n      \n      &:active {\n        color: ' + props.theme['$list-group-link-active-color'] + ';\n        background-color: ' + props.theme['$list-group-link-active-bg'] + ';\n      }\n    }\n    \n    /* \n      Individual list items\n      Use on \'li\'s or \'div\'s within the \'.list-group\' parent.\n    */\n    \n    & .list-group-item {\n      position: relative;\n      display: flex;\n      flex-flow: row wrap;\n      align-items: center;\n      padding: ' + props.theme['$list-group-item-padding-y'] + ' ' + props.theme['$list-group-item-padding-x'] + ';\n      /* Place the border on the list items and negative margin up for better styling */\n      margin-bottom: -' + props.theme['$list-group-border-width'] + ';\n      background-color: ' + props.theme['$list-group-bg'] + ';\n      border: ' + props.theme['$list-group-border-width'] + ' solid ' + props.theme['$list-group-border-color'] + ';\n    \n      &:first-child {\n        ' + borderRadius_3(props.theme['$enable-rounded'], props.theme['$list-group-border-radius']) + '\n      }\n\n      &:last-child {\n        margin-bottom: 0;\n        ' + borderRadius_5(props.theme['$enable-rounded'], props.theme['$list-group-border-radius']) + '\n      }\n      \n      ' + hover_3(props.theme['$enable-hover-media-query'], 'text-decoration: none;') + '\n        \n      &.disabled,\n      &:disabled {   \n        color: ' + props.theme['$list-group-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: ' + props.theme['$list-group-disabled-bg'] + ';\n      }\n    \n    \n      &.active {\n        z-index: 2; /* Place active items above their siblings for proper border styling */\n        color: ' + props.theme['$list-group-active-color'] + ';\n        background-color: ' + props.theme['$list-group-active-bg'] + ';\n        border-color: ' + props.theme['$list-group-active-border'] + ';     \n      }\n    }\n    \n    /* \n      Flush list items\n      Remove borders and border-radius to keep list group items edge-to-edge. Most\n      useful within other components (e.g., cards).\n    */\n\n    &.list-group-flush {\n      .list-group-item {\n        border-right: 0;\n        border-left: 0;\n        border-radius: 0;\n      }\n      \n      &:first-child {\n        .list-group-item:first-child {\n          border-top: 0;\n        }\n      }\n\n      &:last-child {\n        .list-group-item:last-child {\n          border-bottom: 0;\n        }\n      }\n    }\n    \n    \n    \n    /* Contextual variants\n    \n     Add modifier classes to change text and background color on individual items.\n     Organizationally, this must come after the \':hover\' states.\n    */\n    \n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'success', props.theme['$state-success-bg'], props.theme['$state-success-text']) + '\n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'info', props.theme['$state-info-bg'], props.theme['$state-info-text']) + '\n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'warning', props.theme['$state-warning-bg'], props.theme['$state-warning-text']) + '\n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'danger', props.theme['$state-danger-bg'], props.theme['$state-danger-text']) + '\n  ';
 });
 
-ListGroup.defaultProps = defaultProps$42;
-
 /**
  * ListGroup component
  */
-
-var defaultProps$44 = {
-  tag: 'li'
-};
 
 var handleDisabledOnClick = function handleDisabledOnClick(e) {
   e.preventDefault();
@@ -16425,6 +16424,8 @@ var ListGroupItem = function (_React$Component) {
 
   createClass(ListGroupItem, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -16443,12 +16444,14 @@ var ListGroupItem = function (_React$Component) {
         attributes.onClick = handleDisabledOnClick;
       }
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ListGroupItem;
 }(React__default.Component);
 
+ListGroupItem.defaultProps = {
+  tag: 'li'
+};
 ListGroupItem.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   active: PropTypes.bool,
@@ -16458,16 +16461,9 @@ ListGroupItem.propTypes = {
   className: PropTypes.any
 };
 
-
-ListGroupItem.defaultProps = defaultProps$44;
-
 /**
  * ListGroup component
  */
-
-var defaultProps$45 = {
-  tag: H5
-};
 
 var ListGroupItemHeading = function (_React$Component) {
   inherits(ListGroupItemHeading, _React$Component);
@@ -16479,6 +16475,8 @@ var ListGroupItemHeading = function (_React$Component) {
 
   createClass(ListGroupItemHeading, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -16488,27 +16486,22 @@ var ListGroupItemHeading = function (_React$Component) {
       var classes = classnames(className, 'list-group-item-heading');
 
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ListGroupItemHeading;
 }(React__default.Component);
 
+ListGroupItemHeading.defaultProps = {
+  tag: H5
+};
 ListGroupItemHeading.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.any
 };
 
-
-ListGroupItemHeading.defaultProps = defaultProps$45;
-
 /**
  * ListGroup component
  */
-
-var defaultProps$46 = {
-  tag: 'p'
-};
 
 var ListGroupItemHeading$2 = function (_React$Component) {
   inherits(ListGroupItemHeading, _React$Component);
@@ -16520,6 +16513,8 @@ var ListGroupItemHeading$2 = function (_React$Component) {
 
   createClass(ListGroupItemHeading, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -16529,19 +16524,18 @@ var ListGroupItemHeading$2 = function (_React$Component) {
       var classes = classnames(className, 'list-group-item-text');
 
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ListGroupItemHeading;
 }(React__default.Component);
 
+ListGroupItemHeading$2.defaultProps = {
+  tag: 'p'
+};
 ListGroupItemHeading$2.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.any
 };
-
-
-ListGroupItemHeading$2.defaultProps = defaultProps$46;
 
 /*
  * Kopax Ltd Copyright (c) 2016.
@@ -16590,7 +16584,7 @@ makeTheme$35();
  * Mark component
  */
 
-var defaultProps$47 = { theme: makeTheme$35() };
+var defaultProps$7 = { theme: makeTheme$35() };
 
 var Mark = styled__default.mark.withConfig({
   displayName: 'Mark'
@@ -16598,7 +16592,7 @@ var Mark = styled__default.mark.withConfig({
   return '\n    /* Reboot Scss */\n    padding: ' + props.theme['$mark-padding'] + ';\n    background-color: ' + props.theme['$mark-bg'] + ';\n  ';
 });
 
-Mark.defaultProps = defaultProps$47;
+Mark.defaultProps = defaultProps$7;
 
 /**
  * Media component
@@ -16857,7 +16851,7 @@ var propTypes$3 = {
   onEnter: PropTypes.func
 };
 
-var defaultProps$49 = {
+var defaultProps$8 = {
   tag: 'div',
   baseClass: 'fade',
   baseClassIn: 'show',
@@ -16983,7 +16977,7 @@ var Fade = function (_React$Component) {
 }(React__default.Component);
 
 Fade.propTypes = propTypes$3;
-Fade.defaultProps = defaultProps$49;
+Fade.defaultProps = defaultProps$8;
 
 /**
  * BOOTSTRAP THEME MODAL
@@ -17010,6 +17004,18 @@ var makeTheme$36 = function makeTheme() {
   v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
   v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
 
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
   // Grid breakpoints
   //
   // Define the minimum dimensions at which your layout will change,
@@ -17025,6 +17031,14 @@ var makeTheme$36 = function makeTheme() {
   variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
   variables_2(v['$grid-breakpoints']);
 
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
   // Body
   //
   // Settings for the `<body>` element.
@@ -17034,6 +17048,7 @@ var makeTheme$36 = function makeTheme() {
 
   // Fonts
 
+  v['$font-family-sans-serif'] = u['$font-family-sans-serif'] || '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
   v['$font-family-base'] = u['$font-family-base'] || v['$font-family-sans-serif'];
   v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
   v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
@@ -17088,15 +17103,6 @@ var makeTheme$36 = function makeTheme() {
 };
 
 makeTheme$36();
-
-var defaultProps$48 = {
-  isOpen: false,
-  isLocked: false,
-  backdrop: true,
-  keyboard: true,
-  zIndex: 1000,
-  theme: makeTheme$36()
-};
 
 var ModalUnstyled = function (_React$Component) {
   inherits(ModalUnstyled, _React$Component);
@@ -17308,6 +17314,14 @@ var ModalUnstyled = function (_React$Component) {
   return ModalUnstyled;
 }(React__default.Component);
 
+ModalUnstyled.defaultProps = {
+  isOpen: false,
+  isLocked: false,
+  backdrop: true,
+  keyboard: true,
+  zIndex: 1000,
+  theme: makeTheme$36()
+};
 ModalUnstyled.propTypes = {
   theme: PropTypes.object,
   /* eslint-disable react/no-unused-prop-types */
@@ -17338,8 +17352,6 @@ var Modal = styled__default(ModalUnstyled).withConfig({
   return '\n    ' + rebootUtils.body(props.theme['$font-family-base'], props.theme['$font-size-base'], props.theme['$font-weight-base'], props.theme['$line-height-base'], props.theme['$body-color'], props.theme['$body-bg']) + '\n    & .modal {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal'] + ';\n      display: none;\n      outline: 0;\n      overflow-x: hidden;\n      overflow-y: auto;\n      \n      ' + transition_3$1(props.theme['$enable-transitions'], props.theme['$transition-fade']) + '\n      &.fade {\n        .modal-dialog {\n          ' + transition_2(props.theme['$enable-transitions'], props.theme['$modal-transition']) + '\n          transform: translate(0, -25%);\n        }\n      }\n      &.show {\n        .modal-dialog {\n          transform: translate(0, 0);\n        }\n      }\n    }\n    \n    & .modal-dialog {\n      position: relative;\n      width: auto;\n      margin: ' + props.theme['$modal-dialog-margin'] + ';\n    }\n    \n    \n    & .modal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$modal-content-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$modal-content-border-width'] + ' solid ' + props.theme['$modal-content-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius-lg']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$modal-content-xs-box-shadow']) + '\n      outline: 0;\n    }\n    \n    & .modal-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal-backdrop'] + ';\n      background-color: ' + props.theme['$modal-backdrop-bg'] + ';\n      &.fade {\n        opacity: 0\n      }\n      &.show {\n        opacity: ' + props.theme['$modal-backdrop-opacity'] + ';\n      }\n    }\n      \n        \n    & .modal-header {\n      display: flex;\n      align-items: center;\n      justify-content: space-between;\n      padding: ' + props.theme['$modal-header-padding'] + ';\n      border-bottom: ' + props.theme['$modal-header-border-width'] + ' solid ' + props.theme['$modal-header-border-color'] + ';\n    }\n    \n    & .modal-title {\n      margin-bottom: 0;\n      line-height: ' + props.theme['$modal-title-line-height'] + ';\n    }\n    \n    & .modal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n    }\n    \n    & .modal-footer {\n      display: flex;\n      align-items: center;\n      justify-content: flex-end;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n      border-top: ' + props.theme['$modal-footer-border-width'] + ' solid ' + props.theme['$modal-footer-border-color'] + ';\n      // Easily place margin between footer elements\n      > :not(:first-child) { margin-left: .25rem; }\n      > :not(:last-child) { margin-right: .25rem; }\n    }\n    \n\n  \n    // Scale up the modal\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        & .modal-dialog {\n          max-width: ' + props.theme['$modal-md'] + ';\n          margin: ' + props.theme['$modal-dialog-sm-up-margin-y'] + ' auto;\n        }\n      \n        & .modal-content {\n          ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$modal-content-sm-up-box-shadow']) + '\n        }\n      \n        & .modal-sm {\n          max-width: ' + props.theme['$modal-sm'] + ';\n        }\n      ') + '\n  \n\n    ' + breakpoints_6('lg', props.theme['$grid-breakpoints'], '\n        & .modal-lg {\n           max-width:  ' + props.theme['$modal-lg'] + '; \n         }\n      ') + '\n  ';
 });
 
-Modal.defaultProps = defaultProps$48;
-
 var propTypes$4 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   wrapTag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -17349,7 +17361,7 @@ var propTypes$4 = {
   children: PropTypes.node
 };
 
-var defaultProps$50 = {
+var defaultProps$9 = {
   tag: H4,
   wrapTag: 'div'
 };
@@ -17384,7 +17396,7 @@ var ModalHeader = function ModalHeader(props) {
 };
 
 ModalHeader.propTypes = propTypes$4;
-ModalHeader.defaultProps = defaultProps$50;
+ModalHeader.defaultProps = defaultProps$9;
 
 var propTypes$5 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -17392,7 +17404,7 @@ var propTypes$5 = {
   cssModule: PropTypes.object
 };
 
-var defaultProps$51 = {
+var defaultProps$10 = {
   tag: 'div'
 };
 
@@ -17409,7 +17421,7 @@ var ModalFooter = function ModalFooter(props) {
 };
 
 ModalFooter.propTypes = propTypes$5;
-ModalFooter.defaultProps = defaultProps$51;
+ModalFooter.defaultProps = defaultProps$10;
 
 var propTypes$6 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -17417,7 +17429,7 @@ var propTypes$6 = {
   cssModule: PropTypes.object
 };
 
-var defaultProps$52 = {
+var defaultProps$11 = {
   tag: 'div'
 };
 
@@ -17434,7 +17446,10 @@ var ModalBody = function ModalBody(props) {
 };
 
 ModalBody.propTypes = propTypes$6;
-ModalBody.defaultProps = defaultProps$52;
+ModalBody.defaultProps = defaultProps$11;
+
+var rmUnit$13 = unitUtils$1.rmUnit;
+var UNIT$12 = unitUtils$1.UNIT;
 
 /**
  * BOOTSTRAP THEME NAV
@@ -17442,6 +17457,7 @@ ModalBody.defaultProps = defaultProps$52;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
+
 var makeTheme$37 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
@@ -17493,6 +17509,13 @@ var makeTheme$37 = function makeTheme() {
   v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
 
   // Spacing
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // =============================================================================================================
+  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$13(v['$spacer'], UNIT$12.REM) / 2 + UNIT$12.REM;
+  // =============================================================================================================
 
   v['$border-width'] = u['$border-width'] || '1px';
 
@@ -17580,11 +17603,6 @@ makeTheme$37();
  *
  *
  */
-var defaultProps$53 = {
-  tag: Ul,
-  theme: makeTheme$37()
-};
-
 var NavUnstyled = function (_React$Component) {
   inherits(NavUnstyled, _React$Component);
 
@@ -17595,6 +17613,8 @@ var NavUnstyled = function (_React$Component) {
 
   createClass(NavUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -17621,12 +17641,15 @@ var NavUnstyled = function (_React$Component) {
       }), cssModule);
 
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return NavUnstyled;
 }(React__default.Component);
 
+NavUnstyled.defaultProps = {
+  tag: Ul,
+  theme: makeTheme$37()
+};
 NavUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -17651,17 +17674,11 @@ var Nav = styled__default(NavUnstyled).withConfig({
   return '\n    ' + nav_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n    \n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n  ';
 });
 
-Nav.defaultProps = defaultProps$53;
-
 /**
  * NavItem Component
  *
  *
  */
-var defaultProps$54 = {
-  tag: 'li'
-};
-
 var NavItem = function (_React$Component) {
   inherits(NavItem, _React$Component);
 
@@ -17672,6 +17689,8 @@ var NavItem = function (_React$Component) {
 
   createClass(NavItem, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -17683,27 +17702,24 @@ var NavItem = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, 'nav-item'), cssModule);
 
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return NavItem;
 }(React__default.Component);
 
+NavItem.defaultProps = {
+  tag: 'li'
+};
 NavItem.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
 
-
-NavItem.defaultProps = defaultProps$54;
-
-var defaultProps$55 = {
-  tag: A
-};
-
 var NavLink = function (_React$Component) {
   inherits(NavLink, _React$Component);
+
+  // eslint-disable-line react/prefer-stateless-function
 
   function NavLink(props) {
     classCallCheck(this, NavLink);
@@ -17712,7 +17728,7 @@ var NavLink = function (_React$Component) {
 
     _this.onClick = _this.onClick.bind(_this);
     return _this;
-  } // eslint-disable-line react/prefer-stateless-function
+  }
 
   createClass(NavLink, [{
     key: 'onClick',
@@ -17753,6 +17769,9 @@ var NavLink = function (_React$Component) {
   return NavLink;
 }(React__default.Component);
 
+NavLink.defaultProps = {
+  tag: A
+};
 NavLink.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -17763,9 +17782,6 @@ NavLink.propTypes = {
   onClick: PropTypes.func,
   href: PropTypes.any
 };
-
-
-NavLink.defaultProps = defaultProps$55;
 
 /*
  * Kopax Ltd Copyright (c) 2016.
@@ -17805,7 +17821,7 @@ makeTheme$38();
  *
  */
 
-var defaultProps$56 = { theme: makeTheme$38() };
+var defaultProps$12 = { theme: makeTheme$38() };
 
 var Ol = styled__default.ol.withConfig({
   displayName: 'Ol'
@@ -17813,7 +17829,7 @@ var Ol = styled__default.ol.withConfig({
   return '\n    /* Type Scss */\n    &.list-unstyled {\n      ' + lists_1() + '\n    }\n\n    &.list-inline {\n      ' + lists_2() + '\n    }\n\n    &.list-inline-item {\n      ' + lists_3(props.theme['$list-inline-padding']) + '\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n    margin-bottom: 1rem;\n\n    & ol,\n    & ul {\n      margin-bottom: 0;\n    }\n  ';
 });
 
-Ol.defaultProps = defaultProps$56;
+Ol.defaultProps = defaultProps$12;
 
 /* Option */
 
@@ -17859,8 +17875,8 @@ var Output = styled__default(OutputUnstyled).withConfig({
   displayName: 'Output'
 })(['&.output{display:inline-block;}']);
 
-var rmUnit$13 = unitUtils$1.rmUnit;
-var UNIT$12 = unitUtils$1.UNIT;
+var rmUnit$14 = unitUtils$1.rmUnit;
+var UNIT$13 = unitUtils$1.UNIT;
 
 /**
  * BOOTSTRAP THEME PARAGRAPH
@@ -17925,7 +17941,7 @@ var makeTheme$39 = function makeTheme() {
   v['$font-size-h5'] = u['$font-size-h5'] || '1.25rem';
   v['$font-size-h6'] = u['$font-size-h6'] || '1rem';
 
-  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$13(v['$spacer'], UNIT$12.REM) / 2 + UNIT$12.REM;
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$14(v['$spacer'], UNIT$13.REM) / 2 + UNIT$13.REM;
   v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
   v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
   v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
@@ -17951,8 +17967,6 @@ var makeTheme$39 = function makeTheme() {
 
 makeTheme$39();
 
-var defaultProps$57 = { theme: makeTheme$39() };
-
 var PUnstyled = function (_React$Component) {
   inherits(PUnstyled, _React$Component);
 
@@ -17963,6 +17977,8 @@ var PUnstyled = function (_React$Component) {
 
   createClass(PUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -17979,12 +17995,14 @@ var PUnstyled = function (_React$Component) {
         _extends({ className: classes }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return PUnstyled;
 }(React__default.Component);
 
+PUnstyled.defaultProps = {
+  theme: makeTheme$39()
+};
 PUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -18002,8 +18020,6 @@ var P = styled__default(PUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    /* Type Scss */\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n    \n    &.h1{\n      font-size: ' + props.theme['$font-size-h1'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h2{\n      font-size: ' + props.theme['$font-size-h2'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h3{\n      font-size: ' + props.theme['$font-size-h3'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h4{\n      font-size: ' + props.theme['$font-size-h4'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h5{\n      font-size: ' + props.theme['$font-size-h5'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h6{\n      font-size: ' + props.theme['$font-size-h6'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;   \n    margin-bottom: 1rem;\n  ';
 });
-
-P.defaultProps = defaultProps$57;
 
 var paginations = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -18129,6 +18145,26 @@ var makeTheme$40 = function makeTheme() {
   v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
   v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
 
+  // Colors
+  //
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
   // Components
   //
   // Define common padding and border radius sizes and more.
@@ -18147,6 +18183,13 @@ var makeTheme$40 = function makeTheme() {
 
   v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
   v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
+
+  // Links
+  //
+  // Style anchor elements.
+
+  v['$link-color'] = u['$link-color'] || v['$brand-primary'];
+  v['$link-hover-color'] = u['$link-hover-color'] || color(v['$link-color']).darken(0.35).toString();
 
   // Pagination
 
@@ -18184,11 +18227,6 @@ makeTheme$40();
  * A Pagination
  */
 
-var defaultProps$58 = {
-  tag: 'ul',
-  theme: makeTheme$40()
-};
-
 var PaginationUnstyled = function (_React$Component) {
   inherits(PaginationUnstyled, _React$Component);
 
@@ -18199,6 +18237,8 @@ var PaginationUnstyled = function (_React$Component) {
 
   createClass(PaginationUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -18210,12 +18250,15 @@ var PaginationUnstyled = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, 'pagination', defineProperty({}, 'pagination-' + size, !!size)), cssModule);
 
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return PaginationUnstyled;
 }(React__default.Component);
 
+PaginationUnstyled.defaultProps = {
+  tag: 'ul',
+  theme: makeTheme$40()
+};
 PaginationUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -18234,15 +18277,9 @@ var Pagination = styled__default(PaginationUnstyled).withConfig({
   return '\n    ' + paginations_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$border-radius'], props.theme['$pagination-active-color'], props.theme['$pagination-active-bg'], props.theme['$pagination-active-border'], props.theme['$pagination-disabled-color'], props.theme['$cursor-disabled'], props.theme['$pagination-disabled-bg'], props.theme['$pagination-disabled-border'], props.theme['$pagination-padding-y'], props.theme['$pagination-padding-x'], props.theme['$pagination-line-height'], props.theme['$pagination-color'], props.theme['$pagination-bg'], props.theme['$pagination-border-width'], props.theme['$pagination-border-color'], props.theme['$pagination-hover-color'], props.theme['$pagination-hover-bg'], props.theme['$pagination-hover-border'], props.theme['$pagination-padding-y-lg'], props.theme['$pagination-padding-x-lg'], props.theme['$font-size-lg'], props.theme['$line-height-lg'], props.theme['$border-radius-lg'], props.theme['$pagination-padding-y-sm'], props.theme['$pagination-padding-x-sm'], props.theme['$font-size-sm'], props.theme['$line-height-sm'], props.theme['$border-radius-sm']) + '\n  ';
 });
 
-Pagination.defaultProps = defaultProps$58;
-
 /**
  * A PaginationItem
  */
-
-var defaultProps$59 = {
-  tag: 'li'
-};
 
 var PaginationItem = function (_React$Component) {
   inherits(PaginationItem, _React$Component);
@@ -18254,6 +18291,8 @@ var PaginationItem = function (_React$Component) {
 
   createClass(PaginationItem, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           active = _props.active,
@@ -18270,12 +18309,14 @@ var PaginationItem = function (_React$Component) {
       }), cssModule);
 
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return PaginationItem;
 }(React__default.Component);
 
+PaginationItem.defaultProps = {
+  tag: 'li'
+};
 PaginationItem.propTypes = {
   active: PropTypes.bool,
   className: PropTypes.string,
@@ -18285,16 +18326,9 @@ PaginationItem.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
-
-PaginationItem.defaultProps = defaultProps$59;
-
 /**
  * A PaginationLink
  */
-
-var defaultProps$60 = {
-  tag: A
-};
 
 var PaginationLink = function (_React$Component) {
   inherits(PaginationLink, _React$Component);
@@ -18306,6 +18340,8 @@ var PaginationLink = function (_React$Component) {
 
   createClass(PaginationLink, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -18360,12 +18396,14 @@ var PaginationLink = function (_React$Component) {
         }),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return PaginationLink;
 }(React__default.Component);
 
+PaginationLink.defaultProps = {
+  tag: A
+};
 PaginationLink.propTypes = {
   'aria-label': PropTypes.string,
   className: PropTypes.string,
@@ -18375,9 +18413,6 @@ PaginationLink.propTypes = {
   previous: PropTypes.bool,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
-
-
-PaginationLink.defaultProps = defaultProps$60;
 
 /*
  * Kopax Ltd Copyright (c) 2016.
@@ -18420,7 +18455,7 @@ makeTheme$41();
  * Pre component
  */
 
-var defaultProps$61 = { theme: makeTheme$41() };
+var defaultProps$13 = { theme: makeTheme$41() };
 
 var Pre = styled__default.pre.withConfig({
   displayName: 'Pre'
@@ -18428,7 +18463,7 @@ var Pre = styled__default.pre.withConfig({
   return '\n    /* Blocks of code */\n    display: block;\n    margin-top: 0;\n    margin-bottom: 1rem;\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$pre-color'] + ';\n    \n    /* Enable scrollable blocks of code */\n    /* AJT This class was present in bootstrap/scss/code.scss  We must decide if this class should be a mixin or not! */\n    &.pre-scrollable {\n      max-height: ' + props.theme['$pre-scrollable-max-height'] + ';\n      overflow-y: scroll;\n    }\n\n  \n    /* Account for some code outputs that place code tags in pre tags */\n    code {\n      padding: 0;\n      font-size: inherit;\n      color: inherit;\n      background-color: transparent;\n      border-radius: 0;\n    }\n    \n    /* Reboot Scss */\n\n    /* Remove browser default top margin */\n    margin-top: 0;\n    /* Reset browser default of \'1em\' to use \'rem\'s */\n    margin-bottom: 1rem;\n    /* Normalize v4 removed this property, causing \'pre\' content to break out of wrapping code snippets */\n    overflow: auto;\n    \n    /* Bootstrap 4 does not place this css rule straight into Kbd tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
 
-Pre.defaultProps = defaultProps$61;
+Pre.defaultProps = defaultProps$13;
 
 var gradients = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -18560,9 +18595,16 @@ var makeTheme$42 = function makeTheme() {
 
   // Create grayscale
   v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
 
   // Reassign color vars to semantic color scheme
   v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
 
   // Progress bars
 
@@ -18582,10 +18624,6 @@ makeTheme$42();
 
 /* Progress */
 
-var defaultProps$62 = {
-  theme: makeTheme$42()
-};
-
 var ProgressUnstyled = function (_React$Component) {
   inherits(ProgressUnstyled, _React$Component);
 
@@ -18596,6 +18634,8 @@ var ProgressUnstyled = function (_React$Component) {
 
   createClass(ProgressUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           children = _omit.children,
@@ -18607,12 +18647,14 @@ var ProgressUnstyled = function (_React$Component) {
         _extends({ className: classnames('progress', className) }, rest),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ProgressUnstyled;
 }(React__default.Component);
 
+ProgressUnstyled.defaultProps = {
+  theme: makeTheme$42()
+};
 ProgressUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -18631,8 +18673,6 @@ var Progress = styled__default(ProgressUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    \n    &.progress {\n      display: flex;\n      overflow: hidden; // force rounded corners by cropping it\n      font-size: ' + props.theme['$progress-font-size'] + ';\n      line-height: ' + props.theme['$progress-height'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$progress-bg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$progress-border-radius']) + '\n      ' + background_9(props.theme['$enable-hover-media-query'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$brand-inverse'], props.theme['$gray-lightest']) + '\n    }\n    \n    .progress-bar {\n      height: ' + props.theme['$progress-height'] + ';\n      line-height: ' + props.theme['$progress-height'] + ';\n      color: ' + props.theme['$progress-bar-color'] + ';\n      background-color: ' + props.theme['$progress-bar-bg'] + ';\n    }\n    \n    .progress-bar-striped {\n      ' + gradients_7() + '\n      background-size: ' + props.theme['$progress-height'] + ' ' + props.theme['$progress-height'] + ';\n      background-repeat: repeat; /* Not present in bootstrap original but required to repeat the background */\n    }\n    \n    .progress-bar-animated {\n      animation: ' + backgroundPositionKeyFrame(props) + ' ' + props.theme['$progress-bar-animation-timing'] + ';\n    }\n\n  ';
 });
-
-Progress.defaultProps = defaultProps$62;
 
 var asyncGenerator$2 = function () {
   function AwaitValue(value) {
@@ -18911,11 +18951,6 @@ var makeTheme$43 = function makeTheme() {
 
 makeTheme$43();
 
-var defaultProps$63 = {
-  tag: 'div',
-  theme: makeTheme$43()
-};
-
 var RowUnstyled = function (_React$Component) {
   inherits(RowUnstyled, _React$Component);
 
@@ -18926,6 +18961,8 @@ var RowUnstyled = function (_React$Component) {
 
   createClass(RowUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -18937,12 +18974,15 @@ var RowUnstyled = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, noGutters ? 'no-gutters' : null, 'row'), cssModule);
 
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return RowUnstyled;
 }(React__default.Component);
 
+RowUnstyled.defaultProps = {
+  tag: 'div',
+  theme: makeTheme$43()
+};
 RowUnstyled.propTypes = {
   className: PropTypes.string,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -18956,8 +18996,6 @@ var Row = styled__default(RowUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    &.row {\n      ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n    /*\n      Remove the negative margin from default .row, then the horizontal padding\n      from all immediate children columns (to prevent runaway style inheritance).\n    */\n\n    &.no-gutters {\n      margin-right: 0;\n      margin-left: 0;\n\n      > .col,\n      > [class*="col-"] {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n ';
 });
-
-Row.defaultProps = defaultProps$63;
 
 /**
  * Samp component
@@ -19069,8 +19107,6 @@ makeTheme$44();
  * Small component
  */
 
-var defaultProps$64 = { theme: makeTheme$44() };
-
 var SmallUnstyled = function (_React$Component) {
   inherits(SmallUnstyled, _React$Component);
 
@@ -19081,6 +19117,8 @@ var SmallUnstyled = function (_React$Component) {
 
   createClass(SmallUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -19096,12 +19134,14 @@ var SmallUnstyled = function (_React$Component) {
         _extends({ className: classes }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return SmallUnstyled;
 }(React__default.Component);
 
+SmallUnstyled.defaultProps = {
+  theme: makeTheme$44()
+};
 SmallUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -19118,8 +19158,6 @@ var Small = styled__default(SmallUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    /* Reboot Scss */\n    font-size: ' + props.theme['$small-font-size'] + ';\n    font-weight: normal;\n  ';
 });
-
-Small.defaultProps = defaultProps$64;
 
 /**
  * Strong component
@@ -19302,12 +19340,6 @@ makeTheme$45();
  * Tables: default, striped, bordered, hover, condensed and responsive.
  */
 
-var defaultProps$65 = {
-  tag: 'table',
-  responsiveTag: 'div',
-  theme: makeTheme$45()
-};
-
 var TableUnstyled = function (_React$Component) {
   inherits(TableUnstyled, _React$Component);
 
@@ -19318,6 +19350,8 @@ var TableUnstyled = function (_React$Component) {
 
   createClass(TableUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -19346,12 +19380,16 @@ var TableUnstyled = function (_React$Component) {
         );
       }
       return table;
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return TableUnstyled;
 }(React__default.Component);
 
+TableUnstyled.defaultProps = {
+  tag: 'table',
+  responsiveTag: 'div',
+  theme: makeTheme$45()
+};
 TableUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   theme: PropTypes.object,
@@ -19373,10 +19411,8 @@ TableUnstyled.propTypes = {
 var Table = styled__default(TableUnstyled).withConfig({
   displayName: 'Table'
 })(['', ''], function (props) {
-  return '\n    /*\n     Basic Bootstrap table\n    */\n    \n    &.table {\n      width: 100%;\n      max-width: 100%;\n      margin-bottom: ' + props.theme['$spacer'] + ';\n      background-color: ' + props.theme['$table-bg'] + ';\n\n      th,\n      td {\n        padding: ' + props.theme['$table-cell-padding'] + ';\n        vertical-align: top;\n        border-top: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      thead th {\n        vertical-align: bottom;\n        border-bottom: ' + unitUtils$1.math.multiply(2, props.theme['$table-border-width']) + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      tbody + tbody {\n        border-top: ' + unitUtils$1.math.multiply(2, props.theme['$table-border-width']) + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      .table {\n        background-color: ' + props.theme['$body-bg'] + ';\n      }\n    }\n    \n    \n    /*\n     Condensed table w/ half padding\n    */\n    \n    &.table-sm {\n      th,\n      td {\n        padding: ' + props.theme['$table-sm-cell-padding'] + ';\n      }\n    }\n    \n    \n    /* Bordered version\n     Add borders all around the table and between all the columns.\n    */\n    &.table-bordered {\n      border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n    \n      th,\n      td {\n        border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      thead {\n        th,\n        td {\n          border-bottom-width: ' + unitUtils$1.math.multiply(2, props.theme['$table-border-width']) + ';\n        }\n      }\n    }\n    \n    \n    /* Zebra-striping\n     Default zebra-stripe styles (alternating gray and transparent backgrounds)\n    */\n    \n    &.table-striped {\n      tbody tr:nth-of-type(odd) {\n        background-color: ' + props.theme['$table-bg-accent'] + ';\n      }\n    }\n    \n    \n    /* \n    Hover effect Placed here since it has to come after the potential zebra striping\n    */\n\n    \n    &.table-hover {\n      tbody tr {\n        ' + hover_2('\n          background-color: ' + props.theme['$table-bg-hover'] + ';\n        ') + '\n      }\n    }\n    \n    /* Table backgrounds\n    Exact selectors below required to override \'.table-striped\' and prevent\n    inheritance to nested tables.\n    */\n        \n    /* Generate the contextual variants */\n    ' + tableRow_1('active', props.theme['$table-bg-active']) + '\n    ' + tableRow_1('success', props.theme['$state-success-bg']) + '\n    ' + tableRow_1('info', props.theme['$state-info-bg']) + '\n    ' + tableRow_1('warning', props.theme['$state-warning-bg']) + '\n    ' + tableRow_1('danger', props.theme['$state-danger-bg']) + '\n     \n    \n    /* Inverse styles\n    Same table markup, but inverted color scheme: dark background and light text.\n    */ \n    \n    & thead.thead-inverse {\n      th {\n        color: ' + props.theme['$table-inverse-color'] + ';\n        background-color: ' + props.theme['$table-inverse-bg'] + ';\n      }\n    }\n    \n    \n    & thead.thead-default {\n      th {\n        color: ' + props.theme['$table-head-color'] + ';\n        background-color: ' + props.theme['$table-head-bg'] + ';\n      }\n    }\n    \n    &.table-inverse {\n      color: ' + props.theme['$table-inverse-color'] + ';\n      background-color: ' + props.theme['$table-inverse-bg'] + ';\n    \n      th,\n      td,\n      thead th {\n        border-color: ' + props.theme['$table-inverse-border'] + ';\n      }\n    \n      &.table-bordered {\n        border: 0;\n      }\n      \n      &.table-striped {\n        tbody tr:nth-of-type(odd) {\n        background-color: ' + props.theme['$table-inverse-bg-accent'] + ';\n        }\n      }\n      \n      &.table-hover {\n        tbody tr {\n          ' + hover_2('\n            background-color: ' + props.theme['$table-inverse-bg-hover'] + ';\n          ') + '\n        }\n      }\n    }\n    \n    /* Responsive tables\n     Wrap your tables in \'.table-responsive\' and we\'ll make them mobile friendly\n     by enabling horizontal scrolling. Only applies <768px. Everything above that\n     will display normally.\n     */\n    \n    &.table-responsive {\n      display: block;\n      width: 100%;\n      overflow-x: auto;\n      -ms-overflow-style: -ms-autohiding-scrollbar; /* See https://github.com/twbs/bootstrap/pull/10057 */\n      &.table-bordered {\n        border: 0;\n      }\n    }\n    \n    &.table-reflow {\n    \n      /* added bs4 missing tfoot rule */\n      thead, tfoot {\n        float: left;\n      }\n    \n      tbody {\n        display: block;\n        white-space: nowrap;\n      }\n    \n      th,\n      td {\n        border-top: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        border-left: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n    \n        &:last-child {\n          border-right: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        }\n      }\n    \n      thead,\n      tbody,\n      tfoot {\n        &:last-child {\n          tr:last-child th,\n          tr:last-child td {\n            border-bottom: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n          }\n        }\n      }\n    \n      tr {\n        float: left;\n    \n        th,\n        td {\n          display: block !important;\n          border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        }\n      }\n    }\n    \n    /* from reboot.scss */\n    th {\n      /* Centered by default, but left-align-ed to match the tds below. */\n      text-align: left;\n    }\n      \n    /* Reboot Scss */\n    /* No longer part of Normalize since v4 */\n    border-collapse: collapse;\n    /*  Reset for nesting within parents with \'background-color\'. */\n    background-color: ' + props.theme['$table-bg'] + ';    \n    \n  ';
+  return '\n    /*\n     Basic Bootstrap table\n    */\n    &.table {\n      width: 100%;\n      max-width: 100%;\n      margin-bottom: ' + props.theme['$spacer'] + ';\n      background-color: ' + props.theme['$table-bg'] + ';\n\n      th,\n      td {\n        padding: ' + props.theme['$table-cell-padding'] + ';\n        vertical-align: top;\n        border-top: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      thead th {\n        vertical-align: bottom;\n        border-bottom: ' + unitUtils$1.math.multiply(props.theme['$table-border-width'], 2) + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      tbody + tbody {\n        border-top: ' + unitUtils$1.math.multiply(props.theme['$table-border-width'], 2) + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      .table {\n        background-color: ' + props.theme['$body-bg'] + ';\n      }\n    }\n    \n    \n    /*\n     Condensed table w/ half padding\n    */\n    \n    &.table-sm {\n      th,\n      td {\n        padding: ' + props.theme['$table-sm-cell-padding'] + ';\n      }\n    }\n    \n    \n    /* Bordered version\n     Add borders all around the table and between all the columns.\n    */\n    &.table-bordered {\n      border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n    \n      th,\n      td {\n        border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      thead {\n        th,\n        td {\n          border-bottom-width: ' + unitUtils$1.math.multiply(2, props.theme['$table-border-width']) + ';\n        }\n      }\n    }\n    \n    \n    /* Zebra-striping\n     Default zebra-stripe styles (alternating gray and transparent backgrounds)\n    */\n    \n    &.table-striped {\n      tbody tr:nth-of-type(odd) {\n        background-color: ' + props.theme['$table-bg-accent'] + ';\n      }\n    }\n    \n    \n    /* \n    Hover effect Placed here since it has to come after the potential zebra striping\n    */\n\n    \n    &.table-hover {\n      tbody tr {\n        ' + hover_2('\n          background-color: ' + props.theme['$table-bg-hover'] + ';\n        ') + '\n      }\n    }\n    \n    /* Table backgrounds\n    Exact selectors below required to override \'.table-striped\' and prevent\n    inheritance to nested tables.\n    */\n        \n    /* Generate the contextual variants */\n    ' + tableRow_1('active', props.theme['$table-bg-active']) + '\n    ' + tableRow_1('success', props.theme['$state-success-bg']) + '\n    ' + tableRow_1('info', props.theme['$state-info-bg']) + '\n    ' + tableRow_1('warning', props.theme['$state-warning-bg']) + '\n    ' + tableRow_1('danger', props.theme['$state-danger-bg']) + '\n     \n    \n    /* Inverse styles\n    Same table markup, but inverted color scheme: dark background and light text.\n    */ \n    \n    & thead.thead-inverse {\n      th {\n        color: ' + props.theme['$table-inverse-color'] + ';\n        background-color: ' + props.theme['$table-inverse-bg'] + ';\n      }\n    }\n    \n    \n    & thead.thead-default {\n      th {\n        color: ' + props.theme['$table-head-color'] + ';\n        background-color: ' + props.theme['$table-head-bg'] + ';\n      }\n    }\n    \n    &.table-inverse {\n      color: ' + props.theme['$table-inverse-color'] + ';\n      background-color: ' + props.theme['$table-inverse-bg'] + ';\n    \n      th,\n      td,\n      thead th {\n        border-color: ' + props.theme['$table-inverse-border'] + ';\n      }\n    \n      &.table-bordered {\n        border: 0;\n      }\n      \n      &.table-striped {\n        tbody tr:nth-of-type(odd) {\n        background-color: ' + props.theme['$table-inverse-bg-accent'] + ';\n        }\n      }\n      \n      &.table-hover {\n        tbody tr {\n          ' + hover_2('\n            background-color: ' + props.theme['$table-inverse-bg-hover'] + ';\n          ') + '\n        }\n      }\n    }\n    \n    /* Responsive tables\n     Wrap your tables in \'.table-responsive\' and we\'ll make them mobile friendly\n     by enabling horizontal scrolling. Only applies <768px. Everything above that\n     will display normally.\n     */\n    \n    &.table-responsive {\n      display: block;\n      width: 100%;\n      overflow-x: auto;\n      -ms-overflow-style: -ms-autohiding-scrollbar; /* See https://github.com/twbs/bootstrap/pull/10057 */\n      &.table-bordered {\n        border: 0;\n      }\n    }\n    \n    &.table-reflow {\n    \n      /* added bs4 missing tfoot rule */\n      thead, tfoot {\n        float: left;\n      }\n    \n      tbody {\n        display: block;\n        white-space: nowrap;\n      }\n    \n      th,\n      td {\n        border-top: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        border-left: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n    \n        &:last-child {\n          border-right: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        }\n      }\n    \n      thead,\n      tbody,\n      tfoot {\n        &:last-child {\n          tr:last-child th,\n          tr:last-child td {\n            border-bottom: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n          }\n        }\n      }\n    \n      tr {\n        float: left;\n    \n        th,\n        td {\n          display: block !important;\n          border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        }\n      }\n    }\n    \n    /* from reboot.scss */\n    th {\n      /* Centered by default, but left-align-ed to match the tds below. */\n      text-align: left;\n    }\n      \n    /* Reboot Scss */\n    /* No longer part of Normalize since v4 */\n    border-collapse: collapse;\n    /*  Reset for nesting within parents with \'background-color\'. */\n    background-color: ' + props.theme['$table-bg'] + ';    \n    \n  ';
 });
-
-Table.defaultProps = defaultProps$65;
 
 /**
  * Tbody
@@ -19677,13 +19713,6 @@ makeTheme$46();
 
 /* Badge (Text Format) */
 
-var defaultProps$66 = {
-  color: 'default',
-  pill: false,
-  tag: 'span',
-  theme: makeTheme$46()
-};
-
 var BadgeUnstyled = function (_React$Component) {
   inherits(BadgeUnstyled, _React$Component);
 
@@ -19694,6 +19723,8 @@ var BadgeUnstyled = function (_React$Component) {
 
   createClass(BadgeUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -19708,12 +19739,17 @@ var BadgeUnstyled = function (_React$Component) {
           'badge-pill': pill
         }, 'badge-' + color, color)), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return BadgeUnstyled;
 }(React__default.Component);
 
+BadgeUnstyled.defaultProps = {
+  color: 'default',
+  pill: false,
+  tag: 'span',
+  theme: makeTheme$46()
+};
 BadgeUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   color: PropTypes.string,
@@ -19732,8 +19768,6 @@ var Badge = styled__default(BadgeUnstyled).withConfig({
   return '\n    \n    /* Base class */\n    /* Requires one of the contextual, color modifier classes for \'color\' and */\n    /* \'background-color\'. */\n    \n    &.badge {\n      display: inline-block;\n      padding: ' + props.theme['$badge-padding-y'] + ' ' + props.theme['$badge-padding-x'] + ';\n      font-size: ' + props.theme['$badge-font-size'] + ';\n      font-weight: ' + props.theme['$badge-font-weight'] + ';\n      line-height: 1;\n      color: ' + props.theme['$badge-color'] + ';\n      text-align: center;\n      white-space: nowrap;\n      vertical-align: baseline;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n    \n      /* Empty tags collapse automatically */\n      &:empty {\n        display: none;\n      }\n    }\n    \n    \n    /* scss-lint:disable QualifyingElement */\n    /* Add hover effects, but only for links */\n    &a {\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$badge-link-hover-color'] + ';\n        text-decoration: none;\n        cursor: pointer;\n      ') + '\n    }\n    /* scss-lint:enable QualifyingElement */\n    \n    /* Pill tags */\n    /* Make them extra rounded with a modifier to replace v3s badges. */\n    \n    &.badge-pill {\n      padding-right: ' + props.theme['$badge-pill-padding-x'] + ';\n      padding-left: ' + props.theme['$badge-pill-padding-x'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$badge-pill-border-radius']) + '\n    }\n    \n    /* Colors */\n    /* Contextual variations (linked tags get darker on :hover). */\n    \n    &.badge-default {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-default-bg']) + '\n    }     \n    \n    &.badge-primary {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-primary-bg']) + '\n    }\n    \n    &.badge-success {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-success-bg']) + '\n    }\n    \n    &.badge-info {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-info-bg']) + '\n    }\n    \n    &.badge-warning {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-warning-bg']) + '\n    }\n    \n    &.badge-danger {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-danger-bg']) + '\n    }\n  ';
 });
 
-Badge.defaultProps = defaultProps$66;
-
 /* A Textarea (Box) */
 
 /**
@@ -19750,14 +19784,6 @@ var Textarea = styled__default.textarea.withConfig({
 var DEFAULT_DELAYS = {
   shape: 0,
   hide: 250
-};
-
-var defaultProps$67 = {
-  isOpen: false,
-  placement: 'bottom',
-  delay: DEFAULT_DELAYS,
-  autohide: true,
-  toggle: function toggle() {}
 };
 
 var defaultTetherConfig$1 = {
@@ -19939,14 +19965,19 @@ var TooltipUnstyled = function (_React$Component) {
   return TooltipUnstyled;
 }(React__default.Component);
 
+TooltipUnstyled.defaultProps = {
+  isOpen: false,
+  placement: 'bottom',
+  delay: DEFAULT_DELAYS,
+  autohide: true,
+  toggle: function toggle() {}
+};
 TooltipUnstyled.propTypes = propTypes$7;
 var Tooltip = styled__default(TooltipUnstyled).withConfig({
   displayName: 'Tooltip'
 })(['', ''], function (props) {
   return '\n    &.tooltip {\n      position: absolute;\n      z-index: ' + props.theme['$zindex-tooltip'] + ';\n      display: block;\n      font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;\n      font-style: normal;\n      font-weight: 400;\n      letter-spacing: normal;\n      line-break: auto;\n      line-height: 1.5;\n      text-align: left;\n      text-align: start;\n      text-decoration: none;\n      text-shadow: none;\n      text-transform: none;\n      white-space: normal;\n      word-break: normal;\n      word-spacing: normal;\n      font-size: .875rem;\n      word-wrap: break-word;\n      opacity: 0\n    }\n    \n    &.tooltip.show {\n      opacity: ' + props.theme['$tooltip-opacity'] + '\n    }\n    \n    &.tooltip.bs-tether-element-attached-bottom,\n    &.tooltip.tooltip-top {\n      padding: 5px 0;\n      margin-top: -3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-bottom .tooltip-inner:before,\n    &.tooltip.tooltip-top .tooltip-inner:before {\n      bottom: 0;\n      left: 50%;\n      margin-left: -5px;\n      content: "";\n      border-width: 5px 5px 0;\n      border-top-color: #000\n    }\n    \n    &.tooltip.bs-tether-element-attached-left,\n    &.tooltip.tooltip-right {\n      padding: 0 5px;\n      margin-left: 3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-left .tooltip-inner:before,\n    &.tooltip.tooltip-right .tooltip-inner:before {\n      top: 50%;\n      left: 0;\n      margin-top: -5px;\n      content: "";\n      border-width: 5px 5px 5px 0;\n      border-right-color: #000\n    }\n    \n    &.tooltip.bs-tether-element-attached-top,\n    &.tooltip.tooltip-bottom {\n      padding: 5px 0;\n      margin-top: 3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-top .tooltip-inner:before,\n    &.tooltip.tooltip-bottom .tooltip-inner:before {\n      top: 0;\n      left: 50%;\n      margin-left: -5px;\n      content: "";\n      border-width: 0 5px 5px;\n      border-bottom-color: #000\n    }\n    \n    &.tooltip.bs-tether-element-attached-right,\n    &.tooltip.tooltip-left {\n      padding: 0 5px;\n      margin-left: -3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-right .tooltip-inner:before,\n    &.tooltip.tooltip-left .tooltip-inner:before {\n      top: 50%;\n      right: 0;\n      margin-top: -5px;\n      content: "";\n      border-width: 5px 0 5px 5px;\n      border-left-color: #000\n    }\n    \n    & .tooltip-inner {\n      max-width: ' + props.theme['$tooltip-max-width'] + ';\n      padding: ' + props.theme['$tooltip-padding-y'] + ' ' + props.theme['$tooltip-padding-x'] + ';\n      color: ' + props.theme['$tooltip-color'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$tooltip-bg'] + ';\n      border-radius: .25rem\n    }\n    \n    & .tooltip-inner:before {\n      position: absolute;\n      width: 0;\n      height: 0;\n      border-color: transparent;\n      border-style: solid\n    }\n  ';
 });
-
-Tooltip.defaultProps = defaultProps$67;
 
 var cards = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -20053,8 +20084,8 @@ var cards_4 = cards.cardInverse;
 var cards_5 = cards.card;
 
 var detectUnit$2 = unitUtils$1.detectUnit;
-var rmUnit$14 = unitUtils$1.rmUnit;
-var UNIT$13 = unitUtils$1.UNIT;
+var rmUnit$15 = unitUtils$1.rmUnit;
+var UNIT$14 = unitUtils$1.UNIT;
 
 /**
  * BOOTSTRAP THEME CARDS TAG (Cards, CardsColumns, CardDeck, CardGroup)
@@ -20109,6 +20140,7 @@ var makeTheme$47 = function makeTheme() {
 
   // Create grayscale
   v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
 
   // Reassign color vars to semantic color scheme
   v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
@@ -20152,8 +20184,8 @@ var makeTheme$47 = function makeTheme() {
   v['$btn-danger-bg'] = u['$btn-danger-bg'] || v['$brand-danger'];
 
   // THEME EXTEND CARDS
-  v['$card-margin-y-halved'] = u['$card-margin-y-halved'] || rmUnit$14(v['$card-spacer-y'], UNIT$13.REM) / 2 + UNIT$13.REM;
-  v['$card-margin-x-halved'] = u['$card-margin-x-halved'] || rmUnit$14(v['$card-spacer-x'], UNIT$13.REM) / 2 + UNIT$13.REM;
+  v['$card-margin-y-halved'] = u['$card-margin-y-halved'] || rmUnit$15(v['$card-spacer-y'], UNIT$14.REM) / 2 + UNIT$14.REM;
+  v['$card-margin-x-halved'] = u['$card-margin-x-halved'] || rmUnit$15(v['$card-spacer-x'], UNIT$14.REM) / 2 + UNIT$14.REM;
 
   // CardColumns
   v['$card-columns-count'] = u['$card-columns-count'] || '3';
@@ -20166,23 +20198,18 @@ var makeTheme$47 = function makeTheme() {
 
   // CardDeck
   var detectedUnit = detectUnit$2(v['$grid-gutter-width-base']);
-  v['$card-deck-margin'] = u['$card-deck-margin'] || rmUnit$14(v['$grid-gutter-width-base'], detectedUnit) / 2 + detectedUnit;
+  v['$card-deck-margin'] = u['$card-deck-margin'] || rmUnit$15(v['$grid-gutter-width-base'], detectedUnit) / 2 + detectedUnit;
 
   return Object.assign({}, u, v);
 };
 
-var themeCards = makeTheme$47();
+makeTheme$47();
 
 /**
  * Card Component
  *
  *
  */
-var defaultProps$68 = {
-  tag: 'div',
-  theme: makeTheme$47()
-};
-
 var CardUnstyled = function (_React$Component) {
   inherits(CardUnstyled, _React$Component);
 
@@ -20193,6 +20220,8 @@ var CardUnstyled = function (_React$Component) {
 
   createClass(CardUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _cn;
 
@@ -20212,12 +20241,15 @@ var CardUnstyled = function (_React$Component) {
           'card-block': block
         }, defineProperty(_cn, 'card-' + color, color), defineProperty(_cn, 'card-' + (outline ? '-outline' : '') + '-' + color, outline), _cn)), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardUnstyled;
 }(React__default.Component);
 
+CardUnstyled.defaultProps = {
+  tag: 'div',
+  theme: makeTheme$47()
+};
 CardUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -20241,18 +20273,11 @@ var Card = styled__default(CardUnstyled).withConfig({
   return '\n    \n    /*\n    Base styles\n    */\n    &.card {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$card-bg'] + ';\n      border: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n      \n      ' + conditional_1(props.width, 'width: ' + props.width + ';') + '\n      ' + conditional_1(props.backgroundColor, 'background-color: ' + props.backgroundColor + ';') + '\n      ' + conditional_1(props.borderColor, 'border-color: ' + props.borderColor + ';') + '\n    }\n    \n    &.card-block,\n    & .card-block {\n      flex: 1 1 auto;\n      padding: ' + props.theme['$card-spacer-x'] + ';\n    }\n    \n    & .card-title {\n      margin-bottom: ' + props.theme['$card-spacer-y'] + ';\n    }\n    \n    & .card-subtitle {\n      margin-top: -' + props.theme['$card-margin-y-halved'] + ';\n      margin-bottom: 0;\n    }\n    \n    & .card-text:last-child {\n      margin-bottom: 0;\n    }\n   \n    & .card-link {\n      ' + hover_2('\n        text-decoration: none;\n      ') + '\n    \n      + .card-link {\n        margin-left: ' + props.theme['$card-spacer-x'] + ';\n      }\n    }\n    \n    &.card {\n      > .list-group:first-child {\n        .list-group-item:first-child {\n          ' + borderRadius_3(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n        }\n      }\n    \n      > .list-group:last-child {\n        .list-group-item:last-child {\n          ' + borderRadius_5(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n        }\n      }\n    }\n    \n    \n    /*\n     Optional textual caps\n    */\n    \n    & .card-header {\n      padding: ' + props.theme['$card-spacer-y'] + ' ' + props.theme['$card-spacer-x'] + ';\n      margin-bottom: 0; /* Removes the default margin-bottom of <hN> */\n      background-color: ' + props.theme['$card-cap-bg'] + ';\n      border-bottom: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n    \n      &:first-child {\n        ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner'], props.theme['$card-border-radius-inner'], '0', '0') + '\n      }\n    }\n    \n    & .card-footer {\n      padding: ' + props.theme['$card-spacer-y'] + ' ' + props.theme['$card-spacer-x'] + ';\n      background-color: ' + props.theme['$card-cap-bg'] + ';\n      border-top: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n    \n      &:last-child {\n        ' + borderRadius_2(props.theme['$enable-rounded'], '0', '0', props.theme['$card-border-radius-inner'], props.theme['$card-border-radius-inner']) + '\n      }\n    }\n    \n    \n    /*\n     Header navs\n    */\n    \n    & .card-header-tabs {\n      margin-right: -' + props.theme['$card-margin-x-halved'] + ';\n      margin-bottom: -' + props.theme['$card-spacer-y'] + ';\n      margin-left: -' + props.theme['$card-margin-x-halved'] + ';\n      border-bottom: 0;\n    }\n    \n    & .card-header-pills {\n      margin-right: -' + props.theme['$card-margin-x-halved'] + ';\n      margin-left: -' + props.theme['$card-margin-x-halved'] + ';\n    }\n    \n    \n    /*\n     Background variations\n    */\n    \n    &.card-primary {\n      ' + cards_2(props.theme['$brand-primary'], props.theme['$brand-primary']) + '\n    }\n    &.card-success {\n      ' + cards_2(props.theme['$brand-success'], props.theme['$brand-success']) + '\n    }\n    &.card-info {\n      ' + cards_2(props.theme['$brand-info'], props.theme['$brand-info']) + '\n    }\n    &.card-warning {\n      ' + cards_2(props.theme['$brand-warning'], props.theme['$brand-warning']) + '\n    }\n    &.card-danger {\n      ' + cards_2(props.theme['$brand-danger'], props.theme['$brand-danger']) + '\n    }\n    \n    /* Remove all backgrounds */\n    &.card-outline-primary {\n      ' + cards_3(props.theme['$btn-primary-bg']) + '\n    }\n    &.card-outline-secondary {\n      ' + cards_3(props.theme['$btn-secondary-border']) + '\n    }\n    &.card-outline-info {\n      ' + cards_3(props.theme['$btn-info-bg']) + '\n    }\n    &.card-outline-success {\n      ' + cards_3(props.theme['$btn-success-bg']) + '\n    }\n    &.card-outline-warning {\n      ' + cards_3(props.theme['$btn-warning-bg']) + '\n    }\n    &.card-outline-danger {\n      ' + cards_3(props.theme['$btn-danger-bg']) + '\n    }\n    \n    /*\n     Inverse text within a card for use with dark backgrounds\n    */\n    \n    &.card-inverse {\n      ' + cards_4(props.theme['$enable-hover-media-query'], props.theme['$card-link-hover-color']) + '\n    }\n    \n    /*\n     Blockquote\n    */\n    \n    & .card-blockquote {\n      padding: 0;\n      margin-bottom: 0;\n      border-left: 0;\n    }\n    \n    /* Card image */\n    & .card-img {\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n    \n    & .card-img-overlay {\n      position: absolute;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      padding: ' + props.theme['$card-img-overlay-padding'] + ';\n    }\n    \n    \n    \n    /* Card image caps */\n    & .card-img-top {\n      ' + borderRadius_3(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n    \n    & .card-img-bottom {\n      ' + borderRadius_5(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n  ';
 });
 
-Card.defaultProps = defaultProps$68;
-
 /**
  * Card Columns Component
  *
  *
  */
-var defaultProps$69 = {
-  theme: themeCards,
-  tag: 'div'
-};
-
 var CardColumnsUnstyled = function (_React$Component) {
   inherits(CardColumnsUnstyled, _React$Component);
 
@@ -20263,6 +20288,8 @@ var CardColumnsUnstyled = function (_React$Component) {
 
   createClass(CardColumnsUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -20273,12 +20300,15 @@ var CardColumnsUnstyled = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-columns'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardColumnsUnstyled;
 }(React__default.Component);
 
+CardColumnsUnstyled.defaultProps = {
+  tag: 'div',
+  theme: makeTheme$47()
+};
 CardColumnsUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -20295,18 +20325,11 @@ var CardColumns = styled__default(CardColumnsUnstyled).withConfig({
   return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count'] + ';\n          column-gap: ' + props.theme['$card-columns-gap'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin'] + ';\n          }\n        }\n      ') + '\n  ';
 });
 
-CardColumns.defaultProps = defaultProps$69;
-
 /**
  * CardDeck Component
  *
  *
  */
-var defaultProps$70 = {
-  theme: themeCards,
-  tag: 'div'
-};
-
 var CardDeckUnstyled = function (_React$Component) {
   inherits(CardDeckUnstyled, _React$Component);
 
@@ -20317,6 +20340,7 @@ var CardDeckUnstyled = function (_React$Component) {
 
   createClass(CardDeckUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -20327,12 +20351,15 @@ var CardDeckUnstyled = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-deck'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardDeckUnstyled;
 }(React__default.Component);
 
+CardDeckUnstyled.defaultProps = {
+  tag: 'div',
+  theme: makeTheme$47()
+};
 CardDeckUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -20349,18 +20376,11 @@ var CardDeck = styled__default(CardDeckUnstyled).withConfig({
   return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        &.card-deck {\n          display: flex;\n          flex-flow: row wrap;\n        \n          .card {\n            display: flex;\n            flex: 1 0 0;\n            flex-direction: column;  \n            &:not(:first-child) { margin-left: ' + props.theme['$card-deck-margin'] + '; }\n            &:not(:last-child) { margin-right: ' + props.theme['$card-deck-margin'] + '; }\n          }\n        }\n      ') + '\n  ';
 });
 
-CardDeck.defaultProps = defaultProps$70;
-
 /**
  * CardGroup Component
  *
  *
  */
-var defaultProps$71 = {
-  theme: themeCards,
-  tag: 'div'
-};
-
 var CardGroupUnstyled = function (_React$Component) {
   inherits(CardGroupUnstyled, _React$Component);
 
@@ -20371,6 +20391,8 @@ var CardGroupUnstyled = function (_React$Component) {
 
   createClass(CardGroupUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -20381,12 +20403,15 @@ var CardGroupUnstyled = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-group'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardGroupUnstyled;
 }(React__default.Component);
 
+CardGroupUnstyled.defaultProps = {
+  tag: 'div',
+  theme: makeTheme$47()
+};
 CardGroupUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -20403,12 +20428,6 @@ var CardGroup = styled__default(CardGroupUnstyled).withConfig({
   return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    /*\n      Card group\n    */\n      ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n          &.card-group {\n            display: flex;\n            flex-flow: row wrap;\n        \n            .card {\n              flex: 1 0 0;\n        \n              + .card {\n                margin-left: 0;\n                border-left: 0;\n              }\n        \n            ' + conditional_1(props.theme['$enable-rounded'], '\n                &:first-child {\n                  ' + borderRadius_4(props.theme['$enable-rounded'], '0') + '\n                  .card-img-top {\n                    border-top-right-radius: 0;\n                  }\n                  \n                  .card-img-bottom {\n                    border-bottom-right-radius: 0;\n                  }\n                }\n              \n                &:last-child {\n                  ' + borderRadius_6(props.theme['$enable-rounded'], '0') + '\n                  \n                  .card-img-top {\n                    border-top-left-radius: 0;\n                  }\n                  \n                  .card-img-bottom {\n                    border-bottom-left-radius: 0;\n                  }\n                }\n                \n                &:not(:first-child):not(:last-child) {\n                  border-radius: 0;\n        \n                  .card-img-top,\n                  .card-img-bottom {\n                    border-radius: 0;\n                  }\n                }\n              ') + '  \n          }\n        }\n      ') + '\n  ';
 });
 
-CardGroup.defaultProps = defaultProps$71;
-
-var defaultProps$72 = {
-  tag: 'div'
-};
-
 var CardBlock = function (_React$Component) {
   inherits(CardBlock, _React$Component);
 
@@ -20419,6 +20438,8 @@ var CardBlock = function (_React$Component) {
 
   createClass(CardBlock, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -20430,23 +20451,18 @@ var CardBlock = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-block'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardBlock;
 }(React__default.Component);
 
+CardBlock.defaultProps = {
+  tag: 'div'
+};
 CardBlock.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
-};
-
-
-CardBlock.defaultProps = defaultProps$72;
-
-var defaultProps$73 = {
-  tag: 'div'
 };
 
 var CardFooter = function (_React$Component) {
@@ -20459,6 +20475,8 @@ var CardFooter = function (_React$Component) {
 
   createClass(CardFooter, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -20470,23 +20488,18 @@ var CardFooter = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-footer'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardFooter;
 }(React__default.Component);
 
+CardFooter.defaultProps = {
+  tag: 'div'
+};
 CardFooter.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
-};
-
-
-CardFooter.defaultProps = defaultProps$73;
-
-var defaultProps$74 = {
-  tag: 'div'
 };
 
 var CardHeader = function (_React$Component) {
@@ -20499,6 +20512,8 @@ var CardHeader = function (_React$Component) {
 
   createClass(CardHeader, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -20510,23 +20525,18 @@ var CardHeader = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-header'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardHeader;
 }(React__default.Component);
 
+CardHeader.defaultProps = {
+  tag: 'div'
+};
 CardHeader.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
-};
-
-
-CardHeader.defaultProps = defaultProps$74;
-
-var defaultProps$75 = {
-  tag: 'img'
 };
 
 var CardImg = function (_React$Component) {
@@ -20539,6 +20549,8 @@ var CardImg = function (_React$Component) {
 
   createClass(CardImg, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -20559,25 +20571,20 @@ var CardImg = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, cardImgClassName), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardImg;
 }(React__default.Component);
 
+CardImg.defaultProps = {
+  tag: 'img'
+};
 CardImg.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object,
   top: PropTypes.bool,
   bottom: PropTypes.bool
-};
-
-
-CardImg.defaultProps = defaultProps$75;
-
-var defaultProps$76 = {
-  tag: 'div'
 };
 
 var CardImgOverlay = function (_React$Component) {
@@ -20590,6 +20597,8 @@ var CardImgOverlay = function (_React$Component) {
 
   createClass(CardImgOverlay, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -20601,23 +20610,18 @@ var CardImgOverlay = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-img-overlay'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardImgOverlay;
 }(React__default.Component);
 
+CardImgOverlay.defaultProps = {
+  tag: 'div'
+};
 CardImgOverlay.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
-};
-
-
-CardImgOverlay.defaultProps = defaultProps$76;
-
-var defaultProps$77 = {
-  tag: A
 };
 
 var CardLink = function (_React$Component) {
@@ -20630,6 +20634,8 @@ var CardLink = function (_React$Component) {
 
   createClass(CardLink, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -20643,24 +20649,19 @@ var CardLink = function (_React$Component) {
         className: mapToCssModules(classnames(className, 'card-link'), cssModule),
         ref: getRef
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardLink;
 }(React__default.Component);
 
+CardLink.defaultProps = {
+  tag: A
+};
 CardLink.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object,
   getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
-};
-
-
-CardLink.defaultProps = defaultProps$77;
-
-var defaultProps$78 = {
-  tag: H6
 };
 
 var CardSubtitle = function (_React$Component) {
@@ -20673,6 +20674,8 @@ var CardSubtitle = function (_React$Component) {
 
   createClass(CardSubtitle, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -20684,23 +20687,18 @@ var CardSubtitle = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-subtitle'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardSubtitle;
 }(React__default.Component);
 
+CardSubtitle.defaultProps = {
+  tag: H6
+};
 CardSubtitle.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
-};
-
-
-CardSubtitle.defaultProps = defaultProps$78;
-
-var defaultProps$79 = {
-  tag: 'p'
 };
 
 var CardText = function (_React$Component) {
@@ -20713,6 +20711,8 @@ var CardText = function (_React$Component) {
 
   createClass(CardText, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -20724,23 +20724,18 @@ var CardText = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-text'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardText;
 }(React__default.Component);
 
+CardText.defaultProps = {
+  tag: 'p'
+};
 CardText.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
-};
-
-
-CardText.defaultProps = defaultProps$79;
-
-var defaultProps$80 = {
-  tag: H4
 };
 
 var CardTitle = function (_React$Component) {
@@ -20753,6 +20748,8 @@ var CardTitle = function (_React$Component) {
 
   createClass(CardTitle, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -20764,23 +20761,18 @@ var CardTitle = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-title'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardTitle;
 }(React__default.Component);
 
+CardTitle.defaultProps = {
+  tag: H4
+};
 CardTitle.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
-};
-
-
-CardTitle.defaultProps = defaultProps$80;
-
-var defaultProps$81 = {
-  tag: Blockquote
 };
 
 var CardBlockquote = function (_React$Component) {
@@ -20793,6 +20785,8 @@ var CardBlockquote = function (_React$Component) {
 
   createClass(CardBlockquote, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -20804,20 +20798,19 @@ var CardBlockquote = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-blockquote'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardBlockquote;
 }(React__default.Component);
 
+CardBlockquote.defaultProps = {
+  tag: Blockquote
+};
 CardBlockquote.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
-
-
-CardBlockquote.defaultProps = defaultProps$81;
 
 /*
  * Kopax Ltd Copyright (c) 2016.
@@ -20828,11 +20821,6 @@ CardBlockquote.defaultProps = defaultProps$81;
  *
  *
  */
-var defaultProps$82 = {
-  tag: Card,
-  delay: 350
-};
-
 var Accordion = function (_React$Component) {
   inherits(Accordion, _React$Component);
 
@@ -20843,8 +20831,6 @@ var Accordion = function (_React$Component) {
 
   createClass(Accordion, [{
     key: 'render',
-    // eslint-disable-line react/prefer-stateless-function
-
     value: function render() {
       // extract keys for div
       var _props = this.props,
@@ -20896,11 +20882,16 @@ var Accordion = function (_React$Component) {
           children
         )
       );
-    }
+    } // eslint-disable-line react/prefer-stateless-function
+
   }]);
   return Accordion;
 }(React__default.Component);
 
+Accordion.defaultProps = {
+  tag: Card,
+  delay: 350
+};
 Accordion.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
@@ -20912,9 +20903,6 @@ Accordion.propTypes = {
 Accordion.contextTypes = {
   accordionGroup: PropTypes.object
 };
-
-
-Accordion.defaultProps = defaultProps$82;
 
 /**
  * Accordion Group Component
@@ -21155,8 +21143,8 @@ exports.default = {
 unwrapExports(customForms_1);
 var customForms_3 = customForms_1.customForms;
 
-var rmUnit$15 = unitUtils$1.rmUnit;
-var UNIT$14 = unitUtils$1.UNIT;
+var rmUnit$16 = unitUtils$1.rmUnit;
+var UNIT$15 = unitUtils$1.UNIT;
 /**
  * BOOTSTRAP THEME FORM
  *
@@ -21188,11 +21176,13 @@ var makeTheme$48 = function makeTheme() {
   //
   // Grayscale and brand colors for use across Bootstrap.
   // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
   v['$red'] = u['$red'] || '#d9534f';
   v['$orange'] = u['$orange'] || '#f0ad4e';
   v['$green'] = u['$green'] || '#5cb85c';
   v['$blue'] = u['$blue'] || '#0275d8';
   v['$teal'] = u['$teal'] || '#5bc0de';
+  v['$black'] = u['$black'] || '#000';
 
   // Reassign color vars to semantic color scheme
   v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
@@ -21209,7 +21199,14 @@ var makeTheme$48 = function makeTheme() {
   v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
 
   // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
   v['$border-width'] = u['$border-width'] || '1px';
+  v['$spacer'] = u['$spacer'] || '1rem';
+  v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
 
   // Grid breakpoints
   //
@@ -21249,6 +21246,14 @@ var makeTheme$48 = function makeTheme() {
   v['$text-muted'] = u['$text-muted'] || v['$gray-light'];
   v['$line-height-base'] = u['$line-height-base'] || '1.5';
 
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
   // Forms
 
   v['$input-padding-x'] = u['$input-padding-x'] || '.75rem';
@@ -21280,9 +21285,9 @@ var makeTheme$48 = function makeTheme() {
   v['$input-padding-x-lg'] = u['$input-padding-x-lg'] || '1.5rem';
   v['$input-padding-y-lg'] = u['$input-padding-y-lg'] || '.75rem';
 
-  v['$input-height'] = u['$input-height'] || rmUnit$15(v['$font-size-base'], UNIT$14.REM) * v['$line-height-base'] + rmUnit$15(v['$input-padding-y'], UNIT$14.REM) * 2 + UNIT$14.REM;
-  v['$input-height-sm'] = u['$input-height-sm'] || rmUnit$15(v['$font-size-sm'], UNIT$14.REM) * v['$line-height-sm'] + rmUnit$15(v['$input-padding-y-sm'], UNIT$14.REM) * 2 + UNIT$14.REM;
-  v['$input-height-lg'] = u['$input-height-lg'] || rmUnit$15(v['$font-size-lg'], UNIT$14.REM) * v['$line-height-lg'] + rmUnit$15(v['$input-padding-y-lg'], UNIT$14.REM) * 2 + UNIT$14.REM;
+  v['$input-height'] = u['$input-height'] || rmUnit$16(v['$font-size-base'], UNIT$15.REM) * v['$line-height-base'] + rmUnit$16(v['$input-padding-y'], UNIT$15.REM) * 2 + UNIT$15.REM;
+  v['$input-height-sm'] = u['$input-height-sm'] || rmUnit$16(v['$font-size-sm'], UNIT$15.REM) * v['$line-height-sm'] + rmUnit$16(v['$input-padding-y-sm'], UNIT$15.REM) * 2 + UNIT$15.REM;
+  v['$input-height-lg'] = u['$input-height-lg'] || rmUnit$16(v['$font-size-lg'], UNIT$15.REM) * v['$line-height-lg'] + rmUnit$16(v['$input-padding-y-lg'], UNIT$15.REM) * 2 + UNIT$15.REM;
 
   v['$input-transition'] = u['$input-transition'] || 'border-color ease-in-out .15s, box-shadow ease-in-out .15s';
 
@@ -21402,11 +21407,6 @@ makeTheme$48();
  *
  *
  */
-var defaultProps$83 = {
-  tag: 'form',
-  theme: makeTheme$48()
-};
-
 var FormUnstyled = function (_React$Component) {
   inherits(FormUnstyled, _React$Component);
 
@@ -21417,6 +21417,8 @@ var FormUnstyled = function (_React$Component) {
 
   createClass(FormUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -21429,12 +21431,15 @@ var FormUnstyled = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, inline ? 'form-inline' : false), cssModule);
 
       return React__default.createElement(Tag, _extends({ ref: getRef, className: classes }, rest));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return FormUnstyled;
 }(React__default.Component);
 
+FormUnstyled.defaultProps = {
+  tag: 'form',
+  theme: makeTheme$48()
+};
 FormUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
@@ -21454,18 +21459,12 @@ var Form = styled__default(FormUnstyled).withConfig({
   return '\n    /*\n     Textual form controls\n    */\n\n    ' + forms_2(props.theme['$enable-rounded'], props.theme['$enable-transitions'], props.theme['$enable-shadows'], props.theme['$input-height'], props.theme['$input-padding-y'], props.theme['$input-padding-x'], props.theme['$font-size-base'], props.theme['$input-line-height'], props.theme['$input-color'], props.theme['$input-bg'], props.theme['$input-border-radius'], props.theme['$input-btn-border-width'], props.theme['$input-border-color'], props.theme['$input-transition'], props.theme['$input-box-shadow'], props.theme['$input-color-focus'], props.theme['$input-bg-focus'], props.theme['$input-border-focus'], props.theme['$input-box-shadow-focus'], props.theme['$input-color-placeholder'], props.theme['$input-bg-disabled'], props.theme['$cursor-disabled']) + '\n    \n    select.form-control {\n      &:focus::-ms-value {\n        /* Suppress the nested default white text on blue background highlight given to\n         the selected option text when the (still closed) <select> receives focus\n         in IE and (under certain conditions) Edge, as it looks bad and cannot be made to\n         match the appearance of the native widget.\n         See https://github.com/twbs/bootstrap/issues/19398.\n         */\n        color: ' + props.theme['$input-color'] + ';\n        background-color: ' + props.theme['$input-bg'] + ';\n      }\n    }\n\n    /* Make file inputs better match text inputs by forcing them to new lines. */\n    & .form-control-file,\n    .form-control-range {\n      display: block;\n    }\n\n    /*\n     Labels\n    */\n\n    /* For use with horizontal and inline forms, when you need the label text to */\n    /* align with the form controls. */\n    & .col-form-label {\n      padding-top: calc(' + props.theme['$input-padding-y'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      margin-bottom: 0; /* Override the \'<label>\' default */\n    }\n\n    & .col-form-label-lg {\n      padding-top: calc(' + props.theme['$input-padding-y-lg'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y-lg'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      font-size: ' + props.theme['$font-size-lg'] + ';\n    }\n\n    & .col-form-label-sm {\n      padding-top: calc(' + props.theme['$input-padding-y-sm'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y-sm'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      font-size: ' + props.theme['$font-size-sm'] + ';\n    }\n\n    /*\n     Legends\n    */\n\n    /* For use with horizontal and inline forms, when you need the legend text to */\n    /* be the same size as regular labels, and to align with the form controls. */\n    & .col-form-legend {\n      padding-top: ' + props.theme['$input-padding-y'] + ';\n      padding-bottom: ' + props.theme['$input-padding-y'] + ';\n      margin-bottom: 0;\n      font-size: ' + props.theme['$font-size-base'] + ';\n    }\n\n\n    /* Static form control text\n\n     Apply class to an element to make any string of text align with labels in a\n     horizontal form layout.\n    */\n\n    & .form-control-static {\n      padding-top: ' + props.theme['$input-padding-y'] + ';\n      padding-bottom: ' + props.theme['$input-padding-y'] + ';\n      margin-bottom: 0; /* match inputs if this class comes on inputs with default margins */\n      line-height: ' + props.theme['$input-line-height'] + ';\n      border: solid transparent;\n      border-width: ' + props.theme['$input-btn-border-width'] + ' 0;\n\n      &.form-control-sm,\n      &.form-control-lg {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n\n\n    /* Form control sizing\n\n     Build on .form-control with modifier classes to decrease or increase the\n     height and font-size of form controls.\n\n     The .form-group-* form-control variations are sadly duplicated to avoid the\n     issue documented in https://github.com/twbs/bootstrap/issues/15074.\n    */\n\n    & .form-control-sm {\n      padding: ' + props.theme['$input-padding-y-sm'] + ' ' + props.theme['$input-padding-x-sm'] + ';\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-sm']) + '\n    }\n\n    select.form-control-sm {\n      &:not([size]):not([multiple]) {\n        height: ' + props.theme['$input-height-sm'] + ';\n      }\n    }\n\n    & .form-control-lg {\n      padding: ' + props.theme['$input-padding-y-lg'] + ' ' + props.theme['$input-padding-x-lg'] + ';\n      font-size: ' + props.theme['$font-size-lg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-lg']) + '\n    }\n\n    select.form-control-lg {\n      &:not([size]):not([multiple]) {\n        height: ' + props.theme['$input-height-lg'] + ';\n      }\n    }\n\n\n    /* Form groups Designed to help with the organization and spacing of vertical forms. For horizontal forms, use the predefined grid classes. */\n\n    &.form-group,\n     & .form-group {\n      margin-bottom: ' + props.theme['$form-group-margin-bottom'] + ';\n    }\n\n    & .form-text {\n      display: block;\n      margin-top: ' + props.theme['$form-text-margin-top'] + '\n    }\n\n\n    /* Checkboxes and radios Indent the labels to position radios/checkboxes as hanging controls. */\n\n    & .form-check {\n      position: relative;\n      display: block;\n      margin-bottom: ' + props.theme['$form-check-margin-bottom'] + ';\n\n      &.disabled {\n        .form-check-label {\n          color: ' + props.theme['$text-muted'] + ';\n          cursor: ' + props.theme['$cursor-disabled'] + ';\n        }\n      }\n    }\n\n    & .form-check-label {\n      padding-left: ' + props.theme['$form-check-input-gutter'] + ';\n      margin-bottom: 0; /* Override default <label> bottom margin */\n      cursor: pointer;\n    }\n\n    & .form-check-input {\n      position: absolute;\n      margin-top: ' + props.theme['$form-check-input-margin-y'] + ';\n      margin-left: -' + props.theme['$form-check-input-gutter'] + ';\n\n      &:only-child {\n        position: static;\n      }\n    }\n\n    /* Radios and checkboxes on same line */\n    & .form-check-inline {\n      display: inline-block;\n      .form-check-label {\n        vertical-align: middle;\n      }\n\n      + .form-check-inline {\n        margin-left: ' + props.theme['$form-check-inline-margin-x'] + ';\n      }\n\n      &.disabled {\n        color: ' + props.theme['$text-muted'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n      }\n    }\n\n\n    /* Form control feedback states Apply contextual and semantic states to individual form controls. */\n    & .form-control-feedback {\n      margin-top: ' + props.theme['$form-feedback-margin-top'] + ';\n    }\n\n    & .form-control-success,\n    & .form-control-warning,\n    & .form-control-danger {\n      padding-right: ' + unitUtils$1.math.multiply(props.theme['$input-padding-x'], 3) + ';\n      background-repeat: no-repeat;\n      background-position: center right ' + unitUtils$1.math.divide(props.theme['$input-height'], 4) + ';\n      background-size: ' + unitUtils$1.math.divide(props.theme['$input-height'], 2) + ' ' + unitUtils$1.math.divide(props.theme['$input-height'], 2) + ';\n    }\n\n    /* Form validation states */\n    & .has-success {\n      ' + forms_3(props.theme['$enable-shadows'], props.theme['$brand-success'], props.theme['$box-shadow']) + '\n\n      .form-control-success {\n        background-image: ' + props.theme['$form-icon-success'] + ';\n      }\n    }\n\n    & .has-warning {\n      ' + forms_3(props.theme['$enable-shadows'], props.theme['$brand-warning'], props.theme['$box-shadow']) + '\n\n      .form-control-warning {\n        background-image: ' + props.theme['$form-icon-warning'] + ';\n      }\n    }\n\n    & .has-danger {\n      ' + forms_3(props.theme['$enable-shadows'], props.theme['$brand-danger'], props.theme['$box-shadow']) + '\n\n      .form-control-danger {\n        background-image: ' + props.theme['$form-icon-danger'] + ';\n      }\n    }\n\n\n    /* Inline forms\n\n     Make forms appear inline(-block) by adding the .form-inline class. Inline\n     forms begin stacked on extra small (mobile) devices and then go inline when\n     viewports reach <768px.\n\n     Requires wrapping inputs and labels with .form-group for proper display of\n     default HTML form controls and our custom form controls (e.g., input groups).\n    */\n\n    &.form-inline {\n      display: flex;\n      flex-flow: row wrap;\n      align-items: center; /* Prevent shorter elements from growing to same height as others (e.g., small buttons growing to normal sized button height) */\n\n      & .form-check {\n         width: 100%;\n      }\n\n      /* Kick in the inline */\n      ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n          label {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            margin-bottom: 0;\n          }\n          \n          /* Inline-block all the things for inline */\n          & .form-group {\n            display: flex;\n            flex: 0 0 auto;\n            flex-flow: row wrap;\n            margin-bottom: 0;\n          }\n      \n          /* Allow folks to *not* use .form-group */\n          & .form-control {\n            display: inline-block;\n            width: auto; /* Prevent labels from stacking above inputs in .form-group */\n            vertical-align: middle;\n          }\n      \n          /* Make static controls behave like regular ones */\n          & .form-control-static {\n            display: inline-block;\n          }\n      \n          & .input-group {\n            width: auto;\n          }\n          \n          & .form-control-label {\n             margin-bottom: 0;\n            vertical-align: middle;\n          }\n      \n          /* Remove default margin on radios/checkboxes that were used for stacking, and */\n          /*  then undo the floating of radios and checkboxes to match. */\n          & .form-check {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            width: auto;\n            margin-top: 0;\n            margin-bottom: 0;\n          }\n          & .form-check-label {\n            padding-left: 0;\n          }\n          & .form-check-input {\n            position: relative;\n            margin-left: 0;\n            margin-top: 0;\n            margin-right: ' + props.theme['$form-check-input-margin-x'] + ';\n          }\n          \n          /* Custom form controls */\n          & .custom-control {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            padding-left: 0;\n          }\n          \n          & .custom-control-indicator {\n            position: static;\n            display: inline-block;\n            margin-right: ' + props.theme['$form-check-input-margin-x'] + '; /* Flexbox alignment means we lose our HTML space here, so we compensate. */\n            vertical-align: text-bottom;\n          }\n          \n          /* Re-override the feedback icon. */\n          & .has-feedback .form-control-feedback {\n            top: 0;\n          }\n        ') + '\n    }\n    ' + customForms_3(props.theme['$enable-rounded'], props.theme['$enable-shadows'], props.theme['$custom-control-checked-indicator-box-shadow'], props.theme['$custom-control-active-indicator-box-shadow'], props.theme['$custom-control-indicator-box-shadow'], props.theme['$custom-checkbox-indeterminate-box-shadow'], props.theme['$custom-select-focus-box-shadow'], props.theme['$custom-file-focus-box-shadow'], props.theme['$custom-file-box-shadow'], props.theme['$custom-select-border-radius'], props.theme['$custom-file-border-radius'], props.theme['$custom-checkbox-radius'], props.theme['$input-bg'], props.theme['$custom-select-line-height'], props.theme['$line-height-base'], props.theme['$custom-control-gutter'], props.theme['$custom-control-spacer-x'], props.theme['$custom-control-checked-indicator-color'], props.theme['$custom-control-checked-indicator-bg'], props.theme['$custom-control-focus-indicator-box-shadow'], props.theme['$custom-control-active-indicator-color'], props.theme['$custom-control-active-indicator-bg'], props.theme['$custom-control-disabled-cursor'], props.theme['$custom-control-disabled-indicator-bg'], props.theme['$custom-control-disabled-description-color'], props.theme['$custom-control-indicator-size'], props.theme['$custom-control-indicator-bg'], props.theme['$custom-control-indicator-bg-size'], props.theme['$custom-checkbox-checked-icon'], props.theme['$custom-checkbox-indeterminate-bg'], props.theme['$custom-checkbox-indeterminate-icon'], props.theme['$custom-radio-radius'], props.theme['$custom-radio-checked-icon'], props.theme['$custom-control-spacer-y'], props.theme['$border-width'], props.theme['$input-height'], props.theme['$custom-select-padding-y'], props.theme['$custom-select-padding-x'], props.theme['$custom-select-indicator-padding'], props.theme['$custom-select-color'], props.theme['$custom-select-bg'], props.theme['$custom-select-indicator'], props.theme['$custom-select-bg-size'], props.theme['$custom-select-border-width'], props.theme['$custom-select-border-color'], props.theme['$custom-select-focus-border-color'], props.theme['$input-color'], props.theme['$custom-select-disabled-color'], props.theme['$cursor-disabled'], props.theme['$custom-select-disabled-bg'], props.theme['$custom-select-sm-font-size'], props.theme['$custom-file-width'], props.theme['$custom-file-height'], props.theme['$custom-file-padding-x'], props.theme['$custom-file-padding-y'], props.theme['$custom-file-line-height'], props.theme['$custom-file-color'], props.theme['$custom-file-bg'], props.theme['$custom-file-border-width'], props.theme['$custom-file-border-color'], props.theme['$custom-file-button-color'], props.theme['$custom-file-button-bg'], props.theme['$custom-file-text']) + '\n    & .row {\n      ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n  ';
 });
 
-Form.defaultProps = defaultProps$83;
-
 /* eslint-disable quote-props, dot-notation */
 /**
  * Form Group Component test
  *
  *
  */
-var defaultProps$84 = {
-  tag: 'div'
-};
-
 var FormGroup = function (_React$Component) {
   inherits(FormGroup, _React$Component);
 
@@ -21476,6 +21475,8 @@ var FormGroup = function (_React$Component) {
 
   createClass(FormGroup, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -21492,12 +21493,14 @@ var FormGroup = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, color ? 'has-' + color : false, row ? 'row' : false, check ? 'form-check' : 'form-group', check && disabled ? 'disabled' : false, inline ? 'form-check-inline' : false), cssModule);
 
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return FormGroup;
 }(React__default.Component);
 
+FormGroup.defaultProps = {
+  tag: 'div'
+};
 FormGroup.propTypes = {
   className: PropTypes.string,
   check: PropTypes.bool,
@@ -21510,19 +21513,12 @@ FormGroup.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
-
-FormGroup.defaultProps = defaultProps$84;
-
 /* eslint-disable quote-props, dot-notation */
 /**
  * Form Text Component test
  *
  *
  */
-var defaultProps$85 = {
-  tag: 'small'
-};
-
 var FormText = function (_React$Component) {
   inherits(FormText, _React$Component);
 
@@ -21533,6 +21529,8 @@ var FormText = function (_React$Component) {
 
   createClass(FormText, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -21546,12 +21544,14 @@ var FormText = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, !inline ? 'form-text' : false, color ? 'text-' + color : false), cssModule);
 
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return FormText;
 }(React__default.Component);
 
+FormText.defaultProps = {
+  tag: 'small'
+};
 FormText.propTypes = {
   children: PropTypes.node,
   inline: PropTypes.bool,
@@ -21561,19 +21561,12 @@ FormText.propTypes = {
   cssModule: PropTypes.object
 };
 
-
-FormText.defaultProps = defaultProps$85;
-
 /* eslint-disable quote-props, dot-notation */
 /**
  * Form Feedback Component test
  *
  *
  */
-var defaultProps$86 = {
-  tag: 'div'
-};
-
 var FormFeedback = function (_React$Component) {
   inherits(FormFeedback, _React$Component);
 
@@ -21584,6 +21577,8 @@ var FormFeedback = function (_React$Component) {
 
   createClass(FormFeedback, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -21595,21 +21590,20 @@ var FormFeedback = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, 'form-control-feedback'), cssModule);
 
       return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return FormFeedback;
 }(React__default.Component);
 
+FormFeedback.defaultProps = {
+  tag: 'div'
+};
 FormFeedback.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   cssModule: PropTypes.object,
   tag: PropTypes.string
 };
-
-
-FormFeedback.defaultProps = defaultProps$86;
 
 /* eslint-disable quote-props, dot-notation */
 /**
@@ -21633,13 +21627,14 @@ var FormCustom = function (_React$Component) {
           cssModule = _props.cssModule,
           radio = _props.radio,
           children = _props.children,
+          checked = _props.checked,
           defaultChecked = _props.defaultChecked,
-          attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'radio', 'children', 'defaultChecked']);
+          attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'radio', 'children', 'checked', 'defaultChecked']);
 
 
       var classes = mapToCssModules(classnames(className, 'custom-control', radio ? 'custom-radio' : 'custom-checkbox'), cssModule);
 
-      var CustomInput = radio ? React__default.createElement(Input, { defaultChecked: defaultChecked, type: 'radio', id: radio.id, name: radio.name, className: 'custom-control-input' }) : React__default.createElement(Input, { defaultChecked: defaultChecked, type: 'checkbox', className: 'custom-control-input' });
+      var CustomInput = radio ? React__default.createElement(Input, { defaultChecked: defaultChecked, checked: checked, type: 'radio', id: radio.id, name: radio.name, className: 'custom-control-input' }) : React__default.createElement(Input, { defaultChecked: defaultChecked, checked: checked, type: 'checkbox', className: 'custom-control-input' });
       return React__default.createElement(
         Label,
         _extends({ className: classes }, attributes),
@@ -21665,12 +21660,16 @@ FormCustom.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string
   }),
-  defaultChecked: PropTypes.bool
+  defaultChecked: PropTypes.bool,
+  checked: PropTypes.bool
 };
 
 /*
  * Kopax Ltd Copyright (c) 2016.
  */
+
+var rmUnit$17 = unitUtils$1.rmUnit;
+var UNIT$16 = unitUtils$1.UNIT;
 
 /**
  * BOOTSTRAP THEME NAVBAR
@@ -21678,6 +21677,7 @@ FormCustom.propTypes = {
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
+
 var makeTheme$49 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
@@ -21729,6 +21729,13 @@ var makeTheme$49 = function makeTheme() {
   v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
 
   // Spacing
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // =============================================================================================================
+  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$17(v['$spacer'], UNIT$16.REM) / 2 + UNIT$16.REM;
+  // =============================================================================================================
 
   v['$border-width'] = u['$border-width'] || '1px';
 
@@ -21812,13 +21819,6 @@ var makeTheme$49 = function makeTheme() {
 makeTheme$49();
 
 /* eslint-disable */
-var defaultProps$87 = {
-  tag: 'nav',
-  role: 'navigation',
-  toggleable: false,
-  theme: makeTheme$49()
-};
-
 var getToggleableClass = function getToggleableClass(toggleable) {
   // eslint-disable-line react/prefer-stateless-function
   if (toggleable === false) {
@@ -21867,6 +21867,12 @@ var NavbarUnstyled = function (_React$Component) {
   return NavbarUnstyled;
 }(React__default.Component);
 
+NavbarUnstyled.defaultProps = {
+  tag: 'nav',
+  role: 'navigation',
+  toggleable: false,
+  theme: makeTheme$49()
+};
 NavbarUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   light: PropTypes.bool,
@@ -21890,7 +21896,6 @@ var Navbar = styled__default(NavbarUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + nav_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n  ';
 });
-Navbar.defaultProps = defaultProps$87;
 
 var propTypes$8 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -21898,7 +21903,7 @@ var propTypes$8 = {
   cssModule: PropTypes.object
 };
 
-var defaultProps$88 = {
+var defaultProps$14 = {
   tag: 'a'
 };
 
@@ -21915,7 +21920,7 @@ var NavbarBrand = function NavbarBrand(props) {
 };
 
 NavbarBrand.propTypes = propTypes$8;
-NavbarBrand.defaultProps = defaultProps$88;
+NavbarBrand.defaultProps = defaultProps$14;
 
 var propTypes$9 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -21927,7 +21932,7 @@ var propTypes$9 = {
   left: PropTypes.bool
 };
 
-var defaultProps$89 = {
+var defaultProps$15 = {
   tag: 'button',
   type: 'button'
 };
@@ -21954,7 +21959,7 @@ var NavbarToggler = function NavbarToggler(props) {
 };
 
 NavbarToggler.propTypes = propTypes$9;
-NavbarToggler.defaultProps = defaultProps$89;
+NavbarToggler.defaultProps = defaultProps$15;
 
 var propTypes$10 = {
   children: PropTypes.node,
@@ -21965,7 +21970,7 @@ var propTypes$10 = {
   isOpen: PropTypes.bool.isRequired
 };
 
-var defaultProps$90 = {
+var defaultProps$16 = {
   tag: 'li'
 };
 
@@ -21982,7 +21987,7 @@ var NavDropdown = function NavDropdown(props) {
 };
 
 NavDropdown.propTypes = propTypes$10;
-NavDropdown.defaultProps = defaultProps$90;
+NavDropdown.defaultProps = defaultProps$16;
 
 /**
  * BOOTSTRAP THEME CONTAINER
@@ -22037,10 +22042,6 @@ var makeTheme$50 = function makeTheme() {
 
 makeTheme$50();
 
-var defaultProps$91 = {
-  theme: makeTheme$50()
-};
-
 var ContainerUnstyled = function (_React$Component) {
   inherits(ContainerUnstyled, _React$Component);
 
@@ -22051,18 +22052,22 @@ var ContainerUnstyled = function (_React$Component) {
 
   createClass(ContainerUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
 
       return React__default.createElement('div', _extends({ className: classnames(className, 'container') }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ContainerUnstyled;
 }(React__default.Component);
 
+ContainerUnstyled.defaultProps = {
+  theme: makeTheme$50()
+};
 ContainerUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -22076,8 +22081,6 @@ var Container = styled__default(ContainerUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    ' + grid_2(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    \n    ' + grid_3(props.theme['$enable-grid-classes'], props.theme['$container-max-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-
-Container.defaultProps = defaultProps$91;
 
 /**
  * BOOTSTRAP THEME CONTAINERFLUID
@@ -22119,10 +22122,6 @@ var makeTheme$51 = function makeTheme() {
 
 makeTheme$51();
 
-var defaultProps$92 = {
-  theme: makeTheme$51()
-};
-
 var ContainerFluidUnstyled = function (_React$Component) {
   inherits(ContainerFluidUnstyled, _React$Component);
 
@@ -22133,18 +22132,22 @@ var ContainerFluidUnstyled = function (_React$Component) {
 
   createClass(ContainerFluidUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
 
       return React__default.createElement('div', _extends({ className: classnames(className, 'container-fluid') }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ContainerFluidUnstyled;
 }(React__default.Component);
 
+ContainerFluidUnstyled.defaultProps = {
+  theme: makeTheme$51()
+};
 ContainerFluidUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -22158,8 +22161,6 @@ var ContainerFluid = styled__default(ContainerFluidUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    ' + grid_2(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n  ';
 });
-
-ContainerFluid.defaultProps = defaultProps$92;
 
 // 0. Configuration
 

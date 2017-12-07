@@ -7,11 +7,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-const defaultProps = {
-  tag: 'p',
-};
 
 class ListGroupItemHeading extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'p',
+  };
 
   static propTypes = {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -34,8 +35,6 @@ class ListGroupItemHeading extends React.Component { // eslint-disable-line reac
     );
   }
 }
-
-ListGroupItemHeading.defaultProps = defaultProps;
 
 export default ListGroupItemHeading;
 

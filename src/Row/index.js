@@ -6,12 +6,13 @@ import mapToCssModules from 'map-to-css-modules';
 import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
 import { makeTheme } from './theme';
 
-const defaultProps = {
-  tag: 'div',
-  theme: makeTheme(),
-};
 
 class RowUnstyled extends React.Component {    // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'div',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     className: PropTypes.string,
@@ -67,8 +68,6 @@ const Row = styled(RowUnstyled)`
     }
  `}
 `;
-
-Row.defaultProps = defaultProps;
 
 export default Row;
 

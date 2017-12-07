@@ -10,11 +10,12 @@ import styled from 'styled-components';
 import omit from 'lodash.omit';
 import { makeTheme } from './theme';
 
-const defaultProps = {
-  theme: makeTheme(),
-};
 
 class FigCaptionUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -56,8 +57,6 @@ const FigCaption = styled(FigCaptionUnstyled)`
     }
   `}
 `;
-
-FigCaption.defaultProps = defaultProps;
 
 export default FigCaption;
 

@@ -10,11 +10,12 @@ import { getBackgroundUtilities } from 'bootstrap-styled-mixins/lib/utilities/ba
 import { gradientStriped } from 'bootstrap-styled-mixins/lib/gradients';
 import { makeTheme } from './theme';
 
-const defaultProps = {
-  theme: makeTheme(),
-};
 
 class ProgressUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -89,7 +90,5 @@ const Progress = styled(ProgressUnstyled)`
 
   `}
 `;
-
-Progress.defaultProps = defaultProps;
 
 export default Progress;

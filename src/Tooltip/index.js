@@ -16,14 +16,6 @@ const DEFAULT_DELAYS = {
   hide: 250,
 };
 
-const defaultProps = {
-  isOpen: false,
-  placement: 'bottom',
-  delay: DEFAULT_DELAYS,
-  autohide: true,
-  toggle: () => {},
-};
-
 const defaultTetherConfig = {
   classPrefix: 'bs-tether',
   classes: {
@@ -58,6 +50,14 @@ const propTypes = {
 };
 
 export class TooltipUnstyled extends React.Component {
+
+  static defaultProps = {
+    isOpen: false,
+    placement: 'bottom',
+    delay: DEFAULT_DELAYS,
+    autohide: true,
+    toggle: () => {},
+  };
 
   static propTypes = propTypes;
 
@@ -350,7 +350,5 @@ const Tooltip = styled(TooltipUnstyled)`
     }
   `}
 `;
-
-Tooltip.defaultProps = defaultProps;
 
 export default Tooltip;

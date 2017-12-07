@@ -31,11 +31,13 @@ export const makeTheme = (userTheme = {}) => {
   //
   // Grayscale and brand colors for use across Bootstrap.
   // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
   v['$red'] = u['$red'] || '#d9534f';
   v['$orange'] = u['$orange'] || '#f0ad4e';
   v['$green'] = u['$green'] || '#5cb85c';
   v['$blue'] = u['$blue'] || '#0275d8';
   v['$teal'] = u['$teal'] || '#5bc0de';
+  v['$black'] = u['$black'] || '#000';
 
   // Reassign color vars to semantic color scheme
   v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
@@ -52,8 +54,14 @@ export const makeTheme = (userTheme = {}) => {
   v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
 
   // Spacing
-  v['$border-width'] = u['$border-width'] || '1px';
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
 
+  v['$border-width'] = u['$border-width'] || '1px';
+  v['$spacer'] = u['$spacer'] || '1rem';
+  v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
 
   // Grid breakpoints
   //
@@ -93,6 +101,13 @@ export const makeTheme = (userTheme = {}) => {
   v['$text-muted'] = u['$text-muted'] || v['$gray-light'];
   v['$line-height-base'] = u['$line-height-base'] || '1.5';
 
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
 
   // Forms
 
@@ -225,7 +240,6 @@ export const makeTheme = (userTheme = {}) => {
       en: 'Browse',
     },
   };
-
 
   // Form validation icons*
   v['$form-icon-success-color'] = u['$form-icon-success-color'] || v['$brand-success'];

@@ -10,12 +10,12 @@ import CardHeader from '../Cards/CardHeader';
 import Collapse from '../Collapse';
 import H5 from '../H5';
 
-const defaultProps = {
-  tag: Card,
-  delay: 350,
-};
-
 class Accordion extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: Card,
+    delay: 350,
+  };
 
   static propTypes = {
     children: PropTypes.node.isRequired,
@@ -78,7 +78,5 @@ class Accordion extends React.Component { // eslint-disable-line react/prefer-st
     );
   }
 }
-
-Accordion.defaultProps = defaultProps;
 
 export default Accordion;

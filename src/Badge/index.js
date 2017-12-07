@@ -11,14 +11,14 @@ import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { badgeVariant } from 'bootstrap-styled-mixins/lib/badge';
 import { makeTheme } from './theme';
 
-const defaultProps = {
-  color: 'default',
-  pill: false,
-  tag: 'span',
-  theme: makeTheme(),
-};
-
 class BadgeUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    color: 'default',
+    pill: false,
+    tag: 'span',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -127,7 +127,5 @@ const Badge = styled(BadgeUnstyled)`
     }
   `}
 `;
-
-Badge.defaultProps = defaultProps;
 
 export default Badge;

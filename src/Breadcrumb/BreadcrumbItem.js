@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
-const defaultProps = {
-  tag: 'li',
-};
-
 class BreadcrumbItem extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'li',
+  };
 
   static propTypes = {
     active: PropTypes.bool,
@@ -35,7 +35,5 @@ class BreadcrumbItem extends React.Component { // eslint-disable-line react/pref
     );
   }
 }
-
-BreadcrumbItem.defaultProps = defaultProps;
 
 export default BreadcrumbItem;

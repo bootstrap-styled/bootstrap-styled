@@ -16,9 +16,12 @@ import { listUnstyled, listInline } from 'bootstrap-styled-mixins/lib/lists';
 import { navbar } from 'bootstrap-styled-mixins/lib/navbar';
 import { makeTheme } from './theme';
 
-const defaultProps = { theme: makeTheme() };
 
 class UlUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -121,7 +124,5 @@ const Ul = styled(UlUnstyled)`
     }
   `}
 `;
-
-Ul.defaultProps = defaultProps;
 
 export default Ul;

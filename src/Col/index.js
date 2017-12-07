@@ -22,11 +22,6 @@ const columnProps = PropTypes.oneOfType([
   }),
 ]);
 
-const defaultProps = {
-  tag: 'div',
-  theme: makeTheme(),
-  widths: colWidths,
-};
 
 export const getColumnSizeClass = (isXs, colWidth, colSize) => {
   if (colSize === true || colSize === '') {
@@ -39,6 +34,12 @@ export const getColumnSizeClass = (isXs, colWidth, colSize) => {
 };
 
 class ColUnstyled extends React.Component {    // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'div',
+    theme: makeTheme(),
+    widths: colWidths,
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -120,8 +121,6 @@ const Col = styled(ColUnstyled)`
     )}
   `}
 `;
-
-Col.defaultProps = defaultProps;
 
 export default Col;
 

@@ -15,12 +15,13 @@ import { cardVariant, cardOutlineVariant, cardInverse } from 'bootstrap-styled-m
 import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
 import { makeTheme } from './theme';
 
-const defaultProps = {
-  tag: 'div',
-  theme: makeTheme(),
-};
 
 class CardUnstyled extends React.Component {// eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'div',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -324,7 +325,5 @@ const Card = styled(CardUnstyled)`
     }
   `}
 `;
-
-Card.defaultProps = defaultProps;
 
 export default Card;

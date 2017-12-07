@@ -1,5 +1,9 @@
 import { assertAscending, assertStartAtZero } from 'bootstrap-styled-mixins/lib/variables';
+import unitUtils from 'bootstrap-styled-utils/lib/unitUtils';
 import { allowFalseValue } from '../makeTheme/utils';
+
+const { rmUnit, UNIT } = unitUtils;
+
 /**
  * BOOTSTRAP THEME NAVBAR
  *
@@ -55,6 +59,13 @@ export const makeTheme = (userTheme = {}) => {
   v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
 
   // Spacing
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // =============================================================================================================
+  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
+  v['$spacer-halved'] = u['$spacer-halved'] || ((rmUnit(v['$spacer'], UNIT.REM) / 2) + UNIT.REM);
+  // =============================================================================================================
 
   v['$border-width'] = u['$border-width'] || '1px';
 

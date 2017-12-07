@@ -8,12 +8,13 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import Button from '../Button';
-const defaultProps = {
-  tag: 'div',
-};
 
 
 class InputGroupButton extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'div',
+  };
 
   static propTypes = {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -58,7 +59,5 @@ class InputGroupButton extends React.Component { // eslint-disable-line react/pr
     );
   }
 }
-
-InputGroupButton.defaultProps = defaultProps;
 
 export default InputGroupButton;

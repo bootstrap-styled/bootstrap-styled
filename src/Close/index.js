@@ -7,9 +7,11 @@ import mapToCssModules from 'map-to-css-modules';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
 import { makeTheme } from './theme';
 
-const defaultProps = { theme: makeTheme() };
-
 class CloseUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -87,7 +89,5 @@ const Close = styled(CloseUnstyled)`
     /* scss-lint:enable QualifyingElement */
   `}
 `;
-
-Close.defaultProps = defaultProps;
 
 export default Close;

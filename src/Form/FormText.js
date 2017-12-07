@@ -9,11 +9,12 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
-const defaultProps = {
-  tag: 'small',
-};
 
 class FormText extends React.Component {// eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'small',
+  };
 
   static propTypes = {
     children: PropTypes.node,
@@ -45,7 +46,5 @@ class FormText extends React.Component {// eslint-disable-line react/prefer-stat
     );
   }
 }
-
-FormText.defaultProps = defaultProps;
 
 export default FormText;
