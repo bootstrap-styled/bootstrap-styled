@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - Removed `isLocked` props from `Modal`.
 - Updated some z-index values to assure front position to `Modal` component.
 - Automatically add CHANGELOG next todo on release.
+- Added props `theme` to `Row` and omitted the props as with other components.
 
 ## [1.4.3] - 2017-11-10
 

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
+import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
 import themeBs from '../theme';
@@ -14,10 +15,13 @@ const defaultProps = {
 class RowUnstyled extends React.Component {    // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     noGutters: PropTypes.bool,
     cssModule: PropTypes.object,
+    theme: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   render() {
@@ -27,7 +31,7 @@ class RowUnstyled extends React.Component {    // eslint-disable-line react/pref
       noGutters,
       tag: Tag,
       ...attributes
-    } = this.props; // eslint-disable-line no-unused-vars
+    } = omit(this.props, ['theme']);
 
     const classes = mapToCssModules(cn(
       className,
