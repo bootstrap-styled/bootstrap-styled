@@ -81,7 +81,23 @@ const CardColumns = styled(CardColumnsUnstyled)`
       props.theme['$card-inverse-border-color'],
     )}
     ${mediaBreakpointUp(
-      'sm',
+      'md',
+      props.theme['$grid-breakpoints'],
+      `
+        &.card-columns {
+          column-count: 2;
+          column-gap: ${props.theme['$card-columns-gap']};
+      
+          .card {
+            display: inline-block; /* Don't let them vertically span multiple columns */
+            width: 100%; /* Don't let them exceed the column width */
+            margin-bottom: ${props.theme['$card-columns-margin']};
+          }
+        }
+      `
+    )}
+    ${mediaBreakpointUp(
+      'xl',
       props.theme['$grid-breakpoints'],
       `
         &.card-columns {
