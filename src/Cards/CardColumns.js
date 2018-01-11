@@ -85,13 +85,29 @@ const CardColumns = styled(CardColumnsUnstyled)`
       props.theme['$grid-breakpoints'],
       `
         &.card-columns {
-          column-count: 2;
-          column-gap: ${props.theme['$card-columns-gap']};
+          column-count: ${props.theme['$card-columns-count-md']};
+          column-gap: ${props.theme['$card-columns-gap-md']};
       
           .card {
             display: inline-block; /* Don't let them vertically span multiple columns */
             width: 100%; /* Don't let them exceed the column width */
-            margin-bottom: ${props.theme['$card-columns-margin']};
+            margin-bottom: ${props.theme['$card-columns-margin-md']};
+          }
+        }
+      `
+    )}
+    ${mediaBreakpointUp(
+      'lg',
+      props.theme['$grid-breakpoints'],
+      `
+        &.card-columns {
+          column-count: ${props.theme['$card-columns-count-lg']};
+          column-gap: ${props.theme['$card-columns-gap-lg']};
+      
+          .card {
+            display: inline-block; /* Don't let them vertically span multiple columns */
+            width: 100%; /* Don't let them exceed the column width */
+            margin-bottom: ${props.theme['$card-columns-margin-lg']};
           }
         }
       `
@@ -101,13 +117,29 @@ const CardColumns = styled(CardColumnsUnstyled)`
       props.theme['$grid-breakpoints'],
       `
         &.card-columns {
-          column-count: ${props.theme['$card-columns-count']};
-          column-gap: ${props.theme['$card-columns-gap']};
+          column-count: ${props.theme['$card-columns-count-xl']};
+          column-gap: ${props.theme['$card-columns-gap-xl']};
       
           .card {
             display: inline-block; /* Don't let them vertically span multiple columns */
             width: 100%; /* Don't let them exceed the column width */
-            margin-bottom: ${props.theme['$card-columns-margin']};
+            margin-bottom: ${props.theme['$card-columns-margin-xl']};
+          }
+        }
+      `
+    )}
+    ${mediaBreakpointUp(
+      'xxl',
+      props.theme['$grid-breakpoints'],
+      `
+        &.card-columns {
+          column-count: ${props.theme['$card-columns-count-xxl']};
+          column-gap: ${props.theme['$card-columns-gap-xxl']};
+      
+          .card {
+            display: inline-block; /* Don't let them vertically span multiple columns */
+            width: 100%; /* Don't let them exceed the column width */
+            margin-bottom: ${props.theme['$card-columns-margin-xxl']};
           }
         }
       `
