@@ -178,6 +178,7 @@ export default function makeOriginal(userTheme = {}) {
 
 
   // Grid breakpoints
+
   //
   // Define the minimum dimensions at which your layout will change,
   // adapting to different screen sizes, for use in media queries.
@@ -188,6 +189,7 @@ export default function makeOriginal(userTheme = {}) {
     md: '768px',
     lg: '992px',
     xl: '1200px',
+    xxl: '1452px',
   };
   assertAscending(v['$grid-breakpoints'], '$grid-breakpoints');
   assertStartAtZero(v['$grid-breakpoints']);
@@ -690,9 +692,18 @@ export default function makeOriginal(userTheme = {}) {
   detectedUnit = detectUnit(v['$grid-gutter-width-base']);
   v['$card-deck-margin'] = u['$card-deck-margin'] || (rmUnit(v['$grid-gutter-width-base'], detectedUnit) / 2) + detectedUnit;
 
-  v['$card-columns-count'] = u['$card-columns-count'] || '3';
-  v['$card-columns-gap'] = u['$card-columns-gap'] || '1.25rem';
-  v['$card-columns-margin'] = u['$card-columns-margin'] || v['$card-spacer-y'];
+  v['$card-columns-count-md'] = u['$card-columns-count-md'] || '2';
+  v['$card-columns-gap-md'] = u['$card-columns-gap-md'] || '1rem';
+  v['$card-columns-margin-md'] = u['$card-columns-margin-md'] || v['$card-spacer-y'];
+  v['$card-columns-count-lg'] = u['$card-columns-count-lg'] || '2';
+  v['$card-columns-gap-lg'] = u['$card-columns-gap-lg'] || '1.15rem';
+  v['$card-columns-margin-lg'] = u['$card-columns-margin-lg'] || v['$card-spacer-y'];
+  v['$card-columns-count-xl'] = u['$card-columns-count-xl'] || '3';
+  v['$card-columns-gap-xl'] = u['$card-columns-gap-xl'] || '1.25rem';
+  v['$card-columns-margin-xl'] = u['$card-columns-margin-xl'] || v['$card-spacer-y'];
+  v['$card-columns-count-xxl'] = u['$card-columns-count-xxl'] || '4';
+  v['$card-columns-gap-xxl'] = u['$card-columns-gap-xxl'] || '1.25rem';
+  v['$card-columns-margin-xxl'] = u['$card-columns-margin-xxl'] || v['$card-spacer-y'];
 
   // Tooltips
 
