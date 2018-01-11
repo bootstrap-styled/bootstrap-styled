@@ -2313,6 +2313,7 @@ function makeOriginal() {
   v['$link-hover-decoration'] = u['$link-hover-decoration'] || 'underline';
 
   // Grid breakpoints
+
   //
   // Define the minimum dimensions at which your layout will change,
   // adapting to different screen sizes, for use in media queries.
@@ -2322,7 +2323,8 @@ function makeOriginal() {
     sm: '576px',
     md: '768px',
     lg: '992px',
-    xl: '1200px'
+    xl: '1200px',
+    xxl: '1452px'
   };
   variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
   variables_2(v['$grid-breakpoints']);
@@ -2813,9 +2815,18 @@ function makeOriginal() {
   detectedUnit = detectUnit(v['$grid-gutter-width-base']);
   v['$card-deck-margin'] = u['$card-deck-margin'] || rmUnit(v['$grid-gutter-width-base'], detectedUnit) / 2 + detectedUnit;
 
-  v['$card-columns-count'] = u['$card-columns-count'] || '3';
-  v['$card-columns-gap'] = u['$card-columns-gap'] || '1.25rem';
-  v['$card-columns-margin'] = u['$card-columns-margin'] || v['$card-spacer-y'];
+  v['$card-columns-count-md'] = u['$card-columns-count-md'] || '2';
+  v['$card-columns-gap-md'] = u['$card-columns-gap-md'] || '1rem';
+  v['$card-columns-margin-md'] = u['$card-columns-margin-md'] || v['$card-spacer-y'];
+  v['$card-columns-count-lg'] = u['$card-columns-count-lg'] || '2';
+  v['$card-columns-gap-lg'] = u['$card-columns-gap-lg'] || '1.15rem';
+  v['$card-columns-margin-lg'] = u['$card-columns-margin-lg'] || v['$card-spacer-y'];
+  v['$card-columns-count-xl'] = u['$card-columns-count-xl'] || '3';
+  v['$card-columns-gap-xl'] = u['$card-columns-gap-xl'] || '1.25rem';
+  v['$card-columns-margin-xl'] = u['$card-columns-margin-xl'] || v['$card-spacer-y'];
+  v['$card-columns-count-xxl'] = u['$card-columns-count-xxl'] || '4';
+  v['$card-columns-gap-xxl'] = u['$card-columns-gap-xxl'] || '1.25rem';
+  v['$card-columns-margin-xxl'] = u['$card-columns-margin-xxl'] || v['$card-spacer-y'];
 
   // Tooltips
 
@@ -20188,9 +20199,18 @@ var makeTheme$47 = function makeTheme() {
   v['$card-margin-x-halved'] = u['$card-margin-x-halved'] || rmUnit$15(v['$card-spacer-x'], UNIT$14.REM) / 2 + UNIT$14.REM;
 
   // CardColumns
-  v['$card-columns-count'] = u['$card-columns-count'] || '3';
-  v['$card-columns-gap'] = u['$card-columns-gap'] || '1.25rem';
-  v['$card-columns-margin'] = u['$card-columns-margin'] || v['$card-spacer-y'];
+  v['$card-columns-count-md'] = u['$card-columns-count-md'] || '2';
+  v['$card-columns-gap-md'] = u['$card-columns-gap-md'] || '1rem';
+  v['$card-columns-margin-md'] = u['$card-columns-margin-md'] || v['$card-spacer-y'];
+  v['$card-columns-count-lg'] = u['$card-columns-count-lg'] || '2';
+  v['$card-columns-gap-lg'] = u['$card-columns-gap-lg'] || '1.15rem';
+  v['$card-columns-margin-lg'] = u['$card-columns-margin-lg'] || v['$card-spacer-y'];
+  v['$card-columns-count-xl'] = u['$card-columns-count-xl'] || '2';
+  v['$card-columns-gap-xl'] = u['$card-columns-gap-xl'] || '1.25rem';
+  v['$card-columns-margin-xl'] = u['$card-columns-margin-xl'] || v['$card-spacer-y'];
+  v['$card-columns-count-xxl'] = u['$card-columns-count-xxl'] || '3';
+  v['$card-columns-gap-xxl'] = u['$card-columns-gap-xxl'] || '1.25rem';
+  v['$card-columns-margin-xxl'] = u['$card-columns-margin-xxl'] || v['$card-spacer-y'];
 
   // // ?? missing
   // v['$card-inverse-bg-color'] = u['$card-inverse-bg-color'] || '??????';
@@ -20322,7 +20342,7 @@ CardColumnsUnstyled.propTypes = {
 var CardColumns = styled__default(CardColumnsUnstyled).withConfig({
   displayName: 'CardColumns'
 })(['', ''], function (props) {
-  return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + breakpoints_6('md', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: 2;\n          column-gap: ' + props.theme['$card-columns-gap'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin'] + ';\n          }\n        }\n      ') + '\n    ' + breakpoints_6('xl', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count'] + ';\n          column-gap: ' + props.theme['$card-columns-gap'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin'] + ';\n          }\n        }\n      ') + '\n  ';
+  return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + breakpoints_6('md', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-md'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-md'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-md'] + ';\n          }\n        }\n      ') + '\n    ' + breakpoints_6('lg', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-lg'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-lg'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-lg'] + ';\n          }\n        }\n      ') + '\n    ' + breakpoints_6('xl', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-xl'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-xl'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-xl'] + ';\n          }\n        }\n      ') + '\n    ' + breakpoints_6('xxl', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-xxl'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-xxl'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-xxl'] + ';\n          }\n        }\n      ') + '\n  ';
 });
 
 /**
