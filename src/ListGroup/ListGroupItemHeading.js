@@ -8,11 +8,12 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import H5 from '../H5';
 
-const defaultProps = {
-  tag: H5,
-};
 
 class ListGroupItemHeading extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: H5,
+  };
 
   static propTypes = {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -35,8 +36,6 @@ class ListGroupItemHeading extends React.Component { // eslint-disable-line reac
     );
   }
 }
-
-ListGroupItemHeading.defaultProps = defaultProps;
 
 export default ListGroupItemHeading;
 

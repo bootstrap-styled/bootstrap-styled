@@ -5,11 +5,14 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { typography } from 'bootstrap-styled-mixins/lib/typography';
-import bsTheme from '../theme';
+import { makeTheme } from './theme';
 
-const defaultProps = { theme: bsTheme };
 
 class PUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -173,7 +176,5 @@ const P = styled(PUnstyled)`
     margin-bottom: 1rem;
   `}
 `;
-
-P.defaultProps = defaultProps;
 
 export default P;

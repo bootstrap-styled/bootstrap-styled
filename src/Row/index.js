@@ -5,14 +5,15 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
-import themeBs from '../theme';
+import { makeTheme } from './theme';
 
-const defaultProps = {
-  theme: themeBs,
-  tag: 'div',
-};
 
 class RowUnstyled extends React.Component {    // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'div',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -71,8 +72,6 @@ const Row = styled(RowUnstyled)`
     }
  `}
 `;
-
-Row.defaultProps = defaultProps;
 
 export default Row;
 

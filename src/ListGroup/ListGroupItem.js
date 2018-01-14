@@ -7,15 +7,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-const defaultProps = {
-  tag: 'li',
-};
 
 const handleDisabledOnClick = (e) => {
   e.preventDefault();
 };
 
 class ListGroupItem extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'li',
+  };
 
   static propTypes = {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -55,8 +56,6 @@ class ListGroupItem extends React.Component { // eslint-disable-line react/prefe
     );
   }
 }
-
-ListGroupItem.defaultProps = defaultProps;
 
 export default ListGroupItem;
 

@@ -4,9 +4,9 @@
 
 
 import styled from 'styled-components';
-import theme from '../theme';
+import { makeTheme } from './theme';
 
-const defaultProps = { theme };
+const defaultProps = { theme: makeTheme() };
 
 const Mark = styled.mark`
   ${(props) => `

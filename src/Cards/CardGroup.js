@@ -13,14 +13,15 @@ import { borderRightRadius, borderLeftRadius } from 'bootstrap-styled-mixins/lib
 import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
 import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
 import { card } from 'bootstrap-styled-mixins/lib/cards';
-import bsTheme from '../theme';
+import { makeTheme } from './theme';
 
-const defaultProps = {
-  theme: bsTheme,
-  tag: 'div',
-};
 
 class CardGroupUnstyled extends React.Component {// eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'div',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -149,7 +150,5 @@ const CardGroup = styled(CardGroupUnstyled)`
     )}
   `}
 `;
-
-CardGroup.defaultProps = defaultProps;
 
 export default CardGroup;

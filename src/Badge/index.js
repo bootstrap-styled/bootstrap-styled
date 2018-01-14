@@ -9,16 +9,16 @@ import mapToCssModules from 'map-to-css-modules';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { badgeVariant } from 'bootstrap-styled-mixins/lib/badge';
-import bsTheme from '../theme';
-
-const defaultProps = {
-  theme: bsTheme,
-  color: 'default',
-  pill: false,
-  tag: 'span',
-};
+import { makeTheme } from './theme';
 
 class BadgeUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    color: 'default',
+    pill: false,
+    tag: 'span',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -127,7 +127,5 @@ const Badge = styled(BadgeUnstyled)`
     }
   `}
 `;
-
-Badge.defaultProps = defaultProps;
 
 export default Badge;

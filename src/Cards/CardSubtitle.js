@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import H6 from '../H6';
-const defaultProps = {
-  tag: H6,
-};
+
 
 class CardSubtitle extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: H6,
+  };
 
   static propTypes = {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -35,6 +37,5 @@ class CardSubtitle extends React.Component { // eslint-disable-line react/prefer
   }
 }
 
-CardSubtitle.defaultProps = defaultProps;
 
 export default CardSubtitle;

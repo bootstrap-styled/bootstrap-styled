@@ -11,14 +11,14 @@ import omit from 'lodash.omit';
 import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
 import mapToCssModules from 'map-to-css-modules';
 import { card } from 'bootstrap-styled-mixins/lib/cards';
-import bsTheme from '../theme';
+import { makeTheme } from './theme';
 
-const defaultProps = {
-  theme: bsTheme,
-  tag: 'div',
-};
 
 class CardDeckUnstyled extends React.Component {// eslint-disable-line react/prefer-stateless-function
+  static defaultProps = {
+    tag: 'div',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -100,7 +100,5 @@ const CardDeck = styled(CardDeckUnstyled)`
     )}
   `}
 `;
-
-CardDeck.defaultProps = defaultProps;
 
 export default CardDeck;

@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import A from '../A';
-const defaultProps = {
-  tag: A,
-};
+
 
 class NavLink extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: A,
+  };
 
   static propTypes = {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -64,7 +66,5 @@ class NavLink extends React.Component { // eslint-disable-line react/prefer-stat
     );
   }
 }
-
-NavLink.defaultProps = defaultProps;
 
 export default NavLink;

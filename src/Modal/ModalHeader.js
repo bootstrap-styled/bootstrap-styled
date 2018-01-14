@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import H4 from '../H4';
+import Close from '../Close';
+
 const propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   wrapTag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -36,9 +38,7 @@ const ModalHeader = (props) => {
 
   if (toggle) {
     closeButton = (
-      <button type="button" onClick={toggle} className="close" aria-label="Close">
-        <span aria-hidden="true">{String.fromCharCode(215)}</span>
-      </button>
+      <Close type="button" onDismiss={toggle} aria-label="Close" />
     );
   }
 

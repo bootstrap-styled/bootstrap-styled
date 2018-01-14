@@ -12,15 +12,16 @@ import mapToCssModules from 'map-to-css-modules';
 import { borderTopRadius, borderBottomRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
 import { listGroupItemVariant } from 'bootstrap-styled-mixins/lib/list-group';
-import bsTheme from '../theme';
+import { makeTheme } from './theme';
 import Ul from '../Ul/index';
 
-const defaultProps = {
-  theme: bsTheme,
-  tag: Ul,
-};
 
 class ListGroupUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: Ul,
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -202,11 +203,9 @@ const ListGroup = styled(ListGroupUnstyled)`
       'danger',
       props.theme['$state-danger-bg'],
       props.theme['$state-danger-text'],
-    )}    
+    )}
   `}
 `;
-
-ListGroup.defaultProps = defaultProps;
 
 export default ListGroup;
 

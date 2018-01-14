@@ -5,20 +5,22 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
-import bsTheme from '../theme';
-
-const defaultProps = { theme: bsTheme };
+import { makeTheme } from './theme';
 
 class CloseUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
+  static defaultProps = {
+    theme: makeTheme(),
+  };
+
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
-    theme: PropTypes.object,
-    'sr-only': PropTypes.bool,
     className: PropTypes.string,
     closeLabel: PropTypes.string,
     cssModule: PropTypes.object,
     onDismiss: PropTypes.func.isRequired,
+    'sr-only': PropTypes.bool,
+    theme: PropTypes.object,
     /* eslint-enable react/no-unused-prop-types */
   }
 
@@ -77,7 +79,7 @@ const Close = styled(CloseUnstyled)`
      */
     
     /* scss-lint:disable QualifyingElement */
-    &button.close {
+    &.close {
       padding: 0;
       cursor: pointer;
       background: transparent;
@@ -87,7 +89,5 @@ const Close = styled(CloseUnstyled)`
     /* scss-lint:enable QualifyingElement */
   `}
 `;
-
-Close.defaultProps = defaultProps;
 
 export default Close;

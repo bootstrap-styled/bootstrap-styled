@@ -8,11 +8,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
 import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
-import bsTheme from '../theme';
+import { makeTheme } from './theme';
 
-const defaultProps = { theme: bsTheme };
 
 class DlUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -45,7 +48,5 @@ const Dl = styled(DlUnstyled)`
     )}
   `}
 `;
-
-Dl.defaultProps = defaultProps;
 
 export default Dl;

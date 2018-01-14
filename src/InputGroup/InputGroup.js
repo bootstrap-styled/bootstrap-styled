@@ -12,15 +12,15 @@ import mapToCssModules from 'map-to-css-modules';
 import { hoverFocusActive } from 'bootstrap-styled-mixins/lib/hover';
 import { borderRadius, borderLeftRadius, borderRightRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { formControl } from 'bootstrap-styled-mixins/lib/forms';
-import bsTheme from '../theme';
-
-const defaultProps = {
-  theme: bsTheme,
-  tag: 'div',
-};
+import { makeTheme } from './theme';
 
 
 class InputGroupUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'div',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -279,10 +279,7 @@ const InputGroup = styled(InputGroupUnstyled)`
       props.theme['$input-bg-disabled'],
       props.theme['$cursor-disabled'],
     )}
-    
   `}
 `;
-
-InputGroup.defaultProps = defaultProps;
 
 export default InputGroup;

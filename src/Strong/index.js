@@ -7,11 +7,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
-import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
-import bsTheme from '../theme';
-
-const defaultProps = { theme: bsTheme };
 
 class StrongUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -19,7 +15,6 @@ class StrongUnstyled extends React.Component { // eslint-disable-line react/pref
     /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
     children: PropTypes.node,
-    theme: PropTypes.object,
     color: PropTypes.string,
     cssModule: PropTypes.object,
     /* eslint-enable react/no-unused-prop-types */
@@ -31,7 +26,7 @@ class StrongUnstyled extends React.Component { // eslint-disable-line react/pref
       children,
       cssModule,
       ...attributes
-    } = omit(this.props, ['theme']);
+    } = this.props;
 
     const classes = mapToCssModules(cn(
       className,
@@ -49,8 +44,6 @@ class StrongUnstyled extends React.Component { // eslint-disable-line react/pref
 const Strong = styled(StrongUnstyled)`
   font-weight: bolder; /* Add the correct font weight in Chrome, Edge, and Safari */
 `;
-
-Strong.defaultProps = defaultProps;
 
 export default Strong;
 

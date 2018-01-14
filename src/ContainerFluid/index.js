@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import omit from 'lodash.omit';
 import { makeContainer } from 'bootstrap-styled-mixins/lib/grid';
-import bsTheme from '../theme';
+import { makeTheme } from './theme';
 
-const defaultProps = {
-  theme: bsTheme,
-};
 
 class ContainerFluidUnstyled extends React.Component {    // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -39,8 +40,6 @@ const ContainerFluid = styled(ContainerFluidUnstyled)`
     )}
   `}
 `;
-
-ContainerFluid.defaultProps = defaultProps;
 
 export default ContainerFluid;
 

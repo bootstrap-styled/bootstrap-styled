@@ -8,12 +8,13 @@ import ReactDOM from 'react-dom';
 import Tether from 'tether-fix';
 import isFunction from 'lodash.omit';
 
-const defaultProps = {
-  isOpen: false,
-  tetherRef() {},
-};
 
 class TetherContent extends React.Component {// eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    isOpen: false,
+    tetherRef() {},
+  };
 
   static propTypes = {
     children: PropTypes.node.isRequired,
@@ -136,7 +137,5 @@ class TetherContent extends React.Component {// eslint-disable-line react/prefer
     );
   }
 }
-
-TetherContent.defaultProps = defaultProps;
 
 export default TetherContent;
