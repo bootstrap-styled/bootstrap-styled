@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - Updated some z-index values to assure front position to `Modal` component.
 - Automatically add CHANGELOG next todo on release.
 - Added props `theme` to `Row` and omitted the props as with other components.
+- Upgrade dependency [bootstrap-styled-mixins](https://www.npmjs.com/package/bootstrap-styled-mixins) from 1.0.0 to 1.0.1.
 
 ## [1.4.3] - 2017-11-10
 
