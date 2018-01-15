@@ -105,7 +105,7 @@ const Label = styled(LabelUnstyled)`
     touch-action: manipulation;
     /* Allow labels to use margin for spacing. */
     display: inline-block;
-    margin-bottom: .5rem;
+    margin-bottom: ${props.theme['$label-margin-bottom']};
 
     ${button(
       props.theme['$enable-shadows'],
