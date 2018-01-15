@@ -2698,8 +2698,8 @@ function makeOriginal() {
   v['$zindex-dropdown'] = u['$zindex-dropdown'] || '1000';
   v['$zindex-fixed'] = u['$zindex-fixed'] || '1030';
   v['$zindex-sticky'] = u['$zindex-sticky'] || '1030';
-  v['$zindex-modal-backdrop'] = u['$zindex-modal-backdrop'] || '1040';
-  v['$zindex-modal'] = u['$zindex-modal'] || '1050';
+  v['$zindex-modal-backdrop'] = u['$zindex-modal-backdrop'] || '2040';
+  v['$zindex-modal'] = u['$zindex-modal'] || '2050';
   v['$zindex-popover'] = u['$zindex-popover'] || '1060';
   v['$zindex-tooltip'] = u['$zindex-tooltip'] || '1070';
 
@@ -3314,6 +3314,9 @@ function makeExtend() {
   // Navbar
   v['$navbar-max-height'] = u['$navbar-max-height'] || '400px';
   v['$navbar-height'] = u['$navbar-height'] || '70px';
+
+  // Label
+  v['$label-margin-bottom'] = u['$label-margin-bottom'] || '.5rem';
 
   return _extends({}, u, v);
 }
@@ -15783,7 +15786,7 @@ var LabelUnstyled = function LabelUnstyled(props) {
 var Label = styled__default(LabelUnstyled).withConfig({
   displayName: 'Label'
 })(['', ''], function (props) {
-  return '\n    /* Reboot Scss */\n    touch-action: manipulation;\n    /* Allow labels to use margin for spacing. */\n    display: inline-block;\n    margin-bottom: .5rem;\n\n    ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
+  return '\n    /* Reboot Scss */\n    touch-action: manipulation;\n    /* Allow labels to use margin for spacing. */\n    display: inline-block;\n    margin-bottom: ' + props.theme['$label-margin-bottom'] + ';\n\n    ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
 
 Label.propTypes = propTypes$2;
@@ -17111,20 +17114,12 @@ makeTheme$36();
 var ModalUnstyled = function (_React$Component) {
   inherits(ModalUnstyled, _React$Component);
 
-  // eslint-disable-line react/sort-comp
-
   function ModalUnstyled(props) {
     classCallCheck(this, ModalUnstyled);
 
     var _this = possibleConstructorReturn(this, (ModalUnstyled.__proto__ || Object.getPrototypeOf(ModalUnstyled)).call(this, props));
 
-    _this.isTransitioning = false;
-
     _this.onEnter = function () {
-      _this.isTransitioning = true;
-      if (_this.props.isLocked && _this.props.onUnlock) {
-        _this.props.onUnlock();
-      }
       if (_this.props.onEnter) {
         _this.props.onEnter();
       }
@@ -17132,27 +17127,20 @@ var ModalUnstyled = function (_React$Component) {
 
     _this.onExit = function () {
       _this.destroy();
-      _this.isTransitioning = false;
-      if (_this.props.isLocked && _this.props.onUnlock) {
-        _this.props.onUnlock();
-      }
       if (_this.props.onExit) {
         _this.props.onExit();
       }
     };
 
     _this.handleEscape = function (e) {
-      if (_this.props.backdrop !== true) return;
-      _this.isTransitioning = false;
-      if (!_this.isTransitioning && _this.props.keyboard && e.keyCode === 27 && _this.props.onBackdrop) {
+      if (_this.props.keyboard && e.keyCode === 27 && _this.props.onBackdrop) {
         _this.props.onBackdrop();
       }
     };
 
     _this.handleBackdropClick = function (e) {
       if (_this.props.backdrop !== true) return;
-      _this.isTransitioning = false;
-      if (!_this.isTransitioning && _this.props.backdrop && e.target && !_this._dialog.contains(e.target) && _this.props.onBackdrop) {
+      if (_this.props.backdrop && e.target && !_this._dialog.contains(e.target) && _this.props.onBackdrop) {
         // eslint-disable-line no-underscore-dangle
         _this.props.onBackdrop();
       }
@@ -17181,7 +17169,6 @@ var ModalUnstyled = function (_React$Component) {
     };
 
     _this.originalBodyPadding = null;
-    _this.isBodyOverflowing = false;
     return _this;
   }
 
@@ -17207,7 +17194,10 @@ var ModalUnstyled = function (_React$Component) {
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      this.onExit();
+      this.destroy();
+      if (this.props.onExit) {
+        this.props.onExit();
+      }
     }
   }, {
     key: 'hide',
@@ -17217,6 +17207,11 @@ var ModalUnstyled = function (_React$Component) {
   }, {
     key: 'show',
     value: function show() {
+      if (this._dialog) {
+        // eslint-disable-line no-underscore-dangle
+        this.props.onBackdrop(true);
+        return;
+      }
       var classes = document.body.className;
       this._element = document.createElement('div'); // eslint-disable-line no-underscore-dangle
       this._element.setAttribute('tabindex', '-1'); // eslint-disable-line no-underscore-dangle
@@ -17253,7 +17248,7 @@ var ModalUnstyled = function (_React$Component) {
       var _classNames,
           _this2 = this;
 
-      var _omit = lodash_omit(this.props, ['theme', 'isLocked', 'onUnlock', 'onBackdrop', 'keyboard', 'onEnter', 'onExit', 'zIndex']),
+      var _omit = lodash_omit(this.props, ['theme', 'onBackdrop', 'keyboard', 'onEnter', 'onExit', 'zIndex']),
           className = _omit.className,
           wrapClassName = _omit.wrapClassName,
           modalClassName = _omit.modalClassName,
@@ -17320,10 +17315,9 @@ var ModalUnstyled = function (_React$Component) {
 
 ModalUnstyled.defaultProps = {
   isOpen: false,
-  isLocked: false,
   backdrop: true,
   keyboard: true,
-  zIndex: 1000,
+  zIndex: 2000,
   theme: makeTheme$36()
 };
 ModalUnstyled.propTypes = {
@@ -17338,8 +17332,6 @@ ModalUnstyled.propTypes = {
   contentClassName: PropTypes.string,
   /* eslint-enable react/no-unused-prop-types */
   isOpen: PropTypes.bool,
-  isLocked: PropTypes.bool,
-  onUnlock: PropTypes.func,
   onBackdrop: PropTypes.func,
   keyboard: PropTypes.bool,
   backdrop: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['static'])]),
