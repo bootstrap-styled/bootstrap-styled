@@ -571,8 +571,8 @@ export default function makeOriginal(userTheme = {}) {
   v['$zindex-dropdown'] = u['$zindex-dropdown'] || '1000';
   v['$zindex-fixed'] = u['$zindex-fixed'] || '1030';
   v['$zindex-sticky'] = u['$zindex-sticky'] || '1030';
-  v['$zindex-modal-backdrop'] = u['$zindex-modal-backdrop'] || '1040';
-  v['$zindex-modal'] = u['$zindex-modal'] || '1050';
+  v['$zindex-modal-backdrop'] = u['$zindex-modal-backdrop'] || '2040';
+  v['$zindex-modal'] = u['$zindex-modal'] || '2050';
   v['$zindex-popover'] = u['$zindex-popover'] || '1060';
   v['$zindex-tooltip'] = u['$zindex-tooltip'] || '1070';
 
