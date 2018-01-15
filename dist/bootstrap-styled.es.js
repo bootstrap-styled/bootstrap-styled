@@ -2307,6 +2307,7 @@ function makeOriginal() {
   v['$link-hover-decoration'] = u['$link-hover-decoration'] || 'underline';
 
   // Grid breakpoints
+
   //
   // Define the minimum dimensions at which your layout will change,
   // adapting to different screen sizes, for use in media queries.
@@ -2316,7 +2317,8 @@ function makeOriginal() {
     sm: '576px',
     md: '768px',
     lg: '992px',
-    xl: '1200px'
+    xl: '1200px',
+    xxl: '1452px'
   };
   variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
   variables_2(v['$grid-breakpoints']);
@@ -2807,9 +2809,19 @@ function makeOriginal() {
   detectedUnit = detectUnit(v['$grid-gutter-width-base']);
   v['$card-deck-margin'] = u['$card-deck-margin'] || rmUnit(v['$grid-gutter-width-base'], detectedUnit) / 2 + detectedUnit;
 
-  v['$card-columns-count'] = u['$card-columns-count'] || '3';
-  v['$card-columns-gap'] = u['$card-columns-gap'] || '1.25rem';
-  v['$card-columns-margin'] = u['$card-columns-margin'] || v['$card-spacer-y'];
+  v['$card-columns-count-md'] = u['$card-columns-count-md'] || '2';
+  v['$card-columns-gap-md'] = u['$card-columns-gap-md'] || '1rem';
+  v['$card-columns-margin-md'] = u['$card-columns-margin-md'] || v['$card-spacer-y'];
+  v['$card-columns-count-lg'] = u['$card-columns-count-lg'] || '2';
+  v['$card-columns-gap-lg'] = u['$card-columns-gap-lg'] || '1.15rem';
+  v['$card-columns-margin-lg'] = u['$card-columns-margin-lg'] || v['$card-spacer-y'];
+  v['$card-columns-count-xl'] = u['$card-columns-count-xl'] || '3';
+  v['$card-columns-gap-xl'] = u['$card-columns-gap-xl'] || '1.25rem';
+  v['$card-columns-margin-xl'] = u['$card-columns-margin-xl'] || v['$card-spacer-y'];
+  v['$card-columns-count-xxl'] = u['$card-columns-count-xxl'] || '4';
+  v['$card-columns-gap-xxl'] = u['$card-columns-gap-xxl'] || '1.25rem';
+  v['$card-columns-margin-xxl'] = u['$card-columns-margin-xxl'] || v['$card-spacer-y'];
+
   // Tooltips
 
   v['$tooltip-max-width'] = u['$tooltip-max-width'] || '200px';
@@ -4977,13 +4989,6 @@ exports.a = a;
 
 
 var defaultProps = exports.defaultProps = {
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  },
   '$link-color': '#0275d8',
   '$link-decoration': 'none',
   '$link-hover-color': '#014C8D',
@@ -5010,356 +5015,46 @@ exports.default = {
 unwrapExports(a_1);
 var a_3 = a_1.a;
 
-var borderRadius_1 = createCommonjsModule(function (module, exports) {
-'use strict';
+/**
+ * BOOTSTRAP THEME A TAG
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$2 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.borderRadius = borderRadius;
-exports.borderTopRadius = borderTopRadius;
-exports.borderRightRadius = borderRightRadius;
-exports.borderBottomRadius = borderBottomRadius;
-exports.borderLeftRadius = borderLeftRadius;
-var defaultProps = exports.defaultProps = {
-  '$border-radius': '.25rem',
-  '$enable-rounded': true
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Start with assigning color names to specific hex values.
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Link color and decoration
+  v['$link-color'] = u['$link-color'] || v['$brand-primary'];
+  v['$link-decoration'] = u['$link-decoration'] || 'none';
+  v['$link-hover-color'] = u['$link-hover-color'] || color(v['$link-color']).darken(0.35).toString();
+  v['$link-hover-decoration'] = u['$link-hover-decoration'] || 'underline';
+
+  return Object.assign({}, u, v);
 };
 
-function borderRadius() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+makeTheme$2();
 
-  if (enableRounded) {
-    return '\n      border-radius: ' + radius + ';\n    ';
-  }
-  return '';
-}
-
-function borderTopRadius() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
-
-  if (enableRounded) {
-    return '\n      border-top-right-radius: ' + radius + ';\n      border-top-left-radius: ' + radius + ';\n    ';
-  }
-  return '';
-}
-
-function borderRightRadius() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
-
-  if (enableRounded) {
-    return '\n      border-bottom-right-radius: ' + radius + ';\n      border-top-right-radius: ' + radius + ';\n    ';
-  }
-  return '';
-}
-
-function borderBottomRadius() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
-
-  if (enableRounded) {
-    return '\n      border-bottom-right-radius: ' + radius + ';\n      border-bottom-left-radius: ' + radius + ';\n    ';
-  }
-  return '';
-}
-
-function borderLeftRadius() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
-
-  if (enableRounded) {
-    return '\n      border-bottom-left-radius: ' + radius + ';\n      border-top-left-radius: ' + radius + ';\n    ';
-  }
-  return '';
-}
-
-exports.default = {
-  defaultProps: defaultProps,
-  all: borderRadius,
-  top: borderTopRadius,
-  right: borderRightRadius,
-  bottom: borderBottomRadius,
-  left: borderLeftRadius
-};
-});
-
-unwrapExports(borderRadius_1);
-var borderRadius_2 = borderRadius_1.borderRadius;
-var borderRadius_3 = borderRadius_1.borderTopRadius;
-var borderRadius_4 = borderRadius_1.borderRightRadius;
-var borderRadius_5 = borderRadius_1.borderBottomRadius;
-var borderRadius_6 = borderRadius_1.borderLeftRadius;
-
-var boxShadow_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.boxShadow = boxShadow;
-var defaultProps = exports.defaultProps = {
-  '$enable-shadows': false
-};
-
-function boxShadow() {
-  var enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-shadows'];
-
-  if (enableShadows) {
-    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
-
-    return '\n      box-shadow: ' + args.join(' ') + ';\n    ';
-  }
-  return '';
-}
-
-exports.default = {
-  defaultProps: defaultProps,
-  boxShadow: boxShadow
-};
-});
-
-unwrapExports(boxShadow_1);
-var boxShadow_2 = boxShadow_1.boxShadow;
-
-var transition_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.transition = transition;
-var defaultProps = exports.defaultProps = {
-  '$enable-transitions': true
-};
-
-// eslint-disable-next-line consistent-return
-function transition() {
-  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
-
-  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    args[_key - 1] = arguments[_key];
-  }
-
-  if (enableTransitions && args.length) {
-    return '\n      transition: ' + args.join(' ') + ';\n    ';
-  }
-  return '';
-}
-
-exports.default = {
-  transition: transition
-};
-});
-
-unwrapExports(transition_1);
-var transition_2 = transition_1.transition;
-
-var conditional = createCommonjsModule(function (module, exports) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ifThen = ifThen;
-exports.ifElse = ifElse;
-function ifThen(conditions, returnTrue) {
-  return ifElse(conditions, returnTrue, '');
-}
-
-function ifElse(conditions, returnTrue, returnFalse) {
-  return conditions ? returnTrue : returnFalse;
-}
-
-exports.default = {
-  ifThen: ifThen,
-  ifElse: ifElse
-};
-});
-
-unwrapExports(conditional);
-var conditional_1 = conditional.ifThen;
-
-var buttons = createCommonjsModule(function (module, exports) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.defaultProps = undefined;
-exports.buttonVariant = buttonVariant;
-exports.buttonOutlineVariant = buttonOutlineVariant;
-exports.buttonSize = buttonSize;
-exports.button = button;
-
-
-
-var _color2 = _interopRequireDefault(color);
-
-
-
-
-
-
-
-
-
-
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var defaultProps = exports.defaultProps = {
-  '$enable-shadows': true,
-  '$enable-hover-media-query': false,
-  '$enable-transitions': true,
-  '$enable-rounded': true,
-  '$font-weight-normal': 'normal',
-  '$btn-font-weight': 'normal',
-  '$btn-line-height': '1.25',
-  '$btn-transition': 'all .2s ease-in-out',
-  '$input-btn-border-width': '1px',
-  '$btn-padding-x': '1rem',
-  '$btn-padding-y': '.5rem',
-  '$font-size-base': '1rem',
-  '$btn-border-radius': '.25rem',
-  '$btn-box-shadow': 'inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075)',
-  '$btn-focus-box-shadow': '0 0 0 2px rgba(2, 117, 216, 0.25)',
-  '$btn-active-box-shadow': 'inset 0 3px 5px rgba(0, 0, 0, 0.125)',
-  '$cursor-disabled': 'not-allowed',
-  '$link-color': '#0275d8',
-  '$link-hover-color': 'hsl(207.79999999999995, 98.2%, 27.8%)',
-  '$link-hover-decoration': 'underline',
-  '$btn-link-disabled-color': '#636c72',
-  '$btn-padding-x-lg': '1.5rem',
-  '$btn-padding-y-lg': '.75rem',
-  '$font-size-lg': '1.25rem',
-  '$btn-border-radius-lg': '.3rem',
-  '$btn-padding-x-sm': '.5rem',
-  '$btn-padding-y-sm': '.25rem',
-  '$font-size-sm': '.875rem',
-  '$btn-border-radius-sm': '.2rem',
-  '$btn-block-spacing-y': '.5rem',
-  '$btn-primary-color': '#fff',
-  '$btn-primary-bg': '#0275d8',
-  '$btn-primary-border': '#0275d8',
-  '$btn-secondary-color': '#292b2c',
-  '$btn-secondary-bg': '#fff',
-  '$btn-secondary-border': '#ccc',
-  '$btn-info-color': '#fff',
-  '$btn-info-bg': '#5bc0de',
-  '$btn-info-border': '#5bc0de',
-  '$btn-success-color': '#fff',
-  '$btn-success-bg': '#5cb85c',
-  '$btn-success-border': '#5cb85c',
-  '$btn-warning-color': '#fff',
-  '$btn-warning-bg': '#f0ad4e',
-  '$btn-warning-border': '#f0ad4e',
-  '$btn-danger-color': '#fff',
-  '$btn-danger-bg': '#d9534f',
-  '$btn-danger-border': '#d9534f'
-};
-
-function buttonVariant() {
-  var enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-shadows'];
-  var buttonColor = arguments[1];
-  var background = arguments[2];
-  var border = arguments[3];
-  var btnActiveBoxShadow = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$btn-active-box-shadow'];
-  var btnBoxShadow = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$btn-box-shadow'];
-
-  var activeBackground = (0, _color2.default)(background).darken(0.2).toString();
-  var activeBorder = (0, _color2.default)(border).darken(0.12).toString();
-
-  return '\n    color: ' + buttonColor + ';\n    background-color: ' + background + ';\n    border-color: ' + border + ';\n    ' + (0, boxShadow_1.boxShadow)(enableShadows, btnBoxShadow) + '\n  \n    ' + (0, hover_1.hover)('\n      color: ' + buttonColor + ';\n      background-color: ' + activeBackground + ';\n      border-color: ' + activeBorder + ';\n    ') + '\n  \n    &:focus,\n    &.focus {\n      ' + (0, conditional.ifElse)('\n        box-shadow: ' + btnBoxShadow + ', 0 0 0 2px ' + (0, _color2.default)(border).alpha(0.5).toString() + ';\n      ', '\n        box-shadow: 0 0 0 2px ' + (0, _color2.default)(border).alpha(0.5).toString() + ';\n      ') + '\n    }\n  \n    /* Disabled comes first so active can properly restyle */\n    &.disabled,\n    &:disabled {\n      background-color: ' + background + ';\n      border-color: ' + border + ';\n    }\n    \n    &:active,\n    &.active,\n    .show > &.dropdown-toggle {\n      color: ' + buttonColor + ';\n      background-color: ' + activeBackground + ';\n      background-image: none;\n      border-color: ' + activeBorder + ';\n      ' + (0, boxShadow_1.boxShadow)(enableShadows, btnActiveBoxShadow) + '\n    }\n  ';
-}
-
-function buttonOutlineVariant(buttonColor) {
-  var buttonColorHover = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#fff';
-
-  return '\n    color: ' + buttonColor + ';\n    background-image: none;\n    background-color: transparent;\n    border-color: ' + buttonColor + ';\n  \n    ' + (0, hover_1.hover)('\n      color: ' + buttonColorHover + ';\n      background-color: ' + buttonColor + ';\n      border-color: ' + buttonColor + ';\n    ') + '\n  \n    &:focus,\n    &.focus {\n      box-shadow: 0 0 0 2px ' + (0, _color2.default)(buttonColor).alpha(0.5).toString() + ';\n    }\n  \n    &.disabled,\n    &:disabled {\n      color: ' + buttonColor + ';\n      border-color: transparent;\n    }\n    \n    &:active,\n    &.active,\n    & .open > &.dropdown-toggle {\n      color: ' + buttonColorHover + ';\n      background-color: ' + buttonColor + ';\n      border-color: ' + buttonColor + ';\n    }\n  ';
-}
-
-// Button sizes
-function buttonSize() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
-  var paddingY = arguments[1];
-  var paddingX = arguments[2];
-  var fontSize = arguments[3];
-  var btnBorderRadius = arguments[4];
-
-  return '\n    padding: ' + paddingY + ' ' + paddingX + ';\n    font-size: ' + fontSize + ';\n    ' + (0, borderRadius_1.borderRadius)(enableRounded, btnBorderRadius) + '\n  ';
-}
-
-function button() {
-  var $enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-shadows'];
-  var $enableHoverMediaQuery = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$enable-hover-media-query'];
-  var $enableTransitions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$enable-transitions'];
-  var $enableRounded = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$enable-rounded'];
-  var $fontWeightNormal = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$font-weight-normal'];
-  var $btnFontWeight = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$btn-font-weight'];
-  var $btnLineHeight = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$btn-line-height'];
-  var $btnTransition = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$btn-transition'];
-  var $inputBtnBorderWidth = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps['$input-btn-border-width'];
-  var $btnPaddingX = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps['$btn-padding-x'];
-  var $btnPaddingY = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps['$btn-padding-y'];
-  var $fontSizeBase = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps['$font-size-base'];
-  var $btnBorderRadius = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps['$btn-border-radius'];
-  var $btnBoxShadow = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : defaultProps['$btn-box-shadow'];
-  var $btnFocusBoxShadow = arguments.length > 14 && arguments[14] !== undefined ? arguments[14] : defaultProps['$btn-focus-box-shadow'];
-  var $btnActiveBoxShadow = arguments.length > 15 && arguments[15] !== undefined ? arguments[15] : defaultProps['$btn-active-box-shadow'];
-  var $cursorDisabled = arguments.length > 16 && arguments[16] !== undefined ? arguments[16] : defaultProps['$cursor-disabled'];
-  var $linkColor = arguments.length > 17 && arguments[17] !== undefined ? arguments[17] : defaultProps['$link-color'];
-  var $linkHoverColor = arguments.length > 18 && arguments[18] !== undefined ? arguments[18] : defaultProps['$link-hover-color'];
-  var $linkHoverDecoration = arguments.length > 19 && arguments[19] !== undefined ? arguments[19] : defaultProps['$link-hover-decoration'];
-  var $btnLinkDisabledColor = arguments.length > 20 && arguments[20] !== undefined ? arguments[20] : defaultProps['$btn-link-disabled-color'];
-  var $btnPaddingXLg = arguments.length > 21 && arguments[21] !== undefined ? arguments[21] : defaultProps['$btn-padding-x-lg'];
-  var $btnPaddingYLg = arguments.length > 22 && arguments[22] !== undefined ? arguments[22] : defaultProps['$btn-padding-y-lg'];
-  var $fontSizeLg = arguments.length > 23 && arguments[23] !== undefined ? arguments[23] : defaultProps['$font-size-lg'];
-  var $btnBorderRadiusLg = arguments.length > 24 && arguments[24] !== undefined ? arguments[24] : defaultProps['$btn-border-radius-lg'];
-  var $btnPaddingXSm = arguments.length > 25 && arguments[25] !== undefined ? arguments[25] : defaultProps['$btn-padding-x-sm'];
-  var $btnPaddingYSm = arguments.length > 26 && arguments[26] !== undefined ? arguments[26] : defaultProps['$btn-padding-y-sm'];
-  var $fontSizeSm = arguments.length > 27 && arguments[27] !== undefined ? arguments[27] : defaultProps['$font-size-sm'];
-  var $btnBorderRadiusSm = arguments.length > 28 && arguments[28] !== undefined ? arguments[28] : defaultProps['$btn-border-radius-sm'];
-  var $btnBlockSpacingY = arguments.length > 29 && arguments[29] !== undefined ? arguments[29] : defaultProps['$btn-block-spacing-y'];
-  var $btnPrimaryColor = arguments.length > 30 && arguments[30] !== undefined ? arguments[30] : defaultProps['$btn-primary-color'];
-  var $btnPrimaryBg = arguments.length > 31 && arguments[31] !== undefined ? arguments[31] : defaultProps['$btn-primary-bg'];
-  var $btnPrimaryBorder = arguments.length > 32 && arguments[32] !== undefined ? arguments[32] : defaultProps['$btn-primary-border'];
-  var $btnSecondaryColor = arguments.length > 33 && arguments[33] !== undefined ? arguments[33] : defaultProps['$btn-secondary-color'];
-  var $btnSecondaryBg = arguments.length > 34 && arguments[34] !== undefined ? arguments[34] : defaultProps['$btn-secondary-bg'];
-  var $btnSecondaryBorder = arguments.length > 35 && arguments[35] !== undefined ? arguments[35] : defaultProps['$btn-secondary-border'];
-  var $btnInfoColor = arguments.length > 36 && arguments[36] !== undefined ? arguments[36] : defaultProps['$btn-info-color'];
-  var $btnInfoBg = arguments.length > 37 && arguments[37] !== undefined ? arguments[37] : defaultProps['$btn-info-bg'];
-  var $btnInfoBorder = arguments.length > 38 && arguments[38] !== undefined ? arguments[38] : defaultProps['$btn-info-border'];
-  var $btnSuccessColor = arguments.length > 39 && arguments[39] !== undefined ? arguments[39] : defaultProps['$btn-success-color'];
-  var $btnSuccessBg = arguments.length > 40 && arguments[40] !== undefined ? arguments[40] : defaultProps['$btn-success-bg'];
-  var $btnSuccessBorder = arguments.length > 41 && arguments[41] !== undefined ? arguments[41] : defaultProps['$btn-success-border'];
-  var $btnWarningColor = arguments.length > 42 && arguments[42] !== undefined ? arguments[42] : defaultProps['$btn-warning-color'];
-  var $btnWarningBg = arguments.length > 43 && arguments[43] !== undefined ? arguments[43] : defaultProps['$btn-warning-bg'];
-  var $btnWarningBorder = arguments.length > 44 && arguments[44] !== undefined ? arguments[44] : defaultProps['$btn-warning-border'];
-  var $btnDangerColor = arguments.length > 45 && arguments[45] !== undefined ? arguments[45] : defaultProps['$btn-danger-color'];
-  var $btnDangerBg = arguments.length > 46 && arguments[46] !== undefined ? arguments[46] : defaultProps['$btn-danger-bg'];
-  var $btnDangerBorder = arguments.length > 47 && arguments[47] !== undefined ? arguments[47] : defaultProps['$btn-danger-border'];
-
-  return '\n  \n    font-family: inherit;\n    \n    &.btn {\n      display: inline-block;\n      font-weight: ' + $btnFontWeight + ';\n      line-height: ' + $btnLineHeight + ';\n      text-align: center;\n      white-space: nowrap;\n      vertical-align: middle;\n      user-select: none;\n      border: ' + $inputBtnBorderWidth + ' solid transparent;\n      ' + buttonSize($enableRounded, $btnPaddingY, $btnPaddingX, $fontSizeBase, $btnBorderRadius) + '\n      ' + (0, transition_1.transition)($enableTransitions, $btnTransition) + '\n      ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'text-decoration: none;') + '\n\n      &:focus,\n      &.focus {\n        outline: 0;\n        box-shadow: ' + $btnFocusBoxShadow + ';\n      }\n\n      &.disabled,\n      &:disabled {\n        cursor: ' + $cursorDisabled + ';\n        opacity: .65;\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, 'none') + '\n      }  \n\n      &:active,\n      &.active {\n        background-image: none;\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $btnFocusBoxShadow, $btnActiveBoxShadow) + '\n      }\n    }\n    \n    a.btn.disabled,\n    fieldset[disabled] a.btn {\n      pointer-events: none;\n    }\n   \n   \n    /* Alternate buttons */\n   \n    &.btn-primary {\n      ' + buttonVariant($enableShadows, $btnPrimaryColor, $btnPrimaryBg, $btnPrimaryBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-secondary {\n      ' + buttonVariant($enableShadows, $btnSecondaryColor, $btnSecondaryBg, $btnSecondaryBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-info {\n      ' + buttonVariant($enableShadows, $btnInfoColor, $btnInfoBg, $btnInfoBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-success {\n      ' + buttonVariant($enableShadows, $btnSuccessColor, $btnSuccessBg, $btnSuccessBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-warning {\n      ' + buttonVariant($enableShadows, $btnWarningColor, $btnWarningBg, $btnWarningBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-danger {\n      ' + buttonVariant($enableShadows, $btnDangerColor, $btnDangerBg, $btnDangerBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n   \n    &.btn-outline-primary {\n      ' + buttonOutlineVariant($btnPrimaryBg, $btnPrimaryColor) + '\n    }    \n    &.btn-outline-secondary {\n      ' + buttonOutlineVariant($btnSecondaryBorder, $btnSecondaryColor) + '\n    }    \n    &.btn-outline-info {\n      ' + buttonOutlineVariant($btnInfoBg, $btnInfoColor) + '\n    }    \n    &.btn-outline-success {\n      ' + buttonOutlineVariant($btnSuccessBg, $btnSuccessColor) + '\n    }\n    &.btn-outline-warning {\n      ' + buttonOutlineVariant($btnWarningBg, $btnWarningColor) + '\n    }\n    &.btn-outline-danger {\n      ' + buttonOutlineVariant($btnDangerBg, $btnDangerColor) + '\n    }\n   \n    /*\n     Link buttons\n    */\n   \n    &.btn-link {\n      font-weight: ' + $fontWeightNormal + ';\n      color: ' + $linkColor + ';\n      border-radius: 0;\n   \n      &,\n      &:active,\n      &.active,\n      &:disabled {\n        background-color: transparent;\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, 'none') + '\n      }\n     \n      &,\n      &:focus,\n      &:active {\n        border-color: transparent;\n      }\n     \n      ' + (0, hover_1.hover)('border-color: transparent;') + '\n     \n      ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, '\n        color: ' + $linkHoverColor + ';\n        text-decoration: ' + $linkHoverDecoration + ';\n        background-color: transparent;\n      ') + '\n     \n      &:disabled {\n        color: ' + $btnLinkDisabledColor + ';\n        ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, '\n          text-decoration: none;\n        ') + '\n      }\n    }\n  \n  \n    /*\n     Button Sizes\n    */\n   \n    &.btn-lg {\n      /* line-height: ensure even-numbered height of button next to large input */\n      ' + buttonSize($enableRounded, $btnPaddingYLg, $btnPaddingXLg, $fontSizeLg, $btnBorderRadiusLg) + '\n    }\n   \n    &.btn-sm {\n      /* line-height: ensure proper height of button next to small input */\n      ' + buttonSize($enableRounded, $btnPaddingYSm, $btnPaddingXSm, $fontSizeSm, $btnBorderRadiusSm) + '\n    }\n   \n   \n    /*\n     Block button\n    */\n   \n    &.btn-block {\n      display: block;\n      width: 100%;\n    }\n   \n    /* Vertically space out multiple block buttons */\n    &.btn-block + .btn-block {\n      margin-top: ' + $btnBlockSpacingY + ';\n    }\n   \n    /* Specificity overrides */\n    input[type="submit"],\n    input[type="reset"],\n    input[type="button"] {\n      &.btn-block {\n        width: 100%;\n      }\n    }\n   \n    /* Reboot Scss */\n    touch-action: manipulation;\n    line-height: inherit;\n    &:focus{\n      outline: 1px dotted;\n      outline: 5px auto -webkit-focus-ring-color;\n    }\n    \n    &[type="button"],\n    &[type="reset"],\n    &[type="submit"] {\n      -webkit-appearance: button;\n    }\n    \n    &::-moz-focus-inner,\n    &[type="button"]::-moz-focus-inner,\n    &[type="reset"]::-moz-focus-inner,\n    &[type="submit"]::-moz-focus-inner {\n      padding: 0;\n      border-style: none;\n    }\n\n  ';
-}
-
-exports.default = {
-  defaultProps: defaultProps,
-  buttonVariant: buttonVariant,
-  buttonOutlineVariant: buttonOutlineVariant,
-  buttonSize: buttonSize,
-  button: button
-};
-});
-
-unwrapExports(buttons);
-var buttons_5 = buttons.button;
-
-var defaultProps$1 = {
+var defaultProps = {
   theme: bsTheme
 };
 
@@ -5400,20 +5095,15 @@ function composeLink(RouterLink) {
   Link = styled(Link).withConfig({
     displayName: 'composeLink__Link'
   })(['', ''], function (props) {
-    return '\n      ' + a_3(props.theme['$link-color'], props.theme['$link-decoration'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$enable-hover-media-query']) + '\n    \n      ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n    ';
+    return '\n      ' + a_3(props.theme['$link-color'], props.theme['$link-decoration'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$enable-hover-media-query']) + '\n    ';
   });
-  Link.defaultProps = defaultProps$1;
+  Link.defaultProps = defaultProps;
   return Link;
 }
 
 /**
  * A link to a certain page, an anchor tag
  */
-var defaultProps = {
-  tag: 'a',
-  theme: bsTheme
-};
-
 var AUnstyled = function (_React$Component) {
   inherits(AUnstyled, _React$Component);
 
@@ -5460,6 +5150,10 @@ var AUnstyled = function (_React$Component) {
   return AUnstyled;
 }(React.Component);
 
+AUnstyled.defaultProps = {
+  tag: 'a',
+  theme: makeTheme$2()
+};
 AUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -5476,19 +5170,12 @@ AUnstyled.propTypes = {
 var A = styled(AUnstyled).withConfig({
   displayName: 'A'
 })(['', ''], function (props) {
-  return '\n    ' + a_3(props.theme['$link-color'], props.theme['$link-decoration'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$enable-hover-media-query']) + '\n  ';
+  return '\n    ' + a_3(props.theme['$enable-hover-media-query'], props.theme['$link-color'], props.theme['$link-decoration'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration']) + '\n  ';
 });
-
-A.defaultProps = defaultProps;
 
 /**
  * Abbr component
  */
-
-var defaultProps$2 = {
-  tag: 'abbr',
-  theme: bsTheme
-};
 
 var AbbrUnstyled = function (_React$Component) {
   inherits(AbbrUnstyled, _React$Component);
@@ -5500,13 +5187,16 @@ var AbbrUnstyled = function (_React$Component) {
 
   createClass(AbbrUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
-          className = _omit.className,
-          initialism = _omit.initialism,
-          title = _omit.title,
-          Tag = _omit.tag,
-          attributes = objectWithoutProperties(_omit, ['className', 'initialism', 'title', 'tag']);
+      var _props = this.props,
+          className = _props.className,
+          initialism = _props.initialism,
+          title = _props.title,
+          Tag = _props.tag,
+          attributes = objectWithoutProperties(_props, ['className', 'initialism', 'title', 'tag']);
+
 
       return React.createElement(Tag, _extends({
         className: classnames(className, {
@@ -5514,17 +5204,18 @@ var AbbrUnstyled = function (_React$Component) {
         }),
         title: title
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return AbbrUnstyled;
 }(React.Component);
 
+AbbrUnstyled.defaultProps = {
+  tag: 'abbr'
+};
 AbbrUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
-  theme: PropTypes.object,
   tag: PropTypes.string,
   initialism: PropTypes.bool
   /* eslint-enable react/no-unused-prop-types */
@@ -5534,8 +5225,6 @@ AbbrUnstyled.propTypes = {
 var Abbr = styled(AbbrUnstyled).withConfig({
   displayName: 'Abbr'
 })(['&[title]{text-decoration:underline;text-decoration:underline dotted;cursor:help;border-bottom:0;}&.initialism{font-size:90%;text-transform:uppercase;}']);
-
-Abbr.defaultProps = defaultProps$2;
 
 /**
  * Address component
@@ -6639,7 +6328,233 @@ exports.default = {
 unwrapExports(alert);
 var alert_1 = alert.alertVariant;
 
-var defaultProps$4 = { theme: bsTheme };
+var borderRadius_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.borderRadius = borderRadius;
+exports.borderTopRadius = borderTopRadius;
+exports.borderRightRadius = borderRightRadius;
+exports.borderBottomRadius = borderBottomRadius;
+exports.borderLeftRadius = borderLeftRadius;
+var defaultProps = exports.defaultProps = {
+  '$border-radius': '.25rem',
+  '$enable-rounded': true
+};
+
+function borderRadius() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+
+  if (enableRounded) {
+    return '\n      border-radius: ' + radius + ';\n    ';
+  }
+  return '';
+}
+
+function borderTopRadius() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+
+  if (enableRounded) {
+    return '\n      border-top-right-radius: ' + radius + ';\n      border-top-left-radius: ' + radius + ';\n    ';
+  }
+  return '';
+}
+
+function borderRightRadius() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+
+  if (enableRounded) {
+    return '\n      border-bottom-right-radius: ' + radius + ';\n      border-top-right-radius: ' + radius + ';\n    ';
+  }
+  return '';
+}
+
+function borderBottomRadius() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+
+  if (enableRounded) {
+    return '\n      border-bottom-right-radius: ' + radius + ';\n      border-bottom-left-radius: ' + radius + ';\n    ';
+  }
+  return '';
+}
+
+function borderLeftRadius() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
+
+  if (enableRounded) {
+    return '\n      border-bottom-left-radius: ' + radius + ';\n      border-top-left-radius: ' + radius + ';\n    ';
+  }
+  return '';
+}
+
+exports.default = {
+  defaultProps: defaultProps,
+  all: borderRadius,
+  top: borderTopRadius,
+  right: borderRightRadius,
+  bottom: borderBottomRadius,
+  left: borderLeftRadius
+};
+});
+
+unwrapExports(borderRadius_1);
+var borderRadius_2 = borderRadius_1.borderRadius;
+var borderRadius_3 = borderRadius_1.borderTopRadius;
+var borderRadius_4 = borderRadius_1.borderRightRadius;
+var borderRadius_5 = borderRadius_1.borderBottomRadius;
+var borderRadius_6 = borderRadius_1.borderLeftRadius;
+
+/**
+ * BOOTSTRAP THEME ALERT TAG
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$3 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+  v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-weight-bold'] = u['$font-weight-bold'] || 'bold';
+
+  // Alerts
+  //
+  // Define colors for alerts states.
+
+  v['$state-success-text'] = u['$state-success-text'] || '#3c763d';
+  v['$state-success-bg'] = u['$state-success-bg'] || '#dff0d8';
+  v['$state-success-border'] = u['$state-success-border'] || color(v['$state-success-bg']).darken(0.05).toString();
+
+  v['$state-info-text'] = u['$state-info-text'] || '#31708f';
+  v['$state-info-bg'] = u['$state-info-bg'] || '#d9edf7';
+  v['$state-info-border'] = u['$state-info-border'] || color(v['$state-info-bg']).darken(0.07).toString();
+
+  v['$state-warning-text'] = u['$state-warning-text'] || '#8a6d3b';
+  v['$state-warning-bg'] = u['$state-warning-bg'] || '#fcf8e3';
+  v['$mark-bg'] = u['$mark-bg'] || v['$state-warning-bg'];
+  v['$state-warning-border'] = u['$state-warning-border'] || color(v['$state-warning-bg']).darken(0.05).toString();
+
+  v['$state-danger-text'] = u['$state-danger-text'] || '#a94442';
+  v['$state-danger-bg'] = u['$state-danger-bg'] || '#f2dede';
+  v['$state-danger-border'] = u['$state-danger-border'] || color(v['$state-danger-bg']).darken(0.05).toString();
+
+  // Define alert colors, border radius, and padding.
+
+  v['$alert-padding-x'] = u['$alert-padding-x'] || '1.25rem';
+  v['$alert-padding-y'] = u['$alert-padding-y'] || '.75rem';
+  v['$alert-margin-bottom'] = u['$alert-margin-bottom'] || v['$spacer-y'];
+  v['$alert-border-radius'] = u['$alert-border-radius'] || v['$border-radius'];
+  v['$alert-link-font-weight'] = u['$alert-link-font-weight'] || v['$font-weight-bold'];
+  v['$alert-border-width'] = u['$alert-border-width'] || v['$border-width'];
+
+  v['$alert-success-bg'] = u['$alert-success-bg'] || v['$state-success-bg'];
+  v['$alert-success-text'] = u['$alert-success-text'] || v['$state-success-text'];
+  v['$alert-success-border'] = u['$alert-success-border'] || v['$state-success-border'];
+
+  v['$alert-info-bg'] = u['$alert-info-bg'] || v['$state-info-bg'];
+  v['$alert-info-text'] = u['$alert-info-text'] || v['$state-info-text'];
+  v['$alert-info-border'] = u['$alert-info-border'] || v['$state-info-border'];
+
+  v['$alert-warning-bg'] = u['$alert-warning-bg'] || v['$state-warning-bg'];
+  v['$alert-warning-text'] = u['$alert-warning-text'] || v['$state-warning-text'];
+  v['$alert-warning-border'] = u['$alert-warning-border'] || v['$state-warning-border'];
+
+  v['$alert-danger-bg'] = u['$alert-danger-bg'] || v['$state-danger-bg'];
+  v['$alert-danger-text'] = u['$alert-danger-text'] || v['$state-danger-text'];
+  v['$alert-danger-border'] = u['$alert-danger-border'] || v['$state-danger-border'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$3();
+
+var detectUnit$1 = unitUtils$1.detectUnit;
+var rmUnit$2 = unitUtils$1.rmUnit;
+
+/**
+ * BOOTSTRAP THEME CLOSE
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$4 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Colors
+  //
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
+  v['$font-weight-bold'] = u['$font-weight-bold'] || 'bold';
+
+  // Close
+  v['$close-font-size'] = u['$close-font-size'] || rmUnit$2(v['$font-size-base']) * 1.5 + detectUnit$1(v['$font-size-base']);
+  v['$close-font-weight'] = u['$close-font-weight'] || v['$font-weight-bold'];
+  v['$close-color'] = u['$close-color'] || v['$black'];
+  v['$close-text-shadow'] = u['$close-text-shadow'] || '0 1px 0 ' + v['$white'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$4();
 
 var CloseUnstyled = function (_React$Component) {
   inherits(CloseUnstyled, _React$Component);
@@ -6651,6 +6566,8 @@ var CloseUnstyled = function (_React$Component) {
 
   createClass(CloseUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -6676,20 +6593,22 @@ var CloseUnstyled = function (_React$Component) {
           '\xD7'
         )
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CloseUnstyled;
 }(React.Component);
 
+CloseUnstyled.defaultProps = {
+  theme: makeTheme$4()
+};
 CloseUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  theme: PropTypes.object,
-  'sr-only': PropTypes.bool,
   className: PropTypes.string,
   closeLabel: PropTypes.string,
   cssModule: PropTypes.object,
-  onDismiss: PropTypes.func.isRequired
+  onDismiss: PropTypes.func.isRequired,
+  'sr-only': PropTypes.bool,
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -6697,24 +6616,12 @@ CloseUnstyled.propTypes = {
 var Close = styled(CloseUnstyled).withConfig({
   displayName: 'Close'
 })(['', ''], function (props) {
-  return '\n    float: right;\n    font-size: ' + props.theme['$close-font-size'] + ';\n    font-weight: ' + props.theme['$close-font-weight'] + ';\n    line-height: 1;\n    color: ' + props.theme['$close-color'] + ';\n    text-shadow: ' + props.theme['$close-text-shadow'] + ';\n    opacity: .2;\n    \n    &:focus {outline:0;}\n    \n    ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$close-color'] + ';\n        text-decoration: none;\n        cursor: pointer;\n        opacity: .5;\n      ') + '\n    \n    /* Additional properties for button version\n     iOS requires the button element instead of an anchor tag.\n     If you want the anchor version, it requires \'href="#"\'.\n     See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile\n     */\n    \n    /* scss-lint:disable QualifyingElement */\n    &button.close {\n      padding: 0;\n      cursor: pointer;\n      background: transparent;\n      border: 0;\n      -webkit-appearance: none;\n    }\n    /* scss-lint:enable QualifyingElement */\n  ';
+  return '\n    float: right;\n    font-size: ' + props.theme['$close-font-size'] + ';\n    font-weight: ' + props.theme['$close-font-weight'] + ';\n    line-height: 1;\n    color: ' + props.theme['$close-color'] + ';\n    text-shadow: ' + props.theme['$close-text-shadow'] + ';\n    opacity: .2;\n    \n    &:focus {outline:0;}\n    \n    ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$close-color'] + ';\n        text-decoration: none;\n        cursor: pointer;\n        opacity: .5;\n      ') + '\n    \n    /* Additional properties for button version\n     iOS requires the button element instead of an anchor tag.\n     If you want the anchor version, it requires \'href="#"\'.\n     See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile\n     */\n    \n    /* scss-lint:disable QualifyingElement */\n    &.close {\n      padding: 0;\n      cursor: pointer;\n      background: transparent;\n      border: 0;\n      -webkit-appearance: none;\n    }\n    /* scss-lint:enable QualifyingElement */\n  ';
 });
-
-Close.defaultProps = defaultProps$4;
 
 /**
  * Alert component
  */
-
-var defaultProps$3 = {
-  color: 'success',
-  isOpen: true,
-  tag: 'div',
-  transitionAppearTimeout: 150,
-  transitionEnterTimeout: 150,
-  transitionLeaveTimeout: 150,
-  theme: bsTheme
-};
 
 var FirstChild = function FirstChild(_ref) {
   var children = _ref.children;
@@ -6731,6 +6638,8 @@ var AlertUnstyled = function (_React$Component) {
 
   createClass(AlertUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -6740,10 +6649,10 @@ var AlertUnstyled = function (_React$Component) {
           isOpen = _omit.isOpen,
           toggle = _omit.toggle,
           children = _omit.children,
-          transitionAppearTimeout = _omit.transitionAppearTimeout,
-          transitionEnterTimeout = _omit.transitionEnterTimeout,
-          transitionLeaveTimeout = _omit.transitionLeaveTimeout,
-          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'color', 'isOpen', 'toggle', 'children', 'transitionAppearTimeout', 'transitionEnterTimeout', 'transitionLeaveTimeout']);
+          transitionAppear = _omit.transitionAppear,
+          transitionEnter = _omit.transitionEnter,
+          transitionLeave = _omit.transitionLeave,
+          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'color', 'isOpen', 'toggle', 'children', 'transitionAppear', 'transitionEnter', 'transitionLeave']);
 
       var classes = mapToCssModules(classnames(className, 'alert', 'alert-' + color, { 'alert-dismissible': toggle }), cssModule);
 
@@ -6766,21 +6675,29 @@ var AlertUnstyled = function (_React$Component) {
             leave: 'fade',
             leaveActive: 'out'
           },
-          transitionAppear: transitionAppearTimeout > 0,
-          transitionAppearTimeout: transitionAppearTimeout,
-          transitionEnter: transitionEnterTimeout > 0,
-          transitionEnterTimeout: transitionEnterTimeout,
-          transitionLeave: transitionLeaveTimeout > 0,
-          transitionLeaveTimeout: transitionLeaveTimeout
+          transitionAppear: transitionAppear > 0,
+          transitionAppearTimeout: transitionAppear,
+          transitionEnter: transitionEnter > 0,
+          transitionEnterTimeout: transitionEnter,
+          transitionLeave: transitionLeave > 0,
+          transitionLeaveTimeout: transitionLeave
         },
         isOpen ? alert$$1 : null
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return AlertUnstyled;
 }(React.Component);
 
+AlertUnstyled.defaultProps = {
+  color: 'success',
+  isOpen: true,
+  tag: 'div',
+  theme: makeTheme$3(),
+  transitionAppear: 150,
+  transitionEnter: 150,
+  transitionLeave: 150
+};
 AlertUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
@@ -6790,9 +6707,9 @@ AlertUnstyled.propTypes = {
   isOpen: PropTypes.bool,
   toggle: PropTypes.func,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  transitionAppearTimeout: PropTypes.number,
-  transitionEnterTimeout: PropTypes.number,
-  transitionLeaveTimeout: PropTypes.number,
+  transitionAppear: PropTypes.number,
+  transitionEnter: PropTypes.number,
+  transitionLeave: PropTypes.number,
   theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
@@ -6803,8 +6720,6 @@ var Alert = styled(AlertUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    /*\n    Base styles\n    */\n    \n    &.alert {\n      padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n      margin-bottom: ' + props.theme['$alert-margin-bottom'] + ';\n      border: ' + props.theme['$alert-border-width'] + ' solid transparent;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$alert-border-radius']) + '\n    }\n    \n    /* Headings for larger alerts */\n    &.alert-heading {\n      /* Specified to prevent conflicts of changing $headings-color */\n      color: inherit;\n    }\n    \n    /* Provide class for links that match alerts */\n    & .alert-link { \n      font-weight: ' + props.theme['$alert-link-font-weight'] + ';\n    }\n    \n    /* Dismissible alerts Expand the right padding and account for the close buttons positioning. */\n    \n    &.alert-dismissible {    \n      /* Adjust close link position */\n      & .close {\n        position: relative;\n        top: -' + props.theme['$alert-padding-y'] + ';\n        right: -' + props.theme['$alert-padding-x'] + ';\n        padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n        color: inherit;\n      }\n    }\n    /* Alternate styles Generate contextual modifier classes for colorizing the alert. */\n\n    &.alert-success {\n      ' + alert_1(props.theme['$alert-success-bg'], props.theme['$alert-success-border'], props.theme['$alert-success-text']) + '    \n    }\n    &.alert-info {\n      ' + alert_1(props.theme['$alert-info-bg'], props.theme['$alert-info-border'], props.theme['$alert-info-text']) + '\n    } \n    &.alert-warning {\n      ' + alert_1(props.theme['$alert-warning-bg'], props.theme['$alert-warning-border'], props.theme['$alert-warning-text']) + ' \n    }\n    &.alert-danger {\n      ' + alert_1(props.theme['$alert-danger-bg'], props.theme['$alert-danger-border'], props.theme['$alert-danger-text']) + ' \n    }\n  ';
 });
-
-Alert.defaultProps = defaultProps$3;
 
 var index = withTheme(Alert);
 
@@ -6819,17 +6734,68 @@ var Article = styled.article.withConfig({
   displayName: 'Article'
 })(['']);
 
+var rmUnit$3 = unitUtils$1.rmUnit;
+var UNIT$2 = unitUtils$1.UNIT;
+
+/**
+ * BOOTSTRAP THEME BLOCKQUOTE TAG
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$5 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+  // Create grayscale
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // =============================================================================================================
+  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$3(v['$spacer'], UNIT$2.REM) / 2 + UNIT$2.REM;
+  // =============================================================================================================
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
+
+  v['$blockquote-small-color'] = u['$blockquote-small-color'] || v['$gray-light'];
+  v['$blockquote-font-size'] = u['$blockquote-font-size'] || rmUnit$3(v['$font-size-base'], UNIT$2.REM) * 1.25 + UNIT$2.REM;
+  v['$blockquote-border-color'] = u['$blockquote-border-color'] || v['$gray-lighter'];
+  v['$blockquote-border-width'] = u['$blockquote-border-width'] || '.25rem';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$5();
+
 /* eslint dot-notation: 'off' */
 
 /**
  * Blockquote
  *
  */
-
-var defaultProps$5 = {
-  tag: 'blockquote',
-  theme: bsTheme
-};
 
 var BlockquoteUnstyled = function (_React$Component) {
   inherits(BlockquoteUnstyled, _React$Component);
@@ -6841,6 +6807,7 @@ var BlockquoteUnstyled = function (_React$Component) {
 
   createClass(BlockquoteUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -6853,12 +6820,15 @@ var BlockquoteUnstyled = function (_React$Component) {
           'blockquote-reverse': reverse
         })
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return BlockquoteUnstyled;
 }(React.Component);
 
+BlockquoteUnstyled.defaultProps = {
+  tag: 'blockquote',
+  theme: makeTheme$5()
+};
 BlockquoteUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -6875,7 +6845,30 @@ var Blockquote = styled(BlockquoteUnstyled).withConfig({
   return '\n    &.blockquote {\n      padding: ' + props.theme['$spacer-halved'] + ' ' + props.theme['$spacer'] + ';\n      margin-bottom: ' + props.theme['$spacer'] + ';\n      font-size: ' + props.theme['$blockquote-font-size'] + ';\n      border-left: ' + props.theme['$blockquote-border-width'] + ' solid ' + props.theme['$blockquote-border-color'] + ';\n      \n      .blockquote-footer {\n        display: block;\n        font-size: 80%; \n        color: ' + props.theme['$blockquote-small-color'] + ';\n        &::before {\n          content: \'\\2014 \\00A0\';\n        }\n      }\n    }\n\n    &.blockquote-reverse {\n      padding-right: ' + props.theme['$spacer'] + ';\n      padding-left: 0;\n      text-align: right;\n      border-right: ' + props.theme['$blockquote-border-width'] + ' solid ' + props.theme['$blockquote-border-color'] + ';\n      border-left: 0;\n      \n      .blockquote-footer {\n        display: block;\n        font-size: 80%; \n        color: ' + props.theme['$blockquote-small-color'] + ';\n        &::before {\n          content: "";\n        }\n        &::after {\n          content: \'\\00A0 \\2014\';\n        }\n      }\n    }\n    \n    /* Reboot from bootstrap v4 */\n    margin: 0 0 1rem;\n ';
 });
 
-Blockquote.defaultProps = defaultProps$5;
+var conditional = createCommonjsModule(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ifThen = ifThen;
+exports.ifElse = ifElse;
+function ifThen(conditions, returnTrue) {
+  return ifElse(conditions, returnTrue, '');
+}
+
+function ifElse(conditions, returnTrue, returnFalse) {
+  return conditions ? returnTrue : returnFalse;
+}
+
+exports.default = {
+  ifThen: ifThen,
+  ifElse: ifElse
+};
+});
+
+unwrapExports(conditional);
+var conditional_1 = conditional.ifThen;
 
 var align = createCommonjsModule(function (module, exports) {
 "use strict";
@@ -8130,9 +8123,42 @@ exports.default = parseTransition;
 module.exports = exports['default'];
 });
 
-var parseTransition = unwrapExports(parseTransition_1);
+unwrapExports(parseTransition_1);
 
-var transition$1 = createCommonjsModule(function (module, exports) {
+var transition_1$1 = createCommonjsModule(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.transition = transition;
+var defaultProps = exports.defaultProps = {
+  '$enable-transitions': true
+};
+
+// eslint-disable-next-line consistent-return
+function transition() {
+  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
+
+  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    args[_key - 1] = arguments[_key];
+  }
+
+  if (enableTransitions && args.length) {
+    return '\n      transition: ' + args.join(' ') + ';\n    ';
+  }
+  return '';
+}
+
+exports.default = {
+  transition: transition
+};
+});
+
+unwrapExports(transition_1$1);
+var transition_2$1 = transition_1$1.transition;
+
+var transition = createCommonjsModule(function (module, exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8170,14 +8196,14 @@ function fade() {
   var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
   var transitionFade = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$transition-fade'];
 
-  return '\n    .fade,\n     &.fade {\n      opacity: 0;\n      ' + (0, transition_1.transition)(enableTransitions, transitionFade) + '\n    \n      &.show {\n        opacity: 1;\n      }\n    }\n  ';
+  return '\n    .fade,\n     &.fade {\n      opacity: 0;\n      ' + (0, transition_1$1.transition)(enableTransitions, transitionFade) + '\n    \n      &.show {\n        opacity: 1;\n      }\n    }\n  ';
 }
 
 function collapse() {
   var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
   var transitionCollapse = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$transition-collapse'];
 
-  return '\n    .collapse {\n      display: none;\n      &.show {\n        display: block;\n      }\n    }\n    \n    tr {\n      &.collapse.show {\n        display: table-row;\n      }\n    }\n    \n    tbody {\n      &.collapse.show {\n        display: table-row-group;\n      }\n    }\n    \n    .collapsing {\n      position: relative;\n      height: 0;\n      overflow: hidden;\n      ' + (0, transition_1.transition)(enableTransitions, transitionCollapse) + '\n    }\n  ';
+  return '\n    .collapse {\n      display: none;\n      &.show {\n        display: block;\n      }\n    }\n    \n    tr {\n      &.collapse.show {\n        display: table-row;\n      }\n    }\n    \n    tbody {\n      &.collapse.show {\n        display: table-row-group;\n      }\n    }\n    \n    .collapsing {\n      position: relative;\n      height: 0;\n      overflow: hidden;\n      ' + (0, transition_1$1.transition)(enableTransitions, transitionCollapse) + '\n    }\n  ';
 }
 
 // function for get react transition (could even use filter and transform from mixin transition)
@@ -8189,7 +8215,7 @@ function getReactTransition(enableTransition, transition) {
       timingFunction = _transitionList$.timingFunction,
       delay = _transitionList$.delay;
 
-  return (0, transition_1.transition)(enableTransition, property + ' ' + duration + 'ms ' + timingFunction + ' ' + delay + 'ms');
+  return (0, transition_1$1.transition)(enableTransition, property + ' ' + duration + 'ms ' + timingFunction + ' ' + delay + 'ms');
 }
 
 exports.default = {
@@ -8201,8 +8227,8 @@ exports.default = {
 };
 });
 
-var transitionUtils = unwrapExports(transition$1);
-var transition_3$1 = transition$1.fade;
+var transitionUtils = unwrapExports(transition);
+var transition_3 = transition.fade;
 
 var visibility$1 = createCommonjsModule(function (module, exports) {
 "use strict";
@@ -8246,7 +8272,7 @@ exports.default = {
 
 var visibilityUtils = unwrapExports(visibility);
 
-var defaultProps$6 = {
+var defaultProps$1 = {
   theme: bsTheme,
   utils: {
     align: true,
@@ -8275,7 +8301,7 @@ var UtilityProvider = styled.div.withConfig({
   )) + '\n  ';
 });
 
-UtilityProvider.defaultProps = defaultProps$6;
+UtilityProvider.defaultProps = defaultProps$1;
 
 var BootstrapProvider = function (_React$Component) {
   inherits(BootstrapProvider, _React$Component);
@@ -8364,13 +8390,72 @@ BootstrapProvider.propTypes = {
 };
 
 /**
+ * BOOTSTRAP THEME BREADCRUMB TAG
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$6 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+  // Create grayscale
+
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  v['$spacer-x'] = u['$spacer-x'] || v['$spacer'];
+  v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
+
+  // Breadcrumbs
+
+  v['$breadcrumb-padding-y'] = u['$breadcrumb-padding-y'] || '.75rem';
+  v['$breadcrumb-padding-x'] = u['$breadcrumb-padding-x'] || '1rem';
+  v['$breadcrumb-item-padding'] = u['$breadcrumb-item-padding'] || '.5rem';
+
+  v['$breadcrumb-bg'] = u['$breadcrumb-bg'] || v['$gray-lighter'];
+  v['$breadcrumb-divider-color'] = u['$breadcrumb-divider-color'] || v['$gray-light'];
+  v['$breadcrumb-active-color'] = u['$breadcrumb-active-color'] || v['$gray-light'];
+  v['$breadcrumb-divider'] = u['$breadcrumb-divider'] || '"/"';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$6();
+
+/**
  * A Breadcrumb
  */
-
-var defaultProps$7 = {
-  theme: bsTheme,
-  tag: 'ol'
-};
 
 var BreadcrumbUnstyled = function (_React$Component) {
   inherits(BreadcrumbUnstyled, _React$Component);
@@ -8382,6 +8467,8 @@ var BreadcrumbUnstyled = function (_React$Component) {
 
   createClass(BreadcrumbUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -8392,12 +8479,15 @@ var BreadcrumbUnstyled = function (_React$Component) {
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'breadcrumb'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return BreadcrumbUnstyled;
 }(React.Component);
 
+BreadcrumbUnstyled.defaultProps = {
+  tag: 'ol',
+  theme: makeTheme$6()
+};
 BreadcrumbUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -8414,12 +8504,6 @@ var Breadcrumb = styled(BreadcrumbUnstyled).withConfig({
   return '\n    &.breadcrumb {\n      padding: ' + props.theme['$breadcrumb-padding-y'] + ' ' + props.theme['$breadcrumb-padding-x'] + ';\n      margin-bottom: ' + props.theme['$spacer-y'] + ';\n      list-style: none;\n      background-color: ' + props.theme['$breadcrumb-bg'] + ';\n \n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n            \n      ' + clearfix_2$1() + '\n    }\n\n    & .breadcrumb-item {\n      float: left;\n    \n      /* The separator between breadcrumbs (by default, a forward-slash: "/") */\n      + .breadcrumb-item::before {\n        display: inline-block; /* Suppress underlining of the separator in modern browsers */\n        padding-right: ' + props.theme['$breadcrumb-item-padding'] + ';\n        padding-left: ' + props.theme['$breadcrumb-item-padding'] + ';\n        color: ' + props.theme['$breadcrumb-divider-color'] + ';\n        content: ' + props.theme['$breadcrumb-divider'] + ';\n      }\n  \n      /* IE9-11 hack to properly handle hyperlink underlines for breadcrumbs built\n       without \'ul\'s. The \'::before\' pseudo-element generates an element\n       *within* the .breadcrumb-item and thereby inherits the \'text-decoration\'.\n      \n       To trick IE into suppressing the underline, we give the pseudo-element an\n       underline and then immediately remove it.\n      */\n      \n      + .breadcrumb-item:hover::before {\n        text-decoration: underline;\n      }\n      + .breadcrumb-item:hover::before {\n        text-decoration: none;\n      }\n    \n      &.active {\n        color: ' + props.theme['$breadcrumb-active-color'] + ';\n      }\n    }\n  ';
 });
 
-Breadcrumb.defaultProps = defaultProps$7;
-
-var defaultProps$8 = {
-  tag: 'li'
-};
-
 var BreadcrumbItem = function (_React$Component) {
   inherits(BreadcrumbItem, _React$Component);
 
@@ -8430,6 +8514,8 @@ var BreadcrumbItem = function (_React$Component) {
 
   createClass(BreadcrumbItem, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -8444,35 +8530,354 @@ var BreadcrumbItem = function (_React$Component) {
           active: active
         }), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return BreadcrumbItem;
 }(React.Component);
 
+BreadcrumbItem.defaultProps = {
+  tag: 'li'
+};
 BreadcrumbItem.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   active: PropTypes.bool,
   className: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
-
-
-BreadcrumbItem.defaultProps = defaultProps$8;
 
 /*
  * Kopax Ltd Copyright (c) 2016.
  */
 
+var boxShadow_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.boxShadow = boxShadow;
+var defaultProps = exports.defaultProps = {
+  '$enable-shadows': false
+};
+
+function boxShadow() {
+  var enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-shadows'];
+
+  if (enableShadows) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    return '\n      box-shadow: ' + args.join(' ') + ';\n    ';
+  }
+  return '';
+}
+
+exports.default = {
+  defaultProps: defaultProps,
+  boxShadow: boxShadow
+};
+});
+
+unwrapExports(boxShadow_1);
+var boxShadow_2 = boxShadow_1.boxShadow;
+
+var buttons = createCommonjsModule(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.buttonVariant = buttonVariant;
+exports.buttonOutlineVariant = buttonOutlineVariant;
+exports.buttonSize = buttonSize;
+exports.button = button;
+
+
+
+var _color2 = _interopRequireDefault(color);
+
+
+
+
+
+
+
+
+
+
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var defaultProps = exports.defaultProps = {
+  '$enable-shadows': true,
+  '$enable-hover-media-query': false,
+  '$enable-transitions': true,
+  '$enable-rounded': true,
+  '$font-weight-normal': 'normal',
+  '$btn-font-weight': 'normal',
+  '$btn-line-height': '1.25',
+  '$btn-transition': 'all .2s ease-in-out',
+  '$input-btn-border-width': '1px',
+  '$btn-padding-x': '1rem',
+  '$btn-padding-y': '.5rem',
+  '$font-size-base': '1rem',
+  '$btn-border-radius': '.25rem',
+  '$btn-box-shadow': 'inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075)',
+  '$btn-focus-box-shadow': '0 0 0 2px rgba(2, 117, 216, 0.25)',
+  '$btn-active-box-shadow': 'inset 0 3px 5px rgba(0, 0, 0, 0.125)',
+  '$cursor-disabled': 'not-allowed',
+  '$link-color': '#0275d8',
+  '$link-hover-color': 'hsl(207.79999999999995, 98.2%, 27.8%)',
+  '$link-hover-decoration': 'underline',
+  '$btn-link-disabled-color': '#636c72',
+  '$btn-padding-x-lg': '1.5rem',
+  '$btn-padding-y-lg': '.75rem',
+  '$font-size-lg': '1.25rem',
+  '$btn-border-radius-lg': '.3rem',
+  '$btn-padding-x-sm': '.5rem',
+  '$btn-padding-y-sm': '.25rem',
+  '$font-size-sm': '.875rem',
+  '$btn-border-radius-sm': '.2rem',
+  '$btn-block-spacing-y': '.5rem',
+  '$btn-primary-color': '#fff',
+  '$btn-primary-bg': '#0275d8',
+  '$btn-primary-border': '#0275d8',
+  '$btn-secondary-color': '#292b2c',
+  '$btn-secondary-bg': '#fff',
+  '$btn-secondary-border': '#ccc',
+  '$btn-info-color': '#fff',
+  '$btn-info-bg': '#5bc0de',
+  '$btn-info-border': '#5bc0de',
+  '$btn-success-color': '#fff',
+  '$btn-success-bg': '#5cb85c',
+  '$btn-success-border': '#5cb85c',
+  '$btn-warning-color': '#fff',
+  '$btn-warning-bg': '#f0ad4e',
+  '$btn-warning-border': '#f0ad4e',
+  '$btn-danger-color': '#fff',
+  '$btn-danger-bg': '#d9534f',
+  '$btn-danger-border': '#d9534f'
+};
+
+function buttonVariant() {
+  var enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-shadows'];
+  var buttonColor = arguments[1];
+  var background = arguments[2];
+  var border = arguments[3];
+  var btnActiveBoxShadow = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$btn-active-box-shadow'];
+  var btnBoxShadow = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$btn-box-shadow'];
+
+  var activeBackground = (0, _color2.default)(background).darken(0.2).toString();
+  var activeBorder = (0, _color2.default)(border).darken(0.12).toString();
+
+  return '\n    color: ' + buttonColor + ';\n    background-color: ' + background + ';\n    border-color: ' + border + ';\n    ' + (0, boxShadow_1.boxShadow)(enableShadows, btnBoxShadow) + '\n  \n    ' + (0, hover_1.hover)('\n      color: ' + buttonColor + ';\n      background-color: ' + activeBackground + ';\n      border-color: ' + activeBorder + ';\n    ') + '\n  \n    &:focus,\n    &.focus {\n      ' + (0, conditional.ifElse)('\n        box-shadow: ' + btnBoxShadow + ', 0 0 0 2px ' + (0, _color2.default)(border).alpha(0.5).toString() + ';\n      ', '\n        box-shadow: 0 0 0 2px ' + (0, _color2.default)(border).alpha(0.5).toString() + ';\n      ') + '\n    }\n  \n    /* Disabled comes first so active can properly restyle */\n    &.disabled,\n    &:disabled {\n      background-color: ' + background + ';\n      border-color: ' + border + ';\n    }\n    \n    &:active,\n    &.active,\n    .show > &.dropdown-toggle {\n      color: ' + buttonColor + ';\n      background-color: ' + activeBackground + ';\n      background-image: none;\n      border-color: ' + activeBorder + ';\n      ' + (0, boxShadow_1.boxShadow)(enableShadows, btnActiveBoxShadow) + '\n    }\n  ';
+}
+
+function buttonOutlineVariant(buttonColor) {
+  var buttonColorHover = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#fff';
+
+  return '\n    color: ' + buttonColor + ';\n    background-image: none;\n    background-color: transparent;\n    border-color: ' + buttonColor + ';\n  \n    ' + (0, hover_1.hover)('\n      color: ' + buttonColorHover + ';\n      background-color: ' + buttonColor + ';\n      border-color: ' + buttonColor + ';\n    ') + '\n  \n    &:focus,\n    &.focus {\n      box-shadow: 0 0 0 2px ' + (0, _color2.default)(buttonColor).alpha(0.5).toString() + ';\n    }\n  \n    &.disabled,\n    &:disabled {\n      color: ' + buttonColor + ';\n      border-color: transparent;\n    }\n    \n    &:active,\n    &.active,\n    & .open > &.dropdown-toggle {\n      color: ' + buttonColorHover + ';\n      background-color: ' + buttonColor + ';\n      border-color: ' + buttonColor + ';\n    }\n  ';
+}
+
+// Button sizes
+function buttonSize() {
+  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
+  var paddingY = arguments[1];
+  var paddingX = arguments[2];
+  var fontSize = arguments[3];
+  var btnBorderRadius = arguments[4];
+
+  return '\n    padding: ' + paddingY + ' ' + paddingX + ';\n    font-size: ' + fontSize + ';\n    ' + (0, borderRadius_1.borderRadius)(enableRounded, btnBorderRadius) + '\n  ';
+}
+
+function button() {
+  var $enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-shadows'];
+  var $enableHoverMediaQuery = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$enable-hover-media-query'];
+  var $enableTransitions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$enable-transitions'];
+  var $enableRounded = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$enable-rounded'];
+  var $fontWeightNormal = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$font-weight-normal'];
+  var $btnFontWeight = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$btn-font-weight'];
+  var $btnLineHeight = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$btn-line-height'];
+  var $btnTransition = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$btn-transition'];
+  var $inputBtnBorderWidth = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps['$input-btn-border-width'];
+  var $btnPaddingX = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps['$btn-padding-x'];
+  var $btnPaddingY = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps['$btn-padding-y'];
+  var $fontSizeBase = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps['$font-size-base'];
+  var $btnBorderRadius = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps['$btn-border-radius'];
+  var $btnBoxShadow = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : defaultProps['$btn-box-shadow'];
+  var $btnFocusBoxShadow = arguments.length > 14 && arguments[14] !== undefined ? arguments[14] : defaultProps['$btn-focus-box-shadow'];
+  var $btnActiveBoxShadow = arguments.length > 15 && arguments[15] !== undefined ? arguments[15] : defaultProps['$btn-active-box-shadow'];
+  var $cursorDisabled = arguments.length > 16 && arguments[16] !== undefined ? arguments[16] : defaultProps['$cursor-disabled'];
+  var $linkColor = arguments.length > 17 && arguments[17] !== undefined ? arguments[17] : defaultProps['$link-color'];
+  var $linkHoverColor = arguments.length > 18 && arguments[18] !== undefined ? arguments[18] : defaultProps['$link-hover-color'];
+  var $linkHoverDecoration = arguments.length > 19 && arguments[19] !== undefined ? arguments[19] : defaultProps['$link-hover-decoration'];
+  var $btnLinkDisabledColor = arguments.length > 20 && arguments[20] !== undefined ? arguments[20] : defaultProps['$btn-link-disabled-color'];
+  var $btnPaddingXLg = arguments.length > 21 && arguments[21] !== undefined ? arguments[21] : defaultProps['$btn-padding-x-lg'];
+  var $btnPaddingYLg = arguments.length > 22 && arguments[22] !== undefined ? arguments[22] : defaultProps['$btn-padding-y-lg'];
+  var $fontSizeLg = arguments.length > 23 && arguments[23] !== undefined ? arguments[23] : defaultProps['$font-size-lg'];
+  var $btnBorderRadiusLg = arguments.length > 24 && arguments[24] !== undefined ? arguments[24] : defaultProps['$btn-border-radius-lg'];
+  var $btnPaddingXSm = arguments.length > 25 && arguments[25] !== undefined ? arguments[25] : defaultProps['$btn-padding-x-sm'];
+  var $btnPaddingYSm = arguments.length > 26 && arguments[26] !== undefined ? arguments[26] : defaultProps['$btn-padding-y-sm'];
+  var $fontSizeSm = arguments.length > 27 && arguments[27] !== undefined ? arguments[27] : defaultProps['$font-size-sm'];
+  var $btnBorderRadiusSm = arguments.length > 28 && arguments[28] !== undefined ? arguments[28] : defaultProps['$btn-border-radius-sm'];
+  var $btnBlockSpacingY = arguments.length > 29 && arguments[29] !== undefined ? arguments[29] : defaultProps['$btn-block-spacing-y'];
+  var $btnPrimaryColor = arguments.length > 30 && arguments[30] !== undefined ? arguments[30] : defaultProps['$btn-primary-color'];
+  var $btnPrimaryBg = arguments.length > 31 && arguments[31] !== undefined ? arguments[31] : defaultProps['$btn-primary-bg'];
+  var $btnPrimaryBorder = arguments.length > 32 && arguments[32] !== undefined ? arguments[32] : defaultProps['$btn-primary-border'];
+  var $btnSecondaryColor = arguments.length > 33 && arguments[33] !== undefined ? arguments[33] : defaultProps['$btn-secondary-color'];
+  var $btnSecondaryBg = arguments.length > 34 && arguments[34] !== undefined ? arguments[34] : defaultProps['$btn-secondary-bg'];
+  var $btnSecondaryBorder = arguments.length > 35 && arguments[35] !== undefined ? arguments[35] : defaultProps['$btn-secondary-border'];
+  var $btnInfoColor = arguments.length > 36 && arguments[36] !== undefined ? arguments[36] : defaultProps['$btn-info-color'];
+  var $btnInfoBg = arguments.length > 37 && arguments[37] !== undefined ? arguments[37] : defaultProps['$btn-info-bg'];
+  var $btnInfoBorder = arguments.length > 38 && arguments[38] !== undefined ? arguments[38] : defaultProps['$btn-info-border'];
+  var $btnSuccessColor = arguments.length > 39 && arguments[39] !== undefined ? arguments[39] : defaultProps['$btn-success-color'];
+  var $btnSuccessBg = arguments.length > 40 && arguments[40] !== undefined ? arguments[40] : defaultProps['$btn-success-bg'];
+  var $btnSuccessBorder = arguments.length > 41 && arguments[41] !== undefined ? arguments[41] : defaultProps['$btn-success-border'];
+  var $btnWarningColor = arguments.length > 42 && arguments[42] !== undefined ? arguments[42] : defaultProps['$btn-warning-color'];
+  var $btnWarningBg = arguments.length > 43 && arguments[43] !== undefined ? arguments[43] : defaultProps['$btn-warning-bg'];
+  var $btnWarningBorder = arguments.length > 44 && arguments[44] !== undefined ? arguments[44] : defaultProps['$btn-warning-border'];
+  var $btnDangerColor = arguments.length > 45 && arguments[45] !== undefined ? arguments[45] : defaultProps['$btn-danger-color'];
+  var $btnDangerBg = arguments.length > 46 && arguments[46] !== undefined ? arguments[46] : defaultProps['$btn-danger-bg'];
+  var $btnDangerBorder = arguments.length > 47 && arguments[47] !== undefined ? arguments[47] : defaultProps['$btn-danger-border'];
+
+  return '\n  \n    font-family: inherit;\n    \n    &.btn {\n      display: inline-block;\n      font-weight: ' + $btnFontWeight + ';\n      line-height: ' + $btnLineHeight + ';\n      text-align: center;\n      white-space: nowrap;\n      vertical-align: middle;\n      user-select: none;\n      border: ' + $inputBtnBorderWidth + ' solid transparent;\n      ' + buttonSize($enableRounded, $btnPaddingY, $btnPaddingX, $fontSizeBase, $btnBorderRadius) + '\n      ' + (0, transition_1$1.transition)($enableTransitions, $btnTransition) + '\n      ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'text-decoration: none;') + '\n\n      &:focus,\n      &.focus {\n        outline: 0;\n        box-shadow: ' + $btnFocusBoxShadow + ';\n      }\n\n      &.disabled,\n      &:disabled {\n        cursor: ' + $cursorDisabled + ';\n        opacity: .65;\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, 'none') + '\n      }  \n\n      &:active,\n      &.active {\n        background-image: none;\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $btnFocusBoxShadow, $btnActiveBoxShadow) + '\n      }\n    }\n    \n    a.btn.disabled,\n    fieldset[disabled] a.btn {\n      pointer-events: none;\n    }\n   \n   \n    /* Alternate buttons */\n   \n    &.btn-primary {\n      ' + buttonVariant($enableShadows, $btnPrimaryColor, $btnPrimaryBg, $btnPrimaryBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-secondary {\n      ' + buttonVariant($enableShadows, $btnSecondaryColor, $btnSecondaryBg, $btnSecondaryBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-info {\n      ' + buttonVariant($enableShadows, $btnInfoColor, $btnInfoBg, $btnInfoBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-success {\n      ' + buttonVariant($enableShadows, $btnSuccessColor, $btnSuccessBg, $btnSuccessBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-warning {\n      ' + buttonVariant($enableShadows, $btnWarningColor, $btnWarningBg, $btnWarningBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-danger {\n      ' + buttonVariant($enableShadows, $btnDangerColor, $btnDangerBg, $btnDangerBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n   \n    &.btn-outline-primary {\n      ' + buttonOutlineVariant($btnPrimaryBg, $btnPrimaryColor) + '\n    }    \n    &.btn-outline-secondary {\n      ' + buttonOutlineVariant($btnSecondaryBorder, $btnSecondaryColor) + '\n    }    \n    &.btn-outline-info {\n      ' + buttonOutlineVariant($btnInfoBg, $btnInfoColor) + '\n    }    \n    &.btn-outline-success {\n      ' + buttonOutlineVariant($btnSuccessBg, $btnSuccessColor) + '\n    }\n    &.btn-outline-warning {\n      ' + buttonOutlineVariant($btnWarningBg, $btnWarningColor) + '\n    }\n    &.btn-outline-danger {\n      ' + buttonOutlineVariant($btnDangerBg, $btnDangerColor) + '\n    }\n   \n    /*\n     Link buttons\n    */\n   \n    &.btn-link {\n      font-weight: ' + $fontWeightNormal + ';\n      color: ' + $linkColor + ';\n      border-radius: 0;\n   \n      &,\n      &:active,\n      &.active,\n      &:disabled {\n        background-color: transparent;\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, 'none') + '\n      }\n     \n      &,\n      &:focus,\n      &:active {\n        border-color: transparent;\n      }\n     \n      ' + (0, hover_1.hover)('border-color: transparent;') + '\n     \n      ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, '\n        color: ' + $linkHoverColor + ';\n        text-decoration: ' + $linkHoverDecoration + ';\n        background-color: transparent;\n      ') + '\n     \n      &:disabled {\n        color: ' + $btnLinkDisabledColor + ';\n        ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, '\n          text-decoration: none;\n        ') + '\n      }\n    }\n  \n  \n    /*\n     Button Sizes\n    */\n   \n    &.btn-lg {\n      /* line-height: ensure even-numbered height of button next to large input */\n      ' + buttonSize($enableRounded, $btnPaddingYLg, $btnPaddingXLg, $fontSizeLg, $btnBorderRadiusLg) + '\n    }\n   \n    &.btn-sm {\n      /* line-height: ensure proper height of button next to small input */\n      ' + buttonSize($enableRounded, $btnPaddingYSm, $btnPaddingXSm, $fontSizeSm, $btnBorderRadiusSm) + '\n    }\n   \n   \n    /*\n     Block button\n    */\n   \n    &.btn-block {\n      display: block;\n      width: 100%;\n    }\n   \n    /* Vertically space out multiple block buttons */\n    &.btn-block + .btn-block {\n      margin-top: ' + $btnBlockSpacingY + ';\n    }\n   \n    /* Specificity overrides */\n    input[type="submit"],\n    input[type="reset"],\n    input[type="button"] {\n      &.btn-block {\n        width: 100%;\n      }\n    }\n   \n    /* Reboot Scss */\n    touch-action: manipulation;\n    line-height: inherit;\n    &:focus{\n      outline: 1px dotted;\n      outline: 5px auto -webkit-focus-ring-color;\n    }\n    \n    &[type="button"],\n    &[type="reset"],\n    &[type="submit"] {\n      -webkit-appearance: button;\n    }\n    \n    &::-moz-focus-inner,\n    &[type="button"]::-moz-focus-inner,\n    &[type="reset"]::-moz-focus-inner,\n    &[type="submit"]::-moz-focus-inner {\n      padding: 0;\n      border-style: none;\n    }\n\n  ';
+}
+
+exports.default = {
+  defaultProps: defaultProps,
+  buttonVariant: buttonVariant,
+  buttonOutlineVariant: buttonOutlineVariant,
+  buttonSize: buttonSize,
+  button: button
+};
+});
+
+unwrapExports(buttons);
+var buttons_5 = buttons.button;
+
+/**
+ * BOOTSTRAP THEME BUTTON TAG
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$7 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+  v['$green'] = u['$green'] || '#5cb85c';
+  v['$teal'] = u['$teal'] || '#5bc0de';
+  v['$orange'] = u['$orange'] || '#f0ad4e';
+  v['$red'] = u['$red'] || '#d9534f';
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+  v['$brand-success'] = u['$brand-success'] || v['$green'];
+  v['$brand-info'] = u['$brand-info'] || v['$teal'];
+  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
+  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+  v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
+
+  // Buttons
+  //
+  // For each of Bootstrap's buttons, define text, background and border color.
+
+  v['$btn-padding-x'] = u['$btn-padding-x'] || '1rem';
+  v['$btn-padding-y'] = u['$btn-padding-y'] || '.5rem';
+  v['$btn-line-height'] = u['$btn-line-height'] || '1.25';
+  v['$btn-font-weight'] = u['$btn-font-weight'] || v['$font-weight-normal'];
+  v['$btn-box-shadow'] = u['$btn-box-shadow'] || 'inset 0 1px 0 ' + color(v['$white']).alpha(0.15).toString() + ', 0 1px 1px ' + color(v['$black']).alpha(0.075).toString();
+  v['$btn-focus-box-shadow'] = u['$btn-focus-box-shadow'] || '0 0 0 2px ' + color(v['$brand-primary']).alpha(0.25).toString();
+  v['$btn-active-box-shadow'] = u['$btn-active-box-shadow'] || 'inset 0 3px 5px ' + color(v['$black']).alpha(0.125).toString();
+
+  v['$btn-primary-color'] = u['$btn-primary-color'] || v['$white'];
+  v['$btn-primary-bg'] = u['$btn-primary-bg'] || v['$brand-primary'];
+  v['$btn-primary-border'] = u['$btn-primary-border'] || v['$btn-primary-bg'];
+
+  v['$btn-secondary-color'] = u['$btn-secondary-color'] || v['$gray-dark'];
+  v['$btn-secondary-bg'] = u['$btn-secondary-bg'] || v['$white'];
+  v['$btn-secondary-border'] = u['$btn-secondary-border'] || '#ccc';
+
+  v['$btn-info-color'] = u['$btn-info-color'] || v['$white'];
+  v['$btn-info-bg'] = u['$btn-info-bg'] || v['$brand-info'];
+  v['$btn-info-border'] = u['$btn-info-border'] || v['$btn-info-bg'];
+
+  v['$btn-success-color'] = u['$btn-success-color'] || v['$white'];
+  v['$btn-success-bg'] = u['$btn-success-bg'] || v['$brand-success'];
+  v['$btn-success-border'] = u['$btn-success-border'] || v['$btn-success-bg'];
+
+  v['$btn-warning-color'] = u['$btn-warning-color'] || v['$white'];
+  v['$btn-warning-bg'] = u['$btn-warning-bg'] || v['$brand-warning'];
+  v['$btn-warning-border'] = u['$btn-warning-border'] || v['$btn-warning-bg'];
+
+  v['$btn-danger-color'] = u['$btn-danger-color'] || v['$white'];
+  v['$btn-danger-bg'] = u['$btn-danger-bg'] || v['$brand-danger'];
+  v['$btn-danger-border'] = u['$btn-danger-border'] || v['$btn-danger-bg'];
+
+  v['$btn-link-disabled-color'] = u['$btn-link-disabled-color'] || v['$gray-light'];
+
+  v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || '.5rem';
+  v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
+
+  v['$btn-padding-x-lg'] = u['$btn-padding-x-lg'] || '1.5rem';
+  v['$btn-padding-y-lg'] = u['$btn-padding-y-lg'] || '.75rem';
+
+  v['$btn-block-spacing-y'] = u['$btn-block-spacing-y'] || '.5rem';
+
+  // Allows for customizing button radius independently from global border radius
+  v['$btn-border-radius'] = u['$btn-border-radius'] || v['$border-radius'];
+  v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
+  v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
+
+  v['$btn-transition'] = u['$btn-transition'] || 'all .2s ease-in-out';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$7();
+
 /**
  * A button with natures
  */
-
-var defaultProps$9 = {
-  theme: bsTheme,
-  tag: 'button',
-  color: 'secondary'
-};
 
 var ButtonUnstyled = function (_React$Component) {
   inherits(ButtonUnstyled, _React$Component);
@@ -8543,6 +8948,11 @@ var ButtonUnstyled = function (_React$Component) {
   return ButtonUnstyled;
 }(React.Component);
 
+ButtonUnstyled.defaultProps = {
+  tag: 'button',
+  color: 'secondary',
+  theme: makeTheme$7()
+};
 ButtonUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   active: PropTypes.bool,
@@ -8567,8 +8977,6 @@ var Button = styled(ButtonUnstyled).withConfig({
 })(['', ' '], function (props) {
   return '\n    ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
-
-Button.defaultProps = defaultProps$9;
 
 var navDivider_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -8676,15 +9084,151 @@ exports.default = {
 unwrapExports(buttonGroup_1);
 var buttonGroup_3 = buttonGroup_1.buttonGroup;
 
-var propTypes$1 = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  children: PropTypes.node.isRequired,
-  right: PropTypes.bool,
-  className: PropTypes.string,
-  cssModule: PropTypes.object
+var rmUnit$4 = unitUtils$1.rmUnit;
+var UNIT$3 = unitUtils$1.UNIT;
+
+/**
+ * BOOTSTRAP THEME DROPDOWN
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$8 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+  v['$enable-gradients'] = allowFalseValue(u['$enable-gradients'], false);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Colors
+  //
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+  v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
+  v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
+  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+
+  // Z-index master list
+  //
+  // Warning = 'Avoid customizing these values. They're used for a bird's eye view
+  // of components dependent on the z-axis and are designed to all work together.
+
+  v['$zindex-dropdown-backdrop'] = u['$zindex-dropdown-backdrop'] || '990';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+  v['$component-active-color'] = u['$component-active-color'] || v['$white'];
+  v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
+  v['$caret-width'] = u['$caret-width'] || '.3em';
+  v['$line-height-lg'] = u['$line-height-lg'] || '1.6';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  // Forms
+  v['$input-padding-y-lg'] = u['$input-padding-y-lg'] || '.75rem';
+
+  // Dropdowns
+  //
+  // Dropdown menu container and contents.
+
+  v['$dropdown-min-width'] = u['$dropdown-min-width'] || '10rem';
+  v['$dropdown-padding-y'] = u['$dropdown-padding-y'] || '.5rem';
+  v['$dropdown-margin-top'] = u['$dropdown-margin-top'] || '.125rem';
+  v['$dropdown-bg'] = u['$dropdown-bg'] || v['$white'];
+  v['$dropdown-border-color'] = u['$dropdown-border-color'] || color(v['$black']).alpha(0.15).toString();
+  v['$dropdown-border-width'] = u['$dropdown-border-width'] || v['$border-width'];
+  v['$dropdown-divider-bg'] = u['$dropdown-divider-bg'] || v['$gray-lighter'];
+  v['$dropdown-box-shadow'] = u['$dropdown-box-shadow'] || '0 .5rem 1rem rgba(' + v['$black'] + ',.175)';
+
+  v['$dropdown-link-color'] = u['$dropdown-link-color'] || v['$gray-dark'];
+  v['$dropdown-link-hover-color'] = u['$dropdown-link-hover-color'] || color(v['$gray-dark']).darken(0.05).toString();
+  v['$dropdown-link-hover-bg'] = u['$dropdown-link-hover-bg'] || v['$gray-lightest'];
+
+  v['$dropdown-link-active-color'] = u['$dropdown-link-active-color'] || v['$component-active-color'];
+  v['$dropdown-link-active-bg'] = u['$dropdown-link-active-bg'] || v['$component-active-bg'];
+
+  v['$dropdown-link-disabled-color'] = u['$dropdown-link-disabled-color'] || v['$gray-light'];
+
+  v['$dropdown-item-padding-x'] = u['$dropdown-item-padding-x'] || '1.5rem';
+
+  v['$dropdown-header-color'] = u['$dropdown-header-color'] || v['$gray-light'];
+
+  // Forms
+  v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width']; // For form controls and buttons
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+
+  // Buttons
+  //
+  // For each of Bootstrap's buttons, define text, background and border color.
+
+  v['$btn-padding-x'] = u['$btn-padding-x'] || '1rem';
+  v['$btn-active-box-shadow'] = u['$btn-active-box-shadow'] || 'inset 0 3px 5px ' + color(v['$black']).alpha(0.125).toString();
+  v['$btn-padding-x-lg'] = u['$btn-padding-x-lg'] || '1.5rem';
+  v['$btn-padding-y-lg'] = u['$btn-padding-y-lg'] || '.75rem';
+
+  v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
+  v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
+
+  v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || '.5rem';
+  v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
+
+  v['$input-height-lg'] = u['$input-height-lg'] || rmUnit$4(v['$font-size-lg'], UNIT$3.REM) * v['$line-height-lg'] + rmUnit$4(v['$input-padding-y-lg'], UNIT$3.REM) * 2 + UNIT$3.REM;
+
+  return Object.assign({}, u, v);
 };
 
-var defaultProps$11 = {
+makeTheme$8();
+
+var propTypes$1 = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  cssModule: PropTypes.object,
+  right: PropTypes.bool,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+};
+
+var defaultProps$2 = {
   tag: 'div'
 };
 
@@ -8705,7 +9249,7 @@ var DropdownMenu = function DropdownMenu(props, context) {
 };
 
 DropdownMenu.propTypes = propTypes$1;
-DropdownMenu.defaultProps = defaultProps$11;
+DropdownMenu.defaultProps = defaultProps$2;
 DropdownMenu.contextTypes = contextTypes;
 
 var tether = createCommonjsModule(function (module, exports) {
@@ -10462,11 +11006,6 @@ return Tether;
  * A Tether Content component
  */
 
-var defaultProps$12 = {
-  isOpen: false,
-  tetherRef: function tetherRef() {}
-};
-
 var TetherContent = function (_React$Component) {
   inherits(TetherContent, _React$Component);
 
@@ -10567,6 +11106,10 @@ var TetherContent = function (_React$Component) {
   return TetherContent;
 }(React.Component);
 
+TetherContent.defaultProps = {
+  isOpen: false,
+  tetherRef: function tetherRef() {}
+};
 TetherContent.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
@@ -10578,22 +11121,13 @@ TetherContent.propTypes = {
   style: PropTypes.node
 };
 
-
-TetherContent.defaultProps = defaultProps$12;
-
 /**
  * Dropdown
  */
 
-var defaultProps$10 = {
-  isOpen: false,
-  tag: 'div',
-  theme: bsTheme
-};
-
 var defaultTetherConfig = {
-  classPrefix: 'bs-tether',
   classes: { element: 'dropdown', enabled: 'show' },
+  classPrefix: 'bs-tether',
   constraints: [{ to: 'scrollParent', attachment: 'together none' }, { to: 'window', attachment: 'together none' }]
 };
 
@@ -10660,8 +11194,8 @@ var DropdownUnstyled = function (_React$Component) {
     key: 'getChildContext',
     value: function getChildContext() {
       return {
-        toggle: this.props.toggle,
-        isOpen: this.props.isOpen
+        isOpen: this.props.isOpen,
+        toggle: this.props.toggle
       };
     }
   }, {
@@ -10757,7 +11291,15 @@ var DropdownUnstyled = function (_React$Component) {
   return DropdownUnstyled;
 }(React.Component);
 
+DropdownUnstyled.defaultProps = {
+  isOpen: false,
+  tag: 'div',
+  theme: makeTheme$8()
+};
 DropdownUnstyled.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  cssModule: PropTypes.object,
   disabled: PropTypes.bool,
   dropup: PropTypes.bool,
   group: PropTypes.bool,
@@ -10766,24 +11308,19 @@ DropdownUnstyled.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   tether: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   toggle: PropTypes.func,
-  children: PropTypes.node,
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
   theme: PropTypes.object
 };
 DropdownUnstyled.childContextTypes = {
-  toggle: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired
+  isOpen: PropTypes.bool.isRequired,
+  toggle: PropTypes.func.isRequired
 };
 
 
 var Dropdown = styled(DropdownUnstyled).withConfig({
   displayName: 'Dropdown'
 })(['', ''], function (props) {
-  return '\n    &.dropup,\n    &.dropdown {\n      position: relative;\n    }\n\n    & .dropdown-hide {\n      display: none;\n    }\n    \n    & .dropdown-toggle {\n      /* Generate the caret automatically */\n      &::after {\n        display: inline-block;\n        width: 0;\n        height: 0;\n        margin-left: ' + props.theme['$caret-width'] + ';\n        vertical-align: middle;\n        content: \'\';\n        border-top: ' + props.theme['$caret-width'] + ' solid;\n        border-right: ' + props.theme['$caret-width'] + ' solid transparent;\n        border-left: ' + props.theme['$caret-width'] + ' solid transparent;\n      }\n\n      /* Prevent the focus on the dropdown toggle when closing dropdowns */\n      &:focus {\n        outline: 0;\n      }\n    }\n\n    &.dropup {\n      .dropdown-toggle {\n        &::after {\n          border-top: 0;\n          border-bottom: ' + props.theme['$caret-width'] + ' solid;\n        }\n      }\n    }\n\n    & .dropdown-menu {\n      clear: left;\n      position: absolute;\n      top: 100%;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown'] + ';\n      display: none; // none by default, but block on "open" of the menu\n      float: left;\n      min-width: ' + props.theme['$dropdown-min-width'] + ';\n      padding: ' + props.theme['$dropdown-padding-y'] + ' 0;\n      margin: ' + props.theme['$dropdown-margin-top'] + ' 0; /* override default ul */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      color: ' + props.theme['$body-color'] + ';\n      text-align: left; /* Ensures proper alignment if parent has it changed (e.g., modal footer) */\n      list-style: none;\n      background-color: ' + props.theme['$dropdown-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$dropdown-border-width'] + ' solid ' + props.theme['$dropdown-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$dropdown-box-shadow']) + '\n    }\n\n    /* mixin from bootstrap 4, see : scss/mixins/_nav-divider.css */\n    & .dropdown-divider {\n      ' + navDivider_3(props.theme['$spacer-y'], props.theme['$dropdown-divider-bg']) + '\n    }\n\n    & .dropdown-item {\n      display: block;\n      width: 100%; /* For <button>s */\n      padding: 3px ' + props.theme['$dropdown-item-padding-x'] + ';\n      clear: both;\n      font-weight: ' + props.theme['$font-weight-normal'] + ';\n      color: ' + props.theme['$dropdown-link-color'] + ';\n      text-align: inherit; /* For <button>s */\n      white-space: nowrap; /* prevent links from randomly breaking onto new lines */\n      background: none; /* For <button>s */\n      border: 0; /* For <button>s */\n\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$dropdown-link-hover-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-hover-bg'] + '\n      ') + '\n\n      &.active,\n      &:active {\n        color: ' + props.theme['$dropdown-link-active-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-active-bg'] + '\n      }\n\n      &.disabled,\n      &:disabled{\n        color: ' + props.theme['$dropdown-link-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: transparent;\n        ' + conditional_1(props.theme['$enabled-gradients'], 'background-image: none; /* Remove CSS gradient */') + '\n      }\n    }\n\n    &.show {\n      /* show the menu */\n      &>.dropdown-menu {\n        display: block;\n      }\n\n      & > a {\n        outline: 0;\n      }\n    }\n\n\n    /* Menu positioning */\n\n    /* Add extra class to .dropdown-menu to flip the alignment of the dropdown*\n    /* menu with the parent. */\n    & .dropdown-menu-right {\n      right: 0;\n      left: auto; /* Reset the default from .dropdown-menu */\n    }\n\n    & .dropdown-menu-left {\n      right: auto;\n      left: 0;\n    }\n\n    /* Dropdown section headers */\n    & .dropdown-header {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    /* Dropdown section footers */\n    & .dropdown-footer {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    \n\n    /* Backdrop to catch body clicks on mobile, etc. */\n    & .dropdown-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown-backdrop'] + ';\n    }\n\n    /* Allow for dropdowns to go bottom up (aka, dropup-menu) */\n\n    /* Just add .dropup after the standard .dropdown class and you\'re set. */\n    /* TODO: abstract this so that the navbar fixed styles are not placed here? */\n\n    &.dropup {\n      .dropdown-menu {\n        top: auto;\n        bottom: 100%;\n        margin-bottom: ' + props.theme['$dropdown-margin-top'] + ';\n      }\n    }\n        \n    /* Added Mixin boutonGroup to enable dropdown to beneficiate from buttonGroup classes */\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
+  return '\n    &.dropup,\n    &.dropdown {\n      position: relative;\n    }\n\n    & .dropdown-hide {\n      display: none;\n    }\n    \n    & .dropdown-toggle {\n      /* Generate the caret automatically */\n      &::after {\n        display: inline-block;\n        width: 0;\n        height: 0;\n        margin-left: ' + props.theme['$caret-width'] + ';\n        vertical-align: middle;\n        content: \'\';\n        border-top: ' + props.theme['$caret-width'] + ' solid;\n        border-right: ' + props.theme['$caret-width'] + ' solid transparent;\n        border-left: ' + props.theme['$caret-width'] + ' solid transparent;\n      }\n\n      /* Prevent the focus on the dropdown toggle when closing dropdowns */\n      &:focus {\n        outline: 0;\n      }\n    }\n\n    &.dropup {\n      .dropdown-toggle {\n        &::after {\n          border-top: 0;\n          border-bottom: ' + props.theme['$caret-width'] + ' solid;\n        }\n      }\n    }\n\n    & .dropdown-menu {\n      clear: left;\n      position: absolute;\n      top: 100%;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown'] + ';\n      display: none; // none by default, but block on "open" of the menu\n      float: left;\n      min-width: ' + props.theme['$dropdown-min-width'] + ';\n      padding: ' + props.theme['$dropdown-padding-y'] + ' 0;\n      margin: ' + props.theme['$dropdown-margin-top'] + ' 0; /* override default ul */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      color: ' + props.theme['$body-color'] + ';\n      text-align: left; /* Ensures proper alignment if parent has it changed (e.g., modal footer) */\n      list-style: none;\n      background-color: ' + props.theme['$dropdown-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$dropdown-border-width'] + ' solid ' + props.theme['$dropdown-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$dropdown-box-shadow']) + '\n    }\n\n    /* mixin from bootstrap 4, see : scss/mixins/_nav-divider.css */\n    & .dropdown-divider {\n      ' + navDivider_3(props.theme['$spacer-y'], props.theme['$dropdown-divider-bg']) + '\n    }\n\n    & .dropdown-item {\n      display: block;\n      width: 100%; /* For <button>s */\n      padding: 3px ' + props.theme['$dropdown-item-padding-x'] + ';\n      clear: both;\n      font-weight: ' + props.theme['$font-weight-normal'] + ';\n      color: ' + props.theme['$dropdown-link-color'] + ';\n      text-align: inherit; /* For <button>s */\n      white-space: nowrap; /* prevent links from randomly breaking onto new lines */\n      background: none; /* For <button>s */\n      border: 0; /* For <button>s */\n\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$dropdown-link-hover-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-hover-bg'] + '\n      ') + '\n\n      &.active,\n      &:active {\n        color: ' + props.theme['$dropdown-link-active-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-active-bg'] + '\n      }\n\n      &.disabled,\n      &:disabled{\n        color: ' + props.theme['$dropdown-link-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: transparent;\n        ' + conditional_1(props.theme['$enable-gradients'], 'background-image: none; /* Remove CSS gradient */') + '\n      }\n    }\n\n    &.show {\n      /* show the menu */\n      &>.dropdown-menu {\n        display: block;\n      }\n\n      & > a {\n        outline: 0;\n      }\n    }\n\n\n    /* Menu positioning */\n\n    /* Add extra class to .dropdown-menu to flip the alignment of the dropdown*\n    /* menu with the parent. */\n    & .dropdown-menu-right {\n      right: 0;\n      left: auto; /* Reset the default from .dropdown-menu */\n    }\n\n    & .dropdown-menu-left {\n      right: auto;\n      left: 0;\n    }\n\n    /* Dropdown section headers */\n    & .dropdown-header {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    /* Dropdown section footers */\n    & .dropdown-footer {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    \n\n    /* Backdrop to catch body clicks on mobile, etc. */\n    & .dropdown-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown-backdrop'] + ';\n    }\n\n    /* Allow for dropdowns to go bottom up (aka, dropup-menu) */\n\n    /* Just add .dropup after the standard .dropdown class and you\'re set. */\n    /* TODO: abstract this so that the navbar fixed styles are not placed here? */\n\n    &.dropup {\n      .dropdown-menu {\n        top: auto;\n        bottom: 100%;\n        margin-bottom: ' + props.theme['$dropdown-margin-top'] + ';\n      }\n    }\n        \n    /* Added Mixin boutonGroup to enable dropdown to beneficiate from buttonGroup classes */\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
-
-Dropdown.defaultProps = defaultProps$10;
 
 var typography_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -10835,7 +11372,73 @@ exports.default = {
 unwrapExports(typography_1);
 var typography_2 = typography_1.typography;
 
-var defaultProps$14 = { theme: bsTheme };
+var rmUnit$5 = unitUtils$1.rmUnit;
+var UNIT$4 = unitUtils$1.UNIT;
+/**
+ * BOOTSTRAP THEME H6
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$9 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-h6'] = u['$font-size-h6'] || '1rem';
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$5(v['$spacer'], UNIT$4.REM) / 2 + UNIT$4.REM;
+
+  v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
+  v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
+  v['$headings-color'] = u['$headings-color'] || 'inherit';
+
+  v['$display1-size'] = u['$display1-size'] || '6rem';
+  v['$display2-size'] = u['$display2-size'] || '5.5rem';
+  v['$display3-size'] = u['$display3-size'] || '4.5rem';
+  v['$display4-size'] = u['$display4-size'] || '3.5rem';
+
+  v['$display1-weight'] = u['$display1-weight'] || '300';
+  v['$display2-weight'] = u['$display2-weight'] || '300';
+  v['$display3-weight'] = u['$display3-weight'] || '300';
+  v['$display4-weight'] = u['$display4-weight'] || '300';
+
+  v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
+  v['$lead-font-weight'] = u['$lead-font-weight'] || '300';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$9();
 
 var H6Unstyled = function (_React$Component) {
   inherits(H6Unstyled, _React$Component);
@@ -10847,6 +11450,8 @@ var H6Unstyled = function (_React$Component) {
 
   createClass(H6Unstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -10863,20 +11468,22 @@ var H6Unstyled = function (_React$Component) {
         _extends({ className: classes }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return H6Unstyled;
 }(React.Component);
 
+H6Unstyled.defaultProps = {
+  theme: makeTheme$9()
+};
 H6Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node,
-  lead: PropTypes.bool,
-  theme: PropTypes.object,
+  className: PropTypes.string,
   color: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  lead: PropTypes.bool,
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -10886,12 +11493,6 @@ var H6 = styled(H6Unstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h6'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    \n    &.lead {\n     font-size: ' + props.theme['$lead-font-size'] + ';\n     font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-
-H6.defaultProps = defaultProps$14;
-
-var defaultProps$13 = {
-  tag: 'button'
-};
 
 var DropdownItem = function (_React$Component) {
   inherits(DropdownItem, _React$Component);
@@ -10965,27 +11566,21 @@ var DropdownItem = function (_React$Component) {
   return DropdownItem;
 }(React.Component);
 
+DropdownItem.defaultProps = {
+  tag: 'button'
+};
 DropdownItem.propTypes = {
   children: PropTypes.node,
+  className: PropTypes.string,
+  cssModule: PropTypes.object,
   disabled: PropTypes.bool,
   divider: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   header: PropTypes.bool,
   onClick: PropTypes.func,
-  className: PropTypes.string,
-  cssModule: PropTypes.object
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 DropdownItem.contextTypes = {
   toggle: PropTypes.func
-};
-
-
-DropdownItem.defaultProps = defaultProps$13;
-
-var defaultProps$15 = {
-  'data-toggle': 'dropdown',
-  'aria-haspopup': true,
-  color: 'secondary'
 };
 
 var DropdownToggle = function (_React$Component) {
@@ -11071,26 +11666,28 @@ var DropdownToggle = function (_React$Component) {
   return DropdownToggle;
 }(React.Component);
 
+DropdownToggle.defaultProps = {
+  'aria-haspopup': true,
+  'data-toggle': 'dropdown',
+  color: 'secondary'
+};
 DropdownToggle.propTypes = {
+  'aria-haspopup': PropTypes.bool,
   caret: PropTypes.bool,
   children: PropTypes.node,
   className: PropTypes.string,
   cssModule: PropTypes.object,
+  'data-toggle': PropTypes.string,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
-  'data-toggle': PropTypes.string,
-  'aria-haspopup': PropTypes.bool,
+  nav: PropTypes.bool,
   split: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  nav: PropTypes.bool
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 DropdownToggle.contextTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired
 };
-
-
-DropdownToggle.defaultProps = defaultProps$15;
 
 /*
  * Kopax Ltd Copyright (c) 2016.
@@ -11098,8 +11695,8 @@ DropdownToggle.defaultProps = defaultProps$15;
 
 var propTypes = {
   children: PropTypes.node,
-  toggle: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired
+  isOpen: PropTypes.bool.isRequired,
+  toggle: PropTypes.func.isRequired
 };
 
 var ButtonDropdown = function ButtonDropdown(props) {
@@ -11114,14 +11711,80 @@ ButtonDropdown.propTypes = propTypes;
  */
 
 /**
+ * BOOTSTRAP THEME BUTTONGROUP TAG
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$10 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  // v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], true);
+
+  // Colors
+  //
+  // Start with assigning color names to specific hex values
+  v['$black'] = u['$black'] || '#000';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Form input
+
+  v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width']; // For form controls and buttons
+
+  // Buttons
+  //
+  // For each of Bootstrap's buttons, define text, background and border color.
+
+  v['$btn-padding-x'] = u['$btn-padding-x'] || '1rem';
+  v['$btn-active-box-shadow'] = u['$btn-active-box-shadow'] || 'inset 0 3px 5px ' + color(v['$black']).alpha(0.125).toString();
+  v['$btn-padding-x-lg'] = u['$btn-padding-x-lg'] || '1.5rem';
+  v['$btn-padding-y-lg'] = u['$btn-padding-y-lg'] || '.75rem';
+  v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || '.5rem';
+  v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
+
+  // Allows for customizing button radius independently from global border radius
+  v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
+  v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$10();
+
+/**
  * ButtonGroup
  */
-
-var defaultProps$16 = {
-  theme: bsTheme,
-  tag: 'div',
-  role: 'group'
-};
 
 var ButtonGroupUnstyled = function (_React$Component) {
   inherits(ButtonGroupUnstyled, _React$Component);
@@ -11133,6 +11796,8 @@ var ButtonGroupUnstyled = function (_React$Component) {
 
   createClass(ButtonGroupUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -11145,12 +11810,16 @@ var ButtonGroupUnstyled = function (_React$Component) {
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, vertical ? 'btn-group-vertical' : 'btn-group', defineProperty({}, 'btn-group-' + size, size)), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ButtonGroupUnstyled;
 }(React.Component);
 
+ButtonGroupUnstyled.defaultProps = {
+  role: 'group',
+  tag: 'div',
+  theme: makeTheme$10()
+};
 ButtonGroupUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -11169,17 +11838,9 @@ var ButtonGroup = styled(ButtonGroupUnstyled).withConfig({
   return '\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
 
-ButtonGroup.defaultProps = defaultProps$16;
-
 /**
- * ButtonGroup
+ * ButtonToolbar
  */
-
-var defaultProps$17 = {
-  tag: 'div',
-  role: 'toolbar',
-  theme: bsTheme
-};
 
 var ButtonToolbarUnstyled = function (_React$Component) {
   inherits(ButtonToolbarUnstyled, _React$Component);
@@ -11191,6 +11852,8 @@ var ButtonToolbarUnstyled = function (_React$Component) {
 
   createClass(ButtonToolbarUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -11201,12 +11864,16 @@ var ButtonToolbarUnstyled = function (_React$Component) {
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'btn-toolbar'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ButtonToolbarUnstyled;
 }(React.Component);
 
+ButtonToolbarUnstyled.defaultProps = {
+  tag: 'div',
+  role: 'toolbar',
+  theme: bsTheme
+};
 ButtonToolbarUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -11223,11 +11890,45 @@ var ButtonToolbar = styled(ButtonToolbarUnstyled).withConfig({
   return '\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
 
-ButtonToolbar.defaultProps = defaultProps$17;
+/**
+ * BOOTSTRAP THEME CAPTION TAG
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$11 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Create grayscale
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+
+  // Tables
+  //
+  // Customizes the `.table` component with basic values, each used across all table variations.
+
+  v['$table-cell-padding'] = u['$table-cell-padding'] || '.75rem';
+
+  // Fonts
+  v['$text-muted'] = u['$text-muted'] || v['$gray-light'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$11();
 
 /* A Caption (Box) */
 
-var defaultProps$18 = { theme: bsTheme };
+var defaultProps$3 = { theme: makeTheme$11() };
 
 var Caption = styled.caption.withConfig({
   displayName: 'Caption'
@@ -11235,16 +11936,62 @@ var Caption = styled.caption.withConfig({
   return '\n    padding-top: ' + props.theme['$table-cell-padding'] + ';\n    padding-bottom: ' + props.theme['$table-cell-padding'] + ';\n    color: ' + props.theme['$text-muted'] + ';\n    text-align: left;\n    caption-side: top;\n  ';
 });
 
-Caption.defaultProps = defaultProps$18;
+Caption.defaultProps = defaultProps$3;
+
+/**
+ * BOOTSTRAP THEME CODE
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$12 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+  v['$font-family-monospace'] = u['$font-family-monospace'] || 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
+
+  // Colors
+  //
+  // Create grayscale
+  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
+
+  // Code
+
+  v['$code-font-size'] = u['$code-font-size'] || '90%';
+  v['$code-padding-x'] = u['$code-padding-x'] || '.4rem';
+  v['$code-padding-y'] = u['$code-padding-y'] || '.2rem';
+  v['$code-color'] = u['$code-color'] || '#bd4147';
+  v['$code-bg'] = u['$code-bg'] || v['$gray-lightest'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$12();
 
 /**
  * Code component
  */
-
-var defaultProps$19 = {
-  tag: 'code',
-  theme: bsTheme
-};
 
 var CodeUnstyled = function (_React$Component) {
   inherits(CodeUnstyled, _React$Component);
@@ -11256,6 +12003,8 @@ var CodeUnstyled = function (_React$Component) {
 
   createClass(CodeUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -11268,12 +12017,15 @@ var CodeUnstyled = function (_React$Component) {
         _extends({ className: className }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CodeUnstyled;
 }(React.Component);
 
+CodeUnstyled.defaultProps = {
+  tag: 'code',
+  theme: makeTheme$12()
+};
 CodeUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -11288,8 +12040,6 @@ var Code = styled(CodeUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    /* Inline code */\n    padding: ' + props.theme['$code-padding-y'] + ' ' + props.theme['$code-padding-x'] + ';\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$code-color'] + ';\n    background-color: ' + props.theme['$code-bg'] + ';\n    ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + ';\n    \n    /* Streamline the style when inside anchors to avoid broken underline and more */\n    a > & {\n      padding: 0;\n      color: inherit;\n      background-color: inherit;\n    }\n    \n    /* Bootstrap 4 does not place this css rule straight into Code tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
-
-Code.defaultProps = defaultProps$19;
 
 var grid = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -11609,6 +12359,62 @@ exports.default = {
 unwrapExports(gridFramework);
 var gridFramework_5 = gridFramework.makeGridColumns;
 
+/**
+ * BOOTSTRAP THEME COL
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$13 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  // Grid columns
+  //
+  // Set the number of columns and specify the width of the gutters.
+
+  v['$grid-columns'] = u['$grid-columns'] || '12';
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$13();
+
 var colWidths = ['xs', 'sm', 'md', 'lg', 'xl'];
 var stringOrNumberProp = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
 
@@ -11618,12 +12424,6 @@ var columnProps = PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTyp
   pull: stringOrNumberProp,
   offset: stringOrNumberProp
 })]);
-
-var defaultProps$20 = {
-  theme: bsTheme,
-  tag: 'div',
-  widths: colWidths
-};
 
 var getColumnSizeClass = function getColumnSizeClass(isXs, colWidth, colSize) {
   if (colSize === true || colSize === '') {
@@ -11645,6 +12445,8 @@ var ColUnstyled = function (_React$Component) {
 
   createClass(ColUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _this2 = this;
 
@@ -11689,12 +12491,16 @@ var ColUnstyled = function (_React$Component) {
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, colClasses), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ColUnstyled;
 }(React.Component);
 
+ColUnstyled.defaultProps = {
+  tag: 'div',
+  theme: makeTheme$13(),
+  widths: colWidths
+};
 ColUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -11717,7 +12523,244 @@ var Col = styled(ColUnstyled).withConfig({
   return '\n    ' + gridFramework_5(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
 
-Col.defaultProps = defaultProps$20;
+var parseTransition$1 = function parseTransition(transitions) {
+  if (!transitions) {
+    return [];
+  }
+  var sample = transitions;
+  var RULE_DELIMITER = ',';
+  var PROPERTY_DELIMITER = ' ';
+  var MS_UNIT = 'ms';
+  var TMP_STR = 'TMP';
+  var DEFAULT_PROPERTY = 'all';
+  var DEFAULT_DURATION = 0;
+  var DEFAULT_TIMING_FUNCTION = 'ease';
+  var DEFAULT_DELAY = 0;
+  var BEZIER_REGEX = /cubic-bezier\([^\)]+\)/gi;
+  var cubicBezierList = transitions.match(BEZIER_REGEX);
+  if (cubicBezierList) {
+    sample = sample.replace(BEZIER_REGEX, TMP_STR);
+  }
+  var transitionList = sample.split(RULE_DELIMITER).map(function (rule) {
+    var properties = rule.trim().split(PROPERTY_DELIMITER);
+    return {
+      property: properties[0] || DEFAULT_PROPERTY,
+      duration: properties[1] && !(properties[1].indexOf(MS_UNIT) !== -1) ? parseFloat(properties[1]) * 1000 : parseFloat(properties[1]) || DEFAULT_DURATION,
+      timingFunction: properties[2] && properties[2] !== TMP_STR ? properties[2] : cubicBezierList ? cubicBezierList.shift() : DEFAULT_TIMING_FUNCTION,
+      delay: properties[3] && !(properties[3].indexOf(MS_UNIT) !== -1) ? parseFloat(properties[3]) * 1000 : parseFloat(properties[3]) || DEFAULT_DELAY
+    };
+  });
+  return transitionList;
+};
+
+var asyncGenerator$1 = function () {
+  function AwaitValue(value) {
+    this.value = value;
+  }
+
+  function AsyncGenerator(gen) {
+    var front, back;
+
+    function send(key, arg) {
+      return new Promise(function (resolve, reject) {
+        var request = {
+          key: key,
+          arg: arg,
+          resolve: resolve,
+          reject: reject,
+          next: null
+        };
+
+        if (back) {
+          back = back.next = request;
+        } else {
+          front = back = request;
+          resume(key, arg);
+        }
+      });
+    }
+
+    function resume(key, arg) {
+      try {
+        var result = gen[key](arg);
+        var value = result.value;
+
+        if (value instanceof AwaitValue) {
+          Promise.resolve(value.value).then(function (arg) {
+            resume("next", arg);
+          }, function (arg) {
+            resume("throw", arg);
+          });
+        } else {
+          settle(result.done ? "return" : "normal", result.value);
+        }
+      } catch (err) {
+        settle("throw", err);
+      }
+    }
+
+    function settle(type, value) {
+      switch (type) {
+        case "return":
+          front.resolve({
+            value: value,
+            done: true
+          });
+          break;
+
+        case "throw":
+          front.reject(value);
+          break;
+
+        default:
+          front.resolve({
+            value: value,
+            done: false
+          });
+          break;
+      }
+
+      front = front.next;
+
+      if (front) {
+        resume(front.key, front.arg);
+      } else {
+        back = null;
+      }
+    }
+
+    this._invoke = send;
+
+    if (typeof gen.return !== "function") {
+      this.return = undefined;
+    }
+  }
+
+  if (typeof Symbol === "function" && Symbol.asyncIterator) {
+    AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
+      return this;
+    };
+  }
+
+  AsyncGenerator.prototype.next = function (arg) {
+    return this._invoke("next", arg);
+  };
+
+  AsyncGenerator.prototype.throw = function (arg) {
+    return this._invoke("throw", arg);
+  };
+
+  AsyncGenerator.prototype.return = function (arg) {
+    return this._invoke("return", arg);
+  };
+
+  return {
+    wrap: function (fn) {
+      return function () {
+        return new AsyncGenerator(fn.apply(this, arguments));
+      };
+    },
+    await: function (value) {
+      return new AwaitValue(value);
+    }
+  };
+}();
+
+
+
+
+
+var classCallCheck$1 = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
+var UnitUtils = function UnitUtils() {
+  var _this = this;
+  classCallCheck$1(this, UnitUtils);
+  this.UNIT = {
+    EM: 'em',
+    REM: 'rem',
+    PX: 'px',
+    PERCENT: '%'
+  };
+  this.math = {
+    addition: function addition(a, b) {
+      var unit = this.detectUnit(a) || this.detectUnit(b);
+      return this.rmUnit(a) + this.rmUnit(b) + unit;
+    }.bind(this),
+    subtract: function subtract(a, b) {
+      var unit = this.detectUnit(a) || this.detectUnit(b);
+      return this.rmUnit(a) - this.rmUnit(b) + unit;
+    }.bind(this),
+    multiply: function multiply(a, b) {
+      var unit = this.detectUnit(a) || this.detectUnit(b);
+      return this.rmUnit(a) * this.rmUnit(b) + unit;
+    }.bind(this),
+    divide: function divide(a, b) {
+      var unit = this.detectUnit(a) || this.detectUnit(b);
+      return this.rmUnit(a) / this.rmUnit(b) + unit;
+    }.bind(this)
+  };
+  this.detectUnit = function (value) {
+    var ext = void 0;
+    var valueStr = value.toString();
+    if (valueStr.match(_this.UNIT.PX)) {
+      ext = _this.UNIT.PX;
+    } else if (valueStr.match(_this.UNIT.REM)) {
+      ext = _this.UNIT.REM;
+    } else if (valueStr.match(_this.UNIT.EM)) {
+      ext = _this.UNIT.EM;
+    } else if (valueStr.match(_this.UNIT.PERCENT)) {
+      ext = _this.UNIT.PERCENT;
+    } else if (!isNaN(value)) {
+      return null;
+    } else {
+      throw new Error('detectUnit can\'t find unit for ' + value);
+    }
+    return ext;
+  };
+  this.rmUnit = function (value, unit) {
+    var valueStr = value.toString();
+    var ext = unit || _this.detectUnit(valueStr);
+    var number = valueStr.replace(ext, '');
+    return parseFloat(number);
+  };
+  this.toPercent = function (value) {
+    var total = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100;
+    var decimal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 2;
+    return '' + Math.floor(value / total * 100 * Math.pow(10, decimal)) / Math.pow(10, decimal) + _this.UNIT.PERCENT;
+  };
+};
+var index$1 = new UnitUtils();
+
+/**
+ * BOOTSTRAP THEME COLLAPSE
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$14 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+  v['$transition-collapse'] = u['$transition-collapse'] || 'height .35s ease';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$14();
 
 var SHOW = 'SHOW';
 var SHOWN = 'SHOWN';
@@ -11727,20 +12770,30 @@ var HIDDEN = 'HIDDEN';
 var Collapse = function (_Component) {
   inherits(Collapse, _Component);
 
-  function Collapse(props) {
+  function Collapse() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     classCallCheck(this, Collapse);
 
-    var _this = possibleConstructorReturn(this, (Collapse.__proto__ || Object.getPrototypeOf(Collapse)).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.state = {
-      collapse: props.isOpen ? SHOWN : HIDDEN,
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = Collapse.__proto__ || Object.getPrototypeOf(Collapse)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      collapse: HIDDEN,
       height: null
-    };
-    _this.element = null;
-    return _this;
+    }, _this.element = null, _temp), possibleConstructorReturn(_this, _ret);
   }
 
   createClass(Collapse, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.updateVisibility({ collapse: this.props.isOpen ? SHOWN : HIDDEN });
+      this.updateTransition({ delay: this.props.delay, theme: this.props.theme });
+    }
+  }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       var _this2 = this;
@@ -11779,6 +12832,10 @@ var Collapse = function (_Component) {
         }, this.getDelay('hide'));
       }
       // else: do nothing.
+
+      if (nextProps.theme['$transition-collapse'] !== this.props.theme['$transition-collapse'] || nextProps.delay.show !== this.props.delay.show || nextProps.delay.hide !== this.props.delay.hide) {
+        this.updateTransition({ delay: nextProps.delay, theme: nextProps.theme });
+      }
     }
   }, {
     key: 'componentDidUpdate',
@@ -11799,7 +12856,7 @@ var Collapse = function (_Component) {
   }, {
     key: 'getDelay',
     value: function getDelay(key) {
-      var delay = this.props.delay;
+      var delay = this.state.delay;
 
       if ((typeof delay === 'undefined' ? 'undefined' : _typeof(delay)) === 'object') {
         return delay[key];
@@ -11810,6 +12867,34 @@ var Collapse = function (_Component) {
     key: 'getHeight',
     value: function getHeight() {
       return this.element.scrollHeight;
+    }
+  }, {
+    key: 'updateTransition',
+    value: function updateTransition(_ref2) {
+      var delay = _ref2.delay,
+          theme = _ref2.theme;
+
+      var transition = parseTransition$1(theme['$transition-collapse'])[0];
+      var newDelay = {
+        show: delay.show !== undefined ? delay.show : transition.duration,
+        hide: delay.hide !== undefined ? delay.hide : transition.duration
+      };
+      if ((typeof delay === 'undefined' ? 'undefined' : _typeof(delay)) !== 'object' && delay !== undefined) {
+        newDelay = {
+          show: delay,
+          hide: delay
+        };
+      }
+      this.setState({ delay: newDelay });
+    }
+  }, {
+    key: 'updateVisibility',
+    value: function updateVisibility(_ref3) {
+      var collapse = _ref3.collapse;
+
+      this.setState({
+        collapse: collapse
+      });
     }
   }, {
     key: 'render',
@@ -11854,26 +12939,83 @@ var Collapse = function (_Component) {
 Collapse.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.node,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   cssModule: PropTypes.object,
+  delay: PropTypes.oneOfType([PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }), PropTypes.number]),
+  isOpen: PropTypes.bool,
   navbar: PropTypes.bool,
   /* eslint-enable react/no-unused-prop-types */
-  isOpen: PropTypes.bool,
-  delay: PropTypes.oneOfType([PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }), PropTypes.number]),
   onOpened: PropTypes.func,
-  onClosed: PropTypes.func
+  onClosed: PropTypes.func,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  theme: PropTypes.object
 };
 Collapse.defaultProps = {
   isOpen: false,
-  theme: bsTheme,
+  theme: makeTheme$14(),
   tag: 'div',
   delay: {
-    show: 350,
-    hide: 350
+    show: null,
+    hide: null
   },
   onOpened: function onOpened() {},
   onClosed: function onClosed() {}
 };
+
+/**
+ * BOOTSTRAP THEME DD
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$15 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Grid columns
+  //
+  // Set the number of columns and specify the width of the gutters.
+  v['$grid-columns'] = u['$grid-columns'] || '12';
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$15();
 
 /**
  * Definition Description
@@ -11890,18 +13032,22 @@ var DdUnstyled = function (_React$Component) {
 
   createClass(DdUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
 
       return React.createElement('dd', _extends({ className: className }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return DdUnstyled;
 }(React.Component);
 
+DdUnstyled.defaultProps = {
+  theme: makeTheme$15()
+};
 DdUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -11945,8 +13091,8 @@ var DfnUnstyled = function (_React$Component) {
 }(React.Component);
 
 DfnUnstyled.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node
+  children: PropTypes.node,
+  className: PropTypes.string
 };
 
 
@@ -11977,16 +13123,54 @@ var Details = function (_React$Component) {
 }(React.Component);
 
 Details.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string
 };
+
+/**
+ * BOOTSTRAP THEME DL
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$16 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Grid columns
+  //
+  // Set the number of columns and specify the width of the gutters.
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$16();
 
 /**
  *Definition List
  *
  */
-
-var defaultProps$21 = { theme: bsTheme };
 
 var DlUnstyled = function (_React$Component) {
   inherits(DlUnstyled, _React$Component);
@@ -11998,18 +13182,22 @@ var DlUnstyled = function (_React$Component) {
 
   createClass(DlUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
 
       return React.createElement('dl', _extends({ className: className }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return DlUnstyled;
 }(React.Component);
 
+DlUnstyled.defaultProps = {
+  theme: makeTheme$16()
+};
 DlUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -12024,14 +13212,73 @@ var Dl = styled(DlUnstyled).withConfig({
   return '\n    ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n  ';
 });
 
-Dl.defaultProps = defaultProps$21;
+/**
+ * BOOTSTRAP THEME DT
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$17 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  // Grid columns
+  //
+  // Set the number of columns and specify the width of the gutters.
+
+  v['$grid-columns'] = u['$grid-columns'] || '12';
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+  v['$font-weight-bold'] = u['$font-weight-bold'] || 'bold';
+  v['$dt-font-weight'] = u['$dt-font-weight'] || v['$font-weight-bold'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$17();
 
 /**
  * Description Term
  *
  */
-
-var defaultProps$22 = { theme: bsTheme };
 
 var DtUnstyled = function (_React$Component) {
   inherits(DtUnstyled, _React$Component);
@@ -12043,18 +13290,22 @@ var DtUnstyled = function (_React$Component) {
 
   createClass(DtUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
 
       return React.createElement('dt', _extends({ className: className }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return DtUnstyled;
 }(React.Component);
 
+DtUnstyled.defaultProps = {
+  theme: makeTheme$17()
+};
 DtUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -12068,87 +13319,6 @@ var Dt = styled(DtUnstyled).withConfig({
 })(['  ', ''], function (props) {
   return '\n    /* Reboot Scss */\n    font-weight: ' + props.theme['$dt-font-weight'] + ';\n    ' + gridFramework_5(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-
-Dt.defaultProps = defaultProps$22;
-
-var defaultProps$23 = {
-  isOpen: true,
-  theme: bsTheme
-};
-
-var Fade = function (_React$Component) {
-  inherits(Fade, _React$Component);
-
-  function Fade() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
-    classCallCheck(this, Fade);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = Fade.__proto__ || Object.getPrototypeOf(Fade)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      transitionEnterTimeout: null,
-      transitionAppearTimeout: null,
-      transitionLeaveTimeout: null
-    }, _temp), possibleConstructorReturn(_this, _ret);
-  } // eslint-disable-line react/prefer-stateless-function
-
-  createClass(Fade, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      var theme = this.props.theme;
-
-      var userThemeTransitionList = parseTransition(theme['$transition-fade']);
-      this.setState({
-        transitionEnterTimeout: userThemeTransitionList[0].duration,
-        transitionAppearTimeout: userThemeTransitionList[0].duration,
-        transitionLeaveTimeout: userThemeTransitionList[0].duration
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _omit = lodash_omit(this.props, ['theme', 'innerRef']),
-          children = _omit.children,
-          isOpen = _omit.isOpen,
-          rest = objectWithoutProperties(_omit, ['children', 'isOpen']);
-
-      return React.createElement(
-        ReactCSSTransitionGroup,
-        _extends({
-          transitionAppearTimeout: this.state.transitionEnterTimeout,
-          transitionEnterTimeout: this.state.transitionAppearTimeout,
-          transitionLeaveTimeout: this.state.transitionLeaveTimeout,
-          transitionName: {
-            appear: 'fade',
-            appearActive: 'show',
-            enter: 'fade',
-            enterActive: 'show',
-            leave: 'fade'
-          }
-        }, rest),
-        isOpen ? children : null
-      );
-    }
-  }]);
-  return Fade;
-}(React.Component);
-
-Fade.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  children: PropTypes.node.isRequired,
-  theme: PropTypes.object,
-  isOpen: PropTypes.bool
-  /* eslint-enable react/no-unused-prop-types */
-};
-
-
-Fade.defaultProps = defaultProps$23;
-var index$1 = withTheme(Fade);
 
 var FaUnstyled = function (_React$Component) {
   inherits(FaUnstyled, _React$Component);
@@ -12229,9 +13399,47 @@ FaStacked.propTypes = {
  * Kopax Ltd Copyright (c) 2016.
  */
 
-/* A Fieldset (Box) */
+/**
+ * BOOTSTRAP THEME FIELDSET
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$18 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-var defaultProps$24 = { theme: bsTheme };
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Grid columns
+  //
+  // Set the number of columns and specify the width of the gutters.
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$18();
+
+/* A Fieldset (Box) */
 
 var FieldsetUnstyled = function (_React$Component) {
   inherits(FieldsetUnstyled, _React$Component);
@@ -12243,6 +13451,8 @@ var FieldsetUnstyled = function (_React$Component) {
 
   createClass(FieldsetUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -12256,17 +13466,19 @@ var FieldsetUnstyled = function (_React$Component) {
         }, rest),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return FieldsetUnstyled;
 }(React.Component);
 
+FieldsetUnstyled.defaultProps = {
+  theme: makeTheme$18()
+};
 FieldsetUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  theme: PropTypes.object,
+  children: PropTypes.node.isRequired,
   className: PropTypes.string,
-  children: PropTypes.node.isRequired
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -12276,8 +13488,6 @@ var Fieldset = styled(FieldsetUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    min-width: 0;\n    padding: 0;\n    margin: 0;\n    border: 0;\n\n    & .row {\n      ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n\n  ';
 });
-
-Fieldset.defaultProps = defaultProps$24;
 
 /**
  * Footer Component
@@ -12289,7 +13499,73 @@ var Footer = styled.footer.withConfig({
   displayName: 'Footer'
 })(['']);
 
-var defaultProps$25 = { theme: bsTheme };
+var rmUnit$6 = unitUtils$1.rmUnit;
+var UNIT$5 = unitUtils$1.UNIT;
+/**
+ * BOOTSTRAP THEME H1
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$19 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-h1'] = u['$font-size-h1'] || '2.5rem';
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$6(v['$spacer'], UNIT$5.REM) / 2 + UNIT$5.REM;
+
+  v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
+  v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
+  v['$headings-color'] = u['$headings-color'] || 'inherit';
+
+  v['$display1-size'] = u['$display1-size'] || '6rem';
+  v['$display2-size'] = u['$display2-size'] || '5.5rem';
+  v['$display3-size'] = u['$display3-size'] || '4.5rem';
+  v['$display4-size'] = u['$display4-size'] || '3.5rem';
+
+  v['$display1-weight'] = u['$display1-weight'] || '300';
+  v['$display2-weight'] = u['$display2-weight'] || '300';
+  v['$display3-weight'] = u['$display3-weight'] || '300';
+  v['$display4-weight'] = u['$display4-weight'] || '300';
+
+  v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
+  v['$lead-font-weight'] = u['$lead-font-weight'] || '300';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$19();
 
 var H1Unstyled = function (_React$Component) {
   inherits(H1Unstyled, _React$Component);
@@ -12301,6 +13577,8 @@ var H1Unstyled = function (_React$Component) {
 
   createClass(H1Unstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -12317,20 +13595,23 @@ var H1Unstyled = function (_React$Component) {
         _extends({ className: classes }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return H1Unstyled;
 }(React.Component);
 
+H1Unstyled.defaultProps = {
+  theme: makeTheme$19()
+};
 H1Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node,
-  lead: PropTypes.bool,
-  theme: PropTypes.object,
+  className: PropTypes.string,
   color: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  lead: PropTypes.bool,
+  theme: PropTypes.object
+
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -12341,9 +13622,73 @@ var H1 = styled(H1Unstyled).withConfig({
   return '\n    font-size: ' + props.theme['$font-size-h1'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
 
-H1.defaultProps = defaultProps$25;
+var rmUnit$7 = unitUtils$1.rmUnit;
+var UNIT$6 = unitUtils$1.UNIT;
+/**
+ * BOOTSTRAP THEME H2
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
 
-var defaultProps$26 = { theme: bsTheme };
+var makeTheme$20 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-h2'] = u['$font-size-h2'] || '2rem';
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$7(v['$spacer'], UNIT$6.REM) / 2 + UNIT$6.REM;
+
+  v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
+  v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
+  v['$headings-color'] = u['$headings-color'] || 'inherit';
+
+  v['$display1-size'] = u['$display1-size'] || '6rem';
+  v['$display2-size'] = u['$display2-size'] || '5.5rem';
+  v['$display3-size'] = u['$display3-size'] || '4.5rem';
+  v['$display4-size'] = u['$display4-size'] || '3.5rem';
+
+  v['$display1-weight'] = u['$display1-weight'] || '300';
+  v['$display2-weight'] = u['$display2-weight'] || '300';
+  v['$display3-weight'] = u['$display3-weight'] || '300';
+  v['$display4-weight'] = u['$display4-weight'] || '300';
+
+  v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
+  v['$lead-font-weight'] = u['$lead-font-weight'] || '300';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$20();
 
 var H2Unstyled = function (_React$Component) {
   inherits(H2Unstyled, _React$Component);
@@ -12355,6 +13700,8 @@ var H2Unstyled = function (_React$Component) {
 
   createClass(H2Unstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -12371,20 +13718,22 @@ var H2Unstyled = function (_React$Component) {
         _extends({ className: classes }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return H2Unstyled;
 }(React.Component);
 
+H2Unstyled.defaultProps = {
+  theme: makeTheme$20()
+};
 H2Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node,
-  lead: PropTypes.bool,
-  theme: PropTypes.object,
+  className: PropTypes.string,
   color: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  lead: PropTypes.bool,
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -12395,9 +13744,73 @@ var H2 = styled(H2Unstyled).withConfig({
   return '\n\n    font-size: ' + props.theme['$font-size-h2'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
 
-H2.defaultProps = defaultProps$26;
+var rmUnit$8 = unitUtils$1.rmUnit;
+var UNIT$7 = unitUtils$1.UNIT;
+/**
+ * BOOTSTRAP THEME H3
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
 
-var defaultProps$27 = { theme: bsTheme };
+var makeTheme$21 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-h3'] = u['$font-size-h3'] || '1.75rem';
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$8(v['$spacer'], UNIT$7.REM) / 2 + UNIT$7.REM;
+
+  v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
+  v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
+  v['$headings-color'] = u['$headings-color'] || 'inherit';
+
+  v['$display1-size'] = u['$display1-size'] || '6rem';
+  v['$display2-size'] = u['$display2-size'] || '5.5rem';
+  v['$display3-size'] = u['$display3-size'] || '4.5rem';
+  v['$display4-size'] = u['$display4-size'] || '3.5rem';
+
+  v['$display1-weight'] = u['$display1-weight'] || '300';
+  v['$display2-weight'] = u['$display2-weight'] || '300';
+  v['$display3-weight'] = u['$display3-weight'] || '300';
+  v['$display4-weight'] = u['$display4-weight'] || '300';
+
+  v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
+  v['$lead-font-weight'] = u['$lead-font-weight'] || '300';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$21();
 
 var H3Unstyled = function (_React$Component) {
   inherits(H3Unstyled, _React$Component);
@@ -12409,6 +13822,8 @@ var H3Unstyled = function (_React$Component) {
 
   createClass(H3Unstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -12425,20 +13840,22 @@ var H3Unstyled = function (_React$Component) {
         _extends({ className: classes }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return H3Unstyled;
 }(React.Component);
 
+H3Unstyled.defaultProps = {
+  theme: makeTheme$21()
+};
 H3Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node,
-  lead: PropTypes.bool,
-  theme: PropTypes.object,
+  className: PropTypes.string,
   color: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  lead: PropTypes.bool,
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -12449,9 +13866,73 @@ var H3 = styled(H3Unstyled).withConfig({
   return '\n    font-size: ' + props.theme['$font-size-h3'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
 
-H3.defaultProps = defaultProps$27;
+var rmUnit$9 = unitUtils$1.rmUnit;
+var UNIT$8 = unitUtils$1.UNIT;
+/**
+ * BOOTSTRAP THEME H4
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
 
-var defaultProps$28 = { theme: bsTheme };
+var makeTheme$22 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-h4'] = u['$font-size-h4'] || '1.5rem';
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$9(v['$spacer'], UNIT$8.REM) / 2 + UNIT$8.REM;
+
+  v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
+  v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
+  v['$headings-color'] = u['$headings-color'] || 'inherit';
+
+  v['$display1-size'] = u['$display1-size'] || '6rem';
+  v['$display2-size'] = u['$display2-size'] || '5.5rem';
+  v['$display3-size'] = u['$display3-size'] || '4.5rem';
+  v['$display4-size'] = u['$display4-size'] || '3.5rem';
+
+  v['$display1-weight'] = u['$display1-weight'] || '300';
+  v['$display2-weight'] = u['$display2-weight'] || '300';
+  v['$display3-weight'] = u['$display3-weight'] || '300';
+  v['$display4-weight'] = u['$display4-weight'] || '300';
+
+  v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
+  v['$lead-font-weight'] = u['$lead-font-weight'] || '300';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$22();
 
 var H4Unstyled = function (_React$Component) {
   inherits(H4Unstyled, _React$Component);
@@ -12463,6 +13944,8 @@ var H4Unstyled = function (_React$Component) {
 
   createClass(H4Unstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -12479,20 +13962,22 @@ var H4Unstyled = function (_React$Component) {
         _extends({ className: classes }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return H4Unstyled;
 }(React.Component);
 
+H4Unstyled.defaultProps = {
+  theme: makeTheme$22()
+};
 H4Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node,
-  lead: PropTypes.bool,
-  theme: PropTypes.object,
+  className: PropTypes.string,
   color: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  lead: PropTypes.bool,
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -12503,9 +13988,73 @@ var H4 = styled(H4Unstyled).withConfig({
   return '\n    font-size: ' + props.theme['$font-size-h4'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
 
-H4.defaultProps = defaultProps$28;
+var rmUnit$10 = unitUtils$1.rmUnit;
+var UNIT$9 = unitUtils$1.UNIT;
+/**
+ * BOOTSTRAP THEME H5
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
 
-var defaultProps$29 = { theme: bsTheme };
+var makeTheme$23 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-h5'] = u['$font-size-h5'] || '1.25rem';
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$10(v['$spacer'], UNIT$9.REM) / 2 + UNIT$9.REM;
+
+  v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
+  v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
+  v['$headings-color'] = u['$headings-color'] || 'inherit';
+
+  v['$display1-size'] = u['$display1-size'] || '6rem';
+  v['$display2-size'] = u['$display2-size'] || '5.5rem';
+  v['$display3-size'] = u['$display3-size'] || '4.5rem';
+  v['$display4-size'] = u['$display4-size'] || '3.5rem';
+
+  v['$display1-weight'] = u['$display1-weight'] || '300';
+  v['$display2-weight'] = u['$display2-weight'] || '300';
+  v['$display3-weight'] = u['$display3-weight'] || '300';
+  v['$display4-weight'] = u['$display4-weight'] || '300';
+
+  v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
+  v['$lead-font-weight'] = u['$lead-font-weight'] || '300';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$23();
 
 var H5Unstyled = function (_React$Component) {
   inherits(H5Unstyled, _React$Component);
@@ -12517,6 +14066,8 @@ var H5Unstyled = function (_React$Component) {
 
   createClass(H5Unstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -12533,20 +14084,22 @@ var H5Unstyled = function (_React$Component) {
         _extends({ className: classes }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return H5Unstyled;
 }(React.Component);
 
+H5Unstyled.defaultProps = {
+  theme: makeTheme$23()
+};
 H5Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node,
-  lead: PropTypes.bool,
-  theme: PropTypes.object,
+  className: PropTypes.string,
   color: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  lead: PropTypes.bool,
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -12556,8 +14109,6 @@ var H5 = styled(H5Unstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h5'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n \n    &.lead {\n     font-size: ' + props.theme['$lead-font-size'] + ';\n     font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-
-H5.defaultProps = defaultProps$29;
 
 var navbarToggleable_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -12698,7 +14249,100 @@ exports.default = {
 unwrapExports(navbar_1);
 var navbar_3 = navbar_1.navbar;
 
-var defaultProps$30 = { theme: bsTheme };
+/**
+ * BOOTSTRAP THEME HEADER
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$24 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  // Spacing
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Navbar
+
+  v['$navbar-padding-x'] = u['$navbar-padding-x'] || v['$spacer'];
+  v['$navbar-padding-y'] = u['$navbar-padding-y'] || v['$spacer-halved'];
+
+  // Mixin navbar
+  //
+  // From module bootstrap-styled-mixins: https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins/blob/master/src/navbar.js
+
+  v['$zindex-navbar'] = u['$zindex-navbar'] || '1000';
+  v['$zindex-navbar-fixed'] = u['$zindex-navbar-fixed'] || '1030';
+  v['$zindex-navbar-sticky'] = u['$zindex-navbar-sticky'] || '1030';
+  v['$navbar-brand-padding-y'] = u['$navbar-brand-padding-y'] || '.25rem';
+
+  v['$navbar-divider-padding-y'] = u['$navbar-brand-padding-y'] || '.425rem';
+  v['$navbar-toggler-padding-y'] = u['$navbar-toggler-padding-y'] || '.5rem';
+  v['$navbar-toggler-padding-x'] = u['$navbar-toggler-padding-x'] || '.75rem';
+  v['$navbar-toggler-font-size'] = u['$navbar-toggler-font-size'] || '1.25rem';
+
+  v['$navbar-toggler-border-radius'] = u['$navbar-toggler-border-radius'] || '.25rem';
+  v['$navbar-light-active-color'] = u['$navbar-light-active-color'] || 'rgba(0,0,0,.9)';
+  v['$navbar-light-color'] = u['$navbar-light-color'] || 'rgba(0,0,0,.5)';
+  v['$navbar-light-hover-color'] = u['$navbar-light-hover-color'] || 'rgba(0,0,0,.7)';
+  v['$navbar-light-toggler-border'] = u['$navbar-light-toggler-border'] || 'rgba(0,0,0,.1)';
+  v['$navbar-light-disabled-color'] = u['$navbar-light-disabled-color'] || 'rgba(0, 0, 0, 0.3)';
+  v['$navbar-light-toggler-bg'] = u['$navbar-light-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(0,0,0,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-active-color'] = u['$navbar-inverse-active-color'] || 'rgba(255,255,255,1)';
+  v['$navbar-inverse-color'] = u['$navbar-inverse-color'] || 'rgba(255,255,255,.5)';
+  v['$navbar-inverse-hover-color'] = u['$navbar-inverse-hover-color'] || 'rgba(255,255,255,.75)';
+  v['$navbar-inverse-toggler-border'] = u['$navbar-inverse-toggler-border'] || 'rgba(255,255,255,.1)';
+  v['$navbar-inverse-toggler-bg'] = u['$navbar-inverse-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-disabled-color'] = u['$navbar-inverse-disabled-color'] || 'rgba(255, 255, 255, 0.25)';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$24();
+
+var defaultProps$4 = { theme: makeTheme$24() };
 
 var Header = styled.header.withConfig({
   displayName: 'Header'
@@ -12706,11 +14350,53 @@ var Header = styled.header.withConfig({
   return '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + conditional_1(props.shadowHeader, 'box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);') + '\n  ';
 });
 
-Header.defaultProps = defaultProps$30;
+Header.defaultProps = defaultProps$4;
 
-var defaultProps$31 = {
-  theme: bsTheme
+/**
+ * BOOTSTRAP THEME HR
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$25 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$black'] = u['$black'] || '#000';
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+  v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  v['$hr-border-width'] = u['$hr-border-width'] || v['$border-width'];
+
+  v['$hr-border-color'] = u['$hr-border-color'] || color(v['$black']).alpha(0.1).toString();
+
+  return Object.assign({}, u, v);
 };
+
+makeTheme$25();
+
+var defaultProps$5 = { theme: makeTheme$25() };
 
 var Hr = styled.hr.withConfig({
   displayName: 'Hr'
@@ -12718,7 +14404,7 @@ var Hr = styled.hr.withConfig({
   return '\n    margin-top: ' + props.theme['$spacer-y'] + ';\n    margin-bottom: ' + props.theme['$spacer-y'] + ';\n    border: 0;\n    border-top: ' + props.theme['$hr-border-width'] + ' solid ' + props.theme['$hr-border-color'] + ';\n  ';
 });
 
-Hr.defaultProps = defaultProps$31;
+Hr.defaultProps = defaultProps$5;
 
 var image = createCommonjsModule(function (module, exports) {
 "use strict";
@@ -12757,17 +14443,96 @@ exports.default = {
 unwrapExports(image);
 var image_1 = image.imgFluid;
 
+var rmUnit$11 = unitUtils$1.rmUnit;
+var UNIT$10 = unitUtils$1.UNIT;
+
+/**
+ * BOOTSTRAP THEME IMAGE
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$26 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-bg'] = u['$body-bg'] || v['$white'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // =============================================================================================================
+  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$11(v['$spacer'], UNIT$10.REM) / 2 + UNIT$10.REM;
+  // =============================================================================================================
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Image thumbnails
+
+  v['$thumbnail-padding'] = u['$thumbnail-padding'] || '.25rem';
+  v['$thumbnail-bg'] = u['$thumbnail-bg'] || v['$body-bg'];
+  v['$thumbnail-border-width'] = u['$thumbnail-border-width'] || v['$border-width'];
+  v['$thumbnail-border-color'] = u['$thumbnail-border-color'] || '#ddd';
+  v['$thumbnail-border-radius'] = u['$thumbnail-border-radius'] || v['$border-radius'];
+  v['$thumbnail-box-shadow'] = u['$thumbnail-box-shadow'] || '0 1px 2px ' + color(v['$black']).alpha(0.75).toString();
+  v['$thumbnail-transition'] = u['$thumbnail-transition'] || 'all .2s ease-in-out';
+
+  // Image Figures
+
+  v['$figure-caption-font-size'] = u['$figure-caption-font-size'] || '90%';
+  v['$figure-caption-color'] = u['$figure-caption-color'] || v['$gray-light'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$26();
+
 /**
  *
  * Img.react.js
  *
  * Renders an image, enforcing the usage of the alt='' tag
  */
-
-var defaultProps$32 = {
-  theme: bsTheme,
-  tag: 'img'
-};
 
 var ImgUnstyled = function (_React$Component) {
   inherits(ImgUnstyled, _React$Component);
@@ -12779,6 +14544,8 @@ var ImgUnstyled = function (_React$Component) {
 
   createClass(ImgUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -12798,23 +14565,26 @@ var ImgUnstyled = function (_React$Component) {
         src: src,
         alt: alt
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ImgUnstyled;
 }(React.Component);
 
+ImgUnstyled.defaultProps = {
+  tag: 'img',
+  theme: makeTheme$26()
+};
 ImgUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  src: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   alt: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  cssModule: PropTypes.object,
   fluid: PropTypes.bool,
   figure: PropTypes.bool,
-  thumbnail: PropTypes.bool,
-  className: PropTypes.string,
+  src: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   theme: PropTypes.object,
-  cssModule: PropTypes.object,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+  thumbnail: PropTypes.bool
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -12822,10 +14592,8 @@ ImgUnstyled.propTypes = {
 var Img = styled(ImgUnstyled).withConfig({
   displayName: 'Img'
 })(['', ''], function (props) {
-  return '\n    \n    /* \n      Responsive images (ensure images does not scale beyond their parents)\n      This is purposefully opt-in via an explicit class rather than being the default for all <img>.\n      We previously tried the "images are responsive by default" approach in Bootstrap v2,\n      and abandoned it in Bootstrap v3 because it breaks lots of third-party widgets (including Google Maps)\n      which we are not expecting the images within themselves to be involuntarily resized.\n      See also https://github.com/twbs/bootstrap/issues/18178\n    */\n    \n    &.img-fluid {\n      ' + image_1() + '\n    }\n    \n    \n     /* Image thumbnails */ \n    &.img-thumbnail {\n      padding: ' + props.theme['$thumbnail-padding'] + ';\n      background-color: ' + props.theme['$thumbnail-bg'] + ';\n      border: ' + props.theme['$thumbnail-border-width'] + ' solid ' + props.theme['$thumbnail-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$thumbnail-border-radius']) + '\n      ' + transition_2(props.theme['$enable-transitions'], props.theme['$thumbnail-transition']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$thumbnail-box-shadow']) + '\n      /* Keep them at most 100% wide */\n      ' + image_1() + '\n    }\n   \n    &.figure-img {\n      margin-bottom: ' + props.theme['$spacer-halved'] + ';\n      line-height: 1;\n    }\n    \n    /* Reboot Scss */\n    \n    /*\n     By default, <img> are inline-block. This assumes that, and vertically\n     centers them. This will not apply should you reset them to block level.\n    */\n    vertical-align: middle;\n    /*\n     Note: <img> are deliberately not made responsive by default.\n     For the rationale behind this, see the comments on the .img-fluid class.\n    */\n  ';
+  return '\n    \n    /* \n      Responsive images (ensure images does not scale beyond their parents)\n      This is purposefully opt-in via an explicit class rather than being the default for all <img>.\n      We previously tried the "images are responsive by default" approach in Bootstrap v2,\n      and abandoned it in Bootstrap v3 because it breaks lots of third-party widgets (including Google Maps)\n      which we are not expecting the images within themselves to be involuntarily resized.\n      See also https://github.com/twbs/bootstrap/issues/18178\n    */\n    \n    &.img-fluid {\n      ' + image_1() + '\n    }\n    \n    \n     /* Image thumbnails */ \n    &.img-thumbnail {\n      padding: ' + props.theme['$thumbnail-padding'] + ';\n      background-color: ' + props.theme['$thumbnail-bg'] + ';\n      border: ' + props.theme['$thumbnail-border-width'] + ' solid ' + props.theme['$thumbnail-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$thumbnail-border-radius']) + '\n      ' + transition_2$1(props.theme['$enable-transitions'], props.theme['$thumbnail-transition']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$thumbnail-box-shadow']) + '\n      /* Keep them at most 100% wide */\n      ' + image_1() + '\n    }\n   \n    &.figure-img {\n      margin-bottom: ' + props.theme['$spacer-halved'] + ';\n      line-height: 1;\n    }\n    \n    /* Reboot Scss */\n    \n    /*\n     By default, <img> are inline-block. This assumes that, and vertically\n     centers them. This will not apply should you reset them to block level.\n    */\n    vertical-align: middle;\n    /*\n     Note: <img> are deliberately not made responsive by default.\n     For the rationale behind this, see the comments on the .img-fluid class.\n    */\n  ';
 });
-
-Img.defaultProps = defaultProps$32;
 
 /**
  * Figure Component
@@ -12844,10 +14612,11 @@ var FigureUnstyled = function (_React$Component) {
   createClass(FigureUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
-          className = _omit.className,
-          children = _omit.children,
-          rest = objectWithoutProperties(_omit, ['className', 'children']);
+      var _props = this.props,
+          className = _props.className,
+          children = _props.children,
+          rest = objectWithoutProperties(_props, ['className', 'children']);
+
 
       return React.createElement(
         'figure',
@@ -12862,9 +14631,8 @@ var FigureUnstyled = function (_React$Component) {
 
 FigureUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node.isRequired,
-  theme: PropTypes.object
+  className: PropTypes.string
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -12877,10 +14645,6 @@ var Figure = styled(FigureUnstyled).withConfig({
  * FigCaption component
  */
 
-var defaultProps$33 = {
-  theme: bsTheme
-};
-
 var FigCaptionUnstyled = function (_React$Component) {
   inherits(FigCaptionUnstyled, _React$Component);
 
@@ -12891,6 +14655,8 @@ var FigCaptionUnstyled = function (_React$Component) {
 
   createClass(FigCaptionUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -12906,18 +14672,20 @@ var FigCaptionUnstyled = function (_React$Component) {
         }, rest),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return FigCaptionUnstyled;
 }(React.Component);
 
+FigCaptionUnstyled.defaultProps = {
+  theme: makeTheme$26()
+};
 FigCaptionUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node,
-  theme: PropTypes.object,
-  right: PropTypes.bool
+  className: PropTypes.string,
+  right: PropTypes.bool,
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -12928,17 +14696,132 @@ var FigCaption = styled(FigCaptionUnstyled).withConfig({
   return '\n    &.figure-caption {\n      font-size: ' + props.theme['$figure-caption-font-size'] + ';\n      color: ' + props.theme['$figure-caption-color'] + ';\n    }\n  ';
 });
 
-FigCaption.defaultProps = defaultProps$33;
+/**
+ * BOOTSTRAP THEME INPUT
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$27 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+  v['$green'] = u['$green'] || '#5cb85c';
+  v['$teal'] = u['$teal'] || '#5bc0de';
+  v['$orange'] = u['$orange'] || '#f0ad4e';
+  v['$red'] = u['$red'] || '#d9534f';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+  v['$brand-success'] = u['$brand-success'] || v['$green'];
+  v['$brand-info'] = u['$brand-info'] || v['$teal'];
+  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
+  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
+
+  // Spacing
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
+  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
+  v['$font-size-xs'] = u['$font-size-xs'] || '.75rem';
+
+  // Buttons
+  //
+  // For each of Bootstrap's buttons, define text, background and border color.
+
+  v['$btn-padding-x'] = u['$btn-padding-x'] || '1rem';
+  v['$btn-padding-y'] = u['$btn-padding-y'] || '.5rem';
+
+  v['$btn-line-height'] = u['$btn-line-height'] || '1.25';
+  v['$btn-font-weight'] = u['$btn-font-weight'] || v['$font-weight-normal'];
+
+  v['$btn-transition'] = u['$btn-transition'] || 'all .2s ease-in-out';
+  v['$btn-box-shadow'] = u['$btn-box-shadow'] || 'inset 0 1px 0 ' + color(v['$white']).alpha(0.15).toString() + ', 0 1px 1px ' + color(v['$black']).alpha(0.075).toString();
+  v['$btn-block-spacing-y'] = u['$btn-block-spacing-y'] || '.5rem';
+
+  v['$btn-primary-color'] = u['$btn-primary-color'] || v['$white'];
+  v['$btn-primary-bg'] = u['$btn-primary-bg'] || v['$brand-primary'];
+  v['$btn-primary-border'] = u['$btn-primary-border'] || v['$btn-primary-bg'];
+  v['$btn-secondary-color'] = u['$btn-secondary-color'] || v['$gray-dark'];
+  v['$btn-secondary-bg'] = u['$btn-secondary-bg'] || v['$white'];
+  v['$btn-secondary-border'] = u['$btn-secondary-border'] || '#ccc';
+  v['$btn-info-color'] = u['$btn-info-color'] || v['$white'];
+  v['$btn-info-bg'] = u['$btn-info-bg'] || v['$brand-info'];
+  v['$btn-info-border'] = u['$btn-info-border'] || v['$btn-info-bg'];
+  v['$btn-success-color'] = u['$btn-success-color'] || v['$white'];
+  v['$btn-success-bg'] = u['$btn-success-bg'] || v['$brand-success'];
+  v['$btn-success-border'] = u['$btn-success-border'] || v['$btn-success-bg'];
+  v['$btn-warning-color'] = u['$btn-warning-color'] || v['$white'];
+  v['$btn-warning-bg'] = u['$btn-warning-bg'] || v['$brand-warning'];
+  v['$btn-warning-border'] = u['$btn-warning-border'] || v['$btn-warning-bg'];
+
+  v['$btn-danger-color'] = u['$btn-danger-color'] || v['$white'];
+  v['$btn-danger-bg'] = u['$btn-danger-bg'] || v['$brand-danger'];
+  v['$btn-danger-border'] = u['$btn-danger-border'] || v['$btn-danger-bg'];
+  v['$btn-link-disabled-color'] = u['$btn-link-disabled-color'] || v['$gray-light'];
+  v['$btn-padding-x-lg'] = u['$btn-padding-x-lg'] || '1.5rem';
+  v['$btn-padding-y-lg'] = u['$btn-padding-y-lg'] || '.75rem';
+  v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || '.5rem';
+  v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
+
+  // Allows for customizing button radius independently from global border radius
+  v['$btn-border-radius'] = u['$btn-border-radius'] || v['$border-radius'];
+  v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
+  v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
+
+  v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width']; // For form controls and buttons
+
+  // Links
+  //
+  // Style anchor elements.
+
+  v['$link-color'] = u['$link-color'] || v['$brand-primary'];
+  v['$link-hover-color'] = u['$link-hover-color'] || color(v['$link-color']).darken(0.35).toString();
+  v['$link-hover-decoration'] = u['$link-hover-decoration'] || 'underline';
+
+  // Forms
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$27();
 
 /**
  * Input component
  */
-
-var defaultProps$34 = {
-  theme: bsTheme,
-  type: 'text',
-  tag: 'p'
-};
 
 var InputUnstyled = function (_React$Component) {
   inherits(InputUnstyled, _React$Component);
@@ -12950,6 +14833,8 @@ var InputUnstyled = function (_React$Component) {
 
   createClass(InputUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -12990,12 +14875,16 @@ var InputUnstyled = function (_React$Component) {
         attributes.type = type;
       }
       return React.createElement(Tag, _extends({}, attributes, { ref: getRef, className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return InputUnstyled;
 }(React.Component);
 
+InputUnstyled.defaultProps = {
+  tag: 'p',
+  theme: makeTheme$27(),
+  type: 'text'
+};
 InputUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
@@ -13020,8 +14909,6 @@ var Input = styled(InputUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    /* Reboot Scss */\n    touch-action: manipulation;\n    \n    &[type="radio"],\n    &[type="checkbox"] {\n      box-sizing: border-box; /* 1. Add the correct box sizing in IE 10- */\n      padding: 0; /* 2. Remove the padding in IE 10- */\n      /*\n       Apply a disabled cursor for radios and checkboxes.\n       Note: Neither radios nor checkboxes can be readonly.\n      */\n   \n      &:disabled {\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n      }\n    }\n    \n    /* Normalize includes font: inherit;, so font-family. font-size, etc are */\n    /* properly inherited. However, line-height is not inherited there. */\n    line-height: inherit;\n   \n    &.disabled {\n      cursor: ' + props.theme['$cursor-disabled'] + ';\n    }\n   \n    &[type="date"],\n    &[type="time"],\n    &[type="datetime-local"],\n    &[type="month"] {\n    /* Remove the default appearance of temporal inputs to avoid a Mobile Safari\n       bug where setting a custom line-height prevents text from being vertically\n       centered within the input.\n       Bug report: https://github.com/twbs/bootstrap/issues/11266\n     */\n      -webkit-appearance: listbox;\n    }\n      \n    /* Correct the cursor style of increment and decrement buttons in Chrome. */\n    &[type="number"]::-webkit-inner-spin-button,\n    &[type="number"]::-webkit-outer-spin-button {\n      height: auto;\n    }\n    \n    &[type="search"] {\n      /* This overrides the extra rounded corners on search inputs in iOS so that our\n      .form-control class can properly style them. Note that this cannot simply\n       be added to .form-control as it is not specific enough. For details, see\n       https://github.com/twbs/bootstrap/issues/11586.\n       */\n      outline-offset: -2px; /* 2. Correct the outline style in Safari. */\n      -webkit-appearance: none;\n    }\n    \n    /* Remove the inner padding and cancel buttons in Chrome and Safari on macOS. */\n    &[type="search"]::-webkit-search-cancel-button,\n    &[type="search"]::-webkit-search-decoration {\n      -webkit-appearance: none;\n    }\n    \n    ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
-
-Input.defaultProps = defaultProps$34;
 
 var forms = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -13096,7 +14983,7 @@ function formControl() {
   var $inputBgDisabled = arguments.length > 20 && arguments[20] !== undefined ? arguments[20] : defaultProps['$input-bg-disabled'];
   var $cursorDisabled = arguments.length > 21 && arguments[21] !== undefined ? arguments[21] : defaultProps['$cursor-disabled'];
 
-  return '\n      & .form-control {\n        display: block;\n        width: 100%;\n  \n        /* Make inputs at least the height of their button counterpart (base line-height + padding + border) */\n        /* height: ' + $inputHeight + '; */\n  \n        padding: ' + $inputPaddingY + ' ' + $inputPaddingX + ';\n        font-size: ' + $fontSizeBase + ';\n        line-height: ' + $inputLineHeight + ';\n        color: ' + $inputColor + ';\n        background-color: ' + $inputBg + ';\n  \n        /* Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214. */\n        background-image: none;\n        background-clip: padding-box;\n        /* Note: This has no effect on selects in some browsers, due to the limited stylability of selects in CSS. */\n        ' + ($enableRounded ? 'border-radius: ' + $inputBorderRadius + ';' : 'border-radius: 0;') + ' /* Manually use the if/else instead of the mixin to account for iOS override */\n        border: ' + $inputBtnBorderWidth + ' solid ' + $inputBorderColor + ';\n        ' + (0, transition_1.transition)($enableTransitions, $inputTransition) + '\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $inputBoxShadow) + '\n  \n        /* Unstyle the caret on selects in IE10+. */\n        &::-ms-expand {\n          background-color: transparent;\n          border: 0;\n        }\n  \n        /* Customize the :focus state to imitate native WebKit styles. */\n        ' + formControlFocus($enableShadows, $inputColorFocus, $inputBgFocus, $inputBorderFocus, $inputBoxShadowFocus) + '\n  \n        /* Placeholder */\n        &::placeholder {\n          color: ' + $inputColorPlaceholder + ';\n          /* Override Firefox unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526. */\n          opacity: 1;\n        }\n  \n        /* Disabled and read-only inputs\n         HTML5 says that controls under a fieldset > legend:first-child will not be\n         disabled if the fieldset is disabled. Due to implementation difficulty, we\n         do not honor that edge case; we style them as disabled anyway.\n         */\n  \n        &:disabled,\n        &[readonly] {\n          background-color:' + $inputBgDisabled + ';\n          /* iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655. */\n          opacity: 1;\n        }\n  \n        &:disabled {\n          cursor: ' + $cursorDisabled + ';\n        }\n      }\n  ';
+  return '\n      & .form-control {\n        display: block;\n        width: 100%;\n  \n        /* Make inputs at least the height of their button counterpart (base line-height + padding + border) */\n        /* height: ' + $inputHeight + '; */\n  \n        padding: ' + $inputPaddingY + ' ' + $inputPaddingX + ';\n        font-size: ' + $fontSizeBase + ';\n        line-height: ' + $inputLineHeight + ';\n        color: ' + $inputColor + ';\n        background-color: ' + $inputBg + ';\n  \n        /* Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214. */\n        background-image: none;\n        background-clip: padding-box;\n        /* Note: This has no effect on selects in some browsers, due to the limited stylability of selects in CSS. */\n        ' + ($enableRounded ? 'border-radius: ' + $inputBorderRadius + ';' : 'border-radius: 0;') + ' /* Manually use the if/else instead of the mixin to account for iOS override */\n        border: ' + $inputBtnBorderWidth + ' solid ' + $inputBorderColor + ';\n        ' + (0, transition_1$1.transition)($enableTransitions, $inputTransition) + '\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $inputBoxShadow) + '\n  \n        /* Unstyle the caret on selects in IE10+. */\n        &::-ms-expand {\n          background-color: transparent;\n          border: 0;\n        }\n  \n        /* Customize the :focus state to imitate native WebKit styles. */\n        ' + formControlFocus($enableShadows, $inputColorFocus, $inputBgFocus, $inputBorderFocus, $inputBoxShadowFocus) + '\n  \n        /* Placeholder */\n        &::placeholder {\n          color: ' + $inputColorPlaceholder + ';\n          /* Override Firefox unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526. */\n          opacity: 1;\n        }\n  \n        /* Disabled and read-only inputs\n         HTML5 says that controls under a fieldset > legend:first-child will not be\n         disabled if the fieldset is disabled. Due to implementation difficulty, we\n         do not honor that edge case; we style them as disabled anyway.\n         */\n  \n        &:disabled,\n        &[readonly] {\n          background-color:' + $inputBgDisabled + ';\n          /* iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655. */\n          opacity: 1;\n        }\n  \n        &:disabled {\n          cursor: ' + $cursorDisabled + ';\n        }\n      }\n  ';
 }
 
 // Form validation states
@@ -13162,16 +15049,124 @@ unwrapExports(forms);
 var forms_2 = forms.formControl;
 var forms_3 = forms.formControlValidation;
 
+var rmUnit$12 = unitUtils$1.rmUnit;
+var UNIT$11 = unitUtils$1.UNIT;
+
+/**
+ * BOOTSTRAP THEME INPUTGROUP
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$28 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+
+  // Spacing
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+
+  v['$gray'] = u['$gray'] || '#464a4c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
+  v['$font-size-xs'] = u['$font-size-xs'] || '.75rem';
+  v['$line-height-base'] = u['$line-height-base'] || '1.5';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  // Forms
+
+  v['$input-padding-x'] = u['$input-padding-x'] || '.75rem';
+  v['$input-padding-y'] = u['$input-padding-y'] || '.5rem';
+
+  v['$input-bg'] = u['$input-bg'] || v['$white'];
+  v['$input-bg-disabled'] = u['$input-bg-disabled'] || v['$gray-lighter'];
+
+  v['$input-padding-x-lg'] = u['$input-padding-x-lg'] || '1.5rem';
+  v['$input-padding-y-lg'] = u['$input-padding-y-lg'] || '.75rem';
+  v['$input-line-height'] = u['$input-line-height'] || '1.25';
+  v['$input-height'] = u['$input-height'] || rmUnit$12(v['$font-size-base'], UNIT$11.REM) * v['$line-height-base'] + rmUnit$12(v['$input-padding-y'], UNIT$11.REM) * 2 + UNIT$11.REM;
+  v['$input-box-shadow'] = u['$input-box-shadow'] || 'inset 0 1px 1px ' + color(v['$black']).alpha(0.075).toString();
+
+  v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width']; // For form controls and buttons
+
+  v['$input-group-addon-bg'] = u['$input-group-addon-bg'] || v['$gray-lighter'];
+  v['$input-border-color'] = u['$input-border-color'] || color(v['$black']).alpha(0.15).toString();
+  v['$input-border-focus'] = u['$input-border-focus'] || color(v['$brand-primary']).lighten(0.25).toString();
+  v['$input-box-shadow-focus'] = u['$input-box-shadow-focus'] || v['$input-box-shadow'] + ', 0 0 8px rgba(' + v['$input-border-focus'] + ',.6)';
+
+  v['$input-color'] = u['$input-color'] || v['$gray'];
+  v['$input-group-addon-border-color'] = u['$input-group-addon-border-color'] || v['$input-border-color'];
+
+  v['$input-padding-x-sm'] = u['$input-padding-x-sm'] || '.5rem';
+  v['$input-padding-y-sm'] = u['$input-padding-y-sm'] || '.25rem';
+  v['$input-color-placeholder'] = u['$input-color-placeholder'] || v['$gray-light'];
+
+  v['$input-border-radius-lg'] = u['$input-border-radius-lg'] || v['$border-radius-lg'];
+  v['$input-border-radius-sm'] = u['$input-border-radius-sm'] || v['$border-radius-sm'];
+  v['$input-border-radius'] = u['$input-border-radius'] || v['$border-radius'];
+
+  v['$input-transition'] = u['$input-transition'] || 'border-color ease-in-out .15s, box-shadow ease-in-out .15s';
+  v['$input-color-focus'] = u['$input-color-focus'] || v['$input-color'];
+  v['$input-bg-focus'] = u['$input-bg-focus'] || v['$input-bg'];
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$28();
+
 /**
  * InputGroup Component
  *
  *
  */
-var defaultProps$35 = {
-  theme: bsTheme,
-  tag: 'div'
-};
-
 var InputGroupUnstyled = function (_React$Component) {
   inherits(InputGroupUnstyled, _React$Component);
 
@@ -13182,6 +15177,8 @@ var InputGroupUnstyled = function (_React$Component) {
 
   createClass(InputGroupUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -13193,12 +15190,15 @@ var InputGroupUnstyled = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, 'input-group', size ? 'input-group-' + size : null), cssModule);
 
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return InputGroupUnstyled;
 }(React.Component);
 
+InputGroupUnstyled.defaultProps = {
+  tag: 'div',
+  theme: makeTheme$28()
+};
 InputGroupUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -13213,20 +15213,14 @@ InputGroupUnstyled.propTypes = {
 var InputGroup = styled(InputGroupUnstyled).withConfig({
   displayName: 'InputGroup'
 })(['', ''], function (props) {
-  return '\n    /*\n     Base styles\n    */\n   \n    &.input-group {\n      position: relative;\n      display: flex;\n      width: 100%;\n\n      .form-control {\n        /* \n          Ensure that the input is always above the *appended* addon button for\n          proper border colors.\n        */\n        \n        position: relative;\n        z-index: 2;\n        flex: 1 1 auto;\n        /* Add width 1% and flex-basis auto to ensure that button will not wrap out */\n        /* the column. Applies to IE Edge+ and Firefox. Chrome does not require this. */\n        width: 1%;\n        margin-bottom: 0;\n        \n        ' + hover_5(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n      }\n    }\n    \n    & .input-group-addon,\n    & .input-group-btn,\n    &.input-group .form-control {\n      /* Vertically centers the content of the addons within the input group */\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n\n\n      &:not(:first-child):not(:last-child) {\n        ' + borderRadius_2(props.theme['$enable-rounded'], '0') + '\n      }\n    }\n   \n    & .input-group-addon,\n    & .input-group-btn {\n\n      white-space: nowrap;\n      vertical-align: middle; /* Match the inputs */\n    }\n   \n   \n    /* Sizing options\n    Remix the default form control sizing classes into new ones for easier\n    manipulation.\n    */\n   \n    &.input-group-lg > .form-control,\n    &.input-group-lg > .input-group-addon,\n    &.input-group-lg > .input-group-btn > .btn {\n      padding: ' + props.theme['$input-padding-y-lg'] + ' ' + props.theme['$input-padding-x-lg'] + ';\n      font-size: ' + props.theme['$font-size-lg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-lg']) + '\n    }\n    \n    &.input-group-sm > .form-control,\n    &.input-group-sm > .input-group-addon,\n    &.input-group-sm > .input-group-btn > .btn {\n      padding: ' + props.theme['$input-padding-y-sm'] + ' ' + props.theme['$input-padding-x-sm'] + ';\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-sm']) + '\n    }\n   \n   \n    /*\n    Text input groups\n    */\n   \n    & .input-group-addon {\n      padding: ' + props.theme['$input-padding-y'] + ' ' + props.theme['$input-padding-x'] + ';\n      margin-bottom: 0; /* Allow use of <label> elements by overriding our default margin-bottom */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      font-weight: normal;\n      line-height: ' + props.theme['$input-line-height'] + ';\n      color: ' + props.theme['$input-color'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$input-group-addon-bg'] + ';\n      border: ' + props.theme['$input-btn-border-width'] + ' solid ' + props.theme['$input-group-addon-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius']) + '\n   \n      /* \n      Nuke default margins from checkboxes and radios to vertically center within.\n      */\n      input[type="radio"],\n      input[type="checkbox"] {\n        margin-top: 0;\n      }\n    }\n   \n   \n    /*\n     Reset rounded corners\n    */\n   \n    &.input-group .form-control:not(:last-child),\n    & .input-group-addon:not(:last-child),\n    & .input-group-btn:not(:last-child) > .btn,\n    & .input-group-btn:not(:last-child) > .btn-group > .btn,\n    & .input-group-btn:not(:last-child) > .dropdown-toggle,\n    & .input-group-btn:not(:first-child) > .btn:not(:last-child):not(.dropdown-toggle),\n    & .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn {\n      ' + borderRadius_4(props.theme['$enable-rounded'], '0') + '\n    }\n    & .input-group-addon:not(:last-child) {\n      border-right: 0;\n    }\n    &.input-group .form-control:not(:first-child),\n    & .input-group-addon:not(:first-child),\n    & .input-group-btn:not(:first-child) > .btn,\n    & .input-group-btn:not(:first-child) > .btn-group > .btn,\n    & .input-group-btn:not(:first-child) > .dropdown-toggle,\n    & .input-group-btn:not(:last-child) > .btn:not(:first-child),\n    & .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn {\n      ' + borderRadius_6(props.theme['$enable-rounded'], '0') + '\n    }\n    & .form-control + .input-group-addon:not(:first-child) {\n      border-left: 0;\n    }\n   \n    /*\n     Button input groups\n    */\n   \n    & .input-group-btn {\n      position: relative;\n      /* Jankily prevent input button groups from wrapping with white-space and\n      font-size in combination with inline-block on buttons.\n      */\n      font-size: 0;\n      white-space: nowrap;\n   \n      /* Negative margin for spacing, position for bringing hovered/focused/actived\n      element above the siblings.\n      */\n      > .btn {\n        position: relative;\n        /* Vertically stretch the button and center its content */\n        flex: 1;\n        \n        + .btn {\n          margin-left: -' + props.theme['$input-btn-border-width'] + ';\n        }\n        \n        /* Bring the active button to the front */\n        ' + hover_5(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n      }\n   \n      /* Negative margin to only have a single, shared border between the two */\n      &:not(:last-child) {\n        > .btn,\n        > .btn-group {\n          margin-right: -' + props.theme['$input-btn-border-width'] + ';\n        }\n      }\n      &:not(:first-child) {\n        > .btn,\n        > .btn-group {\n          z-index: 2;\n          margin-left: -' + props.theme['$input-btn-border-width'] + ';\n          /* Because specificity */\n          ' + hover_5(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n        }\n      }\n    }\n    \n   /* Added So that Inputs in InputGroup grab the same .form-control class as in Component Form Not Bs4 */\n   ' + forms_2(props.theme['$enable-rounded'], props.theme['$enable-transitions'], props.theme['$enable-shadows'], props.theme['$input-height'], props.theme['$input-padding-y'], props.theme['$input-padding-x'], props.theme['$font-size-base'], props.theme['$input-line-height'], props.theme['$input-color'], props.theme['$input-bg'], props.theme['$input-border-radius'], props.theme['$input-btn-border-width'], props.theme['$input-border-color'], props.theme['$input-transition'], props.theme['$input-box-shadow'], props.theme['$input-color-focus'], props.theme['$input-bg-focus'], props.theme['$input-border-focus'], props.theme['$input-box-shadow-focus'], props.theme['$input-color-placeholder'], props.theme['$input-bg-disabled'], props.theme['$cursor-disabled']) + '\n    \n  ';
+  return '\n    /*\n     Base styles\n    */\n   \n    &.input-group {\n      position: relative;\n      display: flex;\n      width: 100%;\n\n      .form-control {\n        /* \n          Ensure that the input is always above the *appended* addon button for\n          proper border colors.\n        */\n        \n        position: relative;\n        z-index: 2;\n        flex: 1 1 auto;\n        /* Add width 1% and flex-basis auto to ensure that button will not wrap out */\n        /* the column. Applies to IE Edge+ and Firefox. Chrome does not require this. */\n        width: 1%;\n        margin-bottom: 0;\n        \n        ' + hover_5(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n      }\n    }\n    \n    & .input-group-addon,\n    & .input-group-btn,\n    &.input-group .form-control {\n      /* Vertically centers the content of the addons within the input group */\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n\n\n      &:not(:first-child):not(:last-child) {\n        ' + borderRadius_2(props.theme['$enable-rounded'], '0') + '\n      }\n    }\n   \n    & .input-group-addon,\n    & .input-group-btn {\n\n      white-space: nowrap;\n      vertical-align: middle; /* Match the inputs */\n    }\n   \n   \n    /* Sizing options\n    Remix the default form control sizing classes into new ones for easier\n    manipulation.\n    */\n   \n    &.input-group-lg > .form-control,\n    &.input-group-lg > .input-group-addon,\n    &.input-group-lg > .input-group-btn > .btn {\n      padding: ' + props.theme['$input-padding-y-lg'] + ' ' + props.theme['$input-padding-x-lg'] + ';\n      font-size: ' + props.theme['$font-size-lg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-lg']) + '\n    }\n    \n    &.input-group-sm > .form-control,\n    &.input-group-sm > .input-group-addon,\n    &.input-group-sm > .input-group-btn > .btn {\n      padding: ' + props.theme['$input-padding-y-sm'] + ' ' + props.theme['$input-padding-x-sm'] + ';\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-sm']) + '\n    }\n   \n   \n    /*\n    Text input groups\n    */\n   \n    & .input-group-addon {\n      padding: ' + props.theme['$input-padding-y'] + ' ' + props.theme['$input-padding-x'] + ';\n      margin-bottom: 0; /* Allow use of <label> elements by overriding our default margin-bottom */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      font-weight: normal;\n      line-height: ' + props.theme['$input-line-height'] + ';\n      color: ' + props.theme['$input-color'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$input-group-addon-bg'] + ';\n      border: ' + props.theme['$input-btn-border-width'] + ' solid ' + props.theme['$input-group-addon-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius']) + '\n   \n      /* \n      Nuke default margins from checkboxes and radios to vertically center within.\n      */\n      input[type="radio"],\n      input[type="checkbox"] {\n        margin-top: 0;\n      }\n    }\n   \n   \n    /*\n     Reset rounded corners\n    */\n   \n    &.input-group .form-control:not(:last-child),\n    & .input-group-addon:not(:last-child),\n    & .input-group-btn:not(:last-child) > .btn,\n    & .input-group-btn:not(:last-child) > .btn-group > .btn,\n    & .input-group-btn:not(:last-child) > .dropdown-toggle,\n    & .input-group-btn:not(:first-child) > .btn:not(:last-child):not(.dropdown-toggle),\n    & .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn {\n      ' + borderRadius_4(props.theme['$enable-rounded'], '0') + '\n    }\n    & .input-group-addon:not(:last-child) {\n      border-right: 0;\n    }\n    &.input-group .form-control:not(:first-child),\n    & .input-group-addon:not(:first-child),\n    & .input-group-btn:not(:first-child) > .btn,\n    & .input-group-btn:not(:first-child) > .btn-group > .btn,\n    & .input-group-btn:not(:first-child) > .dropdown-toggle,\n    & .input-group-btn:not(:last-child) > .btn:not(:first-child),\n    & .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn {\n      ' + borderRadius_6(props.theme['$enable-rounded'], '0') + '\n    }\n    & .form-control + .input-group-addon:not(:first-child) {\n      border-left: 0;\n    }\n   \n    /*\n     Button input groups\n    */\n   \n    & .input-group-btn {\n      position: relative;\n      /* Jankily prevent input button groups from wrapping with white-space and\n      font-size in combination with inline-block on buttons.\n      */\n      font-size: 0;\n      white-space: nowrap;\n   \n      /* Negative margin for spacing, position for bringing hovered/focused/actived\n      element above the siblings.\n      */\n      > .btn {\n        position: relative;\n        /* Vertically stretch the button and center its content */\n        flex: 1;\n        \n        + .btn {\n          margin-left: -' + props.theme['$input-btn-border-width'] + ';\n        }\n        \n        /* Bring the active button to the front */\n        ' + hover_5(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n      }\n   \n      /* Negative margin to only have a single, shared border between the two */\n      &:not(:last-child) {\n        > .btn,\n        > .btn-group {\n          margin-right: -' + props.theme['$input-btn-border-width'] + ';\n        }\n      }\n      &:not(:first-child) {\n        > .btn,\n        > .btn-group {\n          z-index: 2;\n          margin-left: -' + props.theme['$input-btn-border-width'] + ';\n          /* Because specificity */\n          ' + hover_5(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n        }\n      }\n    }\n    \n   /* Added So that Inputs in InputGroup grab the same .form-control class as in Component Form Not Bs4 */\n   ' + forms_2(props.theme['$enable-rounded'], props.theme['$enable-transitions'], props.theme['$enable-shadows'], props.theme['$input-height'], props.theme['$input-padding-y'], props.theme['$input-padding-x'], props.theme['$font-size-base'], props.theme['$input-line-height'], props.theme['$input-color'], props.theme['$input-bg'], props.theme['$input-border-radius'], props.theme['$input-btn-border-width'], props.theme['$input-border-color'], props.theme['$input-transition'], props.theme['$input-box-shadow'], props.theme['$input-color-focus'], props.theme['$input-bg-focus'], props.theme['$input-border-focus'], props.theme['$input-box-shadow-focus'], props.theme['$input-color-placeholder'], props.theme['$input-bg-disabled'], props.theme['$cursor-disabled']) + '\n  ';
 });
-
-InputGroup.defaultProps = defaultProps$35;
 
 /**
  * InputGroup Component
  *
  *
  */
-var defaultProps$36 = {
-  tag: 'div'
-};
-
 var InputGroupAddon = function (_React$Component) {
   inherits(InputGroupAddon, _React$Component);
 
@@ -13237,6 +15231,8 @@ var InputGroupAddon = function (_React$Component) {
 
   createClass(InputGroupAddon, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -13248,30 +15244,25 @@ var InputGroupAddon = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, 'input-group-addon'), cssModule);
 
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return InputGroupAddon;
 }(React.Component);
 
-InputGroupAddon.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  className: PropTypes.string,
-  cssModule: PropTypes.object
+InputGroupAddon.defaultProps = {
+  tag: 'div'
 };
-
-
-InputGroupAddon.defaultProps = defaultProps$36;
+InputGroupAddon.propTypes = {
+  className: PropTypes.string,
+  cssModule: PropTypes.object,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+};
 
 /**
  * InputGroup Component
  *
  *
  */
-var defaultProps$37 = {
-  tag: 'div'
-};
-
 var InputGroupButton = function (_React$Component) {
   inherits(InputGroupButton, _React$Component);
 
@@ -13282,6 +15273,8 @@ var InputGroupButton = function (_React$Component) {
 
   createClass(InputGroupButton, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -13314,12 +15307,14 @@ var InputGroupButton = function (_React$Component) {
         _extends({}, attributes, { className: classes }),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return InputGroupButton;
 }(React.Component);
 
+InputGroupButton.defaultProps = {
+  tag: 'div'
+};
 InputGroupButton.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   children: PropTypes.node,
@@ -13328,9 +15323,6 @@ InputGroupButton.propTypes = {
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
-
-
-InputGroupButton.defaultProps = defaultProps$37;
 
 /*
  * Kopax Ltd Copyright (c) 2016.
@@ -13353,10 +15345,62 @@ IssueIcon.propTypes = {
 };
 
 /**
+ * BOOTSTRAP THEME KBD
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$29 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+
+  // Colors
+
+  v['$black'] = u['$black'] || '#000';
+
+  // Fonts
+
+  v['$font-family-monospace'] = u['$font-family-monospace'] || 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
+  v['$font-weight-bold'] = u['$font-weight-bold'] || 'bold';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  // Code
+  v['$code-font-size'] = u['$code-font-size'] || '90%';
+  v['$code-padding-x'] = u['$code-padding-x'] || '.4rem';
+  v['$code-padding-y'] = u['$code-padding-y'] || '.2rem';
+
+  v['$kbd-color'] = u['$kbd-color'] || v['$white'];
+  v['$kbd-bg'] = u['$kbd-bg'] || v['$gray-dark'];
+  v['$kbd-box-shadow'] = u['$kbd-box-shadow'] || 'inset 0 -.1rem 0 ' + color(v['$black']).alpha(0.25).toString();
+  v['$nested-kbd-font-weight'] = u['$nested-kbd-font-weight'] || v['$font-weight-bold'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$29();
+
+/**
  * Kbd component
  */
-
-var defaultProps$38 = { theme: bsTheme };
 
 var KbdUnstyled = function (_React$Component) {
   inherits(KbdUnstyled, _React$Component);
@@ -13368,6 +15412,8 @@ var KbdUnstyled = function (_React$Component) {
 
   createClass(KbdUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -13379,16 +15425,18 @@ var KbdUnstyled = function (_React$Component) {
         _extends({ className: className }, rest),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return KbdUnstyled;
 }(React.Component);
 
+KbdUnstyled.defaultProps = {
+  theme: makeTheme$29()
+};
 KbdUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
   children: PropTypes.node,
+  className: PropTypes.string,
   theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
@@ -13400,16 +15448,68 @@ var Kbd = styled(KbdUnstyled).withConfig({
   return '\n    /* User input typically entered via keyboard */\n    padding: ' + props.theme['$code-padding-y'] + ' ' + props.theme['$code-padding-x'] + ';\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$kbd-color'] + ';\n    background-color: ' + props.theme['$kbd-bg'] + ';\n    ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius-sm']) + '\n    ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$kbd-box-shadow']) + '\n    \n    & kbd {\n      padding: 0;\n      font-size: 100%;\n      font-weight: ' + props.theme['$nested-kbd-font-weight'] + ';\n      ' + boxShadow_2(props.theme['$enable-shadows'], 'none') + '\n    }\n    \n    /* Bootstrap 4 does not place this css rule straight into Kbd tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
 
-Kbd.defaultProps = defaultProps$38;
+/**
+ * BOOTSTRAP THEME JUMBOTRON
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$30 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+
+  // Jumbotron
+
+  v['$jumbotron-padding'] = u['$jumbotron-padding'] || '2rem';
+  v['$jumbotron-bg'] = u['$jumbotron-bg'] || v['$gray-lighter'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$30();
 
 /**
  * A Jumbotron (Slider)
  */
-
-var defaultProps$39 = {
-  theme: bsTheme,
-  tag: 'div'
-};
 
 var JumbotronUnstyled = function (_React$Component) {
   inherits(JumbotronUnstyled, _React$Component);
@@ -13421,6 +15521,8 @@ var JumbotronUnstyled = function (_React$Component) {
 
   createClass(JumbotronUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -13432,18 +15534,21 @@ var JumbotronUnstyled = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, 'jumbotron', fluid ? 'jumbotron-fluid' : false), cssModule);
 
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return JumbotronUnstyled;
 }(React.Component);
 
+JumbotronUnstyled.defaultProps = {
+  tag: 'div',
+  theme: makeTheme$30()
+};
 JumbotronUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  fluid: PropTypes.bool,
   className: PropTypes.string,
   cssModule: PropTypes.object,
+  fluid: PropTypes.bool,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
@@ -13455,7 +15560,143 @@ var Jumbotron = styled(JumbotronUnstyled).withConfig({
   return '\n    &.jumbotron {\n      padding: ' + props.theme['$jumbotron-padding'] + ' calc(' + props.theme['$jumbotron-padding'] + ' / 2);\n      margin-bottom: ' + props.theme['$jumbotron-padding'] + ';\n      background-color: ' + props.theme['$jumbotron-bg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius-lg']) + '\n    \n      ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], 'padding: calc(' + props.theme['$jumbotron-padding'] + ' * 2) ' + props.theme['$jumbotron-padding'] + ';') + '  \n    }\n\n    & .jumbotron-hr {\n      border-top-color: ' + color(props.theme['$jumbotron-bg']).darken(0.1).toString() + ';\n    }\n    \n    &.jumbotron-fluid {\n      padding-right: 0;\n      padding-left: 0;\n      ' + borderRadius_2(props.theme['$enable-rounded'], '0') + '\n    }\n  ';
 });
 
-Jumbotron.defaultProps = defaultProps$39;
+/**
+ * BOOTSTRAP THEME LABEL
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$31 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+  v['$green'] = u['$green'] || '#5cb85c';
+  v['$teal'] = u['$teal'] || '#5bc0de';
+  v['$orange'] = u['$orange'] || '#f0ad4e';
+  v['$red'] = u['$red'] || '#d9534f';
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+  v['$brand-success'] = u['$brand-success'] || v['$green'];
+  v['$brand-info'] = u['$brand-info'] || v['$teal'];
+  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
+  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
+
+  // Spacing
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Fonts
+  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
+  v['$font-size-xs'] = u['$font-size-xs'] || '.75rem';
+
+  v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  // Links
+  //
+  // Style anchor elements.
+
+  v['$link-color'] = u['$link-color'] || v['$brand-primary'];
+  v['$link-hover-color'] = u['$link-hover-color'] || color(v['$link-color']).darken(0.35).toString();
+  v['$link-hover-decoration'] = u['$link-hover-decoration'] || 'underline';
+
+  // Forms
+
+  v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width']; // For form controls and buttons
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+
+  // Buttons
+
+  v['$btn-padding-x'] = u['$btn-padding-x'] || '1rem';
+  v['$btn-padding-y'] = u['$btn-padding-y'] || '.5rem';
+  v['$btn-padding-x-lg'] = u['$btn-padding-x-lg'] || '1.5rem';
+  v['$btn-padding-y-lg'] = u['$btn-padding-y-lg'] || '.75rem';
+  v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || '.5rem';
+  v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
+
+  v['$btn-line-height'] = u['$btn-line-height'] || '1.25';
+
+  v['$btn-primary-color'] = u['$btn-primary-color'] || v['$white'];
+  v['$btn-primary-bg'] = u['$btn-primary-bg'] || v['$brand-primary'];
+  v['$btn-primary-border'] = u['$btn-primary-border'] || v['$btn-primary-bg'];
+
+  v['$btn-secondary-color'] = u['$btn-secondary-color'] || v['$gray-dark'];
+  v['$btn-secondary-bg'] = u['$btn-secondary-bg'] || v['$white'];
+  v['$btn-secondary-border'] = u['$btn-secondary-border'] || '#ccc';
+
+  v['$btn-info-color'] = u['$btn-info-color'] || v['$white'];
+  v['$btn-info-bg'] = u['$btn-info-bg'] || v['$brand-info'];
+  v['$btn-info-border'] = u['$btn-info-border'] || v['$btn-info-bg'];
+
+  v['$btn-success-color'] = u['$btn-success-color'] || v['$white'];
+  v['$btn-success-bg'] = u['$btn-success-bg'] || v['$brand-success'];
+  v['$btn-success-border'] = u['$btn-success-border'] || v['$btn-success-bg'];
+
+  v['$btn-warning-color'] = u['$btn-warning-color'] || v['$white'];
+  v['$btn-warning-bg'] = u['$btn-warning-bg'] || v['$brand-warning'];
+  v['$btn-warning-border'] = u['$btn-warning-border'] || v['$btn-warning-bg'];
+
+  v['$btn-danger-color'] = u['$btn-danger-color'] || v['$white'];
+  v['$btn-danger-bg'] = u['$btn-danger-bg'] || v['$brand-danger'];
+  v['$btn-danger-border'] = u['$btn-danger-border'] || v['$btn-danger-bg'];
+
+  v['$btn-font-weight'] = u['$btn-font-weight'] || v['$font-weight-normal'];
+  v['$btn-transition'] = u['$btn-transition'] || 'all .2s ease-in-out';
+
+  v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
+  v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
+  v['$btn-border-radius'] = u['$btn-border-radius'] || v['$border-radius'];
+  v['$btn-box-shadow'] = u['$btn-box-shadow'] || 'inset 0 1px 0 ' + color(v['$white']).alpha(0.15).toString() + ', 0 1px 1px ' + color(v['$black']).alpha(0.075).toString();
+  v['$btn-focus-box-shadow'] = u['$btn-focus-box-shadow'] || '0 0 0 2px ' + color(v['$brand-primary']).alpha(0.25).toString();
+  v['$btn-active-box-shadow'] = u['$btn-active-box-shadow'] || 'inset 0 3px 5px ' + color(v['$black']).alpha(0.125).toString();
+
+  v['$btn-link-disabled-color'] = u['$btn-link-disabled-color'] || v['$gray-light'];
+
+  v['$btn-block-spacing-y'] = u['$btn-block-spacing-y'] || '.5rem';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$31();
 
 /**
  * Label component
@@ -13474,16 +15715,16 @@ var columnProps$1 = PropTypes.oneOfType([PropTypes.string, PropTypes.number, Pro
 
 var propTypes$2 = {
   /* eslint-disable react/no-unused-prop-types */
-  children: PropTypes.node,
-  hidden: PropTypes.bool,
   check: PropTypes.bool,
-  inline: PropTypes.bool,
-  disabled: PropTypes.bool,
-  size: PropTypes.string,
-  for: PropTypes.string,
-  tag: PropTypes.string,
+  children: PropTypes.node,
   className: PropTypes.string,
   cssModule: PropTypes.object,
+  disabled: PropTypes.bool,
+  for: PropTypes.string,
+  hidden: PropTypes.bool,
+  inline: PropTypes.bool,
+  size: PropTypes.string,
+  tag: PropTypes.string,
   xs: columnProps$1,
   sm: columnProps$1,
   md: columnProps$1,
@@ -13493,9 +15734,9 @@ var propTypes$2 = {
   /* eslint-enable react/no-unused-prop-types */
 };
 
-var defaultProps$40 = {
+var defaultProps$6 = {
   tag: 'label',
-  theme: bsTheme
+  theme: makeTheme$31()
 };
 
 var LabelUnstyled = function LabelUnstyled(props) {
@@ -13540,7 +15781,7 @@ var Label = styled(LabelUnstyled).withConfig({
 });
 
 Label.propTypes = propTypes$2;
-Label.defaultProps = defaultProps$40;
+Label.defaultProps = defaultProps$6;
 
 /* A Legend (Box) */
 
@@ -13568,10 +15809,34 @@ unwrapExports(media_1);
 var media_2 = media_1.media;
 
 /**
+ * BOOTSTRAP THEME LI
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$32 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Fonts
+
+  v['$list-inline-padding'] = u['$list-inline-padding'] || '5px';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$32();
+
+/**
  * A list item.
  */
-
-var defaultProps$41 = { theme: bsTheme };
 
 var LiUnstyled = function (_React$Component) {
   inherits(LiUnstyled, _React$Component);
@@ -13583,6 +15848,8 @@ var LiUnstyled = function (_React$Component) {
 
   createClass(LiUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -13603,12 +15870,14 @@ var LiUnstyled = function (_React$Component) {
         }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return LiUnstyled;
 }(React.Component);
 
+LiUnstyled.defaultProps = {
+  theme: makeTheme$32()
+};
 LiUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
@@ -13631,8 +15900,6 @@ var Li = styled(LiUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    &.list-inline-item {\n      display: inline-block;\n    \n      &:not(:last-child) {\n        margin-right: ' + props.theme['$list-inline-padding'] + ';\n      }\n    }\n    \n    ' + media_2() + '\n  ';
 });
-
-Li.defaultProps = defaultProps$41;
 
 var listGroup = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -13672,6 +15939,122 @@ exports.default = {
 
 unwrapExports(listGroup);
 var listGroup_2 = listGroup.listGroupItemVariant;
+
+/**
+ * BOOTSTRAP THEME LISTGROUP
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$33 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray'] = u['$gray'] || '#464a4c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$component-active-color'] = u['$component-active-color'] || v['$white'];
+  v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
+
+  // List group
+
+  v['$list-group-color'] = u['$list-group-color'] || v['$body-color'];
+  v['$list-group-bg'] = u['$list-group-bg'] || v['$white'];
+  v['$list-group-border-color'] = u['$list-group-border-color'] || color(v['$black']).alpha(0.125).toString();
+  v['$list-group-border-width'] = u['$list-group-border-width'] || v['$border-width'];
+  v['$list-group-border-radius'] = u['$list-group-border-radius'] || v['$border-radius'];
+
+  v['$list-group-item-padding-x'] = u['$list-group-item-padding-x'] || '1.25rem';
+  v['$list-group-item-padding-y'] = u['$list-group-item-padding-y'] || '.75rem';
+
+  v['$list-group-hover-bg'] = u['$list-group-hover-bg'] || v['$gray-lightest'];
+  v['$list-group-active-color'] = u['$list-group-active-color'] || v['$component-active-color'];
+  v['$list-group-active-bg'] = u['$list-group-active-bg'] || v['$component-active-bg'];
+  v['$list-group-active-border'] = u['$list-group-active-border'] || v['$list-group-active-bg'];
+
+  v['$list-group-disabled-color'] = u['$list-group-disabled-color'] || v['$gray-light'];
+  v['$list-group-disabled-bg'] = u['$list-group-disabled-bg'] || v['$list-group-bg'];
+
+  v['$list-group-link-color'] = u['$list-group-link-color'] || v['$gray'];
+  v['$list-group-link-hover-color'] = u['$list-group-link-hover-color'] || v['$list-group-link-color'];
+
+  v['$list-group-link-active-color'] = u['$list-group-link-active-color'] || v['$list-group-color'];
+  v['$list-group-link-active-bg'] = u['$list-group-link-active-bg'] || v['$gray-lighter'];
+
+  // Forms
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+
+  // Form states and alerts
+  //
+  // Define colors for form feedback states and, by default, alerts.
+
+  v['$state-success-text'] = u['$state-success-text'] || '#3c763d';
+  v['$state-success-bg'] = u['$state-success-bg'] || '#dff0d8';
+
+  v['$state-info-text'] = u['$state-info-text'] || '#31708f';
+  v['$state-info-bg'] = u['$state-info-bg'] || '#d9edf7';
+
+  v['$state-warning-text'] = u['$state-warning-text'] || '#8a6d3b';
+  v['$state-warning-bg'] = u['$state-warning-bg'] || '#fcf8e3';
+
+  v['$state-danger-text'] = u['$state-danger-text'] || '#a94442';
+  v['$state-danger-bg'] = u['$state-danger-bg'] || '#f2dede';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$33();
 
 var nav_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -13771,14 +16154,151 @@ var lists_2 = lists.listInline;
 var lists_3 = lists.listInlineItem;
 
 /**
+ * BOOTSTRAP THEME UNORDERED LIST
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$34 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray'] = u['$gray'] || '#464a4c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Spacing
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-bg'] = u['$body-bg'] || v['$white'];
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
+  v['$component-active-color'] = u['$component-active-color'] || v['$white'];
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Navbar
+
+  v['$navbar-padding-x'] = u['$navbar-padding-x'] || v['$spacer'];
+  v['$navbar-padding-y'] = u['$navbar-padding-y'] || v['$spacer-halved'];
+
+  // Navs
+
+  v['$nav-link-padding'] = u['$nav-link-padding'] || '.5em 1em';
+  v['$nav-disabled-link-color'] = u['$nav-disabled-link-color'] || v['$gray-light'];
+
+  v['$nav-tabs-border-color'] = u['$nav-tabs-border-color'] || '#ddd';
+  v['$nav-tabs-border-width'] = u['$nav-tabs-border-width'] || v['$border-width'];
+  v['$nav-tabs-border-radius'] = u['$nav-tabs-border-radius'] || v['$border-radius'];
+  v['$nav-tabs-link-hover-border-color'] = u['$nav-tabs-link-hover-border-color'] || v['$gray-lighter'];
+  v['$nav-tabs-active-link-hover-color'] = u['$nav-tabs-active-link-hover-color'] || v['$gray'];
+  v['$nav-tabs-active-link-hover-bg'] = u['$nav-tabs-active-link-hover-bg'] || v['$body-bg'];
+  v['$nav-tabs-active-link-hover-border-color'] = u['$nav-tabs-active-link-hover-border-color'] || '#ddd';
+
+  v['$nav-pills-border-radius'] = u['$nav-pills-border-radius'] || v['$border-radius'];
+  v['$nav-pills-active-link-color'] = u['$nav-pills-active-link-color'] || v['$component-active-color'];
+  v['$nav-pills-active-link-bg'] = u['$nav-pills-active-link-bg'] || v['$component-active-bg'];
+
+  // Forms
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+
+  // Mixin navbar
+  //
+  // From module bootstrap-styled-mixins: https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins/blob/master/src/navbar.js
+
+  v['$zindex-navbar'] = u['$zindex-navbar'] || '1000';
+  v['$zindex-navbar-fixed'] = u['$zindex-navbar-fixed'] || '1030';
+  v['$zindex-navbar-sticky'] = u['$zindex-navbar-sticky'] || '1030';
+  v['$navbar-brand-padding-y'] = u['$navbar-brand-padding-y'] || '.25rem';
+
+  v['$navbar-divider-padding-y'] = u['$navbar-brand-padding-y'] || '.425rem';
+  v['$navbar-toggler-padding-y'] = u['$navbar-toggler-padding-y'] || '.5rem';
+  v['$navbar-toggler-padding-x'] = u['$navbar-toggler-padding-x'] || '.75rem';
+  v['$navbar-toggler-font-size'] = u['$navbar-toggler-font-size'] || '1.25rem';
+
+  v['$navbar-toggler-border-radius'] = u['$navbar-toggler-border-radius'] || '.25rem';
+  v['$navbar-light-active-color'] = u['$navbar-light-active-color'] || 'rgba(0,0,0,.9)';
+  v['$navbar-light-color'] = u['$navbar-light-color'] || 'rgba(0,0,0,.5)';
+  v['$navbar-light-hover-color'] = u['$navbar-light-hover-color'] || 'rgba(0,0,0,.7)';
+  v['$navbar-light-toggler-border'] = u['$navbar-light-toggler-border'] || 'rgba(0,0,0,.1)';
+  v['$navbar-light-disabled-color'] = u['$navbar-light-disabled-color'] || 'rgba(0, 0, 0, 0.3)';
+  v['$navbar-light-toggler-bg'] = u['$navbar-light-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(0,0,0,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-active-color'] = u['$navbar-inverse-active-color'] || 'rgba(255,255,255,1)';
+  v['$navbar-inverse-color'] = u['$navbar-inverse-color'] || 'rgba(255,255,255,.5)';
+  v['$navbar-inverse-hover-color'] = u['$navbar-inverse-hover-color'] || 'rgba(255,255,255,.75)';
+  v['$navbar-inverse-toggler-border'] = u['$navbar-inverse-toggler-border'] || 'rgba(255,255,255,.1)';
+  v['$navbar-inverse-toggler-bg'] = u['$navbar-inverse-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-disabled-color'] = u['$navbar-inverse-disabled-color'] || 'rgba(255, 255, 255, 0.25)';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$34();
+
+/**
  * Unordered List Tabs and Pills
  *
  * The form with a username and a password input field, both of which are
  * controlled via the application state.
  *
  */
-
-var defaultProps$43 = { theme: bsTheme };
 
 var UlUnstyled = function (_React$Component) {
   inherits(UlUnstyled, _React$Component);
@@ -13790,6 +16310,8 @@ var UlUnstyled = function (_React$Component) {
 
   createClass(UlUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -13804,12 +16326,14 @@ var UlUnstyled = function (_React$Component) {
         _extends({ className: classes }, rest),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return UlUnstyled;
 }(React.Component);
 
+UlUnstyled.defaultProps = {
+  theme: makeTheme$34()
+};
 UlUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node.isRequired,
@@ -13824,19 +16348,12 @@ UlUnstyled.propTypes = {
 var Ul = styled(UlUnstyled).withConfig({
   displayName: 'Ul'
 })(['', ''], function (props) {
-  return '\n    ' + nav_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n\n    /* Type Scss */\n    &.list-unstyled {\n      ' + lists_1() + '\n    }\n\n    &.list-inline {\n      ' + lists_2() + '\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;\n    margin-bottom: 1rem;\n  \n    & ol,\n    & ul {\n      margin-bottom: 0;\n    }\n  ';
+  return '\n    ' + nav_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$font-size-lg'], props.theme['$border-width'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n\n    /* Type Scss */\n    &.list-unstyled {\n      ' + lists_1() + '\n    }\n\n    &.list-inline {\n      ' + lists_2() + '\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;\n    margin-bottom: 1rem;\n  \n    & ol,\n    & ul {\n      margin-bottom: 0;\n    }\n  ';
 });
-
-Ul.defaultProps = defaultProps$43;
 
 /**
  * ListGroup component
  */
-
-var defaultProps$42 = {
-  theme: bsTheme,
-  tag: Ul
-};
 
 var ListGroupUnstyled = function (_React$Component) {
   inherits(ListGroupUnstyled, _React$Component);
@@ -13848,6 +16365,8 @@ var ListGroupUnstyled = function (_React$Component) {
 
   createClass(ListGroupUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -13859,12 +16378,15 @@ var ListGroupUnstyled = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, 'list-group', flush ? 'list-group-flush' : false), cssModule);
 
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ListGroupUnstyled;
 }(React.Component);
 
+ListGroupUnstyled.defaultProps = {
+  tag: Ul,
+  theme: makeTheme$33()
+};
 ListGroupUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -13879,18 +16401,12 @@ ListGroupUnstyled.propTypes = {
 var ListGroup = styled(ListGroupUnstyled).withConfig({
   displayName: 'ListGroup'
 })(['', ''], function (props) {
-  return '\n    /* \n      Base class\n      Easily usable on ul, ol, or div.\n    */\n    \n    &.list-group {\n      display: flex;\n      flex-direction: column;\n      /* No need to set list-style: none; since .list-group-item is block level */\n      padding-left: 0;  /* reset padding because ul and ol */\n      margin-bottom: 0;\n    }\n    \n    \n    /* \n      Interactive list items\n      Use anchor or button elements instead of \'li\'s or \'div\'s to create interactive\n      list items. Includes an extra \'.active\' modifier class for selected items.\n    */\n    \n    & .list-group-item-action {\n      width: 100%; /* For \'button\'s (anchors become 100% by default though) */\n      color: ' + props.theme['$list-group-link-color'] + ';\n      text-align: inherit; /* For \'button\'s (anchors inherit) */\n    \n      /* Hover state */\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n          color: ' + props.theme['$list-group-link-hover-color'] + ';\n          text-decoration: none;\n          background-color: ' + props.theme['$list-group-hover-bg'] + ';\n        ') + ';\n      \n      &:active {\n        color: ' + props.theme['$list-group-link-active-color'] + ';\n        background-color: ' + props.theme['$list-group-link-active-bg'] + ';\n      }\n    }\n    \n    /* \n      Individual list items\n      Use on \'li\'s or \'div\'s within the \'.list-group\' parent.\n    */\n    \n    & .list-group-item {\n      position: relative;\n      display: flex;\n      flex-flow: row wrap;\n      align-items: center;\n      padding: ' + props.theme['$list-group-item-padding-y'] + ' ' + props.theme['$list-group-item-padding-x'] + ';\n      /* Place the border on the list items and negative margin up for better styling */\n      margin-bottom: -' + props.theme['$list-group-border-width'] + ';\n      background-color: ' + props.theme['$list-group-bg'] + ';\n      border: ' + props.theme['$list-group-border-width'] + ' solid ' + props.theme['$list-group-border-color'] + ';\n    \n      &:first-child {\n        ' + borderRadius_3(props.theme['$enable-rounded'], props.theme['$list-group-border-radius']) + '\n      }\n\n      &:last-child {\n        margin-bottom: 0;\n        ' + borderRadius_5(props.theme['$enable-rounded'], props.theme['$list-group-border-radius']) + '\n      }\n      \n      ' + hover_3(props.theme['$enable-hover-media-query'], 'text-decoration: none;') + '\n        \n      &.disabled,\n      &:disabled {   \n        color: ' + props.theme['$list-group-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: ' + props.theme['$list-group-disabled-bg'] + ';\n      }\n    \n    \n      &.active {\n        z-index: 2; /* Place active items above their siblings for proper border styling */\n        color: ' + props.theme['$list-group-active-color'] + ';\n        background-color: ' + props.theme['$list-group-active-bg'] + ';\n        border-color: ' + props.theme['$list-group-active-border'] + ';     \n      }\n    }\n    \n    /* \n      Flush list items\n      Remove borders and border-radius to keep list group items edge-to-edge. Most\n      useful within other components (e.g., cards).\n    */\n\n    &.list-group-flush {\n      .list-group-item {\n        border-right: 0;\n        border-left: 0;\n        border-radius: 0;\n      }\n      \n      &:first-child {\n        .list-group-item:first-child {\n          border-top: 0;\n        }\n      }\n\n      &:last-child {\n        .list-group-item:last-child {\n          border-bottom: 0;\n        }\n      }\n    }\n    \n    \n    \n    /* Contextual variants\n    \n     Add modifier classes to change text and background color on individual items.\n     Organizationally, this must come after the \':hover\' states.\n    */\n    \n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'success', props.theme['$state-success-bg'], props.theme['$state-success-text']) + '\n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'info', props.theme['$state-info-bg'], props.theme['$state-info-text']) + '\n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'warning', props.theme['$state-warning-bg'], props.theme['$state-warning-text']) + '\n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'danger', props.theme['$state-danger-bg'], props.theme['$state-danger-text']) + '    \n  ';
+  return '\n    /* \n      Base class\n      Easily usable on ul, ol, or div.\n    */\n    \n    &.list-group {\n      display: flex;\n      flex-direction: column;\n      /* No need to set list-style: none; since .list-group-item is block level */\n      padding-left: 0;  /* reset padding because ul and ol */\n      margin-bottom: 0;\n    }\n    \n    \n    /* \n      Interactive list items\n      Use anchor or button elements instead of \'li\'s or \'div\'s to create interactive\n      list items. Includes an extra \'.active\' modifier class for selected items.\n    */\n    \n    & .list-group-item-action {\n      width: 100%; /* For \'button\'s (anchors become 100% by default though) */\n      color: ' + props.theme['$list-group-link-color'] + ';\n      text-align: inherit; /* For \'button\'s (anchors inherit) */\n    \n      /* Hover state */\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n          color: ' + props.theme['$list-group-link-hover-color'] + ';\n          text-decoration: none;\n          background-color: ' + props.theme['$list-group-hover-bg'] + ';\n        ') + ';\n      \n      &:active {\n        color: ' + props.theme['$list-group-link-active-color'] + ';\n        background-color: ' + props.theme['$list-group-link-active-bg'] + ';\n      }\n    }\n    \n    /* \n      Individual list items\n      Use on \'li\'s or \'div\'s within the \'.list-group\' parent.\n    */\n    \n    & .list-group-item {\n      position: relative;\n      display: flex;\n      flex-flow: row wrap;\n      align-items: center;\n      padding: ' + props.theme['$list-group-item-padding-y'] + ' ' + props.theme['$list-group-item-padding-x'] + ';\n      /* Place the border on the list items and negative margin up for better styling */\n      margin-bottom: -' + props.theme['$list-group-border-width'] + ';\n      background-color: ' + props.theme['$list-group-bg'] + ';\n      border: ' + props.theme['$list-group-border-width'] + ' solid ' + props.theme['$list-group-border-color'] + ';\n    \n      &:first-child {\n        ' + borderRadius_3(props.theme['$enable-rounded'], props.theme['$list-group-border-radius']) + '\n      }\n\n      &:last-child {\n        margin-bottom: 0;\n        ' + borderRadius_5(props.theme['$enable-rounded'], props.theme['$list-group-border-radius']) + '\n      }\n      \n      ' + hover_3(props.theme['$enable-hover-media-query'], 'text-decoration: none;') + '\n        \n      &.disabled,\n      &:disabled {   \n        color: ' + props.theme['$list-group-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: ' + props.theme['$list-group-disabled-bg'] + ';\n      }\n    \n    \n      &.active {\n        z-index: 2; /* Place active items above their siblings for proper border styling */\n        color: ' + props.theme['$list-group-active-color'] + ';\n        background-color: ' + props.theme['$list-group-active-bg'] + ';\n        border-color: ' + props.theme['$list-group-active-border'] + ';     \n      }\n    }\n    \n    /* \n      Flush list items\n      Remove borders and border-radius to keep list group items edge-to-edge. Most\n      useful within other components (e.g., cards).\n    */\n\n    &.list-group-flush {\n      .list-group-item {\n        border-right: 0;\n        border-left: 0;\n        border-radius: 0;\n      }\n      \n      &:first-child {\n        .list-group-item:first-child {\n          border-top: 0;\n        }\n      }\n\n      &:last-child {\n        .list-group-item:last-child {\n          border-bottom: 0;\n        }\n      }\n    }\n    \n    \n    \n    /* Contextual variants\n    \n     Add modifier classes to change text and background color on individual items.\n     Organizationally, this must come after the \':hover\' states.\n    */\n    \n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'success', props.theme['$state-success-bg'], props.theme['$state-success-text']) + '\n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'info', props.theme['$state-info-bg'], props.theme['$state-info-text']) + '\n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'warning', props.theme['$state-warning-bg'], props.theme['$state-warning-text']) + '\n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'danger', props.theme['$state-danger-bg'], props.theme['$state-danger-text']) + '\n  ';
 });
-
-ListGroup.defaultProps = defaultProps$42;
 
 /**
  * ListGroup component
  */
-
-var defaultProps$44 = {
-  tag: 'li'
-};
 
 var handleDisabledOnClick = function handleDisabledOnClick(e) {
   e.preventDefault();
@@ -13906,6 +16422,8 @@ var ListGroupItem = function (_React$Component) {
 
   createClass(ListGroupItem, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -13924,12 +16442,14 @@ var ListGroupItem = function (_React$Component) {
         attributes.onClick = handleDisabledOnClick;
       }
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ListGroupItem;
 }(React.Component);
 
+ListGroupItem.defaultProps = {
+  tag: 'li'
+};
 ListGroupItem.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   active: PropTypes.bool,
@@ -13939,16 +16459,9 @@ ListGroupItem.propTypes = {
   className: PropTypes.any
 };
 
-
-ListGroupItem.defaultProps = defaultProps$44;
-
 /**
  * ListGroup component
  */
-
-var defaultProps$45 = {
-  tag: H5
-};
 
 var ListGroupItemHeading = function (_React$Component) {
   inherits(ListGroupItemHeading, _React$Component);
@@ -13960,6 +16473,8 @@ var ListGroupItemHeading = function (_React$Component) {
 
   createClass(ListGroupItemHeading, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -13969,27 +16484,22 @@ var ListGroupItemHeading = function (_React$Component) {
       var classes = classnames(className, 'list-group-item-heading');
 
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ListGroupItemHeading;
 }(React.Component);
 
+ListGroupItemHeading.defaultProps = {
+  tag: H5
+};
 ListGroupItemHeading.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.any
 };
 
-
-ListGroupItemHeading.defaultProps = defaultProps$45;
-
 /**
  * ListGroup component
  */
-
-var defaultProps$46 = {
-  tag: 'p'
-};
 
 var ListGroupItemHeading$2 = function (_React$Component) {
   inherits(ListGroupItemHeading, _React$Component);
@@ -14001,6 +16511,8 @@ var ListGroupItemHeading$2 = function (_React$Component) {
 
   createClass(ListGroupItemHeading, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -14010,19 +16522,18 @@ var ListGroupItemHeading$2 = function (_React$Component) {
       var classes = classnames(className, 'list-group-item-text');
 
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ListGroupItemHeading;
 }(React.Component);
 
+ListGroupItemHeading$2.defaultProps = {
+  tag: 'p'
+};
 ListGroupItemHeading$2.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.any
 };
-
-
-ListGroupItemHeading$2.defaultProps = defaultProps$46;
 
 /*
  * Kopax Ltd Copyright (c) 2016.
@@ -14037,10 +16548,41 @@ var Map$1 = styled.map.withConfig({
 })(['display:inline;']);
 
 /**
+ * BOOTSTRAP THEME MARK
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$35 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Form states and alerts
+
+  v['$state-warning-bg'] = u['$state-warning-bg'] || '#fcf8e3';
+
+  // Fonts
+
+  v['$mark-padding'] = u['$mark-padding'] || '.2em';
+  v['$mark-bg'] = u['$mark-bg'] || v['$state-warning-bg'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$35();
+
+/**
  * Mark component
  */
 
-var defaultProps$47 = { theme: bsTheme };
+var defaultProps$7 = { theme: makeTheme$35() };
 
 var Mark = styled.mark.withConfig({
   displayName: 'Mark'
@@ -14048,15 +16590,11 @@ var Mark = styled.mark.withConfig({
   return '\n    /* Reboot Scss */\n    padding: ' + props.theme['$mark-padding'] + ';\n    background-color: ' + props.theme['$mark-bg'] + ';\n  ';
 });
 
-Mark.defaultProps = defaultProps$47;
+Mark.defaultProps = defaultProps$7;
 
 /**
  * Media component
  */
-
-var defaultProps$48 = {
-  theme: bsTheme
-};
 
 var MediaUnstyled = function (_React$Component) {
   inherits(MediaUnstyled, _React$Component);
@@ -14069,20 +16607,21 @@ var MediaUnstyled = function (_React$Component) {
   createClass(MediaUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
-          body = _omit.body,
-          bottom = _omit.bottom,
-          className = _omit.className,
-          cssModule = _omit.cssModule,
-          heading = _omit.heading,
-          left = _omit.left,
-          list = _omit.list,
-          middle = _omit.middle,
-          object = _omit.object,
-          right = _omit.right,
-          tag = _omit.tag,
-          top = _omit.top,
-          attributes = objectWithoutProperties(_omit, ['body', 'bottom', 'className', 'cssModule', 'heading', 'left', 'list', 'middle', 'object', 'right', 'tag', 'top']);
+      var _props = this.props,
+          body = _props.body,
+          bottom = _props.bottom,
+          className = _props.className,
+          cssModule = _props.cssModule,
+          heading = _props.heading,
+          left = _props.left,
+          list = _props.list,
+          middle = _props.middle,
+          object = _props.object,
+          right = _props.right,
+          tag = _props.tag,
+          top = _props.top,
+          attributes = objectWithoutProperties(_props, ['body', 'bottom', 'className', 'cssModule', 'heading', 'left', 'list', 'middle', 'object', 'right', 'tag', 'top']);
+
 
       var defaultTag = void 0;
       if (heading) {
@@ -14120,7 +16659,6 @@ var MediaUnstyled = function (_React$Component) {
 
 MediaUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  theme: PropTypes.object,
   body: PropTypes.bool,
   bottom: PropTypes.bool,
   children: PropTypes.node,
@@ -14141,8 +16679,6 @@ MediaUnstyled.propTypes = {
 var Media = styled(MediaUnstyled).withConfig({
   displayName: 'Media'
 })(['&.media,& .media{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;}& .media-body{-webkit-box-flex:1;-ms-flex:1 1 0%;flex:1 1 0%}', ''], media_2());
-
-Media.defaultProps = defaultProps$48;
 
 var tools = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -14313,7 +16849,7 @@ var propTypes$3 = {
   onEnter: PropTypes.func
 };
 
-var defaultProps$50 = {
+var defaultProps$8 = {
   tag: 'div',
   baseClass: 'fade',
   baseClassIn: 'show',
@@ -14325,7 +16861,7 @@ var defaultProps$50 = {
   transitionLeave: true
 };
 
-var Fade$1 = function (_React$Component) {
+var Fade = function (_React$Component) {
   inherits(Fade, _React$Component);
 
   function Fade(props) {
@@ -14438,16 +16974,133 @@ var Fade$1 = function (_React$Component) {
   return Fade;
 }(React.Component);
 
-Fade$1.propTypes = propTypes$3;
-Fade$1.defaultProps = defaultProps$50;
+Fade.propTypes = propTypes$3;
+Fade.defaultProps = defaultProps$8;
 
-var defaultProps$49 = {
-  isOpen: false,
-  isLocked: false,
-  backdrop: true,
-  keyboard: true,
-  zIndex: 1000
+/**
+ * BOOTSTRAP THEME MODAL
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$36 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-bg'] = u['$body-bg'] || v['$white'];
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Fonts
+
+  v['$font-family-sans-serif'] = u['$font-family-sans-serif'] || '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+  v['$font-family-base'] = u['$font-family-base'] || v['$font-family-sans-serif'];
+  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
+  v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
+  v['$font-weight-base'] = u['$font-weight-base'] || v['$font-weight-normal'];
+  v['$line-height-base'] = u['$line-height-base'] || '1.5';
+
+  // Z-index master list
+  //
+  // Warning = 'Avoid customizing these values. They're used for a bird's eye view
+  // of components dependent on the z-axis and are designed to all work together.
+
+  v['$zindex-modal'] = u['$zindex-modal'] || '1050';
+  v['$zindex-modal-backdrop'] = u['$zindex-modal-backdrop'] || '1040';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+  v['$transition-fade'] = u['$transition-fade'] || 'opacity .15s linear';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+
+  // Modals
+
+  // Padding applied to the modal body
+  v['$modal-inner-padding'] = u['$modal-inner-padding'] || '15px';
+
+  v['$modal-dialog-margin'] = u['$modal-dialog-margin'] || '10px';
+  v['$modal-dialog-sm-up-margin-y'] = u['$modal-dialog-sm-up-margin-y'] || '30px';
+
+  v['$modal-title-line-height'] = u['$modal-title-line-height'] || v['$line-height-base'];
+
+  v['$modal-content-bg'] = u['$modal-content-bg'] || v['$white'];
+  v['$modal-content-border-color'] = u['$modal-content-border-color'] || color(v['$black']).alpha(0.2).toString();
+  v['$modal-content-border-width'] = u['$modal-content-border-width'] || v['$border-width'];
+  v['$modal-content-xs-box-shadow'] = u['$modal-content-xs-box-shadow'] || '0 3px 9px ' + color(v['$black']).alpha(0.5).toString();
+  v['$modal-content-sm-up-box-shadow'] = u['$modal-content-sm-up-box-shadow'] || '0 5px 15px ' + color(v['$black']).alpha(0.5).toString();
+
+  v['$modal-backdrop-bg'] = u['$modal-backdrop-bg'] || v['$black'];
+  v['$modal-backdrop-opacity'] = u['$modal-backdrop-opacity'] || '.5';
+  v['$modal-header-border-color'] = u['$modal-header-border-color'] || v['$gray-lighter'];
+  v['$modal-footer-border-color'] = u['$modal-footer-border-color'] || v['$modal-header-border-color'];
+  v['$modal-header-border-width'] = u['$modal-header-border-width'] || v['$modal-content-border-width'];
+  v['$modal-footer-border-width'] = u['$modal-footer-border-width'] || v['$modal-header-border-width'];
+  v['$modal-header-padding'] = u['$modal-header-padding'] || '15px';
+
+  v['$modal-lg'] = u['$modal-lg'] || '800px';
+  v['$modal-md'] = u['$modal-md'] || '500px';
+  v['$modal-sm'] = u['$modal-sm'] || '300px';
+
+  v['$modal-transition'] = u['$modal-transition'] || 'transform .3s ease-out';
+
+  return Object.assign({}, u, v);
 };
+
+makeTheme$36();
 
 var ModalUnstyled = function (_React$Component) {
   inherits(ModalUnstyled, _React$Component);
@@ -14594,7 +17247,7 @@ var ModalUnstyled = function (_React$Component) {
       var _classNames,
           _this2 = this;
 
-      var _omit = lodash_omit(this.props, ['isLocked', 'onUnlock', 'onBackdrop', 'keyboard', 'onEnter', 'onExit', 'zIndex']),
+      var _omit = lodash_omit(this.props, ['theme', 'isLocked', 'onUnlock', 'onBackdrop', 'keyboard', 'onEnter', 'onExit', 'zIndex']),
           className = _omit.className,
           wrapClassName = _omit.wrapClassName,
           modalClassName = _omit.modalClassName,
@@ -14611,7 +17264,7 @@ var ModalUnstyled = function (_React$Component) {
         TransitionGroup,
         { component: 'div', className: mapToCssModules(classnames(wrapClassName, className)) },
         isOpen && React.createElement(
-          Fade$1,
+          Fade,
           {
             key: 'modal-dialog',
             onEnter: this.onEnter,
@@ -14641,7 +17294,7 @@ var ModalUnstyled = function (_React$Component) {
             )
           )
         ),
-        isOpen && backdrop && React.createElement(Fade$1, {
+        isOpen && backdrop && React.createElement(Fade, {
           key: 'modal-backdrop',
           transitionAppearTimeout: 150,
           transitionEnterTimeout: 150,
@@ -14659,7 +17312,16 @@ var ModalUnstyled = function (_React$Component) {
   return ModalUnstyled;
 }(React.Component);
 
+ModalUnstyled.defaultProps = {
+  isOpen: false,
+  isLocked: false,
+  backdrop: true,
+  keyboard: true,
+  zIndex: 1000,
+  theme: makeTheme$36()
+};
 ModalUnstyled.propTypes = {
+  theme: PropTypes.object,
   /* eslint-disable react/no-unused-prop-types */
   size: PropTypes.string,
   children: PropTypes.node,
@@ -14685,10 +17347,8 @@ ModalUnstyled.propTypes = {
 var Modal = styled(ModalUnstyled).withConfig({
   displayName: 'Modal'
 })(['', ''], function (props) {
-  return '\n    ' + rebootUtils.body(props.theme['$font-family-base'], props.theme['$font-size-base'], props.theme['$font-weight-base'], props.theme['$line-height-base'], props.theme['$body-color'], props.theme['$body-bg']) + '\n    & .modal {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal'] + ';\n      display: none;\n      outline: 0;\n      overflow-x: hidden;\n      overflow-y: auto;\n      \n      ' + transition_3$1(props.theme['$enable-transitions'], props.theme['$transition-fade']) + '\n      &.fade {\n        .modal-dialog {\n          ' + transition_2(props.theme['$enable-transitions'], props.theme['$modal-transition']) + '\n          transform: translate(0, -25%);\n        }\n      }\n      &.show {\n        .modal-dialog {\n          transform: translate(0, 0);\n        }\n      }\n    }\n    \n    & .modal-dialog {\n      position: relative;\n      width: auto;\n      margin: ' + props.theme['$modal-dialog-margin'] + ';\n    }\n    \n    \n    & .modal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$modal-content-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$modal-content-border-width'] + ' solid ' + props.theme['$modal-content-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius-lg']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$modal-content-xs-box-shadow']) + '\n      outline: 0;\n    }\n    \n    & .modal-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal-backdrop'] + ';\n      background-color: ' + props.theme['$modal-backdrop-bg'] + ';\n      &.fade {\n        opacity: 0\n      }\n      &.show {\n        opacity: ' + props.theme['$modal-backdrop-opacity'] + ';\n      }\n    }\n      \n        \n    & .modal-header {\n      display: flex;\n      align-items: center;\n      justify-content: space-between;\n      padding: ' + props.theme['$modal-header-padding'] + ';\n      border-bottom: ' + props.theme['$modal-header-border-width'] + ' solid ' + props.theme['$modal-header-border-color'] + ';\n    }\n    \n    & .modal-title {\n      margin-bottom: 0;\n      line-height: ' + props.theme['$modal-title-line-height'] + ';\n    }\n    \n    & .modal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n    }\n    \n    & .modal-footer {\n      display: flex;\n      align-items: center;\n      justify-content: flex-end;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n      border-top: ' + props.theme['$modal-footer-border-width'] + ' solid ' + props.theme['$modal-footer-border-color'] + ';\n      // Easily place margin between footer elements\n      > :not(:first-child) { margin-left: .25rem; }\n      > :not(:last-child) { margin-right: .25rem; }\n    }\n    \n\n  \n    // Scale up the modal\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        & .modal-dialog {\n          max-width: ' + props.theme['$modal-md'] + ';\n          margin: ' + props.theme['$modal-dialog-sm-up-margin-y'] + ' auto;\n        }\n      \n        & .modal-content {\n          ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$modal-content-sm-up-box-shadow']) + '\n        }\n      \n        & .modal-sm {\n          max-width: ' + props.theme['$modal-sm'] + ';\n        }\n      ') + '\n  \n\n    ' + breakpoints_6('lg', props.theme['$grid-breakpoints'], '\n        & .modal-lg {\n           max-width:  ' + props.theme['$modal-lg'] + '; \n         }\n      ') + '\n  ';
+  return '\n    ' + rebootUtils.body(props.theme['$font-family-base'], props.theme['$font-size-base'], props.theme['$font-weight-base'], props.theme['$line-height-base'], props.theme['$body-color'], props.theme['$body-bg']) + '\n    & .modal {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal'] + ';\n      display: none;\n      outline: 0;\n      overflow-x: hidden;\n      overflow-y: auto;\n      \n      ' + transition_3(props.theme['$enable-transitions'], props.theme['$transition-fade']) + '\n      &.fade {\n        .modal-dialog {\n          ' + transition_2$1(props.theme['$enable-transitions'], props.theme['$modal-transition']) + '\n          transform: translate(0, -25%);\n        }\n      }\n      &.show {\n        .modal-dialog {\n          transform: translate(0, 0);\n        }\n      }\n    }\n    \n    & .modal-dialog {\n      position: relative;\n      width: auto;\n      margin: ' + props.theme['$modal-dialog-margin'] + ';\n    }\n    \n    \n    & .modal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$modal-content-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$modal-content-border-width'] + ' solid ' + props.theme['$modal-content-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius-lg']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$modal-content-xs-box-shadow']) + '\n      outline: 0;\n    }\n    \n    & .modal-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal-backdrop'] + ';\n      background-color: ' + props.theme['$modal-backdrop-bg'] + ';\n      &.fade {\n        opacity: 0\n      }\n      &.show {\n        opacity: ' + props.theme['$modal-backdrop-opacity'] + ';\n      }\n    }\n      \n        \n    & .modal-header {\n      display: flex;\n      align-items: center;\n      justify-content: space-between;\n      padding: ' + props.theme['$modal-header-padding'] + ';\n      border-bottom: ' + props.theme['$modal-header-border-width'] + ' solid ' + props.theme['$modal-header-border-color'] + ';\n    }\n    \n    & .modal-title {\n      margin-bottom: 0;\n      line-height: ' + props.theme['$modal-title-line-height'] + ';\n    }\n    \n    & .modal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n    }\n    \n    & .modal-footer {\n      display: flex;\n      align-items: center;\n      justify-content: flex-end;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n      border-top: ' + props.theme['$modal-footer-border-width'] + ' solid ' + props.theme['$modal-footer-border-color'] + ';\n      // Easily place margin between footer elements\n      > :not(:first-child) { margin-left: .25rem; }\n      > :not(:last-child) { margin-right: .25rem; }\n    }\n    \n\n  \n    // Scale up the modal\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        & .modal-dialog {\n          max-width: ' + props.theme['$modal-md'] + ';\n          margin: ' + props.theme['$modal-dialog-sm-up-margin-y'] + ' auto;\n        }\n      \n        & .modal-content {\n          ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$modal-content-sm-up-box-shadow']) + '\n        }\n      \n        & .modal-sm {\n          max-width: ' + props.theme['$modal-sm'] + ';\n        }\n      ') + '\n  \n\n    ' + breakpoints_6('lg', props.theme['$grid-breakpoints'], '\n        & .modal-lg {\n           max-width:  ' + props.theme['$modal-lg'] + '; \n         }\n      ') + '\n  ';
 });
-
-Modal.defaultProps = defaultProps$49;
 
 var propTypes$4 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -14699,7 +17359,7 @@ var propTypes$4 = {
   children: PropTypes.node
 };
 
-var defaultProps$51 = {
+var defaultProps$9 = {
   tag: H4,
   wrapTag: 'div'
 };
@@ -14718,15 +17378,7 @@ var ModalHeader = function ModalHeader(props) {
   var classes = mapToCssModules(classnames(className, 'modal-header'), cssModule);
 
   if (toggle) {
-    closeButton = React.createElement(
-      'button',
-      { type: 'button', onClick: toggle, className: 'close', 'aria-label': 'Close' },
-      React.createElement(
-        'span',
-        { 'aria-hidden': 'true' },
-        String.fromCharCode(215)
-      )
-    );
+    closeButton = React.createElement(Close, { type: 'button', onDismiss: toggle, 'aria-label': 'Close' });
   }
 
   return React.createElement(
@@ -14742,7 +17394,7 @@ var ModalHeader = function ModalHeader(props) {
 };
 
 ModalHeader.propTypes = propTypes$4;
-ModalHeader.defaultProps = defaultProps$51;
+ModalHeader.defaultProps = defaultProps$9;
 
 var propTypes$5 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -14750,7 +17402,7 @@ var propTypes$5 = {
   cssModule: PropTypes.object
 };
 
-var defaultProps$52 = {
+var defaultProps$10 = {
   tag: 'div'
 };
 
@@ -14767,7 +17419,7 @@ var ModalFooter = function ModalFooter(props) {
 };
 
 ModalFooter.propTypes = propTypes$5;
-ModalFooter.defaultProps = defaultProps$52;
+ModalFooter.defaultProps = defaultProps$10;
 
 var propTypes$6 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -14775,7 +17427,7 @@ var propTypes$6 = {
   cssModule: PropTypes.object
 };
 
-var defaultProps$53 = {
+var defaultProps$11 = {
   tag: 'div'
 };
 
@@ -14792,18 +17444,163 @@ var ModalBody = function ModalBody(props) {
 };
 
 ModalBody.propTypes = propTypes$6;
-ModalBody.defaultProps = defaultProps$53;
+ModalBody.defaultProps = defaultProps$11;
+
+var rmUnit$13 = unitUtils$1.rmUnit;
+var UNIT$12 = unitUtils$1.UNIT;
+
+/**
+ * BOOTSTRAP THEME NAV
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$37 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray'] = u['$gray'] || '#464a4c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Spacing
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // =============================================================================================================
+  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$13(v['$spacer'], UNIT$12.REM) / 2 + UNIT$12.REM;
+  // =============================================================================================================
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-bg'] = u['$body-bg'] || v['$white'];
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
+  v['$component-active-color'] = u['$component-active-color'] || v['$white'];
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Navbar
+
+  v['$navbar-padding-x'] = u['$navbar-padding-x'] || v['$spacer'];
+  v['$navbar-padding-y'] = u['$navbar-padding-y'] || v['$spacer-halved'];
+
+  // Navs
+
+  v['$nav-link-padding'] = u['$nav-link-padding'] || '.5em 1em';
+  v['$nav-disabled-link-color'] = u['$nav-disabled-link-color'] || v['$gray-light'];
+
+  v['$nav-tabs-border-color'] = u['$nav-tabs-border-color'] || '#ddd';
+  v['$nav-tabs-border-width'] = u['$nav-tabs-border-width'] || v['$border-width'];
+  v['$nav-tabs-border-radius'] = u['$nav-tabs-border-radius'] || v['$border-radius'];
+  v['$nav-tabs-link-hover-border-color'] = u['$nav-tabs-link-hover-border-color'] || v['$gray-lighter'];
+  v['$nav-tabs-active-link-hover-color'] = u['$nav-tabs-active-link-hover-color'] || v['$gray'];
+  v['$nav-tabs-active-link-hover-bg'] = u['$nav-tabs-active-link-hover-bg'] || v['$body-bg'];
+  v['$nav-tabs-active-link-hover-border-color'] = u['$nav-tabs-active-link-hover-border-color'] || '#ddd';
+
+  v['$nav-pills-border-radius'] = u['$nav-pills-border-radius'] || v['$border-radius'];
+  v['$nav-pills-active-link-color'] = u['$nav-pills-active-link-color'] || v['$component-active-color'];
+  v['$nav-pills-active-link-bg'] = u['$nav-pills-active-link-bg'] || v['$component-active-bg'];
+
+  // Forms
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+
+  // Mixin navbar
+  //
+  // From module bootstrap-styled-mixins: https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins/blob/master/src/navbar.js
+
+  v['$zindex-navbar'] = u['$zindex-navbar'] || '1000';
+  v['$zindex-navbar-fixed'] = u['$zindex-navbar-fixed'] || '1030';
+  v['$zindex-navbar-sticky'] = u['$zindex-navbar-sticky'] || '1030';
+  v['$navbar-brand-padding-y'] = u['$navbar-brand-padding-y'] || '.25rem';
+
+  v['$navbar-divider-padding-y'] = u['$navbar-brand-padding-y'] || '.425rem';
+  v['$navbar-toggler-padding-y'] = u['$navbar-toggler-padding-y'] || '.5rem';
+  v['$navbar-toggler-padding-x'] = u['$navbar-toggler-padding-x'] || '.75rem';
+  v['$navbar-toggler-font-size'] = u['$navbar-toggler-font-size'] || '1.25rem';
+
+  v['$navbar-toggler-border-radius'] = u['$navbar-toggler-border-radius'] || '.25rem';
+  v['$navbar-light-active-color'] = u['$navbar-light-active-color'] || 'rgba(0,0,0,.9)';
+  v['$navbar-light-color'] = u['$navbar-light-color'] || 'rgba(0,0,0,.5)';
+  v['$navbar-light-hover-color'] = u['$navbar-light-hover-color'] || 'rgba(0,0,0,.7)';
+  v['$navbar-light-toggler-border'] = u['$navbar-light-toggler-border'] || 'rgba(0,0,0,.1)';
+  v['$navbar-light-disabled-color'] = u['$navbar-light-disabled-color'] || 'rgba(0, 0, 0, 0.3)';
+  v['$navbar-light-toggler-bg'] = u['$navbar-light-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(0,0,0,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-active-color'] = u['$navbar-inverse-active-color'] || 'rgba(255,255,255,1)';
+  v['$navbar-inverse-color'] = u['$navbar-inverse-color'] || 'rgba(255,255,255,.5)';
+  v['$navbar-inverse-hover-color'] = u['$navbar-inverse-hover-color'] || 'rgba(255,255,255,.75)';
+  v['$navbar-inverse-toggler-border'] = u['$navbar-inverse-toggler-border'] || 'rgba(255,255,255,.1)';
+  v['$navbar-inverse-toggler-bg'] = u['$navbar-inverse-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-disabled-color'] = u['$navbar-inverse-disabled-color'] || 'rgba(255, 255, 255, 0.25)';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$37();
 
 /**
  * Nav Component
  *
  *
  */
-var defaultProps$54 = {
-  theme: bsTheme,
-  tag: Ul
-};
-
 var NavUnstyled = function (_React$Component) {
   inherits(NavUnstyled, _React$Component);
 
@@ -14814,6 +17611,8 @@ var NavUnstyled = function (_React$Component) {
 
   createClass(NavUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -14840,12 +17639,15 @@ var NavUnstyled = function (_React$Component) {
       }), cssModule);
 
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return NavUnstyled;
 }(React.Component);
 
+NavUnstyled.defaultProps = {
+  tag: Ul,
+  theme: makeTheme$37()
+};
 NavUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -14870,17 +17672,11 @@ var Nav = styled(NavUnstyled).withConfig({
   return '\n    ' + nav_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n    \n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n  ';
 });
 
-Nav.defaultProps = defaultProps$54;
-
 /**
  * NavItem Component
  *
  *
  */
-var defaultProps$55 = {
-  tag: 'li'
-};
-
 var NavItem = function (_React$Component) {
   inherits(NavItem, _React$Component);
 
@@ -14891,6 +17687,8 @@ var NavItem = function (_React$Component) {
 
   createClass(NavItem, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -14902,27 +17700,24 @@ var NavItem = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, 'nav-item'), cssModule);
 
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return NavItem;
 }(React.Component);
 
+NavItem.defaultProps = {
+  tag: 'li'
+};
 NavItem.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
 
-
-NavItem.defaultProps = defaultProps$55;
-
-var defaultProps$56 = {
-  tag: A
-};
-
 var NavLink = function (_React$Component) {
   inherits(NavLink, _React$Component);
+
+  // eslint-disable-line react/prefer-stateless-function
 
   function NavLink(props) {
     classCallCheck(this, NavLink);
@@ -14931,7 +17726,7 @@ var NavLink = function (_React$Component) {
 
     _this.onClick = _this.onClick.bind(_this);
     return _this;
-  } // eslint-disable-line react/prefer-stateless-function
+  }
 
   createClass(NavLink, [{
     key: 'onClick',
@@ -14972,6 +17767,9 @@ var NavLink = function (_React$Component) {
   return NavLink;
 }(React.Component);
 
+NavLink.defaultProps = {
+  tag: A
+};
 NavLink.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -14983,12 +17781,35 @@ NavLink.propTypes = {
   href: PropTypes.any
 };
 
-
-NavLink.defaultProps = defaultProps$56;
-
 /*
  * Kopax Ltd Copyright (c) 2016.
  */
+
+/**
+ * BOOTSTRAP THEME ORDERED LIST
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$38 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Fonts
+
+  v['$list-inline-padding'] = u['$list-inline-padding'] || '5px';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$38();
 
 /**
  * Ordered List Tabs and Pills
@@ -14998,15 +17819,15 @@ NavLink.defaultProps = defaultProps$56;
  *
  */
 
-var defaultProps$57 = { theme: bsTheme };
+var defaultProps$12 = { theme: makeTheme$38() };
 
 var Ol = styled.ol.withConfig({
   displayName: 'Ol'
-})(['  ', ''], function (props) {
+})(['', ''], function (props) {
   return '\n    /* Type Scss */\n    &.list-unstyled {\n      ' + lists_1() + '\n    }\n\n    &.list-inline {\n      ' + lists_2() + '\n    }\n\n    &.list-inline-item {\n      ' + lists_3(props.theme['$list-inline-padding']) + '\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n    margin-bottom: 1rem;\n\n    & ol,\n    & ul {\n      margin-bottom: 0;\n    }\n  ';
 });
 
-Ol.defaultProps = defaultProps$57;
+Ol.defaultProps = defaultProps$12;
 
 /* Option */
 
@@ -15027,9 +17848,10 @@ var OutputUnstyled = function (_React$Component) {
   createClass(OutputUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
-          className = _omit.className,
-          rest = objectWithoutProperties(_omit, ['className']);
+      var _props = this.props,
+          className = _props.className,
+          rest = objectWithoutProperties(_props, ['className']);
+
 
       return React.createElement('output', _extends({
         className: classnames(className, 'output')
@@ -15042,8 +17864,7 @@ var OutputUnstyled = function (_React$Component) {
 
 OutputUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
-  theme: PropTypes.object
+  className: PropTypes.string
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -15052,7 +17873,97 @@ var Output = styled(OutputUnstyled).withConfig({
   displayName: 'Output'
 })(['&.output{display:inline-block;}']);
 
-var defaultProps$58 = { theme: bsTheme };
+var rmUnit$14 = unitUtils$1.rmUnit;
+var UNIT$13 = unitUtils$1.UNIT;
+
+/**
+ * BOOTSTRAP THEME PARAGRAPH
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$39 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray'] = u['$gray'] || '#464a4c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-h1'] = u['$font-size-h1'] || '2.5rem';
+  v['$font-size-h2'] = u['$font-size-h2'] || '2rem';
+  v['$font-size-h3'] = u['$font-size-h3'] || '1.75rem';
+  v['$font-size-h4'] = u['$font-size-h4'] || '1.5rem';
+  v['$font-size-h5'] = u['$font-size-h5'] || '1.25rem';
+  v['$font-size-h6'] = u['$font-size-h6'] || '1rem';
+
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$14(v['$spacer'], UNIT$13.REM) / 2 + UNIT$13.REM;
+  v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
+  v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
+  v['$headings-color'] = u['$headings-color'] || 'inherit';
+
+  v['$display1-size'] = u['$display1-size'] || '6rem';
+  v['$display2-size'] = u['$display2-size'] || '5.5rem';
+  v['$display3-size'] = u['$display3-size'] || '4.5rem';
+  v['$display4-size'] = u['$display4-size'] || '3.5rem';
+
+  v['$display1-weight'] = u['$display1-weight'] || '300';
+  v['$display2-weight'] = u['$display2-weight'] || '300';
+  v['$display3-weight'] = u['$display3-weight'] || '300';
+  v['$display4-weight'] = u['$display4-weight'] || '300';
+
+  v['$display-line-height'] = u['$display-line-height'] || v['$headings-line-height'];
+
+  v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
+  v['$lead-font-weight'] = u['$lead-font-weight'] || '300';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$39();
 
 var PUnstyled = function (_React$Component) {
   inherits(PUnstyled, _React$Component);
@@ -15064,6 +17975,8 @@ var PUnstyled = function (_React$Component) {
 
   createClass(PUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -15080,12 +17993,14 @@ var PUnstyled = function (_React$Component) {
         _extends({ className: classes }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return PUnstyled;
 }(React.Component);
 
+PUnstyled.defaultProps = {
+  theme: makeTheme$39()
+};
 PUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -15103,8 +18018,6 @@ var P = styled(PUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    /* Type Scss */\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n    \n    &.h1{\n      font-size: ' + props.theme['$font-size-h1'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h2{\n      font-size: ' + props.theme['$font-size-h2'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h3{\n      font-size: ' + props.theme['$font-size-h3'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h4{\n      font-size: ' + props.theme['$font-size-h4'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h5{\n      font-size: ' + props.theme['$font-size-h5'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    &.h6{\n      font-size: ' + props.theme['$font-size-h6'] + ';\n      ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;   \n    margin-bottom: 1rem;\n  ';
 });
-
-P.defaultProps = defaultProps$58;
 
 var paginations = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -15207,13 +18120,110 @@ unwrapExports(paginations);
 var paginations_3 = paginations.pagination;
 
 /**
+ * BOOTSTRAP THEME PAGINATION
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$40 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Colors
+  //
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+  v['$line-height-lg'] = u['$line-height-lg'] || '1.6';
+  v['$line-height-sm'] = u['$line-height-sm'] || '1.3';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
+
+  // Links
+  //
+  // Style anchor elements.
+
+  v['$link-color'] = u['$link-color'] || v['$brand-primary'];
+  v['$link-hover-color'] = u['$link-hover-color'] || color(v['$link-color']).darken(0.35).toString();
+
+  // Pagination
+
+  v['$pagination-padding-x'] = u['$pagination-padding-x'] || '.75rem';
+  v['$pagination-padding-y'] = u['$pagination-padding-y'] || '.5rem';
+  v['$pagination-padding-x-sm'] = u['$pagination-padding-x-sm'] || '.5rem';
+  v['$pagination-padding-y-sm'] = u['$pagination-padding-y-sm'] || '.25rem';
+  v['$pagination-padding-x-lg'] = u['$pagination-padding-x-lg'] || '1.5rem';
+  v['$pagination-padding-y-lg'] = u['$pagination-padding-y-lg'] || '.75rem';
+  v['$pagination-line-height'] = u['$pagination-line-height'] || '1.25';
+
+  v['$pagination-color'] = u['$pagination-color'] || v['$link-color'];
+  v['$pagination-bg'] = u['$pagination-bg'] || v['$white'];
+  v['$pagination-border-width'] = u['$pagination-border-width'] || v['$border-width'];
+  v['$pagination-border-color'] = u['$pagination-border-color'] || '#ddd';
+
+  v['$pagination-hover-color'] = u['$pagination-hover-color'] || v['$link-hover-color'];
+  v['$pagination-hover-bg'] = u['$pagination-hover-bg'] || v['$gray-lighter'];
+  v['$pagination-hover-border'] = u['$pagination-hover-border'] || '#ddd';
+
+  v['$pagination-active-color'] = u['$pagination-active-color'] || v['$white'];
+  v['$pagination-active-bg'] = u['$pagination-active-bg'] || v['$brand-primary'];
+  v['$pagination-active-border'] = u['$pagination-active-border'] || v['$brand-primary'];
+
+  v['$pagination-disabled-color'] = u['$pagination-disabled-color'] || v['$gray-light'];
+  v['$pagination-disabled-bg'] = u['$pagination-disabled-bg'] || v['$white'];
+  v['$pagination-disabled-border'] = u['$pagination-disabled-border'] || '#ddd';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$40();
+
+/**
  * A Pagination
  */
-
-var defaultProps$59 = {
-  theme: bsTheme,
-  tag: 'ul'
-};
 
 var PaginationUnstyled = function (_React$Component) {
   inherits(PaginationUnstyled, _React$Component);
@@ -15225,6 +18235,8 @@ var PaginationUnstyled = function (_React$Component) {
 
   createClass(PaginationUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -15236,12 +18248,15 @@ var PaginationUnstyled = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, 'pagination', defineProperty({}, 'pagination-' + size, !!size)), cssModule);
 
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return PaginationUnstyled;
 }(React.Component);
 
+PaginationUnstyled.defaultProps = {
+  tag: 'ul',
+  theme: makeTheme$40()
+};
 PaginationUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -15260,15 +18275,9 @@ var Pagination = styled(PaginationUnstyled).withConfig({
   return '\n    ' + paginations_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$border-radius'], props.theme['$pagination-active-color'], props.theme['$pagination-active-bg'], props.theme['$pagination-active-border'], props.theme['$pagination-disabled-color'], props.theme['$cursor-disabled'], props.theme['$pagination-disabled-bg'], props.theme['$pagination-disabled-border'], props.theme['$pagination-padding-y'], props.theme['$pagination-padding-x'], props.theme['$pagination-line-height'], props.theme['$pagination-color'], props.theme['$pagination-bg'], props.theme['$pagination-border-width'], props.theme['$pagination-border-color'], props.theme['$pagination-hover-color'], props.theme['$pagination-hover-bg'], props.theme['$pagination-hover-border'], props.theme['$pagination-padding-y-lg'], props.theme['$pagination-padding-x-lg'], props.theme['$font-size-lg'], props.theme['$line-height-lg'], props.theme['$border-radius-lg'], props.theme['$pagination-padding-y-sm'], props.theme['$pagination-padding-x-sm'], props.theme['$font-size-sm'], props.theme['$line-height-sm'], props.theme['$border-radius-sm']) + '\n  ';
 });
 
-Pagination.defaultProps = defaultProps$59;
-
 /**
  * A PaginationItem
  */
-
-var defaultProps$60 = {
-  tag: 'li'
-};
 
 var PaginationItem = function (_React$Component) {
   inherits(PaginationItem, _React$Component);
@@ -15280,6 +18289,8 @@ var PaginationItem = function (_React$Component) {
 
   createClass(PaginationItem, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           active = _props.active,
@@ -15296,12 +18307,14 @@ var PaginationItem = function (_React$Component) {
       }), cssModule);
 
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return PaginationItem;
 }(React.Component);
 
+PaginationItem.defaultProps = {
+  tag: 'li'
+};
 PaginationItem.propTypes = {
   active: PropTypes.bool,
   className: PropTypes.string,
@@ -15311,16 +18324,9 @@ PaginationItem.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
-
-PaginationItem.defaultProps = defaultProps$60;
-
 /**
  * A PaginationLink
  */
-
-var defaultProps$61 = {
-  tag: A
-};
 
 var PaginationLink = function (_React$Component) {
   inherits(PaginationLink, _React$Component);
@@ -15332,6 +18338,8 @@ var PaginationLink = function (_React$Component) {
 
   createClass(PaginationLink, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -15386,12 +18394,14 @@ var PaginationLink = function (_React$Component) {
         }),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return PaginationLink;
 }(React.Component);
 
+PaginationLink.defaultProps = {
+  tag: A
+};
 PaginationLink.propTypes = {
   'aria-label': PropTypes.string,
   className: PropTypes.string,
@@ -15402,18 +18412,48 @@ PaginationLink.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
-
-PaginationLink.defaultProps = defaultProps$61;
-
 /*
  * Kopax Ltd Copyright (c) 2016.
  */
 
 /**
+ * BOOTSTRAP THEME PRE
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$41 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Code
+
+  v['$code-font-size'] = u['$code-font-size'] || '90%';
+
+  v['$pre-color'] = u['$pre-color'] || v['$gray-dark'];
+  v['$pre-scrollable-max-height'] = u['$pre-scrollable-max-height'] || '340px';
+
+  // Fonts
+
+  v['$font-family-monospace'] = u['$font-family-monospace'] || 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$41();
+
+/**
  * Pre component
  */
 
-var defaultProps$62 = { theme: bsTheme };
+var defaultProps$13 = { theme: makeTheme$41() };
 
 var Pre = styled.pre.withConfig({
   displayName: 'Pre'
@@ -15421,7 +18461,7 @@ var Pre = styled.pre.withConfig({
   return '\n    /* Blocks of code */\n    display: block;\n    margin-top: 0;\n    margin-bottom: 1rem;\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$pre-color'] + ';\n    \n    /* Enable scrollable blocks of code */\n    /* AJT This class was present in bootstrap/scss/code.scss  We must decide if this class should be a mixin or not! */\n    &.pre-scrollable {\n      max-height: ' + props.theme['$pre-scrollable-max-height'] + ';\n      overflow-y: scroll;\n    }\n\n  \n    /* Account for some code outputs that place code tags in pre tags */\n    code {\n      padding: 0;\n      font-size: inherit;\n      color: inherit;\n      background-color: transparent;\n      border-radius: 0;\n    }\n    \n    /* Reboot Scss */\n\n    /* Remove browser default top margin */\n    margin-top: 0;\n    /* Reset browser default of \'1em\' to use \'rem\'s */\n    margin-bottom: 1rem;\n    /* Normalize v4 removed this property, causing \'pre\' content to break out of wrapping code snippets */\n    overflow: auto;\n    \n    /* Bootstrap 4 does not place this css rule straight into Kbd tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
 
-Pre.defaultProps = defaultProps$62;
+Pre.defaultProps = defaultProps$13;
 
 var gradients = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -15518,11 +18558,69 @@ exports.default = {
 unwrapExports(gradients);
 var gradients_7 = gradients.gradientStriped;
 
-/* Progress */
+/**
+ * BOOTSTRAP THEME PROGRESS
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$42 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-var defaultProps$63 = {
-  theme: bsTheme
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Progress bars
+
+  v['$progress-height'] = u['$progress-height'] || '1rem';
+  v['$progress-font-size'] = u['$progress-font-size'] || '.75rem';
+  v['$progress-bg'] = u['$progress-bg'] || v['$gray-lighter'];
+  v['$progress-border-radius'] = u['$progress-border-radius'] || v['$border-radius'];
+  v['$progress-box-shadow'] = u['$progress-box-shadow'] || 'inset 0 .1rem .1rem ' + color(v['$black']).alpha(0.1).toString();
+  v['$progress-bar-color'] = u['$progress-bar-color'] || v['$white'];
+  v['$progress-bar-bg'] = u['$progress-bar-bg'] || v['$brand-primary'];
+  v['$progress-bar-animation-timing'] = u['$progress-bar-animation-timing'] || '1s linear infinite';
+
+  return Object.assign({}, u, v);
 };
+
+makeTheme$42();
+
+/* Progress */
 
 var ProgressUnstyled = function (_React$Component) {
   inherits(ProgressUnstyled, _React$Component);
@@ -15534,6 +18632,8 @@ var ProgressUnstyled = function (_React$Component) {
 
   createClass(ProgressUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           children = _omit.children,
@@ -15545,12 +18645,14 @@ var ProgressUnstyled = function (_React$Component) {
         _extends({ className: classnames('progress', className) }, rest),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ProgressUnstyled;
 }(React.Component);
 
+ProgressUnstyled.defaultProps = {
+  theme: makeTheme$42()
+};
 ProgressUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -15570,9 +18672,7 @@ var Progress = styled(ProgressUnstyled).withConfig({
   return '\n    \n    &.progress {\n      display: flex;\n      overflow: hidden; // force rounded corners by cropping it\n      font-size: ' + props.theme['$progress-font-size'] + ';\n      line-height: ' + props.theme['$progress-height'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$progress-bg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$progress-border-radius']) + '\n      ' + background_9(props.theme['$enable-hover-media-query'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$brand-inverse'], props.theme['$gray-lightest']) + '\n    }\n    \n    .progress-bar {\n      height: ' + props.theme['$progress-height'] + ';\n      line-height: ' + props.theme['$progress-height'] + ';\n      color: ' + props.theme['$progress-bar-color'] + ';\n      background-color: ' + props.theme['$progress-bar-bg'] + ';\n    }\n    \n    .progress-bar-striped {\n      ' + gradients_7() + '\n      background-size: ' + props.theme['$progress-height'] + ' ' + props.theme['$progress-height'] + ';\n      background-repeat: repeat; /* Not present in bootstrap original but required to repeat the background */\n    }\n    \n    .progress-bar-animated {\n      animation: ' + backgroundPositionKeyFrame(props) + ' ' + props.theme['$progress-bar-animation-timing'] + ';\n    }\n\n  ';
 });
 
-Progress.defaultProps = defaultProps$63;
-
-var asyncGenerator$1 = function () {
+var asyncGenerator$2 = function () {
   function AwaitValue(value) {
     this.value = value;
   }
@@ -15689,7 +18789,7 @@ var asyncGenerator$1 = function () {
 
 
 
-var classCallCheck$1 = function (instance, Constructor) {
+var classCallCheck$2 = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
@@ -15715,7 +18815,7 @@ var createClass$1 = function () {
 
 var RangeUtils = function () {
   function RangeUtils() {
-    classCallCheck$1(this, RangeUtils);
+    classCallCheck$2(this, RangeUtils);
   }
   createClass$1(RangeUtils, [{
     key: "mapBetween",
@@ -15808,10 +18908,46 @@ ProgressBar.propTypes = {
 
 };
 
-var defaultProps$64 = {
-  theme: bsTheme,
-  tag: 'div'
+/**
+ * BOOTSTRAP THEME ROW
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$43 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Grid columns
+  //
+  // Specify the width of the gutters.
+
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
+
+  return Object.assign({}, u, v);
 };
+
+makeTheme$43();
 
 var RowUnstyled = function (_React$Component) {
   inherits(RowUnstyled, _React$Component);
@@ -15823,28 +18959,36 @@ var RowUnstyled = function (_React$Component) {
 
   createClass(RowUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
-      var _props = this.props,
-          className = _props.className,
-          cssModule = _props.cssModule,
-          noGutters = _props.noGutters,
-          Tag = _props.tag,
-          attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'noGutters', 'tag']); // eslint-disable-line no-unused-vars
+      var _omit = lodash_omit(this.props, ['theme']),
+          className = _omit.className,
+          cssModule = _omit.cssModule,
+          noGutters = _omit.noGutters,
+          Tag = _omit.tag,
+          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'noGutters', 'tag']);
 
       var classes = mapToCssModules(classnames(className, noGutters ? 'no-gutters' : null, 'row'), cssModule);
 
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return RowUnstyled;
 }(React.Component);
 
+RowUnstyled.defaultProps = {
+  tag: 'div',
+  theme: makeTheme$43()
+};
 RowUnstyled.propTypes = {
+  /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   noGutters: PropTypes.bool,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  theme: PropTypes.object
+  /* eslint-enable react/no-unused-prop-types */
 };
 
 
@@ -15853,8 +18997,6 @@ var Row = styled(RowUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    &.row {\n      ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n    /*\n      Remove the negative margin from default .row, then the horizontal padding\n      from all immediate children columns (to prevent runaway style inheritance).\n    */\n\n    &.no-gutters {\n      margin-right: 0;\n      margin-left: 0;\n\n      > .col,\n      > [class*="col-"] {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n ';
 });
-
-Row.defaultProps = defaultProps$64;
 
 /**
  * Samp component
@@ -15909,7 +19051,7 @@ var SelectUnstyled = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme', 'className']),
+      var _omit = lodash_omit(this.props, ['className']),
           children = _omit.children,
           rest = objectWithoutProperties(_omit, ['children']);
 
@@ -15927,7 +19069,6 @@ var SelectUnstyled = function (_React$Component) {
 
 SelectUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  theme: PropTypes.object,
   className: PropTypes.string,
   children: PropTypes.node.isRequired
   /* eslint-enable react/no-unused-prop-types */
@@ -15939,10 +19080,33 @@ var Select = styled(SelectUnstyled).withConfig({
 })(['&.select{touch-action:manipulation;line-height:inherit;}&:disabled{color:graytext;}']);
 
 /**
+ * BOOTSTRAP THEME ROW
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$44 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+  // Fonts
+
+  v['$small-font-size'] = u['$small-font-size'] || '80%';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$44();
+
+/**
  * Small component
  */
-
-var defaultProps$65 = { theme: bsTheme };
 
 var SmallUnstyled = function (_React$Component) {
   inherits(SmallUnstyled, _React$Component);
@@ -15954,6 +19118,8 @@ var SmallUnstyled = function (_React$Component) {
 
   createClass(SmallUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -15969,12 +19135,14 @@ var SmallUnstyled = function (_React$Component) {
         _extends({ className: classes }, attributes),
         children
       );
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return SmallUnstyled;
 }(React.Component);
 
+SmallUnstyled.defaultProps = {
+  theme: makeTheme$44()
+};
 SmallUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -15992,13 +19160,9 @@ var Small = styled(SmallUnstyled).withConfig({
   return '\n    /* Reboot Scss */\n    font-size: ' + props.theme['$small-font-size'] + ';\n    font-weight: normal;\n  ';
 });
 
-Small.defaultProps = defaultProps$65;
-
 /**
  * Strong component
  */
-
-var defaultProps$66 = { theme: bsTheme };
 
 var StrongUnstyled = function (_React$Component) {
   inherits(StrongUnstyled, _React$Component);
@@ -16011,12 +19175,13 @@ var StrongUnstyled = function (_React$Component) {
   createClass(StrongUnstyled, [{
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
-          className = _omit.className,
-          color = _omit.color,
-          children = _omit.children,
-          cssModule = _omit.cssModule,
-          attributes = objectWithoutProperties(_omit, ['className', 'color', 'children', 'cssModule']);
+      var _props = this.props,
+          className = _props.className,
+          color = _props.color,
+          children = _props.children,
+          cssModule = _props.cssModule,
+          attributes = objectWithoutProperties(_props, ['className', 'color', 'children', 'cssModule']);
+
 
       var classes = mapToCssModules(classnames(className, color ? 'text-' + color : false), cssModule);
 
@@ -16035,7 +19200,6 @@ StrongUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
   children: PropTypes.node,
-  theme: PropTypes.object,
   color: PropTypes.string,
   cssModule: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
@@ -16045,8 +19209,6 @@ StrongUnstyled.propTypes = {
 var Strong = styled(StrongUnstyled).withConfig({
   displayName: 'Strong'
 })(['font-weight:bolder;']);
-
-Strong.defaultProps = defaultProps$66;
 
 var Summary = styled.summary.withConfig({
   displayName: 'Summary'
@@ -16090,16 +19252,94 @@ exports.default = {
 unwrapExports(tableRow);
 var tableRow_1 = tableRow.tableRowVariant;
 
+/**
+ * BOOTSTRAP THEME TABLE
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$45 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Grayscale and colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray'] = u['$gray'] || '#464a4c';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-bg'] = u['$body-bg'] || v['$white'];
+
+  // Tables
+  //
+  // Customizes the `.table` component with basic values, each used across all table variations.
+
+  v['$table-cell-padding'] = u['$table-cell-padding'] || '.75rem';
+  v['$table-sm-cell-padding'] = u['$table-sm-cell-padding'] || '.3rem';
+
+  v['$table-bg'] = u['$table-bg'] || 'transparent';
+
+  v['$table-inverse-bg'] = u['$table-inverse-bg'] || v['$gray-dark'];
+  v['$table-inverse-bg-accent'] = u['$table-inverse-bg-accent'] || color(v['$white']).alpha(0.05).toString();
+  v['$table-inverse-bg-hover'] = u['$table-inverse-bg-hover'] || color(v['$white']).alpha(0.075).toString();
+  v['$table-inverse-color'] = u['$table-inverse-color'] || v['$body-bg'];
+  v['$table-inverse-border'] = u['$table-inverse-border'] || color(v['$gray-dark']).lighten(0.075).toString();
+
+  v['$table-bg-accent'] = u['$table-bg-accent'] || color(v['$black']).alpha(0.05).toString();
+  v['$table-bg-hover'] = u['$table-bg-hover'] || color(v['$black']).alpha(0.075).toString();
+  v['$table-bg-active'] = u['$table-bg-active'] || v['$table-bg-hover'];
+
+  v['$table-head-bg'] = u['$table-head-bg'] || v['$gray-lighter'];
+  v['$table-head-color'] = u['$table-head-color'] || v['$gray'];
+
+  v['$table-border-width'] = u['$table-border-width'] || v['$border-width'];
+  v['$table-border-color'] = u['$table-border-color'] || v['$gray-lighter'];
+
+  // Form states and alerts
+  //
+  // Define colors for form feedback states and, by default, alerts.
+
+  v['$state-success-bg'] = u['$state-success-bg'] || '#dff0d8';
+  v['$state-info-bg'] = u['$state-info-bg'] || '#d9edf7';
+  v['$state-warning-bg'] = u['$state-warning-bg'] || '#fcf8e3';
+  v['$state-danger-bg'] = u['$state-danger-bg'] || '#f2dede';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$45();
+
 /* eslint-disable quote-props, dot-notation */
 /**
  * Tables: default, striped, bordered, hover, condensed and responsive.
  */
-
-var defaultProps$67 = {
-  tag: 'table',
-  responsiveTag: 'div',
-  theme: bsTheme
-};
 
 var TableUnstyled = function (_React$Component) {
   inherits(TableUnstyled, _React$Component);
@@ -16111,6 +19351,8 @@ var TableUnstyled = function (_React$Component) {
 
   createClass(TableUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -16139,12 +19381,16 @@ var TableUnstyled = function (_React$Component) {
         );
       }
       return table;
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return TableUnstyled;
 }(React.Component);
 
+TableUnstyled.defaultProps = {
+  tag: 'table',
+  responsiveTag: 'div',
+  theme: makeTheme$45()
+};
 TableUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   theme: PropTypes.object,
@@ -16166,10 +19412,8 @@ TableUnstyled.propTypes = {
 var Table = styled(TableUnstyled).withConfig({
   displayName: 'Table'
 })(['', ''], function (props) {
-  return '\n    /*\n     Basic Bootstrap table\n    */\n    \n    &.table {\n      width: 100%;\n      max-width: 100%;\n      margin-bottom: ' + props.theme['$spacer'] + ';\n      background-color: ' + props.theme['$table-bg'] + ';\n\n      th,\n      td {\n        padding: ' + props.theme['$table-cell-padding'] + ';\n        vertical-align: top;\n        border-top: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      thead th {\n        vertical-align: bottom;\n        border-bottom: ' + unitUtils$1.math.multiply(2, props.theme['$table-border-width']) + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      tbody + tbody {\n        border-top: ' + unitUtils$1.math.multiply(2, props.theme['$table-border-width']) + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      .table {\n        background-color: ' + props.theme['$body-bg'] + ';\n      }\n    }\n    \n    \n    /*\n     Condensed table w/ half padding\n    */\n    \n    &.table-sm {\n      th,\n      td {\n        padding: ' + props.theme['$table-sm-cell-padding'] + ';\n      }\n    }\n    \n    \n    /* Bordered version\n     Add borders all around the table and between all the columns.\n    */\n    &.table-bordered {\n      border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n    \n      th,\n      td {\n        border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      thead {\n        th,\n        td {\n          border-bottom-width: ' + unitUtils$1.math.multiply(2, props.theme['$table-border-width']) + ';\n        }\n      }\n    }\n    \n    \n    /* Zebra-striping\n     Default zebra-stripe styles (alternating gray and transparent backgrounds)\n    */\n    \n    &.table-striped {\n      tbody tr:nth-of-type(odd) {\n        background-color: ' + props.theme['$table-bg-accent'] + ';\n      }\n    }\n    \n    \n    /* \n    Hover effect Placed here since it has to come after the potential zebra striping\n    */\n\n    \n    &.table-hover {\n      tbody tr {\n        ' + hover_2('\n          background-color: ' + props.theme['$table-bg-hover'] + ';\n        ') + '\n      }\n    }\n    \n    /* Table backgrounds\n    Exact selectors below required to override \'.table-striped\' and prevent\n    inheritance to nested tables.\n    */\n        \n    /* Generate the contextual variants */\n    ' + tableRow_1('active', props.theme['$table-bg-active']) + '\n    ' + tableRow_1('success', props.theme['$state-success-bg']) + '\n    ' + tableRow_1('info', props.theme['$state-info-bg']) + '\n    ' + tableRow_1('warning', props.theme['$state-warning-bg']) + '\n    ' + tableRow_1('danger', props.theme['$state-danger-bg']) + '\n     \n    \n    /* Inverse styles\n    Same table markup, but inverted color scheme: dark background and light text.\n    */ \n    \n    & thead.thead-inverse {\n      th {\n        color: ' + props.theme['$table-inverse-color'] + ';\n        background-color: ' + props.theme['$table-inverse-bg'] + ';\n      }\n    }\n    \n    \n    & thead.thead-default {\n      th {\n        color: ' + props.theme['$table-head-color'] + ';\n        background-color: ' + props.theme['$table-head-bg'] + ';\n      }\n    }\n    \n    &.table-inverse {\n      color: ' + props.theme['$table-inverse-color'] + ';\n      background-color: ' + props.theme['$table-inverse-bg'] + ';\n    \n      th,\n      td,\n      thead th {\n        border-color: ' + props.theme['$table-inverse-border'] + ';\n      }\n    \n      &.table-bordered {\n        border: 0;\n      }\n      \n      &.table-striped {\n        tbody tr:nth-of-type(odd) {\n        background-color: ' + props.theme['$table-inverse-bg-accent'] + ';\n        }\n      }\n      \n      &.table-hover {\n        tbody tr {\n          ' + hover_2('\n            background-color: ' + props.theme['$table-inverse-bg-hover'] + ';\n          ') + '\n        }\n      }\n    }\n    \n    \n    \n    /* Responsive tables\n     Wrap your tables in \'.table-responsive\' and we\'ll make them mobile friendly\n     by enabling horizontal scrolling. Only applies <768px. Everything above that\n     will display normally.\n     */\n    \n    &.table-responsive {\n      display: block;\n      width: 100%;\n      overflow-x: auto;\n      -ms-overflow-style: -ms-autohiding-scrollbar; /* See https://github.com/twbs/bootstrap/pull/10057 */\n      &.table-bordered {\n        border: 0;\n      }\n    }\n    \n    \n    &.table-reflow {\n    \n      /* added bs4 missing tfoot rule */\n      thead, tfoot {\n        float: left;\n      }\n    \n      tbody {\n        display: block;\n        white-space: nowrap;\n      }\n    \n      th,\n      td {\n        border-top: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        border-left: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n    \n        &:last-child {\n          border-right: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        }\n      }\n    \n      thead,\n      tbody,\n      tfoot {\n        &:last-child {\n          tr:last-child th,\n          tr:last-child td {\n            border-bottom: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n          }\n        }\n      }\n    \n      tr {\n        float: left;\n    \n        th,\n        td {\n          display: block !important;\n          border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        }\n      }\n    }\n    \n      /* from reboot.scss */\n      th {\n        /* Centered by default, but left-align-ed to match the tds below. */\n        text-align: left;\n      }\n        \n\n      \n    /* Reboot Scss */\n    /* No longer part of Normalize since v4 */\n    border-collapse: collapse;\n    /*  Reset for nesting within parents with \'background-color\'. */\n    background-color: ' + props.theme['$table-bg'] + ';    \n    \n  ';
+  return '\n    /*\n     Basic Bootstrap table\n    */\n    &.table {\n      width: 100%;\n      max-width: 100%;\n      margin-bottom: ' + props.theme['$spacer'] + ';\n      background-color: ' + props.theme['$table-bg'] + ';\n\n      th,\n      td {\n        padding: ' + props.theme['$table-cell-padding'] + ';\n        vertical-align: top;\n        border-top: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      thead th {\n        vertical-align: bottom;\n        border-bottom: ' + unitUtils$1.math.multiply(props.theme['$table-border-width'], 2) + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      tbody + tbody {\n        border-top: ' + unitUtils$1.math.multiply(props.theme['$table-border-width'], 2) + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      .table {\n        background-color: ' + props.theme['$body-bg'] + ';\n      }\n    }\n    \n    \n    /*\n     Condensed table w/ half padding\n    */\n    \n    &.table-sm {\n      th,\n      td {\n        padding: ' + props.theme['$table-sm-cell-padding'] + ';\n      }\n    }\n    \n    \n    /* Bordered version\n     Add borders all around the table and between all the columns.\n    */\n    &.table-bordered {\n      border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n    \n      th,\n      td {\n        border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      thead {\n        th,\n        td {\n          border-bottom-width: ' + unitUtils$1.math.multiply(2, props.theme['$table-border-width']) + ';\n        }\n      }\n    }\n    \n    \n    /* Zebra-striping\n     Default zebra-stripe styles (alternating gray and transparent backgrounds)\n    */\n    \n    &.table-striped {\n      tbody tr:nth-of-type(odd) {\n        background-color: ' + props.theme['$table-bg-accent'] + ';\n      }\n    }\n    \n    \n    /* \n    Hover effect Placed here since it has to come after the potential zebra striping\n    */\n\n    \n    &.table-hover {\n      tbody tr {\n        ' + hover_2('\n          background-color: ' + props.theme['$table-bg-hover'] + ';\n        ') + '\n      }\n    }\n    \n    /* Table backgrounds\n    Exact selectors below required to override \'.table-striped\' and prevent\n    inheritance to nested tables.\n    */\n        \n    /* Generate the contextual variants */\n    ' + tableRow_1('active', props.theme['$table-bg-active']) + '\n    ' + tableRow_1('success', props.theme['$state-success-bg']) + '\n    ' + tableRow_1('info', props.theme['$state-info-bg']) + '\n    ' + tableRow_1('warning', props.theme['$state-warning-bg']) + '\n    ' + tableRow_1('danger', props.theme['$state-danger-bg']) + '\n     \n    \n    /* Inverse styles\n    Same table markup, but inverted color scheme: dark background and light text.\n    */ \n    \n    & thead.thead-inverse {\n      th {\n        color: ' + props.theme['$table-inverse-color'] + ';\n        background-color: ' + props.theme['$table-inverse-bg'] + ';\n      }\n    }\n    \n    \n    & thead.thead-default {\n      th {\n        color: ' + props.theme['$table-head-color'] + ';\n        background-color: ' + props.theme['$table-head-bg'] + ';\n      }\n    }\n    \n    &.table-inverse {\n      color: ' + props.theme['$table-inverse-color'] + ';\n      background-color: ' + props.theme['$table-inverse-bg'] + ';\n    \n      th,\n      td,\n      thead th {\n        border-color: ' + props.theme['$table-inverse-border'] + ';\n      }\n    \n      &.table-bordered {\n        border: 0;\n      }\n      \n      &.table-striped {\n        tbody tr:nth-of-type(odd) {\n        background-color: ' + props.theme['$table-inverse-bg-accent'] + ';\n        }\n      }\n      \n      &.table-hover {\n        tbody tr {\n          ' + hover_2('\n            background-color: ' + props.theme['$table-inverse-bg-hover'] + ';\n          ') + '\n        }\n      }\n    }\n    \n    /* Responsive tables\n     Wrap your tables in \'.table-responsive\' and we\'ll make them mobile friendly\n     by enabling horizontal scrolling. Only applies <768px. Everything above that\n     will display normally.\n     */\n    \n    &.table-responsive {\n      display: block;\n      width: 100%;\n      overflow-x: auto;\n      -ms-overflow-style: -ms-autohiding-scrollbar; /* See https://github.com/twbs/bootstrap/pull/10057 */\n      &.table-bordered {\n        border: 0;\n      }\n    }\n    \n    &.table-reflow {\n    \n      /* added bs4 missing tfoot rule */\n      thead, tfoot {\n        float: left;\n      }\n    \n      tbody {\n        display: block;\n        white-space: nowrap;\n      }\n    \n      th,\n      td {\n        border-top: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        border-left: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n    \n        &:last-child {\n          border-right: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        }\n      }\n    \n      thead,\n      tbody,\n      tfoot {\n        &:last-child {\n          tr:last-child th,\n          tr:last-child td {\n            border-bottom: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n          }\n        }\n      }\n    \n      tr {\n        float: left;\n    \n        th,\n        td {\n          display: block !important;\n          border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        }\n      }\n    }\n    \n    /* from reboot.scss */\n    th {\n      /* Centered by default, but left-align-ed to match the tds below. */\n      text-align: left;\n    }\n      \n    /* Reboot Scss */\n    /* No longer part of Normalize since v4 */\n    border-collapse: collapse;\n    /*  Reset for nesting within parents with \'background-color\'. */\n    background-color: ' + props.theme['$table-bg'] + ';    \n    \n  ';
 });
-
-Table.defaultProps = defaultProps$67;
 
 /**
  * Tbody
@@ -16385,14 +19629,90 @@ exports.default = {
 unwrapExports(badge);
 var badge_2 = badge.badgeVariant;
 
-/* Badge (Text Format) */
+/**
+ * BOOTSTRAP THEME BADGE TAG
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$46 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-var defaultProps$68 = {
-  theme: bsTheme,
-  color: 'default',
-  pill: false,
-  tag: 'span'
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Color
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$blue'] = u['$blue'] || '#0275d8';
+  v['$green'] = u['$green'] || '#5cb85c';
+  v['$teal'] = u['$teal'] || '#5bc0de';
+  v['$orange'] = u['$orange'] || '#f0ad4e';
+  v['$red'] = u['$red'] || '#d9534f';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+  v['$brand-success'] = u['$brand-success'] || v['$green'];
+  v['$brand-info'] = u['$brand-info'] || v['$teal'];
+  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
+  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
+  v['$brand-inverse'] = u['$brand-inverse'] || v['$gray-dark'];
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-weight-bold'] = u['$font-weight-bold'] || 'bold';
+
+  // Badges
+
+  v['$badge-default-bg'] = u['$badge-default-bg'] || v['$gray-light'];
+  v['$badge-primary-bg'] = u['$badge-primary-bg'] || v['$brand-primary'];
+  v['$badge-success-bg'] = u['$badge-success-bg'] || v['$brand-success'];
+  v['$badge-info-bg'] = u['$badge-info-bg'] || v['$brand-info'];
+  v['$badge-warning-bg'] = u['$badge-warning-bg'] || v['$brand-warning'];
+  v['$badge-danger-bg'] = u['$badge-danger-bg'] || v['$brand-danger'];
+
+  v['$badge-color'] = u['$badge-color'] || v['$white'];
+  v['$badge-link-hover-color'] = u['$badge-link-hover-color'] || v['$white'];
+  v['$badge-font-size'] = u['$badge-font-size'] || '75%';
+  v['$badge-font-weight'] = u['$badge-font-weight'] || v['$font-weight-bold'];
+  v['$badge-padding-x'] = u['$badge-padding-x'] || '.4em';
+  v['$badge-padding-y'] = u['$badge-padding-y'] || '.25em';
+
+  v['$badge-pill-padding-x'] = u['$badge-pill-padding-x'] || '.6em';
+
+  // Use a higher than normal value to ensure completely rounded edges when
+  // customizing padding or font-size on labels.
+  v['$badge-pill-border-radius'] = u['$badge-pill-border-radius'] || '10rem';
+
+  return Object.assign({}, u, v);
 };
+
+makeTheme$46();
+
+/* Badge (Text Format) */
 
 var BadgeUnstyled = function (_React$Component) {
   inherits(BadgeUnstyled, _React$Component);
@@ -16404,6 +19724,8 @@ var BadgeUnstyled = function (_React$Component) {
 
   createClass(BadgeUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -16418,12 +19740,17 @@ var BadgeUnstyled = function (_React$Component) {
           'badge-pill': pill
         }, 'badge-' + color, color)), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return BadgeUnstyled;
 }(React.Component);
 
+BadgeUnstyled.defaultProps = {
+  color: 'default',
+  pill: false,
+  tag: 'span',
+  theme: makeTheme$46()
+};
 BadgeUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   color: PropTypes.string,
@@ -16442,8 +19769,6 @@ var Badge = styled(BadgeUnstyled).withConfig({
   return '\n    \n    /* Base class */\n    /* Requires one of the contextual, color modifier classes for \'color\' and */\n    /* \'background-color\'. */\n    \n    &.badge {\n      display: inline-block;\n      padding: ' + props.theme['$badge-padding-y'] + ' ' + props.theme['$badge-padding-x'] + ';\n      font-size: ' + props.theme['$badge-font-size'] + ';\n      font-weight: ' + props.theme['$badge-font-weight'] + ';\n      line-height: 1;\n      color: ' + props.theme['$badge-color'] + ';\n      text-align: center;\n      white-space: nowrap;\n      vertical-align: baseline;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n    \n      /* Empty tags collapse automatically */\n      &:empty {\n        display: none;\n      }\n    }\n    \n    \n    /* scss-lint:disable QualifyingElement */\n    /* Add hover effects, but only for links */\n    &a {\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$badge-link-hover-color'] + ';\n        text-decoration: none;\n        cursor: pointer;\n      ') + '\n    }\n    /* scss-lint:enable QualifyingElement */\n    \n    /* Pill tags */\n    /* Make them extra rounded with a modifier to replace v3s badges. */\n    \n    &.badge-pill {\n      padding-right: ' + props.theme['$badge-pill-padding-x'] + ';\n      padding-left: ' + props.theme['$badge-pill-padding-x'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$badge-pill-border-radius']) + '\n    }\n    \n    /* Colors */\n    /* Contextual variations (linked tags get darker on :hover). */\n    \n    &.badge-default {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-default-bg']) + '\n    }     \n    \n    &.badge-primary {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-primary-bg']) + '\n    }\n    \n    &.badge-success {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-success-bg']) + '\n    }\n    \n    &.badge-info {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-info-bg']) + '\n    }\n    \n    &.badge-warning {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-warning-bg']) + '\n    }\n    \n    &.badge-danger {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-danger-bg']) + '\n    }\n  ';
 });
 
-Badge.defaultProps = defaultProps$68;
-
 /* A Textarea (Box) */
 
 /**
@@ -16454,20 +19779,12 @@ var Textarea = styled.textarea.withConfig({
 })(['touch-action:manipulation;line-height:inherit;resize:vertical;']);
 
 /**
- * A Tooltip component
+ * A Tooltip tag
  */
 
 var DEFAULT_DELAYS = {
   shape: 0,
   hide: 250
-};
-
-var defaultProps$69 = {
-  isOpen: false,
-  placement: 'bottom',
-  delay: DEFAULT_DELAYS,
-  autohide: true,
-  toggle: function toggle() {}
 };
 
 var defaultTetherConfig$1 = {
@@ -16649,14 +19966,19 @@ var TooltipUnstyled = function (_React$Component) {
   return TooltipUnstyled;
 }(React.Component);
 
+TooltipUnstyled.defaultProps = {
+  isOpen: false,
+  placement: 'bottom',
+  delay: DEFAULT_DELAYS,
+  autohide: true,
+  toggle: function toggle() {}
+};
 TooltipUnstyled.propTypes = propTypes$7;
 var Tooltip = styled(TooltipUnstyled).withConfig({
   displayName: 'Tooltip'
 })(['', ''], function (props) {
   return '\n    &.tooltip {\n      position: absolute;\n      z-index: ' + props.theme['$zindex-tooltip'] + ';\n      display: block;\n      font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;\n      font-style: normal;\n      font-weight: 400;\n      letter-spacing: normal;\n      line-break: auto;\n      line-height: 1.5;\n      text-align: left;\n      text-align: start;\n      text-decoration: none;\n      text-shadow: none;\n      text-transform: none;\n      white-space: normal;\n      word-break: normal;\n      word-spacing: normal;\n      font-size: .875rem;\n      word-wrap: break-word;\n      opacity: 0\n    }\n    \n    &.tooltip.show {\n      opacity: ' + props.theme['$tooltip-opacity'] + '\n    }\n    \n    &.tooltip.bs-tether-element-attached-bottom,\n    &.tooltip.tooltip-top {\n      padding: 5px 0;\n      margin-top: -3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-bottom .tooltip-inner:before,\n    &.tooltip.tooltip-top .tooltip-inner:before {\n      bottom: 0;\n      left: 50%;\n      margin-left: -5px;\n      content: "";\n      border-width: 5px 5px 0;\n      border-top-color: #000\n    }\n    \n    &.tooltip.bs-tether-element-attached-left,\n    &.tooltip.tooltip-right {\n      padding: 0 5px;\n      margin-left: 3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-left .tooltip-inner:before,\n    &.tooltip.tooltip-right .tooltip-inner:before {\n      top: 50%;\n      left: 0;\n      margin-top: -5px;\n      content: "";\n      border-width: 5px 5px 5px 0;\n      border-right-color: #000\n    }\n    \n    &.tooltip.bs-tether-element-attached-top,\n    &.tooltip.tooltip-bottom {\n      padding: 5px 0;\n      margin-top: 3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-top .tooltip-inner:before,\n    &.tooltip.tooltip-bottom .tooltip-inner:before {\n      top: 0;\n      left: 50%;\n      margin-left: -5px;\n      content: "";\n      border-width: 0 5px 5px;\n      border-bottom-color: #000\n    }\n    \n    &.tooltip.bs-tether-element-attached-right,\n    &.tooltip.tooltip-left {\n      padding: 0 5px;\n      margin-left: -3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-right .tooltip-inner:before,\n    &.tooltip.tooltip-left .tooltip-inner:before {\n      top: 50%;\n      right: 0;\n      margin-top: -5px;\n      content: "";\n      border-width: 5px 0 5px 5px;\n      border-left-color: #000\n    }\n    \n    & .tooltip-inner {\n      max-width: ' + props.theme['$tooltip-max-width'] + ';\n      padding: ' + props.theme['$tooltip-padding-y'] + ' ' + props.theme['$tooltip-padding-x'] + ';\n      color: ' + props.theme['$tooltip-color'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$tooltip-bg'] + ';\n      border-radius: .25rem\n    }\n    \n    & .tooltip-inner:before {\n      position: absolute;\n      width: 0;\n      height: 0;\n      border-color: transparent;\n      border-style: solid\n    }\n  ';
 });
-
-Tooltip.defaultProps = defaultProps$69;
 
 var cards = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -16762,16 +20084,142 @@ var cards_3 = cards.cardOutlineVariant;
 var cards_4 = cards.cardInverse;
 var cards_5 = cards.card;
 
+var detectUnit$2 = unitUtils$1.detectUnit;
+var rmUnit$15 = unitUtils$1.rmUnit;
+var UNIT$14 = unitUtils$1.UNIT;
+
+/**
+ * BOOTSTRAP THEME CARDS TAG (Cards, CardsColumns, CardDeck, CardGroup)
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$47 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  // Colors
+  //
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+  v['$green'] = u['$green'] || '#5cb85c';
+  v['$teal'] = u['$teal'] || '#5bc0de';
+  v['$orange'] = u['$orange'] || '#f0ad4e';
+  v['$red'] = u['$red'] || '#d9534f';
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+  v['$brand-success'] = u['$brand-success'] || v['$green'];
+  v['$brand-info'] = u['$brand-info'] || v['$teal'];
+  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
+  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
+  v['$brand-inverse'] = u['$brand-inverse'] || v['$gray-dark'];
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Grid columns
+  //
+  // Set the number of columns and specify the width of the gutters.
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+
+  // Cards (Card, CardGroup)
+
+  v['$card-spacer-x'] = u['$card-spacer-x'] || '1.25rem';
+  v['$card-spacer-y'] = u['$card-spacer-y'] || '.75rem';
+  v['$card-border-width'] = u['$card-border-width'] || '1px';
+  v['$card-border-radius'] = u['$card-border-radius'] || v['$border-radius'];
+  v['$card-border-color'] = u['$card-border-color'] || color(v['$black']).alpha(0.125).toString();
+  v['$card-border-radius-inner'] = u['$card-border-radius-inner'] || 'calc(' + v['$card-border-radius'] + ' - ' + v['$card-border-width'] + ')';
+  v['$card-cap-bg'] = u['$card-cap-bg'] || v['$gray-lightest'];
+  v['$card-bg'] = u['$card-bg'] || v['$white'];
+
+  v['$card-link-hover-color'] = u['$card-link-hover-color'] || v['$white'];
+
+  v['$card-img-overlay-padding'] = u['$card-img-overlay-padding'] || '1.25rem';
+
+  // Button
+  v['$btn-primary-bg'] = u['$btn-primary-bg'] || v['$brand-primary'];
+  v['$btn-secondary-border'] = u['$btn-secondary-border'] || '#ccc';
+  v['$btn-info-bg'] = u['$btn-info-bg'] || v['$brand-info'];
+  v['$btn-success-bg'] = u['$btn-success-bg'] || v['$brand-success'];
+  v['$btn-warning-bg'] = u['$btn-warning-bg'] || v['$brand-warning'];
+  v['$btn-danger-bg'] = u['$btn-danger-bg'] || v['$brand-danger'];
+
+  // THEME EXTEND CARDS
+  v['$card-margin-y-halved'] = u['$card-margin-y-halved'] || rmUnit$15(v['$card-spacer-y'], UNIT$14.REM) / 2 + UNIT$14.REM;
+  v['$card-margin-x-halved'] = u['$card-margin-x-halved'] || rmUnit$15(v['$card-spacer-x'], UNIT$14.REM) / 2 + UNIT$14.REM;
+
+  // CardColumns
+  v['$card-columns-count-md'] = u['$card-columns-count-md'] || '2';
+  v['$card-columns-gap-md'] = u['$card-columns-gap-md'] || '1rem';
+  v['$card-columns-margin-md'] = u['$card-columns-margin-md'] || v['$card-spacer-y'];
+  v['$card-columns-count-lg'] = u['$card-columns-count-lg'] || '2';
+  v['$card-columns-gap-lg'] = u['$card-columns-gap-lg'] || '1.15rem';
+  v['$card-columns-margin-lg'] = u['$card-columns-margin-lg'] || v['$card-spacer-y'];
+  v['$card-columns-count-xl'] = u['$card-columns-count-xl'] || '2';
+  v['$card-columns-gap-xl'] = u['$card-columns-gap-xl'] || '1.25rem';
+  v['$card-columns-margin-xl'] = u['$card-columns-margin-xl'] || v['$card-spacer-y'];
+  v['$card-columns-count-xxl'] = u['$card-columns-count-xxl'] || '3';
+  v['$card-columns-gap-xxl'] = u['$card-columns-gap-xxl'] || '1.25rem';
+  v['$card-columns-margin-xxl'] = u['$card-columns-margin-xxl'] || v['$card-spacer-y'];
+
+  // // ?? missing
+  // v['$card-inverse-bg-color'] = u['$card-inverse-bg-color'] || '??????';
+  // v['$card-inverse-border-color'] = u['$card-inverse-border-color'] || '??????';
+
+  // CardDeck
+  var detectedUnit = detectUnit$2(v['$grid-gutter-width-base']);
+  v['$card-deck-margin'] = u['$card-deck-margin'] || rmUnit$15(v['$grid-gutter-width-base'], detectedUnit) / 2 + detectedUnit;
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$47();
+
 /**
  * Card Component
  *
  *
  */
-var defaultProps$70 = {
-  theme: bsTheme,
-  tag: 'div'
-};
-
 var CardUnstyled = function (_React$Component) {
   inherits(CardUnstyled, _React$Component);
 
@@ -16782,6 +20230,8 @@ var CardUnstyled = function (_React$Component) {
 
   createClass(CardUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _cn;
 
@@ -16801,12 +20251,15 @@ var CardUnstyled = function (_React$Component) {
           'card-block': block
         }, defineProperty(_cn, 'card-' + color, color), defineProperty(_cn, 'card-' + (outline ? '-outline' : '') + '-' + color, outline), _cn)), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardUnstyled;
 }(React.Component);
 
+CardUnstyled.defaultProps = {
+  tag: 'div',
+  theme: makeTheme$47()
+};
 CardUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -16830,18 +20283,11 @@ var Card = styled(CardUnstyled).withConfig({
   return '\n    \n    /*\n    Base styles\n    */\n    &.card {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$card-bg'] + ';\n      border: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n      \n      ' + conditional_1(props.width, 'width: ' + props.width + ';') + '\n      ' + conditional_1(props.backgroundColor, 'background-color: ' + props.backgroundColor + ';') + '\n      ' + conditional_1(props.borderColor, 'border-color: ' + props.borderColor + ';') + '\n    }\n    \n    &.card-block,\n    & .card-block {\n      flex: 1 1 auto;\n      padding: ' + props.theme['$card-spacer-x'] + ';\n    }\n    \n    & .card-title {\n      margin-bottom: ' + props.theme['$card-spacer-y'] + ';\n    }\n    \n    & .card-subtitle {\n      margin-top: -' + props.theme['$card-margin-y-halved'] + ';\n      margin-bottom: 0;\n    }\n    \n    & .card-text:last-child {\n      margin-bottom: 0;\n    }\n   \n    & .card-link {\n      ' + hover_2('\n        text-decoration: none;\n      ') + '\n    \n      + .card-link {\n        margin-left: ' + props.theme['$card-spacer-x'] + ';\n      }\n    }\n    \n    &.card {\n      > .list-group:first-child {\n        .list-group-item:first-child {\n          ' + borderRadius_3(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n        }\n      }\n    \n      > .list-group:last-child {\n        .list-group-item:last-child {\n          ' + borderRadius_5(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n        }\n      }\n    }\n    \n    \n    /*\n     Optional textual caps\n    */\n    \n    & .card-header {\n      padding: ' + props.theme['$card-spacer-y'] + ' ' + props.theme['$card-spacer-x'] + ';\n      margin-bottom: 0; /* Removes the default margin-bottom of <hN> */\n      background-color: ' + props.theme['$card-cap-bg'] + ';\n      border-bottom: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n    \n      &:first-child {\n        ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner'], props.theme['$card-border-radius-inner'], '0', '0') + '\n      }\n    }\n    \n    & .card-footer {\n      padding: ' + props.theme['$card-spacer-y'] + ' ' + props.theme['$card-spacer-x'] + ';\n      background-color: ' + props.theme['$card-cap-bg'] + ';\n      border-top: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n    \n      &:last-child {\n        ' + borderRadius_2(props.theme['$enable-rounded'], '0', '0', props.theme['$card-border-radius-inner'], props.theme['$card-border-radius-inner']) + '\n      }\n    }\n    \n    \n    /*\n     Header navs\n    */\n    \n    & .card-header-tabs {\n      margin-right: -' + props.theme['$card-margin-x-halved'] + ';\n      margin-bottom: -' + props.theme['$card-spacer-y'] + ';\n      margin-left: -' + props.theme['$card-margin-x-halved'] + ';\n      border-bottom: 0;\n    }\n    \n    & .card-header-pills {\n      margin-right: -' + props.theme['$card-margin-x-halved'] + ';\n      margin-left: -' + props.theme['$card-margin-x-halved'] + ';\n    }\n    \n    \n    /*\n     Background variations\n    */\n    \n    &.card-primary {\n      ' + cards_2(props.theme['$brand-primary'], props.theme['$brand-primary']) + '\n    }\n    &.card-success {\n      ' + cards_2(props.theme['$brand-success'], props.theme['$brand-success']) + '\n    }\n    &.card-info {\n      ' + cards_2(props.theme['$brand-info'], props.theme['$brand-info']) + '\n    }\n    &.card-warning {\n      ' + cards_2(props.theme['$brand-warning'], props.theme['$brand-warning']) + '\n    }\n    &.card-danger {\n      ' + cards_2(props.theme['$brand-danger'], props.theme['$brand-danger']) + '\n    }\n    \n    /* Remove all backgrounds */\n    &.card-outline-primary {\n      ' + cards_3(props.theme['$btn-primary-bg']) + '\n    }\n    &.card-outline-secondary {\n      ' + cards_3(props.theme['$btn-secondary-border']) + '\n    }\n    &.card-outline-info {\n      ' + cards_3(props.theme['$btn-info-bg']) + '\n    }\n    &.card-outline-success {\n      ' + cards_3(props.theme['$btn-success-bg']) + '\n    }\n    &.card-outline-warning {\n      ' + cards_3(props.theme['$btn-warning-bg']) + '\n    }\n    &.card-outline-danger {\n      ' + cards_3(props.theme['$btn-danger-bg']) + '\n    }\n    \n    /*\n     Inverse text within a card for use with dark backgrounds\n    */\n    \n    &.card-inverse {\n      ' + cards_4(props.theme['$enable-hover-media-query'], props.theme['$card-link-hover-color']) + '\n    }\n    \n    /*\n     Blockquote\n    */\n    \n    & .card-blockquote {\n      padding: 0;\n      margin-bottom: 0;\n      border-left: 0;\n    }\n    \n    /* Card image */\n    & .card-img {\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n    \n    & .card-img-overlay {\n      position: absolute;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      padding: ' + props.theme['$card-img-overlay-padding'] + ';\n    }\n    \n    \n    \n    /* Card image caps */\n    & .card-img-top {\n      ' + borderRadius_3(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n    \n    & .card-img-bottom {\n      ' + borderRadius_5(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n  ';
 });
 
-Card.defaultProps = defaultProps$70;
-
 /**
  * Card Columns Component
  *
  *
  */
-var defaultProps$71 = {
-  theme: bsTheme,
-  tag: 'div'
-};
-
 var CardColumnsUnstyled = function (_React$Component) {
   inherits(CardColumnsUnstyled, _React$Component);
 
@@ -16852,6 +20298,8 @@ var CardColumnsUnstyled = function (_React$Component) {
 
   createClass(CardColumnsUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -16862,18 +20310,21 @@ var CardColumnsUnstyled = function (_React$Component) {
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-columns'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardColumnsUnstyled;
 }(React.Component);
 
+CardColumnsUnstyled.defaultProps = {
+  tag: 'div',
+  theme: makeTheme$47()
+};
 CardColumnsUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
+  cssModule: PropTypes.object,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  theme: PropTypes.object,
-  cssModule: PropTypes.object
+  theme: PropTypes.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -16881,21 +20332,14 @@ CardColumnsUnstyled.propTypes = {
 var CardColumns = styled(CardColumnsUnstyled).withConfig({
   displayName: 'CardColumns'
 })(['', ''], function (props) {
-  return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count'] + ';\n          column-gap: ' + props.theme['$card-columns-gap'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin'] + ';\n          }\n        }\n      ') + '\n  ';
+  return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + breakpoints_6('md', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-md'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-md'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-md'] + ';\n          }\n        }\n      ') + '\n    ' + breakpoints_6('lg', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-lg'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-lg'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-lg'] + ';\n          }\n        }\n      ') + '\n    ' + breakpoints_6('xl', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-xl'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-xl'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-xl'] + ';\n          }\n        }\n      ') + '\n    ' + breakpoints_6('xxl', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-xxl'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-xxl'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-xxl'] + ';\n          }\n        }\n      ') + '\n  ';
 });
-
-CardColumns.defaultProps = defaultProps$71;
 
 /**
  * CardDeck Component
  *
  *
  */
-var defaultProps$72 = {
-  theme: bsTheme,
-  tag: 'div'
-};
-
 var CardDeckUnstyled = function (_React$Component) {
   inherits(CardDeckUnstyled, _React$Component);
 
@@ -16906,6 +20350,7 @@ var CardDeckUnstyled = function (_React$Component) {
 
   createClass(CardDeckUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -16916,12 +20361,15 @@ var CardDeckUnstyled = function (_React$Component) {
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-deck'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardDeckUnstyled;
 }(React.Component);
 
+CardDeckUnstyled.defaultProps = {
+  tag: 'div',
+  theme: makeTheme$47()
+};
 CardDeckUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -16938,18 +20386,11 @@ var CardDeck = styled(CardDeckUnstyled).withConfig({
   return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        &.card-deck {\n          display: flex;\n          flex-flow: row wrap;\n        \n          .card {\n            display: flex;\n            flex: 1 0 0;\n            flex-direction: column;  \n            &:not(:first-child) { margin-left: ' + props.theme['$card-deck-margin'] + '; }\n            &:not(:last-child) { margin-right: ' + props.theme['$card-deck-margin'] + '; }\n          }\n        }\n      ') + '\n  ';
 });
 
-CardDeck.defaultProps = defaultProps$72;
-
 /**
  * CardGroup Component
  *
  *
  */
-var defaultProps$73 = {
-  theme: bsTheme,
-  tag: 'div'
-};
-
 var CardGroupUnstyled = function (_React$Component) {
   inherits(CardGroupUnstyled, _React$Component);
 
@@ -16960,6 +20401,8 @@ var CardGroupUnstyled = function (_React$Component) {
 
   createClass(CardGroupUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -16970,12 +20413,15 @@ var CardGroupUnstyled = function (_React$Component) {
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-group'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardGroupUnstyled;
 }(React.Component);
 
+CardGroupUnstyled.defaultProps = {
+  tag: 'div',
+  theme: makeTheme$47()
+};
 CardGroupUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -16992,12 +20438,6 @@ var CardGroup = styled(CardGroupUnstyled).withConfig({
   return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    /*\n      Card group\n    */\n      ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n          &.card-group {\n            display: flex;\n            flex-flow: row wrap;\n        \n            .card {\n              flex: 1 0 0;\n        \n              + .card {\n                margin-left: 0;\n                border-left: 0;\n              }\n        \n            ' + conditional_1(props.theme['$enable-rounded'], '\n                &:first-child {\n                  ' + borderRadius_4(props.theme['$enable-rounded'], '0') + '\n                  .card-img-top {\n                    border-top-right-radius: 0;\n                  }\n                  \n                  .card-img-bottom {\n                    border-bottom-right-radius: 0;\n                  }\n                }\n              \n                &:last-child {\n                  ' + borderRadius_6(props.theme['$enable-rounded'], '0') + '\n                  \n                  .card-img-top {\n                    border-top-left-radius: 0;\n                  }\n                  \n                  .card-img-bottom {\n                    border-bottom-left-radius: 0;\n                  }\n                }\n                \n                &:not(:first-child):not(:last-child) {\n                  border-radius: 0;\n        \n                  .card-img-top,\n                  .card-img-bottom {\n                    border-radius: 0;\n                  }\n                }\n              ') + '  \n          }\n        }\n      ') + '\n  ';
 });
 
-CardGroup.defaultProps = defaultProps$73;
-
-var defaultProps$74 = {
-  tag: 'div'
-};
-
 var CardBlock = function (_React$Component) {
   inherits(CardBlock, _React$Component);
 
@@ -17008,6 +20448,8 @@ var CardBlock = function (_React$Component) {
 
   createClass(CardBlock, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -17019,23 +20461,18 @@ var CardBlock = function (_React$Component) {
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-block'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardBlock;
 }(React.Component);
 
-CardBlock.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  className: PropTypes.string,
-  cssModule: PropTypes.object
-};
-
-
-CardBlock.defaultProps = defaultProps$74;
-
-var defaultProps$75 = {
+CardBlock.defaultProps = {
   tag: 'div'
+};
+CardBlock.propTypes = {
+  className: PropTypes.string,
+  cssModule: PropTypes.object,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
 var CardFooter = function (_React$Component) {
@@ -17048,6 +20485,8 @@ var CardFooter = function (_React$Component) {
 
   createClass(CardFooter, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -17059,23 +20498,18 @@ var CardFooter = function (_React$Component) {
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-footer'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardFooter;
 }(React.Component);
 
+CardFooter.defaultProps = {
+  tag: 'div'
+};
 CardFooter.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
-};
-
-
-CardFooter.defaultProps = defaultProps$75;
-
-var defaultProps$76 = {
-  tag: 'div'
 };
 
 var CardHeader = function (_React$Component) {
@@ -17088,6 +20522,8 @@ var CardHeader = function (_React$Component) {
 
   createClass(CardHeader, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -17099,23 +20535,18 @@ var CardHeader = function (_React$Component) {
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-header'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardHeader;
 }(React.Component);
 
+CardHeader.defaultProps = {
+  tag: 'div'
+};
 CardHeader.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
-};
-
-
-CardHeader.defaultProps = defaultProps$76;
-
-var defaultProps$77 = {
-  tag: 'img'
 };
 
 var CardImg = function (_React$Component) {
@@ -17128,6 +20559,8 @@ var CardImg = function (_React$Component) {
 
   createClass(CardImg, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -17148,25 +20581,20 @@ var CardImg = function (_React$Component) {
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, cardImgClassName), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardImg;
 }(React.Component);
 
+CardImg.defaultProps = {
+  tag: 'img'
+};
 CardImg.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object,
   top: PropTypes.bool,
   bottom: PropTypes.bool
-};
-
-
-CardImg.defaultProps = defaultProps$77;
-
-var defaultProps$78 = {
-  tag: 'div'
 };
 
 var CardImgOverlay = function (_React$Component) {
@@ -17179,6 +20607,8 @@ var CardImgOverlay = function (_React$Component) {
 
   createClass(CardImgOverlay, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -17190,23 +20620,18 @@ var CardImgOverlay = function (_React$Component) {
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-img-overlay'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardImgOverlay;
 }(React.Component);
 
+CardImgOverlay.defaultProps = {
+  tag: 'div'
+};
 CardImgOverlay.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
-};
-
-
-CardImgOverlay.defaultProps = defaultProps$78;
-
-var defaultProps$79 = {
-  tag: A
 };
 
 var CardLink = function (_React$Component) {
@@ -17219,6 +20644,8 @@ var CardLink = function (_React$Component) {
 
   createClass(CardLink, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -17232,24 +20659,19 @@ var CardLink = function (_React$Component) {
         className: mapToCssModules(classnames(className, 'card-link'), cssModule),
         ref: getRef
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardLink;
 }(React.Component);
 
+CardLink.defaultProps = {
+  tag: A
+};
 CardLink.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object,
   getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
-};
-
-
-CardLink.defaultProps = defaultProps$79;
-
-var defaultProps$80 = {
-  tag: H6
 };
 
 var CardSubtitle = function (_React$Component) {
@@ -17262,6 +20684,8 @@ var CardSubtitle = function (_React$Component) {
 
   createClass(CardSubtitle, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -17273,23 +20697,18 @@ var CardSubtitle = function (_React$Component) {
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-subtitle'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardSubtitle;
 }(React.Component);
 
+CardSubtitle.defaultProps = {
+  tag: H6
+};
 CardSubtitle.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
-};
-
-
-CardSubtitle.defaultProps = defaultProps$80;
-
-var defaultProps$81 = {
-  tag: 'p'
 };
 
 var CardText = function (_React$Component) {
@@ -17302,6 +20721,8 @@ var CardText = function (_React$Component) {
 
   createClass(CardText, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -17313,23 +20734,18 @@ var CardText = function (_React$Component) {
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-text'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardText;
 }(React.Component);
 
+CardText.defaultProps = {
+  tag: 'p'
+};
 CardText.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
-};
-
-
-CardText.defaultProps = defaultProps$81;
-
-var defaultProps$82 = {
-  tag: H4
 };
 
 var CardTitle = function (_React$Component) {
@@ -17342,6 +20758,8 @@ var CardTitle = function (_React$Component) {
 
   createClass(CardTitle, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -17353,23 +20771,18 @@ var CardTitle = function (_React$Component) {
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-title'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardTitle;
 }(React.Component);
 
+CardTitle.defaultProps = {
+  tag: H4
+};
 CardTitle.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
-};
-
-
-CardTitle.defaultProps = defaultProps$82;
-
-var defaultProps$83 = {
-  tag: Blockquote
 };
 
 var CardBlockquote = function (_React$Component) {
@@ -17382,6 +20795,8 @@ var CardBlockquote = function (_React$Component) {
 
   createClass(CardBlockquote, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -17393,20 +20808,19 @@ var CardBlockquote = function (_React$Component) {
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-blockquote'), cssModule)
       }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return CardBlockquote;
 }(React.Component);
 
-CardBlockquote.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  className: PropTypes.string,
-  cssModule: PropTypes.object
+CardBlockquote.defaultProps = {
+  tag: Blockquote
 };
-
-
-CardBlockquote.defaultProps = defaultProps$83;
+CardBlockquote.propTypes = {
+  className: PropTypes.string,
+  cssModule: PropTypes.object,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+};
 
 /*
  * Kopax Ltd Copyright (c) 2016.
@@ -17417,10 +20831,6 @@ CardBlockquote.defaultProps = defaultProps$83;
  *
  *
  */
-var defaultProps$84 = {
-  tag: Card
-};
-
 var Accordion = function (_React$Component) {
   inherits(Accordion, _React$Component);
 
@@ -17431,8 +20841,6 @@ var Accordion = function (_React$Component) {
 
   createClass(Accordion, [{
     key: 'render',
-    // eslint-disable-line react/prefer-stateless-function
-
     value: function render() {
       // extract keys for div
       var _props = this.props,
@@ -17441,7 +20849,8 @@ var Accordion = function (_React$Component) {
           children = _props.children,
           heading = _props.heading,
           Tag = _props.tag,
-          attributes = objectWithoutProperties(_props, ['className', 'name', 'children', 'heading', 'tag']);
+          delay = _props.delay,
+          attributes = objectWithoutProperties(_props, ['className', 'name', 'children', 'heading', 'tag', 'delay']);
       var _context$accordionGro = this.context.accordionGroup,
           activeAccordionName = _context$accordionGro.activeAccordionName,
           onClick = _context$accordionGro.onClick,
@@ -17479,28 +20888,31 @@ var Accordion = function (_React$Component) {
         accordionHeading,
         React.createElement(
           Collapse,
-          { isOpen: optional.isOpened },
+          { delay: delay, isOpen: optional.isOpened },
           children
         )
       );
-    }
+    } // eslint-disable-line react/prefer-stateless-function
+
   }]);
   return Accordion;
 }(React.Component);
 
+Accordion.defaultProps = {
+  tag: Card,
+  delay: 350
+};
 Accordion.propTypes = {
-  className: PropTypes.string,
-  heading: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  delay: PropTypes.oneOfType([PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }), PropTypes.number]),
+  heading: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   name: PropTypes.string,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 Accordion.contextTypes = {
   accordionGroup: PropTypes.object
 };
-
-
-Accordion.defaultProps = defaultProps$84;
 
 /**
  * Accordion Group Component
@@ -17741,17 +21153,270 @@ exports.default = {
 unwrapExports(customForms_1);
 var customForms_3 = customForms_1.customForms;
 
+var rmUnit$16 = unitUtils$1.rmUnit;
+var UNIT$15 = unitUtils$1.UNIT;
+/**
+ * BOOTSTRAP THEME FORM
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$48 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$red'] = u['$red'] || '#d9534f';
+  v['$orange'] = u['$orange'] || '#f0ad4e';
+  v['$green'] = u['$green'] || '#5cb85c';
+  v['$blue'] = u['$blue'] || '#0275d8';
+  v['$teal'] = u['$teal'] || '#5bc0de';
+  v['$black'] = u['$black'] || '#000';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+  v['$brand-success'] = u['$brand-success'] || v['$green'];
+  v['$brand-info'] = u['$brand-info'] || v['$teal'];
+  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
+  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray'] = u['$gray'] || '#464a4c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$border-width'] = u['$border-width'] || '1px';
+  v['$spacer'] = u['$spacer'] || '1rem';
+  v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  // Grid columns
+  //
+  // Specify the width of the gutters.
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
+  v['$font-size-xs'] = u['$font-size-xs'] || '.75rem';
+  v['$text-muted'] = u['$text-muted'] || v['$gray-light'];
+  v['$line-height-base'] = u['$line-height-base'] || '1.5';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  // Forms
+
+  v['$input-padding-x'] = u['$input-padding-x'] || '.75rem';
+  v['$input-padding-y'] = u['$input-padding-y'] || '.5rem';
+  v['$input-line-height'] = u['$input-line-height'] || '1.25';
+
+  v['$input-bg'] = u['$input-bg'] || v['$white'];
+  v['$input-bg-disabled'] = u['$input-bg-disabled'] || v['$gray-lighter'];
+
+  v['$input-color'] = u['$input-color'] || v['$gray'];
+  v['$input-border-color'] = u['$input-border-color'] || color(v['$black']).alpha(0.15).toString();
+  v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width']; // For form controls and buttons
+  v['$input-box-shadow'] = u['$input-box-shadow'] || 'inset 0 1px 1px ' + color(v['$black']).alpha(0.075).toString();
+
+  v['$input-border-radius'] = u['$input-border-radius'] || v['$border-radius'];
+  v['$input-border-radius-lg'] = u['$input-border-radius-lg'] || v['$border-radius-lg'];
+  v['$input-border-radius-sm'] = u['$input-border-radius-sm'] || v['$border-radius-sm'];
+
+  v['$input-bg-focus'] = u['$input-bg-focus'] || v['$input-bg'];
+  v['$input-border-focus'] = u['$input-border-focus'] || color(v['$brand-primary']).lighten(0.25).toString();
+  v['$input-box-shadow-focus'] = u['$input-box-shadow-focus'] || v['$input-box-shadow'] + ', 0 0 8px rgba(' + v['$input-border-focus'] + ',.6)';
+  v['$input-color-focus'] = u['$input-color-focus'] || v['$input-color'];
+
+  v['$input-color-placeholder'] = u['$input-color-placeholder'] || v['$gray-light'];
+
+  v['$input-padding-x-sm'] = u['$input-padding-x-sm'] || '.5rem';
+  v['$input-padding-y-sm'] = u['$input-padding-y-sm'] || '.25rem';
+
+  v['$input-padding-x-lg'] = u['$input-padding-x-lg'] || '1.5rem';
+  v['$input-padding-y-lg'] = u['$input-padding-y-lg'] || '.75rem';
+
+  v['$input-height'] = u['$input-height'] || rmUnit$16(v['$font-size-base'], UNIT$15.REM) * v['$line-height-base'] + rmUnit$16(v['$input-padding-y'], UNIT$15.REM) * 2 + UNIT$15.REM;
+  v['$input-height-sm'] = u['$input-height-sm'] || rmUnit$16(v['$font-size-sm'], UNIT$15.REM) * v['$line-height-sm'] + rmUnit$16(v['$input-padding-y-sm'], UNIT$15.REM) * 2 + UNIT$15.REM;
+  v['$input-height-lg'] = u['$input-height-lg'] || rmUnit$16(v['$font-size-lg'], UNIT$15.REM) * v['$line-height-lg'] + rmUnit$16(v['$input-padding-y-lg'], UNIT$15.REM) * 2 + UNIT$15.REM;
+
+  v['$input-transition'] = u['$input-transition'] || 'border-color ease-in-out .15s, box-shadow ease-in-out .15s';
+
+  v['$form-text-margin-top'] = u['$form-text-margin-top'] || '.25rem';
+  v['$form-feedback-margin-top'] = u['$form-feedback-margin-top'] || v['$form-text-margin-top'];
+
+  v['$form-check-margin-bottom'] = u['$form-check-margin-bottom'] || '.5rem';
+  v['$form-check-input-gutter'] = u['$form-check-input-gutter'] || '1.25rem';
+  v['$form-check-input-margin-y'] = u['$form-check-input-margin-y'] || '.25rem';
+  v['$form-check-input-margin-x'] = u['$form-check-input-margin-x'] || '.25rem';
+
+  v['$form-check-inline-margin-x'] = u['$form-check-inline-margin-x'] || '.75rem';
+
+  v['$form-group-margin-bottom'] = u['$form-group-margin-bottom'] || v['$spacer-y'];
+
+  v['$input-group-addon-bg'] = u['$input-group-addon-bg'] || v['$gray-lighter'];
+  v['$input-group-addon-border-color'] = u['$input-group-addon-border-color'] || v['$input-border-color'];
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+
+  v['$custom-control-gutter'] = u['$custom-control-gutter'] || '1.5rem';
+  v['$custom-control-spacer-x'] = u['$custom-control-spacer-x'] || '1rem';
+  v['$custom-control-spacer-y'] = u['$custom-control-spacer-y'] || '.25rem';
+
+  v['$custom-control-indicator-size'] = u['$custom-control-indicator-size'] || '1rem';
+  v['$custom-control-indicator-bg'] = u['$custom-control-indicator-bg'] || '#ddd';
+  v['$custom-control-indicator-bg-size'] = u['$custom-control-indicator-bg-size'] || '50% 50%';
+  v['$custom-control-indicator-box-shadow'] = u['$custom-control-indicator-box-shadow'] || 'inset 0 .25rem .25rem ' + color(v['$black']).alpha(0.1).toString();
+
+  v['$custom-control-disabled-cursor'] = u['$custom-control-disabled-cursor'] || v['$cursor-disabled'];
+  v['$custom-control-disabled-indicator-bg'] = u['$custom-control-disabled-indicator-bg'] || v['$gray-lighter'];
+  v['$custom-control-disabled-description-color'] = u['$custom-control-disabled-description-color'] || v['$gray-light'];
+
+  v['$custom-control-checked-indicator-color'] = u['$custom-control-checked-indicator-color'] || v['$white'];
+  v['$custom-control-checked-indicator-bg'] = u['$custom-control-checked-indicator-bg'] || v['$brand-primary'];
+  v['$custom-control-checked-indicator-box-shadow'] = u['$custom-control-checked-indicator-box-shadow'] || 'none';
+
+  v['$custom-control-focus-indicator-box-shadow'] = u['$custom-control-focus-indicator-box-shadow'] || '0 0 0 1px ' + v['$body-bg'] + ', 0 0 0 3px ' + v['$brand-primary'];
+
+  v['$custom-control-active-indicator-color'] = u['$custom-control-active-indicator-color'] || v['$white'];
+  v['$custom-control-active-indicator-bg'] = u['$custom-control-active-indicator-bg'] || color(v['$brand-primary']).lighten(0.35).toString();
+  v['$custom-control-active-indicator-box-shadow'] = u['$custom-control-active-indicator-box-shadow'] || 'none';
+
+  v['$custom-checkbox-radius'] = u['$custom-checkbox-radius'] || v['$border-radius'];
+  v['$custom-checkbox-checked-icon'] = u['$custom-checkbox-checked-icon'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="' + v['$custom-control-checked-indicator-color'] + '" d="M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z"/%3E%3C/svg%3E\')';
+
+  v['$custom-checkbox-indeterminate-bg'] = u['$custom-checkbox-indeterminate-bg'] || v['$brand-primary'];
+  v['$custom-checkbox-indeterminate-indicator-color'] = u['$custom-checkbox-indeterminate-indicator-color'] || v['$custom-control-checked-indicator-color'];
+  v['$custom-checkbox-indeterminate-icon'] = u['$custom-checkbox-indeterminate-icon'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 4"%3E%3Cpath stroke="' + v['$custom-checkbox-indeterminate-indicator-color'] + '" d="M0 2h4"/%3E%3C/svg%3E\')';
+  v['$custom-checkbox-indeterminate-box-shadow'] = u['$custom-checkbox-indeterminate-box-shadow'] || 'none';
+
+  v['$custom-radio-radius'] = u['$custom-radio-radius'] || '50%';
+  v['$custom-radio-checked-icon'] = u['$custom-radio-checked-icon'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"%3E%3Ccircle r="3" fill="' + v['$custom-control-checked-indicator-color'] + '"/%3E%3C/svg%3E\')';
+
+  v['$custom-select-padding-x'] = u['$custom-select-padding-x'] || '.75rem ';
+  v['$custom-select-padding-y'] = u['$custom-select-padding-y'] || '.375rem';
+  v['$custom-select-indicator-padding'] = u['$custom-select-indicator-padding'] || '1rem'; // Extra padding to account for the presence of the background-image based indicator
+  v['$custom-select-line-height'] = u['$custom-select-line-height'] || v['$input-line-height'];
+  v['$custom-select-color'] = u['$custom-select-color'] || v['$input-color'];
+  v['$custom-select-disabled-color'] = u['$custom-select-disabled-color'] || v['$gray-light'];
+  v['$custom-select-bg'] = u['$custom-select-bg'] || v['$white'];
+  v['$custom-select-disabled-bg'] = u['$custom-select-disabled-bg'] || v['$gray-lighter'];
+  v['$custom-select-bg-size'] = u['$custom-select-bg-size'] || '8px 10px'; // In pixels because image dimensions
+  v['$custom-select-indicator-color'] = u['$custom-select-indicator-color'] || '#333';
+  v['$custom-select-indicator'] = u['$custom-select-indicator'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"%3E%3Cpath fill="' + v['$custom-select-indicator-color'] + '" d="M2 0L0 2h4zm0 5L0 3h4z"/%3E%3C/svg%3E\')';
+  v['$custom-select-border-width'] = u['$custom-select-border-width'] || v['$input-btn-border-width'];
+  v['$custom-select-border-color'] = u['$custom-select-border-color'] || v['$input-border-color'];
+  v['$custom-select-border-radius'] = u['$custom-select-border-radius'] || v['$border-radius'];
+
+  v['$custom-select-focus-border-color'] = u['$custom-select-focus-border-color'] || color(v['$brand-primary']).lighten(0.25).toString();
+  v['$custom-select-focus-box-shadow'] = u['$custom-select-focus-box-shadow'] || 'inset 0 1px 2px ' + color(v['$black']).alpha(0.75).toString() + ', 0 0 5px rgba(' + v['$custom-select-focus-border-color'] + ', .5)';
+
+  v['$custom-select-sm-font-size'] = u['$custom-select-sm-font-size'] || '75%';
+
+  v['$custom-file-height'] = u['$custom-file-height'] || '2.5rem';
+  v['$custom-file-width'] = u['$custom-file-width'] || '14rem';
+  v['$custom-file-focus-box-shadow'] = u['$custom-file-focus-box-shadow'] || '0 0 0 .075rem ' + v['$white'] + ', 0 0 0 .2rem ' + v['$brand-primary'];
+
+  v['$custom-file-padding-x'] = u['$custom-file-padding-x'] || '.5rem';
+  v['$custom-file-padding-y'] = u['$custom-file-padding-y'] || '1rem';
+  v['$custom-file-line-height'] = u['$custom-file-line-height'] || '1.5';
+  v['$custom-file-color'] = u['$custom-file-color'] || v['$gray'];
+  v['$custom-file-bg'] = u['$custom-file-bg'] || v['$white'];
+  v['$custom-file-border-width'] = u['$custom-file-border-width'] || v['$border-width'];
+  v['$custom-file-border-color'] = u['$custom-file-border-color'] || v['$input-border-color'];
+  v['$custom-file-border-radius'] = u['$custom-file-border-radius'] || v['$border-radius'];
+  v['$custom-file-box-shadow'] = u['$custom-file-box-shadow'] || 'inset 0 .2rem .4rem ' + color(v['$black']).alpha(0.05).toString();
+  v['$custom-file-button-color'] = u['$custom-file-button-color'] || v['$custom-file-color'];
+  v['$custom-file-button-bg'] = u['$custom-file-button-bg'] || v['$gray-lighter'];
+  v['$custom-file-text'] = u['$custom-file-text'] || {
+    placeholder: {
+      en: 'Choose file...'
+    },
+    'button-label': {
+      en: 'Browse'
+    }
+  };
+
+  // Form validation icons*
+  v['$form-icon-success-color'] = u['$form-icon-success-color'] || v['$brand-success'];
+  v['$form-icon-success'] = u['$form-icon-success'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="' + v['$form-icon-success-color'] + '" d="M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z"/%3E%3C/svg%3E\')';
+
+  v['$form-icon-warning-color'] = u['$form-icon-warning-color'] || v['$brand-warning'];
+  v['$form-icon-warning'] = u['$form-icon-warning'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="' + v['$form-icon-warning-color'] + '" d="M4.4 5.324h-.8v-2.46h.8zm0 1.42h-.8V5.89h.8zM3.76.63L.04 7.075c-.115.2.016.425.26.426h7.397c.242 0 .372-.226.258-.426C6.726 4.924 5.47 2.79 4.253.63c-.113-.174-.39-.174-.494 0z"/%3E%3C/svg%3E\')';
+
+  v['$form-icon-danger-color'] = u['$form-icon-danger-color'] || v['$brand-danger'];
+  v['$form-icon-danger'] = u['$form-icon-danger'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="' + v['$form-icon-danger-color'] + '" viewBox="-2 -2 7 7"%3E%3Cpath stroke="%23d9534f" d="M0 0l3 3m0-3L0 3"/%3E%3Ccircle r=".5"/%3E%3Ccircle cx="3" r=".5"/%3E%3Ccircle cy="3" r=".5"/%3E%3Ccircle cx="3" cy="3" r=".5"/%3E%3C/svg%3E\')';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$48();
+
 /* eslint-disable quote-props, dot-notation */
 /**
  * Form Component test
  *
  *
  */
-var defaultProps$85 = {
-  theme: bsTheme,
-  tag: 'form'
-};
-
 var FormUnstyled = function (_React$Component) {
   inherits(FormUnstyled, _React$Component);
 
@@ -17762,6 +21427,8 @@ var FormUnstyled = function (_React$Component) {
 
   createClass(FormUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -17774,12 +21441,15 @@ var FormUnstyled = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, inline ? 'form-inline' : false), cssModule);
 
       return React.createElement(Tag, _extends({ ref: getRef, className: classes }, rest));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return FormUnstyled;
 }(React.Component);
 
+FormUnstyled.defaultProps = {
+  tag: 'form',
+  theme: makeTheme$48()
+};
 FormUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   children: PropTypes.node,
@@ -17799,18 +21469,12 @@ var Form = styled(FormUnstyled).withConfig({
   return '\n    /*\n     Textual form controls\n    */\n\n    ' + forms_2(props.theme['$enable-rounded'], props.theme['$enable-transitions'], props.theme['$enable-shadows'], props.theme['$input-height'], props.theme['$input-padding-y'], props.theme['$input-padding-x'], props.theme['$font-size-base'], props.theme['$input-line-height'], props.theme['$input-color'], props.theme['$input-bg'], props.theme['$input-border-radius'], props.theme['$input-btn-border-width'], props.theme['$input-border-color'], props.theme['$input-transition'], props.theme['$input-box-shadow'], props.theme['$input-color-focus'], props.theme['$input-bg-focus'], props.theme['$input-border-focus'], props.theme['$input-box-shadow-focus'], props.theme['$input-color-placeholder'], props.theme['$input-bg-disabled'], props.theme['$cursor-disabled']) + '\n    \n    select.form-control {\n      &:focus::-ms-value {\n        /* Suppress the nested default white text on blue background highlight given to\n         the selected option text when the (still closed) <select> receives focus\n         in IE and (under certain conditions) Edge, as it looks bad and cannot be made to\n         match the appearance of the native widget.\n         See https://github.com/twbs/bootstrap/issues/19398.\n         */\n        color: ' + props.theme['$input-color'] + ';\n        background-color: ' + props.theme['$input-bg'] + ';\n      }\n    }\n\n    /* Make file inputs better match text inputs by forcing them to new lines. */\n    & .form-control-file,\n    .form-control-range {\n      display: block;\n    }\n\n    /*\n     Labels\n    */\n\n    /* For use with horizontal and inline forms, when you need the label text to */\n    /* align with the form controls. */\n    & .col-form-label {\n      padding-top: calc(' + props.theme['$input-padding-y'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      margin-bottom: 0; /* Override the \'<label>\' default */\n    }\n\n    & .col-form-label-lg {\n      padding-top: calc(' + props.theme['$input-padding-y-lg'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y-lg'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      font-size: ' + props.theme['$font-size-lg'] + ';\n    }\n\n    & .col-form-label-sm {\n      padding-top: calc(' + props.theme['$input-padding-y-sm'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y-sm'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      font-size: ' + props.theme['$font-size-sm'] + ';\n    }\n\n    /*\n     Legends\n    */\n\n    /* For use with horizontal and inline forms, when you need the legend text to */\n    /* be the same size as regular labels, and to align with the form controls. */\n    & .col-form-legend {\n      padding-top: ' + props.theme['$input-padding-y'] + ';\n      padding-bottom: ' + props.theme['$input-padding-y'] + ';\n      margin-bottom: 0;\n      font-size: ' + props.theme['$font-size-base'] + ';\n    }\n\n\n    /* Static form control text\n\n     Apply class to an element to make any string of text align with labels in a\n     horizontal form layout.\n    */\n\n    & .form-control-static {\n      padding-top: ' + props.theme['$input-padding-y'] + ';\n      padding-bottom: ' + props.theme['$input-padding-y'] + ';\n      margin-bottom: 0; /* match inputs if this class comes on inputs with default margins */\n      line-height: ' + props.theme['$input-line-height'] + ';\n      border: solid transparent;\n      border-width: ' + props.theme['$input-btn-border-width'] + ' 0;\n\n      &.form-control-sm,\n      &.form-control-lg {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n\n\n    /* Form control sizing\n\n     Build on .form-control with modifier classes to decrease or increase the\n     height and font-size of form controls.\n\n     The .form-group-* form-control variations are sadly duplicated to avoid the\n     issue documented in https://github.com/twbs/bootstrap/issues/15074.\n    */\n\n    & .form-control-sm {\n      padding: ' + props.theme['$input-padding-y-sm'] + ' ' + props.theme['$input-padding-x-sm'] + ';\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-sm']) + '\n    }\n\n    select.form-control-sm {\n      &:not([size]):not([multiple]) {\n        height: ' + props.theme['$input-height-sm'] + ';\n      }\n    }\n\n    & .form-control-lg {\n      padding: ' + props.theme['$input-padding-y-lg'] + ' ' + props.theme['$input-padding-x-lg'] + ';\n      font-size: ' + props.theme['$font-size-lg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-lg']) + '\n    }\n\n    select.form-control-lg {\n      &:not([size]):not([multiple]) {\n        height: ' + props.theme['$input-height-lg'] + ';\n      }\n    }\n\n\n    /* Form groups Designed to help with the organization and spacing of vertical forms. For horizontal forms, use the predefined grid classes. */\n\n    &.form-group,\n     & .form-group {\n      margin-bottom: ' + props.theme['$form-group-margin-bottom'] + ';\n    }\n\n    & .form-text {\n      display: block;\n      margin-top: ' + props.theme['$form-text-margin-top'] + '\n    }\n\n\n    /* Checkboxes and radios Indent the labels to position radios/checkboxes as hanging controls. */\n\n    & .form-check {\n      position: relative;\n      display: block;\n      margin-bottom: ' + props.theme['$form-check-margin-bottom'] + ';\n\n      &.disabled {\n        .form-check-label {\n          color: ' + props.theme['$text-muted'] + ';\n          cursor: ' + props.theme['$cursor-disabled'] + ';\n        }\n      }\n    }\n\n    & .form-check-label {\n      padding-left: ' + props.theme['$form-check-input-gutter'] + ';\n      margin-bottom: 0; /* Override default <label> bottom margin */\n      cursor: pointer;\n    }\n\n    & .form-check-input {\n      position: absolute;\n      margin-top: ' + props.theme['$form-check-input-margin-y'] + ';\n      margin-left: -' + props.theme['$form-check-input-gutter'] + ';\n\n      &:only-child {\n        position: static;\n      }\n    }\n\n    /* Radios and checkboxes on same line */\n    & .form-check-inline {\n      display: inline-block;\n      .form-check-label {\n        vertical-align: middle;\n      }\n\n      + .form-check-inline {\n        margin-left: ' + props.theme['$form-check-inline-margin-x'] + ';\n      }\n\n      &.disabled {\n        color: ' + props.theme['$text-muted'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n      }\n    }\n\n\n    /* Form control feedback states Apply contextual and semantic states to individual form controls. */\n    & .form-control-feedback {\n      margin-top: ' + props.theme['$form-feedback-margin-top'] + ';\n    }\n\n    & .form-control-success,\n    & .form-control-warning,\n    & .form-control-danger {\n      padding-right: ' + unitUtils$1.math.multiply(props.theme['$input-padding-x'], 3) + ';\n      background-repeat: no-repeat;\n      background-position: center right ' + unitUtils$1.math.divide(props.theme['$input-height'], 4) + ';\n      background-size: ' + unitUtils$1.math.divide(props.theme['$input-height'], 2) + ' ' + unitUtils$1.math.divide(props.theme['$input-height'], 2) + ';\n    }\n\n    /* Form validation states */\n    & .has-success {\n      ' + forms_3(props.theme['$enable-shadows'], props.theme['$brand-success'], props.theme['$box-shadow']) + '\n\n      .form-control-success {\n        background-image: ' + props.theme['$form-icon-success'] + ';\n      }\n    }\n\n    & .has-warning {\n      ' + forms_3(props.theme['$enable-shadows'], props.theme['$brand-warning'], props.theme['$box-shadow']) + '\n\n      .form-control-warning {\n        background-image: ' + props.theme['$form-icon-warning'] + ';\n      }\n    }\n\n    & .has-danger {\n      ' + forms_3(props.theme['$enable-shadows'], props.theme['$brand-danger'], props.theme['$box-shadow']) + '\n\n      .form-control-danger {\n        background-image: ' + props.theme['$form-icon-danger'] + ';\n      }\n    }\n\n\n    /* Inline forms\n\n     Make forms appear inline(-block) by adding the .form-inline class. Inline\n     forms begin stacked on extra small (mobile) devices and then go inline when\n     viewports reach <768px.\n\n     Requires wrapping inputs and labels with .form-group for proper display of\n     default HTML form controls and our custom form controls (e.g., input groups).\n    */\n\n    &.form-inline {\n      display: flex;\n      flex-flow: row wrap;\n      align-items: center; /* Prevent shorter elements from growing to same height as others (e.g., small buttons growing to normal sized button height) */\n\n      & .form-check {\n         width: 100%;\n      }\n\n      /* Kick in the inline */\n      ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n          label {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            margin-bottom: 0;\n          }\n          \n          /* Inline-block all the things for inline */\n          & .form-group {\n            display: flex;\n            flex: 0 0 auto;\n            flex-flow: row wrap;\n            margin-bottom: 0;\n          }\n      \n          /* Allow folks to *not* use .form-group */\n          & .form-control {\n            display: inline-block;\n            width: auto; /* Prevent labels from stacking above inputs in .form-group */\n            vertical-align: middle;\n          }\n      \n          /* Make static controls behave like regular ones */\n          & .form-control-static {\n            display: inline-block;\n          }\n      \n          & .input-group {\n            width: auto;\n          }\n          \n          & .form-control-label {\n             margin-bottom: 0;\n            vertical-align: middle;\n          }\n      \n          /* Remove default margin on radios/checkboxes that were used for stacking, and */\n          /*  then undo the floating of radios and checkboxes to match. */\n          & .form-check {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            width: auto;\n            margin-top: 0;\n            margin-bottom: 0;\n          }\n          & .form-check-label {\n            padding-left: 0;\n          }\n          & .form-check-input {\n            position: relative;\n            margin-left: 0;\n            margin-top: 0;\n            margin-right: ' + props.theme['$form-check-input-margin-x'] + ';\n          }\n          \n          /* Custom form controls */\n          & .custom-control {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            padding-left: 0;\n          }\n          \n          & .custom-control-indicator {\n            position: static;\n            display: inline-block;\n            margin-right: ' + props.theme['$form-check-input-margin-x'] + '; /* Flexbox alignment means we lose our HTML space here, so we compensate. */\n            vertical-align: text-bottom;\n          }\n          \n          /* Re-override the feedback icon. */\n          & .has-feedback .form-control-feedback {\n            top: 0;\n          }\n        ') + '\n    }\n    ' + customForms_3(props.theme['$enable-rounded'], props.theme['$enable-shadows'], props.theme['$custom-control-checked-indicator-box-shadow'], props.theme['$custom-control-active-indicator-box-shadow'], props.theme['$custom-control-indicator-box-shadow'], props.theme['$custom-checkbox-indeterminate-box-shadow'], props.theme['$custom-select-focus-box-shadow'], props.theme['$custom-file-focus-box-shadow'], props.theme['$custom-file-box-shadow'], props.theme['$custom-select-border-radius'], props.theme['$custom-file-border-radius'], props.theme['$custom-checkbox-radius'], props.theme['$input-bg'], props.theme['$custom-select-line-height'], props.theme['$line-height-base'], props.theme['$custom-control-gutter'], props.theme['$custom-control-spacer-x'], props.theme['$custom-control-checked-indicator-color'], props.theme['$custom-control-checked-indicator-bg'], props.theme['$custom-control-focus-indicator-box-shadow'], props.theme['$custom-control-active-indicator-color'], props.theme['$custom-control-active-indicator-bg'], props.theme['$custom-control-disabled-cursor'], props.theme['$custom-control-disabled-indicator-bg'], props.theme['$custom-control-disabled-description-color'], props.theme['$custom-control-indicator-size'], props.theme['$custom-control-indicator-bg'], props.theme['$custom-control-indicator-bg-size'], props.theme['$custom-checkbox-checked-icon'], props.theme['$custom-checkbox-indeterminate-bg'], props.theme['$custom-checkbox-indeterminate-icon'], props.theme['$custom-radio-radius'], props.theme['$custom-radio-checked-icon'], props.theme['$custom-control-spacer-y'], props.theme['$border-width'], props.theme['$input-height'], props.theme['$custom-select-padding-y'], props.theme['$custom-select-padding-x'], props.theme['$custom-select-indicator-padding'], props.theme['$custom-select-color'], props.theme['$custom-select-bg'], props.theme['$custom-select-indicator'], props.theme['$custom-select-bg-size'], props.theme['$custom-select-border-width'], props.theme['$custom-select-border-color'], props.theme['$custom-select-focus-border-color'], props.theme['$input-color'], props.theme['$custom-select-disabled-color'], props.theme['$cursor-disabled'], props.theme['$custom-select-disabled-bg'], props.theme['$custom-select-sm-font-size'], props.theme['$custom-file-width'], props.theme['$custom-file-height'], props.theme['$custom-file-padding-x'], props.theme['$custom-file-padding-y'], props.theme['$custom-file-line-height'], props.theme['$custom-file-color'], props.theme['$custom-file-bg'], props.theme['$custom-file-border-width'], props.theme['$custom-file-border-color'], props.theme['$custom-file-button-color'], props.theme['$custom-file-button-bg'], props.theme['$custom-file-text']) + '\n    & .row {\n      ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n  ';
 });
 
-Form.defaultProps = defaultProps$85;
-
 /* eslint-disable quote-props, dot-notation */
 /**
  * Form Group Component test
  *
  *
  */
-var defaultProps$86 = {
-  tag: 'div'
-};
-
 var FormGroup = function (_React$Component) {
   inherits(FormGroup, _React$Component);
 
@@ -17821,6 +21485,8 @@ var FormGroup = function (_React$Component) {
 
   createClass(FormGroup, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -17837,26 +21503,25 @@ var FormGroup = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, color ? 'has-' + color : false, row ? 'row' : false, check ? 'form-check' : 'form-group', check && disabled ? 'disabled' : false, inline ? 'form-check-inline' : false), cssModule);
 
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return FormGroup;
 }(React.Component);
 
+FormGroup.defaultProps = {
+  tag: 'div'
+};
 FormGroup.propTypes = {
-  inline: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
-  cssModule: PropTypes.object,
-  disabled: PropTypes.bool,
   check: PropTypes.bool,
   color: PropTypes.string,
-  row: PropTypes.bool
+  cssModule: PropTypes.object,
+  disabled: PropTypes.bool,
+  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  inline: PropTypes.bool,
+  row: PropTypes.bool,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
-
-
-FormGroup.defaultProps = defaultProps$86;
 
 /* eslint-disable quote-props, dot-notation */
 /**
@@ -17864,10 +21529,6 @@ FormGroup.defaultProps = defaultProps$86;
  *
  *
  */
-var defaultProps$87 = {
-  tag: 'small'
-};
-
 var FormText = function (_React$Component) {
   inherits(FormText, _React$Component);
 
@@ -17878,6 +21539,8 @@ var FormText = function (_React$Component) {
 
   createClass(FormText, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -17891,12 +21554,14 @@ var FormText = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, !inline ? 'form-text' : false, color ? 'text-' + color : false), cssModule);
 
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return FormText;
 }(React.Component);
 
+FormText.defaultProps = {
+  tag: 'small'
+};
 FormText.propTypes = {
   children: PropTypes.node,
   inline: PropTypes.bool,
@@ -17906,19 +21571,12 @@ FormText.propTypes = {
   cssModule: PropTypes.object
 };
 
-
-FormText.defaultProps = defaultProps$87;
-
 /* eslint-disable quote-props, dot-notation */
 /**
  * Form Feedback Component test
  *
  *
  */
-var defaultProps$88 = {
-  tag: 'div'
-};
-
 var FormFeedback = function (_React$Component) {
   inherits(FormFeedback, _React$Component);
 
@@ -17929,6 +21587,8 @@ var FormFeedback = function (_React$Component) {
 
   createClass(FormFeedback, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -17940,21 +21600,20 @@ var FormFeedback = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, 'form-control-feedback'), cssModule);
 
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return FormFeedback;
 }(React.Component);
 
+FormFeedback.defaultProps = {
+  tag: 'div'
+};
 FormFeedback.propTypes = {
   children: PropTypes.node,
-  tag: PropTypes.string,
   className: PropTypes.string,
-  cssModule: PropTypes.object
+  cssModule: PropTypes.object,
+  tag: PropTypes.string
 };
-
-
-FormFeedback.defaultProps = defaultProps$88;
 
 /* eslint-disable quote-props, dot-notation */
 /**
@@ -17978,12 +21637,14 @@ var FormCustom = function (_React$Component) {
           cssModule = _props.cssModule,
           radio = _props.radio,
           children = _props.children,
-          attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'radio', 'children']);
+          checked = _props.checked,
+          defaultChecked = _props.defaultChecked,
+          attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'radio', 'children', 'checked', 'defaultChecked']);
 
 
       var classes = mapToCssModules(classnames(className, 'custom-control', radio ? 'custom-radio' : 'custom-checkbox'), cssModule);
 
-      var CustomInput = radio ? React.createElement(Input, { type: 'radio', id: radio.id, name: radio.name, className: 'custom-control-input' }) : React.createElement(Input, { type: 'checkbox', className: 'custom-control-input' });
+      var CustomInput = radio ? React.createElement(Input, { defaultChecked: defaultChecked, checked: checked, type: 'radio', id: radio.id, name: radio.name, className: 'custom-control-input' }) : React.createElement(Input, { defaultChecked: defaultChecked, checked: checked, type: 'checkbox', className: 'custom-control-input' });
       return React.createElement(
         Label,
         _extends({ className: classes }, attributes),
@@ -18008,21 +21669,166 @@ FormCustom.propTypes = {
   radio: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string
-  })
+  }),
+  defaultChecked: PropTypes.bool,
+  checked: PropTypes.bool
 };
 
 /*
  * Kopax Ltd Copyright (c) 2016.
  */
 
-/* eslint-disable */
-var defaultProps$89 = {
-  tag: 'nav',
-  role: 'navigation',
-  toggleable: false,
-  theme: bsTheme
+var rmUnit$17 = unitUtils$1.rmUnit;
+var UNIT$16 = unitUtils$1.UNIT;
+
+/**
+ * BOOTSTRAP THEME NAVBAR
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$49 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray'] = u['$gray'] || '#464a4c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Spacing
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // =============================================================================================================
+  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$17(v['$spacer'], UNIT$16.REM) / 2 + UNIT$16.REM;
+  // =============================================================================================================
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-bg'] = u['$body-bg'] || v['$white'];
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
+  v['$component-active-color'] = u['$component-active-color'] || v['$white'];
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Navbar
+
+  v['$navbar-padding-x'] = u['$navbar-padding-x'] || v['$spacer'];
+  v['$navbar-padding-y'] = u['$navbar-padding-y'] || v['$spacer-halved'];
+
+  // Navs
+
+  v['$nav-link-padding'] = u['$nav-link-padding'] || '.5em 1em';
+  v['$nav-disabled-link-color'] = u['$nav-disabled-link-color'] || v['$gray-light'];
+
+  v['$nav-tabs-border-color'] = u['$nav-tabs-border-color'] || '#ddd';
+  v['$nav-tabs-border-width'] = u['$nav-tabs-border-width'] || v['$border-width'];
+  v['$nav-tabs-border-radius'] = u['$nav-tabs-border-radius'] || v['$border-radius'];
+  v['$nav-tabs-link-hover-border-color'] = u['$nav-tabs-link-hover-border-color'] || v['$gray-lighter'];
+  v['$nav-tabs-active-link-hover-color'] = u['$nav-tabs-active-link-hover-color'] || v['$gray'];
+  v['$nav-tabs-active-link-hover-bg'] = u['$nav-tabs-active-link-hover-bg'] || v['$body-bg'];
+  v['$nav-tabs-active-link-hover-border-color'] = u['$nav-tabs-active-link-hover-border-color'] || '#ddd';
+
+  v['$nav-pills-border-radius'] = u['$nav-pills-border-radius'] || v['$border-radius'];
+  v['$nav-pills-active-link-color'] = u['$nav-pills-active-link-color'] || v['$component-active-color'];
+  v['$nav-pills-active-link-bg'] = u['$nav-pills-active-link-bg'] || v['$component-active-bg'];
+
+  // Forms
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+
+  // Mixin navbar
+  //
+  // From module bootstrap-styled-mixins: https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins/blob/master/src/navbar.js
+
+  v['$zindex-navbar'] = u['$zindex-navbar'] || '1000';
+  v['$zindex-navbar-fixed'] = u['$zindex-navbar-fixed'] || '1030';
+  v['$zindex-navbar-sticky'] = u['$zindex-navbar-sticky'] || '1030';
+  v['$navbar-brand-padding-y'] = u['$navbar-brand-padding-y'] || '.25rem';
+
+  v['$navbar-divider-padding-y'] = u['$navbar-brand-padding-y'] || '.425rem';
+  v['$navbar-toggler-padding-y'] = u['$navbar-toggler-padding-y'] || '.5rem';
+  v['$navbar-toggler-padding-x'] = u['$navbar-toggler-padding-x'] || '.75rem';
+  v['$navbar-toggler-font-size'] = u['$navbar-toggler-font-size'] || '1.25rem';
+
+  v['$navbar-toggler-border-radius'] = u['$navbar-toggler-border-radius'] || '.25rem';
+  v['$navbar-light-active-color'] = u['$navbar-light-active-color'] || 'rgba(0,0,0,.9)';
+  v['$navbar-light-color'] = u['$navbar-light-color'] || 'rgba(0,0,0,.5)';
+  v['$navbar-light-hover-color'] = u['$navbar-light-hover-color'] || 'rgba(0,0,0,.7)';
+  v['$navbar-light-toggler-border'] = u['$navbar-light-toggler-border'] || 'rgba(0,0,0,.1)';
+  v['$navbar-light-disabled-color'] = u['$navbar-light-disabled-color'] || 'rgba(0, 0, 0, 0.3)';
+  v['$navbar-light-toggler-bg'] = u['$navbar-light-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(0,0,0,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-active-color'] = u['$navbar-inverse-active-color'] || 'rgba(255,255,255,1)';
+  v['$navbar-inverse-color'] = u['$navbar-inverse-color'] || 'rgba(255,255,255,.5)';
+  v['$navbar-inverse-hover-color'] = u['$navbar-inverse-hover-color'] || 'rgba(255,255,255,.75)';
+  v['$navbar-inverse-toggler-border'] = u['$navbar-inverse-toggler-border'] || 'rgba(255,255,255,.1)';
+  v['$navbar-inverse-toggler-bg'] = u['$navbar-inverse-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-disabled-color'] = u['$navbar-inverse-disabled-color'] || 'rgba(255, 255, 255, 0.25)';
+
+  return Object.assign({}, u, v);
 };
 
+makeTheme$49();
+
+/* eslint-disable */
 var getToggleableClass = function getToggleableClass(toggleable) {
   // eslint-disable-line react/prefer-stateless-function
   if (toggleable === false) {
@@ -18071,6 +21877,12 @@ var NavbarUnstyled = function (_React$Component) {
   return NavbarUnstyled;
 }(React.Component);
 
+NavbarUnstyled.defaultProps = {
+  tag: 'nav',
+  role: 'navigation',
+  toggleable: false,
+  theme: makeTheme$49()
+};
 NavbarUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   light: PropTypes.bool,
@@ -18094,7 +21906,6 @@ var Navbar = styled(NavbarUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + nav_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n  ';
 });
-Navbar.defaultProps = defaultProps$89;
 
 var propTypes$8 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -18102,7 +21913,7 @@ var propTypes$8 = {
   cssModule: PropTypes.object
 };
 
-var defaultProps$90 = {
+var defaultProps$14 = {
   tag: 'a'
 };
 
@@ -18119,7 +21930,7 @@ var NavbarBrand = function NavbarBrand(props) {
 };
 
 NavbarBrand.propTypes = propTypes$8;
-NavbarBrand.defaultProps = defaultProps$90;
+NavbarBrand.defaultProps = defaultProps$14;
 
 var propTypes$9 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -18131,7 +21942,7 @@ var propTypes$9 = {
   left: PropTypes.bool
 };
 
-var defaultProps$91 = {
+var defaultProps$15 = {
   tag: 'button',
   type: 'button'
 };
@@ -18158,7 +21969,7 @@ var NavbarToggler = function NavbarToggler(props) {
 };
 
 NavbarToggler.propTypes = propTypes$9;
-NavbarToggler.defaultProps = defaultProps$91;
+NavbarToggler.defaultProps = defaultProps$15;
 
 var propTypes$10 = {
   children: PropTypes.node,
@@ -18169,7 +21980,7 @@ var propTypes$10 = {
   isOpen: PropTypes.bool.isRequired
 };
 
-var defaultProps$92 = {
+var defaultProps$16 = {
   tag: 'li'
 };
 
@@ -18186,11 +21997,60 @@ var NavDropdown = function NavDropdown(props) {
 };
 
 NavDropdown.propTypes = propTypes$10;
-NavDropdown.defaultProps = defaultProps$92;
+NavDropdown.defaultProps = defaultProps$16;
 
-var defaultProps$93 = {
-  theme: bsTheme
+/**
+ * BOOTSTRAP THEME CONTAINER
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$50 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Grid columns
+  //
+  // Set the number of columns and specify the width of the gutters.
+
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
+
+  // Grid containers
+  //
+  // Define the maximum width of `.container` for different screen sizes.
+
+  v['$container-max-widths'] = u['$container-max-widths'] || {
+    sm: '540px',
+    md: '720px',
+    lg: '960px',
+    xl: '1140px'
+  };
+  variables_1(v['$container-max-widths'], '$container-max-widths');
+
+  return Object.assign({}, u, v);
 };
+
+makeTheme$50();
 
 var ContainerUnstyled = function (_React$Component) {
   inherits(ContainerUnstyled, _React$Component);
@@ -18202,18 +22062,22 @@ var ContainerUnstyled = function (_React$Component) {
 
   createClass(ContainerUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
 
       return React.createElement('div', _extends({ className: classnames(className, 'container') }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ContainerUnstyled;
 }(React.Component);
 
+ContainerUnstyled.defaultProps = {
+  theme: makeTheme$50()
+};
 ContainerUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -18228,11 +22092,45 @@ var Container = styled(ContainerUnstyled).withConfig({
   return '\n    ' + grid_2(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    \n    ' + grid_3(props.theme['$enable-grid-classes'], props.theme['$container-max-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
 
-Container.defaultProps = defaultProps$93;
+/**
+ * BOOTSTRAP THEME CONTAINERFLUID
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$51 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-var defaultProps$94 = {
-  theme: bsTheme
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Grid columns
+  //
+  // Set the number of columns and specify the width of the gutters.
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
+
+  return Object.assign({}, u, v);
 };
+
+makeTheme$51();
 
 var ContainerFluidUnstyled = function (_React$Component) {
   inherits(ContainerFluidUnstyled, _React$Component);
@@ -18244,18 +22142,22 @@ var ContainerFluidUnstyled = function (_React$Component) {
 
   createClass(ContainerFluidUnstyled, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           attributes = objectWithoutProperties(_omit, ['className']);
 
       return React.createElement('div', _extends({ className: classnames(className, 'container-fluid') }, attributes));
-    } // eslint-disable-line react/prefer-stateless-function
-
+    }
   }]);
   return ContainerFluidUnstyled;
 }(React.Component);
 
+ContainerFluidUnstyled.defaultProps = {
+  theme: makeTheme$51()
+};
 ContainerFluidUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   className: PropTypes.string,
@@ -18270,9 +22172,7 @@ var ContainerFluid = styled(ContainerFluidUnstyled).withConfig({
   return '\n    ' + grid_2(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n  ';
 });
 
-ContainerFluid.defaultProps = defaultProps$94;
-
 // 0. Configuration
 
-export { bsTheme as theme, makeTheme$$1 as makeTheme, A, composeLink, Abbr, Address, index as Alert, Area, Article, Blockquote, BootstrapProvider, Breadcrumb, BreadcrumbItem, Button, ButtonDropdown, ButtonGroup, ButtonToolbar, Caption, Close, Code, Col, Collapse, Dd, Dfn, Details, Dl, Dt, index$1 as Fade, Fa, FaStacked, Fieldset, Footer, H1, H2, H3, H4, H5, H6, Header, Hr, Img, Figure, FigCaption, Input, InputGroup, InputGroupAddon, InputGroupButton, IssueIcon, Kbd, Jumbotron, Label, Legend, Li, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemHeading$2 as ListGroupItemText, Map$1 as Map, Mark, Media, Modal, ModalBody, ModalFooter, ModalHeader, Nav, NavLink, NavItem, Ol, Option, Output, P, Pagination, PaginationItem, PaginationLink, Pre, Progress, ProgressBar, Row, Samp, Section, Select, Small, Strong, Summary, Sub, Sup, Table, Tbody, Tfoot, Thead, Td, Th, Tr, Badge, Textarea, Tooltip, Ul, Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote, Accordion, AccordionGroup, Form, FormGroup, FormText, FormFeedback, FormCustom, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Navbar, NavbarToggler, NavbarBrand, NavDropdown, Container, ContainerFluid, reboot_1 as getGlobalStyles, reboot_2 as getGlobalStyleNoBootstrapProvider };
+export { bsTheme as theme, makeTheme$$1 as makeTheme, A, composeLink, Abbr, Address, index as Alert, Area, Article, Blockquote, BootstrapProvider, Breadcrumb, BreadcrumbItem, Button, ButtonDropdown, ButtonGroup, ButtonToolbar, Caption, Close, Code, Col, Collapse, Dd, Dfn, Details, Dl, Dt, Fa, FaStacked, Fieldset, Footer, H1, H2, H3, H4, H5, H6, Header, Hr, Img, Figure, FigCaption, Input, InputGroup, InputGroupAddon, InputGroupButton, IssueIcon, Kbd, Jumbotron, Label, Legend, Li, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemHeading$2 as ListGroupItemText, Map$1 as Map, Mark, Media, Modal, ModalBody, ModalFooter, ModalHeader, Nav, NavLink, NavItem, Ol, Option, Output, P, Pagination, PaginationItem, PaginationLink, Pre, Progress, ProgressBar, Row, Samp, Section, Select, Small, Strong, Summary, Sub, Sup, Table, Tbody, Tfoot, Thead, Td, Th, Tr, Badge, Textarea, Tooltip, Ul, Card, CardBlock, CardFooter, CardHeader, CardImg, CardImgOverlay, CardLink, CardSubtitle, CardText, CardTitle, CardColumns, CardDeck, CardGroup, CardBlockquote, Accordion, AccordionGroup, Form, FormGroup, FormText, FormFeedback, FormCustom, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Navbar, NavbarToggler, NavbarBrand, NavDropdown, Container, ContainerFluid, reboot_1 as getGlobalStyles, reboot_2 as getGlobalStyleNoBootstrapProvider };
 //# sourceMappingURL=bootstrap-styled.es.js.map

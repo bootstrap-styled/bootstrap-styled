@@ -15,19 +15,14 @@ import { navDivider } from 'bootstrap-styled-mixins/lib/nav-divider';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
 import { buttonGroup } from 'bootstrap-styled-mixins/lib/buttonGroup';
 import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
-import bsTheme from '../theme';
+import { makeTheme } from './theme';
 import DropdownMenu from './DropdownMenu';
 import TetherContent from '../TetherContent';
 
-const defaultProps = {
-  isOpen: false,
-  tag: 'div',
-  theme: bsTheme,
-};
 
 const defaultTetherConfig = {
-  classPrefix: 'bs-tether',
   classes: { element: 'dropdown', enabled: 'show' },
+  classPrefix: 'bs-tether',
   constraints: [
     { to: 'scrollParent', attachment: 'together none' },
     { to: 'window', attachment: 'together none' },
@@ -36,7 +31,16 @@ const defaultTetherConfig = {
 
 class DropdownUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
+  static defaultProps = {
+    isOpen: false,
+    tag: 'div',
+    theme: makeTheme(),
+  };
+
   static propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
+    cssModule: PropTypes.object,
     disabled: PropTypes.bool,
     dropup: PropTypes.bool,
     group: PropTypes.bool,
@@ -45,21 +49,18 @@ class DropdownUnstyled extends React.Component { // eslint-disable-line react/pr
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     tether: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
     toggle: PropTypes.func,
-    children: PropTypes.node,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
     theme: PropTypes.object,
   };
 
   static childContextTypes = {
-    toggle: PropTypes.func.isRequired,
     isOpen: PropTypes.bool.isRequired,
+    toggle: PropTypes.func.isRequired,
   };
 
   getChildContext() {
     return {
-      toggle: this.props.toggle,
       isOpen: this.props.isOpen,
+      toggle: this.props.toggle,
     };
   }
 
@@ -294,9 +295,9 @@ const Dropdown = styled(DropdownUnstyled)`
         color: ${props.theme['$dropdown-link-disabled-color']};
         cursor: ${props.theme['$cursor-disabled']};
         background-color: transparent;
-        ${ifThen(props.theme['$enabled-gradients'],
-  'background-image: none; /* Remove CSS gradient */'
-)}
+        ${ifThen(props.theme['$enable-gradients'],
+          'background-image: none; /* Remove CSS gradient */'
+        )}
       }
     }
 
@@ -371,23 +372,21 @@ const Dropdown = styled(DropdownUnstyled)`
         
     /* Added Mixin boutonGroup to enable dropdown to beneficiate from buttonGroup classes */
     ${buttonGroup(
-  props.theme['$enable-shadows'],
-  props.theme['$enable-rounded'],
-  props.theme['$input-btn-border-width'],
-  props.theme['$btn-padding-x'],
-  props.theme['$btn-active-box-shadow'],
-  props.theme['$btn-padding-x-lg'],
-  props.theme['$btn-padding-y-lg'],
-  props.theme['$font-size-lg'],
-  props.theme['$btn-border-radius-lg'],
-  props.theme['$btn-padding-x-sm'],
-  props.theme['$btn-padding-y-sm'],
-  props.theme['$font-size-sm'],
-  props.theme['$btn-border-radius-sm']
-)}
+      props.theme['$enable-shadows'],
+      props.theme['$enable-rounded'],
+      props.theme['$input-btn-border-width'],
+      props.theme['$btn-padding-x'],
+      props.theme['$btn-active-box-shadow'],
+      props.theme['$btn-padding-x-lg'],
+      props.theme['$btn-padding-y-lg'],
+      props.theme['$font-size-lg'],
+      props.theme['$btn-border-radius-lg'],
+      props.theme['$btn-padding-x-sm'],
+      props.theme['$btn-padding-y-sm'],
+      props.theme['$font-size-sm'],
+      props.theme['$btn-border-radius-sm']
+    )}
   `}
 `;
-
-Dropdown.defaultProps = defaultProps;
 
 export default Dropdown;

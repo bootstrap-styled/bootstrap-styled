@@ -8,11 +8,12 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
-const defaultProps = {
-  tag: 'li',
-};
 
 class NavItem extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'li',
+  };
 
   static propTypes = {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -38,7 +39,5 @@ class NavItem extends React.Component { // eslint-disable-line react/prefer-stat
     );
   }
 }
-
-NavItem.defaultProps = defaultProps;
 
 export default NavItem;

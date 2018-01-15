@@ -8,15 +8,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
-import omit from 'lodash.omit';
 
 class FigureUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
     children: PropTypes.node.isRequired,
-    theme: PropTypes.object,
+    className: PropTypes.string,
     /* eslint-enable react/no-unused-prop-types */
   }
 
@@ -25,7 +23,7 @@ class FigureUnstyled extends React.Component { // eslint-disable-line react/pref
       className,
       children,
       ...rest
-    } = omit(this.props, ['theme']);
+    } = this.props;
 
     return (
       <figure className={cn('figure', className)} {...rest}>

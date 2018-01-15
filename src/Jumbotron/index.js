@@ -11,21 +11,22 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
-import bsTheme from '../theme';
+import { makeTheme } from './theme';
 
-const defaultProps = {
-  theme: bsTheme,
-  tag: 'div',
-};
 
 class JumbotronUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
+  static defaultProps = {
+    tag: 'div',
+    theme: makeTheme(),
+  };
+
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    fluid: PropTypes.bool,
     className: PropTypes.string,
     cssModule: PropTypes.object,
+    fluid: PropTypes.bool,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     theme: PropTypes.object,
     /* eslint-enable react/no-unused-prop-types */
   }
@@ -82,7 +83,5 @@ const Jumbotron = styled(JumbotronUnstyled)`
     }
   `}
 `;
-
-Jumbotron.defaultProps = defaultProps;
 
 export default Jumbotron;

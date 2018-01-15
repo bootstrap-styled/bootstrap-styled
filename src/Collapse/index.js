@@ -2,54 +2,54 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash.omit';
-
+import { parseTransition } from 'bootstrap-styled-utils';
 import mapToCssModules from 'map-to-css-modules';
-import bsTheme from '../theme';
+import { makeTheme } from './theme';
 
 const SHOW = 'SHOW';
 const SHOWN = 'SHOWN';
 const HIDE = 'HIDE';
 const HIDDEN = 'HIDDEN';
 
-
 class Collapse extends Component {
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.node,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     cssModule: PropTypes.object,
-    navbar: PropTypes.bool,
-    /* eslint-enable react/no-unused-prop-types */
-    isOpen: PropTypes.bool,
     delay: PropTypes.oneOfType([
       PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
       PropTypes.number,
     ]),
+    isOpen: PropTypes.bool,
+    navbar: PropTypes.bool,
+    /* eslint-enable react/no-unused-prop-types */
     onOpened: PropTypes.func,
     onClosed: PropTypes.func,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    theme: PropTypes.object,
   };
 
   static defaultProps = {
     isOpen: false,
-    theme: bsTheme,
+    theme: makeTheme(),
     tag: 'div',
     delay: {
-      show: 350,
-      hide: 350,
+      show: null,
+      hide: null,
     },
     onOpened: () => {},
     onClosed: () => {},
   };
 
-  constructor(props) {
-    super(props);
+  state = {
+    collapse: HIDDEN,
+    height: null,
+  };
 
-    this.state = {
-      collapse: props.isOpen ? SHOWN : HIDDEN,
-      height: null,
-    };
-    this.element = null;
+  componentWillMount() {
+    this.updateVisibility({ collapse: this.props.isOpen ? SHOWN : HIDDEN });
+    this.updateTransition({ delay: this.props.delay, theme: this.props.theme });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -87,6 +87,13 @@ class Collapse extends Component {
       }, this.getDelay('hide'));
     }
     // else: do nothing.
+
+    if (nextProps.theme['$transition-collapse'] !== this.props.theme['$transition-collapse'] ||
+      nextProps.delay.show !== this.props.delay.show ||
+      nextProps.delay.hide !== this.props.delay.hide
+    ) {
+      this.updateTransition({ delay: nextProps.delay, theme: nextProps.theme });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -108,7 +115,7 @@ class Collapse extends Component {
   }
 
   getDelay(key) {
-    const { delay } = this.props;
+    const { delay } = this.state;
     if (typeof delay === 'object') {
       return delay[key];
     }
@@ -118,6 +125,29 @@ class Collapse extends Component {
   getHeight() {
     return this.element.scrollHeight;
   }
+
+  updateTransition({ delay, theme }) {
+    const transition = parseTransition(theme['$transition-collapse'])[0];
+    let newDelay = {
+      show: delay.show !== undefined ? delay.show : transition.duration,
+      hide: delay.hide !== undefined ? delay.hide : transition.duration,
+    };
+    if (typeof delay !== 'object' && delay !== undefined) {
+      newDelay = {
+        show: delay,
+        hide: delay,
+      };
+    }
+    this.setState({ delay: newDelay });
+  }
+
+  updateVisibility({ collapse }) {
+    this.setState({
+      collapse,
+    });
+  }
+
+  element = null;
 
   render() {
     const {

@@ -3,21 +3,23 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import H6 from '../H6';
-const defaultProps = {
-  tag: 'button',
-};
+
 
 class DropdownItem extends React.Component {
 
+  static defaultProps = {
+    tag: 'button',
+  };
+
   static propTypes = {
     children: PropTypes.node,
-    disabled: PropTypes.bool,
-    divider: PropTypes.bool,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    header: PropTypes.bool,
-    onClick: PropTypes.func,
     className: PropTypes.string,
     cssModule: PropTypes.object,
+    disabled: PropTypes.bool,
+    divider: PropTypes.bool,
+    header: PropTypes.bool,
+    onClick: PropTypes.func,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   };
 
   static contextTypes = {
@@ -84,7 +86,5 @@ class DropdownItem extends React.Component {
     );
   }
 }
-
-DropdownItem.defaultProps = defaultProps;
 
 export default DropdownItem;

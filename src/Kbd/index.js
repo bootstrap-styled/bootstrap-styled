@@ -9,16 +9,19 @@ import styled from 'styled-components';
 import omit from 'lodash.omit';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { boxShadow } from 'bootstrap-styled-mixins/lib/box-shadow';
-import bsTheme from '../theme';
+import { makeTheme } from './theme';
 
-const defaultProps = { theme: bsTheme };
 
 class KbdUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
+  static defaultProps = {
+    theme: makeTheme(),
+  };
+
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
     children: PropTypes.node,
+    className: PropTypes.string,
     theme: PropTypes.object,
     /* eslint-enable react/no-unused-prop-types */
   }
@@ -60,8 +63,6 @@ const Kbd = styled(KbdUnstyled)`
     font-family: ${props.theme['$font-family-monospace']};
   `}
 `;
-
-Kbd.defaultProps = defaultProps;
 
 export default Kbd;
 

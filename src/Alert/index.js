@@ -11,25 +11,25 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { alertVariant } from 'bootstrap-styled-mixins/lib/alert';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
-import themeBs from '../theme';
-import Close from '../Close';
+import { makeTheme } from './theme';
 
-const defaultProps = {
-  color: 'success',
-  isOpen: true,
-  tag: 'div',
-  transitionAppearTimeout: 150,
-  transitionEnterTimeout: 150,
-  transitionLeaveTimeout: 150,
-  theme: themeBs,
-};
+import Close from '../Close';
 
 const FirstChild = ({ children }) => (
   React.Children.toArray(children)[0] || null
 );
 
-
 class AlertUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    color: 'success',
+    isOpen: true,
+    tag: 'div',
+    theme: makeTheme(),
+    transitionAppear: 150,
+    transitionEnter: 150,
+    transitionLeave: 150,
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -40,9 +40,9 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
     isOpen: PropTypes.bool,
     toggle: PropTypes.func,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    transitionAppearTimeout: PropTypes.number,
-    transitionEnterTimeout: PropTypes.number,
-    transitionLeaveTimeout: PropTypes.number,
+    transitionAppear: PropTypes.number,
+    transitionEnter: PropTypes.number,
+    transitionLeave: PropTypes.number,
     theme: PropTypes.object,
     /* eslint-enable react/no-unused-prop-types */
   }
@@ -56,9 +56,9 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
       isOpen,
       toggle,
       children,
-      transitionAppearTimeout,
-      transitionEnterTimeout,
-      transitionLeaveTimeout,
+      transitionAppear,
+      transitionEnter,
+      transitionLeave,
       ...attributes
     } = omit(this.props, ['theme']);
 
@@ -87,12 +87,12 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
           leave: 'fade',
           leaveActive: 'out',
         }}
-        transitionAppear={transitionAppearTimeout > 0}
-        transitionAppearTimeout={transitionAppearTimeout}
-        transitionEnter={transitionEnterTimeout > 0}
-        transitionEnterTimeout={transitionEnterTimeout}
-        transitionLeave={transitionLeaveTimeout > 0}
-        transitionLeaveTimeout={transitionLeaveTimeout}
+        transitionAppear={transitionAppear > 0}
+        transitionAppearTimeout={transitionAppear}
+        transitionEnter={transitionEnter > 0}
+        transitionEnterTimeout={transitionEnter}
+        transitionLeave={transitionLeave > 0}
+        transitionLeaveTimeout={transitionLeave}
       >
         {isOpen ? alert : null}
       </ReactCSSTransitionGroup>
@@ -168,8 +168,6 @@ const Alert = styled(AlertUnstyled)`
     }
   `}
 `;
-
-Alert.defaultProps = defaultProps;
 
 export default withTheme(Alert);
 

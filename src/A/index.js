@@ -9,14 +9,14 @@ import omit from 'lodash.omit';
 
 import mapToCssModules from 'map-to-css-modules';
 import { a } from 'bootstrap-styled-mixins/lib/a';
-import bsTheme from '../theme';
-
-const defaultProps = {
-  tag: 'a',
-  theme: bsTheme,
-};
+import { makeTheme } from './theme';
 
 class AUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'a',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -64,16 +64,14 @@ class AUnstyled extends React.Component { // eslint-disable-line react/prefer-st
 const A = styled(AUnstyled)`
   ${(props) => `
     ${a(
+      props.theme['$enable-hover-media-query'],
       props.theme['$link-color'],
       props.theme['$link-decoration'],
       props.theme['$link-hover-color'],
       props.theme['$link-hover-decoration'],
-      props.theme['$enable-hover-media-query'],
     )}
   `}
 `;
-
-A.defaultProps = defaultProps;
 
 export default A;
 

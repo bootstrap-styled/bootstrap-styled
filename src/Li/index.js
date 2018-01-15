@@ -8,11 +8,14 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
 import { media as mediaCss } from 'bootstrap-styled-mixins/lib/media';
-import bsTheme from '../theme';
+import { makeTheme } from './theme';
 
-const defaultProps = { theme: bsTheme };
 
 class LiUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -78,7 +81,5 @@ const Li = styled(LiUnstyled)`
     ${mediaCss()}
   `}
 `;
-
-Li.defaultProps = defaultProps;
 
 export default Li;

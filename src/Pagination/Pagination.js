@@ -9,14 +9,15 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { pagination } from 'bootstrap-styled-mixins/lib/paginations';
-import bsTheme from '../theme';
+import { makeTheme } from './theme';
 
-const defaultProps = {
-  theme: bsTheme,
-  tag: 'ul',
-};
 
 class PaginationUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'ul',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -88,7 +89,5 @@ const Pagination = styled(PaginationUnstyled)`
     )}
   `}
 `;
-
-Pagination.defaultProps = defaultProps;
 
 export default Pagination;

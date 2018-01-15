@@ -13,14 +13,15 @@ import { hover } from 'bootstrap-styled-mixins/lib/hover';
 import { borderRadius, borderTopRadius, borderBottomRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { cardVariant, cardOutlineVariant, cardInverse } from 'bootstrap-styled-mixins/lib/cards';
 import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
-import bsTheme from '../theme';
+import { makeTheme } from './theme';
 
-const defaultProps = {
-  theme: bsTheme,
-  tag: 'div',
-};
 
 class CardUnstyled extends React.Component {// eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'div',
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -324,7 +325,5 @@ const Card = styled(CardUnstyled)`
     }
   `}
 `;
-
-Card.defaultProps = defaultProps;
 
 export default Card;

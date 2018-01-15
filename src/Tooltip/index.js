@@ -1,5 +1,5 @@
 /**
- * A Tooltip component
+ * A Tooltip tag
  */
 
 import React from 'react';
@@ -10,17 +10,10 @@ import omit from 'lodash.omit';
 import { getTetherAttachments, tetherAttachements } from 'bootstrap-styled-utils/lib/tools';
 import mapToCssModules from 'map-to-css-modules';
 import TetherContent from '../TetherContent';
+
 const DEFAULT_DELAYS = {
   shape: 0,
   hide: 250,
-};
-
-const defaultProps = {
-  isOpen: false,
-  placement: 'bottom',
-  delay: DEFAULT_DELAYS,
-  autohide: true,
-  toggle: () => {},
 };
 
 const defaultTetherConfig = {
@@ -57,6 +50,14 @@ const propTypes = {
 };
 
 export class TooltipUnstyled extends React.Component {
+
+  static defaultProps = {
+    isOpen: false,
+    placement: 'bottom',
+    delay: DEFAULT_DELAYS,
+    autohide: true,
+    toggle: () => {},
+  };
 
   static propTypes = propTypes;
 
@@ -349,7 +350,5 @@ const Tooltip = styled(TooltipUnstyled)`
     }
   `}
 `;
-
-Tooltip.defaultProps = defaultProps;
 
 export default Tooltip;

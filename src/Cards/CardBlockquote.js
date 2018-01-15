@@ -4,16 +4,17 @@ import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import Blockquote from '../Blockquote';
 
-const defaultProps = {
-  tag: Blockquote,
-};
 
 class CardBlockquote extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
+  static defaultProps = {
+    tag: Blockquote,
+  };
+
   static propTypes = {
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     className: PropTypes.string,
     cssModule: PropTypes.object,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   };
 
   render() {
@@ -35,7 +36,5 @@ class CardBlockquote extends React.Component { // eslint-disable-line react/pref
     );
   }
 }
-
-CardBlockquote.defaultProps = defaultProps;
 
 export default CardBlockquote;

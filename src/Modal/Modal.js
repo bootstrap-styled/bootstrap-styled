@@ -18,18 +18,22 @@ import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
 import { fade } from 'bootstrap-styled-mixins/lib//utilities/transition';
 import rebootUtils from 'bootstrap-styled-mixins/lib/utilities/reboot';
 import Fade from './Fade';
+import { makeTheme } from './theme';
 
-const defaultProps = {
-  isOpen: false,
-  isLocked: false,
-  backdrop: true,
-  keyboard: true,
-  zIndex: 1000,
-};
 
 class ModalUnstyled extends React.Component {
 
+  static defaultProps = {
+    isOpen: false,
+    isLocked: false,
+    backdrop: true,
+    keyboard: true,
+    zIndex: 1000,
+    theme: makeTheme(),
+  };
+
   static propTypes = {
+    theme: PropTypes.object,
     /* eslint-disable react/no-unused-prop-types */
     size: PropTypes.string,
     children: PropTypes.node,
@@ -195,7 +199,7 @@ class ModalUnstyled extends React.Component {
       backdrop,
       children,
       ...attributes
-    } = omit(this.props, ['isLocked', 'onUnlock', 'onBackdrop', 'keyboard', 'onEnter', 'onExit', 'zIndex']);
+    } = omit(this.props, ['theme', 'isLocked', 'onUnlock', 'onBackdrop', 'keyboard', 'onEnter', 'onExit', 'zIndex']);
 
     return (
       <TransitionGroup component="div" className={mapToCssModules(classNames(wrapClassName, className))}>
@@ -378,8 +382,5 @@ const Modal = styled(ModalUnstyled)`
     )}
   `}
 `;
-
-
-Modal.defaultProps = defaultProps;
 
 export default Modal;

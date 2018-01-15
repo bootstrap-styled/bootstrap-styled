@@ -22,7 +22,6 @@ export { default as Dfn } from './Dfn';
 export { default as Details } from './Details';
 export { default as Dl } from './Dl';
 export { default as Dt } from './Dt';
-export { default as Fade } from './Fade';
 export { default as Fa, FaStacked } from './Fa';
 export { default as Fieldset } from './Fieldset';
 export { default as Footer } from './Footer';

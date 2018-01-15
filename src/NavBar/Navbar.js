@@ -3,18 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
-import themeBs from '../theme';
+import { makeTheme } from './theme';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { navbar } from 'bootstrap-styled-mixins/lib/navbar';
 import { nav } from 'bootstrap-styled-mixins/lib/nav';
 
-const defaultProps = {
-  tag: 'nav',
-  role: 'navigation',
-  toggleable: false,
-  theme: themeBs,
-};
 
 const getToggleableClass = (toggleable) => { // eslint-disable-line react/prefer-stateless-function
   if (toggleable === false) {
@@ -27,6 +21,13 @@ const getToggleableClass = (toggleable) => { // eslint-disable-line react/prefer
 };
 
 class NavbarUnstyled extends React.Component {
+
+  static defaultProps = {
+    tag: 'nav',
+    role: 'navigation',
+    toggleable: false,
+    theme: makeTheme(),
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -131,6 +132,5 @@ const Navbar = styled(NavbarUnstyled)`
     )}
   `}
 `;
-Navbar.defaultProps = defaultProps;
 
 export default Navbar;

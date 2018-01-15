@@ -121,8 +121,10 @@ describe('<Collapse />', () => {
   });
 
   it('should render with class "show" when isOpen is true', () => {
-    const renderedComponent = shallow(<Collapse isOpen />);
-    expect(renderedComponent.hasClass('show')).toEqual(true);
+    isOpen = true;
+    const renderedComponent = mount(<Collapse isOpen={isOpen} />);
+    console.log(renderedComponent.debug());
+    expect(renderedComponent.find('div').hasClass('show')).toEqual(true);
   });
 
   it('should set height to null when isOpen is true', () => {

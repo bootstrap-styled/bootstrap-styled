@@ -9,15 +9,16 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { button } from 'bootstrap-styled-mixins/lib/buttons';
-import bsTheme from '../theme';
+import { makeTheme } from './theme';
 
-const defaultProps = {
-  theme: bsTheme,
-  type: 'text',
-  tag: 'p',
-};
 
 class InputUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static defaultProps = {
+    tag: 'p',
+    theme: makeTheme(),
+    type: 'text',
+  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -201,7 +202,5 @@ const Input = styled(InputUnstyled)`
     )}
  `}
 `;
-
-Input.defaultProps = defaultProps;
 
 export default Input;
