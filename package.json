@@ -42,7 +42,7 @@
     "lib",
     "src"
   ],
-  "keywords": "bootstrap-styled, styled-components, react",
+  "keywords": ["bootstrap-styled", "styled-components", "react"],
   "author": "Dimitri Kopriwa <dimitri.kopriwa@kopaxgroup.com>",
   "license": "UNLICENSED",
   "eslintConfig": {
