@@ -48,6 +48,7 @@ stages:
   - build
   - test
   - release
+  - deploy
 
 # Job: Build
 build_dev:
@@ -164,8 +165,9 @@ pages:
   artifacts:
     paths:
       - public
-#  only:
-#    - master
+  only:
+    - dev
+    - master
   tags:
     - docker
 
