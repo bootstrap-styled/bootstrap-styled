@@ -56,4 +56,5 @@ class FormGroup extends React.Component {// eslint-disable-line react/prefer-sta
   }
 }
 
+/** @component */
 export default FormGroup;

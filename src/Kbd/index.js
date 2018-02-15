@@ -64,5 +64,6 @@ const Kbd = styled(KbdUnstyled)`
   `}
 `;
 
+/** @component */
 export default Kbd;
 

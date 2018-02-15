@@ -69,4 +69,5 @@ const ButtonToolbar = styled(ButtonToolbarUnstyled)`
   `}  
 `;
 
+/** @component */
 export default ButtonToolbar;

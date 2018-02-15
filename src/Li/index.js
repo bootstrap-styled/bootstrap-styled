@@ -82,4 +82,5 @@ const Li = styled(LiUnstyled)`
   `}
 `;
 
+/** @component */
 export default Li;

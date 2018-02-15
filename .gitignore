@@ -6,5 +6,6 @@ bundle-stats.html
 .idea/
 coverage/
 /reports
+/public
 /test-report.xml
 jest_0

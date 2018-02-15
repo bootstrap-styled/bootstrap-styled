@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
 import alignUtils from 'bootstrap-styled-mixins/lib/utilities/align';
@@ -17,6 +18,27 @@ import textUtils from 'bootstrap-styled-mixins/lib/utilities/text';
 import transitionUtils from 'bootstrap-styled-mixins/lib/utilities/transition';
 import visibilityUtils from 'bootstrap-styled-mixins/lib/utilities/visibility';
 import theme from '../theme';
+
+const propTypes = {
+  theme: PropTypes.object,
+  utils: {
+    align: PropTypes.bool,
+    background: PropTypes.bool,
+    border: PropTypes.bool,
+    clearfix: PropTypes.bool,
+    cursor: PropTypes.bool,
+    display: PropTypes.bool,
+    flex: PropTypes.bool,
+    float: PropTypes.bool,
+    position: PropTypes.bool,
+    screenreaders: PropTypes.bool,
+    sizing: PropTypes.bool,
+    spacing: PropTypes.bool,
+    text: PropTypes.bool,
+    transition: PropTypes.bool,
+    visibility: PropTypes.bool,
+  },
+};
 
 const defaultProps = {
   theme,
@@ -113,5 +135,7 @@ const UtilityProvider = styled.div`
 `;
 
 UtilityProvider.defaultProps = defaultProps;
+UtilityProvider.propTypes = propTypes;
 
+/** @component */
 export default UtilityProvider;

@@ -29,5 +29,6 @@ const Dfn = styled(DfnUnstyled)`
   font-style: italic; /* Add the correct font style in Android 4.3- */
 `;
 
+/** @component */
 export default Dfn;
 

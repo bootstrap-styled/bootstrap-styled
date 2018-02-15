@@ -326,4 +326,5 @@ const Card = styled(CardUnstyled)`
   `}
 `;
 
+/** @component */
 export default Card;

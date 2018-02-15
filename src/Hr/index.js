@@ -14,4 +14,5 @@ const Hr = styled.hr`
 
 Hr.defaultProps = defaultProps;
 
+/** @component */
 export default Hr;

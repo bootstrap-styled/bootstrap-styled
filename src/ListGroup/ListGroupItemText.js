@@ -1,5 +1,5 @@
 /**
- * ListGroup component
+ * ListGroupItemText component
  */
 
 
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 
 
-class ListGroupItemHeading extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class ListGroupItemText extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static defaultProps = {
     tag: 'p',
@@ -36,5 +36,5 @@ class ListGroupItemHeading extends React.Component { // eslint-disable-line reac
   }
 }
 
-export default ListGroupItemHeading;
+export default ListGroupItemText;
 

@@ -84,4 +84,5 @@ const Jumbotron = styled(JumbotronUnstyled)`
   `}
 `;
 
+/** @component */
 export default Jumbotron;

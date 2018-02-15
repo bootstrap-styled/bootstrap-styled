@@ -4,7 +4,7 @@
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
-import Breadcrumb from '../Breadcrumb';
+import Breadcrumb from '../index';
 
 const children = (<h1>Test</h1>);
 

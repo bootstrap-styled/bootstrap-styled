@@ -100,7 +100,9 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
   }
 }
 
-const Alert = styled(AlertUnstyled)`
+const AlertUnstyledWithTheme = withTheme(AlertUnstyled);
+
+const Alert = styled(AlertUnstyledWithTheme)`
   ${(props) => `
     /*
     Base styles
@@ -169,5 +171,6 @@ const Alert = styled(AlertUnstyled)`
   `}
 `;
 
-export default withTheme(Alert);
+/** @component */
+export default Alert;
 

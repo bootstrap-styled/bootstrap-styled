@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.5] - 2018-02-15
+
+- Added styleguide [WIP].
+
 ## [1.4.4] - 2018-01-15
 
 - Removed `isLocked` props from `Modal`.

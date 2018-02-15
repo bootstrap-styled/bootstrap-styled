@@ -58,5 +58,6 @@ const FigCaption = styled(FigCaptionUnstyled)`
   `}
 `;
 
+/** @component */
 export default FigCaption;
 

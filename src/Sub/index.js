@@ -6,5 +6,7 @@ const Sub = styled.sub`
   vertical-align: baseline;
   bottom: -.25em;
 `;
+
+/** @component */
 export default Sub;
 

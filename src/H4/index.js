@@ -78,4 +78,5 @@ const H4 = styled(H4Unstyled)`
   `}
 `;
 
+/** @component */
 export default H4;

@@ -156,3 +156,16 @@ release:
   tags:
     - docker
 
+# Pages
+pages:
+  stage: deploy
+  script:
+    - npm run styleguide:build
+  artifacts:
+    paths:
+      - public
+#  only:
+#    - master
+  tags:
+    - docker
+

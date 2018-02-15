@@ -42,4 +42,5 @@ class FormFeedback extends React.Component {// eslint-disable-line react/prefer-
   }
 }
 
+/** @component */
 export default FormFeedback;

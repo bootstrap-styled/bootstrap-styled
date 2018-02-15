@@ -90,4 +90,5 @@ const Close = styled(CloseUnstyled)`
   `}
 `;
 
+/** @component */
 export default Close;

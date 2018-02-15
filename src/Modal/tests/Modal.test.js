@@ -5,7 +5,7 @@
 import { mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
-import Modal from '../Modal';
+import Modal from '../index';
 
 const children = <span>Yo!</span>;
 

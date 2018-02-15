@@ -1,6 +1,7 @@
 {
   "only": [
-    "src"
+    "src",
+    "styleguide"
   ],
   "presets": [
     [

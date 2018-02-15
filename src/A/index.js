@@ -9,26 +9,46 @@ import omit from 'lodash.omit';
 
 import mapToCssModules from 'map-to-css-modules';
 import { a } from 'bootstrap-styled-mixins/lib/a';
-import { makeTheme } from './theme';
+// import theme from './theme';
+
+const defaultProps = {
+  tag: 'a',
+  theme: {
+    '$enable-hover-media-query': true,
+    '$link-color': '#f00',
+    '$link-decoration': '#f00',
+    '$link-hover-color': '#f00',
+    '$link-hover-decoration': '#f00',
+  },
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Description of prop "active". */
+  active: PropTypes.bool,
+  tag: PropTypes.string,
+  disabled: PropTypes.bool,
+  /** Theme variables. */
+  theme: PropTypes.shape({
+    '$enable-hover-media-query': PropTypes.bool,
+    '$link-color': PropTypes.string,
+    '$link-decoration': PropTypes.string,
+    '$link-hover-color': PropTypes.string,
+    '$link-hover-decoration': PropTypes.string,
+  }),
+  color: PropTypes.string,
+  cssModule: PropTypes.object,
+};
 
 class AUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'a',
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
-    active: PropTypes.bool,
-    tag: PropTypes.string,
-    disabled: PropTypes.bool,
-    theme: PropTypes.object,
-    color: PropTypes.string,
-    cssModule: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   state = {
     focus: false,
@@ -61,6 +81,9 @@ class AUnstyled extends React.Component { // eslint-disable-line react/prefer-st
   }
 }
 
+/**
+ * anchor link element
+ */
 const A = styled(AUnstyled)`
   ${(props) => `
     ${a(
@@ -73,7 +96,8 @@ const A = styled(AUnstyled)`
   `}
 `;
 
-export default A;
+A.defaultProps = defaultProps;
+A.propTypes = propTypes;
 
-// export composers
-export { default as composeLink } from './composeLink';
+/** @component */
+export default A;

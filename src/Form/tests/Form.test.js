@@ -1,7 +1,7 @@
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
-import Form from '../Form';
+import Form from '../index';
 
 const children = (<h1>Test</h1>);
 

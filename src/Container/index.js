@@ -47,5 +47,6 @@ const Container = styled(ContainerUnstyled)`
   `}
 `;
 
+/** @component */
 export default Container;
 

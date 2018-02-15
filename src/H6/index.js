@@ -78,4 +78,5 @@ const H6 = styled(H6Unstyled)`
   `}
 `;
 
+/** @component */
 export default H6;

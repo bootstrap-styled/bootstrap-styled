@@ -177,4 +177,5 @@ const P = styled(PUnstyled)`
   `}
 `;
 
+/** @component */
 export default P;

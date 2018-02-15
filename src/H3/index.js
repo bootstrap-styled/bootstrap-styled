@@ -78,4 +78,5 @@ const H3 = styled(H3Unstyled)`
   `}
 `;
 
+/** @component */
 export default H3;

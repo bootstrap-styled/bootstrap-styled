@@ -47,4 +47,5 @@ class FormText extends React.Component {// eslint-disable-line react/prefer-stat
   }
 }
 
+/** @component */
 export default FormText;

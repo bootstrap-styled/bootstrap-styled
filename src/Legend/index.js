@@ -11,4 +11,5 @@ const Legend = styled.legend`
   line-height: inherit;
 `;
 
+/** @component */
 export default Legend;

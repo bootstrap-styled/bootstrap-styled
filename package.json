@@ -10,6 +10,8 @@
     "last 2 versions"
   ],
   "scripts": {
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build",
     "prebuild": "npm run build:clean",
     "build": "npm run build:lib && npm run build:dist",
     "prebuild:lib": "rimraf lib/*",
@@ -153,6 +155,7 @@
     "raf": "^3.3.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-styleguidist": "^6.2.3",
     "react-test-renderer": "^16.0.0",
     "react-transition-group": "1.2.0",
     "rimraf": "^2.6.2",
@@ -169,7 +172,8 @@
     "rollup-watch": "^4.3.1",
     "sinon": "^3.3.0",
     "styled-components": "^2.2.3",
-    "toctoc": "^0.2.3"
+    "toctoc": "^0.2.3",
+    "webpack": "^3.11.0"
   },
   "jest": {
     "roots": [

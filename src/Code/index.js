@@ -64,5 +64,6 @@ const Code = styled(CodeUnstyled)`
   `}
 `;
 
+/** @component */
 export default Code;
 

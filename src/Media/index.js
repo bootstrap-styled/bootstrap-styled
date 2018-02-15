@@ -106,4 +106,5 @@ const Media = styled(MediaUnstyled)`
   ${media()}
 `;
 
+/** @component */
 export default Media;

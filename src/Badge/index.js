@@ -128,4 +128,5 @@ const Badge = styled(BadgeUnstyled)`
   `}
 `;
 
+/** @component */
 export default Badge;

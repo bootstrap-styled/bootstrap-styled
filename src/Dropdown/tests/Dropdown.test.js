@@ -4,7 +4,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import BootstrapProvider from '../../BootstrapProvider';
-import Dropdown from '../Dropdown';
+import Dropdown from '../index';
 import DropdownItem from '../DropdownItem';
 import DropdownMenu from '../DropdownMenu';
 import DropdownToggle from '../DropdownToggle';
