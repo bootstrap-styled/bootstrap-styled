@@ -4,7 +4,8 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { mount } from 'enzyme';
-import A, { composeLink } from '../index';
+import A from '../index';
+import composeLink from '../composeLink';
 
 const Link = composeLink(A);
 

@@ -21,7 +21,7 @@ import theme from '../theme';
 
 const propTypes = {
   theme: PropTypes.object,
-  utils: {
+  utils: PropTypes.shape({
     align: PropTypes.bool,
     background: PropTypes.bool,
     border: PropTypes.bool,
@@ -37,7 +37,7 @@ const propTypes = {
     text: PropTypes.bool,
     transition: PropTypes.bool,
     visibility: PropTypes.bool,
-  },
+  }),
 };
 
 const defaultProps = {

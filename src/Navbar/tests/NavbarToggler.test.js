@@ -1,5 +1,5 @@
 /**
- * Testing our NavBarToggler component
+ * Testing our NavbarToggler component
  */
 import { shallow } from 'enzyme';
 import React from 'react';
@@ -20,7 +20,7 @@ describe('<NavbarToggler />', () => {
     });
     expect(renderedComponent.find('.navbar-toggler-left').length).toBe(1);
   });
-  it('should render a <NavBarToggler> with class .navbar-toggler-right', () => {
+  it('should render a <NavbarToggler> with class .navbar-toggler-right', () => {
     const renderedComponent = renderComponent({
       right: true,
     });

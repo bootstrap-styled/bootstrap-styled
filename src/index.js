@@ -109,10 +109,10 @@ export { default as Dropdown } from './Dropdown';
 export { default as DropdownItem } from './Dropdown/DropdownItem';
 export { default as DropdownToggle } from './Dropdown/DropdownToggle';
 export { default as DropdownMenu } from './Dropdown/DropdownMenu';
-export { default as Navbar } from './NavBar';
-export { default as NavbarToggler } from './NavBar/NavbarToggler';
-export { default as NavbarBrand } from './NavBar/NavbarBrand';
-export { default as NavDropdown } from './NavBar/NavDropdown';
+export { default as Navbar } from './Navbar';
+export { default as NavbarToggler } from './Navbar/NavbarToggler';
+export { default as NavbarBrand } from './Navbar/NavbarBrand';
+export { default as NavDropdown } from './Navbar/NavDropdown';
 // 3. Organisms
 export { default as Container } from './Container';
 export { default as ContainerFluid } from './ContainerFluid';
