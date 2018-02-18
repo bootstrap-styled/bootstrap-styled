@@ -5106,26 +5106,7 @@ var a_3 = a_1.a;
 /**
  * A link to a certain page, an anchor tag
  */
-var registerObserver = require('react-perf-devtool');
-
 // import theme from './theme';
-
-function callback(measures) {
-  var i = void 0;
-  for (i = 0; i < measures.length; i++) {
-    if (measures[i].componentName === 'A') {
-      return console.log(measures[i]);
-    }
-  }
-}
-
-var options = {
-  shouldLog: false,
-  port: 3000,
-  components: ['A', 'Button']
-
-  // Simple, no?
-};registerObserver(options, callback);
 
 var defaultProps = {
   tag: 'a',

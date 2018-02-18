@@ -13,5 +13,5 @@ Or as a Button:
 
 
 ```js { "props": { "active": "true" } }
-<Button tag={A} color="danger" href="https://bootstrap-styled.yeutech.com">I am active</Button>
+<A color="info" active href="https://bootstrap-styled.yeutech.com">Visit Bootstrap Styled !</A>
 ```
