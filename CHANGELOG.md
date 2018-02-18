@@ -2,8 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.4.5] - 2018-02-15
-
+## [1.4.5] - YYYY-DD-MM
+- Upgrade dependency [react-transition-group](https://www.npmjs.com/package/react-transition-group) from 1.2.0 to 2.2.1.
+- Upgrade dependency [bootstrap-styled-utils](https://www.npmjs.com/package/bootstrap-styled-utils) from 1.0.0 to 1.0.1.
+- Updated `Modal`, `Fade` and `Alert` components to fit with [react-transition-group](https://www.npmjs.com/package/react-transition-group) v2.2.1.
+- Added `UncontrolledAlert` component to avoid having to write function and state for closing purposes.
+- Added `autoHideDuration` props to `UncontrolledAlert` to automatically close component when set time has expired.
 - Added styleguide [WIP].
 
 ## [1.4.4] - 2018-01-15

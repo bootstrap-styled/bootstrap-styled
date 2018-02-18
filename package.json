@@ -157,7 +157,7 @@
     "react-dom": "^16.0.0",
     "react-styleguidist": "^6.2.3",
     "react-test-renderer": "^16.0.0",
-    "react-transition-group": "1.2.0",
+    "react-transition-group": "2.2.1",
     "rimraf": "^2.6.2",
     "rollup": "^0.50.0",
     "rollup-plugin-babel": "^3.0.2",
@@ -218,7 +218,7 @@
   ],
   "dependencies": {
     "bootstrap-styled-mixins": "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled-mixins.git#v1.0.1",
-    "bootstrap-styled-utils": "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled-utils.git#v1.0.0",
+    "bootstrap-styled-utils": "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled-utils.git#dev",
     "classnames": "^2.2.5",
     "color": "^1.0.3",
     "lodash.omit": "^4.5.0",

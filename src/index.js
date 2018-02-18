@@ -5,7 +5,7 @@ export { default as A } from './A';
 export { default as composeLink } from './A/composeLink';
 export { default as Abbr } from './Abbr';
 export { default as Address } from './Address';
-export { default as Alert } from './Alert';
+export { default as Alert, UncontrolledAlert } from './Alert';
 export { default as Area } from './Area';
 export { default as Article } from './Article';
 export { default as Blockquote } from './Blockquote';
