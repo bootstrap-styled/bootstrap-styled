@@ -5097,19 +5097,16 @@ exports.default = {
 unwrapExports(a_1);
 var a_3 = a_1.a;
 
-/**
- * A link to a certain page, an anchor tag
- */
 // import theme from './theme';
 
 var defaultProps = {
   tag: 'a',
   theme: {
-    '$enable-hover-media-query': true,
-    '$link-color': '#f00',
-    '$link-decoration': '#f00',
-    '$link-hover-color': '#f00',
-    '$link-hover-decoration': '#f00'
+    '$link-color': '#0275d8',
+    '$link-decoration': 'none',
+    '$link-hover-color': '#014C8D',
+    '$link-hover-decoration': 'underline',
+    '$enable-hover-media-query': false
   }
 };
 var propTypes = {
@@ -5117,19 +5114,26 @@ var propTypes = {
    * @ignore
    */
   className: PropTypes.string,
-  /** Description of prop "active". */
-  active: PropTypes.bool,
+  /**
+   * Replace or remove a className from the component.
+   */
   tag: PropTypes.string,
-  disabled: PropTypes.bool,
   /** Theme variables. */
   theme: PropTypes.shape({
-    '$enable-hover-media-query': PropTypes.bool,
     '$link-color': PropTypes.string,
     '$link-decoration': PropTypes.string,
     '$link-hover-color': PropTypes.string,
-    '$link-hover-decoration': PropTypes.string
+    '$link-hover-decoration': PropTypes.string,
+    '$enable-hover-media-query': PropTypes.bool
   }),
-  color: PropTypes.string,
+  /**
+   * Color of the component.
+   */
+  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  /**
+   * Replace or remove a className from the component.
+   * @see See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
   cssModule: PropTypes.object
 };
 
@@ -5161,21 +5165,17 @@ var AUnstyled = function (_React$Component) {
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
-          active = _omit.active,
-          disabled = _omit.disabled,
           cssModule = _omit.cssModule,
           color = _omit.color,
           Tag = _omit.tag,
-          attributes = objectWithoutProperties(_omit, ['className', 'active', 'disabled', 'cssModule', 'color', 'tag']);
+          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'color', 'tag']);
 
       var focus = this.state.focus;
 
 
       return React.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, defineProperty({
-          focus: focus,
-          active: active,
-          disabled: disabled
+          focus: focus
         }, 'text-' + color, color)), cssModule)
       }, attributes));
     }
@@ -5184,7 +5184,7 @@ var AUnstyled = function (_React$Component) {
 }(React.Component);
 
 /**
- * anchor link element
+ * An anchor tag component used to direct towards a page outside of the application.
  */
 
 
@@ -5193,7 +5193,7 @@ AUnstyled.propTypes = propTypes;
 var A = /*#__PURE__*/styled(AUnstyled).withConfig({
   displayName: 'A'
 })(['', ''], function (props) {
-  return '\n    ' + a_3(props.theme['$enable-hover-media-query'], props.theme['$link-color'], props.theme['$link-decoration'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration']) + '\n  ';
+  return '\n    ' + a_3(props.theme['$link-color'], props.theme['$link-decoration'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$enable-hover-media-query']) + '\n  ';
 });
 
 A.defaultProps = defaultProps;
@@ -6544,10 +6544,6 @@ var Close = /*#__PURE__*/styled(CloseUnstyled).withConfig({
   return '\n    float: right;\n    font-size: ' + props.theme['$close-font-size'] + ';\n    font-weight: ' + props.theme['$close-font-weight'] + ';\n    line-height: 1;\n    color: ' + props.theme['$close-color'] + ';\n    text-shadow: ' + props.theme['$close-text-shadow'] + ';\n    opacity: .2;\n    \n    &:focus {outline:0;}\n    \n    ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$close-color'] + ';\n        text-decoration: none;\n        cursor: pointer;\n        opacity: .5;\n      ') + '\n    \n    /* Additional properties for button version\n     iOS requires the button element instead of an anchor tag.\n     If you want the anchor version, it requires \'href="#"\'.\n     See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile\n     */\n    \n    /* scss-lint:disable QualifyingElement */\n    &.close {\n      padding: 0;\n      cursor: pointer;\n      background: transparent;\n      border: 0;\n      -webkit-appearance: none;\n    }\n    /* scss-lint:enable QualifyingElement */\n  ';
 });
 
-/**
- * Alert component
- */
-
 var defaultProps$2 = {
   color: 'success',
   isOpen: true,
@@ -6560,9 +6556,21 @@ var defaultProps$2 = {
 
 var propTypes$1 = {
   /* eslint-disable react/no-unused-prop-types */
+  /**
+   * @ignore
+   */
   children: PropTypes.node,
+  /**
+   * @ignore
+   */
   className: PropTypes.string,
+  /**
+   * Replace or remove a className from the component.
+   */
   cssModule: PropTypes.object,
+  /**
+   * Change the color of the component.
+   */
   color: PropTypes.string,
   isOpen: PropTypes.bool,
   toggle: PropTypes.func,
@@ -6704,6 +6712,9 @@ var Alert = /*#__PURE__*/styled(AlertUnstyled).withConfig({
   return '\n    /*\n    Base styles\n    */\n    \n    &.alert {\n      padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n      margin-bottom: ' + props.theme['$alert-margin-bottom'] + ';\n      border: ' + props.theme['$alert-border-width'] + ' solid transparent;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$alert-border-radius']) + '\n    }\n    \n    /* Headings for larger alerts */\n    &.alert-heading {\n      /* Specified to prevent conflicts of changing $headings-color */\n      color: inherit;\n    }\n    \n    /* Provide class for links that match alerts */\n    & .alert-link { \n      font-weight: ' + props.theme['$alert-link-font-weight'] + ';\n    }\n    \n    /* Dismissible alerts Expand the right padding and account for the close buttons positioning. */\n    \n    &.alert-dismissible {    \n      /* Adjust close link position */\n      & .close {\n        position: relative;\n        top: -' + props.theme['$alert-padding-y'] + ';\n        right: -' + props.theme['$alert-padding-x'] + ';\n        padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n        color: inherit;\n      }\n    }\n    /* Alternate styles Generate contextual modifier classes for colorizing the alert. */\n\n    &.alert-success {\n      ' + alert_1(props.theme['$alert-success-bg'], props.theme['$alert-success-border'], props.theme['$alert-success-text']) + '    \n    }\n    &.alert-info {\n      ' + alert_1(props.theme['$alert-info-bg'], props.theme['$alert-info-border'], props.theme['$alert-info-text']) + '\n    } \n    &.alert-warning {\n      ' + alert_1(props.theme['$alert-warning-bg'], props.theme['$alert-warning-border'], props.theme['$alert-warning-text']) + ' \n    }\n    &.alert-danger {\n      ' + alert_1(props.theme['$alert-danger-bg'], props.theme['$alert-danger-border'], props.theme['$alert-danger-text']) + ' \n    }\n  ';
 });
 
+Alert.defaultProps = defaultProps$2;
+Alert.propTypes = propTypes$1;
+
 /** @component */
 var Alert$1 = withTheme(Alert);
 
@@ -6737,10 +6748,6 @@ var UncontrolledAlert = function (_React$Component) {
   }]);
   return UncontrolledAlert;
 }(React.Component);
-
-/*
- * Kopax Ltd Copyright (c) 2016.
- */
 
 /**
  * A Area
@@ -7663,7 +7670,7 @@ var defaultProps = exports.defaultProps = {
  */
 
 function getGlobalStyles() {
-  return '\n    html {\n      ' + html() + '\n    }\n    *,\n    *::before,\n    *::after {\n      ' + boxSizing() + '\n    }\n    @-ms-viewport { \n      ' + ie10FixViewport() + ' \n    }\n  ';
+  return '\n    html {\n      ' + html() + '\n    }\n    *,\n    *::before,\n    *::after {\n      ' + boxSizing() + '\n    }\n    @-ms-viewport { \n      ' + ie10FixViewport() + ' \n    }\n    body {\n      ' + bodyUtils() + '\n    }\n  ';
 }
 
 function getGlobalStyleNoBootstrapProvider() {
@@ -7715,7 +7722,7 @@ function body() {
 }
 
 function bodyUtils() {
-  return '\n    &.overflow {\n      overflow-x: hidden;\n    }\n  ';
+  return '\n    &.overflow {\n      overflow: hidden;\n    }\n  ';
 }
 
 // Suppress the focus outline on elements that cannot be accessed via keyboard.
@@ -16845,7 +16852,6 @@ function createChainedFunction() {
   return funcs.filter(function (func) {
     return func != null;
   }).reduce(function (acc, func) {
-    // eslint-disable-line arrow-body-style
     return function chainedFunction() {
       for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
         args[_key2] = arguments[_key2];

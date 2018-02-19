@@ -2,7 +2,7 @@
  * UncontrolledAlert component
  */
 import React from 'react';
-import Alert from './Alert';
+import Alert from './index';
 
 class UncontrolledAlert extends React.Component { // eslint-disable-line react/prefer-stateless-function
 

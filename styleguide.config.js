@@ -8,6 +8,7 @@ module.exports = {
   ignore: [
     '**/src/index.js',
     '**/A/composeLink.js',
+    '**/Abbr/*.js',
     '**/{Accordions,Cards,Map}/index.js',
     '**/makeTheme/**',
     '**/theme.js',
@@ -19,7 +20,6 @@ module.exports = {
   sections: [
     {
       name: 'Introduction',
-
       content: 'docs/introduction.md',
     },
     {
