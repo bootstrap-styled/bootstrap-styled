@@ -1,3 +1,6 @@
+/**
+ * UncontrolledAlert component
+ */
 import React from 'react';
 import Alert from './Alert';
 
@@ -14,4 +17,5 @@ class UncontrolledAlert extends React.Component { // eslint-disable-line react/p
   }
 }
 
+/** @component */
 export default UncontrolledAlert;

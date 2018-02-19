@@ -6368,7 +6368,7 @@ exports.default = Transition;
 
 var Transition = unwrapExports(Transition_1);
 
-var propTypes$1 = _extends({}, Transition.propTypes, {
+var propTypes$2 = _extends({}, Transition.propTypes, {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   baseClass: PropTypes.string,
@@ -6377,7 +6377,7 @@ var propTypes$1 = _extends({}, Transition.propTypes, {
   cssModule: PropTypes.object
 });
 
-var defaultProps$2 = _extends({}, Transition.defaultProps, {
+var defaultProps$3 = _extends({}, Transition.defaultProps, {
   tag: 'div',
   baseClass: 'fade',
   baseClassActive: 'show',
@@ -6429,8 +6429,8 @@ function Fade(props) {
   );
 }
 
-Fade.propTypes = propTypes$1;
-Fade.defaultProps = defaultProps$2;
+Fade.propTypes = propTypes$2;
+Fade.defaultProps = defaultProps$3;
 
 var detectUnit$1 = unitUtils$1.detectUnit;
 var rmUnit$2 = unitUtils$1.rmUnit;
@@ -6548,6 +6548,32 @@ var Close = /*#__PURE__*/styled(CloseUnstyled).withConfig({
  * Alert component
  */
 
+var defaultProps$2 = {
+  color: 'success',
+  isOpen: true,
+  tag: 'div',
+  theme: makeTheme$2(),
+  transition: _extends({}, Fade.defaultProps, {
+    unmountOnExit: true
+  })
+};
+
+var propTypes$1 = {
+  /* eslint-disable react/no-unused-prop-types */
+  children: PropTypes.node,
+  className: PropTypes.string,
+  cssModule: PropTypes.object,
+  color: PropTypes.string,
+  isOpen: PropTypes.bool,
+  toggle: PropTypes.func,
+  autoClose: PropTypes.func,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  transition: PropTypes.shape(Fade.propTypes),
+  autoHideDuration: PropTypes.number,
+  theme: PropTypes.object
+  /* eslint-enable react/no-unused-prop-types */
+};
+
 var AlertUnstyled = function (_React$Component) {
   inherits(AlertUnstyled, _React$Component);
 
@@ -6563,7 +6589,6 @@ var AlertUnstyled = function (_React$Component) {
     }
 
     return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = AlertUnstyled.__proto__ || Object.getPrototypeOf(AlertUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      // Used to only render active snackbars.
       exited: false
     }, _this.setAutoHideTimer = function () {
       var autoHideDuration = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -6585,6 +6610,10 @@ var AlertUnstyled = function (_React$Component) {
       _this.setState({ exited: true });
     }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
   } // eslint-disable-line react/prefer-stateless-function
+
+  /* eslint-disable react/no-unused-prop-types */
+
+  /* eslint-enable react/no-unused-prop-types */
 
   createClass(AlertUnstyled, [{
     key: 'componentWillMount',
@@ -6665,30 +6694,8 @@ var AlertUnstyled = function (_React$Component) {
   return AlertUnstyled;
 }(React.Component);
 
-AlertUnstyled.defaultProps = {
-  color: 'success',
-  isOpen: true,
-  tag: 'div',
-  theme: makeTheme$2(),
-  transition: _extends({}, Fade.defaultProps, {
-    unmountOnExit: true
-  })
-};
-AlertUnstyled.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  children: PropTypes.node,
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
-  color: PropTypes.string,
-  isOpen: PropTypes.bool,
-  toggle: PropTypes.func,
-  autoClose: PropTypes.func,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  transition: PropTypes.shape(Fade.propTypes),
-  autoHideDuration: PropTypes.number,
-  theme: PropTypes.object
-  /* eslint-enable react/no-unused-prop-types */
-};
+AlertUnstyled.defaultProps = defaultProps$2;
+AlertUnstyled.propTypes = propTypes$1;
 
 
 var Alert = /*#__PURE__*/styled(AlertUnstyled).withConfig({
@@ -6697,8 +6704,12 @@ var Alert = /*#__PURE__*/styled(AlertUnstyled).withConfig({
   return '\n    /*\n    Base styles\n    */\n    \n    &.alert {\n      padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n      margin-bottom: ' + props.theme['$alert-margin-bottom'] + ';\n      border: ' + props.theme['$alert-border-width'] + ' solid transparent;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$alert-border-radius']) + '\n    }\n    \n    /* Headings for larger alerts */\n    &.alert-heading {\n      /* Specified to prevent conflicts of changing $headings-color */\n      color: inherit;\n    }\n    \n    /* Provide class for links that match alerts */\n    & .alert-link { \n      font-weight: ' + props.theme['$alert-link-font-weight'] + ';\n    }\n    \n    /* Dismissible alerts Expand the right padding and account for the close buttons positioning. */\n    \n    &.alert-dismissible {    \n      /* Adjust close link position */\n      & .close {\n        position: relative;\n        top: -' + props.theme['$alert-padding-y'] + ';\n        right: -' + props.theme['$alert-padding-x'] + ';\n        padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n        color: inherit;\n      }\n    }\n    /* Alternate styles Generate contextual modifier classes for colorizing the alert. */\n\n    &.alert-success {\n      ' + alert_1(props.theme['$alert-success-bg'], props.theme['$alert-success-border'], props.theme['$alert-success-text']) + '    \n    }\n    &.alert-info {\n      ' + alert_1(props.theme['$alert-info-bg'], props.theme['$alert-info-border'], props.theme['$alert-info-text']) + '\n    } \n    &.alert-warning {\n      ' + alert_1(props.theme['$alert-warning-bg'], props.theme['$alert-warning-border'], props.theme['$alert-warning-text']) + ' \n    }\n    &.alert-danger {\n      ' + alert_1(props.theme['$alert-danger-bg'], props.theme['$alert-danger-border'], props.theme['$alert-danger-text']) + ' \n    }\n  ';
 });
 
+/** @component */
 var Alert$1 = withTheme(Alert);
 
+/**
+ * UncontrolledAlert component
+ */
 var UncontrolledAlert = function (_React$Component) {
   inherits(UncontrolledAlert, _React$Component);
 
@@ -8280,7 +8291,7 @@ exports.default = {
 
 var visibilityUtils = unwrapExports(visibility);
 
-var propTypes$2 = {
+var propTypes$3 = {
   theme: PropTypes.object,
   utils: PropTypes.shape({
     align: PropTypes.bool,
@@ -8301,7 +8312,7 @@ var propTypes$2 = {
   })
 };
 
-var defaultProps$3 = {
+var defaultProps$4 = {
   theme: bsTheme,
   utils: {
     align: true,
@@ -8330,8 +8341,8 @@ var UtilityProvider = /*#__PURE__*/styled.div.withConfig({
   )) + '\n  ';
 });
 
-UtilityProvider.defaultProps = defaultProps$3;
-UtilityProvider.propTypes = propTypes$2;
+UtilityProvider.defaultProps = defaultProps$4;
+UtilityProvider.propTypes = propTypes$3;
 
 var BootstrapProvider = function (_React$Component) {
   inherits(BootstrapProvider, _React$Component);
@@ -9246,7 +9257,7 @@ var makeTheme$7 = function makeTheme() {
 
 makeTheme$7();
 
-var propTypes$4 = {
+var propTypes$5 = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   cssModule: PropTypes.object,
@@ -9254,7 +9265,7 @@ var propTypes$4 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
-var defaultProps$4 = {
+var defaultProps$5 = {
   tag: 'div'
 };
 
@@ -9274,8 +9285,8 @@ var DropdownMenu = function DropdownMenu(props, context) {
   return React.createElement(Tag, _extends({}, attributes, { tabIndex: '-1', 'aria-hidden': !context.isOpen, role: 'menu', className: classes }));
 };
 
-DropdownMenu.propTypes = propTypes$4;
-DropdownMenu.defaultProps = defaultProps$4;
+DropdownMenu.propTypes = propTypes$5;
+DropdownMenu.defaultProps = defaultProps$5;
 DropdownMenu.contextTypes = contextTypes;
 
 var tether = createCommonjsModule(function (module, exports) {
@@ -11348,7 +11359,7 @@ var Dropdown = /*#__PURE__*/styled(DropdownUnstyled).withConfig({
   return '\n    &.dropup,\n    &.dropdown {\n      position: relative;\n    }\n\n    & .dropdown-hide {\n      display: none;\n    }\n    \n    & .dropdown-toggle {\n      /* Generate the caret automatically */\n      &::after {\n        display: inline-block;\n        width: 0;\n        height: 0;\n        margin-left: ' + props.theme['$caret-width'] + ';\n        vertical-align: middle;\n        content: \'\';\n        border-top: ' + props.theme['$caret-width'] + ' solid;\n        border-right: ' + props.theme['$caret-width'] + ' solid transparent;\n        border-left: ' + props.theme['$caret-width'] + ' solid transparent;\n      }\n\n      /* Prevent the focus on the dropdown toggle when closing dropdowns */\n      &:focus {\n        outline: 0;\n      }\n    }\n\n    &.dropup {\n      .dropdown-toggle {\n        &::after {\n          border-top: 0;\n          border-bottom: ' + props.theme['$caret-width'] + ' solid;\n        }\n      }\n    }\n\n    & .dropdown-menu {\n      clear: left;\n      position: absolute;\n      top: 100%;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown'] + ';\n      display: none; // none by default, but block on "open" of the menu\n      float: left;\n      min-width: ' + props.theme['$dropdown-min-width'] + ';\n      padding: ' + props.theme['$dropdown-padding-y'] + ' 0;\n      margin: ' + props.theme['$dropdown-margin-top'] + ' 0; /* override default ul */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      color: ' + props.theme['$body-color'] + ';\n      text-align: left; /* Ensures proper alignment if parent has it changed (e.g., modal footer) */\n      list-style: none;\n      background-color: ' + props.theme['$dropdown-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$dropdown-border-width'] + ' solid ' + props.theme['$dropdown-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$dropdown-box-shadow']) + '\n    }\n\n    /* mixin from bootstrap 4, see : scss/mixins/_nav-divider.css */\n    & .dropdown-divider {\n      ' + navDivider_3(props.theme['$spacer-y'], props.theme['$dropdown-divider-bg']) + '\n    }\n\n    & .dropdown-item {\n      display: block;\n      width: 100%; /* For <button>s */\n      padding: 3px ' + props.theme['$dropdown-item-padding-x'] + ';\n      clear: both;\n      font-weight: ' + props.theme['$font-weight-normal'] + ';\n      color: ' + props.theme['$dropdown-link-color'] + ';\n      text-align: inherit; /* For <button>s */\n      white-space: nowrap; /* prevent links from randomly breaking onto new lines */\n      background: none; /* For <button>s */\n      border: 0; /* For <button>s */\n\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$dropdown-link-hover-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-hover-bg'] + '\n      ') + '\n\n      &.active,\n      &:active {\n        color: ' + props.theme['$dropdown-link-active-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-active-bg'] + '\n      }\n\n      &.disabled,\n      &:disabled{\n        color: ' + props.theme['$dropdown-link-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: transparent;\n        ' + conditional_1(props.theme['$enable-gradients'], 'background-image: none; /* Remove CSS gradient */') + '\n      }\n    }\n\n    &.show {\n      /* show the menu */\n      &>.dropdown-menu {\n        display: block;\n      }\n\n      & > a {\n        outline: 0;\n      }\n    }\n\n\n    /* Menu positioning */\n\n    /* Add extra class to .dropdown-menu to flip the alignment of the dropdown*\n    /* menu with the parent. */\n    & .dropdown-menu-right {\n      right: 0;\n      left: auto; /* Reset the default from .dropdown-menu */\n    }\n\n    & .dropdown-menu-left {\n      right: auto;\n      left: 0;\n    }\n\n    /* Dropdown section headers */\n    & .dropdown-header {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    /* Dropdown section footers */\n    & .dropdown-footer {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    \n\n    /* Backdrop to catch body clicks on mobile, etc. */\n    & .dropdown-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown-backdrop'] + ';\n    }\n\n    /* Allow for dropdowns to go bottom up (aka, dropup-menu) */\n\n    /* Just add .dropup after the standard .dropdown class and you\'re set. */\n    /* TODO: abstract this so that the navbar fixed styles are not placed here? */\n\n    &.dropup {\n      .dropdown-menu {\n        top: auto;\n        bottom: 100%;\n        margin-bottom: ' + props.theme['$dropdown-margin-top'] + ';\n      }\n    }\n        \n    /* Added Mixin boutonGroup to enable dropdown to beneficiate from buttonGroup classes */\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
 
-var propTypes$3 = {
+var propTypes$4 = {
   children: PropTypes.node,
   isOpen: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired
@@ -11359,7 +11370,7 @@ var ButtonDropdown = function ButtonDropdown(props) {
   return React.createElement(Dropdown, _extends({}, props, { group: true }));
 };
 
-ButtonDropdown.propTypes = propTypes$3;
+ButtonDropdown.propTypes = propTypes$4;
 
 /**
  * BOOTSTRAP THEME BUTTONGROUP TAG
@@ -11579,7 +11590,7 @@ makeTheme$9();
 
 /* A Caption (Box) */
 
-var defaultProps$5 = { theme: makeTheme$9() };
+var defaultProps$6 = { theme: makeTheme$9() };
 
 var Caption = /*#__PURE__*/styled.caption.withConfig({
   displayName: 'Caption'
@@ -11587,7 +11598,7 @@ var Caption = /*#__PURE__*/styled.caption.withConfig({
   return '\n    padding-top: ' + props.theme['$table-cell-padding'] + ';\n    padding-bottom: ' + props.theme['$table-cell-padding'] + ';\n    color: ' + props.theme['$text-muted'] + ';\n    text-align: left;\n    caption-side: top;\n  ';
 });
 
-Caption.defaultProps = defaultProps$5;
+Caption.defaultProps = defaultProps$6;
 
 /**
  * BOOTSTRAP THEME CODE
@@ -13952,7 +13963,7 @@ var makeTheme$23 = function makeTheme() {
 
 makeTheme$23();
 
-var defaultProps$6 = { theme: makeTheme$23() };
+var defaultProps$7 = { theme: makeTheme$23() };
 
 var Header = /*#__PURE__*/styled.header.withConfig({
   displayName: 'Header'
@@ -13960,7 +13971,7 @@ var Header = /*#__PURE__*/styled.header.withConfig({
   return '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + conditional_1(props.shadowHeader, 'box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);') + '\n  ';
 });
 
-Header.defaultProps = defaultProps$6;
+Header.defaultProps = defaultProps$7;
 
 /**
  * BOOTSTRAP THEME HR
@@ -14006,7 +14017,7 @@ var makeTheme$24 = function makeTheme() {
 
 makeTheme$24();
 
-var defaultProps$7 = { theme: makeTheme$24() };
+var defaultProps$8 = { theme: makeTheme$24() };
 
 var Hr = /*#__PURE__*/styled.hr.withConfig({
   displayName: 'Hr'
@@ -14014,7 +14025,7 @@ var Hr = /*#__PURE__*/styled.hr.withConfig({
   return '\n    margin-top: ' + props.theme['$spacer-y'] + ';\n    margin-bottom: ' + props.theme['$spacer-y'] + ';\n    border: 0;\n    border-top: ' + props.theme['$hr-border-width'] + ' solid ' + props.theme['$hr-border-color'] + ';\n  ';
 });
 
-Hr.defaultProps = defaultProps$7;
+Hr.defaultProps = defaultProps$8;
 
 var image = createCommonjsModule(function (module, exports) {
 "use strict";
@@ -15319,7 +15330,7 @@ var columnProps$1 = PropTypes.oneOfType([PropTypes.string, PropTypes.number, Pro
   offset: stringOrNumberProp$1
 })]);
 
-var propTypes$5 = {
+var propTypes$6 = {
   /* eslint-disable react/no-unused-prop-types */
   check: PropTypes.bool,
   children: PropTypes.node,
@@ -15340,7 +15351,7 @@ var propTypes$5 = {
   /* eslint-enable react/no-unused-prop-types */
 };
 
-var defaultProps$8 = {
+var defaultProps$9 = {
   tag: 'label',
   theme: makeTheme$30()
 };
@@ -15386,8 +15397,8 @@ var Label = /*#__PURE__*/styled(LabelUnstyled).withConfig({
   return '\n    /* Reboot Scss */\n    touch-action: manipulation;\n    /* Allow labels to use margin for spacing. */\n    display: inline-block;\n    margin-bottom: ' + props.theme['$label-margin-bottom'] + ';\n\n    ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
 
-Label.propTypes = propTypes$5;
-Label.defaultProps = defaultProps$8;
+Label.propTypes = propTypes$6;
+Label.defaultProps = defaultProps$9;
 
 /* A Legend (Box) */
 
@@ -16184,7 +16195,7 @@ makeTheme$34();
  * Mark component
  */
 
-var defaultProps$9 = { theme: makeTheme$34() };
+var defaultProps$10 = { theme: makeTheme$34() };
 
 var Mark = /*#__PURE__*/styled.mark.withConfig({
   displayName: 'Mark'
@@ -16192,7 +16203,7 @@ var Mark = /*#__PURE__*/styled.mark.withConfig({
   return '\n    /* Reboot Scss */\n    padding: ' + props.theme['$mark-padding'] + ';\n    background-color: ' + props.theme['$mark-bg'] + ';\n  ';
 });
 
-Mark.defaultProps = defaultProps$9;
+Mark.defaultProps = defaultProps$10;
 
 /**
  * Media component
@@ -17234,13 +17245,13 @@ var Modal = /*#__PURE__*/styled(ModalUnstyled).withConfig({
   return '\n    ' + rebootUtils.body(props.theme['$font-family-base'], props.theme['$font-size-base'], props.theme['$font-weight-base'], props.theme['$line-height-base'], props.theme['$body-color'], props.theme['$body-bg']) + '\n    & .modal {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal'] + ';\n      display: none;\n      outline: 0;\n      overflow-x: hidden;\n      overflow-y: auto;\n      \n      ' + transition_3(props.theme['$enable-transitions'], props.theme['$transition-fade']) + '\n      &.fade {\n        .modal-dialog {\n          ' + transition_2$1(props.theme['$enable-transitions'], props.theme['$modal-transition']) + '\n          transform: translate(0, -25%);\n        }\n      }\n      &.show {\n        .modal-dialog {\n          transform: translate(0, 0);\n        }\n      }\n    }\n    \n    & .modal-dialog {\n      position: relative;\n      width: auto;\n      margin: ' + props.theme['$modal-dialog-margin'] + ';\n    }\n    \n    \n    & .modal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$modal-content-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$modal-content-border-width'] + ' solid ' + props.theme['$modal-content-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius-lg']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$modal-content-xs-box-shadow']) + '\n      outline: 0;\n    }\n    \n    & .modal-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal-backdrop'] + ';\n      background-color: ' + props.theme['$modal-backdrop-bg'] + ';\n      &.fade {\n        opacity: 0\n      }\n      &.show {\n        opacity: ' + props.theme['$modal-backdrop-opacity'] + ';\n      }\n    }\n      \n        \n    & .modal-header {\n      display: flex;\n      align-items: center;\n      justify-content: space-between;\n      padding: ' + props.theme['$modal-header-padding'] + ';\n      border-bottom: ' + props.theme['$modal-header-border-width'] + ' solid ' + props.theme['$modal-header-border-color'] + ';\n    }\n    \n    & .modal-title {\n      margin-bottom: 0;\n      line-height: ' + props.theme['$modal-title-line-height'] + ';\n    }\n    \n    & .modal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n    }\n    \n    & .modal-footer {\n      display: flex;\n      align-items: center;\n      justify-content: flex-end;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n      border-top: ' + props.theme['$modal-footer-border-width'] + ' solid ' + props.theme['$modal-footer-border-color'] + ';\n      // Easily place margin between footer elements\n      > :not(:first-child) { margin-left: .25rem; }\n      > :not(:last-child) { margin-right: .25rem; }\n    }\n    \n\n  \n    // Scale up the modal\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        & .modal-dialog {\n          max-width: ' + props.theme['$modal-md'] + ';\n          margin: ' + props.theme['$modal-dialog-sm-up-margin-y'] + ' auto;\n        }\n      \n        & .modal-content {\n          ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$modal-content-sm-up-box-shadow']) + '\n        }\n      \n        & .modal-sm {\n          max-width: ' + props.theme['$modal-sm'] + ';\n        }\n      ') + '\n  \n\n    ' + breakpoints_6('lg', props.theme['$grid-breakpoints'], '\n        & .modal-lg {\n           max-width:  ' + props.theme['$modal-lg'] + '; \n         }\n      ') + '\n  ';
 });
 
-var propTypes$6 = {
+var propTypes$7 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
 
-var defaultProps$10 = {
+var defaultProps$11 = {
   tag: 'div'
 };
 
@@ -17256,16 +17267,16 @@ var ModalBody = function ModalBody(props) {
   }));
 };
 
-ModalBody.propTypes = propTypes$6;
-ModalBody.defaultProps = defaultProps$10;
+ModalBody.propTypes = propTypes$7;
+ModalBody.defaultProps = defaultProps$11;
 
-var propTypes$7 = {
+var propTypes$8 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
 
-var defaultProps$11 = {
+var defaultProps$12 = {
   tag: 'div'
 };
 
@@ -17281,10 +17292,10 @@ var ModalFooter = function ModalFooter(props) {
   }));
 };
 
-ModalFooter.propTypes = propTypes$7;
-ModalFooter.defaultProps = defaultProps$11;
+ModalFooter.propTypes = propTypes$8;
+ModalFooter.defaultProps = defaultProps$12;
 
-var propTypes$8 = {
+var propTypes$9 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   wrapTag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   toggle: PropTypes.func,
@@ -17293,7 +17304,7 @@ var propTypes$8 = {
   children: PropTypes.node
 };
 
-var defaultProps$12 = {
+var defaultProps$13 = {
   tag: H4,
   wrapTag: 'div'
 };
@@ -17327,8 +17338,8 @@ var ModalHeader = function ModalHeader(props) {
   );
 };
 
-ModalHeader.propTypes = propTypes$8;
-ModalHeader.defaultProps = defaultProps$12;
+ModalHeader.propTypes = propTypes$9;
+ModalHeader.defaultProps = defaultProps$13;
 
 var rmUnit$13 = unitUtils$1.rmUnit;
 var UNIT$12 = unitUtils$1.UNIT;
@@ -17699,7 +17710,7 @@ makeTheme$37();
  *
  */
 
-var defaultProps$13 = { theme: makeTheme$37() };
+var defaultProps$14 = { theme: makeTheme$37() };
 
 var Ol = /*#__PURE__*/styled.ol.withConfig({
   displayName: 'Ol'
@@ -17707,7 +17718,7 @@ var Ol = /*#__PURE__*/styled.ol.withConfig({
   return '\n    /* Type Scss */\n    &.list-unstyled {\n      ' + lists_1() + '\n    }\n\n    &.list-inline {\n      ' + lists_2() + '\n    }\n\n    &.list-inline-item {\n      ' + lists_3(props.theme['$list-inline-padding']) + '\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n    margin-bottom: 1rem;\n\n    & ol,\n    & ul {\n      margin-bottom: 0;\n    }\n  ';
 });
 
-Ol.defaultProps = defaultProps$13;
+Ol.defaultProps = defaultProps$14;
 
 /* Option */
 
@@ -18329,7 +18340,7 @@ makeTheme$40();
  * Pre component
  */
 
-var defaultProps$14 = { theme: makeTheme$40() };
+var defaultProps$15 = { theme: makeTheme$40() };
 
 var Pre = /*#__PURE__*/styled.pre.withConfig({
   displayName: 'Pre'
@@ -18337,7 +18348,7 @@ var Pre = /*#__PURE__*/styled.pre.withConfig({
   return '\n    /* Blocks of code */\n    display: block;\n    margin-top: 0;\n    margin-bottom: 1rem;\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$pre-color'] + ';\n    \n    /* Enable scrollable blocks of code */\n    /* AJT This class was present in bootstrap/scss/code.scss  We must decide if this class should be a mixin or not! */\n    &.pre-scrollable {\n      max-height: ' + props.theme['$pre-scrollable-max-height'] + ';\n      overflow-y: scroll;\n    }\n\n  \n    /* Account for some code outputs that place code tags in pre tags */\n    code {\n      padding: 0;\n      font-size: inherit;\n      color: inherit;\n      background-color: transparent;\n      border-radius: 0;\n    }\n    \n    /* Reboot Scss */\n\n    /* Remove browser default top margin */\n    margin-top: 0;\n    /* Reset browser default of \'1em\' to use \'rem\'s */\n    margin-bottom: 1rem;\n    /* Normalize v4 removed this property, causing \'pre\' content to break out of wrapping code snippets */\n    overflow: auto;\n    \n    /* Bootstrap 4 does not place this css rule straight into Kbd tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
 
-Pre.defaultProps = defaultProps$14;
+Pre.defaultProps = defaultProps$15;
 
 var gradients = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -19673,7 +19684,7 @@ var defaultTetherConfig$1 = {
 };
 // propTypes need to be excluded of the tooltip class
 // issue on : https://github.com/yannickcr/eslint-plugin-react/issues/203
-var propTypes$9 = {
+var propTypes$10 = {
   placement: PropTypes.oneOf(tools_10),
   target: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   isOpen: PropTypes.bool,
@@ -19810,7 +19821,7 @@ var TooltipUnstyled = function (_React$Component) {
         return null;
       }
 
-      var attributes = lodash_omit(this.props, Object.keys(propTypes$9));
+      var attributes = lodash_omit(this.props, Object.keys(propTypes$10));
 
       var classes = mapToCssModules(classnames('tooltip', this.props.className), this.props.cssModule);
 
@@ -19849,7 +19860,7 @@ TooltipUnstyled.defaultProps = {
   autohide: true,
   toggle: function toggle() {}
 };
-TooltipUnstyled.propTypes = propTypes$9;
+TooltipUnstyled.propTypes = propTypes$10;
 var Tooltip = /*#__PURE__*/styled(TooltipUnstyled).withConfig({
   displayName: 'Tooltip'
 })(['', ''], function (props) {
@@ -21986,7 +21997,7 @@ var Navbar = /*#__PURE__*/styled(NavbarUnstyled).withConfig({
   return '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + nav_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n  ';
 });
 
-var propTypes$10 = {
+var propTypes$11 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   type: PropTypes.string,
   className: PropTypes.string,
@@ -21996,7 +22007,7 @@ var propTypes$10 = {
   left: PropTypes.bool
 };
 
-var defaultProps$15 = {
+var defaultProps$16 = {
   tag: 'button',
   type: 'button'
 };
@@ -22022,16 +22033,16 @@ var NavbarToggler = function NavbarToggler(props) {
   );
 };
 
-NavbarToggler.propTypes = propTypes$10;
-NavbarToggler.defaultProps = defaultProps$15;
+NavbarToggler.propTypes = propTypes$11;
+NavbarToggler.defaultProps = defaultProps$16;
 
-var propTypes$11 = {
+var propTypes$12 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
 
-var defaultProps$16 = {
+var defaultProps$17 = {
   tag: 'a'
 };
 
@@ -22047,10 +22058,10 @@ var NavbarBrand = function NavbarBrand(props) {
   return React.createElement(Tag, _extends({}, attributes, { className: classes }));
 };
 
-NavbarBrand.propTypes = propTypes$11;
-NavbarBrand.defaultProps = defaultProps$16;
+NavbarBrand.propTypes = propTypes$12;
+NavbarBrand.defaultProps = defaultProps$17;
 
-var propTypes$12 = {
+var propTypes$13 = {
   children: PropTypes.node,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
@@ -22059,7 +22070,7 @@ var propTypes$12 = {
   isOpen: PropTypes.bool.isRequired
 };
 
-var defaultProps$17 = {
+var defaultProps$18 = {
   tag: 'li'
 };
 
@@ -22075,8 +22086,8 @@ var NavDropdown = function NavDropdown(props) {
   return React.createElement(Dropdown, _extends({}, attributes, { tag: Tag, className: classes }));
 };
 
-NavDropdown.propTypes = propTypes$12;
-NavDropdown.defaultProps = defaultProps$17;
+NavDropdown.propTypes = propTypes$13;
+NavDropdown.defaultProps = defaultProps$18;
 
 /**
  * BOOTSTRAP THEME CONTAINER

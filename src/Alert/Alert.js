@@ -15,37 +15,43 @@ import { makeTheme } from './theme';
 import Fade from '../Modal/Fade';
 import Close from '../Close';
 
+const defaultProps = {
+  color: 'success',
+  isOpen: true,
+  tag: 'div',
+  theme: makeTheme(),
+  transition: {
+    ...Fade.defaultProps,
+    unmountOnExit: true,
+  },
+};
+
+const propTypes = {
+  /* eslint-disable react/no-unused-prop-types */
+  children: PropTypes.node,
+  className: PropTypes.string,
+  cssModule: PropTypes.object,
+  color: PropTypes.string,
+  isOpen: PropTypes.bool,
+  toggle: PropTypes.func,
+  autoClose: PropTypes.func,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  transition: PropTypes.shape(Fade.propTypes),
+  autoHideDuration: PropTypes.number,
+  theme: PropTypes.object,
+  /* eslint-enable react/no-unused-prop-types */
+};
+
+
 class AlertUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    color: 'success',
-    isOpen: true,
-    tag: 'div',
-    theme: makeTheme(),
-    transition: {
-      ...Fade.defaultProps,
-      unmountOnExit: true,
-    },
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    children: PropTypes.node,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    color: PropTypes.string,
-    isOpen: PropTypes.bool,
-    toggle: PropTypes.func,
-    autoClose: PropTypes.func,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    transition: PropTypes.shape(Fade.propTypes),
-    autoHideDuration: PropTypes.number,
-    theme: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  };
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   state = {
-    // Used to only render active snackbars.
     exited: false,
   };
 
@@ -217,5 +223,6 @@ const Alert = styled(AlertUnstyled)`
   `}
 `;
 
+/** @component */
 export default withTheme(Alert);
 
