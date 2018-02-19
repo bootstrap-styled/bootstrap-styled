@@ -156,7 +156,6 @@
     "lint-staged": "^4.0.0",
     "pre-commit": "^1.2.2",
     "prop-types": "^15.6.0",
-    "raf": "^3.3.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-styleguidist": "^6.2.3",
@@ -221,8 +220,8 @@
     "lint-staged"
   ],
   "dependencies": {
-    "bootstrap-styled-mixins": "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled-mixins.git#v1.0.1",
-    "bootstrap-styled-utils": "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled-utils.git#dev",
+    "bootstrap-styled-mixins": "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled-mixins.git#v1.0.2",
+    "bootstrap-styled-utils": "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled-utils.git#1.0.1",
     "classnames": "^2.2.5",
     "color": "^1.0.3",
     "lodash.omit": "^4.5.0",
@@ -235,6 +234,6 @@
     "react-dom": "^16.0.0",
     "prop-types": "^15.6.0",
     "styled-components": "^2.1.2",
-    "react-transition-group": "1.2.0"
+    "react-transition-group": "2.2.1"
   }
 }
