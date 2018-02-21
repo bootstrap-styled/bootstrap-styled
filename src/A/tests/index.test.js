@@ -104,6 +104,24 @@ describe('<A />', () => {
     });
     expect(renderedComponent.find('a').props().target).toEqual('_blank');
   });
+  it('should render an <A> tag without a theme and props active', () => {
+    const active = true;
+    const renderedComponent = renderComponentUsingTheme({
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
+      children,
+      active,
+    });
+    expect(renderedComponent.find('a').hasClass('active')).toEqual(true);
+  });
+  it('should render an <A> tag without a theme and props disabled', () => {
+    const disabled = true;
+    const renderedComponent = renderComponentUsingTheme({
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
+      children,
+      disabled,
+    });
+    expect(renderedComponent.find('a').hasClass('disabled')).toEqual(true);
+  });
   it('should have an attribute color', () => {
     const renderedComponent = renderComponentUsingTheme({
       href: 'https://bootstrap-styled.kopaxgroup.com/',
@@ -128,6 +146,26 @@ describe('<A />', () => {
       children,
     });
     expect(renderedComponent.find('a').hasClass('btn')).toBe(true);
+  });
+  it('active should set a class', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      className: 'btn',
+      target: '_blank',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
+      children,
+      active: true,
+    });
+    expect(renderedComponent.find('a').hasClass('active')).toBe(true);
+  });
+  it('disabled should set a class', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      className: 'btn',
+      target: '_blank',
+      href: 'https://bootstrap-styled.kopaxgroup.com/',
+      children,
+      disabled: true,
+    });
+    expect(renderedComponent.find('a').hasClass('disabled')).toBe(true);
   });
   it('color should set a class', () => {
     const renderedComponent = renderComponentUsingTheme({

@@ -1,3 +1,6 @@
+/**
+ * A link to a certain page, an anchor tag
+ */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -11,11 +14,11 @@ import { a } from 'bootstrap-styled-mixins/lib/a';
 const defaultProps = {
   tag: 'a',
   theme: {
-    '$link-color': '#0275d8',
-    '$link-decoration': 'none',
-    '$link-hover-color': '#014C8D',
-    '$link-hover-decoration': 'underline',
-    '$enable-hover-media-query': false,
+    '$enable-hover-media-query': true,
+    '$link-color': '#f00',
+    '$link-decoration': '#f00',
+    '$link-hover-color': '#f00',
+    '$link-hover-decoration': '#f00',
   },
 };
 const propTypes = {
@@ -23,26 +26,19 @@ const propTypes = {
    * @ignore
    */
   className: PropTypes.string,
-  /**
-   * Replace or remove a className from the component.
-   */
+  /** Description of prop "active". */
+  active: PropTypes.bool,
   tag: PropTypes.string,
+  disabled: PropTypes.bool,
   /** Theme variables. */
   theme: PropTypes.shape({
+    '$enable-hover-media-query': PropTypes.bool,
     '$link-color': PropTypes.string,
     '$link-decoration': PropTypes.string,
     '$link-hover-color': PropTypes.string,
     '$link-hover-decoration': PropTypes.string,
-    '$enable-hover-media-query': PropTypes.bool,
   }),
-  /**
-   * Color of the component.
-   */
-  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
-  /**
-   * Replace or remove a className from the component.
-   * @see See example [here](https://www.npmjs.com/package/map-to-css-modules).
-   */
+  color: PropTypes.string,
   cssModule: PropTypes.object,
 };
 
@@ -61,6 +57,8 @@ class AUnstyled extends React.Component { // eslint-disable-line react/prefer-st
   render() {
     const {
       className,
+      active,
+      disabled,
       cssModule,
       color,
       tag: Tag,
@@ -73,6 +71,8 @@ class AUnstyled extends React.Component { // eslint-disable-line react/prefer-st
       <Tag
         className={mapToCssModules(cn(className, {
           focus,
+          active,
+          disabled,
           [`text-${color}`]: color,
         }), cssModule)}
         {...attributes}
@@ -82,16 +82,16 @@ class AUnstyled extends React.Component { // eslint-disable-line react/prefer-st
 }
 
 /**
- * An anchor tag component used to direct towards a page outside of the application.
+ * anchor link element
  */
 const A = styled(AUnstyled)`
   ${(props) => `
     ${a(
+      props.theme['$enable-hover-media-query'],
       props.theme['$link-color'],
       props.theme['$link-decoration'],
       props.theme['$link-hover-color'],
       props.theme['$link-hover-decoration'],
-      props.theme['$enable-hover-media-query']
     )}
   `}
 `;

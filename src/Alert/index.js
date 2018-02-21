@@ -1,123 +1,51 @@
+/**
+ * Alert component
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled, { withTheme } from 'styled-components';
+import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { alertVariant } from 'bootstrap-styled-mixins/lib/alert';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
-import { createChainedFunction } from 'bootstrap-styled-utils';
 import { makeTheme } from './theme';
-import Fade from '../Modal/Fade';
+
 import Close from '../Close';
 
-const defaultProps = {
-  color: 'success',
-  isOpen: true,
-  tag: 'div',
-  theme: makeTheme(),
-  transition: {
-    ...Fade.defaultProps,
-    unmountOnExit: true,
-  },
-};
-
-const propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  /**
-   * @ignore
-   */
-  children: PropTypes.node,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * Replace or remove a className from the component.
-   */
-  cssModule: PropTypes.object,
-  /**
-   * Change the color of the component.
-   */
-  color: PropTypes.string,
-  isOpen: PropTypes.bool,
-  toggle: PropTypes.func,
-  autoClose: PropTypes.func,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  transition: PropTypes.shape(Fade.propTypes),
-  autoHideDuration: PropTypes.number,
-  theme: PropTypes.object,
-  /* eslint-enable react/no-unused-prop-types */
-};
-
+const FirstChild = ({ children }) => (
+  React.Children.toArray(children)[0] || null
+);
 
 class AlertUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = defaultProps;
-
-  /* eslint-disable react/no-unused-prop-types */
-  static propTypes = propTypes;
-  /* eslint-enable react/no-unused-prop-types */
-
-  state = {
-    exited: false,
+  static defaultProps = {
+    color: 'success',
+    isOpen: true,
+    tag: 'div',
+    theme: makeTheme(),
+    transitionAppear: 150,
+    transitionEnter: 150,
+    transitionLeave: 150,
   };
 
-  componentWillMount() {
-    if (!this.props.isOpen) {
-      this.setState({ exited: true });
-    }
+  static propTypes = {
+    /* eslint-disable react/no-unused-prop-types */
+    children: PropTypes.node,
+    className: PropTypes.string,
+    cssModule: PropTypes.object,
+    color: PropTypes.string,
+    isOpen: PropTypes.bool,
+    toggle: PropTypes.func,
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    transitionAppear: PropTypes.number,
+    transitionEnter: PropTypes.number,
+    transitionLeave: PropTypes.number,
+    theme: PropTypes.object,
+    /* eslint-enable react/no-unused-prop-types */
   }
-
-  componentDidMount() {
-    if (this.props.isOpen) {
-      this.setAutoHideTimer();
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isOpen) {
-      this.setState({ exited: false });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.isOpen !== this.props.isOpen) {
-      if (this.props.isOpen) {
-        this.setAutoHideTimer();
-      } else {
-        clearTimeout(this.timerAutoHide);
-      }
-    }
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timerAutoHide);
-  }
-
-  // Timer that controls delay before snackbar auto hides
-  setAutoHideTimer = (autoHideDuration = null) => {
-    if (this.props.autoHideDuration == null || !this.props.toggle) {
-      return;
-    }
-
-    clearTimeout(this.timerAutoHide);
-
-    this.timerAutoHide = setTimeout(() => {
-      if (this.props.autoHideDuration != null && this.props.toggle) {
-        this.props.toggle();
-      } else if (this.props.autoHideDuration != null && !this.props.toggle) {
-        this.props.autoClose();
-      }
-    }, autoHideDuration || this.props.autoHideDuration || 0);
-  };
-
-  timerAutoHide = null;
-
-  handleExited = () => {
-    this.setState({ exited: true });
-  };
-
 
   render() {
     const {
@@ -128,11 +56,11 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
       isOpen,
       toggle,
       children,
-      onExited,
-      transition,
-      autoClose,
+      transitionAppear,
+      transitionEnter,
+      transitionLeave,
       ...attributes
-    } = omit(this.props, ['theme', 'autoHideDuration']);
+    } = omit(this.props, ['theme']);
 
     const classes = mapToCssModules(cn(
       className,
@@ -141,28 +69,40 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
       { 'alert-dismissible': toggle }
     ), cssModule);
 
-    if (!isOpen && this.state.exited) {
-      return null;
-    }
-
-    const transitionProps = {
-      in: isOpen,
-      appear: true,
-      onExited: createChainedFunction(this.handleExited, onExited),
-    };
+    const alert = (
+      <Tag {...attributes} className={classes} role="alert">
+        {toggle && <Close onDismiss={toggle} />}
+        {children}
+      </Tag>
+    );
 
     return (
-      <Fade {...attributes} {...transition} {...transitionProps} tag={Tag} className={classes} in={isOpen} role="alert">
-        {toggle ?
-          <Close onDismiss={toggle} />
-          : null}
-        {children}
-      </Fade>
+      <ReactCSSTransitionGroup
+        component={FirstChild}
+        transitionName={{
+          appear: 'fade',
+          appearActive: 'show',
+          enter: 'fade',
+          enterActive: 'show',
+          leave: 'fade',
+          leaveActive: 'out',
+        }}
+        transitionAppear={transitionAppear > 0}
+        transitionAppearTimeout={transitionAppear}
+        transitionEnter={transitionEnter > 0}
+        transitionEnterTimeout={transitionEnter}
+        transitionLeave={transitionLeave > 0}
+        transitionLeaveTimeout={transitionLeave}
+      >
+        {isOpen ? alert : null}
+      </ReactCSSTransitionGroup>
     );
   }
 }
 
-const Alert = styled(AlertUnstyled)`
+const AlertUnstyledWithTheme = withTheme(AlertUnstyled);
+
+const Alert = styled(AlertUnstyledWithTheme)`
   ${(props) => `
     /*
     Base styles
@@ -202,38 +142,35 @@ const Alert = styled(AlertUnstyled)`
 
     &.alert-success {
       ${alertVariant(
-  props.theme['$alert-success-bg'],
-  props.theme['$alert-success-border'],
-  props.theme['$alert-success-text'],
-)}    
+        props.theme['$alert-success-bg'],
+        props.theme['$alert-success-border'],
+        props.theme['$alert-success-text'],
+      )}    
     }
     &.alert-info {
       ${alertVariant(
-  props.theme['$alert-info-bg'],
-  props.theme['$alert-info-border'],
-  props.theme['$alert-info-text'],
-)}
+        props.theme['$alert-info-bg'],
+        props.theme['$alert-info-border'],
+        props.theme['$alert-info-text'],
+      )}
     } 
     &.alert-warning {
       ${alertVariant(
-  props.theme['$alert-warning-bg'],
-  props.theme['$alert-warning-border'],
-  props.theme['$alert-warning-text'],
-)} 
+        props.theme['$alert-warning-bg'],
+        props.theme['$alert-warning-border'],
+        props.theme['$alert-warning-text'],
+      )} 
     }
     &.alert-danger {
       ${alertVariant(
-  props.theme['$alert-danger-bg'],
-  props.theme['$alert-danger-border'],
-  props.theme['$alert-danger-text'],
-)} 
+        props.theme['$alert-danger-bg'],
+        props.theme['$alert-danger-border'],
+        props.theme['$alert-danger-text'],
+      )} 
     }
   `}
 `;
 
-Alert.defaultProps = defaultProps;
-Alert.propTypes = propTypes;
-
 /** @component */
-export default withTheme(Alert);
+export default Alert;
 

@@ -1,11 +1,9 @@
 React component example:
 
 ```js
-<div>
-  <A href="https://bootstrap-styled.yeutech.com">Visit Bootstrap Styled !</A>
-  <A color="success" href="https://bootstrap-styled.yeutech.com">Visit Bootstrap Styled !</A>
-</div>
+<A color="info" href="https://bootstrap-styled.yeutech.com">Visit Bootstrap Styled !</A>
 ```
+
 Or as a Button:
 
 
@@ -13,3 +11,7 @@ Or as a Button:
 <Button tag={A} color="danger" href="https://bootstrap-styled.yeutech.com">Visit Bootstrap Styled !</Button>
 ```
 
+
+```js { "props": { "active": "true" } }
+<Button tag={A} color="danger" href="https://bootstrap-styled.yeutech.com">I am active</Button>
+```
