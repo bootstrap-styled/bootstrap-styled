@@ -2,11 +2,11 @@
 // styleguide/ThemeWrapper.js
 
 import React, { Component } from 'react';
-import { ThemeProvider } from 'styled-components';
+import BootstrapProvider from '../src/BootstrapProvider';
 import theme from '../src/theme';
 
 export default class ThemeWrapper extends Component {
   render() {
-    return <ThemeProvider theme={theme}>{this.props.children}</ThemeProvider>;
+    return <BootstrapProvider theme={theme}>{this.props.children}</BootstrapProvider>;
   }
 }

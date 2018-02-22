@@ -1,9 +1,9 @@
+/* eslint no-underscore-dangle: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
+import { Portal } from 'react-portal';
 import styled from 'styled-components';
-import TransitionGroup from 'react-transition-group/TransitionGroup';
-import classNames from 'classnames';
+import cn from 'classnames';
 import omit from 'lodash.omit';
 import {
   getOriginalBodyPadding,
@@ -20,236 +20,311 @@ import rebootUtils from 'bootstrap-styled-mixins/lib/utilities/reboot';
 import Fade from './Fade';
 import { makeTheme } from './theme';
 
+function noop() { }
+
+const FadePropTypes = PropTypes.shape(Fade.propTypes);
+
+const propTypes = {
+  theme: PropTypes.object,
+  isOpen: PropTypes.bool,
+  autoFocus: PropTypes.bool,
+  size: PropTypes.string,
+  toggle: PropTypes.func,
+  keyboard: PropTypes.bool,
+  role: PropTypes.string,
+  labelledBy: PropTypes.string,
+  backdrop: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.oneOf(['static']),
+  ]),
+  onEnter: PropTypes.func,
+  onExit: PropTypes.func,
+  onOpened: PropTypes.func,
+  onClosed: PropTypes.func,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  documentClassName: PropTypes.string,
+  modalClassName: PropTypes.string,
+  backdropClassName: PropTypes.string,
+  contentClassName: PropTypes.string,
+  fade: PropTypes.bool,
+  cssModule: PropTypes.object,
+  zIndex: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
+  backdropTransition: FadePropTypes,
+  modalTransition: FadePropTypes,
+};
+
+const defaultProps = {
+  isOpen: false,
+  autoFocus: true,
+  role: 'dialog',
+  backdrop: true,
+  keyboard: true,
+  zIndex: 2000,
+  theme: makeTheme(),
+  fade: true,
+  onOpened: noop,
+  onClosed: noop,
+  modalTransition: {
+    timeout: 300,
+  },
+  backdropTransition: {
+    mountOnEnter: true,
+    timeout: 150, // uses standard fade transition
+  },
+};
 
 class ModalUnstyled extends React.Component {
 
-  static defaultProps = {
-    isOpen: false,
-    backdrop: true,
-    keyboard: true,
-    zIndex: 2000,
-    theme: makeTheme(),
-  };
-
-  static propTypes = {
-    theme: PropTypes.object,
-    /* eslint-disable react/no-unused-prop-types */
-    size: PropTypes.string,
-    children: PropTypes.node,
-    className: PropTypes.string,
-    wrapClassName: PropTypes.string,
-    modalClassName: PropTypes.string,
-    backdropClassName: PropTypes.string,
-    contentClassName: PropTypes.string,
-    /* eslint-enable react/no-unused-prop-types */
-    isOpen: PropTypes.bool,
-    onBackdrop: PropTypes.func,
-    keyboard: PropTypes.bool,
-    backdrop: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.oneOf(['static']),
-    ]),
-    onEnter: PropTypes.func,
-    onExit: PropTypes.func,
-    cssModule: PropTypes.object,
-    zIndex: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
-    ]),
-  };
+  static defaultProps = defaultProps;
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   constructor(props) {
     super(props);
     this.originalBodyPadding = null;
+
+
+    this.state = {
+      isOpen: props.isOpen,
+    };
+
+    if (props.isOpen) {
+      this.init();
+    }
   }
 
   componentDidMount() {
-    if (this.props.isOpen) {
-      this.togglePortal();
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.isOpen !== prevProps.isOpen) {
-      // handle portal events/dom updates
-      this.togglePortal();
-    } else if (this._element) { // eslint-disable-line no-underscore-dangle
-      // rerender portal
-      this.renderIntoSubtree();
-    }
-  }
-
-  componentWillUnmount() {
-    this.destroy();
-    if (this.props.onExit) {
-      this.props.onExit();
-    }
-  }
-
-  onEnter = () => {
     if (this.props.onEnter) {
       this.props.onEnter();
     }
+
+    if (this.state.isOpen && this.props.autoFocus) {
+      this.setFocus();
+    }
+
+    this._isMounted = true;
   }
 
-  onExit = () => {
-    this.destroy();
-    if (this.props.onExit) {
-      this.props.onExit();
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isOpen && !this.props.isOpen) {
+      this.setState({ isOpen: nextProps.isOpen });
     }
   }
 
-  handleEscape = (e) => {
-    if (this.props.keyboard && e.keyCode === 27 && this.props.onBackdrop) {
-      this.props.onBackdrop();
+  componentWillUpdate(nextProps, nextState) {
+    if (nextState.isOpen && !this.state.isOpen) {
+      this.init();
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.autoFocus && this.state.isOpen && !prevState.isOpen) {
+      this.setFocus();
+    }
+  }
+
+
+  componentWillUnmount() {
+    if (this.props.onExit) {
+      this.props.onExit();
+    }
+    if (this.state.isOpen) {
+      this.destroy();
+    }
+    this._isMounted = false;
+  }
+
+  onOpened = (node, isAppearing) => {
+    this.props.onOpened();
+    (this.props.modalTransition.onEntered || noop)(node, isAppearing);
+  }
+
+  onClosed = (node) => {
+    // so all methods get called before it is unmounted
+    this.props.onClosed();
+    (this.props.modalTransition.onExited || noop)(node);
+    this.destroy();
+
+    if (this._isMounted) {
+      this.setState({ isOpen: false });
+    }
+  }
+
+  setFocus() {
+    if (this._dialog && this._dialog.parentNode && typeof this._dialog.parentNode.focus === 'function') {
+      this._dialog.parentNode.focus();
     }
   }
 
   handleBackdropClick = (e) => {
-    if (this.props.backdrop !== true) return;
-    if (this.props.backdrop && e.target && !this._dialog.contains(e.target) && this.props.onBackdrop) {  // eslint-disable-line no-underscore-dangle
-      this.props.onBackdrop();
+    e.stopPropagation();
+    if (!this.props.isOpen || this.props.backdrop !== true) return;
+
+    const container = this._dialog;
+
+    if (e.target && !container.contains(e.target) && this.props.toggle) {
+      this.props.toggle();
     }
   }
 
-  togglePortal = () => {
-    if (this.props.isOpen) {
-      this._focus = true; // eslint-disable-line no-underscore-dangle
-      this.show();
-    } else {
-      this.hide();
+  handleEscape = (e) => {
+    if (this.props.isOpen && this.props.keyboard && e.keyCode === 27 && this.props.toggle) {
+      this.props.toggle();
     }
   }
 
   destroy = () => {
-    if (this._element) {  // eslint-disable-line no-underscore-dangle
-      ReactDOM.unmountComponentAtNode(this._element); // eslint-disable-line no-underscore-dangle
-      document.body.removeChild(this._element); // eslint-disable-line no-underscore-dangle
-      this._element = null; // eslint-disable-line no-underscore-dangle
-    }
+    document.body.removeChild(this._element);
+    this._element = null;
 
-    const classes = document.body.className.replace('overflow', '');
-    document.body.className = mapToCssModules(classNames(classes).trim(), this.props.cssModule);
+    // Use regex to prevent matching `modal-open` as part of a different class, e.g. `my-modal-opened`
+    const classes = document.body.className.replace(/(^| )overflow( |$)/, ' ');
+    document.body.className = mapToCssModules(cn(classes).trim(), this.props.cssModule);
     setScrollbarWidth(this.originalBodyPadding);
   }
 
-  hide() {
-    this.renderIntoSubtree();
-  }
-
-  show() {
-    if (this._dialog) { // eslint-disable-line no-underscore-dangle
-      this.props.onBackdrop(true);
-      return;
-    }
+  init() {
     const classes = document.body.className;
-    this._element = document.createElement('div');  // eslint-disable-line no-underscore-dangle
-    this._element.setAttribute('tabindex', '-1'); // eslint-disable-line no-underscore-dangle
-    this._element.style.position = 'relative';  // eslint-disable-line no-underscore-dangle
-    this._element.style.zIndex = this.props.zIndex; // eslint-disable-line no-underscore-dangle
+    this._element = document.createElement('div');
+    this._element.setAttribute('tabindex', '-1');
+    this._element.style.position = 'relative';
+    this._element.style.zIndex = this.props.zIndex;
     this.originalBodyPadding = getOriginalBodyPadding();
 
     conditionallyUpdateScrollbar();
 
-    document.body.appendChild(this._element); // eslint-disable-line no-underscore-dangle
-    document.body.className = mapToCssModules(classNames(
+    document.body.appendChild(this._element);
+
+    document.body.className = mapToCssModules(cn(
       classes,
       'overflow'
     ), this.props.cssModule);
-
-    this.renderIntoSubtree();
   }
 
-  renderIntoSubtree() {
-    ReactDOM.unstable_renderSubtreeIntoContainer(
-      this,
-      this.renderChildren(),
-      this._element  // eslint-disable-line no-underscore-dangle
-    );
-
-    // check if modal should receive focus
-    if (this._focus) {  // eslint-disable-line no-underscore-dangle
-      if (this._dialog && this._dialog.parentNode && typeof this._dialog.parentNode.focus === 'function') { // eslint-disable-line no-underscore-dangle
-        this._dialog.parentNode.focus(); // eslint-disable-line no-underscore-dangle
-      }
-      this._focus = false;  // eslint-disable-line no-underscore-dangle
-    }
-  }
-
-  renderChildren() {
-    const {
-      className,
-      wrapClassName,
-      modalClassName,
-      backdropClassName,
-      contentClassName,
-      cssModule,
-      isOpen,
-      size,
-      backdrop,
-      children,
-      ...attributes
-    } = omit(this.props, ['theme', 'onBackdrop', 'keyboard', 'onEnter', 'onExit', 'zIndex']);
+  renderModalDialog() {
+    const attributes = omit(this.props, [
+      'theme',
+      'isOpen',
+      'autoFocus',
+      'size',
+      'toggle',
+      'keyboard',
+      'role',
+      'labelledBy',
+      'backdrop',
+      'onEnter',
+      'onExit',
+      'onOpened',
+      'onClosed',
+      'children',
+      'className',
+      'documentClassName',
+      'modalClassName',
+      'backdropClassName',
+      'contentClassName',
+      'fade',
+      'cssModule',
+      'zIndex',
+      'backdropTransition',
+      'modalTransition',
+    ]);
 
     return (
-      <TransitionGroup component="div" className={mapToCssModules(classNames(wrapClassName, className))}>
-        {isOpen && (
-          <Fade
-            key="modal-dialog"
-            onEnter={this.onEnter}
-            onLeave={this.onExit}
-            transitionAppearTimeout={300}
-            transitionEnterTimeout={300}
-            transitionLeaveTimeout={300}
-            onClickCapture={this.handleBackdropClick}
-            onKeyUp={this.handleEscape}
-            className={mapToCssModules(classNames('modal', modalClassName), cssModule)}
-            style={{ display: 'block' }}
-            tabIndex="-1"
-          >
-            <div
-              className={mapToCssModules(classNames('modal-dialog', {
-                [`modal-${size}`]: size,
-                show: isOpen,
-              }))}
-              role="document"
-              ref={(c) => (this._dialog = c)} // eslint-disable-line
-              {...attributes}
-            >
-              <div className={mapToCssModules(classNames('modal-content', contentClassName), cssModule)}>
-                {children}
-              </div>
-            </div>
-          </Fade>
-        )}
-        {isOpen && backdrop && (
-          <Fade
-            key="modal-backdrop"
-            transitionAppearTimeout={150}
-            transitionEnterTimeout={150}
-            transitionLeaveTimeout={150}
-            className={mapToCssModules(classNames('modal-backdrop', backdropClassName), cssModule)}
-          />
-        )}
-      </TransitionGroup>
+      <div
+        className={mapToCssModules(cn('modal-dialog', this.props.documentClassName, {
+          [`modal-${this.props.size}`]: this.props.size,
+        }), this.props.cssModule)}
+        role="document"
+        ref={(c) => {
+          this._dialog = c;
+        }}
+        {...attributes}
+      >
+        <div
+          className={mapToCssModules(
+            cn('modal-content', this.props.contentClassName),
+            this.props.cssModule
+          )}
+        >
+          {this.props.children}
+        </div>
+      </div>
     );
   }
 
   render() {
+    if (this.state.isOpen) {
+      const {
+        modalClassName,
+        backdropClassName,
+        cssModule,
+        isOpen,
+        backdrop,
+        role,
+        labelledBy,
+      } = this.props;
+
+      const modalAttributes = {
+        onClick: this.handleBackdropClick,
+        onKeyUp: this.handleEscape,
+        style: { display: 'block' },
+        'aria-labelledby': labelledBy,
+        role,
+        tabIndex: '-1',
+      };
+
+      const hasTransition = this.props.fade;
+      const modalTransition = {
+        ...Fade.defaultProps,
+        ...this.props.modalTransition,
+        baseClass: hasTransition ? this.props.modalTransition.baseClass : '',
+        timeout: hasTransition ? this.props.modalTransition.timeout : 0,
+      };
+      const backdropTransition = {
+        ...Fade.defaultProps,
+        ...this.props.backdropTransition,
+        baseClass: hasTransition ? this.props.backdropTransition.baseClass : '',
+        timeout: hasTransition ? this.props.backdropTransition.timeout : 0,
+      };
+
+      return (
+        <Portal node={this._element}>
+          <div className={mapToCssModules(this.props.className)}>
+            <Fade
+              {...modalAttributes}
+              {...modalTransition}
+              in={isOpen}
+              onEntered={this.onOpened}
+              onExited={this.onClosed}
+              cssModule={cssModule}
+              className={mapToCssModules(cn('modal', modalClassName), cssModule)}
+            >
+              {this.renderModalDialog()}
+            </Fade>
+            <Fade
+              {...backdropTransition}
+              in={isOpen && !!backdrop}
+              cssModule={cssModule}
+              className={mapToCssModules(cn('modal-backdrop', backdropClassName), cssModule)}
+            />
+          </div>
+        </Portal>
+      );
+    }
+
     return null;
   }
 }
-
+/**
+ * Modal element
+ */
 const Modal = styled(ModalUnstyled)`
   ${(props) => `
-    ${rebootUtils.body(
-      props.theme['$font-family-base'],
-      props.theme['$font-size-base'],
-      props.theme['$font-weight-base'],
-      props.theme['$line-height-base'],
-      props.theme['$body-color'],
-      props.theme['$body-bg'],
-    )}
     & .modal {
       position: fixed;
       top: 0;
@@ -280,6 +355,14 @@ const Modal = styled(ModalUnstyled)`
       position: relative;
       width: auto;
       margin: ${props.theme['$modal-dialog-margin']};
+      ${rebootUtils.body(
+  props.theme['$font-family-base'],
+  props.theme['$font-size-base'],
+  props.theme['$font-weight-base'],
+  props.theme['$line-height-base'],
+  props.theme['$body-color'],
+  props.theme['$body-bg'],
+)}
     }
     
     
@@ -304,7 +387,8 @@ const Modal = styled(ModalUnstyled)`
       z-index: ${props.theme['$zindex-modal-backdrop']};
       background-color: ${props.theme['$modal-backdrop-bg']};
       &.fade {
-        opacity: 0
+        opacity: 0;
+        ${transition(props.theme['$enable-transitions'], props.theme['$transition-fade'])};
       }
       &.show {
         opacity: ${props.theme['$modal-backdrop-opacity']};
@@ -346,7 +430,7 @@ const Modal = styled(ModalUnstyled)`
   
     // Scale up the modal
     ${mediaBreakpointUp('sm', props.theme['$grid-breakpoints'],
-      `
+  `
         & .modal-dialog {
           max-width: ${props.theme['$modal-md']};
           margin: ${props.theme['$modal-dialog-sm-up-margin-y']} auto;
@@ -360,16 +444,16 @@ const Modal = styled(ModalUnstyled)`
           max-width: ${props.theme['$modal-sm']};
         }
       `
-    )}
+)}
   
 
     ${mediaBreakpointUp('lg', props.theme['$grid-breakpoints'],
-      `
+  `
         & .modal-lg {
            max-width:  ${props.theme['$modal-lg']}; 
          }
       `
-    )}
+)}
   `}
 `;
 
