@@ -199,7 +199,7 @@
       "global": {
         "statements": 95,
         "branches": 92,
-        "functions": 92,
+        "functions": 90,
         "lines": 95
       }
     },
