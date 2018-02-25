@@ -35,9 +35,6 @@ const propTypes = {
     '$link-hover-decoration': PropTypes.string,
     '$enable-hover-media-query': PropTypes.bool,
   }),
-  /**
-   * Color of the component.
-   */
   color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /**
    * Replace or remove a className from the component.
