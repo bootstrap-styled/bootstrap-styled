@@ -104,9 +104,9 @@ describe('<A />', () => {
     const renderedComponent = renderComponentUsingTheme({
       href: 'https://bootstrap-styled.kopaxgroup.com/',
       children,
-      color: 'test-color',
+      color: 'white',
     });
-    expect(renderedComponent.find('a').hasClass('text-test-color')).toBe(true);
+    expect(renderedComponent.find('a').hasClass('text-white')).toBe(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

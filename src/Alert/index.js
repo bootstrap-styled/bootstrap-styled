@@ -74,7 +74,7 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
       this.setState({ exited: true });
     }
   }
-
+  /* eslint-disable no-console */
   componentDidMount() {
     if (this.props.autoHideDuration) {
       if (this.props.onClick) {
@@ -84,7 +84,7 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
       this.setAutoHideTimer();
     }
   }
-
+  /* eslint-enable no-console */
   componentWillReceiveProps(nextProps) {
     if (nextProps.isOpen) {
       this.setState({ exited: false });
