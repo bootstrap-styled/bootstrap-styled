@@ -46,4 +46,5 @@ const Header = styled.header`
 
 Header.defaultProps = defaultProps;
 
+/** @component */
 export default Header;

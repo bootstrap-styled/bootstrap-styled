@@ -101,4 +101,5 @@ const CardDeck = styled(CardDeckUnstyled)`
   `}
 `;
 
+/** @component */
 export default CardDeck;

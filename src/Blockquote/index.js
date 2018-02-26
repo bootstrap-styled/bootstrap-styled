@@ -91,4 +91,5 @@ const Blockquote = styled(BlockquoteUnstyled)`
 
 `;
 
+/** @component */
 export default Blockquote;

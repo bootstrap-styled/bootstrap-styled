@@ -41,5 +41,6 @@ const ContainerFluid = styled(ContainerFluidUnstyled)`
   `}
 `;
 
+/** @component */
 export default ContainerFluid;
 

@@ -11,4 +11,5 @@ const Address = styled.address`
   line-height: inherit;
 `;
 
+/** @component */
 export default Address;

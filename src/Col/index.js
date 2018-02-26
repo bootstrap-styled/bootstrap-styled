@@ -122,5 +122,6 @@ const Col = styled(ColUnstyled)`
   `}
 `;
 
+/** @component */
 export default Col;
 

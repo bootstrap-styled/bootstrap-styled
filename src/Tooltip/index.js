@@ -351,4 +351,5 @@ const Tooltip = styled(TooltipUnstyled)`
   `}
 `;
 
+/** @component */
 export default Tooltip;

@@ -62,4 +62,5 @@ const Select = styled(SelectUnstyled)`
   }
 `;
 
+/** @component */
 export default Select;

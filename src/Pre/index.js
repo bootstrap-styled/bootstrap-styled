@@ -50,5 +50,6 @@ const Pre = styled.pre`
 
 Pre.defaultProps = defaultProps;
 
+/** @component */
 export default Pre;
 

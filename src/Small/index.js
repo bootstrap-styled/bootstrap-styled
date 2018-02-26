@@ -57,4 +57,5 @@ const Small = styled(SmallUnstyled)`
   `}
 `;
 
+/** @component */
 export default Small;

@@ -45,5 +45,6 @@ const Strong = styled(StrongUnstyled)`
   font-weight: bolder; /* Add the correct font weight in Chrome, Edge, and Safari */
 `;
 
+/** @component */
 export default Strong;
 

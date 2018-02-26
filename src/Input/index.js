@@ -203,4 +203,5 @@ const Input = styled(InputUnstyled)`
  `}
 `;
 
+/** @component */
 export default Input;

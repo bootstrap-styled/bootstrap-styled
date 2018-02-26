@@ -147,4 +147,5 @@ const CardColumns = styled(CardColumnsUnstyled)`
   `}
 `;
 
+/** @component */
 export default CardColumns;

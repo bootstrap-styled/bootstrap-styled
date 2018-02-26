@@ -62,5 +62,6 @@ const Abbr = styled(AbbrUnstyled)`
   }
 `;
 
+/** @component */
 export default Abbr;
 

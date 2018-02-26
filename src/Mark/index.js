@@ -18,5 +18,6 @@ const Mark = styled.mark`
 
 Mark.defaultProps = defaultProps;
 
+/** @component */
 export default Mark;
 

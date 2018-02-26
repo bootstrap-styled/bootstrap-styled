@@ -1,6 +1,3 @@
-/**
- * A link to a certain page, an anchor tag
- */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -9,26 +6,52 @@ import omit from 'lodash.omit';
 
 import mapToCssModules from 'map-to-css-modules';
 import { a } from 'bootstrap-styled-mixins/lib/a';
-import { makeTheme } from './theme';
+
+const defaultProps = {
+  tag: 'a',
+  theme: {
+    '$link-color': '#0275d8',
+    '$link-decoration': 'none',
+    '$link-hover-color': '#014C8D',
+    '$link-hover-decoration': 'underline',
+    '$enable-hover-media-query': false,
+  },
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
+  /** Theme variables. */
+  theme: PropTypes.shape({
+    '$link-color': PropTypes.string,
+    '$link-decoration': PropTypes.string,
+    '$link-hover-color': PropTypes.string,
+    '$link-hover-decoration': PropTypes.string,
+    '$enable-hover-media-query': PropTypes.bool,
+  }),
+  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 
 class AUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'a',
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
-    active: PropTypes.bool,
-    tag: PropTypes.string,
-    disabled: PropTypes.bool,
-    theme: PropTypes.object,
-    color: PropTypes.string,
-    cssModule: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   state = {
     focus: false,
@@ -37,8 +60,6 @@ class AUnstyled extends React.Component { // eslint-disable-line react/prefer-st
   render() {
     const {
       className,
-      active,
-      disabled,
       cssModule,
       color,
       tag: Tag,
@@ -51,8 +72,6 @@ class AUnstyled extends React.Component { // eslint-disable-line react/prefer-st
       <Tag
         className={mapToCssModules(cn(className, {
           focus,
-          active,
-          disabled,
           [`text-${color}`]: color,
         }), cssModule)}
         {...attributes}
@@ -61,19 +80,23 @@ class AUnstyled extends React.Component { // eslint-disable-line react/prefer-st
   }
 }
 
+/**
+ * An anchor tag component used to direct towards a page outside of the application.
+ */
 const A = styled(AUnstyled)`
   ${(props) => `
     ${a(
-      props.theme['$enable-hover-media-query'],
-      props.theme['$link-color'],
-      props.theme['$link-decoration'],
-      props.theme['$link-hover-color'],
-      props.theme['$link-hover-decoration'],
-    )}
+  props.theme['$link-color'],
+  props.theme['$link-decoration'],
+  props.theme['$link-hover-color'],
+  props.theme['$link-hover-decoration'],
+  props.theme['$enable-hover-media-query']
+)}
   `}
 `;
 
-export default A;
+A.defaultProps = defaultProps;
+A.propTypes = propTypes;
 
-// export composers
-export { default as composeLink } from './composeLink';
+/** @component */
+export default A;

@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.5] - 2018-02-15
+
+- Added styleguide [WIP].
+- Upgrade dependency react-transition-group from 1.2.0 to 2.2.1.
+- Upgrade dependency bootstrap-styled-utils from 1.0.0 to 1.0.1.
+- Updated Modal, Fade and Alert components to fit with react-transition-group v2.2.1.
+- Added props uncontrolled to Alert component to avoid having to set closing function and state.
+- Added props toggle to allow Close Button on Alert component.
+- Added props autoHideDuration to set timer for auto-closing Alert component.
+- Added dependency [react-portal](https://www.npmjs.com/package/react-portal) 4.1.2.
+
 ## [1.4.4] - 2018-01-15
 
 - Removed `isLocked` props from `Modal`.

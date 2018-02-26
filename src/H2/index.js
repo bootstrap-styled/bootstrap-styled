@@ -79,4 +79,5 @@ const H2 = styled(H2Unstyled)`
   `}
 `;
 
+/** @component */
 export default H2;

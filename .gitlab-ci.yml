@@ -48,6 +48,7 @@ stages:
   - build
   - test
   - release
+  - deploy
 
 # Job: Build
 build_dev:
@@ -152,6 +153,20 @@ release:
   dependencies:
     - build
   only:
+    - master
+  tags:
+    - docker
+
+# Pages
+pages:
+  stage: deploy
+  script:
+    - npm run styleguide:build
+  artifacts:
+    paths:
+      - public
+  only:
+    - dev
     - master
   tags:
     - docker

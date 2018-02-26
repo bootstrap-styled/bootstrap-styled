@@ -5,7 +5,7 @@
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
-import Table from '../Table';
+import Table from '../index';
 
 const children = (
   <tbody>

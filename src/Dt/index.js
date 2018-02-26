@@ -48,4 +48,5 @@ const Dt = styled(DtUnstyled)`
   `}
 `;
 
+/** @component */
 export default Dt;

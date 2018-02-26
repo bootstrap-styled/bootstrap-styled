@@ -50,4 +50,5 @@ const Dd = styled(DdUnstyled)`
   `}
 `;
 
+/** @component */
 export default Dd;

@@ -5,7 +5,7 @@
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
-import Fa from '../Fa';
+import Fa from '../index';
 
 const renderComponent = (props = {}) => shallow(
   <Fa {...props} />

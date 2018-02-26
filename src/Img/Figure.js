@@ -47,4 +47,5 @@ const Figure = styled(FigureUnstyled)`
   
 `;
 
+/** @component */
 export default Figure;

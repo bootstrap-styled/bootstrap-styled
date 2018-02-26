@@ -49,4 +49,5 @@ const Dl = styled(DlUnstyled)`
   `}
 `;
 
+/** @component */
 export default Dl;

@@ -1,101 +1,89 @@
-/**
- * Nav Component
- *
- *
- */
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import cn from 'classnames';
+import styled from 'styled-components';
+import { makeTheme } from './theme';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
+import { navbar } from 'bootstrap-styled-mixins/lib/navbar';
 import { nav } from 'bootstrap-styled-mixins/lib/nav';
-import { navbar as navbarMixin } from 'bootstrap-styled-mixins/lib/navbar';
-import { makeTheme } from './theme';
-import Ul from '../Ul';
 
 
-class NavUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
+const getToggleableClass = (toggleable) => { // eslint-disable-line react/prefer-stateless-function
+  if (toggleable === false) {
+    return false;
+  } else if (toggleable === true || toggleable === 'xs') {
+    return 'navbar-toggleable';
+  }
+
+  return `navbar-toggleable-${toggleable}`;
+};
+
+class NavbarUnstyled extends React.Component {
 
   static defaultProps = {
-    tag: Ul,
+    tag: 'nav',
+    role: 'navigation',
+    toggleable: false,
     theme: makeTheme(),
   };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
+    light: PropTypes.bool,
+    inverse: PropTypes.bool,
+    full: PropTypes.bool,
+    fixed: PropTypes.string,
+    sticky: PropTypes.string,
+    color: PropTypes.string,
+    role: PropTypes.string,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     className: PropTypes.string,
     cssModule: PropTypes.object,
+    toggleable: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     theme: PropTypes.object,
-    inline: PropTypes.bool,
-    vertical: PropTypes.bool,
-    justified: PropTypes.bool,
-    fill: PropTypes.bool,
-    tabs: PropTypes.bool,
-    pills: PropTypes.bool,
-    stacked: PropTypes.bool,
-    navbar: PropTypes.bool,
     /* eslint-enable react/no-unused-prop-types */
-  }
+  };
 
   render() {
     const {
+      toggleable,
       className,
       cssModule,
-      tabs,
-      pills,
-      fill,
-      inline,
-      stacked,
-      vertical,
-      justified,
-      navbar,
+      light,
+      inverse,
+      full,
+      fixed,
+      sticky,
+      color,
       tag: Tag,
       ...attributes
     } = omit(this.props, ['theme']);
 
     const classes = mapToCssModules(cn(
       className,
-      navbar ? 'navbar-nav' : 'nav',
+      'navbar',
+      getToggleableClass(toggleable),
       {
-        'nav-tabs': tabs,
-        'nav-pills': pills,
-        'nav-fill': fill,
-        'nav-inline': inline,
-        'nav-stacked': stacked,
-        'nav-justified': justified,
-        'flex-column': vertical,
+        'navbar-light': light,
+        'navbar-inverse': inverse,
+        [`bg-${color}`]: color,
+        'navbar-full': full,
+        [`fixed-${fixed}`]: fixed,
+        [`sticky-${sticky}`]: sticky,
       }
     ), cssModule);
 
-    return (
+    return(
       <Tag {...attributes} className={classes} />
-    );
+    )
   }
-}
+};
 
-const Nav = styled(NavUnstyled)`
+const Navbar = styled(NavbarUnstyled)`
   ${(props) => `
-    ${nav(
-      props.theme['$enable-rounded'],
-      props.theme['$enable-hover-media-query'],
-      props.theme['$nav-link-padding'],
-      props.theme['$nav-disabled-link-color'],
-      props.theme['$cursor-disabled'],
-      props.theme['$nav-tabs-border-width'],
-      props.theme['$nav-tabs-border-color'],
-      props.theme['$nav-tabs-border-radius'],
-      props.theme['$nav-tabs-link-hover-border-color'],
-      props.theme['$nav-tabs-active-link-hover-color'],
-      props.theme['$nav-tabs-active-link-hover-bg'],
-      props.theme['$nav-tabs-active-link-hover-border-color'],
-      props.theme['$nav-pills-border-radius'],
-      props.theme['$nav-pills-active-link-color'],
-      props.theme['$nav-pills-active-link-bg'],
-    )}
-    
-    ${navbarMixin(
+    ${navbar(
       props.theme['$grid-breakpoints'],
       props.theme['$enable-rounded'],
       props.theme['$enable-hover-media-query'],
@@ -125,7 +113,25 @@ const Nav = styled(NavUnstyled)`
       props.theme['$navbar-inverse-toggler-bg'],
       props.theme['$navbar-inverse-disabled-color'],
     )}
+    ${nav(
+      props.theme['$enable-rounded'],
+      props.theme['$enable-hover-media-query'],
+      props.theme['$nav-link-padding'],
+      props.theme['$nav-disabled-link-color'],
+      props.theme['$cursor-disabled'],
+      props.theme['$nav-tabs-border-width'],
+      props.theme['$nav-tabs-border-color'],
+      props.theme['$nav-tabs-border-radius'],
+      props.theme['$nav-tabs-link-hover-border-color'],
+      props.theme['$nav-tabs-active-link-hover-color'],
+      props.theme['$nav-tabs-active-link-hover-bg'],
+      props.theme['$nav-tabs-active-link-hover-border-color'],
+      props.theme['$nav-pills-border-radius'],
+      props.theme['$nav-pills-active-link-color'],
+      props.theme['$nav-pills-active-link-bg'],
+    )}
   `}
 `;
 
-export default Nav;
+/** @component */
+export default Navbar;

@@ -78,4 +78,5 @@ const H5 = styled(H5Unstyled)`
   `}
 `;
 
+/** @component */
 export default H5;

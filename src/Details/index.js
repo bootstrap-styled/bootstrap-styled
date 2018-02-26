@@ -16,4 +16,5 @@ class Details extends React.Component { // eslint-disable-line react/prefer-stat
   }
 }
 
+/** @component */
 export default Details;

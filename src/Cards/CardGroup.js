@@ -151,4 +151,5 @@ const CardGroup = styled(CardGroupUnstyled)`
   `}
 `;
 
+/** @component */
 export default CardGroup;

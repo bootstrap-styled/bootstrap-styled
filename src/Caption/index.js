@@ -17,4 +17,5 @@ const Caption = styled.caption`
 
 Caption.defaultProps = defaultProps;
 
+/** @component */
 export default Caption;

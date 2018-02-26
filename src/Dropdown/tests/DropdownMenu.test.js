@@ -5,7 +5,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import BootstrapProvider from '../../BootstrapProvider';
 import DropdownMenu from '../DropdownMenu';
-import NavDropdown from '../../NavBar/NavDropdown';
+import NavDropdown from '../../Navbar/NavDropdown';
 
 const children = (<h1>Test</h1>);
 

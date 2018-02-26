@@ -58,4 +58,5 @@ class FormCustom extends React.Component {// eslint-disable-line react/prefer-st
 }
 
 
+/** @component */
 export default FormCustom;

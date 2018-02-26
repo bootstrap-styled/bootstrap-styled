@@ -12,4 +12,5 @@ const Textarea = styled.textarea`
   resize: vertical;
 `;
 
+/** @component */
 export default Textarea;

@@ -8,4 +8,5 @@ const Area = styled.area`
   cursor: pointer;
 `;
 
+/** @component */
 export default Area;

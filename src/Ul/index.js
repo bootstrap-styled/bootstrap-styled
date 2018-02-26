@@ -125,4 +125,5 @@ const Ul = styled(UlUnstyled)`
   `}
 `;
 
+/** @component */
 export default Ul;

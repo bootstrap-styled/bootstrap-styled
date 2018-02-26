@@ -73,5 +73,6 @@ const Row = styled(RowUnstyled)`
  `}
 `;
 
+/** @component */
 export default Row;
 

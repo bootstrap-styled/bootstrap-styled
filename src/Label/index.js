@@ -163,4 +163,5 @@ const Label = styled(LabelUnstyled)`
 Label.propTypes = propTypes;
 Label.defaultProps = defaultProps;
 
+/** @component */
 export default Label;

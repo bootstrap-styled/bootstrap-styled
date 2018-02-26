@@ -56,4 +56,5 @@ const Fieldset = styled(FieldsetUnstyled)`
   `}
 `;
 
+/** @component */
 export default Fieldset;

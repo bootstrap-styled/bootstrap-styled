@@ -40,4 +40,5 @@ const Ol = styled.ol`
 
 Ol.defaultProps = defaultProps;
 
+/** @component */
 export default Ol;

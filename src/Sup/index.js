@@ -6,4 +6,5 @@ const Sup = styled.sup`
   vertical-align: baseline;
   top: -.5em;
 `;
+/** @component */
 export default Sup;
