@@ -6,7 +6,6 @@ import omit from 'lodash.omit';
 
 import mapToCssModules from 'map-to-css-modules';
 import { a } from 'bootstrap-styled-mixins/lib/a';
-// import theme from './theme';
 
 const defaultProps = {
   tag: 'a',
@@ -24,9 +23,12 @@ const propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Replace or remove a className from the component.
+   * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.string,
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
   /** Theme variables. */
   theme: PropTypes.shape({
     '$link-color': PropTypes.string,
@@ -38,7 +40,7 @@ const propTypes = {
   color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /**
    * Replace or remove a className from the component.
-   * @see See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
    */
   cssModule: PropTypes.object,
 };

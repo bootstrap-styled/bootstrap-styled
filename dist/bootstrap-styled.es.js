@@ -5099,8 +5099,6 @@ exports.default = {
 unwrapExports(a_1);
 var a_3 = a_1.a;
 
-// import theme from './theme';
-
 var defaultProps = {
   tag: 'a',
   theme: {
@@ -5117,9 +5115,9 @@ var propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Replace or remove a className from the component.
+   * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.string,
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   /** Theme variables. */
   theme: PropTypes.shape({
     '$link-color': PropTypes.string,
@@ -5131,7 +5129,7 @@ var propTypes = {
   color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /**
    * Replace or remove a className from the component.
-   * @see See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
    */
   cssModule: PropTypes.object
 };
