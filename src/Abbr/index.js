@@ -7,6 +7,7 @@ import mapToCssModules from 'map-to-css-modules';
 
 const defaultProps = {
   tag: 'abbr',
+  initialism: 'false',
 };
 
 const propTypes = {
@@ -24,7 +25,7 @@ const propTypes = {
   /**
    * Title used to display abbreviation text.
    */
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   /**
    * Toggles original Bootstrap CSS
    */

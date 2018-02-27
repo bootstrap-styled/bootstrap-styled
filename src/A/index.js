@@ -37,7 +37,17 @@ const propTypes = {
     '$link-hover-decoration': PropTypes.string,
     '$enable-hover-media-query': PropTypes.bool,
   }),
-  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  /** Color variables. */
+  color: PropTypes.oneOf([
+    'white',
+    'muted',
+    'gray-dark',
+    'primary',
+    'success',
+    'info',
+    'warning',
+    'danger',
+  ]),
   /**
    * Replace or remove a className from the component.
    * See example [here](https://www.npmjs.com/package/map-to-css-modules).
