@@ -1,3 +1,1 @@
-# Configuration
-
-Hey
+Configuration description
