@@ -23,11 +23,10 @@ const propTypes = {
   ]),
   /**
    * Title used to display abbreviation text.
-   * See example <a href="https://www.w3schools.com/tags/tag_abbr.asp" target="_blank">here</a>.
    */
   title: PropTypes.string,
   /**
-   * If boolean is true, <Abbr /> component will use original Bootstrap css
+   * Toggles original Bootstrap CSS
    */
   initialism: PropTypes.bool,
   /**

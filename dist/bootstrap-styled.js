@@ -5263,11 +5263,10 @@ var propTypes$1 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   /**
    * Title used to display abbreviation text.
-   * See example <a href="https://www.w3schools.com/tags/tag_abbr.asp" target="_blank">here</a>.
    */
   title: PropTypes.string,
   /**
-   * If boolean is true, <Abbr /> component will use original Bootstrap css
+   * Toggles original Bootstrap CSS
    */
   initialism: PropTypes.bool,
   /**
@@ -5328,10 +5327,6 @@ var Abbr = styled__default(AbbrUnstyled).withConfig({
 
 Abbr.defaultProps = defaultProps$2;
 Abbr.propTypes = propTypes$1;
-
-/**
- * Address component
- */
 
 var Address = styled__default.address.withConfig({
   displayName: 'Address'
@@ -6671,6 +6666,8 @@ var AlertUnstyled = function (_React$Component) {
         this.setState({ exited: true });
       }
     }
+    /* eslint-disable no-console */
+
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
@@ -6682,6 +6679,8 @@ var AlertUnstyled = function (_React$Component) {
         this.setAutoHideTimer();
       }
     }
+    /* eslint-enable no-console */
+
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
