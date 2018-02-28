@@ -4,18 +4,35 @@ import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import Blockquote from '../Blockquote';
 
+const defaultProps = {
+  tag: Blockquote,
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 
 class CardBlockquote extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: Blockquote,
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  };
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -36,5 +53,8 @@ class CardBlockquote extends React.Component { // eslint-disable-line react/pref
     );
   }
 }
+
+CardBlockquote.defaultProps = defaultProps;
+CardBlockquote.propTypes = propTypes;
 
 export default CardBlockquote;

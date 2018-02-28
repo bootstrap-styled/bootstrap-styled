@@ -4,18 +4,36 @@ import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import H4 from '../H4';
 
+const defaultProps = {
+  tag: H4,
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 
 class CardTitle extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: H4,
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-  };
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
+
 
   render() {
     const {
@@ -36,5 +54,8 @@ class CardTitle extends React.Component { // eslint-disable-line react/prefer-st
     );
   }
 }
+
+CardTitle.defaultProps = defaultProps;
+CardTitle.propTypes = propTypes;
 
 export default CardTitle;

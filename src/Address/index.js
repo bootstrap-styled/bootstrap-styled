@@ -1,6 +1,3 @@
-/**
- * Address component
- */
 
 import styled from 'styled-components';
 

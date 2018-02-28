@@ -11,7 +11,6 @@ import mapToCssModules from 'map-to-css-modules';
 import { alertVariant } from 'bootstrap-styled-mixins/lib/alert';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { createChainedFunction } from 'bootstrap-styled-utils';
-import theme from './theme';
 import Fade from '../Modal/Fade';
 import Close from '../Close';
 
@@ -20,7 +19,27 @@ const defaultProps = {
   isOpen: true,
   tag: 'div',
   toggle: false,
-  theme,
+  theme: {
+    '$alert-padding-x': '1.25rem',
+    '$alert-padding-y': '.75rem',
+    '$alert-margin-bottom': '1rem',
+    '$alert-border-radius': '.25rem',
+    '$alert-link-font-weight': 'bold',
+    '$alert-border-width': '1px',
+    '$alert-success-bg': '#dff0d8',
+    '$alert-success-text': '#3c763d',
+    '$alert-success-border': '#3c763d',
+    '$alert-info-bg': '#d9edf7',
+    '$alert-info-text': '#31708f',
+    '$alert-info-border': '#31708f',
+    '$alert-warning-bg': '#fcf8e3',
+    '$alert-warning-text': '#8a6d3b',
+    '$alert-warning-border': '#8a6d3b',
+    '$alert-danger-bg': '#f2dede',
+    '$alert-danger-text': '#a94442',
+    '$alert-danger-border': '#a94442',
+    '$enable-rounded': true,
+  },
   uncontrolled: false,
   autoHideDuration: 0, // theme
   transition: {
@@ -34,18 +53,80 @@ const propTypes = {
    * @ignore
    */
   children: PropTypes.node,
+  /**
+   * @ignore
+   */
   className: PropTypes.string,
-  cssModule: PropTypes.object,
-  color: PropTypes.string,
+  /** Color variables. */
+  color: PropTypes.oneOf([
+    'white',
+    'muted',
+    'gray-dark',
+    'primary',
+    'success',
+    'info',
+    'warning',
+    'danger',
+  ]),
+  /**
+   * Toggles dismissal of an alert.
+   */
   isOpen: PropTypes.bool,
+  /**
+   * Toggles onClick event.
+   */
   toggle: PropTypes.bool,
+  /**
+   * Assign function to onClick event.
+   */
   onClick: PropTypes.func,
+  /**
+   * Toggles onClick event.
+   */
   initializeIsOpen: PropTypes.func,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /**
+   * Transition used to dismiss alert.
+   */
   transition: PropTypes.shape(Fade.propTypes),
+  /**
+   * Transition's duration used to dismiss alert.
+   */
   autoHideDuration: PropTypes.number,
-  theme: PropTypes.object,
+  /** Theme variables. */
+  theme: {
+    '$alert-padding-x': PropTypes.string,
+    '$alert-padding-y': PropTypes.string,
+    '$alert-margin-bottom': PropTypes.string,
+    '$alert-border-radius': PropTypes.string,
+    '$alert-link-font-weight': PropTypes.string,
+    '$alert-border-width': PropTypes.string,
+    '$alert-success-bg': PropTypes.string,
+    '$alert-success-text': PropTypes.string,
+    '$alert-success-border': PropTypes.string,
+    '$alert-info-bg': PropTypes.string,
+    '$alert-info-text': PropTypes.string,
+    '$alert-info-border': PropTypes.string,
+    '$alert-warning-bg': PropTypes.string,
+    '$alert-warning-text': PropTypes.string,
+    '$alert-warning-border': PropTypes.string,
+    '$alert-danger-bg': PropTypes.string,
+    '$alert-danger-text': PropTypes.string,
+    '$alert-danger-border': PropTypes.string,
+    '$enable-rounded': PropTypes.bool,
+  },
+  /**
+   * Toggles inner alert state so that you don't have to write your own state or closing function.
+   */
   uncontrolled: PropTypes.bool,
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
 };
 
 class AlertUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -57,7 +138,6 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
   /* eslint-enable react/no-unused-prop-types */
 
   state = {
-    // inner Alert state for uncontrolled
     uncontrolledOpen: true,
     exited: false,
   };
@@ -74,7 +154,7 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
       this.setState({ exited: true });
     }
   }
-
+  /* eslint-disable no-console */
   componentDidMount() {
     if (this.props.autoHideDuration) {
       if (this.props.onClick) {
@@ -84,7 +164,7 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
       this.setAutoHideTimer();
     }
   }
-
+  /* eslint-enable no-console */
   componentWillReceiveProps(nextProps) {
     if (nextProps.isOpen) {
       this.setState({ exited: false });
@@ -260,6 +340,9 @@ const Alert = styled(AlertUnstyled)`
     }
   `}
 `;
+
+Alert.defaultProps = defaultProps;
+Alert.propTypes = propTypes;
 
 /** @component */
 export default withTheme(Alert);

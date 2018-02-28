@@ -21,6 +21,9 @@ export const makeTheme = (userTheme = {}) => {
   // Quickly modify global styling by enabling or disabling optional features.
 
   v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-rounded'], false);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-transitions'] = allowFalseValue(u['$enable-rounded'], true);
 
   // Colors
   //

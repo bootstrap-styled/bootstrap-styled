@@ -22,7 +22,6 @@ const columnProps = PropTypes.oneOfType([
   }),
 ]);
 
-
 export const getColumnSizeClass = (isXs, colWidth, colSize) => {
   if (colSize === true || colSize === '') {
     return isXs ? '' : `col-${colWidth}`;

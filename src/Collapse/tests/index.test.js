@@ -123,7 +123,6 @@ describe('<Collapse />', () => {
   it('should render with class "show" when isOpen is true', () => {
     isOpen = true;
     const renderedComponent = mount(<Collapse isOpen={isOpen} />);
-    console.log(renderedComponent.debug());
     expect(renderedComponent.find('div').hasClass('show')).toEqual(true);
   });
 

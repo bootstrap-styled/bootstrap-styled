@@ -3,12 +3,38 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
-
+const defaultProps = {
+  tag: 'img',
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
+  /** Toggle image position to top of the card. */
+  top: PropTypes.bool,
+  /** Toggle image position to bottom of the card. */
+  bottom: PropTypes.bool,
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 class CardImg extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'img',
-  };
+  static defaultProps = defaultProps;
+
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   static propTypes = {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -46,5 +72,8 @@ class CardImg extends React.Component { // eslint-disable-line react/prefer-stat
     );
   }
 }
+
+CardImg.defaultProps = defaultProps;
+CardImg.propTypes = propTypes;
 
 export default CardImg;
