@@ -174,6 +174,7 @@
     "rollup-plugin-uglify": "^2.0.1",
     "rollup-plugin-visualizer": "^0.3.1",
     "rollup-watch": "^4.3.1",
+    "rsg-components": "^3.0.0",
     "sinon": "^3.3.0",
     "styled-components": "^2.2.3",
     "toctoc": "^0.2.3",

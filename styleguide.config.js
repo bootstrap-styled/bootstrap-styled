@@ -19,7 +19,6 @@ module.exports = {
   sections: [
     {
       name: 'Introduction',
-
       content: 'docs/introduction.md',
     },
     {
@@ -88,7 +87,7 @@ module.exports = {
     },
   },
   styleguideComponents: {
-    // StyleGuideRenderer: path.join(__dirname, 'styleguide/StyleGuideRenderer'),
-    Wrapper: path.join(__dirname, 'styleguide/ThemeWrapper'),
+    StyleGuideRenderer: path.join(__dirname, 'styleguide/components/LayoutRenderer'),
+    Wrapper: path.join(__dirname, 'styleguide/components/Wrapper'),
   },
 };

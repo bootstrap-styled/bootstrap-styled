@@ -12,7 +12,7 @@ import { button } from 'bootstrap-styled-mixins/lib/buttons';
 
 const defaultProps = {
   tag: 'button',
-  color: 'secondary',
+  color: 'primary',
   theme: {
     '$btn-padding-x': '1rem',
     '$btn-padding-y': '.5rem',

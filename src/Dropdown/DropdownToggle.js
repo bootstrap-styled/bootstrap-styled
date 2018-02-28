@@ -11,7 +11,7 @@ class DropdownToggle extends React.Component {
   static defaultProps = {
     'aria-haspopup': true,
     'data-toggle': 'dropdown',
-    color: 'secondary',
+    color: 'primary',
   };
 
   static propTypes = {

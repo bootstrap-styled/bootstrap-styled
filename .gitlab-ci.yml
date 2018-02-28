@@ -161,6 +161,8 @@ release:
 pages:
   stage: deploy
   script:
+    # REPLACE VERSION
+    - sed -i 's/$PACKAGE_VERSION/'`echo $PACKAGE_VERSION`'/g' docs/introduction.md
     - npm run styleguide:build
   artifacts:
     paths:

@@ -40,7 +40,6 @@ describe('<Code />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
     });
-    expect(renderedComponent.find('code').length).toBe(1);
     expect(renderedComponent.find('Code').length).toBe(1);
   });
   it('should have children with a theme', () => {

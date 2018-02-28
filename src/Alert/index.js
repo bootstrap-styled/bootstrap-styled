@@ -97,7 +97,7 @@ const propTypes = {
    */
   autoHideDuration: PropTypes.number,
   /** Theme variables. */
-  theme: {
+  theme: PropTypes.shape({
     '$alert-padding-x': PropTypes.string,
     '$alert-padding-y': PropTypes.string,
     '$alert-margin-bottom': PropTypes.string,
@@ -117,7 +117,7 @@ const propTypes = {
     '$alert-danger-text': PropTypes.string,
     '$alert-danger-border': PropTypes.string,
     '$enable-rounded': PropTypes.bool,
-  },
+  }),
   /**
    * Toggles inner alert state so that you don't have to write your own state or closing function.
    */

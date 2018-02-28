@@ -58,6 +58,7 @@ const defaultProps = {
     '$enable-hover-media-query': false,
   },
 };
+
 const propTypes = {
   /**
    * @ignore
