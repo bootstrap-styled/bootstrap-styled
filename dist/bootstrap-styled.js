@@ -6537,7 +6537,7 @@ var propTypes$2 = {
    */
   autoHideDuration: PropTypes.number,
   /** Theme variables. */
-  theme: {
+  theme: PropTypes.shape({
     '$alert-padding-x': PropTypes.string,
     '$alert-padding-y': PropTypes.string,
     '$alert-margin-bottom': PropTypes.string,
@@ -6557,7 +6557,7 @@ var propTypes$2 = {
     '$alert-danger-text': PropTypes.string,
     '$alert-danger-border': PropTypes.string,
     '$enable-rounded': PropTypes.bool
-  },
+  }),
   /**
    * Toggles inner alert state so that you don't have to write your own state or closing function.
    */
@@ -8776,7 +8776,7 @@ var buttons_5 = buttons.button;
 
 var defaultProps$10 = {
   tag: 'button',
-  color: 'secondary',
+  color: 'primary',
   theme: {
     '$btn-padding-x': '1rem',
     '$btn-padding-y': '.5rem',
@@ -19620,6 +19620,7 @@ var defaultProps$27 = {
     '$enable-hover-media-query': false
   }
 };
+
 var propTypes$23 = {
   /**
    * @ignore
@@ -21887,7 +21888,7 @@ var DropdownToggle = function (_React$Component) {
 DropdownToggle.defaultProps = {
   'aria-haspopup': true,
   'data-toggle': 'dropdown',
-  color: 'secondary'
+  color: 'primary'
 };
 DropdownToggle.propTypes = {
   'aria-haspopup': PropTypes.bool,
