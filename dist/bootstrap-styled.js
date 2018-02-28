@@ -3415,7 +3415,7 @@ function makeTheme$1() {
 /**
  * default export is a default theme
  */
-var bsTheme = makeTheme$1();
+var theme = makeTheme$1();
 
 /**
  * utility use to extend bootstrap-styled default theme
@@ -5123,7 +5123,7 @@ var propTypes = {
    * Replace the default component tag by the one specified. Can be:
    */
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  /** Theme variables. */
+  /** Theme variables. Can be: */
   theme: PropTypes.shape({
     '$link-color': PropTypes.string,
     '$link-decoration': PropTypes.string,
@@ -5131,6 +5131,7 @@ var propTypes = {
     '$link-hover-decoration': PropTypes.string,
     '$enable-hover-media-query': PropTypes.bool
   }),
+  /** Color variables. Can be: */
   color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /**
    * Replace or remove a className from the component.
@@ -5202,7 +5203,7 @@ A.defaultProps = defaultProps;
 A.propTypes = propTypes;
 
 var defaultProps$1 = {
-  theme: bsTheme
+  theme: theme
 };
 
 function composeLink(RouterLink) {
@@ -5249,7 +5250,8 @@ function composeLink(RouterLink) {
 }
 
 var defaultProps$2 = {
-  tag: 'abbr'
+  tag: 'abbr',
+  initialism: 'false'
 };
 
 var propTypes$1 = {
@@ -5264,7 +5266,7 @@ var propTypes$1 = {
   /**
    * Title used to display abbreviation text.
    */
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   /**
    * Toggles original Bootstrap CSS
    */
@@ -5681,102 +5683,6 @@ var UnitUtils = function UnitUtils() {
   };
 };
 var index$2 = new UnitUtils();
-
-/**
- * BOOTSTRAP THEME ALERT TAG
- *
- * this file is not meant to be used and must be kept as original
- * @param userTheme
- */
-var makeTheme$2 = function makeTheme() {
-  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  /* eslint dot-notation: 'off', new-cap: 'off' */
-  // Variables
-  //
-  // Copy settings from this file into the provided `_custom.scss` to override
-  // the Bootstrap defaults without modifying key, versioned files.
-  var v = {};
-  var u = userTheme;
-
-  // Options
-  //
-  // Quickly modify global styling by enabling or disabling optional features.
-
-  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
-
-  // Spacing
-  //
-  // Control the default styling of most Bootstrap elements by modifying these
-  // variables. Mostly focused on spacing.
-  // You can add more entries to the v['$spacers'] map, should you need more variation.
-
-  v['$spacer'] = u['$spacer'] || '1rem';
-  v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
-  v['$border-width'] = u['$border-width'] || '1px';
-
-  // Components
-  //
-  // Define common padding and border radius sizes and more.
-
-  v['$border-radius'] = u['$border-radius'] || '.25rem';
-
-  // Fonts
-  //
-  // Font, line-height, and color for body text, headings, and more.
-
-  v['$font-weight-bold'] = u['$font-weight-bold'] || 'bold';
-
-  // Alerts
-  //
-  // Define colors for alerts states.
-
-  v['$state-success-text'] = u['$state-success-text'] || '#3c763d';
-  v['$state-success-bg'] = u['$state-success-bg'] || '#dff0d8';
-  v['$state-success-border'] = u['$state-success-border'] || color(v['$state-success-bg']).darken(0.05).toString();
-
-  v['$state-info-text'] = u['$state-info-text'] || '#31708f';
-  v['$state-info-bg'] = u['$state-info-bg'] || '#d9edf7';
-  v['$state-info-border'] = u['$state-info-border'] || color(v['$state-info-bg']).darken(0.07).toString();
-
-  v['$state-warning-text'] = u['$state-warning-text'] || '#8a6d3b';
-  v['$state-warning-bg'] = u['$state-warning-bg'] || '#fcf8e3';
-  v['$mark-bg'] = u['$mark-bg'] || v['$state-warning-bg'];
-  v['$state-warning-border'] = u['$state-warning-border'] || color(v['$state-warning-bg']).darken(0.05).toString();
-
-  v['$state-danger-text'] = u['$state-danger-text'] || '#a94442';
-  v['$state-danger-bg'] = u['$state-danger-bg'] || '#f2dede';
-  v['$state-danger-border'] = u['$state-danger-border'] || color(v['$state-danger-bg']).darken(0.05).toString();
-
-  // Define alert colors, border radius, and padding.
-
-  v['$alert-padding-x'] = u['$alert-padding-x'] || '1.25rem';
-  v['$alert-padding-y'] = u['$alert-padding-y'] || '.75rem';
-  v['$alert-margin-bottom'] = u['$alert-margin-bottom'] || v['$spacer-y'];
-  v['$alert-border-radius'] = u['$alert-border-radius'] || v['$border-radius'];
-  v['$alert-link-font-weight'] = u['$alert-link-font-weight'] || v['$font-weight-bold'];
-  v['$alert-border-width'] = u['$alert-border-width'] || v['$border-width'];
-
-  v['$alert-success-bg'] = u['$alert-success-bg'] || v['$state-success-bg'];
-  v['$alert-success-text'] = u['$alert-success-text'] || v['$state-success-text'];
-  v['$alert-success-border'] = u['$alert-success-border'] || v['$state-success-border'];
-
-  v['$alert-info-bg'] = u['$alert-info-bg'] || v['$state-info-bg'];
-  v['$alert-info-text'] = u['$alert-info-text'] || v['$state-info-text'];
-  v['$alert-info-border'] = u['$alert-info-border'] || v['$state-info-border'];
-
-  v['$alert-warning-bg'] = u['$alert-warning-bg'] || v['$state-warning-bg'];
-  v['$alert-warning-text'] = u['$alert-warning-text'] || v['$state-warning-text'];
-  v['$alert-warning-border'] = u['$alert-warning-border'] || v['$state-warning-border'];
-
-  v['$alert-danger-bg'] = u['$alert-danger-bg'] || v['$state-danger-bg'];
-  v['$alert-danger-text'] = u['$alert-danger-text'] || v['$state-danger-text'];
-  v['$alert-danger-border'] = u['$alert-danger-border'] || v['$state-danger-border'];
-
-  return Object.assign({}, u, v);
-};
-
-var theme = makeTheme$2();
 
 var PropTypes$1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -6457,54 +6363,41 @@ function Fade(props) {
 Fade.propTypes = propTypes$3;
 Fade.defaultProps = defaultProps$4;
 
-var detectUnit$1 = unitUtils$1.detectUnit;
-var rmUnit$2 = unitUtils$1.rmUnit;
-
-/**
- * BOOTSTRAP THEME CLOSE
- *
- * this file is not meant to be used and must be kept as original
- * @param userTheme
- */
-
-var makeTheme$3 = function makeTheme() {
-  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  /* eslint dot-notation: 'off', new-cap: 'off' */
-  // Variables
-  //
-  // Copy settings from this file into the provided `_custom.scss` to override
-  // the Bootstrap defaults without modifying key, versioned files.
-  var v = {};
-  var u = userTheme;
-
-  // Options
-  //
-  // Quickly modify global styling by enabling or disabling optional features.
-  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
-
-  // Colors
-  //
-  // Start with assigning color names to specific hex values.
-  v['$white'] = u['$white'] || '#fff';
-  v['$black'] = u['$black'] || '#000';
-
-  // Fonts
-  //
-  // Font, line-height, and color for body text, headings, and more.
-  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
-  v['$font-weight-bold'] = u['$font-weight-bold'] || 'bold';
-
-  // Close
-  v['$close-font-size'] = u['$close-font-size'] || rmUnit$2(v['$font-size-base']) * 1.5 + detectUnit$1(v['$font-size-base']);
-  v['$close-font-weight'] = u['$close-font-weight'] || v['$font-weight-bold'];
-  v['$close-color'] = u['$close-color'] || v['$black'];
-  v['$close-text-shadow'] = u['$close-text-shadow'] || '0 1px 0 ' + v['$white'];
-
-  return Object.assign({}, u, v);
+var defaultProps$5 = {
+  theme: {
+    '$close-color': '#000',
+    '$close-font-size': '1.5rem',
+    '$close-font-weight': '#bold',
+    '$close-text-shadow': '0 1px 0 #fff',
+    '$enable-hover-media-query': false
+  },
+  onDismiss: {}
 };
-
-makeTheme$3();
+var propTypes$4 = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$enable-rounded': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool
+  }),
+  /** Replace close label with any string. */
+  closeLabel: PropTypes.string,
+  /** Dispatch function when dismiss is trigger. */
+  onDismiss: PropTypes.func.isRequired,
+  /** Toggles screen-reader only CSS display. */
+  'sr-only': PropTypes.bool,
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
+};
 
 var CloseUnstyled = function (_React$Component) {
   inherits(CloseUnstyled, _React$Component);
@@ -6516,6 +6409,9 @@ var CloseUnstyled = function (_React$Component) {
 
   createClass(CloseUnstyled, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -6544,23 +6440,15 @@ var CloseUnstyled = function (_React$Component) {
         )
       );
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return CloseUnstyled;
 }(React__default.Component);
 
-CloseUnstyled.defaultProps = {
-  theme: makeTheme$3()
-};
-CloseUnstyled.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
-  closeLabel: PropTypes.string,
-  cssModule: PropTypes.object,
-  onDismiss: PropTypes.func.isRequired,
-  'sr-only': PropTypes.bool,
-  theme: PropTypes.object
-  /* eslint-enable react/no-unused-prop-types */
-};
+CloseUnstyled.defaultProps = defaultProps$5;
+CloseUnstyled.propTypes = propTypes$4;
 
 
 var Close = styled__default(CloseUnstyled).withConfig({
@@ -6568,6 +6456,9 @@ var Close = styled__default(CloseUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    float: right;\n    font-size: ' + props.theme['$close-font-size'] + ';\n    font-weight: ' + props.theme['$close-font-weight'] + ';\n    line-height: 1;\n    color: ' + props.theme['$close-color'] + ';\n    text-shadow: ' + props.theme['$close-text-shadow'] + ';\n    opacity: .2;\n    \n    &:focus {outline:0;}\n    \n    ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$close-color'] + ';\n        text-decoration: none;\n        cursor: pointer;\n        opacity: .5;\n      ') + '\n    \n    /* Additional properties for button version\n     iOS requires the button element instead of an anchor tag.\n     If you want the anchor version, it requires \'href="#"\'.\n     See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile\n     */\n    \n    /* scss-lint:disable QualifyingElement */\n    &.close {\n      padding: 0;\n      cursor: pointer;\n      background: transparent;\n      border: 0;\n      -webkit-appearance: none;\n    }\n    /* scss-lint:enable QualifyingElement */\n  ';
 });
+
+Close.defaultProps = defaultProps$5;
+Close.propTypes = propTypes$4;
 
 /**
  * Alert component
@@ -6578,7 +6469,27 @@ var defaultProps$3 = {
   isOpen: true,
   tag: 'div',
   toggle: false,
-  theme: theme,
+  theme: {
+    '$alert-padding-x': '1.25rem',
+    '$alert-padding-y': '.75rem',
+    '$alert-margin-bottom': '1rem',
+    '$alert-border-radius': '.25rem',
+    '$alert-link-font-weight': 'bold',
+    '$alert-border-width': '1px',
+    '$alert-success-bg': '#dff0d8',
+    '$alert-success-text': '#3c763d',
+    '$alert-success-border': '#3c763d',
+    '$alert-info-bg': '#d9edf7',
+    '$alert-info-text': '#31708f',
+    '$alert-info-border': '#31708f',
+    '$alert-warning-bg': '#fcf8e3',
+    '$alert-warning-text': '#8a6d3b',
+    '$alert-warning-border': '#8a6d3b',
+    '$alert-danger-bg': '#f2dede',
+    '$alert-danger-text': '#a94442',
+    '$alert-danger-border': '#a94442',
+    '$enable-rounded': true
+  },
   uncontrolled: false,
   autoHideDuration: 0, // theme
   transition: _extends({}, Fade.defaultProps, {
@@ -6591,18 +6502,71 @@ var propTypes$2 = {
    * @ignore
    */
   children: PropTypes.node,
+  /**
+   * @ignore
+   */
   className: PropTypes.string,
-  cssModule: PropTypes.object,
-  color: PropTypes.string,
+  /** Color variables. */
+  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  /**
+   * Toggles dismissal of an alert.
+   */
   isOpen: PropTypes.bool,
+  /**
+   * Toggles onClick event.
+   */
   toggle: PropTypes.bool,
+  /**
+   * Assign function to onClick event.
+   */
   onClick: PropTypes.func,
+  /**
+   * Toggles onClick event.
+   */
   initializeIsOpen: PropTypes.func,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /**
+   * Transition used to dismiss alert.
+   */
   transition: PropTypes.shape(Fade.propTypes),
+  /**
+   * Transition's duration used to dismiss alert.
+   */
   autoHideDuration: PropTypes.number,
-  theme: PropTypes.object,
-  uncontrolled: PropTypes.bool
+  /** Theme variables. */
+  theme: {
+    '$alert-padding-x': PropTypes.string,
+    '$alert-padding-y': PropTypes.string,
+    '$alert-margin-bottom': PropTypes.string,
+    '$alert-border-radius': PropTypes.string,
+    '$alert-link-font-weight': PropTypes.string,
+    '$alert-border-width': PropTypes.string,
+    '$alert-success-bg': PropTypes.string,
+    '$alert-success-text': PropTypes.string,
+    '$alert-success-border': PropTypes.string,
+    '$alert-info-bg': PropTypes.string,
+    '$alert-info-text': PropTypes.string,
+    '$alert-info-border': PropTypes.string,
+    '$alert-warning-bg': PropTypes.string,
+    '$alert-warning-text': PropTypes.string,
+    '$alert-warning-border': PropTypes.string,
+    '$alert-danger-bg': PropTypes.string,
+    '$alert-danger-text': PropTypes.string,
+    '$alert-danger-border': PropTypes.string,
+    '$enable-rounded': PropTypes.bool
+  },
+  /**
+   * Toggles inner alert state so that you don't have to write your own state or closing function.
+   */
+  uncontrolled: PropTypes.bool,
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
 };
 
 var AlertUnstyled = function (_React$Component) {
@@ -6620,7 +6584,6 @@ var AlertUnstyled = function (_React$Component) {
     }
 
     return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = AlertUnstyled.__proto__ || Object.getPrototypeOf(AlertUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      // inner Alert state for uncontrolled
       uncontrolledOpen: true,
       exited: false
     }, _this.setAutoHideTimer = function (autoHideDuration) {
@@ -6768,6 +6731,9 @@ var Alert = styled__default(AlertUnstyled).withConfig({
   return '\n    /*\n    Base styles\n    */\n    \n    &.alert {\n      padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n      margin-bottom: ' + props.theme['$alert-margin-bottom'] + ';\n      border: ' + props.theme['$alert-border-width'] + ' solid transparent;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$alert-border-radius']) + '\n    }\n    \n    /* Headings for larger alerts */\n    &.alert-heading {\n      /* Specified to prevent conflicts of changing $headings-color */\n      color: inherit;\n    }\n    \n    /* Provide class for links that match alerts */\n    & .alert-link { \n      font-weight: ' + props.theme['$alert-link-font-weight'] + ';\n    }\n    \n    /* Dismissible alerts Expand the right padding and account for the close buttons positioning. */\n    \n    &.alert-dismissible {    \n      /* Adjust close link position */\n      & .close {\n        position: relative;\n        top: -' + props.theme['$alert-padding-y'] + ';\n        right: -' + props.theme['$alert-padding-x'] + ';\n        padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n        color: inherit;\n      }\n    }\n    /* Alternate styles Generate contextual modifier classes for colorizing the alert. */\n\n    &.alert-success {\n      ' + alert_1(props.theme['$alert-success-bg'], props.theme['$alert-success-border'], props.theme['$alert-success-text']) + '    \n    }\n    &.alert-info {\n      ' + alert_1(props.theme['$alert-info-bg'], props.theme['$alert-info-border'], props.theme['$alert-info-text']) + '\n    } \n    &.alert-warning {\n      ' + alert_1(props.theme['$alert-warning-bg'], props.theme['$alert-warning-border'], props.theme['$alert-warning-text']) + ' \n    }\n    &.alert-danger {\n      ' + alert_1(props.theme['$alert-danger-bg'], props.theme['$alert-danger-border'], props.theme['$alert-danger-text']) + ' \n    }\n  ';
 });
 
+Alert.defaultProps = defaultProps$3;
+Alert.propTypes = propTypes$2;
+
 /** @component */
 var index$1 = styled.withTheme(Alert);
 
@@ -6782,68 +6748,46 @@ var Article = styled__default.article.withConfig({
   displayName: 'Article'
 })(['']);
 
-var rmUnit$3 = unitUtils$1.rmUnit;
-var UNIT$2 = unitUtils$1.UNIT;
-
-/**
- * BOOTSTRAP THEME BLOCKQUOTE TAG
- *
- * this file is not meant to be used and must be kept as original
- * @param userTheme
- */
-
-var makeTheme$4 = function makeTheme() {
-  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  /* eslint dot-notation: 'off', new-cap: 'off' */
-  // Variables
-  //
-  // Copy settings from this file into the provided `_custom.scss` to override
-  // the Bootstrap defaults without modifying key, versioned files.
-  var v = {};
-  var u = userTheme;
-
-  // Colors
-  //
-  // Grayscale and brand colors for use across Bootstrap.
-  // Create grayscale
-  v['$gray-light'] = u['$gray-light'] || '#636c72';
-  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
-
-  // Spacing
-  //
-  // Control the default styling of most Bootstrap elements by modifying these
-  // variables. Mostly focused on spacing.
-  // You can add more entries to the v['$spacers'] map, should you need more variation.
-
-  v['$spacer'] = u['$spacer'] || '1rem';
-
-  // =============================================================================================================
-  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
-  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$3(v['$spacer'], UNIT$2.REM) / 2 + UNIT$2.REM;
-  // =============================================================================================================
-
-  // Fonts
-  //
-  // Font, line-height, and color for body text, headings, and more.
-  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
-
-  v['$blockquote-small-color'] = u['$blockquote-small-color'] || v['$gray-light'];
-  v['$blockquote-font-size'] = u['$blockquote-font-size'] || rmUnit$3(v['$font-size-base'], UNIT$2.REM) * 1.25 + UNIT$2.REM;
-  v['$blockquote-border-color'] = u['$blockquote-border-color'] || v['$gray-lighter'];
-  v['$blockquote-border-width'] = u['$blockquote-border-width'] || '.25rem';
-
-  return Object.assign({}, u, v);
-};
-
-makeTheme$4();
-
 /* eslint dot-notation: 'off' */
 
 /**
  * Blockquote
  *
  */
+
+var defaultProps$6 = {
+  tag: 'blockquote',
+  theme: {
+    '$blockquote-small-color': '#636c72',
+    '$blockquote-font-size': '1.25rem',
+    '$blockquote-border-color': '#eceeef',
+    '$blockquote-border-width': '.25rem'
+  }
+};
+var propTypes$5 = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$blockquote-small-color': PropTypes.string,
+    '$blockquote-font-size': PropTypes.string,
+    '$blockquote-border-color': PropTypes.string,
+    '$blockquote-border-width': PropTypes.string
+  }),
+  /** Toggles content to display on left or right. */
+  reverse: PropTypes.bool,
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
+};
 
 var BlockquoteUnstyled = function (_React$Component) {
   inherits(BlockquoteUnstyled, _React$Component);
@@ -6856,42 +6800,40 @@ var BlockquoteUnstyled = function (_React$Component) {
   createClass(BlockquoteUnstyled, [{
     key: 'render',
     // eslint-disable-line react/prefer-stateless-function
+
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
           reverse = _omit.reverse,
           Tag = _omit.tag,
-          attributes = objectWithoutProperties(_omit, ['className', 'reverse', 'tag']);
+          cssModule = _omit.cssModule,
+          attributes = objectWithoutProperties(_omit, ['className', 'reverse', 'tag', 'cssModule']);
 
       return React__default.createElement(Tag, _extends({
-        className: classnames(className, 'blockquote', {
+        className: mapToCssModules(classnames(className, 'blockquote', {
           'blockquote-reverse': reverse
-        })
+        }), cssModule)
       }, attributes));
     }
   }]);
   return BlockquoteUnstyled;
 }(React__default.Component);
 
-BlockquoteUnstyled.defaultProps = {
-  tag: 'blockquote',
-  theme: makeTheme$4()
-};
-BlockquoteUnstyled.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
-  theme: PropTypes.object,
-  tag: PropTypes.string,
-  reverse: PropTypes.bool
-  /* eslint-enable react/no-unused-prop-types */
-};
+/**
+ * A quoting blocks component. Wrap `<Blockquote />` around any html node or element as the quote.
+ */
 
 
+BlockquoteUnstyled.defaultProps = defaultProps$6;
+BlockquoteUnstyled.propTypes = propTypes$5;
 var Blockquote = styled__default(BlockquoteUnstyled).withConfig({
   displayName: 'Blockquote'
 })(['  ', ' '], function (props) {
   return '\n    &.blockquote {\n      padding: ' + props.theme['$spacer-halved'] + ' ' + props.theme['$spacer'] + ';\n      margin-bottom: ' + props.theme['$spacer'] + ';\n      font-size: ' + props.theme['$blockquote-font-size'] + ';\n      border-left: ' + props.theme['$blockquote-border-width'] + ' solid ' + props.theme['$blockquote-border-color'] + ';\n      \n      .blockquote-footer {\n        display: block;\n        font-size: 80%; \n        color: ' + props.theme['$blockquote-small-color'] + ';\n        &::before {\n          content: \'\\2014 \\00A0\';\n        }\n      }\n    }\n\n    &.blockquote-reverse {\n      padding-right: ' + props.theme['$spacer'] + ';\n      padding-left: 0;\n      text-align: right;\n      border-right: ' + props.theme['$blockquote-border-width'] + ' solid ' + props.theme['$blockquote-border-color'] + ';\n      border-left: 0;\n      \n      .blockquote-footer {\n        display: block;\n        font-size: 80%; \n        color: ' + props.theme['$blockquote-small-color'] + ';\n        &::before {\n          content: "";\n        }\n        &::after {\n          content: \'\\00A0 \\2014\';\n        }\n      }\n    }\n    \n    /* Reboot from bootstrap v4 */\n    margin: 0 0 1rem;\n ';
 });
+
+Blockquote.defaultProps = defaultProps$6;
+Blockquote.propTypes = propTypes$5;
 
 var conditional = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -8320,7 +8262,7 @@ exports.default = {
 
 var visibilityUtils = unwrapExports(visibility);
 
-var propTypes$4 = {
+var propTypes$6 = {
   theme: PropTypes.object,
   utils: PropTypes.shape({
     align: PropTypes.bool,
@@ -8341,8 +8283,8 @@ var propTypes$4 = {
   })
 };
 
-var defaultProps$5 = {
-  theme: bsTheme,
+var defaultProps$7 = {
+  theme: theme,
   utils: {
     align: true,
     background: true,
@@ -8370,8 +8312,8 @@ var UtilityProvider = styled__default.div.withConfig({
   )) + '\n  ';
 });
 
-UtilityProvider.defaultProps = defaultProps$5;
-UtilityProvider.propTypes = propTypes$4;
+UtilityProvider.defaultProps = defaultProps$7;
+UtilityProvider.propTypes = propTypes$6;
 
 var BootstrapProvider = function (_React$Component) {
   inherits(BootstrapProvider, _React$Component);
@@ -8417,12 +8359,12 @@ var BootstrapProvider = function (_React$Component) {
     value: function render() {
       var _props = this.props,
           children = _props.children,
-          theme = _props.theme,
+          theme$$1 = _props.theme,
           utils = _props.utils;
 
       return React__default.createElement(
         styled.ThemeProvider,
-        { theme: makeTheme$$1(theme) },
+        { theme: makeTheme$$1(theme$$1) },
         React__default.createElement(
           UtilityProvider,
           { utils: utils },
@@ -8435,7 +8377,7 @@ var BootstrapProvider = function (_React$Component) {
 }(React__default.Component);
 
 BootstrapProvider.defaultProps = {
-  theme: bsTheme
+  theme: theme
 };
 BootstrapProvider.propTypes = {
   children: PropTypes.node,
@@ -8460,72 +8402,48 @@ BootstrapProvider.propTypes = {
 };
 
 /**
- * BOOTSTRAP THEME BREADCRUMB TAG
- *
- * this file is not meant to be used and must be kept as original
- * @param userTheme
- */
-var makeTheme$5 = function makeTheme() {
-  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  /* eslint dot-notation: 'off', new-cap: 'off' */
-  // Variables
-  //
-  // Copy settings from this file into the provided `_custom.scss` to override
-  // the Bootstrap defaults without modifying key, versioned files.
-  var v = {};
-  var u = userTheme;
-
-  // Options
-  //
-  // Quickly modify global styling by enabling or disabling optional features.
-
-  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
-
-  // Colors
-  //
-  // Grayscale and brand colors for use across Bootstrap.
-  // Create grayscale
-
-  v['$gray-light'] = u['$gray-light'] || '#636c72';
-  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
-
-  // Components
-  //
-  // Define common padding and border radius sizes and more.
-
-  v['$border-radius'] = u['$border-radius'] || '.25rem';
-
-  // Spacing
-  //
-  // Control the default styling of most Bootstrap elements by modifying these
-  // variables. Mostly focused on spacing.
-  // You can add more entries to the v['$spacers'] map, should you need more variation.
-
-  v['$spacer'] = u['$spacer'] || '1rem';
-
-  v['$spacer-x'] = u['$spacer-x'] || v['$spacer'];
-  v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
-
-  // Breadcrumbs
-
-  v['$breadcrumb-padding-y'] = u['$breadcrumb-padding-y'] || '.75rem';
-  v['$breadcrumb-padding-x'] = u['$breadcrumb-padding-x'] || '1rem';
-  v['$breadcrumb-item-padding'] = u['$breadcrumb-item-padding'] || '.5rem';
-
-  v['$breadcrumb-bg'] = u['$breadcrumb-bg'] || v['$gray-lighter'];
-  v['$breadcrumb-divider-color'] = u['$breadcrumb-divider-color'] || v['$gray-light'];
-  v['$breadcrumb-active-color'] = u['$breadcrumb-active-color'] || v['$gray-light'];
-  v['$breadcrumb-divider'] = u['$breadcrumb-divider'] || '"/"';
-
-  return Object.assign({}, u, v);
-};
-
-makeTheme$5();
-
-/**
  * A Breadcrumb
  */
+
+var defaultProps$8 = {
+  tag: 'ol',
+  theme: {
+    '$breadcrumb-padding-y': '.75rem',
+    '$breadcrumb-padding-x': '1rem',
+    '$breadcrumb-item-padding': '.5rem',
+    '$breadcrumb-bg': '#eceeef',
+    '$breadcrumb-divider-color': '#636c72',
+    '$breadcrumb-active-color': '#636c72',
+    '$breadcrumb-divider': '"/"',
+    '$enable-rounded': false
+  }
+};
+var propTypes$7 = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$breadcrumb-padding-y': PropTypes.string,
+    '$breadcrumb-padding-x': PropTypes.string,
+    '$breadcrumb-item-padding': PropTypes.string,
+    '$breadcrumb-bg': PropTypes.string,
+    '$breadcrumb-divider-color': PropTypes.string,
+    '$breadcrumb-active-color': PropTypes.string,
+    '$breadcrumb-divider': PropTypes.string,
+    '$enable-rounded': PropTypes.bool
+  }),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
+};
 
 var BreadcrumbUnstyled = function (_React$Component) {
   inherits(BreadcrumbUnstyled, _React$Component);
@@ -8537,6 +8455,9 @@ var BreadcrumbUnstyled = function (_React$Component) {
 
   createClass(BreadcrumbUnstyled, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -8550,29 +8471,52 @@ var BreadcrumbUnstyled = function (_React$Component) {
         className: mapToCssModules(classnames(className, 'breadcrumb'), cssModule)
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return BreadcrumbUnstyled;
 }(React__default.Component);
 
-BreadcrumbUnstyled.defaultProps = {
-  tag: 'ol',
-  theme: makeTheme$5()
-};
-BreadcrumbUnstyled.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
-  theme: PropTypes.object
-  /* eslint-enable react/no-unused-prop-types */
-};
+/**
+ * Use our **default** `Breadcrumb` blocks, to emphasize part of your page.
+ * You can also use another `tag` without list markup.
+ */
 
 
+BreadcrumbUnstyled.defaultProps = defaultProps$8;
+BreadcrumbUnstyled.propTypes = propTypes$7;
 var Breadcrumb = styled__default(BreadcrumbUnstyled).withConfig({
   displayName: 'Breadcrumb'
 })(['', ''], function (props) {
   return '\n    &.breadcrumb {\n      padding: ' + props.theme['$breadcrumb-padding-y'] + ' ' + props.theme['$breadcrumb-padding-x'] + ';\n      margin-bottom: ' + props.theme['$spacer-y'] + ';\n      list-style: none;\n      background-color: ' + props.theme['$breadcrumb-bg'] + ';\n \n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n            \n      ' + clearfix_2$1() + '\n    }\n\n    & .breadcrumb-item {\n      float: left;\n    \n      /* The separator between breadcrumbs (by default, a forward-slash: "/") */\n      + .breadcrumb-item::before {\n        display: inline-block; /* Suppress underlining of the separator in modern browsers */\n        padding-right: ' + props.theme['$breadcrumb-item-padding'] + ';\n        padding-left: ' + props.theme['$breadcrumb-item-padding'] + ';\n        color: ' + props.theme['$breadcrumb-divider-color'] + ';\n        content: ' + props.theme['$breadcrumb-divider'] + ';\n      }\n  \n      /* IE9-11 hack to properly handle hyperlink underlines for breadcrumbs built\n       without \'ul\'s. The \'::before\' pseudo-element generates an element\n       *within* the .breadcrumb-item and thereby inherits the \'text-decoration\'.\n      \n       To trick IE into suppressing the underline, we give the pseudo-element an\n       underline and then immediately remove it.\n      */\n      \n      + .breadcrumb-item:hover::before {\n        text-decoration: underline;\n      }\n      + .breadcrumb-item:hover::before {\n        text-decoration: none;\n      }\n    \n      &.active {\n        color: ' + props.theme['$breadcrumb-active-color'] + ';\n      }\n    }\n  ';
 });
+
+Breadcrumb.defaultProps = defaultProps$8;
+Breadcrumb.propTypes = propTypes$7;
+
+var defaultProps$9 = {
+  tag: 'li'
+};
+var propTypes$8 = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /**
+   * Toggles active CSS.
+   */
+  active: PropTypes.bool,
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
+};
 
 var BreadcrumbItem = function (_React$Component) {
   inherits(BreadcrumbItem, _React$Component);
@@ -8584,6 +8528,9 @@ var BreadcrumbItem = function (_React$Component) {
 
   createClass(BreadcrumbItem, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -8601,19 +8548,19 @@ var BreadcrumbItem = function (_React$Component) {
         }), cssModule)
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return BreadcrumbItem;
 }(React__default.Component);
 
-BreadcrumbItem.defaultProps = {
-  tag: 'li'
-};
-BreadcrumbItem.propTypes = {
-  active: PropTypes.bool,
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
-};
+BreadcrumbItem.defaultProps = defaultProps$9;
+BreadcrumbItem.propTypes = propTypes$8;
+
+
+BreadcrumbItem.defaultProps = defaultProps$9;
+BreadcrumbItem.propTypes = propTypes$8;
 
 var boxShadow_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -8824,126 +8771,122 @@ unwrapExports(buttons);
 var buttons_5 = buttons.button;
 
 /**
- * BOOTSTRAP THEME BUTTON TAG
- *
- * this file is not meant to be used and must be kept as original
- * @param userTheme
- */
-var makeTheme$6 = function makeTheme() {
-  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  /* eslint dot-notation: 'off', new-cap: 'off' */
-  // Variables
-  //
-  // Copy settings from this file into the provided `_custom.scss` to override
-  // the Bootstrap defaults without modifying key, versioned files.
-  var v = {};
-  var u = userTheme;
-
-  // Options
-  //
-  // Quickly modify global styling by enabling or disabling optional features.
-
-  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
-
-  // Colors
-  //
-  // Grayscale and brand colors for use across Bootstrap.
-
-  // Start with assigning color names to specific hex values.
-  v['$white'] = u['$white'] || '#fff';
-  v['$black'] = u['$black'] || '#000';
-  v['$blue'] = u['$blue'] || '#0275d8';
-  v['$green'] = u['$green'] || '#5cb85c';
-  v['$teal'] = u['$teal'] || '#5bc0de';
-  v['$orange'] = u['$orange'] || '#f0ad4e';
-  v['$red'] = u['$red'] || '#d9534f';
-
-  // Create grayscale
-  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
-  v['$gray-light'] = u['$gray-light'] || '#636c72';
-
-  // Reassign color vars to semantic color scheme
-  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
-  v['$brand-success'] = u['$brand-success'] || v['$green'];
-  v['$brand-info'] = u['$brand-info'] || v['$teal'];
-  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
-  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
-
-  // Components
-  //
-  // Define common padding and border radius sizes and more.
-
-  v['$border-radius'] = u['$border-radius'] || '.25rem';
-  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
-  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
-
-  // Fonts
-  //
-  // Font, line-height, and color for body text, headings, and more.
-  v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
-
-  // Buttons
-  //
-  // For each of Bootstrap's buttons, define text, background and border color.
-
-  v['$btn-padding-x'] = u['$btn-padding-x'] || '1rem';
-  v['$btn-padding-y'] = u['$btn-padding-y'] || '.5rem';
-  v['$btn-line-height'] = u['$btn-line-height'] || '1.25';
-  v['$btn-font-weight'] = u['$btn-font-weight'] || v['$font-weight-normal'];
-  v['$btn-box-shadow'] = u['$btn-box-shadow'] || 'inset 0 1px 0 ' + color(v['$white']).alpha(0.15).toString() + ', 0 1px 1px ' + color(v['$black']).alpha(0.075).toString();
-  v['$btn-focus-box-shadow'] = u['$btn-focus-box-shadow'] || '0 0 0 2px ' + color(v['$brand-primary']).alpha(0.25).toString();
-  v['$btn-active-box-shadow'] = u['$btn-active-box-shadow'] || 'inset 0 3px 5px ' + color(v['$black']).alpha(0.125).toString();
-
-  v['$btn-primary-color'] = u['$btn-primary-color'] || v['$white'];
-  v['$btn-primary-bg'] = u['$btn-primary-bg'] || v['$brand-primary'];
-  v['$btn-primary-border'] = u['$btn-primary-border'] || v['$btn-primary-bg'];
-
-  v['$btn-secondary-color'] = u['$btn-secondary-color'] || v['$gray-dark'];
-  v['$btn-secondary-bg'] = u['$btn-secondary-bg'] || v['$white'];
-  v['$btn-secondary-border'] = u['$btn-secondary-border'] || '#ccc';
-
-  v['$btn-info-color'] = u['$btn-info-color'] || v['$white'];
-  v['$btn-info-bg'] = u['$btn-info-bg'] || v['$brand-info'];
-  v['$btn-info-border'] = u['$btn-info-border'] || v['$btn-info-bg'];
-
-  v['$btn-success-color'] = u['$btn-success-color'] || v['$white'];
-  v['$btn-success-bg'] = u['$btn-success-bg'] || v['$brand-success'];
-  v['$btn-success-border'] = u['$btn-success-border'] || v['$btn-success-bg'];
-
-  v['$btn-warning-color'] = u['$btn-warning-color'] || v['$white'];
-  v['$btn-warning-bg'] = u['$btn-warning-bg'] || v['$brand-warning'];
-  v['$btn-warning-border'] = u['$btn-warning-border'] || v['$btn-warning-bg'];
-
-  v['$btn-danger-color'] = u['$btn-danger-color'] || v['$white'];
-  v['$btn-danger-bg'] = u['$btn-danger-bg'] || v['$brand-danger'];
-  v['$btn-danger-border'] = u['$btn-danger-border'] || v['$btn-danger-bg'];
-
-  v['$btn-link-disabled-color'] = u['$btn-link-disabled-color'] || v['$gray-light'];
-
-  v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || '.5rem';
-  v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
-
-  v['$btn-padding-x-lg'] = u['$btn-padding-x-lg'] || '1.5rem';
-  v['$btn-padding-y-lg'] = u['$btn-padding-y-lg'] || '.75rem';
-
-  v['$btn-block-spacing-y'] = u['$btn-block-spacing-y'] || '.5rem';
-
-  // Allows for customizing button radius independently from global border radius
-  v['$btn-border-radius'] = u['$btn-border-radius'] || v['$border-radius'];
-  v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
-  v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
-
-  v['$btn-transition'] = u['$btn-transition'] || 'all .2s ease-in-out';
-
-  return Object.assign({}, u, v);
-};
-
-makeTheme$6();
-
-/**
  * A button with natures
  */
+
+var defaultProps$10 = {
+  tag: 'button',
+  color: 'secondary',
+  theme: {
+    '$btn-padding-x': '1rem',
+    '$btn-padding-y': '.5rem',
+    '$btn-line-height': '1.25',
+    '$btn-font-weight': 'normal',
+    '$btn-box-shadow': 'inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075)',
+    '$btn-focus-box-shadow': '0 0 0 2px rgba(2, 117, 216, 0.25)',
+    '$btn-active-box-shadow': 'inset 0 3px 5px rgba(0, 0, 0, 0.125)',
+    '$btn-primary-color': '#fff',
+    '$btn-primary-bg': '#0275d8',
+    '$btn-primary-border': '#0275d8',
+    '$btn-secondary-color': '#292b2c',
+    '$btn-secondary-bg': '#fff',
+    '$btn-secondary-border': '#ccc',
+    '$btn-info-color': '#fff',
+    '$btn-info-bg': '#5bc0de',
+    '$btn-info-border': '#5bc0de',
+    '$btn-success-color': '#fff',
+    '$btn-success-bg': '#5cb85c',
+    '$btn-success-border': '#5cb85c',
+    '$btn-warning-color': '#fff',
+    '$btn-warning-bg': '#f0ad4e',
+    '$btn-warning-border': '#f0ad4e',
+    '$btn-danger-color': '#fff',
+    '$btn-danger-bg': '#d9534f',
+    '$btn-danger-border': '#d9534f',
+    '$btn-link-disabled-color': '#636c72',
+    '$btn-padding-x-sm': '.5rem',
+    '$btn-padding-y-sm': '.25rem',
+    '$btn-padding-x-lg': '1.5rem',
+    '$btn-padding-y-lg': '.75rem',
+    '$btn-block-spacing-y': '.5rem',
+    '$btn-border-radius': '.25rem',
+    '$btn-border-radius-lg': '.3rem',
+    '$btn-border-radius-sm': '.2rem',
+    '$btn-transition': 'all .2s ease-in-out'
+  }
+};
+var propTypes$9 = {
+  /** Toggles active CSS color. */
+  active: PropTypes.bool,
+  /** Toggles block CSS display. */
+  block: PropTypes.bool,
+  /** Toggles disable mouse event and CSS color. */
+  disabled: PropTypes.bool,
+  /** Toggles outline CSS border and background color. */
+  outline: PropTypes.bool,
+  /** @ignore */
+  className: PropTypes.string,
+  /** Color variables. Can be: */
+  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  /** Replace the default component tag reference by the one specified. Can be: */
+  getRef: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /** Start specified function when on click event is trigger. */
+  onClick: PropTypes.func,
+  /** Buttons use default size base and can use different size such as: */
+  size: PropTypes.oneOf(['sm', 'lg']),
+  /** Toggles drop up CSS style. */
+  dropup: PropTypes.bool,
+  /** Replace the default component tag by the one specified. Can be: */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$btn-padding-x': PropTypes.string,
+    '$btn-padding-y': PropTypes.string,
+    '$btn-line-height': PropTypes.string,
+    '$btn-font-weight': PropTypes.string,
+    '$btn-box-shadow': PropTypes.string,
+    '$btn-focus-box-shadow': PropTypes.string,
+    '$btn-active-box-shadow': PropTypes.string,
+    '$btn-primary-color': PropTypes.string,
+    '$btn-primary-bg': PropTypes.string,
+    '$btn-primary-border': PropTypes.string,
+    '$btn-secondary-color': PropTypes.string,
+    '$btn-secondary-bg': PropTypes.string,
+    '$btn-secondary-border': PropTypes.string,
+    '$btn-info-color': PropTypes.string,
+    '$btn-info-bg': PropTypes.string,
+    '$btn-info-border': PropTypes.string,
+    '$btn-success-color': PropTypes.string,
+    '$btn-success-bg': PropTypes.string,
+    '$btn-success-border': PropTypes.string,
+    '$btn-warning-color': PropTypes.string,
+    '$btn-warning-bg': PropTypes.string,
+    '$btn-warning-border': PropTypes.string,
+    '$btn-danger-color': PropTypes.string,
+    '$btn-danger-bg': PropTypes.string,
+    '$btn-danger-border': PropTypes.string,
+    '$btn-link-disabled-color': PropTypes.string,
+    '$btn-padding-x-sm': PropTypes.string,
+    '$btn-padding-y-sm': PropTypes.string,
+    '$btn-padding-x-lg': PropTypes.string,
+    '$btn-padding-y-lg': PropTypes.string,
+    '$btn-block-spacing-y': PropTypes.string,
+    '$btn-border-radius': PropTypes.string,
+    '$btn-border-radius-lg': PropTypes.string,
+    '$btn-border-radius-sm': PropTypes.string,
+    '$btn-transition': PropTypes.string,
+    '$link-hover-decoration': PropTypes.string,
+    '$enable-rounded': PropTypes.bool,
+    '$enable-shadows': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool,
+    '$enable-transitions': PropTypes.bool
+  }),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
+};
 
 var ButtonUnstyled = function (_React$Component) {
   inherits(ButtonUnstyled, _React$Component);
@@ -8970,6 +8913,10 @@ var ButtonUnstyled = function (_React$Component) {
       }
     }, _temp), possibleConstructorReturn(_this, _ret);
   } // eslint-disable-line react/prefer-stateless-function
+
+  /* eslint-disable react/no-unused-prop-types */
+
+  /* eslint-enable react/no-unused-prop-types */
 
   createClass(ButtonUnstyled, [{
     key: 'render',
@@ -9013,36 +8960,22 @@ var ButtonUnstyled = function (_React$Component) {
   }]);
   return ButtonUnstyled;
 }(React__default.Component);
-
-ButtonUnstyled.defaultProps = {
-  tag: 'button',
-  color: 'secondary',
-  theme: makeTheme$6()
-};
-ButtonUnstyled.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  active: PropTypes.bool,
-  block: PropTypes.bool,
-  color: PropTypes.string,
-  disabled: PropTypes.bool,
-  outline: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  onClick: PropTypes.func,
-  size: PropTypes.string,
-  dropup: PropTypes.bool,
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
-  theme: PropTypes.object
-  /* eslint-enable react/no-unused-prop-types */
-};
+/**
+ * Use our default **link**, **colored** or **outlined** `Buttons` blocks, to emphasize part of your page.
+ * You can also use different `size` or another `tag` instead of `<Button />`.
+ */
 
 
+ButtonUnstyled.defaultProps = defaultProps$10;
+ButtonUnstyled.propTypes = propTypes$9;
 var Button = styled__default(ButtonUnstyled).withConfig({
   displayName: 'Button'
 })(['', ' '], function (props) {
   return '\n    ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
+
+Button.defaultProps = defaultProps$10;
+Button.propTypes = propTypes$9;
 
 var navDivider_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -9150,8 +9083,8 @@ exports.default = {
 unwrapExports(buttonGroup_1);
 var buttonGroup_3 = buttonGroup_1.buttonGroup;
 
-var rmUnit$4 = unitUtils$1.rmUnit;
-var UNIT$3 = unitUtils$1.UNIT;
+var rmUnit$2 = unitUtils$1.rmUnit;
+var UNIT$2 = unitUtils$1.UNIT;
 
 /**
  * BOOTSTRAP THEME DROPDOWN
@@ -9160,7 +9093,7 @@ var UNIT$3 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$7 = function makeTheme() {
+var makeTheme$2 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -9279,14 +9212,14 @@ var makeTheme$7 = function makeTheme() {
   v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || '.5rem';
   v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
 
-  v['$input-height-lg'] = u['$input-height-lg'] || rmUnit$4(v['$font-size-lg'], UNIT$3.REM) * v['$line-height-lg'] + rmUnit$4(v['$input-padding-y-lg'], UNIT$3.REM) * 2 + UNIT$3.REM;
+  v['$input-height-lg'] = u['$input-height-lg'] || rmUnit$2(v['$font-size-lg'], UNIT$2.REM) * v['$line-height-lg'] + rmUnit$2(v['$input-padding-y-lg'], UNIT$2.REM) * 2 + UNIT$2.REM;
 
   return Object.assign({}, u, v);
 };
 
-makeTheme$7();
+makeTheme$2();
 
-var propTypes$6 = {
+var propTypes$11 = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   cssModule: PropTypes.object,
@@ -9294,7 +9227,7 @@ var propTypes$6 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
-var defaultProps$6 = {
+var defaultProps$11 = {
   tag: 'div'
 };
 
@@ -9314,8 +9247,8 @@ var DropdownMenu = function DropdownMenu(props, context) {
   return React__default.createElement(Tag, _extends({}, attributes, { tabIndex: '-1', 'aria-hidden': !context.isOpen, role: 'menu', className: classes }));
 };
 
-DropdownMenu.propTypes = propTypes$6;
-DropdownMenu.defaultProps = defaultProps$6;
+DropdownMenu.propTypes = propTypes$11;
+DropdownMenu.defaultProps = defaultProps$11;
 DropdownMenu.contextTypes = contextTypes;
 
 var tether = createCommonjsModule(function (module, exports) {
@@ -11360,7 +11293,7 @@ var DropdownUnstyled = function (_React$Component) {
 DropdownUnstyled.defaultProps = {
   isOpen: false,
   tag: 'div',
-  theme: makeTheme$7()
+  theme: makeTheme$2()
 };
 DropdownUnstyled.propTypes = {
   children: PropTypes.node,
@@ -11388,9 +11321,14 @@ var Dropdown = styled__default(DropdownUnstyled).withConfig({
   return '\n    &.dropup,\n    &.dropdown {\n      position: relative;\n    }\n\n    & .dropdown-hide {\n      display: none;\n    }\n    \n    & .dropdown-toggle {\n      /* Generate the caret automatically */\n      &::after {\n        display: inline-block;\n        width: 0;\n        height: 0;\n        margin-left: ' + props.theme['$caret-width'] + ';\n        vertical-align: middle;\n        content: \'\';\n        border-top: ' + props.theme['$caret-width'] + ' solid;\n        border-right: ' + props.theme['$caret-width'] + ' solid transparent;\n        border-left: ' + props.theme['$caret-width'] + ' solid transparent;\n      }\n\n      /* Prevent the focus on the dropdown toggle when closing dropdowns */\n      &:focus {\n        outline: 0;\n      }\n    }\n\n    &.dropup {\n      .dropdown-toggle {\n        &::after {\n          border-top: 0;\n          border-bottom: ' + props.theme['$caret-width'] + ' solid;\n        }\n      }\n    }\n\n    & .dropdown-menu {\n      clear: left;\n      position: absolute;\n      top: 100%;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown'] + ';\n      display: none; // none by default, but block on "open" of the menu\n      float: left;\n      min-width: ' + props.theme['$dropdown-min-width'] + ';\n      padding: ' + props.theme['$dropdown-padding-y'] + ' 0;\n      margin: ' + props.theme['$dropdown-margin-top'] + ' 0; /* override default ul */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      color: ' + props.theme['$body-color'] + ';\n      text-align: left; /* Ensures proper alignment if parent has it changed (e.g., modal footer) */\n      list-style: none;\n      background-color: ' + props.theme['$dropdown-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$dropdown-border-width'] + ' solid ' + props.theme['$dropdown-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$dropdown-box-shadow']) + '\n    }\n\n    /* mixin from bootstrap 4, see : scss/mixins/_nav-divider.css */\n    & .dropdown-divider {\n      ' + navDivider_3(props.theme['$spacer-y'], props.theme['$dropdown-divider-bg']) + '\n    }\n\n    & .dropdown-item {\n      display: block;\n      width: 100%; /* For <button>s */\n      padding: 3px ' + props.theme['$dropdown-item-padding-x'] + ';\n      clear: both;\n      font-weight: ' + props.theme['$font-weight-normal'] + ';\n      color: ' + props.theme['$dropdown-link-color'] + ';\n      text-align: inherit; /* For <button>s */\n      white-space: nowrap; /* prevent links from randomly breaking onto new lines */\n      background: none; /* For <button>s */\n      border: 0; /* For <button>s */\n\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$dropdown-link-hover-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-hover-bg'] + '\n      ') + '\n\n      &.active,\n      &:active {\n        color: ' + props.theme['$dropdown-link-active-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-active-bg'] + '\n      }\n\n      &.disabled,\n      &:disabled{\n        color: ' + props.theme['$dropdown-link-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: transparent;\n        ' + conditional_1(props.theme['$enable-gradients'], 'background-image: none; /* Remove CSS gradient */') + '\n      }\n    }\n\n    &.show {\n      /* show the menu */\n      &>.dropdown-menu {\n        display: block;\n      }\n\n      & > a {\n        outline: 0;\n      }\n    }\n\n\n    /* Menu positioning */\n\n    /* Add extra class to .dropdown-menu to flip the alignment of the dropdown*\n    /* menu with the parent. */\n    & .dropdown-menu-right {\n      right: 0;\n      left: auto; /* Reset the default from .dropdown-menu */\n    }\n\n    & .dropdown-menu-left {\n      right: auto;\n      left: 0;\n    }\n\n    /* Dropdown section headers */\n    & .dropdown-header {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    /* Dropdown section footers */\n    & .dropdown-footer {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    \n\n    /* Backdrop to catch body clicks on mobile, etc. */\n    & .dropdown-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown-backdrop'] + ';\n    }\n\n    /* Allow for dropdowns to go bottom up (aka, dropup-menu) */\n\n    /* Just add .dropup after the standard .dropdown class and you\'re set. */\n    /* TODO: abstract this so that the navbar fixed styles are not placed here? */\n\n    &.dropup {\n      .dropdown-menu {\n        top: auto;\n        bottom: 100%;\n        margin-bottom: ' + props.theme['$dropdown-margin-top'] + ';\n      }\n    }\n        \n    /* Added Mixin boutonGroup to enable dropdown to beneficiate from buttonGroup classes */\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
 
-var propTypes$5 = {
+var propTypes$10 = {
+  /**
+   * @ignore
+   */
   children: PropTypes.node,
+  /** Toggles open button dropdown. */
   isOpen: PropTypes.bool.isRequired,
+  /** Assign function to start when dropdown opening action is trigger. */
   toggle: PropTypes.func.isRequired
 };
 
@@ -11399,83 +11337,66 @@ var ButtonDropdown = function ButtonDropdown(props) {
   return React__default.createElement(Dropdown, _extends({}, props, { group: true }));
 };
 
-ButtonDropdown.propTypes = propTypes$5;
-
-/**
- * BOOTSTRAP THEME BUTTONGROUP TAG
- *
- * this file is not meant to be used and must be kept as original
- * @param userTheme
- */
-var makeTheme$8 = function makeTheme() {
-  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  /* eslint dot-notation: 'off', new-cap: 'off' */
-  // Variables
-  //
-  // Copy settings from this file into the provided `_custom.scss` to override
-  // the Bootstrap defaults without modifying key, versioned files.
-  var v = {};
-  var u = userTheme;
-
-  // Options
-  //
-  // Quickly modify global styling by enabling or disabling optional features.
-
-  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
-  // v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
-  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], true);
-
-  // Colors
-  //
-  // Start with assigning color names to specific hex values
-  v['$black'] = u['$black'] || '#000';
-
-  // Components
-  //
-  // Define common padding and border radius sizes and more.
-  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
-  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
-
-  // Fonts
-  //
-  // Font, line-height, and color for body text, headings, and more.
-  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
-  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
-
-  // Spacing
-  //
-  // Control the default styling of most Bootstrap elements by modifying these
-
-  v['$border-width'] = u['$border-width'] || '1px';
-
-  // Form input
-
-  v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width']; // For form controls and buttons
-
-  // Buttons
-  //
-  // For each of Bootstrap's buttons, define text, background and border color.
-
-  v['$btn-padding-x'] = u['$btn-padding-x'] || '1rem';
-  v['$btn-active-box-shadow'] = u['$btn-active-box-shadow'] || 'inset 0 3px 5px ' + color(v['$black']).alpha(0.125).toString();
-  v['$btn-padding-x-lg'] = u['$btn-padding-x-lg'] || '1.5rem';
-  v['$btn-padding-y-lg'] = u['$btn-padding-y-lg'] || '.75rem';
-  v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || '.5rem';
-  v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
-
-  // Allows for customizing button radius independently from global border radius
-  v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
-  v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
-
-  return Object.assign({}, u, v);
-};
-
-makeTheme$8();
+ButtonDropdown.propTypes = propTypes$10;
 
 /**
  * ButtonGroup
  */
+
+var defaultProps$12 = {
+  tag: 'div',
+  role: 'group',
+  theme: {
+    '$input-btn-border-width': '1px',
+    '$btn-padding-x': '1rem',
+    '$btn-active-box-shadow': 'inset 0 3px 5px rgba(0, 0, 0, 0.125)',
+    '$btn-padding-x-lg': '1.5rem',
+    '$btn-padding-y-lg': '.75rem',
+    '$font-size-lg': '1.25rem',
+    '$btn-padding-x-sm': '.5rem',
+    '$btn-padding-y-sm': '.25rem',
+    '$font-size-sm': '.875rem',
+    '$btn-border-radius-lg': '.3rem',
+    '$btn-border-radius-sm': '.2rem',
+    '$enable-rounded': true,
+    '$enable-shadows': true
+  }
+};
+var propTypes$12 = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$input-btn-border-width': PropTypes.string,
+    '$btn-padding-x': PropTypes.string,
+    '$btn-active-box-shadow': PropTypes.string,
+    '$btn-padding-x-lg': PropTypes.string,
+    '$btn-padding-y-lg': PropTypes.string,
+    '$font-size-lg': PropTypes.string,
+    '$btn-padding-x-sm': PropTypes.string,
+    '$btn-padding-y-sm': PropTypes.string,
+    '$font-size-sm': PropTypes.string,
+    '$btn-border-radius-lg': PropTypes.string,
+    '$btn-border-radius-sm': PropTypes.string,
+    '$enable-rounded': PropTypes.bool,
+    '$enable-shadows': PropTypes.bool
+  }),
+  /** Buttons use default size base and can use different size such as: */
+  size: PropTypes.oneOf(['sm', 'lg']),
+  /** Toggles vertical CSS display. */
+  vertical: PropTypes.bool,
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
+};
 
 var ButtonGroupUnstyled = function (_React$Component) {
   inherits(ButtonGroupUnstyled, _React$Component);
@@ -11487,8 +11408,6 @@ var ButtonGroupUnstyled = function (_React$Component) {
 
   createClass(ButtonGroupUnstyled, [{
     key: 'render',
-    // eslint-disable-line react/prefer-stateless-function
-
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
           className = _omit.className,
@@ -11501,16 +11420,12 @@ var ButtonGroupUnstyled = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, vertical ? 'btn-group-vertical' : 'btn-group', defineProperty({}, 'btn-group-' + size, size)), cssModule)
       }, attributes));
-    }
+    } // eslint-disable-line react/prefer-stateless-function
+
   }]);
   return ButtonGroupUnstyled;
 }(React__default.Component);
 
-ButtonGroupUnstyled.defaultProps = {
-  role: 'group',
-  tag: 'div',
-  theme: makeTheme$8()
-};
 ButtonGroupUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -11529,9 +11444,63 @@ var ButtonGroup = styled__default(ButtonGroupUnstyled).withConfig({
   return '\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
 
+ButtonGroup.defaultProps = defaultProps$12;
+ButtonGroup.propTypes = propTypes$12;
+
 /**
  * ButtonToolbar
  */
+
+var defaultProps$13 = {
+  tag: 'div',
+  role: 'toolbar',
+  theme: {
+    '$input-btn-border-width': '1px',
+    '$btn-padding-x': '1rem',
+    '$btn-active-box-shadow': 'inset 0 3px 5px rgba(0, 0, 0, 0.125)',
+    '$btn-padding-x-lg': '1.5rem',
+    '$btn-padding-y-lg': '.75rem',
+    '$font-size-lg': '1.25rem',
+    '$btn-padding-x-sm': '.5rem',
+    '$btn-padding-y-sm': '.25rem',
+    '$font-size-sm': '.875rem',
+    '$btn-border-radius-lg': '.3rem',
+    '$btn-border-radius-sm': '.2rem',
+    '$enable-rounded': true,
+    '$enable-shadows': true
+  }
+};
+var propTypes$13 = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$input-btn-border-width': PropTypes.string,
+    '$btn-padding-x': PropTypes.string,
+    '$btn-active-box-shadow': PropTypes.string,
+    '$btn-padding-x-lg': PropTypes.string,
+    '$btn-padding-y-lg': PropTypes.string,
+    '$font-size-lg': PropTypes.string,
+    '$btn-padding-x-sm': PropTypes.string,
+    '$btn-padding-y-sm': PropTypes.string,
+    '$font-size-sm': PropTypes.string,
+    '$btn-border-radius-lg': PropTypes.string,
+    '$btn-border-radius-sm': PropTypes.string,
+    '$enable-rounded': PropTypes.bool,
+    '$enable-shadows': PropTypes.bool
+  }),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
+};
 
 var ButtonToolbarUnstyled = function (_React$Component) {
   inherits(ButtonToolbarUnstyled, _React$Component);
@@ -11543,6 +11512,9 @@ var ButtonToolbarUnstyled = function (_React$Component) {
 
   createClass(ButtonToolbarUnstyled, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -11556,133 +11528,90 @@ var ButtonToolbarUnstyled = function (_React$Component) {
         className: mapToCssModules(classnames(className, 'btn-toolbar'), cssModule)
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return ButtonToolbarUnstyled;
 }(React__default.Component);
-
-ButtonToolbarUnstyled.defaultProps = {
-  tag: 'div',
-  role: 'toolbar',
-  theme: bsTheme
-};
-ButtonToolbarUnstyled.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
-  theme: PropTypes.object
-  /* eslint-enable react/no-unused-prop-types */
-};
+/**
+ * Button with toolbar like CSS style and display.
+ */
 
 
+ButtonToolbarUnstyled.defaultProps = defaultProps$13;
+ButtonToolbarUnstyled.propTypes = propTypes$13;
 var ButtonToolbar = styled__default(ButtonToolbarUnstyled).withConfig({
   displayName: 'ButtonToolbar'
 })(['', '  '], function (props) {
   return '\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
 
-/**
- * BOOTSTRAP THEME CAPTION TAG
- *
- * this file is not meant to be used and must be kept as original
- * @param userTheme
- */
-var makeTheme$9 = function makeTheme() {
-  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  /* eslint dot-notation: 'off', new-cap: 'off' */
-  // Variables
-  //
-  // Copy settings from this file into the provided `_custom.scss` to override
-  // the Bootstrap defaults without modifying key, versioned files.
-  var v = {};
-  var u = userTheme;
-
-  // Colors
-  //
-  // Create grayscale
-  v['$gray-light'] = u['$gray-light'] || '#636c72';
-
-  // Tables
-  //
-  // Customizes the `.table` component with basic values, each used across all table variations.
-
-  v['$table-cell-padding'] = u['$table-cell-padding'] || '.75rem';
-
-  // Fonts
-  v['$text-muted'] = u['$text-muted'] || v['$gray-light'];
-
-  return Object.assign({}, u, v);
-};
-
-makeTheme$9();
+ButtonToolbar.defaultProps = defaultProps$13;
+ButtonToolbar.propTypes = propTypes$13;
 
 /* A Caption (Box) */
 
-var defaultProps$7 = { theme: makeTheme$9() };
+var defaultProps$14 = {
+  theme: {
+    '$table-cell-padding': '.75rem',
+    '$text-muted': '#636c72'
+  }
+};
+var propTypes$14 = {
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$table-cell-padding': PropTypes.string,
+    '$text-muted': PropTypes.string
+  })
+};
+/**
+ * A `<Caption />` tag component in order to add description title to a `<Table />` component.
 
+ */
 var Caption = styled__default.caption.withConfig({
   displayName: 'Caption'
 })(['', ''], function (props) {
   return '\n    padding-top: ' + props.theme['$table-cell-padding'] + ';\n    padding-bottom: ' + props.theme['$table-cell-padding'] + ';\n    color: ' + props.theme['$text-muted'] + ';\n    text-align: left;\n    caption-side: top;\n  ';
 });
 
-Caption.defaultProps = defaultProps$7;
-
-/**
- * BOOTSTRAP THEME CODE
- *
- * this file is not meant to be used and must be kept as original
- * @param userTheme
- */
-var makeTheme$10 = function makeTheme() {
-  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  /* eslint dot-notation: 'off', new-cap: 'off' */
-  // Variables
-  //
-  // Copy settings from this file into the provided `_custom.scss` to override
-  // the Bootstrap defaults without modifying key, versioned files.
-  var v = {};
-  var u = userTheme;
-
-  // Options
-  //
-  // Quickly modify global styling by enabling or disabling optional features.
-
-  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
-
-  // Components
-  //
-  // Define common padding and border radius sizes and more.
-  v['$border-radius'] = u['$border-radius'] || '.25rem';
-
-  // Fonts
-  //
-  // Font, line-height, and color for body text, headings, and more.
-  v['$font-family-monospace'] = u['$font-family-monospace'] || 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
-
-  // Colors
-  //
-  // Create grayscale
-  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
-
-  // Code
-
-  v['$code-font-size'] = u['$code-font-size'] || '90%';
-  v['$code-padding-x'] = u['$code-padding-x'] || '.4rem';
-  v['$code-padding-y'] = u['$code-padding-y'] || '.2rem';
-  v['$code-color'] = u['$code-color'] || '#bd4147';
-  v['$code-bg'] = u['$code-bg'] || v['$gray-lightest'];
-
-  return Object.assign({}, u, v);
-};
-
-makeTheme$10();
+Caption.defaultProps = defaultProps$14;
+Caption.propTypes = propTypes$14;
 
 /**
  * Code component
  */
+
+var defaultProps$15 = {
+  tag: 'a',
+  theme: {
+    '$code-font-size': '90%',
+    '$code-padding-x': '.4rem',
+    '$code-padding-y': '.2rem',
+    '$code-color': '#bd4147',
+    '$code-bg': '#f7f7f9',
+    '$enable-rounded': false
+  }
+};
+var propTypes$15 = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$code-font-size': PropTypes.string,
+    '$code-padding-x': PropTypes.string,
+    '$code-padding-y': PropTypes.string,
+    '$code-color': PropTypes.string,
+    '$code-bg': PropTypes.string,
+    '$enable-rounded': PropTypes.bool
+  })
+};
 
 var CodeUnstyled = function (_React$Component) {
   inherits(CodeUnstyled, _React$Component);
@@ -11694,6 +11623,9 @@ var CodeUnstyled = function (_React$Component) {
 
   createClass(CodeUnstyled, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -11709,21 +11641,15 @@ var CodeUnstyled = function (_React$Component) {
         children
       );
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return CodeUnstyled;
 }(React__default.Component);
 
-CodeUnstyled.defaultProps = {
-  tag: 'code',
-  theme: makeTheme$10()
-};
-CodeUnstyled.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
-  theme: PropTypes.object,
-  tag: PropTypes.string
-  /* eslint-enable react/no-unused-prop-types */
-};
+CodeUnstyled.defaultProps = defaultProps$15;
+CodeUnstyled.propTypes = propTypes$15;
 
 
 var Code = styled__default(CodeUnstyled).withConfig({
@@ -11731,6 +11657,9 @@ var Code = styled__default(CodeUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    /* Inline code */\n    padding: ' + props.theme['$code-padding-y'] + ' ' + props.theme['$code-padding-x'] + ';\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$code-color'] + ';\n    background-color: ' + props.theme['$code-bg'] + ';\n    ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + ';\n    \n    /* Streamline the style when inside anchors to avoid broken underline and more */\n    a > & {\n      padding: 0;\n      color: inherit;\n      background-color: inherit;\n    }\n    \n    /* Bootstrap 4 does not place this css rule straight into Code tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
+
+Code.defaultProps = defaultProps$15;
+Code.propTypes = propTypes$15;
 
 var grid = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -12056,7 +11985,7 @@ var gridFramework_5 = gridFramework.makeGridColumns;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$11 = function makeTheme() {
+var makeTheme$3 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -12104,7 +12033,7 @@ var makeTheme$11 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$11();
+makeTheme$3();
 
 var colWidths = ['xs', 'sm', 'md', 'lg', 'xl'];
 var stringOrNumberProp = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
@@ -12189,7 +12118,7 @@ var ColUnstyled = function (_React$Component) {
 
 ColUnstyled.defaultProps = {
   tag: 'div',
-  theme: makeTheme$11(),
+  theme: makeTheme$3(),
   widths: colWidths
 };
 ColUnstyled.propTypes = {
@@ -12220,7 +12149,7 @@ var Col = styled__default(ColUnstyled).withConfig({
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$12 = function makeTheme() {
+var makeTheme$4 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -12239,7 +12168,7 @@ var makeTheme$12 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$12();
+makeTheme$4();
 
 var SHOW = 'SHOW';
 var SHOWN = 'SHOWN';
@@ -12430,7 +12359,7 @@ Collapse.propTypes = {
 };
 Collapse.defaultProps = {
   isOpen: false,
-  theme: makeTheme$12(),
+  theme: makeTheme$4(),
   tag: 'div',
   delay: {
     show: null,
@@ -12446,7 +12375,7 @@ Collapse.defaultProps = {
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$13 = function makeTheme() {
+var makeTheme$5 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -12494,7 +12423,7 @@ var makeTheme$13 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$13();
+makeTheme$5();
 
 /**
  * Definition Description
@@ -12525,7 +12454,7 @@ var DdUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 DdUnstyled.defaultProps = {
-  theme: makeTheme$13()
+  theme: makeTheme$5()
 };
 DdUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -12615,7 +12544,7 @@ Details.propTypes = {
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$14 = function makeTheme() {
+var makeTheme$6 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -12647,7 +12576,7 @@ var makeTheme$14 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$14();
+makeTheme$6();
 
 /**
  *Definition List
@@ -12678,7 +12607,7 @@ var DlUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 DlUnstyled.defaultProps = {
-  theme: makeTheme$14()
+  theme: makeTheme$6()
 };
 DlUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -12700,7 +12629,7 @@ var Dl = styled__default(DlUnstyled).withConfig({
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$15 = function makeTheme() {
+var makeTheme$7 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -12755,7 +12684,7 @@ var makeTheme$15 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$15();
+makeTheme$7();
 
 /**
  * Description Term
@@ -12786,7 +12715,7 @@ var DtUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 DtUnstyled.defaultProps = {
-  theme: makeTheme$15()
+  theme: makeTheme$7()
 };
 DtUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -12883,7 +12812,7 @@ FaStacked.propTypes = {
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$16 = function makeTheme() {
+var makeTheme$8 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -12915,7 +12844,7 @@ var makeTheme$16 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$16();
+makeTheme$8();
 
 /* A Fieldset (Box) */
 
@@ -12950,7 +12879,7 @@ var FieldsetUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 FieldsetUnstyled.defaultProps = {
-  theme: makeTheme$16()
+  theme: makeTheme$8()
 };
 FieldsetUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -13027,8 +12956,8 @@ exports.default = {
 unwrapExports(typography_1);
 var typography_2 = typography_1.typography;
 
-var rmUnit$5 = unitUtils$1.rmUnit;
-var UNIT$4 = unitUtils$1.UNIT;
+var rmUnit$3 = unitUtils$1.rmUnit;
+var UNIT$3 = unitUtils$1.UNIT;
 /**
  * BOOTSTRAP THEME H1
  *
@@ -13036,7 +12965,7 @@ var UNIT$4 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$17 = function makeTheme() {
+var makeTheme$9 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -13070,7 +12999,7 @@ var makeTheme$17 = function makeTheme() {
   // Font, line-height, and color for body text, headings, and more.
 
   v['$font-size-h1'] = u['$font-size-h1'] || '2.5rem';
-  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$5(v['$spacer'], UNIT$4.REM) / 2 + UNIT$4.REM;
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$3(v['$spacer'], UNIT$3.REM) / 2 + UNIT$3.REM;
 
   v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
   v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
@@ -13093,7 +13022,7 @@ var makeTheme$17 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$17();
+makeTheme$9();
 
 var H1Unstyled = function (_React$Component) {
   inherits(H1Unstyled, _React$Component);
@@ -13129,7 +13058,7 @@ var H1Unstyled = function (_React$Component) {
 }(React__default.Component);
 
 H1Unstyled.defaultProps = {
-  theme: makeTheme$17()
+  theme: makeTheme$9()
 };
 H1Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -13150,8 +13079,8 @@ var H1 = styled__default(H1Unstyled).withConfig({
   return '\n    font-size: ' + props.theme['$font-size-h1'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
 
-var rmUnit$6 = unitUtils$1.rmUnit;
-var UNIT$5 = unitUtils$1.UNIT;
+var rmUnit$4 = unitUtils$1.rmUnit;
+var UNIT$4 = unitUtils$1.UNIT;
 /**
  * BOOTSTRAP THEME H2
  *
@@ -13159,7 +13088,7 @@ var UNIT$5 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$18 = function makeTheme() {
+var makeTheme$10 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -13193,7 +13122,7 @@ var makeTheme$18 = function makeTheme() {
   // Font, line-height, and color for body text, headings, and more.
 
   v['$font-size-h2'] = u['$font-size-h2'] || '2rem';
-  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$6(v['$spacer'], UNIT$5.REM) / 2 + UNIT$5.REM;
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$4(v['$spacer'], UNIT$4.REM) / 2 + UNIT$4.REM;
 
   v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
   v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
@@ -13216,7 +13145,7 @@ var makeTheme$18 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$18();
+makeTheme$10();
 
 var H2Unstyled = function (_React$Component) {
   inherits(H2Unstyled, _React$Component);
@@ -13252,7 +13181,7 @@ var H2Unstyled = function (_React$Component) {
 }(React__default.Component);
 
 H2Unstyled.defaultProps = {
-  theme: makeTheme$18()
+  theme: makeTheme$10()
 };
 H2Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -13272,8 +13201,8 @@ var H2 = styled__default(H2Unstyled).withConfig({
   return '\n\n    font-size: ' + props.theme['$font-size-h2'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
 
-var rmUnit$7 = unitUtils$1.rmUnit;
-var UNIT$6 = unitUtils$1.UNIT;
+var rmUnit$5 = unitUtils$1.rmUnit;
+var UNIT$5 = unitUtils$1.UNIT;
 /**
  * BOOTSTRAP THEME H3
  *
@@ -13281,7 +13210,7 @@ var UNIT$6 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$19 = function makeTheme() {
+var makeTheme$11 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -13315,7 +13244,7 @@ var makeTheme$19 = function makeTheme() {
   // Font, line-height, and color for body text, headings, and more.
 
   v['$font-size-h3'] = u['$font-size-h3'] || '1.75rem';
-  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$7(v['$spacer'], UNIT$6.REM) / 2 + UNIT$6.REM;
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$5(v['$spacer'], UNIT$5.REM) / 2 + UNIT$5.REM;
 
   v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
   v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
@@ -13338,7 +13267,7 @@ var makeTheme$19 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$19();
+makeTheme$11();
 
 var H3Unstyled = function (_React$Component) {
   inherits(H3Unstyled, _React$Component);
@@ -13374,7 +13303,7 @@ var H3Unstyled = function (_React$Component) {
 }(React__default.Component);
 
 H3Unstyled.defaultProps = {
-  theme: makeTheme$19()
+  theme: makeTheme$11()
 };
 H3Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -13394,8 +13323,8 @@ var H3 = styled__default(H3Unstyled).withConfig({
   return '\n    font-size: ' + props.theme['$font-size-h3'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
 
-var rmUnit$8 = unitUtils$1.rmUnit;
-var UNIT$7 = unitUtils$1.UNIT;
+var rmUnit$6 = unitUtils$1.rmUnit;
+var UNIT$6 = unitUtils$1.UNIT;
 /**
  * BOOTSTRAP THEME H4
  *
@@ -13403,7 +13332,7 @@ var UNIT$7 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$20 = function makeTheme() {
+var makeTheme$12 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -13437,7 +13366,7 @@ var makeTheme$20 = function makeTheme() {
   // Font, line-height, and color for body text, headings, and more.
 
   v['$font-size-h4'] = u['$font-size-h4'] || '1.5rem';
-  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$8(v['$spacer'], UNIT$7.REM) / 2 + UNIT$7.REM;
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$6(v['$spacer'], UNIT$6.REM) / 2 + UNIT$6.REM;
 
   v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
   v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
@@ -13460,7 +13389,7 @@ var makeTheme$20 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$20();
+makeTheme$12();
 
 var H4Unstyled = function (_React$Component) {
   inherits(H4Unstyled, _React$Component);
@@ -13496,7 +13425,7 @@ var H4Unstyled = function (_React$Component) {
 }(React__default.Component);
 
 H4Unstyled.defaultProps = {
-  theme: makeTheme$20()
+  theme: makeTheme$12()
 };
 H4Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -13516,8 +13445,8 @@ var H4 = styled__default(H4Unstyled).withConfig({
   return '\n    font-size: ' + props.theme['$font-size-h4'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
 
-var rmUnit$9 = unitUtils$1.rmUnit;
-var UNIT$8 = unitUtils$1.UNIT;
+var rmUnit$7 = unitUtils$1.rmUnit;
+var UNIT$7 = unitUtils$1.UNIT;
 /**
  * BOOTSTRAP THEME H5
  *
@@ -13525,7 +13454,7 @@ var UNIT$8 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$21 = function makeTheme() {
+var makeTheme$13 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -13559,7 +13488,7 @@ var makeTheme$21 = function makeTheme() {
   // Font, line-height, and color for body text, headings, and more.
 
   v['$font-size-h5'] = u['$font-size-h5'] || '1.25rem';
-  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$9(v['$spacer'], UNIT$8.REM) / 2 + UNIT$8.REM;
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$7(v['$spacer'], UNIT$7.REM) / 2 + UNIT$7.REM;
 
   v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
   v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
@@ -13582,7 +13511,7 @@ var makeTheme$21 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$21();
+makeTheme$13();
 
 var H5Unstyled = function (_React$Component) {
   inherits(H5Unstyled, _React$Component);
@@ -13618,7 +13547,7 @@ var H5Unstyled = function (_React$Component) {
 }(React__default.Component);
 
 H5Unstyled.defaultProps = {
-  theme: makeTheme$21()
+  theme: makeTheme$13()
 };
 H5Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -13638,8 +13567,8 @@ var H5 = styled__default(H5Unstyled).withConfig({
   return '\n    font-size: ' + props.theme['$font-size-h5'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n \n    &.lead {\n     font-size: ' + props.theme['$lead-font-size'] + ';\n     font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
 
-var rmUnit$10 = unitUtils$1.rmUnit;
-var UNIT$9 = unitUtils$1.UNIT;
+var rmUnit$8 = unitUtils$1.rmUnit;
+var UNIT$8 = unitUtils$1.UNIT;
 /**
  * BOOTSTRAP THEME H6
  *
@@ -13647,7 +13576,7 @@ var UNIT$9 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$22 = function makeTheme() {
+var makeTheme$14 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -13681,7 +13610,7 @@ var makeTheme$22 = function makeTheme() {
   // Font, line-height, and color for body text, headings, and more.
 
   v['$font-size-h6'] = u['$font-size-h6'] || '1rem';
-  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$10(v['$spacer'], UNIT$9.REM) / 2 + UNIT$9.REM;
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$8(v['$spacer'], UNIT$8.REM) / 2 + UNIT$8.REM;
 
   v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
   v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
@@ -13704,7 +13633,7 @@ var makeTheme$22 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$22();
+makeTheme$14();
 
 var H6Unstyled = function (_React$Component) {
   inherits(H6Unstyled, _React$Component);
@@ -13740,7 +13669,7 @@ var H6Unstyled = function (_React$Component) {
 }(React__default.Component);
 
 H6Unstyled.defaultProps = {
-  theme: makeTheme$22()
+  theme: makeTheme$14()
 };
 H6Unstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -13905,7 +13834,7 @@ var navbar_3 = navbar_1.navbar;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$23 = function makeTheme() {
+var makeTheme$15 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -13990,9 +13919,9 @@ var makeTheme$23 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$23();
+makeTheme$15();
 
-var defaultProps$8 = { theme: makeTheme$23() };
+var defaultProps$16 = { theme: makeTheme$15() };
 
 var Header = styled__default.header.withConfig({
   displayName: 'Header'
@@ -14000,7 +13929,7 @@ var Header = styled__default.header.withConfig({
   return '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + conditional_1(props.shadowHeader, 'box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);') + '\n  ';
 });
 
-Header.defaultProps = defaultProps$8;
+Header.defaultProps = defaultProps$16;
 
 /**
  * BOOTSTRAP THEME HR
@@ -14008,7 +13937,7 @@ Header.defaultProps = defaultProps$8;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$24 = function makeTheme() {
+var makeTheme$16 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -14044,9 +13973,9 @@ var makeTheme$24 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$24();
+makeTheme$16();
 
-var defaultProps$9 = { theme: makeTheme$24() };
+var defaultProps$17 = { theme: makeTheme$16() };
 
 var Hr = styled__default.hr.withConfig({
   displayName: 'Hr'
@@ -14054,7 +13983,7 @@ var Hr = styled__default.hr.withConfig({
   return '\n    margin-top: ' + props.theme['$spacer-y'] + ';\n    margin-bottom: ' + props.theme['$spacer-y'] + ';\n    border: 0;\n    border-top: ' + props.theme['$hr-border-width'] + ' solid ' + props.theme['$hr-border-color'] + ';\n  ';
 });
 
-Hr.defaultProps = defaultProps$9;
+Hr.defaultProps = defaultProps$17;
 
 var image = createCommonjsModule(function (module, exports) {
 "use strict";
@@ -14093,8 +14022,8 @@ exports.default = {
 unwrapExports(image);
 var image_1 = image.imgFluid;
 
-var rmUnit$11 = unitUtils$1.rmUnit;
-var UNIT$10 = unitUtils$1.UNIT;
+var rmUnit$9 = unitUtils$1.rmUnit;
+var UNIT$9 = unitUtils$1.UNIT;
 
 /**
  * BOOTSTRAP THEME IMAGE
@@ -14103,7 +14032,7 @@ var UNIT$10 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$25 = function makeTheme() {
+var makeTheme$17 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -14146,7 +14075,7 @@ var makeTheme$25 = function makeTheme() {
 
   // =============================================================================================================
   // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
-  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$11(v['$spacer'], UNIT$10.REM) / 2 + UNIT$10.REM;
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$9(v['$spacer'], UNIT$9.REM) / 2 + UNIT$9.REM;
   // =============================================================================================================
 
   v['$border-width'] = u['$border-width'] || '1px';
@@ -14175,7 +14104,7 @@ var makeTheme$25 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$25();
+makeTheme$17();
 
 /**
  *
@@ -14222,7 +14151,7 @@ var ImgUnstyled = function (_React$Component) {
 
 ImgUnstyled.defaultProps = {
   tag: 'img',
-  theme: makeTheme$25()
+  theme: makeTheme$17()
 };
 ImgUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -14328,7 +14257,7 @@ var FigCaptionUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 FigCaptionUnstyled.defaultProps = {
-  theme: makeTheme$25()
+  theme: makeTheme$17()
 };
 FigCaptionUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -14352,7 +14281,7 @@ var FigCaption = styled__default(FigCaptionUnstyled).withConfig({
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$26 = function makeTheme() {
+var makeTheme$18 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -14467,7 +14396,7 @@ var makeTheme$26 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$26();
+makeTheme$18();
 
 /**
  * Input component
@@ -14532,7 +14461,7 @@ var InputUnstyled = function (_React$Component) {
 
 InputUnstyled.defaultProps = {
   tag: 'p',
-  theme: makeTheme$26(),
+  theme: makeTheme$18(),
   type: 'text'
 };
 InputUnstyled.propTypes = {
@@ -14699,8 +14628,8 @@ unwrapExports(forms);
 var forms_2 = forms.formControl;
 var forms_3 = forms.formControlValidation;
 
-var rmUnit$12 = unitUtils$1.rmUnit;
-var UNIT$11 = unitUtils$1.UNIT;
+var rmUnit$10 = unitUtils$1.rmUnit;
+var UNIT$10 = unitUtils$1.UNIT;
 
 /**
  * BOOTSTRAP THEME INPUTGROUP
@@ -14709,7 +14638,7 @@ var UNIT$11 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$27 = function makeTheme() {
+var makeTheme$19 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -14780,7 +14709,7 @@ var makeTheme$27 = function makeTheme() {
   v['$input-padding-x-lg'] = u['$input-padding-x-lg'] || '1.5rem';
   v['$input-padding-y-lg'] = u['$input-padding-y-lg'] || '.75rem';
   v['$input-line-height'] = u['$input-line-height'] || '1.25';
-  v['$input-height'] = u['$input-height'] || rmUnit$12(v['$font-size-base'], UNIT$11.REM) * v['$line-height-base'] + rmUnit$12(v['$input-padding-y'], UNIT$11.REM) * 2 + UNIT$11.REM;
+  v['$input-height'] = u['$input-height'] || rmUnit$10(v['$font-size-base'], UNIT$10.REM) * v['$line-height-base'] + rmUnit$10(v['$input-padding-y'], UNIT$10.REM) * 2 + UNIT$10.REM;
   v['$input-box-shadow'] = u['$input-box-shadow'] || 'inset 0 1px 1px ' + color(v['$black']).alpha(0.075).toString();
 
   v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width']; // For form controls and buttons
@@ -14810,7 +14739,7 @@ var makeTheme$27 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$27();
+makeTheme$19();
 
 /**
  * InputGroup Component
@@ -14847,7 +14776,7 @@ var InputGroupUnstyled = function (_React$Component) {
 
 InputGroupUnstyled.defaultProps = {
   tag: 'div',
-  theme: makeTheme$27()
+  theme: makeTheme$19()
 };
 InputGroupUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -14996,7 +14925,7 @@ IssueIcon.propTypes = {
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$28 = function makeTheme() {
+var makeTheme$20 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -15042,7 +14971,7 @@ var makeTheme$28 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$28();
+makeTheme$20();
 
 /**
  * Kbd component
@@ -15077,7 +15006,7 @@ var KbdUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 KbdUnstyled.defaultProps = {
-  theme: makeTheme$28()
+  theme: makeTheme$20()
 };
 KbdUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -15100,7 +15029,7 @@ var Kbd = styled__default(KbdUnstyled).withConfig({
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$29 = function makeTheme() {
+var makeTheme$21 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -15151,7 +15080,7 @@ var makeTheme$29 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$29();
+makeTheme$21();
 
 /**
  * A Jumbotron (Slider)
@@ -15187,7 +15116,7 @@ var JumbotronUnstyled = function (_React$Component) {
 
 JumbotronUnstyled.defaultProps = {
   tag: 'div',
-  theme: makeTheme$29()
+  theme: makeTheme$21()
 };
 JumbotronUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -15212,7 +15141,7 @@ var Jumbotron = styled__default(JumbotronUnstyled).withConfig({
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$30 = function makeTheme() {
+var makeTheme$22 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -15342,7 +15271,7 @@ var makeTheme$30 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$30();
+makeTheme$22();
 
 /**
  * Label component
@@ -15359,7 +15288,7 @@ var columnProps$1 = PropTypes.oneOfType([PropTypes.string, PropTypes.number, Pro
   offset: stringOrNumberProp$1
 })]);
 
-var propTypes$7 = {
+var propTypes$16 = {
   /* eslint-disable react/no-unused-prop-types */
   check: PropTypes.bool,
   children: PropTypes.node,
@@ -15380,9 +15309,9 @@ var propTypes$7 = {
   /* eslint-enable react/no-unused-prop-types */
 };
 
-var defaultProps$10 = {
+var defaultProps$18 = {
   tag: 'label',
-  theme: makeTheme$30()
+  theme: makeTheme$22()
 };
 
 var LabelUnstyled = function LabelUnstyled(props) {
@@ -15426,8 +15355,8 @@ var Label = styled__default(LabelUnstyled).withConfig({
   return '\n    /* Reboot Scss */\n    touch-action: manipulation;\n    /* Allow labels to use margin for spacing. */\n    display: inline-block;\n    margin-bottom: ' + props.theme['$label-margin-bottom'] + ';\n\n    ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
 
-Label.propTypes = propTypes$7;
-Label.defaultProps = defaultProps$10;
+Label.propTypes = propTypes$16;
+Label.defaultProps = defaultProps$18;
 
 /* A Legend (Box) */
 
@@ -15460,7 +15389,7 @@ var media_2 = media_1.media;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$31 = function makeTheme() {
+var makeTheme$23 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -15478,7 +15407,7 @@ var makeTheme$31 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$31();
+makeTheme$23();
 
 /**
  * A list item.
@@ -15522,7 +15451,7 @@ var LiUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 LiUnstyled.defaultProps = {
-  theme: makeTheme$31()
+  theme: makeTheme$23()
 };
 LiUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -15592,7 +15521,7 @@ var listGroup_2 = listGroup.listGroupItemVariant;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$32 = function makeTheme() {
+var makeTheme$24 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -15700,7 +15629,7 @@ var makeTheme$32 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$32();
+makeTheme$24();
 
 var nav_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -15805,7 +15734,7 @@ var lists_3 = lists.listInlineItem;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$33 = function makeTheme() {
+var makeTheme$25 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -15936,7 +15865,7 @@ var makeTheme$33 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$33();
+makeTheme$25();
 
 /**
  * Unordered List Tabs and Pills
@@ -15978,7 +15907,7 @@ var UlUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 UlUnstyled.defaultProps = {
-  theme: makeTheme$33()
+  theme: makeTheme$25()
 };
 UlUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -16031,7 +15960,7 @@ var ListGroupUnstyled = function (_React$Component) {
 
 ListGroupUnstyled.defaultProps = {
   tag: Ul,
-  theme: makeTheme$32()
+  theme: makeTheme$24()
 };
 ListGroupUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -16185,8 +16114,8 @@ ListGroupItemText.propTypes = {
  * Map Component
  *
  */
-var Mapp = styled__default.map.withConfig({
-  displayName: 'Map__Mapp'
+var Map$1 = styled__default.map.withConfig({
+  displayName: 'Map'
 })(['display:inline;']);
 
 /**
@@ -16195,7 +16124,7 @@ var Mapp = styled__default.map.withConfig({
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$34 = function makeTheme() {
+var makeTheme$26 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -16218,13 +16147,13 @@ var makeTheme$34 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$34();
+makeTheme$26();
 
 /**
  * Mark component
  */
 
-var defaultProps$11 = { theme: makeTheme$34() };
+var defaultProps$19 = { theme: makeTheme$26() };
 
 var Mark = styled__default.mark.withConfig({
   displayName: 'Mark'
@@ -16232,7 +16161,7 @@ var Mark = styled__default.mark.withConfig({
   return '\n    /* Reboot Scss */\n    padding: ' + props.theme['$mark-padding'] + ';\n    background-color: ' + props.theme['$mark-bg'] + ';\n  ';
 });
 
-Mark.defaultProps = defaultProps$11;
+Mark.defaultProps = defaultProps$19;
 
 /**
  * Media component
@@ -16528,7 +16457,7 @@ var tools_10 = tools.tetherAttachements;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$35 = function makeTheme() {
+var makeTheme$27 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -16645,14 +16574,14 @@ var makeTheme$35 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$35();
+makeTheme$27();
 
 /* eslint no-underscore-dangle: 0 */
 function noop() {}
 
 var FadePropTypes = PropTypes.shape(Fade.propTypes);
 
-var propTypes$8 = {
+var propTypes$17 = {
   theme: PropTypes.object,
   isOpen: PropTypes.bool,
   autoFocus: PropTypes.bool,
@@ -16679,14 +16608,14 @@ var propTypes$8 = {
   modalTransition: FadePropTypes
 };
 
-var defaultProps$12 = {
+var defaultProps$20 = {
   isOpen: false,
   autoFocus: true,
   role: 'dialog',
   backdrop: true,
   keyboard: true,
   zIndex: 2000,
-  theme: makeTheme$35(),
+  theme: makeTheme$27(),
   fade: true,
   onOpened: noop,
   onClosed: noop,
@@ -16928,21 +16857,21 @@ var ModalUnstyled = function (_React$Component) {
  */
 
 
-ModalUnstyled.defaultProps = defaultProps$12;
-ModalUnstyled.propTypes = propTypes$8;
+ModalUnstyled.defaultProps = defaultProps$20;
+ModalUnstyled.propTypes = propTypes$17;
 var Modal = styled__default(ModalUnstyled).withConfig({
   displayName: 'Modal'
 })(['', ''], function (props) {
   return '\n    & .modal {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal'] + ';\n      display: none;\n      outline: 0;\n      overflow-x: hidden;\n      overflow-y: auto;\n      \n      ' + transition_3(props.theme['$enable-transitions'], props.theme['$transition-fade']) + '\n      &.fade {\n        .modal-dialog {\n          ' + transition_2$1(props.theme['$enable-transitions'], props.theme['$modal-transition']) + '\n          transform: translate(0, -25%);\n        }\n      }\n      &.show {\n        .modal-dialog {\n          transform: translate(0, 0);\n        }\n      }\n    }\n    \n    & .modal-dialog {\n      position: relative;\n      width: auto;\n      margin: ' + props.theme['$modal-dialog-margin'] + ';\n      ' + rebootUtils.body(props.theme['$font-family-base'], props.theme['$font-size-base'], props.theme['$font-weight-base'], props.theme['$line-height-base'], props.theme['$body-color'], props.theme['$body-bg']) + '\n    }\n    \n    \n    & .modal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$modal-content-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$modal-content-border-width'] + ' solid ' + props.theme['$modal-content-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius-lg']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$modal-content-xs-box-shadow']) + '\n      outline: 0;\n    }\n    \n    & .modal-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal-backdrop'] + ';\n      background-color: ' + props.theme['$modal-backdrop-bg'] + ';\n      &.fade {\n        opacity: 0;\n        ' + transition_2$1(props.theme['$enable-transitions'], props.theme['$transition-fade']) + ';\n      }\n      &.show {\n        opacity: ' + props.theme['$modal-backdrop-opacity'] + ';\n      }\n    }\n      \n        \n    & .modal-header {\n      display: flex;\n      align-items: center;\n      justify-content: space-between;\n      padding: ' + props.theme['$modal-header-padding'] + ';\n      border-bottom: ' + props.theme['$modal-header-border-width'] + ' solid ' + props.theme['$modal-header-border-color'] + ';\n    }\n    \n    & .modal-title {\n      margin-bottom: 0;\n      line-height: ' + props.theme['$modal-title-line-height'] + ';\n    }\n    \n    & .modal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n    }\n    \n    & .modal-footer {\n      display: flex;\n      align-items: center;\n      justify-content: flex-end;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n      border-top: ' + props.theme['$modal-footer-border-width'] + ' solid ' + props.theme['$modal-footer-border-color'] + ';\n      // Easily place margin between footer elements\n      > :not(:first-child) { margin-left: .25rem; }\n      > :not(:last-child) { margin-right: .25rem; }\n    }\n    \n\n  \n    // Scale up the modal\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        & .modal-dialog {\n          max-width: ' + props.theme['$modal-md'] + ';\n          margin: ' + props.theme['$modal-dialog-sm-up-margin-y'] + ' auto;\n        }\n      \n        & .modal-content {\n          ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$modal-content-sm-up-box-shadow']) + '\n        }\n      \n        & .modal-sm {\n          max-width: ' + props.theme['$modal-sm'] + ';\n        }\n      ') + '\n  \n\n    ' + breakpoints_6('lg', props.theme['$grid-breakpoints'], '\n        & .modal-lg {\n           max-width:  ' + props.theme['$modal-lg'] + '; \n         }\n      ') + '\n  ';
 });
 
-var propTypes$9 = {
+var propTypes$18 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
 
-var defaultProps$13 = {
+var defaultProps$21 = {
   tag: 'div'
 };
 
@@ -16958,16 +16887,16 @@ var ModalBody = function ModalBody(props) {
   }));
 };
 
-ModalBody.propTypes = propTypes$9;
-ModalBody.defaultProps = defaultProps$13;
+ModalBody.propTypes = propTypes$18;
+ModalBody.defaultProps = defaultProps$21;
 
-var propTypes$10 = {
+var propTypes$19 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
 
-var defaultProps$14 = {
+var defaultProps$22 = {
   tag: 'div'
 };
 
@@ -16983,10 +16912,10 @@ var ModalFooter = function ModalFooter(props) {
   }));
 };
 
-ModalFooter.propTypes = propTypes$10;
-ModalFooter.defaultProps = defaultProps$14;
+ModalFooter.propTypes = propTypes$19;
+ModalFooter.defaultProps = defaultProps$22;
 
-var propTypes$11 = {
+var propTypes$20 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   wrapTag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   toggle: PropTypes.func,
@@ -16995,7 +16924,7 @@ var propTypes$11 = {
   children: PropTypes.node
 };
 
-var defaultProps$15 = {
+var defaultProps$23 = {
   tag: H4,
   wrapTag: 'div'
 };
@@ -17029,11 +16958,11 @@ var ModalHeader = function ModalHeader(props) {
   );
 };
 
-ModalHeader.propTypes = propTypes$11;
-ModalHeader.defaultProps = defaultProps$15;
+ModalHeader.propTypes = propTypes$20;
+ModalHeader.defaultProps = defaultProps$23;
 
-var rmUnit$13 = unitUtils$1.rmUnit;
-var UNIT$12 = unitUtils$1.UNIT;
+var rmUnit$11 = unitUtils$1.rmUnit;
+var UNIT$11 = unitUtils$1.UNIT;
 
 /**
  * BOOTSTRAP THEME NAV
@@ -17042,7 +16971,7 @@ var UNIT$12 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$36 = function makeTheme() {
+var makeTheme$28 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -17098,7 +17027,7 @@ var makeTheme$36 = function makeTheme() {
 
   // =============================================================================================================
   // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
-  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$13(v['$spacer'], UNIT$12.REM) / 2 + UNIT$12.REM;
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$11(v['$spacer'], UNIT$11.REM) / 2 + UNIT$11.REM;
   // =============================================================================================================
 
   v['$border-width'] = u['$border-width'] || '1px';
@@ -17180,7 +17109,7 @@ var makeTheme$36 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$36();
+makeTheme$28();
 
 /**
  * Nav Component
@@ -17232,7 +17161,7 @@ var NavUnstyled = function (_React$Component) {
 
 NavUnstyled.defaultProps = {
   tag: Ul,
-  theme: makeTheme$36()
+  theme: makeTheme$28()
 };
 NavUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -17373,7 +17302,7 @@ NavItem.propTypes = {
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$37 = function makeTheme() {
+var makeTheme$29 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -17391,7 +17320,7 @@ var makeTheme$37 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$37();
+makeTheme$29();
 
 /**
  * Ordered List Tabs and Pills
@@ -17401,7 +17330,7 @@ makeTheme$37();
  *
  */
 
-var defaultProps$16 = { theme: makeTheme$37() };
+var defaultProps$24 = { theme: makeTheme$29() };
 
 var Ol = styled__default.ol.withConfig({
   displayName: 'Ol'
@@ -17409,7 +17338,7 @@ var Ol = styled__default.ol.withConfig({
   return '\n    /* Type Scss */\n    &.list-unstyled {\n      ' + lists_1() + '\n    }\n\n    &.list-inline {\n      ' + lists_2() + '\n    }\n\n    &.list-inline-item {\n      ' + lists_3(props.theme['$list-inline-padding']) + '\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n    margin-bottom: 1rem;\n\n    & ol,\n    & ul {\n      margin-bottom: 0;\n    }\n  ';
 });
 
-Ol.defaultProps = defaultProps$16;
+Ol.defaultProps = defaultProps$24;
 
 /* Option */
 
@@ -17455,8 +17384,8 @@ var Output = styled__default(OutputUnstyled).withConfig({
   displayName: 'Output'
 })(['&.output{display:inline-block;}']);
 
-var rmUnit$14 = unitUtils$1.rmUnit;
-var UNIT$13 = unitUtils$1.UNIT;
+var rmUnit$12 = unitUtils$1.rmUnit;
+var UNIT$12 = unitUtils$1.UNIT;
 
 /**
  * BOOTSTRAP THEME PARAGRAPH
@@ -17465,7 +17394,7 @@ var UNIT$13 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$38 = function makeTheme() {
+var makeTheme$30 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -17521,7 +17450,7 @@ var makeTheme$38 = function makeTheme() {
   v['$font-size-h5'] = u['$font-size-h5'] || '1.25rem';
   v['$font-size-h6'] = u['$font-size-h6'] || '1rem';
 
-  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$14(v['$spacer'], UNIT$13.REM) / 2 + UNIT$13.REM;
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$12(v['$spacer'], UNIT$12.REM) / 2 + UNIT$12.REM;
   v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
   v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
   v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
@@ -17545,7 +17474,7 @@ var makeTheme$38 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$38();
+makeTheme$30();
 
 var PUnstyled = function (_React$Component) {
   inherits(PUnstyled, _React$Component);
@@ -17581,7 +17510,7 @@ var PUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 PUnstyled.defaultProps = {
-  theme: makeTheme$38()
+  theme: makeTheme$30()
 };
 PUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -17707,7 +17636,7 @@ var paginations_3 = paginations.pagination;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$39 = function makeTheme() {
+var makeTheme$31 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -17801,7 +17730,7 @@ var makeTheme$39 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$39();
+makeTheme$31();
 
 /**
  * A Pagination
@@ -17837,7 +17766,7 @@ var PaginationUnstyled = function (_React$Component) {
 
 PaginationUnstyled.defaultProps = {
   tag: 'ul',
-  theme: makeTheme$39()
+  theme: makeTheme$31()
 };
 PaginationUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -18000,7 +17929,7 @@ PaginationLink.propTypes = {
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$40 = function makeTheme() {
+var makeTheme$32 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -18025,13 +17954,13 @@ var makeTheme$40 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$40();
+makeTheme$32();
 
 /**
  * Pre component
  */
 
-var defaultProps$17 = { theme: makeTheme$40() };
+var defaultProps$25 = { theme: makeTheme$32() };
 
 var Pre = styled__default.pre.withConfig({
   displayName: 'Pre'
@@ -18039,7 +17968,7 @@ var Pre = styled__default.pre.withConfig({
   return '\n    /* Blocks of code */\n    display: block;\n    margin-top: 0;\n    margin-bottom: 1rem;\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$pre-color'] + ';\n    \n    /* Enable scrollable blocks of code */\n    /* AJT This class was present in bootstrap/scss/code.scss  We must decide if this class should be a mixin or not! */\n    &.pre-scrollable {\n      max-height: ' + props.theme['$pre-scrollable-max-height'] + ';\n      overflow-y: scroll;\n    }\n\n  \n    /* Account for some code outputs that place code tags in pre tags */\n    code {\n      padding: 0;\n      font-size: inherit;\n      color: inherit;\n      background-color: transparent;\n      border-radius: 0;\n    }\n    \n    /* Reboot Scss */\n\n    /* Remove browser default top margin */\n    margin-top: 0;\n    /* Reset browser default of \'1em\' to use \'rem\'s */\n    margin-bottom: 1rem;\n    /* Normalize v4 removed this property, causing \'pre\' content to break out of wrapping code snippets */\n    overflow: auto;\n    \n    /* Bootstrap 4 does not place this css rule straight into Kbd tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
 
-Pre.defaultProps = defaultProps$17;
+Pre.defaultProps = defaultProps$25;
 
 var gradients = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -18142,7 +18071,7 @@ var gradients_7 = gradients.gradientStriped;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$41 = function makeTheme() {
+var makeTheme$33 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -18196,7 +18125,7 @@ var makeTheme$41 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$41();
+makeTheme$33();
 
 /* Progress */
 
@@ -18229,7 +18158,7 @@ var ProgressUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 ProgressUnstyled.defaultProps = {
-  theme: makeTheme$41()
+  theme: makeTheme$33()
 };
 ProgressUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -18492,7 +18421,7 @@ ProgressBar.propTypes = {
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$42 = function makeTheme() {
+var makeTheme$34 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -18525,7 +18454,7 @@ var makeTheme$42 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$42();
+makeTheme$34();
 
 var RowUnstyled = function (_React$Component) {
   inherits(RowUnstyled, _React$Component);
@@ -18557,7 +18486,7 @@ var RowUnstyled = function (_React$Component) {
 
 RowUnstyled.defaultProps = {
   tag: 'div',
-  theme: makeTheme$42()
+  theme: makeTheme$34()
 };
 RowUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -18663,7 +18592,7 @@ var Select = styled__default(SelectUnstyled).withConfig({
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$43 = function makeTheme() {
+var makeTheme$35 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -18680,7 +18609,7 @@ var makeTheme$43 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$43();
+makeTheme$35();
 
 /**
  * Small component
@@ -18719,7 +18648,7 @@ var SmallUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 SmallUnstyled.defaultProps = {
-  theme: makeTheme$43()
+  theme: makeTheme$35()
 };
 SmallUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -18836,7 +18765,7 @@ var tableRow_1 = tableRow.tableRowVariant;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$44 = function makeTheme() {
+var makeTheme$36 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -18912,7 +18841,7 @@ var makeTheme$44 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$44();
+makeTheme$36();
 
 /* eslint-disable quote-props, dot-notation */
 /**
@@ -18967,7 +18896,7 @@ var TableUnstyled = function (_React$Component) {
 TableUnstyled.defaultProps = {
   tag: 'table',
   responsiveTag: 'div',
-  theme: makeTheme$44()
+  theme: makeTheme$36()
 };
 TableUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -19207,90 +19136,73 @@ exports.default = {
 unwrapExports(badge);
 var badge_2 = badge.badgeVariant;
 
-/**
- * BOOTSTRAP THEME BADGE TAG
- *
- * this file is not meant to be used and must be kept as original
- * @param userTheme
- */
-var makeTheme$45 = function makeTheme() {
-  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  /* eslint dot-notation: 'off', new-cap: 'off' */
-  // Variables
-  //
-  // Copy settings from this file into the provided `_custom.scss` to override
-  // the Bootstrap defaults without modifying key, versioned files.
-  var v = {};
-  var u = userTheme;
-
-  // Options
-  //
-  // Quickly modify global styling by enabling or disabling optional features.
-
-  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
-  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
-
-  // Color
-
-  // Start with assigning color names to specific hex values.
-  v['$white'] = u['$white'] || '#fff';
-  v['$blue'] = u['$blue'] || '#0275d8';
-  v['$green'] = u['$green'] || '#5cb85c';
-  v['$teal'] = u['$teal'] || '#5bc0de';
-  v['$orange'] = u['$orange'] || '#f0ad4e';
-  v['$red'] = u['$red'] || '#d9534f';
-  v['$gray-light'] = u['$gray-light'] || '#636c72';
-  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
-
-  // Reassign color vars to semantic color scheme
-  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
-  v['$brand-success'] = u['$brand-success'] || v['$green'];
-  v['$brand-info'] = u['$brand-info'] || v['$teal'];
-  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
-  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
-  v['$brand-inverse'] = u['$brand-inverse'] || v['$gray-dark'];
-
-  // Components
-  //
-  // Define common padding and border radius sizes and more.
-
-  v['$border-radius'] = u['$border-radius'] || '.25rem';
-
-  // Fonts
-  //
-  // Font, line-height, and color for body text, headings, and more.
-
-  v['$font-weight-bold'] = u['$font-weight-bold'] || 'bold';
-
-  // Badges
-
-  v['$badge-default-bg'] = u['$badge-default-bg'] || v['$gray-light'];
-  v['$badge-primary-bg'] = u['$badge-primary-bg'] || v['$brand-primary'];
-  v['$badge-success-bg'] = u['$badge-success-bg'] || v['$brand-success'];
-  v['$badge-info-bg'] = u['$badge-info-bg'] || v['$brand-info'];
-  v['$badge-warning-bg'] = u['$badge-warning-bg'] || v['$brand-warning'];
-  v['$badge-danger-bg'] = u['$badge-danger-bg'] || v['$brand-danger'];
-
-  v['$badge-color'] = u['$badge-color'] || v['$white'];
-  v['$badge-link-hover-color'] = u['$badge-link-hover-color'] || v['$white'];
-  v['$badge-font-size'] = u['$badge-font-size'] || '75%';
-  v['$badge-font-weight'] = u['$badge-font-weight'] || v['$font-weight-bold'];
-  v['$badge-padding-x'] = u['$badge-padding-x'] || '.4em';
-  v['$badge-padding-y'] = u['$badge-padding-y'] || '.25em';
-
-  v['$badge-pill-padding-x'] = u['$badge-pill-padding-x'] || '.6em';
-
-  // Use a higher than normal value to ensure completely rounded edges when
-  // customizing padding or font-size on labels.
-  v['$badge-pill-border-radius'] = u['$badge-pill-border-radius'] || '10rem';
-
-  return Object.assign({}, u, v);
-};
-
-makeTheme$45();
-
 /* Badge (Text Format) */
+
+var defaultProps$26 = {
+  color: 'default',
+  pill: false,
+  tag: 'span',
+  theme: {
+    '$badge-default-bg': '#636c72',
+    '$badge-primary-bg': '#0275d8',
+    '$badge-success-bg': '#5cb85c',
+    '$badge-info-bg': '#5bc0de',
+    '$badge-warning-bg': '#f0ad4e',
+    '$badge-danger-bg': '#d9534f',
+    '$badge-color': '#fff',
+    '$badge-link-hover-color': '#fff',
+    '$badge-font-size': '75%',
+    '$badge-font-weight': 'bold',
+    '$badge-padding-x': '.4em',
+    '$badge-padding-y': '.25em',
+    '$badge-pill-padding-x': '.6em',
+    '$badge-pill-border-radius': '10rem',
+    '$enable-rounded': true,
+    '$enable-hover-media-query': false
+  }
+};
+var propTypes$21 = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Color variables. Can be: */
+  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  /**
+   * Change badge border radius.
+   */
+  pill: PropTypes.bool,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$badge-default-bg': PropTypes.string,
+    '$badge-primary-bg': PropTypes.string,
+    '$badge-success-bg': PropTypes.string,
+    '$badge-info-bg': PropTypes.string,
+    '$badge-warning-bg': PropTypes.string,
+    '$badge-danger-bg': PropTypes.string,
+    '$badge-color': PropTypes.string,
+    '$badge-link-hover-color': PropTypes.string,
+    '$badge-font-size': PropTypes.string,
+    '$badge-font-weight': PropTypes.string,
+    '$badge-padding-x': PropTypes.string,
+    '$badge-padding-y': PropTypes.string,
+    '$badge-pill-padding-x': PropTypes.string,
+    '$badge-pill-border-radius': PropTypes.string,
+    '$link-hover-decoration': PropTypes.string,
+    '$enable-rounded': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool
+  }),
+
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
+};
 
 var BadgeUnstyled = function (_React$Component) {
   inherits(BadgeUnstyled, _React$Component);
@@ -19302,6 +19214,9 @@ var BadgeUnstyled = function (_React$Component) {
 
   createClass(BadgeUnstyled, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -19319,26 +19234,15 @@ var BadgeUnstyled = function (_React$Component) {
         }, 'badge-' + color, color)), cssModule)
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return BadgeUnstyled;
 }(React__default.Component);
 
-BadgeUnstyled.defaultProps = {
-  color: 'default',
-  pill: false,
-  tag: 'span',
-  theme: makeTheme$45()
-};
-BadgeUnstyled.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  color: PropTypes.string,
-  pill: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
-  theme: PropTypes.object
-  /* eslint-enable react/no-unused-prop-types */
-};
+BadgeUnstyled.defaultProps = defaultProps$26;
+BadgeUnstyled.propTypes = propTypes$21;
 
 
 var Badge = styled__default(BadgeUnstyled).withConfig({
@@ -19346,6 +19250,11 @@ var Badge = styled__default(BadgeUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    \n    /* Base class */\n    /* Requires one of the contextual, color modifier classes for \'color\' and */\n    /* \'background-color\'. */\n    \n    &.badge {\n      display: inline-block;\n      padding: ' + props.theme['$badge-padding-y'] + ' ' + props.theme['$badge-padding-x'] + ';\n      font-size: ' + props.theme['$badge-font-size'] + ';\n      font-weight: ' + props.theme['$badge-font-weight'] + ';\n      line-height: 1;\n      color: ' + props.theme['$badge-color'] + ';\n      text-align: center;\n      white-space: nowrap;\n      vertical-align: baseline;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n    \n      /* Empty tags collapse automatically */\n      &:empty {\n        display: none;\n      }\n    }\n    \n    \n    /* scss-lint:disable QualifyingElement */\n    /* Add hover effects, but only for links */\n    &a {\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$badge-link-hover-color'] + ';\n        text-decoration: none;\n        cursor: pointer;\n      ') + '\n    }\n    /* scss-lint:enable QualifyingElement */\n    \n    /* Pill tags */\n    /* Make them extra rounded with a modifier to replace v3s badges. */\n    \n    &.badge-pill {\n      padding-right: ' + props.theme['$badge-pill-padding-x'] + ';\n      padding-left: ' + props.theme['$badge-pill-padding-x'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$badge-pill-border-radius']) + '\n    }\n    \n    /* Colors */\n    /* Contextual variations (linked tags get darker on :hover). */\n    \n    &.badge-default {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-default-bg']) + '\n    }     \n    \n    &.badge-primary {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-primary-bg']) + '\n    }\n    \n    &.badge-success {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-success-bg']) + '\n    }\n    \n    &.badge-info {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-info-bg']) + '\n    }\n    \n    &.badge-warning {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-warning-bg']) + '\n    }\n    \n    &.badge-danger {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-danger-bg']) + '\n    }\n  ';
 });
+/**
+ * Badges can be used as link and buttons and also in order to provide a counter.
+ */
+Badge.defaultProps = defaultProps$26;
+Badge.propTypes = propTypes$21;
 
 /* A Textarea (Box) */
 
@@ -19375,7 +19284,7 @@ var defaultTetherConfig$1 = {
 };
 // propTypes need to be excluded of the tooltip class
 // issue on : https://github.com/yannickcr/eslint-plugin-react/issues/203
-var propTypes$12 = {
+var propTypes$22 = {
   placement: PropTypes.oneOf(tools_10),
   target: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   isOpen: PropTypes.bool,
@@ -19512,7 +19421,7 @@ var TooltipUnstyled = function (_React$Component) {
         return null;
       }
 
-      var attributes = lodash_omit(this.props, Object.keys(propTypes$12));
+      var attributes = lodash_omit(this.props, Object.keys(propTypes$22));
 
       var classes = mapToCssModules(classnames('tooltip', this.props.className), this.props.cssModule);
 
@@ -19551,7 +19460,7 @@ TooltipUnstyled.defaultProps = {
   autohide: true,
   toggle: function toggle() {}
 };
-TooltipUnstyled.propTypes = propTypes$12;
+TooltipUnstyled.propTypes = propTypes$22;
 var Tooltip = styled__default(TooltipUnstyled).withConfig({
   displayName: 'Tooltip'
 })(['', ''], function (props) {
@@ -19662,142 +19571,131 @@ var cards_3 = cards.cardOutlineVariant;
 var cards_4 = cards.cardInverse;
 var cards_5 = cards.card;
 
-var detectUnit$2 = unitUtils$1.detectUnit;
-var rmUnit$15 = unitUtils$1.rmUnit;
-var UNIT$14 = unitUtils$1.UNIT;
-
-/**
- * BOOTSTRAP THEME CARDS TAG (Cards, CardsColumns, CardDeck, CardGroup)
- *
- * this file is not meant to be used and must be kept as original
- * @param userTheme
- */
-
-var makeTheme$46 = function makeTheme() {
-  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  /* eslint dot-notation: 'off', new-cap: 'off' */
-  // Variables
-  //
-  // Copy settings from this file into the provided `_custom.scss` to override
-  // the Bootstrap defaults without modifying key, versioned files.
-  var v = {};
-  var u = userTheme;
-
-  // Options
-  //
-  // Quickly modify global styling by enabling or disabling optional features.
-
-  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
-  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
-
-  // Grid breakpoints
-  //
-  // Define the minimum dimensions at which your layout will change,
-  // adapting to different screen sizes, for use in media queries.
-
-  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  };
-  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
-  variables_2(v['$grid-breakpoints']);
-
-  // Colors
-  //
-  // Start with assigning color names to specific hex values.
-  v['$white'] = u['$white'] || '#fff';
-  v['$black'] = u['$black'] || '#000';
-  v['$blue'] = u['$blue'] || '#0275d8';
-  v['$green'] = u['$green'] || '#5cb85c';
-  v['$teal'] = u['$teal'] || '#5bc0de';
-  v['$orange'] = u['$orange'] || '#f0ad4e';
-  v['$red'] = u['$red'] || '#d9534f';
-
-  // Create grayscale
-  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
-  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
-
-  // Reassign color vars to semantic color scheme
-  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
-  v['$brand-success'] = u['$brand-success'] || v['$green'];
-  v['$brand-info'] = u['$brand-info'] || v['$teal'];
-  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
-  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
-  v['$brand-inverse'] = u['$brand-inverse'] || v['$gray-dark'];
-
-  // Components
-  //
-  // Define common padding and border radius sizes and more.
-  v['$border-radius'] = u['$border-radius'] || '.25rem';
-
-  // Grid columns
-  //
-  // Set the number of columns and specify the width of the gutters.
-  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
-
-  // Cards (Card, CardGroup)
-
-  v['$card-spacer-x'] = u['$card-spacer-x'] || '1.25rem';
-  v['$card-spacer-y'] = u['$card-spacer-y'] || '.75rem';
-  v['$card-border-width'] = u['$card-border-width'] || '1px';
-  v['$card-border-radius'] = u['$card-border-radius'] || v['$border-radius'];
-  v['$card-border-color'] = u['$card-border-color'] || color(v['$black']).alpha(0.125).toString();
-  v['$card-border-radius-inner'] = u['$card-border-radius-inner'] || 'calc(' + v['$card-border-radius'] + ' - ' + v['$card-border-width'] + ')';
-  v['$card-cap-bg'] = u['$card-cap-bg'] || v['$gray-lightest'];
-  v['$card-bg'] = u['$card-bg'] || v['$white'];
-
-  v['$card-link-hover-color'] = u['$card-link-hover-color'] || v['$white'];
-
-  v['$card-img-overlay-padding'] = u['$card-img-overlay-padding'] || '1.25rem';
-
-  // Button
-  v['$btn-primary-bg'] = u['$btn-primary-bg'] || v['$brand-primary'];
-  v['$btn-secondary-border'] = u['$btn-secondary-border'] || '#ccc';
-  v['$btn-info-bg'] = u['$btn-info-bg'] || v['$brand-info'];
-  v['$btn-success-bg'] = u['$btn-success-bg'] || v['$brand-success'];
-  v['$btn-warning-bg'] = u['$btn-warning-bg'] || v['$brand-warning'];
-  v['$btn-danger-bg'] = u['$btn-danger-bg'] || v['$brand-danger'];
-
-  // THEME EXTEND CARDS
-  v['$card-margin-y-halved'] = u['$card-margin-y-halved'] || rmUnit$15(v['$card-spacer-y'], UNIT$14.REM) / 2 + UNIT$14.REM;
-  v['$card-margin-x-halved'] = u['$card-margin-x-halved'] || rmUnit$15(v['$card-spacer-x'], UNIT$14.REM) / 2 + UNIT$14.REM;
-
-  // CardColumns
-  v['$card-columns-count-md'] = u['$card-columns-count-md'] || '2';
-  v['$card-columns-gap-md'] = u['$card-columns-gap-md'] || '1rem';
-  v['$card-columns-margin-md'] = u['$card-columns-margin-md'] || v['$card-spacer-y'];
-  v['$card-columns-count-lg'] = u['$card-columns-count-lg'] || '2';
-  v['$card-columns-gap-lg'] = u['$card-columns-gap-lg'] || '1.15rem';
-  v['$card-columns-margin-lg'] = u['$card-columns-margin-lg'] || v['$card-spacer-y'];
-  v['$card-columns-count-xl'] = u['$card-columns-count-xl'] || '2';
-  v['$card-columns-gap-xl'] = u['$card-columns-gap-xl'] || '1.25rem';
-  v['$card-columns-margin-xl'] = u['$card-columns-margin-xl'] || v['$card-spacer-y'];
-  v['$card-columns-count-xxl'] = u['$card-columns-count-xxl'] || '3';
-  v['$card-columns-gap-xxl'] = u['$card-columns-gap-xxl'] || '1.25rem';
-  v['$card-columns-margin-xxl'] = u['$card-columns-margin-xxl'] || v['$card-spacer-y'];
-
-  // // ?? missing
-  // v['$card-inverse-bg-color'] = u['$card-inverse-bg-color'] || '??????';
-  // v['$card-inverse-border-color'] = u['$card-inverse-border-color'] || '??????';
-
-  // CardDeck
-  var detectedUnit = detectUnit$2(v['$grid-gutter-width-base']);
-  v['$card-deck-margin'] = u['$card-deck-margin'] || rmUnit$15(v['$grid-gutter-width-base'], detectedUnit) / 2 + detectedUnit;
-
-  return Object.assign({}, u, v);
-};
-
-makeTheme$46();
-
 /**
  * Card Component
  *
  *
  */
+var defaultProps$27 = {
+  tag: 'div',
+  theme: {
+    '$brand-primary': '#0275d8',
+    '$brand-success': '#5cb85c',
+    '$brand-info': '#5bc0de',
+    '$brand-warning': '#f0ad4e',
+    '$brand-danger': '#d9534f',
+    '$brand-inverse': '#292b2c',
+    '$card-spacer-x': '1.25rem',
+    '$card-spacer-y': '.75rem',
+    '$card-border-width': '1px',
+    '$card-border-radius': '.25rem',
+    '$card-border-color': 'rgba(0, 0, 0, 0.125)',
+    '$card-border-radius-inner': '',
+    '$card-cap-bg': '$gray-lightest',
+    '$card-bg': '$white',
+    '$card-link-hover-color': '$white',
+    '$card-img-overlay-padding': '1.25rem',
+    '$card-margin-y-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
+    '$card-margin-x-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
+    '$card-columns-count-md': '2',
+    '$card-columns-gap-md': '1rem',
+    '$card-columns-margin-md': '$card-spacer-y',
+    '$card-columns-count-lg': '2',
+    '$card-columns-gap-lg': '1.15rem',
+    '$card-columns-margin-lg': '$card-spacer-y',
+    '$card-columns-count-xl': '2',
+    '$card-columns-gap-xl': '1.25rem',
+    '$card-columns-margin-xl': '$card-spacer-y',
+    '$card-columns-count-xxl': '3',
+    '$card-columns-gap-xxl': '1.25rem',
+    '$card-columns-margin-xxl': '$card-spacer-y',
+    '$card-deck-margin': '(r, detectedUnit) / 2) + detectedUni',
+    '$btn-primary-bg': '$brand-primary',
+    '$btn-secondary-border': '#ccc',
+    '$btn-info-bg': '$brand-info',
+    '$btn-success-bg': '$brand-success',
+    '$btn-warning-bg': '$brand-warning',
+    '$btn-danger-bg': '$brand-danger',
+    '$enable-rounded': false,
+    '$enable-hover-media-query': false
+  }
+};
+var propTypes$23 = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$brand-primary': PropTypes.string,
+    '$brand-success': PropTypes.string,
+    '$brand-info': PropTypes.string,
+    '$brand-warning': PropTypes.string,
+    '$brand-danger': PropTypes.string,
+    '$brand-inverse': PropTypes.string,
+    '$card-spacer-x': PropTypes.string,
+    '$card-spacer-y': PropTypes.string,
+    '$card-border-width': PropTypes.string,
+    '$card-border-radius': PropTypes.string,
+    '$card-border-color': PropTypes.string,
+    '$card-border-radius-inner': PropTypes.string,
+    '$card-cap-bg': PropTypes.string,
+    '$card-bg': PropTypes.string,
+    '$card-link-hover-color': PropTypes.string,
+    '$card-img-overlay-padding': PropTypes.string,
+    '$card-margin-y-halved': PropTypes.string,
+    '$card-margin-x-halved': PropTypes.string,
+    '$card-columns-count-md': PropTypes.string,
+    '$card-columns-gap-md': PropTypes.string,
+    '$card-columns-margin-md': PropTypes.string,
+    '$card-columns-count-lg': PropTypes.string,
+    '$card-columns-gap-lg': PropTypes.string,
+    '$card-columns-margin-lg': PropTypes.string,
+    '$card-columns-count-xl': PropTypes.string,
+    '$card-columns-gap-xl': PropTypes.string,
+    '$card-columns-margin-xl': PropTypes.string,
+    '$card-columns-count-xxl': PropTypes.string,
+    '$card-columns-gap-xxl': PropTypes.string,
+    '$card-columns-margin-xxl': PropTypes.string,
+    '$card-deck-margin': PropTypes.string,
+    '$btn-primary-bg': PropTypes.string,
+    '$btn-secondary-border': PropTypes.string,
+    '$btn-info-bg': PropTypes.string,
+    '$btn-success-bg': PropTypes.string,
+    '$btn-warning-bg': PropTypes.string,
+    '$btn-danger-bg': PropTypes.string,
+    '$link-color': PropTypes.string,
+    '$link-decoration': PropTypes.string,
+    '$link-hover-color': PropTypes.string,
+    '$link-hover-decoration': PropTypes.string,
+    '$enable-rounded': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool
+  }),
+  /** Color variables. Can be: */
+  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  /** Toggles inverse CSS color. */
+  inverse: PropTypes.bool,
+  /** Toggles block CSS display. */
+  block: PropTypes.bool,
+  /** Toggles outline CSS styles. */
+  outline: PropTypes.bool,
+  /** Width size in percent. */
+  width: PropTypes.string,
+  /** Use different background color with valid CSS. */
+  backgroundColor: PropTypes.string,
+  /** Use different border color with valid CSS. */
+  borderColor: PropTypes.string,
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
+};
+
 var CardUnstyled = function (_React$Component) {
   inherits(CardUnstyled, _React$Component);
 
@@ -19808,6 +19706,9 @@ var CardUnstyled = function (_React$Component) {
 
   createClass(CardUnstyled, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -19830,42 +19731,141 @@ var CardUnstyled = function (_React$Component) {
         }, defineProperty(_cn, 'card-' + color, color), defineProperty(_cn, 'card-' + (outline ? '-outline' : '') + '-' + color, outline), _cn)), cssModule)
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return CardUnstyled;
 }(React__default.Component);
 
-CardUnstyled.defaultProps = {
-  tag: 'div',
-  theme: makeTheme$46()
-};
-CardUnstyled.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
-  theme: PropTypes.object,
-  cssModule: PropTypes.object,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  inverse: PropTypes.bool,
-  color: PropTypes.string,
-  block: PropTypes.bool,
-  outline: PropTypes.bool,
-  width: PropTypes.string,
-  backgroundColor: PropTypes.string,
-  borderColor: PropTypes.string
-  /* eslint-enable react/no-unused-prop-types */
-};
+/**
+ * Use our `<Card />` blocks with `<CardImg />`, `<CardBlock />`, `<CardTitle />`, `<CardSubtitle />` and `<CardText />` components  to emphasize part of your page.
+ * You can also use `width` attribute.
+ */
 
 
+CardUnstyled.defaultProps = defaultProps$27;
+CardUnstyled.propTypes = propTypes$23;
 var Card = styled__default(CardUnstyled).withConfig({
   displayName: 'Card'
 })(['', ''], function (props) {
   return '\n    \n    /*\n    Base styles\n    */\n    &.card {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$card-bg'] + ';\n      border: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n      \n      ' + conditional_1(props.width, 'width: ' + props.width + ';') + '\n      ' + conditional_1(props.backgroundColor, 'background-color: ' + props.backgroundColor + ';') + '\n      ' + conditional_1(props.borderColor, 'border-color: ' + props.borderColor + ';') + '\n    }\n    \n    &.card-block,\n    & .card-block {\n      flex: 1 1 auto;\n      padding: ' + props.theme['$card-spacer-x'] + ';\n    }\n    \n    & .card-title {\n      margin-bottom: ' + props.theme['$card-spacer-y'] + ';\n    }\n    \n    & .card-subtitle {\n      margin-top: -' + props.theme['$card-margin-y-halved'] + ';\n      margin-bottom: 0;\n    }\n    \n    & .card-text:last-child {\n      margin-bottom: 0;\n    }\n   \n    & .card-link {\n      ' + hover_2('\n        text-decoration: none;\n      ') + '\n    \n      + .card-link {\n        margin-left: ' + props.theme['$card-spacer-x'] + ';\n      }\n    }\n    \n    &.card {\n      > .list-group:first-child {\n        .list-group-item:first-child {\n          ' + borderRadius_3(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n        }\n      }\n    \n      > .list-group:last-child {\n        .list-group-item:last-child {\n          ' + borderRadius_5(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n        }\n      }\n    }\n    \n    \n    /*\n     Optional textual caps\n    */\n    \n    & .card-header {\n      padding: ' + props.theme['$card-spacer-y'] + ' ' + props.theme['$card-spacer-x'] + ';\n      margin-bottom: 0; /* Removes the default margin-bottom of <hN> */\n      background-color: ' + props.theme['$card-cap-bg'] + ';\n      border-bottom: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n    \n      &:first-child {\n        ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner'], props.theme['$card-border-radius-inner'], '0', '0') + '\n      }\n    }\n    \n    & .card-footer {\n      padding: ' + props.theme['$card-spacer-y'] + ' ' + props.theme['$card-spacer-x'] + ';\n      background-color: ' + props.theme['$card-cap-bg'] + ';\n      border-top: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n    \n      &:last-child {\n        ' + borderRadius_2(props.theme['$enable-rounded'], '0', '0', props.theme['$card-border-radius-inner'], props.theme['$card-border-radius-inner']) + '\n      }\n    }\n    \n    \n    /*\n     Header navs\n    */\n    \n    & .card-header-tabs {\n      margin-right: -' + props.theme['$card-margin-x-halved'] + ';\n      margin-bottom: -' + props.theme['$card-spacer-y'] + ';\n      margin-left: -' + props.theme['$card-margin-x-halved'] + ';\n      border-bottom: 0;\n    }\n    \n    & .card-header-pills {\n      margin-right: -' + props.theme['$card-margin-x-halved'] + ';\n      margin-left: -' + props.theme['$card-margin-x-halved'] + ';\n    }\n    \n    \n    /*\n     Background variations\n    */\n    \n    &.card-primary {\n      ' + cards_2(props.theme['$brand-primary'], props.theme['$brand-primary']) + '\n    }\n    &.card-success {\n      ' + cards_2(props.theme['$brand-success'], props.theme['$brand-success']) + '\n    }\n    &.card-info {\n      ' + cards_2(props.theme['$brand-info'], props.theme['$brand-info']) + '\n    }\n    &.card-warning {\n      ' + cards_2(props.theme['$brand-warning'], props.theme['$brand-warning']) + '\n    }\n    &.card-danger {\n      ' + cards_2(props.theme['$brand-danger'], props.theme['$brand-danger']) + '\n    }\n    \n    /* Remove all backgrounds */\n    &.card-outline-primary {\n      ' + cards_3(props.theme['$btn-primary-bg']) + '\n    }\n    &.card-outline-secondary {\n      ' + cards_3(props.theme['$btn-secondary-border']) + '\n    }\n    &.card-outline-info {\n      ' + cards_3(props.theme['$btn-info-bg']) + '\n    }\n    &.card-outline-success {\n      ' + cards_3(props.theme['$btn-success-bg']) + '\n    }\n    &.card-outline-warning {\n      ' + cards_3(props.theme['$btn-warning-bg']) + '\n    }\n    &.card-outline-danger {\n      ' + cards_3(props.theme['$btn-danger-bg']) + '\n    }\n    \n    /*\n     Inverse text within a card for use with dark backgrounds\n    */\n    \n    &.card-inverse {\n      ' + cards_4(props.theme['$enable-hover-media-query'], props.theme['$card-link-hover-color']) + '\n    }\n    \n    /*\n     Blockquote\n    */\n    \n    & .card-blockquote {\n      padding: 0;\n      margin-bottom: 0;\n      border-left: 0;\n    }\n    \n    /* Card image */\n    & .card-img {\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n    \n    & .card-img-overlay {\n      position: absolute;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      padding: ' + props.theme['$card-img-overlay-padding'] + ';\n    }\n    \n    \n    \n    /* Card image caps */\n    & .card-img-top {\n      ' + borderRadius_3(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n    \n    & .card-img-bottom {\n      ' + borderRadius_5(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n  ';
 });
 
+Card.defaultProps = defaultProps$27;
+Card.propTypes = propTypes$23;
+
 /**
  * Card Columns Component
  *
  *
  */
+var defaultProps$28 = {
+  tag: 'div',
+  theme: {
+    '$brand-primary': '#0275d8',
+    '$brand-success': '#5cb85c',
+    '$brand-info': '#5bc0de',
+    '$brand-warning': '#f0ad4e',
+    '$brand-danger': '#d9534f',
+    '$brand-inverse': '#292b2c',
+    '$card-spacer-x': '1.25rem',
+    '$card-spacer-y': '.75rem',
+    '$card-border-width': '1px',
+    '$card-border-radius': '.25rem',
+    '$card-border-color': 'rgba(0, 0, 0, 0.125)',
+    '$card-border-radius-inner': '',
+    '$card-cap-bg': '$gray-lightest',
+    '$card-bg': '$white',
+    '$card-link-hover-color': '$white',
+    '$card-img-overlay-padding': '1.25rem',
+    '$card-margin-y-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
+    '$card-margin-x-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
+    '$card-columns-count-md': '2',
+    '$card-columns-gap-md': '1rem',
+    '$card-columns-margin-md': '$card-spacer-y',
+    '$card-columns-count-lg': '2',
+    '$card-columns-gap-lg': '1.15rem',
+    '$card-columns-margin-lg': '$card-spacer-y',
+    '$card-columns-count-xl': '2',
+    '$card-columns-gap-xl': '1.25rem',
+    '$card-columns-margin-xl': '$card-spacer-y',
+    '$card-columns-count-xxl': '3',
+    '$card-columns-gap-xxl': '1.25rem',
+    '$card-columns-margin-xxl': '$card-spacer-y',
+    '$card-deck-margin': '(r, detectedUnit) / 2) + detectedUni',
+    '$btn-primary-bg': '$brand-primary',
+    '$btn-secondary-border': '#ccc',
+    '$btn-info-bg': '$brand-info',
+    '$btn-success-bg': '$brand-success',
+    '$btn-warning-bg': '$brand-warning',
+    '$btn-danger-bg': '$brand-danger',
+    '$enable-rounded': false,
+    '$enable-hover-media-query': false
+  }
+};
+var propTypes$24 = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$brand-primary': PropTypes.string,
+    '$brand-success': PropTypes.string,
+    '$brand-info': PropTypes.string,
+    '$brand-warning': PropTypes.string,
+    '$brand-danger': PropTypes.string,
+    '$brand-inverse': PropTypes.string,
+    '$card-spacer-x': PropTypes.string,
+    '$card-spacer-y': PropTypes.string,
+    '$card-border-width': PropTypes.string,
+    '$card-border-radius': PropTypes.string,
+    '$card-border-color': PropTypes.string,
+    '$card-border-radius-inner': PropTypes.string,
+    '$card-cap-bg': PropTypes.string,
+    '$card-bg': PropTypes.string,
+    '$card-link-hover-color': PropTypes.string,
+    '$card-img-overlay-padding': PropTypes.string,
+    '$card-margin-y-halved': PropTypes.string,
+    '$card-margin-x-halved': PropTypes.string,
+    '$card-columns-count-md': PropTypes.string,
+    '$card-columns-gap-md': PropTypes.string,
+    '$card-columns-margin-md': PropTypes.string,
+    '$card-columns-count-lg': PropTypes.string,
+    '$card-columns-gap-lg': PropTypes.string,
+    '$card-columns-margin-lg': PropTypes.string,
+    '$card-columns-count-xl': PropTypes.string,
+    '$card-columns-gap-xl': PropTypes.string,
+    '$card-columns-margin-xl': PropTypes.string,
+    '$card-columns-count-xxl': PropTypes.string,
+    '$card-columns-gap-xxl': PropTypes.string,
+    '$card-columns-margin-xxl': PropTypes.string,
+    '$card-deck-margin': PropTypes.string,
+    '$btn-primary-bg': PropTypes.string,
+    '$btn-secondary-border': PropTypes.string,
+    '$btn-info-bg': PropTypes.string,
+    '$btn-success-bg': PropTypes.string,
+    '$btn-warning-bg': PropTypes.string,
+    '$btn-danger-bg': PropTypes.string,
+    '$link-color': PropTypes.string,
+    '$link-decoration': PropTypes.string,
+    '$link-hover-color': PropTypes.string,
+    '$link-hover-decoration': PropTypes.string,
+    '$enable-rounded': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool
+  }),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
+};
+
 var CardColumnsUnstyled = function (_React$Component) {
   inherits(CardColumnsUnstyled, _React$Component);
 
@@ -19876,6 +19876,9 @@ var CardColumnsUnstyled = function (_React$Component) {
 
   createClass(CardColumnsUnstyled, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -19889,22 +19892,15 @@ var CardColumnsUnstyled = function (_React$Component) {
         className: mapToCssModules(classnames(className, 'card-columns'), cssModule)
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return CardColumnsUnstyled;
 }(React__default.Component);
 
-CardColumnsUnstyled.defaultProps = {
-  tag: 'div',
-  theme: makeTheme$46()
-};
-CardColumnsUnstyled.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  theme: PropTypes.object
-  /* eslint-enable react/no-unused-prop-types */
-};
+CardColumnsUnstyled.defaultProps = defaultProps$28;
+CardColumnsUnstyled.propTypes = propTypes$24;
 
 
 var CardColumns = styled__default(CardColumnsUnstyled).withConfig({
@@ -19913,11 +19909,120 @@ var CardColumns = styled__default(CardColumnsUnstyled).withConfig({
   return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + breakpoints_6('md', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-md'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-md'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-md'] + ';\n          }\n        }\n      ') + '\n    ' + breakpoints_6('lg', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-lg'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-lg'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-lg'] + ';\n          }\n        }\n      ') + '\n    ' + breakpoints_6('xl', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-xl'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-xl'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-xl'] + ';\n          }\n        }\n      ') + '\n    ' + breakpoints_6('xxl', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-xxl'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-xxl'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-xxl'] + ';\n          }\n        }\n      ') + '\n  ';
 });
 
+CardColumns.defaultProps = defaultProps$28;
+CardColumns.propTypes = propTypes$24;
+
 /**
  * CardDeck Component
  *
  *
  */
+var defaultProps$29 = {
+  tag: 'div',
+  theme: {
+    '$brand-primary': '#0275d8',
+    '$brand-success': '#5cb85c',
+    '$brand-info': '#5bc0de',
+    '$brand-warning': '#f0ad4e',
+    '$brand-danger': '#d9534f',
+    '$brand-inverse': '#292b2c',
+    '$card-spacer-x': '1.25rem',
+    '$card-spacer-y': '.75rem',
+    '$card-border-width': '1px',
+    '$card-border-radius': '.25rem',
+    '$card-border-color': 'rgba(0, 0, 0, 0.125)',
+    '$card-border-radius-inner': '',
+    '$card-cap-bg': '$gray-lightest',
+    '$card-bg': '$white',
+    '$card-link-hover-color': '$white',
+    '$card-img-overlay-padding': '1.25rem',
+    '$card-margin-y-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
+    '$card-margin-x-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
+    '$card-columns-count-md': '2',
+    '$card-columns-gap-md': '1rem',
+    '$card-columns-margin-md': '$card-spacer-y',
+    '$card-columns-count-lg': '2',
+    '$card-columns-gap-lg': '1.15rem',
+    '$card-columns-margin-lg': '$card-spacer-y',
+    '$card-columns-count-xl': '2',
+    '$card-columns-gap-xl': '1.25rem',
+    '$card-columns-margin-xl': '$card-spacer-y',
+    '$card-columns-count-xxl': '3',
+    '$card-columns-gap-xxl': '1.25rem',
+    '$card-columns-margin-xxl': '$card-spacer-y',
+    '$card-deck-margin': '(r, detectedUnit) / 2) + detectedUni',
+    '$btn-primary-bg': '$brand-primary',
+    '$btn-secondary-border': '#ccc',
+    '$btn-info-bg': '$brand-info',
+    '$btn-success-bg': '$brand-success',
+    '$btn-warning-bg': '$brand-warning',
+    '$btn-danger-bg': '$brand-danger',
+    '$enable-rounded': false,
+    '$enable-hover-media-query': false
+  }
+};
+var propTypes$25 = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$brand-primary': PropTypes.string,
+    '$brand-success': PropTypes.string,
+    '$brand-info': PropTypes.string,
+    '$brand-warning': PropTypes.string,
+    '$brand-danger': PropTypes.string,
+    '$brand-inverse': PropTypes.string,
+    '$card-spacer-x': PropTypes.string,
+    '$card-spacer-y': PropTypes.string,
+    '$card-border-width': PropTypes.string,
+    '$card-border-radius': PropTypes.string,
+    '$card-border-color': PropTypes.string,
+    '$card-border-radius-inner': PropTypes.string,
+    '$card-cap-bg': PropTypes.string,
+    '$card-bg': PropTypes.string,
+    '$card-link-hover-color': PropTypes.string,
+    '$card-img-overlay-padding': PropTypes.string,
+    '$card-margin-y-halved': PropTypes.string,
+    '$card-margin-x-halved': PropTypes.string,
+    '$card-columns-count-md': PropTypes.string,
+    '$card-columns-gap-md': PropTypes.string,
+    '$card-columns-margin-md': PropTypes.string,
+    '$card-columns-count-lg': PropTypes.string,
+    '$card-columns-gap-lg': PropTypes.string,
+    '$card-columns-margin-lg': PropTypes.string,
+    '$card-columns-count-xl': PropTypes.string,
+    '$card-columns-gap-xl': PropTypes.string,
+    '$card-columns-margin-xl': PropTypes.string,
+    '$card-columns-count-xxl': PropTypes.string,
+    '$card-columns-gap-xxl': PropTypes.string,
+    '$card-columns-margin-xxl': PropTypes.string,
+    '$card-deck-margin': PropTypes.string,
+    '$btn-primary-bg': PropTypes.string,
+    '$btn-secondary-border': PropTypes.string,
+    '$btn-info-bg': PropTypes.string,
+    '$btn-success-bg': PropTypes.string,
+    '$btn-warning-bg': PropTypes.string,
+    '$btn-danger-bg': PropTypes.string,
+    '$link-color': PropTypes.string,
+    '$link-decoration': PropTypes.string,
+    '$link-hover-color': PropTypes.string,
+    '$link-hover-decoration': PropTypes.string,
+    '$enable-rounded': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool
+  }),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
+};
+
 var CardDeckUnstyled = function (_React$Component) {
   inherits(CardDeckUnstyled, _React$Component);
 
@@ -19928,6 +20033,9 @@ var CardDeckUnstyled = function (_React$Component) {
 
   createClass(CardDeckUnstyled, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
     value: function render() {
       var _omit = lodash_omit(this.props, ['theme']),
@@ -19940,22 +20048,15 @@ var CardDeckUnstyled = function (_React$Component) {
         className: mapToCssModules(classnames(className, 'card-deck'), cssModule)
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return CardDeckUnstyled;
 }(React__default.Component);
 
-CardDeckUnstyled.defaultProps = {
-  tag: 'div',
-  theme: makeTheme$46()
-};
-CardDeckUnstyled.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  theme: PropTypes.object,
-  cssModule: PropTypes.object
-  /* eslint-enable react/no-unused-prop-types */
-};
+CardDeckUnstyled.defaultProps = defaultProps$29;
+CardDeckUnstyled.propTypes = propTypes$25;
 
 
 var CardDeck = styled__default(CardDeckUnstyled).withConfig({
@@ -19964,11 +20065,120 @@ var CardDeck = styled__default(CardDeckUnstyled).withConfig({
   return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        &.card-deck {\n          display: flex;\n          flex-flow: row wrap;\n        \n          .card {\n            display: flex;\n            flex: 1 0 0;\n            flex-direction: column;  \n            &:not(:first-child) { margin-left: ' + props.theme['$card-deck-margin'] + '; }\n            &:not(:last-child) { margin-right: ' + props.theme['$card-deck-margin'] + '; }\n          }\n        }\n      ') + '\n  ';
 });
 
+CardDeck.defaultProps = defaultProps$29;
+CardDeck.propTypes = propTypes$25;
+
 /**
  * CardGroup Component
  *
  *
  */
+var defaultProps$30 = {
+  tag: 'div',
+  theme: {
+    '$brand-primary': '#0275d8',
+    '$brand-success': '#5cb85c',
+    '$brand-info': '#5bc0de',
+    '$brand-warning': '#f0ad4e',
+    '$brand-danger': '#d9534f',
+    '$brand-inverse': '#292b2c',
+    '$card-spacer-x': '1.25rem',
+    '$card-spacer-y': '.75rem',
+    '$card-border-width': '1px',
+    '$card-border-radius': '.25rem',
+    '$card-border-color': 'rgba(0, 0, 0, 0.125)',
+    '$card-border-radius-inner': '',
+    '$card-cap-bg': '$gray-lightest',
+    '$card-bg': '$white',
+    '$card-link-hover-color': '$white',
+    '$card-img-overlay-padding': '1.25rem',
+    '$card-margin-y-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
+    '$card-margin-x-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
+    '$card-columns-count-md': '2',
+    '$card-columns-gap-md': '1rem',
+    '$card-columns-margin-md': '$card-spacer-y',
+    '$card-columns-count-lg': '2',
+    '$card-columns-gap-lg': '1.15rem',
+    '$card-columns-margin-lg': '$card-spacer-y',
+    '$card-columns-count-xl': '2',
+    '$card-columns-gap-xl': '1.25rem',
+    '$card-columns-margin-xl': '$card-spacer-y',
+    '$card-columns-count-xxl': '3',
+    '$card-columns-gap-xxl': '1.25rem',
+    '$card-columns-margin-xxl': '$card-spacer-y',
+    '$card-deck-margin': '(r, detectedUnit) / 2) + detectedUni',
+    '$btn-primary-bg': '$brand-primary',
+    '$btn-secondary-border': '#ccc',
+    '$btn-info-bg': '$brand-info',
+    '$btn-success-bg': '$brand-success',
+    '$btn-warning-bg': '$brand-warning',
+    '$btn-danger-bg': '$brand-danger',
+    '$enable-rounded': false,
+    '$enable-hover-media-query': false
+  }
+};
+var propTypes$26 = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$brand-primary': PropTypes.string,
+    '$brand-success': PropTypes.string,
+    '$brand-info': PropTypes.string,
+    '$brand-warning': PropTypes.string,
+    '$brand-danger': PropTypes.string,
+    '$brand-inverse': PropTypes.string,
+    '$card-spacer-x': PropTypes.string,
+    '$card-spacer-y': PropTypes.string,
+    '$card-border-width': PropTypes.string,
+    '$card-border-radius': PropTypes.string,
+    '$card-border-color': PropTypes.string,
+    '$card-border-radius-inner': PropTypes.string,
+    '$card-cap-bg': PropTypes.string,
+    '$card-bg': PropTypes.string,
+    '$card-link-hover-color': PropTypes.string,
+    '$card-img-overlay-padding': PropTypes.string,
+    '$card-margin-y-halved': PropTypes.string,
+    '$card-margin-x-halved': PropTypes.string,
+    '$card-columns-count-md': PropTypes.string,
+    '$card-columns-gap-md': PropTypes.string,
+    '$card-columns-margin-md': PropTypes.string,
+    '$card-columns-count-lg': PropTypes.string,
+    '$card-columns-gap-lg': PropTypes.string,
+    '$card-columns-margin-lg': PropTypes.string,
+    '$card-columns-count-xl': PropTypes.string,
+    '$card-columns-gap-xl': PropTypes.string,
+    '$card-columns-margin-xl': PropTypes.string,
+    '$card-columns-count-xxl': PropTypes.string,
+    '$card-columns-gap-xxl': PropTypes.string,
+    '$card-columns-margin-xxl': PropTypes.string,
+    '$card-deck-margin': PropTypes.string,
+    '$btn-primary-bg': PropTypes.string,
+    '$btn-secondary-border': PropTypes.string,
+    '$btn-info-bg': PropTypes.string,
+    '$btn-success-bg': PropTypes.string,
+    '$btn-warning-bg': PropTypes.string,
+    '$btn-danger-bg': PropTypes.string,
+    '$link-color': PropTypes.string,
+    '$link-decoration': PropTypes.string,
+    '$link-hover-color': PropTypes.string,
+    '$link-hover-decoration': PropTypes.string,
+    '$enable-rounded': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool
+  }),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
+};
+
 var CardGroupUnstyled = function (_React$Component) {
   inherits(CardGroupUnstyled, _React$Component);
 
@@ -19979,6 +20189,9 @@ var CardGroupUnstyled = function (_React$Component) {
 
   createClass(CardGroupUnstyled, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -19992,22 +20205,15 @@ var CardGroupUnstyled = function (_React$Component) {
         className: mapToCssModules(classnames(className, 'card-group'), cssModule)
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return CardGroupUnstyled;
 }(React__default.Component);
 
-CardGroupUnstyled.defaultProps = {
-  tag: 'div',
-  theme: makeTheme$46()
-};
-CardGroupUnstyled.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  theme: PropTypes.object,
-  cssModule: PropTypes.object
-  /* eslint-enable react/no-unused-prop-types */
-};
+CardGroupUnstyled.defaultProps = defaultProps$30;
+CardGroupUnstyled.propTypes = propTypes$26;
 
 
 var CardGroup = styled__default(CardGroupUnstyled).withConfig({
@@ -20015,6 +20221,28 @@ var CardGroup = styled__default(CardGroupUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    /*\n      Card group\n    */\n      ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n          &.card-group {\n            display: flex;\n            flex-flow: row wrap;\n        \n            .card {\n              flex: 1 0 0;\n        \n              + .card {\n                margin-left: 0;\n                border-left: 0;\n              }\n        \n            ' + conditional_1(props.theme['$enable-rounded'], '\n                &:first-child {\n                  ' + borderRadius_4(props.theme['$enable-rounded'], '0') + '\n                  .card-img-top {\n                    border-top-right-radius: 0;\n                  }\n                  \n                  .card-img-bottom {\n                    border-bottom-right-radius: 0;\n                  }\n                }\n              \n                &:last-child {\n                  ' + borderRadius_6(props.theme['$enable-rounded'], '0') + '\n                  \n                  .card-img-top {\n                    border-top-left-radius: 0;\n                  }\n                  \n                  .card-img-bottom {\n                    border-bottom-left-radius: 0;\n                  }\n                }\n                \n                &:not(:first-child):not(:last-child) {\n                  border-radius: 0;\n        \n                  .card-img-top,\n                  .card-img-bottom {\n                    border-radius: 0;\n                  }\n                }\n              ') + '  \n          }\n        }\n      ') + '\n  ';
 });
+
+CardGroup.defaultProps = defaultProps$30;
+CardGroup.propTypes = propTypes$26;
+
+var defaultProps$31 = {
+  tag: 'div'
+};
+var propTypes$27 = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
+};
 
 var CardBlock = function (_React$Component) {
   inherits(CardBlock, _React$Component);
@@ -20026,6 +20254,9 @@ var CardBlock = function (_React$Component) {
 
   createClass(CardBlock, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -20040,17 +20271,37 @@ var CardBlock = function (_React$Component) {
         className: mapToCssModules(classnames(className, 'card-block'), cssModule)
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return CardBlock;
 }(React__default.Component);
 
-CardBlock.defaultProps = {
+CardBlock.defaultProps = defaultProps$31;
+CardBlock.propTypes = propTypes$27;
+
+
+CardBlock.defaultProps = defaultProps$31;
+CardBlock.propTypes = propTypes$27;
+
+var defaultProps$32 = {
   tag: 'div'
 };
-CardBlock.propTypes = {
+var propTypes$28 = {
+  /**
+   * @ignore
+   */
   className: PropTypes.string,
-  cssModule: PropTypes.object,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
 };
 
 var CardFooter = function (_React$Component) {
@@ -20063,6 +20314,9 @@ var CardFooter = function (_React$Component) {
 
   createClass(CardFooter, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -20077,16 +20331,36 @@ var CardFooter = function (_React$Component) {
         className: mapToCssModules(classnames(className, 'card-footer'), cssModule)
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return CardFooter;
 }(React__default.Component);
 
-CardFooter.defaultProps = {
+CardFooter.defaultProps = defaultProps$32;
+CardFooter.propTypes = propTypes$28;
+
+
+CardFooter.defaultProps = defaultProps$32;
+CardFooter.propTypes = propTypes$28;
+
+var defaultProps$33 = {
   tag: 'div'
 };
-CardFooter.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+var propTypes$29 = {
+  /**
+   * @ignore
+   */
   className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
   cssModule: PropTypes.object
 };
 
@@ -20100,6 +20374,9 @@ var CardHeader = function (_React$Component) {
 
   createClass(CardHeader, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -20114,16 +20391,40 @@ var CardHeader = function (_React$Component) {
         className: mapToCssModules(classnames(className, 'card-header'), cssModule)
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return CardHeader;
 }(React__default.Component);
 
-CardHeader.defaultProps = {
-  tag: 'div'
+CardHeader.defaultProps = defaultProps$33;
+CardHeader.propTypes = propTypes$29;
+
+
+CardHeader.defaultProps = defaultProps$33;
+CardHeader.propTypes = propTypes$29;
+
+var defaultProps$34 = {
+  tag: 'img'
 };
-CardHeader.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+var propTypes$30 = {
+  /**
+   * @ignore
+   */
   className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /** Toggle image position to top of the card. */
+  top: PropTypes.bool,
+  /** Toggle image position to bottom of the card. */
+  bottom: PropTypes.bool,
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
   cssModule: PropTypes.object
 };
 
@@ -20137,8 +20438,9 @@ var CardImg = function (_React$Component) {
 
   createClass(CardImg, [{
     key: 'render',
-    // eslint-disable-line react/prefer-stateless-function
 
+
+    /* eslint-disable react/no-unused-prop-types */
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -20160,19 +20462,45 @@ var CardImg = function (_React$Component) {
         className: mapToCssModules(classnames(className, cardImgClassName), cssModule)
       }, attributes));
     }
+    /* eslint-enable react/no-unused-prop-types */
+
+    // eslint-disable-line react/prefer-stateless-function
+
   }]);
   return CardImg;
 }(React__default.Component);
 
-CardImg.defaultProps = {
-  tag: 'img'
-};
+CardImg.defaultProps = defaultProps$34;
+CardImg.propTypes = propTypes$30;
 CardImg.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object,
   top: PropTypes.bool,
   bottom: PropTypes.bool
+};
+
+
+CardImg.defaultProps = defaultProps$34;
+CardImg.propTypes = propTypes$30;
+
+var defaultProps$35 = {
+  tag: 'div'
+};
+var propTypes$31 = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
 };
 
 var CardImgOverlay = function (_React$Component) {
@@ -20185,6 +20513,9 @@ var CardImgOverlay = function (_React$Component) {
 
   createClass(CardImgOverlay, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -20199,16 +20530,38 @@ var CardImgOverlay = function (_React$Component) {
         className: mapToCssModules(classnames(className, 'card-img-overlay'), cssModule)
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return CardImgOverlay;
 }(React__default.Component);
 
-CardImgOverlay.defaultProps = {
-  tag: 'div'
+CardImgOverlay.defaultProps = defaultProps$35;
+CardImgOverlay.propTypes = propTypes$31;
+
+
+CardImgOverlay.defaultProps = defaultProps$35;
+CardImgOverlay.propTypes = propTypes$31;
+
+var defaultProps$36 = {
+  tag: A
 };
-CardImgOverlay.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+var propTypes$32 = {
+  /**
+   * @ignore
+   */
   className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /** . */
+  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
   cssModule: PropTypes.object
 };
 
@@ -20222,6 +20575,9 @@ var CardLink = function (_React$Component) {
 
   createClass(CardLink, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -20238,18 +20594,37 @@ var CardLink = function (_React$Component) {
         ref: getRef
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return CardLink;
 }(React__default.Component);
 
-CardLink.defaultProps = {
-  tag: A
+CardLink.defaultProps = defaultProps$36;
+CardLink.propTypes = propTypes$32;
+
+
+CardLink.defaultProps = defaultProps$36;
+CardLink.propTypes = propTypes$32;
+
+var defaultProps$37 = {
+  tag: H6
 };
-CardLink.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+var propTypes$33 = {
+  /**
+   * @ignore
+   */
   className: PropTypes.string,
-  cssModule: PropTypes.object,
-  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object
 };
 
 var CardSubtitle = function (_React$Component) {
@@ -20262,6 +20637,9 @@ var CardSubtitle = function (_React$Component) {
 
   createClass(CardSubtitle, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -20276,16 +20654,36 @@ var CardSubtitle = function (_React$Component) {
         className: mapToCssModules(classnames(className, 'card-subtitle'), cssModule)
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return CardSubtitle;
 }(React__default.Component);
 
-CardSubtitle.defaultProps = {
-  tag: H6
+CardSubtitle.defaultProps = defaultProps$37;
+CardSubtitle.propTypes = propTypes$33;
+
+
+CardSubtitle.defaultProps = defaultProps$37;
+CardSubtitle.propTypes = propTypes$33;
+
+var defaultProps$38 = {
+  tag: 'p'
 };
-CardSubtitle.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+var propTypes$34 = {
+  /**
+   * @ignore
+   */
   className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
   cssModule: PropTypes.object
 };
 
@@ -20299,6 +20697,9 @@ var CardText = function (_React$Component) {
 
   createClass(CardText, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -20313,16 +20714,36 @@ var CardText = function (_React$Component) {
         className: mapToCssModules(classnames(className, 'card-text'), cssModule)
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return CardText;
 }(React__default.Component);
 
-CardText.defaultProps = {
-  tag: 'p'
+CardText.defaultProps = defaultProps$38;
+CardText.propTypes = propTypes$34;
+
+
+CardText.defaultProps = defaultProps$38;
+CardText.propTypes = propTypes$34;
+
+var defaultProps$39 = {
+  tag: H4
 };
-CardText.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+var propTypes$35 = {
+  /**
+   * @ignore
+   */
   className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
   cssModule: PropTypes.object
 };
 
@@ -20336,6 +20757,9 @@ var CardTitle = function (_React$Component) {
 
   createClass(CardTitle, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -20350,16 +20774,36 @@ var CardTitle = function (_React$Component) {
         className: mapToCssModules(classnames(className, 'card-title'), cssModule)
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return CardTitle;
 }(React__default.Component);
 
-CardTitle.defaultProps = {
-  tag: H4
+CardTitle.defaultProps = defaultProps$39;
+CardTitle.propTypes = propTypes$35;
+
+
+CardTitle.defaultProps = defaultProps$39;
+CardTitle.propTypes = propTypes$35;
+
+var defaultProps$40 = {
+  tag: Blockquote
 };
-CardTitle.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+var propTypes$36 = {
+  /**
+   * @ignore
+   */
   className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
   cssModule: PropTypes.object
 };
 
@@ -20373,6 +20817,9 @@ var CardBlockquote = function (_React$Component) {
 
   createClass(CardBlockquote, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -20387,18 +20834,19 @@ var CardBlockquote = function (_React$Component) {
         className: mapToCssModules(classnames(className, 'card-blockquote'), cssModule)
       }, attributes));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return CardBlockquote;
 }(React__default.Component);
 
-CardBlockquote.defaultProps = {
-  tag: Blockquote
-};
-CardBlockquote.propTypes = {
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
-};
+CardBlockquote.defaultProps = defaultProps$40;
+CardBlockquote.propTypes = propTypes$36;
+
+
+CardBlockquote.defaultProps = defaultProps$40;
+CardBlockquote.propTypes = propTypes$36;
 
 /*
  * Kopax Ltd Copyright (c) 2016.
@@ -20731,8 +21179,8 @@ exports.default = {
 unwrapExports(customForms_1);
 var customForms_3 = customForms_1.customForms;
 
-var rmUnit$16 = unitUtils$1.rmUnit;
-var UNIT$15 = unitUtils$1.UNIT;
+var rmUnit$13 = unitUtils$1.rmUnit;
+var UNIT$13 = unitUtils$1.UNIT;
 /**
  * BOOTSTRAP THEME FORM
  *
@@ -20740,7 +21188,7 @@ var UNIT$15 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$47 = function makeTheme() {
+var makeTheme$37 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -20873,9 +21321,9 @@ var makeTheme$47 = function makeTheme() {
   v['$input-padding-x-lg'] = u['$input-padding-x-lg'] || '1.5rem';
   v['$input-padding-y-lg'] = u['$input-padding-y-lg'] || '.75rem';
 
-  v['$input-height'] = u['$input-height'] || rmUnit$16(v['$font-size-base'], UNIT$15.REM) * v['$line-height-base'] + rmUnit$16(v['$input-padding-y'], UNIT$15.REM) * 2 + UNIT$15.REM;
-  v['$input-height-sm'] = u['$input-height-sm'] || rmUnit$16(v['$font-size-sm'], UNIT$15.REM) * v['$line-height-sm'] + rmUnit$16(v['$input-padding-y-sm'], UNIT$15.REM) * 2 + UNIT$15.REM;
-  v['$input-height-lg'] = u['$input-height-lg'] || rmUnit$16(v['$font-size-lg'], UNIT$15.REM) * v['$line-height-lg'] + rmUnit$16(v['$input-padding-y-lg'], UNIT$15.REM) * 2 + UNIT$15.REM;
+  v['$input-height'] = u['$input-height'] || rmUnit$13(v['$font-size-base'], UNIT$13.REM) * v['$line-height-base'] + rmUnit$13(v['$input-padding-y'], UNIT$13.REM) * 2 + UNIT$13.REM;
+  v['$input-height-sm'] = u['$input-height-sm'] || rmUnit$13(v['$font-size-sm'], UNIT$13.REM) * v['$line-height-sm'] + rmUnit$13(v['$input-padding-y-sm'], UNIT$13.REM) * 2 + UNIT$13.REM;
+  v['$input-height-lg'] = u['$input-height-lg'] || rmUnit$13(v['$font-size-lg'], UNIT$13.REM) * v['$line-height-lg'] + rmUnit$13(v['$input-padding-y-lg'], UNIT$13.REM) * 2 + UNIT$13.REM;
 
   v['$input-transition'] = u['$input-transition'] || 'border-color ease-in-out .15s, box-shadow ease-in-out .15s';
 
@@ -20987,7 +21435,7 @@ var makeTheme$47 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$47();
+makeTheme$37();
 
 /* eslint-disable quote-props, dot-notation */
 /**
@@ -21026,7 +21474,7 @@ var FormUnstyled = function (_React$Component) {
 
 FormUnstyled.defaultProps = {
   tag: 'form',
-  theme: makeTheme$47()
+  theme: makeTheme$37()
 };
 FormUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -21459,8 +21907,8 @@ DropdownToggle.contextTypes = {
   toggle: PropTypes.func.isRequired
 };
 
-var rmUnit$17 = unitUtils$1.rmUnit;
-var UNIT$16 = unitUtils$1.UNIT;
+var rmUnit$14 = unitUtils$1.rmUnit;
+var UNIT$14 = unitUtils$1.UNIT;
 
 /**
  * BOOTSTRAP THEME NAVBAR
@@ -21469,7 +21917,7 @@ var UNIT$16 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$48 = function makeTheme() {
+var makeTheme$38 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -21525,7 +21973,7 @@ var makeTheme$48 = function makeTheme() {
 
   // =============================================================================================================
   // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
-  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$17(v['$spacer'], UNIT$16.REM) / 2 + UNIT$16.REM;
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$14(v['$spacer'], UNIT$14.REM) / 2 + UNIT$14.REM;
   // =============================================================================================================
 
   v['$border-width'] = u['$border-width'] || '1px';
@@ -21607,7 +22055,7 @@ var makeTheme$48 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$48();
+makeTheme$38();
 
 /* eslint-disable */
 var getToggleableClass = function getToggleableClass(toggleable) {
@@ -21662,7 +22110,7 @@ NavbarUnstyled.defaultProps = {
   tag: 'nav',
   role: 'navigation',
   toggleable: false,
-  theme: makeTheme$48()
+  theme: makeTheme$38()
 };
 NavbarUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -21688,7 +22136,7 @@ var Navbar = styled__default(NavbarUnstyled).withConfig({
   return '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + nav_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n  ';
 });
 
-var propTypes$13 = {
+var propTypes$37 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   type: PropTypes.string,
   className: PropTypes.string,
@@ -21698,7 +22146,7 @@ var propTypes$13 = {
   left: PropTypes.bool
 };
 
-var defaultProps$18 = {
+var defaultProps$41 = {
   tag: 'button',
   type: 'button'
 };
@@ -21724,16 +22172,16 @@ var NavbarToggler = function NavbarToggler(props) {
   );
 };
 
-NavbarToggler.propTypes = propTypes$13;
-NavbarToggler.defaultProps = defaultProps$18;
+NavbarToggler.propTypes = propTypes$37;
+NavbarToggler.defaultProps = defaultProps$41;
 
-var propTypes$14 = {
+var propTypes$38 = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   cssModule: PropTypes.object
 };
 
-var defaultProps$19 = {
+var defaultProps$42 = {
   tag: 'a'
 };
 
@@ -21749,10 +22197,10 @@ var NavbarBrand = function NavbarBrand(props) {
   return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
 };
 
-NavbarBrand.propTypes = propTypes$14;
-NavbarBrand.defaultProps = defaultProps$19;
+NavbarBrand.propTypes = propTypes$38;
+NavbarBrand.defaultProps = defaultProps$42;
 
-var propTypes$15 = {
+var propTypes$39 = {
   children: PropTypes.node,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
@@ -21761,7 +22209,7 @@ var propTypes$15 = {
   isOpen: PropTypes.bool.isRequired
 };
 
-var defaultProps$20 = {
+var defaultProps$43 = {
   tag: 'li'
 };
 
@@ -21777,8 +22225,8 @@ var NavDropdown = function NavDropdown(props) {
   return React__default.createElement(Dropdown, _extends({}, attributes, { tag: Tag, className: classes }));
 };
 
-NavDropdown.propTypes = propTypes$15;
-NavDropdown.defaultProps = defaultProps$20;
+NavDropdown.propTypes = propTypes$39;
+NavDropdown.defaultProps = defaultProps$43;
 
 /**
  * BOOTSTRAP THEME CONTAINER
@@ -21786,7 +22234,7 @@ NavDropdown.defaultProps = defaultProps$20;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$49 = function makeTheme() {
+var makeTheme$39 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -21831,7 +22279,7 @@ var makeTheme$49 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$49();
+makeTheme$39();
 
 var ContainerUnstyled = function (_React$Component) {
   inherits(ContainerUnstyled, _React$Component);
@@ -21857,7 +22305,7 @@ var ContainerUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 ContainerUnstyled.defaultProps = {
-  theme: makeTheme$49()
+  theme: makeTheme$39()
 };
 ContainerUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -21879,7 +22327,7 @@ var Container = styled__default(ContainerUnstyled).withConfig({
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$50 = function makeTheme() {
+var makeTheme$40 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -21911,7 +22359,7 @@ var makeTheme$50 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$50();
+makeTheme$40();
 
 var ContainerFluidUnstyled = function (_React$Component) {
   inherits(ContainerFluidUnstyled, _React$Component);
@@ -21937,7 +22385,7 @@ var ContainerFluidUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 ContainerFluidUnstyled.defaultProps = {
-  theme: makeTheme$50()
+  theme: makeTheme$40()
 };
 ContainerFluidUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -21955,7 +22403,7 @@ var ContainerFluid = styled__default(ContainerFluidUnstyled).withConfig({
 
 // 0. Configuration
 
-exports.theme = bsTheme;
+exports.theme = theme;
 exports.makeTheme = makeTheme$$1;
 exports.A = A;
 exports.composeLink = composeLink;
@@ -22011,7 +22459,7 @@ exports.ListGroup = ListGroup;
 exports.ListGroupItem = ListGroupItem;
 exports.ListGroupItemHeading = ListGroupItemHeading;
 exports.ListGroupItemText = ListGroupItemText;
-exports.Map = Mapp;
+exports.Map = Map$1;
 exports.Mark = Mark;
 exports.Media = Media;
 exports.Modal = Modal;
