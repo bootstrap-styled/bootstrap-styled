@@ -17,4 +17,5 @@ IssueIcon.propTypes = {
   className: PropTypes.string,
 };
 
+/** @component */
 export default IssueIcon;

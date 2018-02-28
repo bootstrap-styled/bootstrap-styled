@@ -41,6 +41,7 @@ describe('<Code />', () => {
       children,
     });
     expect(renderedComponent.find('Code').length).toBe(1);
+    expect(renderedComponent.find('CodeUnstyled').length).toBe(1);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

@@ -18,6 +18,7 @@ const propTypes = {
   tag: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
+    PropTypes.node,
   ]),
   /** . */
   getRef: PropTypes.oneOfType([
