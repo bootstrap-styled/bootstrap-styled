@@ -9,25 +9,68 @@ import styled from 'styled-components';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { buttonGroup } from 'bootstrap-styled-mixins/lib/buttonGroup';
-import bsTheme from '../theme';
 
+const defaultProps = {
+  tag: 'div',
+  role: 'toolbar',
+  theme: {
+    '$input-btn-border-width': '1px',
+    '$btn-padding-x': '1rem',
+    '$btn-active-box-shadow': 'inset 0 3px 5px rgba(0, 0, 0, 0.125)',
+    '$btn-padding-x-lg': '1.5rem',
+    '$btn-padding-y-lg': '.75rem',
+    '$font-size-lg': '1.25rem',
+    '$btn-padding-x-sm': '.5rem',
+    '$btn-padding-y-sm': '.25rem',
+    '$font-size-sm': '.875rem',
+    '$btn-border-radius-lg': '.3rem',
+    '$btn-border-radius-sm': '.2rem',
+    '$enable-rounded': true,
+    '$enable-shadows': true,
+  },
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$input-btn-border-width': PropTypes.string,
+    '$btn-padding-x': PropTypes.string,
+    '$btn-active-box-shadow': PropTypes.string,
+    '$btn-padding-x-lg': PropTypes.string,
+    '$btn-padding-y-lg': PropTypes.string,
+    '$font-size-lg': PropTypes.string,
+    '$btn-padding-x-sm': PropTypes.string,
+    '$btn-padding-y-sm': PropTypes.string,
+    '$font-size-sm': PropTypes.string,
+    '$btn-border-radius-lg': PropTypes.string,
+    '$btn-border-radius-sm': PropTypes.string,
+    '$enable-rounded': PropTypes.bool,
+    '$enable-shadows': PropTypes.bool,
+  }),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 
 class ButtonToolbarUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'div',
-    role: 'toolbar',
-    theme: bsTheme,
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    theme: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -48,7 +91,9 @@ class ButtonToolbarUnstyled extends React.Component { // eslint-disable-line rea
     );
   }
 }
-
+/**
+ * Button with toolbar like CSS style and display.
+ */
 const ButtonToolbar = styled(ButtonToolbarUnstyled)`
   ${(props) => `
     ${buttonGroup(
@@ -68,6 +113,9 @@ const ButtonToolbar = styled(ButtonToolbarUnstyled)`
     )}
   `}  
 `;
+
+ButtonToolbar.defaultProps = defaultProps;
+ButtonToolbar.propTypes = propTypes;
 
 /** @component */
 export default ButtonToolbar;

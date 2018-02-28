@@ -4,19 +4,39 @@ import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import A from '../A';
 
-
+const defaultProps = {
+  tag: A,
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
+  /** . */
+  getRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.element,
+  ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 class CardLink extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: A,
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  };
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -39,5 +59,8 @@ class CardLink extends React.Component { // eslint-disable-line react/prefer-sta
     );
   }
 }
+
+CardLink.defaultProps = defaultProps;
+CardLink.propTypes = propTypes;
 
 export default CardLink;

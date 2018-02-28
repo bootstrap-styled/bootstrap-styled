@@ -29,7 +29,7 @@ const propTypes = {
     PropTypes.string,
     PropTypes.element,
   ]),
-  /** Theme variables. */
+  /** Theme variables. Can be: */
   theme: PropTypes.shape({
     '$link-color': PropTypes.string,
     '$link-decoration': PropTypes.string,
@@ -37,7 +37,7 @@ const propTypes = {
     '$link-hover-decoration': PropTypes.string,
     '$enable-hover-media-query': PropTypes.bool,
   }),
-  /** Color variables. */
+  /** Color variables. Can be: */
   color: PropTypes.oneOf([
     'white',
     'muted',

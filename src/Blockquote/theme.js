@@ -45,7 +45,6 @@ export const makeTheme = (userTheme = {}) => {
   v['$blockquote-font-size'] = u['$blockquote-font-size'] || (rmUnit(v['$font-size-base'], UNIT.REM) * 1.25) + UNIT.REM;
   v['$blockquote-border-color'] = u['$blockquote-border-color'] || v['$gray-lighter'];
   v['$blockquote-border-width'] = u['$blockquote-border-width'] || '.25rem';
-
   return Object.assign({}, u, v);
 };
 

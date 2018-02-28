@@ -13,31 +13,145 @@ import { hover } from 'bootstrap-styled-mixins/lib/hover';
 import { borderRadius, borderTopRadius, borderBottomRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { cardVariant, cardOutlineVariant, cardInverse } from 'bootstrap-styled-mixins/lib/cards';
 import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
-import { makeTheme } from './theme';
 
-
+const defaultProps = {
+  tag: 'div',
+  theme: {
+    '$brand-primary': '#0275d8',
+    '$brand-success': '#5cb85c',
+    '$brand-info': '#5bc0de',
+    '$brand-warning': '#f0ad4e',
+    '$brand-danger': '#d9534f',
+    '$brand-inverse': '#292b2c',
+    '$card-spacer-x': '1.25rem',
+    '$card-spacer-y': '.75rem',
+    '$card-border-width': '1px',
+    '$card-border-radius': '.25rem',
+    '$card-border-color': 'rgba(0, 0, 0, 0.125)',
+    '$card-border-radius-inner': '',
+    '$card-cap-bg': '$gray-lightest',
+    '$card-bg': '$white',
+    '$card-link-hover-color': '$white',
+    '$card-img-overlay-padding': '1.25rem',
+    '$card-margin-y-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
+    '$card-margin-x-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
+    '$card-columns-count-md': '2',
+    '$card-columns-gap-md': '1rem',
+    '$card-columns-margin-md': '$card-spacer-y',
+    '$card-columns-count-lg': '2',
+    '$card-columns-gap-lg': '1.15rem',
+    '$card-columns-margin-lg': '$card-spacer-y',
+    '$card-columns-count-xl': '2',
+    '$card-columns-gap-xl': '1.25rem',
+    '$card-columns-margin-xl': '$card-spacer-y',
+    '$card-columns-count-xxl': '3',
+    '$card-columns-gap-xxl': '1.25rem',
+    '$card-columns-margin-xxl': '$card-spacer-y',
+    '$card-deck-margin': '(r, detectedUnit) / 2) + detectedUni',
+    '$btn-primary-bg': '$brand-primary',
+    '$btn-secondary-border': '#ccc',
+    '$btn-info-bg': '$brand-info',
+    '$btn-success-bg': '$brand-success',
+    '$btn-warning-bg': '$brand-warning',
+    '$btn-danger-bg': '$brand-danger',
+    '$enable-rounded': false,
+    '$enable-hover-media-query': false,
+  },
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$brand-primary': PropTypes.string,
+    '$brand-success': PropTypes.string,
+    '$brand-info': PropTypes.string,
+    '$brand-warning': PropTypes.string,
+    '$brand-danger': PropTypes.string,
+    '$brand-inverse': PropTypes.string,
+    '$card-spacer-x': PropTypes.string,
+    '$card-spacer-y': PropTypes.string,
+    '$card-border-width': PropTypes.string,
+    '$card-border-radius': PropTypes.string,
+    '$card-border-color': PropTypes.string,
+    '$card-border-radius-inner': PropTypes.string,
+    '$card-cap-bg': PropTypes.string,
+    '$card-bg': PropTypes.string,
+    '$card-link-hover-color': PropTypes.string,
+    '$card-img-overlay-padding': PropTypes.string,
+    '$card-margin-y-halved': PropTypes.string,
+    '$card-margin-x-halved': PropTypes.string,
+    '$card-columns-count-md': PropTypes.string,
+    '$card-columns-gap-md': PropTypes.string,
+    '$card-columns-margin-md': PropTypes.string,
+    '$card-columns-count-lg': PropTypes.string,
+    '$card-columns-gap-lg': PropTypes.string,
+    '$card-columns-margin-lg': PropTypes.string,
+    '$card-columns-count-xl': PropTypes.string,
+    '$card-columns-gap-xl': PropTypes.string,
+    '$card-columns-margin-xl': PropTypes.string,
+    '$card-columns-count-xxl': PropTypes.string,
+    '$card-columns-gap-xxl': PropTypes.string,
+    '$card-columns-margin-xxl': PropTypes.string,
+    '$card-deck-margin': PropTypes.string,
+    '$btn-primary-bg': PropTypes.string,
+    '$btn-secondary-border': PropTypes.string,
+    '$btn-info-bg': PropTypes.string,
+    '$btn-success-bg': PropTypes.string,
+    '$btn-warning-bg': PropTypes.string,
+    '$btn-danger-bg': PropTypes.string,
+    '$link-color': PropTypes.string,
+    '$link-decoration': PropTypes.string,
+    '$link-hover-color': PropTypes.string,
+    '$link-hover-decoration': PropTypes.string,
+    '$enable-rounded': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool,
+  }),
+  /** Color variables. Can be: */
+  color: PropTypes.oneOf([
+    'white',
+    'muted',
+    'gray-dark',
+    'primary',
+    'success',
+    'info',
+    'warning',
+    'danger',
+  ]),
+  /** Toggles inverse CSS color. */
+  inverse: PropTypes.bool,
+  /** Toggles block CSS display. */
+  block: PropTypes.bool,
+  /** Toggles outline CSS styles. */
+  outline: PropTypes.bool,
+  /** Width size in percent. */
+  width: PropTypes.string,
+  /** Use different background color with valid CSS. */
+  backgroundColor: PropTypes.string,
+  /** Use different border color with valid CSS. */
+  borderColor: PropTypes.string,
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 class CardUnstyled extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'div',
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
-    theme: PropTypes.object,
-    cssModule: PropTypes.object,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    inverse: PropTypes.bool,
-    color: PropTypes.string,
-    block: PropTypes.bool,
-    outline: PropTypes.bool,
-    width: PropTypes.string,
-    backgroundColor: PropTypes.string,
-    borderColor: PropTypes.string,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -69,6 +183,10 @@ class CardUnstyled extends React.Component {// eslint-disable-line react/prefer-
   }
 }
 
+/**
+ * Use our `<Card />` blocks with `<CardImg />`, `<CardBlock />`, `<CardTitle />`, `<CardSubtitle />` and `<CardText />` components  to emphasize part of your page.
+ * You can also use `width` attribute.
+ */
 const Card = styled(CardUnstyled)`
   ${(props) => `
     
@@ -325,6 +443,9 @@ const Card = styled(CardUnstyled)`
     }
   `}
 `;
+
+Card.defaultProps = defaultProps;
+Card.propTypes = propTypes;
 
 /** @component */
 export default Card;

@@ -69,19 +69,19 @@ const propTypes = {
     'danger',
   ]),
   /**
-   * Toggles dismissal of an alert
+   * Toggles dismissal of an alert.
    */
   isOpen: PropTypes.bool,
   /**
-   * Toggles onClick event
+   * Toggles onClick event.
    */
   toggle: PropTypes.bool,
   /**
-   * Assign function to onClick event
+   * Assign function to onClick event.
    */
   onClick: PropTypes.func,
   /**
-   * Toggles onClick event
+   * Toggles onClick event.
    */
   initializeIsOpen: PropTypes.func,
   /**
@@ -89,11 +89,11 @@ const propTypes = {
    */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   /**
-   * Transition used to dismiss alert
+   * Transition used to dismiss alert.
    */
   transition: PropTypes.shape(Fade.propTypes),
   /**
-   * Transition's duration used to dismiss alert
+   * Transition's duration used to dismiss alert.
    */
   autoHideDuration: PropTypes.number,
   /** Theme variables. */
@@ -119,7 +119,7 @@ const propTypes = {
     '$enable-rounded': PropTypes.bool,
   },
   /**
-   * Inner Alert state for uncontrolled
+   * Toggles inner alert state so that you don't have to write your own state or closing function.
    */
   uncontrolled: PropTypes.bool,
   /**

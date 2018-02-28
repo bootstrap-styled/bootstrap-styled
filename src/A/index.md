@@ -1,4 +1,4 @@
-React component example:
+`<A />` component example:
 
 ```js
 <div>
@@ -9,7 +9,7 @@ React component example:
   </P>
 </div>
 ```
-Or as a Button:
+Or as a `<Button />`:
 
 
 ```js

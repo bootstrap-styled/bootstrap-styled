@@ -9,27 +9,91 @@ import mapToCssModules from 'map-to-css-modules';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { badgeVariant } from 'bootstrap-styled-mixins/lib/badge';
-import { makeTheme } from './theme';
 
+const defaultProps = {
+  color: 'default',
+  pill: false,
+  tag: 'span',
+  theme: {
+    '$badge-default-bg': '#636c72',
+    '$badge-primary-bg': '#0275d8',
+    '$badge-success-bg': '#5cb85c',
+    '$badge-info-bg': '#5bc0de',
+    '$badge-warning-bg': '#f0ad4e',
+    '$badge-danger-bg': '#d9534f',
+    '$badge-color': '#fff',
+    '$badge-link-hover-color': '#fff',
+    '$badge-font-size': '75%',
+    '$badge-font-weight': 'bold',
+    '$badge-padding-x': '.4em',
+    '$badge-padding-y': '.25em',
+    '$badge-pill-padding-x': '.6em',
+    '$badge-pill-border-radius': '10rem',
+    '$enable-rounded': true,
+    '$enable-hover-media-query': false,
+  },
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Color variables. Can be: */
+  color: PropTypes.oneOf([
+    'white',
+    'muted',
+    'gray-dark',
+    'primary',
+    'success',
+    'info',
+    'warning',
+    'danger',
+  ]),
+  /**
+   * Change badge border radius.
+   */
+  pill: PropTypes.bool,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$badge-default-bg': PropTypes.string,
+    '$badge-primary-bg': PropTypes.string,
+    '$badge-success-bg': PropTypes.string,
+    '$badge-info-bg': PropTypes.string,
+    '$badge-warning-bg': PropTypes.string,
+    '$badge-danger-bg': PropTypes.string,
+    '$badge-color': PropTypes.string,
+    '$badge-link-hover-color': PropTypes.string,
+    '$badge-font-size': PropTypes.string,
+    '$badge-font-weight': PropTypes.string,
+    '$badge-padding-x': PropTypes.string,
+    '$badge-padding-y': PropTypes.string,
+    '$badge-pill-padding-x': PropTypes.string,
+    '$badge-pill-border-radius': PropTypes.string,
+    '$link-hover-decoration': PropTypes.string,
+    '$enable-rounded': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool,
+  }),
+
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 class BadgeUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    color: 'default',
-    pill: false,
-    tag: 'span',
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    color: PropTypes.string,
-    pill: PropTypes.bool,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    theme: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -127,6 +191,11 @@ const Badge = styled(BadgeUnstyled)`
     }
   `}
 `;
+/**
+ * Badges can be used as link and buttons and also in order to provide a counter.
+ */
+Badge.defaultProps = defaultProps;
+Badge.propTypes = propTypes;
 
 /** @component */
 export default Badge;

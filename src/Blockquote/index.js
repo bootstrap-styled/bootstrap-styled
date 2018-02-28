@@ -10,43 +10,74 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
-import { makeTheme } from './theme';
+import mapToCssModules from 'map-to-css-modules';
 
+const defaultProps = {
+  tag: 'blockquote',
+  theme: {
+    '$blockquote-small-color': '#636c72',
+    '$blockquote-font-size': '1.25rem',
+    '$blockquote-border-color': '#eceeef',
+    '$blockquote-border-width': '.25rem',
+  },
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$blockquote-small-color': PropTypes.string,
+    '$blockquote-font-size': PropTypes.string,
+    '$blockquote-border-color': PropTypes.string,
+    '$blockquote-border-width': PropTypes.string,
+  }),
+  /** Toggles content to display on left or right. */
+  reverse: PropTypes.bool,
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 
 class BlockquoteUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  static defaultProps = {
-    tag: 'blockquote',
-    theme: makeTheme(),
-  };
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
-    theme: PropTypes.object,
-    tag: PropTypes.string,
-    reverse: PropTypes.bool,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  static defaultProps = defaultProps;
+
+  static propTypes = propTypes;
 
   render() {
     const {
       className,
       reverse,
       tag: Tag,
+      cssModule,
       ...attributes
     } = omit(this.props, ['theme']);
 
     return (
       <Tag
-        className={cn(className, 'blockquote', {
+        className={mapToCssModules(cn(className, 'blockquote', {
           'blockquote-reverse': reverse,
-        })}
+        }), cssModule)}
         {...attributes}
       />
     );
   }
 }
 
+/**
+ * A quoting blocks component. Wrap `<Blockquote />` around any html node or element as the quote.
+ */
 const Blockquote = styled(BlockquoteUnstyled)` 
   ${(props) => `
     &.blockquote {
@@ -90,6 +121,9 @@ const Blockquote = styled(BlockquoteUnstyled)`
  `} 
 
 `;
+
+Blockquote.defaultProps = defaultProps;
+Blockquote.propTypes = propTypes;
 
 /** @component */
 export default Blockquote;
