@@ -3,17 +3,34 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
-const propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
-  right: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-};
-
 const defaultProps = {
   tag: 'div',
 };
+
+const propTypes = {
+  /** Specified node element will be passed as children of `<DropdownItem />`. */
+  children: PropTypes.node.isRequired,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+  /** Toggles right CSS display. */
+  right: PropTypes.bool,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+};
+
 
 const contextTypes = {
   isOpen: PropTypes.bool.isRequired,
@@ -35,5 +52,5 @@ const DropdownMenu = (props, context) => {
 DropdownMenu.propTypes = propTypes;
 DropdownMenu.defaultProps = defaultProps;
 DropdownMenu.contextTypes = contextTypes;
-
+/** @component */
 export default DropdownMenu;

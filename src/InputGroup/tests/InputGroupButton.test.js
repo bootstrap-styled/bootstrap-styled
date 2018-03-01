@@ -68,9 +68,9 @@ describe('<InputGroupButton />', () => {
     });
 
     it('should render additional props on the child Button', () => {
-      const wrapper = shallow(<InputGroupButton color="white">Yo!</InputGroupButton>);
+      const wrapper = shallow(<InputGroupButton color="primary">Yo!</InputGroupButton>);
 
-      expect(wrapper.childAt(0).prop('color')).toBe('white');
+      expect(wrapper.childAt(0).prop('color')).toBe('primary');
     });
 
     it('should render additional classes on the child Button', () => {

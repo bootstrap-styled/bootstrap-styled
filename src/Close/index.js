@@ -14,7 +14,7 @@ const defaultProps = {
     '$close-text-shadow': '0 1px 0 #fff',
     '$enable-hover-media-query': false,
   },
-  onDismiss: {},
+  onDismiss: () => '',
 };
 const propTypes = {
   /**

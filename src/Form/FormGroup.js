@@ -9,24 +9,53 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
-
+const defaultProps = {
+  tag: 'div',
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<DropdownItem />`. */
+  children: PropTypes.node,
+  /** Toggles input radio or checkbox check. */
+  check: PropTypes.bool,
+  /** Color variables. Can be: */
+  color: PropTypes.oneOf([
+    'success',
+    'warning',
+    'danger',
+  ]),
+  /** Toggles disabled check of input radio or checkbox. */
+  disabled: PropTypes.bool,
+  /** Replace the default component tag reference by the one specified. Can be: */
+  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /** Toggles inline CSS display. */
+  inline: PropTypes.bool,
+  /** Toggles row CSS display. */
+  row: PropTypes.bool,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 class FormGroup extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'div',
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    className: PropTypes.string,
-    check: PropTypes.bool,
-    color: PropTypes.string,
-    cssModule: PropTypes.object,
-    disabled: PropTypes.bool,
-    getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    inline: PropTypes.bool,
-    row: PropTypes.bool,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -55,6 +84,9 @@ class FormGroup extends React.Component {// eslint-disable-line react/prefer-sta
     );
   }
 }
+
+FormGroup.defaultProps = defaultProps;
+FormGroup.propTypes = propTypes;
 
 /** @component */
 export default FormGroup;

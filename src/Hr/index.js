@@ -1,7 +1,20 @@
 import styled from 'styled-components';
-import { makeTheme } from './theme';
+import PropTypes from 'prop-types';
 
-const defaultProps = { theme: makeTheme() };
+
+const defaultProps = {
+  theme: {
+    '$hr-border-width': '1px',
+    '$hr-border-color': 'rgba(0, 0, 0, 0.1)',
+  },
+};
+const propTypes = {
+  /** Theme variables. Can be: */
+  theme: {
+    '$hr-border-width': PropTypes.string,
+    '$hr-border-color': PropTypes.string,
+  },
+};
 
 const Hr = styled.hr`
   ${(props) => `
@@ -13,6 +26,7 @@ const Hr = styled.hr`
 `;
 
 Hr.defaultProps = defaultProps;
+Hr.propTypes = propTypes;
 
 /** @component */
 export default Hr;

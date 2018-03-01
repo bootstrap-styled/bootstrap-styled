@@ -8,30 +8,62 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
 import { media as mediaCss } from 'bootstrap-styled-mixins/lib/media';
-import { makeTheme } from './theme';
+import mapToCssModules from 'map-to-css-modules';
 
+
+const defaultProps = {
+  theme: {
+    '$list-inline-padding': '5px',
+  },
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<Li />` component. */
+  children: PropTypes.node,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$list-inline-padding': PropTypes.string,
+  }),
+  /** Toggles disabled CSS style. */
+  disabled: PropTypes.bool,
+  /** Toggles separator CSS display. */
+  separator: PropTypes.bool,
+  /** Toggles active CSS display. */
+  active: PropTypes.bool,
+  /** Toggles inline CSS display. */
+  inline: PropTypes.bool,
+  /** Toggles media CSS style. */
+  media: PropTypes.bool,
+  /** Toggles 'dropdown-item' CSS style. */
+  'dropdown-item': PropTypes.bool,
+  /** Toggles 'dropdown-header' CSS style. */
+  'dropdown-header': PropTypes.bool,
+  /** Toggles 'dropdown-footer' CSS style. */
+  'dropdown-footer': PropTypes.bool,
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 
 class LiUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    children: PropTypes.node,
-    disabled: PropTypes.bool,
-    className: PropTypes.string,
-    separator: PropTypes.bool,
-    active: PropTypes.bool,
-    inline: PropTypes.bool,
-    media: PropTypes.bool,
-    'dropdown-item': PropTypes.bool,
-    'dropdown-header': PropTypes.bool,
-    'dropdown-footer': PropTypes.bool,
-    theme: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -46,7 +78,7 @@ class LiUnstyled extends React.Component { // eslint-disable-line react/prefer-s
       ...attributes
     } = omit(this.props, ['theme']);
 
-    const classes = cn(
+    const classes = mapToCssModules(cn(
       className,
       separator ? 'dropdown-divider' : false,
       dropdownItem ? 'dropdown-item' : false,
@@ -55,7 +87,7 @@ class LiUnstyled extends React.Component { // eslint-disable-line react/prefer-s
       dropdownFooter ? 'dropdown-footer' : false,
       inline ? 'list-inline-item' : false,
       media ? 'media' : false,
-    );
+    ));
     return (
       <li
         className={classes}
@@ -67,7 +99,10 @@ class LiUnstyled extends React.Component { // eslint-disable-line react/prefer-s
   }
 }
 
-
+/**
+ * Replace or remove a className from the component.
+ * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+ */
 const Li = styled(LiUnstyled)`
   ${(props) => `
     &.list-inline-item {
@@ -81,6 +116,9 @@ const Li = styled(LiUnstyled)`
     ${mediaCss()}
   `}
 `;
+
+Li.defaultProps = defaultProps;
+Li.propTypes = propTypes;
 
 /** @component */
 export default Li;

@@ -4,7 +4,5 @@ This component has no props.
 `<Textarea />` component example:
 
 ```js
-<Textarea>
-  This is a text area
-</Textarea>
+<Textarea defaultValue="This is a text area" />
 ```

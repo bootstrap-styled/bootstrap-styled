@@ -25,6 +25,8 @@ export const makeTheme = (userTheme = {}) => {
   // Colors
 
   v['$black'] = u['$black'] || '#000';
+  v['$white'] = u['$white'] || '#fff';
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
 
   // Fonts
 

@@ -8,24 +8,37 @@ import ReactDOM from 'react-dom';
 import Tether from 'tether-fix';
 import isFunction from 'lodash.omit';
 
-
+const defaultProps = {
+  isOpen: false,
+  tetherRef() {},
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<TetherContent />` component. */
+  children: PropTypes.node,
+  /** Toggles opened CSS display. */
+  isOpen: PropTypes.bool,
+  /** Toggles disabled CSS display. */
+  disabled: PropTypes.bool,
+  /** Dispatch specified function when toggle action is triggered. */
+  toggle: PropTypes.func.isRequired,
+  /** Tether object. Please consult [Tether documentation](http://tether.io/) for more information. */
+  tether: PropTypes.object.isRequired,
+  /** Tether reference. Please consult [Tether documentation](http://tether.io/) for more information. */
+  tetherRef: PropTypes.func,
+  /** Tether style. Please consult [Tether documentation](http://tether.io/) for more information. */
+  style: PropTypes.node,
+};
 class TetherContent extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    isOpen: false,
-    tetherRef() {},
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string,
-    isOpen: PropTypes.bool,
-    disabled: PropTypes.bool,
-    toggle: PropTypes.func.isRequired,
-    tether: PropTypes.object.isRequired,
-    tetherRef: PropTypes.func,
-    style: PropTypes.node,
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   componentDidMount = () => {
     this.handleProps();
@@ -137,5 +150,8 @@ class TetherContent extends React.Component {// eslint-disable-line react/prefer
     );
   }
 }
+
+TetherContent.defaultProps = defaultProps;
+TetherContent.propTypes = propTypes;
 
 export default TetherContent;

@@ -11,19 +11,33 @@ import mapToCssModules from 'map-to-css-modules';
 import Label from '../Label';
 import Input from '../Input';
 
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<DropdownItem />`. */
+  children: PropTypes.node,
+  /** Specified id and name will be attributed to input of type radio. */
+  radio: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+  }),
+  /** Toggles default checked input of type radio or checkbox. */
+  defaultChecked: PropTypes.bool,
+  /** Toggles checked input of type radio or checkbox. */
+  checked: PropTypes.bool,
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 class FormCustom extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
-  static propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    radio: PropTypes.shape({
-      id: PropTypes.string,
-      name: PropTypes.string,
-    }),
-    defaultChecked: PropTypes.bool,
-    checked: PropTypes.bool,
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -57,6 +71,7 @@ class FormCustom extends React.Component {// eslint-disable-line react/prefer-st
   }
 }
 
+FormCustom.propTypes = propTypes;
 
 /** @component */
 export default FormCustom;

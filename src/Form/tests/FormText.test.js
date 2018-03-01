@@ -43,9 +43,9 @@ describe('<FormText />', () => {
   it('should have a class text-info', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      color: 'info',
+      color: 'success',
     });
-    expect(renderedComponent.find('small').hasClass('text-info')).toBe(true);
+    expect(renderedComponent.find('small').hasClass('text-success')).toBe(true);
   });
   it('should NOT have a class form-text', () => {
     const renderedComponent = renderComponentUsingTheme({
