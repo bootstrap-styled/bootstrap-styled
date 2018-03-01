@@ -1,5 +1,3 @@
-# Introduction
-
 ![image](https://img.shields.io/badge/version-$PACKAGE_VERSION-green.svg)
 ![image](https://img.shields.io/node/v/passport.svg)
 ![image](https://img.shields.io/npm/v/npm.svg)
@@ -7,5 +5,4 @@
 ![image](https://img.shields.io/twitter/follow/espadrine.svg?style=social&logo=twitter&label=Follow)
 ![image](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)
 
-Hey
-?
+Bootstrap Styled is a free and NO-CSS framework based on Bootstrap, ReactJS and Styled-component.
