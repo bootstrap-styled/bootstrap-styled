@@ -63,7 +63,7 @@ describe('<Abbr />', () => {
       initialism: true,
       children,
     });
-    expect(renderedComponent.find('abbr').hasClass('initialism'));
+    expect(renderedComponent.find('Abbr').props().initialism).toEqual(true);
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

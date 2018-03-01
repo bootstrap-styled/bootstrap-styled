@@ -7,7 +7,7 @@ import mapToCssModules from 'map-to-css-modules';
 
 const defaultProps = {
   tag: 'abbr',
-  initialism: 'false',
+  initialism: false,
 };
 
 const propTypes = {
