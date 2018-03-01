@@ -54,9 +54,9 @@ describe('<Card />', () => {
   });
   it('should have an attribute color with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
-      color: 'white',
+      color: 'primary',
     });
-    expect(renderedComponent.find('Card').props().color).toBe('white');
+    expect(renderedComponent.find('Card').props().color).toBe('primary');
   });
   it('should have an attribute block with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

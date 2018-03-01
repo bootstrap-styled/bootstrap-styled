@@ -17,7 +17,7 @@ const propTypes = {
   tag: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
-    PropTypes.node,
+    PropTypes.func,
   ]),
   /** Toggle image position to top of the card. */
   top: PropTypes.bool,

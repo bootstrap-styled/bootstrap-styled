@@ -69,7 +69,7 @@ const propTypes = {
   tag: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
-    PropTypes.node,
+    PropTypes.func,
   ]),
   /** Theme variables. Can be: */
   theme: PropTypes.shape({

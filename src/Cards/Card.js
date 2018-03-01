@@ -120,9 +120,6 @@ const propTypes = {
   }),
   /** Color variables. Can be: */
   color: PropTypes.oneOf([
-    'white',
-    'muted',
-    'gray-dark',
     'primary',
     'success',
     'info',
