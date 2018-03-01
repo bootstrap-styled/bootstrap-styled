@@ -11,7 +11,7 @@ import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { badgeVariant } from 'bootstrap-styled-mixins/lib/badge';
 
 const defaultProps = {
-  color: 'white',
+  color: 'default',
   pill: false,
   tag: 'span',
   theme: {
@@ -40,9 +40,7 @@ const propTypes = {
   className: PropTypes.string,
   /** Color variables. Can be: */
   color: PropTypes.oneOf([
-    'white',
-    'muted',
-    'gray-dark',
+    'default',
     'primary',
     'success',
     'info',

@@ -64,10 +64,9 @@ const propTypes = {
   className: PropTypes.string,
   /** Color variables. Can be: */
   color: PropTypes.oneOf([
-    'white',
-    'muted',
-    'gray-dark',
+    'link',
     'primary',
+    'secondary',
     'success',
     'info',
     'warning',
