@@ -3,11 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
-import { makeTheme } from './theme';
+import {makeTheme} from './theme';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
-import { navbar } from 'bootstrap-styled-mixins/lib/navbar';
-import { nav } from 'bootstrap-styled-mixins/lib/nav';
+import {navbar} from 'bootstrap-styled-mixins/lib/navbar';
+import {nav} from 'bootstrap-styled-mixins/lib/nav';
 
 
 const getToggleableClass = (toggleable) => { // eslint-disable-line react/prefer-stateless-function
@@ -69,7 +69,7 @@ const defaultProps = {
     '$navbar-light-hover-color': 'rgba(0,0,0,.7)',
     '$navbar-light-toggler-border': 'rgba(0,0,0,.1)',
     '$navbar-light-disabled-color': 'rgba(0, 0, 0, 0.3)',
-    '$navbar-light-toggler-bg':'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(0,0,0,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')',
+    '$navbar-light-toggler-bg': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(0,0,0,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')',
     '$navbar-inverse-active-color': 'rgba(255,255,255,1)',
     '$navbar-inverse-color': 'rgba(255,255,255,.5)',
     '$navbar-inverse-hover-color': 'rgba(255,255,255,.75)',
@@ -108,6 +108,8 @@ const propTypes = {
     'info',
     'warning',
     'danger',
+    'inverse',
+    'faded',
   ]),
   /** . */
   role: PropTypes.string,
@@ -204,61 +206,62 @@ class NavbarUnstyled extends React.Component {
       }
     ), cssModule);
 
-    return(
-      <Tag {...attributes} className={classes} />
+    return (
+      <Tag {...attributes} className={classes}/>
     )
   }
-};
+}
+;
 
 const Navbar = styled(NavbarUnstyled)`
   ${(props) => `
     ${navbar(
-      props.theme['$grid-breakpoints'],
-      props.theme['$enable-rounded'],
-      props.theme['$enable-hover-media-query'],
-      props.theme['$navbar-padding-y'],
-      props.theme['$navbar-padding-x'],
-      props.theme['$zindex-navbar'],
-      props.theme['$zindex-navbar-fixed'],
-      props.theme['$zindex-navbar-sticky'],
-      props.theme['$navbar-brand-padding-y'],
-      props.theme['$font-size-lg'],
-      props.theme['$navbar-divider-padding-y'],
-      props.theme['$navbar-toggler-padding-y'],
-      props.theme['$navbar-toggler-padding-x'],
-      props.theme['$navbar-toggler-font-size'],
-      props.theme['$border-width'],
-      props.theme['$navbar-toggler-border-radius'],
-      props.theme['$navbar-light-active-color'],
-      props.theme['$navbar-light-color'],
-      props.theme['$navbar-light-hover-color'],
-      props.theme['$navbar-light-toggler-border'],
-      props.theme['$navbar-light-disabled-color'],
-      props.theme['$navbar-light-toggler-bg'],
-      props.theme['$navbar-inverse-active-color'],
-      props.theme['$navbar-inverse-color'],
-      props.theme['$navbar-inverse-hover-color'],
-      props.theme['$navbar-inverse-toggler-border'],
-      props.theme['$navbar-inverse-toggler-bg'],
-      props.theme['$navbar-inverse-disabled-color'],
-    )}
+  props.theme['$grid-breakpoints'],
+  props.theme['$enable-rounded'],
+  props.theme['$enable-hover-media-query'],
+  props.theme['$navbar-padding-y'],
+  props.theme['$navbar-padding-x'],
+  props.theme['$zindex-navbar'],
+  props.theme['$zindex-navbar-fixed'],
+  props.theme['$zindex-navbar-sticky'],
+  props.theme['$navbar-brand-padding-y'],
+  props.theme['$font-size-lg'],
+  props.theme['$navbar-divider-padding-y'],
+  props.theme['$navbar-toggler-padding-y'],
+  props.theme['$navbar-toggler-padding-x'],
+  props.theme['$navbar-toggler-font-size'],
+  props.theme['$border-width'],
+  props.theme['$navbar-toggler-border-radius'],
+  props.theme['$navbar-light-active-color'],
+  props.theme['$navbar-light-color'],
+  props.theme['$navbar-light-hover-color'],
+  props.theme['$navbar-light-toggler-border'],
+  props.theme['$navbar-light-disabled-color'],
+  props.theme['$navbar-light-toggler-bg'],
+  props.theme['$navbar-inverse-active-color'],
+  props.theme['$navbar-inverse-color'],
+  props.theme['$navbar-inverse-hover-color'],
+  props.theme['$navbar-inverse-toggler-border'],
+  props.theme['$navbar-inverse-toggler-bg'],
+  props.theme['$navbar-inverse-disabled-color'],
+)}
     ${nav(
-      props.theme['$enable-rounded'],
-      props.theme['$enable-hover-media-query'],
-      props.theme['$nav-link-padding'],
-      props.theme['$nav-disabled-link-color'],
-      props.theme['$cursor-disabled'],
-      props.theme['$nav-tabs-border-width'],
-      props.theme['$nav-tabs-border-color'],
-      props.theme['$nav-tabs-border-radius'],
-      props.theme['$nav-tabs-link-hover-border-color'],
-      props.theme['$nav-tabs-active-link-hover-color'],
-      props.theme['$nav-tabs-active-link-hover-bg'],
-      props.theme['$nav-tabs-active-link-hover-border-color'],
-      props.theme['$nav-pills-border-radius'],
-      props.theme['$nav-pills-active-link-color'],
-      props.theme['$nav-pills-active-link-bg'],
-    )}
+  props.theme['$enable-rounded'],
+  props.theme['$enable-hover-media-query'],
+  props.theme['$nav-link-padding'],
+  props.theme['$nav-disabled-link-color'],
+  props.theme['$cursor-disabled'],
+  props.theme['$nav-tabs-border-width'],
+  props.theme['$nav-tabs-border-color'],
+  props.theme['$nav-tabs-border-radius'],
+  props.theme['$nav-tabs-link-hover-border-color'],
+  props.theme['$nav-tabs-active-link-hover-color'],
+  props.theme['$nav-tabs-active-link-hover-bg'],
+  props.theme['$nav-tabs-active-link-hover-border-color'],
+  props.theme['$nav-pills-border-radius'],
+  props.theme['$nav-pills-active-link-color'],
+  props.theme['$nav-pills-active-link-bg'],
+)}
   `}
 `;
 

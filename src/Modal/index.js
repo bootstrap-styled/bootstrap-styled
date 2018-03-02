@@ -23,37 +23,70 @@ import { makeTheme } from './theme';
 function noop() { }
 
 const FadePropTypes = PropTypes.shape(Fade.propTypes);
-
 const propTypes = {
-  theme: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+
+  }),
+  /** Toggles opened CSS style. */
   isOpen: PropTypes.bool,
+  /** Toggles auto focus CSS style. */
   autoFocus: PropTypes.bool,
-  size: PropTypes.string,
+  /** Modal use default size base and can use different size such as: */
+  size: PropTypes.oneOf([
+    'sm',
+    'lg',
+  ]),
+  /** Dispatch specified function when on toggle action is triggered. */
   toggle: PropTypes.func,
+  /** Toggles keyboard events. */
   keyboard: PropTypes.bool,
+  /** Define role with specified one. */
   role: PropTypes.string,
+  /** Define labelledBy with specified one. */
   labelledBy: PropTypes.string,
+  /** Toggles backdrop action. */
   backdrop: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.oneOf(['static']),
   ]),
+  /** Dispatch specified function when entering modal is triggered. */
   onEnter: PropTypes.func,
+  /** Dispatch specified function when exiting modal is triggered. */
   onExit: PropTypes.func,
+  /** Dispatch specified function when opened modal is triggered. */
   onOpened: PropTypes.func,
+  /** Dispatch specified function when closed modal is triggered. */
   onClosed: PropTypes.func,
+  /** Specified node element will be passed as children of `<Modal />`. */
   children: PropTypes.node,
-  className: PropTypes.string,
+  /** Define document's className with specified one. */
   documentClassName: PropTypes.string,
+  /** Define modal's className with specified one. */
   modalClassName: PropTypes.string,
+  /** Define backdrop's className with specified one. */
   backdropClassName: PropTypes.string,
+  /** Define content's className with specified one. */
   contentClassName: PropTypes.string,
+  /** Toggles fade transition. */
   fade: PropTypes.bool,
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
   cssModule: PropTypes.object,
+  /** Define z-index with specified one. */
   zIndex: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
   ]),
+  /** Define backdrop transition with specified one. */
   backdropTransition: FadePropTypes,
+  /** Define modal transition with specified one. */
   modalTransition: FadePropTypes,
 };
 
@@ -456,6 +489,9 @@ const Modal = styled(ModalUnstyled)`
 )}
   `}
 `;
+
+Modal.defaultProps = defaultProps;
+Modal.propTypes = propTypes;
 
 /** @component */
 export default Modal;

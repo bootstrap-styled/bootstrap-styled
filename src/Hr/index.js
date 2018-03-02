@@ -10,10 +10,10 @@ const defaultProps = {
 };
 const propTypes = {
   /** Theme variables. Can be: */
-  theme: {
+  theme: PropTypes.shape({
     '$hr-border-width': PropTypes.string,
     '$hr-border-color': PropTypes.string,
-  },
+  }),
 };
 
 const Hr = styled.hr`

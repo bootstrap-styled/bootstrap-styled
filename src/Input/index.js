@@ -91,6 +91,7 @@ const propTypes = {
     'submit',
     'tel',
     'text',
+    'select',
     'time',
     'url',
     'week',

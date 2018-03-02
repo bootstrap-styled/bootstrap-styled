@@ -24,7 +24,10 @@ const propTypes = {
   disabled: PropTypes.bool,
   /** Color variables. Can be: */
   color: PropTypes.oneOf([
-    'primary',
+    'success',
+    'info',
+    'warning',
+    'danger',
   ]),
   /**
    * Replace the default component tag by the one specified. Can be:

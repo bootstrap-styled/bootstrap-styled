@@ -94,7 +94,7 @@ module.exports = {
         {
           name: 'Installation',
           content: 'docs/installation.md',
-          description: 'The description for the installation section',
+          description: 'Discover how to install `bootstrap-styled`',
         },
         {
           name: 'Configuration',

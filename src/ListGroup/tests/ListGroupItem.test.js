@@ -66,12 +66,12 @@ describe('<ListGroupItem />', () => {
     });
     expect(renderedComponent.find('li').hasClass('list-group-item-action'));
   });
-  it('should have a class list-group-item-primary with a theme', () => {
+  it('should have a class list-group-item-success with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      color: 'primary',
+      color: 'success',
     });
-    expect(renderedComponent.find('li').hasClass('list-group-item-primary'));
+    expect(renderedComponent.find('li').hasClass('list-group-item-success'));
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
