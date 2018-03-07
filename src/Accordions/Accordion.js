@@ -10,27 +10,45 @@ import CardHeader from '../Cards/CardHeader';
 import Collapse from '../Collapse';
 import H5 from '../H5';
 
+const defaultProps = {
+  tag: Card,
+  delay: 350,
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  /** Specified node element will be passed as children of `<Alert /> component. */
+  children: PropTypes.node.isRequired,
+  /** Delay variables. Can be: */
+  delay: PropTypes.oneOfType([
+    PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
+    PropTypes.number,
+  ]),
+  /** Heading variables. Can be: */
+  heading: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string,
+  ]),
+  /** Accordion name variables. */
+  name: PropTypes.string,
+};
 class Accordion extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: Card,
-    delay: 350,
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string,
-    delay: PropTypes.oneOfType([
-      PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
-      PropTypes.number,
-    ]),
-    heading: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.string,
-    ]),
-    name: PropTypes.string,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   static contextTypes = {
     accordionGroup: PropTypes.object,
@@ -79,4 +97,8 @@ class Accordion extends React.Component { // eslint-disable-line react/prefer-st
   }
 }
 
+Accordion.defaultProps = defaultProps;
+Accordion.propTypes = propTypes;
+
+/** @component */
 export default Accordion;

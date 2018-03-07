@@ -52,11 +52,9 @@ const propTypes = {
   /**
    * @ignore
    */
-  children: PropTypes.node,
-  /**
-   * @ignore
-   */
   className: PropTypes.string,
+  /** Specified node element will be passed as children of `<Alert /> component. */
+  children: PropTypes.node,
   /** Color variables. */
   color: PropTypes.oneOf([
     'success',
@@ -266,7 +264,7 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
 }
 
 /**
- * Alert link element
+ * Alert component.
  */
 const Alert = styled(AlertUnstyled)`
   ${(props) => `

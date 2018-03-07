@@ -5,7 +5,7 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import { makeGridColumns } from 'bootstrap-styled-mixins/lib/grid-framework';
 import mapToCssModules from 'map-to-css-modules';
-import { makeTheme } from './theme';
+
 
 const colWidths = ['xs', 'sm', 'md', 'lg', 'xl'];
 const stringOrNumberProp = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
@@ -32,28 +32,66 @@ export const getColumnSizeClass = (isXs, colWidth, colSize) => {
   return isXs ? `col-${colSize}` : `col-${colWidth}-${colSize}`;
 };
 
+const defaultProps = {
+  tag: 'div',
+  widths: colWidths,
+  theme: {
+    '$enable-grid-classes': true,
+    '$grid-breakpoints': {
+      xs: '0',
+      sm: '576px',
+      md: '768px',
+      lg: '992px',
+      xl: '1200px',
+    },
+    '$grid-columns': '12',
+    '$grid-gutter-widths': {
+      xs: '30px',
+      sm: '30px',
+      md: '30px',
+      lg: '30px',
+      xl: '30px',
+    },
+  },
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /** Extra small columns variables. */
+  xs: columnProps,
+  /** Small columns variables. */
+  sm: columnProps,
+  /** Medium columns variables. */
+  md: columnProps,
+  /** Large columns variables. */
+  lg: columnProps,
+  /** Extra large columns variables. */
+  xl: columnProps,
+  /** Widths size variables. */
+  widths: PropTypes.array,
+  /** Theme variables. */
+  theme: PropTypes.shape({
+
+  }),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 class ColUnstyled extends React.Component {    // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'div',
-    theme: makeTheme(),
-    widths: colWidths,
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    xs: columnProps,
-    sm: columnProps,
-    md: columnProps,
-    lg: columnProps,
-    xl: columnProps,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    widths: PropTypes.array,
-    theme: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -109,7 +147,9 @@ class ColUnstyled extends React.Component {    // eslint-disable-line react/pref
     );
   }
 }
-
+/**
+ * Column component to use inside a `<Row />` component.
+ */
 const Col = styled(ColUnstyled)`
   ${(props) => `
     ${makeGridColumns(
@@ -120,6 +160,9 @@ const Col = styled(ColUnstyled)`
     )}
   `}
 `;
+
+Col.defaultProps = defaultProps;
+Col.propTypes = propTypes;
 
 /** @component */
 export default Col;
