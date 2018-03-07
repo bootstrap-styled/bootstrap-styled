@@ -43,6 +43,7 @@ const propTypes = {
     'muted',
     'gray-dark',
     'primary',
+    'secondary',
     'success',
     'info',
     'warning',
