@@ -14,7 +14,7 @@ const defaultProps = {
     '$close-text-shadow': '0 1px 0 #fff',
     '$enable-hover-media-query': false,
   },
-  onDismiss: () => '',
+  onDismiss: () => {},
 };
 const propTypes = {
   /**
@@ -31,7 +31,7 @@ const propTypes = {
   }),
   /** Replace close label with any string. */
   closeLabel: PropTypes.string,
-  /** Dispatch function when dismiss is trigger. */
+  /** Call function when dismiss is trigger. */
   onDismiss: PropTypes.func.isRequired,
   /** Toggles screen-reader only CSS display. */
   'sr-only': PropTypes.bool,

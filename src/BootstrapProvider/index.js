@@ -8,7 +8,7 @@ const defaultProps = {
   theme: themeBs,
 };
 const propTypes = {
-  /** Specified node element will be passed as children of `<Alert /> component. */
+  /** Specified node element will be passed as children of `<<Alert> />` component. */
   children: PropTypes.node,
   /** Theme variables. */
   theme: PropTypes.object,

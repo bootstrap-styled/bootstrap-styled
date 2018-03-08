@@ -41,7 +41,7 @@ const propTypes = {
     'sm',
     'lg',
   ]),
-  /** Dispatch specified function when on toggle action is triggered. */
+  /** Call specified function when on toggle action is triggered. */
   toggle: PropTypes.func,
   /** Toggles keyboard events. */
   keyboard: PropTypes.bool,
@@ -54,13 +54,13 @@ const propTypes = {
     PropTypes.bool,
     PropTypes.oneOf(['static']),
   ]),
-  /** Dispatch specified function when entering modal is triggered. */
+  /** Call specified function when entering modal is triggered. */
   onEnter: PropTypes.func,
-  /** Dispatch specified function when exiting modal is triggered. */
+  /** Call specified function when exiting modal is triggered. */
   onExit: PropTypes.func,
-  /** Dispatch specified function when opened modal is triggered. */
+  /** Call specified function when opened modal is triggered. */
   onOpened: PropTypes.func,
-  /** Dispatch specified function when closed modal is triggered. */
+  /** Call specified function when closed modal is triggered. */
   onClosed: PropTypes.func,
   /** Specified node element will be passed as children of `<Modal />`. */
   children: PropTypes.node,

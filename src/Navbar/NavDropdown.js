@@ -11,7 +11,7 @@ const propTypes = {
   className: PropTypes.string,
   /** Specified node element will be passed as children of `<DropdownItem />` component. */
   children: PropTypes.node,
-  /** Dispatch specified function when toggle action triggered. */
+  /** Call specified function when toggle action triggered. */
   toggle: PropTypes.func.isRequired,
   /** Toggles isOpen CSS style. */
   isOpen: PropTypes.bool.isRequired,

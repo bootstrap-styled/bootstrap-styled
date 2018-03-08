@@ -23,7 +23,7 @@ const propTypes = {
   isOpen: PropTypes.bool,
   /** Toggles disabled CSS display. */
   disabled: PropTypes.bool,
-  /** Dispatch specified function when toggle action is triggered. */
+  /** Call specified function when toggle action is triggered. */
   toggle: PropTypes.func.isRequired,
   /** Tether object. Please consult [Tether documentation](http://tether.io/) for more information. */
   tether: PropTypes.object.isRequired,

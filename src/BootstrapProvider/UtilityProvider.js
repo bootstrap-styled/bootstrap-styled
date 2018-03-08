@@ -41,7 +41,7 @@ const defaultProps = {
   },
 };
 const propTypes = {
-  /** Specified node element will be passed as children of `<Alert /> component. */
+  /** Specified node element will be passed as children of `<UtilityProvider />` component. */
   children: PropTypes.node,
   /** Theme variables. */
   theme: PropTypes.object,

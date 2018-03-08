@@ -12,15 +12,17 @@ const propTypes = {
    * @ignore
    */
   className: PropTypes.string,
-  /** Specified node element will be passed as children of `<DropdownItem />` component. */
+  /**
+   * @ignore
+   */
   children: PropTypes.node,
   /** Toggles disabled CSS style. */
   disabled: PropTypes.bool,
-  /** Toggles divider string element display. */
+  /** Toggles divider visibility. */
   divider: PropTypes.bool,
   /** Toggles header element display. */
   header: PropTypes.bool,
-  /** Dispatch specified function when on click event is triggered. */
+  /** Call specified function when on click event is triggered. */
   onClick: PropTypes.func,
   /**
    * Replace the default component tag by the one specified. Can be:

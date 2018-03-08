@@ -88,17 +88,20 @@ const propTypes = {
   children: PropTypes.node,
   /** Toggles disabled CSS style. */
   disabled: PropTypes.bool,
-  /** Toggles dropup CSS style. */
+  /** Toggles dropdown direction. */
   dropup: PropTypes.bool,
   /** Toggles group CSS style. */
   group: PropTypes.bool,
-  /** Toggles isOpen CSS style. */
+  /** Toggles dropdown visibility. */
   isOpen: PropTypes.bool,
-  /** Change size with the specified one. */
-  size: PropTypes.string,
+  /** Size variables. Can be small or large: */
+  size: PropTypes.oneOf([
+    'sm',
+    'lg',
+  ]),
   /** Tether position value. Can be: */
   tether: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  /** Dispatch specified function when on toggle action is triggered. */
+  /** Call specified function when on toggle action is triggered. */
   toggle: PropTypes.func,
   /** Theme variables. Can be: */
   theme: PropTypes.shape({

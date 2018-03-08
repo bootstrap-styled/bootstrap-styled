@@ -27,7 +27,7 @@ const propTypes = {
   ]),
   /** Wrapped tag variables. Can be: */
   wrapTag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  /** Dispatch specified function when on toggle action is triggered. */
+  /** Call specified function when on toggle action is triggered. */
   toggle: PropTypes.func,
   /**
    * Replace or remove a className from the component.

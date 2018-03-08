@@ -20,6 +20,10 @@ const propTypes = {
    */
   className: PropTypes.string,
   /**
+   * @ignore
+   */
+  children: PropTypes.node,
+  /**
    * Replace the default component tag by the one specified. Can be:
    */
   tag: PropTypes.oneOfType([
@@ -27,19 +31,17 @@ const propTypes = {
     PropTypes.element,
     PropTypes.func,
   ]),
-  /** Specified node element will be passed as children of `<Alert /> component. */
-  children: PropTypes.node.isRequired,
-  /** Delay variables. Can be: */
+  /** Delay transition in milliseconds before and after collapse. Can be: */
   delay: PropTypes.oneOfType([
     PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
     PropTypes.number,
   ]),
-  /** Heading variables. Can be: */
+  /** Heading used as title for accordion. Can be: */
   heading: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.string,
   ]),
-  /** Accordion name variables. */
+  /** `<AccordionGroup />` define active accordion with accordion name. */
   name: PropTypes.string,
 };
 class Accordion extends React.Component { // eslint-disable-line react/prefer-stateless-function

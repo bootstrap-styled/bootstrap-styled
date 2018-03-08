@@ -25,7 +25,7 @@ const propTypes = {
   'data-toggle': PropTypes.string,
   /** Toggles disabled CSS style. */
   disabled: PropTypes.bool,
-  /** Dispatch specified function when on click event is triggered. */
+  /** Call specified function when on click event is triggered. */
   onClick: PropTypes.func,
   /** Toggles nav CSS style. */
   nav: PropTypes.bool,

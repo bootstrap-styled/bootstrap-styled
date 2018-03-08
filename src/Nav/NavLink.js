@@ -18,7 +18,7 @@ const propTypes = {
   disabled: PropTypes.bool,
   /** Toggles active CSS style. */
   active: PropTypes.bool,
-  /** Dispatch specified function when on click event is triggered. */
+  /** Call specified function when on click event is triggered. */
   onClick: PropTypes.func,
   /** Replace the default component tag reference by the one specified. */
   href: PropTypes.any,

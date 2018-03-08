@@ -113,7 +113,7 @@ const propTypes = {
   static: PropTypes.bool,
   /** Toggles addon CSS style. */
   addon: PropTypes.bool,
-  /** Dispatch specified function when `onChange` event is triggered. */
+  /** Call specified function when `onChange` event is triggered. */
   onChange: PropTypes.func,
   /** Toggles indeterminate CSS style. */
   indeterminate: PropTypes.bool,

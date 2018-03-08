@@ -18,8 +18,8 @@ const defaultProps = {
   },
   tag: 'div',
   delay: {
-    show: null,
-    hide: null,
+    show: 350,
+    hide: 350,
   },
   onOpened: () => {},
   onClosed: () => {},
@@ -37,7 +37,7 @@ const propTypes = {
     PropTypes.element,
     PropTypes.func,
   ]),
-  /** Delay before and after collapse transition. Can be: */
+  /** Delay transition in milliseconds before and after collapse. Can be: */
   delay: PropTypes.oneOfType([
     PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
     PropTypes.number,
@@ -46,9 +46,9 @@ const propTypes = {
   isOpen: PropTypes.bool,
   /** Toggles nav bar CSS display. */
   navbar: PropTypes.bool,
-  /** Dispatch specified function when opened collapse action is triggered. */
+  /** Call specified function when opened collapse action is triggered. */
   onOpened: PropTypes.func,
-  /** Dispatch specified function when closed collapse action is triggered. */
+  /** Call specified function when closed collapse action is triggered. */
   onClosed: PropTypes.func,
   /** Theme variables. Can be: */
   theme: PropTypes.shape({

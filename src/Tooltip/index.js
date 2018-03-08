@@ -49,7 +49,7 @@ const propTypes = {
   tether: PropTypes.object,
   /** Tether reference. Please consult [Tether documentation](http://tether.io/) for more information. */
   tetherRef: PropTypes.func,
-  /** Dispatch specified function when toggle action is triggered. */
+  /** Call specified function when toggle action is triggered. */
   toggle: PropTypes.func,
   /** Toggles hide CSS display. */
   autohide: PropTypes.bool,

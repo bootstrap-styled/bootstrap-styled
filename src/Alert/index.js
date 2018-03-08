@@ -53,7 +53,7 @@ const propTypes = {
    * @ignore
    */
   className: PropTypes.string,
-  /** Specified node element will be passed as children of `<Alert /> component. */
+  /** Specified node element will be passed as children of `<Alert />` component. */
   children: PropTypes.node,
   /** Color variables. */
   color: PropTypes.oneOf([
@@ -71,7 +71,7 @@ const propTypes = {
    */
   toggle: PropTypes.bool,
   /**
-   * Assign function to onClick event.
+   * Call specified function when `on click` event is triggered.
    */
   onClick: PropTypes.func,
   /**
@@ -87,7 +87,7 @@ const propTypes = {
    */
   transition: PropTypes.shape(Fade.propTypes),
   /**
-   * Transition's duration used to dismiss alert.
+   * Transition's duration used to dismiss alert automatically.
    */
   autoHideDuration: PropTypes.number,
   /** Theme variables. */

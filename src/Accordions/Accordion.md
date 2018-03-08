@@ -22,7 +22,7 @@ const handleAccordionChange = function(name) {
        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
      </CardBlock>
    </Accordion>
-   <Accordion heading={<Strong>Collapsible Group Item #2</Strong>} name="Accordion3">
+   <Accordion heading={<Strong>Collapsible Group Item #3</Strong>} name="Accordion3">
      <CardBlock>
        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
      </CardBlock>
