@@ -9,12 +9,13 @@ module.exports = {
   ignore: [
     '**/src/index.js',
     '**/src/Accordions/index.js',
-    '**/src/Accordions/Accordion.js',
     '**/src/Accordions/AccordionGroup.js',
     '**/src/Article/index.js',
     '**/src/Breadcrumb/BreadcrumbItem.js',
     '**/src/Button/ButtonDropdown.js',
     '**/src/ButtonGroup/ButtonToolbar.js',
+    '**/src/BootstrapProvider/index.js',
+    '**/src/BootstrapProvider/UtilityProvider.js',
     '**/src/Cards/CardBlock.js',
     '**/src/Cards/CardBlockquote.js',
     '**/src/Cards/CardColumns.js',
@@ -96,6 +97,7 @@ module.exports = {
         {
           name: 'Configuration',
           content: 'docs/configuration.md',
+          components: 'src/BootstrapProvider/*.js',
         },
       ],
     },
