@@ -1,10 +1,9 @@
 /* Ignored components needed to be used in example */
-import AccordionGroup from '../src/Accordions/AccordionGroup';
 import BreadcrumbItem from '../src/Breadcrumb/BreadcrumbItem';
 import ButtonDropdown from '../src/Button/ButtonDropdown';
 import ButtonToolbar from '../src/ButtonGroup/ButtonToolbar';
-import BootstrapProvider from '../src/BootstrapProvider';
-import UtilityProvider from '../src/BootstrapProvider/UtilityProvider';
+// import BootstrapProvider from '../src/BootstrapProvider';
+// import UtilityProvider from '../src/BootstrapProvider/UtilityProvider';
 import CardBlock from '../src/Cards/CardBlock';
 import CardBlockquote from '../src/Cards/CardBlockquote';
 import CardColumns from '../src/Cards/CardColumns';
@@ -63,12 +62,11 @@ import Thead from '../src/Table/Thead';
 import Tr from '../src/Table/Tr';
 import TetherContent from '../src/TetherContent';
 
-global.AccordionGroup = AccordionGroup;
 global.BreadcrumbItem = BreadcrumbItem;
 global.ButtonDropdown = ButtonDropdown;
 global.ButtonToolbar = ButtonToolbar;
-global.BootstrapProvider = BootstrapProvider;
-global.UtilityProvider = UtilityProvider;
+// global.BootstrapProvider = BootstrapProvider;
+// global.UtilityProvider = UtilityProvider;
 global.CardBlock = CardBlock;
 global.CardBlockquote = CardBlockquote;
 global.CardColumns = CardColumns;

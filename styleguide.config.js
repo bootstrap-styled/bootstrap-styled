@@ -9,13 +9,10 @@ module.exports = {
   ignore: [
     '**/src/index.js',
     '**/src/Accordions/index.js',
-    '**/src/Accordions/AccordionGroup.js',
     '**/src/Article/index.js',
     '**/src/Breadcrumb/BreadcrumbItem.js',
     '**/src/Button/ButtonDropdown.js',
     '**/src/ButtonGroup/ButtonToolbar.js',
-    '**/src/BootstrapProvider/index.js',
-    '**/src/BootstrapProvider/UtilityProvider.js',
     '**/src/Cards/CardBlock.js',
     '**/src/Cards/CardBlockquote.js',
     '**/src/Cards/CardColumns.js',
@@ -104,6 +101,10 @@ module.exports = {
     {
       name: 'UI Components',
       content: 'docs/ui.md',
+      ignore: [
+        '**/src/BootstrapProvider/index.js',
+        '**/src/BootstrapProvider/UtilityProvider.js',
+      ],
       components: 'src/**/*.js',
     },
   ],
