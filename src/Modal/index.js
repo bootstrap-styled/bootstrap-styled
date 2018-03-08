@@ -206,7 +206,14 @@ class ModalUnstyled extends React.Component {
   }
 
   handleEscape = (e) => {
+    console.log(e);
+    console.log(this.props.isOpen);
+    console.log(this.props.keyboard);
+    console.log(e.keyCode === 27);
+    console.log(this.props.toggle);
+
     if (this.props.isOpen && this.props.keyboard && e.keyCode === 27 && this.props.toggle) {
+      console.log('test');
       this.props.toggle();
     }
   }
