@@ -9,26 +9,102 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { pagination } from 'bootstrap-styled-mixins/lib/paginations';
-import { makeTheme } from './theme';
 
 
+const defaultProps = {
+  tag: 'ul',
+  theme: {
+    '$enable-rounded': true,
+    '$enable-hover-media-query': false,
+    '$pagination-padding-x': '.75rem',
+    '$pagination-padding-y': '.5rem',
+    '$pagination-padding-x-sm': '.5rem',
+    '$pagination-padding-y-sm': '.25rem',
+    '$pagination-padding-x-lg': '1.5rem',
+    '$pagination-padding-y-lg': '.75rem',
+    '$pagination-line-height': '1.25',
+    '$pagination-color': '#0275d8',
+    '$pagination-bg': '#fff',
+    '$pagination-border-width': '1px',
+    '$pagination-border-color': '#ddd',
+    '$pagination-hover-color': 'hsl(207.79999999999995, 98.2%, 27.8%)',
+    '$pagination-hover-bg': '#eceeef',
+    '$pagination-hover-border': '#ddd',
+    '$pagination-active-color': '#fff',
+    '$pagination-active-bg': '#0275d8',
+    '$pagination-active-border': '#0275d8',
+    '$pagination-disabled-color': '#636c72',
+    '$pagination-disabled-bg': '#fff',
+    '$pagination-disabled-border': '#ddd',
+  },
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<Pagination />` component. */
+  children: PropTypes.node,
+  /** Pagination use default size base and can use different size such as: */
+  size: PropTypes.oneOf([
+    'sm',
+    'lg',
+  ]),
+  /** Replace the default component tag by the one specified. Can be: */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$enable-rounded': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool,
+    '$pagination-padding-x': PropTypes.string,
+    '$pagination-padding-y': PropTypes.string,
+    '$pagination-padding-x-sm': PropTypes.string,
+    '$pagination-padding-y-sm': PropTypes.string,
+    '$pagination-padding-x-lg': PropTypes.string,
+    '$pagination-padding-y-lg': PropTypes.string,
+    '$pagination-line-height': PropTypes.string,
+    '$pagination-color': PropTypes.string,
+    '$pagination-bg': PropTypes.string,
+    '$pagination-border-width': PropTypes.string,
+    '$pagination-border-color': PropTypes.string,
+    '$pagination-hover-color': PropTypes.string,
+    '$pagination-hover-bg': PropTypes.string,
+    '$pagination-hover-border': PropTypes.string,
+    '$pagination-active-color': PropTypes.string,
+    '$pagination-active-bg': PropTypes.string,
+    '$pagination-active-border': PropTypes.string,
+    '$pagination-disabled-color': PropTypes.string,
+    '$pagination-disabled-bg': PropTypes.string,
+    '$pagination-disabled-border': PropTypes.string,
+  }),
+  /** Color variables. Can be: */
+  color: PropTypes.oneOf([
+    'white',
+    'muted',
+    'gray-dark',
+    'primary',
+    'success',
+    'info',
+    'warning',
+    'danger',
+  ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 class PaginationUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'ul',
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
-    children: PropTypes.node,
-    cssModule: PropTypes.object,
-    size: PropTypes.string,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    theme: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -89,6 +165,9 @@ const Pagination = styled(PaginationUnstyled)`
     )}
   `}
 `;
+
+Pagination.defaultProps = defaultProps;
+Pagination.propTypes = propTypes;
 
 /** @component */
 export default Pagination;

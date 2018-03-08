@@ -14,6 +14,10 @@ const defaultProps = {
   tag: 'button',
   color: 'primary',
   theme: {
+    '$enable-rounded': true,
+    '$enable-shadows': false,
+    '$enable-hover-media-query': true,
+    '$enable-transitions': true,
     '$btn-padding-x': '1rem',
     '$btn-padding-y': '.5rem',
     '$btn-line-height': '1.25',
@@ -64,10 +68,9 @@ const propTypes = {
   className: PropTypes.string,
   /** Color variables. Can be: */
   color: PropTypes.oneOf([
-    'white',
-    'muted',
-    'gray-dark',
+    'link',
     'primary',
+    'secondary',
     'success',
     'info',
     'warning',
@@ -91,6 +94,7 @@ const propTypes = {
   tag: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
+    PropTypes.func,
   ]),
   /** Theme variables. Can be: */
   theme: PropTypes.shape({

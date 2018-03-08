@@ -3,12 +3,32 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
 
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Size variables. Can be: */
+  size: PropTypes.oneOf([
+    'lg',
+    '2x',
+    '3x',
+    '4x',
+    '5x',
+  ]),
+  /** Color variables. Can be: */
+  color: PropTypes.oneOf([
+    'success',
+    'info',
+    'warning',
+    'danger',
+  ]),
+};
+
 class FaUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  static propTypes = {
-    className: PropTypes.string,
-    size: PropTypes.string,
-    color: PropTypes.string,
-  };
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -36,6 +56,8 @@ const Fa = styled(FaUnstyled)`
     vertical-align: -2%;
   }
 `;
+
+Fa.propTypes = propTypes;
 
 /** @component */
 export default Fa;

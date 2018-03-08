@@ -12,25 +12,123 @@ import mapToCssModules from 'map-to-css-modules';
 import { hoverFocusActive } from 'bootstrap-styled-mixins/lib/hover';
 import { borderRadius, borderLeftRadius, borderRightRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { formControl } from 'bootstrap-styled-mixins/lib/forms';
-import { makeTheme } from './theme';
 
 
+const defaultProps = {
+  tag: 'div',
+  theme: {
+    '$enable-rounded': true,
+    '$enable-shadows': false,
+    '$enable-hover-media-query': false,
+    '$enable-transitions': true,
+    '$font-size-base': '1rem', // Assumes the browser default, typically `16px`
+    '$font-size-lg': '1.25rem',
+    '$font-size-sm': '.875rem',
+    '$font-size-xs': '.75rem',
+    '$line-height-base': '1.5',
+    '$border-radius': '.25rem',
+    '$border-radius-lg': '.3rem',
+    '$border-radius-sm': '.2rem',
+    '$input-padding-x': '.75rem',
+    '$input-padding-y': '.5rem',
+    '$input-bg': '#fff',
+    '$input-bg-disabled': '#eceeef',
+    '$input-padding-x-lg': '1.5rem',
+    '$input-padding-y-lg': '.75rem',
+    '$input-line-height': '1.25',
+    '$input-height': '2.5rem',
+    '$input-box-shadow': 'inset 0 1px 1px rgba(0, 0, 0, 0.075)',
+    '$input-btn-border-width': '1px', // For form controls and buttons
+    '$input-group-addon-bg': '#eceeef',
+    '$input-border-color': 'rgba(0, 0, 0, 0.15)',
+    '$input-border-focus': 'hsl(207.79999999999995, 98.2%, 53.4%)',
+    '$input-box-shadow-focus': 'inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(hsl(207.79999999999995, 98.2%, 53.4%),.6)',
+    '$input-color': '#464a4c',
+    '$input-group-addon-border-color': 'border-color ease-in-out .15s, box-shadow ease-in-out .15s',
+    '$input-padding-x-sm': '.5rem',
+    '$input-padding-y-sm': '.25rem',
+    '$input-color-placeholder': '#636c72',
+    '$input-border-radius-lg': '.3rem',
+    '$input-border-radius-sm': '.2rem',
+    '$input-border-radius': '.25rem',
+    '$input-transition': 'border-color ease-in-out .15s, box-shadow ease-in-out .15s',
+    '$input-color-focus': '#464a4c',
+    '$input-bg-focus': '#fff',
+    '$cursor-disabled': 'not-allowed',
+  },
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified string define the input size, small or large. */
+  size: PropTypes.oneOf([
+    'sm',
+    'lg',
+  ]),
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$enable-rounded': PropTypes.bool,
+    '$enable-shadows': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool,
+    '$enable-transitions': PropTypes.bool,
+    '$font-size-base': PropTypes.string, // Assumes the browser default, typically `16px`
+    '$font-size-lg': PropTypes.string,
+    '$font-size-sm': PropTypes.string,
+    '$font-size-xs': PropTypes.string,
+    '$line-height-base': PropTypes.string,
+    '$border-radius': PropTypes.string,
+    '$border-radius-lg': PropTypes.string,
+    '$border-radius-sm': PropTypes.string,
+    '$input-padding-x': PropTypes.string,
+    '$input-padding-y': PropTypes.string,
+    '$input-bg': PropTypes.string,
+    '$input-bg-disabled': PropTypes.string,
+    '$input-padding-x-lg': PropTypes.string,
+    '$input-padding-y-lg': PropTypes.string,
+    '$input-line-height': PropTypes.string,
+    '$input-height': PropTypes.string,
+    '$input-box-shadow': PropTypes.string,
+    '$input-btn-border-width': PropTypes.string, // For form controls and buttons
+    '$input-group-addon-bg': PropTypes.string,
+    '$input-border-color': PropTypes.string,
+    '$input-border-focus': PropTypes.string,
+    '$input-box-shadow-focus': PropTypes.string,
+    '$input-color': PropTypes.string,
+    '$input-group-addon-border-color': PropTypes.string,
+    '$input-padding-x-sm': PropTypes.string,
+    '$input-padding-y-sm': PropTypes.string,
+    '$input-color-placeholder': PropTypes.string,
+    '$input-border-radius-lg': PropTypes.string,
+    '$input-border-radius-sm': PropTypes.string,
+    '$input-border-radius': PropTypes.string,
+    '$input-transition': PropTypes.string,
+    '$input-color-focus': PropTypes.string,
+    '$input-bg-focus': PropTypes.string,
+    '$cursor-disabled': PropTypes.string,
+  }),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 class InputGroupUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'div',
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    size: PropTypes.string,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    theme: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  };
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -52,7 +150,10 @@ class InputGroupUnstyled extends React.Component { // eslint-disable-line react/
     );
   }
 }
-
+/**
+ * Use our `<InputGroup />` component with `<InputGroupAddon />` and `<InputGroupAddon />` components.
+ * You can also add `Button Dropdown` and customize `Sizing`.
+ */
 const InputGroup = styled(InputGroupUnstyled)`
   ${(props) => `
     /*
@@ -281,6 +382,9 @@ const InputGroup = styled(InputGroupUnstyled)`
     )}
   `}
 `;
+
+InputGroup.defaultProps = defaultProps;
+InputGroup.propTypes = propTypes;
 
 /** @component */
 export default InputGroup;

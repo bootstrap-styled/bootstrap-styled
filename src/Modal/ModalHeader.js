@@ -5,18 +5,36 @@ import mapToCssModules from 'map-to-css-modules';
 import H4 from '../H4';
 import Close from '../Close';
 
-const propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  wrapTag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  toggle: PropTypes.func,
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
-  children: PropTypes.node,
-};
-
 const defaultProps = {
   tag: H4,
   wrapTag: 'div',
+};
+
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<ModalHeader /> component. */
+  children: PropTypes.node,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  /** Wrapped tag variables. Can be: */
+  wrapTag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /** Call specified function when on toggle action is triggered. */
+  toggle: PropTypes.func,
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+
 };
 
 const ModalHeader = (props) => {

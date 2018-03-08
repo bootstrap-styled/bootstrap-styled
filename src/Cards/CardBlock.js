@@ -17,6 +17,7 @@ const propTypes = {
   tag: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
+    PropTypes.func,
   ]),
   /**
    * Replace or remove a className from the component.

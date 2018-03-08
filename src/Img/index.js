@@ -15,32 +15,82 @@ import { imgFluid } from 'bootstrap-styled-mixins/lib/image';
 import { boxShadow } from 'bootstrap-styled-mixins/lib/box-shadow';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { transition } from 'bootstrap-styled-mixins/lib/transition';
-import { makeTheme } from './theme';
 
 
+const defaultProps = {
+  tag: 'img',
+  theme: {
+    '$enable-rounded': true,
+    '$enable-transitions': true,
+    '$enable-shadows': false,
+    '$spacer-halved': '0.5rem',
+    '$border-width': '1px',
+    '$border-radius': '.25rem',
+    '$thumbnail-padding': '.25rem',
+    '$thumbnail-bg': '#fff',
+    '$thumbnail-border-width': '1px',
+    '$thumbnail-border-color': '#ddd',
+    '$thumbnail-border-radius': '.25rem',
+    '$thumbnail-box-shadow': '0 1px 2px rgba(0, 0, 0, 0.75)',
+    '$thumbnail-transition': 'all .2s ease-in-out',
+    '$figure-caption-font-size': '90%',
+    '$figure-caption-color': '#636c72',
+  },
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
+  /** Toggles fluid responsive CSS display. */
+  fluid: PropTypes.bool,
+  /** Toggles figure CSS style. */
+  figure: PropTypes.bool,
+  /** Image source. */
+  src: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
+  /** Image alt description. */
+  alt: PropTypes.string.isRequired,
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$enable-rounded': PropTypes.bool,
+    '$enable-transitions': PropTypes.bool,
+    '$enable-shadows': PropTypes.bool,
+    '$spacer-halved': PropTypes.string,
+    '$border-width': PropTypes.string,
+    '$border-radius': PropTypes.string,
+    '$thumbnail-padding': PropTypes.string,
+    '$thumbnail-bg': PropTypes.string,
+    '$thumbnail-border-width': PropTypes.string,
+    '$thumbnail-border-color': PropTypes.string,
+    '$thumbnail-border-radius': PropTypes.string,
+    '$thumbnail-box-shadow': PropTypes.string,
+    '$thumbnail-transition': PropTypes.string,
+    '$figure-caption-font-size': PropTypes.string,
+    '$figure-caption-color': PropTypes.string,
+  }),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 class ImgUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'img',
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    alt: PropTypes.string.isRequired,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    fluid: PropTypes.bool,
-    figure: PropTypes.bool,
-    src: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-    ]).isRequired,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    theme: PropTypes.object,
-    thumbnail: PropTypes.bool,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -72,6 +122,11 @@ class ImgUnstyled extends React.Component { // eslint-disable-line react/prefer-
     );
   }
 }
+
+/**
+ * Use our `<Image />` component, to emphasize part of your pages.
+ * You can also use `thumbnails` attribute, **aligning images** and add `<Figure />` components.
+ */
 
 const Img = styled(ImgUnstyled)`
   ${(props) => `
@@ -129,6 +184,9 @@ const Img = styled(ImgUnstyled)`
     */
   `}
 `;
+
+Img.defaultProps = defaultProps;
+Img.propTypes = propTypes;
 
 /** @component */
 export default Img;

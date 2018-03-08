@@ -1,4 +1,4 @@
-The `<Summary />` component defines a visible heading for the <details> element. The heading can be clicked to view/hide the details. 
+The `<Summary />` component defines a visible heading for the `<Details />` element. The heading can be clicked to view/hide the details. 
 This component has no props.
 
 `<Summary />` component example:

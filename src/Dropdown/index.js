@@ -15,7 +15,6 @@ import { navDivider } from 'bootstrap-styled-mixins/lib/nav-divider';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
 import { buttonGroup } from 'bootstrap-styled-mixins/lib/buttonGroup';
 import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
-import { makeTheme } from './theme';
 import DropdownMenu from './DropdownMenu';
 import TetherContent from '../TetherContent';
 
@@ -29,28 +28,150 @@ const defaultTetherConfig = {
   ],
 };
 
+const defaultProps = {
+  isOpen: false,
+  tag: 'div',
+  theme: {
+    '$enable-rounded': true,
+    '$enable-shadows': false,
+    '$enable-gradients': false,
+    '$enable-hover-media-query': false,
+    '$spacer-y': '1rem',
+    '$border-width': '1px',
+    '$font-size-sm': '.875rem',
+    '$font-weight-normal': 'normal',
+    '$font-size-base': '1rem',
+    '$font-size-lg': '1.25rem',
+    '$zindex-dropdown-backdrop': '990',
+    '$component-active-color': '#fff',
+    '$component-active-bg': '#0275d8',
+    '$caret-width': '.3em',
+    '$line-height-lg': '1.6',
+    '$border-radius-lg': '.3rem',
+    '$border-radius-sm': '.2rem',
+    '$input-padding-y-lg': '.75rem',
+    '$dropdown-min-width': '10rem',
+    '$dropdown-padding-y': '.5rem',
+    '$dropdown-margin-top': '.125rem',
+    '$dropdown-bg': '#fff',
+    '$dropdown-border-color': '',
+    '$dropdown-border-width': '',
+    '$dropdown-divider-bg': '',
+    '$dropdown-box-shadow': '0 .5rem 1rem rgba(#000,.175)',
+    '$dropdown-link-color': '',
+    '$dropdown-link-hover-color': '',
+    '$dropdown-link-hover-bg': '',
+    '$dropdown-link-active-color': '',
+    '$dropdown-link-active-bg': '',
+    '$dropdown-link-disabled-color': '',
+    '$dropdown-item-padding-x': '1.5rem',
+    '$dropdown-header-color': '',
+    '$input-btn-border-width': '', // For form controls and buttons
+    '$cursor-disabled': 'not-allowed',
+    '$btn-padding-x': '1rem',
+    '$btn-active-box-shadow': '',
+    '$btn-padding-x-lg': '1.5rem',
+    '$btn-padding-y-lg': '.75rem',
+    '$btn-border-radius-lg': '',
+    '$btn-border-radius-sm': '',
+    '$btn-padding-x-sm': '.5rem',
+    '$btn-padding-y-sm': '.25rem',
+    '$input-height-lg': '',
+  },
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<DropdownItem />`. */
+  children: PropTypes.node,
+  /** Toggles disabled CSS style. */
+  disabled: PropTypes.bool,
+  /** Toggles dropdown direction. */
+  dropup: PropTypes.bool,
+  /** Toggles group CSS style. */
+  group: PropTypes.bool,
+  /** Toggles dropdown visibility. */
+  isOpen: PropTypes.bool,
+  /** Size variables. Can be small or large: */
+  size: PropTypes.oneOf([
+    'sm',
+    'lg',
+  ]),
+  /** Tether position value. Can be: */
+  tether: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  /** Call specified function when on toggle action is triggered. */
+  toggle: PropTypes.func,
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$enable-rounded': PropTypes.bool,
+    '$enable-shadows': PropTypes.bool,
+    '$enable-gradients': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool,
+    '$spacer-y': PropTypes.string,
+    '$border-width': PropTypes.string,
+    '$font-size-sm': PropTypes.string,
+    '$font-weight-normal': PropTypes.string,
+    '$font-size-base': PropTypes.string,
+    '$font-size-lg': PropTypes.string,
+    '$zindex-dropdown-backdrop': PropTypes.string,
+    '$component-active-color': PropTypes.string,
+    '$component-active-bg': PropTypes.string,
+    '$caret-width': PropTypes.string,
+    '$line-height-lg': PropTypes.string,
+    '$border-radius-lg': PropTypes.string,
+    '$border-radius-sm': PropTypes.string,
+    '$input-padding-y-lg': PropTypes.string,
+    '$dropdown-min-width': PropTypes.string,
+    '$dropdown-padding-y': PropTypes.string,
+    '$dropdown-margin-top': PropTypes.string,
+    '$dropdown-bg': PropTypes.string,
+    '$dropdown-border-color': PropTypes.string,
+    '$dropdown-border-width': PropTypes.string,
+    '$dropdown-divider-bg': PropTypes.string,
+    '$dropdown-box-shadow': PropTypes.string,
+    '$dropdown-link-color': PropTypes.string,
+    '$dropdown-link-hover-color': PropTypes.string,
+    '$dropdown-link-hover-bg': PropTypes.string,
+    '$dropdown-link-active-color': PropTypes.string,
+    '$dropdown-link-active-bg': PropTypes.string,
+    '$dropdown-link-disabled-color': PropTypes.string,
+    '$dropdown-item-padding-x': PropTypes.string,
+    '$dropdown-header-color': PropTypes.string,
+    '$input-btn-border-width': PropTypes.string, // For form controls and buttons
+    '$cursor-disabled': PropTypes.string,
+    '$btn-padding-x': PropTypes.string,
+    '$btn-active-box-shadow': PropTypes.string,
+    '$btn-padding-x-lg': PropTypes.string,
+    '$btn-padding-y-lg': PropTypes.string,
+    '$btn-border-radius-lg': PropTypes.string,
+    '$btn-border-radius-sm': PropTypes.string,
+    '$btn-padding-x-sm': PropTypes.string,
+    '$btn-padding-y-sm': PropTypes.string,
+    '$input-height-lg': PropTypes.string,
+  }),
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 class DropdownUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    isOpen: false,
-    tag: 'div',
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    disabled: PropTypes.bool,
-    dropup: PropTypes.bool,
-    group: PropTypes.bool,
-    isOpen: PropTypes.bool,
-    size: PropTypes.string,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    tether: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-    toggle: PropTypes.func,
-    theme: PropTypes.object,
-  };
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   static childContextTypes = {
     isOpen: PropTypes.bool.isRequired,
@@ -197,7 +318,10 @@ class DropdownUnstyled extends React.Component { // eslint-disable-line react/pr
     );
   }
 }
-
+/**
+ * Use our `<Dropdown />` blocks with dismissing menu.
+ * Customize it with `<DropdownToggle />` with `caret` attribute for display icon and `<DropdownItem />` with `header`, `disabled` and `divider` attributes for customize menu.
+ */
 const Dropdown = styled(DropdownUnstyled)`
   ${(props) => `
     &.dropup,
@@ -388,6 +512,9 @@ const Dropdown = styled(DropdownUnstyled)`
     )}
   `}
 `;
+
+Dropdown.defaultProps = defaultProps;
+Dropdown.propTypes = propTypes;
 
 /** @component */
 export default Dropdown;

@@ -4,23 +4,48 @@ import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import H6 from '../H6';
 
+const defaultProps = {
+  tag: 'button',
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * @ignore
+   */
+  children: PropTypes.node,
+  /** Toggles disabled CSS style. */
+  disabled: PropTypes.bool,
+  /** Toggles divider visibility. */
+  divider: PropTypes.bool,
+  /** Toggles header element display. */
+  header: PropTypes.bool,
+  /** Call specified function when on click event is triggered. */
+  onClick: PropTypes.func,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 
 class DropdownItem extends React.Component {
 
-  static defaultProps = {
-    tag: 'button',
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    disabled: PropTypes.bool,
-    divider: PropTypes.bool,
-    header: PropTypes.bool,
-    onClick: PropTypes.func,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  };
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   static contextTypes = {
     toggle: PropTypes.func,
@@ -87,4 +112,8 @@ class DropdownItem extends React.Component {
   }
 }
 
+DropdownItem.defaultProps = defaultProps;
+DropdownItem.propTypes = propTypes;
+
+/** @component */
 export default DropdownItem;

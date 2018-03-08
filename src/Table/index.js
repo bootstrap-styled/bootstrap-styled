@@ -12,33 +12,98 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { tableRowVariant } from 'bootstrap-styled-mixins/lib/table-row';
 import { hover as hoverMixin } from 'bootstrap-styled-mixins/lib/hover';
-import { makeTheme } from './theme';
 
 
+const defaultProps = {
+  tag: 'table',
+  responsiveTag: 'div',
+  theme: {
+    '$body-bg': '#fff',
+    '$table-cell-padding': '.75rem',
+    '$table-sm-cell-padding': '.3rem',
+    '$table-bg': 'transparent',
+    '$table-inverse-bg': '#292b2c',
+    '$table-inverse-bg-accent': 'rgba(255, 255, 255, 0.05)',
+    '$table-inverse-bg-hover': 'rgba(0, 0, 0, 0.075)',
+    '$table-inverse-color': '#fff',
+    '$table-inverse-border': 'hsl(200, 3.5%, 17.9%)',
+    '$table-bg-accent': 'rgba(0, 0, 0, 0.05)',
+    '$table-bg-hover': 'rgba(0, 0, 0, 0.075)',
+    '$table-bg-active': 'rgba(0, 0, 0, 0.075)',
+    '$table-head-bg': '#eceeef',
+    '$table-head-color': '#464a4c',
+    '$table-border-width': '1px',
+    '$table-border-color': '#eceeef',
+    '$state-success-bg': '#dff0d8',
+    '$state-info-bg': '#d9edf7',
+    '$state-warning-bg': '#fcf8e3',
+    '$state-danger-bg': '#f2dede',
+  },
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
+  /** Change tab size with specified one. Can be: `sm` */
+  size: PropTypes.string,
+  /** Toggles bordered CSS style. */
+  bordered: PropTypes.bool,
+  /** Toggles striped CSS style. */
+  striped: PropTypes.bool,
+  /** Toggles inverse CSS style. */
+  inverse: PropTypes.bool,
+  /** Toggles hover CSS style. */
+  hover: PropTypes.bool,
+  /** Toggles reflow CSS style. */
+  reflow: PropTypes.bool,
+  /** Toggles responsive CSS display. */
+  responsive: PropTypes.bool,
+  /** Replace the responsive component tag by the one specified. Can be: */
+  responsiveTag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$body-bg': PropTypes.string,
+    '$table-cell-padding': PropTypes.string,
+    '$table-sm-cell-padding': PropTypes.string,
+    '$table-bg': PropTypes.string,
+    '$table-inverse-bg': PropTypes.string,
+    '$table-inverse-bg-accent': PropTypes.string,
+    '$table-inverse-bg-hover': PropTypes.string,
+    '$table-inverse-color': PropTypes.string,
+    '$table-inverse-border': PropTypes.string,
+    '$table-bg-accent': PropTypes.string,
+    '$table-bg-hover': PropTypes.string,
+    '$table-bg-active': PropTypes.string,
+    '$table-head-bg': PropTypes.string,
+    '$table-head-color': PropTypes.string,
+    '$table-border-width': PropTypes.string,
+    '$table-border-color': PropTypes.string,
+    '$state-success-bg': PropTypes.string,
+    '$state-info-bg': PropTypes.string,
+    '$state-warning-bg': PropTypes.string,
+    '$state-danger-bg': PropTypes.string,
+  }),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 class TableUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'table',
-    responsiveTag: 'div',
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    theme: PropTypes.object,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    size: PropTypes.string,
-    bordered: PropTypes.bool,
-    striped: PropTypes.bool,
-    inverse: PropTypes.bool,
-    hover: PropTypes.bool,
-    reflow: PropTypes.bool,
-    responsive: PropTypes.bool,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    responsiveTag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    /* eslint-enable react/no-unused-prop-types */
-  };
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -77,7 +142,14 @@ class TableUnstyled extends React.Component { // eslint-disable-line react/prefe
     return table;
   }
 }
-
+/**
+ * A classic `<Table />` component.
+ * **Inverse**, **head** options, **striped rows**, **bordered** table, **contextual classes**, **colored** with global background utilities and **responsive tables**.
+ * **Hoverable rows**
+ * Add `.table-hover` to enable a hover state on table rows within a `<Tbody>`.
+ * **Small table**
+ * Add `.table-sm` to make tables more compact by cutting cell padding in half.
+ */
 const Table = styled(TableUnstyled)`
   ${(props) => `
     /*
@@ -302,6 +374,9 @@ const Table = styled(TableUnstyled)`
     
   `}
 `;
+
+Table.defaultProps = defaultProps;
+Table.propTypes = propTypes;
 
 /** @component */
 export default Table;

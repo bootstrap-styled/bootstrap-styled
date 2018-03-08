@@ -40,9 +40,7 @@ const propTypes = {
   className: PropTypes.string,
   /** Color variables. Can be: */
   color: PropTypes.oneOf([
-    'white',
-    'muted',
-    'gray-dark',
+    'default',
     'primary',
     'success',
     'info',
@@ -59,6 +57,7 @@ const propTypes = {
   tag: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
+    PropTypes.func,
   ]),
   /** Theme variables. Can be: */
   theme: PropTypes.shape({

@@ -4,7 +4,38 @@ import classNames from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import A from '../A';
 
-
+const defaultProps = {
+  tag: A,
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Replace the default component tag reference by the one specified. Can be: */
+  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /** Toggles disabled CSS style. */
+  disabled: PropTypes.bool,
+  /** Toggles active CSS style. */
+  active: PropTypes.bool,
+  /** Call specified function when on click event is triggered. */
+  onClick: PropTypes.func,
+  /** Replace the default component tag reference by the one specified. */
+  href: PropTypes.any,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 class NavLink extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static defaultProps = {
@@ -66,5 +97,8 @@ class NavLink extends React.Component { // eslint-disable-line react/prefer-stat
     );
   }
 }
+
+NavLink.defaultProps = defaultProps;
+NavLink.propTypes = propTypes;
 
 export default NavLink;

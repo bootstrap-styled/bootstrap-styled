@@ -70,6 +70,7 @@ const propTypes = {
   tag: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
+    PropTypes.node,
   ]),
   /** Theme variables. Can be: */
   theme: PropTypes.shape({
@@ -119,9 +120,6 @@ const propTypes = {
   }),
   /** Color variables. Can be: */
   color: PropTypes.oneOf([
-    'white',
-    'muted',
-    'gray-dark',
     'primary',
     'success',
     'info',

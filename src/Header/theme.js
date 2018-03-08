@@ -1,5 +1,8 @@
 import { assertAscending, assertStartAtZero } from 'bootstrap-styled-mixins/lib/variables';
+import unitUtils from 'bootstrap-styled-utils/lib/unitUtils';
 import { allowFalseValue } from '../makeTheme/utils';
+const { rmUnit, UNIT } = unitUtils;
+
 /**
  * BOOTSTRAP THEME HEADER
  *
@@ -40,6 +43,8 @@ export const makeTheme = (userTheme = {}) => {
   // Spacing
 
   v['$border-width'] = u['$border-width'] || '1px';
+  v['$spacer'] = u['$spacer'] || '1rem';
+  v['$spacer-halved'] = u['$spacer-halved'] || (rmUnit(v['$spacer'], UNIT.REM) / 2) + UNIT.REM;
 
   // Fonts
   //

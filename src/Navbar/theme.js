@@ -59,6 +59,7 @@ export const makeTheme = (userTheme = {}) => {
   v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
 
   // Spacing
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
 
   v['$spacer'] = u['$spacer'] || '1rem';
 

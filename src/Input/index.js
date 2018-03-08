@@ -9,34 +9,185 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { button } from 'bootstrap-styled-mixins/lib/buttons';
-import { makeTheme } from './theme';
 
+const defaultProps = {
+  tag: 'p',
+  theme: {
+    '$enable-rounded': true,
+    '$enable-shadows': false,
+    '$enable-hover-media-query': false,
+    '$enable-transitions': true,
+    '$font-weight-normal': 'normal',
+    '$font-size-base': '1rem',
+    '$font-size-lg': '1.25rem',
+    '$font-size-sm': '.875rem',
+    '$font-size-xs': '.75rem',
+    '$btn-padding-x': '1rem',
+    '$btn-padding-y': '.5rem',
+    '$btn-line-height': '1.25',
+    '$btn-font-weight': 'normal',
+    '$btn-transition': 'all .2s ease-in-out',
+    '$btn-box-shadow': 'inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075)',
+    '$btn-block-spacing-y': '.5rem',
+    '$btn-primary-color': '#fff',
+    '$btn-primary-bg': '#0275d8',
+    '$btn-primary-border': '#0275d8',
+    '$btn-secondary-color': '#292b2c',
+    '$btn-secondary-bg': '#fff',
+    '$btn-secondary-border': '#ccc',
+    '$btn-info-color': '#fff',
+    '$btn-info-bg': '#5bc0de',
+    '$btn-info-border': '#5bc0de',
+    '$btn-success-color': '#fff',
+    '$btn-success-bg': '#5cb85c',
+    '$btn-success-border': '#5cb85c',
+    '$btn-warning-color': '#fff',
+    '$btn-warning-bg': '#f0ad4e',
+    '$btn-warning-border': '#f0ad4e',
+    '$btn-danger-color': '#fff',
+    '$btn-danger-bg': '#d9534f',
+    '$btn-danger-border': '#d9534f',
+    '$btn-link-disabled-color': '#636c72',
+    '$btn-padding-x-lg': '1.5rem',
+    '$btn-padding-y-lg': '.75rem',
+    '$btn-padding-x-sm': '.5rem',
+    '$btn-padding-y-sm': '.25rem',
+    '$btn-border-radius': '.25rem',
+    '$btn-border-radius-lg': '1.25rem',
+    '$btn-border-radius-sm': '.875rem',
+    '$input-btn-border-width': '1px', // For form controls and buttons
+    '$link-color': '#0275d8',
+    '$link-hover-color': 'hsl(207.79999999999995, 98.2%, 27.8%)',
+    '$link-hover-decoration': 'underline',
+    '$cursor-disabled': 'not-allowed',
+  },
+  type: 'text',
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<Input />` component. */
+  children: PropTypes.node,
+  /** Specified string define the type of input to display. */
+  type: PropTypes.oneOf([
+    'button',
+    'checkbox',
+    'color',
+    'date',
+    'datetime-local',
+    'email',
+    'file',
+    'hidden',
+    'image',
+    'month',
+    'number',
+    'password',
+    'radio',
+    'range',
+    'reset',
+    'search',
+    'submit',
+    'tel',
+    'text',
+    'select',
+    'time',
+    'url',
+    'week',
+  ]),
+  /** Specified string define the input size, small or large. */
+  size: PropTypes.oneOf([
+    'sm',
+    'lg',
+  ]),
+  /** Specified string define the input state. */
+  state: PropTypes.oneOf([
+    'success',
+    'warning',
+    'danger',
+  ]),
+  /** Replace the default component tag reference by the one specified. Can be: */
+  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /** Toggles static CSS style. */
+  static: PropTypes.bool,
+  /** Toggles addon CSS style. */
+  addon: PropTypes.bool,
+  /** Call specified function when `onChange` event is triggered. */
+  onChange: PropTypes.func,
+  /** Toggles indeterminate CSS style. */
+  indeterminate: PropTypes.bool,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$enable-rounded': PropTypes.bool,
+    '$enable-shadows': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool,
+    '$enable-transitions': PropTypes.bool,
+    '$font-weight-normal': PropTypes.string,
+    '$font-size-base': PropTypes.string,
+    '$font-size-lg': PropTypes.string,
+    '$font-size-sm': PropTypes.string,
+    '$font-size-xs': PropTypes.string,
+    '$btn-padding-x': PropTypes.string,
+    '$btn-padding-y': PropTypes.string,
+    '$btn-line-height': PropTypes.string,
+    '$btn-font-weight': PropTypes.string,
+    '$btn-transition': PropTypes.string,
+    '$btn-box-shadow': PropTypes.string,
+    '$btn-block-spacing-y': PropTypes.string,
+    '$btn-primary-color': PropTypes.string,
+    '$btn-primary-bg': PropTypes.string,
+    '$btn-primary-border': PropTypes.string,
+    '$btn-secondary-color': PropTypes.string,
+    '$btn-secondary-bg': PropTypes.string,
+    '$btn-secondary-border': PropTypes.string,
+    '$btn-info-color': PropTypes.string,
+    '$btn-info-bg': PropTypes.string,
+    '$btn-info-border': PropTypes.string,
+    '$btn-success-color': PropTypes.string,
+    '$btn-success-bg': PropTypes.string,
+    '$btn-success-border': PropTypes.string,
+    '$btn-warning-color': PropTypes.string,
+    '$btn-warning-bg': PropTypes.string,
+    '$btn-warning-border': PropTypes.string,
+    '$btn-danger-color': PropTypes.string,
+    '$btn-danger-bg': PropTypes.string,
+    '$btn-danger-border': PropTypes.string,
+    '$btn-link-disabled-color': PropTypes.string,
+    '$btn-padding-x-lg': PropTypes.string,
+    '$btn-padding-y-lg': PropTypes.string,
+    '$btn-padding-x-sm': PropTypes.string,
+    '$btn-padding-y-sm': PropTypes.string,
+    '$btn-border-radius': PropTypes.string,
+    '$btn-border-radius-lg': PropTypes.string,
+    '$btn-border-radius-sm': PropTypes.string,
+    '$input-btn-border-width': PropTypes.string, // For form controls and buttons
+    '$link-color': PropTypes.string,
+    '$link-hover-color': PropTypes.string,
+    '$link-hover-decoration': PropTypes.string,
+    '$cursor-disabled': PropTypes.string,
+  }),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 
 class InputUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'p',
-    theme: makeTheme(),
-    type: 'text',
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    children: PropTypes.node,
-    type: PropTypes.string,
-    size: PropTypes.string,
-    state: PropTypes.string,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    static: PropTypes.bool,
-    addon: PropTypes.bool,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    theme: PropTypes.object,
-    onChange: PropTypes.func,
-    indeterminate: PropTypes.bool,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -88,7 +239,9 @@ class InputUnstyled extends React.Component { // eslint-disable-line react/prefe
     );
   }
 }
-
+/**
+ * `<Input />` component specifies an input field where the user can enter data.
+ */
 const Input = styled(InputUnstyled)`
   ${(props) => `
     /* Reboot Scss */
@@ -202,6 +355,9 @@ const Input = styled(InputUnstyled)`
     )}
  `}
 `;
+
+Input.defaultProps = defaultProps;
+Input.propTypes = propTypes;
 
 /** @component */
 export default Input;

@@ -9,19 +9,38 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
+const defaultProps = {
+  tag: 'div',
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<DropdownItem />`. */
+  children: PropTypes.node,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 
 class FormFeedback extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'div',
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    tag: PropTypes.string,
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -41,6 +60,9 @@ class FormFeedback extends React.Component {// eslint-disable-line react/prefer-
     );
   }
 }
+
+FormFeedback.defaultProps = defaultProps;
+FormFeedback.propTypes = propTypes;
 
 /** @component */
 export default FormFeedback;

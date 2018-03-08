@@ -8,17 +8,30 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import H5 from '../H5';
 
-
+const defaultProps = {
+  tag: H5,
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+};
 class ListGroupItemHeading extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: H5,
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    className: PropTypes.any,
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -36,6 +49,9 @@ class ListGroupItemHeading extends React.Component { // eslint-disable-line reac
     );
   }
 }
+
+ListGroupItemHeading.defaultProps = defaultProps;
+ListGroupItemHeading.propTypes = propTypes;
 
 export default ListGroupItemHeading;
 

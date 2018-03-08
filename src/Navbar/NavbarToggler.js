@@ -3,19 +3,37 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
-const propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  type: PropTypes.string,
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
-  children: PropTypes.node,
-  right: PropTypes.bool,
-  left: PropTypes.bool,
-};
 
 const defaultProps = {
   tag: 'button',
   type: 'button',
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<NavbarToggler />` component. */
+  children: PropTypes.node,
+  /** Value type of the component. */
+  type: PropTypes.string,
+  /** Toggles right CSS display. */
+  right: PropTypes.bool,
+  /** Toggles left CSS display. */
+  left: PropTypes.bool,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
 };
 
 const navbarToggleIcon = <span className="navbar-toggler-icon" />;
@@ -48,4 +66,5 @@ const NavbarToggler = (props) => {
 NavbarToggler.propTypes = propTypes;
 NavbarToggler.defaultProps = defaultProps;
 
+/** @component */
 export default NavbarToggler;

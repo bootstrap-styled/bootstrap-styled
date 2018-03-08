@@ -52,17 +52,11 @@ const propTypes = {
   /**
    * @ignore
    */
-  children: PropTypes.node,
-  /**
-   * @ignore
-   */
   className: PropTypes.string,
+  /** Specified node element will be passed as children of `<Alert />` component. */
+  children: PropTypes.node,
   /** Color variables. */
   color: PropTypes.oneOf([
-    'white',
-    'muted',
-    'gray-dark',
-    'primary',
     'success',
     'info',
     'warning',
@@ -77,7 +71,7 @@ const propTypes = {
    */
   toggle: PropTypes.bool,
   /**
-   * Assign function to onClick event.
+   * Call specified function when `on click` event is triggered.
    */
   onClick: PropTypes.func,
   /**
@@ -93,7 +87,7 @@ const propTypes = {
    */
   transition: PropTypes.shape(Fade.propTypes),
   /**
-   * Transition's duration used to dismiss alert.
+   * Transition's duration used to dismiss alert automatically.
    */
   autoHideDuration: PropTypes.number,
   /** Theme variables. */
@@ -270,7 +264,7 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
 }
 
 /**
- * Alert link element
+ * Alert component.
  */
 const Alert = styled(AlertUnstyled)`
   ${(props) => `

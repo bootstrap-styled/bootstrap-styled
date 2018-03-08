@@ -40,12 +40,12 @@ describe('<FormGroup />', () => {
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
-  it('should have a class has-info', () => {
+  it('should have a class has-warning', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      color: 'info',
+      color: 'warning',
     });
-    expect(renderedComponent.find('div').at(1).hasClass('has-info')).toBe(true);
+    expect(renderedComponent.find('div').at(1).hasClass('has-warning')).toBe(true);
   });
   it('should have a class row', () => {
     const renderedComponent = renderComponentUsingTheme({

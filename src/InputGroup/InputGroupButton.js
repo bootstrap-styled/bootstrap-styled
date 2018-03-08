@@ -9,21 +9,41 @@ import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import Button from '../Button';
 
-
+const defaultProps = {
+  tag: 'div',
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<InputGroup />` component. */
+  children: PropTypes.node,
+  /** Specified input group className. */
+  groupClassName: PropTypes.string,
+  /** Specified input group attribute. */
+  groupAttributes: PropTypes.object,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 class InputGroupButton extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'div',
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    children: PropTypes.node,
-    groupClassName: PropTypes.string,
-    groupAttributes: PropTypes.object,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-  };
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -59,5 +79,8 @@ class InputGroupButton extends React.Component { // eslint-disable-line react/pr
     );
   }
 }
+
+InputGroupButton.defaultProps = defaultProps;
+InputGroupButton.propTypes = propTypes;
 
 export default InputGroupButton;

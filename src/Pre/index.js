@@ -4,10 +4,26 @@
 
 
 import styled from 'styled-components';
-import { makeTheme } from './theme';
+import PropTypes from 'prop-types';
 
-const defaultProps = { theme: makeTheme() };
 
+const defaultProps = {
+  theme: {
+    '$code-font-size': '90%',
+    '$pre-color': '#292b2c',
+    '$pre-scrollable-max-height': '340px',
+    '$font-family-monospace': 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+  },
+};
+const propTypes = {
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$code-font-size': PropTypes.string,
+    '$pre-color': PropTypes.string,
+    '$pre-scrollable-max-height': PropTypes.string,
+    '$font-family-monospace': PropTypes.string,
+  }),
+};
 const Pre = styled.pre`
   ${(props) => `
     /* Blocks of code */
@@ -49,6 +65,7 @@ const Pre = styled.pre`
 `;
 
 Pre.defaultProps = defaultProps;
+Pre.propTypes = propTypes;
 
 /** @component */
 export default Pre;

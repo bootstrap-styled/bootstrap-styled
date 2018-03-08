@@ -5,28 +5,53 @@ import mapToCssModules from 'map-to-css-modules';
 import Button from '../Button';
 import A from '../A';
 
-
+const defaultProps = {
+  'aria-haspopup': true,
+  'data-toggle': 'dropdown',
+  color: 'primary',
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<DropdownItem />`. */
+  children: PropTypes.node,
+  /** Toggles popup CSS style. */
+  'aria-haspopup': PropTypes.bool,
+  /** Toggles caret CSS style. */
+  caret: PropTypes.bool,
+  /** Change toggle content with specified string. */
+  'data-toggle': PropTypes.string,
+  /** Toggles disabled CSS style. */
+  disabled: PropTypes.bool,
+  /** Call specified function when on click event is triggered. */
+  onClick: PropTypes.func,
+  /** Toggles nav CSS style. */
+  nav: PropTypes.bool,
+  /** Toggles split CSS style. */
+  split: PropTypes.bool,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 class DropdownToggle extends React.Component {
 
-  static defaultProps = {
-    'aria-haspopup': true,
-    'data-toggle': 'dropdown',
-    color: 'primary',
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    'aria-haspopup': PropTypes.bool,
-    caret: PropTypes.bool,
-    children: PropTypes.node,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    'data-toggle': PropTypes.string,
-    disabled: PropTypes.bool,
-    onClick: PropTypes.func,
-    nav: PropTypes.bool,
-    split: PropTypes.bool,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  };
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   static contextTypes = {
     isOpen: PropTypes.bool.isRequired,
@@ -89,4 +114,7 @@ class DropdownToggle extends React.Component {
   }
 }
 
+DropdownToggle.defaultProps = defaultProps;
+DropdownToggle.propTypes = propTypes;
+/** @component */
 export default DropdownToggle;

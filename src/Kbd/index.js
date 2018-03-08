@@ -9,22 +9,54 @@ import styled from 'styled-components';
 import omit from 'lodash.omit';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { boxShadow } from 'bootstrap-styled-mixins/lib/box-shadow';
-import { makeTheme } from './theme';
 
+const defaultProps = {
+  theme: {
+    '$enable-rounded': true,
+    '$enable-shadows': false,
+    '$font-family-monospace': 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+    '$font-weight-bold': 'bold',
+    '$border-radius-sm': '.2rem',
+    '$code-font-size': '90%',
+    '$code-padding-x': '.4rem',
+    '$code-padding-y': '.2rem',
+    '$kbd-color': '#fff',
+    '$kbd-bg': '#292b2c',
+    '$kbd-box-shadow': 'inset 0 -.1rem 0 rgba(0, 0, 0, 0.25)',
+    '$nested-kbd-font-weight': 'bold',
+  },
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<Kbd />` component. */
+  children: PropTypes.node.isRequired,
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$enable-rounded': PropTypes.bool,
+    '$enable-shadows': PropTypes.bool,
+    '$font-family-monospace': PropTypes.string,
+    '$font-weight-bold': PropTypes.string,
+    '$border-radius-sm': PropTypes.string,
+    '$code-font-size': PropTypes.string,
+    '$code-padding-x': PropTypes.string,
+    '$code-padding-y': PropTypes.string,
+    '$kbd-color': PropTypes.string,
+    '$kbd-bg': PropTypes.string,
+    '$kbd-box-shadow': PropTypes.string,
+    '$nested-kbd-font-weight': PropTypes.string,
+  }),
+};
 
 class KbdUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    children: PropTypes.node,
-    className: PropTypes.string,
-    theme: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -41,7 +73,10 @@ class KbdUnstyled extends React.Component { // eslint-disable-line react/prefer-
   }
 
 }
-
+/**
+ * Replace or remove a className from the component.
+ * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+ */
 const Kbd = styled(KbdUnstyled)`
   ${(props) => `
     /* User input typically entered via keyboard */
@@ -63,6 +98,9 @@ const Kbd = styled(KbdUnstyled)`
     font-family: ${props.theme['$font-family-monospace']};
   `}
 `;
+
+Kbd.defaultProps = defaultProps;
+Kbd.propTypes = propTypes;
 
 /** @component */
 export default Kbd;

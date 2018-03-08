@@ -12,26 +12,106 @@ import mapToCssModules from 'map-to-css-modules';
 import { borderTopRadius, borderBottomRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
 import { listGroupItemVariant } from 'bootstrap-styled-mixins/lib/list-group';
-import { makeTheme } from './theme';
 import Ul from '../Ul/index';
 
 
+const defaultProps = {
+  tag: Ul,
+  toggleable: 'false',
+  theme: {
+    '$enable-rounded': true,
+    '$enable-hover-media-query': false,
+    '$component-active-color': '#fff',
+    '$component-active-bg': '#0275d8',
+    '$list-group-color': '#292b2c',
+    '$list-group-bg': '#fff',
+    '$list-group-border-color': 'rgba(0, 0, 0, 0.125)',
+    '$list-group-border-width': '1px',
+    '$list-group-border-radius': '.25rem',
+    '$list-group-item-padding-x': '1.25rem',
+    '$list-group-item-padding-y': '.75rem',
+    '$list-group-hover-bg': '#f7f7f9',
+    '$list-group-active-color': '#fff',
+    '$list-group-active-bg': '#0275d8',
+    '$list-group-active-border': '#0275d8',
+    '$list-group-disabled-color': '#636c72',
+    '$list-group-disabled-bg': '#fff',
+    '$list-group-link-color': '#464a4c',
+    '$list-group-link-hover-color': '#464a4c',
+    '$list-group-link-active-color': '#292b2c',
+    '$list-group-link-active-bg': '#eceeef',
+    '$cursor-disabled': 'not-allowed',
+    '$state-success-text': '#3c763d',
+    '$state-success-bg': '#dff0d8',
+    '$state-info-text': '#31708f',
+    '$state-info-bg': '#d9edf7',
+    '$state-warning-text': '#8a6d3b',
+    '$state-warning-bg': '#fcf8e3',
+    '$state-danger-text': '#a94442',
+    '$state-danger-bg': '#f2dede',
+  },
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Replace the default component tag by the one specified. Can be: */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  /** Toggles flush CSS style. */
+  flush: PropTypes.bool,
+  /** Toggles passed as a string. Can be `true` or `false` */
+  toggleable: PropTypes.string,
+  /** Theme variables. */
+  theme: PropTypes.shape({
+    '$enable-rounded': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool,
+    '$component-active-color': PropTypes.string,
+    '$component-active-bg': PropTypes.string,
+    '$list-group-color': PropTypes.string,
+    '$list-group-bg': PropTypes.string,
+    '$list-group-border-color': PropTypes.string,
+    '$list-group-border-width': PropTypes.string,
+    '$list-group-border-radius': PropTypes.string,
+    '$list-group-item-padding-x': PropTypes.string,
+    '$list-group-item-padding-y': PropTypes.string,
+    '$list-group-hover-bg': PropTypes.string,
+    '$list-group-active-color': PropTypes.string,
+    '$list-group-active-bg': PropTypes.string,
+    '$list-group-active-border': PropTypes.string,
+    '$list-group-disabled-color': PropTypes.string,
+    '$list-group-disabled-bg': PropTypes.string,
+    '$list-group-link-color': PropTypes.string,
+    '$list-group-link-hover-color': PropTypes.string,
+    '$list-group-link-active-color': PropTypes.string,
+    '$list-group-link-active-bg': PropTypes.string,
+    '$cursor-disabled': PropTypes.string,
+    '$state-success-text': PropTypes.string,
+    '$state-success-bg': PropTypes.string,
+    '$state-info-text': PropTypes.string,
+    '$state-info-bg': PropTypes.string,
+    '$state-warning-text': PropTypes.string,
+    '$state-warning-bg': PropTypes.string,
+    '$state-danger-text': PropTypes.string,
+    '$state-danger-bg': PropTypes.string,
+  }),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
+};
 class ListGroupUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: Ul,
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    flush: PropTypes.bool,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    theme: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -53,7 +133,9 @@ class ListGroupUnstyled extends React.Component { // eslint-disable-line react/p
     );
   }
 }
-
+/**
+ * The most basic list group is an unordered list with list items and the proper classes. Build upon it with the options that follow, or with your own CSS as needed.
+ */
 const ListGroup = styled(ListGroupUnstyled)`
   ${(props) => `
     /* 
@@ -206,6 +288,9 @@ const ListGroup = styled(ListGroupUnstyled)`
     )}
   `}
 `;
+
+ListGroup.defaultProps = defaultProps;
+ListGroup.propTypes = propTypes;
 
 /** @component */
 export default ListGroup;

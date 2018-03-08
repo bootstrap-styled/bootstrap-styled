@@ -4,9 +4,9 @@
  */
 import styled from 'styled-components';
 
-const Map = styled.map`
+const Mapp = styled.map`
   display: inline;
 `;
 
 /** @component */
-export default Map;
+export default Mapp;

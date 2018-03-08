@@ -6,14 +6,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-export default class Thead extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static propTypes = {
-    className: PropTypes.string,
-    inverse: PropTypes.bool,
-    defaultBg: PropTypes.bool,
-    children: PropTypes.node,
-  };
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<Td />` component. */
+  children: PropTypes.node,
+  /** Toggles inverse CSS style. */
+  inverse: PropTypes.bool,
+  /** Toggles default background CSS style. */
+  defaultBg: PropTypes.bool,
+};
+
+class Thead extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -36,3 +47,7 @@ export default class Thead extends React.Component { // eslint-disable-line reac
     );
   }
 }
+
+Thead.propTypes = propTypes;
+
+export default Thead;

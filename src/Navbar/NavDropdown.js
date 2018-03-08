@@ -5,14 +5,30 @@ import mapToCssModules from 'map-to-css-modules';
 import Dropdown from '../Dropdown';
 
 const propTypes = {
-  children: PropTypes.node,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /**
+   * @ignore
+   */
   className: PropTypes.string,
-  cssModule: PropTypes.object,
+  /** Specified node element will be passed as children of `<DropdownItem />` component. */
+  children: PropTypes.node,
+  /** Call specified function when toggle action triggered. */
   toggle: PropTypes.func.isRequired,
+  /** Toggles isOpen CSS style. */
   isOpen: PropTypes.bool.isRequired,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   */
+  cssModule: PropTypes.object,
 };
-
 const defaultProps = {
   tag: 'li',
 };
@@ -38,4 +54,5 @@ const NavDropdown = (props) => {
 NavDropdown.propTypes = propTypes;
 NavDropdown.defaultProps = defaultProps;
 
+/** @component */
 export default NavDropdown;

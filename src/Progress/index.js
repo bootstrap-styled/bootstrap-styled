@@ -8,22 +8,50 @@ import styled, { keyframes } from 'styled-components';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { getBackgroundUtilities } from 'bootstrap-styled-mixins/lib/utilities/background';
 import { gradientStriped } from 'bootstrap-styled-mixins/lib/gradients';
-import { makeTheme } from './theme';
 
 
+const defaultProps = {
+  theme: {
+    '$enable-rounded': true,
+    '$enable-hover-media-query': false,
+    '$progress-height': '1rem',
+    '$progress-font-size': '.75rem',
+    '$progress-bg': '#eceeef',
+    '$progress-border-radius': '.25rem',
+    '$progress-box-shadow': 'inset 0 .1rem .1rem rgba(0, 0, 0, 0.1)',
+    '$progress-bar-color': '#fff',
+    '$progress-bar-bg': '#0275d8',
+    '$progress-bar-animation-timing': 'infinite',
+  },
+};
+const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<Progress />` component. */
+  children: PropTypes.node,
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$enable-rounded': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool,
+    '$progress-height': PropTypes.string,
+    '$progress-font-size': PropTypes.string,
+    '$progress-bg': PropTypes.string,
+    '$progress-border-radius': PropTypes.string,
+    '$progress-box-shadow': PropTypes.string,
+    '$progress-bar-color': PropTypes.string,
+    '$progress-bar-bg': PropTypes.string,
+    '$progress-bar-animation-timing': PropTypes.string,
+  }),
+};
 class ProgressUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
-    children: PropTypes.node,
-    theme: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -44,7 +72,11 @@ const backgroundPositionKeyFrame = (props) => keyframes`
   from { background-position: ${props.theme['$progress-height']} 0; }
   to { background-position: 0 0; }
 `;
-
+/**
+ * A classic `<Progress />` component. Can be used with **customized** value.
+ * You can also control `height` and `backgrounds` colors or **multiple bars**.
+ * Striped or Animated stripes.
+ */
 const Progress = styled(ProgressUnstyled)`
   ${(props) => `
     
@@ -90,6 +122,9 @@ const Progress = styled(ProgressUnstyled)`
 
   `}
 `;
+
+Progress.defaultProps = defaultProps;
+Progress.propTypes = propTypes;
 
 /** @component */
 export default Progress;

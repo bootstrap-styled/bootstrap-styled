@@ -18,8 +18,9 @@ const propTypes = {
   tag: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
+    PropTypes.func,
   ]),
-  /** . */
+  /** Replace the default component tag reference by the one specified. Can be: */
   getRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.element,

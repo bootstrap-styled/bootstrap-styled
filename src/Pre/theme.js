@@ -13,6 +13,7 @@ export const makeTheme = (userTheme = {}) => {
   const v = {};
   const u = userTheme;
 
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
   // Code
 
   v['$code-font-size'] = u['$code-font-size'] || '90%';
