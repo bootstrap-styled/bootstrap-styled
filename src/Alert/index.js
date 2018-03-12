@@ -14,7 +14,7 @@ import { createChainedFunction } from 'bootstrap-styled-utils';
 import Fade from '../Modal/Fade';
 import Close from '../Close';
 
-const defaultProps = {
+export const defaultProps = {
   color: 'success',
   isOpen: true,
   tag: 'div',
@@ -48,7 +48,7 @@ const defaultProps = {
   },
 };
 
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */
