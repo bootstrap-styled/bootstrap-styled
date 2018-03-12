@@ -5,7 +5,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import styled, { withTheme } from 'styled-components';
+import styled from 'styled-components';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { alertVariant } from 'bootstrap-styled-mixins/lib/alert';
@@ -339,4 +339,4 @@ Alert.defaultProps = defaultProps;
 Alert.propTypes = propTypes;
 
 /** @component */
-export default withTheme(Alert);
+export default Alert;

@@ -5682,7 +5682,7 @@ var UnitUtils = function UnitUtils() {
     return '' + Math.floor(value / total * 100 * Math.pow(10, decimal)) / Math.pow(10, decimal) + _this.UNIT.PERCENT;
   };
 };
-var index$2 = new UnitUtils();
+var index$1 = new UnitUtils();
 
 var PropTypes$1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -6731,9 +6731,6 @@ var Alert = styled__default(AlertUnstyled).withConfig({
 
 Alert.defaultProps = defaultProps$3;
 Alert.propTypes = propTypes$2;
-
-/** @component */
-var index$1 = styled.withTheme(Alert);
 
 /**
  * A Area
@@ -18385,7 +18382,7 @@ var RangeUtils = function () {
   }]);
   return RangeUtils;
 }();
-var index$3 = new RangeUtils();
+var index$2 = new RangeUtils();
 
 /* ProgressBar */
 
@@ -18451,7 +18448,7 @@ var ProgressBar = function (_React$Component) {
   createClass(ProgressBar, [{
     key: 'getWidth',
     value: function getWidth(valueNow, valueMin, valueMax) {
-      return index$3.mapBetween(valueNow, valueMin, valueMax) + '%';
+      return index$2.mapBetween(valueNow, valueMin, valueMax) + '%';
     }
   }, {
     key: 'render',
@@ -23228,7 +23225,7 @@ exports.A = A;
 exports.composeLink = composeLink;
 exports.Abbr = Abbr;
 exports.Address = Address;
-exports.Alert = index$1;
+exports.Alert = Alert;
 exports.Area = Area;
 exports.Article = Article;
 exports.Blockquote = Blockquote;
