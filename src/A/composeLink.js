@@ -5,7 +5,7 @@ import omit from 'lodash.omit';
 import { a } from 'bootstrap-styled-mixins/lib/a';
 import bsTheme from '../theme';
 
-const defaultProps = {
+export const defaultProps = {
   theme: bsTheme,
 };
 

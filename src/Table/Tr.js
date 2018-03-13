@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 
 
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

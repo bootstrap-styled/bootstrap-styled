@@ -5,12 +5,12 @@ import mapToCssModules from 'map-to-css-modules';
 import Button from '../Button';
 import A from '../A';
 
-const defaultProps = {
+export const defaultProps = {
   'aria-haspopup': true,
   'data-toggle': 'dropdown',
   color: 'primary',
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

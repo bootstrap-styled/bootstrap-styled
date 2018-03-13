@@ -16,7 +16,7 @@ import { listUnstyled, listInline } from 'bootstrap-styled-mixins/lib/lists';
 import { navbar } from 'bootstrap-styled-mixins/lib/navbar';
 
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'nav',
   role: 'navigation',
   toggleable: 'false',
@@ -74,7 +74,7 @@ const defaultProps = {
     '$navbar-inverse-disabled-color': 'rgba(255, 255, 255, 0.25)',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

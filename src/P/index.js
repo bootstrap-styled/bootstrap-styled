@@ -7,7 +7,7 @@ import mapToCssModules from 'map-to-css-modules';
 import { typography } from 'bootstrap-styled-mixins/lib/typography';
 
 
-const defaultProps = {
+export const defaultProps = {
   theme: {
     '$grid-breakpoints': {
       xs: '0',
@@ -42,7 +42,7 @@ const defaultProps = {
     '$lead-font-weight': '300',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

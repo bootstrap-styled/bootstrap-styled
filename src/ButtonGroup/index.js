@@ -10,7 +10,7 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { buttonGroup } from 'bootstrap-styled-mixins/lib/buttonGroup';
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'div',
   role: 'group',
   theme: {
@@ -29,7 +29,7 @@ const defaultProps = {
     '$enable-shadows': true,
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

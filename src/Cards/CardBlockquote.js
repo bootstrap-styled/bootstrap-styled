@@ -4,10 +4,10 @@ import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import Blockquote from '../Blockquote';
 
-const defaultProps = {
+export const defaultProps = {
   tag: Blockquote,
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 
-const defaultProps = {
+export const defaultProps = {
   theme: {
     '$code-font-size': '90%',
     '$pre-color': '#292b2c',
@@ -15,7 +15,7 @@ const defaultProps = {
     '$font-family-monospace': 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
   },
 };
-const propTypes = {
+export const propTypes = {
   /** Theme variables. Can be: */
   theme: PropTypes.shape({
     '$code-font-size': PropTypes.string,

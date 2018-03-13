@@ -10,7 +10,7 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { button } from 'bootstrap-styled-mixins/lib/buttons';
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'button',
   color: 'primary',
   theme: {
@@ -55,7 +55,7 @@ const defaultProps = {
     '$btn-transition': 'all .2s ease-in-out',
   },
 };
-const propTypes = {
+export const propTypes = {
   /** Toggles active CSS color. */
   active: PropTypes.bool,
   /** Toggles block CSS display. */

@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import omit from 'lodash.omit';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'a',
   theme: {
     '$code-font-size': '90%',
@@ -20,7 +20,7 @@ const defaultProps = {
     '$enable-rounded': false,
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

@@ -15,7 +15,7 @@ import { listGroupItemVariant } from 'bootstrap-styled-mixins/lib/list-group';
 import Ul from '../Ul/index';
 
 
-const defaultProps = {
+export const defaultProps = {
   tag: Ul,
   toggleable: 'false',
   theme: {
@@ -51,7 +51,7 @@ const defaultProps = {
     '$state-danger-bg': '#f2dede',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

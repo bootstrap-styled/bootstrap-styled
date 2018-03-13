@@ -10,7 +10,7 @@ import omit from 'lodash.omit';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { boxShadow } from 'bootstrap-styled-mixins/lib/box-shadow';
 
-const defaultProps = {
+export const defaultProps = {
   theme: {
     '$enable-rounded': true,
     '$enable-shadows': false,
@@ -26,7 +26,7 @@ const defaultProps = {
     '$nested-kbd-font-weight': 'bold',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

@@ -7,7 +7,7 @@ import mapToCssModules from 'map-to-css-modules';
 import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
 
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'div',
   theme: {
     '$grid-gutter-widths': {
@@ -20,7 +20,7 @@ const defaultProps = {
     '$enable-grid-classes': false,
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

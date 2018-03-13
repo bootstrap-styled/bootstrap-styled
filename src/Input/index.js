@@ -10,7 +10,7 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { button } from 'bootstrap-styled-mixins/lib/buttons';
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'p',
   theme: {
     '$enable-rounded': true,
@@ -63,7 +63,7 @@ const defaultProps = {
   },
   type: 'text',
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

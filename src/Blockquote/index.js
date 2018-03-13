@@ -12,7 +12,7 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'blockquote',
   theme: {
     '$blockquote-small-color': '#636c72',
@@ -21,7 +21,7 @@ const defaultProps = {
     '$blockquote-border-width': '.25rem',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

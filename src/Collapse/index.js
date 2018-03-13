@@ -11,7 +11,7 @@ const HIDE = 'HIDE';
 const HIDDEN = 'HIDDEN';
 
 
-const defaultProps = {
+export const defaultProps = {
   isOpen: false,
   theme: {
     '$transition-collapse': 'height .35s ease',
@@ -24,7 +24,7 @@ const defaultProps = {
   onOpened: () => {},
   onClosed: () => {},
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

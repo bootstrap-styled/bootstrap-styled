@@ -3,13 +3,13 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const defaultProps = {
+export const defaultProps = {
   theme: {
     '$table-cell-padding': '.75rem',
     '$text-muted': '#636c72',
   },
 };
-const propTypes = {
+export const propTypes = {
   /** Theme variables. Can be: */
   theme: PropTypes.shape({
     '$table-cell-padding': PropTypes.string,

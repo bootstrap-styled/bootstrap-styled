@@ -10,7 +10,7 @@ import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { badgeVariant } from 'bootstrap-styled-mixins/lib/badge';
 
-const defaultProps = {
+export const defaultProps = {
   color: 'default',
   pill: false,
   tag: 'span',
@@ -33,7 +33,7 @@ const defaultProps = {
     '$enable-hover-media-query': false,
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

@@ -10,11 +10,11 @@ import CardHeader from '../Cards/CardHeader';
 import Collapse from '../Collapse';
 import H5 from '../H5';
 
-const defaultProps = {
+export const defaultProps = {
   tag: Card,
   delay: 350,
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

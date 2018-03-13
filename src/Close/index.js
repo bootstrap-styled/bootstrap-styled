@@ -6,7 +6,7 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
 
-const defaultProps = {
+export const defaultProps = {
   theme: {
     '$close-color': '#000',
     '$close-font-size': '1.5rem',
@@ -16,7 +16,7 @@ const defaultProps = {
   },
   onDismiss: () => {},
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

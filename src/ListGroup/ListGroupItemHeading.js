@@ -8,10 +8,10 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import H5 from '../H5';
 
-const defaultProps = {
+export const defaultProps = {
   tag: H5,
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

@@ -6,13 +6,13 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const defaultProps = {
+export const defaultProps = {
   theme: {
     '$mark-padding': '.2em',
     '$mark-bg': '#fcf8e3',
   },
 };
-const propTypes = {
+export const propTypes = {
   /** Theme variables. Can be: */
   theme: PropTypes.shape({
     '$mark-padding': PropTypes.string,

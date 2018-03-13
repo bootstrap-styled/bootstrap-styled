@@ -17,7 +17,7 @@ import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { transition } from 'bootstrap-styled-mixins/lib/transition';
 
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'img',
   theme: {
     '$enable-rounded': true,
@@ -37,7 +37,7 @@ const defaultProps = {
     '$figure-caption-color': '#636c72',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

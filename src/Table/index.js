@@ -14,7 +14,7 @@ import { tableRowVariant } from 'bootstrap-styled-mixins/lib/table-row';
 import { hover as hoverMixin } from 'bootstrap-styled-mixins/lib/hover';
 
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'table',
   responsiveTag: 'div',
   theme: {
@@ -40,7 +40,7 @@ const defaultProps = {
     '$state-danger-bg': '#f2dede',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

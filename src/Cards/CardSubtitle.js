@@ -4,10 +4,10 @@ import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import H6 from '../H6';
 
-const defaultProps = {
+export const defaultProps = {
   tag: H6,
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

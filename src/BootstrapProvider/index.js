@@ -4,10 +4,10 @@ import { ThemeProvider } from 'styled-components';
 import themeBs, { makeTheme } from '../theme';
 import UtilityProvider from './UtilityProvider';
 
-const defaultProps = {
+export const defaultProps = {
   theme: themeBs,
 };
-const propTypes = {
+export const propTypes = {
   /** Specified node element will be passed as children of `<<Alert> />` component. */
   children: PropTypes.node,
   /** Theme variables. */

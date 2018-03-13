@@ -13,7 +13,7 @@ import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
 
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'div',
   theme: {
     '$enable-rounded': true,
@@ -29,7 +29,7 @@ const defaultProps = {
     '$jumbotron-bg': '#eceeef',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

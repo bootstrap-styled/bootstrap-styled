@@ -4,11 +4,11 @@ import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'div',
 };
 
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

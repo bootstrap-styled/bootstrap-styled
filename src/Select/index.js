@@ -6,7 +6,7 @@ import cn from 'classnames';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
 
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

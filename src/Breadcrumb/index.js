@@ -11,7 +11,7 @@ import mapToCssModules from 'map-to-css-modules';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { clearfix } from 'bootstrap-styled-mixins/lib/clearfix';
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'ol',
   theme: {
     '$breadcrumb-padding-y': '.75rem',
@@ -24,7 +24,7 @@ const defaultProps = {
     '$enable-rounded': false,
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

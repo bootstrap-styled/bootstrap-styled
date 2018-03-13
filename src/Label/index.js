@@ -26,7 +26,7 @@ const columnProps = PropTypes.oneOfType([
   }),
 ]);
 
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */
@@ -72,7 +72,7 @@ const propTypes = {
   cssModule: PropTypes.object,
 };
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'label',
   theme: makeTheme(),
 };
