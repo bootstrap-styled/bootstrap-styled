@@ -6487,7 +6487,7 @@ var defaultProps$3 = {
   },
   uncontrolled: false,
   autoHideDuration: 0, // theme
-  transition: _extends({}, Fade.defaultProps, {
+  transition: _extends({}, defaultProps$4, {
     unmountOnExit: true
   })
 };
@@ -6524,7 +6524,7 @@ var propTypes$2 = {
   /**
    * Transition used to dismiss alert.
    */
-  transition: PropTypes.shape(Fade.propTypes),
+  transition: PropTypes.shape(propTypes$3),
   /**
    * Transition's duration used to dismiss alert automatically.
    */
@@ -16623,7 +16623,7 @@ makeTheme$4();
 /* eslint no-underscore-dangle: 0 */
 function noop() {}
 
-var FadePropTypes = PropTypes.shape(Fade.propTypes);
+var FadePropTypes = PropTypes.shape(propTypes$3);
 var propTypes$53 = {
   /**
    * @ignore
@@ -16884,11 +16884,11 @@ var ModalUnstyled = function (_React$Component) {
         };
 
         var hasTransition = this.props.fade;
-        var modalTransition = _extends({}, Fade.defaultProps, this.props.modalTransition, {
+        var modalTransition = _extends({}, defaultProps$4, this.props.modalTransition, {
           baseClass: hasTransition ? this.props.modalTransition.baseClass : '',
           timeout: hasTransition ? this.props.modalTransition.timeout : 0
         });
-        var backdropTransition = _extends({}, Fade.defaultProps, this.props.backdropTransition, {
+        var backdropTransition = _extends({}, defaultProps$4, this.props.backdropTransition, {
           baseClass: hasTransition ? this.props.backdropTransition.baseClass : '',
           timeout: hasTransition ? this.props.backdropTransition.timeout : 0
         });
