@@ -5135,7 +5135,7 @@ var propTypes = {
   color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -6394,7 +6394,7 @@ var propTypes$4 = {
   'sr-only': PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -6562,7 +6562,7 @@ var propTypes$2 = {
   uncontrolled: PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -6716,21 +6716,23 @@ var AlertUnstyled = function (_React$Component) {
   return AlertUnstyled;
 }(React__default.Component);
 
+AlertUnstyled.defaultProps = defaultProps$3;
+AlertUnstyled.propTypes = propTypes$2;
+
+
+var AlertHoc = styled.withTheme(AlertUnstyled);
+
 /**
  * Alert component.
  */
-
-
-AlertUnstyled.defaultProps = defaultProps$3;
-AlertUnstyled.propTypes = propTypes$2;
-var Alert = styled__default(AlertUnstyled).withConfig({
+var Alert = styled__default(AlertHoc).withConfig({
   displayName: 'Alert'
 })(['', ''], function (props) {
   return '\n    /*\n    Base styles\n    */\n    \n    &.alert {\n      padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n      margin-bottom: ' + props.theme['$alert-margin-bottom'] + ';\n      border: ' + props.theme['$alert-border-width'] + ' solid transparent;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$alert-border-radius']) + '\n    }\n    \n    /* Headings for larger alerts */\n    &.alert-heading {\n      /* Specified to prevent conflicts of changing $headings-color */\n      color: inherit;\n    }\n    \n    /* Provide class for links that match alerts */\n    & .alert-link { \n      font-weight: ' + props.theme['$alert-link-font-weight'] + ';\n    }\n    \n    /* Dismissible alerts Expand the right padding and account for the close buttons positioning. */\n    \n    &.alert-dismissible {    \n      /* Adjust close link position */\n      & .close {\n        position: relative;\n        top: -' + props.theme['$alert-padding-y'] + ';\n        right: -' + props.theme['$alert-padding-x'] + ';\n        padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n        color: inherit;\n      }\n    }\n    /* Alternate styles Generate contextual modifier classes for colorizing the alert. */\n\n    &.alert-success {\n      ' + alert_1(props.theme['$alert-success-bg'], props.theme['$alert-success-border'], props.theme['$alert-success-text']) + '    \n    }\n    &.alert-info {\n      ' + alert_1(props.theme['$alert-info-bg'], props.theme['$alert-info-border'], props.theme['$alert-info-text']) + '\n    } \n    &.alert-warning {\n      ' + alert_1(props.theme['$alert-warning-bg'], props.theme['$alert-warning-border'], props.theme['$alert-warning-text']) + ' \n    }\n    &.alert-danger {\n      ' + alert_1(props.theme['$alert-danger-bg'], props.theme['$alert-danger-border'], props.theme['$alert-danger-text']) + ' \n    }\n  ';
 });
 
-Alert.defaultProps = defaultProps$3;
 Alert.propTypes = propTypes$2;
+Alert.defaultProps = defaultProps$3;
 
 /**
  * A Area
@@ -6779,7 +6781,7 @@ var propTypes$5 = {
   reverse: PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -8482,7 +8484,7 @@ var propTypes$8 = {
   }),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -8555,7 +8557,7 @@ var propTypes$9 = {
   active: PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -8929,7 +8931,7 @@ var propTypes$10 = {
   }),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -9142,7 +9144,7 @@ var propTypes$13 = {
   className: PropTypes.string,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object,
   /** Toggles right CSS display. */
@@ -11199,7 +11201,7 @@ var propTypes$12 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -11460,7 +11462,7 @@ var propTypes$15 = {
   vertical: PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -11564,7 +11566,7 @@ var propTypes$16 = {
   }),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -12113,7 +12115,7 @@ var propTypes$19 = {
   theme: PropTypes.shape({}),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -12243,7 +12245,7 @@ var propTypes$20 = {
   }),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -13052,7 +13054,7 @@ var propTypes$29 = {
   lead: PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -13163,7 +13165,7 @@ var propTypes$30 = {
   lead: PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -13271,7 +13273,7 @@ var propTypes$31 = {
   lead: PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -13379,7 +13381,7 @@ var propTypes$32 = {
   lead: PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -13487,7 +13489,7 @@ var propTypes$33 = {
   lead: PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -13595,7 +13597,7 @@ var propTypes$34 = {
   lead: PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -13859,8 +13861,8 @@ var propTypes$35 = {
   })
 };
 /**
- * You can use **Headings** with **components** or **className**.
- * Alternatively we provide **Display** headings in order to give more flexibility on heading sizing.
+ * You can use `<Header />` with **components** or **className**.
+ * Alternatively we provide **Display** header in order to give more flexibility on header sizing.
  */
 var Header = styled__default.header.withConfig({
   displayName: 'Header'
@@ -13995,7 +13997,7 @@ var propTypes$37 = {
   }),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -14308,7 +14310,7 @@ var propTypes$38 = {
   /** Specified node element will be passed as children of `<Input />` component. */
   children: PropTypes.node,
   /** Specified string define the type of input to display. */
-  type: PropTypes.oneOf(['button', 'checkbox', 'color', 'date', 'datetime-local', 'email', 'file', 'hidden', 'image', 'month', 'number', 'password', 'radio', 'range', 'reset', 'search', 'submit', 'tel', 'text', 'select', 'time', 'url', 'week']),
+  type: PropTypes.oneOf(['button', 'checkbox', 'color', 'date', 'datetime', 'datetime-local', 'email', 'file', 'hidden', 'image', 'month', 'number', 'password', 'radio', 'range', 'reset', 'search', 'submit', 'tel', 'text', 'textarea', 'select', 'time', 'url', 'week']),
   /** Specified string define the input size, small or large. */
   size: PropTypes.oneOf(['sm', 'lg']),
   /** Specified string define the input state. */
@@ -14379,7 +14381,7 @@ var propTypes$38 = {
   }),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -14703,7 +14705,7 @@ var propTypes$39 = {
   }),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -14777,7 +14779,7 @@ var propTypes$40 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -14848,7 +14850,7 @@ var propTypes$41 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -15010,7 +15012,7 @@ var KbdUnstyled = function (_React$Component) {
 }(React__default.Component);
 /**
  * Replace or remove a className from the component.
- * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+ * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
  */
 
 
@@ -15066,7 +15068,7 @@ var propTypes$43 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -15311,7 +15313,7 @@ var propTypes$44 = {
   xl: columnProps$1,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -15434,7 +15436,7 @@ var propTypes$45 = {
   'dropdown-footer': PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -15484,7 +15486,7 @@ var LiUnstyled = function (_React$Component) {
 
 /**
  * Replace or remove a className from the component.
- * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+ * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
  */
 
 
@@ -15900,7 +15902,7 @@ var propTypes$46 = {
   }),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -15981,7 +15983,7 @@ var propTypes$48 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -16212,7 +16214,7 @@ var propTypes$52 = {
   top: PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -16672,7 +16674,7 @@ var propTypes$53 = {
   fade: PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object,
   /** Define z-index with specified one. */
@@ -16958,7 +16960,7 @@ var propTypes$54 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -16993,7 +16995,7 @@ var propTypes$55 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -17023,7 +17025,7 @@ var propTypes$56 = {
    * @ignore
    */
   className: PropTypes.string,
-  /** Specified node element will be passed as children of `<ModalHeader /> component. */
+  /** Specified node element will be passed as children of `<ModalHeader />` component. */
   children: PropTypes.node,
   /**
    * Replace the default component tag by the one specified. Can be:
@@ -17035,7 +17037,7 @@ var propTypes$56 = {
   toggle: PropTypes.func,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 
@@ -17202,7 +17204,7 @@ var propTypes$57 = {
   }),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
   /** Toggles disabled CSS style. */
@@ -17299,7 +17301,7 @@ var propTypes$58 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -17394,7 +17396,7 @@ var propTypes$59 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -17588,7 +17590,7 @@ var propTypes$61 = {
   }),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -17813,7 +17815,7 @@ var propTypes$62 = {
   color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -18409,7 +18411,7 @@ var propTypes$65 = {
   color: PropTypes.oneOf(['success', 'info', 'warning', 'danger']),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -18512,7 +18514,7 @@ var propTypes$66 = {
   }),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -18691,7 +18693,7 @@ var propTypes$68 = {
   color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -18762,7 +18764,7 @@ var propTypes$69 = {
   color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -18936,7 +18938,7 @@ var propTypes$70 = {
   }),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -19350,7 +19352,7 @@ var propTypes$75 = {
 
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -19460,7 +19462,7 @@ var propTypes$76 = {
   delay: PropTypes.oneOfType([PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }), PropTypes.number]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -19862,7 +19864,7 @@ var propTypes$77 = {
   borderColor: PropTypes.string,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -20032,7 +20034,7 @@ var propTypes$78 = {
   }),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -20189,7 +20191,7 @@ var propTypes$79 = {
   }),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -20345,7 +20347,7 @@ var propTypes$80 = {
   }),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -20410,7 +20412,7 @@ var propTypes$81 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -20470,7 +20472,7 @@ var propTypes$82 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -20530,7 +20532,7 @@ var propTypes$83 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -20594,7 +20596,7 @@ var propTypes$84 = {
   bottom: PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -20669,7 +20671,7 @@ var propTypes$85 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -20731,7 +20733,7 @@ var propTypes$86 = {
   getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -20793,7 +20795,7 @@ var propTypes$87 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -20853,7 +20855,7 @@ var propTypes$88 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -20913,7 +20915,7 @@ var propTypes$89 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -20973,7 +20975,7 @@ var propTypes$90 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -21392,577 +21394,313 @@ exports.default = {
 unwrapExports(customForms_1);
 var customForms_3 = customForms_1.customForms;
 
-var rmUnit$3 = unitUtils$1.rmUnit;
-var UNIT$3 = unitUtils$1.UNIT;
-/**
- * BOOTSTRAP THEME FORM
- *
- * this file is not meant to be used and must be kept as original
- * @param userTheme
- */
-
-var makeTheme$5 = function makeTheme() {
-  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  /* eslint dot-notation: 'off', new-cap: 'off' */
-  // Variables
-  //
-  // Copy settings from this file into the provided `_custom.scss` to override
-  // the Bootstrap defaults without modifying key, versioned files.
-  var v = {};
-  var u = userTheme;
-
-  // Options
-  //
-  // Quickly modify global styling by enabling or disabling optional features.
-
-  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
-  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
-  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
-  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
-
-  // Colors
-  //
-  // Grayscale and brand colors for use across Bootstrap.
-  // Start with assigning color names to specific hex values.
-  v['$white'] = u['$white'] || '#fff';
-  v['$red'] = u['$red'] || '#d9534f';
-  v['$orange'] = u['$orange'] || '#f0ad4e';
-  v['$green'] = u['$green'] || '#5cb85c';
-  v['$blue'] = u['$blue'] || '#0275d8';
-  v['$teal'] = u['$teal'] || '#5bc0de';
-  v['$black'] = u['$black'] || '#000';
-
-  // Reassign color vars to semantic color scheme
-  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
-  v['$brand-success'] = u['$brand-success'] || v['$green'];
-  v['$brand-info'] = u['$brand-info'] || v['$teal'];
-  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
-  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
-
-  // Create grayscale
-  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
-  v['$gray'] = u['$gray'] || '#464a4c';
-  v['$gray-light'] = u['$gray-light'] || '#636c72';
-  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
-  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
-
-  // Spacing
-  //
-  // Control the default styling of most Bootstrap elements by modifying these
-  // variables. Mostly focused on spacing.
-  // You can add more entries to the v['$spacers'] map, should you need more variation.
-
-  v['$border-width'] = u['$border-width'] || '1px';
-  v['$spacer'] = u['$spacer'] || '1rem';
-  v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
-
-  // Grid breakpoints
-  //
-  // Define the minimum dimensions at which your layout will change,
-  // adapting to different screen sizes, for use in media queries.
-
-  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  };
-  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
-  variables_2(v['$grid-breakpoints']);
-
-  // Grid columns
-  //
-  // Specify the width of the gutters.
-  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
-  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
-    xs: v['$grid-gutter-width-base'],
-    sm: v['$grid-gutter-width-base'],
-    md: v['$grid-gutter-width-base'],
-    lg: v['$grid-gutter-width-base'],
-    xl: v['$grid-gutter-width-base']
-  };
-
-  // Fonts
-  //
-  // Font, line-height, and color for body text, headings, and more.
-
-  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
-  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
-  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
-  v['$font-size-xs'] = u['$font-size-xs'] || '.75rem';
-  v['$text-muted'] = u['$text-muted'] || v['$gray-light'];
-  v['$line-height-base'] = u['$line-height-base'] || '1.5';
-  v['$line-height-lg'] = u['$line-height-lg'] || '1.6';
-  v['$line-height-sm'] = u['$line-height-sm'] || '1.3';
-
-  // Components
-  //
-  // Define common padding and border radius sizes and more.
-
-  v['$border-radius'] = u['$border-radius'] || '.25rem';
-  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
-  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
-
-  // Forms
-
-  v['$input-padding-x'] = u['$input-padding-x'] || '.75rem';
-  v['$input-padding-y'] = u['$input-padding-y'] || '.5rem';
-  v['$input-line-height'] = u['$input-line-height'] || '1.25';
-
-  v['$input-bg'] = u['$input-bg'] || v['$white'];
-  v['$input-bg-disabled'] = u['$input-bg-disabled'] || v['$gray-lighter'];
-
-  v['$input-color'] = u['$input-color'] || v['$gray'];
-  v['$input-border-color'] = u['$input-border-color'] || color(v['$black']).alpha(0.15).toString();
-  v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width']; // For form controls and buttons
-  v['$input-box-shadow'] = u['$input-box-shadow'] || 'inset 0 1px 1px ' + color(v['$black']).alpha(0.075).toString();
-
-  v['$input-border-radius'] = u['$input-border-radius'] || v['$border-radius'];
-  v['$input-border-radius-lg'] = u['$input-border-radius-lg'] || v['$border-radius-lg'];
-  v['$input-border-radius-sm'] = u['$input-border-radius-sm'] || v['$border-radius-sm'];
-
-  v['$input-bg-focus'] = u['$input-bg-focus'] || v['$input-bg'];
-  v['$input-border-focus'] = u['$input-border-focus'] || color(v['$brand-primary']).lighten(0.25).toString();
-  v['$input-box-shadow-focus'] = u['$input-box-shadow-focus'] || v['$input-box-shadow'] + ', 0 0 8px rgba(' + v['$input-border-focus'] + ',.6)';
-  v['$input-color-focus'] = u['$input-color-focus'] || v['$input-color'];
-
-  v['$input-color-placeholder'] = u['$input-color-placeholder'] || v['$gray-light'];
-
-  v['$input-padding-x-sm'] = u['$input-padding-x-sm'] || '.5rem';
-  v['$input-padding-y-sm'] = u['$input-padding-y-sm'] || '.25rem';
-
-  v['$input-padding-x-lg'] = u['$input-padding-x-lg'] || '1.5rem';
-  v['$input-padding-y-lg'] = u['$input-padding-y-lg'] || '.75rem';
-
-  v['$input-height'] = u['$input-height'] || rmUnit$3(v['$font-size-base'], UNIT$3.REM) * v['$line-height-base'] + rmUnit$3(v['$input-padding-y'], UNIT$3.REM) * 2 + UNIT$3.REM;
-  v['$input-height-sm'] = u['$input-height-sm'] || rmUnit$3(v['$font-size-sm'], UNIT$3.REM) * v['$line-height-sm'] + rmUnit$3(v['$input-padding-y-sm'], UNIT$3.REM) * 2 + UNIT$3.REM;
-  v['$input-height-lg'] = u['$input-height-lg'] || rmUnit$3(v['$font-size-lg'], UNIT$3.REM) * v['$line-height-lg'] + rmUnit$3(v['$input-padding-y-lg'], UNIT$3.REM) * 2 + UNIT$3.REM;
-
-  v['$input-transition'] = u['$input-transition'] || 'border-color ease-in-out .15s, box-shadow ease-in-out .15s';
-
-  v['$form-text-margin-top'] = u['$form-text-margin-top'] || '.25rem';
-  v['$form-feedback-margin-top'] = u['$form-feedback-margin-top'] || v['$form-text-margin-top'];
-
-  v['$form-check-margin-bottom'] = u['$form-check-margin-bottom'] || '.5rem';
-  v['$form-check-input-gutter'] = u['$form-check-input-gutter'] || '1.25rem';
-  v['$form-check-input-margin-y'] = u['$form-check-input-margin-y'] || '.25rem';
-  v['$form-check-input-margin-x'] = u['$form-check-input-margin-x'] || '.25rem';
-
-  v['$form-check-inline-margin-x'] = u['$form-check-inline-margin-x'] || '.75rem';
-
-  v['$form-group-margin-bottom'] = u['$form-group-margin-bottom'] || v['$spacer-y'];
-
-  v['$input-group-addon-bg'] = u['$input-group-addon-bg'] || v['$gray-lighter'];
-  v['$input-group-addon-border-color'] = u['$input-group-addon-border-color'] || v['$input-border-color'];
-
-  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
-
-  v['$custom-control-gutter'] = u['$custom-control-gutter'] || '1.5rem';
-  v['$custom-control-spacer-x'] = u['$custom-control-spacer-x'] || '1rem';
-  v['$custom-control-spacer-y'] = u['$custom-control-spacer-y'] || '.25rem';
-
-  v['$custom-control-indicator-size'] = u['$custom-control-indicator-size'] || '1rem';
-  v['$custom-control-indicator-bg'] = u['$custom-control-indicator-bg'] || '#ddd';
-  v['$custom-control-indicator-bg-size'] = u['$custom-control-indicator-bg-size'] || '50% 50%';
-  v['$custom-control-indicator-box-shadow'] = u['$custom-control-indicator-box-shadow'] || 'inset 0 .25rem .25rem ' + color(v['$black']).alpha(0.1).toString();
-
-  v['$custom-control-disabled-cursor'] = u['$custom-control-disabled-cursor'] || v['$cursor-disabled'];
-  v['$custom-control-disabled-indicator-bg'] = u['$custom-control-disabled-indicator-bg'] || v['$gray-lighter'];
-  v['$custom-control-disabled-description-color'] = u['$custom-control-disabled-description-color'] || v['$gray-light'];
-
-  v['$custom-control-checked-indicator-color'] = u['$custom-control-checked-indicator-color'] || v['$white'];
-  v['$custom-control-checked-indicator-bg'] = u['$custom-control-checked-indicator-bg'] || v['$brand-primary'];
-  v['$custom-control-checked-indicator-box-shadow'] = u['$custom-control-checked-indicator-box-shadow'] || 'none';
-
-  v['$custom-control-focus-indicator-box-shadow'] = u['$custom-control-focus-indicator-box-shadow'] || '0 0 0 1px ' + v['$body-bg'] + ', 0 0 0 3px ' + v['$brand-primary'];
-
-  v['$custom-control-active-indicator-color'] = u['$custom-control-active-indicator-color'] || v['$white'];
-  v['$custom-control-active-indicator-bg'] = u['$custom-control-active-indicator-bg'] || color(v['$brand-primary']).lighten(0.35).toString();
-  v['$custom-control-active-indicator-box-shadow'] = u['$custom-control-active-indicator-box-shadow'] || 'none';
-
-  v['$custom-checkbox-radius'] = u['$custom-checkbox-radius'] || v['$border-radius'];
-  v['$custom-checkbox-checked-icon'] = u['$custom-checkbox-checked-icon'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="' + v['$custom-control-checked-indicator-color'] + '" d="M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z"/%3E%3C/svg%3E\')';
-
-  v['$custom-checkbox-indeterminate-bg'] = u['$custom-checkbox-indeterminate-bg'] || v['$brand-primary'];
-  v['$custom-checkbox-indeterminate-indicator-color'] = u['$custom-checkbox-indeterminate-indicator-color'] || v['$custom-control-checked-indicator-color'];
-  v['$custom-checkbox-indeterminate-icon'] = u['$custom-checkbox-indeterminate-icon'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 4"%3E%3Cpath stroke="' + v['$custom-checkbox-indeterminate-indicator-color'] + '" d="M0 2h4"/%3E%3C/svg%3E\')';
-  v['$custom-checkbox-indeterminate-box-shadow'] = u['$custom-checkbox-indeterminate-box-shadow'] || 'none';
-
-  v['$custom-radio-radius'] = u['$custom-radio-radius'] || '50%';
-  v['$custom-radio-checked-icon'] = u['$custom-radio-checked-icon'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"%3E%3Ccircle r="3" fill="' + v['$custom-control-checked-indicator-color'] + '"/%3E%3C/svg%3E\')';
-
-  v['$custom-select-padding-x'] = u['$custom-select-padding-x'] || '.75rem ';
-  v['$custom-select-padding-y'] = u['$custom-select-padding-y'] || '.375rem';
-  v['$custom-select-indicator-padding'] = u['$custom-select-indicator-padding'] || '1rem'; // Extra padding to account for the presence of the background-image based indicator
-  v['$custom-select-line-height'] = u['$custom-select-line-height'] || v['$input-line-height'];
-  v['$custom-select-color'] = u['$custom-select-color'] || v['$input-color'];
-  v['$custom-select-disabled-color'] = u['$custom-select-disabled-color'] || v['$gray-light'];
-  v['$custom-select-bg'] = u['$custom-select-bg'] || v['$white'];
-  v['$custom-select-disabled-bg'] = u['$custom-select-disabled-bg'] || v['$gray-lighter'];
-  v['$custom-select-bg-size'] = u['$custom-select-bg-size'] || '8px 10px'; // In pixels because image dimensions
-  v['$custom-select-indicator-color'] = u['$custom-select-indicator-color'] || '#333';
-  v['$custom-select-indicator'] = u['$custom-select-indicator'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"%3E%3Cpath fill="' + v['$custom-select-indicator-color'] + '" d="M2 0L0 2h4zm0 5L0 3h4z"/%3E%3C/svg%3E\')';
-  v['$custom-select-border-width'] = u['$custom-select-border-width'] || v['$input-btn-border-width'];
-  v['$custom-select-border-color'] = u['$custom-select-border-color'] || v['$input-border-color'];
-  v['$custom-select-border-radius'] = u['$custom-select-border-radius'] || v['$border-radius'];
-
-  v['$custom-select-focus-border-color'] = u['$custom-select-focus-border-color'] || color(v['$brand-primary']).lighten(0.25).toString();
-  v['$custom-select-focus-box-shadow'] = u['$custom-select-focus-box-shadow'] || 'inset 0 1px 2px ' + color(v['$black']).alpha(0.75).toString() + ', 0 0 5px rgba(' + v['$custom-select-focus-border-color'] + ', .5)';
-
-  v['$custom-select-sm-font-size'] = u['$custom-select-sm-font-size'] || '75%';
-
-  v['$custom-file-height'] = u['$custom-file-height'] || '2.5rem';
-  v['$custom-file-width'] = u['$custom-file-width'] || '14rem';
-  v['$custom-file-focus-box-shadow'] = u['$custom-file-focus-box-shadow'] || '0 0 0 .075rem ' + v['$white'] + ', 0 0 0 .2rem ' + v['$brand-primary'];
-
-  v['$custom-file-padding-x'] = u['$custom-file-padding-x'] || '.5rem';
-  v['$custom-file-padding-y'] = u['$custom-file-padding-y'] || '1rem';
-  v['$custom-file-line-height'] = u['$custom-file-line-height'] || '1.5';
-  v['$custom-file-color'] = u['$custom-file-color'] || v['$gray'];
-  v['$custom-file-bg'] = u['$custom-file-bg'] || v['$white'];
-  v['$custom-file-border-width'] = u['$custom-file-border-width'] || v['$border-width'];
-  v['$custom-file-border-color'] = u['$custom-file-border-color'] || v['$input-border-color'];
-  v['$custom-file-border-radius'] = u['$custom-file-border-radius'] || v['$border-radius'];
-  v['$custom-file-box-shadow'] = u['$custom-file-box-shadow'] || 'inset 0 .2rem .4rem ' + color(v['$black']).alpha(0.05).toString();
-  v['$custom-file-button-color'] = u['$custom-file-button-color'] || v['$custom-file-color'];
-  v['$custom-file-button-bg'] = u['$custom-file-button-bg'] || v['$gray-lighter'];
-  v['$custom-file-text'] = u['$custom-file-text'] || {
-    placeholder: {
-      en: 'Choose file...'
-    },
-    'button-label': {
-      en: 'Browse'
-    }
-  };
-
-  // Form validation icons*
-  v['$form-icon-success-color'] = u['$form-icon-success-color'] || v['$brand-success'];
-  v['$form-icon-success'] = u['$form-icon-success'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="' + v['$form-icon-success-color'] + '" d="M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z"/%3E%3C/svg%3E\')';
-
-  v['$form-icon-warning-color'] = u['$form-icon-warning-color'] || v['$brand-warning'];
-  v['$form-icon-warning'] = u['$form-icon-warning'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="' + v['$form-icon-warning-color'] + '" d="M4.4 5.324h-.8v-2.46h.8zm0 1.42h-.8V5.89h.8zM3.76.63L.04 7.075c-.115.2.016.425.26.426h7.397c.242 0 .372-.226.258-.426C6.726 4.924 5.47 2.79 4.253.63c-.113-.174-.39-.174-.494 0z"/%3E%3C/svg%3E\')';
-
-  v['$form-icon-danger-color'] = u['$form-icon-danger-color'] || v['$brand-danger'];
-  v['$form-icon-danger'] = u['$form-icon-danger'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="' + v['$form-icon-danger-color'] + '" viewBox="-2 -2 7 7"%3E%3Cpath stroke="%23d9534f" d="M0 0l3 3m0-3L0 3"/%3E%3Ccircle r=".5"/%3E%3Ccircle cx="3" r=".5"/%3E%3Ccircle cy="3" r=".5"/%3E%3Ccircle cx="3" cy="3" r=".5"/%3E%3C/svg%3E\')';
-
-  return Object.assign({}, u, v);
-};
-
-makeTheme$5();
-
 /* eslint-disable quote-props, dot-notation */
 /**
  * Form Component test
  *
  *
  */
-// export const defaultProps = {
-//   tag: 'form',
-//   theme: {
-//     '$brand-primary': '#0275d8',
-//     '$brand-success': '#5cb85c',
-//     '$brand-info': '#5bc0de',
-//     '$brand-warning': '#f0ad4e',
-//     '$brand-danger': '#d9534f',
-//     '$gray-dark': '#292b2c',
-//     '$gray': '#464a4c',
-//     '$gray-light': '#636c72',
-//     '$gray-lighter': '#eceeef',
-//     '$gray-lightest': '#f7f7f9',
-//     '$border-width': '1px',
-//     '$spacer': '1rem',
-//     '$spacer-y': '1rem',
-//     '$grid-breakpoints': {
-//       xs: '0',
-//       sm: '576px',
-//       md: '768px',
-//       lg: '992px',
-//       xl: '1200px',
-//     },
-//     '$grid-gutter-width-base': '30px',
-//     '$grid-gutter-widths': {
-//       xs: '30px',
-//       sm: '30px',
-//       md: '30px',
-//       lg: '30px',
-//       xl: '30px',
-//     },
-//     '$font-size-base': '1rem',
-//     '$font-size-lg': '1.25rem',
-//     '$font-size-sm': '.875rem',
-//     '$font-size-xs': '.75rem',
-//     '$text-muted': '#636c72',
-//     '$line-height-base': '1.5',
-//     '$line-height-lg': '1.6',
-//     '$line-height-sm': '1.3',
-//     '$border-radius': '.25rem',
-//     '$border-radius-lg': '.3rem',
-//     '$border-radius-sm': '.2rem',
-//     '$input-padding-x': '.75rem',
-//     '$input-padding-y': '.5rem',
-//     '$input-line-height': '1.25',
-//     '$input-bg': '#fff',
-//     '$input-bg-disabled': '#eceeef',
-//     '$input-color': '#464a4c',
-//     '$input-border-color': 'rgba(0, 0, 0, 0.15)',
-//     '$input-btn-border-width': '1px',
-//     '$input-box-shadow': 'rgba(0, 0, 0, 0.15)',
-//     '$input-border-radius': '.25rem',
-//     '$input-border-radius-lg': '.3rem',
-//     '$input-border-radius-sm': '.2rem',
-//     '$input-bg-focus': '#fff',
-//     '$input-border-focus': 'hsl(207.79999999999995, 98.2%, 53.4%)',
-//     '$input-box-shadow-focus': 'inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(undefined,.6)',
-//     '$input-color-focus': '#464a4c',
-//     '$input-color-placeholder': '#636c72',
-//     '$input-padding-x-sm': '.5rem',
-//     '$input-padding-y-sm': '.25rem',
-//     '$input-padding-x-lg': '1.5rem',
-//     '$input-padding-y-lg': '.75rem',
-//     '$input-height': '2.5rem',
-//     '$input-height-sm': '1.6375rem',
-//     '$input-height-lg': '3.5rem',
-//     '$input-transition': '.15s',
-//     '$form-text-margin-top': '.25rem',
-//     '$form-feedback-margin-top': '.25rem',
-//     '$form-check-margin-bottom': '.5rem',
-//     '$form-check-input-gutter': '1.25rem',
-//     '$form-check-input-margin-y': '.25rem',
-//     '$form-check-input-margin-x': '.25rem',
-//     '$form-check-inline-margin-x': '.75rem',
-//     '$form-group-margin-bottom': '1rem',
-//     '$input-group-addon-bg': '#eceeef',
-//     '$input-group-addon-border-color': 'rgba(0, 0, 0, 0.15)',
-//     '$cursor-disabled': 'not-allowed',
-//     '$custom-control-gutter': '1.5rem',
-//     '$custom-control-spacer-x': '1rem',
-//     '$custom-control-spacer-y': '.25rem',
-//     '$custom-control-indicator-size': '1rem',
-//     '$custom-control-indicator-bg': '#ddd',
-//     '$custom-control-indicator-bg-size': '50%',
-//     '$custom-control-indicator-box-shadow': 'inset 0 .25rem .25rem rgba(0, 0, 0, 0.1)',
-//     '$custom-control-disabled-cursor': 'not-allowed',
-//     '$custom-control-disabled-indicator-bg': '#eceeef',
-//     '$custom-control-disabled-description-color': '#636c72',
-//     '$custom-control-checked-indicator-color': '#fff',
-//     '$custom-control-checked-indicator-bg': '#0275d8',
-//     '$custom-control-checked-indicator-box-shadow': 'none',
-//     '$custom-control-focus-indicator-box-shadow': '0 0 0 1px #fff, 0 0 0 3px #0275d8',
-//     '$custom-control-active-indicator-color': '#fff',
-//     '$custom-control-active-indicator-bg': 'hsl(207.79999999999995, 98.2%, 57.7%)',
-//     '$custom-control-active-indicator-box-shadow': 'none',
-//     '$custom-checkbox-radius': '.25rem',
-//     '$custom-checkbox-checked-icon': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="#fff" d="M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z"/%3E%3C/svg%3E\')',
-//     '$custom-checkbox-indeterminate-bg': '#0275d8',
-//     '$custom-checkbox-indeterminate-indicator-color': '#fff',
-//     '$custom-checkbox-indeterminate-icon': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 4"%3E%3Cpath stroke="undefined" d="M0 2h4"/%3E%3C/svg%3E\')',
-//     '$custom-checkbox-indeterminate-box-shadow': 'none',
-//     '$custom-radio-radius': '50%',
-//     '$custom-radio-checked-icon': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"%3E%3Ccircle r="3" fill="#fff"/%3E%3C/svg%3E\')',
-//     '$custom-select-padding-x': '.75rem',
-//     '$custom-select-padding-y': '.375rem',
-//     '$custom-select-indicator-padding': '1rem',
-//     '$custom-select-line-height': '1.25',
-//     '$custom-select-color': '#464a4c',
-//     '$custom-select-disabled-color': '#636c72',
-//     '$custom-select-bg': '#fff',
-//     '$custom-select-disabled-bg': '#eceeef',
-//     '$custom-select-bg-size': '8px 10px',
-//     '$custom-select-indicator-color': '#333',
-//     '$custom-select-indicator': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"%3E%3Cpath fill="#333" d="M2 0L0 2h4zm0 5L0 3h4z"/%3E%3C/svg%3E\')',
-//     '$custom-select-border-width': '1px',
-//     '$custom-select-border-color': 'rgba(0, 0, 0, 0.15)',
-//     '$custom-select-border-radius': '.25rem',
-//     '$custom-select-focus-border-color': 'hsl(207.79999999999995, 98.2%, 53.4%)',
-//     '$custom-select-focus-box-shadow': 'inset 0 1px 2px rgba(0, 0, 0, 0.75), 0 0 5px rgba(hsl(207.79999999999995, 98.2%, 53.4%), .5) ',
-//     '$custom-select-sm-font-size': '75%',
-//     '$custom-file-height': '2.5rem',
-//     '$custom-file-width': '14rem',
-//     '$custom-file-focus-box-shadow': '0 0 0 .075rem #fff, 0 0 0 .2rem #0275d8',
-//     '$custom-file-padding-x': '.5rem',
-//     '$custom-file-padding-y': '1rem',
-//     '$custom-file-line-height': '1.5',
-//     '$custom-file-color': '#464a4c',
-//     '$custom-file-bg': '#fff',
-//     '$custom-file-border-width': '1px',
-//     '$custom-file-border-color': 'rgba(0, 0, 0, 0.15)',
-//     '$custom-file-border-radius': '.25rem',
-//     '$custom-file-box-shadow': 'inset 0 .2rem .4rem rgba(0, 0, 0, 0.05)',
-//     '$custom-file-button-color': '#464a4c',
-//     '$custom-file-button-bg': '#eceeef',
-//     '$custom-file-text': {
-//       placeholder: {
-//         en: 'Choose file...',
-//       },
-//       'button-label': {
-//         en: 'Browse',
-//       },
-//     },
-//     '$form-icon-success-color': '#5cb85c',
-//     '$form-icon-success': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="undefined" d="M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z"/%3E%3C/svg%3E\')',
-//     '$form-icon-warning-color': '#f0ad4e',
-//     '$form-icon-warning': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="undefined" d="M4.4 5.324h-.8v-2.46h.8zm0 1.42h-.8V5.89h.8zM3.76.63L.04 7.075c-.115.2.016.425.26.426h7.397c.242 0 .372-.226.258-.426C6.726 4.924 5.47 2.79 4.253.63c-.113-.174-.39-.174-.494 0z"/%3E%3C/svg%3E\')',
-//     '$form-icon-danger-color': '#d9534f',
-//     '$form-icon-danger': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="undefined" viewBox="-2 -2 7 7"%3E%3Cpath stroke="%23d9534f" d="M0 0l3 3m0-3L0 3"/%3E%3Ccircle r=".5"/%3E%3Ccircle cx="3" r=".5"/%3E%3Ccircle cy="3" r=".5"/%3E%3Ccircle cx="3" cy="3" r=".5"/%3E%3C/svg%3E\')',
-//   },
-// };
+var defaultProps$81 = {
+  tag: 'form',
+  theme: {
+    '$brand-primary': '#0275d8',
+    '$brand-success': '#5cb85c',
+    '$brand-info': '#5bc0de',
+    '$brand-warning': '#f0ad4e',
+    '$brand-danger': '#d9534f',
+    '$gray-dark': '#292b2c',
+    '$gray': '#464a4c',
+    '$gray-light': '#636c72',
+    '$gray-lighter': '#eceeef',
+    '$gray-lightest': '#f7f7f9',
+    '$border-width': '1px',
+    '$spacer': '1rem',
+    '$spacer-y': '1rem',
+    '$grid-breakpoints': {
+      xs: '0',
+      sm: '576px',
+      md: '768px',
+      lg: '992px',
+      xl: '1200px'
+    },
+    '$grid-gutter-width-base': '30px',
+    '$grid-gutter-widths': {
+      xs: '30px',
+      sm: '30px',
+      md: '30px',
+      lg: '30px',
+      xl: '30px'
+    },
+    '$font-size-base': '1rem',
+    '$font-size-lg': '1.25rem',
+    '$font-size-sm': '.875rem',
+    '$font-size-xs': '.75rem',
+    '$text-muted': '#636c72',
+    '$line-height-base': '1.5',
+    '$line-height-lg': '1.6',
+    '$line-height-sm': '1.3',
+    '$border-radius': '.25rem',
+    '$border-radius-lg': '.3rem',
+    '$border-radius-sm': '.2rem',
+    '$input-padding-x': '.75rem',
+    '$input-padding-y': '.5rem',
+    '$input-line-height': '1.25',
+    '$input-bg': '#fff',
+    '$input-bg-disabled': '#eceeef',
+    '$input-color': '#464a4c',
+    '$input-border-color': 'rgba(0, 0, 0, 0.15)',
+    '$input-btn-border-width': '1px',
+    '$input-box-shadow': 'rgba(0, 0, 0, 0.15)',
+    '$input-border-radius': '.25rem',
+    '$input-border-radius-lg': '.3rem',
+    '$input-border-radius-sm': '.2rem',
+    '$input-bg-focus': '#fff',
+    '$input-border-focus': 'hsl(207.79999999999995, 98.2%, 53.4%)',
+    '$input-box-shadow-focus': 'inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(undefined,.6)',
+    '$input-color-focus': '#464a4c',
+    '$input-color-placeholder': '#636c72',
+    '$input-padding-x-sm': '.5rem',
+    '$input-padding-y-sm': '.25rem',
+    '$input-padding-x-lg': '1.5rem',
+    '$input-padding-y-lg': '.75rem',
+    '$input-height': '2.5rem',
+    '$input-height-sm': '1.6375rem',
+    '$input-height-lg': '3.5rem',
+    '$input-transition': '.15s',
+    '$form-text-margin-top': '.25rem',
+    '$form-feedback-margin-top': '.25rem',
+    '$form-check-margin-bottom': '.5rem',
+    '$form-check-input-gutter': '1.25rem',
+    '$form-check-input-margin-y': '.25rem',
+    '$form-check-input-margin-x': '.25rem',
+    '$form-check-inline-margin-x': '.75rem',
+    '$form-group-margin-bottom': '1rem',
+    '$input-group-addon-bg': '#eceeef',
+    '$input-group-addon-border-color': 'rgba(0, 0, 0, 0.15)',
+    '$cursor-disabled': 'not-allowed',
+    '$custom-control-gutter': '1.5rem',
+    '$custom-control-spacer-x': '1rem',
+    '$custom-control-spacer-y': '.25rem',
+    '$custom-control-indicator-size': '1rem',
+    '$custom-control-indicator-bg': '#ddd',
+    '$custom-control-indicator-bg-size': '50%',
+    '$custom-control-indicator-box-shadow': 'inset 0 .25rem .25rem rgba(0, 0, 0, 0.1)',
+    '$custom-control-disabled-cursor': 'not-allowed',
+    '$custom-control-disabled-indicator-bg': '#eceeef',
+    '$custom-control-disabled-description-color': '#636c72',
+    '$custom-control-checked-indicator-color': '#fff',
+    '$custom-control-checked-indicator-bg': '#0275d8',
+    '$custom-control-checked-indicator-box-shadow': 'none',
+    '$custom-control-focus-indicator-box-shadow': '0 0 0 1px #fff, 0 0 0 3px #0275d8',
+    '$custom-control-active-indicator-color': '#fff',
+    '$custom-control-active-indicator-bg': 'hsl(207.79999999999995, 98.2%, 57.7%)',
+    '$custom-control-active-indicator-box-shadow': 'none',
+    '$custom-checkbox-radius': '.25rem',
+    '$custom-checkbox-checked-icon': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="#fff" d="M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z"/%3E%3C/svg%3E\')',
+    '$custom-checkbox-indeterminate-bg': '#0275d8',
+    '$custom-checkbox-indeterminate-indicator-color': '#fff',
+    '$custom-checkbox-indeterminate-icon': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 4"%3E%3Cpath stroke="undefined" d="M0 2h4"/%3E%3C/svg%3E\')',
+    '$custom-checkbox-indeterminate-box-shadow': 'none',
+    '$custom-radio-radius': '50%',
+    '$custom-radio-checked-icon': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"%3E%3Ccircle r="3" fill="#fff"/%3E%3C/svg%3E\')',
+    '$custom-select-padding-x': '.75rem',
+    '$custom-select-padding-y': '.375rem',
+    '$custom-select-indicator-padding': '1rem',
+    '$custom-select-line-height': '1.25',
+    '$custom-select-color': '#464a4c',
+    '$custom-select-disabled-color': '#636c72',
+    '$custom-select-bg': '#fff',
+    '$custom-select-disabled-bg': '#eceeef',
+    '$custom-select-bg-size': '8px 10px',
+    '$custom-select-indicator-color': '#333',
+    '$custom-select-indicator': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"%3E%3Cpath fill="#333" d="M2 0L0 2h4zm0 5L0 3h4z"/%3E%3C/svg%3E\')',
+    '$custom-select-border-width': '1px',
+    '$custom-select-border-color': 'rgba(0, 0, 0, 0.15)',
+    '$custom-select-border-radius': '.25rem',
+    '$custom-select-focus-border-color': 'hsl(207.79999999999995, 98.2%, 53.4%)',
+    '$custom-select-focus-box-shadow': 'inset 0 1px 2px rgba(0, 0, 0, 0.75), 0 0 5px rgba(hsl(207.79999999999995, 98.2%, 53.4%), .5) ',
+    '$custom-select-sm-font-size': '75%',
+    '$custom-file-height': '2.5rem',
+    '$custom-file-width': '14rem',
+    '$custom-file-focus-box-shadow': '0 0 0 .075rem #fff, 0 0 0 .2rem #0275d8',
+    '$custom-file-padding-x': '.5rem',
+    '$custom-file-padding-y': '1rem',
+    '$custom-file-line-height': '1.5',
+    '$custom-file-color': '#464a4c',
+    '$custom-file-bg': '#fff',
+    '$custom-file-border-width': '1px',
+    '$custom-file-border-color': 'rgba(0, 0, 0, 0.15)',
+    '$custom-file-border-radius': '.25rem',
+    '$custom-file-box-shadow': 'inset 0 .2rem .4rem rgba(0, 0, 0, 0.05)',
+    '$custom-file-button-color': '#464a4c',
+    '$custom-file-button-bg': '#eceeef',
+    '$custom-file-text': {
+      placeholder: {
+        en: 'Choose file...'
+      },
+      'button-label': {
+        en: 'Browse'
+      }
+    },
+    '$form-icon-success-color': '#5cb85c',
+    '$form-icon-success': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="undefined" d="M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z"/%3E%3C/svg%3E\')',
+    '$form-icon-warning-color': '#f0ad4e',
+    '$form-icon-warning': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="undefined" d="M4.4 5.324h-.8v-2.46h.8zm0 1.42h-.8V5.89h.8zM3.76.63L.04 7.075c-.115.2.016.425.26.426h7.397c.242 0 .372-.226.258-.426C6.726 4.924 5.47 2.79 4.253.63c-.113-.174-.39-.174-.494 0z"/%3E%3C/svg%3E\')',
+    '$form-icon-danger-color': '#d9534f',
+    '$form-icon-danger': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="undefined" viewBox="-2 -2 7 7"%3E%3Cpath stroke="%23d9534f" d="M0 0l3 3m0-3L0 3"/%3E%3Ccircle r=".5"/%3E%3Ccircle cx="3" r=".5"/%3E%3Ccircle cy="3" r=".5"/%3E%3Ccircle cx="3" cy="3" r=".5"/%3E%3C/svg%3E\')'
+  }
+};
 
-// export const propTypes = {
-//   /**
-//    * @ignore
-//    */
-//   className: PropTypes.string,
-//   /** Specified node element will be passed as children of `<DropdownItem />`. */
-//   children: PropTypes.node,
-//   /** Theme variables. Can be: */
-//   theme: PropTypes.shape({
-//     '$brand-primary': PropTypes.string,
-//     '$brand-success': PropTypes.string,
-//     '$brand-info': PropTypes.string,
-//     '$brand-warning': PropTypes.string,
-//     '$brand-danger': PropTypes.string,
-//     '$gray-dark': PropTypes.string,
-//     '$gray': PropTypes.string,
-//     '$gray-light': PropTypes.string,
-//     '$gray-lighter': PropTypes.string,
-//     '$gray-lightest': PropTypes.string,
-//     '$border-width': PropTypes.string,
-//     '$spacer': PropTypes.string,
-//     '$spacer-y': PropTypes.string,
-//     '$grid-breakpoints': PropTypes.object,
-//     '$grid-gutter-width-base': '30px',
-//     '$grid-gutter-widths': PropTypes.object,
-//     '$font-size-base': PropTypes.string,
-//     '$font-size-lg': PropTypes.string,
-//     '$font-size-sm': PropTypes.string,
-//     '$font-size-xs': PropTypes.string,
-//     '$text-muted': PropTypes.string,
-//     '$line-height-base': PropTypes.string,
-//     '$line-height-lg': PropTypes.string,
-//     '$line-height-sm': PropTypes.string,
-//     '$border-radius': PropTypes.string,
-//     '$border-radius-lg': PropTypes.string,
-//     '$border-radius-sm': PropTypes.string,
-//     '$input-padding-x': PropTypes.string,
-//     '$input-padding-y': PropTypes.string,
-//     '$input-line-height': PropTypes.string,
-//     '$input-bg': PropTypes.string,
-//     '$input-bg-disabled': PropTypes.string,
-//     '$input-color': PropTypes.string,
-//     '$input-border-color': PropTypes.string,
-//     '$input-btn-border-width': PropTypes.string,
-//     '$input-box-shadow': PropTypes.string,
-//     '$input-border-radius': PropTypes.string,
-//     '$input-border-radius-lg': PropTypes.string,
-//     '$input-border-radius-sm': PropTypes.string,
-//     '$input-bg-focus': PropTypes.string,
-//     '$input-border-focus': PropTypes.string,
-//     '$input-box-shadow-focus': PropTypes.string,
-//     '$input-color-focus': PropTypes.string,
-//     '$input-color-placeholder': PropTypes.string,
-//     '$input-padding-x-sm': PropTypes.string,
-//     '$input-padding-y-sm': PropTypes.string,
-//     '$input-padding-x-lg': PropTypes.string,
-//     '$input-padding-y-lg': PropTypes.string,
-//     '$input-height': PropTypes.string,
-//     '$input-height-sm': PropTypes.string,
-//     '$input-height-lg': PropTypes.string,
-//     '$input-transition': PropTypes.string,
-//     '$form-text-margin-top': PropTypes.string,
-//     '$form-feedback-margin-top': PropTypes.string,
-//     '$form-check-margin-bottom': PropTypes.string,
-//     '$form-check-input-gutter': PropTypes.string,
-//     '$form-check-input-margin-y': PropTypes.string,
-//     '$form-check-input-margin-x': PropTypes.string,
-//     '$form-check-inline-margin-x': PropTypes.string,
-//     '$form-group-margin-bottom': PropTypes.string,
-//     '$input-group-addon-bg': PropTypes.string,
-//     '$input-group-addon-border-color': PropTypes.string,
-//     '$cursor-disabled': PropTypes.string,
-//     '$custom-control-gutter': PropTypes.string,
-//     '$custom-control-spacer-x': PropTypes.string,
-//     '$custom-control-spacer-y': PropTypes.string,
-//     '$custom-control-indicator-size': PropTypes.string,
-//     '$custom-control-indicator-bg': PropTypes.string,
-//     '$custom-control-indicator-bg-size': PropTypes.string,
-//     '$custom-control-indicator-box-shadow': PropTypes.string,
-//     '$custom-control-disabled-cursor': PropTypes.string,
-//     '$custom-control-disabled-indicator-bg': PropTypes.string,
-//     '$custom-control-disabled-description-color': PropTypes.string,
-//     '$custom-control-checked-indicator-color': PropTypes.string,
-//     '$custom-control-checked-indicator-bg': PropTypes.string,
-//     '$custom-control-checked-indicator-box-shadow': PropTypes.string,
-//     '$custom-control-focus-indicator-box-shadow': PropTypes.string,
-//     '$custom-control-active-indicator-color': PropTypes.string,
-//     '$custom-control-active-indicator-bg': PropTypes.string,
-//     '$custom-control-active-indicator-box-shadow': PropTypes.string,
-//     '$custom-checkbox-radius': PropTypes.string,
-//     '$custom-checkbox-checked-icon': PropTypes.string,
-//     '$custom-checkbox-indeterminate-bg': PropTypes.string,
-//     '$custom-checkbox-indeterminate-indicator-color': PropTypes.string,
-//     '$custom-checkbox-indeterminate-icon': PropTypes.string,
-//     '$custom-checkbox-indeterminate-box-shadow': PropTypes.string,
-//     '$custom-radio-radius': PropTypes.string,
-//     '$custom-radio-checked-icon': PropTypes.string,
-//     '$custom-select-padding-x': PropTypes.string,
-//     '$custom-select-padding-y': PropTypes.string,
-//     '$custom-select-indicator-padding': PropTypes.string,
-//     '$custom-select-line-height': PropTypes.string,
-//     '$custom-select-color': PropTypes.string,
-//     '$custom-select-disabled-color': PropTypes.string,
-//     '$custom-select-bg': PropTypes.string,
-//     '$custom-select-disabled-bg': PropTypes.string,
-//     '$custom-select-bg-size': PropTypes.string,
-//     '$custom-select-indicator-color': PropTypes.string,
-//     '$custom-select-indicator': PropTypes.string,
-//     '$custom-select-border-width': PropTypes.string,
-//     '$custom-select-border-color': PropTypes.string,
-//     '$custom-select-border-radius': PropTypes.string,
-//     '$custom-select-focus-border-color': PropTypes.string,
-//     '$custom-select-focus-box-shadow': PropTypes.string,
-//     '$custom-select-sm-font-size': PropTypes.string,
-//     '$custom-file-height': PropTypes.string,
-//     '$custom-file-width': PropTypes.string,
-//     '$custom-file-focus-box-shadow': PropTypes.string,
-//     '$custom-file-padding-x': PropTypes.string,
-//     '$custom-file-padding-y': PropTypes.string,
-//     '$custom-file-line-height': PropTypes.string,
-//     '$custom-file-color': PropTypes.string,
-//     '$custom-file-bg': PropTypes.string,
-//     '$custom-file-border-width': PropTypes.string,
-//     '$custom-file-border-color': PropTypes.string,
-//     '$custom-file-border-radius': PropTypes.string,
-//     '$custom-file-box-shadow': PropTypes.string,
-//     '$custom-file-button-color': PropTypes.string,
-//     '$custom-file-button-bg': PropTypes.string,
-//     '$custom-file-text': PropTypes.object,
-//     '$form-icon-success-color': PropTypes.string,
-//     '$form-icon-success': PropTypes.string,
-//     '$form-icon-warning-color': PropTypes.string,
-//     '$form-icon-warning': PropTypes.string,
-//     '$form-icon-danger-color': PropTypes.string,
-//     '$form-icon-danger': PropTypes.string,
-//   }),
-//   /** Toggles inline CSS style. */
-//   inline: PropTypes.bool,
-//   /** Replace the default component tag reference by the one specified. Can be: */
-//   getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-//   /**
-//    * Replace the default component tag by the one specified. Can be:
-//    */
-//   tag: PropTypes.oneOfType([
-//     PropTypes.string,
-//     PropTypes.element,
-//     PropTypes.func,
-//   ]),
-//   /**
-//    * Replace or remove a className from the component.
-//    * See example [here](https://www.npmjs.com/package/map-to-css-modules).
-//    */
-//   cssModule: PropTypes.object,
-// };
+var propTypes$93 = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<DropdownItem />`. */
+  children: PropTypes.node,
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$brand-primary': PropTypes.string,
+    '$brand-success': PropTypes.string,
+    '$brand-info': PropTypes.string,
+    '$brand-warning': PropTypes.string,
+    '$brand-danger': PropTypes.string,
+    '$gray-dark': PropTypes.string,
+    '$gray': PropTypes.string,
+    '$gray-light': PropTypes.string,
+    '$gray-lighter': PropTypes.string,
+    '$gray-lightest': PropTypes.string,
+    '$border-width': PropTypes.string,
+    '$spacer': PropTypes.string,
+    '$spacer-y': PropTypes.string,
+    '$grid-breakpoints': PropTypes.object,
+    '$grid-gutter-width-base': '30px',
+    '$grid-gutter-widths': PropTypes.object,
+    '$font-size-base': PropTypes.string,
+    '$font-size-lg': PropTypes.string,
+    '$font-size-sm': PropTypes.string,
+    '$font-size-xs': PropTypes.string,
+    '$text-muted': PropTypes.string,
+    '$line-height-base': PropTypes.string,
+    '$line-height-lg': PropTypes.string,
+    '$line-height-sm': PropTypes.string,
+    '$border-radius': PropTypes.string,
+    '$border-radius-lg': PropTypes.string,
+    '$border-radius-sm': PropTypes.string,
+    '$input-padding-x': PropTypes.string,
+    '$input-padding-y': PropTypes.string,
+    '$input-line-height': PropTypes.string,
+    '$input-bg': PropTypes.string,
+    '$input-bg-disabled': PropTypes.string,
+    '$input-color': PropTypes.string,
+    '$input-border-color': PropTypes.string,
+    '$input-btn-border-width': PropTypes.string,
+    '$input-box-shadow': PropTypes.string,
+    '$input-border-radius': PropTypes.string,
+    '$input-border-radius-lg': PropTypes.string,
+    '$input-border-radius-sm': PropTypes.string,
+    '$input-bg-focus': PropTypes.string,
+    '$input-border-focus': PropTypes.string,
+    '$input-box-shadow-focus': PropTypes.string,
+    '$input-color-focus': PropTypes.string,
+    '$input-color-placeholder': PropTypes.string,
+    '$input-padding-x-sm': PropTypes.string,
+    '$input-padding-y-sm': PropTypes.string,
+    '$input-padding-x-lg': PropTypes.string,
+    '$input-padding-y-lg': PropTypes.string,
+    '$input-height': PropTypes.string,
+    '$input-height-sm': PropTypes.string,
+    '$input-height-lg': PropTypes.string,
+    '$input-transition': PropTypes.string,
+    '$form-text-margin-top': PropTypes.string,
+    '$form-feedback-margin-top': PropTypes.string,
+    '$form-check-margin-bottom': PropTypes.string,
+    '$form-check-input-gutter': PropTypes.string,
+    '$form-check-input-margin-y': PropTypes.string,
+    '$form-check-input-margin-x': PropTypes.string,
+    '$form-check-inline-margin-x': PropTypes.string,
+    '$form-group-margin-bottom': PropTypes.string,
+    '$input-group-addon-bg': PropTypes.string,
+    '$input-group-addon-border-color': PropTypes.string,
+    '$cursor-disabled': PropTypes.string,
+    '$custom-control-gutter': PropTypes.string,
+    '$custom-control-spacer-x': PropTypes.string,
+    '$custom-control-spacer-y': PropTypes.string,
+    '$custom-control-indicator-size': PropTypes.string,
+    '$custom-control-indicator-bg': PropTypes.string,
+    '$custom-control-indicator-bg-size': PropTypes.string,
+    '$custom-control-indicator-box-shadow': PropTypes.string,
+    '$custom-control-disabled-cursor': PropTypes.string,
+    '$custom-control-disabled-indicator-bg': PropTypes.string,
+    '$custom-control-disabled-description-color': PropTypes.string,
+    '$custom-control-checked-indicator-color': PropTypes.string,
+    '$custom-control-checked-indicator-bg': PropTypes.string,
+    '$custom-control-checked-indicator-box-shadow': PropTypes.string,
+    '$custom-control-focus-indicator-box-shadow': PropTypes.string,
+    '$custom-control-active-indicator-color': PropTypes.string,
+    '$custom-control-active-indicator-bg': PropTypes.string,
+    '$custom-control-active-indicator-box-shadow': PropTypes.string,
+    '$custom-checkbox-radius': PropTypes.string,
+    '$custom-checkbox-checked-icon': PropTypes.string,
+    '$custom-checkbox-indeterminate-bg': PropTypes.string,
+    '$custom-checkbox-indeterminate-indicator-color': PropTypes.string,
+    '$custom-checkbox-indeterminate-icon': PropTypes.string,
+    '$custom-checkbox-indeterminate-box-shadow': PropTypes.string,
+    '$custom-radio-radius': PropTypes.string,
+    '$custom-radio-checked-icon': PropTypes.string,
+    '$custom-select-padding-x': PropTypes.string,
+    '$custom-select-padding-y': PropTypes.string,
+    '$custom-select-indicator-padding': PropTypes.string,
+    '$custom-select-line-height': PropTypes.string,
+    '$custom-select-color': PropTypes.string,
+    '$custom-select-disabled-color': PropTypes.string,
+    '$custom-select-bg': PropTypes.string,
+    '$custom-select-disabled-bg': PropTypes.string,
+    '$custom-select-bg-size': PropTypes.string,
+    '$custom-select-indicator-color': PropTypes.string,
+    '$custom-select-indicator': PropTypes.string,
+    '$custom-select-border-width': PropTypes.string,
+    '$custom-select-border-color': PropTypes.string,
+    '$custom-select-border-radius': PropTypes.string,
+    '$custom-select-focus-border-color': PropTypes.string,
+    '$custom-select-focus-box-shadow': PropTypes.string,
+    '$custom-select-sm-font-size': PropTypes.string,
+    '$custom-file-height': PropTypes.string,
+    '$custom-file-width': PropTypes.string,
+    '$custom-file-focus-box-shadow': PropTypes.string,
+    '$custom-file-padding-x': PropTypes.string,
+    '$custom-file-padding-y': PropTypes.string,
+    '$custom-file-line-height': PropTypes.string,
+    '$custom-file-color': PropTypes.string,
+    '$custom-file-bg': PropTypes.string,
+    '$custom-file-border-width': PropTypes.string,
+    '$custom-file-border-color': PropTypes.string,
+    '$custom-file-border-radius': PropTypes.string,
+    '$custom-file-box-shadow': PropTypes.string,
+    '$custom-file-button-color': PropTypes.string,
+    '$custom-file-button-bg': PropTypes.string,
+    '$custom-file-text': PropTypes.object,
+    '$form-icon-success-color': PropTypes.string,
+    '$form-icon-success': PropTypes.string,
+    '$form-icon-warning-color': PropTypes.string,
+    '$form-icon-warning': PropTypes.string,
+    '$form-icon-danger-color': PropTypes.string,
+    '$form-icon-danger': PropTypes.string
+  }),
+  /** Toggles inline CSS style. */
+  inline: PropTypes.bool,
+  /** Replace the default component tag reference by the one specified. Can be: */
+  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  /**
+   * Replace or remove a className from the component.
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
+   */
+  cssModule: PropTypes.object
+};
 
 var FormUnstyled = function (_React$Component) {
   inherits(FormUnstyled, _React$Component);
@@ -21974,6 +21712,9 @@ var FormUnstyled = function (_React$Component) {
 
   createClass(FormUnstyled, [{
     key: 'render',
+
+    /* eslint-enable react/no-unused-prop-types */
+
     // eslint-disable-line react/prefer-stateless-function
 
     value: function render() {
@@ -21989,6 +21730,9 @@ var FormUnstyled = function (_React$Component) {
 
       return React__default.createElement(Tag, _extends({ ref: getRef, className: classes }, rest));
     }
+
+    /* eslint-disable react/no-unused-prop-types */
+
   }]);
   return FormUnstyled;
 }(React__default.Component);
@@ -21998,26 +21742,16 @@ var FormUnstyled = function (_React$Component) {
  */
 
 
-FormUnstyled.defaultProps = {
-  tag: 'form',
-  theme: makeTheme$5()
-};
-FormUnstyled.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  children: PropTypes.node,
-  theme: PropTypes.object,
-  inline: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  className: PropTypes.string,
-  cssModule: PropTypes.object
-  /* eslint-enable react/no-unused-prop-types */
-};
+FormUnstyled.defaultProps = defaultProps$81;
+FormUnstyled.propTypes = propTypes$93;
 var Form = styled__default(FormUnstyled).withConfig({
   displayName: 'Form'
 })(['  ', ''], function (props) {
   return '\n    /*\n     Textual form controls\n    */\n\n    ' + forms_2(props.theme['$enable-rounded'], props.theme['$enable-transitions'], props.theme['$enable-shadows'], props.theme['$input-height'], props.theme['$input-padding-y'], props.theme['$input-padding-x'], props.theme['$font-size-base'], props.theme['$input-line-height'], props.theme['$input-color'], props.theme['$input-bg'], props.theme['$input-border-radius'], props.theme['$input-btn-border-width'], props.theme['$input-border-color'], props.theme['$input-transition'], props.theme['$input-box-shadow'], props.theme['$input-color-focus'], props.theme['$input-bg-focus'], props.theme['$input-border-focus'], props.theme['$input-box-shadow-focus'], props.theme['$input-color-placeholder'], props.theme['$input-bg-disabled'], props.theme['$cursor-disabled']) + '\n    \n    select.form-control {\n      &:focus::-ms-value {\n        /* Suppress the nested default white text on blue background highlight given to\n         the selected option text when the (still closed) <select> receives focus\n         in IE and (under certain conditions) Edge, as it looks bad and cannot be made to\n         match the appearance of the native widget.\n         See https://github.com/twbs/bootstrap/issues/19398.\n         */\n        color: ' + props.theme['$input-color'] + ';\n        background-color: ' + props.theme['$input-bg'] + ';\n      }\n    }\n\n    /* Make file inputs better match text inputs by forcing them to new lines. */\n    & .form-control-file,\n    .form-control-range {\n      display: block;\n    }\n\n    /*\n     Labels\n    */\n\n    /* For use with horizontal and inline forms, when you need the label text to */\n    /* align with the form controls. */\n    & .col-form-label {\n      padding-top: calc(' + props.theme['$input-padding-y'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      margin-bottom: 0; /* Override the \'<label>\' default */\n    }\n\n    & .col-form-label-lg {\n      padding-top: calc(' + props.theme['$input-padding-y-lg'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y-lg'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      font-size: ' + props.theme['$font-size-lg'] + ';\n    }\n\n    & .col-form-label-sm {\n      padding-top: calc(' + props.theme['$input-padding-y-sm'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y-sm'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      font-size: ' + props.theme['$font-size-sm'] + ';\n    }\n\n    /*\n     Legends\n    */\n\n    /* For use with horizontal and inline forms, when you need the legend text to */\n    /* be the same size as regular labels, and to align with the form controls. */\n    & .col-form-legend {\n      padding-top: ' + props.theme['$input-padding-y'] + ';\n      padding-bottom: ' + props.theme['$input-padding-y'] + ';\n      margin-bottom: 0;\n      font-size: ' + props.theme['$font-size-base'] + ';\n    }\n\n\n    /* Static form control text\n\n     Apply class to an element to make any string of text align with labels in a\n     horizontal form layout.\n    */\n\n    & .form-control-static {\n      padding-top: ' + props.theme['$input-padding-y'] + ';\n      padding-bottom: ' + props.theme['$input-padding-y'] + ';\n      margin-bottom: 0; /* match inputs if this class comes on inputs with default margins */\n      line-height: ' + props.theme['$input-line-height'] + ';\n      border: solid transparent;\n      border-width: ' + props.theme['$input-btn-border-width'] + ' 0;\n\n      &.form-control-sm,\n      &.form-control-lg {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n\n\n    /* Form control sizing\n\n     Build on .form-control with modifier classes to decrease or increase the\n     height and font-size of form controls.\n\n     The .form-group-* form-control variations are sadly duplicated to avoid the\n     issue documented in https://github.com/twbs/bootstrap/issues/15074.\n    */\n\n    & .form-control-sm {\n      padding: ' + props.theme['$input-padding-y-sm'] + ' ' + props.theme['$input-padding-x-sm'] + ';\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-sm']) + '\n    }\n\n    select.form-control-sm {\n      &:not([size]):not([multiple]) {\n        height: ' + props.theme['$input-height-sm'] + ';\n      }\n    }\n\n    & .form-control-lg {\n      padding: ' + props.theme['$input-padding-y-lg'] + ' ' + props.theme['$input-padding-x-lg'] + ';\n      font-size: ' + props.theme['$font-size-lg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-lg']) + '\n    }\n\n    select.form-control-lg {\n      &:not([size]):not([multiple]) {\n        height: ' + props.theme['$input-height-lg'] + ';\n      }\n    }\n\n\n    /* Form groups Designed to help with the organization and spacing of vertical forms. For horizontal forms, use the predefined grid classes. */\n\n    &.form-group,\n     & .form-group {\n      margin-bottom: ' + props.theme['$form-group-margin-bottom'] + ';\n    }\n\n    & .form-text {\n      display: block;\n      margin-top: ' + props.theme['$form-text-margin-top'] + '\n    }\n\n\n    /* Checkboxes and radios Indent the labels to position radios/checkboxes as hanging controls. */\n\n    & .form-check {\n      position: relative;\n      display: block;\n      margin-bottom: ' + props.theme['$form-check-margin-bottom'] + ';\n\n      &.disabled {\n        .form-check-label {\n          color: ' + props.theme['$text-muted'] + ';\n          cursor: ' + props.theme['$cursor-disabled'] + ';\n        }\n      }\n    }\n\n    & .form-check-label {\n      padding-left: ' + props.theme['$form-check-input-gutter'] + ';\n      margin-bottom: 0; /* Override default <label> bottom margin */\n      cursor: pointer;\n    }\n\n    & .form-check-input {\n      position: absolute;\n      margin-top: ' + props.theme['$form-check-input-margin-y'] + ';\n      margin-left: -' + props.theme['$form-check-input-gutter'] + ';\n\n      &:only-child {\n        position: static;\n      }\n    }\n\n    /* Radios and checkboxes on same line */\n    & .form-check-inline {\n      display: inline-block;\n      .form-check-label {\n        vertical-align: middle;\n      }\n\n      + .form-check-inline {\n        margin-left: ' + props.theme['$form-check-inline-margin-x'] + ';\n      }\n\n      &.disabled {\n        color: ' + props.theme['$text-muted'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n      }\n    }\n\n\n    /* Form control feedback states Apply contextual and semantic states to individual form controls. */\n    & .form-control-feedback {\n      margin-top: ' + props.theme['$form-feedback-margin-top'] + ';\n    }\n\n    & .form-control-success,\n    & .form-control-warning,\n    & .form-control-danger {\n      padding-right: ' + unitUtils$1.math.multiply(props.theme['$input-padding-x'], 3) + ';\n      background-repeat: no-repeat;\n      background-position: center right ' + unitUtils$1.math.divide(props.theme['$input-height'], 4) + ';\n      background-size: ' + unitUtils$1.math.divide(props.theme['$input-height'], 2) + ' ' + unitUtils$1.math.divide(props.theme['$input-height'], 2) + ';\n    }\n\n    /* Form validation states */\n    & .has-success {\n      ' + forms_3(props.theme['$enable-shadows'], props.theme['$brand-success'], props.theme['$box-shadow']) + '\n\n      .form-control-success {\n        background-image: ' + props.theme['$form-icon-success'] + ';\n      }\n    }\n\n    & .has-warning {\n      ' + forms_3(props.theme['$enable-shadows'], props.theme['$brand-warning'], props.theme['$box-shadow']) + '\n\n      .form-control-warning {\n        background-image: ' + props.theme['$form-icon-warning'] + ';\n      }\n    }\n\n    & .has-danger {\n      ' + forms_3(props.theme['$enable-shadows'], props.theme['$brand-danger'], props.theme['$box-shadow']) + '\n\n      .form-control-danger {\n        background-image: ' + props.theme['$form-icon-danger'] + ';\n      }\n    }\n\n\n    /* Inline forms\n\n     Make forms appear inline(-block) by adding the .form-inline class. Inline\n     forms begin stacked on extra small (mobile) devices and then go inline when\n     viewports reach <768px.\n\n     Requires wrapping inputs and labels with .form-group for proper display of\n     default HTML form controls and our custom form controls (e.g., input groups).\n    */\n\n    &.form-inline {\n      display: flex;\n      flex-flow: row wrap;\n      align-items: center; /* Prevent shorter elements from growing to same height as others (e.g., small buttons growing to normal sized button height) */\n\n      & .form-check {\n         width: 100%;\n      }\n\n      /* Kick in the inline */\n      ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n          label {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            margin-bottom: 0;\n          }\n          \n          /* Inline-block all the things for inline */\n          & .form-group {\n            display: flex;\n            flex: 0 0 auto;\n            flex-flow: row wrap;\n            margin-bottom: 0;\n          }\n      \n          /* Allow folks to *not* use .form-group */\n          & .form-control {\n            display: inline-block;\n            width: auto; /* Prevent labels from stacking above inputs in .form-group */\n            vertical-align: middle;\n          }\n      \n          /* Make static controls behave like regular ones */\n          & .form-control-static {\n            display: inline-block;\n          }\n      \n          & .input-group {\n            width: auto;\n          }\n          \n          & .form-control-label {\n             margin-bottom: 0;\n            vertical-align: middle;\n          }\n      \n          /* Remove default margin on radios/checkboxes that were used for stacking, and */\n          /*  then undo the floating of radios and checkboxes to match. */\n          & .form-check {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            width: auto;\n            margin-top: 0;\n            margin-bottom: 0;\n          }\n          & .form-check-label {\n            padding-left: 0;\n          }\n          & .form-check-input {\n            position: relative;\n            margin-left: 0;\n            margin-top: 0;\n            margin-right: ' + props.theme['$form-check-input-margin-x'] + ';\n          }\n          \n          /* Custom form controls */\n          & .custom-control {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            padding-left: 0;\n          }\n          \n          & .custom-control-indicator {\n            position: static;\n            display: inline-block;\n            margin-right: ' + props.theme['$form-check-input-margin-x'] + '; /* Flexbox alignment means we lose our HTML space here, so we compensate. */\n            vertical-align: text-bottom;\n          }\n          \n          /* Re-override the feedback icon. */\n          & .has-feedback .form-control-feedback {\n            top: 0;\n          }\n        ') + '\n    }\n    ' + customForms_3(props.theme['$enable-rounded'], props.theme['$enable-shadows'], props.theme['$custom-control-checked-indicator-box-shadow'], props.theme['$custom-control-active-indicator-box-shadow'], props.theme['$custom-control-indicator-box-shadow'], props.theme['$custom-checkbox-indeterminate-box-shadow'], props.theme['$custom-select-focus-box-shadow'], props.theme['$custom-file-focus-box-shadow'], props.theme['$custom-file-box-shadow'], props.theme['$custom-select-border-radius'], props.theme['$custom-file-border-radius'], props.theme['$custom-checkbox-radius'], props.theme['$input-bg'], props.theme['$custom-select-line-height'], props.theme['$line-height-base'], props.theme['$custom-control-gutter'], props.theme['$custom-control-spacer-x'], props.theme['$custom-control-checked-indicator-color'], props.theme['$custom-control-checked-indicator-bg'], props.theme['$custom-control-focus-indicator-box-shadow'], props.theme['$custom-control-active-indicator-color'], props.theme['$custom-control-active-indicator-bg'], props.theme['$custom-control-disabled-cursor'], props.theme['$custom-control-disabled-indicator-bg'], props.theme['$custom-control-disabled-description-color'], props.theme['$custom-control-indicator-size'], props.theme['$custom-control-indicator-bg'], props.theme['$custom-control-indicator-bg-size'], props.theme['$custom-checkbox-checked-icon'], props.theme['$custom-checkbox-indeterminate-bg'], props.theme['$custom-checkbox-indeterminate-icon'], props.theme['$custom-radio-radius'], props.theme['$custom-radio-checked-icon'], props.theme['$custom-control-spacer-y'], props.theme['$border-width'], props.theme['$input-height'], props.theme['$custom-select-padding-y'], props.theme['$custom-select-padding-x'], props.theme['$custom-select-indicator-padding'], props.theme['$custom-select-color'], props.theme['$custom-select-bg'], props.theme['$custom-select-indicator'], props.theme['$custom-select-bg-size'], props.theme['$custom-select-border-width'], props.theme['$custom-select-border-color'], props.theme['$custom-select-focus-border-color'], props.theme['$input-color'], props.theme['$custom-select-disabled-color'], props.theme['$cursor-disabled'], props.theme['$custom-select-disabled-bg'], props.theme['$custom-select-sm-font-size'], props.theme['$custom-file-width'], props.theme['$custom-file-height'], props.theme['$custom-file-padding-x'], props.theme['$custom-file-padding-y'], props.theme['$custom-file-line-height'], props.theme['$custom-file-color'], props.theme['$custom-file-bg'], props.theme['$custom-file-border-width'], props.theme['$custom-file-border-color'], props.theme['$custom-file-button-color'], props.theme['$custom-file-button-bg'], props.theme['$custom-file-text']) + '\n    & .row {\n      ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n  ';
 });
+
+Form.defaultProps = defaultProps$81;
+Form.propTypes = propTypes$93;
 
 /* eslint-disable quote-props, dot-notation */
 /**
@@ -22025,10 +21759,10 @@ var Form = styled__default(FormUnstyled).withConfig({
  *
  *
  */
-var defaultProps$81 = {
+var defaultProps$82 = {
   tag: 'div'
 };
-var propTypes$93 = {
+var propTypes$94 = {
   /**
    * @ignore
    */
@@ -22053,7 +21787,7 @@ var propTypes$93 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -22097,12 +21831,12 @@ var FormGroup = function (_React$Component) {
   return FormGroup;
 }(React__default.Component);
 
-FormGroup.defaultProps = defaultProps$81;
-FormGroup.propTypes = propTypes$93;
+FormGroup.defaultProps = defaultProps$82;
+FormGroup.propTypes = propTypes$94;
 
 
-FormGroup.defaultProps = defaultProps$81;
-FormGroup.propTypes = propTypes$93;
+FormGroup.defaultProps = defaultProps$82;
+FormGroup.propTypes = propTypes$94;
 
 /* eslint-disable quote-props, dot-notation */
 /**
@@ -22110,10 +21844,10 @@ FormGroup.propTypes = propTypes$93;
  *
  *
  */
-var defaultProps$82 = {
+var defaultProps$83 = {
   tag: 'small'
 };
-var propTypes$94 = {
+var propTypes$95 = {
   /**
    * @ignore
    */
@@ -22121,7 +21855,7 @@ var propTypes$94 = {
   /** Specified node element will be passed as children of `<DropdownItem />`. */
   children: PropTypes.node,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['success', 'warning', 'danger']),
+  color: PropTypes.oneOf(['success', 'warning', 'danger', 'muted']),
   /** Toggles inline CSS display. */
   inline: PropTypes.bool,
   /**
@@ -22130,7 +21864,7 @@ var propTypes$94 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -22171,12 +21905,12 @@ var FormText = function (_React$Component) {
   return FormText;
 }(React__default.Component);
 
-FormText.defaultProps = defaultProps$82;
-FormText.propTypes = propTypes$94;
+FormText.defaultProps = defaultProps$83;
+FormText.propTypes = propTypes$95;
 
 
-FormText.defaultProps = defaultProps$82;
-FormText.propTypes = propTypes$94;
+FormText.defaultProps = defaultProps$83;
+FormText.propTypes = propTypes$95;
 
 /* eslint-disable quote-props, dot-notation */
 /**
@@ -22184,10 +21918,10 @@ FormText.propTypes = propTypes$94;
  *
  *
  */
-var defaultProps$83 = {
+var defaultProps$84 = {
   tag: 'div'
 };
-var propTypes$95 = {
+var propTypes$96 = {
   /**
    * @ignore
    */
@@ -22200,7 +21934,7 @@ var propTypes$95 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -22239,12 +21973,12 @@ var FormFeedback = function (_React$Component) {
   return FormFeedback;
 }(React__default.Component);
 
-FormFeedback.defaultProps = defaultProps$83;
-FormFeedback.propTypes = propTypes$95;
+FormFeedback.defaultProps = defaultProps$84;
+FormFeedback.propTypes = propTypes$96;
 
 
-FormFeedback.defaultProps = defaultProps$83;
-FormFeedback.propTypes = propTypes$95;
+FormFeedback.defaultProps = defaultProps$84;
+FormFeedback.propTypes = propTypes$96;
 
 /* eslint-disable quote-props, dot-notation */
 /**
@@ -22252,7 +21986,7 @@ FormFeedback.propTypes = propTypes$95;
  *
  *
  */
-var propTypes$96 = {
+var propTypes$97 = {
   /**
    * @ignore
    */
@@ -22270,7 +22004,7 @@ var propTypes$96 = {
   checked: PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -22321,15 +22055,15 @@ var FormCustom = function (_React$Component) {
   return FormCustom;
 }(React__default.Component);
 
-FormCustom.propTypes = propTypes$96;
+FormCustom.propTypes = propTypes$97;
 
 
-FormCustom.propTypes = propTypes$96;
+FormCustom.propTypes = propTypes$97;
 
-var defaultProps$84 = {
+var defaultProps$85 = {
   tag: 'button'
 };
-var propTypes$97 = {
+var propTypes$98 = {
   /**
    * @ignore
    */
@@ -22352,7 +22086,7 @@ var propTypes$97 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -22433,22 +22167,22 @@ var DropdownItem = function (_React$Component) {
   return DropdownItem;
 }(React__default.Component);
 
-DropdownItem.defaultProps = defaultProps$84;
-DropdownItem.propTypes = propTypes$97;
+DropdownItem.defaultProps = defaultProps$85;
+DropdownItem.propTypes = propTypes$98;
 DropdownItem.contextTypes = {
   toggle: PropTypes.func
 };
 
 
-DropdownItem.defaultProps = defaultProps$84;
-DropdownItem.propTypes = propTypes$97;
+DropdownItem.defaultProps = defaultProps$85;
+DropdownItem.propTypes = propTypes$98;
 
-var defaultProps$85 = {
+var defaultProps$86 = {
   'aria-haspopup': true,
   'data-toggle': 'dropdown',
   color: 'primary'
 };
-var propTypes$98 = {
+var propTypes$99 = {
   /**
    * @ignore
    */
@@ -22475,7 +22209,7 @@ var propTypes$98 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -22567,19 +22301,19 @@ var DropdownToggle = function (_React$Component) {
   return DropdownToggle;
 }(React__default.Component);
 
-DropdownToggle.defaultProps = defaultProps$85;
-DropdownToggle.propTypes = propTypes$98;
+DropdownToggle.defaultProps = defaultProps$86;
+DropdownToggle.propTypes = propTypes$99;
 DropdownToggle.contextTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired
 };
 
 
-DropdownToggle.defaultProps = defaultProps$85;
-DropdownToggle.propTypes = propTypes$98;
+DropdownToggle.defaultProps = defaultProps$86;
+DropdownToggle.propTypes = propTypes$99;
 
-var rmUnit$4 = unitUtils$1.rmUnit;
-var UNIT$4 = unitUtils$1.UNIT;
+var rmUnit$3 = unitUtils$1.rmUnit;
+var UNIT$3 = unitUtils$1.UNIT;
 
 /**
  * BOOTSTRAP THEME NAVBAR
@@ -22588,7 +22322,7 @@ var UNIT$4 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$6 = function makeTheme() {
+var makeTheme$5 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -22645,7 +22379,7 @@ var makeTheme$6 = function makeTheme() {
 
   // =============================================================================================================
   // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
-  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$4(v['$spacer'], UNIT$4.REM) / 2 + UNIT$4.REM;
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$3(v['$spacer'], UNIT$3.REM) / 2 + UNIT$3.REM;
   // =============================================================================================================
 
   v['$border-width'] = u['$border-width'] || '1px';
@@ -22727,7 +22461,7 @@ var makeTheme$6 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$6();
+makeTheme$5();
 
 /* eslint-disable */
 var getToggleableClass = function getToggleableClass(toggleable) {
@@ -22741,7 +22475,7 @@ var getToggleableClass = function getToggleableClass(toggleable) {
   return 'navbar-toggleable-' + toggleable;
 };
 
-var defaultProps$86 = {
+var defaultProps$87 = {
   tag: 'nav',
   role: 'navigation',
   toggleable: false,
@@ -22799,7 +22533,7 @@ var defaultProps$86 = {
     '$navbar-inverse-disabled-color': 'rgba(255, 255, 255, 0.25)'
   }
 };
-var propTypes$99 = {
+var propTypes$100 = {
   /**
    * @ignore
    */
@@ -22874,7 +22608,7 @@ var propTypes$99 = {
   }),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -22922,8 +22656,8 @@ var NavbarUnstyled = function (_React$Component) {
   return NavbarUnstyled;
 }(React__default.Component);
 
-NavbarUnstyled.defaultProps = defaultProps$86;
-NavbarUnstyled.propTypes = propTypes$99;
+NavbarUnstyled.defaultProps = defaultProps$87;
+NavbarUnstyled.propTypes = propTypes$100;
 
 
 
@@ -22933,14 +22667,14 @@ var Navbar = styled__default(NavbarUnstyled).withConfig({
   return '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + nav_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n  ';
 });
 
-Navbar.defaultProps = defaultProps$86;
-Navbar.propTypes = propTypes$99;
+Navbar.defaultProps = defaultProps$87;
+Navbar.propTypes = propTypes$100;
 
-var defaultProps$87 = {
+var defaultProps$88 = {
   tag: 'button',
   type: 'button'
 };
-var propTypes$100 = {
+var propTypes$101 = {
   /**
    * @ignore
    */
@@ -22959,7 +22693,7 @@ var propTypes$100 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -22985,14 +22719,14 @@ var NavbarToggler = function NavbarToggler(props) {
   );
 };
 
-NavbarToggler.propTypes = propTypes$100;
-NavbarToggler.defaultProps = defaultProps$87;
+NavbarToggler.propTypes = propTypes$101;
+NavbarToggler.defaultProps = defaultProps$88;
 
-var defaultProps$88 = {
+var defaultProps$89 = {
   tag: 'a'
 };
 
-var propTypes$101 = {
+var propTypes$102 = {
   /**
    * @ignore
    */
@@ -23003,7 +22737,7 @@ var propTypes$101 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
@@ -23020,10 +22754,10 @@ var NavbarBrand = function NavbarBrand(props) {
   return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
 };
 
-NavbarBrand.propTypes = propTypes$101;
-NavbarBrand.defaultProps = defaultProps$88;
+NavbarBrand.propTypes = propTypes$102;
+NavbarBrand.defaultProps = defaultProps$89;
 
-var propTypes$102 = {
+var propTypes$103 = {
   /**
    * @ignore
    */
@@ -23040,11 +22774,11 @@ var propTypes$102 = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object
 };
-var defaultProps$89 = {
+var defaultProps$90 = {
   tag: 'li'
 };
 
@@ -23060,10 +22794,10 @@ var NavDropdown = function NavDropdown(props) {
   return React__default.createElement(Dropdown, _extends({}, attributes, { tag: Tag, className: classes }));
 };
 
-NavDropdown.propTypes = propTypes$102;
-NavDropdown.defaultProps = defaultProps$89;
+NavDropdown.propTypes = propTypes$103;
+NavDropdown.defaultProps = defaultProps$90;
 
-var defaultProps$90 = {
+var defaultProps$91 = {
   theme: {
     '$grid-gutter-width-base': '30px',
     '$grid-gutter-widths': {
@@ -23082,7 +22816,7 @@ var defaultProps$90 = {
     '$enable-grid-classes': true
   }
 };
-var propTypes$103 = {
+var propTypes$104 = {
   /**
    * @ignore
    */
@@ -23129,18 +22863,18 @@ var ContainerUnstyled = function (_React$Component) {
  */
 
 
-ContainerUnstyled.defaultProps = defaultProps$90;
-ContainerUnstyled.propTypes = propTypes$103;
+ContainerUnstyled.defaultProps = defaultProps$91;
+ContainerUnstyled.propTypes = propTypes$104;
 var Container = styled__default(ContainerUnstyled).withConfig({
   displayName: 'Container'
 })(['', ''], function (props) {
   return '\n    ' + grid_2(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    \n    ' + grid_3(props.theme['$enable-grid-classes'], props.theme['$container-max-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
 
-Container.defaultProps = defaultProps$90;
-Container.propTypes = propTypes$103;
+Container.defaultProps = defaultProps$91;
+Container.propTypes = propTypes$104;
 
-var defaultProps$91 = {
+var defaultProps$92 = {
   theme: {
     '$grid-gutter-width-base': '30px',
     '$grid-gutter-widths': {
@@ -23153,7 +22887,7 @@ var defaultProps$91 = {
     '$enable-grid-classes': true
   }
 };
-var propTypes$104 = {
+var propTypes$105 = {
   /**
    * @ignore
    */
@@ -23199,16 +22933,16 @@ var ContainerFluidUnstyled = function (_React$Component) {
  */
 
 
-ContainerFluidUnstyled.defaultProps = defaultProps$91;
-ContainerFluidUnstyled.propTypes = propTypes$104;
+ContainerFluidUnstyled.defaultProps = defaultProps$92;
+ContainerFluidUnstyled.propTypes = propTypes$105;
 var ContainerFluid = styled__default(ContainerFluidUnstyled).withConfig({
   displayName: 'ContainerFluid'
 })(['', ''], function (props) {
   return '\n    ' + grid_2(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n  ';
 });
 
-ContainerFluid.defaultProps = defaultProps$91;
-ContainerFluid.propTypes = propTypes$104;
+ContainerFluid.defaultProps = defaultProps$92;
+ContainerFluid.propTypes = propTypes$105;
 
 // 0. Configuration
 

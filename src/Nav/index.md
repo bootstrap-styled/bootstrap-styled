@@ -6,7 +6,7 @@ initialState = {
 };
 <Nav tabs>
   <NavItem>
-    <NavLink active href="#">Active</NavLink>
+    <NavLink active href="javascript:;">Active</NavLink>
   </NavItem>
   <NavDropdown isOpen={state.isOpen} toggle={() => setState({ isOpen: !state.isOpen })}>
     <DropdownToggle caret nav>
@@ -21,10 +21,10 @@ initialState = {
     </DropdownMenu>
   </NavDropdown>
   <NavItem>
-    <NavLink href="#">Link</NavLink>
+    <NavLink href="javascript:;">Link</NavLink>
   </NavItem>
   <NavItem>
-    <NavLink disabled href="#">Disabled</NavLink>
+    <NavLink disabled href="javascript:;">Disabled</NavLink>
   </NavItem>
 </Nav>
 ```

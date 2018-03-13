@@ -1,4 +1,4 @@
-Heading component example:
+`<Header />` component example:
 
 ```js
 initialState = {
@@ -8,7 +8,7 @@ initialState = {
   <H3 color="muted">Project name</H3>
   <Nav pills>
     <NavItem>
-      <NavLink active href="#">Active</NavLink>
+      <NavLink active href="javascript:;">Active</NavLink>
     </NavItem>
     <NavDropdown isOpen={state.isOpen} toggle={() => setState({ isOpen: !state.isOpen })}>
       <DropdownToggle caret nav>
@@ -23,7 +23,7 @@ initialState = {
       </DropdownMenu>
     </NavDropdown>
     <NavItem>
-      <NavLink href="#">Contact</NavLink>
+      <NavLink href="javascript:;">Contact</NavLink>
     </NavItem>
   </Nav>
 </Header>

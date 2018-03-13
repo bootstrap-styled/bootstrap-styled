@@ -1,7 +1,7 @@
 `<Dl />` component example:
 
 ```js
-<Dl>
+<Dl className="d-inline-block">
   <Dt>Coffee</Dt>
   <Dd>Black hot or cold drink</Dd>
   <Dt>Tea</Dt>

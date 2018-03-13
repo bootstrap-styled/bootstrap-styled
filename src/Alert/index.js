@@ -5,7 +5,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { alertVariant } from 'bootstrap-styled-mixins/lib/alert';
@@ -118,7 +118,7 @@ export const propTypes = {
   uncontrolled: PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object,
 };
@@ -263,10 +263,12 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
   }
 }
 
+const AlertHoc = withTheme(AlertUnstyled);
+
 /**
  * Alert component.
  */
-const Alert = styled(AlertUnstyled)`
+const Alert = styled(AlertHoc)`
   ${(props) => `
     /*
     Base styles
@@ -335,8 +337,8 @@ const Alert = styled(AlertUnstyled)`
   `}
 `;
 
-Alert.defaultProps = defaultProps;
 Alert.propTypes = propTypes;
+Alert.defaultProps = defaultProps;
 
 /** @component */
 export default Alert;

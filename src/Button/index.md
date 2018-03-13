@@ -2,19 +2,72 @@
 
 ```js
 <div>
-  <Button color="link">link</Button>
   <Button color="primary">primary</Button>
-  <Button tag={A} color="secondary" href="#">secondary</Button>
-  <Button outline color="success">success</Button>
-  <Button color="info" size="sm">info</Button>
-  <Button color="warning" size="lg">warning</Button>
-  <Button color="danger" size="lg" block>danger</Button>
-  <Button tag={A} color="primary" size="lg" active>active</Button>
-  <Button color="secondary" size="lg" disabled>disabled</Button>
+  <Button color="secondary">secondary</Button>
+  <Button color="success">success</Button>
+  <Button color="info">info</Button>
+  <Button color="warning">warning</Button>
+  <Button color="danger">danger</Button>
+  <Button color="link">link</Button>
 </div>
 ```
 
-Radio `<Button />` component example with:
+`<Button />` component example with specific tags:
+
+```js
+<div>
+  <Button tag={A} color="primary" href="javascript:;">Link</Button>
+  <Button color="primary" type="submit">Button</Button>
+  <Button tag={Input} color="primary" type="button" value="Input" />
+  <Button tag={Input} color="primary" type="submit" value="Submit" />
+  <Button tag={Input} color="primary" type="reset" value="Reset" />
+</div>
+```
+
+Outline `<Button />` component example with specific tags:
+
+```js
+<div>
+  <Button outline color="primary">primary</Button>
+  <Button outline color="secondary">secondary</Button>
+  <Button outline color="success">success</Button>
+  <Button outline color="info">info</Button>
+  <Button outline color="warning">warning</Button>
+  <Button outline color="danger">danger</Button>
+</div>
+```
+
+`<Button />` component example with specific sizes and display:
+
+```js
+<div>
+  <Button color="primary" size="sm">Small Button</Button>
+  <Button color="secondary" size="sm">Small Button</Button>
+  <div>
+    <Button color="primary" size="lg">Large Button</Button>
+    <Button color="secondary" size="lg">Large Button</Button>
+  </div>
+  <Button color="primary" size="lg" block>Block level button</Button>
+  <Button color="secondary" size="lg" block>Block level button</Button>
+</div>
+```
+
+`<Button />` component example with states:
+
+```js
+<div>
+  <div>
+    <Button tag={A} color="primary" size="lg" active>Active primary link</Button>
+    <Button tag={A} color="secondary" size="lg" active>Active link</Button>
+  </div>
+  <div>
+    <Button color="primary" size="lg" disabled>Disabled primary button</Button>
+    <Button color="secondary" size="lg" disabled>Disabled button</Button>
+  </div>
+</div>
+```
+
+Radio `<Button />` component example:
 
 ```js
 initialState = {
@@ -35,7 +88,7 @@ const onRadioBtnClick = function(rSelected) {
 </div>
 ```
 
-Checkbox and radio `<Button />` component example with:
+Checkbox `<Button />` component example with:
 
 ```js
 initialState = {

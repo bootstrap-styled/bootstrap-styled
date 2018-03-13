@@ -71,8 +71,8 @@ export const propTypes = {
   }),
 };
 /**
- * You can use **Headings** with **components** or **className**.
- * Alternatively we provide **Display** headings in order to give more flexibility on heading sizing.
+ * You can use `<Header />` with **components** or **className**.
+ * Alternatively we provide **Display** header in order to give more flexibility on header sizing.
  */
 const Header = styled.header`
   ${(props) => `

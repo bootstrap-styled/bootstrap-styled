@@ -2,9 +2,9 @@
 
 ```js
 <Select>
-  <Option value="volvo">Volvo</Option>
-  <Option value="saab">Saab</Option>
-  <Option value="mercedes">Mercedes</Option>
-  <Option value="audi">Audi</Option>
+  <Option value="bootstrap">Bootstrap</Option>
+  <Option value="styled">Styled</Option>
+  <Option value="from">From</Option>
+  <Option value="yeutech">YeuTech</Option>
 </Select>
 ```

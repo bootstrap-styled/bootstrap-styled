@@ -140,7 +140,7 @@ export const propTypes = {
   borderColor: PropTypes.string,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object,
 };
