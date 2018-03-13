@@ -52,7 +52,7 @@ const propTypes = {
   'dropdown-footer': PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object,
 };
@@ -101,7 +101,7 @@ class LiUnstyled extends React.Component { // eslint-disable-line react/prefer-s
 
 /**
  * Replace or remove a className from the component.
- * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+ * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
  */
 const Li = styled(LiUnstyled)`
   ${(props) => `

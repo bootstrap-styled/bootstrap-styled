@@ -118,7 +118,7 @@ const propTypes = {
   uncontrolled: PropTypes.bool,
   /**
    * Replace or remove a className from the component.
-   * See example [here](https://www.npmjs.com/package/map-to-css-modules).
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
   cssModule: PropTypes.object,
 };
@@ -263,10 +263,12 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
   }
 }
 
+const AlertHoc = withTheme(AlertUnstyled);
+
 /**
  * Alert component.
  */
-const Alert = styled(AlertUnstyled)`
+const Alert = styled(AlertHoc)`
   ${(props) => `
     /*
     Base styles
@@ -335,8 +337,8 @@ const Alert = styled(AlertUnstyled)`
   `}
 `;
 
-Alert.defaultProps = defaultProps;
 Alert.propTypes = propTypes;
+Alert.defaultProps = defaultProps;
 
 /** @component */
-export default withTheme(Alert);
+export default Alert;

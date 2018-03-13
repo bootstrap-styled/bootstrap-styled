@@ -4,5 +4,15 @@ This component has no props.
 `<Textarea />` component example:
 
 ```js
-<Textarea defaultValue="This is a text area" />
+<Form>
+  <Textarea className="w-100" name="text" id="example-text-area" />
+</Form>
+```
+
+You can also use `<Input />` component of type `textarea` as below:
+
+```js
+<Form>
+  <Input type="textarea" name="text" id="example-text-area-input" />
+</Form>
 ```

@@ -1,8 +1,8 @@
 `<Dt />` component example:
 
 ```js
-<div>
+<Dl className="d-inline-block">
   <Dt>Coffee</Dt>
   <Dd>Black hot drink</Dd>
-</div>
+</Dl>
 ```

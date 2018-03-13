@@ -7,7 +7,7 @@ initialState = {
 <Navbar color="faded" light toggleable="lg">
   <Container>
     <div className="d-flex justify-content-between">
-      <NavbarBrand tag={A} to="/">Brand</NavbarBrand>
+      <NavbarBrand tag={A} to="javascript:;">Brand</NavbarBrand>
       <NavbarToggler onClick={() => setState({ isOpen: !state.isOpen })} />
     </div>
     <Collapse navbar isOpen={state.isOpen}>
