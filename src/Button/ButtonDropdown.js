@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Dropdown from '../Dropdown';
 
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

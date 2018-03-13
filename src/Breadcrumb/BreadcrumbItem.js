@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'li',
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

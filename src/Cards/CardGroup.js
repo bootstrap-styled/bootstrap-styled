@@ -14,7 +14,7 @@ import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
 import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
 import { card } from 'bootstrap-styled-mixins/lib/cards';
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'div',
   theme: {
     '$brand-primary': '#0275d8',
@@ -58,7 +58,7 @@ const defaultProps = {
     '$enable-hover-media-query': false,
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

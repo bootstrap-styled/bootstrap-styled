@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import omit from 'lodash.omit';
 import { makeGridColumns } from 'bootstrap-styled-mixins/lib/grid-framework';
 
-const defaultProps = {
+export const defaultProps = {
   theme: {
     '$grid-columns': '12',
     '$grid-gutter-widths': {
@@ -29,7 +29,7 @@ const defaultProps = {
     '$enable-grid-classes': true,
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

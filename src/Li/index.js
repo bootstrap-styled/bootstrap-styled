@@ -11,12 +11,12 @@ import { media as mediaCss } from 'bootstrap-styled-mixins/lib/media';
 import mapToCssModules from 'map-to-css-modules';
 
 
-const defaultProps = {
+export const defaultProps = {
   theme: {
     '$list-inline-padding': '5px',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

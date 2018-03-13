@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

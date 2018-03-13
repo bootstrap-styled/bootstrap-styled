@@ -20,7 +20,7 @@ const getToggleableClass = (toggleable) => { // eslint-disable-line react/prefer
   return `navbar-toggleable-${toggleable}`;
 };
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'nav',
   role: 'navigation',
   toggleable: false,
@@ -78,7 +78,7 @@ const defaultProps = {
     '$navbar-inverse-disabled-color': 'rgba(255, 255, 255, 0.25)',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

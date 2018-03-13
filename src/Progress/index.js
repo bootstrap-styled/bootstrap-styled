@@ -10,7 +10,7 @@ import { getBackgroundUtilities } from 'bootstrap-styled-mixins/lib/utilities/ba
 import { gradientStriped } from 'bootstrap-styled-mixins/lib/gradients';
 
 
-const defaultProps = {
+export const defaultProps = {
   theme: {
     '$enable-rounded': true,
     '$enable-hover-media-query': false,
@@ -24,7 +24,7 @@ const defaultProps = {
     '$progress-bar-animation-timing': 'infinite',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

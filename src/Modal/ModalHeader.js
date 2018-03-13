@@ -5,12 +5,12 @@ import mapToCssModules from 'map-to-css-modules';
 import H4 from '../H4';
 import Close from '../Close';
 
-const defaultProps = {
+export const defaultProps = {
   tag: H4,
   wrapTag: 'div',
 };
 
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

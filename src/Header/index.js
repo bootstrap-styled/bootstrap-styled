@@ -3,7 +3,7 @@ import { navbar } from 'bootstrap-styled-mixins/lib/navbar';
 import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
 import PropTypes from 'prop-types';
 
-const defaultProps = {
+export const defaultProps = {
   theme: {
     '$enable-rounded': true,
     '$enable-hover-media-query': false,
@@ -35,7 +35,7 @@ const defaultProps = {
     '$navbar-inverse-disabled-color': 'rgba(255, 255, 255, 0.25)',
   },
 };
-const propTypes = {
+export const propTypes = {
   /** Toggle shadow CSS style. */
   shadowHeader: PropTypes.bool,
   /** Theme variables. Can be: */

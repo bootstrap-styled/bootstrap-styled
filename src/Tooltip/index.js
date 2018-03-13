@@ -29,7 +29,7 @@ const defaultTetherConfig = {
 };
 // propTypes need to be excluded of the tooltip class
 // issue on : https://github.com/yannickcr/eslint-plugin-react/issues/203
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */
@@ -64,7 +64,7 @@ const propTypes = {
    */
   cssModule: PropTypes.object,
 };
-const defaultProps = {
+export const defaultProps = {
   isOpen: false,
   placement: 'bottom',
   delay: DEFAULT_DELAYS,

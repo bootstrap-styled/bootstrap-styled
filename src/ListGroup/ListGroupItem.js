@@ -10,10 +10,10 @@ import cn from 'classnames';
 const handleDisabledOnClick = (e) => {
   e.preventDefault();
 };
-const defaultProps = {
+export const defaultProps = {
   tag: 'li',
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

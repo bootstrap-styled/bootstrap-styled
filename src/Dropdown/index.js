@@ -28,7 +28,7 @@ const defaultTetherConfig = {
   ],
 };
 
-const defaultProps = {
+export const defaultProps = {
   isOpen: false,
   tag: 'div',
   theme: {
@@ -79,7 +79,7 @@ const defaultProps = {
     '$input-height-lg': '',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

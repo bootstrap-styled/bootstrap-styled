@@ -20,7 +20,7 @@ import visibilityUtils from 'bootstrap-styled-mixins/lib/utilities/visibility';
 import theme from '../theme';
 
 
-const defaultProps = {
+export const defaultProps = {
   theme,
   utils: {
     align: true,
@@ -40,7 +40,7 @@ const defaultProps = {
     visibility: true,
   },
 };
-const propTypes = {
+export const propTypes = {
   /** Specified node element will be passed as children of `<UtilityProvider />` component. */
   children: PropTypes.node,
   /** Theme variables. */

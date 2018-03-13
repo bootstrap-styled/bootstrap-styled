@@ -7,7 +7,7 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { a } from 'bootstrap-styled-mixins/lib/a';
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'a',
   theme: {
     '$link-color': '#0275d8',
@@ -17,7 +17,7 @@ const defaultProps = {
     '$enable-hover-media-query': false,
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

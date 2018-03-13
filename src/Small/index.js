@@ -11,12 +11,12 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 
 
-const defaultProps = {
+export const defaultProps = {
   theme: {
     '$small-font-size': '80%',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

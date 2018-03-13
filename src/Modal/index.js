@@ -17,13 +17,13 @@ import { boxShadow } from 'bootstrap-styled-mixins/lib/box-shadow';
 import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
 import { fade } from 'bootstrap-styled-mixins/lib//utilities/transition';
 import rebootUtils from 'bootstrap-styled-mixins/lib/utilities/reboot';
-import Fade from './Fade';
+import Fade, { propTypes as FadePropType, defaultProps as FadeDefaultProps } from './Fade';
 import { makeTheme } from './theme';
 
 function noop() { }
 
-const FadePropTypes = PropTypes.shape(Fade.propTypes);
-const propTypes = {
+const FadePropTypes = PropTypes.shape(FadePropType);
+export const propTypes = {
   /**
    * @ignore
    */
@@ -90,7 +90,7 @@ const propTypes = {
   modalTransition: FadePropTypes,
 };
 
-const defaultProps = {
+export const defaultProps = {
   isOpen: false,
   autoFocus: true,
   role: 'dialog',
@@ -206,14 +206,7 @@ class ModalUnstyled extends React.Component {
   }
 
   handleEscape = (e) => {
-    console.log(e);
-    console.log(this.props.isOpen);
-    console.log(this.props.keyboard);
-    console.log(e.keyCode === 27);
-    console.log(this.props.toggle);
-
     if (this.props.isOpen && this.props.keyboard && e.keyCode === 27 && this.props.toggle) {
-      console.log('test');
       this.props.toggle();
     }
   }
@@ -320,13 +313,13 @@ class ModalUnstyled extends React.Component {
 
       const hasTransition = this.props.fade;
       const modalTransition = {
-        ...Fade.defaultProps,
+        ...FadeDefaultProps,
         ...this.props.modalTransition,
         baseClass: hasTransition ? this.props.modalTransition.baseClass : '',
         timeout: hasTransition ? this.props.modalTransition.timeout : 0,
       };
       const backdropTransition = {
-        ...Fade.defaultProps,
+        ...FadeDefaultProps,
         ...this.props.backdropTransition,
         baseClass: hasTransition ? this.props.backdropTransition.baseClass : '',
         timeout: hasTransition ? this.props.backdropTransition.timeout : 0,

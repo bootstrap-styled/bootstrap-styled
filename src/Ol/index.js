@@ -10,12 +10,12 @@ import styled from 'styled-components';
 import { listUnstyled, listInline, listInlineItem } from 'bootstrap-styled-mixins/lib/lists';
 import PropTypes from 'prop-types';
 
-const defaultProps = {
+export const defaultProps = {
   theme: {
     '$list-inline-padding': '5px',
   },
 };
-const propTypes = {
+export const propTypes = {
   /** Theme variables. Can be: */
   theme: PropTypes.shape({
     '$list-inline-padding': PropTypes.string,

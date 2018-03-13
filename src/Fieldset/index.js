@@ -7,7 +7,7 @@ import omit from 'lodash.omit';
 import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
 
 
-const defaultProps = {
+export const defaultProps = {
   theme: {
     '$grid-gutter-widths': {
       xs: '30px',
@@ -19,7 +19,7 @@ const defaultProps = {
     '$enable-grid-classes': true,
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

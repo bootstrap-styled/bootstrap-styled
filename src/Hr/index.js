@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 
-const defaultProps = {
+export const defaultProps = {
   theme: {
     '$hr-border-width': '1px',
     '$hr-border-color': 'rgba(0, 0, 0, 0.1)',
   },
 };
-const propTypes = {
+export const propTypes = {
   /** Theme variables. Can be: */
   theme: PropTypes.shape({
     '$hr-border-width': PropTypes.string,

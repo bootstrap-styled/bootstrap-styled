@@ -11,7 +11,7 @@ import mapToCssModules from 'map-to-css-modules';
 import { alertVariant } from 'bootstrap-styled-mixins/lib/alert';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { createChainedFunction } from 'bootstrap-styled-utils';
-import Fade from '../Modal/Fade';
+import Fade, { defaultProps as FadeDefaultProps, propTypes as FadeProptypes } from '../Modal/Fade';
 import Close from '../Close';
 
 export const defaultProps = {
@@ -43,7 +43,7 @@ export const defaultProps = {
   uncontrolled: false,
   autoHideDuration: 0, // theme
   transition: {
-    ...Fade.defaultProps,
+    ...FadeDefaultProps,
     unmountOnExit: true,
   },
 };
@@ -85,7 +85,7 @@ export const propTypes = {
   /**
    * Transition used to dismiss alert.
    */
-  transition: PropTypes.shape(Fade.propTypes),
+  transition: PropTypes.shape(FadeProptypes),
   /**
    * Transition's duration used to dismiss alert automatically.
    */

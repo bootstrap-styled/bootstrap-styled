@@ -14,7 +14,7 @@ import { navbar as navbarMixin } from 'bootstrap-styled-mixins/lib/navbar';
 import Ul from '../Ul';
 
 
-const defaultProps = {
+export const defaultProps = {
   tag: Ul,
   toggleable: 'false',
   theme: {
@@ -64,7 +64,7 @@ const defaultProps = {
     '$navbar-inverse-disabled-color': 'rgba(255, 255, 255, 0.25)',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

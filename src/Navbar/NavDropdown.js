@@ -4,7 +4,7 @@ import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 import Dropdown from '../Dropdown';
 
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */
@@ -29,7 +29,7 @@ const propTypes = {
    */
   cssModule: PropTypes.object,
 };
-const defaultProps = {
+export const defaultProps = {
   tag: 'li',
 };
 

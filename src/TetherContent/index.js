@@ -8,11 +8,11 @@ import ReactDOM from 'react-dom';
 import Tether from 'tether-fix';
 import isFunction from 'lodash.omit';
 
-const defaultProps = {
+export const defaultProps = {
   isOpen: false,
   tetherRef() {},
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

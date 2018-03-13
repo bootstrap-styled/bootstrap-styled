@@ -11,7 +11,7 @@ import mapToCssModules from 'map-to-css-modules';
 import { pagination } from 'bootstrap-styled-mixins/lib/paginations';
 
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'ul',
   theme: {
     '$enable-rounded': true,
@@ -38,7 +38,7 @@ const defaultProps = {
     '$pagination-disabled-border': '#ddd',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

@@ -14,7 +14,7 @@ import Img from '../Img';
 import Ul from '../Ul';
 import H4 from '../H4';
 
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

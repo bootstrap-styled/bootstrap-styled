@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
 
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

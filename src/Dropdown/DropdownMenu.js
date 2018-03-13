@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import mapToCssModules from 'map-to-css-modules';
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'div',
 };
 
-const propTypes = {
+export const propTypes = {
   /** Specified node element will be passed as children of `<DropdownItem />`. */
   children: PropTypes.node.isRequired,
   /**

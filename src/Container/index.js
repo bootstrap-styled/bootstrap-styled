@@ -5,7 +5,7 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import { makeContainer, makeContainerMaxWidths } from 'bootstrap-styled-mixins/lib/grid';
 
-const defaultProps = {
+export const defaultProps = {
   theme: {
     '$grid-gutter-width-base': '30px',
     '$grid-gutter-widths': {
@@ -24,7 +24,7 @@ const defaultProps = {
     '$enable-grid-classes': true,
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

@@ -32,7 +32,7 @@ export const getColumnSizeClass = (isXs, colWidth, colSize) => {
   return isXs ? `col-${colSize}` : `col-${colWidth}-${colSize}`;
 };
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'div',
   widths: colWidths,
   theme: {
@@ -54,7 +54,7 @@ const defaultProps = {
     },
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

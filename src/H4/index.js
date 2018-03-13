@@ -7,7 +7,7 @@ import mapToCssModules from 'map-to-css-modules';
 import { typography } from 'bootstrap-styled-mixins/lib/typography';
 
 
-const defaultProps = {
+export const defaultProps = {
   theme: {
     '$font-size-h4': '1.5rem',
     '$headings-margin-bottom': '0.5rem',
@@ -27,7 +27,7 @@ const defaultProps = {
     '$lead-font-weight': '300',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

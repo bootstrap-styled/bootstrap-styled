@@ -19,7 +19,7 @@ import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
 import { makeTheme } from './theme';
 
 
-// const defaultProps = {
+// export const defaultProps = {
 //   tag: 'form',
 //   theme: {
 //     '$brand-primary': '#0275d8',
@@ -170,7 +170,7 @@ import { makeTheme } from './theme';
 //   },
 // };
 
-// const propTypes = {
+// export const propTypes = {
 //   /**
 //    * @ignore
 //    */

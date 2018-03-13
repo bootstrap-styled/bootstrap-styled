@@ -14,7 +14,7 @@ import { borderRadius, borderTopRadius, borderBottomRadius } from 'bootstrap-sty
 import { cardVariant, cardOutlineVariant, cardInverse } from 'bootstrap-styled-mixins/lib/cards';
 import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'div',
   theme: {
     '$brand-primary': '#0275d8',
@@ -59,7 +59,7 @@ const defaultProps = {
   },
 };
 
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

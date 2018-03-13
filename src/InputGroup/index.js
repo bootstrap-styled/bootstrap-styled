@@ -14,7 +14,7 @@ import { borderRadius, borderLeftRadius, borderRightRadius } from 'bootstrap-sty
 import { formControl } from 'bootstrap-styled-mixins/lib/forms';
 
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'div',
   theme: {
     '$enable-rounded': true,
@@ -57,7 +57,7 @@ const defaultProps = {
     '$cursor-disabled': 'not-allowed',
   },
 };
-const propTypes = {
+export const propTypes = {
   /**
    * @ignore
    */

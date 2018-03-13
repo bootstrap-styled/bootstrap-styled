@@ -6,7 +6,7 @@ import mapToCssModules from 'map-to-css-modules';
 import omit from 'lodash.omit';
 import { pick } from 'bootstrap-styled-utils';
 
-const propTypes = {
+export const propTypes = {
   ...Transition.propTypes,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -19,7 +19,7 @@ const propTypes = {
   cssModule: PropTypes.object,
 };
 
-const defaultProps = {
+export const defaultProps = {
   ...Transition.defaultProps,
   tag: 'div',
   baseClass: 'fade',

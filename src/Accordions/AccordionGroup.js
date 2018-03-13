@@ -7,7 +7,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash.omit';
 
-const propTypes = {
+export const propTypes = {
   /**
    * Define current active accordion.
    */
