@@ -8,7 +8,7 @@ export const defaultProps = {
   theme: themeBs,
 };
 export const propTypes = {
-  /** Specified node element will be passed as children of `<<Alert> />` component. */
+  /** Specified node element will be passed as children of `<BootstrapProvider />` component. */
   children: PropTypes.node,
   /** Theme variables. */
   theme: PropTypes.object,
