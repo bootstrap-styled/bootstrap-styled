@@ -205,7 +205,10 @@ module.exports = {
   },
   template: path.join(__dirname, 'styleguide/template.html'),
   theme: {
-
+    color: {
+      link: '#4c279e',
+      linkHover: '#a280ed',
+    },
   },
   title: `${pkg.description || pkg.name} documentation`,
   verbose: false,
