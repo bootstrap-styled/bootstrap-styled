@@ -12766,7 +12766,7 @@ var propTypes$26 = {
   /** Size variables. Can be: */
   size: PropTypes.oneOf(['lg', '2x', '3x', '4x', '5x']),
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['success', 'info', 'warning', 'danger'])
+  color: PropTypes.oneOf(['success', 'info', 'warning', 'danger', 'white'])
 };
 
 var FaUnstyled = function (_React$Component) {
