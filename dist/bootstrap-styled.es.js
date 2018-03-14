@@ -8329,7 +8329,7 @@ var defaultProps$7 = {
   theme: theme
 };
 var propTypes$6 = {
-  /** Specified node element will be passed as children of `<<Alert> />` component. */
+  /** Specified node element will be passed as children of `<BootstrapProvider />` component. */
   children: PropTypes.node,
   /** Theme variables. */
   theme: PropTypes.object,
