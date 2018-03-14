@@ -191,7 +191,17 @@ module.exports = {
   showUsage: true,
   showSidebar: true,
   styles: {
-
+    Markdown: {
+      pre: {
+        border: 1,
+        background: '#363438',
+      },
+      code: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: '#a280ed',
+      },
+    },
   },
   template: path.join(__dirname, 'styleguide/template.html'),
   theme: {
