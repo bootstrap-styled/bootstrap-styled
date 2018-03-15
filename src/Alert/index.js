@@ -84,7 +84,7 @@ export const propTypes = {
   /**
    * Transition used to dismiss alert.
    */
-  transition: PropTypes.shape(FadeProptypes),
+  transition: PropTypes.shape({ FadeProptypes }),
   /**
    * Transition's duration used to dismiss alert automatically.
    */
