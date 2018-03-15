@@ -6332,7 +6332,7 @@ function Fade(props) {
   // error, we can either explicitly define keys or use the Transition.defaultProps.
   // Using the Transition.defaultProps excludes any required props. Thus, the best
   // solution is to explicitly define required props in our utilities and reference these.
-  // This also gives us more flexibility in the future to remove the prop-types
+  // This also gives us moreisOpen flexibility in the future to remove the prop-types
   // dependency in distribution builds (Similar to how `react-transition-group` does).
   // Note: Without omitting the `react-transition-group` props, the resulting child
   // Tag component would inherit the Transition properties as attributes for the HTML
@@ -6463,7 +6463,6 @@ var defaultProps$3 = {
   color: 'success',
   isOpen: true,
   tag: 'div',
-  toggle: false,
   theme: {
     '$alert-padding-x': '1.25rem',
     '$alert-padding-y': '.75rem',
@@ -6508,7 +6507,7 @@ var propTypes$2 = {
   /**
    * Toggles onClick event.
    */
-  toggle: PropTypes.bool,
+  toggle: PropTypes.func,
   /**
    * Call specified function when `on click` event is triggered.
    */
@@ -21568,9 +21567,21 @@ var propTypes$93 = {
     '$border-width': PropTypes.string,
     '$spacer': PropTypes.string,
     '$spacer-y': PropTypes.string,
-    '$grid-breakpoints': PropTypes.object,
+    '$grid-breakpoints': PropTypes.shape({
+      'xs': PropTypes.string,
+      'sm': PropTypes.string,
+      'md': PropTypes.string,
+      'lg': PropTypes.string,
+      'xl': PropTypes.string
+    }),
     '$grid-gutter-width-base': '30px',
-    '$grid-gutter-widths': PropTypes.object,
+    '$grid-gutter-widths': PropTypes.shape({
+      'xs': PropTypes.string,
+      'sm': PropTypes.string,
+      'md': PropTypes.string,
+      'lg': PropTypes.string,
+      'xl': PropTypes.string
+    }),
     '$font-size-base': PropTypes.string,
     '$font-size-lg': PropTypes.string,
     '$font-size-sm': PropTypes.string,

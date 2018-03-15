@@ -18,7 +18,6 @@ export const defaultProps = {
   color: 'success',
   isOpen: true,
   tag: 'div',
-  toggle: false,
   theme: {
     '$alert-padding-x': '1.25rem',
     '$alert-padding-y': '.75rem',
@@ -69,7 +68,7 @@ export const propTypes = {
   /**
    * Toggles onClick event.
    */
-  toggle: PropTypes.bool,
+  toggle: PropTypes.func,
   /**
    * Call specified function when `on click` event is triggered.
    */
