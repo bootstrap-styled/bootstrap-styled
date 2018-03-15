@@ -19,9 +19,11 @@ const renderComponentUsingTheme = (props) => mount(
 
 describe('<Alert />', () => {
   let onClick;
+  let toggle;
 
   beforeAll(() => {
     onClick = jest.fn();
+    toggle = jest.fn();
   });
 
   it('should render an <Alert> tag with a theme', () => {
@@ -47,7 +49,7 @@ describe('<Alert />', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
       uncontrolled: true,
-      toggle: true,
+      toggle,
     });
     expect(renderedComponent.find('Fade').props().in).toEqual(true);
     renderedComponent.find('button').simulate('click');

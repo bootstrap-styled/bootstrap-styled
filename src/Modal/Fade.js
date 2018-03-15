@@ -64,7 +64,7 @@ function Fade(props) {
   // error, we can either explicitly define keys or use the Transition.defaultProps.
   // Using the Transition.defaultProps excludes any required props. Thus, the best
   // solution is to explicitly define required props in our utilities and reference these.
-  // This also gives us more flexibility in the future to remove the prop-types
+  // This also gives us moreisOpen flexibility in the future to remove the prop-types
   // dependency in distribution builds (Similar to how `react-transition-group` does).
   // Note: Without omitting the `react-transition-group` props, the resulting child
   // Tag component would inherit the Transition properties as attributes for the HTML
