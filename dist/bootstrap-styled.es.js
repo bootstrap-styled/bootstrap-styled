@@ -6463,7 +6463,6 @@ var defaultProps$3 = {
   color: 'success',
   isOpen: true,
   tag: 'div',
-  toggle: false,
   theme: {
     '$alert-padding-x': '1.25rem',
     '$alert-padding-y': '.75rem',
@@ -6508,7 +6507,7 @@ var propTypes$2 = {
   /**
    * Toggles onClick event.
    */
-  toggle: PropTypes.bool,
+  toggle: PropTypes.func,
   /**
    * Call specified function when `on click` event is triggered.
    */
@@ -8329,7 +8328,7 @@ var defaultProps$7 = {
   theme: theme
 };
 var propTypes$6 = {
-  /** Specified node element will be passed as children of `<<Alert> />` component. */
+  /** Specified node element will be passed as children of `<BootstrapProvider />` component. */
   children: PropTypes.node,
   /** Theme variables. */
   theme: PropTypes.object,
@@ -12766,7 +12765,7 @@ var propTypes$26 = {
   /** Size variables. Can be: */
   size: PropTypes.oneOf(['lg', '2x', '3x', '4x', '5x']),
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['success', 'info', 'warning', 'danger'])
+  color: PropTypes.oneOf(['success', 'info', 'warning', 'danger', 'white'])
 };
 
 var FaUnstyled = function (_React$Component) {
