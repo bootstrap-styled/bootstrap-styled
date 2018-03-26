@@ -9,24 +9,55 @@ import styled from 'styled-components';
 import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
-import { makeTheme } from './theme';
 
 
+export const defaultProps = {
+  theme: {
+    '$small-font-size': '80%',
+  },
+};
+export const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
+  /** Specified node element will be passed as children of `<Small />` component. */
+  children: PropTypes.node,
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$small-font-size': PropTypes.string,
+  }),
+  /** Color variables. Can be: */
+  color: PropTypes.oneOf([
+    'white',
+    'muted',
+    'gray-dark',
+    'primary',
+    'success',
+    'info',
+    'warning',
+    'danger',
+  ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
+   */
+  cssModule: PropTypes.object,
+};
 class SmallUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
-    children: PropTypes.node,
-    theme: PropTypes.object,
-    color: PropTypes.string,
-    cssModule: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const { className,
@@ -57,4 +88,8 @@ const Small = styled(SmallUnstyled)`
   `}
 `;
 
+Small.defaultProps = defaultProps;
+Small.propTypes = propTypes;
+
+/** @component */
 export default Small;

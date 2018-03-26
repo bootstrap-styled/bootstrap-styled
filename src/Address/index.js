@@ -1,7 +1,3 @@
-/**
- * Address component
- */
-
 import styled from 'styled-components';
 
 const Address = styled.address`
@@ -11,4 +7,5 @@ const Address = styled.address`
   line-height: inherit;
 `;
 
+/** @component */
 export default Address;

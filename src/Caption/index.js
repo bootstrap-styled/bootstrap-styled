@@ -1,10 +1,25 @@
 /* A Caption (Box) */
 
 import styled from 'styled-components';
-import { makeTheme } from './theme';
+import PropTypes from 'prop-types';
 
-const defaultProps = { theme: makeTheme() };
+export const defaultProps = {
+  theme: {
+    '$table-cell-padding': '.75rem',
+    '$text-muted': '#636c72',
+  },
+};
+export const propTypes = {
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$table-cell-padding': PropTypes.string,
+    '$text-muted': PropTypes.string,
+  }),
+};
+/**
+ * A `<Caption />` tag component in order to add description title to a `<Table />` component.
 
+ */
 const Caption = styled.caption`
   ${(props) => `
     padding-top: ${props.theme['$table-cell-padding']};
@@ -16,5 +31,7 @@ const Caption = styled.caption`
 `;
 
 Caption.defaultProps = defaultProps;
+Caption.propTypes = propTypes;
 
+/** @component */
 export default Caption;

@@ -4,43 +4,69 @@ import classNames from 'classnames';
 import omit from 'lodash.omit';
 import { parseTransition } from 'bootstrap-styled-utils';
 import mapToCssModules from 'map-to-css-modules';
-import { makeTheme } from './theme';
 
 const SHOW = 'SHOW';
 const SHOWN = 'SHOWN';
 const HIDE = 'HIDE';
 const HIDDEN = 'HIDDEN';
 
+
+export const defaultProps = {
+  isOpen: false,
+  theme: {
+    '$transition-collapse': 'height .35s ease',
+  },
+  tag: 'div',
+  delay: {
+    show: 350,
+    hide: 350,
+  },
+  onOpened: () => {},
+  onClosed: () => {},
+};
+export const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  /** Delay transition in milliseconds before and after collapse. Can be: */
+  delay: PropTypes.oneOfType([
+    PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
+    PropTypes.number,
+  ]),
+  /** Toggles collapse open or close action. */
+  isOpen: PropTypes.bool,
+  /** Toggles nav bar CSS display. */
+  navbar: PropTypes.bool,
+  /** Call specified function when opened collapse action is triggered. */
+  onOpened: PropTypes.func,
+  /** Call specified function when closed collapse action is triggered. */
+  onClosed: PropTypes.func,
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$transition-collapse': PropTypes.string,
+  }),
+  /**
+   * Replace or remove a className from the component.
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
+   */
+  cssModule: PropTypes.object,
+};
 class Collapse extends Component {
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.node,
-    cssModule: PropTypes.object,
-    delay: PropTypes.oneOfType([
-      PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
-      PropTypes.number,
-    ]),
-    isOpen: PropTypes.bool,
-    navbar: PropTypes.bool,
-    /* eslint-enable react/no-unused-prop-types */
-    onOpened: PropTypes.func,
-    onClosed: PropTypes.func,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    theme: PropTypes.object,
-  };
+  static defaultProps = defaultProps;
 
-  static defaultProps = {
-    isOpen: false,
-    theme: makeTheme(),
-    tag: 'div',
-    delay: {
-      show: null,
-      hide: null,
-    },
-    onOpened: () => {},
-    onClosed: () => {},
-  };
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   state = {
     collapse: HIDDEN,
@@ -185,4 +211,9 @@ class Collapse extends Component {
     );
   }
 }
+
+Collapse.defaultProps = defaultProps;
+Collapse.propTypes = propTypes;
+
+/** @component */
 export default Collapse;

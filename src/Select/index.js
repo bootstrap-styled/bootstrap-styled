@@ -6,14 +6,19 @@ import cn from 'classnames';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
 
+export const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<Select />` component. */
+  children: PropTypes.node,
+};
 class SelectUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
-    children: PropTypes.node.isRequired,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   state = {
     className: null,
@@ -50,7 +55,9 @@ class SelectUnstyled extends React.Component { // eslint-disable-line react/pref
     );
   }
 }
-
+/**
+ * `<Select />` is used to create a drop-down list.
+ */
 const Select = styled(SelectUnstyled)`
   &.select {
     touch-action: manipulation;
@@ -62,4 +69,7 @@ const Select = styled(SelectUnstyled)`
   }
 `;
 
+Select.propTypes = propTypes;
+
+/** @component */
 export default Select;

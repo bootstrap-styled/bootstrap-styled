@@ -18,9 +18,11 @@ const renderComponentUsingTheme = (props) => mount(
 );
 
 describe('<Alert />', () => {
+  let onClick;
   let toggle;
 
   beforeAll(() => {
+    onClick = jest.fn();
     toggle = jest.fn();
   });
 
@@ -43,13 +45,38 @@ describe('<Alert />', () => {
     });
     expect(renderedComponent.contains(children)).toEqual(true);
   });
+  it('should have a Close button that closes Alert without a function', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      uncontrolled: true,
+      toggle,
+    });
+    expect(renderedComponent.find('Fade').props().in).toEqual(true);
+    renderedComponent.find('button').simulate('click');
+    expect(renderedComponent.find('Fade').props().in).toEqual(false);
+  });
+  it('should have a autoHideDuration props', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      autoHideDuration: 500,
+    });
+    expect(renderedComponent.find('Alert').props().autoHideDuration).toEqual(500);
+  });
+  it('should send a warninng', () => {
+    const renderedComponent = renderComponentUsingTheme({
+      children,
+      autoHideDuration: 500,
+      onClick: () => {},
+    });
+    expect(renderedComponent.find('Alert').props().autoHideDuration).toEqual(500);
+  });
   it('should have a toggle function', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      toggle,
+      onClick,
     });
     expect(renderedComponent.find('Close').length).toEqual(1);
     renderedComponent.find('button').simulate('click');
-    expect(toggle).toHaveBeenCalled();
+    expect(onClick).toHaveBeenCalled();
   });
 });

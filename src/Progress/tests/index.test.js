@@ -1,4 +1,5 @@
-import Progress, { ProgressBar } from '../index';
+import Progress from '../index';
+import ProgressBar from '../ProgressBar';
 
 describe('export Progress', () => {
   it('should export <Progress />', () => {

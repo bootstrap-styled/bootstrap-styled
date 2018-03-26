@@ -1,5 +1,5 @@
 /**
- * ListGroup component
+ * ListGroupItemText component
  */
 
 
@@ -7,17 +7,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
+export const defaultProps = {
+  tag: 'p',
+};
+export const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+};
+class ListGroupItemText extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-class ListGroupItemHeading extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  static defaultProps = defaultProps;
 
-  static defaultProps = {
-    tag: 'p',
-  };
-
-  static propTypes = {
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    className: PropTypes.any,
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -36,5 +46,8 @@ class ListGroupItemHeading extends React.Component { // eslint-disable-line reac
   }
 }
 
-export default ListGroupItemHeading;
+ListGroupItemText.defaultProps = defaultProps;
+ListGroupItemText.propTypes = propTypes;
+
+export default ListGroupItemText;
 

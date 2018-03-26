@@ -4,7 +4,7 @@
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
-import InputGroup from '../InputGroup';
+import InputGroup from '../index';
 
 const children = (<h1>Test</h1>);
 
@@ -43,12 +43,12 @@ describe('<InputGroup />', () => {
     });
     expect(renderedComponent.find('InputGroup').length).toBe(1);
   });
-  it('should have a class input-group-size-test with a theme', () => {
+  it('should have a class input-group-size-lg with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      size: 'size-test',
+      size: 'lg',
     });
-    expect(renderedComponent.find('InputGroup').hasClass('input-group-size-test'));
+    expect(renderedComponent.find('InputGroup').hasClass('input-group-size-lg'));
   });
   it('should have children with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({

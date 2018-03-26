@@ -4,7 +4,7 @@
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
-import ButtonGroup from '../ButtonGroup';
+import ButtonGroup from '../index';
 
 const children = (<h1>Test</h1>);
 

@@ -5,25 +5,54 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
-import { makeTheme } from './theme';
 
+
+export const defaultProps = {
+  tag: 'div',
+  theme: {
+    '$grid-gutter-widths': {
+      xs: '30px',
+      sm: '30px',
+      md: '30px',
+      lg: '30px',
+      xl: '30px',
+    },
+    '$enable-grid-classes': false,
+  },
+};
+export const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
+  /** . */
+  noGutters: PropTypes.bool,
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$grid-gutter-widths': PropTypes.object,
+    '$enable-grid-classes': PropTypes.bool,
+  }),
+  /**
+   * Replace or remove a className from the component.
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
+   */
+  cssModule: PropTypes.object,
+};
 
 class RowUnstyled extends React.Component {    // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'div',
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    noGutters: PropTypes.bool,
-    cssModule: PropTypes.object,
-    theme: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -46,7 +75,13 @@ class RowUnstyled extends React.Component {    // eslint-disable-line react/pref
   }
 
 }
-
+/**
+ * A simple way to build **responsive grids**.
+ * Building a **grids layout** is very simple:
+ * * Add a `<Row />` component
+ * * Add as many `<Col />` component as you want as `child` of your `<Row />` component
+ * Each column will have an equal width, no matter the number of columns.
+ */
 const Row = styled(RowUnstyled)`
   ${(props) => `
     &.row {
@@ -73,5 +108,9 @@ const Row = styled(RowUnstyled)`
  `}
 `;
 
+Row.defaultProps = defaultProps;
+Row.propTypes = propTypes;
+
+/** @component */
 export default Row;
 

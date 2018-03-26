@@ -5,7 +5,8 @@ import { ThemeProvider } from 'styled-components';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import theme from '../../theme';
-import Progress, { ProgressBar } from '../index';
+import Progress from '../index';
+import ProgressBar from '../ProgressBar';
 
 const renderComponent = (props = {}) => shallow(
   <Progress>

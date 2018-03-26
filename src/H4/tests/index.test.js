@@ -47,9 +47,9 @@ describe('<H4 />', () => {
   it('should have an attribute color', () => {
     const renderedComponent = renderComponentUsingTheme({
       children,
-      color: 'test-color',
+      color: 'primary',
     });
-    expect(renderedComponent.find('H4').props().color).toBe('test-color');
+    expect(renderedComponent.find('H4').props().color).toBe('primary');
   });
   it('should have a classname lead', () => {
     const renderedComponent = renderComponentUsingTheme({

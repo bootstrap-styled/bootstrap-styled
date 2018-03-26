@@ -68,9 +68,9 @@ export default {
   input: 'src/index.js',
   sourcemap: true,
   name: pkg.name,
-  external: ['react', 'react-dom', 'prop-types', 'styled-components', 'react-transition-group'],
+  external: ['react', 'react-dom', 'prop-types', 'styled-components', 'react-transition-group', 'react-portal'],
   exports: 'named',
   output,
   plugins,
-  globals: { react: 'React', 'react-dom': 'ReactDom', 'prop-types': 'PropTypes', 'styled-components': 'styled', 'react-transition-group': 'ReactTransitionGroup', color: 'Color' },
+  globals: { react: 'React', 'react-dom': 'ReactDom', 'prop-types': 'PropTypes', 'styled-components': 'styled', 'react-transition-group': 'ReactTransitionGroup', color: 'Color', 'react-portal': 'ReactPortal' },
 };

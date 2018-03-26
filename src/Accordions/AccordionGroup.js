@@ -7,17 +7,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash.omit';
 
-export default class AccordionGroup extends React.Component {// eslint-disable-line react/prefer-stateless-function
+export const propTypes = {
+  /**
+   * Define current active accordion.
+   */
+  activeAccordionName: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+  ]),
+  /**
+   * Call specified function when `on click` event is triggered.
+   */
+  onChange: PropTypes.func,
+  /**
+   * Toggles heading component visibility.
+   */
+  'heading-component': PropTypes.bool,
+};
 
-  static propTypes = {
-    activeAccordionName: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-      PropTypes.bool,
-    ]),
-    onChange: PropTypes.func,
-    'heading-component': PropTypes.bool,
-  }
+class AccordionGroup extends React.Component {// eslint-disable-line react/prefer-stateless-function
+
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   static childContextTypes = {
     accordionGroup: PropTypes.object,
@@ -45,3 +58,8 @@ export default class AccordionGroup extends React.Component {// eslint-disable-l
     );
   }
 }
+
+AccordionGroup.propTypes = propTypes;
+
+/** @component */
+export default AccordionGroup;

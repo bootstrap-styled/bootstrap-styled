@@ -100,6 +100,8 @@ export const makeTheme = (userTheme = {}) => {
   v['$font-size-xs'] = u['$font-size-xs'] || '.75rem';
   v['$text-muted'] = u['$text-muted'] || v['$gray-light'];
   v['$line-height-base'] = u['$line-height-base'] || '1.5';
+  v['$line-height-lg'] = u['$line-height-lg'] || '1.6';
+  v['$line-height-sm'] = u['$line-height-sm'] || '1.3';
 
   // Components
   //

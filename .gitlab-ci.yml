@@ -1,4 +1,4 @@
-image: kopaxgroup/node8-jdk8-sonarscanner2-docker17-debian:latest
+image: kopaxgroup/node9-jdk8-flyway4-sonarscanner2-docker17-debian
 
 variables:
   GIT_STRATEGY: none
@@ -48,6 +48,7 @@ stages:
   - build
   - test
   - release
+  - deploy
 
 # Job: Build
 build_dev:
@@ -137,12 +138,37 @@ release:
     - git push --tags
     # prepare next dev version
     - git checkout dev
+    - git pull origin dev
     - git reset HEAD --hard
-    - npm version patch -m "preparing next version %s"
+    - VERSION=$(npm version patch -m "preparing next version %s")
+    - DATE=`date +%Y-%m-??`
+    - PATTERN="All notable changes to this project will be documented in this file"
+    - sed -i "/$PATTERN/a- TODO":" write change before preparing next tag" CHANGELOG.md
+    - sed -i "/$PATTERN/G" CHANGELOG.md
+    - sed -i "/$PATTERN/a## [$VERSION] - $DATE" CHANGELOG.md
+    - sed -i "/$PATTERN/G" CHANGELOG.md
+    - git add -A
+    - git commit -m "Add todo next version $VERSION in CHANGELOG.md"
     - git push origin HEAD:dev
   dependencies:
     - build
   only:
+    - master
+  tags:
+    - docker
+
+# Pages
+pages:
+  stage: deploy
+  script:
+    # REPLACE VERSION
+    - sed -i 's/$PACKAGE_VERSION/'`echo $PACKAGE_VERSION`'/g' docs/introduction.md
+    - npm run styleguide:build
+  artifacts:
+    paths:
+      - public
+  only:
+    - dev
     - master
   tags:
     - docker

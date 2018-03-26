@@ -14,25 +14,50 @@ import Img from '../Img';
 import Ul from '../Ul';
 import H4 from '../H4';
 
+export const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<Media />` component. */
+  children: PropTypes.node,
+  /** Toggles body CSS style. */
+  body: PropTypes.bool,
+  /** Toggles body CSS style. */
+  bottom: PropTypes.bool,
+  /** Toggles heading CSS style. */
+  heading: PropTypes.bool,
+  /** Toggles left CSS display. */
+  left: PropTypes.bool,
+  /** Toggles list CSS style. */
+  list: PropTypes.bool,
+  /** Toggles middle CSS style. */
+  middle: PropTypes.bool,
+  /** Toggles object CSS style. */
+  object: PropTypes.bool,
+  /** Toggles right CSS style. */
+  right: PropTypes.bool,
+  /** . */
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /** Toggles top CSS style. */
+  top: PropTypes.bool,
+  /**
+   * Replace or remove a className from the component.
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
+   */
+  cssModule: PropTypes.object,
+};
+/**
+ * A classic `<Media />` component.
+ * The media object helps build complex and repetitive components where some media is positioned alongside content that doesn’t wrap around said media. Plus, it does this with only two required classes thanks to flexbox.
+ * Use Nesting with Media objects can be infinitely nested, though we suggest you stop at some point. Place nested Media within the .media-body of a parent media object.
+ * Or alignment Media in a media object can be aligned with flexbox utilities to the top (default), middle, or end of your .media-body content.
+ */
 class MediaUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    body: PropTypes.bool,
-    bottom: PropTypes.bool,
-    children: PropTypes.node,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    heading: PropTypes.bool,
-    left: PropTypes.bool,
-    list: PropTypes.bool,
-    middle: PropTypes.bool,
-    object: PropTypes.bool,
-    right: PropTypes.bool,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    top: PropTypes.bool,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -106,4 +131,7 @@ const Media = styled(MediaUnstyled)`
   ${media()}
 `;
 
+Media.propTypes = propTypes;
+
+/** @component */
 export default Media;

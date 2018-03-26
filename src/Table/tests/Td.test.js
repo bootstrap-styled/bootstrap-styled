@@ -8,7 +8,7 @@ import React from 'react';
 import theme from '../../theme';
 
 import Td from '../Td';
-import Table from '../Table';
+import Table from '../index';
 import Tr from '../Tr';
 import Tbody from '../Tbody';
 

@@ -29,35 +29,51 @@ const defaultTetherConfig = {
 };
 // propTypes need to be excluded of the tooltip class
 // issue on : https://github.com/yannickcr/eslint-plugin-react/issues/203
-const propTypes = {
+export const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Tooltip placement. Please consult [Tether documentation](http://tether.io/) for more information. */
   placement: PropTypes.oneOf(tetherAttachements),
+  /** Id name of the component triggering tooltip action. */
   target: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
   ]).isRequired,
+  /** Toggles opened CSS display. */
   isOpen: PropTypes.bool,
+  /** Toggles disabled CSS display. */
   disabled: PropTypes.bool,
+  /** Tether object. Please consult [Tether documentation](http://tether.io/) for more information. */
   tether: PropTypes.object,
+  /** Tether reference. Please consult [Tether documentation](http://tether.io/) for more information. */
   tetherRef: PropTypes.func,
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
+  /** Call specified function when toggle action is triggered. */
   toggle: PropTypes.func,
+  /** Toggles hide CSS display. */
   autohide: PropTypes.bool,
+  /** Define delay before opening the tooltip. */
   delay: PropTypes.oneOfType([
     PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
     PropTypes.number,
   ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
+   */
+  cssModule: PropTypes.object,
 };
-
+export const defaultProps = {
+  isOpen: false,
+  placement: 'bottom',
+  delay: DEFAULT_DELAYS,
+  autohide: true,
+  toggle: () => {},
+};
 export class TooltipUnstyled extends React.Component {
 
-  static defaultProps = {
-    isOpen: false,
-    placement: 'bottom',
-    delay: DEFAULT_DELAYS,
-    autohide: true,
-    toggle: () => {},
-  };
+  static defaultProps = defaultProps;
 
   static propTypes = propTypes;
 
@@ -351,4 +367,8 @@ const Tooltip = styled(TooltipUnstyled)`
   `}
 `;
 
+Tooltip.defaultProps = defaultProps;
+Tooltip.propTypes = propTypes;
+
+/** @component */
 export default Tooltip;

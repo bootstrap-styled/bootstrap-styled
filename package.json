@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-styled",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Bootstrap Styled",
   "main": "lib/index.js",
   "jsnext:main": "dist/bootstrap-styled.es.js",
@@ -10,6 +10,8 @@
     "last 2 versions"
   ],
   "scripts": {
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build",
     "prebuild": "npm run build:clean",
     "build": "npm run build:lib && npm run build:dist",
     "prebuild:lib": "rimraf lib/*",
@@ -42,7 +44,11 @@
     "lib",
     "src"
   ],
-  "keywords": "bootstrap-styled, styled-components, react",
+  "keywords": [
+    "bootstrap-styled",
+    "styled-components",
+    "react"
+  ],
   "author": "Dimitri Kopriwa <dimitri.kopriwa@kopaxgroup.com>",
   "license": "UNLICENSED",
   "eslintConfig": {
@@ -153,8 +159,9 @@
     "raf": "^3.3.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-styleguidist": "^6.2.3",
     "react-test-renderer": "^16.0.0",
-    "react-transition-group": "1.2.0",
+    "react-transition-group": "2.2.1",
     "rimraf": "^2.6.2",
     "rollup": "^0.50.0",
     "rollup-plugin-babel": "^3.0.2",
@@ -167,9 +174,11 @@
     "rollup-plugin-uglify": "^2.0.1",
     "rollup-plugin-visualizer": "^0.3.1",
     "rollup-watch": "^4.3.1",
+    "rsg-components": "^3.0.0",
     "sinon": "^3.3.0",
     "styled-components": "^2.2.3",
-    "toctoc": "^0.2.3"
+    "toctoc": "^0.2.3",
+    "webpack": "^3.11.0"
   },
   "jest": {
     "roots": [
@@ -191,7 +200,7 @@
       "global": {
         "statements": 95,
         "branches": 92,
-        "functions": 92,
+        "functions": 90,
         "lines": 95
       }
     },
@@ -214,19 +223,20 @@
   ],
   "dependencies": {
     "bootstrap-styled-mixins": "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled-mixins.git#v1.0.1",
-    "bootstrap-styled-utils": "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled-utils.git#v1.0.0",
+    "bootstrap-styled-utils": "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled-utils.git#1.0.1",
     "classnames": "^2.2.5",
     "color": "^1.0.3",
     "lodash.omit": "^4.5.0",
     "map-to-css-modules": "^1.0.6",
     "math-utils": "git+ssh://git@module.kopaxgroup.com:20024/dev-tools/math-utils.git#v0.3.1",
-    "tether-fix": "^1.4.0-fix-es"
+    "tether-fix": "^1.4.0-fix-es",
+    "react-portal": "4.1.2"
   },
   "peerDependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "prop-types": "^15.6.0",
     "styled-components": "^2.1.2",
-    "react-transition-group": "1.2.0"
+    "react-transition-group": "2.2.1"
   }
 }

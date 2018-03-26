@@ -6,29 +6,53 @@ import cn from 'classnames';
 import { rangeUtils } from 'math-utils';
 import mapToCssModules from 'map-to-css-modules';
 
-export default class ProgressBar extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export const defaultProps = {
+  valueMin: 0,
+  valueMax: 100,
+  valueNow: 0,
+  striped: false,
+  animated: false,
+};
+export const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<ProgressBar />` component. */
+  children: PropTypes.node,
+  /** Defines the minimum value of the progress bar. */
+  valueMin: PropTypes.number,
+  /** Defines the current value of the progress bar. */
+  valueNow: PropTypes.number,
+  /** Defines the maximum value of the progress bar. */
+  valueMax: PropTypes.number,
+  /** Defines the size height. */
+  height: PropTypes.string,
+  /** Toggles striped CSS style. */
+  striped: PropTypes.bool,
+  /** Toggles animated CSS style. */
+  animated: PropTypes.bool,
+  /** Color variables. Can be: */
+  color: PropTypes.oneOf([
+    'success',
+    'info',
+    'warning',
+    'danger',
+  ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
+   */
+  cssModule: PropTypes.object,
+};
 
-  static defaultProps = {
-    valueMin: 0,
-    valueMax: 100,
-    valueNow: 0,
-    striped: false,
-    animated: false,
-  };
+class ProgressBar extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node,
-    valueMin: PropTypes.number,
-    valueNow: PropTypes.number,
-    valueMax: PropTypes.number,
-    height: PropTypes.string,
-    striped: PropTypes.bool,
-    animated: PropTypes.bool,
-    cssModule: PropTypes.object,
-    color: PropTypes.string,
+  static defaultProps = defaultProps;
 
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   state = {
     classNameProgress: '',
@@ -73,3 +97,8 @@ export default class ProgressBar extends React.Component { // eslint-disable-lin
     );
   }
 }
+
+ProgressBar.defaultProps = defaultProps;
+ProgressBar.propTypes = propTypes;
+
+export default ProgressBar;

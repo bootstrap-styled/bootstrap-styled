@@ -6,13 +6,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-export default class Tr extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static propTypes = {
-    className: PropTypes.string,
-    color: PropTypes.string,
-    children: PropTypes.node,
-  };
+export const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<Td />` component. */
+  children: PropTypes.node,
+  /** Color variables. Can be: */
+  color: PropTypes.oneOf([
+    'active',
+    'success',
+    'info',
+    'warning',
+    'danger',
+  ]),
+};
+
+class Tr extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -33,3 +49,7 @@ export default class Tr extends React.Component { // eslint-disable-line react/p
     );
   }
 }
+
+Tr.propTypes = propTypes;
+
+export default Tr;

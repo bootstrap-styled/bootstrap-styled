@@ -5,25 +5,104 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { typography } from 'bootstrap-styled-mixins/lib/typography';
-import { makeTheme } from './theme';
 
 
+export const defaultProps = {
+  theme: {
+    '$grid-breakpoints': {
+      xs: '0',
+      sm: '576px',
+      md: '768px',
+      lg: '992px',
+      xl: '1200px',
+    },
+    '$enable-rounded': true,
+    '$enable-hover-media-query': false,
+    '$font-size-h1': '2.5rem',
+    '$font-size-h2': '2rem',
+    '$font-size-h3': '1.75rem',
+    '$font-size-h4': '1.5rem',
+    '$font-size-h5': '1.25rem',
+    '$font-size-h6': '1rem',
+    '$headings-margin-bottom': '0.5rem',
+    '$headings-font-family': 'inherit',
+    '$headings-font-weight': '500',
+    '$headings-line-height': '1.1',
+    '$headings-color': 'inherit',
+    '$display1-size': '6rem',
+    '$display2-size': '5.5rem',
+    '$display3-size': '4.5rem',
+    '$display4-size': '3.5rem',
+    '$display1-weight': '300',
+    '$display2-weight': '300',
+    '$display3-weight': '300',
+    '$display4-weight': '300',
+    '$display-line-height': '1.1',
+    '$lead-font-size': '1.25rem',
+    '$lead-font-weight': '300',
+  },
+};
+export const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Specified node element will be passed as children of `<DropdownItem />` component. */
+  children: PropTypes.node,
+  /** Color variables. Can be: */
+  color: PropTypes.oneOf([
+    'white',
+    'muted',
+    'gray-dark',
+    'primary',
+    'success',
+    'info',
+    'warning',
+    'danger',
+  ]),
+  /** Toggles lead CSS style. */
+  lead: PropTypes.bool,
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$enable-rounded': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool,
+    '$grid-breakpoints': PropTypes.object,
+    '$font-size-h1': PropTypes.string,
+    '$font-size-h2': PropTypes.string,
+    '$font-size-h3': PropTypes.string,
+    '$font-size-h4': PropTypes.string,
+    '$font-size-h5': PropTypes.string,
+    '$font-size-h6': PropTypes.string,
+    '$headings-margin-bottom': PropTypes.string,
+    '$headings-font-family': PropTypes.string,
+    '$headings-font-weight': PropTypes.string,
+    '$headings-line-height': PropTypes.string,
+    '$headings-color': PropTypes.string,
+    '$display1-size': PropTypes.string,
+    '$display2-size': PropTypes.string,
+    '$display3-size': PropTypes.string,
+    '$display4-size': PropTypes.string,
+    '$display1-weight': PropTypes.string,
+    '$display2-weight': PropTypes.string,
+    '$display3-weight': PropTypes.string,
+    '$display4-weight': PropTypes.string,
+    '$display-line-height': PropTypes.string,
+    '$lead-font-size': PropTypes.string,
+    '$lead-font-weight': PropTypes.string,
+  }),
+  /**
+   * Replace or remove a className from the component.
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
+   */
+  cssModule: PropTypes.object,
+};
 class PUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
-    children: PropTypes.node,
-    theme: PropTypes.object,
-    color: PropTypes.string,
-    lead: PropTypes.bool,
-    cssModule: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const { className,
@@ -177,4 +256,5 @@ const P = styled(PUnstyled)`
   `}
 `;
 
+/** @component */
 export default P;

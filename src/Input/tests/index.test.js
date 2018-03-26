@@ -72,17 +72,17 @@ describe('<Input />', () => {
     });
     expect(renderedComponent.find('Input').hasClass('form-check-input'));
   });
-  it('should have a class form-control-state-test with a theme', () => {
+  it('should have a class form-control-state-success with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
-      state: 'state-test',
+      state: 'success',
     });
-    expect(renderedComponent.find('Input').hasClass('form-control-state-test'));
+    expect(renderedComponent.find('Input').hasClass('form-control-state-success'));
   });
-  it('should have a class form-control-size-test with a theme', () => {
+  it('should have a class form-control-size-sm with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
-      size: 'size-test',
+      size: 'sm',
     });
-    expect(renderedComponent.find('Input').hasClass('form-control-size-test'));
+    expect(renderedComponent.find('Input').hasClass('form-control-size-sm'));
   });
   it('should not render with "form-check-input" nor "form-control" class when type is checkbox and addon is truthy', () => {
     const renderedComponent = shallow(<Input addon type="checkbox" />);

@@ -8,10 +8,19 @@
 
 import styled from 'styled-components';
 import { listUnstyled, listInline, listInlineItem } from 'bootstrap-styled-mixins/lib/lists';
-import { makeTheme } from './theme';
+import PropTypes from 'prop-types';
 
-const defaultProps = { theme: makeTheme() };
-
+export const defaultProps = {
+  theme: {
+    '$list-inline-padding': '5px',
+  },
+};
+export const propTypes = {
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$list-inline-padding': PropTypes.string,
+  }),
+};
 const Ol = styled.ol`
   ${(props) => `
     /* Type Scss */
@@ -39,5 +48,7 @@ const Ol = styled.ol`
 `;
 
 Ol.defaultProps = defaultProps;
+Ol.propTypes = propTypes;
 
+/** @component */
 export default Ol;

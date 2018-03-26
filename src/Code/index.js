@@ -8,23 +8,47 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
-import { makeTheme } from './theme';
 
-
+export const defaultProps = {
+  tag: 'a',
+  theme: {
+    '$code-font-size': '90%',
+    '$code-padding-x': '.4rem',
+    '$code-padding-y': '.2rem',
+    '$code-color': '#bd4147',
+    '$code-bg': '#f7f7f9',
+    '$enable-rounded': false,
+  },
+};
+export const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$code-font-size': PropTypes.string,
+    '$code-padding-x': PropTypes.string,
+    '$code-padding-y': PropTypes.string,
+    '$code-color': PropTypes.string,
+    '$code-bg': PropTypes.string,
+    '$enable-rounded': PropTypes.bool,
+  }),
+};
 class CodeUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'code',
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
-    theme: PropTypes.object,
-    tag: PropTypes.string,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -64,5 +88,9 @@ const Code = styled(CodeUnstyled)`
   `}
 `;
 
+Code.defaultProps = defaultProps;
+Code.propTypes = propTypes;
+
+/** @component */
 export default Code;
 

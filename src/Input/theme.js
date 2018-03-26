@@ -44,10 +44,13 @@ export const makeTheme = (userTheme = {}) => {
   v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
   v['$brand-danger'] = u['$brand-danger'] || v['$red'];
 
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+
   // Spacing
 
   v['$border-width'] = u['$border-width'] || '1px';
-
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
   // Fonts
   //
   // Font, line-height, and color for body text, headings, and more.

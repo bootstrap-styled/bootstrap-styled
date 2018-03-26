@@ -35,4 +35,5 @@ const Output = styled(OutputUnstyled)`
   }
 `;
 
+/** @component */
 export default Output;

@@ -26,28 +26,53 @@ const columnProps = PropTypes.oneOfType([
   }),
 ]);
 
-const propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  check: PropTypes.bool,
-  children: PropTypes.node,
+export const propTypes = {
+  /**
+   * @ignore
+   */
   className: PropTypes.string,
-  cssModule: PropTypes.object,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+  ]),
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+
+  }),
+  /** Toggles check CSS style. */
+  check: PropTypes.bool,
+  /** Specified node element will be passed as children of `<Label />` component. */
+  children: PropTypes.node,
+  /** Toggles disabled CSS style. */
   disabled: PropTypes.bool,
+  /** `For` attribute ill be replaced with the specified one. */
   for: PropTypes.string,
+  /** Toggles hidden CSS style. */
   hidden: PropTypes.bool,
+  /** Toggles inline CSS style. */
   inline: PropTypes.bool,
+  /** `size` attribute ill be replaced with the specified one. */
   size: PropTypes.string,
-  tag: PropTypes.string,
+  /** Extra small columns variables. */
   xs: columnProps,
+  /** Small columns variables. */
   sm: columnProps,
+  /** Medium columns variables. */
   md: columnProps,
+  /** Large columns variables. */
   lg: columnProps,
+  /** Extra large columns variables. */
   xl: columnProps,
-  theme: PropTypes.object,
-  /* eslint-enable react/no-unused-prop-types */
+  /**
+   * Replace or remove a className from the component.
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
+   */
+  cssModule: PropTypes.object,
 };
 
-const defaultProps = {
+export const defaultProps = {
   tag: 'label',
   theme: makeTheme(),
 };
@@ -98,14 +123,16 @@ let LabelUnstyled = (props) => {  // eslint-disable-line
     <Tag htmlFor={htmlFor} {...attributes} className={classes} />
   );
 };
-
+/**
+ * `<Label />` defines a label for an <input> element.
+ */
 const Label = styled(LabelUnstyled)`
   ${(props) => `
     /* Reboot Scss */
     touch-action: manipulation;
     /* Allow labels to use margin for spacing. */
     display: inline-block;
-    margin-bottom: .5rem;
+    margin-bottom: ${props.theme['$label-margin-bottom']};
 
     ${button(
       props.theme['$enable-shadows'],
@@ -163,4 +190,5 @@ const Label = styled(LabelUnstyled)`
 Label.propTypes = propTypes;
 Label.defaultProps = defaultProps;
 
+/** @component */
 export default Label;

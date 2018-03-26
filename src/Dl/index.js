@@ -8,21 +8,38 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
 import { makeRow } from 'bootstrap-styled-mixins/lib/grid';
-import { makeTheme } from './theme';
 
+export const defaultProps = {
+  theme: {
+    '$grid-gutter-widths': {
+      xs: '30px',
+      sm: '30px',
+      md: '30px',
+      lg: '30px',
+      xl: '30px',
+    },
+    '$enable-grid-classes': true,
+  },
+};
+export const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$grid-gutter-widths': PropTypes.object,
+    '$enable-grid-classes': PropTypes.bool,
+  }),
+};
 
 class DlUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
-    theme: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -35,7 +52,9 @@ class DlUnstyled extends React.Component { // eslint-disable-line react/prefer-s
     );
   }
 }
-
+/**
+ * `<Dl />` defines a description list.
+ */
 const Dl = styled(DlUnstyled)` 
   /* Reboot Scss */
   margin-top: 0;
@@ -49,4 +68,8 @@ const Dl = styled(DlUnstyled)`
   `}
 `;
 
+Dl.defaultProps = defaultProps;
+Dl.propTypes = propTypes;
+
+/** @component */
 export default Dl;

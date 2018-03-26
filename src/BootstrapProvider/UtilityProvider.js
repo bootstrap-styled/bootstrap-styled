@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ifThen } from 'bootstrap-styled-mixins/lib/conditional';
 import alignUtils from 'bootstrap-styled-mixins/lib/utilities/align';
@@ -18,7 +19,8 @@ import transitionUtils from 'bootstrap-styled-mixins/lib/utilities/transition';
 import visibilityUtils from 'bootstrap-styled-mixins/lib/utilities/visibility';
 import theme from '../theme';
 
-const defaultProps = {
+
+export const defaultProps = {
   theme,
   utils: {
     align: true,
@@ -37,6 +39,45 @@ const defaultProps = {
     transition: true,
     visibility: true,
   },
+};
+export const propTypes = {
+  /** Specified node element will be passed as children of `<UtilityProvider />` component. */
+  children: PropTypes.node,
+  /** Theme variables. */
+  theme: PropTypes.object,
+  /** Utilities variables. */
+  utils: PropTypes.shape({
+    /** Toggles align theme variables. */
+    align: PropTypes.bool,
+    /** Toggles background theme variables. */
+    background: PropTypes.bool,
+    /** Toggles `<A />` link theme variables. */
+    a: PropTypes.bool,
+    /** Toggles border theme variables. */
+    border: PropTypes.bool,
+    /** Toggles clearfix theme variables. */
+    clearfix: PropTypes.bool,
+    /** Toggles display theme variables. */
+    display: PropTypes.bool,
+    /** Toggles flex theme variables. */
+    flex: PropTypes.bool,
+    /** Toggles float theme variables. */
+    float: PropTypes.bool,
+    /** Toggles position theme variables. */
+    position: PropTypes.bool,
+    /** Toggles screenreaders theme variables. */
+    screenreaders: PropTypes.bool,
+    /** Toggles sizing theme variables. */
+    sizing: PropTypes.bool,
+    /** Toggles spacing theme variables. */
+    spacing: PropTypes.bool,
+    /** Toggles text theme variables. */
+    text: PropTypes.bool,
+    /** Toggles transition theme variables. */
+    transition: PropTypes.bool,
+    /** Toggles visibility theme variables. */
+    visibility: PropTypes.bool,
+  }),
 };
 
 const UtilityProvider = styled.div`
@@ -113,5 +154,7 @@ const UtilityProvider = styled.div`
 `;
 
 UtilityProvider.defaultProps = defaultProps;
+UtilityProvider.propTypes = propTypes;
 
+/** @component */
 export default UtilityProvider;

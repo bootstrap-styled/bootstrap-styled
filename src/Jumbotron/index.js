@@ -11,25 +11,60 @@ import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
-import { makeTheme } from './theme';
 
 
+export const defaultProps = {
+  tag: 'div',
+  theme: {
+    '$enable-rounded': true,
+    '$grid-breakpoints': {
+      xs: '0',
+      sm: '576px',
+      md: '768px',
+      lg: '992px',
+      xl: '1200px',
+    },
+    '$border-radius-lg': '.3rem',
+    '$jumbotron-padding': '2rem',
+    '$jumbotron-bg': '#eceeef',
+  },
+};
+export const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /** Toggles disabled CSS style. */
+  fluid: PropTypes.bool,
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$enable-rounded': PropTypes.bool,
+    '$grid-breakpoints': PropTypes.object,
+    '$border-radius-lg': PropTypes.string,
+    '$jumbotron-padding': PropTypes.string,
+    '$jumbotron-bg': PropTypes.string,
+  }),
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  /**
+   * Replace or remove a className from the component.
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
+   */
+  cssModule: PropTypes.object,
+};
 class JumbotronUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'div',
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    fluid: PropTypes.bool,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    theme: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -51,7 +86,10 @@ class JumbotronUnstyled extends React.Component { // eslint-disable-line react/p
     );
   }
 }
-
+/**
+ * A classic `<Jumbotron />` component.
+ * You can also add `Button Dropdown` and customize `Sizing`.
+ */
 const Jumbotron = styled(JumbotronUnstyled)`
   ${(props) => `
     &.jumbotron {
@@ -84,4 +122,8 @@ const Jumbotron = styled(JumbotronUnstyled)`
   `}
 `;
 
+Jumbotron.defaultProps = defaultProps;
+Jumbotron.propTypes = propTypes;
+
+/** @component */
 export default Jumbotron;

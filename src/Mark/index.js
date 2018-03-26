@@ -4,10 +4,21 @@
 
 
 import styled from 'styled-components';
-import { makeTheme } from './theme';
+import PropTypes from 'prop-types';
 
-const defaultProps = { theme: makeTheme() };
-
+export const defaultProps = {
+  theme: {
+    '$mark-padding': '.2em',
+    '$mark-bg': '#fcf8e3',
+  },
+};
+export const propTypes = {
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$mark-padding': PropTypes.string,
+    '$mark-bg': PropTypes.string,
+  }),
+};
 const Mark = styled.mark`
   ${(props) => `
     /* Reboot Scss */
@@ -17,6 +28,8 @@ const Mark = styled.mark`
 `;
 
 Mark.defaultProps = defaultProps;
+Mark.propTypes = propTypes;
 
+/** @component */
 export default Mark;
 

@@ -4,7 +4,8 @@
 import { mount } from 'enzyme';
 import React from 'react';
 import BootstrapProvider from '../../BootstrapProvider';
-import Progress, { ProgressBar } from '../index';
+import Progress from '../index';
+import ProgressBar from '../ProgressBar';
 
 const renderComponent = (props = {}) => mount(
   <Progress>

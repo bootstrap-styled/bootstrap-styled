@@ -1,0 +1,1 @@
+The `<BootstrapProvider />` component allows you to configure the styling of all your components and to toggle global options. You are not required to use it, but we strongly suggest applying it so that you benefit of the full extent of our application.

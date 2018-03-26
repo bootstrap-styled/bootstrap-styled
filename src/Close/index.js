@@ -5,24 +5,50 @@ import cn from 'classnames';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { hoverFocus } from 'bootstrap-styled-mixins/lib/hover';
-import { makeTheme } from './theme';
+
+export const defaultProps = {
+  theme: {
+    '$close-color': '#000',
+    '$close-font-size': '1.5rem',
+    '$close-font-weight': '#bold',
+    '$close-text-shadow': '0 1px 0 #fff',
+    '$enable-hover-media-query': false,
+  },
+  onDismiss: () => {},
+};
+export const propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Replace the default component tag by the one specified. Can be:
+   */
+  /** Theme variables. Can be: */
+  theme: PropTypes.shape({
+    '$enable-rounded': PropTypes.bool,
+    '$enable-hover-media-query': PropTypes.bool,
+  }),
+  /** Replace close label with any string. */
+  closeLabel: PropTypes.string,
+  /** Call function when dismiss is trigger. */
+  onDismiss: PropTypes.func.isRequired,
+  /** Toggles screen-reader only CSS display. */
+  'sr-only': PropTypes.bool,
+  /**
+   * Replace or remove a className from the component.
+   * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
+   */
+  cssModule: PropTypes.object,
+};
 
 class CloseUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    theme: makeTheme(),
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
-    closeLabel: PropTypes.string,
-    cssModule: PropTypes.object,
-    onDismiss: PropTypes.func.isRequired,
-    'sr-only': PropTypes.bool,
-    theme: PropTypes.object,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  /* eslint-disable react/no-unused-prop-types */
+  static propTypes = propTypes;
+  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const {
@@ -33,7 +59,6 @@ class CloseUnstyled extends React.Component { // eslint-disable-line react/prefe
       cssModule,
       ...attributes
     } = omit(this.props, ['theme']);
-
     return (
       <button
         className={mapToCssModules(cn(className, 'close', {
@@ -90,4 +115,8 @@ const Close = styled(CloseUnstyled)`
   `}
 `;
 
+Close.defaultProps = defaultProps;
+Close.propTypes = propTypes;
+
+/** @component */
 export default Close;
