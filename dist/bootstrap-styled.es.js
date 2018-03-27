@@ -19426,7 +19426,7 @@ var propTypes$76 = {
    */
   className: PropTypes.string,
   /** Tooltip placement. Please consult [Tether documentation](http://tether.io/) for more information. */
-  placement: PropTypes.oneOf([tools_10]),
+  placement: PropTypes.oneOf(tools_10),
   /** Id name of the component triggering tooltip action. */
   target: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   /** Toggles opened CSS display. */
