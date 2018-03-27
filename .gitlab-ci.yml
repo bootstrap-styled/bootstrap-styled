@@ -94,8 +94,8 @@ build:
     expire_in: 1 hour
     paths:
       - .
-  except:
-    - dev
+  only:
+    - master
   tags:
     - docker
 
