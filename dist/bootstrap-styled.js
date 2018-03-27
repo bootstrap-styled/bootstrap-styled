@@ -2219,7 +2219,6 @@ function allowFalseValue(userValue, defaultValue) {
 
 var detectUnit = unitUtils$1.detectUnit;
 var rmUnit = unitUtils$1.rmUnit;
-var UNIT = unitUtils$1.UNIT;
 
 /**
  * ORIGINAL BOOTSTRAP THEME
@@ -2238,6 +2237,8 @@ function makeOriginal() {
   // the Bootstrap defaults without modifying key, versioned files.
   var v = {};
   var u = userTheme;
+
+  var detectedUnit = void 0;
 
   // Table of Contents
   //
@@ -2334,12 +2335,12 @@ function makeOriginal() {
 
   // =============================================================================================================
   // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
-  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit(v['$spacer'], UNIT.REM) / 2 + UNIT.REM;
+  detectedUnit = detectUnit(v['$spacer']);
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit(v['$spacer'], detectedUnit) / 2 + detectedUnit;
   // =============================================================================================================
 
   v['$spacer-x'] = u['$spacer-x'] || v['$spacer'];
   v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
-  var detectedUnit = detectUnit(v['$spacer']);
   v['$spacers'] = u['$spacers'] || {
     0: {
       x: 0,
@@ -2461,7 +2462,8 @@ function makeOriginal() {
   v['$font-size-h5'] = u['$font-size-h5'] || '1.25rem';
   v['$font-size-h6'] = u['$font-size-h6'] || '1rem';
 
-  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit(v['$spacer'], UNIT.REM) / 2 + UNIT.REM;
+  detectedUnit = detectUnit(v['$spacer']);
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit(v['$spacer'], detectedUnit) / 2 + detectedUnit;
   v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
   v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
   v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
@@ -2487,7 +2489,8 @@ function makeOriginal() {
   v['$text-muted'] = u['$text-muted'] || v['$gray-light'];
 
   v['$blockquote-small-color'] = u['$blockquote-small-color'] || v['$gray-light'];
-  v['$blockquote-font-size'] = u['$blockquote-font-size'] || rmUnit(v['$font-size-base'], UNIT.REM) * 1.25 + UNIT.REM;
+  detectedUnit = detectUnit(v['$font-size-base']);
+  v['$blockquote-font-size'] = u['$blockquote-font-size'] || rmUnit(v['$font-size-base'], detectedUnit) * 1.25 + detectedUnit;
   v['$blockquote-border-color'] = u['$blockquote-border-color'] || v['$gray-lighter'];
   v['$blockquote-border-width'] = u['$blockquote-border-width'] || '.25rem';
 
@@ -2632,9 +2635,10 @@ function makeOriginal() {
   v['$input-padding-x-lg'] = u['$input-padding-x-lg'] || '1.5rem';
   v['$input-padding-y-lg'] = u['$input-padding-y-lg'] || '.75rem';
 
-  v['$input-height'] = u['$input-height'] || rmUnit(v['$font-size-base'], UNIT.REM) * v['$line-height-base'] + rmUnit(v['$input-padding-y'], UNIT.REM) * 2 + UNIT.REM;
-  v['$input-height-sm'] = u['$input-height-sm'] || rmUnit(v['$font-size-sm'], UNIT.REM) * v['$line-height-sm'] + rmUnit(v['$input-padding-y-sm'], UNIT.REM) * 2 + UNIT.REM;
-  v['$input-height-lg'] = u['$input-height-lg'] || rmUnit(v['$font-size-lg'], UNIT.REM) * v['$line-height-lg'] + rmUnit(v['$input-padding-y-lg'], UNIT.REM) * 2 + UNIT.REM;
+  detectedUnit = detectUnit(v['$font-size-base']);
+  v['$input-height'] = u['$input-height'] || rmUnit(v['$font-size-base'], detectedUnit) * v['$line-height-base'] + rmUnit(v['$input-padding-y'], detectedUnit) * 2 + detectedUnit;
+  v['$input-height-sm'] = u['$input-height-sm'] || rmUnit(v['$font-size-sm'], detectedUnit) * v['$line-height-sm'] + rmUnit(v['$input-padding-y-sm'], detectedUnit) * 2 + detectedUnit;
+  v['$input-height-lg'] = u['$input-height-lg'] || rmUnit(v['$font-size-lg'], detectedUnit) * v['$line-height-lg'] + rmUnit(v['$input-padding-y-lg'], detectedUnit) * 2 + detectedUnit;
 
   v['$input-transition'] = u['$input-transition'] || 'border-color ease-in-out .15s, box-shadow ease-in-out .15s';
 
@@ -2941,7 +2945,8 @@ function makeOriginal() {
   v['$popover-arrow-width'] = u['$popover-arrow-width'] || '10px';
   v['$popover-arrow-color'] = u['$popover-arrow-color'] || v['$popover-bg'];
 
-  v['$popover-arrow-outer-width'] = u['$popover-arrow-outer-width'] || rmUnit(v['$popover-arrow-width'], UNIT.PX) + 1 + UNIT.PX;
+  detectedUnit = detectUnit(v['$popover-arrow-width']);
+  v['$popover-arrow-outer-width'] = u['$popover-arrow-outer-width'] || rmUnit(v['$popover-arrow-width'], detectedUnit) + 1 + detectedUnit;
   v['$popover-arrow-outer-color'] = u['$popover-arrow-outer-color'] || color(v['$popover-border-color']).fade(0.5).toString();
 
   // Badges
@@ -3361,7 +3366,7 @@ var possibleConstructorReturn = function (self, call) {
 };
 
 var rmUnit$1 = unitUtils$1.rmUnit;
-var UNIT$1 = unitUtils$1.UNIT;
+var UNIT = unitUtils$1.UNIT;
 /**
  * Extends of Bootstrap original
  *
@@ -3385,8 +3390,8 @@ function makeExtend() {
   v['$header-navbar-border-width'] = u['$header-navbar-border-width'] || v['$border-width'];
 
   // Card
-  v['$card-margin-y-halved'] = u['$card-margin-y-halved'] || rmUnit$1(v['$card-spacer-y'], UNIT$1.REM) / 2 + UNIT$1.REM;
-  v['$card-margin-x-halved'] = u['$card-margin-x-halved'] || rmUnit$1(v['$card-spacer-x'], UNIT$1.REM) / 2 + UNIT$1.REM;
+  v['$card-margin-y-halved'] = u['$card-margin-y-halved'] || rmUnit$1(v['$card-spacer-y'], UNIT.REM) / 2 + UNIT.REM;
+  v['$card-margin-x-halved'] = u['$card-margin-x-halved'] || rmUnit$1(v['$card-spacer-x'], UNIT.REM) / 2 + UNIT.REM;
 
   // Nav
   v['$nav-link-hover-bg'] = u['$nav-link-hover-bg'] || color(v['$brand-inverse']).darken(0.03).toString();
@@ -14106,7 +14111,7 @@ var Figure = styled__default(FigureUnstyled).withConfig({
 })(['&.figure{display:inline-block;}margin:0 0 1rem;']);
 
 var rmUnit$2 = unitUtils$1.rmUnit;
-var UNIT$2 = unitUtils$1.UNIT;
+var UNIT$1 = unitUtils$1.UNIT;
 
 /**
  * BOOTSTRAP THEME IMAGE
@@ -14158,7 +14163,7 @@ var makeTheme$2 = function makeTheme() {
 
   // =============================================================================================================
   // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
-  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$2(v['$spacer'], UNIT$2.REM) / 2 + UNIT$2.REM;
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$2(v['$spacer'], UNIT$1.REM) / 2 + UNIT$1.REM;
   // =============================================================================================================
 
   v['$border-width'] = u['$border-width'] || '1px';
@@ -19837,7 +19842,7 @@ var propTypes$77 = {
     '$enable-hover-media-query': PropTypes.bool
   }),
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['primary', 'success', 'info', 'warning', 'danger']),
+  color: PropTypes.oneOf(['primary', 'success', 'info', 'warning', 'danger', 'white']),
   /** Toggles inverse CSS color. */
   inverse: PropTypes.bool,
   /** Toggles block CSS display. */
@@ -22313,7 +22318,7 @@ DropdownToggle.defaultProps = defaultProps$86;
 DropdownToggle.propTypes = propTypes$99;
 
 var rmUnit$3 = unitUtils$1.rmUnit;
-var UNIT$3 = unitUtils$1.UNIT;
+var UNIT$2 = unitUtils$1.UNIT;
 
 /**
  * BOOTSTRAP THEME NAVBAR
@@ -22379,7 +22384,7 @@ var makeTheme$5 = function makeTheme() {
 
   // =============================================================================================================
   // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
-  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$3(v['$spacer'], UNIT$3.REM) / 2 + UNIT$3.REM;
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$3(v['$spacer'], UNIT$2.REM) / 2 + UNIT$2.REM;
   // =============================================================================================================
 
   v['$border-width'] = u['$border-width'] || '1px';
