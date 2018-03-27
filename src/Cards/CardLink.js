@@ -20,11 +20,8 @@ export const propTypes = {
     PropTypes.element,
     PropTypes.func,
   ]),
-  /** Replace the default component tag reference by the one specified. Can be: */
-  getRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.element,
-  ]),
+  /** Use that property to pass a ref callback to the native button component. */
+  innerRef: PropTypes.func,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
@@ -44,7 +41,7 @@ class CardLink extends React.Component { // eslint-disable-line react/prefer-sta
       className,
       cssModule,
       tag: Tag,
-      getRef,
+      innerRef,
       ...attributes
     } = this.props;
 
@@ -54,7 +51,7 @@ class CardLink extends React.Component { // eslint-disable-line react/prefer-sta
           className,
           'card-link'
         ), cssModule)}
-        ref={getRef}
+        ref={innerRef}
         {...attributes}
       />
     );

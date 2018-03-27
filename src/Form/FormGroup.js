@@ -26,11 +26,12 @@ export const propTypes = {
     'success',
     'warning',
     'danger',
+    '',
   ]),
   /** Toggles disabled check of input radio or checkbox. */
   disabled: PropTypes.bool,
-  /** Replace the default component tag reference by the one specified. Can be: */
-  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /** Use that property to pass a ref callback to the native button component. */
+  innerRef: PropTypes.func,
   /** Toggles inline CSS display. */
   inline: PropTypes.bool,
   /** Toggles row CSS display. */

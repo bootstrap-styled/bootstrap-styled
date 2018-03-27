@@ -23,6 +23,9 @@ export const propTypes = {
     'warning',
     'danger',
     'white',
+    'gray-dark',
+    'primary',
+    'hide',
   ]),
 };
 

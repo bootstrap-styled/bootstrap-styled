@@ -12,8 +12,8 @@ export const propTypes = {
    * @ignore
    */
   className: PropTypes.string,
-  /** Replace the default component tag reference by the one specified. Can be: */
-  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /** Use that property to pass a ref callback to the native button component. */
+  innerRef: PropTypes.func,
   /** Toggles disabled CSS style. */
   disabled: PropTypes.bool,
   /** Toggles active CSS style. */
@@ -38,20 +38,9 @@ export const propTypes = {
 };
 class NavLink extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: A,
-  };
+  static defaultProps = defaultProps;
 
-  static propTypes = {
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    disabled: PropTypes.bool,
-    active: PropTypes.bool,
-    className: PropTypes.string,
-    cssModule: PropTypes.object,
-    onClick: PropTypes.func,
-    href: PropTypes.any,
-  };
+  static propTypes = propTypes;
 
   constructor(props) {
     super(props);
@@ -79,7 +68,7 @@ class NavLink extends React.Component { // eslint-disable-line react/prefer-stat
       cssModule,
       active,
       tag: Tag,
-      getRef,
+      innerRef,
       ...attributes
     } = this.props;
 
@@ -93,7 +82,7 @@ class NavLink extends React.Component { // eslint-disable-line react/prefer-stat
     ), cssModule);
 
     return (
-      <Tag {...attributes} ref={getRef} onClick={this.onClick} className={classes} />
+      <Tag {...attributes} ref={innerRef} onClick={this.onClick} className={classes} />
     );
   }
 }

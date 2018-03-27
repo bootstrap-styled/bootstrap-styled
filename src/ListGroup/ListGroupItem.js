@@ -28,6 +28,7 @@ export const propTypes = {
     'info',
     'warning',
     'danger',
+    '',
   ]),
   /**
    * Replace the default component tag by the one specified. Can be:

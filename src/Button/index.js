@@ -76,11 +76,8 @@ export const propTypes = {
     'warning',
     'danger',
   ]),
-  /** Replace the default component tag reference by the one specified. Can be: */
-  getRef: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-  ]),
+  /** Use that property to pass a ref callback to the native button component. */
+  innerRef: PropTypes.func,
   /** Start specified function when on click event is trigger. */
   onClick: PropTypes.func,
   /** Buttons use default size base and can use different size such as: */
@@ -176,7 +173,7 @@ class ButtonUnstyled extends React.Component { // eslint-disable-line react/pref
       color,
       outline,
       size,
-      getRef,
+      innerRef,
       tag: Tag,
       ...attributes
     } = omit(this.props, ['theme']);
@@ -198,7 +195,7 @@ class ButtonUnstyled extends React.Component { // eslint-disable-line react/pref
       <Tag
         type={(Tag === 'button' && attributes.onClick) ? 'button' : undefined}
         className={classes}
-        ref={getRef}
+        ref={innerRef}
         {...attributes}
         onClick={this.onClick}
       />

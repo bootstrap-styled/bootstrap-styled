@@ -98,6 +98,7 @@ export const propTypes = {
   size: PropTypes.oneOf([
     'sm',
     'lg',
+    '',
   ]),
   /** Tether position value. Can be: */
   tether: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),

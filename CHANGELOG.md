@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.5.8] - 2018-03-??
+
+- Change all `getRef` with `innerRef`.
+
 ## [v1.5.7] - 2018-03-27
 
 - Unfix dependency [react-portal](https://www.npmjs.com/package/react-portal) ^4.1.2.

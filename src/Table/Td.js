@@ -20,6 +20,7 @@ export const propTypes = {
     'info',
     'warning',
     'danger',
+    '',
   ]),
 };
 

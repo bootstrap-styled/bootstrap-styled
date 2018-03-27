@@ -319,8 +319,8 @@ const propTypes = {
   }),
   /** Toggles inline CSS style. */
   inline: PropTypes.bool,
-  /** Replace the default component tag reference by the one specified. Can be: */
-  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /** Use that property to pass a ref callback to the native button component. */
+  innerRef: PropTypes.func,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
@@ -351,7 +351,7 @@ class FormUnstyled extends React.Component {// eslint-disable-line react/prefer-
       cssModule,
       inline,
       tag: Tag,
-      getRef,
+      innerRef,
       ...rest
     } = omit(this.props, ['theme']);
 
@@ -361,7 +361,7 @@ class FormUnstyled extends React.Component {// eslint-disable-line react/prefer-
     ), cssModule);
 
     return (
-      <Tag ref={getRef} className={classes} {...rest} />
+      <Tag ref={innerRef} className={classes} {...rest} />
     );
   }
 }
