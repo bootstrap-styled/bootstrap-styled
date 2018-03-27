@@ -125,6 +125,7 @@ export const propTypes = {
     'info',
     'warning',
     'danger',
+    'white',
   ]),
   /** Toggles inverse CSS color. */
   inverse: PropTypes.bool,
