@@ -8875,8 +8875,8 @@ var propTypes$10 = {
   className: PropTypes.string,
   /** Color variables. Can be: */
   color: PropTypes.oneOf(['link', 'primary', 'secondary', 'success', 'info', 'warning', 'danger']),
-  /** Replace the default component tag reference by the one specified. Can be: */
-  getRef: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /** Use that property to pass a ref callback to the native button component. */
+  innerRef: PropTypes.func,
   /** Start specified function when on click event is trigger. */
   onClick: PropTypes.func,
   /** Buttons use default size base and can use different size such as: */
@@ -8981,9 +8981,9 @@ var ButtonUnstyled = function (_React$Component) {
           color = _omit.color,
           outline = _omit.outline,
           size = _omit.size,
-          getRef = _omit.getRef,
+          innerRef = _omit.innerRef,
           Tag = _omit.tag,
-          attributes = objectWithoutProperties(_omit, ['active', 'disabled', 'block', 'className', 'cssModule', 'dropup', 'color', 'outline', 'size', 'getRef', 'tag']);
+          attributes = objectWithoutProperties(_omit, ['active', 'disabled', 'block', 'className', 'cssModule', 'dropup', 'color', 'outline', 'size', 'innerRef', 'tag']);
       /* eslint-enable prefer-const */
 
       var classes = mapToCssModules(classnames(className, 'btn', (_cn = {
@@ -8999,7 +8999,7 @@ var ButtonUnstyled = function (_React$Component) {
       return React__default.createElement(Tag, _extends({
         type: Tag === 'button' && attributes.onClick ? 'button' : undefined,
         className: classes,
-        ref: getRef
+        ref: innerRef
       }, attributes, {
         onClick: this.onClick
       }));
@@ -12770,7 +12770,7 @@ var propTypes$26 = {
   /** Size variables. Can be: */
   size: PropTypes.oneOf(['lg', '2x', '3x', '4x', '5x']),
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['success', 'info', 'warning', 'danger', 'white'])
+  color: PropTypes.oneOf(['success', 'info', 'warning', 'danger', 'white', 'gray-dark', 'primary', 'hide'])
 };
 
 var FaUnstyled = function (_React$Component) {
@@ -14314,8 +14314,8 @@ var propTypes$38 = {
   size: PropTypes.oneOf(['sm', 'lg']),
   /** Specified string define the input state. */
   state: PropTypes.oneOf(['success', 'warning', 'danger']),
-  /** Replace the default component tag reference by the one specified. Can be: */
-  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /** Use that property to pass a ref callback to the native button component. */
+  innerRef: PropTypes.func,
   /** Toggles static CSS style. */
   static: PropTypes.bool,
   /** Toggles addon CSS style. */
@@ -14410,8 +14410,8 @@ var InputUnstyled = function (_React$Component) {
           tag = _omit.tag,
           addon = _omit.addon,
           staticInput = _omit.static,
-          getRef = _omit.getRef,
-          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'type', 'size', 'state', 'tag', 'addon', 'static', 'getRef']);
+          innerRef = _omit.innerRef,
+          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'type', 'size', 'state', 'tag', 'addon', 'static', 'innerRef']);
 
       var checkInput = ['radio', 'checkbox'].indexOf(type) > -1;
       var fileInput = type === 'file';
@@ -14439,7 +14439,7 @@ var InputUnstyled = function (_React$Component) {
       if (Tag === 'input') {
         attributes.type = type;
       }
-      return React__default.createElement(Tag, _extends({}, attributes, { ref: getRef, className: classes }));
+      return React__default.createElement(Tag, _extends({}, attributes, { ref: innerRef, className: classes }));
     }
 
     /* eslint-disable react/no-unused-prop-types */
@@ -17284,8 +17284,8 @@ var propTypes$58 = {
    * @ignore
    */
   className: PropTypes.string,
-  /** Replace the default component tag reference by the one specified. Can be: */
-  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /** Use that property to pass a ref callback to the native button component. */
+  innerRef: PropTypes.func,
   /** Toggles disabled CSS style. */
   disabled: PropTypes.bool,
   /** Toggles active CSS style. */
@@ -17343,8 +17343,8 @@ var NavLink = function (_React$Component) {
           cssModule = _props.cssModule,
           active = _props.active,
           Tag = _props.tag,
-          getRef = _props.getRef,
-          attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'active', 'tag', 'getRef']);
+          innerRef = _props.innerRef,
+          attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'active', 'tag', 'innerRef']);
 
 
       var classes = mapToCssModules(classnames(className, 'nav-link', {
@@ -17352,25 +17352,14 @@ var NavLink = function (_React$Component) {
         active: active
       }), cssModule);
 
-      return React__default.createElement(Tag, _extends({}, attributes, { ref: getRef, onClick: this.onClick, className: classes }));
+      return React__default.createElement(Tag, _extends({}, attributes, { ref: innerRef, onClick: this.onClick, className: classes }));
     }
   }]);
   return NavLink;
 }(React__default.Component);
 
-NavLink.defaultProps = {
-  tag: A
-};
-NavLink.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  disabled: PropTypes.bool,
-  active: PropTypes.bool,
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
-  onClick: PropTypes.func,
-  href: PropTypes.any
-};
+NavLink.defaultProps = defaultProps$53;
+NavLink.propTypes = propTypes$58;
 
 
 NavLink.defaultProps = defaultProps$53;
@@ -20728,8 +20717,8 @@ var propTypes$86 = {
    * Replace the default component tag by the one specified. Can be:
    */
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
-  /** Replace the default component tag reference by the one specified. Can be: */
-  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  /** Use that property to pass a ref callback to the native button component. */
+  innerRef: PropTypes.func,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
@@ -20757,13 +20746,13 @@ var CardLink = function (_React$Component) {
           className = _props.className,
           cssModule = _props.cssModule,
           Tag = _props.tag,
-          getRef = _props.getRef,
-          attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag', 'getRef']);
+          innerRef = _props.innerRef,
+          attributes = objectWithoutProperties(_props, ['className', 'cssModule', 'tag', 'innerRef']);
 
 
       return React__default.createElement(Tag, _extends({
         className: mapToCssModules(classnames(className, 'card-link'), cssModule),
-        ref: getRef
+        ref: innerRef
       }, attributes));
     }
 
@@ -21700,8 +21689,8 @@ var propTypes$93 = {
   }),
   /** Toggles inline CSS style. */
   inline: PropTypes.bool,
-  /** Replace the default component tag reference by the one specified. Can be: */
-  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /** Use that property to pass a ref callback to the native button component. */
+  innerRef: PropTypes.func,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
@@ -21734,12 +21723,12 @@ var FormUnstyled = function (_React$Component) {
           cssModule = _omit.cssModule,
           inline = _omit.inline,
           Tag = _omit.tag,
-          getRef = _omit.getRef,
-          rest = objectWithoutProperties(_omit, ['className', 'cssModule', 'inline', 'tag', 'getRef']);
+          innerRef = _omit.innerRef,
+          rest = objectWithoutProperties(_omit, ['className', 'cssModule', 'inline', 'tag', 'innerRef']);
 
       var classes = mapToCssModules(classnames(className, inline ? 'form-inline' : false), cssModule);
 
-      return React__default.createElement(Tag, _extends({ ref: getRef, className: classes }, rest));
+      return React__default.createElement(Tag, _extends({ ref: innerRef, className: classes }, rest));
     }
 
     /* eslint-disable react/no-unused-prop-types */
@@ -21786,8 +21775,8 @@ var propTypes$94 = {
   color: PropTypes.oneOf(['success', 'warning', 'danger', '']),
   /** Toggles disabled check of input radio or checkbox. */
   disabled: PropTypes.bool,
-  /** Replace the default component tag reference by the one specified. Can be: */
-  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /** Use that property to pass a ref callback to the native button component. */
+  innerRef: PropTypes.func,
   /** Toggles inline CSS display. */
   inline: PropTypes.bool,
   /** Toggles row CSS display. */

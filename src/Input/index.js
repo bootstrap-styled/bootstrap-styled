@@ -109,8 +109,8 @@ export const propTypes = {
     'warning',
     'danger',
   ]),
-  /** Replace the default component tag reference by the one specified. Can be: */
-  getRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /** Use that property to pass a ref callback to the native button component. */
+  innerRef: PropTypes.func,
   /** Toggles static CSS style. */
   static: PropTypes.bool,
   /** Toggles addon CSS style. */
@@ -201,7 +201,7 @@ class InputUnstyled extends React.Component { // eslint-disable-line react/prefe
       tag,
       addon,
       static: staticInput,
-      getRef,
+      innerRef,
       ...attributes
     } = omit(this.props, ['theme']);
 
@@ -237,7 +237,7 @@ class InputUnstyled extends React.Component { // eslint-disable-line react/prefe
       attributes.type = type;
     }
     return (
-      <Tag {...attributes} ref={getRef} className={classes} />
+      <Tag {...attributes} ref={innerRef} className={classes} />
     );
   }
 }
