@@ -2,11 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.5.7] - 2018-03-??
+## [v1.5.7] - 2018-03-27
 
-- TODO: write change before preparing next tag
+- Unfix dependency [react-portal](https://www.npmjs.com/package/react-portal) ^4.1.2.
+- No singleton dependency [babel-plugin-styled-components](https://www.npmjs.com/package/babel-plugin-styled-components) from ^1.3.0 to ^1.5.1.
+- No singleton dependency [prop-types](https://www.npmjs.com/package/prop-types) from ^15.6.0 to ^15.6.1.
+- No singleton dependency [styled-components](https://www.npmjs.com/package/styled-components) from ^2.2.3 to ^3.2.3.
+- No singleton dependency [styled-components](https://www.npmjs.com/package/styled-components) from ^2.1.2 to ^3.2.3.
 
-## [v1.5.6] - 2018-03-??
+## [v1.5.6] - 2018-03-27
 
 - TODO: write change before preparing next tag
 
