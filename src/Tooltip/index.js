@@ -35,7 +35,7 @@ export const propTypes = {
    */
   className: PropTypes.string,
   /** Tooltip placement. Please consult [Tether documentation](http://tether.io/) for more information. */
-  placement: PropTypes.oneOf(tetherAttachements),
+  placement: PropTypes.oneOf([tetherAttachements]),
   /** Id name of the component triggering tooltip action. */
   target: PropTypes.oneOfType([
     PropTypes.string,

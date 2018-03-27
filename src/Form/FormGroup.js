@@ -26,6 +26,7 @@ export const propTypes = {
     'success',
     'warning',
     'danger',
+    '',
   ]),
   /** Toggles disabled check of input radio or checkbox. */
   disabled: PropTypes.bool,

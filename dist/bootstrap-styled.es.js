@@ -11136,7 +11136,7 @@ var propTypes$12 = {
   /** Toggles dropdown visibility. */
   isOpen: PropTypes.bool,
   /** Size variables. Can be small or large: */
-  size: PropTypes.oneOf(['sm', 'lg']),
+  size: PropTypes.oneOf(['sm', 'lg', '']),
   /** Tether position value. Can be: */
   tether: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   /** Call specified function when on toggle action is triggered. */
@@ -12820,7 +12820,7 @@ var propTypes$27 = {
    */
   className: PropTypes.string,
   /** Size variables. Can be: */
-  size: PropTypes.oneOf(['lg', '2x', '3x', '4x', '5x'])
+  size: PropTypes.oneOf(['lg', '2x', '3x', '4x', '5x', ''])
 };
 
 var FaStacked = function (_React$Component) {
@@ -15970,7 +15970,7 @@ var propTypes$48 = {
   active: PropTypes.bool,
   disabled: PropTypes.bool,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['success', 'info', 'warning', 'danger']),
+  color: PropTypes.oneOf(['success', 'info', 'warning', 'danger', '']),
   /**
    * Replace the default component tag by the one specified. Can be:
    */
@@ -16635,7 +16635,7 @@ var propTypes$53 = {
   /** Toggles auto focus CSS style. */
   autoFocus: PropTypes.bool,
   /** Modal use default size base and can use different size such as: */
-  size: PropTypes.oneOf(['sm', 'lg']),
+  size: PropTypes.oneOf(['sm', 'lg', '']),
   /** Call specified function when on toggle action is triggered. */
   toggle: PropTypes.func,
   /** Toggles keyboard events. */
@@ -18402,7 +18402,7 @@ var propTypes$65 = {
   /** Toggles animated CSS style. */
   animated: PropTypes.bool,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['success', 'info', 'warning', 'danger']),
+  color: PropTypes.oneOf(['success', 'info', 'warning', 'danger', '']),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
@@ -19093,7 +19093,7 @@ var propTypes$72 = {
   /** Specified node element will be passed as children of `<Td />` component. */
   children: PropTypes.node,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['active', 'success', 'info', 'warning', 'danger'])
+  color: PropTypes.oneOf(['active', 'success', 'info', 'warning', 'danger', ''])
 };
 
 var Td = function (_React$Component) {
@@ -19148,7 +19148,7 @@ var propTypes$73 = {
   /** Specified node element will be passed as children of `<Th />` component. */
   children: PropTypes.node,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['active', 'success', 'info', 'warning', 'danger'])
+  color: PropTypes.oneOf(['active', 'success', 'info', 'warning', 'danger', ''])
 };
 
 var Th = function (_React$Component) {
@@ -19203,7 +19203,7 @@ var propTypes$74 = {
   /** Specified node element will be passed as children of `<Td />` component. */
   children: PropTypes.node,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['active', 'success', 'info', 'warning', 'danger'])
+  color: PropTypes.oneOf(['active', 'success', 'info', 'warning', 'danger', ''])
 };
 
 var Tr = function (_React$Component) {
@@ -19437,7 +19437,7 @@ var propTypes$76 = {
    */
   className: PropTypes.string,
   /** Tooltip placement. Please consult [Tether documentation](http://tether.io/) for more information. */
-  placement: PropTypes.oneOf(tools_10),
+  placement: PropTypes.oneOf([tools_10]),
   /** Id name of the component triggering tooltip action. */
   target: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   /** Toggles opened CSS display. */
@@ -21778,7 +21778,7 @@ var propTypes$94 = {
   /** Toggles input radio or checkbox check. */
   check: PropTypes.bool,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['success', 'warning', 'danger']),
+  color: PropTypes.oneOf(['success', 'warning', 'danger', '']),
   /** Toggles disabled check of input radio or checkbox. */
   disabled: PropTypes.bool,
   /** Replace the default component tag reference by the one specified. Can be: */
@@ -21861,7 +21861,7 @@ var propTypes$95 = {
   /** Specified node element will be passed as children of `<DropdownItem />`. */
   children: PropTypes.node,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['success', 'warning', 'danger', 'muted']),
+  color: PropTypes.oneOf(['success', 'warning', 'danger', 'muted', '']),
   /** Toggles inline CSS display. */
   inline: PropTypes.bool,
   /**

@@ -38,6 +38,7 @@ export const propTypes = {
     'info',
     'warning',
     'danger',
+    '',
   ]),
   /**
    * Replace or remove a className from the component.

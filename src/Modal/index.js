@@ -40,6 +40,7 @@ export const propTypes = {
   size: PropTypes.oneOf([
     'sm',
     'lg',
+    '',
   ]),
   /** Call specified function when on toggle action is triggered. */
   toggle: PropTypes.func,

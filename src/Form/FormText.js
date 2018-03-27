@@ -25,6 +25,7 @@ export const propTypes = {
     'warning',
     'danger',
     'muted',
+    '',
   ]),
   /** Toggles inline CSS display. */
   inline: PropTypes.bool,
