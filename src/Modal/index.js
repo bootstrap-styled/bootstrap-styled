@@ -20,8 +20,6 @@ import rebootUtils from 'bootstrap-styled-mixins/lib/utilities/reboot';
 import Fade, { propTypes as FadePropType, defaultProps as FadeDefaultProps } from './Fade';
 import { makeTheme } from './theme';
 
-function noop() { }
-
 const FadePropTypes = PropTypes.shape(FadePropType);
 export const propTypes = {
   /**
@@ -100,8 +98,8 @@ export const defaultProps = {
   zIndex: 2000,
   theme: makeTheme(),
   fade: true,
-  onOpened: noop,
-  onClosed: noop,
+  onOpened: null,
+  onClosed: null,
   modalTransition: {
     timeout: 300,
   },
@@ -174,14 +172,22 @@ class ModalUnstyled extends React.Component {
   }
 
   onOpened = (node, isAppearing) => {
-    this.props.onOpened();
-    (this.props.modalTransition.onEntered || noop)(node, isAppearing);
+    if (this.props.onOpened) {
+      this.props.onOpened();
+    }
+    if (this.props.modalTransition.onEntered) {
+      this.props.modalTransition.onEntered(node, isAppearing);
+    }
   }
 
   onClosed = (node) => {
     // so all methods get called before it is unmounted
-    this.props.onClosed();
-    (this.props.modalTransition.onExited || noop)(node);
+    if (this.props.onClosed) {
+      this.props.onClosed();
+    }
+    if (this.props.modalTransition.onEntered) {
+      this.props.modalTransition.onExited(node);
+    }
     this.destroy();
 
     if (this._isMounted) {

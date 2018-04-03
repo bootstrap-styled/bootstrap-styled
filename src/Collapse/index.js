@@ -21,8 +21,8 @@ export const defaultProps = {
     show: 350,
     hide: 350,
   },
-  onOpened: () => {},
-  onClosed: () => {},
+  onOpened: null,
+  onClosed: null,
 };
 export const propTypes = {
   /**
@@ -126,13 +126,17 @@ class Collapse extends Component {
     if (this.state.collapse === SHOWN &&
       prevState &&
       prevState.collapse !== SHOWN) {
-      this.props.onOpened();
+      if (this.props.onOpened) {
+        this.props.onOpened();
+      }
     }
 
     if (this.state.collapse === HIDDEN &&
       prevState &&
       prevState.collapse !== HIDDEN) {
-      this.props.onClosed();
+      if (this.props.onClosed) {
+        this.props.onClosed();
+      }
     }
   }
 

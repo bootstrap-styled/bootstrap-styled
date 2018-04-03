@@ -6370,8 +6370,7 @@ var defaultProps$5 = {
     '$close-font-weight': '#bold',
     '$close-text-shadow': '0 1px 0 #fff',
     '$enable-hover-media-query': false
-  },
-  onDismiss: function onDismiss() {}
+  }
 };
 var propTypes$4 = {
   /**
@@ -10930,7 +10929,7 @@ return Tether;
 
 var defaultProps$14 = {
   isOpen: false,
-  tetherRef: function tetherRef() {}
+  tetherRef: null
 };
 var propTypes$14 = {
   /**
@@ -11015,7 +11014,9 @@ var TetherContent = function (_React$Component) {
       if (_this.tether) {
         _this.tether.destroy();
         _this.tether = null;
-        _this.props.tetherRef(_this.tether);
+        if (_this.props.tetherRef) {
+          _this.props.tetherRef(_this.tether);
+        }
       }
     }, _this.show = function () {
       document.addEventListener('click', _this.handleDocumentClick, true);
@@ -11025,7 +11026,9 @@ var TetherContent = function (_React$Component) {
       document.body.appendChild(_this.element);
       _this.renderIntoSubtree();
       _this.tether = new tether(_this.getTetherConfig());
-      _this.props.tetherRef(_this.tether);
+      if (_this.props.tetherRef) {
+        _this.props.tetherRef(_this.tether);
+      }
       _this.tether.position();
     }, _this.toggle = function (e) {
       if (_this.props.disabled) {
@@ -12216,8 +12219,8 @@ var defaultProps$20 = {
     show: 350,
     hide: 350
   },
-  onOpened: function onOpened() {},
-  onClosed: function onClosed() {}
+  onOpened: null,
+  onClosed: null
 };
 var propTypes$20 = {
   /**
@@ -12327,11 +12330,15 @@ var Collapse = function (_Component) {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps, prevState) {
       if (this.state.collapse === SHOWN && prevState && prevState.collapse !== SHOWN) {
-        this.props.onOpened();
+        if (this.props.onOpened) {
+          this.props.onOpened();
+        }
       }
 
       if (this.state.collapse === HIDDEN && prevState && prevState.collapse !== HIDDEN) {
-        this.props.onClosed();
+        if (this.props.onClosed) {
+          this.props.onClosed();
+        }
       }
     }
   }, {
@@ -16625,8 +16632,6 @@ var makeTheme$4 = function makeTheme() {
 makeTheme$4();
 
 /* eslint no-underscore-dangle: 0 */
-function noop() {}
-
 var FadePropTypes = PropTypes.shape(propTypes$3);
 var propTypes$53 = {
   /**
@@ -16693,8 +16698,8 @@ var defaultProps$48 = {
   zIndex: 2000,
   theme: makeTheme$4(),
   fade: true,
-  onOpened: noop,
-  onClosed: noop,
+  onOpened: null,
+  onClosed: null,
   modalTransition: {
     timeout: 300
   },
@@ -16715,14 +16720,22 @@ var ModalUnstyled = function (_React$Component) {
     var _this = possibleConstructorReturn(this, (ModalUnstyled.__proto__ || Object.getPrototypeOf(ModalUnstyled)).call(this, props));
 
     _this.onOpened = function (node, isAppearing) {
-      _this.props.onOpened();
-      (_this.props.modalTransition.onEntered || noop)(node, isAppearing);
+      if (_this.props.onOpened) {
+        _this.props.onOpened();
+      }
+      if (_this.props.modalTransition.onEntered) {
+        _this.props.modalTransition.onEntered(node, isAppearing);
+      }
     };
 
     _this.onClosed = function (node) {
       // so all methods get called before it is unmounted
-      _this.props.onClosed();
-      (_this.props.modalTransition.onExited || noop)(node);
+      if (_this.props.onClosed) {
+        _this.props.onClosed();
+      }
+      if (_this.props.modalTransition.onEntered) {
+        _this.props.modalTransition.onExited(node);
+      }
       _this.destroy();
 
       if (_this._isMounted) {
@@ -20599,9 +20612,8 @@ var CardImg = function (_React$Component) {
 
   createClass(CardImg, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
 
-
-    /* eslint-disable react/no-unused-prop-types */
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -20623,23 +20635,12 @@ var CardImg = function (_React$Component) {
         className: mapToCssModules(classnames(className, cardImgClassName), cssModule)
       }, attributes));
     }
-    /* eslint-enable react/no-unused-prop-types */
-
-    // eslint-disable-line react/prefer-stateless-function
-
   }]);
   return CardImg;
 }(React.Component);
 
 CardImg.defaultProps = defaultProps$73;
 CardImg.propTypes = propTypes$84;
-CardImg.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
-  top: PropTypes.bool,
-  bottom: PropTypes.bool
-};
 
 
 CardImg.defaultProps = defaultProps$73;
@@ -22465,7 +22466,7 @@ makeTheme$5();
 var getToggleableClass = function getToggleableClass(toggleable) {
   // eslint-disable-line react/prefer-stateless-function
   if (toggleable === false) {
-    return false;
+    return '';
   } else if (toggleable === true || toggleable === 'xs') {
     return 'navbar-toggleable';
   }
