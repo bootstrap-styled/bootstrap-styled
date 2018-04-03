@@ -130,24 +130,35 @@ test:
 release:
   stage: release
   script:
-    # create branch for release version
+    # update release date
     - git checkout -b ${PACKAGE_VERSION}
+    - git checkout package-lock.json || echo 'nothing to do'
+    - sed -i 's/????-??-??/'`date +%Y-%m-%d`'/g' CHANGELOG.md
+    - sed -i "s/?NEXT?/v$PACKAGE_VERSION/g" CHANGELOG.md
+    - git add CHANGELOG.md
+    - git commit -m "Set release date in CHANGELOG.md"
     - git push origin ${PACKAGE_VERSION}
     # tag version
     - git tag -a -m "new version ${PACKAGE_VERSION}" ${PACKAGE_VERSION}
     - git push --tags
     # prepare next dev version
     - git checkout dev
-    - git pull origin dev
+    - npm run build:clean
     - git reset HEAD --hard
+    - git pull origin dev
+    # again update release date for dev branch
+    - sed -i 's/????-??-??/'`date +%Y-%m-%d`'/g' CHANGELOG.md
+    - sed -i "s/?NEXT?/v$PACKAGE_VERSION/g" CHANGELOG.md
+    - git add CHANGELOG.md
+    - git commit -m "Set release date in CHANGELOG.md"
+    # add next release
     - VERSION=$(npm version patch -m "preparing next version %s")
-    - DATE=`date +%Y-%m-??`
     - PATTERN="All notable changes to this project will be documented in this file"
-    - sed -i "/$PATTERN/a- TODO":" write change before preparing next tag" CHANGELOG.md
+    - sed -i "/$PATTERN/a- TODO":" write changelog before preparing next tag" CHANGELOG.md
     - sed -i "/$PATTERN/G" CHANGELOG.md
-    - sed -i "/$PATTERN/a## [$VERSION] - $DATE" CHANGELOG.md
+    - sed -i "/$PATTERN/a## [?NEXT?] - ????-??-??" CHANGELOG.md
     - sed -i "/$PATTERN/G" CHANGELOG.md
-    - git add -A
+    - git add CHANGELOG.md
     - git commit -m "Add todo next version $VERSION in CHANGELOG.md"
     - git push origin HEAD:dev
   dependencies:
