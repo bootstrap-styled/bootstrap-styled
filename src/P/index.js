@@ -42,6 +42,7 @@ export const defaultProps = {
     '$lead-font-weight': '300',
   },
 };
+
 export const propTypes = {
   /**
    * @ignore

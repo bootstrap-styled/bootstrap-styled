@@ -68,6 +68,7 @@ export const makeTheme = (userTheme = {}) => {
   // of components dependent on the z-axis and are designed to all work together.
 
   v['$zindex-dropdown-backdrop'] = u['$zindex-dropdown-backdrop'] || '990';
+  v['$zindex-dropdown'] = u['$zindex-dropdown'] || '1000';
 
   // Components
   //

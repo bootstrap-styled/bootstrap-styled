@@ -58,6 +58,20 @@ export const propTypes = {
     PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
     PropTypes.number,
   ]),
+  /** Theme variables. */
+  theme: PropTypes.shape({
+    '$zindex-tooltip': PropTypes.string,
+    '$tooltip-max-width': PropTypes.string,
+    '$tooltip-color': PropTypes.string,
+    '$tooltip-bg': PropTypes.string,
+    '$tooltip-opacity': PropTypes.string,
+    '$tooltip-padding-y': PropTypes.string,
+    '$tooltip-padding-x': PropTypes.string,
+    '$tooltip-margin': PropTypes.string,
+    '$tooltip-arrow-width': PropTypes.string,
+    '$tooltip-arrow-color': PropTypes.string,
+    '$component-active-color': PropTypes.string,
+  }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
@@ -69,7 +83,19 @@ export const defaultProps = {
   placement: 'bottom',
   delay: DEFAULT_DELAYS,
   autohide: true,
-  toggle: () => {},
+  toggle: null,
+  theme: {
+    '$zindex-tooltip': '1070',
+    '$tooltip-max-width': '200px',
+    '$tooltip-color': '#fff',
+    '$tooltip-bg': '#000',
+    '$tooltip-opacity': '.9',
+    '$tooltip-padding-y': '3px',
+    '$tooltip-padding-x': '8px',
+    '$tooltip-margin': '3px',
+    '$tooltip-arrow-width': '5px',
+    '$tooltip-arrow-color': '#000',
+  },
 };
 export class TooltipUnstyled extends React.Component {
 
@@ -205,8 +231,10 @@ export class TooltipUnstyled extends React.Component {
     if (this.props.disabled) {
       return e && e.preventDefault();
     }
-
-    return this.props.toggle();
+    if (this.props.toggle) {
+      return this.props.toggle();
+    }
+    return null;
   }
 
   handleFocus = () => {

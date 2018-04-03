@@ -70,7 +70,7 @@ function Fade(props) {
   // Tag component would inherit the Transition properties as attributes for the HTML
   // element which results in errors/warnings for non-valid attributes.
   const transitionProps = pick(otherProps, TransitionPropTypeKeys);
-  const childProps = omit(otherProps, TransitionPropTypeKeys);
+  const childProps = omit(otherProps, TransitionPropTypeKeys, 'innerRef');
   return (
     <Transition {...transitionProps}>
       {(status) => {
