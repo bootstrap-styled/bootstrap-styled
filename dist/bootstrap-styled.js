@@ -2181,26 +2181,6 @@ var makeTheme$2 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-// export const makeTheme2 = (u = {}, v = {}) => {
-//  v['$kopax'] = u['$kopax'] || 'underline';
-//   return { ...u, ...v };
-// };
-//
-//
-//
-//
-// const list = [makeTheme1, makeTheme2];
-//
-// export function makeTheme(theme) {
-//   const all = [].concat(list);
-//   let t = theme;
-//   let mt;
-//   while(mt = all.shift()) {
-//     t = mt(t);
-//   }
-//   return t;
-// }
-
 makeTheme$2();
 
 /**
