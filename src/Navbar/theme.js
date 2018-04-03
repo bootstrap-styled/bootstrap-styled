@@ -127,22 +127,22 @@ export const makeTheme = (userTheme = {}) => {
   v['$navbar-brand-padding-y'] = u['$navbar-brand-padding-y'] || '.25rem';
 
   v['$navbar-divider-padding-y'] = u['$navbar-brand-padding-y'] || '.425rem';
-  v['$navbar-toggler-padding-y'] = u['$navbar-toggler-padding-y'] || '.5rem';
+  v['$navbar-toggler-padding-y'] = u['$navbar-toggler-padding-y'] || '.25rem';
   v['$navbar-toggler-padding-x'] = u['$navbar-toggler-padding-x'] || '.75rem';
   v['$navbar-toggler-font-size'] = u['$navbar-toggler-font-size'] || '1.25rem';
 
   v['$navbar-toggler-border-radius'] = u['$navbar-toggler-border-radius'] || '.25rem';
-  v['$navbar-light-active-color'] = u['$navbar-light-active-color'] || 'rgba(0,0,0,.9)';
-  v['$navbar-light-color'] = u['$navbar-light-color'] || 'rgba(0,0,0,.5)';
-  v['$navbar-light-hover-color'] = u['$navbar-light-hover-color'] || 'rgba(0,0,0,.7)';
-  v['$navbar-light-toggler-border'] = u['$navbar-light-toggler-border'] || 'rgba(0,0,0,.1)';
+  v['$navbar-light-active-color'] = u['$navbar-light-active-color'] || 'rgba(0, 0, 0, 0.9)';
+  v['$navbar-light-color'] = u['$navbar-light-color'] || 'rgba(0, 0, 0, 0.5)';
+  v['$navbar-light-hover-color'] = u['$navbar-light-hover-color'] || 'rgba(0, 0, 0, 0.7)';
+  v['$navbar-light-toggler-border'] = u['$navbar-light-toggler-border'] || 'rgba(0, 0, 0, 0.1)';
   v['$navbar-light-disabled-color'] = u['$navbar-light-disabled-color'] || 'rgba(0, 0, 0, 0.3)';
-  v['$navbar-light-toggler-bg'] = u['$navbar-light-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(0,0,0,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
-  v['$navbar-inverse-active-color'] = u['$navbar-inverse-active-color'] || 'rgba(255,255,255,1)';
-  v['$navbar-inverse-color'] = u['$navbar-inverse-color'] || 'rgba(255,255,255,.5)';
-  v['$navbar-inverse-hover-color'] = u['$navbar-inverse-hover-color'] || 'rgba(255,255,255,.75)';
-  v['$navbar-inverse-toggler-border'] = u['$navbar-inverse-toggler-border'] || 'rgba(255,255,255,.1)';
-  v['$navbar-inverse-toggler-bg'] = u['$navbar-inverse-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-light-toggler-bg'] = u['$navbar-light-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(0, 0, 0, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-active-color'] = u['$navbar-inverse-active-color'] || 'rgb(255, 255, 255)';
+  v['$navbar-inverse-color'] = u['$navbar-inverse-color'] || 'rgba(255, 255, 255, 0.5)';
+  v['$navbar-inverse-hover-color'] = u['$navbar-inverse-hover-color'] || 'rgba(255, 255, 255, .75)';
+  v['$navbar-inverse-toggler-border'] = u['$navbar-inverse-toggler-border'] || 'rgba(255, 255, 255, 0.1)';
+  v['$navbar-inverse-toggler-bg'] = u['$navbar-inverse-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255, 255, 255, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
   v['$navbar-inverse-disabled-color'] = u['$navbar-inverse-disabled-color'] || 'rgba(255, 255, 255, 0.25)';
 
   return Object.assign({}, u, v);

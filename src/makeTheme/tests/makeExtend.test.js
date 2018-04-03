@@ -5,6 +5,6 @@ describe('makeExtend', () => {
     expect(makeExtend).toBeDefined();
   });
   it('should have keys starting with $ only', () => {
-    Object.keys(makeExtend(undefined)).forEach((key) => expect(key[0]).toEqual('$'));
+    Object.keys(makeExtend()).forEach((key) => expect(key[0]).toEqual('$'));
   });
 });
