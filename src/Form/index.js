@@ -174,8 +174,6 @@ const propTypes = {
    * @ignore
    */
   className: PropTypes.string,
-  /** Specified node element will be passed as children of `<DropdownItem />`. */
-  children: PropTypes.node,
   /** Theme variables. Can be: */
   theme: PropTypes.shape({
     '$brand-primary': PropTypes.string,
@@ -198,7 +196,7 @@ const propTypes = {
       'lg': PropTypes.string,
       'xl': PropTypes.string,
     }),
-    '$grid-gutter-width-base': '30px',
+    '$grid-gutter-width-base': PropTypes.string,
     '$grid-gutter-widths': PropTypes.shape({
       'xs': PropTypes.string,
       'sm': PropTypes.string,
