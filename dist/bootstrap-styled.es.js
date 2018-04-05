@@ -9662,7 +9662,8 @@ var propTypes$2 = {
    */
   isOpen: PropTypes.bool,
   /**
-   * Toggles onClick event.
+   * @ignore
+   * Used for Close component.
    */
   toggle: PropTypes.func,
   /**
@@ -9828,21 +9829,20 @@ var AlertUnstyled = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme', 'autoHideDuration']),
+      var _omit = lodash_omit(this.props, ['theme', 'autoHideDuration', 'toggle']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           color = _omit.color,
           isOpen = _omit.isOpen,
-          toggle = _omit.toggle,
           onClick = _omit.onClick,
           children = _omit.children,
           onExited = _omit.onExited,
           transition = _omit.transition,
           uncontrolled = _omit.uncontrolled,
-          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'color', 'isOpen', 'toggle', 'onClick', 'children', 'onExited', 'transition', 'uncontrolled']);
+          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'color', 'isOpen', 'onClick', 'children', 'onExited', 'transition', 'uncontrolled']);
 
-      var classes = mapToCssModules(classnames(className, 'alert', 'alert-' + color, { 'alert-dismissible': toggle || onClick }), cssModule);
+      var classes = mapToCssModules(classnames(className, 'alert', 'alert-' + color, { 'alert-dismissible': uncontrolled || onClick }), cssModule);
 
       if (!isOpen && this.state.exited) {
         return null;
@@ -9862,7 +9862,7 @@ var AlertUnstyled = function (_React$Component) {
           'in': uncontrolled ? this.state.uncontrolledOpen : isOpen,
           role: 'alert'
         }, attributes, transition, transitionProps),
-        (toggle || onClick) && React.createElement(Close, { onDismiss: this.toggle }),
+        (uncontrolled || onClick) && React.createElement(Close, { onDismiss: this.toggle }),
         children
       );
     }

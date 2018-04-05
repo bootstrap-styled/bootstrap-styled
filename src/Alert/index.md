@@ -1,7 +1,10 @@
 `<Alert />` component example:
 
 ```js
- <Alert color="info" toggle={() => {}}>
+initialState = {
+  alertIsOpen: true,
+};
+ <Alert color="info" isOpen={state.alertIsOpen} onClick={() => setState({ alertIsOpen: !state.alertIsOpen })}>
    I am a controlled alert
  </Alert>
 ```
@@ -9,5 +12,5 @@
 Uncontrolled `<Alert />` component example:
 
 ```js
-<Alert color="danger" uncontrolled toggle={() => {}}>Uncontrolled alert</Alert>
+<Alert color="danger" uncontrolled>Uncontrolled alert</Alert>
 ```

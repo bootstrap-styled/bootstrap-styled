@@ -66,7 +66,8 @@ export const propTypes = {
    */
   isOpen: PropTypes.bool,
   /**
-   * Toggles onClick event.
+   * @ignore
+   * Used for Close component.
    */
   toggle: PropTypes.func,
   /**
@@ -222,20 +223,19 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
       tag: Tag,
       color,
       isOpen,
-      toggle,
       onClick,
       children,
       onExited,
       transition,
       uncontrolled,
       ...attributes
-    } = omit(this.props, ['theme', 'autoHideDuration']);
+    } = omit(this.props, ['theme', 'autoHideDuration', 'toggle']);
 
     const classes = mapToCssModules(cn(
       className,
       'alert',
       `alert-${color}`,
-      { 'alert-dismissible': toggle || onClick }
+      { 'alert-dismissible': uncontrolled || onClick }
     ), cssModule);
 
     if (!isOpen && this.state.exited) {
@@ -258,7 +258,7 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
         {...transition}
         {...transitionProps}
       >
-        {(toggle || onClick) && <Close onDismiss={this.toggle} />}
+        {(uncontrolled || onClick) && <Close onDismiss={this.toggle} />}
         {children}
       </Fade>
     );
