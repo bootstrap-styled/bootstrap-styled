@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled, { ThemeProvider, keyframes, withTheme } from 'styled-components';
+import styled, { ThemeProvider, keyframes } from 'styled-components';
 import ReactDOM from 'react-dom';
 import { Portal } from 'react-portal';
 
@@ -9642,7 +9642,7 @@ var defaultProps$3 = {
     '$enable-rounded': true
   },
   uncontrolled: false,
-  autoHideDuration: 0, // theme
+  autoHideDuration: null,
   transition: _extends({}, defaultProps$4, {
     unmountOnExit: true
   })
@@ -9870,16 +9870,14 @@ var AlertUnstyled = function (_React$Component) {
   return AlertUnstyled;
 }(React.Component);
 
-AlertUnstyled.defaultProps = defaultProps$3;
-AlertUnstyled.propTypes = propTypes$2;
-
-
-var AlertHoc = withTheme(AlertUnstyled);
-
 /**
  * Alert component.
  */
-var Alert = styled(AlertHoc).withConfig({
+
+
+AlertUnstyled.defaultProps = defaultProps$3;
+AlertUnstyled.propTypes = propTypes$2;
+var Alert = styled(AlertUnstyled).withConfig({
   displayName: 'Alert'
 })(['', ''], function (props) {
   return '\n    /*\n    Base styles\n    */\n    \n    &.alert {\n      padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n      margin-bottom: ' + props.theme['$alert-margin-bottom'] + ';\n      border: ' + props.theme['$alert-border-width'] + ' solid transparent;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$alert-border-radius']) + '\n    }\n    \n    /* Headings for larger alerts */\n    &.alert-heading {\n      /* Specified to prevent conflicts of changing $headings-color */\n      color: inherit;\n    }\n    \n    /* Provide class for links that match alerts */\n    & .alert-link { \n      font-weight: ' + props.theme['$alert-link-font-weight'] + ';\n    }\n    \n    /* Dismissible alerts Expand the right padding and account for the close buttons positioning. */\n    \n    &.alert-dismissible {    \n      /* Adjust close link position */\n      & .close {\n        position: relative;\n        top: -' + props.theme['$alert-padding-y'] + ';\n        right: -' + props.theme['$alert-padding-x'] + ';\n        padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n        color: inherit;\n      }\n    }\n    /* Alternate styles Generate contextual modifier classes for colorizing the alert. */\n\n    &.alert-success {\n      ' + alert_1(props.theme['$alert-success-bg'], props.theme['$alert-success-border'], props.theme['$alert-success-text']) + '    \n    }\n    &.alert-info {\n      ' + alert_1(props.theme['$alert-info-bg'], props.theme['$alert-info-border'], props.theme['$alert-info-text']) + '\n    } \n    &.alert-warning {\n      ' + alert_1(props.theme['$alert-warning-bg'], props.theme['$alert-warning-border'], props.theme['$alert-warning-text']) + ' \n    }\n    &.alert-danger {\n      ' + alert_1(props.theme['$alert-danger-bg'], props.theme['$alert-danger-border'], props.theme['$alert-danger-text']) + ' \n    }\n  ';
