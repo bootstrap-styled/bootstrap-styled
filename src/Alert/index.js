@@ -11,7 +11,7 @@ import mapToCssModules from 'map-to-css-modules';
 import { alertVariant } from 'bootstrap-styled-mixins/lib/alert';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { createChainedFunction } from 'bootstrap-styled-utils';
-import Fade, { defaultProps as FadeDefaultProps, propTypes as FadeProptypes } from '../Modal/Fade';
+import Fade, { defaultProps as FadeDefaultProps } from '../Modal/Fade';
 import Close from '../Close';
 
 export const defaultProps = {
@@ -84,7 +84,10 @@ export const propTypes = {
   /**
    * Transition used to dismiss alert.
    */
-  transition: PropTypes.shape({ FadeProptypes }),
+  transition: PropTypes.shape({
+    FadeProptypes: PropTypes.object,
+    unmountOnExit: PropTypes.bool,
+  }),
   /**
    * Transition's duration used to dismiss alert automatically.
    */
@@ -262,12 +265,10 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
   }
 }
 
-const AlertHoc = withTheme(AlertUnstyled);
-
 /**
  * Alert component.
  */
-const Alert = styled(AlertHoc)`
+const AlertHoc = styled(AlertUnstyled)`
   ${(props) => `
     /*
     Base styles
@@ -335,6 +336,8 @@ const Alert = styled(AlertHoc)`
     }
   `}
 `;
+
+const Alert = withTheme(AlertHoc);
 
 Alert.propTypes = propTypes;
 Alert.defaultProps = defaultProps;
