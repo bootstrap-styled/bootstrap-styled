@@ -97,7 +97,7 @@ ReactDOM.render(
 );
 ```
 
-In addition to the BootstrapProvider, you will want to have our global-styles for <html /> injected in your app.
+In addition to the BootstrapProvider, you will want to have our global-styles for injected in your app.
 
 ```js static
 import { getGlobalStyles } from 'bootstrap-styled';

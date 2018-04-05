@@ -6533,7 +6533,10 @@ var propTypes$2 = {
   /**
    * Transition used to dismiss alert.
    */
-  transition: PropTypes.shape({ FadeProptypes: propTypes$3 }),
+  transition: PropTypes.shape({
+    FadeProptypes: PropTypes.object,
+    unmountOnExit: PropTypes.bool
+  }),
   /**
    * Transition's duration used to dismiss alert automatically.
    */
