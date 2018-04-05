@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [?NEXT?] - ????-??-??
+## [v1.5.10] - 2018-04-05
 
 - Improve sonar coverage
 
