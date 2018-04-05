@@ -80,8 +80,8 @@ export const makeTheme = (userTheme = {}) => {
   // Warning = 'Avoid customizing these values. They're used for a bird's eye view
   // of components dependent on the z-axis and are designed to all work together.
 
-  v['$zindex-modal'] = u['$zindex-modal'] || '1050';
-  v['$zindex-modal-backdrop'] = u['$zindex-modal-backdrop'] || '1040';
+  v['$zindex-modal'] = u['$zindex-modal'] || '2050';
+  v['$zindex-modal-backdrop'] = u['$zindex-modal-backdrop'] || '2040';
 
   // Components
   //

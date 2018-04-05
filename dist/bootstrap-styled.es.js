@@ -1,8 +1,169 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled, { ThemeProvider, keyframes, withTheme } from 'styled-components';
+import styled, { ThemeProvider, keyframes } from 'styled-components';
 import ReactDOM from 'react-dom';
 import { Portal } from 'react-portal';
+
+// This module is used by the following variable: $popover-border-color, $popover-box-shadow, $popover-title-bg, $popover-arrow-outer-color
+// import Color from 'color';
+
+// This utils is used by unitUtils constant variable in order to use detectUnit and rmUnit utilities.
+// import unitUtils from 'bootstrap-styled-utils/lib/unitUtils';
+
+// This utils is used by the following variable: $enable-print-styles
+// import { allowFalseValue } from './utils';
+
+// These variables are used by following variables: $spacer, $spacers, $popover-arrow-outer-width and $popover-arrow-width.
+// const { detectUnit, rmUnit } = unitUtils;
+
+/**
+ * ORIGINAL BOOTSTRAP THEME
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+function makeOriginal() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+  // This variable is used by following variables: $spacer, $spacers, $popover-arrow-outer-width and $popover-arrow-width.
+  // let detectedUnit;
+
+  // Colors
+  // This variable was created in original Bootstrap and is still unused in original Bootstrap.
+  // v['$yellow'] = u['$yellow'] || '#ffd500';
+
+  // This variable was created in original Bootstrap and is used by @mixin gradient-x-three-colors and gradient-x-three-colors in original Bootstrap.
+  // These @mixin aren't called in original Bootstrap.
+  // v['$purple'] = u['$purple'] || '#613d7c';
+
+  // This variable is used by following $popover-bg variable.
+  // v['$white'] = u['$white'] || '#fff';
+
+  // This variable is used by following $popover-border-color and $popover-box-shadow variables.
+  // v['$black'] = u['$black'] || '#000';
+
+  // Options
+  // This variable was created in original Bootstrap and used in @mixin @media print.
+  // Waiting for new print mixin.
+  // v['$enable-print-styles'] = allowFalseValue(u['$enable-print-styles'], true);
+
+  // Spacing
+  // This variable is used by following detectedUnit variable.
+  // v['$spacer'] = u['$spacer'] || '1rem';
+
+  // This variable is used by following $spacers variable.
+  // =============================================================================================================
+  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
+  // detectedUnit = detectUnit(v['$spacer']);
+  // =============================================================================================================
+
+  // This variable was created in original Bootstrap and used in @mixin spacing.
+  // For now there is no other use of $spacers in original Bootstrap.
+  // v['$spacers'] = u['$spacers'] || {
+  //   0: {
+  //     x: 0,
+  //     y: 0,
+  //   },
+  //   1: {
+  //     x: (rmUnit(v['$spacer-x']) * 0.25) + detectedUnit,
+  //     y: (rmUnit(v['$spacer-y']) * 0.25) + detectedUnit,
+  //   },
+  //   2: {
+  //     x: (rmUnit(v['$spacer-x']) * 0.5) + detectedUnit,
+  //     y: (rmUnit(v['$spacer-y']) * 0.5) + detectedUnit,
+  //   },
+  //   3: {
+  //     x: v['$spacer-x'],
+  //     y: v['$spacer-y'],
+  //   },
+  //   4: {
+  //     x: (rmUnit(v['$spacer-x']) * 1.5) + detectedUnit,
+  //     y: (rmUnit(v['$spacer-y']) * 1.5) + detectedUnit,
+  //   },
+  //   5: {
+  //     x: (rmUnit(v['$spacer-x']) * 3) + detectedUnit,
+  //     y: (rmUnit(v['$spacer-y']) * 3) + detectedUnit,
+  //   },
+  // };
+
+  // This variable was created in original Bootstrap and used in @mixin sizing.
+  // For now there is no other use of $sizes in original Bootstrap.
+  // v['$sizes'] = u['$sizes'] || {
+  //   25: '25%',
+  //   50: '50%',
+  //   75: '75%',
+  //   100: '100%',
+  // };
+
+  // This variable is used by following $popover-border-width variable.
+  // v['$border-width'] = u['$border-width'] || '1px';
+
+  // This variable was created in original Bootstrap and used in @mixin transition.
+  // For now there is no other use of $transition-base in original Bootstrap.
+  // v['$transition-base'] = u['$transition-base'] || 'all .2s ease-in-out';
+
+  // These variables were created in original Bootstrap and used in @mixin position.
+  // For now there is no other use of $zindex-fixed, $zindex-sticky and $zindex-popover in original Bootstrap.
+  // v['$zindex-fixed'] = u['$zindex-fixed'] || '1030';
+  // v['$zindex-sticky'] = u['$zindex-sticky'] || '1030';
+  // v['$zindex-popover'] = u['$zindex-popover'] || '1060';
+
+  // Popovers
+  // These variables were created in original Bootstrap and are still unused in original Bootstrap.
+  // Waiting for new Popover component.
+  // v['$popover-inner-padding'] = u['$popover-inner-padding'] || '1px';
+  // v['$popover-bg'] = u['$popover-bg'] || v['$white'];
+  // v['$popover-max-width'] = u['$popover-max-width'] || '276px';
+  // v['$popover-border-width'] = u['$popover-border-width'] || v['$border-width'];
+  //
+  // v['$popover-border-color'] = u['$popover-border-color'] || Color(v['$black']).alpha(0.2).toString();
+  // v['$popover-box-shadow'] = u['$popover-box-shadow'] || `0 5px 10px ${Color(v['$black']).alpha(0.2).toString()}`;
+  //
+  // v['$popover-title-bg'] = u['$popover-title-bg'] || Color(v['$popover-bg']).darken(0.03).toString();
+  // v['$popover-title-padding-x'] = u['$popover-title-padding-x'] || '14px';
+  // v['$popover-title-padding-y'] = u['$popover-title-padding-y'] || '8px';
+  //
+  // v['$popover-content-padding-x'] = u['$popover-content-padding-x'] || '14px';
+  // v['$popover-content-padding-y'] = u['$popover-content-padding-y'] || '9px';
+  //
+  // v['$popover-arrow-width'] = u['$popover-arrow-width'] || '10px';
+  // v['$popover-arrow-color'] = u['$popover-arrow-color'] || v['$popover-bg'];
+  //
+  // detectedUnit = detectUnit(v['$popover-arrow-width']);
+  // v['$popover-arrow-outer-width'] = u['$popover-arrow-outer-width'] || ((rmUnit(v['$popover-arrow-width'], detectedUnit) + 1) + detectedUnit);
+  // v['$popover-arrow-outer-color'] = u['$popover-arrow-outer-color'] || Color(v['$popover-border-color']).fade(0.5).toString();
+
+  // Carousel
+  // These variables are not used yet in Bootstrap Styled. Waiting for new Carousel component.
+
+  // v['$carousel-control-color'] = u['$carousel-control-color'] || v['$white'];
+  // v['$carousel-control-width'] = u['$carousel-control-width'] || '15%';
+  // v['$carousel-control-opacity'] = u['$carousel-control-opacity'] || '.5';
+  //
+  // v['$carousel-indicator-width'] = u['$carousel-indicator-width'] || '30px';
+  // v['$carousel-indicator-height'] = u['$carousel-indicator-height'] || '3px';
+  // v['$carousel-indicator-spacer'] = u['$carousel-indicator-spacer'] || '3px';
+  // v['$carousel-indicator-active-bg'] = u['$carousel-indicator-active-bg'] || v['$white'];
+  //
+  // v['$carousel-caption-width'] = u['$carousel-caption-width'] || '70%';
+  // v['$carousel-caption-color'] = u['$carousel-caption-color'] || v['$white'];
+  //
+  // v['$carousel-control-icon-width'] = u['$carousel-control-icon-width'] || '20px';
+  //
+  // v['$carousel-control-prev-icon-bg'] = u['$carousel-control-prev-icon-bg'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="${v['$carousel-control-color']}" viewBox="0 0 8 8"%3E%3Cpath d="M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z"/%3E%3C/svg%3E')`;
+  // v['$carousel-control-next-icon-bg'] = u['$carousel-control-next-icon-bg'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="${v['$carousel-control-color']}" viewBox="0 0 8 8"%3E%3Cpath d="M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z"/%3E%3C/svg%3E')`;
+  //
+  // v['$carousel-transition'] = u['$carousel-transition'] || 'transform .6s ease-in-out';
+
+  return Object.assign({}, u, v);
+}
 
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -1967,6 +2128,236 @@ function zeroArray(arr, length) {
 
 var color = Color;
 
+/**
+ * Helper used to keep false values provided by userTheme
+ * @param userValue
+ * @param defaultValue
+ * @returns {*}
+ */
+function allowFalseValue(userValue, defaultValue) {
+  return userValue === false ? userValue : userValue || defaultValue;
+}
+
+/**
+ * BOOTSTRAP THEME A TAG
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$2 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+
+  // Start with assigning color names to specific hex values.
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Link color and decoration
+  v['$link-color'] = u['$link-color'] || v['$brand-primary'];
+  v['$link-decoration'] = u['$link-decoration'] || 'none';
+  v['$link-hover-color'] = u['$link-hover-color'] || color(v['$link-color']).darken(0.35).toString();
+  v['$link-hover-decoration'] = u['$link-hover-decoration'] || 'underline';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$2();
+
+/**
+ * BOOTSTRAP THEME ALERT TAG
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$3 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+  v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-weight-bold'] = u['$font-weight-bold'] || 'bold';
+
+  // Alerts
+  //
+  // Define colors for alerts states.
+
+  v['$state-success-text'] = u['$state-success-text'] || '#3c763d';
+  v['$state-success-bg'] = u['$state-success-bg'] || '#dff0d8';
+  v['$state-success-border'] = u['$state-success-border'] || color(v['$state-success-bg']).darken(0.05).toString();
+
+  v['$state-info-text'] = u['$state-info-text'] || '#31708f';
+  v['$state-info-bg'] = u['$state-info-bg'] || '#d9edf7';
+  v['$state-info-border'] = u['$state-info-border'] || color(v['$state-info-bg']).darken(0.07).toString();
+
+  v['$state-warning-text'] = u['$state-warning-text'] || '#8a6d3b';
+  v['$state-warning-bg'] = u['$state-warning-bg'] || '#fcf8e3';
+
+  v['$mark-bg'] = u['$mark-bg'] || v['$state-warning-bg'];
+  v['$state-warning-border'] = u['$state-warning-border'] || color(v['$state-warning-bg']).darken(0.05).toString();
+
+  v['$state-danger-text'] = u['$state-danger-text'] || '#a94442';
+  v['$state-danger-bg'] = u['$state-danger-bg'] || '#f2dede';
+  v['$state-danger-border'] = u['$state-danger-border'] || color(v['$state-danger-bg']).darken(0.05).toString();
+
+  // Define alert colors, border radius, and padding.
+
+  v['$alert-padding-x'] = u['$alert-padding-x'] || '1.25rem';
+  v['$alert-padding-y'] = u['$alert-padding-y'] || '.75rem';
+  v['$alert-margin-bottom'] = u['$alert-margin-bottom'] || v['$spacer-y'];
+  v['$alert-border-radius'] = u['$alert-border-radius'] || v['$border-radius'];
+  v['$alert-link-font-weight'] = u['$alert-link-font-weight'] || v['$font-weight-bold'];
+  v['$alert-border-width'] = u['$alert-border-width'] || v['$border-width'];
+
+  v['$alert-success-bg'] = u['$alert-success-bg'] || v['$state-success-bg'];
+  v['$alert-success-text'] = u['$alert-success-text'] || v['$state-success-text'];
+  v['$alert-success-border'] = u['$alert-success-border'] || v['$state-success-border'];
+
+  v['$alert-info-bg'] = u['$alert-info-bg'] || v['$state-info-bg'];
+  v['$alert-info-text'] = u['$alert-info-text'] || v['$state-info-text'];
+  v['$alert-info-border'] = u['$alert-info-border'] || v['$state-info-border'];
+
+  v['$alert-warning-bg'] = u['$alert-warning-bg'] || v['$state-warning-bg'];
+  v['$alert-warning-text'] = u['$alert-warning-text'] || v['$state-warning-text'];
+  v['$alert-warning-border'] = u['$alert-warning-border'] || v['$state-warning-border'];
+
+  v['$alert-danger-bg'] = u['$alert-danger-bg'] || v['$state-danger-bg'];
+  v['$alert-danger-text'] = u['$alert-danger-text'] || v['$state-danger-text'];
+  v['$alert-danger-border'] = u['$alert-danger-border'] || v['$state-danger-border'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$3();
+
+/**
+ * BOOTSTRAP THEME BADGE TAG
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$4 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Color
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$blue'] = u['$blue'] || '#0275d8';
+  v['$green'] = u['$green'] || '#5cb85c';
+  v['$teal'] = u['$teal'] || '#5bc0de';
+  v['$orange'] = u['$orange'] || '#f0ad4e';
+  v['$red'] = u['$red'] || '#d9534f';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+  v['$brand-success'] = u['$brand-success'] || v['$green'];
+  v['$brand-info'] = u['$brand-info'] || v['$teal'];
+  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
+  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
+  v['$brand-inverse'] = u['$brand-inverse'] || v['$gray-dark'];
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-weight-bold'] = u['$font-weight-bold'] || 'bold';
+
+  // Badges
+
+  v['$badge-default-bg'] = u['$badge-default-bg'] || v['$gray-light'];
+  v['$badge-primary-bg'] = u['$badge-primary-bg'] || v['$brand-primary'];
+  v['$badge-success-bg'] = u['$badge-success-bg'] || v['$brand-success'];
+  v['$badge-info-bg'] = u['$badge-info-bg'] || v['$brand-info'];
+  v['$badge-warning-bg'] = u['$badge-warning-bg'] || v['$brand-warning'];
+  v['$badge-danger-bg'] = u['$badge-danger-bg'] || v['$brand-danger'];
+
+  v['$badge-color'] = u['$badge-color'] || v['$white'];
+  v['$badge-link-hover-color'] = u['$badge-link-hover-color'] || v['$white'];
+  v['$badge-font-size'] = u['$badge-font-size'] || '75%';
+  v['$badge-font-weight'] = u['$badge-font-weight'] || v['$font-weight-bold'];
+  v['$badge-padding-x'] = u['$badge-padding-x'] || '.4em';
+  v['$badge-padding-y'] = u['$badge-padding-y'] || '.25em';
+
+  v['$badge-pill-padding-x'] = u['$badge-pill-padding-x'] || '.6em';
+
+  // Use a higher than normal value to ensure completely rounded edges when
+  // customizing padding or font-size on labels.
+  v['$badge-pill-border-radius'] = u['$badge-pill-border-radius'] || '10rem';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$4();
+
 var unitUtils = createCommonjsModule(function (module, exports) {
 'use strict';
 
@@ -2046,6 +2437,354 @@ module.exports = exports['default'];
 });
 
 var unitUtils$1 = unwrapExports(unitUtils);
+
+var rmUnit = unitUtils$1.rmUnit;
+var UNIT = unitUtils$1.UNIT;
+
+/**
+ * BOOTSTRAP THEME BLOCKQUOTE TAG
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$5 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+  // Create grayscale
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // =============================================================================================================
+  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit(v['$spacer'], UNIT.REM) / 2 + UNIT.REM;
+  // =============================================================================================================
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
+
+  v['$blockquote-small-color'] = u['$blockquote-small-color'] || v['$gray-light'];
+  v['$blockquote-font-size'] = u['$blockquote-font-size'] || rmUnit(v['$font-size-base'], UNIT.REM) * 1.25 + UNIT.REM;
+  v['$blockquote-border-color'] = u['$blockquote-border-color'] || v['$gray-lighter'];
+  v['$blockquote-border-width'] = u['$blockquote-border-width'] || '.25rem';
+  return Object.assign({}, u, v);
+};
+
+makeTheme$5();
+
+/**
+ * BOOTSTRAP THEME BREADCRUMB TAG
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$6 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+  // Create grayscale
+
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  v['$spacer-x'] = u['$spacer-x'] || v['$spacer'];
+  v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
+
+  // Breadcrumbs
+
+  v['$breadcrumb-padding-y'] = u['$breadcrumb-padding-y'] || '.75rem';
+  v['$breadcrumb-padding-x'] = u['$breadcrumb-padding-x'] || '1rem';
+  v['$breadcrumb-item-padding'] = u['$breadcrumb-item-padding'] || '.5rem';
+
+  v['$breadcrumb-bg'] = u['$breadcrumb-bg'] || v['$gray-lighter'];
+  v['$breadcrumb-divider-color'] = u['$breadcrumb-divider-color'] || v['$gray-light'];
+  v['$breadcrumb-active-color'] = u['$breadcrumb-active-color'] || v['$gray-light'];
+  v['$breadcrumb-divider'] = u['$breadcrumb-divider'] || '"/"';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$6();
+
+/**
+ * BOOTSTRAP THEME BUTTON TAG
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$7 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], true);
+  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+  v['$green'] = u['$green'] || '#5cb85c';
+  v['$teal'] = u['$teal'] || '#5bc0de';
+  v['$orange'] = u['$orange'] || '#f0ad4e';
+  v['$red'] = u['$red'] || '#d9534f';
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+  v['$brand-success'] = u['$brand-success'] || v['$green'];
+  v['$brand-info'] = u['$brand-info'] || v['$teal'];
+  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
+  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+  v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
+
+  // Buttons
+  //
+  // For each of Bootstrap's buttons, define text, background and border color.
+
+  v['$btn-padding-x'] = u['$btn-padding-x'] || '1rem';
+  v['$btn-padding-y'] = u['$btn-padding-y'] || '.5rem';
+  v['$btn-line-height'] = u['$btn-line-height'] || '1.25';
+  v['$btn-font-weight'] = u['$btn-font-weight'] || v['$font-weight-normal'];
+  v['$btn-box-shadow'] = u['$btn-box-shadow'] || 'inset 0 1px 0 ' + color(v['$white']).alpha(0.15).toString() + ', 0 1px 1px ' + color(v['$black']).alpha(0.075).toString();
+  v['$btn-focus-box-shadow'] = u['$btn-focus-box-shadow'] || '0 0 0 2px ' + color(v['$brand-primary']).alpha(0.25).toString();
+  v['$btn-active-box-shadow'] = u['$btn-active-box-shadow'] || 'inset 0 3px 5px ' + color(v['$black']).alpha(0.125).toString();
+
+  v['$btn-primary-color'] = u['$btn-primary-color'] || v['$white'];
+  v['$btn-primary-bg'] = u['$btn-primary-bg'] || v['$brand-primary'];
+  v['$btn-primary-border'] = u['$btn-primary-border'] || v['$btn-primary-bg'];
+
+  v['$btn-secondary-color'] = u['$btn-secondary-color'] || v['$gray-dark'];
+  v['$btn-secondary-bg'] = u['$btn-secondary-bg'] || v['$white'];
+  v['$btn-secondary-border'] = u['$btn-secondary-border'] || '#ccc';
+
+  v['$btn-info-color'] = u['$btn-info-color'] || v['$white'];
+  v['$btn-info-bg'] = u['$btn-info-bg'] || v['$brand-info'];
+  v['$btn-info-border'] = u['$btn-info-border'] || v['$btn-info-bg'];
+
+  v['$btn-success-color'] = u['$btn-success-color'] || v['$white'];
+  v['$btn-success-bg'] = u['$btn-success-bg'] || v['$brand-success'];
+  v['$btn-success-border'] = u['$btn-success-border'] || v['$btn-success-bg'];
+
+  v['$btn-warning-color'] = u['$btn-warning-color'] || v['$white'];
+  v['$btn-warning-bg'] = u['$btn-warning-bg'] || v['$brand-warning'];
+  v['$btn-warning-border'] = u['$btn-warning-border'] || v['$btn-warning-bg'];
+
+  v['$btn-danger-color'] = u['$btn-danger-color'] || v['$white'];
+  v['$btn-danger-bg'] = u['$btn-danger-bg'] || v['$brand-danger'];
+  v['$btn-danger-border'] = u['$btn-danger-border'] || v['$btn-danger-bg'];
+
+  v['$btn-link-disabled-color'] = u['$btn-link-disabled-color'] || v['$gray-light'];
+
+  v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || '.5rem';
+  v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
+
+  v['$btn-padding-x-lg'] = u['$btn-padding-x-lg'] || '1.5rem';
+  v['$btn-padding-y-lg'] = u['$btn-padding-y-lg'] || '.75rem';
+
+  v['$btn-block-spacing-y'] = u['$btn-block-spacing-y'] || '.5rem';
+
+  // Allows for customizing button radius independently from global border radius
+  v['$btn-border-radius'] = u['$btn-border-radius'] || v['$border-radius'];
+  v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
+  v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
+
+  v['$btn-transition'] = u['$btn-transition'] || 'all .2s ease-in-out';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$7();
+
+/**
+ * BOOTSTRAP THEME BUTTONGROUP TAG
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$8 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  // v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], true);
+
+  // Colors
+  //
+  // Start with assigning color names to specific hex values
+  v['$black'] = u['$black'] || '#000';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Form input
+
+  v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width']; // For form controls and buttons
+
+  // Buttons
+  //
+  // For each of Bootstrap's buttons, define text, background and border color.
+
+  v['$btn-padding-x'] = u['$btn-padding-x'] || '1rem';
+  v['$btn-active-box-shadow'] = u['$btn-active-box-shadow'] || 'inset 0 3px 5px ' + color(v['$black']).alpha(0.125).toString();
+  v['$btn-padding-x-lg'] = u['$btn-padding-x-lg'] || '1.5rem';
+  v['$btn-padding-y-lg'] = u['$btn-padding-y-lg'] || '.75rem';
+  v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || '.5rem';
+  v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
+
+  // Allows for customizing button radius independently from global border radius
+  v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
+  v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$8();
+
+/**
+ * BOOTSTRAP THEME CAPTION TAG
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$9 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Create grayscale
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+
+  // Tables
+  //
+  // Customizes the `.table` component with basic values, each used across all table variations.
+
+  v['$table-cell-padding'] = u['$table-cell-padding'] || '.75rem';
+
+  // Fonts
+  v['$text-muted'] = u['$text-muted'] || v['$gray-light'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$9();
 
 var process = { argv: [], env: {} };
 
@@ -2202,27 +2941,18 @@ unwrapExports(variables);
 var variables_1 = variables.assertAscending;
 var variables_2 = variables.assertStartAtZero;
 
-/**
- * Helper used to keep false values provided by userTheme
- * @param userValue
- * @param defaultValue
- * @returns {*}
- */
-function allowFalseValue(userValue, defaultValue) {
-  return userValue === false ? userValue : userValue || defaultValue;
-}
-
 var detectUnit = unitUtils$1.detectUnit;
-var rmUnit = unitUtils$1.rmUnit;
+var rmUnit$1 = unitUtils$1.rmUnit;
+var UNIT$1 = unitUtils$1.UNIT;
 
 /**
- * ORIGINAL BOOTSTRAP THEME
+ * BOOTSTRAP THEME CARDS TAG (Cards, CardsColumns, CardDeck, CardGroup)
  *
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
 
-function makeOriginal() {
+var makeTheme$10 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -2233,71 +2963,41 @@ function makeOriginal() {
   var v = {};
   var u = userTheme;
 
-  var detectedUnit = void 0;
-
-  // Table of Contents
-  //
-  // Colors
   // Options
-  // Spacing
-  // Body
-  // Links
-  // Grid breakpoints
-  // Grid containers
-  // Grid columns
-  // Fonts
-  // Components
-  // Tables
-  // Buttons
-  // Forms
-  // Dropdowns
-  // Z-index master list
-  // Navbar
-  // Navs
-  // Pagination
-  // Jumbotron
-  // Form states and alerts
-  // Cards
-  // Tooltips
-  // Popovers
-  // Badges
-  // Modals
-  // Alerts
-  // Progress bars
-  // List group
-  // Image thumbnails
-  // Figures
-  // Breadcrumbs
-  // Carousel
-  // Close
-  // Code
-
-  // General variable structure
   //
-  // Variable format should follow the `v['$component-modifier-state-property']` order.
+  // Quickly modify global styling by enabling or disabling optional features.
 
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
 
   // Colors
   //
-  // Grayscale and brand colors for use across Bootstrap.
-
   // Start with assigning color names to specific hex values.
   v['$white'] = u['$white'] || '#fff';
   v['$black'] = u['$black'] || '#000';
-  v['$red'] = u['$red'] || '#d9534f';
-  v['$orange'] = u['$orange'] || '#f0ad4e';
-  v['$yellow'] = u['$yellow'] || '#ffd500';
-  v['$green'] = u['$green'] || '#5cb85c';
   v['$blue'] = u['$blue'] || '#0275d8';
+  v['$green'] = u['$green'] || '#5cb85c';
   v['$teal'] = u['$teal'] || '#5bc0de';
-  v['$pink'] = u['$pink'] || '#ff5b77';
-  v['$purple'] = u['$purple'] || '#613d7c';
+  v['$orange'] = u['$orange'] || '#f0ad4e';
+  v['$red'] = u['$red'] || '#d9534f';
 
   // Create grayscale
   v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
-  v['$gray'] = u['$gray'] || '#464a4c';
-  v['$gray-light'] = u['$gray-light'] || '#636c72';
-  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
   v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
 
   // Reassign color vars to semantic color scheme
@@ -2308,88 +3008,195 @@ function makeOriginal() {
   v['$brand-danger'] = u['$brand-danger'] || v['$red'];
   v['$brand-inverse'] = u['$brand-inverse'] || v['$gray-dark'];
 
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Grid columns
+  //
+  // Set the number of columns and specify the width of the gutters.
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+
+  // Cards (Card, CardGroup)
+
+  v['$card-spacer-x'] = u['$card-spacer-x'] || '1.25rem';
+  v['$card-spacer-y'] = u['$card-spacer-y'] || '.75rem';
+  v['$card-border-width'] = u['$card-border-width'] || '1px';
+  v['$card-border-radius'] = u['$card-border-radius'] || v['$border-radius'];
+  v['$card-border-color'] = u['$card-border-color'] || color(v['$black']).alpha(0.125).toString();
+  v['$card-border-radius-inner'] = u['$card-border-radius-inner'] || 'calc(' + v['$card-border-radius'] + ' - ' + v['$card-border-width'] + ')';
+  v['$card-cap-bg'] = u['$card-cap-bg'] || v['$gray-lightest'];
+  v['$card-bg'] = u['$card-bg'] || v['$white'];
+
+  v['$card-link-hover-color'] = u['$card-link-hover-color'] || v['$white'];
+
+  v['$card-img-overlay-padding'] = u['$card-img-overlay-padding'] || '1.25rem';
+
+  // Button
+  v['$btn-primary-bg'] = u['$btn-primary-bg'] || v['$brand-primary'];
+  v['$btn-secondary-border'] = u['$btn-secondary-border'] || '#ccc';
+  v['$btn-info-bg'] = u['$btn-info-bg'] || v['$brand-info'];
+  v['$btn-success-bg'] = u['$btn-success-bg'] || v['$brand-success'];
+  v['$btn-warning-bg'] = u['$btn-warning-bg'] || v['$brand-warning'];
+  v['$btn-danger-bg'] = u['$btn-danger-bg'] || v['$brand-danger'];
+
+  // THEME EXTEND CARDS
+  v['$card-margin-y-halved'] = u['$card-margin-y-halved'] || rmUnit$1(v['$card-spacer-y'], UNIT$1.REM) / 2 + UNIT$1.REM;
+  v['$card-margin-x-halved'] = u['$card-margin-x-halved'] || rmUnit$1(v['$card-spacer-x'], UNIT$1.REM) / 2 + UNIT$1.REM;
+
+  // CardColumns
+  v['$card-columns-count-md'] = u['$card-columns-count-md'] || '2';
+  v['$card-columns-gap-md'] = u['$card-columns-gap-md'] || '1rem';
+  v['$card-columns-margin-md'] = u['$card-columns-margin-md'] || v['$card-spacer-y'];
+  v['$card-columns-count-lg'] = u['$card-columns-count-lg'] || '2';
+  v['$card-columns-gap-lg'] = u['$card-columns-gap-lg'] || '1.15rem';
+  v['$card-columns-margin-lg'] = u['$card-columns-margin-lg'] || v['$card-spacer-y'];
+  v['$card-columns-count-xl'] = u['$card-columns-count-xl'] || '3';
+  v['$card-columns-gap-xl'] = u['$card-columns-gap-xl'] || '1.25rem';
+  v['$card-columns-margin-xl'] = u['$card-columns-margin-xl'] || v['$card-spacer-y'];
+  v['$card-columns-count-xxl'] = u['$card-columns-count-xxl'] || '4';
+  v['$card-columns-gap-xxl'] = u['$card-columns-gap-xxl'] || '1.25rem';
+  v['$card-columns-margin-xxl'] = u['$card-columns-margin-xxl'] || v['$card-spacer-y'];
+
+  // // ?? missing
+  // v['$card-inverse-bg-color'] = u['$card-inverse-bg-color'] || '??????';
+  // v['$card-inverse-border-color'] = u['$card-inverse-border-color'] || '??????';
+
+  // CardDeck
+  var detectedUnit = detectUnit(v['$grid-gutter-width-base']);
+  v['$card-deck-margin'] = u['$card-deck-margin'] || rmUnit$1(v['$grid-gutter-width-base'], detectedUnit) / 2 + detectedUnit;
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$10();
+
+var detectUnit$1 = unitUtils$1.detectUnit;
+var rmUnit$2 = unitUtils$1.rmUnit;
+
+/**
+ * BOOTSTRAP THEME CLOSE
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$11 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Colors
+  //
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
+  v['$font-weight-bold'] = u['$font-weight-bold'] || 'bold';
+
+  // Close
+  v['$close-font-size'] = u['$close-font-size'] || rmUnit$2(v['$font-size-base']) * 1.5 + detectUnit$1(v['$font-size-base']);
+  v['$close-font-weight'] = u['$close-font-weight'] || v['$font-weight-bold'];
+  v['$close-color'] = u['$close-color'] || v['$black'];
+  v['$close-text-shadow'] = u['$close-text-shadow'] || '0 1px 0 ' + v['$white'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$11();
+
+/**
+ * BOOTSTRAP THEME CODE
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$12 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
   // Options
   //
   // Quickly modify global styling by enabling or disabling optional features.
 
   v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
-  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
-  v['$enable-gradients'] = allowFalseValue(u['$enable-gradients'], false);
-  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
-  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+  v['$font-family-monospace'] = u['$font-family-monospace'] || 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
+
+  // Colors
+
+  v['$pink'] = u['$pink'] || '#ff5b77';
+
+  // Create grayscale
+  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
+
+  // Code
+
+  v['$code-font-size'] = u['$code-font-size'] || '90%';
+  v['$code-padding-x'] = u['$code-padding-x'] || '.4rem';
+  v['$code-padding-y'] = u['$code-padding-y'] || '.2rem';
+  v['$code-color'] = u['$code-color'] || v['$pink'];
+  v['$code-bg'] = u['$code-bg'] || v['$gray-lightest'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$12();
+
+/**
+ * BOOTSTRAP THEME COL
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$13 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
   v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
-  v['$enable-print-styles'] = allowFalseValue(u['$enable-print-styles'], true);
-
-  // Spacing
-  //
-  // Control the default styling of most Bootstrap elements by modifying these
-  // variables. Mostly focused on spacing.
-  // You can add more entries to the v['$spacers'] map, should you need more variation.
-
-  v['$spacer'] = u['$spacer'] || '1rem';
-
-  // =============================================================================================================
-  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
-  detectedUnit = detectUnit(v['$spacer']);
-  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit(v['$spacer'], detectedUnit) / 2 + detectedUnit;
-  // =============================================================================================================
-
-  v['$spacer-x'] = u['$spacer-x'] || v['$spacer'];
-  v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
-  v['$spacers'] = u['$spacers'] || {
-    0: {
-      x: 0,
-      y: 0
-    },
-    1: {
-      x: rmUnit(v['$spacer-x']) * 0.25 + detectedUnit,
-      y: rmUnit(v['$spacer-y']) * 0.25 + detectedUnit
-    },
-    2: {
-      x: rmUnit(v['$spacer-x']) * 0.5 + detectedUnit,
-      y: rmUnit(v['$spacer-y']) * 0.5 + detectedUnit
-    },
-    3: {
-      x: v['$spacer-x'],
-      y: v['$spacer-y']
-    },
-    4: {
-      x: rmUnit(v['$spacer-x']) * 1.5 + detectedUnit,
-      y: rmUnit(v['$spacer-y']) * 1.5 + detectedUnit
-    },
-    5: {
-      x: rmUnit(v['$spacer-x']) * 3 + detectedUnit,
-      y: rmUnit(v['$spacer-y']) * 3 + detectedUnit
-    }
-  };
-  v['$border-width'] = u['$border-width'] || '1px';
-
-  // This variable affects the `.h-*` and `.w-*` classes.
-  v['$sizes'] = u['$sizes'] || {
-    25: '25%',
-    50: '50%',
-    75: '75%',
-    100: '100%'
-  };
-
-  // Body
-  //
-  // Settings for the `<body>` element.
-
-  v['$body-bg'] = u['$body-bg'] || v['$white'];
-  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
-
-  // Links
-  //
-  // Style anchor elements.
-
-  v['$link-color'] = u['$link-color'] || v['$brand-primary'];
-  v['$link-decoration'] = u['$link-decoration'] || 'none';
-  v['$link-hover-color'] = u['$link-hover-color'] || color(v['$link-color']).darken(0.35).toString();
-  v['$link-hover-decoration'] = u['$link-hover-decoration'] || 'underline';
 
   // Grid breakpoints
-
   //
   // Define the minimum dimensions at which your layout will change,
   // adapting to different screen sizes, for use in media queries.
@@ -2399,11 +3206,92 @@ function makeOriginal() {
     sm: '576px',
     md: '768px',
     lg: '992px',
-    xl: '1200px',
-    xxl: '1452px'
+    xl: '1200px'
   };
   variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
   variables_2(v['$grid-breakpoints']);
+
+  // Grid columns
+  //
+  // Set the number of columns and specify the width of the gutters.
+
+  v['$grid-columns'] = u['$grid-columns'] || '12';
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$13();
+
+/**
+ * BOOTSTRAP THEME COLLAPSE
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$14 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+  v['$transition-collapse'] = u['$transition-collapse'] || 'height .35s ease';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$14();
+
+/**
+ * BOOTSTRAP THEME CONTAINER
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$15 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Grid columns
+  //
+  // Set the number of columns and specify the width of the gutters.
+
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
 
   // Grid containers
   //
@@ -2416,6 +3304,322 @@ function makeOriginal() {
     xl: '1140px'
   };
   variables_1(v['$container-max-widths'], '$container-max-widths');
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$15();
+
+/**
+ * BOOTSTRAP THEME CONTAINERFLUID
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$16 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Grid columns
+  //
+  // Set the number of columns and specify the width of the gutters.
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$16();
+
+/**
+ * BOOTSTRAP THEME DD
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$17 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Grid columns
+  //
+  // Set the number of columns and specify the width of the gutters.
+  v['$grid-columns'] = u['$grid-columns'] || '12';
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$17();
+
+/**
+ * BOOTSTRAP THEME DL
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$18 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Grid columns
+  //
+  // Set the number of columns and specify the width of the gutters.
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$18();
+
+var rmUnit$3 = unitUtils$1.rmUnit;
+var UNIT$2 = unitUtils$1.UNIT;
+
+/**
+ * BOOTSTRAP THEME DROPDOWN
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$19 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+  v['$enable-gradients'] = allowFalseValue(u['$enable-gradients'], false);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Colors
+  //
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+  v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
+  v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
+  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+
+  // Z-index master list
+  //
+  // Warning = 'Avoid customizing these values. They're used for a bird's eye view
+  // of components dependent on the z-axis and are designed to all work together.
+
+  v['$zindex-dropdown-backdrop'] = u['$zindex-dropdown-backdrop'] || '990';
+  v['$zindex-dropdown'] = u['$zindex-dropdown'] || '1000';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+  v['$component-active-color'] = u['$component-active-color'] || v['$white'];
+  v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
+  v['$caret-width'] = u['$caret-width'] || '.3em';
+  v['$line-height-lg'] = u['$line-height-lg'] || '1.6';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  // Forms
+  v['$input-padding-y-lg'] = u['$input-padding-y-lg'] || '.75rem';
+
+  // Dropdowns
+  //
+  // Dropdown menu container and contents.
+
+  v['$dropdown-min-width'] = u['$dropdown-min-width'] || '10rem';
+  v['$dropdown-padding-y'] = u['$dropdown-padding-y'] || '.5rem';
+  v['$dropdown-margin-top'] = u['$dropdown-margin-top'] || '.125rem';
+  v['$dropdown-bg'] = u['$dropdown-bg'] || v['$white'];
+  v['$dropdown-border-color'] = u['$dropdown-border-color'] || color(v['$black']).alpha(0.15).toString();
+  v['$dropdown-border-width'] = u['$dropdown-border-width'] || v['$border-width'];
+  v['$dropdown-divider-bg'] = u['$dropdown-divider-bg'] || v['$gray-lighter'];
+  v['$dropdown-box-shadow'] = u['$dropdown-box-shadow'] || '0 .5rem 1rem rgba(' + v['$black'] + ',.175)';
+
+  v['$dropdown-link-color'] = u['$dropdown-link-color'] || v['$gray-dark'];
+  v['$dropdown-link-hover-color'] = u['$dropdown-link-hover-color'] || color(v['$gray-dark']).darken(0.05).toString();
+  v['$dropdown-link-hover-bg'] = u['$dropdown-link-hover-bg'] || v['$gray-lightest'];
+
+  v['$dropdown-link-active-color'] = u['$dropdown-link-active-color'] || v['$component-active-color'];
+  v['$dropdown-link-active-bg'] = u['$dropdown-link-active-bg'] || v['$component-active-bg'];
+
+  v['$dropdown-link-disabled-color'] = u['$dropdown-link-disabled-color'] || v['$gray-light'];
+
+  v['$dropdown-item-padding-x'] = u['$dropdown-item-padding-x'] || '1.5rem';
+
+  v['$dropdown-header-color'] = u['$dropdown-header-color'] || v['$gray-light'];
+
+  // Forms
+  v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width']; // For form controls and buttons
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+
+  // Buttons
+  //
+  // For each of Bootstrap's buttons, define text, background and border color.
+
+  v['$btn-padding-x'] = u['$btn-padding-x'] || '1rem';
+  v['$btn-active-box-shadow'] = u['$btn-active-box-shadow'] || 'inset 0 3px 5px ' + color(v['$black']).alpha(0.125).toString();
+  v['$btn-padding-x-lg'] = u['$btn-padding-x-lg'] || '1.5rem';
+  v['$btn-padding-y-lg'] = u['$btn-padding-y-lg'] || '.75rem';
+
+  v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
+  v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
+
+  v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || '.5rem';
+  v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
+
+  v['$input-height-lg'] = u['$input-height-lg'] || rmUnit$3(v['$font-size-lg'], UNIT$2.REM) * v['$line-height-lg'] + rmUnit$3(v['$input-padding-y-lg'], UNIT$2.REM) * 2 + UNIT$2.REM;
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$19();
+
+/**
+ * BOOTSTRAP THEME DT
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$20 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
 
   // Grid columns
   //
@@ -2434,170 +3638,172 @@ function makeOriginal() {
   // Fonts
   //
   // Font, line-height, and color for body text, headings, and more.
+  v['$font-weight-bold'] = u['$font-weight-bold'] || 'bold';
+  v['$dt-font-weight'] = u['$dt-font-weight'] || v['$font-weight-bold'];
 
-  v['$font-family-sans-serif'] = u['$font-family-sans-serif'] || '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
-  v['$font-family-monospace'] = u['$font-family-monospace'] || 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
-  v['$font-family-base'] = u['$font-family-base'] || v['$font-family-sans-serif'];
+  return Object.assign({}, u, v);
+};
+
+makeTheme$20();
+
+/**
+ * BOOTSTRAP THEME FIELDSET
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$21 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Grid columns
+  //
+  // Set the number of columns and specify the width of the gutters.
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$21();
+
+var rmUnit$4 = unitUtils$1.rmUnit;
+var UNIT$3 = unitUtils$1.UNIT;
+/**
+ * BOOTSTRAP THEME FORM
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$22 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$red'] = u['$red'] || '#d9534f';
+  v['$orange'] = u['$orange'] || '#f0ad4e';
+  v['$green'] = u['$green'] || '#5cb85c';
+  v['$blue'] = u['$blue'] || '#0275d8';
+  v['$teal'] = u['$teal'] || '#5bc0de';
+  v['$black'] = u['$black'] || '#000';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+  v['$brand-success'] = u['$brand-success'] || v['$green'];
+  v['$brand-info'] = u['$brand-info'] || v['$teal'];
+  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
+  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray'] = u['$gray'] || '#464a4c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$border-width'] = u['$border-width'] || '1px';
+  v['$spacer'] = u['$spacer'] || '1rem';
+  v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  // Grid columns
+  //
+  // Specify the width of the gutters.
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
 
   v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
   v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
   v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
   v['$font-size-xs'] = u['$font-size-xs'] || '.75rem';
-
-  v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
-  v['$font-weight-bold'] = u['$font-weight-bold'] || 'bold';
-
-  v['$font-weight-base'] = u['$font-weight-base'] || v['$font-weight-normal'];
-  v['$line-height-base'] = u['$line-height-base'] || '1.5';
-
-  v['$font-size-h1'] = u['$font-size-h1'] || '2.5rem';
-  v['$font-size-h2'] = u['$font-size-h2'] || '2rem';
-  v['$font-size-h3'] = u['$font-size-h3'] || '1.75rem';
-  v['$font-size-h4'] = u['$font-size-h4'] || '1.5rem';
-  v['$font-size-h5'] = u['$font-size-h5'] || '1.25rem';
-  v['$font-size-h6'] = u['$font-size-h6'] || '1rem';
-
-  detectedUnit = detectUnit(v['$spacer']);
-  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit(v['$spacer'], detectedUnit) / 2 + detectedUnit;
-  v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
-  v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
-  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
-  v['$headings-color'] = u['$headings-color'] || 'inherit';
-
-  v['$display1-size'] = u['$display1-size'] || '6rem';
-  v['$display2-size'] = u['$display2-size'] || '5.5rem';
-  v['$display3-size'] = u['$display3-size'] || '4.5rem';
-  v['$display4-size'] = u['$display4-size'] || '3.5rem';
-
-  v['$display1-weight'] = u['$display1-weight'] || '300';
-  v['$display2-weight'] = u['$display2-weight'] || '300';
-  v['$display3-weight'] = u['$display3-weight'] || '300';
-  v['$display4-weight'] = u['$display4-weight'] || '300';
-
-  v['$display-line-height'] = u['$display-line-height'] || v['$headings-line-height'];
-
-  v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
-  v['$lead-font-weight'] = u['$lead-font-weight'] || '300';
-
-  v['$small-font-size'] = u['$small-font-size'] || '80%';
-
   v['$text-muted'] = u['$text-muted'] || v['$gray-light'];
+  v['$line-height-base'] = u['$line-height-base'] || '1.5';
+  v['$line-height-lg'] = u['$line-height-lg'] || '1.6';
+  v['$line-height-sm'] = u['$line-height-sm'] || '1.3';
 
-  v['$blockquote-small-color'] = u['$blockquote-small-color'] || v['$gray-light'];
-  detectedUnit = detectUnit(v['$font-size-base']);
-  v['$blockquote-font-size'] = u['$blockquote-font-size'] || rmUnit(v['$font-size-base'], detectedUnit) * 1.25 + detectedUnit;
-  v['$blockquote-border-color'] = u['$blockquote-border-color'] || v['$gray-lighter'];
-  v['$blockquote-border-width'] = u['$blockquote-border-width'] || '.25rem';
+  // Body
+  //
+  // Settings for the `<body>` element.
 
-  v['$hr-border-color'] = u['$hr-border-color'] || color(v['$black']).alpha(0.1).toString();
-  v['$hr-border-width'] = u['$hr-border-width'] || v['$border-width'];
-
-  v['$mark-padding'] = u['$mark-padding'] || '.2em';
-
-  v['$dt-font-weight'] = u['$dt-font-weight'] || v['$font-weight-bold'];
-
-  v['$kbd-box-shadow'] = u['$kbd-box-shadow'] || 'inset 0 -.1rem 0 ' + color(v['$black']).alpha(0.25).toString();
-  v['$nested-kbd-font-weight'] = u['$nested-kbd-font-weight'] || v['$font-weight-bold'];
-
-  v['$list-inline-padding'] = u['$list-inline-padding'] || '5px';
+  v['$body-bg'] = u['$body-bg'] || v['$white'];
 
   // Components
   //
   // Define common padding and border radius sizes and more.
 
-  v['$line-height-lg'] = u['$line-height-lg'] || '1.6';
-  v['$line-height-sm'] = u['$line-height-sm'] || '1.3';
-
   v['$border-radius'] = u['$border-radius'] || '.25rem';
   v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
   v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
-
-  v['$component-active-color'] = u['$component-active-color'] || v['$white'];
-  v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
-
-  v['$caret-width'] = u['$caret-width'] || '.3em';
-
-  v['$transition-base'] = u['$transition-base'] || 'all .2s ease-in-out';
-  v['$transition-fade'] = u['$transition-fade'] || 'opacity .15s linear';
-  v['$transition-collapse'] = u['$transition-collapse'] || 'height .35s ease';
-
-  // Tables
-  //
-  // Customizes the `.table` component with basic values, each used across all table variations.
-
-  v['$table-cell-padding'] = u['$table-cell-padding'] || '.75rem';
-  v['$table-sm-cell-padding'] = u['$table-sm-cell-padding'] || '.3rem';
-
-  v['$table-bg'] = u['$table-bg'] || 'transparent';
-
-  v['$table-inverse-bg'] = u['$table-inverse-bg'] || v['$gray-dark'];
-  v['$table-inverse-bg-accent'] = u['$table-inverse-bg-accent'] || color(v['$white']).alpha(0.05).toString();
-  v['$table-inverse-bg-hover'] = u['$table-inverse-bg-hover'] || color(v['$white']).alpha(0.075).toString();
-  v['$table-inverse-color'] = u['$table-inverse-color'] || v['$body-bg'];
-  v['$table-inverse-border'] = u['$table-inverse-border'] || color(v['$gray-dark']).lighten(0.075).toString();
-
-  v['$table-bg-accent'] = u['$table-bg-accent'] || color(v['$black']).alpha(0.05).toString();
-  v['$table-bg-hover'] = u['$table-bg-hover'] || color(v['$black']).alpha(0.075).toString();
-  v['$table-bg-active'] = u['$table-bg-active'] || v['$table-bg-hover'];
-
-  v['$table-head-bg'] = u['$table-head-bg'] || v['$gray-lighter'];
-  v['$table-head-color'] = u['$table-head-color'] || v['$gray'];
-
-  v['$table-border-width'] = u['$table-border-width'] || v['$border-width'];
-  v['$table-border-color'] = u['$table-border-color'] || v['$gray-lighter'];
-
-  // Buttons
-  //
-  // For each of Bootstrap's buttons, define text, background and border color.
-
-  v['$btn-padding-x'] = u['$btn-padding-x'] || '1rem';
-  v['$btn-padding-y'] = u['$btn-padding-y'] || '.5rem';
-  v['$btn-line-height'] = u['$btn-line-height'] || '1.25';
-  v['$btn-font-weight'] = u['$btn-font-weight'] || v['$font-weight-normal'];
-  v['$btn-box-shadow'] = u['$btn-box-shadow'] || 'inset 0 1px 0 ' + color(v['$white']).alpha(0.15).toString() + ', 0 1px 1px ' + color(v['$black']).alpha(0.075).toString();
-  v['$btn-focus-box-shadow'] = u['$btn-focus-box-shadow'] || '0 0 0 2px ' + color(v['$brand-primary']).alpha(0.25).toString();
-  v['$btn-active-box-shadow'] = u['$btn-active-box-shadow'] || 'inset 0 3px 5px ' + color(v['$black']).alpha(0.125).toString();
-
-  v['$btn-primary-color'] = u['$btn-primary-color'] || v['$white'];
-  v['$btn-primary-bg'] = u['$btn-primary-bg'] || v['$brand-primary'];
-  v['$btn-primary-border'] = u['$btn-primary-border'] || v['$btn-primary-bg'];
-
-  v['$btn-secondary-color'] = u['$btn-secondary-color'] || v['$gray-dark'];
-  v['$btn-secondary-bg'] = u['$btn-secondary-bg'] || v['$white'];
-  v['$btn-secondary-border'] = u['$btn-secondary-border'] || '#ccc';
-
-  v['$btn-info-color'] = u['$btn-info-color'] || v['$white'];
-  v['$btn-info-bg'] = u['$btn-info-bg'] || v['$brand-info'];
-  v['$btn-info-border'] = u['$btn-info-border'] || v['$btn-info-bg'];
-
-  v['$btn-success-color'] = u['$btn-success-color'] || v['$white'];
-  v['$btn-success-bg'] = u['$btn-success-bg'] || v['$brand-success'];
-  v['$btn-success-border'] = u['$btn-success-border'] || v['$btn-success-bg'];
-
-  v['$btn-warning-color'] = u['$btn-warning-color'] || v['$white'];
-  v['$btn-warning-bg'] = u['$btn-warning-bg'] || v['$brand-warning'];
-  v['$btn-warning-border'] = u['$btn-warning-border'] || v['$btn-warning-bg'];
-
-  v['$btn-danger-color'] = u['$btn-danger-color'] || v['$white'];
-  v['$btn-danger-bg'] = u['$btn-danger-bg'] || v['$brand-danger'];
-  v['$btn-danger-border'] = u['$btn-danger-border'] || v['$btn-danger-bg'];
-
-  v['$btn-link-disabled-color'] = u['$btn-link-disabled-color'] || v['$gray-light'];
-
-  v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || '.5rem';
-  v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
-
-  v['$btn-padding-x-lg'] = u['$btn-padding-x-lg'] || '1.5rem';
-  v['$btn-padding-y-lg'] = u['$btn-padding-y-lg'] || '.75rem';
-
-  v['$btn-block-spacing-y'] = u['$btn-block-spacing-y'] || '.5rem';
-
-  // Allows for customizing button radius independently from global border radius
-  v['$btn-border-radius'] = u['$btn-border-radius'] || v['$border-radius'];
-  v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
-  v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
-
-  v['$btn-transition'] = u['$btn-transition'] || 'all .2s ease-in-out';
 
   // Forms
 
@@ -2630,10 +3836,9 @@ function makeOriginal() {
   v['$input-padding-x-lg'] = u['$input-padding-x-lg'] || '1.5rem';
   v['$input-padding-y-lg'] = u['$input-padding-y-lg'] || '.75rem';
 
-  detectedUnit = detectUnit(v['$font-size-base']);
-  v['$input-height'] = u['$input-height'] || rmUnit(v['$font-size-base'], detectedUnit) * v['$line-height-base'] + rmUnit(v['$input-padding-y'], detectedUnit) * 2 + detectedUnit;
-  v['$input-height-sm'] = u['$input-height-sm'] || rmUnit(v['$font-size-sm'], detectedUnit) * v['$line-height-sm'] + rmUnit(v['$input-padding-y-sm'], detectedUnit) * 2 + detectedUnit;
-  v['$input-height-lg'] = u['$input-height-lg'] || rmUnit(v['$font-size-lg'], detectedUnit) * v['$line-height-lg'] + rmUnit(v['$input-padding-y-lg'], detectedUnit) * 2 + detectedUnit;
+  v['$input-height'] = u['$input-height'] || rmUnit$4(v['$font-size-base'], UNIT$3.REM) * v['$line-height-base'] + rmUnit$4(v['$input-padding-y'], UNIT$3.REM) * 2 + UNIT$3.REM;
+  v['$input-height-sm'] = u['$input-height-sm'] || rmUnit$4(v['$font-size-sm'], UNIT$3.REM) * v['$line-height-sm'] + rmUnit$4(v['$input-padding-y-sm'], UNIT$3.REM) * 2 + UNIT$3.REM;
+  v['$input-height-lg'] = u['$input-height-lg'] || rmUnit$4(v['$font-size-lg'], UNIT$3.REM) * v['$line-height-lg'] + rmUnit$4(v['$input-padding-y-lg'], UNIT$3.REM) * 2 + UNIT$3.REM;
 
   v['$input-transition'] = u['$input-transition'] || 'border-color ease-in-out .15s, box-shadow ease-in-out .15s';
 
@@ -2732,7 +3937,7 @@ function makeOriginal() {
     }
   };
 
-  // Form validation icons
+  // Form validation icons*
   v['$form-icon-success-color'] = u['$form-icon-success-color'] || v['$brand-success'];
   v['$form-icon-success'] = u['$form-icon-success'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="' + v['$form-icon-success-color'] + '" d="M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z"/%3E%3C/svg%3E\')';
 
@@ -2742,118 +3947,1258 @@ function makeOriginal() {
   v['$form-icon-danger-color'] = u['$form-icon-danger-color'] || v['$brand-danger'];
   v['$form-icon-danger'] = u['$form-icon-danger'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="' + v['$form-icon-danger-color'] + '" viewBox="-2 -2 7 7"%3E%3Cpath stroke="%23d9534f" d="M0 0l3 3m0-3L0 3"/%3E%3Ccircle r=".5"/%3E%3Ccircle cx="3" r=".5"/%3E%3Ccircle cy="3" r=".5"/%3E%3Ccircle cx="3" cy="3" r=".5"/%3E%3C/svg%3E\')';
 
-  // Dropdowns
+  return Object.assign({}, u, v);
+};
+
+makeTheme$22();
+
+var rmUnit$5 = unitUtils$1.rmUnit;
+var UNIT$4 = unitUtils$1.UNIT;
+/**
+ * BOOTSTRAP THEME H1
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$23 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
   //
-  // Dropdown menu container and contents.
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
 
-  v['$dropdown-min-width'] = u['$dropdown-min-width'] || '10rem';
-  v['$dropdown-padding-y'] = u['$dropdown-padding-y'] || '.5rem';
-  v['$dropdown-margin-top'] = u['$dropdown-margin-top'] || '.125rem';
-  v['$dropdown-bg'] = u['$dropdown-bg'] || v['$white'];
-  v['$dropdown-border-color'] = u['$dropdown-border-color'] || color(v['$black']).alpha(0.15).toString();
-  v['$dropdown-border-width'] = u['$dropdown-border-width'] || v['$border-width'];
-  v['$dropdown-divider-bg'] = u['$dropdown-divider-bg'] || v['$gray-lighter'];
-  v['$dropdown-box-shadow'] = u['$dropdown-box-shadow'] || '0 .5rem 1rem rgba(' + v['$black'] + ',.175)';
-
-  v['$dropdown-link-color'] = u['$dropdown-link-color'] || v['$gray-dark'];
-  v['$dropdown-link-hover-color'] = u['$dropdown-link-hover-color'] || color(v['$gray-dark']).darken(0.05).toString();
-  v['$dropdown-link-hover-bg'] = u['$dropdown-link-hover-bg'] || v['$gray-lightest'];
-
-  v['$dropdown-link-active-color'] = u['$dropdown-link-active-color'] || v['$component-active-color'];
-  v['$dropdown-link-active-bg'] = u['$dropdown-link-active-bg'] || v['$component-active-bg'];
-
-  v['$dropdown-link-disabled-color'] = u['$dropdown-link-disabled-color'] || v['$gray-light'];
-
-  v['$dropdown-item-padding-x'] = u['$dropdown-item-padding-x'] || '1.5rem';
-
-  v['$dropdown-header-color'] = u['$dropdown-header-color'] || v['$gray-light'];
-
-  // Z-index master list
+  // Colors
   //
-  // Warning = 'Avoid customizing these values. They're used for a bird's eye view
-  // of components dependent on the z-axis and are designed to all work together.
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
 
-  v['$zindex-dropdown-backdrop'] = u['$zindex-dropdown-backdrop'] || '990';
-  v['$zindex-dropdown'] = u['$zindex-dropdown'] || '1000';
-  v['$zindex-fixed'] = u['$zindex-fixed'] || '1030';
-  v['$zindex-sticky'] = u['$zindex-sticky'] || '1030';
-  v['$zindex-modal-backdrop'] = u['$zindex-modal-backdrop'] || '2040';
-  v['$zindex-modal'] = u['$zindex-modal'] || '2050';
-  v['$zindex-popover'] = u['$zindex-popover'] || '1060';
-  v['$zindex-tooltip'] = u['$zindex-tooltip'] || '1070';
+  // Body
+  //
+  // Settings for the `<body>` element.
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-h1'] = u['$font-size-h1'] || '2.5rem';
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$5(v['$spacer'], UNIT$4.REM) / 2 + UNIT$4.REM;
+
+  v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
+  v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
+  v['$headings-color'] = u['$headings-color'] || 'inherit';
+
+  v['$display1-size'] = u['$display1-size'] || '6rem';
+  v['$display2-size'] = u['$display2-size'] || '5.5rem';
+  v['$display3-size'] = u['$display3-size'] || '4.5rem';
+  v['$display4-size'] = u['$display4-size'] || '3.5rem';
+
+  v['$display1-weight'] = u['$display1-weight'] || '300';
+  v['$display2-weight'] = u['$display2-weight'] || '300';
+  v['$display3-weight'] = u['$display3-weight'] || '300';
+  v['$display4-weight'] = u['$display4-weight'] || '300';
+
+  v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
+  v['$lead-font-weight'] = u['$lead-font-weight'] || '300';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$23();
+
+var rmUnit$6 = unitUtils$1.rmUnit;
+var UNIT$5 = unitUtils$1.UNIT;
+/**
+ * BOOTSTRAP THEME H2
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$24 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-h2'] = u['$font-size-h2'] || '2rem';
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$6(v['$spacer'], UNIT$5.REM) / 2 + UNIT$5.REM;
+
+  v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
+  v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
+  v['$headings-color'] = u['$headings-color'] || 'inherit';
+
+  v['$display1-size'] = u['$display1-size'] || '6rem';
+  v['$display2-size'] = u['$display2-size'] || '5.5rem';
+  v['$display3-size'] = u['$display3-size'] || '4.5rem';
+  v['$display4-size'] = u['$display4-size'] || '3.5rem';
+
+  v['$display1-weight'] = u['$display1-weight'] || '300';
+  v['$display2-weight'] = u['$display2-weight'] || '300';
+  v['$display3-weight'] = u['$display3-weight'] || '300';
+  v['$display4-weight'] = u['$display4-weight'] || '300';
+
+  v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
+  v['$lead-font-weight'] = u['$lead-font-weight'] || '300';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$24();
+
+var rmUnit$7 = unitUtils$1.rmUnit;
+var UNIT$6 = unitUtils$1.UNIT;
+/**
+ * BOOTSTRAP THEME H3
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$25 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-h3'] = u['$font-size-h3'] || '1.75rem';
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$7(v['$spacer'], UNIT$6.REM) / 2 + UNIT$6.REM;
+
+  v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
+  v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
+  v['$headings-color'] = u['$headings-color'] || 'inherit';
+
+  v['$display1-size'] = u['$display1-size'] || '6rem';
+  v['$display2-size'] = u['$display2-size'] || '5.5rem';
+  v['$display3-size'] = u['$display3-size'] || '4.5rem';
+  v['$display4-size'] = u['$display4-size'] || '3.5rem';
+
+  v['$display1-weight'] = u['$display1-weight'] || '300';
+  v['$display2-weight'] = u['$display2-weight'] || '300';
+  v['$display3-weight'] = u['$display3-weight'] || '300';
+  v['$display4-weight'] = u['$display4-weight'] || '300';
+
+  v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
+  v['$lead-font-weight'] = u['$lead-font-weight'] || '300';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$25();
+
+var rmUnit$8 = unitUtils$1.rmUnit;
+var UNIT$7 = unitUtils$1.UNIT;
+/**
+ * BOOTSTRAP THEME H4
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$26 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-h4'] = u['$font-size-h4'] || '1.5rem';
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$8(v['$spacer'], UNIT$7.REM) / 2 + UNIT$7.REM;
+
+  v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
+  v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
+  v['$headings-color'] = u['$headings-color'] || 'inherit';
+
+  v['$display1-size'] = u['$display1-size'] || '6rem';
+  v['$display2-size'] = u['$display2-size'] || '5.5rem';
+  v['$display3-size'] = u['$display3-size'] || '4.5rem';
+  v['$display4-size'] = u['$display4-size'] || '3.5rem';
+
+  v['$display1-weight'] = u['$display1-weight'] || '300';
+  v['$display2-weight'] = u['$display2-weight'] || '300';
+  v['$display3-weight'] = u['$display3-weight'] || '300';
+  v['$display4-weight'] = u['$display4-weight'] || '300';
+
+  v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
+  v['$lead-font-weight'] = u['$lead-font-weight'] || '300';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$26();
+
+var rmUnit$9 = unitUtils$1.rmUnit;
+var UNIT$8 = unitUtils$1.UNIT;
+/**
+ * BOOTSTRAP THEME H5
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$27 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-h5'] = u['$font-size-h5'] || '1.25rem';
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$9(v['$spacer'], UNIT$8.REM) / 2 + UNIT$8.REM;
+
+  v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
+  v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
+  v['$headings-color'] = u['$headings-color'] || 'inherit';
+
+  v['$display1-size'] = u['$display1-size'] || '6rem';
+  v['$display2-size'] = u['$display2-size'] || '5.5rem';
+  v['$display3-size'] = u['$display3-size'] || '4.5rem';
+  v['$display4-size'] = u['$display4-size'] || '3.5rem';
+
+  v['$display1-weight'] = u['$display1-weight'] || '300';
+  v['$display2-weight'] = u['$display2-weight'] || '300';
+  v['$display3-weight'] = u['$display3-weight'] || '300';
+  v['$display4-weight'] = u['$display4-weight'] || '300';
+
+  v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
+  v['$lead-font-weight'] = u['$lead-font-weight'] || '300';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$27();
+
+var rmUnit$10 = unitUtils$1.rmUnit;
+var UNIT$9 = unitUtils$1.UNIT;
+/**
+ * BOOTSTRAP THEME H6
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$28 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-h6'] = u['$font-size-h6'] || '1rem';
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$10(v['$spacer'], UNIT$9.REM) / 2 + UNIT$9.REM;
+
+  v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
+  v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
+  v['$headings-color'] = u['$headings-color'] || 'inherit';
+
+  v['$display1-size'] = u['$display1-size'] || '6rem';
+  v['$display2-size'] = u['$display2-size'] || '5.5rem';
+  v['$display3-size'] = u['$display3-size'] || '4.5rem';
+  v['$display4-size'] = u['$display4-size'] || '3.5rem';
+
+  v['$display1-weight'] = u['$display1-weight'] || '300';
+  v['$display2-weight'] = u['$display2-weight'] || '300';
+  v['$display3-weight'] = u['$display3-weight'] || '300';
+  v['$display4-weight'] = u['$display4-weight'] || '300';
+
+  v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
+  v['$lead-font-weight'] = u['$lead-font-weight'] || '300';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$28();
+
+var rmUnit$11 = unitUtils$1.rmUnit;
+var UNIT$10 = unitUtils$1.UNIT;
+
+/**
+ * BOOTSTRAP THEME HEADER
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$29 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  // Spacing
+
+  v['$border-width'] = u['$border-width'] || '1px';
+  v['$spacer'] = u['$spacer'] || '1rem';
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$11(v['$spacer'], UNIT$10.REM) / 2 + UNIT$10.REM;
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
 
   // Navbar
 
   v['$navbar-padding-x'] = u['$navbar-padding-x'] || v['$spacer'];
   v['$navbar-padding-y'] = u['$navbar-padding-y'] || v['$spacer-halved'];
 
-  v['$navbar-toggler-padding-x'] = u['$navbar-toggler-padding-x'] || '.75rem';
+  // Mixin navbar
+  //
+  // From module bootstrap-styled-mixins: https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins/blob/master/src/navbar.js
+
+  v['$zindex-navbar'] = u['$zindex-navbar'] || '1000';
+  v['$zindex-navbar-fixed'] = u['$zindex-navbar-fixed'] || '1030';
+  v['$zindex-navbar-sticky'] = u['$zindex-navbar-sticky'] || '1030';
+  v['$navbar-brand-padding-y'] = u['$navbar-brand-padding-y'] || '.25rem';
+
+  v['$navbar-divider-padding-y'] = u['$navbar-brand-padding-y'] || '.425rem';
   v['$navbar-toggler-padding-y'] = u['$navbar-toggler-padding-y'] || '.25rem';
-  v['$navbar-toggler-font-size'] = u['$navbar-toggler-font-size'] || v['$font-size-lg'];
-  v['$navbar-toggler-border-radius'] = u['$navbar-toggler-border-radius'] || v['$btn-border-radius'];
+  v['$navbar-toggler-padding-x'] = u['$navbar-toggler-padding-x'] || '.75rem';
+  v['$navbar-toggler-font-size'] = u['$navbar-toggler-font-size'] || '1.25rem';
 
-  v['$navbar-inverse-color'] = u['$navbar-inverse-color'] || color(v['$white']).alpha(0.5).toString();
-  v['$navbar-inverse-hover-color'] = u['$navbar-inverse-hover-color'] || color(v['$white']).alpha(0.75).toString();
-  v['$navbar-inverse-active-color'] = u['$navbar-inverse-active-color'] || color(v['$white']).alpha(1).toString();
-  v['$navbar-inverse-disabled-color'] = u['$navbar-inverse-disabled-color'] || color(v['$white']).alpha(0.25).toString();
-  v['$navbar-inverse-toggler-bg'] = u['$navbar-inverse-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="' + v['$navbar-inverse-color'] + '" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
-  v['$navbar-inverse-toggler-border'] = u['$navbar-inverse-toggler-border'] || color(v['$white']).alpha(0.1).toString();
+  v['$navbar-toggler-border-radius'] = u['$navbar-toggler-border-radius'] || '.25rem';
+  v['$navbar-light-active-color'] = u['$navbar-light-active-color'] || 'rgba(0, 0, 0, 0.9)';
+  v['$navbar-light-color'] = u['$navbar-light-color'] || 'rgba(0, 0, 0, 0.5)';
+  v['$navbar-light-hover-color'] = u['$navbar-light-hover-color'] || 'rgba(0, 0, 0, 0.7)';
+  v['$navbar-light-toggler-border'] = u['$navbar-light-toggler-border'] || 'rgba(0, 0, 0, 0.1)';
+  v['$navbar-light-disabled-color'] = u['$navbar-light-disabled-color'] || 'rgba(0, 0, 0, 0.3)';
+  v['$navbar-light-toggler-bg'] = u['$navbar-light-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(0, 0, 0, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-active-color'] = u['$navbar-inverse-active-color'] || 'rgb(255, 255, 255)';
+  v['$navbar-inverse-color'] = u['$navbar-inverse-color'] || 'rgba(255, 255, 255, 0.5)';
+  v['$navbar-inverse-hover-color'] = u['$navbar-inverse-hover-color'] || 'rgba(255, 255, 255, 0.75)';
+  v['$navbar-inverse-toggler-border'] = u['$navbar-inverse-toggler-border'] || 'rgba(255, 255, 255, 0.1)';
+  v['$navbar-inverse-toggler-bg'] = u['$navbar-inverse-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255, 255, 255, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-disabled-color'] = u['$navbar-inverse-disabled-color'] || 'rgba(255, 255, 255, 0.25)';
 
-  v['$navbar-light-color'] = u['$navbar-light-color'] || color(v['$black']).alpha(0.5).toString();
-  v['$navbar-light-hover-color'] = u['$navbar-light-hover-color'] || color(v['$black']).alpha(0.7).toString();
-  v['$navbar-light-active-color'] = u['$navbar-light-active-color'] || color(v['$black']).alpha(0.9).toString();
-  v['$navbar-light-disabled-color'] = u['$navbar-light-disabled-color'] || color(v['$black']).alpha(0.3).toString();
-  v['$navbar-light-toggler-bg'] = u['$navbar-light-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="' + v['$navbar-light-color'] + '" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
-  v['$navbar-light-toggler-border'] = u['$navbar-light-toggler-border'] || color(v['$black']).alpha(0.1).toString();
+  return Object.assign({}, u, v);
+};
 
-  // Navs
+makeTheme$29();
 
-  v['$nav-link-padding'] = u['$nav-link-padding'] || '.5em 1em';
-  v['$nav-disabled-link-color'] = u['$nav-disabled-link-color'] || v['$gray-light'];
+/**
+ * BOOTSTRAP THEME HR
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$30 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  v['$nav-tabs-border-color'] = u['$nav-tabs-border-color'] || '#ddd';
-  v['$nav-tabs-border-width'] = u['$nav-tabs-border-width'] || v['$border-width'];
-  v['$nav-tabs-border-radius'] = u['$nav-tabs-border-radius'] || v['$border-radius'];
-  v['$nav-tabs-link-hover-border-color'] = u['$nav-tabs-link-hover-border-color'] || v['$gray-lighter'];
-  v['$nav-tabs-active-link-hover-color'] = u['$nav-tabs-active-link-hover-color'] || v['$gray'];
-  v['$nav-tabs-active-link-hover-bg'] = u['$nav-tabs-active-link-hover-bg'] || v['$body-bg'];
-  v['$nav-tabs-active-link-hover-border-color'] = u['$nav-tabs-active-link-hover-border-color'] || '#ddd';
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
 
-  v['$nav-pills-border-radius'] = u['$nav-pills-border-radius'] || v['$border-radius'];
-  v['$nav-pills-active-link-color'] = u['$nav-pills-active-link-color'] || v['$component-active-color'];
-  v['$nav-pills-active-link-bg'] = u['$nav-pills-active-link-bg'] || v['$component-active-bg'];
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
 
-  // Pagination
+  // Start with assigning color names to specific hex values.
+  v['$black'] = u['$black'] || '#000';
 
-  v['$pagination-padding-x'] = u['$pagination-padding-x'] || '.75rem';
-  v['$pagination-padding-y'] = u['$pagination-padding-y'] || '.5rem';
-  v['$pagination-padding-x-sm'] = u['$pagination-padding-x-sm'] || '.5rem';
-  v['$pagination-padding-y-sm'] = u['$pagination-padding-y-sm'] || '.25rem';
-  v['$pagination-padding-x-lg'] = u['$pagination-padding-x-lg'] || '1.5rem';
-  v['$pagination-padding-y-lg'] = u['$pagination-padding-y-lg'] || '.75rem';
-  v['$pagination-line-height'] = u['$pagination-line-height'] || '1.25';
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
 
-  v['$pagination-color'] = u['$pagination-color'] || v['$link-color'];
-  v['$pagination-bg'] = u['$pagination-bg'] || v['$white'];
-  v['$pagination-border-width'] = u['$pagination-border-width'] || v['$border-width'];
-  v['$pagination-border-color'] = u['$pagination-border-color'] || '#ddd';
+  v['$spacer'] = u['$spacer'] || '1rem';
+  v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
 
-  v['$pagination-hover-color'] = u['$pagination-hover-color'] || v['$link-hover-color'];
-  v['$pagination-hover-bg'] = u['$pagination-hover-bg'] || v['$gray-lighter'];
-  v['$pagination-hover-border'] = u['$pagination-hover-border'] || '#ddd';
+  v['$border-width'] = u['$border-width'] || '1px';
 
-  v['$pagination-active-color'] = u['$pagination-active-color'] || v['$white'];
-  v['$pagination-active-bg'] = u['$pagination-active-bg'] || v['$brand-primary'];
-  v['$pagination-active-border'] = u['$pagination-active-border'] || v['$brand-primary'];
+  v['$hr-border-width'] = u['$hr-border-width'] || v['$border-width'];
 
-  v['$pagination-disabled-color'] = u['$pagination-disabled-color'] || v['$gray-light'];
-  v['$pagination-disabled-bg'] = u['$pagination-disabled-bg'] || v['$white'];
-  v['$pagination-disabled-border'] = u['$pagination-disabled-border'] || '#ddd';
+  v['$hr-border-color'] = u['$hr-border-color'] || color(v['$black']).alpha(0.1).toString();
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$30();
+
+var rmUnit$12 = unitUtils$1.rmUnit;
+var UNIT$11 = unitUtils$1.UNIT;
+
+/**
+ * BOOTSTRAP THEME IMAGE
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$31 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-bg'] = u['$body-bg'] || v['$white'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // =============================================================================================================
+  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$12(v['$spacer'], UNIT$11.REM) / 2 + UNIT$11.REM;
+  // =============================================================================================================
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Image thumbnails
+
+  v['$thumbnail-padding'] = u['$thumbnail-padding'] || '.25rem';
+  v['$thumbnail-bg'] = u['$thumbnail-bg'] || v['$body-bg'];
+  v['$thumbnail-border-width'] = u['$thumbnail-border-width'] || v['$border-width'];
+  v['$thumbnail-border-color'] = u['$thumbnail-border-color'] || '#ddd';
+  v['$thumbnail-border-radius'] = u['$thumbnail-border-radius'] || v['$border-radius'];
+  v['$thumbnail-box-shadow'] = u['$thumbnail-box-shadow'] || '0 1px 2px ' + color(v['$black']).alpha(0.75).toString();
+  v['$thumbnail-transition'] = u['$thumbnail-transition'] || 'all .2s ease-in-out';
+
+  // Image Figures
+
+  v['$figure-caption-font-size'] = u['$figure-caption-font-size'] || '90%';
+  v['$figure-caption-color'] = u['$figure-caption-color'] || v['$gray-light'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$31();
+
+/**
+ * BOOTSTRAP THEME INPUT
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$32 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+  v['$green'] = u['$green'] || '#5cb85c';
+  v['$teal'] = u['$teal'] || '#5bc0de';
+  v['$orange'] = u['$orange'] || '#f0ad4e';
+  v['$red'] = u['$red'] || '#d9534f';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+  v['$brand-success'] = u['$brand-success'] || v['$green'];
+  v['$brand-info'] = u['$brand-info'] || v['$teal'];
+  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
+  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
+
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+
+  // Spacing
+
+  v['$border-width'] = u['$border-width'] || '1px';
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
+  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
+  v['$font-size-xs'] = u['$font-size-xs'] || '.75rem';
+
+  // Buttons
+  //
+  // For each of Bootstrap's buttons, define text, background and border color.
+
+  v['$btn-padding-x'] = u['$btn-padding-x'] || '1rem';
+  v['$btn-padding-y'] = u['$btn-padding-y'] || '.5rem';
+
+  v['$btn-line-height'] = u['$btn-line-height'] || '1.25';
+  v['$btn-font-weight'] = u['$btn-font-weight'] || v['$font-weight-normal'];
+
+  v['$btn-transition'] = u['$btn-transition'] || 'all .2s ease-in-out';
+  v['$btn-box-shadow'] = u['$btn-box-shadow'] || 'inset 0 1px 0 ' + color(v['$white']).alpha(0.15).toString() + ', 0 1px 1px ' + color(v['$black']).alpha(0.075).toString();
+  v['$btn-block-spacing-y'] = u['$btn-block-spacing-y'] || '.5rem';
+
+  v['$btn-primary-color'] = u['$btn-primary-color'] || v['$white'];
+  v['$btn-primary-bg'] = u['$btn-primary-bg'] || v['$brand-primary'];
+  v['$btn-primary-border'] = u['$btn-primary-border'] || v['$btn-primary-bg'];
+  v['$btn-secondary-color'] = u['$btn-secondary-color'] || v['$gray-dark'];
+  v['$btn-secondary-bg'] = u['$btn-secondary-bg'] || v['$white'];
+  v['$btn-secondary-border'] = u['$btn-secondary-border'] || '#ccc';
+  v['$btn-info-color'] = u['$btn-info-color'] || v['$white'];
+  v['$btn-info-bg'] = u['$btn-info-bg'] || v['$brand-info'];
+  v['$btn-info-border'] = u['$btn-info-border'] || v['$btn-info-bg'];
+  v['$btn-success-color'] = u['$btn-success-color'] || v['$white'];
+  v['$btn-success-bg'] = u['$btn-success-bg'] || v['$brand-success'];
+  v['$btn-success-border'] = u['$btn-success-border'] || v['$btn-success-bg'];
+  v['$btn-warning-color'] = u['$btn-warning-color'] || v['$white'];
+  v['$btn-warning-bg'] = u['$btn-warning-bg'] || v['$brand-warning'];
+  v['$btn-warning-border'] = u['$btn-warning-border'] || v['$btn-warning-bg'];
+
+  v['$btn-danger-color'] = u['$btn-danger-color'] || v['$white'];
+  v['$btn-danger-bg'] = u['$btn-danger-bg'] || v['$brand-danger'];
+  v['$btn-danger-border'] = u['$btn-danger-border'] || v['$btn-danger-bg'];
+  v['$btn-link-disabled-color'] = u['$btn-link-disabled-color'] || v['$gray-light'];
+  v['$btn-padding-x-lg'] = u['$btn-padding-x-lg'] || '1.5rem';
+  v['$btn-padding-y-lg'] = u['$btn-padding-y-lg'] || '.75rem';
+  v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || '.5rem';
+  v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
+
+  // Allows for customizing button radius independently from global border radius
+  v['$btn-border-radius'] = u['$btn-border-radius'] || v['$border-radius'];
+  v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
+  v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
+
+  v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width']; // For form controls and buttons
+
+  // Links
+  //
+  // Style anchor elements.
+
+  v['$link-color'] = u['$link-color'] || v['$brand-primary'];
+  v['$link-hover-color'] = u['$link-hover-color'] || color(v['$link-color']).darken(0.35).toString();
+  v['$link-hover-decoration'] = u['$link-hover-decoration'] || 'underline';
+
+  // Forms
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$32();
+
+var rmUnit$13 = unitUtils$1.rmUnit;
+var UNIT$12 = unitUtils$1.UNIT;
+
+/**
+ * BOOTSTRAP THEME INPUTGROUP
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$33 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+
+  // Spacing
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+
+  v['$gray'] = u['$gray'] || '#464a4c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
+  v['$font-size-xs'] = u['$font-size-xs'] || '.75rem';
+  v['$line-height-base'] = u['$line-height-base'] || '1.5';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  // Forms
+
+  v['$input-padding-x'] = u['$input-padding-x'] || '.75rem';
+  v['$input-padding-y'] = u['$input-padding-y'] || '.5rem';
+
+  v['$input-bg'] = u['$input-bg'] || v['$white'];
+  v['$input-bg-disabled'] = u['$input-bg-disabled'] || v['$gray-lighter'];
+
+  v['$input-padding-x-lg'] = u['$input-padding-x-lg'] || '1.5rem';
+  v['$input-padding-y-lg'] = u['$input-padding-y-lg'] || '.75rem';
+  v['$input-line-height'] = u['$input-line-height'] || '1.25';
+  v['$input-height'] = u['$input-height'] || rmUnit$13(v['$font-size-base'], UNIT$12.REM) * v['$line-height-base'] + rmUnit$13(v['$input-padding-y'], UNIT$12.REM) * 2 + UNIT$12.REM;
+  v['$input-box-shadow'] = u['$input-box-shadow'] || 'inset 0 1px 1px ' + color(v['$black']).alpha(0.075).toString();
+
+  v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width']; // For form controls and buttons
+
+  v['$input-group-addon-bg'] = u['$input-group-addon-bg'] || v['$gray-lighter'];
+  v['$input-border-color'] = u['$input-border-color'] || color(v['$black']).alpha(0.15).toString();
+  v['$input-border-focus'] = u['$input-border-focus'] || color(v['$brand-primary']).lighten(0.25).toString();
+  v['$input-box-shadow-focus'] = u['$input-box-shadow-focus'] || v['$input-box-shadow'] + ', 0 0 8px rgba(' + v['$input-border-focus'] + ',.6)';
+
+  v['$input-color'] = u['$input-color'] || v['$gray'];
+  v['$input-group-addon-border-color'] = u['$input-group-addon-border-color'] || v['$input-border-color'];
+
+  v['$input-padding-x-sm'] = u['$input-padding-x-sm'] || '.5rem';
+  v['$input-padding-y-sm'] = u['$input-padding-y-sm'] || '.25rem';
+  v['$input-color-placeholder'] = u['$input-color-placeholder'] || v['$gray-light'];
+
+  v['$input-border-radius-lg'] = u['$input-border-radius-lg'] || v['$border-radius-lg'];
+  v['$input-border-radius-sm'] = u['$input-border-radius-sm'] || v['$border-radius-sm'];
+  v['$input-border-radius'] = u['$input-border-radius'] || v['$border-radius'];
+
+  v['$input-transition'] = u['$input-transition'] || 'border-color ease-in-out .15s, box-shadow ease-in-out .15s';
+  v['$input-color-focus'] = u['$input-color-focus'] || v['$input-color'];
+  v['$input-bg-focus'] = u['$input-bg-focus'] || v['$input-bg'];
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$33();
+
+/**
+ * BOOTSTRAP THEME JUMBOTRON
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$34 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
 
   // Jumbotron
 
   v['$jumbotron-padding'] = u['$jumbotron-padding'] || '2rem';
   v['$jumbotron-bg'] = u['$jumbotron-bg'] || v['$gray-lighter'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$34();
+
+/**
+ * BOOTSTRAP THEME KBD
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$35 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+
+  // Colors
+
+  v['$black'] = u['$black'] || '#000';
+  v['$white'] = u['$white'] || '#fff';
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Fonts
+
+  v['$font-family-monospace'] = u['$font-family-monospace'] || 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
+  v['$font-weight-bold'] = u['$font-weight-bold'] || 'bold';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  // Code
+  v['$code-font-size'] = u['$code-font-size'] || '90%';
+  v['$code-padding-x'] = u['$code-padding-x'] || '.4rem';
+  v['$code-padding-y'] = u['$code-padding-y'] || '.2rem';
+
+  v['$kbd-color'] = u['$kbd-color'] || v['$white'];
+  v['$kbd-bg'] = u['$kbd-bg'] || v['$gray-dark'];
+  v['$kbd-box-shadow'] = u['$kbd-box-shadow'] || 'inset 0 -.1rem 0 ' + color(v['$black']).alpha(0.25).toString();
+  v['$nested-kbd-font-weight'] = u['$nested-kbd-font-weight'] || v['$font-weight-bold'];
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$35();
+
+/**
+ * BOOTSTRAP THEME LABEL
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$36 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+  v['$green'] = u['$green'] || '#5cb85c';
+  v['$teal'] = u['$teal'] || '#5bc0de';
+  v['$orange'] = u['$orange'] || '#f0ad4e';
+  v['$red'] = u['$red'] || '#d9534f';
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+  v['$brand-success'] = u['$brand-success'] || v['$green'];
+  v['$brand-info'] = u['$brand-info'] || v['$teal'];
+  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
+  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
+
+  // Spacing
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Fonts
+  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
+  v['$font-size-xs'] = u['$font-size-xs'] || '.75rem';
+
+  v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  // Links
+  //
+  // Style anchor elements.
+
+  v['$link-color'] = u['$link-color'] || v['$brand-primary'];
+  v['$link-hover-color'] = u['$link-hover-color'] || color(v['$link-color']).darken(0.35).toString();
+  v['$link-hover-decoration'] = u['$link-hover-decoration'] || 'underline';
+
+  // Forms
+
+  v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width']; // For form controls and buttons
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+
+  // Buttons
+
+  v['$btn-padding-x'] = u['$btn-padding-x'] || '1rem';
+  v['$btn-padding-y'] = u['$btn-padding-y'] || '.5rem';
+  v['$btn-padding-x-lg'] = u['$btn-padding-x-lg'] || '1.5rem';
+  v['$btn-padding-y-lg'] = u['$btn-padding-y-lg'] || '.75rem';
+  v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || '.5rem';
+  v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
+
+  v['$btn-line-height'] = u['$btn-line-height'] || '1.25';
+
+  v['$btn-primary-color'] = u['$btn-primary-color'] || v['$white'];
+  v['$btn-primary-bg'] = u['$btn-primary-bg'] || v['$brand-primary'];
+  v['$btn-primary-border'] = u['$btn-primary-border'] || v['$btn-primary-bg'];
+
+  v['$btn-secondary-color'] = u['$btn-secondary-color'] || v['$gray-dark'];
+  v['$btn-secondary-bg'] = u['$btn-secondary-bg'] || v['$white'];
+  v['$btn-secondary-border'] = u['$btn-secondary-border'] || '#ccc';
+
+  v['$btn-info-color'] = u['$btn-info-color'] || v['$white'];
+  v['$btn-info-bg'] = u['$btn-info-bg'] || v['$brand-info'];
+  v['$btn-info-border'] = u['$btn-info-border'] || v['$btn-info-bg'];
+
+  v['$btn-success-color'] = u['$btn-success-color'] || v['$white'];
+  v['$btn-success-bg'] = u['$btn-success-bg'] || v['$brand-success'];
+  v['$btn-success-border'] = u['$btn-success-border'] || v['$btn-success-bg'];
+
+  v['$btn-warning-color'] = u['$btn-warning-color'] || v['$white'];
+  v['$btn-warning-bg'] = u['$btn-warning-bg'] || v['$brand-warning'];
+  v['$btn-warning-border'] = u['$btn-warning-border'] || v['$btn-warning-bg'];
+
+  v['$btn-danger-color'] = u['$btn-danger-color'] || v['$white'];
+  v['$btn-danger-bg'] = u['$btn-danger-bg'] || v['$brand-danger'];
+  v['$btn-danger-border'] = u['$btn-danger-border'] || v['$btn-danger-bg'];
+
+  v['$btn-font-weight'] = u['$btn-font-weight'] || v['$font-weight-normal'];
+  v['$btn-transition'] = u['$btn-transition'] || 'all .2s ease-in-out';
+
+  v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
+  v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
+  v['$btn-border-radius'] = u['$btn-border-radius'] || v['$border-radius'];
+  v['$btn-box-shadow'] = u['$btn-box-shadow'] || 'inset 0 1px 0 ' + color(v['$white']).alpha(0.15).toString() + ', 0 1px 1px ' + color(v['$black']).alpha(0.075).toString();
+  v['$btn-focus-box-shadow'] = u['$btn-focus-box-shadow'] || '0 0 0 2px ' + color(v['$brand-primary']).alpha(0.25).toString();
+  v['$btn-active-box-shadow'] = u['$btn-active-box-shadow'] || 'inset 0 3px 5px ' + color(v['$black']).alpha(0.125).toString();
+
+  v['$btn-link-disabled-color'] = u['$btn-link-disabled-color'] || v['$gray-light'];
+
+  v['$btn-block-spacing-y'] = u['$btn-block-spacing-y'] || '.5rem';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$36();
+
+/**
+ * BOOTSTRAP THEME LI
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$37 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Fonts
+
+  v['$list-inline-padding'] = u['$list-inline-padding'] || '5px';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$37();
+
+/**
+ * BOOTSTRAP THEME LISTGROUP
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$38 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray'] = u['$gray'] || '#464a4c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$component-active-color'] = u['$component-active-color'] || v['$white'];
+  v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
+
+  // List group
+
+  v['$list-group-color'] = u['$list-group-color'] || v['$body-color'];
+  v['$list-group-bg'] = u['$list-group-bg'] || v['$white'];
+  v['$list-group-border-color'] = u['$list-group-border-color'] || color(v['$black']).alpha(0.125).toString();
+  v['$list-group-border-width'] = u['$list-group-border-width'] || v['$border-width'];
+  v['$list-group-border-radius'] = u['$list-group-border-radius'] || v['$border-radius'];
+
+  v['$list-group-item-padding-x'] = u['$list-group-item-padding-x'] || '1.25rem';
+  v['$list-group-item-padding-y'] = u['$list-group-item-padding-y'] || '.75rem';
+
+  v['$list-group-hover-bg'] = u['$list-group-hover-bg'] || v['$gray-lightest'];
+  v['$list-group-active-color'] = u['$list-group-active-color'] || v['$component-active-color'];
+  v['$list-group-active-bg'] = u['$list-group-active-bg'] || v['$component-active-bg'];
+  v['$list-group-active-border'] = u['$list-group-active-border'] || v['$list-group-active-bg'];
+
+  v['$list-group-disabled-color'] = u['$list-group-disabled-color'] || v['$gray-light'];
+  v['$list-group-disabled-bg'] = u['$list-group-disabled-bg'] || v['$list-group-bg'];
+
+  v['$list-group-link-color'] = u['$list-group-link-color'] || v['$gray'];
+  v['$list-group-link-hover-color'] = u['$list-group-link-hover-color'] || v['$list-group-link-color'];
+
+  v['$list-group-link-active-color'] = u['$list-group-link-active-color'] || v['$list-group-color'];
+  v['$list-group-link-active-bg'] = u['$list-group-link-active-bg'] || v['$gray-lighter'];
+
+  // Forms
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
 
   // Form states and alerts
   //
@@ -2861,109 +5206,141 @@ function makeOriginal() {
 
   v['$state-success-text'] = u['$state-success-text'] || '#3c763d';
   v['$state-success-bg'] = u['$state-success-bg'] || '#dff0d8';
-  v['$state-success-border'] = u['$state-success-border'] || color(v['$state-success-bg']).darken(0.05).toString();
 
   v['$state-info-text'] = u['$state-info-text'] || '#31708f';
   v['$state-info-bg'] = u['$state-info-bg'] || '#d9edf7';
-  v['$state-info-border'] = u['$state-info-border'] || color(v['$state-info-bg']).darken(0.07).toString();
 
   v['$state-warning-text'] = u['$state-warning-text'] || '#8a6d3b';
   v['$state-warning-bg'] = u['$state-warning-bg'] || '#fcf8e3';
-  v['$mark-bg'] = u['$mark-bg'] || v['$state-warning-bg'];
-  v['$state-warning-border'] = u['$state-warning-border'] || color(v['$state-warning-bg']).darken(0.05).toString();
 
   v['$state-danger-text'] = u['$state-danger-text'] || '#a94442';
   v['$state-danger-bg'] = u['$state-danger-bg'] || '#f2dede';
-  v['$state-danger-border'] = u['$state-danger-border'] || color(v['$state-danger-bg']).darken(0.05).toString();
 
-  // Cards
+  return Object.assign({}, u, v);
+};
 
-  v['$card-spacer-x'] = u['$card-spacer-x'] || '1.25rem';
-  v['$card-spacer-y'] = u['$card-spacer-y'] || '.75rem';
-  v['$card-border-width'] = u['$card-border-width'] || '1px';
-  v['$card-border-radius'] = u['$card-border-radius'] || v['$border-radius'];
-  v['$card-border-color'] = u['$card-border-color'] || color(v['$black']).alpha(0.125).toString();
-  v['$card-border-radius-inner'] = u['$card-border-radius-inner'] || 'calc(' + v['$card-border-radius'] + ' - ' + v['$card-border-width'] + ')';
-  v['$card-cap-bg'] = u['$card-cap-bg'] || v['$gray-lightest'];
-  v['$card-bg'] = u['$card-bg'] || v['$white'];
+makeTheme$38();
 
-  v['$card-link-hover-color'] = u['$card-link-hover-color'] || v['$white'];
+/**
+ * BOOTSTRAP THEME MARK
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$39 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  v['$card-img-overlay-padding'] = u['$card-img-overlay-padding'] || '1.25rem';
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
 
-  detectedUnit = detectUnit(v['$grid-gutter-width-base']);
-  v['$card-deck-margin'] = u['$card-deck-margin'] || rmUnit(v['$grid-gutter-width-base'], detectedUnit) / 2 + detectedUnit;
+  // Form states and alerts
 
-  v['$card-columns-count-md'] = u['$card-columns-count-md'] || '2';
-  v['$card-columns-gap-md'] = u['$card-columns-gap-md'] || '1rem';
-  v['$card-columns-margin-md'] = u['$card-columns-margin-md'] || v['$card-spacer-y'];
-  v['$card-columns-count-lg'] = u['$card-columns-count-lg'] || '2';
-  v['$card-columns-gap-lg'] = u['$card-columns-gap-lg'] || '1.15rem';
-  v['$card-columns-margin-lg'] = u['$card-columns-margin-lg'] || v['$card-spacer-y'];
-  v['$card-columns-count-xl'] = u['$card-columns-count-xl'] || '3';
-  v['$card-columns-gap-xl'] = u['$card-columns-gap-xl'] || '1.25rem';
-  v['$card-columns-margin-xl'] = u['$card-columns-margin-xl'] || v['$card-spacer-y'];
-  v['$card-columns-count-xxl'] = u['$card-columns-count-xxl'] || '4';
-  v['$card-columns-gap-xxl'] = u['$card-columns-gap-xxl'] || '1.25rem';
-  v['$card-columns-margin-xxl'] = u['$card-columns-margin-xxl'] || v['$card-spacer-y'];
+  v['$state-warning-bg'] = u['$state-warning-bg'] || '#fcf8e3';
 
-  // Tooltips
+  // Fonts
 
-  v['$tooltip-max-width'] = u['$tooltip-max-width'] || '200px';
-  v['$tooltip-color'] = u['$tooltip-color'] || v['$white'];
-  v['$tooltip-bg'] = u['$tooltip-bg'] || v['$black'];
-  v['$tooltip-opacity'] = u['$tooltip-opacity'] || '.9';
-  v['$tooltip-padding-y'] = u['$tooltip-padding-y'] || '3px';
-  v['$tooltip-padding-x'] = u['$tooltip-padding-x'] || '8px';
-  v['$tooltip-margin'] = u['$tooltip-margin'] || '3px';
+  v['$mark-padding'] = u['$mark-padding'] || '.2em';
+  v['$mark-bg'] = u['$mark-bg'] || v['$state-warning-bg'];
 
-  v['$tooltip-arrow-width'] = u['$tooltip-arrow-width'] || '5px';
-  v['$tooltip-arrow-color'] = u['$tooltip-arrow-color'] || v['$tooltip-bg'];
+  return Object.assign({}, u, v);
+};
 
-  // Popovers
+makeTheme$39();
 
-  v['$popover-inner-padding'] = u['$popover-inner-padding'] || '1px';
-  v['$popover-bg'] = u['$popover-bg'] || v['$white'];
-  v['$popover-max-width'] = u['$popover-max-width'] || '276px';
-  v['$popover-border-width'] = u['$popover-border-width'] || v['$border-width'];
+/**
+ * BOOTSTRAP THEME MODAL
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$40 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  v['$popover-border-color'] = u['$popover-border-color'] || color(v['$black']).alpha(0.2).toString();
-  v['$popover-box-shadow'] = u['$popover-box-shadow'] || '0 5px 10px ' + color(v['$black']).alpha(0.2).toString();
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
 
-  v['$popover-title-bg'] = u['$popover-title-bg'] || color(v['$popover-bg']).darken(0.03).toString();
-  v['$popover-title-padding-x'] = u['$popover-title-padding-x'] || '14px';
-  v['$popover-title-padding-y'] = u['$popover-title-padding-y'] || '8px';
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
 
-  v['$popover-content-padding-x'] = u['$popover-content-padding-x'] || '14px';
-  v['$popover-content-padding-y'] = u['$popover-content-padding-y'] || '9px';
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
+  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
 
-  v['$popover-arrow-width'] = u['$popover-arrow-width'] || '10px';
-  v['$popover-arrow-color'] = u['$popover-arrow-color'] || v['$popover-bg'];
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
 
-  detectedUnit = detectUnit(v['$popover-arrow-width']);
-  v['$popover-arrow-outer-width'] = u['$popover-arrow-outer-width'] || rmUnit(v['$popover-arrow-width'], detectedUnit) + 1 + detectedUnit;
-  v['$popover-arrow-outer-color'] = u['$popover-arrow-outer-color'] || color(v['$popover-border-color']).fade(0.5).toString();
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
 
-  // Badges
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
 
-  v['$badge-default-bg'] = u['$badge-default-bg'] || v['$gray-light'];
-  v['$badge-primary-bg'] = u['$badge-primary-bg'] || v['$brand-primary'];
-  v['$badge-success-bg'] = u['$badge-success-bg'] || v['$brand-success'];
-  v['$badge-info-bg'] = u['$badge-info-bg'] || v['$brand-info'];
-  v['$badge-warning-bg'] = u['$badge-warning-bg'] || v['$brand-warning'];
-  v['$badge-danger-bg'] = u['$badge-danger-bg'] || v['$brand-danger'];
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
 
-  v['$badge-color'] = u['$badge-color'] || v['$white'];
-  v['$badge-link-hover-color'] = u['$badge-link-hover-color'] || v['$white'];
-  v['$badge-font-size'] = u['$badge-font-size'] || '75%';
-  v['$badge-font-weight'] = u['$badge-font-weight'] || v['$font-weight-bold'];
-  v['$badge-padding-x'] = u['$badge-padding-x'] || '.4em';
-  v['$badge-padding-y'] = u['$badge-padding-y'] || '.25em';
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
 
-  v['$badge-pill-padding-x'] = u['$badge-pill-padding-x'] || '.6em';
-  // Use a higher than normal value to ensure completely rounded edges when
-  // customizing padding or font-size on labels.
-  v['$badge-pill-border-radius'] = u['$badge-pill-border-radius'] || '10rem';
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-bg'] = u['$body-bg'] || v['$white'];
+  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+
+  // Fonts
+
+  v['$font-family-sans-serif'] = u['$font-family-sans-serif'] || '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+  v['$font-family-base'] = u['$font-family-base'] || v['$font-family-sans-serif'];
+  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
+  v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
+  v['$font-weight-base'] = u['$font-weight-base'] || v['$font-weight-normal'];
+  v['$line-height-base'] = u['$line-height-base'] || '1.5';
+
+  // Z-index master list
+  //
+  // Warning = 'Avoid customizing these values. They're used for a bird's eye view
+  // of components dependent on the z-axis and are designed to all work together.
+
+  v['$zindex-modal'] = u['$zindex-modal'] || '2050';
+  v['$zindex-modal-backdrop'] = u['$zindex-modal-backdrop'] || '2040';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+  v['$transition-fade'] = u['$transition-fade'] || 'opacity .15s linear';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
 
   // Modals
 
@@ -2995,32 +5372,611 @@ function makeOriginal() {
 
   v['$modal-transition'] = u['$modal-transition'] || 'transform .3s ease-out';
 
-  // Alerts
+  return Object.assign({}, u, v);
+};
+
+makeTheme$40();
+
+var rmUnit$14 = unitUtils$1.rmUnit;
+var UNIT$13 = unitUtils$1.UNIT;
+
+/**
+ * BOOTSTRAP THEME NAV
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$41 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
   //
-  // Define alert colors, border radius, and padding.
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
 
-  v['$alert-padding-x'] = u['$alert-padding-x'] || '1.25rem';
-  v['$alert-padding-y'] = u['$alert-padding-y'] || '.75rem';
-  v['$alert-margin-bottom'] = u['$alert-margin-bottom'] || v['$spacer-y'];
-  v['$alert-border-radius'] = u['$alert-border-radius'] || v['$border-radius'];
-  v['$alert-link-font-weight'] = u['$alert-link-font-weight'] || v['$font-weight-bold'];
-  v['$alert-border-width'] = u['$alert-border-width'] || v['$border-width'];
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
 
-  v['$alert-success-bg'] = u['$alert-success-bg'] || v['$state-success-bg'];
-  v['$alert-success-text'] = u['$alert-success-text'] || v['$state-success-text'];
-  v['$alert-success-border'] = u['$alert-success-border'] || v['$state-success-border'];
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
 
-  v['$alert-info-bg'] = u['$alert-info-bg'] || v['$state-info-bg'];
-  v['$alert-info-text'] = u['$alert-info-text'] || v['$state-info-text'];
-  v['$alert-info-border'] = u['$alert-info-border'] || v['$state-info-border'];
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
 
-  v['$alert-warning-bg'] = u['$alert-warning-bg'] || v['$state-warning-bg'];
-  v['$alert-warning-text'] = u['$alert-warning-text'] || v['$state-warning-text'];
-  v['$alert-warning-border'] = u['$alert-warning-border'] || v['$state-warning-border'];
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
 
-  v['$alert-danger-bg'] = u['$alert-danger-bg'] || v['$state-danger-bg'];
-  v['$alert-danger-text'] = u['$alert-danger-text'] || v['$state-danger-text'];
-  v['$alert-danger-border'] = u['$alert-danger-border'] || v['$state-danger-border'];
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray'] = u['$gray'] || '#464a4c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Spacing
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // =============================================================================================================
+  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$14(v['$spacer'], UNIT$13.REM) / 2 + UNIT$13.REM;
+  // =============================================================================================================
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-bg'] = u['$body-bg'] || v['$white'];
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
+  v['$component-active-color'] = u['$component-active-color'] || v['$white'];
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Navbar
+
+  v['$navbar-padding-x'] = u['$navbar-padding-x'] || v['$spacer'];
+  v['$navbar-padding-y'] = u['$navbar-padding-y'] || v['$spacer-halved'];
+
+  // Navs
+
+  v['$nav-link-padding'] = u['$nav-link-padding'] || '.5em 1em';
+  v['$nav-disabled-link-color'] = u['$nav-disabled-link-color'] || v['$gray-light'];
+
+  v['$nav-tabs-border-color'] = u['$nav-tabs-border-color'] || '#ddd';
+  v['$nav-tabs-border-width'] = u['$nav-tabs-border-width'] || v['$border-width'];
+  v['$nav-tabs-border-radius'] = u['$nav-tabs-border-radius'] || v['$border-radius'];
+  v['$nav-tabs-link-hover-border-color'] = u['$nav-tabs-link-hover-border-color'] || v['$gray-lighter'];
+  v['$nav-tabs-active-link-hover-color'] = u['$nav-tabs-active-link-hover-color'] || v['$gray'];
+  v['$nav-tabs-active-link-hover-bg'] = u['$nav-tabs-active-link-hover-bg'] || v['$body-bg'];
+  v['$nav-tabs-active-link-hover-border-color'] = u['$nav-tabs-active-link-hover-border-color'] || '#ddd';
+
+  v['$nav-pills-border-radius'] = u['$nav-pills-border-radius'] || v['$border-radius'];
+  v['$nav-pills-active-link-color'] = u['$nav-pills-active-link-color'] || v['$component-active-color'];
+  v['$nav-pills-active-link-bg'] = u['$nav-pills-active-link-bg'] || v['$component-active-bg'];
+
+  // Forms
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+
+  // Mixin navbar
+  //
+  // From module bootstrap-styled-mixins: https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins/blob/master/src/navbar.js
+
+  v['$zindex-navbar'] = u['$zindex-navbar'] || '1000';
+  v['$zindex-navbar-fixed'] = u['$zindex-navbar-fixed'] || '1030';
+  v['$zindex-navbar-sticky'] = u['$zindex-navbar-sticky'] || '1030';
+  v['$navbar-brand-padding-y'] = u['$navbar-brand-padding-y'] || '.25rem';
+
+  v['$navbar-divider-padding-y'] = u['$navbar-brand-padding-y'] || '.425rem';
+  v['$navbar-toggler-padding-y'] = u['$navbar-toggler-padding-y'] || '.25rem';
+  v['$navbar-toggler-padding-x'] = u['$navbar-toggler-padding-x'] || '.75rem';
+  v['$navbar-toggler-font-size'] = u['$navbar-toggler-font-size'] || '1.25rem';
+
+  v['$navbar-toggler-border-radius'] = u['$navbar-toggler-border-radius'] || '.25rem';
+  v['$navbar-light-active-color'] = u['$navbar-light-active-color'] || 'rgba(0, 0, 0, 0.9)';
+  v['$navbar-light-color'] = u['$navbar-light-color'] || 'rgba(0, 0, 0, 0.5)';
+  v['$navbar-light-hover-color'] = u['$navbar-light-hover-color'] || 'rgba(0, 0, 0, 0.7)';
+  v['$navbar-light-toggler-border'] = u['$navbar-light-toggler-border'] || 'rgba(0, 0, 0, 0.1)';
+  v['$navbar-light-disabled-color'] = u['$navbar-light-disabled-color'] || 'rgba(0, 0, 0, 0.3)';
+  v['$navbar-light-toggler-bg'] = u['$navbar-light-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(0, 0, 0, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-active-color'] = u['$navbar-inverse-active-color'] || 'rgb(255, 255, 255)';
+  v['$navbar-inverse-color'] = u['$navbar-inverse-color'] || 'rgba(255, 255, 255, 0.5)';
+  v['$navbar-inverse-hover-color'] = u['$navbar-inverse-hover-color'] || 'rgba(255, 255, 255, 0.75)';
+  v['$navbar-inverse-toggler-border'] = u['$navbar-inverse-toggler-border'] || 'rgba(255, 255, 255, 0.1)';
+  v['$navbar-inverse-toggler-bg'] = u['$navbar-inverse-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255, 255, 255, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-disabled-color'] = u['$navbar-inverse-disabled-color'] || 'rgba(255, 255, 255, 0.25)';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$41();
+
+var rmUnit$15 = unitUtils$1.rmUnit;
+var UNIT$14 = unitUtils$1.UNIT;
+
+/**
+ * BOOTSTRAP THEME NAVBAR
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$42 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray'] = u['$gray'] || '#464a4c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Spacing
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // =============================================================================================================
+  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
+  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$15(v['$spacer'], UNIT$14.REM) / 2 + UNIT$14.REM;
+  // =============================================================================================================
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-bg'] = u['$body-bg'] || v['$white'];
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
+  v['$component-active-color'] = u['$component-active-color'] || v['$white'];
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Navbar
+
+  v['$navbar-padding-x'] = u['$navbar-padding-x'] || v['$spacer'];
+  v['$navbar-padding-y'] = u['$navbar-padding-y'] || v['$spacer-halved'];
+
+  // Navs
+
+  v['$nav-link-padding'] = u['$nav-link-padding'] || '.5em 1em';
+  v['$nav-disabled-link-color'] = u['$nav-disabled-link-color'] || v['$gray-light'];
+
+  v['$nav-tabs-border-color'] = u['$nav-tabs-border-color'] || '#ddd';
+  v['$nav-tabs-border-width'] = u['$nav-tabs-border-width'] || v['$border-width'];
+  v['$nav-tabs-border-radius'] = u['$nav-tabs-border-radius'] || v['$border-radius'];
+  v['$nav-tabs-link-hover-border-color'] = u['$nav-tabs-link-hover-border-color'] || v['$gray-lighter'];
+  v['$nav-tabs-active-link-hover-color'] = u['$nav-tabs-active-link-hover-color'] || v['$gray'];
+  v['$nav-tabs-active-link-hover-bg'] = u['$nav-tabs-active-link-hover-bg'] || v['$body-bg'];
+  v['$nav-tabs-active-link-hover-border-color'] = u['$nav-tabs-active-link-hover-border-color'] || '#ddd';
+
+  v['$nav-pills-border-radius'] = u['$nav-pills-border-radius'] || v['$border-radius'];
+  v['$nav-pills-active-link-color'] = u['$nav-pills-active-link-color'] || v['$component-active-color'];
+  v['$nav-pills-active-link-bg'] = u['$nav-pills-active-link-bg'] || v['$component-active-bg'];
+
+  // Forms
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+
+  // Mixin navbar
+  //
+  // From module bootstrap-styled-mixins: https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins/blob/master/src/navbar.js
+
+  v['$zindex-navbar'] = u['$zindex-navbar'] || '1000';
+  v['$zindex-navbar-fixed'] = u['$zindex-navbar-fixed'] || '1030';
+  v['$zindex-navbar-sticky'] = u['$zindex-navbar-sticky'] || '1030';
+  v['$navbar-brand-padding-y'] = u['$navbar-brand-padding-y'] || '.25rem';
+
+  v['$navbar-divider-padding-y'] = u['$navbar-brand-padding-y'] || '.425rem';
+  v['$navbar-toggler-padding-y'] = u['$navbar-toggler-padding-y'] || '.25rem';
+  v['$navbar-toggler-padding-x'] = u['$navbar-toggler-padding-x'] || '.75rem';
+  v['$navbar-toggler-font-size'] = u['$navbar-toggler-font-size'] || '1.25rem';
+
+  v['$navbar-toggler-border-radius'] = u['$navbar-toggler-border-radius'] || '.25rem';
+  v['$navbar-light-active-color'] = u['$navbar-light-active-color'] || 'rgba(0, 0, 0, 0.9)';
+  v['$navbar-light-color'] = u['$navbar-light-color'] || 'rgba(0, 0, 0, 0.5)';
+  v['$navbar-light-hover-color'] = u['$navbar-light-hover-color'] || 'rgba(0, 0, 0, 0.7)';
+  v['$navbar-light-toggler-border'] = u['$navbar-light-toggler-border'] || 'rgba(0, 0, 0, 0.1)';
+  v['$navbar-light-disabled-color'] = u['$navbar-light-disabled-color'] || 'rgba(0, 0, 0, 0.3)';
+  v['$navbar-light-toggler-bg'] = u['$navbar-light-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(0, 0, 0, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-active-color'] = u['$navbar-inverse-active-color'] || 'rgb(255, 255, 255)';
+  v['$navbar-inverse-color'] = u['$navbar-inverse-color'] || 'rgba(255, 255, 255, 0.5)';
+  v['$navbar-inverse-hover-color'] = u['$navbar-inverse-hover-color'] || 'rgba(255, 255, 255, .75)';
+  v['$navbar-inverse-toggler-border'] = u['$navbar-inverse-toggler-border'] || 'rgba(255, 255, 255, 0.1)';
+  v['$navbar-inverse-toggler-bg'] = u['$navbar-inverse-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255, 255, 255, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-disabled-color'] = u['$navbar-inverse-disabled-color'] || 'rgba(255, 255, 255, 0.25)';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$42();
+
+/**
+ * BOOTSTRAP THEME ORDERED LIST
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$43 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Fonts
+
+  v['$list-inline-padding'] = u['$list-inline-padding'] || '5px';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$43();
+
+var rmUnit$16 = unitUtils$1.rmUnit;
+var UNIT$15 = unitUtils$1.UNIT;
+
+/**
+ * BOOTSTRAP THEME PARAGRAPH
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+
+var makeTheme$44 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray'] = u['$gray'] || '#464a4c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-h1'] = u['$font-size-h1'] || '2.5rem';
+  v['$font-size-h2'] = u['$font-size-h2'] || '2rem';
+  v['$font-size-h3'] = u['$font-size-h3'] || '1.75rem';
+  v['$font-size-h4'] = u['$font-size-h4'] || '1.5rem';
+  v['$font-size-h5'] = u['$font-size-h5'] || '1.25rem';
+  v['$font-size-h6'] = u['$font-size-h6'] || '1rem';
+
+  v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || rmUnit$16(v['$spacer'], UNIT$15.REM) / 2 + UNIT$15.REM;
+  v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
+  v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
+  v['$headings-color'] = u['$headings-color'] || 'inherit';
+
+  v['$display1-size'] = u['$display1-size'] || '6rem';
+  v['$display2-size'] = u['$display2-size'] || '5.5rem';
+  v['$display3-size'] = u['$display3-size'] || '4.5rem';
+  v['$display4-size'] = u['$display4-size'] || '3.5rem';
+
+  v['$display1-weight'] = u['$display1-weight'] || '300';
+  v['$display2-weight'] = u['$display2-weight'] || '300';
+  v['$display3-weight'] = u['$display3-weight'] || '300';
+  v['$display4-weight'] = u['$display4-weight'] || '300';
+
+  v['$display-line-height'] = u['$display-line-height'] || v['$headings-line-height'];
+
+  v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
+  v['$lead-font-weight'] = u['$lead-font-weight'] || '300';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$44();
+
+/**
+ * BOOTSTRAP THEME PAGINATION
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$45 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Colors
+  //
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+  v['$line-height-lg'] = u['$line-height-lg'] || '1.6';
+  v['$line-height-sm'] = u['$line-height-sm'] || '1.3';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
+
+  // Links
+  //
+  // Style anchor elements.
+
+  v['$link-color'] = u['$link-color'] || v['$brand-primary'];
+  v['$link-hover-color'] = u['$link-hover-color'] || color(v['$link-color']).darken(0.35).toString();
+
+  // Pagination
+
+  v['$pagination-padding-x'] = u['$pagination-padding-x'] || '.75rem';
+  v['$pagination-padding-y'] = u['$pagination-padding-y'] || '.5rem';
+  v['$pagination-padding-x-sm'] = u['$pagination-padding-x-sm'] || '.5rem';
+  v['$pagination-padding-y-sm'] = u['$pagination-padding-y-sm'] || '.25rem';
+  v['$pagination-padding-x-lg'] = u['$pagination-padding-x-lg'] || '1.5rem';
+  v['$pagination-padding-y-lg'] = u['$pagination-padding-y-lg'] || '.75rem';
+  v['$pagination-line-height'] = u['$pagination-line-height'] || '1.25';
+
+  v['$pagination-color'] = u['$pagination-color'] || v['$link-color'];
+  v['$pagination-bg'] = u['$pagination-bg'] || v['$white'];
+  v['$pagination-border-width'] = u['$pagination-border-width'] || v['$border-width'];
+  v['$pagination-border-color'] = u['$pagination-border-color'] || '#ddd';
+
+  v['$pagination-hover-color'] = u['$pagination-hover-color'] || v['$link-hover-color'];
+  v['$pagination-hover-bg'] = u['$pagination-hover-bg'] || v['$gray-lighter'];
+  v['$pagination-hover-border'] = u['$pagination-hover-border'] || '#ddd';
+
+  v['$pagination-active-color'] = u['$pagination-active-color'] || v['$white'];
+  v['$pagination-active-bg'] = u['$pagination-active-bg'] || v['$brand-primary'];
+  v['$pagination-active-border'] = u['$pagination-active-border'] || v['$brand-primary'];
+
+  v['$pagination-disabled-color'] = u['$pagination-disabled-color'] || v['$gray-light'];
+  v['$pagination-disabled-bg'] = u['$pagination-disabled-bg'] || v['$white'];
+  v['$pagination-disabled-border'] = u['$pagination-disabled-border'] || '#ddd';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$45();
+
+/**
+ * BOOTSTRAP THEME PRE
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$46 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  // Code
+
+  v['$code-font-size'] = u['$code-font-size'] || '90%';
+
+  v['$pre-color'] = u['$pre-color'] || v['$gray-dark'];
+  v['$pre-scrollable-max-height'] = u['$pre-scrollable-max-height'] || '340px';
+
+  // Fonts
+
+  v['$font-family-monospace'] = u['$font-family-monospace'] || 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$46();
+
+/**
+ * BOOTSTRAP THEME PROGRESS
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$47 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
 
   // Progress bars
 
@@ -3033,383 +5989,350 @@ function makeOriginal() {
   v['$progress-bar-bg'] = u['$progress-bar-bg'] || v['$brand-primary'];
   v['$progress-bar-animation-timing'] = u['$progress-bar-animation-timing'] || '1s linear infinite';
 
-  // List group
-
-  v['$list-group-color'] = u['$list-group-color'] || v['$body-color'];
-  v['$list-group-bg'] = u['$list-group-bg'] || v['$white'];
-  v['$list-group-border-color'] = u['$list-group-border-color'] || color(v['$black']).alpha(0.125).toString();
-  v['$list-group-border-width'] = u['$list-group-border-width'] || v['$border-width'];
-  v['$list-group-border-radius'] = u['$list-group-border-radius'] || v['$border-radius'];
-
-  v['$list-group-item-padding-x'] = u['$list-group-item-padding-x'] || '1.25rem';
-  v['$list-group-item-padding-y'] = u['$list-group-item-padding-y'] || '.75rem';
-
-  v['$list-group-hover-bg'] = u['$list-group-hover-bg'] || v['$gray-lightest'];
-  v['$list-group-active-color'] = u['$list-group-active-color'] || v['$component-active-color'];
-  v['$list-group-active-bg'] = u['$list-group-active-bg'] || v['$component-active-bg'];
-  v['$list-group-active-border'] = u['$list-group-active-border'] || v['$list-group-active-bg'];
-
-  v['$list-group-disabled-color'] = u['$list-group-disabled-color'] || v['$gray-light'];
-  v['$list-group-disabled-bg'] = u['$list-group-disabled-bg'] || v['$list-group-bg'];
-
-  v['$list-group-link-color'] = u['$list-group-link-color'] || v['$gray'];
-  v['$list-group-link-hover-color'] = u['$list-group-link-hover-color'] || v['$list-group-link-color'];
-
-  v['$list-group-link-active-color'] = u['$list-group-link-active-color'] || v['$list-group-color'];
-  v['$list-group-link-active-bg'] = u['$list-group-link-active-bg'] || v['$gray-lighter'];
-
-  // Image thumbnails
-
-  v['$thumbnail-padding'] = u['$thumbnail-padding'] || '.25rem';
-  v['$thumbnail-bg'] = u['$thumbnail-bg'] || v['$body-bg'];
-  v['$thumbnail-border-width'] = u['$thumbnail-border-width'] || v['$border-width'];
-  v['$thumbnail-border-color'] = u['$thumbnail-border-color'] || '#ddd';
-  v['$thumbnail-border-radius'] = u['$thumbnail-border-radius'] || v['$border-radius'];
-  v['$thumbnail-box-shadow'] = u['$thumbnail-box-shadow'] || '0 1px 2px ' + color(v['$black']).alpha(0.75).toString();
-  v['$thumbnail-transition'] = u['$thumbnail-transition'] || 'all .2s ease-in-out';
-
-  // Figures
-
-  v['$figure-caption-font-size'] = u['$figure-caption-font-size'] || '90%';
-  v['$figure-caption-color'] = u['$figure-caption-color'] || v['$gray-light'];
-
-  // Breadcrumbs
-
-  v['$breadcrumb-padding-y'] = u['$breadcrumb-padding-y'] || '.75rem';
-  v['$breadcrumb-padding-x'] = u['$breadcrumb-padding-x'] || '1rem';
-  v['$breadcrumb-item-padding'] = u['$breadcrumb-item-padding'] || '.5rem';
-
-  v['$breadcrumb-bg'] = u['$breadcrumb-bg'] || v['$gray-lighter'];
-  v['$breadcrumb-divider-color'] = u['$breadcrumb-divider-color'] || v['$gray-light'];
-  v['$breadcrumb-active-color'] = u['$breadcrumb-active-color'] || v['$gray-light'];
-  v['$breadcrumb-divider'] = u['$breadcrumb-divider'] || '"/"';
-
-  // Carousel
-
-  // v['$carousel-control-color'] = u['$carousel-control-color'] || v['$white'];
-  // v['$carousel-control-width'] = u['$carousel-control-width'] || '15%';
-  // v['$carousel-control-opacity'] = u['$carousel-control-opacity'] || '.5';
-  //
-  // v['$carousel-indicator-width'] = u['$carousel-indicator-width'] || '30px';
-  // v['$carousel-indicator-height'] = u['$carousel-indicator-height'] || '3px';
-  // v['$carousel-indicator-spacer'] = u['$carousel-indicator-spacer'] || '3px';
-  // v['$carousel-indicator-active-bg'] = u['$carousel-indicator-active-bg'] || v['$white'];
-  //
-  // v['$carousel-caption-width'] = u['$carousel-caption-width'] || '70%';
-  // v['$carousel-caption-color'] = u['$carousel-caption-color'] || v['$white'];
-  //
-  // v['$carousel-control-icon-width'] = u['$carousel-control-icon-width'] || '20px';
-  //
-  // v['$carousel-control-prev-icon-bg'] = u['$carousel-control-prev-icon-bg'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="${v['$carousel-control-color']}" viewBox="0 0 8 8"%3E%3Cpath d="M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z"/%3E%3C/svg%3E')`;
-  // v['$carousel-control-next-icon-bg'] = u['$carousel-control-next-icon-bg'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="${v['$carousel-control-color']}" viewBox="0 0 8 8"%3E%3Cpath d="M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z"/%3E%3C/svg%3E')`;
-  //
-  // v['$carousel-transition'] = u['$carousel-transition'] || 'transform .6s ease-in-out';
-
-
-  // Close
-
-  v['$close-font-size'] = u['$close-font-size'] || rmUnit(v['$font-size-base']) * 1.5 + detectUnit(v['$font-size-base']);
-  v['$close-font-weight'] = u['$close-font-weight'] || v['$font-weight-bold'];
-  v['$close-color'] = u['$close-color'] || v['$black'];
-  v['$close-text-shadow'] = u['$close-text-shadow'] || '0 1px 0 ' + v['$white'];
-
-  // Code
-
-  v['$code-font-size'] = u['$code-font-size'] || '90%';
-  v['$code-padding-x'] = u['$code-padding-x'] || '.4rem';
-  v['$code-padding-y'] = u['$code-padding-y'] || '.2rem';
-  v['$code-color'] = u['$code-color'] || '#bd4147';
-  v['$code-bg'] = u['$code-bg'] || v['$gray-lightest'];
-
-  v['$kbd-color'] = u['$kbd-color'] || v['$white'];
-  v['$kbd-bg'] = u['$kbd-bg'] || v['$gray-dark'];
-
-  v['$pre-color'] = u['$pre-color'] || v['$gray-dark'];
-  v['$pre-scrollable-max-height'] = u['$pre-scrollable-max-height'] || '340px';
-
   return Object.assign({}, u, v);
-}
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
 };
 
+makeTheme$47();
 
-
-
-
-var asyncGenerator = function () {
-  function AwaitValue(value) {
-    this.value = value;
-  }
-
-  function AsyncGenerator(gen) {
-    var front, back;
-
-    function send(key, arg) {
-      return new Promise(function (resolve, reject) {
-        var request = {
-          key: key,
-          arg: arg,
-          resolve: resolve,
-          reject: reject,
-          next: null
-        };
-
-        if (back) {
-          back = back.next = request;
-        } else {
-          front = back = request;
-          resume(key, arg);
-        }
-      });
-    }
-
-    function resume(key, arg) {
-      try {
-        var result = gen[key](arg);
-        var value = result.value;
-
-        if (value instanceof AwaitValue) {
-          Promise.resolve(value.value).then(function (arg) {
-            resume("next", arg);
-          }, function (arg) {
-            resume("throw", arg);
-          });
-        } else {
-          settle(result.done ? "return" : "normal", result.value);
-        }
-      } catch (err) {
-        settle("throw", err);
-      }
-    }
-
-    function settle(type, value) {
-      switch (type) {
-        case "return":
-          front.resolve({
-            value: value,
-            done: true
-          });
-          break;
-
-        case "throw":
-          front.reject(value);
-          break;
-
-        default:
-          front.resolve({
-            value: value,
-            done: false
-          });
-          break;
-      }
-
-      front = front.next;
-
-      if (front) {
-        resume(front.key, front.arg);
-      } else {
-        back = null;
-      }
-    }
-
-    this._invoke = send;
-
-    if (typeof gen.return !== "function") {
-      this.return = undefined;
-    }
-  }
-
-  if (typeof Symbol === "function" && Symbol.asyncIterator) {
-    AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
-      return this;
-    };
-  }
-
-  AsyncGenerator.prototype.next = function (arg) {
-    return this._invoke("next", arg);
-  };
-
-  AsyncGenerator.prototype.throw = function (arg) {
-    return this._invoke("throw", arg);
-  };
-
-  AsyncGenerator.prototype.return = function (arg) {
-    return this._invoke("return", arg);
-  };
-
-  return {
-    wrap: function (fn) {
-      return function () {
-        return new AsyncGenerator(fn.apply(this, arguments));
-      };
-    },
-    await: function (value) {
-      return new AwaitValue(value);
-    }
-  };
-}();
-
-
-
-
-
-var classCallCheck = function (instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-};
-
-var createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-
-
-
-
-
-var defineProperty = function (obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-};
-
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }
-
-  return target;
-};
-
-
-
-var inherits = function (subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-  }
-
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      enumerable: false,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-};
-
-
-
-
-
-
-
-
-
-var objectWithoutProperties = function (obj, keys) {
-  var target = {};
-
-  for (var i in obj) {
-    if (keys.indexOf(i) >= 0) continue;
-    if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
-    target[i] = obj[i];
-  }
-
-  return target;
-};
-
-var possibleConstructorReturn = function (self, call) {
-  if (!self) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return call && (typeof call === "object" || typeof call === "function") ? call : self;
-};
-
-var rmUnit$1 = unitUtils$1.rmUnit;
-var UNIT = unitUtils$1.UNIT;
 /**
- * Extends of Bootstrap original
+ * BOOTSTRAP THEME ROW
  *
- * You can add new bootstrap-styled variable here
- * @param original
+ * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-
-function makeExtend() {
-  var original = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : makeOriginal();
-  var userTheme = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-  /* eslint dot-notation: 'off', new-cap: 'off' */
-  var v = original;
-  var u = userTheme;
-
-  // tools
-
-  // Header
-  v['$header-navbar-border-color'] = u['$header-navbar-border-color'] || v['$gray-lighter'];
-  v['$header-navbar-border-width'] = u['$header-navbar-border-width'] || v['$border-width'];
-
-  // Card
-  v['$card-margin-y-halved'] = u['$card-margin-y-halved'] || rmUnit$1(v['$card-spacer-y'], UNIT.REM) / 2 + UNIT.REM;
-  v['$card-margin-x-halved'] = u['$card-margin-x-halved'] || rmUnit$1(v['$card-spacer-x'], UNIT.REM) / 2 + UNIT.REM;
-
-  // Nav
-  v['$nav-link-hover-bg'] = u['$nav-link-hover-bg'] || color(v['$brand-inverse']).darken(0.03).toString();
-
-  // Navbar
-  v['$navbar-max-height'] = u['$navbar-max-height'] || '400px';
-  v['$navbar-height'] = u['$navbar-height'] || '70px';
-
-  // Label
-  v['$label-margin-bottom'] = u['$label-margin-bottom'] || '.5rem';
-
-  return _extends({}, u, v);
-}
-
-/**
- * makeTheme is used to extend our bootstrap styled
- * @param userTheme
- * @returns {object} theme or extended theme
- */
-function makeTheme$1() {
+var makeTheme$48 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  return makeExtend(makeOriginal(userTheme), userTheme);
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-grid-classes'] = allowFalseValue(u['$enable-grid-classes'], true);
+
+  // Grid columns
+  //
+  // Specify the width of the gutters.
+
+  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
+  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
+    xs: v['$grid-gutter-width-base'],
+    sm: v['$grid-gutter-width-base'],
+    md: v['$grid-gutter-width-base'],
+    lg: v['$grid-gutter-width-base'],
+    xl: v['$grid-gutter-width-base']
+  };
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$48();
+
+/**
+ * BOOTSTRAP THEME ROW
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$49 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+  // Fonts
+
+  v['$small-font-size'] = u['$small-font-size'] || '80%';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$49();
+
+/**
+ * BOOTSTRAP THEME TABLE
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$50 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Colors
+  //
+  // Grayscale and colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+
+  // Create grayscale
+  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
+  v['$gray'] = u['$gray'] || '#464a4c';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Spacing
+  //
+  // Control the default styling of most Bootstrap elements by modifying these
+  // variables. Mostly focused on spacing.
+  // You can add more entries to the v['$spacers'] map, should you need more variation.
+
+  v['$spacer'] = u['$spacer'] || '1rem';
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-bg'] = u['$body-bg'] || v['$white'];
+
+  // Tables
+  //
+  // Customizes the `.table` component with basic values, each used across all table variations.
+
+  v['$table-cell-padding'] = u['$table-cell-padding'] || '.75rem';
+  v['$table-sm-cell-padding'] = u['$table-sm-cell-padding'] || '.3rem';
+
+  v['$table-bg'] = u['$table-bg'] || 'transparent';
+
+  v['$table-inverse-bg'] = u['$table-inverse-bg'] || v['$gray-dark'];
+  v['$table-inverse-bg-accent'] = u['$table-inverse-bg-accent'] || color(v['$white']).alpha(0.05).toString();
+  v['$table-inverse-bg-hover'] = u['$table-inverse-bg-hover'] || color(v['$white']).alpha(0.075).toString();
+  v['$table-inverse-color'] = u['$table-inverse-color'] || v['$body-bg'];
+  v['$table-inverse-border'] = u['$table-inverse-border'] || color(v['$gray-dark']).lighten(0.075).toString();
+
+  v['$table-bg-accent'] = u['$table-bg-accent'] || color(v['$black']).alpha(0.05).toString();
+  v['$table-bg-hover'] = u['$table-bg-hover'] || color(v['$black']).alpha(0.075).toString();
+  v['$table-bg-active'] = u['$table-bg-active'] || v['$table-bg-hover'];
+
+  v['$table-head-bg'] = u['$table-head-bg'] || v['$gray-lighter'];
+  v['$table-head-color'] = u['$table-head-color'] || v['$gray'];
+
+  v['$table-border-width'] = u['$table-border-width'] || v['$border-width'];
+  v['$table-border-color'] = u['$table-border-color'] || v['$gray-lighter'];
+
+  // Form states and alerts
+  //
+  // Define colors for form feedback states and, by default, alerts.
+
+  v['$state-success-bg'] = u['$state-success-bg'] || '#dff0d8';
+  v['$state-info-bg'] = u['$state-info-bg'] || '#d9edf7';
+  v['$state-warning-bg'] = u['$state-warning-bg'] || '#fcf8e3';
+  v['$state-danger-bg'] = u['$state-danger-bg'] || '#f2dede';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$50();
+
+/**
+ * BOOTSTRAP THEME UNORDERED LIST
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$51 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  // Options
+  //
+  // Quickly modify global styling by enabling or disabling optional features.
+
+  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
+  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
+
+  // Grid breakpoints
+  //
+  // Define the minimum dimensions at which your layout will change,
+  // adapting to different screen sizes, for use in media queries.
+
+  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  };
+  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
+  variables_2(v['$grid-breakpoints']);
+
+  // Colors
+  //
+  // Grayscale and brand colors for use across Bootstrap.
+
+  // Start with assigning color names to specific hex values.
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$blue'] = u['$blue'] || '#0275d8';
+
+  // Create grayscale
+  v['$gray'] = u['$gray'] || '#464a4c';
+  v['$gray-light'] = u['$gray-light'] || '#636c72';
+  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
+
+  // Reassign color vars to semantic color scheme
+  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
+
+  // Spacing
+
+  v['$border-width'] = u['$border-width'] || '1px';
+
+  // Fonts
+  //
+  // Font, line-height, and color for body text, headings, and more.
+
+  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
+
+  // Body
+  //
+  // Settings for the `<body>` element.
+
+  v['$body-bg'] = u['$body-bg'] || v['$white'];
+
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
+  v['$component-active-color'] = u['$component-active-color'] || v['$white'];
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+
+  // Navbar
+
+  v['$navbar-padding-x'] = u['$navbar-padding-x'] || v['$spacer'];
+  v['$navbar-padding-y'] = u['$navbar-padding-y'] || v['$spacer-halved'];
+
+  // Navs
+
+  v['$nav-link-padding'] = u['$nav-link-padding'] || '.5em 1em';
+  v['$nav-disabled-link-color'] = u['$nav-disabled-link-color'] || v['$gray-light'];
+
+  v['$nav-tabs-border-color'] = u['$nav-tabs-border-color'] || '#ddd';
+  v['$nav-tabs-border-width'] = u['$nav-tabs-border-width'] || v['$border-width'];
+  v['$nav-tabs-border-radius'] = u['$nav-tabs-border-radius'] || v['$border-radius'];
+  v['$nav-tabs-link-hover-border-color'] = u['$nav-tabs-link-hover-border-color'] || v['$gray-lighter'];
+  v['$nav-tabs-active-link-hover-color'] = u['$nav-tabs-active-link-hover-color'] || v['$gray'];
+  v['$nav-tabs-active-link-hover-bg'] = u['$nav-tabs-active-link-hover-bg'] || v['$body-bg'];
+  v['$nav-tabs-active-link-hover-border-color'] = u['$nav-tabs-active-link-hover-border-color'] || '#ddd';
+
+  v['$nav-pills-border-radius'] = u['$nav-pills-border-radius'] || v['$border-radius'];
+  v['$nav-pills-active-link-color'] = u['$nav-pills-active-link-color'] || v['$component-active-color'];
+  v['$nav-pills-active-link-bg'] = u['$nav-pills-active-link-bg'] || v['$component-active-bg'];
+
+  // Forms
+
+  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
+
+  // Mixin navbar
+  //
+  // From module bootstrap-styled-mixins: https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins/blob/master/src/navbar.js
+
+  v['$zindex-navbar'] = u['$zindex-navbar'] || '1000';
+  v['$zindex-navbar-fixed'] = u['$zindex-navbar-fixed'] || '1030';
+  v['$zindex-navbar-sticky'] = u['$zindex-navbar-sticky'] || '1030';
+  v['$navbar-brand-padding-y'] = u['$navbar-brand-padding-y'] || '.25rem';
+
+  v['$navbar-divider-padding-y'] = u['$navbar-brand-padding-y'] || '.425rem';
+  v['$navbar-toggler-padding-y'] = u['$navbar-toggler-padding-y'] || '.25rem';
+  v['$navbar-toggler-padding-x'] = u['$navbar-toggler-padding-x'] || '.75rem';
+  v['$navbar-toggler-font-size'] = u['$navbar-toggler-font-size'] || '1.25rem';
+
+  v['$navbar-toggler-border-radius'] = u['$navbar-toggler-border-radius'] || '.25rem';
+  v['$navbar-light-active-color'] = u['$navbar-light-active-color'] || 'rgba(0, 0, 0, 0.9)';
+  v['$navbar-light-color'] = u['$navbar-light-color'] || 'rgba(0, 0, 0, 0.5)';
+  v['$navbar-light-hover-color'] = u['$navbar-light-hover-color'] || 'rgba(0, 0, 0, 0.7)';
+  v['$navbar-light-toggler-border'] = u['$navbar-light-toggler-border'] || 'rgba(0, 0, 0, 0.1)';
+  v['$navbar-light-disabled-color'] = u['$navbar-light-disabled-color'] || 'rgba(0, 0, 0, 0.3)';
+  v['$navbar-light-toggler-bg'] = u['$navbar-light-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(0, 0, 0, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-active-color'] = u['$navbar-inverse-active-color'] || 'rgb(255, 255, 255)';
+  v['$navbar-inverse-color'] = u['$navbar-inverse-color'] || 'rgba(255, 255, 255, 0.5)';
+  v['$navbar-inverse-hover-color'] = u['$navbar-inverse-hover-color'] || 'rgba(255, 255, 255, 0.75)';
+  v['$navbar-inverse-toggler-border'] = u['$navbar-inverse-toggler-border'] || 'rgba(255, 255, 255, 0.1)';
+  v['$navbar-inverse-toggler-bg'] = u['$navbar-inverse-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255, 255, 255, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
+  v['$navbar-inverse-disabled-color'] = u['$navbar-inverse-disabled-color'] || 'rgba(255, 255, 255, 0.25)';
+
+  return Object.assign({}, u, v);
+};
+
+makeTheme$51();
+
+/**
+ * BOOTSTRAP THEME TOOLTIP
+ *
+ * this file is not meant to be used and must be kept as original
+ * @param userTheme
+ */
+var makeTheme$52 = function makeTheme() {
+  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  /* eslint dot-notation: 'off', new-cap: 'off' */
+  // Variables
+  //
+  // Copy settings from this file into the provided `_custom.scss` to override
+  // the Bootstrap defaults without modifying key, versioned files.
+  var v = {};
+  var u = userTheme;
+
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+
+  v['$zindex-tooltip'] = u['$zindex-tooltip'] || '1070';
+
+  v['$tooltip-max-width'] = u['$tooltip-max-width'] || '200px';
+  v['$tooltip-color'] = u['$tooltip-color'] || v['$white'];
+  v['$tooltip-bg'] = u['$tooltip-bg'] || v['$black'];
+  v['$tooltip-opacity'] = u['$tooltip-opacity'] || '.9';
+  v['$tooltip-padding-y'] = u['$tooltip-padding-y'] || '3px';
+  v['$tooltip-padding-x'] = u['$tooltip-padding-x'] || '8px';
+  v['$tooltip-margin'] = u['$tooltip-margin'] || '3px';
+
+  v['$tooltip-arrow-width'] = u['$tooltip-arrow-width'] || '5px';
+  v['$tooltip-arrow-color'] = u['$tooltip-arrow-color'] || v['$tooltip-bg'];
+  return Object.assign({}, u, v);
+};
+
+makeTheme$52();
+
+var list = [makeOriginal, makeTheme$2, makeTheme$3, makeTheme$4, makeTheme$5, makeTheme$6, makeTheme$7, makeTheme$8, makeTheme$9, makeTheme$10, makeTheme$11, makeTheme$12, makeTheme$13, makeTheme$14, makeTheme$15, makeTheme$16, makeTheme$17, makeTheme$18, makeTheme$19, makeTheme$20, makeTheme$21, makeTheme$22, makeTheme$23, makeTheme$24, makeTheme$25, makeTheme$26, makeTheme$27, makeTheme$28, makeTheme$29, makeTheme$30, makeTheme$31, makeTheme$32, makeTheme$33, makeTheme$34, makeTheme$35, makeTheme$36, makeTheme$37, makeTheme$38, makeTheme$39, makeTheme$40, makeTheme$41, makeTheme$42, makeTheme$43, makeTheme$44, makeTheme$45, makeTheme$46, makeTheme$47, makeTheme$48, makeTheme$49, makeTheme$50, makeTheme$51, makeTheme$52];
+
+function makeTheme$1(theme) {
+  var all = [].concat(list);
+  var t = theme;
+  var mt = void 0;
+
+  /* eslint-disable no-cond-assign */
+  while (mt = all.shift()) {
+    t = mt(t);
+  }
+  /* eslint-enable no-cond-assign */
+  return t;
 }
 
 /**
@@ -5104,6 +8027,236 @@ exports.default = {
 unwrapExports(a_1);
 var a_3 = a_1.a;
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
+
+
+
+
+
+var asyncGenerator = function () {
+  function AwaitValue(value) {
+    this.value = value;
+  }
+
+  function AsyncGenerator(gen) {
+    var front, back;
+
+    function send(key, arg) {
+      return new Promise(function (resolve, reject) {
+        var request = {
+          key: key,
+          arg: arg,
+          resolve: resolve,
+          reject: reject,
+          next: null
+        };
+
+        if (back) {
+          back = back.next = request;
+        } else {
+          front = back = request;
+          resume(key, arg);
+        }
+      });
+    }
+
+    function resume(key, arg) {
+      try {
+        var result = gen[key](arg);
+        var value = result.value;
+
+        if (value instanceof AwaitValue) {
+          Promise.resolve(value.value).then(function (arg) {
+            resume("next", arg);
+          }, function (arg) {
+            resume("throw", arg);
+          });
+        } else {
+          settle(result.done ? "return" : "normal", result.value);
+        }
+      } catch (err) {
+        settle("throw", err);
+      }
+    }
+
+    function settle(type, value) {
+      switch (type) {
+        case "return":
+          front.resolve({
+            value: value,
+            done: true
+          });
+          break;
+
+        case "throw":
+          front.reject(value);
+          break;
+
+        default:
+          front.resolve({
+            value: value,
+            done: false
+          });
+          break;
+      }
+
+      front = front.next;
+
+      if (front) {
+        resume(front.key, front.arg);
+      } else {
+        back = null;
+      }
+    }
+
+    this._invoke = send;
+
+    if (typeof gen.return !== "function") {
+      this.return = undefined;
+    }
+  }
+
+  if (typeof Symbol === "function" && Symbol.asyncIterator) {
+    AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
+      return this;
+    };
+  }
+
+  AsyncGenerator.prototype.next = function (arg) {
+    return this._invoke("next", arg);
+  };
+
+  AsyncGenerator.prototype.throw = function (arg) {
+    return this._invoke("throw", arg);
+  };
+
+  AsyncGenerator.prototype.return = function (arg) {
+    return this._invoke("return", arg);
+  };
+
+  return {
+    wrap: function (fn) {
+      return function () {
+        return new AsyncGenerator(fn.apply(this, arguments));
+      };
+    },
+    await: function (value) {
+      return new AwaitValue(value);
+    }
+  };
+}();
+
+
+
+
+
+var classCallCheck = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
+var createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+
+
+
+
+
+var defineProperty = function (obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+};
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+
+
+var inherits = function (subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+};
+
+
+
+
+
+
+
+
+
+var objectWithoutProperties = function (obj, keys) {
+  var target = {};
+
+  for (var i in obj) {
+    if (keys.indexOf(i) >= 0) continue;
+    if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+    target[i] = obj[i];
+  }
+
+  return target;
+};
+
+var possibleConstructorReturn = function (self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return call && (typeof call === "object" || typeof call === "function") ? call : self;
+};
+
 var defaultProps = {
   tag: 'a',
   theme: {
@@ -6343,7 +9496,7 @@ function Fade(props) {
   // Tag component would inherit the Transition properties as attributes for the HTML
   // element which results in errors/warnings for non-valid attributes.
   var transitionProps = pick(otherProps, TransitionPropTypeKeys);
-  var childProps = lodash_omit(otherProps, TransitionPropTypeKeys);
+  var childProps = lodash_omit(otherProps, TransitionPropTypeKeys, 'innerRef');
   return React.createElement(
     Transition,
     transitionProps,
@@ -6370,8 +9523,7 @@ var defaultProps$5 = {
     '$close-font-weight': '#bold',
     '$close-text-shadow': '0 1px 0 #fff',
     '$enable-hover-media-query': false
-  },
-  onDismiss: function onDismiss() {}
+  }
 };
 var propTypes$4 = {
   /**
@@ -6490,7 +9642,7 @@ var defaultProps$3 = {
     '$enable-rounded': true
   },
   uncontrolled: false,
-  autoHideDuration: 0, // theme
+  autoHideDuration: null,
   transition: _extends({}, defaultProps$4, {
     unmountOnExit: true
   })
@@ -6510,7 +9662,8 @@ var propTypes$2 = {
    */
   isOpen: PropTypes.bool,
   /**
-   * Toggles onClick event.
+   * @ignore
+   * Used for Close component.
    */
   toggle: PropTypes.func,
   /**
@@ -6528,7 +9681,10 @@ var propTypes$2 = {
   /**
    * Transition used to dismiss alert.
    */
-  transition: PropTypes.shape({ FadeProptypes: propTypes$3 }),
+  transition: PropTypes.shape({
+    FadeProptypes: PropTypes.object,
+    unmountOnExit: PropTypes.bool
+  }),
   /**
    * Transition's duration used to dismiss alert automatically.
    */
@@ -6673,21 +9829,20 @@ var AlertUnstyled = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _omit = lodash_omit(this.props, ['theme', 'autoHideDuration']),
+      var _omit = lodash_omit(this.props, ['theme', 'autoHideDuration', 'toggle']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           Tag = _omit.tag,
           color = _omit.color,
           isOpen = _omit.isOpen,
-          toggle = _omit.toggle,
           onClick = _omit.onClick,
           children = _omit.children,
           onExited = _omit.onExited,
           transition = _omit.transition,
           uncontrolled = _omit.uncontrolled,
-          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'color', 'isOpen', 'toggle', 'onClick', 'children', 'onExited', 'transition', 'uncontrolled']);
+          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag', 'color', 'isOpen', 'onClick', 'children', 'onExited', 'transition', 'uncontrolled']);
 
-      var classes = mapToCssModules(classnames(className, 'alert', 'alert-' + color, { 'alert-dismissible': toggle || onClick }), cssModule);
+      var classes = mapToCssModules(classnames(className, 'alert', 'alert-' + color, { 'alert-dismissible': uncontrolled || onClick }), cssModule);
 
       if (!isOpen && this.state.exited) {
         return null;
@@ -6707,7 +9862,7 @@ var AlertUnstyled = function (_React$Component) {
           'in': uncontrolled ? this.state.uncontrolledOpen : isOpen,
           role: 'alert'
         }, attributes, transition, transitionProps),
-        (toggle || onClick) && React.createElement(Close, { onDismiss: this.toggle }),
+        (uncontrolled || onClick) && React.createElement(Close, { onDismiss: this.toggle }),
         children
       );
     }
@@ -6715,16 +9870,14 @@ var AlertUnstyled = function (_React$Component) {
   return AlertUnstyled;
 }(React.Component);
 
-AlertUnstyled.defaultProps = defaultProps$3;
-AlertUnstyled.propTypes = propTypes$2;
-
-
-var AlertHoc = withTheme(AlertUnstyled);
-
 /**
  * Alert component.
  */
-var Alert = styled(AlertHoc).withConfig({
+
+
+AlertUnstyled.defaultProps = defaultProps$3;
+AlertUnstyled.propTypes = propTypes$2;
+var Alert = styled(AlertUnstyled).withConfig({
   displayName: 'Alert'
 })(['', ''], function (props) {
   return '\n    /*\n    Base styles\n    */\n    \n    &.alert {\n      padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n      margin-bottom: ' + props.theme['$alert-margin-bottom'] + ';\n      border: ' + props.theme['$alert-border-width'] + ' solid transparent;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$alert-border-radius']) + '\n    }\n    \n    /* Headings for larger alerts */\n    &.alert-heading {\n      /* Specified to prevent conflicts of changing $headings-color */\n      color: inherit;\n    }\n    \n    /* Provide class for links that match alerts */\n    & .alert-link { \n      font-weight: ' + props.theme['$alert-link-font-weight'] + ';\n    }\n    \n    /* Dismissible alerts Expand the right padding and account for the close buttons positioning. */\n    \n    &.alert-dismissible {    \n      /* Adjust close link position */\n      & .close {\n        position: relative;\n        top: -' + props.theme['$alert-padding-y'] + ';\n        right: -' + props.theme['$alert-padding-x'] + ';\n        padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n        color: inherit;\n      }\n    }\n    /* Alternate styles Generate contextual modifier classes for colorizing the alert. */\n\n    &.alert-success {\n      ' + alert_1(props.theme['$alert-success-bg'], props.theme['$alert-success-border'], props.theme['$alert-success-text']) + '    \n    }\n    &.alert-info {\n      ' + alert_1(props.theme['$alert-info-bg'], props.theme['$alert-info-border'], props.theme['$alert-info-text']) + '\n    } \n    &.alert-warning {\n      ' + alert_1(props.theme['$alert-warning-bg'], props.theme['$alert-warning-border'], props.theme['$alert-warning-text']) + ' \n    }\n    &.alert-danger {\n      ' + alert_1(props.theme['$alert-danger-bg'], props.theme['$alert-danger-border'], props.theme['$alert-danger-text']) + ' \n    }\n  ';
@@ -8388,6 +11541,13 @@ var BootstrapProvider = function (_React$Component) {
 
     return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = BootstrapProvider.__proto__ || Object.getPrototypeOf(BootstrapProvider)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       isWindowPhone8Fixed: null // just for unit testing
+
+
+      // componentWillReceiveProps(nextProps) {
+      //   const diff = 0;
+      //
+      // }
+
     }, _temp), possibleConstructorReturn(_this, _ret);
   } // eslint-disable-line react/prefer-stateless-function
 
@@ -8420,12 +11580,19 @@ var BootstrapProvider = function (_React$Component) {
     value: function render() {
       var _props = this.props,
           children = _props.children,
-          theme$$1 = _props.theme,
+          userTheme = _props.theme,
           utils = _props.utils;
 
+      var theme$$1 = makeTheme$$1(userTheme);
+      var metaKeyList = Object.keys(theme$$1).filter(function (f) {
+        return theme$$1[f][0] === '_';
+      });
+      metaKeyList.forEach(function (k) {
+        delete theme$$1[k];
+      });
       return React.createElement(
         ThemeProvider,
-        { theme: makeTheme$$1(theme$$1) },
+        { theme: theme$$1 },
         React.createElement(
           UtilityProvider,
           { utils: utils },
@@ -10930,7 +14097,7 @@ return Tether;
 
 var defaultProps$14 = {
   isOpen: false,
-  tetherRef: function tetherRef() {}
+  tetherRef: null
 };
 var propTypes$14 = {
   /**
@@ -11015,7 +14182,9 @@ var TetherContent = function (_React$Component) {
       if (_this.tether) {
         _this.tether.destroy();
         _this.tether = null;
-        _this.props.tetherRef(_this.tether);
+        if (_this.props.tetherRef) {
+          _this.props.tetherRef(_this.tether);
+        }
       }
     }, _this.show = function () {
       document.addEventListener('click', _this.handleDocumentClick, true);
@@ -11025,7 +14194,9 @@ var TetherContent = function (_React$Component) {
       document.body.appendChild(_this.element);
       _this.renderIntoSubtree();
       _this.tether = new tether(_this.getTetherConfig());
-      _this.props.tetherRef(_this.tether);
+      if (_this.props.tetherRef) {
+        _this.props.tetherRef(_this.tether);
+      }
       _this.tether.position();
     }, _this.toggle = function (e) {
       if (_this.props.disabled) {
@@ -11089,6 +14260,7 @@ var defaultProps$12 = {
     '$font-size-base': '1rem',
     '$font-size-lg': '1.25rem',
     '$zindex-dropdown-backdrop': '990',
+    '$zindex-dropdown': '1000',
     '$component-active-color': '#fff',
     '$component-active-bg': '#0275d8',
     '$caret-width': '.3em',
@@ -11159,6 +14331,7 @@ var propTypes$12 = {
     '$font-size-base': PropTypes.string,
     '$font-size-lg': PropTypes.string,
     '$zindex-dropdown-backdrop': PropTypes.string,
+    '$zindex-dropdown': PropTypes.string,
     '$component-active-color': PropTypes.string,
     '$component-active-bg': PropTypes.string,
     '$caret-width': PropTypes.string,
@@ -12216,8 +15389,8 @@ var defaultProps$20 = {
     show: 350,
     hide: 350
   },
-  onOpened: function onOpened() {},
-  onClosed: function onClosed() {}
+  onOpened: null,
+  onClosed: null
 };
 var propTypes$20 = {
   /**
@@ -12327,11 +15500,15 @@ var Collapse = function (_Component) {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps, prevState) {
       if (this.state.collapse === SHOWN && prevState && prevState.collapse !== SHOWN) {
-        this.props.onOpened();
+        if (this.props.onOpened) {
+          this.props.onOpened();
+        }
       }
 
       if (this.state.collapse === HIDDEN && prevState && prevState.collapse !== HIDDEN) {
-        this.props.onClosed();
+        if (this.props.onClosed) {
+          this.props.onClosed();
+        }
       }
     }
   }, {
@@ -14105,90 +17282,6 @@ var Figure = styled(FigureUnstyled).withConfig({
   displayName: 'Figure'
 })(['&.figure{display:inline-block;}margin:0 0 1rem;']);
 
-var rmUnit$2 = unitUtils$1.rmUnit;
-var UNIT$1 = unitUtils$1.UNIT;
-
-/**
- * BOOTSTRAP THEME IMAGE
- *
- * this file is not meant to be used and must be kept as original
- * @param userTheme
- */
-
-var makeTheme$2 = function makeTheme() {
-  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  /* eslint dot-notation: 'off', new-cap: 'off' */
-  // Variables
-  //
-  // Copy settings from this file into the provided `_custom.scss` to override
-  // the Bootstrap defaults without modifying key, versioned files.
-  var v = {};
-  var u = userTheme;
-
-  // Options
-  //
-  // Quickly modify global styling by enabling or disabling optional features.
-
-  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
-  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
-  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
-
-  // Colors
-  //
-  // Grayscale and brand colors for use across Bootstrap.
-
-  // Start with assigning color names to specific hex values.
-  v['$white'] = u['$white'] || '#fff';
-  v['$gray-light'] = u['$gray-light'] || '#636c72';
-
-  // Body
-  //
-  // Settings for the `<body>` element.
-
-  v['$body-bg'] = u['$body-bg'] || v['$white'];
-
-  // Spacing
-  //
-  // Control the default styling of most Bootstrap elements by modifying these
-  // variables. Mostly focused on spacing.
-  // You can add more entries to the v['$spacers'] map, should you need more variation.
-
-  v['$spacer'] = u['$spacer'] || '1rem';
-
-  // =============================================================================================================
-  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
-  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$2(v['$spacer'], UNIT$1.REM) / 2 + UNIT$1.REM;
-  // =============================================================================================================
-
-  v['$border-width'] = u['$border-width'] || '1px';
-
-  // Components
-  //
-  // Define common padding and border radius sizes and more.
-
-  v['$border-radius'] = u['$border-radius'] || '.25rem';
-
-  // Image thumbnails
-
-  v['$thumbnail-padding'] = u['$thumbnail-padding'] || '.25rem';
-  v['$thumbnail-bg'] = u['$thumbnail-bg'] || v['$body-bg'];
-  v['$thumbnail-border-width'] = u['$thumbnail-border-width'] || v['$border-width'];
-  v['$thumbnail-border-color'] = u['$thumbnail-border-color'] || '#ddd';
-  v['$thumbnail-border-radius'] = u['$thumbnail-border-radius'] || v['$border-radius'];
-  v['$thumbnail-box-shadow'] = u['$thumbnail-box-shadow'] || '0 1px 2px ' + color(v['$black']).alpha(0.75).toString();
-  v['$thumbnail-transition'] = u['$thumbnail-transition'] || 'all .2s ease-in-out';
-
-  // Image Figures
-
-  v['$figure-caption-font-size'] = u['$figure-caption-font-size'] || '90%';
-  v['$figure-caption-color'] = u['$figure-caption-color'] || v['$gray-light'];
-
-  return Object.assign({}, u, v);
-};
-
-makeTheme$2();
-
 /**
  * FigCaption component
  */
@@ -14226,7 +17319,7 @@ var FigCaptionUnstyled = function (_React$Component) {
 }(React.Component);
 
 FigCaptionUnstyled.defaultProps = {
-  theme: makeTheme$2()
+  theme: makeTheme$31()
 };
 FigCaptionUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -15123,144 +18216,6 @@ Jumbotron.defaultProps = defaultProps$39;
 Jumbotron.propTypes = propTypes$43;
 
 /**
- * BOOTSTRAP THEME LABEL
- *
- * this file is not meant to be used and must be kept as original
- * @param userTheme
- */
-var makeTheme$3 = function makeTheme() {
-  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  /* eslint dot-notation: 'off', new-cap: 'off' */
-  // Variables
-  //
-  // Copy settings from this file into the provided `_custom.scss` to override
-  // the Bootstrap defaults without modifying key, versioned files.
-  var v = {};
-  var u = userTheme;
-
-  // Options
-  //
-  // Quickly modify global styling by enabling or disabling optional features.
-
-  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
-  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
-  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
-  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
-
-  // Colors
-  //
-  // Grayscale and brand colors for use across Bootstrap.
-
-  // Start with assigning color names to specific hex values.
-  v['$white'] = u['$white'] || '#fff';
-  v['$black'] = u['$black'] || '#000';
-  v['$blue'] = u['$blue'] || '#0275d8';
-  v['$green'] = u['$green'] || '#5cb85c';
-  v['$teal'] = u['$teal'] || '#5bc0de';
-  v['$orange'] = u['$orange'] || '#f0ad4e';
-  v['$red'] = u['$red'] || '#d9534f';
-
-  // Create grayscale
-  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
-  v['$gray-light'] = u['$gray-light'] || '#636c72';
-
-  // Reassign color vars to semantic color scheme
-  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
-  v['$brand-success'] = u['$brand-success'] || v['$green'];
-  v['$brand-info'] = u['$brand-info'] || v['$teal'];
-  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
-  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
-
-  // Spacing
-
-  v['$border-width'] = u['$border-width'] || '1px';
-
-  // Fonts
-  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
-  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
-  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
-  v['$font-size-xs'] = u['$font-size-xs'] || '.75rem';
-
-  v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
-
-  // Components
-  //
-  // Define common padding and border radius sizes and more.
-
-  v['$border-radius'] = u['$border-radius'] || '.25rem';
-  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
-  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
-
-  // Links
-  //
-  // Style anchor elements.
-
-  v['$link-color'] = u['$link-color'] || v['$brand-primary'];
-  v['$link-hover-color'] = u['$link-hover-color'] || color(v['$link-color']).darken(0.35).toString();
-  v['$link-hover-decoration'] = u['$link-hover-decoration'] || 'underline';
-
-  // Forms
-
-  v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width']; // For form controls and buttons
-
-  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
-
-  // Buttons
-
-  v['$btn-padding-x'] = u['$btn-padding-x'] || '1rem';
-  v['$btn-padding-y'] = u['$btn-padding-y'] || '.5rem';
-  v['$btn-padding-x-lg'] = u['$btn-padding-x-lg'] || '1.5rem';
-  v['$btn-padding-y-lg'] = u['$btn-padding-y-lg'] || '.75rem';
-  v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || '.5rem';
-  v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
-
-  v['$btn-line-height'] = u['$btn-line-height'] || '1.25';
-
-  v['$btn-primary-color'] = u['$btn-primary-color'] || v['$white'];
-  v['$btn-primary-bg'] = u['$btn-primary-bg'] || v['$brand-primary'];
-  v['$btn-primary-border'] = u['$btn-primary-border'] || v['$btn-primary-bg'];
-
-  v['$btn-secondary-color'] = u['$btn-secondary-color'] || v['$gray-dark'];
-  v['$btn-secondary-bg'] = u['$btn-secondary-bg'] || v['$white'];
-  v['$btn-secondary-border'] = u['$btn-secondary-border'] || '#ccc';
-
-  v['$btn-info-color'] = u['$btn-info-color'] || v['$white'];
-  v['$btn-info-bg'] = u['$btn-info-bg'] || v['$brand-info'];
-  v['$btn-info-border'] = u['$btn-info-border'] || v['$btn-info-bg'];
-
-  v['$btn-success-color'] = u['$btn-success-color'] || v['$white'];
-  v['$btn-success-bg'] = u['$btn-success-bg'] || v['$brand-success'];
-  v['$btn-success-border'] = u['$btn-success-border'] || v['$btn-success-bg'];
-
-  v['$btn-warning-color'] = u['$btn-warning-color'] || v['$white'];
-  v['$btn-warning-bg'] = u['$btn-warning-bg'] || v['$brand-warning'];
-  v['$btn-warning-border'] = u['$btn-warning-border'] || v['$btn-warning-bg'];
-
-  v['$btn-danger-color'] = u['$btn-danger-color'] || v['$white'];
-  v['$btn-danger-bg'] = u['$btn-danger-bg'] || v['$brand-danger'];
-  v['$btn-danger-border'] = u['$btn-danger-border'] || v['$btn-danger-bg'];
-
-  v['$btn-font-weight'] = u['$btn-font-weight'] || v['$font-weight-normal'];
-  v['$btn-transition'] = u['$btn-transition'] || 'all .2s ease-in-out';
-
-  v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
-  v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
-  v['$btn-border-radius'] = u['$btn-border-radius'] || v['$border-radius'];
-  v['$btn-box-shadow'] = u['$btn-box-shadow'] || 'inset 0 1px 0 ' + color(v['$white']).alpha(0.15).toString() + ', 0 1px 1px ' + color(v['$black']).alpha(0.075).toString();
-  v['$btn-focus-box-shadow'] = u['$btn-focus-box-shadow'] || '0 0 0 2px ' + color(v['$brand-primary']).alpha(0.25).toString();
-  v['$btn-active-box-shadow'] = u['$btn-active-box-shadow'] || 'inset 0 3px 5px ' + color(v['$black']).alpha(0.125).toString();
-
-  v['$btn-link-disabled-color'] = u['$btn-link-disabled-color'] || v['$gray-light'];
-
-  v['$btn-block-spacing-y'] = u['$btn-block-spacing-y'] || '.5rem';
-
-  return Object.assign({}, u, v);
-};
-
-makeTheme$3();
-
-/**
  * Label component
  */
 
@@ -15319,7 +18274,7 @@ var propTypes$44 = {
 
 var defaultProps$40 = {
   tag: 'label',
-  theme: makeTheme$3()
+  theme: makeTheme$36()
 };
 
 var LabelUnstyled = function LabelUnstyled(props) {
@@ -16499,134 +19454,7 @@ var tools_5 = tools.getOriginalBodyPadding;
 var tools_6 = tools.conditionallyUpdateScrollbar;
 var tools_10 = tools.tetherAttachements;
 
-/**
- * BOOTSTRAP THEME MODAL
- *
- * this file is not meant to be used and must be kept as original
- * @param userTheme
- */
-var makeTheme$4 = function makeTheme() {
-  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  /* eslint dot-notation: 'off', new-cap: 'off' */
-  // Variables
-  //
-  // Copy settings from this file into the provided `_custom.scss` to override
-  // the Bootstrap defaults without modifying key, versioned files.
-  var v = {};
-  var u = userTheme;
-
-  // Options
-  //
-  // Quickly modify global styling by enabling or disabling optional features.
-
-  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
-  v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
-  v['$enable-transitions'] = allowFalseValue(u['$enable-transitions'], true);
-
-  // Colors
-  //
-  // Grayscale and brand colors for use across Bootstrap.
-
-  // Start with assigning color names to specific hex values.
-  v['$white'] = u['$white'] || '#fff';
-  v['$black'] = u['$black'] || '#000';
-
-  // Create grayscale
-  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
-  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
-
-  // Grid breakpoints
-  //
-  // Define the minimum dimensions at which your layout will change,
-  // adapting to different screen sizes, for use in media queries.
-
-  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  };
-  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
-  variables_2(v['$grid-breakpoints']);
-
-  // Spacing
-  //
-  // Control the default styling of most Bootstrap elements by modifying these
-  // variables. Mostly focused on spacing.
-  // You can add more entries to the v['$spacers'] map, should you need more variation.
-
-  v['$border-width'] = u['$border-width'] || '1px';
-
-  // Body
-  //
-  // Settings for the `<body>` element.
-
-  v['$body-bg'] = u['$body-bg'] || v['$white'];
-  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
-
-  // Fonts
-
-  v['$font-family-sans-serif'] = u['$font-family-sans-serif'] || '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
-  v['$font-family-base'] = u['$font-family-base'] || v['$font-family-sans-serif'];
-  v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
-  v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
-  v['$font-weight-base'] = u['$font-weight-base'] || v['$font-weight-normal'];
-  v['$line-height-base'] = u['$line-height-base'] || '1.5';
-
-  // Z-index master list
-  //
-  // Warning = 'Avoid customizing these values. They're used for a bird's eye view
-  // of components dependent on the z-axis and are designed to all work together.
-
-  v['$zindex-modal'] = u['$zindex-modal'] || '1050';
-  v['$zindex-modal-backdrop'] = u['$zindex-modal-backdrop'] || '1040';
-
-  // Components
-  //
-  // Define common padding and border radius sizes and more.
-  v['$transition-fade'] = u['$transition-fade'] || 'opacity .15s linear';
-  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
-
-  // Modals
-
-  // Padding applied to the modal body
-  v['$modal-inner-padding'] = u['$modal-inner-padding'] || '15px';
-
-  v['$modal-dialog-margin'] = u['$modal-dialog-margin'] || '10px';
-  v['$modal-dialog-sm-up-margin-y'] = u['$modal-dialog-sm-up-margin-y'] || '30px';
-
-  v['$modal-title-line-height'] = u['$modal-title-line-height'] || v['$line-height-base'];
-
-  v['$modal-content-bg'] = u['$modal-content-bg'] || v['$white'];
-  v['$modal-content-border-color'] = u['$modal-content-border-color'] || color(v['$black']).alpha(0.2).toString();
-  v['$modal-content-border-width'] = u['$modal-content-border-width'] || v['$border-width'];
-  v['$modal-content-xs-box-shadow'] = u['$modal-content-xs-box-shadow'] || '0 3px 9px ' + color(v['$black']).alpha(0.5).toString();
-  v['$modal-content-sm-up-box-shadow'] = u['$modal-content-sm-up-box-shadow'] || '0 5px 15px ' + color(v['$black']).alpha(0.5).toString();
-
-  v['$modal-backdrop-bg'] = u['$modal-backdrop-bg'] || v['$black'];
-  v['$modal-backdrop-opacity'] = u['$modal-backdrop-opacity'] || '.5';
-  v['$modal-header-border-color'] = u['$modal-header-border-color'] || v['$gray-lighter'];
-  v['$modal-footer-border-color'] = u['$modal-footer-border-color'] || v['$modal-header-border-color'];
-  v['$modal-header-border-width'] = u['$modal-header-border-width'] || v['$modal-content-border-width'];
-  v['$modal-footer-border-width'] = u['$modal-footer-border-width'] || v['$modal-header-border-width'];
-  v['$modal-header-padding'] = u['$modal-header-padding'] || '15px';
-
-  v['$modal-lg'] = u['$modal-lg'] || '800px';
-  v['$modal-md'] = u['$modal-md'] || '500px';
-  v['$modal-sm'] = u['$modal-sm'] || '300px';
-
-  v['$modal-transition'] = u['$modal-transition'] || 'transform .3s ease-out';
-
-  return Object.assign({}, u, v);
-};
-
-makeTheme$4();
-
 /* eslint no-underscore-dangle: 0 */
-function noop() {}
-
 var FadePropTypes = PropTypes.shape(propTypes$3);
 var propTypes$53 = {
   /**
@@ -16691,10 +19519,10 @@ var defaultProps$48 = {
   backdrop: true,
   keyboard: true,
   zIndex: 2000,
-  theme: makeTheme$4(),
+  theme: makeTheme$40(),
   fade: true,
-  onOpened: noop,
-  onClosed: noop,
+  onOpened: null,
+  onClosed: null,
   modalTransition: {
     timeout: 300
   },
@@ -16715,14 +19543,22 @@ var ModalUnstyled = function (_React$Component) {
     var _this = possibleConstructorReturn(this, (ModalUnstyled.__proto__ || Object.getPrototypeOf(ModalUnstyled)).call(this, props));
 
     _this.onOpened = function (node, isAppearing) {
-      _this.props.onOpened();
-      (_this.props.modalTransition.onEntered || noop)(node, isAppearing);
+      if (_this.props.onOpened) {
+        _this.props.onOpened();
+      }
+      if (_this.props.modalTransition.onEntered) {
+        _this.props.modalTransition.onEntered(node, isAppearing);
+      }
     };
 
     _this.onClosed = function (node) {
       // so all methods get called before it is unmounted
-      _this.props.onClosed();
-      (_this.props.modalTransition.onExited || noop)(node);
+      if (_this.props.onClosed) {
+        _this.props.onClosed();
+      }
+      if (_this.props.modalTransition.onEntered) {
+        _this.props.modalTransition.onExited(node);
+      }
       _this.destroy();
 
       if (_this._isMounted) {
@@ -17537,6 +20373,7 @@ var defaultProps$56 = {
     '$lead-font-weight': '300'
   }
 };
+
 var propTypes$61 = {
   /**
    * @ignore
@@ -19448,6 +22285,20 @@ var propTypes$76 = {
   autohide: PropTypes.bool,
   /** Define delay before opening the tooltip. */
   delay: PropTypes.oneOfType([PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }), PropTypes.number]),
+  /** Theme variables. */
+  theme: PropTypes.shape({
+    '$zindex-tooltip': PropTypes.string,
+    '$tooltip-max-width': PropTypes.string,
+    '$tooltip-color': PropTypes.string,
+    '$tooltip-bg': PropTypes.string,
+    '$tooltip-opacity': PropTypes.string,
+    '$tooltip-padding-y': PropTypes.string,
+    '$tooltip-padding-x': PropTypes.string,
+    '$tooltip-margin': PropTypes.string,
+    '$tooltip-arrow-width': PropTypes.string,
+    '$tooltip-arrow-color': PropTypes.string,
+    '$component-active-color': PropTypes.string
+  }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
@@ -19459,7 +22310,19 @@ var defaultProps$65 = {
   placement: 'bottom',
   delay: DEFAULT_DELAYS,
   autohide: true,
-  toggle: function toggle() {}
+  toggle: null,
+  theme: {
+    '$zindex-tooltip': '1070',
+    '$tooltip-max-width': '200px',
+    '$tooltip-color': '#fff',
+    '$tooltip-bg': '#000',
+    '$tooltip-opacity': '.9',
+    '$tooltip-padding-y': '3px',
+    '$tooltip-padding-x': '8px',
+    '$tooltip-margin': '3px',
+    '$tooltip-arrow-width': '5px',
+    '$tooltip-arrow-color': '#000'
+  }
 };
 var TooltipUnstyled = function (_React$Component) {
   inherits(TooltipUnstyled, _React$Component);
@@ -19568,8 +22431,10 @@ var TooltipUnstyled = function (_React$Component) {
       if (_this.props.disabled) {
         return e && e.preventDefault();
       }
-
-      return _this.props.toggle();
+      if (_this.props.toggle) {
+        return _this.props.toggle();
+      }
+      return null;
     }, _this.handleFocus = function () {
       _this.setState({
         focus: true
@@ -20599,9 +23464,8 @@ var CardImg = function (_React$Component) {
 
   createClass(CardImg, [{
     key: 'render',
+    // eslint-disable-line react/prefer-stateless-function
 
-
-    /* eslint-disable react/no-unused-prop-types */
     value: function render() {
       var _props = this.props,
           className = _props.className,
@@ -20623,23 +23487,12 @@ var CardImg = function (_React$Component) {
         className: mapToCssModules(classnames(className, cardImgClassName), cssModule)
       }, attributes));
     }
-    /* eslint-enable react/no-unused-prop-types */
-
-    // eslint-disable-line react/prefer-stateless-function
-
   }]);
   return CardImg;
 }(React.Component);
 
 CardImg.defaultProps = defaultProps$73;
 CardImg.propTypes = propTypes$84;
-CardImg.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
-  top: PropTypes.bool,
-  bottom: PropTypes.bool
-};
 
 
 CardImg.defaultProps = defaultProps$73;
@@ -22310,162 +25163,11 @@ DropdownToggle.contextTypes = {
 DropdownToggle.defaultProps = defaultProps$86;
 DropdownToggle.propTypes = propTypes$99;
 
-var rmUnit$3 = unitUtils$1.rmUnit;
-var UNIT$2 = unitUtils$1.UNIT;
-
-/**
- * BOOTSTRAP THEME NAVBAR
- *
- * this file is not meant to be used and must be kept as original
- * @param userTheme
- */
-
-var makeTheme$5 = function makeTheme() {
-  var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  /* eslint dot-notation: 'off', new-cap: 'off' */
-  // Variables
-  //
-  // Copy settings from this file into the provided `_custom.scss` to override
-  // the Bootstrap defaults without modifying key, versioned files.
-  var v = {};
-  var u = userTheme;
-
-  // Options
-  //
-  // Quickly modify global styling by enabling or disabling optional features.
-
-  v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
-  v['$enable-hover-media-query'] = allowFalseValue(u['$enable-hover-media-query'], false);
-
-  // Grid breakpoints
-  //
-  // Define the minimum dimensions at which your layout will change,
-  // adapting to different screen sizes, for use in media queries.
-
-  v['$grid-breakpoints'] = u['$grid-breakpoints'] || {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  };
-  variables_1(v['$grid-breakpoints'], '$grid-breakpoints');
-  variables_2(v['$grid-breakpoints']);
-
-  // Colors
-  //
-  // Grayscale and brand colors for use across Bootstrap.
-
-  // Start with assigning color names to specific hex values.
-  v['$white'] = u['$white'] || '#fff';
-  v['$black'] = u['$black'] || '#000';
-  v['$blue'] = u['$blue'] || '#0275d8';
-
-  // Create grayscale
-  v['$gray'] = u['$gray'] || '#464a4c';
-  v['$gray-light'] = u['$gray-light'] || '#636c72';
-  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
-
-  // Reassign color vars to semantic color scheme
-  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
-
-  // Spacing
-  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
-
-  v['$spacer'] = u['$spacer'] || '1rem';
-
-  // =============================================================================================================
-  // Added by AJT, put up here as it is used along the file and must be defined before used by other variables
-  v['$spacer-halved'] = u['$spacer-halved'] || rmUnit$3(v['$spacer'], UNIT$2.REM) / 2 + UNIT$2.REM;
-  // =============================================================================================================
-
-  v['$border-width'] = u['$border-width'] || '1px';
-
-  // Fonts
-  //
-  // Font, line-height, and color for body text, headings, and more.
-
-  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
-
-  // Body
-  //
-  // Settings for the `<body>` element.
-
-  v['$body-bg'] = u['$body-bg'] || v['$white'];
-
-  // Components
-  //
-  // Define common padding and border radius sizes and more.
-
-  v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
-  v['$component-active-color'] = u['$component-active-color'] || v['$white'];
-  v['$border-radius'] = u['$border-radius'] || '.25rem';
-
-  // Navbar
-
-  v['$navbar-padding-x'] = u['$navbar-padding-x'] || v['$spacer'];
-  v['$navbar-padding-y'] = u['$navbar-padding-y'] || v['$spacer-halved'];
-
-  // Navs
-
-  v['$nav-link-padding'] = u['$nav-link-padding'] || '.5em 1em';
-  v['$nav-disabled-link-color'] = u['$nav-disabled-link-color'] || v['$gray-light'];
-
-  v['$nav-tabs-border-color'] = u['$nav-tabs-border-color'] || '#ddd';
-  v['$nav-tabs-border-width'] = u['$nav-tabs-border-width'] || v['$border-width'];
-  v['$nav-tabs-border-radius'] = u['$nav-tabs-border-radius'] || v['$border-radius'];
-  v['$nav-tabs-link-hover-border-color'] = u['$nav-tabs-link-hover-border-color'] || v['$gray-lighter'];
-  v['$nav-tabs-active-link-hover-color'] = u['$nav-tabs-active-link-hover-color'] || v['$gray'];
-  v['$nav-tabs-active-link-hover-bg'] = u['$nav-tabs-active-link-hover-bg'] || v['$body-bg'];
-  v['$nav-tabs-active-link-hover-border-color'] = u['$nav-tabs-active-link-hover-border-color'] || '#ddd';
-
-  v['$nav-pills-border-radius'] = u['$nav-pills-border-radius'] || v['$border-radius'];
-  v['$nav-pills-active-link-color'] = u['$nav-pills-active-link-color'] || v['$component-active-color'];
-  v['$nav-pills-active-link-bg'] = u['$nav-pills-active-link-bg'] || v['$component-active-bg'];
-
-  // Forms
-
-  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
-
-  // Mixin navbar
-  //
-  // From module bootstrap-styled-mixins: https://module.kopaxgroup.com/styled-components/bootstrap-styled-mixins/blob/master/src/navbar.js
-
-  v['$zindex-navbar'] = u['$zindex-navbar'] || '1000';
-  v['$zindex-navbar-fixed'] = u['$zindex-navbar-fixed'] || '1030';
-  v['$zindex-navbar-sticky'] = u['$zindex-navbar-sticky'] || '1030';
-  v['$navbar-brand-padding-y'] = u['$navbar-brand-padding-y'] || '.25rem';
-
-  v['$navbar-divider-padding-y'] = u['$navbar-brand-padding-y'] || '.425rem';
-  v['$navbar-toggler-padding-y'] = u['$navbar-toggler-padding-y'] || '.5rem';
-  v['$navbar-toggler-padding-x'] = u['$navbar-toggler-padding-x'] || '.75rem';
-  v['$navbar-toggler-font-size'] = u['$navbar-toggler-font-size'] || '1.25rem';
-
-  v['$navbar-toggler-border-radius'] = u['$navbar-toggler-border-radius'] || '.25rem';
-  v['$navbar-light-active-color'] = u['$navbar-light-active-color'] || 'rgba(0,0,0,.9)';
-  v['$navbar-light-color'] = u['$navbar-light-color'] || 'rgba(0,0,0,.5)';
-  v['$navbar-light-hover-color'] = u['$navbar-light-hover-color'] || 'rgba(0,0,0,.7)';
-  v['$navbar-light-toggler-border'] = u['$navbar-light-toggler-border'] || 'rgba(0,0,0,.1)';
-  v['$navbar-light-disabled-color'] = u['$navbar-light-disabled-color'] || 'rgba(0, 0, 0, 0.3)';
-  v['$navbar-light-toggler-bg'] = u['$navbar-light-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(0,0,0,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
-  v['$navbar-inverse-active-color'] = u['$navbar-inverse-active-color'] || 'rgba(255,255,255,1)';
-  v['$navbar-inverse-color'] = u['$navbar-inverse-color'] || 'rgba(255,255,255,.5)';
-  v['$navbar-inverse-hover-color'] = u['$navbar-inverse-hover-color'] || 'rgba(255,255,255,.75)';
-  v['$navbar-inverse-toggler-border'] = u['$navbar-inverse-toggler-border'] || 'rgba(255,255,255,.1)';
-  v['$navbar-inverse-toggler-bg'] = u['$navbar-inverse-toggler-bg'] || 'url(\'data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E\')';
-  v['$navbar-inverse-disabled-color'] = u['$navbar-inverse-disabled-color'] || 'rgba(255, 255, 255, 0.25)';
-
-  return Object.assign({}, u, v);
-};
-
-makeTheme$5();
-
 /* eslint-disable */
 var getToggleableClass = function getToggleableClass(toggleable) {
   // eslint-disable-line react/prefer-stateless-function
   if (toggleable === false) {
-    return false;
+    return '';
   } else if (toggleable === true || toggleable === 'xs') {
     return 'navbar-toggleable';
   }

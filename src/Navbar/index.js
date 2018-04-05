@@ -12,7 +12,7 @@ import {nav} from 'bootstrap-styled-mixins/lib/nav';
 
 const getToggleableClass = (toggleable) => { // eslint-disable-line react/prefer-stateless-function
   if (toggleable === false) {
-    return false;
+    return '';
   } else if (toggleable === true || toggleable === 'xs') {
     return 'navbar-toggleable';
   }

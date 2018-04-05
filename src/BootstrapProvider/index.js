@@ -58,6 +58,11 @@ class BootstrapProvider extends React.Component { // eslint-disable-line react/p
     isWindowPhone8Fixed: null, // just for unit testing
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   const diff = 0;
+  //
+  // }
+
   componentDidMount() {
     this.windowPhone8Fix();
   }
@@ -79,9 +84,14 @@ class BootstrapProvider extends React.Component { // eslint-disable-line react/p
   }
 
   render() {
-    const { children, theme, utils } = this.props;
+    const { children, theme: userTheme, utils } = this.props;
+    const theme = makeTheme(userTheme);
+    const metaKeyList = Object.keys(theme).filter((f) => theme[f][0] === '_');
+    metaKeyList.forEach((k) => {
+      delete theme[k];
+    });
     return (
-      <ThemeProvider theme={makeTheme(theme)}>
+      <ThemeProvider theme={theme}>
         <UtilityProvider utils={utils}>
           {children}
         </UtilityProvider>

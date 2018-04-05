@@ -35,39 +35,39 @@
 ```js
 <Form>
   <FormGroup row>
-    <Label for="example-email" sm={2}>Email</Label>
+    <Label htmlFor="example-email-form" sm={2}>Email</Label>
     <Col sm={10}>
-      <Input type="email" name="email" id="example-email" placeholder="with a placeholder" />
+      <Input type="email" name="email" id="example-email-form" placeholder="with a placeholder" />
     </Col>
   </FormGroup>
   <FormGroup row>
-    <Label for="examplePassword" sm={2}>Password</Label>
+    <Label htmlFor="example-password-form" sm={2}>Password</Label>
     <Col sm={10}>
-      <Input type="password" name="password" id="example-password" placeholder="password placeholder" />
+      <Input type="password" name="password" id="example-password-form" placeholder="password placeholder" />
     </Col>
   </FormGroup>
   <FormGroup row>
-    <Label for="example-select" sm={2}>Select</Label>
+    <Label htmlFor="example-select-form" sm={2}>Select</Label>
     <Col sm={10}>
-      <Input type="select" name="select" id="example-select" />
+      <Input type="select" name="select" id="example-select-form" />
     </Col>
   </FormGroup>
   <FormGroup row>
-    <Label for="example-select-multi" sm={2}>Select Multiple</Label>
+    <Label htmlFor="example-select-multi-form" sm={2}>Select Multiple</Label>
     <Col sm={10}>
-      <Input type="select" name="selectMulti" id="example-select-multi" multiple />
+      <Input type="select" name="selectMulti" id="example-select-multi-form" multiple />
     </Col>
   </FormGroup>
   <FormGroup row>
-    <Label for="example-text" sm={2}>Text Area</Label>
+    <Label htmlFor="example-text-form" sm={2}>Text Area</Label>
     <Col sm={10}>
-      <Input type="textarea" name="text" id="example-text" />
+      <Input type="textarea" name="text" id="example-text-form" />
     </Col>
   </FormGroup>
   <FormGroup row>
-    <Label for="example-file" sm={2}>File</Label>
+    <Label htmlFor="example-file-form" sm={2}>File</Label>
     <Col sm={10}>
-      <Input type="file" name="file" id="example-file" />
+      <Input type="file" name="file" id="example-file-form" />
       <FormText color="muted">
         This is some placeholder block-level help text for the above input.
         Its a bit lighter and easily wraps to a new line.
@@ -79,30 +79,30 @@
     <Col sm={10}>
       <FormGroup check>
         <Label check>
-          <Input type="radio" name="radio1" />{' '}
+          <Input type="radio" name="radio1-form" />{' '}
           Option one is this and that—be sure to include why its great
         </Label>
       </FormGroup>
       <FormGroup check>
         <Label check>
-          <Input type="radio" name="radio2" />{' '}
+          <Input type="radio" name="radio2-form" />{' '}
           Option two can be something else and selecting it will deselect option one
         </Label>
       </FormGroup>
       <FormGroup check disabled>
         <Label check>
-          <Input type="radio" name="radio3" disabled />{' '}
+          <Input type="radio" name="radio3-form" disabled />{' '}
           Option three is disabled
         </Label>
       </FormGroup>
     </Col>
   </FormGroup>
   <FormGroup row>
-    <Label for="checkbox2" sm={2}>Checkbox</Label>
+    <Label htmlFor="checkbox2-form" sm={2}>Checkbox</Label>
     <Col sm={{ size: 10 }}>
       <FormGroup check>
         <Label check>
-          <Input type="checkbox" id="checkbox2" />{' '}
+          <Input type="checkbox" id="checkbox2-form" />{' '}
           Check me out
         </Label>
       </FormGroup>
@@ -125,10 +125,10 @@
     <Input type="text" id="inlineFormInput" defaultValue="Jane Doe" />
   </FormGroup>
   <FormGroup>
-    <Label hidden for="inline-form-input-group">Username</Label>
+    <Label hidden for="inline-form-input-group-form">Username</Label>
     <InputGroup>
       <InputGroupAddon>@</InputGroupAddon>
-      <Input type="text" className="form-control" id="inline-form-input-group-addon" defaultValue="Username" />
+      <Input type="text" className="form-control" id="inline-form-input-group-addon-form" defaultValue="Username" />
     </InputGroup>
   </FormGroup>
   <FormGroup>
@@ -189,15 +189,15 @@
 ```js
 <Form>
   <FormGroup row>
-    <Label for="example-email-input" sm={2} size="lg">Email</Label>
+    <Label htmlFor="example-email-input-form" sm={2} size="lg">Email</Label>
     <Col sm={10}>
-      <Input type="email" name="email" id="example-email-input" placeholder="lg" size="lg" />
+      <Input type="email" name="email" id="example-email-input-form" placeholder="lg" size="lg" />
     </Col>
   </FormGroup>
   <FormGroup row>
-    <Label for="example-email-input-2" sm={2}>Email</Label>
+    <Label htmlFor="example-email-input-2-form" sm={2}>Email</Label>
     <Col sm={10}>
-      <Input type="email" name="email" id="example-email-input-2" placeholder="default" />
+      <Input type="email" name="email" id="example-email-input-2-form" placeholder="default" />
     </Col>
   </FormGroup>
 </Form>
@@ -208,11 +208,11 @@
 ```js
 <Form inline>
   <FormGroup className="mr-2">
-    <Label for="example-email-input-hidden" hidden>Email</Label>
+    <Label htmlFor="example-email-input-hidden" hidden>Email</Label>
     <Input type="email" name="email" id="example-email-input-hidden" placeholder="Email" />
   </FormGroup>
   <FormGroup className="mr-2">
-    <Label for="examplePassword" hidden>Password</Label>
+    <Label htmlFor="examplePassword" hidden>Password</Label>
     <Input type="password" name="password" id="example-password-input" placeholder="Password" />
   </FormGroup>
   <Button>Submit</Button>
@@ -288,19 +288,19 @@
   
   <FormGroup check inline>
     <Label check>
-      <Input type="radio" name="example-radio-1" className="mr-2" />
+      <Input type="radio" name="example-radio-1-form" className="mr-2" />
       1
     </Label>
   </FormGroup>
   <FormGroup check inline>
     <Label check>
-      <Input type="radio" name="example-radio-2" className="mr-2"/>
+      <Input type="radio" name="example-radio-2-form" className="mr-2"/>
       2
     </Label>
   </FormGroup>
   <FormGroup check inline disabled>
     <Label check>
-      <Input type="radio" name="example-radio-3" className="mr-2" disabled />
+      <Input type="radio" name="example-radio-3-form" className="mr-2" disabled />
       3
     </Label>
   </FormGroup>

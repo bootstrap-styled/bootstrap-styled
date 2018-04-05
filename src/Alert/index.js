@@ -5,13 +5,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import styled, { withTheme } from 'styled-components';
+import styled from 'styled-components';
 import omit from 'lodash.omit';
 import mapToCssModules from 'map-to-css-modules';
 import { alertVariant } from 'bootstrap-styled-mixins/lib/alert';
 import { borderRadius } from 'bootstrap-styled-mixins/lib/border-radius';
 import { createChainedFunction } from 'bootstrap-styled-utils';
-import Fade, { defaultProps as FadeDefaultProps, propTypes as FadeProptypes } from '../Modal/Fade';
+import Fade, { defaultProps as FadeDefaultProps } from '../Modal/Fade';
 import Close from '../Close';
 
 export const defaultProps = {
@@ -40,7 +40,7 @@ export const defaultProps = {
     '$enable-rounded': true,
   },
   uncontrolled: false,
-  autoHideDuration: 0, // theme
+  autoHideDuration: null,
   transition: {
     ...FadeDefaultProps,
     unmountOnExit: true,
@@ -66,7 +66,8 @@ export const propTypes = {
    */
   isOpen: PropTypes.bool,
   /**
-   * Toggles onClick event.
+   * @ignore
+   * Used for Close component.
    */
   toggle: PropTypes.func,
   /**
@@ -84,7 +85,10 @@ export const propTypes = {
   /**
    * Transition used to dismiss alert.
    */
-  transition: PropTypes.shape({ FadeProptypes }),
+  transition: PropTypes.shape({
+    FadeProptypes: PropTypes.object,
+    unmountOnExit: PropTypes.bool,
+  }),
   /**
    * Transition's duration used to dismiss alert automatically.
    */
@@ -219,20 +223,19 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
       tag: Tag,
       color,
       isOpen,
-      toggle,
       onClick,
       children,
       onExited,
       transition,
       uncontrolled,
       ...attributes
-    } = omit(this.props, ['theme', 'autoHideDuration']);
+    } = omit(this.props, ['theme', 'autoHideDuration', 'toggle']);
 
     const classes = mapToCssModules(cn(
       className,
       'alert',
       `alert-${color}`,
-      { 'alert-dismissible': toggle || onClick }
+      { 'alert-dismissible': uncontrolled || onClick }
     ), cssModule);
 
     if (!isOpen && this.state.exited) {
@@ -255,19 +258,17 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
         {...transition}
         {...transitionProps}
       >
-        {(toggle || onClick) && <Close onDismiss={this.toggle} />}
+        {(uncontrolled || onClick) && <Close onDismiss={this.toggle} />}
         {children}
       </Fade>
     );
   }
 }
 
-const AlertHoc = withTheme(AlertUnstyled);
-
 /**
  * Alert component.
  */
-const Alert = styled(AlertHoc)`
+const Alert = styled(AlertUnstyled)`
   ${(props) => `
     /*
     Base styles

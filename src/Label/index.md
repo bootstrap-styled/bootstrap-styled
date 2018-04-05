@@ -2,7 +2,7 @@
 
 ```js
 <Form action="/">
-  <Label for="name">Name</Label>
-  <Input type="text" name="contact" id="name" value="Insert your name" />
+  <Label htmlFor="name-label">Name</Label>
+  <Input type="text" name="contact" id="name-label" value="Insert your name" />
 </Form>
 ```

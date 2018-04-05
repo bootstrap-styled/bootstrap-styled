@@ -1,5 +1,6 @@
 `<Close />` component example:
 
 ```js
-<Close />
+const onDismiss = () => alert('Add your callback action.');
+<Close onDismiss={onDismiss}/>
 ```
