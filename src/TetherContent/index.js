@@ -10,7 +10,7 @@ import isFunction from 'lodash.omit';
 
 export const defaultProps = {
   isOpen: false,
-  tetherRef() {},
+  tetherRef: null,
 };
 export const propTypes = {
   /**
@@ -104,7 +104,9 @@ class TetherContent extends React.Component {// eslint-disable-line react/prefer
     if (this.tether) {
       this.tether.destroy();
       this.tether = null;
-      this.props.tetherRef(this.tether);
+      if (this.props.tetherRef) {
+        this.props.tetherRef(this.tether);
+      }
     }
   }
 
@@ -116,7 +118,9 @@ class TetherContent extends React.Component {// eslint-disable-line react/prefer
     document.body.appendChild(this.element);
     this.renderIntoSubtree();
     this.tether = new Tether(this.getTetherConfig());
-    this.props.tetherRef(this.tether);
+    if (this.props.tetherRef) {
+      this.props.tetherRef(this.tether);
+    }
     this.tether.position();
   }
 

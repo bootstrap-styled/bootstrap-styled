@@ -32,7 +32,9 @@ export const makeTheme = (userTheme = {}) => {
   v['$font-family-monospace'] = u['$font-family-monospace'] || 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
 
   // Colors
-  //
+
+  v['$pink'] = u['$pink'] || '#ff5b77';
+
   // Create grayscale
   v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
 
@@ -41,7 +43,7 @@ export const makeTheme = (userTheme = {}) => {
   v['$code-font-size'] = u['$code-font-size'] || '90%';
   v['$code-padding-x'] = u['$code-padding-x'] || '.4rem';
   v['$code-padding-y'] = u['$code-padding-y'] || '.2rem';
-  v['$code-color'] = u['$code-color'] || '#bd4147';
+  v['$code-color'] = u['$code-color'] || v['$pink'];
   v['$code-bg'] = u['$code-bg'] || v['$gray-lightest'];
 
   return Object.assign({}, u, v);

@@ -2,9 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [?NEXT?] - ????-??-??
+
+- Improve sonar coverage
+
 ## [v1.5.9] - 2018-03-??
 
-- TODO: write change before preparing next tag
+- Add color `white` to Card.
 
 ## [v1.5.8] - 2018-03-??
 
