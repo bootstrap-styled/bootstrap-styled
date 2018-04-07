@@ -4,11 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## [?NEXT?] - ????-??-??
 
-- Improve sonar coverage
+- TODO: write changelog before preparing next tag
 
 ## [v1.5.11] - 2018-03-??
 
 - Corrected bug in `BootstrapProvider`.
+
+## [v1.5.10] - 2018-04-05
+
+- Improve sonar coverage
+
 
 ## [v1.5.9] - 2018-03-??
 
