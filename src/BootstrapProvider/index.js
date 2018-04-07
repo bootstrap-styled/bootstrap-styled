@@ -86,7 +86,7 @@ class BootstrapProvider extends React.Component { // eslint-disable-line react/p
   render() {
     const { children, theme: userTheme, utils } = this.props;
     const theme = makeTheme(userTheme);
-    const metaKeyList = Object.keys(theme).filter((f) => theme[f][0] === '_');
+    const metaKeyList = Object.keys(theme).filter((f) => f[0] === '_');
     metaKeyList.forEach((k) => {
       delete theme[k];
     });

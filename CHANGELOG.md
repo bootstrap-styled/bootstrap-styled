@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 - Improve sonar coverage
 
+## [v1.5.11] - 2018-03-??
+
+- Corrected bug in `BootstrapProvider`.
+
 ## [v1.5.9] - 2018-03-??
 
 - Add color `white` to Card.
