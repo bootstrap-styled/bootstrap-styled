@@ -11590,7 +11590,7 @@ var BootstrapProvider = function (_React$Component) {
 
       var theme$$1 = makeTheme$$1(userTheme);
       var metaKeyList = Object.keys(theme$$1).filter(function (f) {
-        return theme$$1[f][0] === '_';
+        return f[0] === '_';
       });
       metaKeyList.forEach(function (k) {
         delete theme$$1[k];
