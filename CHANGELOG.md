@@ -8,10 +8,6 @@ All notable changes to this project will be documented in this file.
 
 ## [v1.5.11] - 2018-04-07
 
-- TODO: write changelog before preparing next tag
-
-## [v1.5.11] - 2018-03-??
-
 - Corrected bug in `BootstrapProvider`.
 
 ## [v1.5.10] - 2018-04-05
@@ -19,11 +15,11 @@ All notable changes to this project will be documented in this file.
 - Improve sonar coverage
 
 
-## [v1.5.9] - 2018-03-??
+## [v1.5.9] - 2018-03-28
 
 - Add color `white` to Card.
 
-## [v1.5.8] - 2018-03-??
+## [v1.5.8] - 2018-03-27
 
 - Change all `getRef` with `innerRef`.
 
