@@ -119,7 +119,6 @@ const UtilityProvider = styled.div`
     ${ifThen(props.utils.screenreaders, screenreadersUtils.getScreenReadersUtilities())}
     ${ifThen(props.utils.spacing, spacingUtils.getSpacingUtilities(
       props.theme['$grid-breakpoints'],
-      props.theme['$zindex-navbar-fixed'],
       props.theme['$spacers'], // eslint-disable-line dot-notation
     ))}
     ${ifThen(props.utils.text, textUtils.getTextUtilities(

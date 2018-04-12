@@ -10788,7 +10788,7 @@ var defaultProps = exports.defaultProps = {
  */
 
 function getGlobalStyles() {
-  return '\n    html {\n      ' + html() + '\n    }\n    *,\n    *::before,\n    *::after {\n      ' + boxSizing() + '\n    }\n    @-ms-viewport { \n      ' + ie10FixViewport() + ' \n    }\n  ';
+  return '\n    html {\n      ' + html() + '\n    }\n    *,\n    *::before,\n    *::after {\n      ' + boxSizing() + '\n    }\n    @-ms-viewport { \n      ' + ie10FixViewport() + ' \n    }\n    body {\n      ' + bodyUtils() + '\n    }\n  ';
 }
 
 function getGlobalStyleNoBootstrapProvider() {
@@ -10840,7 +10840,7 @@ function body() {
 }
 
 function bodyUtils() {
-  return '\n    &.overflow {\n      overflow-x: hidden;\n    }\n  ';
+  return '\n    &.overflow {\n      overflow: hidden;\n    }\n  ';
 }
 
 // Suppress the focus outline on elements that cannot be accessed via keyboard.
@@ -11479,7 +11479,7 @@ var propTypes$7 = {
 var UtilityProvider = styled__default.div.withConfig({
   displayName: 'UtilityProvider'
 })(['', ''], function (props) {
-  return '\n    ' + rebootUtils.body(props.theme['$font-family-base'], props.theme['$font-size-base'], props.theme['$font-weight-base'], props.theme['$line-height-base'], props.theme['$body-color'], props.theme['$body-bg']) + '\n    ' + conditional_1(props.utils.align, alignUtils.getAlignUtilities()) + '\n    ' + conditional_1(props.utils.background, backgroundUtils.getBackgroundUtilities(props.theme['$enable-hover-media-query'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$brand-inverse'], props.theme['$gray-lightest'])) + '\n    ' + conditional_1(props.utils.border, bordersUtils.getBordersUtilities(props.theme['$enable-rounded'], props.theme['$border-radius'])) + '\n    ' + conditional_1(props.utils.clearfix, clearfixUtils.getClearfixUtilities()) + '\n    ' + conditional_1(props.utils.cursor, cursorUtils.getCursorUtilities()) + '\n    ' + conditional_1(props.utils.display, displayUtils.getDisplayUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + conditional_1(props.utils.flex, flexUtils.getFlexUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + conditional_1(props.utils.float, floatUtils.getFloatUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + conditional_1(props.utils.screenreaders, screenreadersUtils.getScreenReadersUtilities()) + '\n    ' + conditional_1(props.utils.spacing, spacingUtils.getSpacingUtilities(props.theme['$grid-breakpoints'], props.theme['$zindex-navbar-fixed'], props.theme['$spacers'] // eslint-disable-line dot-notation
+  return '\n    ' + rebootUtils.body(props.theme['$font-family-base'], props.theme['$font-size-base'], props.theme['$font-weight-base'], props.theme['$line-height-base'], props.theme['$body-color'], props.theme['$body-bg']) + '\n    ' + conditional_1(props.utils.align, alignUtils.getAlignUtilities()) + '\n    ' + conditional_1(props.utils.background, backgroundUtils.getBackgroundUtilities(props.theme['$enable-hover-media-query'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$brand-inverse'], props.theme['$gray-lightest'])) + '\n    ' + conditional_1(props.utils.border, bordersUtils.getBordersUtilities(props.theme['$enable-rounded'], props.theme['$border-radius'])) + '\n    ' + conditional_1(props.utils.clearfix, clearfixUtils.getClearfixUtilities()) + '\n    ' + conditional_1(props.utils.cursor, cursorUtils.getCursorUtilities()) + '\n    ' + conditional_1(props.utils.display, displayUtils.getDisplayUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + conditional_1(props.utils.flex, flexUtils.getFlexUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + conditional_1(props.utils.float, floatUtils.getFloatUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + conditional_1(props.utils.screenreaders, screenreadersUtils.getScreenReadersUtilities()) + '\n    ' + conditional_1(props.utils.spacing, spacingUtils.getSpacingUtilities(props.theme['$grid-breakpoints'], props.theme['$spacers'] // eslint-disable-line dot-notation
   )) + '\n    ' + conditional_1(props.utils.text, textUtils.getTextUtilities(props.theme['$enable-hover-media-query'], props.theme['$grid-breakpoints'], props.theme['$font-weight-normal'], props.theme['$font-weight-bold'], props.theme['$text-muted'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$gray-dark'])) + '\n    ' + conditional_1(props.utils.transition, transitionUtils.getTransitionUtilities(props.theme['$enable-transitions'], props.theme['$transition-fade'], props.theme['$transition-collapse'])) + '\n    ' + conditional_1(props.utils.visibility, visibilityUtils.getVisibilityUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + conditional_1(props.utils.position, positionUtils.getPositionUtilities(props.theme['$zindex-fixed'], props.theme['$zindex-sticky'])) + '\n    ' + conditional_1(props.utils.sizing, sizingUtils.getSizingUtilities(props.theme['$sizes'] // eslint-disable-line dot-notation
   )) + '\n  ';
 });

@@ -6,7 +6,11 @@ All notable changes to this project will be documented in this file.
 
 - TODO: write changelog before preparing next tag
 
-## [v1.5.11] - 2018-03-??
+## [v1.5.12] - 2018-04-12
+
+- Removed argument in `UtilityProvider` based on a mistake in `bootstrap-styled-mixin`.
+
+## [v1.5.11] - 2018-04-07
 
 - Corrected bug in `BootstrapProvider`.
 
@@ -15,11 +19,11 @@ All notable changes to this project will be documented in this file.
 - Improve sonar coverage
 
 
-## [v1.5.9] - 2018-03-??
+## [v1.5.9] - 2018-03-28
 
 - Add color `white` to Card.
 
-## [v1.5.8] - 2018-03-??
+## [v1.5.8] - 2018-03-27
 
 - Change all `getRef` with `innerRef`.
 
