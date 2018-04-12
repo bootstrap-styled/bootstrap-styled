@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [?NEXT?] - ????-??-??
+## [v1.5.13] - 2018-04-12
 
 - Rename `makeTheme` to `theme` and removed `theme.js`.
 - Improve `makeTheme`, first arg can accept a list of makeTheme instead of the object override.
