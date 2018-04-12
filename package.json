@@ -219,7 +219,7 @@
     "lint-staged"
   ],
   "dependencies": {
-    "bootstrap-styled-mixins": "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled-mixins.git#v1.0.1",
+    "bootstrap-styled-mixins": "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled-mixins.git#v1.0.2",
     "bootstrap-styled-utils": "git+ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled-utils.git#1.0.1",
     "classnames": "^2.2.5",
     "color": "^1.0.3",

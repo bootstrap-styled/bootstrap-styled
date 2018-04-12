@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 - TODO: write changelog before preparing next tag
 
+## [v1.5.12] - 2018-04-12
+
+- Removed argument in `UtilityProvider` based on a mistake in `bootstrap-styled-mixin`.
+
 ## [v1.5.11] - 2018-04-07
 
 - Corrected bug in `BootstrapProvider`.
