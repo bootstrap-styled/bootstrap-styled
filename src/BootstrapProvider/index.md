@@ -87,7 +87,7 @@ const list = [
   makeThemeMotion
 ];
 
-export default makeTheme(list);
+export default makeTheme(list, commonThemeConfig);
 ```
 
 
