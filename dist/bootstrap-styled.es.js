@@ -10034,7 +10034,7 @@ var defaultProps = exports.defaultProps = {
  */
 
 function getGlobalStyles() {
-  return '\n    html {\n      ' + html() + '\n    }\n    *,\n    *::before,\n    *::after {\n      ' + boxSizing() + '\n    }\n    @-ms-viewport { \n      ' + ie10FixViewport() + ' \n    }\n    body {\n      ' + bodyUtils() + '\n    }\n  ';
+  return '\n    html {\n      ' + html() + '\n    }\n    *,\n    *::before,\n    *::after {\n      ' + boxSizing() + '\n    }\n    @-ms-viewport { \n      ' + ie10FixViewport() + ' \n    }\n  ';
 }
 
 function getGlobalStyleNoBootstrapProvider() {
@@ -10086,7 +10086,7 @@ function body() {
 }
 
 function bodyUtils() {
-  return '\n    &.overflow {\n      overflow: hidden;\n    }\n  ';
+  return '\n    &.overflow {\n      overflow-x: hidden;\n    }\n  ';
 }
 
 // Suppress the focus outline on elements that cannot be accessed via keyboard.
@@ -11579,7 +11579,7 @@ var BootstrapProvider = function (_React$Component) {
     }, _this.injectGlobal = function () {
       if (_this.props.injectGlobal) {
         /* eslint-disable no-unused-expressions */
-        injectGlobal(_templateObject, reboot_1(_this.state.theme['$font-family-base'] || theme['$font-family-base'], _this.state.theme['$font-size-base'] || theme['$font-size-base'], _this.state.theme['$font-weight-base'] || theme['$font-weight-base'], _this.state.theme['$line-height-base'] || theme['$line-height-base'], _this.state.theme['$body-color'] || theme['$body-color'], _this.state.theme['$body-bg'] || theme['$body-bg']));
+        injectGlobal(_templateObject, reboot_2(_this.state.theme['$font-family-base'] || theme['$font-family-base'], _this.state.theme['$font-size-base'] || theme['$font-size-base'], _this.state.theme['$font-weight-base'] || theme['$font-weight-base'], _this.state.theme['$line-height-base'] || theme['$line-height-base'], _this.state.theme['$body-color'] || theme['$body-color'], _this.state.theme['$body-bg'] || theme['$body-bg']));
       }
     }, _temp), possibleConstructorReturn(_this, _ret);
   } // eslint-disable-line react/prefer-stateless-function

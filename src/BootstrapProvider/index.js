@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider, injectGlobal } from 'styled-components';
-import { getGlobalStyles } from 'bootstrap-styled-mixins/lib/utilities/reboot';
+import { getGlobalStyleNoBootstrapProvider } from 'bootstrap-styled-mixins/lib/utilities/reboot';
 import themeBs, { makeTheme as makeThemeBs } from '../theme';
 import UtilityProvider, { defaultProps as utilityProviderDefaultProps } from './UtilityProvider';
 
@@ -91,7 +91,7 @@ class BootstrapProvider extends React.Component { // eslint-disable-line react/p
     if (this.props.injectGlobal) {
       /* eslint-disable no-unused-expressions */
       injectGlobal`
-        ${getGlobalStyles(
+        ${getGlobalStyleNoBootstrapProvider(
           this.state.theme['$font-family-base'] || themeBs['$font-family-base'],
           this.state.theme['$font-size-base'] || themeBs['$font-size-base'],
           this.state.theme['$font-weight-base'] || themeBs['$font-weight-base'],
