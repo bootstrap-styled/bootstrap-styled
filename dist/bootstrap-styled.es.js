@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled, { ThemeProvider, keyframes } from 'styled-components';
+import styled, { ThemeProvider, injectGlobal, keyframes } from 'styled-components';
 import ReactDOM from 'react-dom';
 import { Portal } from 'react-portal';
 
@@ -2144,7 +2144,7 @@ function allowFalseValue(userValue, defaultValue) {
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$2 = function makeTheme() {
+var makeTheme$1 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -2176,7 +2176,7 @@ var makeTheme$2 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$2();
+makeTheme$1();
 
 /**
  * BOOTSTRAP THEME ALERT TAG
@@ -2184,7 +2184,7 @@ makeTheme$2();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$3 = function makeTheme() {
+var makeTheme$2 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -2273,7 +2273,7 @@ var makeTheme$3 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$3();
+makeTheme$2();
 
 /**
  * BOOTSTRAP THEME BADGE TAG
@@ -2281,7 +2281,7 @@ makeTheme$3();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$4 = function makeTheme() {
+var makeTheme$3 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -2356,7 +2356,7 @@ var makeTheme$4 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$4();
+makeTheme$3();
 
 var unitUtils = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -2448,7 +2448,7 @@ var UNIT = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$5 = function makeTheme() {
+var makeTheme$4 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -2491,7 +2491,7 @@ var makeTheme$5 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$5();
+makeTheme$4();
 
 /**
  * BOOTSTRAP THEME BREADCRUMB TAG
@@ -2499,7 +2499,7 @@ makeTheme$5();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$6 = function makeTheme() {
+var makeTheme$5 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -2555,7 +2555,7 @@ var makeTheme$6 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$6();
+makeTheme$5();
 
 /**
  * BOOTSTRAP THEME BUTTON TAG
@@ -2563,7 +2563,7 @@ makeTheme$6();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$7 = function makeTheme() {
+var makeTheme$6 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -2676,7 +2676,7 @@ var makeTheme$7 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$7();
+makeTheme$6();
 
 /**
  * BOOTSTRAP THEME BUTTONGROUP TAG
@@ -2684,7 +2684,7 @@ makeTheme$7();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$8 = function makeTheme() {
+var makeTheme$7 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -2748,7 +2748,7 @@ var makeTheme$8 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$8();
+makeTheme$7();
 
 /**
  * BOOTSTRAP THEME CAPTION TAG
@@ -2756,7 +2756,7 @@ makeTheme$8();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$9 = function makeTheme() {
+var makeTheme$8 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -2784,7 +2784,7 @@ var makeTheme$9 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$9();
+makeTheme$8();
 
 var process = { argv: [], env: {} };
 
@@ -2952,7 +2952,7 @@ var UNIT$1 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$10 = function makeTheme() {
+var makeTheme$9 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -3070,7 +3070,7 @@ var makeTheme$10 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$10();
+makeTheme$9();
 
 var detectUnit$1 = unitUtils$1.detectUnit;
 var rmUnit$2 = unitUtils$1.rmUnit;
@@ -3082,7 +3082,7 @@ var rmUnit$2 = unitUtils$1.rmUnit;
  * @param userTheme
  */
 
-var makeTheme$11 = function makeTheme() {
+var makeTheme$10 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -3119,7 +3119,7 @@ var makeTheme$11 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$11();
+makeTheme$10();
 
 /**
  * BOOTSTRAP THEME CODE
@@ -3127,7 +3127,7 @@ makeTheme$11();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$12 = function makeTheme() {
+var makeTheme$11 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -3172,7 +3172,7 @@ var makeTheme$12 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$12();
+makeTheme$11();
 
 /**
  * BOOTSTRAP THEME COL
@@ -3180,7 +3180,7 @@ makeTheme$12();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$13 = function makeTheme() {
+var makeTheme$12 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -3228,7 +3228,7 @@ var makeTheme$13 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$13();
+makeTheme$12();
 
 /**
  * BOOTSTRAP THEME COLLAPSE
@@ -3236,7 +3236,7 @@ makeTheme$13();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$14 = function makeTheme() {
+var makeTheme$13 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -3255,7 +3255,7 @@ var makeTheme$14 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$14();
+makeTheme$13();
 
 /**
  * BOOTSTRAP THEME CONTAINER
@@ -3263,7 +3263,7 @@ makeTheme$14();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$15 = function makeTheme() {
+var makeTheme$14 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -3308,7 +3308,7 @@ var makeTheme$15 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$15();
+makeTheme$14();
 
 /**
  * BOOTSTRAP THEME CONTAINERFLUID
@@ -3316,7 +3316,7 @@ makeTheme$15();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$16 = function makeTheme() {
+var makeTheme$15 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -3348,7 +3348,7 @@ var makeTheme$16 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$16();
+makeTheme$15();
 
 /**
  * BOOTSTRAP THEME DD
@@ -3356,7 +3356,7 @@ makeTheme$16();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$17 = function makeTheme() {
+var makeTheme$16 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -3404,7 +3404,7 @@ var makeTheme$17 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$17();
+makeTheme$16();
 
 /**
  * BOOTSTRAP THEME DL
@@ -3412,7 +3412,7 @@ makeTheme$17();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$18 = function makeTheme() {
+var makeTheme$17 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -3444,7 +3444,7 @@ var makeTheme$18 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$18();
+makeTheme$17();
 
 var rmUnit$3 = unitUtils$1.rmUnit;
 var UNIT$2 = unitUtils$1.UNIT;
@@ -3456,7 +3456,7 @@ var UNIT$2 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$19 = function makeTheme() {
+var makeTheme$18 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -3581,7 +3581,7 @@ var makeTheme$19 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$19();
+makeTheme$18();
 
 /**
  * BOOTSTRAP THEME DT
@@ -3589,7 +3589,7 @@ makeTheme$19();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$20 = function makeTheme() {
+var makeTheme$19 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -3644,7 +3644,7 @@ var makeTheme$20 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$20();
+makeTheme$19();
 
 /**
  * BOOTSTRAP THEME FIELDSET
@@ -3652,7 +3652,7 @@ makeTheme$20();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$21 = function makeTheme() {
+var makeTheme$20 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -3684,7 +3684,7 @@ var makeTheme$21 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$21();
+makeTheme$20();
 
 var rmUnit$4 = unitUtils$1.rmUnit;
 var UNIT$3 = unitUtils$1.UNIT;
@@ -3695,7 +3695,7 @@ var UNIT$3 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$22 = function makeTheme() {
+var makeTheme$21 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -3950,7 +3950,7 @@ var makeTheme$22 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$22();
+makeTheme$21();
 
 var rmUnit$5 = unitUtils$1.rmUnit;
 var UNIT$4 = unitUtils$1.UNIT;
@@ -3961,7 +3961,7 @@ var UNIT$4 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$23 = function makeTheme() {
+var makeTheme$22 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -4018,7 +4018,7 @@ var makeTheme$23 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$23();
+makeTheme$22();
 
 var rmUnit$6 = unitUtils$1.rmUnit;
 var UNIT$5 = unitUtils$1.UNIT;
@@ -4029,7 +4029,7 @@ var UNIT$5 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$24 = function makeTheme() {
+var makeTheme$23 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -4086,7 +4086,7 @@ var makeTheme$24 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$24();
+makeTheme$23();
 
 var rmUnit$7 = unitUtils$1.rmUnit;
 var UNIT$6 = unitUtils$1.UNIT;
@@ -4097,7 +4097,7 @@ var UNIT$6 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$25 = function makeTheme() {
+var makeTheme$24 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -4154,7 +4154,7 @@ var makeTheme$25 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$25();
+makeTheme$24();
 
 var rmUnit$8 = unitUtils$1.rmUnit;
 var UNIT$7 = unitUtils$1.UNIT;
@@ -4165,7 +4165,7 @@ var UNIT$7 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$26 = function makeTheme() {
+var makeTheme$25 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -4222,7 +4222,7 @@ var makeTheme$26 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$26();
+makeTheme$25();
 
 var rmUnit$9 = unitUtils$1.rmUnit;
 var UNIT$8 = unitUtils$1.UNIT;
@@ -4233,7 +4233,7 @@ var UNIT$8 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$27 = function makeTheme() {
+var makeTheme$26 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -4290,7 +4290,7 @@ var makeTheme$27 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$27();
+makeTheme$26();
 
 var rmUnit$10 = unitUtils$1.rmUnit;
 var UNIT$9 = unitUtils$1.UNIT;
@@ -4301,7 +4301,7 @@ var UNIT$9 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$28 = function makeTheme() {
+var makeTheme$27 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -4358,7 +4358,7 @@ var makeTheme$28 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$28();
+makeTheme$27();
 
 var rmUnit$11 = unitUtils$1.rmUnit;
 var UNIT$10 = unitUtils$1.UNIT;
@@ -4370,7 +4370,7 @@ var UNIT$10 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$29 = function makeTheme() {
+var makeTheme$28 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -4457,7 +4457,7 @@ var makeTheme$29 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$29();
+makeTheme$28();
 
 /**
  * BOOTSTRAP THEME HR
@@ -4465,7 +4465,7 @@ makeTheme$29();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$30 = function makeTheme() {
+var makeTheme$29 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -4501,7 +4501,7 @@ var makeTheme$30 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$30();
+makeTheme$29();
 
 var rmUnit$12 = unitUtils$1.rmUnit;
 var UNIT$11 = unitUtils$1.UNIT;
@@ -4513,7 +4513,7 @@ var UNIT$11 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$31 = function makeTheme() {
+var makeTheme$30 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -4585,7 +4585,7 @@ var makeTheme$31 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$31();
+makeTheme$30();
 
 /**
  * BOOTSTRAP THEME INPUT
@@ -4593,7 +4593,7 @@ makeTheme$31();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$32 = function makeTheme() {
+var makeTheme$31 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -4711,7 +4711,7 @@ var makeTheme$32 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$32();
+makeTheme$31();
 
 var rmUnit$13 = unitUtils$1.rmUnit;
 var UNIT$12 = unitUtils$1.UNIT;
@@ -4723,7 +4723,7 @@ var UNIT$12 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$33 = function makeTheme() {
+var makeTheme$32 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -4824,7 +4824,7 @@ var makeTheme$33 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$33();
+makeTheme$32();
 
 /**
  * BOOTSTRAP THEME JUMBOTRON
@@ -4832,7 +4832,7 @@ makeTheme$33();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$34 = function makeTheme() {
+var makeTheme$33 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -4883,7 +4883,7 @@ var makeTheme$34 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$34();
+makeTheme$33();
 
 /**
  * BOOTSTRAP THEME KBD
@@ -4891,7 +4891,7 @@ makeTheme$34();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$35 = function makeTheme() {
+var makeTheme$34 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -4939,7 +4939,7 @@ var makeTheme$35 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$35();
+makeTheme$34();
 
 /**
  * BOOTSTRAP THEME LABEL
@@ -4947,7 +4947,7 @@ makeTheme$35();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$36 = function makeTheme() {
+var makeTheme$35 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -5077,7 +5077,7 @@ var makeTheme$36 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$36();
+makeTheme$35();
 
 /**
  * BOOTSTRAP THEME LI
@@ -5085,7 +5085,7 @@ makeTheme$36();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$37 = function makeTheme() {
+var makeTheme$36 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -5103,7 +5103,7 @@ var makeTheme$37 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$37();
+makeTheme$36();
 
 /**
  * BOOTSTRAP THEME LISTGROUP
@@ -5111,7 +5111,7 @@ makeTheme$37();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$38 = function makeTheme() {
+var makeTheme$37 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -5219,7 +5219,7 @@ var makeTheme$38 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$38();
+makeTheme$37();
 
 /**
  * BOOTSTRAP THEME MARK
@@ -5227,7 +5227,7 @@ makeTheme$38();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$39 = function makeTheme() {
+var makeTheme$38 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -5250,7 +5250,7 @@ var makeTheme$39 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$39();
+makeTheme$38();
 
 /**
  * BOOTSTRAP THEME MODAL
@@ -5258,7 +5258,7 @@ makeTheme$39();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$40 = function makeTheme() {
+var makeTheme$39 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -5375,7 +5375,7 @@ var makeTheme$40 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$40();
+makeTheme$39();
 
 var rmUnit$14 = unitUtils$1.rmUnit;
 var UNIT$13 = unitUtils$1.UNIT;
@@ -5387,7 +5387,7 @@ var UNIT$13 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$41 = function makeTheme() {
+var makeTheme$40 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -5525,7 +5525,7 @@ var makeTheme$41 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$41();
+makeTheme$40();
 
 var rmUnit$15 = unitUtils$1.rmUnit;
 var UNIT$14 = unitUtils$1.UNIT;
@@ -5537,7 +5537,7 @@ var UNIT$14 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$42 = function makeTheme() {
+var makeTheme$41 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -5676,7 +5676,7 @@ var makeTheme$42 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$42();
+makeTheme$41();
 
 /**
  * BOOTSTRAP THEME ORDERED LIST
@@ -5684,7 +5684,7 @@ makeTheme$42();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$43 = function makeTheme() {
+var makeTheme$42 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -5702,7 +5702,7 @@ var makeTheme$43 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$43();
+makeTheme$42();
 
 var rmUnit$16 = unitUtils$1.rmUnit;
 var UNIT$15 = unitUtils$1.UNIT;
@@ -5714,7 +5714,7 @@ var UNIT$15 = unitUtils$1.UNIT;
  * @param userTheme
  */
 
-var makeTheme$44 = function makeTheme() {
+var makeTheme$43 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -5794,7 +5794,7 @@ var makeTheme$44 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$44();
+makeTheme$43();
 
 /**
  * BOOTSTRAP THEME PAGINATION
@@ -5802,7 +5802,7 @@ makeTheme$44();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$45 = function makeTheme() {
+var makeTheme$44 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -5896,7 +5896,7 @@ var makeTheme$45 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$45();
+makeTheme$44();
 
 /**
  * BOOTSTRAP THEME PRE
@@ -5904,7 +5904,7 @@ makeTheme$45();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$46 = function makeTheme() {
+var makeTheme$45 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -5930,7 +5930,7 @@ var makeTheme$46 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$46();
+makeTheme$45();
 
 /**
  * BOOTSTRAP THEME PROGRESS
@@ -5938,7 +5938,7 @@ makeTheme$46();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$47 = function makeTheme() {
+var makeTheme$46 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -5992,7 +5992,7 @@ var makeTheme$47 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$47();
+makeTheme$46();
 
 /**
  * BOOTSTRAP THEME ROW
@@ -6000,7 +6000,7 @@ makeTheme$47();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$48 = function makeTheme() {
+var makeTheme$47 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -6033,7 +6033,7 @@ var makeTheme$48 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$48();
+makeTheme$47();
 
 /**
  * BOOTSTRAP THEME ROW
@@ -6041,7 +6041,7 @@ makeTheme$48();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$49 = function makeTheme() {
+var makeTheme$48 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -6058,7 +6058,7 @@ var makeTheme$49 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$49();
+makeTheme$48();
 
 /**
  * BOOTSTRAP THEME TABLE
@@ -6066,7 +6066,7 @@ makeTheme$49();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$50 = function makeTheme() {
+var makeTheme$49 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -6142,7 +6142,7 @@ var makeTheme$50 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$50();
+makeTheme$49();
 
 /**
  * BOOTSTRAP THEME UNORDERED LIST
@@ -6150,7 +6150,7 @@ makeTheme$50();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$51 = function makeTheme() {
+var makeTheme$50 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -6281,7 +6281,7 @@ var makeTheme$51 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$51();
+makeTheme$50();
 
 /**
  * BOOTSTRAP THEME TOOLTIP
@@ -6289,7 +6289,7 @@ makeTheme$51();
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-var makeTheme$52 = function makeTheme() {
+var makeTheme$51 = function makeTheme() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   /* eslint dot-notation: 'off', new-cap: 'off' */
@@ -6318,32 +6318,33 @@ var makeTheme$52 = function makeTheme() {
   return Object.assign({}, u, v);
 };
 
-makeTheme$52();
+makeTheme$51();
 
-var list = [makeOriginal, makeTheme$2, makeTheme$3, makeTheme$4, makeTheme$5, makeTheme$6, makeTheme$7, makeTheme$8, makeTheme$9, makeTheme$10, makeTheme$11, makeTheme$12, makeTheme$13, makeTheme$14, makeTheme$15, makeTheme$16, makeTheme$17, makeTheme$18, makeTheme$19, makeTheme$20, makeTheme$21, makeTheme$22, makeTheme$23, makeTheme$24, makeTheme$25, makeTheme$26, makeTheme$27, makeTheme$28, makeTheme$29, makeTheme$30, makeTheme$31, makeTheme$32, makeTheme$33, makeTheme$34, makeTheme$35, makeTheme$36, makeTheme$37, makeTheme$38, makeTheme$39, makeTheme$40, makeTheme$41, makeTheme$42, makeTheme$43, makeTheme$44, makeTheme$45, makeTheme$46, makeTheme$47, makeTheme$48, makeTheme$49, makeTheme$50, makeTheme$51, makeTheme$52];
+var makeThemeList = [makeOriginal, makeTheme$1, makeTheme$2, makeTheme$3, makeTheme$4, makeTheme$5, makeTheme$6, makeTheme$7, makeTheme$8, makeTheme$9, makeTheme$10, makeTheme$11, makeTheme$12, makeTheme$13, makeTheme$14, makeTheme$15, makeTheme$16, makeTheme$17, makeTheme$18, makeTheme$19, makeTheme$20, makeTheme$21, makeTheme$22, makeTheme$23, makeTheme$24, makeTheme$25, makeTheme$26, makeTheme$27, makeTheme$28, makeTheme$29, makeTheme$30, makeTheme$31, makeTheme$32, makeTheme$33, makeTheme$34, makeTheme$35, makeTheme$36, makeTheme$37, makeTheme$38, makeTheme$39, makeTheme$40, makeTheme$41, makeTheme$42, makeTheme$43, makeTheme$44, makeTheme$45, makeTheme$46, makeTheme$47, makeTheme$48, makeTheme$49, makeTheme$50, makeTheme$51];
 
-function makeTheme$1(theme) {
+/* eslint-disable */
+/**
+ * This makeTheme can build from a list of makeTheme also
+ * @param list
+ * @param theme
+ * @returns {*}
+ */
+function makeTheme$$1(list, theme) {
+  if (!Array.isArray(list)) {
+    theme = list;
+    list = makeThemeList;
+  }
   var all = [].concat(list);
   var t = theme;
   var mt = void 0;
 
-  /* eslint-disable no-cond-assign */
   while (mt = all.shift()) {
     t = mt(t);
   }
-  /* eslint-enable no-cond-assign */
   return t;
 }
 
-/**
- * default export is a default theme
- */
-var theme = makeTheme$1();
-
-/**
- * utility use to extend bootstrap-styled default theme
- */
-var makeTheme$$1 = makeTheme$1;
+var theme = makeTheme$$1();
 
 var classnames = createCommonjsModule(function (module) {
 /*!
@@ -8257,6 +8258,22 @@ var possibleConstructorReturn = function (self, call) {
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
 
+
+
+
+
+
+
+
+
+var taggedTemplateLiteral = function (strings, raw) {
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+};
+
 var defaultProps = {
   tag: 'a',
   theme: {
@@ -9984,6 +10001,137 @@ var Blockquote = styled(BlockquoteUnstyled).withConfig({
 Blockquote.defaultProps = defaultProps$6;
 Blockquote.propTypes = propTypes$5;
 
+var reboot = createCommonjsModule(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getGlobalStyles = getGlobalStyles;
+exports.getGlobalStyleNoBootstrapProvider = getGlobalStyleNoBootstrapProvider;
+exports.html = html;
+exports.boxSizing = boxSizing;
+exports.ie10FixViewport = ie10FixViewport;
+exports.body = body;
+exports.bodyUtils = bodyUtils;
+exports.tabIndex = tabIndex;
+exports.svg = svg;
+exports.ie10FixHidden = ie10FixHidden;
+exports.webkitFileUploadButton = webkitFileUploadButton;
+var defaultProps = exports.defaultProps = {
+  '$font-family-base': '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  '$font-size-base': '1rem',
+  '$font-weight-base': '1.5',
+  '$line-height-base': '1.5',
+  '$body-color': '#292b2c',
+  '$body-bg': '#fff'
+};
+
+/**
+ * getRebootUtility
+ *
+ * This utility MUST return only things that can ONLY be injected in global styles
+ */
+
+function getGlobalStyles() {
+  return '\n    html {\n      ' + html() + '\n    }\n    *,\n    *::before,\n    *::after {\n      ' + boxSizing() + '\n    }\n    @-ms-viewport { \n      ' + ie10FixViewport() + ' \n    }\n    body {\n      ' + bodyUtils() + '\n    }\n  ';
+}
+
+function getGlobalStyleNoBootstrapProvider() {
+  var fontFamilyBase = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$font-family-base'];
+  var fontSizeBase = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$font-size-base'];
+  var fontWeightBase = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$font-weight-base'];
+  var lineHeightBase = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$line-height-base'];
+  var bodyColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$body-color'];
+  var bodyBg = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$body-bg'];
+
+  return '\n  ' + getGlobalStyles() + '\n  body {\n  ' + body(fontFamilyBase, fontSizeBase, fontWeightBase, lineHeightBase, bodyColor, bodyBg) + ' \n}';
+}
+
+// Document
+//
+// 1. Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`.
+// 2. Change the default font family in all browsers.
+// 3. Correct the line height in all browsers.
+// 4. Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS.
+// 5. Setting @viewport causes scrollbars to overlap content in IE11 and Edge, so
+//    we force a non-overlapping, non-auto-hiding scrollbar to counteract.
+// 6. Change the default tap highlight to be completely transparent in iOS.
+function html() {
+  return '\n    box-sizing: border-box;\n    font-family: sans-serif;\n    line-height: 1.15;\n    -ms-text-size-adjust: 100%;\n    -webkit-text-size-adjust: 100%;\n    -ms-overflow-style: scrollbar;\n    -webkit-tap-highlight-color: rgba(0,0,0,0);\n  ';
+}
+
+function boxSizing() {
+  return '\n    box-sizing: inherit;\n  ';
+}
+
+// IE10+ doesn't honor `<meta name="viewport">` in some cases.
+function ie10FixViewport() {
+  return '\n    width: device-width;\n  ';
+}
+
+// Body
+//
+// 1. Remove the margin in all browsers.
+// 2. As a best practice, apply a default `background-color`.
+function body() {
+  var fontFamilyBase = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$font-family-base'];
+  var fontSizeBase = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$font-size-base'];
+  var fontWeightBase = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$font-weight-base'];
+  var lineHeightBase = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$line-height-base'];
+  var bodyColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$body-color'];
+  var bodyBg = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$body-bg'];
+
+  return '\n    margin: 0;\n    font-family: ' + fontFamilyBase + ';\n    font-size: ' + fontSizeBase + ';\n    font-weight: ' + fontWeightBase + ';\n    line-height: ' + lineHeightBase + ';\n    color: ' + bodyColor + ';\n    background-color: ' + bodyBg + ';\n    \n    ' + bodyUtils() + '\n    \n    [tabindex="-1"]:focus {\n      ' + tabIndex() + '\n    }\n    svg:not(:root) {\n      ' + svg() + '\n    }\n    [hidden] {\n      ' + ie10FixHidden() + '\n    }\n    ::-webkit-file-upload-button {\n      ' + webkitFileUploadButton() + '\n    }\n  ';
+}
+
+function bodyUtils() {
+  return '\n    &.overflow {\n      overflow: hidden;\n    }\n  ';
+}
+
+// Suppress the focus outline on elements that cannot be accessed via keyboard.
+// This prevents an unwanted focus outline from appearing around elements that
+// might still respond to pointer events.
+//
+// Credit: https://github.com/suitcss/base
+function tabIndex() {
+  return '\n    outline: none !important;\n  ';
+}
+
+// Hide the overflow in IE
+function svg() {
+  return '\n    overflow: hidden;\n  ';
+}
+
+// Always hide an element with the `hidden` HTML attribute (from PureCSS).
+// Needed for proper display in IE 10-.
+function ie10FixHidden() {
+  return '\n    display: none !important;\n  ';
+}
+
+function webkitFileUploadButton() {
+  return '\n    font: inherit;\n    -webkit-appearance: button;\n  ';
+}
+
+exports.default = {
+  html: html,
+  boxSizing: boxSizing,
+  ie10FixViewport: ie10FixViewport,
+  body: body,
+  bodyUtils: bodyUtils,
+  tabIndex: tabIndex,
+  svg: svg,
+  ie10FixHidden: ie10FixHidden,
+  getGlobalStyles: getGlobalStyles,
+  getGlobalStyleNoBootstrapProvider: getGlobalStyleNoBootstrapProvider,
+  webkitFileUploadButton: webkitFileUploadButton
+};
+});
+
+var rebootUtils = unwrapExports(reboot);
+var reboot_1 = reboot.getGlobalStyles;
+var reboot_2 = reboot.getGlobalStyleNoBootstrapProvider;
+
 var conditional = createCommonjsModule(function (module, exports) {
 'use strict';
 
@@ -10750,137 +10898,6 @@ exports.default = {
 
 var positionUtils = unwrapExports(position);
 
-var reboot = createCommonjsModule(function (module, exports) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getGlobalStyles = getGlobalStyles;
-exports.getGlobalStyleNoBootstrapProvider = getGlobalStyleNoBootstrapProvider;
-exports.html = html;
-exports.boxSizing = boxSizing;
-exports.ie10FixViewport = ie10FixViewport;
-exports.body = body;
-exports.bodyUtils = bodyUtils;
-exports.tabIndex = tabIndex;
-exports.svg = svg;
-exports.ie10FixHidden = ie10FixHidden;
-exports.webkitFileUploadButton = webkitFileUploadButton;
-var defaultProps = exports.defaultProps = {
-  '$font-family-base': '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-  '$font-size-base': '1rem',
-  '$font-weight-base': '1.5',
-  '$line-height-base': '1.5',
-  '$body-color': '#292b2c',
-  '$body-bg': '#fff'
-};
-
-/**
- * getRebootUtility
- *
- * This utility MUST return only things that can ONLY be injected in global styles
- */
-
-function getGlobalStyles() {
-  return '\n    html {\n      ' + html() + '\n    }\n    *,\n    *::before,\n    *::after {\n      ' + boxSizing() + '\n    }\n    @-ms-viewport { \n      ' + ie10FixViewport() + ' \n    }\n    body {\n      ' + bodyUtils() + '\n    }\n  ';
-}
-
-function getGlobalStyleNoBootstrapProvider() {
-  var fontFamilyBase = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$font-family-base'];
-  var fontSizeBase = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$font-size-base'];
-  var fontWeightBase = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$font-weight-base'];
-  var lineHeightBase = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$line-height-base'];
-  var bodyColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$body-color'];
-  var bodyBg = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$body-bg'];
-
-  return '\n  ' + getGlobalStyles() + '\n  body {\n  ' + body(fontFamilyBase, fontSizeBase, fontWeightBase, lineHeightBase, bodyColor, bodyBg) + ' \n}';
-}
-
-// Document
-//
-// 1. Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`.
-// 2. Change the default font family in all browsers.
-// 3. Correct the line height in all browsers.
-// 4. Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS.
-// 5. Setting @viewport causes scrollbars to overlap content in IE11 and Edge, so
-//    we force a non-overlapping, non-auto-hiding scrollbar to counteract.
-// 6. Change the default tap highlight to be completely transparent in iOS.
-function html() {
-  return '\n    box-sizing: border-box;\n    font-family: sans-serif;\n    line-height: 1.15;\n    -ms-text-size-adjust: 100%;\n    -webkit-text-size-adjust: 100%;\n    -ms-overflow-style: scrollbar;\n    -webkit-tap-highlight-color: rgba(0,0,0,0);\n  ';
-}
-
-function boxSizing() {
-  return '\n    box-sizing: inherit;\n  ';
-}
-
-// IE10+ doesn't honor `<meta name="viewport">` in some cases.
-function ie10FixViewport() {
-  return '\n    width: device-width;\n  ';
-}
-
-// Body
-//
-// 1. Remove the margin in all browsers.
-// 2. As a best practice, apply a default `background-color`.
-function body() {
-  var fontFamilyBase = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$font-family-base'];
-  var fontSizeBase = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$font-size-base'];
-  var fontWeightBase = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$font-weight-base'];
-  var lineHeightBase = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$line-height-base'];
-  var bodyColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$body-color'];
-  var bodyBg = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$body-bg'];
-
-  return '\n    margin: 0;\n    font-family: ' + fontFamilyBase + ';\n    font-size: ' + fontSizeBase + ';\n    font-weight: ' + fontWeightBase + ';\n    line-height: ' + lineHeightBase + ';\n    color: ' + bodyColor + ';\n    background-color: ' + bodyBg + ';\n    \n    ' + bodyUtils() + '\n    \n    [tabindex="-1"]:focus {\n      ' + tabIndex() + '\n    }\n    svg:not(:root) {\n      ' + svg() + '\n    }\n    [hidden] {\n      ' + ie10FixHidden() + '\n    }\n    ::-webkit-file-upload-button {\n      ' + webkitFileUploadButton() + '\n    }\n  ';
-}
-
-function bodyUtils() {
-  return '\n    &.overflow {\n      overflow: hidden;\n    }\n  ';
-}
-
-// Suppress the focus outline on elements that cannot be accessed via keyboard.
-// This prevents an unwanted focus outline from appearing around elements that
-// might still respond to pointer events.
-//
-// Credit: https://github.com/suitcss/base
-function tabIndex() {
-  return '\n    outline: none !important;\n  ';
-}
-
-// Hide the overflow in IE
-function svg() {
-  return '\n    overflow: hidden;\n  ';
-}
-
-// Always hide an element with the `hidden` HTML attribute (from PureCSS).
-// Needed for proper display in IE 10-.
-function ie10FixHidden() {
-  return '\n    display: none !important;\n  ';
-}
-
-function webkitFileUploadButton() {
-  return '\n    font: inherit;\n    -webkit-appearance: button;\n  ';
-}
-
-exports.default = {
-  html: html,
-  boxSizing: boxSizing,
-  ie10FixViewport: ie10FixViewport,
-  body: body,
-  bodyUtils: bodyUtils,
-  tabIndex: tabIndex,
-  svg: svg,
-  ie10FixHidden: ie10FixHidden,
-  getGlobalStyles: getGlobalStyles,
-  getGlobalStyleNoBootstrapProvider: getGlobalStyleNoBootstrapProvider,
-  webkitFileUploadButton: webkitFileUploadButton
-};
-});
-
-var rebootUtils = unwrapExports(reboot);
-var reboot_1 = reboot.getGlobalStyles;
-var reboot_2 = reboot.getGlobalStyleNoBootstrapProvider;
-
 var screenReader = createCommonjsModule(function (module, exports) {
 "use strict";
 
@@ -11482,12 +11499,18 @@ var UtilityProvider = styled.div.withConfig({
 UtilityProvider.defaultProps = defaultProps$8;
 UtilityProvider.propTypes = propTypes$7;
 
+var _templateObject = taggedTemplateLiteral(['\n        ', '\n      '], ['\n        ', '\n      ']);
+
 var defaultProps$7 = {
-  theme: theme
+  theme: theme,
+  injectGlobal: true,
+  utils: defaultProps$8.utils
 };
 var propTypes$6 = {
   /** Specified node element will be passed as children of `<BootstrapProvider />` component. */
   children: PropTypes.node,
+  /** Define if BootstrapProvider is in charge of calling getGlobalStyles for you, it can only be run once. */
+  injectGlobal: PropTypes.bool,
   /** Theme variables. */
   theme: PropTypes.object,
   /** Utilities variables. */
@@ -11540,14 +11563,24 @@ var BootstrapProvider = function (_React$Component) {
     }
 
     return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = BootstrapProvider.__proto__ || Object.getPrototypeOf(BootstrapProvider)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      theme: {},
       isWindowPhone8Fixed: null // just for unit testing
+    }, _this.makeTheme = function (_ref2, cb) {
+      var userTheme = _ref2.theme;
 
-
-      // componentWillReceiveProps(nextProps) {
-      //   const diff = 0;
-      //
-      // }
-
+      var theme$$1 = makeTheme$$1(userTheme);
+      var metaKeyList = Object.keys(theme$$1).filter(function (f) {
+        return f[0] === '_';
+      });
+      metaKeyList.forEach(function (k) {
+        delete theme$$1[k];
+      });
+      _this.setState({ theme: theme$$1 }, cb);
+    }, _this.injectGlobal = function () {
+      if (_this.props.injectGlobal) {
+        /* eslint-disable no-unused-expressions */
+        injectGlobal(_templateObject, reboot_1(_this.state.theme['$font-family-base'] || theme['$font-family-base'], _this.state.theme['$font-size-base'] || theme['$font-size-base'], _this.state.theme['$font-weight-base'] || theme['$font-weight-base'], _this.state.theme['$line-height-base'] || theme['$line-height-base'], _this.state.theme['$body-color'] || theme['$body-color'], _this.state.theme['$body-bg'] || theme['$body-bg']));
+      }
     }, _temp), possibleConstructorReturn(_this, _ret);
   } // eslint-disable-line react/prefer-stateless-function
 
@@ -11556,9 +11589,21 @@ var BootstrapProvider = function (_React$Component) {
   /* eslint-enable react/no-unused-prop-types */
 
   createClass(BootstrapProvider, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.makeTheme(this.props, this.injectGlobal);
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.windowPhone8Fix();
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (JSON.stringify(this.props.theme) !== JSON.stringify(nextProps.theme)) {
+        this.makeTheme(this.props);
+      }
     }
   }, {
     key: 'windowPhone8Fix',
@@ -11580,19 +11625,11 @@ var BootstrapProvider = function (_React$Component) {
     value: function render() {
       var _props = this.props,
           children = _props.children,
-          userTheme = _props.theme,
           utils = _props.utils;
 
-      var theme$$1 = makeTheme$$1(userTheme);
-      var metaKeyList = Object.keys(theme$$1).filter(function (f) {
-        return f[0] === '_';
-      });
-      metaKeyList.forEach(function (k) {
-        delete theme$$1[k];
-      });
       return React.createElement(
         ThemeProvider,
-        { theme: theme$$1 },
+        { theme: this.state.theme },
         React.createElement(
           UtilityProvider,
           { utils: utils },
@@ -17319,7 +17356,7 @@ var FigCaptionUnstyled = function (_React$Component) {
 }(React.Component);
 
 FigCaptionUnstyled.defaultProps = {
-  theme: makeTheme$31()
+  theme: makeTheme$30()
 };
 FigCaptionUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
@@ -18274,7 +18311,7 @@ var propTypes$44 = {
 
 var defaultProps$40 = {
   tag: 'label',
-  theme: makeTheme$36()
+  theme: makeTheme$35()
 };
 
 var LabelUnstyled = function LabelUnstyled(props) {
@@ -19519,7 +19556,7 @@ var defaultProps$48 = {
   backdrop: true,
   keyboard: true,
   zIndex: 2000,
-  theme: makeTheme$40(),
+  theme: makeTheme$39(),
   fade: true,
   onOpened: null,
   onClosed: null,

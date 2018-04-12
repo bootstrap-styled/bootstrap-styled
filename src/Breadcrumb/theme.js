@@ -1,4 +1,4 @@
-import { allowFalseValue } from '../makeTheme/utils';
+import { allowFalseValue } from '../theme/utils';
 
 /**
  * BOOTSTRAP THEME BREADCRUMB TAG

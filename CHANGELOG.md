@@ -4,7 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [?NEXT?] - ????-??-??
 
-- TODO: write changelog before preparing next tag
+- Rename `makeTheme` to `theme` and removed `theme.js`.
+- Improve `makeTheme`, first arg can accept a list of makeTheme instead of the object override.
+- Using state instead of props in `BootstrapProvider`.
 
 ## [v1.5.12] - 2018-04-12
 

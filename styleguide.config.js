@@ -18,7 +18,7 @@ module.exports = {
     '**/src/Section/index.js',
     '**/src/TetherContent/index.js',
     '**/A/composeLink.js',
-    '**/makeTheme/**',
+    '**/theme/**',
     '**/theme.js',
     '**/__tests__/**',
     '**/*.test.{js,jsx,ts,tsx}',
