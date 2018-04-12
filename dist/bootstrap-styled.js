@@ -10039,7 +10039,7 @@ var defaultProps = exports.defaultProps = {
  */
 
 function getGlobalStyles() {
-  return '\n    html {\n      ' + html() + '\n    }\n    *,\n    *::before,\n    *::after {\n      ' + boxSizing() + '\n    }\n    @-ms-viewport { \n      ' + ie10FixViewport() + ' \n    }\n  ';
+  return '\n    html {\n      ' + html() + '\n    }\n    *,\n    *::before,\n    *::after {\n      ' + boxSizing() + '\n    }\n    @-ms-viewport { \n      ' + ie10FixViewport() + ' \n    }\n    body {\n      ' + bodyUtils() + '\n    }\n  ';
 }
 
 function getGlobalStyleNoBootstrapProvider() {
@@ -10091,7 +10091,7 @@ function body() {
 }
 
 function bodyUtils() {
-  return '\n    &.overflow {\n      overflow-x: hidden;\n    }\n  ';
+  return '\n    &.overflow {\n      overflow: hidden;\n    }\n  ';
 }
 
 // Suppress the focus outline on elements that cannot be accessed via keyboard.
