@@ -64,12 +64,10 @@ const theme = {
 </BootstrapProvider>
 ```
 
-There is another way to use `makeTheme` **as an utility**.
-
 If the first argument passed to the `makeTheme` *(original)* is a **List** of `makeTheme`  
-and a the second argument is a `theme` object configuration, it will then iterate the list and pipe the theme into all the `makeTheme`.
+and the second argument is a `theme` object configuration, it will then iterate the list and pipe the created theme into all the `makeTheme`.
 
-Because it is an utility, if you want to make the theme of bootstrap-styled available, you must not forget to still add it to the list of makeTheme to process.
+If you want to make the theme of bootstrap-styled, you must not forget to add it to the list of makeTheme to process.
 
 That tool can be useful when you are playing with themes while you build application or module that depend on bootstrap-styled.
 
