@@ -1,5 +1,5 @@
 import Color from 'color';
-import { allowFalseValue } from '../makeTheme/utils';
+import { allowFalseValue } from '../theme/utils';
 /**
  * BOOTSTRAP THEME LABEL
  *
