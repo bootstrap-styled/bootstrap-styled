@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-styled",
-  "version": "1.5.12",
+  "version": "1.5.13",
   "description": "Bootstrap Styled",
   "main": "lib/index.js",
   "jsnext:main": "dist/bootstrap-styled.es.js",
