@@ -65,26 +65,48 @@ class BootstrapProvider extends React.Component { // eslint-disable-line react/p
   }
 
   componentWillMount() {
-    this.makeTheme(this.props, this.injectGlobal);
+    this.setTheme(this.props, this.injectGlobal);
   }
 
   componentDidMount() {
     this.windowPhone8Fix();
   }
 
+  /**
+   * On update props
+   * @param nextProps
+   */
   componentWillReceiveProps(nextProps) {
-    if (JSON.stringify(this.props.theme) !== JSON.stringify(nextProps.theme)) {
-      this.makeTheme(this.props);
+    /**
+     * We only replace the theme if the filtered theme is different from the current one
+     */
+    if (JSON.stringify(this.makeTheme(this.props)) !== JSON.stringify(nextProps.theme)) {
+      this.setTheme(this.props);
     }
   }
 
-  makeTheme = ({ theme: userTheme }, cb) => {
+  /**
+   * setTheme is in charge of replacing the theme, it does not filter it, use makeTheme for that
+   * @param userTheme
+   * @param cb
+   */
+  setTheme = ({ theme: userTheme }, cb) => {
+    const theme = this.makeTheme({ theme: userTheme });
+    this.setState({ theme }, cb);
+  }
+
+  /**
+   * makeTheme is in charge of filtering the meta data out of the theme
+   * @param userTheme
+   * @returns {*}
+   */
+  makeTheme = ({ theme: userTheme }) => {
     const theme = makeThemeBs(userTheme);
     const metaKeyList = Object.keys(theme).filter((f) => f[0] === '_');
     metaKeyList.forEach((k) => {
       delete theme[k];
     });
-    this.setState({ theme }, cb);
+    return theme;
   }
 
   injectGlobal = () => {
