@@ -64,6 +64,31 @@ const theme = {
 </BootstrapProvider>
 ```
 
+If the first argument passed to the `makeTheme` *(original)* is a **List** of `makeTheme`  
+and the second argument is a `theme` object configuration, it will then iterate the list and pipe the created theme into all the `makeTheme`.
+
+If you want to make the theme of bootstrap-styled, you must not forget to add it to the list of makeTheme to process.
+
+That tool can be useful when you are playing with themes while you build application or module that depend on bootstrap-styled.
+
+
+```js static
+import { makeTheme } from 'bootstrap-styled';
+import { makeTheme as makeThemeMotion } from 'bootstrap-styled-motion';
+
+const commonThemeConfig = {
+  '$brand-primary': 'red',
+};
+
+const list = [
+  makeTheme,
+  makeThemeMotion
+];
+
+export default makeTheme(list, commonThemeConfig);
+```
+
+
 #### **Utils**
 
 Utils are all activated by default. They inject some CSS utilities classes in the scope of the BootstrapProvider. They will be available in all your components using the className attributes.

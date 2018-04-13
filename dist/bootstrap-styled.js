@@ -1,13 +1,12 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('prop-types'), require('styled-components'), require('react-dom'), require('react-portal')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'react', 'prop-types', 'styled-components', 'react-dom', 'react-portal'], factory) :
-	(factory((global['bootstrap-styled'] = {}),global.React,global.PropTypes,global.styled,global.ReactDom,global.ReactPortal));
-}(this, (function (exports,React,PropTypes,styled,ReactDOM,reactPortal) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('styled-components'), require('react-dom')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'react', 'styled-components', 'react-dom'], factory) :
+	(factory((global['bootstrap-styled'] = {}),global.React,global.styled,global.ReactDom));
+}(this, (function (exports,React,styled,ReactDOM) { 'use strict';
 
 var React__default = 'default' in React ? React['default'] : React;
-PropTypes = PropTypes && PropTypes.hasOwnProperty('default') ? PropTypes['default'] : PropTypes;
 var styled__default = 'default' in styled ? styled['default'] : styled;
-ReactDOM = ReactDOM && ReactDOM.hasOwnProperty('default') ? ReactDOM['default'] : ReactDOM;
+var ReactDOM__default = 'default' in ReactDOM ? ReactDOM['default'] : ReactDOM;
 
 // This module is used by the following variable: $popover-border-color, $popover-box-shadow, $popover-title-bg, $popover-arrow-outer-color
 // import Color from 'color';
@@ -6351,6 +6350,903 @@ function makeTheme$$1(list, theme) {
 
 var theme = makeTheme$$1();
 
+"use strict";
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * 
+ */
+
+function makeEmptyFunction(arg) {
+  return function () {
+    return arg;
+  };
+}
+
+/**
+ * This function accepts and discards inputs; it has no side effects. This is
+ * primarily useful idiomatically for overridable function endpoints which
+ * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
+ */
+var emptyFunction = function emptyFunction() {};
+
+emptyFunction.thatReturns = makeEmptyFunction;
+emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
+emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
+emptyFunction.thatReturnsNull = makeEmptyFunction(null);
+emptyFunction.thatReturnsThis = function () {
+  return this;
+};
+emptyFunction.thatReturnsArgument = function (arg) {
+  return arg;
+};
+
+var emptyFunction_1 = emptyFunction;
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+'use strict';
+
+/**
+ * Use invariant() to assert state which your program assumes to be true.
+ *
+ * Provide sprintf-style format (only %s is supported) and arguments
+ * to provide information about what broke and what you were
+ * expecting.
+ *
+ * The invariant message will be stripped in production, but the invariant
+ * will remain to ensure logic does not differ in production.
+ */
+
+var validateFormat = function validateFormat(format) {};
+
+{
+  validateFormat = function validateFormat(format) {
+    if (format === undefined) {
+      throw new Error('invariant requires an error message argument');
+    }
+  };
+}
+
+function invariant(condition, format, a, b, c, d, e, f) {
+  validateFormat(format);
+
+  if (!condition) {
+    var error;
+    if (format === undefined) {
+      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+    } else {
+      var args = [a, b, c, d, e, f];
+      var argIndex = 0;
+      error = new Error(format.replace(/%s/g, function () {
+        return args[argIndex++];
+      }));
+      error.name = 'Invariant Violation';
+    }
+
+    error.framesToPop = 1; // we don't care about invariant's own frame
+    throw error;
+  }
+}
+
+var invariant_1 = invariant;
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+'use strict';
+
+
+
+/**
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */
+
+var warning = emptyFunction_1;
+
+{
+  var printWarning = function printWarning(format) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    var argIndex = 0;
+    var message = 'Warning: ' + format.replace(/%s/g, function () {
+      return args[argIndex++];
+    });
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+
+  warning = function warning(condition, format) {
+    if (format === undefined) {
+      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
+    }
+
+    if (format.indexOf('Failed Composite propType: ') === 0) {
+      return; // Ignore CompositeComponent proptype check.
+    }
+
+    if (!condition) {
+      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+        args[_key2 - 2] = arguments[_key2];
+      }
+
+      printWarning.apply(undefined, [format].concat(args));
+    }
+  };
+}
+
+var warning_1 = warning;
+
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+'use strict';
+/* eslint-disable no-unused-vars */
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+function shouldUseNative() {
+	try {
+		if (!Object.assign) {
+			return false;
+		}
+
+		// Detect buggy property enumeration order in older V8 versions.
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+		test1[5] = 'de';
+		if (Object.getOwnPropertyNames(test1)[0] === '5') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test2 = {};
+		for (var i = 0; i < 10; i++) {
+			test2['_' + String.fromCharCode(i)] = i;
+		}
+		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+			return test2[n];
+		});
+		if (order2.join('') !== '0123456789') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test3 = {};
+		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+			test3[letter] = letter;
+		});
+		if (Object.keys(Object.assign({}, test3)).join('') !==
+				'abcdefghijklmnopqrst') {
+			return false;
+		}
+
+		return true;
+	} catch (err) {
+		// We don't expect any of the above to throw, but better to be safe.
+		return false;
+	}
+}
+
+var objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (getOwnPropertySymbols) {
+			symbols = getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+'use strict';
+
+var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+var ReactPropTypesSecret_1 = ReactPropTypesSecret;
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+'use strict';
+
+{
+  var invariant$1 = invariant_1;
+  var warning$1 = warning_1;
+  var ReactPropTypesSecret$1 = ReactPropTypesSecret_1;
+  var loggedTypeFailures = {};
+}
+
+/**
+ * Assert that the values match with the type specs.
+ * Error messages are memorized and will only be shown once.
+ *
+ * @param {object} typeSpecs Map of name to a ReactPropType
+ * @param {object} values Runtime values that need to be type-checked
+ * @param {string} location e.g. "prop", "context", "child context"
+ * @param {string} componentName Name of the component for error messages.
+ * @param {?Function} getStack Returns the component stack.
+ * @private
+ */
+function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+  {
+    for (var typeSpecName in typeSpecs) {
+      if (typeSpecs.hasOwnProperty(typeSpecName)) {
+        var error;
+        // Prop type validation may throw. In case they do, we don't want to
+        // fail the render phase where it didn't fail before. So we log it.
+        // After these have been cleaned up, we'll let them throw.
+        try {
+          // This is intentionally an invariant that gets caught. It's the same
+          // behavior as without this statement except with a better message.
+          invariant$1(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, typeof typeSpecs[typeSpecName]);
+          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret$1);
+        } catch (ex) {
+          error = ex;
+        }
+        warning$1(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
+        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+          // Only monitor this failure once because there tends to be a lot of the
+          // same error.
+          loggedTypeFailures[error.message] = true;
+
+          var stack = getStack ? getStack() : '';
+
+          warning$1(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
+        }
+      }
+    }
+  }
+}
+
+var checkPropTypes_1 = checkPropTypes;
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+'use strict';
+
+
+
+
+
+
+
+
+
+var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
+  /* global Symbol */
+  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
+
+  /**
+   * Returns the iterator method function contained on the iterable object.
+   *
+   * Be sure to invoke the function with the iterable as context:
+   *
+   *     var iteratorFn = getIteratorFn(myIterable);
+   *     if (iteratorFn) {
+   *       var iterator = iteratorFn.call(myIterable);
+   *       ...
+   *     }
+   *
+   * @param {?object} maybeIterable
+   * @return {?function}
+   */
+  function getIteratorFn(maybeIterable) {
+    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
+    if (typeof iteratorFn === 'function') {
+      return iteratorFn;
+    }
+  }
+
+  /**
+   * Collection of methods that allow declaration and validation of props that are
+   * supplied to React components. Example usage:
+   *
+   *   var Props = require('ReactPropTypes');
+   *   var MyArticle = React.createClass({
+   *     propTypes: {
+   *       // An optional string prop named "description".
+   *       description: Props.string,
+   *
+   *       // A required enum prop named "category".
+   *       category: Props.oneOf(['News','Photos']).isRequired,
+   *
+   *       // A prop named "dialog" that requires an instance of Dialog.
+   *       dialog: Props.instanceOf(Dialog).isRequired
+   *     },
+   *     render: function() { ... }
+   *   });
+   *
+   * A more formal specification of how these methods are used:
+   *
+   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
+   *   decl := ReactPropTypes.{type}(.isRequired)?
+   *
+   * Each and every declaration produces a function with the same signature. This
+   * allows the creation of custom validation functions. For example:
+   *
+   *  var MyLink = React.createClass({
+   *    propTypes: {
+   *      // An optional string or URI prop named "href".
+   *      href: function(props, propName, componentName) {
+   *        var propValue = props[propName];
+   *        if (propValue != null && typeof propValue !== 'string' &&
+   *            !(propValue instanceof URI)) {
+   *          return new Error(
+   *            'Expected a string or an URI for ' + propName + ' in ' +
+   *            componentName
+   *          );
+   *        }
+   *      }
+   *    },
+   *    render: function() {...}
+   *  });
+   *
+   * @internal
+   */
+
+  var ANONYMOUS = '<<anonymous>>';
+
+  // Important!
+  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
+  var ReactPropTypes = {
+    array: createPrimitiveTypeChecker('array'),
+    bool: createPrimitiveTypeChecker('boolean'),
+    func: createPrimitiveTypeChecker('function'),
+    number: createPrimitiveTypeChecker('number'),
+    object: createPrimitiveTypeChecker('object'),
+    string: createPrimitiveTypeChecker('string'),
+    symbol: createPrimitiveTypeChecker('symbol'),
+
+    any: createAnyTypeChecker(),
+    arrayOf: createArrayOfTypeChecker,
+    element: createElementTypeChecker(),
+    instanceOf: createInstanceTypeChecker,
+    node: createNodeChecker(),
+    objectOf: createObjectOfTypeChecker,
+    oneOf: createEnumTypeChecker,
+    oneOfType: createUnionTypeChecker,
+    shape: createShapeTypeChecker,
+    exact: createStrictShapeTypeChecker,
+  };
+
+  /**
+   * inlined Object.is polyfill to avoid requiring consumers ship their own
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+   */
+  /*eslint-disable no-self-compare*/
+  function is(x, y) {
+    // SameValue algorithm
+    if (x === y) {
+      // Steps 1-5, 7-10
+      // Steps 6.b-6.e: +0 != -0
+      return x !== 0 || 1 / x === 1 / y;
+    } else {
+      // Step 6.a: NaN == NaN
+      return x !== x && y !== y;
+    }
+  }
+  /*eslint-enable no-self-compare*/
+
+  /**
+   * We use an Error-like object for backward compatibility as people may call
+   * PropTypes directly and inspect their output. However, we don't use real
+   * Errors anymore. We don't inspect their stack anyway, and creating them
+   * is prohibitively expensive if they are created too often, such as what
+   * happens in oneOfType() for any type before the one that matched.
+   */
+  function PropTypeError(message) {
+    this.message = message;
+    this.stack = '';
+  }
+  // Make `instanceof Error` still work for returned errors.
+  PropTypeError.prototype = Error.prototype;
+
+  function createChainableTypeChecker(validate) {
+    {
+      var manualPropTypeCallCache = {};
+      var manualPropTypeWarningCount = 0;
+    }
+    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
+      componentName = componentName || ANONYMOUS;
+      propFullName = propFullName || propName;
+
+      if (secret !== ReactPropTypesSecret_1) {
+        if (throwOnDirectAccess) {
+          // New behavior only for users of `prop-types` package
+          invariant_1(
+            false,
+            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+            'Use `PropTypes.checkPropTypes()` to call them. ' +
+            'Read more at http://fb.me/use-check-prop-types'
+          );
+        } else if ("development" !== 'production' && typeof console !== 'undefined') {
+          // Old behavior for people using React.PropTypes
+          var cacheKey = componentName + ':' + propName;
+          if (
+            !manualPropTypeCallCache[cacheKey] &&
+            // Avoid spamming the console because they are often not actionable except for lib authors
+            manualPropTypeWarningCount < 3
+          ) {
+            warning_1(
+              false,
+              'You are manually calling a React.PropTypes validation ' +
+              'function for the `%s` prop on `%s`. This is deprecated ' +
+              'and will throw in the standalone `prop-types` package. ' +
+              'You may be seeing this warning due to a third-party PropTypes ' +
+              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.',
+              propFullName,
+              componentName
+            );
+            manualPropTypeCallCache[cacheKey] = true;
+            manualPropTypeWarningCount++;
+          }
+        }
+      }
+      if (props[propName] == null) {
+        if (isRequired) {
+          if (props[propName] === null) {
+            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
+          }
+          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
+        }
+        return null;
+      } else {
+        return validate(props, propName, componentName, location, propFullName);
+      }
+    }
+
+    var chainedCheckType = checkType.bind(null, false);
+    chainedCheckType.isRequired = checkType.bind(null, true);
+
+    return chainedCheckType;
+  }
+
+  function createPrimitiveTypeChecker(expectedType) {
+    function validate(props, propName, componentName, location, propFullName, secret) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== expectedType) {
+        // `propValue` being instance of, say, date/regexp, pass the 'object'
+        // check, but we can offer a more precise error message here rather than
+        // 'of type `object`'.
+        var preciseType = getPreciseType(propValue);
+
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createAnyTypeChecker() {
+    return createChainableTypeChecker(emptyFunction_1.thatReturnsNull);
+  }
+
+  function createArrayOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (typeof typeChecker !== 'function') {
+        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
+      }
+      var propValue = props[propName];
+      if (!Array.isArray(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
+      }
+      for (var i = 0; i < propValue.length; i++) {
+        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret_1);
+        if (error instanceof Error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createElementTypeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      if (!isValidElement(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createInstanceTypeChecker(expectedClass) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!(props[propName] instanceof expectedClass)) {
+        var expectedClassName = expectedClass.name || ANONYMOUS;
+        var actualClassName = getClassName(props[propName]);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createEnumTypeChecker(expectedValues) {
+    if (!Array.isArray(expectedValues)) {
+      warning_1(false, 'Invalid argument supplied to oneOf, expected an instance of array.');
+      return emptyFunction_1.thatReturnsNull;
+    }
+
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      for (var i = 0; i < expectedValues.length; i++) {
+        if (is(propValue, expectedValues[i])) {
+          return null;
+        }
+      }
+
+      var valuesString = JSON.stringify(expectedValues);
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createObjectOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (typeof typeChecker !== 'function') {
+        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
+      }
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
+      }
+      for (var key in propValue) {
+        if (propValue.hasOwnProperty(key)) {
+          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
+          if (error instanceof Error) {
+            return error;
+          }
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createUnionTypeChecker(arrayOfTypeCheckers) {
+    if (!Array.isArray(arrayOfTypeCheckers)) {
+      warning_1(false, 'Invalid argument supplied to oneOfType, expected an instance of array.');
+      return emptyFunction_1.thatReturnsNull;
+    }
+
+    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+      var checker = arrayOfTypeCheckers[i];
+      if (typeof checker !== 'function') {
+        warning_1(
+          false,
+          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
+          'received %s at index %s.',
+          getPostfixForTypeWarning(checker),
+          i
+        );
+        return emptyFunction_1.thatReturnsNull;
+      }
+    }
+
+    function validate(props, propName, componentName, location, propFullName) {
+      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+        var checker = arrayOfTypeCheckers[i];
+        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret_1) == null) {
+          return null;
+        }
+      }
+
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createNodeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!isNode(props[propName])) {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      for (var key in shapeTypes) {
+        var checker = shapeTypes[key];
+        if (!checker) {
+          continue;
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createStrictShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      // We need to check all keys in case some are required but missing from
+      // props.
+      var allKeys = objectAssign({}, props[propName], shapeTypes);
+      for (var key in allKeys) {
+        var checker = shapeTypes[key];
+        if (!checker) {
+          return new PropTypeError(
+            'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
+            '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
+            '\nValid keys: ' +  JSON.stringify(Object.keys(shapeTypes), null, '  ')
+          );
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+
+    return createChainableTypeChecker(validate);
+  }
+
+  function isNode(propValue) {
+    switch (typeof propValue) {
+      case 'number':
+      case 'string':
+      case 'undefined':
+        return true;
+      case 'boolean':
+        return !propValue;
+      case 'object':
+        if (Array.isArray(propValue)) {
+          return propValue.every(isNode);
+        }
+        if (propValue === null || isValidElement(propValue)) {
+          return true;
+        }
+
+        var iteratorFn = getIteratorFn(propValue);
+        if (iteratorFn) {
+          var iterator = iteratorFn.call(propValue);
+          var step;
+          if (iteratorFn !== propValue.entries) {
+            while (!(step = iterator.next()).done) {
+              if (!isNode(step.value)) {
+                return false;
+              }
+            }
+          } else {
+            // Iterator will provide entry [k,v] tuples rather than values.
+            while (!(step = iterator.next()).done) {
+              var entry = step.value;
+              if (entry) {
+                if (!isNode(entry[1])) {
+                  return false;
+                }
+              }
+            }
+          }
+        } else {
+          return false;
+        }
+
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  function isSymbol(propType, propValue) {
+    // Native Symbol.
+    if (propType === 'symbol') {
+      return true;
+    }
+
+    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
+    if (propValue['@@toStringTag'] === 'Symbol') {
+      return true;
+    }
+
+    // Fallback for non-spec compliant Symbols which are polyfilled.
+    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
+      return true;
+    }
+
+    return false;
+  }
+
+  // Equivalent of `typeof` but with special handling for array and regexp.
+  function getPropType(propValue) {
+    var propType = typeof propValue;
+    if (Array.isArray(propValue)) {
+      return 'array';
+    }
+    if (propValue instanceof RegExp) {
+      // Old webkits (at least until Android 4.0) return 'function' rather than
+      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
+      // passes PropTypes.object.
+      return 'object';
+    }
+    if (isSymbol(propType, propValue)) {
+      return 'symbol';
+    }
+    return propType;
+  }
+
+  // This handles more types than `getPropType`. Only used for error messages.
+  // See `createPrimitiveTypeChecker`.
+  function getPreciseType(propValue) {
+    if (typeof propValue === 'undefined' || propValue === null) {
+      return '' + propValue;
+    }
+    var propType = getPropType(propValue);
+    if (propType === 'object') {
+      if (propValue instanceof Date) {
+        return 'date';
+      } else if (propValue instanceof RegExp) {
+        return 'regexp';
+      }
+    }
+    return propType;
+  }
+
+  // Returns a string that is postfixed to a warning about an invalid type.
+  // For example, "undefined" or "of type array"
+  function getPostfixForTypeWarning(value) {
+    var type = getPreciseType(value);
+    switch (type) {
+      case 'array':
+      case 'object':
+        return 'an ' + type;
+      case 'boolean':
+      case 'date':
+      case 'regexp':
+        return 'a ' + type;
+      default:
+        return type;
+    }
+  }
+
+  // Returns class name of the object, if any.
+  function getClassName(propValue) {
+    if (!propValue.constructor || !propValue.constructor.name) {
+      return ANONYMOUS;
+    }
+    return propValue.constructor.name;
+  }
+
+  ReactPropTypes.checkPropTypes = checkPropTypes_1;
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+'use strict';
+
+var propTypes$1 = createCommonjsModule(function (module) {
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+{
+  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+    Symbol.for &&
+    Symbol.for('react.element')) ||
+    0xeac7;
+
+  var isValidElement = function(object) {
+    return typeof object === 'object' &&
+      object !== null &&
+      object.$$typeof === REACT_ELEMENT_TYPE;
+  };
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = factoryWithTypeCheckers(isValidElement, throwOnDirectAccess);
+}
+});
+
 var classnames = createCommonjsModule(function (module) {
 /*!
   Copyright (c) 2016 Jed Watson.
@@ -6707,7 +7603,7 @@ var maskSrcKey = (function() {
 var funcToString = funcProto.toString;
 
 /** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
+var hasOwnProperty$1 = objectProto.hasOwnProperty;
 
 /**
  * Used to resolve the
@@ -6718,7 +7614,7 @@ var objectToString = objectProto.toString;
 
 /** Used to detect if a method is native. */
 var reIsNative = RegExp('^' +
-  funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&')
+  funcToString.call(hasOwnProperty$1).replace(reRegExpChar, '\\$&')
   .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
 );
 
@@ -6795,7 +7691,7 @@ function hashGet(key) {
     var result = data[key];
     return result === HASH_UNDEFINED ? undefined : result;
   }
-  return hasOwnProperty.call(data, key) ? data[key] : undefined;
+  return hasOwnProperty$1.call(data, key) ? data[key] : undefined;
 }
 
 /**
@@ -6809,7 +7705,7 @@ function hashGet(key) {
  */
 function hashHas(key) {
   var data = this.__data__;
-  return nativeCreate ? data[key] !== undefined : hasOwnProperty.call(data, key);
+  return nativeCreate ? data[key] !== undefined : hasOwnProperty$1.call(data, key);
 }
 
 /**
@@ -7110,7 +8006,7 @@ function arrayLikeKeys(value, inherited) {
       skipIndexes = !!length;
 
   for (var key in value) {
-    if ((inherited || hasOwnProperty.call(value, key)) &&
+    if ((inherited || hasOwnProperty$1.call(value, key)) &&
         !(skipIndexes && (key == 'length' || isIndex(key, length)))) {
       result.push(key);
     }
@@ -7273,7 +8169,7 @@ function baseKeysIn(object) {
       result = [];
 
   for (var key in object) {
-    if (!(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
+    if (!(key == 'constructor' && (isProto || !hasOwnProperty$1.call(object, key)))) {
       result.push(key);
     }
   }
@@ -7591,7 +8487,7 @@ function eq(value, other) {
  */
 function isArguments(value) {
   // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
-  return isArrayLikeObject(value) && hasOwnProperty.call(value, 'callee') &&
+  return isArrayLikeObject(value) && hasOwnProperty$1.call(value, 'callee') &&
     (!propertyIsEnumerable.call(value, 'callee') || objectToString.call(value) == argsTag);
 }
 
@@ -8293,26 +9189,26 @@ var propTypes = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$link-color': PropTypes.string,
-    '$link-decoration': PropTypes.string,
-    '$link-hover-color': PropTypes.string,
-    '$link-hover-decoration': PropTypes.string,
-    '$enable-hover-media-query': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$link-color': propTypes$1.string,
+    '$link-decoration': propTypes$1.string,
+    '$link-hover-color': propTypes$1.string,
+    '$link-hover-decoration': propTypes$1.string,
+    '$enable-hover-media-query': propTypes$1.bool
   }),
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  color: propTypes$1.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var AUnstyled = function (_React$Component) {
@@ -8410,9 +9306,9 @@ function composeLink(RouterLink) {
 
   Link.propTypes = {
     /* eslint-disable react/no-unused-prop-types */
-    className: PropTypes.string,
-    to: PropTypes.string.isRequired,
-    theme: PropTypes.object
+    className: propTypes$1.string,
+    to: propTypes$1.string.isRequired,
+    theme: propTypes$1.object
     /* eslint-enable react/no-unused-prop-types */
   };
   Link = styled__default(Link).withConfig({
@@ -8429,28 +9325,28 @@ var defaultProps$2 = {
   initialism: false
 };
 
-var propTypes$1 = {
+var propTypes$2 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   /**
    * Title used to display abbreviation text.
    */
-  title: PropTypes.string.isRequired,
+  title: propTypes$1.string.isRequired,
   /**
    * Toggles original Bootstrap CSS
    */
-  initialism: PropTypes.bool,
+  initialism: propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var AbbrUnstyled = function (_React$Component) {
@@ -8497,13 +9393,13 @@ var AbbrUnstyled = function (_React$Component) {
 
 
 AbbrUnstyled.defaultProps = defaultProps$2;
-AbbrUnstyled.propTypes = propTypes$1;
+AbbrUnstyled.propTypes = propTypes$2;
 var Abbr = styled__default(AbbrUnstyled).withConfig({
   displayName: 'Abbr'
 })(['&[title]{text-decoration:underline;text-decoration:underline dotted;cursor:help;border-bottom:0;}&.initialism{font-size:90%;text-transform:uppercase;}']);
 
 Abbr.defaultProps = defaultProps$2;
-Abbr.propTypes = propTypes$1;
+Abbr.propTypes = propTypes$2;
 
 var Address = styled__default.address.withConfig({
   displayName: 'Address'
@@ -8868,7 +9764,7 @@ exports.transitionTimeout = transitionTimeout;
 
 
 
-var _propTypes2 = _interopRequireDefault(PropTypes);
+var _propTypes2 = _interopRequireDefault(propTypes$1);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8920,7 +9816,7 @@ exports.EXITING = exports.ENTERED = exports.ENTERING = exports.EXITED = exports.
 
 
 
-var PropTypes$$1 = _interopRequireWildcard(PropTypes);
+var PropTypes = _interopRequireWildcard(propTypes$1);
 
 
 
@@ -8928,7 +9824,7 @@ var _react2 = _interopRequireDefault(React__default);
 
 
 
-var _reactDom2 = _interopRequireDefault(ReactDOM);
+var _reactDom2 = _interopRequireDefault(ReactDOM__default);
 
 
 
@@ -9295,7 +10191,7 @@ var Transition = function (_React$Component) {
 }(_react2.default.Component);
 
 Transition.contextTypes = {
-  transitionGroup: PropTypes$$1.object
+  transitionGroup: PropTypes.object
 };
 Transition.childContextTypes = {
   transitionGroup: function transitionGroup() {}
@@ -9317,12 +10213,12 @@ Transition.propTypes = {
    * </Transition>
    * ```
    */
-  children: PropTypes$$1.oneOfType([PropTypes$$1.func.isRequired, PropTypes$$1.element.isRequired]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.func.isRequired, PropTypes.element.isRequired]).isRequired,
 
   /**
    * Show the component; triggers the enter or exit states
    */
-  in: PropTypes$$1.bool,
+  in: PropTypes.bool,
 
   /**
    * By default the child component is mounted immediately along with
@@ -9330,13 +10226,13 @@ Transition.propTypes = {
    * first `in={true}` you can set `mountOnEnter`. After the first enter transition the component will stay
    * mounted, even on "exited", unless you also specify `unmountOnExit`.
    */
-  mountOnEnter: PropTypes$$1.bool,
+  mountOnEnter: PropTypes.bool,
 
   /**
    * By default the child component stays mounted after it reaches the `'exited'` state.
    * Set `unmountOnExit` if you'd prefer to unmount the component after it finishes exiting.
    */
-  unmountOnExit: PropTypes$$1.bool,
+  unmountOnExit: PropTypes.bool,
 
   /**
    * Normally a component is not transitioned if it is shown when the `<Transition>` component mounts.
@@ -9345,17 +10241,17 @@ Transition.propTypes = {
    *
    * > Note: there are no specific "appear" states. `appear` only adds an additional `enter` transition.
    */
-  appear: PropTypes$$1.bool,
+  appear: PropTypes.bool,
 
   /**
    * Enable or disable enter transitions.
    */
-  enter: PropTypes$$1.bool,
+  enter: PropTypes.bool,
 
   /**
    * Enable or disable exit transitions.
    */
-  exit: PropTypes$$1.bool,
+  exit: PropTypes.bool,
 
   /**
    * The duration of the transition, in milliseconds.
@@ -9395,7 +10291,7 @@ Transition.propTypes = {
    * }}
    * ```
    */
-  addEndListener: PropTypes$$1.func,
+  addEndListener: PropTypes.func,
 
   /**
    * Callback fired before the "entering" status is applied. An extra parameter
@@ -9403,7 +10299,7 @@ Transition.propTypes = {
    *
    * @type Function(node: HtmlElement, isAppearing: bool) -> void
    */
-  onEnter: PropTypes$$1.func,
+  onEnter: PropTypes.func,
 
   /**
    * Callback fired after the "entering" status is applied. An extra parameter
@@ -9411,7 +10307,7 @@ Transition.propTypes = {
    *
    * @type Function(node: HtmlElement, isAppearing: bool)
    */
-  onEntering: PropTypes$$1.func,
+  onEntering: PropTypes.func,
 
   /**
    * Callback fired after the "entered" status is applied. An extra parameter
@@ -9419,28 +10315,28 @@ Transition.propTypes = {
    *
    * @type Function(node: HtmlElement, isAppearing: bool) -> void
    */
-  onEntered: PropTypes$$1.func,
+  onEntered: PropTypes.func,
 
   /**
    * Callback fired before the "exiting" status is applied.
    *
    * @type Function(node: HtmlElement) -> void
    */
-  onExit: PropTypes$$1.func,
+  onExit: PropTypes.func,
 
   /**
    * Callback fired after the "exiting" status is applied.
    *
    * @type Function(node: HtmlElement) -> void
    */
-  onExiting: PropTypes$$1.func,
+  onExiting: PropTypes.func,
 
   /**
    * Callback fired after the "exited" status is applied.
    *
    * @type Function(node: HtmlElement) -> void
    */
-  onExited: PropTypes$$1.func
+  onExited: PropTypes.func
 };
 
 // Name the function so it is clearer in the documentation
@@ -9474,13 +10370,13 @@ exports.default = Transition;
 
 var Transition = unwrapExports(Transition_1);
 
-var propTypes$3 = _extends({}, Transition.propTypes, {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  baseClass: PropTypes.string,
-  baseClassActive: PropTypes.string,
-  className: PropTypes.string,
-  cssModule: PropTypes.object
+var propTypes$4 = _extends({}, Transition.propTypes, {
+  children: propTypes$1.oneOfType([propTypes$1.arrayOf(propTypes$1.node), propTypes$1.node]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.func]),
+  baseClass: propTypes$1.string,
+  baseClassActive: propTypes$1.string,
+  className: propTypes$1.string,
+  cssModule: propTypes$1.object
 });
 
 var defaultProps$4 = _extends({}, Transition.defaultProps, {
@@ -9535,7 +10431,7 @@ function Fade(props) {
   );
 }
 
-Fade.propTypes = propTypes$3;
+Fade.propTypes = propTypes$4;
 Fade.defaultProps = defaultProps$4;
 
 var defaultProps$5 = {
@@ -9547,30 +10443,30 @@ var defaultProps$5 = {
     '$enable-hover-media-query': false
   }
 };
-var propTypes$4 = {
+var propTypes$5 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$enable-rounded': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool
   }),
   /** Replace close label with any string. */
-  closeLabel: PropTypes.string,
+  closeLabel: propTypes$1.string,
   /** Call function when dismiss is trigger. */
-  onDismiss: PropTypes.func.isRequired,
+  onDismiss: propTypes$1.func.isRequired,
   /** Toggles screen-reader only CSS display. */
-  'sr-only': PropTypes.bool,
+  'sr-only': propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var CloseUnstyled = function (_React$Component) {
@@ -9622,7 +10518,7 @@ var CloseUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 CloseUnstyled.defaultProps = defaultProps$5;
-CloseUnstyled.propTypes = propTypes$4;
+CloseUnstyled.propTypes = propTypes$5;
 
 
 var Close = styled__default(CloseUnstyled).withConfig({
@@ -9632,7 +10528,7 @@ var Close = styled__default(CloseUnstyled).withConfig({
 });
 
 Close.defaultProps = defaultProps$5;
-Close.propTypes = propTypes$4;
+Close.propTypes = propTypes$5;
 
 /**
  * Alert component
@@ -9670,78 +10566,78 @@ var defaultProps$3 = {
   })
 };
 
-var propTypes$2 = {
+var propTypes$3 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<Alert />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Color variables. */
-  color: PropTypes.oneOf(['success', 'info', 'warning', 'danger']),
+  color: propTypes$1.oneOf(['success', 'info', 'warning', 'danger']),
   /**
    * Toggles dismissal of an alert.
    */
-  isOpen: PropTypes.bool,
+  isOpen: propTypes$1.bool,
   /**
    * @ignore
    * Used for Close component.
    */
-  toggle: PropTypes.func,
+  toggle: propTypes$1.func,
   /**
    * Call specified function when `on click` event is triggered.
    */
-  onClick: PropTypes.func,
+  onClick: propTypes$1.func,
   /**
    * Toggles onClick event.
    */
-  initializeIsOpen: PropTypes.func,
+  initializeIsOpen: propTypes$1.func,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  tag: propTypes$1.oneOfType([propTypes$1.func, propTypes$1.string]),
   /**
    * Transition used to dismiss alert.
    */
-  transition: PropTypes.shape({
-    FadeProptypes: PropTypes.object,
-    unmountOnExit: PropTypes.bool
+  transition: propTypes$1.shape({
+    FadeProptypes: propTypes$1.object,
+    unmountOnExit: propTypes$1.bool
   }),
   /**
    * Transition's duration used to dismiss alert automatically.
    */
-  autoHideDuration: PropTypes.number,
+  autoHideDuration: propTypes$1.number,
   /** Theme variables. */
-  theme: PropTypes.shape({
-    '$alert-padding-x': PropTypes.string,
-    '$alert-padding-y': PropTypes.string,
-    '$alert-margin-bottom': PropTypes.string,
-    '$alert-border-radius': PropTypes.string,
-    '$alert-link-font-weight': PropTypes.string,
-    '$alert-border-width': PropTypes.string,
-    '$alert-success-bg': PropTypes.string,
-    '$alert-success-text': PropTypes.string,
-    '$alert-success-border': PropTypes.string,
-    '$alert-info-bg': PropTypes.string,
-    '$alert-info-text': PropTypes.string,
-    '$alert-info-border': PropTypes.string,
-    '$alert-warning-bg': PropTypes.string,
-    '$alert-warning-text': PropTypes.string,
-    '$alert-warning-border': PropTypes.string,
-    '$alert-danger-bg': PropTypes.string,
-    '$alert-danger-text': PropTypes.string,
-    '$alert-danger-border': PropTypes.string,
-    '$enable-rounded': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$alert-padding-x': propTypes$1.string,
+    '$alert-padding-y': propTypes$1.string,
+    '$alert-margin-bottom': propTypes$1.string,
+    '$alert-border-radius': propTypes$1.string,
+    '$alert-link-font-weight': propTypes$1.string,
+    '$alert-border-width': propTypes$1.string,
+    '$alert-success-bg': propTypes$1.string,
+    '$alert-success-text': propTypes$1.string,
+    '$alert-success-border': propTypes$1.string,
+    '$alert-info-bg': propTypes$1.string,
+    '$alert-info-text': propTypes$1.string,
+    '$alert-info-border': propTypes$1.string,
+    '$alert-warning-bg': propTypes$1.string,
+    '$alert-warning-text': propTypes$1.string,
+    '$alert-warning-border': propTypes$1.string,
+    '$alert-danger-bg': propTypes$1.string,
+    '$alert-danger-text': propTypes$1.string,
+    '$alert-danger-border': propTypes$1.string,
+    '$enable-rounded': propTypes$1.bool
   }),
   /**
    * Toggles inner alert state so that you don't have to write your own state or closing function.
    */
-  uncontrolled: PropTypes.bool,
+  uncontrolled: propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var AlertUnstyled = function (_React$Component) {
@@ -9898,14 +10794,14 @@ var AlertUnstyled = function (_React$Component) {
 
 
 AlertUnstyled.defaultProps = defaultProps$3;
-AlertUnstyled.propTypes = propTypes$2;
+AlertUnstyled.propTypes = propTypes$3;
 var Alert = styled__default(AlertUnstyled).withConfig({
   displayName: 'Alert'
 })(['', ''], function (props) {
   return '\n    /*\n    Base styles\n    */\n    \n    &.alert {\n      padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n      margin-bottom: ' + props.theme['$alert-margin-bottom'] + ';\n      border: ' + props.theme['$alert-border-width'] + ' solid transparent;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$alert-border-radius']) + '\n    }\n    \n    /* Headings for larger alerts */\n    &.alert-heading {\n      /* Specified to prevent conflicts of changing $headings-color */\n      color: inherit;\n    }\n    \n    /* Provide class for links that match alerts */\n    & .alert-link { \n      font-weight: ' + props.theme['$alert-link-font-weight'] + ';\n    }\n    \n    /* Dismissible alerts Expand the right padding and account for the close buttons positioning. */\n    \n    &.alert-dismissible {    \n      /* Adjust close link position */\n      & .close {\n        position: relative;\n        top: -' + props.theme['$alert-padding-y'] + ';\n        right: -' + props.theme['$alert-padding-x'] + ';\n        padding: ' + props.theme['$alert-padding-y'] + ' ' + props.theme['$alert-padding-x'] + ';\n        color: inherit;\n      }\n    }\n    /* Alternate styles Generate contextual modifier classes for colorizing the alert. */\n\n    &.alert-success {\n      ' + alert_1(props.theme['$alert-success-bg'], props.theme['$alert-success-border'], props.theme['$alert-success-text']) + '    \n    }\n    &.alert-info {\n      ' + alert_1(props.theme['$alert-info-bg'], props.theme['$alert-info-border'], props.theme['$alert-info-text']) + '\n    } \n    &.alert-warning {\n      ' + alert_1(props.theme['$alert-warning-bg'], props.theme['$alert-warning-border'], props.theme['$alert-warning-text']) + ' \n    }\n    &.alert-danger {\n      ' + alert_1(props.theme['$alert-danger-bg'], props.theme['$alert-danger-border'], props.theme['$alert-danger-text']) + ' \n    }\n  ';
 });
 
-Alert.propTypes = propTypes$2;
+Alert.propTypes = propTypes$3;
 Alert.defaultProps = defaultProps$3;
 
 /**
@@ -9935,29 +10831,29 @@ var defaultProps$6 = {
     '$blockquote-border-width': '.25rem'
   }
 };
-var propTypes$5 = {
+var propTypes$6 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$blockquote-small-color': PropTypes.string,
-    '$blockquote-font-size': PropTypes.string,
-    '$blockquote-border-color': PropTypes.string,
-    '$blockquote-border-width': PropTypes.string
+  theme: propTypes$1.shape({
+    '$blockquote-small-color': propTypes$1.string,
+    '$blockquote-font-size': propTypes$1.string,
+    '$blockquote-border-color': propTypes$1.string,
+    '$blockquote-border-width': propTypes$1.string
   }),
   /** Toggles content to display on left or right. */
-  reverse: PropTypes.bool,
+  reverse: propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var BlockquoteUnstyled = function (_React$Component) {
@@ -9996,7 +10892,7 @@ var BlockquoteUnstyled = function (_React$Component) {
 
 
 BlockquoteUnstyled.defaultProps = defaultProps$6;
-BlockquoteUnstyled.propTypes = propTypes$5;
+BlockquoteUnstyled.propTypes = propTypes$6;
 var Blockquote = styled__default(BlockquoteUnstyled).withConfig({
   displayName: 'Blockquote'
 })(['  ', ' '], function (props) {
@@ -10004,7 +10900,7 @@ var Blockquote = styled__default(BlockquoteUnstyled).withConfig({
 });
 
 Blockquote.defaultProps = defaultProps$6;
-Blockquote.propTypes = propTypes$5;
+Blockquote.propTypes = propTypes$6;
 
 var reboot = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -11453,43 +12349,43 @@ var defaultProps$8 = {
     visibility: true
   }
 };
-var propTypes$7 = {
+var propTypes$8 = {
   /** Specified node element will be passed as children of `<UtilityProvider />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Theme variables. */
-  theme: PropTypes.object,
+  theme: propTypes$1.object,
   /** Utilities variables. */
-  utils: PropTypes.shape({
+  utils: propTypes$1.shape({
     /** Toggles align theme variables. */
-    align: PropTypes.bool,
+    align: propTypes$1.bool,
     /** Toggles background theme variables. */
-    background: PropTypes.bool,
+    background: propTypes$1.bool,
     /** Toggles `<A />` link theme variables. */
-    a: PropTypes.bool,
+    a: propTypes$1.bool,
     /** Toggles border theme variables. */
-    border: PropTypes.bool,
+    border: propTypes$1.bool,
     /** Toggles clearfix theme variables. */
-    clearfix: PropTypes.bool,
+    clearfix: propTypes$1.bool,
     /** Toggles display theme variables. */
-    display: PropTypes.bool,
+    display: propTypes$1.bool,
     /** Toggles flex theme variables. */
-    flex: PropTypes.bool,
+    flex: propTypes$1.bool,
     /** Toggles float theme variables. */
-    float: PropTypes.bool,
+    float: propTypes$1.bool,
     /** Toggles position theme variables. */
-    position: PropTypes.bool,
+    position: propTypes$1.bool,
     /** Toggles screenreaders theme variables. */
-    screenreaders: PropTypes.bool,
+    screenreaders: propTypes$1.bool,
     /** Toggles sizing theme variables. */
-    sizing: PropTypes.bool,
+    sizing: propTypes$1.bool,
     /** Toggles spacing theme variables. */
-    spacing: PropTypes.bool,
+    spacing: propTypes$1.bool,
     /** Toggles text theme variables. */
-    text: PropTypes.bool,
+    text: propTypes$1.bool,
     /** Toggles transition theme variables. */
-    transition: PropTypes.bool,
+    transition: propTypes$1.bool,
     /** Toggles visibility theme variables. */
-    visibility: PropTypes.bool
+    visibility: propTypes$1.bool
   })
 };
 
@@ -11502,7 +12398,7 @@ var UtilityProvider = styled__default.div.withConfig({
 });
 
 UtilityProvider.defaultProps = defaultProps$8;
-UtilityProvider.propTypes = propTypes$7;
+UtilityProvider.propTypes = propTypes$8;
 
 var _templateObject = taggedTemplateLiteral(['\n        ', '\n      '], ['\n        ', '\n      ']);
 
@@ -11511,45 +12407,45 @@ var defaultProps$7 = {
   injectGlobal: true,
   utils: defaultProps$8.utils
 };
-var propTypes$6 = {
+var propTypes$7 = {
   /** Specified node element will be passed as children of `<BootstrapProvider />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Define if BootstrapProvider is in charge of calling getGlobalStyles for you, it can only be run once. */
-  injectGlobal: PropTypes.bool,
+  injectGlobal: propTypes$1.bool,
   /** Theme variables. */
-  theme: PropTypes.object,
+  theme: propTypes$1.object,
   /** Utilities variables. */
-  utils: PropTypes.shape({
+  utils: propTypes$1.shape({
     /** Toggles align theme variables. */
-    align: PropTypes.bool,
+    align: propTypes$1.bool,
     /** Toggles background theme variables. */
-    background: PropTypes.bool,
+    background: propTypes$1.bool,
     /** Toggles `<A />` link theme variables. */
-    a: PropTypes.bool,
+    a: propTypes$1.bool,
     /** Toggles border theme variables. */
-    border: PropTypes.bool,
+    border: propTypes$1.bool,
     /** Toggles clearfix theme variables. */
-    clearfix: PropTypes.bool,
+    clearfix: propTypes$1.bool,
     /** Toggles display theme variables. */
-    display: PropTypes.bool,
+    display: propTypes$1.bool,
     /** Toggles flex theme variables. */
-    flex: PropTypes.bool,
+    flex: propTypes$1.bool,
     /** Toggles float theme variables. */
-    float: PropTypes.bool,
+    float: propTypes$1.bool,
     /** Toggles position theme variables. */
-    position: PropTypes.bool,
+    position: propTypes$1.bool,
     /** Toggles screenreaders theme variables. */
-    screenreaders: PropTypes.bool,
+    screenreaders: propTypes$1.bool,
     /** Toggles sizing theme variables. */
-    sizing: PropTypes.bool,
+    sizing: propTypes$1.bool,
     /** Toggles spacing theme variables. */
-    spacing: PropTypes.bool,
+    spacing: propTypes$1.bool,
     /** Toggles text theme variables. */
-    text: PropTypes.bool,
+    text: propTypes$1.bool,
     /** Toggles transition theme variables. */
-    transition: PropTypes.bool,
+    transition: propTypes$1.bool,
     /** Toggles visibility theme variables. */
-    visibility: PropTypes.bool
+    visibility: propTypes$1.bool
   })
 };
 
@@ -11570,8 +12466,13 @@ var BootstrapProvider = function (_React$Component) {
     return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = BootstrapProvider.__proto__ || Object.getPrototypeOf(BootstrapProvider)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       theme: {},
       isWindowPhone8Fixed: null // just for unit testing
-    }, _this.makeTheme = function (_ref2, cb) {
+    }, _this.setTheme = function (_ref2, cb) {
       var userTheme = _ref2.theme;
+
+      var theme$$1 = _this.makeTheme({ theme: userTheme });
+      _this.setState({ theme: theme$$1 }, cb);
+    }, _this.makeTheme = function (_ref3) {
+      var userTheme = _ref3.theme;
 
       var theme$$1 = makeTheme$$1(userTheme);
       var metaKeyList = Object.keys(theme$$1).filter(function (f) {
@@ -11580,7 +12481,7 @@ var BootstrapProvider = function (_React$Component) {
       metaKeyList.forEach(function (k) {
         delete theme$$1[k];
       });
-      _this.setState({ theme: theme$$1 }, cb);
+      return theme$$1;
     }, _this.injectGlobal = function () {
       if (_this.props.injectGlobal) {
         /* eslint-disable no-unused-expressions */
@@ -11596,20 +12497,43 @@ var BootstrapProvider = function (_React$Component) {
   createClass(BootstrapProvider, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      this.makeTheme(this.props, this.injectGlobal);
+      this.setTheme(this.props, this.injectGlobal);
     }
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.windowPhone8Fix();
     }
+
+    /**
+     * On update props
+     * @param nextProps
+     */
+
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      if (JSON.stringify(this.props.theme) !== JSON.stringify(nextProps.theme)) {
-        this.makeTheme(this.props);
+      /**
+       * We only replace the theme if the filtered theme is different from the current one
+       */
+      if (JSON.stringify(this.makeTheme(this.props)) !== JSON.stringify(nextProps.theme)) {
+        this.setTheme(this.props);
       }
     }
+
+    /**
+     * setTheme is in charge of replacing the theme, it does not filter it, use makeTheme for that
+     * @param userTheme
+     * @param cb
+     */
+
+
+    /**
+     * makeTheme is in charge of filtering the meta data out of the theme
+     * @param userTheme
+     * @returns {*}
+     */
+
   }, {
     key: 'windowPhone8Fix',
     value: function windowPhone8Fix() {
@@ -11647,11 +12571,11 @@ var BootstrapProvider = function (_React$Component) {
 }(React__default.Component);
 
 BootstrapProvider.defaultProps = defaultProps$7;
-BootstrapProvider.propTypes = propTypes$6;
+BootstrapProvider.propTypes = propTypes$7;
 
 
 BootstrapProvider.defaultProps = defaultProps$7;
-BootstrapProvider.propTypes = propTypes$6;
+BootstrapProvider.propTypes = propTypes$7;
 
 /**
  * A Breadcrumb
@@ -11670,31 +12594,31 @@ var defaultProps$9 = {
     '$enable-rounded': false
   }
 };
-var propTypes$8 = {
+var propTypes$9 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$breadcrumb-padding-y': PropTypes.string,
-    '$breadcrumb-padding-x': PropTypes.string,
-    '$breadcrumb-item-padding': PropTypes.string,
-    '$breadcrumb-bg': PropTypes.string,
-    '$breadcrumb-divider-color': PropTypes.string,
-    '$breadcrumb-active-color': PropTypes.string,
-    '$breadcrumb-divider': PropTypes.string,
-    '$enable-rounded': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$breadcrumb-padding-y': propTypes$1.string,
+    '$breadcrumb-padding-x': propTypes$1.string,
+    '$breadcrumb-item-padding': propTypes$1.string,
+    '$breadcrumb-bg': propTypes$1.string,
+    '$breadcrumb-divider-color': propTypes$1.string,
+    '$breadcrumb-active-color': propTypes$1.string,
+    '$breadcrumb-divider': propTypes$1.string,
+    '$enable-rounded': propTypes$1.bool
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var BreadcrumbUnstyled = function (_React$Component) {
@@ -11737,7 +12661,7 @@ var BreadcrumbUnstyled = function (_React$Component) {
 
 
 BreadcrumbUnstyled.defaultProps = defaultProps$9;
-BreadcrumbUnstyled.propTypes = propTypes$8;
+BreadcrumbUnstyled.propTypes = propTypes$9;
 var Breadcrumb = styled__default(BreadcrumbUnstyled).withConfig({
   displayName: 'Breadcrumb'
 })(['', ''], function (props) {
@@ -11745,29 +12669,29 @@ var Breadcrumb = styled__default(BreadcrumbUnstyled).withConfig({
 });
 
 Breadcrumb.defaultProps = defaultProps$9;
-Breadcrumb.propTypes = propTypes$8;
+Breadcrumb.propTypes = propTypes$9;
 
 var defaultProps$10 = {
   tag: 'li'
 };
-var propTypes$9 = {
+var propTypes$10 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Toggles active CSS.
    */
-  active: PropTypes.bool,
+  active: propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var BreadcrumbItem = function (_React$Component) {
@@ -11808,11 +12732,11 @@ var BreadcrumbItem = function (_React$Component) {
 }(React__default.Component);
 
 BreadcrumbItem.defaultProps = defaultProps$10;
-BreadcrumbItem.propTypes = propTypes$9;
+BreadcrumbItem.propTypes = propTypes$10;
 
 
 BreadcrumbItem.defaultProps = defaultProps$10;
-BreadcrumbItem.propTypes = propTypes$9;
+BreadcrumbItem.propTypes = propTypes$10;
 
 var boxShadow_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -12071,77 +12995,77 @@ var defaultProps$11 = {
     '$btn-transition': 'all .2s ease-in-out'
   }
 };
-var propTypes$10 = {
+var propTypes$11 = {
   /** Toggles active CSS color. */
-  active: PropTypes.bool,
+  active: propTypes$1.bool,
   /** Toggles block CSS display. */
-  block: PropTypes.bool,
+  block: propTypes$1.bool,
   /** Toggles disable mouse event and CSS color. */
-  disabled: PropTypes.bool,
+  disabled: propTypes$1.bool,
   /** Toggles outline CSS border and background color. */
-  outline: PropTypes.bool,
+  outline: propTypes$1.bool,
   /** @ignore */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['link', 'primary', 'secondary', 'success', 'info', 'warning', 'danger']),
+  color: propTypes$1.oneOf(['link', 'primary', 'secondary', 'success', 'info', 'warning', 'danger']),
   /** Use that property to pass a ref callback to the native button component. */
-  innerRef: PropTypes.func,
+  innerRef: propTypes$1.func,
   /** Start specified function when on click event is trigger. */
-  onClick: PropTypes.func,
+  onClick: propTypes$1.func,
   /** Buttons use default size base and can use different size such as: */
-  size: PropTypes.oneOf(['sm', 'lg']),
+  size: propTypes$1.oneOf(['sm', 'lg']),
   /** Toggles drop up CSS style. */
-  dropup: PropTypes.bool,
+  dropup: propTypes$1.bool,
   /** Replace the default component tag by the one specified. Can be: */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$btn-padding-x': PropTypes.string,
-    '$btn-padding-y': PropTypes.string,
-    '$btn-line-height': PropTypes.string,
-    '$btn-font-weight': PropTypes.string,
-    '$btn-box-shadow': PropTypes.string,
-    '$btn-focus-box-shadow': PropTypes.string,
-    '$btn-active-box-shadow': PropTypes.string,
-    '$btn-primary-color': PropTypes.string,
-    '$btn-primary-bg': PropTypes.string,
-    '$btn-primary-border': PropTypes.string,
-    '$btn-secondary-color': PropTypes.string,
-    '$btn-secondary-bg': PropTypes.string,
-    '$btn-secondary-border': PropTypes.string,
-    '$btn-info-color': PropTypes.string,
-    '$btn-info-bg': PropTypes.string,
-    '$btn-info-border': PropTypes.string,
-    '$btn-success-color': PropTypes.string,
-    '$btn-success-bg': PropTypes.string,
-    '$btn-success-border': PropTypes.string,
-    '$btn-warning-color': PropTypes.string,
-    '$btn-warning-bg': PropTypes.string,
-    '$btn-warning-border': PropTypes.string,
-    '$btn-danger-color': PropTypes.string,
-    '$btn-danger-bg': PropTypes.string,
-    '$btn-danger-border': PropTypes.string,
-    '$btn-link-disabled-color': PropTypes.string,
-    '$btn-padding-x-sm': PropTypes.string,
-    '$btn-padding-y-sm': PropTypes.string,
-    '$btn-padding-x-lg': PropTypes.string,
-    '$btn-padding-y-lg': PropTypes.string,
-    '$btn-block-spacing-y': PropTypes.string,
-    '$btn-border-radius': PropTypes.string,
-    '$btn-border-radius-lg': PropTypes.string,
-    '$btn-border-radius-sm': PropTypes.string,
-    '$btn-transition': PropTypes.string,
-    '$link-hover-decoration': PropTypes.string,
-    '$enable-rounded': PropTypes.bool,
-    '$enable-shadows': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool,
-    '$enable-transitions': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$btn-padding-x': propTypes$1.string,
+    '$btn-padding-y': propTypes$1.string,
+    '$btn-line-height': propTypes$1.string,
+    '$btn-font-weight': propTypes$1.string,
+    '$btn-box-shadow': propTypes$1.string,
+    '$btn-focus-box-shadow': propTypes$1.string,
+    '$btn-active-box-shadow': propTypes$1.string,
+    '$btn-primary-color': propTypes$1.string,
+    '$btn-primary-bg': propTypes$1.string,
+    '$btn-primary-border': propTypes$1.string,
+    '$btn-secondary-color': propTypes$1.string,
+    '$btn-secondary-bg': propTypes$1.string,
+    '$btn-secondary-border': propTypes$1.string,
+    '$btn-info-color': propTypes$1.string,
+    '$btn-info-bg': propTypes$1.string,
+    '$btn-info-border': propTypes$1.string,
+    '$btn-success-color': propTypes$1.string,
+    '$btn-success-bg': propTypes$1.string,
+    '$btn-success-border': propTypes$1.string,
+    '$btn-warning-color': propTypes$1.string,
+    '$btn-warning-bg': propTypes$1.string,
+    '$btn-warning-border': propTypes$1.string,
+    '$btn-danger-color': propTypes$1.string,
+    '$btn-danger-bg': propTypes$1.string,
+    '$btn-danger-border': propTypes$1.string,
+    '$btn-link-disabled-color': propTypes$1.string,
+    '$btn-padding-x-sm': propTypes$1.string,
+    '$btn-padding-y-sm': propTypes$1.string,
+    '$btn-padding-x-lg': propTypes$1.string,
+    '$btn-padding-y-lg': propTypes$1.string,
+    '$btn-block-spacing-y': propTypes$1.string,
+    '$btn-border-radius': propTypes$1.string,
+    '$btn-border-radius-lg': propTypes$1.string,
+    '$btn-border-radius-sm': propTypes$1.string,
+    '$btn-transition': propTypes$1.string,
+    '$link-hover-decoration': propTypes$1.string,
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-shadows': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool,
+    '$enable-transitions': propTypes$1.bool
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var ButtonUnstyled = function (_React$Component) {
@@ -12223,7 +13147,7 @@ var ButtonUnstyled = function (_React$Component) {
 
 
 ButtonUnstyled.defaultProps = defaultProps$11;
-ButtonUnstyled.propTypes = propTypes$10;
+ButtonUnstyled.propTypes = propTypes$11;
 var Button = styled__default(ButtonUnstyled).withConfig({
   displayName: 'Button'
 })(['', ' '], function (props) {
@@ -12231,7 +13155,7 @@ var Button = styled__default(ButtonUnstyled).withConfig({
 });
 
 Button.defaultProps = defaultProps$11;
-Button.propTypes = propTypes$10;
+Button.propTypes = propTypes$11;
 
 var navDivider_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -12343,28 +13267,28 @@ var defaultProps$13 = {
   tag: 'div'
 };
 
-var propTypes$13 = {
+var propTypes$14 = {
   /** Specified node element will be passed as children of `<DropdownItem />`. */
-  children: PropTypes.node.isRequired,
+  children: propTypes$1.node.isRequired,
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object,
+  cssModule: propTypes$1.object,
   /** Toggles right CSS display. */
-  right: PropTypes.bool,
+  right: propTypes$1.bool,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func])
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func])
 };
 
 var contextTypes = {
-  isOpen: PropTypes.bool.isRequired
+  isOpen: propTypes$1.bool.isRequired
 };
 
 var DropdownMenu = function DropdownMenu(props, context) {
@@ -12379,7 +13303,7 @@ var DropdownMenu = function DropdownMenu(props, context) {
   return React__default.createElement(Tag, _extends({}, attributes, { tabIndex: '-1', 'aria-hidden': !context.isOpen, role: 'menu', className: classes }));
 };
 
-DropdownMenu.propTypes = propTypes$13;
+DropdownMenu.propTypes = propTypes$14;
 DropdownMenu.defaultProps = defaultProps$13;
 DropdownMenu.contextTypes = contextTypes;
 
@@ -14141,25 +15065,25 @@ var defaultProps$14 = {
   isOpen: false,
   tetherRef: null
 };
-var propTypes$14 = {
+var propTypes$15 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<TetherContent />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Toggles opened CSS display. */
-  isOpen: PropTypes.bool,
+  isOpen: propTypes$1.bool,
   /** Toggles disabled CSS display. */
-  disabled: PropTypes.bool,
+  disabled: propTypes$1.bool,
   /** Call specified function when toggle action is triggered. */
-  toggle: PropTypes.func.isRequired,
+  toggle: propTypes$1.func.isRequired,
   /** Tether object. Please consult [Tether documentation](http://tether.io/) for more information. */
-  tether: PropTypes.object.isRequired,
+  tether: propTypes$1.object.isRequired,
   /** Tether reference. Please consult [Tether documentation](http://tether.io/) for more information. */
-  tetherRef: PropTypes.func,
+  tetherRef: propTypes$1.func,
   /** Tether style. Please consult [Tether documentation](http://tether.io/) for more information. */
-  style: PropTypes.node
+  style: propTypes$1.node
 };
 
 var TetherContent = function (_React$Component) {
@@ -14217,7 +15141,7 @@ var TetherContent = function (_React$Component) {
 
       if (_this.element) {
         document.body.removeChild(_this.element);
-        ReactDOM.unmountComponentAtNode(_this.element);
+        ReactDOM__default.unmountComponentAtNode(_this.element);
         _this.element = null;
       }
 
@@ -14247,7 +15171,7 @@ var TetherContent = function (_React$Component) {
 
       return _this.props.toggle();
     }, _this.renderIntoSubtree = function () {
-      ReactDOM.unstable_renderSubtreeIntoContainer(_this, _this.renderChildren(), _this.element);
+      ReactDOM__default.unstable_renderSubtreeIntoContainer(_this, _this.renderChildren(), _this.element);
     }, _this.renderChildren = function () {
       var _this$props = _this.props,
           children = _this$props.children,
@@ -14271,11 +15195,11 @@ var TetherContent = function (_React$Component) {
 }(React__default.Component);
 
 TetherContent.defaultProps = defaultProps$14;
-TetherContent.propTypes = propTypes$14;
+TetherContent.propTypes = propTypes$15;
 
 
 TetherContent.defaultProps = defaultProps$14;
-TetherContent.propTypes = propTypes$14;
+TetherContent.propTypes = propTypes$15;
 
 /**
  * Dropdown
@@ -14339,85 +15263,85 @@ var defaultProps$12 = {
     '$input-height-lg': ''
   }
 };
-var propTypes$12 = {
+var propTypes$13 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<DropdownItem />`. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Toggles disabled CSS style. */
-  disabled: PropTypes.bool,
+  disabled: propTypes$1.bool,
   /** Toggles dropdown direction. */
-  dropup: PropTypes.bool,
+  dropup: propTypes$1.bool,
   /** Toggles group CSS style. */
-  group: PropTypes.bool,
+  group: propTypes$1.bool,
   /** Toggles dropdown visibility. */
-  isOpen: PropTypes.bool,
+  isOpen: propTypes$1.bool,
   /** Size variables. Can be small or large: */
-  size: PropTypes.oneOf(['sm', 'lg', '']),
+  size: propTypes$1.oneOf(['sm', 'lg', '']),
   /** Tether position value. Can be: */
-  tether: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  tether: propTypes$1.oneOfType([propTypes$1.object, propTypes$1.bool]),
   /** Call specified function when on toggle action is triggered. */
-  toggle: PropTypes.func,
+  toggle: propTypes$1.func,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$enable-rounded': PropTypes.bool,
-    '$enable-shadows': PropTypes.bool,
-    '$enable-gradients': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool,
-    '$spacer-y': PropTypes.string,
-    '$border-width': PropTypes.string,
-    '$font-size-sm': PropTypes.string,
-    '$font-weight-normal': PropTypes.string,
-    '$font-size-base': PropTypes.string,
-    '$font-size-lg': PropTypes.string,
-    '$zindex-dropdown-backdrop': PropTypes.string,
-    '$zindex-dropdown': PropTypes.string,
-    '$component-active-color': PropTypes.string,
-    '$component-active-bg': PropTypes.string,
-    '$caret-width': PropTypes.string,
-    '$line-height-lg': PropTypes.string,
-    '$border-radius-lg': PropTypes.string,
-    '$border-radius-sm': PropTypes.string,
-    '$input-padding-y-lg': PropTypes.string,
-    '$dropdown-min-width': PropTypes.string,
-    '$dropdown-padding-y': PropTypes.string,
-    '$dropdown-margin-top': PropTypes.string,
-    '$dropdown-bg': PropTypes.string,
-    '$dropdown-border-color': PropTypes.string,
-    '$dropdown-border-width': PropTypes.string,
-    '$dropdown-divider-bg': PropTypes.string,
-    '$dropdown-box-shadow': PropTypes.string,
-    '$dropdown-link-color': PropTypes.string,
-    '$dropdown-link-hover-color': PropTypes.string,
-    '$dropdown-link-hover-bg': PropTypes.string,
-    '$dropdown-link-active-color': PropTypes.string,
-    '$dropdown-link-active-bg': PropTypes.string,
-    '$dropdown-link-disabled-color': PropTypes.string,
-    '$dropdown-item-padding-x': PropTypes.string,
-    '$dropdown-header-color': PropTypes.string,
-    '$input-btn-border-width': PropTypes.string, // For form controls and buttons
-    '$cursor-disabled': PropTypes.string,
-    '$btn-padding-x': PropTypes.string,
-    '$btn-active-box-shadow': PropTypes.string,
-    '$btn-padding-x-lg': PropTypes.string,
-    '$btn-padding-y-lg': PropTypes.string,
-    '$btn-border-radius-lg': PropTypes.string,
-    '$btn-border-radius-sm': PropTypes.string,
-    '$btn-padding-x-sm': PropTypes.string,
-    '$btn-padding-y-sm': PropTypes.string,
-    '$input-height-lg': PropTypes.string
+  theme: propTypes$1.shape({
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-shadows': propTypes$1.bool,
+    '$enable-gradients': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool,
+    '$spacer-y': propTypes$1.string,
+    '$border-width': propTypes$1.string,
+    '$font-size-sm': propTypes$1.string,
+    '$font-weight-normal': propTypes$1.string,
+    '$font-size-base': propTypes$1.string,
+    '$font-size-lg': propTypes$1.string,
+    '$zindex-dropdown-backdrop': propTypes$1.string,
+    '$zindex-dropdown': propTypes$1.string,
+    '$component-active-color': propTypes$1.string,
+    '$component-active-bg': propTypes$1.string,
+    '$caret-width': propTypes$1.string,
+    '$line-height-lg': propTypes$1.string,
+    '$border-radius-lg': propTypes$1.string,
+    '$border-radius-sm': propTypes$1.string,
+    '$input-padding-y-lg': propTypes$1.string,
+    '$dropdown-min-width': propTypes$1.string,
+    '$dropdown-padding-y': propTypes$1.string,
+    '$dropdown-margin-top': propTypes$1.string,
+    '$dropdown-bg': propTypes$1.string,
+    '$dropdown-border-color': propTypes$1.string,
+    '$dropdown-border-width': propTypes$1.string,
+    '$dropdown-divider-bg': propTypes$1.string,
+    '$dropdown-box-shadow': propTypes$1.string,
+    '$dropdown-link-color': propTypes$1.string,
+    '$dropdown-link-hover-color': propTypes$1.string,
+    '$dropdown-link-hover-bg': propTypes$1.string,
+    '$dropdown-link-active-color': propTypes$1.string,
+    '$dropdown-link-active-bg': propTypes$1.string,
+    '$dropdown-link-disabled-color': propTypes$1.string,
+    '$dropdown-item-padding-x': propTypes$1.string,
+    '$dropdown-header-color': propTypes$1.string,
+    '$input-btn-border-width': propTypes$1.string, // For form controls and buttons
+    '$cursor-disabled': propTypes$1.string,
+    '$btn-padding-x': propTypes$1.string,
+    '$btn-active-box-shadow': propTypes$1.string,
+    '$btn-padding-x-lg': propTypes$1.string,
+    '$btn-padding-y-lg': propTypes$1.string,
+    '$btn-border-radius-lg': propTypes$1.string,
+    '$btn-border-radius-sm': propTypes$1.string,
+    '$btn-padding-x-sm': propTypes$1.string,
+    '$btn-padding-y-sm': propTypes$1.string,
+    '$input-height-lg': propTypes$1.string
   }),
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var DropdownUnstyled = function (_React$Component) {
@@ -14463,7 +15387,7 @@ var DropdownUnstyled = function (_React$Component) {
     }, _this.removeEvents = function () {
       document.removeEventListener('click', _this.handleDocumentClick, true);
     }, _this.handleDocumentClick = function (e) {
-      var container = ReactDOM.findDOMNode(_this); // eslint-disable-line react/no-find-dom-node
+      var container = ReactDOM__default.findDOMNode(_this); // eslint-disable-line react/no-find-dom-node
 
       if (container.contains(e.target) && container !== e.target) {
         return;
@@ -14511,7 +15435,7 @@ var DropdownUnstyled = function (_React$Component) {
   }, {
     key: 'getTetherTarget',
     value: function getTetherTarget() {
-      var container = ReactDOM.findDOMNode(this); // eslint-disable-line react/no-find-dom-node
+      var container = ReactDOM__default.findDOMNode(this); // eslint-disable-line react/no-find-dom-node
 
       return container.querySelector('[data-toggle="dropdown"]');
     }
@@ -14590,10 +15514,10 @@ var DropdownUnstyled = function (_React$Component) {
 
 
 DropdownUnstyled.defaultProps = defaultProps$12;
-DropdownUnstyled.propTypes = propTypes$12;
+DropdownUnstyled.propTypes = propTypes$13;
 DropdownUnstyled.childContextTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  toggle: PropTypes.func.isRequired
+  isOpen: propTypes$1.bool.isRequired,
+  toggle: propTypes$1.func.isRequired
 };
 var Dropdown = styled__default(DropdownUnstyled).withConfig({
   displayName: 'Dropdown'
@@ -14602,17 +15526,17 @@ var Dropdown = styled__default(DropdownUnstyled).withConfig({
 });
 
 Dropdown.defaultProps = defaultProps$12;
-Dropdown.propTypes = propTypes$12;
+Dropdown.propTypes = propTypes$13;
 
-var propTypes$11 = {
+var propTypes$12 = {
   /**
    * @ignore
    */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Toggles open button dropdown. */
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: propTypes$1.bool.isRequired,
   /** Assign function to start when dropdown opening action is trigger. */
-  toggle: PropTypes.func.isRequired
+  toggle: propTypes$1.func.isRequired
 };
 
 var ButtonDropdown = function ButtonDropdown(props) {
@@ -14620,7 +15544,7 @@ var ButtonDropdown = function ButtonDropdown(props) {
   return React__default.createElement(Dropdown, _extends({}, props, { group: true }));
 };
 
-ButtonDropdown.propTypes = propTypes$11;
+ButtonDropdown.propTypes = propTypes$12;
 
 /**
  * ButtonGroup
@@ -14645,40 +15569,40 @@ var defaultProps$15 = {
     '$enable-shadows': true
   }
 };
-var propTypes$15 = {
+var propTypes$16 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$input-btn-border-width': PropTypes.string,
-    '$btn-padding-x': PropTypes.string,
-    '$btn-active-box-shadow': PropTypes.string,
-    '$btn-padding-x-lg': PropTypes.string,
-    '$btn-padding-y-lg': PropTypes.string,
-    '$font-size-lg': PropTypes.string,
-    '$btn-padding-x-sm': PropTypes.string,
-    '$btn-padding-y-sm': PropTypes.string,
-    '$font-size-sm': PropTypes.string,
-    '$btn-border-radius-lg': PropTypes.string,
-    '$btn-border-radius-sm': PropTypes.string,
-    '$enable-rounded': PropTypes.bool,
-    '$enable-shadows': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$input-btn-border-width': propTypes$1.string,
+    '$btn-padding-x': propTypes$1.string,
+    '$btn-active-box-shadow': propTypes$1.string,
+    '$btn-padding-x-lg': propTypes$1.string,
+    '$btn-padding-y-lg': propTypes$1.string,
+    '$font-size-lg': propTypes$1.string,
+    '$btn-padding-x-sm': propTypes$1.string,
+    '$btn-padding-y-sm': propTypes$1.string,
+    '$font-size-sm': propTypes$1.string,
+    '$btn-border-radius-lg': propTypes$1.string,
+    '$btn-border-radius-sm': propTypes$1.string,
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-shadows': propTypes$1.bool
   }),
   /** Buttons use default size base and can use different size such as: */
-  size: PropTypes.oneOf(['sm', 'lg']),
+  size: propTypes$1.oneOf(['sm', 'lg']),
   /** Toggles vertical CSS display. */
-  vertical: PropTypes.bool,
+  vertical: propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var ButtonGroupUnstyled = function (_React$Component) {
@@ -14711,12 +15635,12 @@ var ButtonGroupUnstyled = function (_React$Component) {
 
 ButtonGroupUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
-  size: PropTypes.string,
-  vertical: PropTypes.bool,
-  theme: PropTypes.object
+  tag: propTypes$1.oneOfType([propTypes$1.func, propTypes$1.string]),
+  className: propTypes$1.string,
+  cssModule: propTypes$1.object,
+  size: propTypes$1.string,
+  vertical: propTypes$1.bool,
+  theme: propTypes$1.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -14728,7 +15652,7 @@ var ButtonGroup = styled__default(ButtonGroupUnstyled).withConfig({
 });
 
 ButtonGroup.defaultProps = defaultProps$15;
-ButtonGroup.propTypes = propTypes$15;
+ButtonGroup.propTypes = propTypes$16;
 
 /**
  * ButtonToolbar
@@ -14753,36 +15677,36 @@ var defaultProps$16 = {
     '$enable-shadows': true
   }
 };
-var propTypes$16 = {
+var propTypes$17 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$input-btn-border-width': PropTypes.string,
-    '$btn-padding-x': PropTypes.string,
-    '$btn-active-box-shadow': PropTypes.string,
-    '$btn-padding-x-lg': PropTypes.string,
-    '$btn-padding-y-lg': PropTypes.string,
-    '$font-size-lg': PropTypes.string,
-    '$btn-padding-x-sm': PropTypes.string,
-    '$btn-padding-y-sm': PropTypes.string,
-    '$font-size-sm': PropTypes.string,
-    '$btn-border-radius-lg': PropTypes.string,
-    '$btn-border-radius-sm': PropTypes.string,
-    '$enable-rounded': PropTypes.bool,
-    '$enable-shadows': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$input-btn-border-width': propTypes$1.string,
+    '$btn-padding-x': propTypes$1.string,
+    '$btn-active-box-shadow': propTypes$1.string,
+    '$btn-padding-x-lg': propTypes$1.string,
+    '$btn-padding-y-lg': propTypes$1.string,
+    '$font-size-lg': propTypes$1.string,
+    '$btn-padding-x-sm': propTypes$1.string,
+    '$btn-padding-y-sm': propTypes$1.string,
+    '$font-size-sm': propTypes$1.string,
+    '$btn-border-radius-lg': propTypes$1.string,
+    '$btn-border-radius-sm': propTypes$1.string,
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-shadows': propTypes$1.bool
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var ButtonToolbarUnstyled = function (_React$Component) {
@@ -14823,7 +15747,7 @@ var ButtonToolbarUnstyled = function (_React$Component) {
 
 
 ButtonToolbarUnstyled.defaultProps = defaultProps$16;
-ButtonToolbarUnstyled.propTypes = propTypes$16;
+ButtonToolbarUnstyled.propTypes = propTypes$17;
 var ButtonToolbar = styled__default(ButtonToolbarUnstyled).withConfig({
   displayName: 'ButtonToolbar'
 })(['', '  '], function (props) {
@@ -14831,7 +15755,7 @@ var ButtonToolbar = styled__default(ButtonToolbarUnstyled).withConfig({
 });
 
 ButtonToolbar.defaultProps = defaultProps$16;
-ButtonToolbar.propTypes = propTypes$16;
+ButtonToolbar.propTypes = propTypes$17;
 
 /* A Caption (Box) */
 
@@ -14841,11 +15765,11 @@ var defaultProps$17 = {
     '$text-muted': '#636c72'
   }
 };
-var propTypes$17 = {
+var propTypes$18 = {
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$table-cell-padding': PropTypes.string,
-    '$text-muted': PropTypes.string
+  theme: propTypes$1.shape({
+    '$table-cell-padding': propTypes$1.string,
+    '$text-muted': propTypes$1.string
   })
 };
 /**
@@ -14859,7 +15783,7 @@ var Caption = styled__default.caption.withConfig({
 });
 
 Caption.defaultProps = defaultProps$17;
-Caption.propTypes = propTypes$17;
+Caption.propTypes = propTypes$18;
 
 /**
  * Code component
@@ -14876,23 +15800,23 @@ var defaultProps$18 = {
     '$enable-rounded': false
   }
 };
-var propTypes$18 = {
+var propTypes$19 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$code-font-size': PropTypes.string,
-    '$code-padding-x': PropTypes.string,
-    '$code-padding-y': PropTypes.string,
-    '$code-color': PropTypes.string,
-    '$code-bg': PropTypes.string,
-    '$enable-rounded': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$code-font-size': propTypes$1.string,
+    '$code-padding-x': propTypes$1.string,
+    '$code-padding-y': propTypes$1.string,
+    '$code-color': propTypes$1.string,
+    '$code-bg': propTypes$1.string,
+    '$enable-rounded': propTypes$1.bool
   })
 };
 
@@ -14932,7 +15856,7 @@ var CodeUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 CodeUnstyled.defaultProps = defaultProps$18;
-CodeUnstyled.propTypes = propTypes$18;
+CodeUnstyled.propTypes = propTypes$19;
 
 
 var Code = styled__default(CodeUnstyled).withConfig({
@@ -14942,7 +15866,7 @@ var Code = styled__default(CodeUnstyled).withConfig({
 });
 
 Code.defaultProps = defaultProps$18;
-Code.propTypes = propTypes$18;
+Code.propTypes = propTypes$19;
 
 var grid = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -15263,10 +16187,10 @@ unwrapExports(gridFramework);
 var gridFramework_5 = gridFramework.makeGridColumns;
 
 var colWidths = ['xs', 'sm', 'md', 'lg', 'xl'];
-var stringOrNumberProp = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
+var stringOrNumberProp = propTypes$1.oneOfType([propTypes$1.number, propTypes$1.string]);
 
-var columnProps = PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTypes.string, PropTypes.shape({
-  size: PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTypes.string]),
+var columnProps = propTypes$1.oneOfType([propTypes$1.bool, propTypes$1.number, propTypes$1.string, propTypes$1.shape({
+  size: propTypes$1.oneOfType([propTypes$1.bool, propTypes$1.number, propTypes$1.string]),
   push: stringOrNumberProp,
   pull: stringOrNumberProp,
   offset: stringOrNumberProp
@@ -15304,15 +16228,15 @@ var defaultProps$19 = {
     }
   }
 };
-var propTypes$19 = {
+var propTypes$20 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  tag: propTypes$1.oneOfType([propTypes$1.func, propTypes$1.string]),
   /** Extra small columns variables. */
   xs: columnProps,
   /** Small columns variables. */
@@ -15324,14 +16248,14 @@ var propTypes$19 = {
   /** Extra large columns variables. */
   xl: columnProps,
   /** Widths size variables. */
-  widths: PropTypes.array,
+  widths: propTypes$1.array,
   /** Theme variables. */
-  theme: PropTypes.shape({}),
+  theme: propTypes$1.shape({}),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var ColUnstyled = function (_React$Component) {
@@ -15406,7 +16330,7 @@ var ColUnstyled = function (_React$Component) {
 
 
 ColUnstyled.defaultProps = defaultProps$19;
-ColUnstyled.propTypes = propTypes$19;
+ColUnstyled.propTypes = propTypes$20;
 var Col = styled__default(ColUnstyled).withConfig({
   displayName: 'Col'
 })(['', ''], function (props) {
@@ -15414,7 +16338,7 @@ var Col = styled__default(ColUnstyled).withConfig({
 });
 
 Col.defaultProps = defaultProps$19;
-Col.propTypes = propTypes$19;
+Col.propTypes = propTypes$20;
 
 var SHOW = 'SHOW';
 var SHOWN = 'SHOWN';
@@ -15434,34 +16358,34 @@ var defaultProps$20 = {
   onOpened: null,
   onClosed: null
 };
-var propTypes$20 = {
+var propTypes$21 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /** Delay transition in milliseconds before and after collapse. Can be: */
-  delay: PropTypes.oneOfType([PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }), PropTypes.number]),
+  delay: propTypes$1.oneOfType([propTypes$1.shape({ show: propTypes$1.number, hide: propTypes$1.number }), propTypes$1.number]),
   /** Toggles collapse open or close action. */
-  isOpen: PropTypes.bool,
+  isOpen: propTypes$1.bool,
   /** Toggles nav bar CSS display. */
-  navbar: PropTypes.bool,
+  navbar: propTypes$1.bool,
   /** Call specified function when opened collapse action is triggered. */
-  onOpened: PropTypes.func,
+  onOpened: propTypes$1.func,
   /** Call specified function when closed collapse action is triggered. */
-  onClosed: PropTypes.func,
+  onClosed: propTypes$1.func,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$transition-collapse': PropTypes.string
+  theme: propTypes$1.shape({
+    '$transition-collapse': propTypes$1.string
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var Collapse = function (_Component) {
@@ -15642,11 +16566,11 @@ var Collapse = function (_Component) {
 }(React.Component);
 
 Collapse.defaultProps = defaultProps$20;
-Collapse.propTypes = propTypes$20;
+Collapse.propTypes = propTypes$21;
 
 
 Collapse.defaultProps = defaultProps$20;
-Collapse.propTypes = propTypes$20;
+Collapse.propTypes = propTypes$21;
 
 /**
  * Definition Description
@@ -15673,17 +16597,17 @@ var defaultProps$21 = {
     '$enable-grid-classes': true
   }
 };
-var propTypes$21 = {
+var propTypes$22 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$grid-columns': PropTypes.string,
-    '$grid-gutter-widths': PropTypes.object,
-    '$grid-breakpoints': PropTypes.object,
-    '$enable-grid-classes': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$grid-columns': propTypes$1.string,
+    '$grid-gutter-widths': propTypes$1.object,
+    '$grid-breakpoints': propTypes$1.object,
+    '$enable-grid-classes': propTypes$1.bool
   })
 };
 
@@ -15721,7 +16645,7 @@ var DdUnstyled = function (_React$Component) {
 
 
 DdUnstyled.defaultProps = defaultProps$21;
-DdUnstyled.propTypes = propTypes$21;
+DdUnstyled.propTypes = propTypes$22;
 var Dd = styled__default(DdUnstyled).withConfig({
   displayName: 'Dd'
 })(['  margin-bottom:.5rem;margin-left:0;', ''], function (props) {
@@ -15729,19 +16653,19 @@ var Dd = styled__default(DdUnstyled).withConfig({
 });
 
 Dd.defaultProps = defaultProps$21;
-Dd.propTypes = propTypes$21;
+Dd.propTypes = propTypes$22;
 
 /**
  * Dfn component
  */
 
-var propTypes$22 = {
+var propTypes$23 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Node element wrapped in `<Dfn />` component */
-  children: PropTypes.node.isRequired
+  children: propTypes$1.node.isRequired
 };
 
 var DfnUnstyled = function (_React$Component) {
@@ -15777,20 +16701,20 @@ var DfnUnstyled = function (_React$Component) {
  */
 
 
-DfnUnstyled.propTypes = propTypes$22;
+DfnUnstyled.propTypes = propTypes$23;
 var Dfn = styled__default(DfnUnstyled).withConfig({
   displayName: 'Dfn'
 })(['font-style:italic;']);
 
-Dfn.propTypes = propTypes$22;
+Dfn.propTypes = propTypes$23;
 
-var propTypes$23 = {
+var propTypes$24 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<Details />` component. */
-  children: PropTypes.node.isRequired
+  children: propTypes$1.node.isRequired
 };
 
 var Details = function (_React$Component) {
@@ -15820,10 +16744,10 @@ var Details = function (_React$Component) {
   return Details;
 }(React__default.Component);
 
-Details.propTypes = propTypes$23;
+Details.propTypes = propTypes$24;
 
 
-Details.propTypes = propTypes$23;
+Details.propTypes = propTypes$24;
 
 /**
  *Definition List
@@ -15842,15 +16766,15 @@ var defaultProps$22 = {
     '$enable-grid-classes': true
   }
 };
-var propTypes$24 = {
+var propTypes$25 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$grid-gutter-widths': PropTypes.object,
-    '$enable-grid-classes': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$grid-gutter-widths': propTypes$1.object,
+    '$enable-grid-classes': propTypes$1.bool
   })
 };
 
@@ -15888,7 +16812,7 @@ var DlUnstyled = function (_React$Component) {
 
 
 DlUnstyled.defaultProps = defaultProps$22;
-DlUnstyled.propTypes = propTypes$24;
+DlUnstyled.propTypes = propTypes$25;
 var Dl = styled__default(DlUnstyled).withConfig({
   displayName: 'Dl'
 })(['  margin-top:0;margin-bottom:1rem;', ''], function (props) {
@@ -15896,7 +16820,7 @@ var Dl = styled__default(DlUnstyled).withConfig({
 });
 
 Dl.defaultProps = defaultProps$22;
-Dl.propTypes = propTypes$24;
+Dl.propTypes = propTypes$25;
 
 /**
  * Description Term
@@ -15923,17 +16847,17 @@ var defaultProps$23 = {
     '$enable-grid-classes': true
   }
 };
-var propTypes$25 = {
+var propTypes$26 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$grid-columns': PropTypes.string,
-    '$grid-gutter-widths': PropTypes.object,
-    '$grid-breakpoints': PropTypes.object,
-    '$enable-grid-classes': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$grid-columns': propTypes$1.string,
+    '$grid-gutter-widths': propTypes$1.object,
+    '$grid-breakpoints': propTypes$1.object,
+    '$enable-grid-classes': propTypes$1.bool
   })
 };
 
@@ -15971,7 +16895,7 @@ var DtUnstyled = function (_React$Component) {
 
 
 DtUnstyled.defaultProps = defaultProps$23;
-DtUnstyled.propTypes = propTypes$25;
+DtUnstyled.propTypes = propTypes$26;
 var Dt = styled__default(DtUnstyled).withConfig({
   displayName: 'Dt'
 })(['  ', ''], function (props) {
@@ -15979,17 +16903,17 @@ var Dt = styled__default(DtUnstyled).withConfig({
 });
 
 Dt.defaultProps = defaultProps$23;
-Dt.propTypes = propTypes$25;
+Dt.propTypes = propTypes$26;
 
-var propTypes$26 = {
+var propTypes$27 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Size variables. Can be: */
-  size: PropTypes.oneOf(['lg', '2x', '3x', '4x', '5x']),
+  size: propTypes$1.oneOf(['lg', '2x', '3x', '4x', '5x']),
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['success', 'info', 'warning', 'danger', 'white', 'gray-dark', 'primary', 'hide'])
+  color: propTypes$1.oneOf(['success', 'info', 'warning', 'danger', 'white', 'gray-dark', 'primary', 'hide'])
 };
 
 var FaUnstyled = function (_React$Component) {
@@ -16029,22 +16953,22 @@ var FaUnstyled = function (_React$Component) {
   return FaUnstyled;
 }(React__default.Component);
 
-FaUnstyled.propTypes = propTypes$26;
+FaUnstyled.propTypes = propTypes$27;
 
 
 var Fa = styled__default(FaUnstyled).withConfig({
   displayName: 'Fa'
 })(['&.fa-lg{vertical-align:-2%;}']);
 
-Fa.propTypes = propTypes$26;
+Fa.propTypes = propTypes$27;
 
-var propTypes$27 = {
+var propTypes$28 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Size variables. Can be: */
-  size: PropTypes.oneOf(['lg', '2x', '3x', '4x', '5x', ''])
+  size: propTypes$1.oneOf(['lg', '2x', '3x', '4x', '5x', ''])
 };
 
 var FaStacked = function (_React$Component) {
@@ -16077,10 +17001,10 @@ var FaStacked = function (_React$Component) {
   return FaStacked;
 }(React__default.Component);
 
-FaStacked.propTypes = propTypes$27;
+FaStacked.propTypes = propTypes$28;
 
 
-FaStacked.propTypes = propTypes$27;
+FaStacked.propTypes = propTypes$28;
 
 /* A Fieldset (Box) */
 
@@ -16096,17 +17020,17 @@ var defaultProps$24 = {
     '$enable-grid-classes': true
   }
 };
-var propTypes$28 = {
+var propTypes$29 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Node element passed has child of fieldset component */
-  children: PropTypes.node.isRequired,
+  children: propTypes$1.node.isRequired,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$grid-gutter-widths': PropTypes.object,
-    '$enable-grid-classes': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$grid-gutter-widths': propTypes$1.object,
+    '$enable-grid-classes': propTypes$1.bool
   })
 };
 
@@ -16151,7 +17075,7 @@ var FieldsetUnstyled = function (_React$Component) {
 
 
 FieldsetUnstyled.defaultProps = defaultProps$24;
-FieldsetUnstyled.propTypes = propTypes$28;
+FieldsetUnstyled.propTypes = propTypes$29;
 var Fieldset = styled__default(FieldsetUnstyled).withConfig({
   displayName: 'Fieldset'
 })(['', ''], function (props) {
@@ -16159,7 +17083,7 @@ var Fieldset = styled__default(FieldsetUnstyled).withConfig({
 });
 
 Fieldset.defaultProps = defaultProps$24;
-Fieldset.propTypes = propTypes$28;
+Fieldset.propTypes = propTypes$29;
 
 /**
  * Footer Component
@@ -16241,40 +17165,40 @@ var defaultProps$25 = {
     '$lead-font-weight': '300'
   }
 };
-var propTypes$29 = {
+var propTypes$30 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$link-color': PropTypes.string,
-    '$font-size-h1': PropTypes.string,
-    '$headings-margin-bottom': PropTypes.string,
-    '$headings-font-family': PropTypes.string,
-    '$headings-font-weight': PropTypes.string,
-    '$headings-line-height': PropTypes.string,
-    '$headings-color': PropTypes.string,
-    '$display1-size': PropTypes.string,
-    '$display2-size': PropTypes.string,
-    '$display3-size': PropTypes.string,
-    '$display4-size': PropTypes.string,
-    '$display1-weight': PropTypes.string,
-    '$display2-weight': PropTypes.string,
-    '$display3-weight': PropTypes.string,
-    '$display4-weight': PropTypes.string,
-    '$lead-font-size': PropTypes.string,
-    '$lead-font-weight': PropTypes.string
+  theme: propTypes$1.shape({
+    '$link-color': propTypes$1.string,
+    '$font-size-h1': propTypes$1.string,
+    '$headings-margin-bottom': propTypes$1.string,
+    '$headings-font-family': propTypes$1.string,
+    '$headings-font-weight': propTypes$1.string,
+    '$headings-line-height': propTypes$1.string,
+    '$headings-color': propTypes$1.string,
+    '$display1-size': propTypes$1.string,
+    '$display2-size': propTypes$1.string,
+    '$display3-size': propTypes$1.string,
+    '$display4-size': propTypes$1.string,
+    '$display1-weight': propTypes$1.string,
+    '$display2-weight': propTypes$1.string,
+    '$display3-weight': propTypes$1.string,
+    '$display4-weight': propTypes$1.string,
+    '$lead-font-size': propTypes$1.string,
+    '$lead-font-weight': propTypes$1.string
   }),
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  color: propTypes$1.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /** Toggles lead CSS style. */
-  lead: PropTypes.bool,
+  lead: propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var H1Unstyled = function (_React$Component) {
@@ -16322,7 +17246,7 @@ var H1Unstyled = function (_React$Component) {
 
 
 H1Unstyled.defaultProps = defaultProps$25;
-H1Unstyled.propTypes = propTypes$29;
+H1Unstyled.propTypes = propTypes$30;
 var H1 = styled__default(H1Unstyled).withConfig({
   displayName: 'H1'
 })(['', ''], function (props) {
@@ -16330,7 +17254,7 @@ var H1 = styled__default(H1Unstyled).withConfig({
 });
 
 H1.defaultProps = defaultProps$25;
-H1.propTypes = propTypes$29;
+H1.propTypes = propTypes$30;
 
 var defaultProps$26 = {
   theme: {
@@ -16352,40 +17276,40 @@ var defaultProps$26 = {
     '$lead-font-weight': '300'
   }
 };
-var propTypes$30 = {
+var propTypes$31 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$link-color': PropTypes.string,
-    '$font-size-h2': PropTypes.string,
-    '$headings-margin-bottom': PropTypes.string,
-    '$headings-font-family': PropTypes.string,
-    '$headings-font-weight': PropTypes.string,
-    '$headings-line-height': PropTypes.string,
-    '$headings-color': PropTypes.string,
-    '$display1-size': PropTypes.string,
-    '$display2-size': PropTypes.string,
-    '$display3-size': PropTypes.string,
-    '$display4-size': PropTypes.string,
-    '$display1-weight': PropTypes.string,
-    '$display2-weight': PropTypes.string,
-    '$display3-weight': PropTypes.string,
-    '$display4-weight': PropTypes.string,
-    '$lead-font-size': PropTypes.string,
-    '$lead-font-weight': PropTypes.string
+  theme: propTypes$1.shape({
+    '$link-color': propTypes$1.string,
+    '$font-size-h2': propTypes$1.string,
+    '$headings-margin-bottom': propTypes$1.string,
+    '$headings-font-family': propTypes$1.string,
+    '$headings-font-weight': propTypes$1.string,
+    '$headings-line-height': propTypes$1.string,
+    '$headings-color': propTypes$1.string,
+    '$display1-size': propTypes$1.string,
+    '$display2-size': propTypes$1.string,
+    '$display3-size': propTypes$1.string,
+    '$display4-size': propTypes$1.string,
+    '$display1-weight': propTypes$1.string,
+    '$display2-weight': propTypes$1.string,
+    '$display3-weight': propTypes$1.string,
+    '$display4-weight': propTypes$1.string,
+    '$lead-font-size': propTypes$1.string,
+    '$lead-font-weight': propTypes$1.string
   }),
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  color: propTypes$1.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /** Toggles lead CSS style. */
-  lead: PropTypes.bool,
+  lead: propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var H2Unstyled = function (_React$Component) {
@@ -16428,7 +17352,7 @@ var H2Unstyled = function (_React$Component) {
 }(React__default.Component);
 
 H2Unstyled.defaultProps = defaultProps$26;
-H2Unstyled.propTypes = propTypes$30;
+H2Unstyled.propTypes = propTypes$31;
 
 
 var H2 = styled__default(H2Unstyled).withConfig({
@@ -16438,7 +17362,7 @@ var H2 = styled__default(H2Unstyled).withConfig({
 });
 
 H2.defaultProps = defaultProps$26;
-H2.propTypes = propTypes$30;
+H2.propTypes = propTypes$31;
 
 var defaultProps$27 = {
   theme: {
@@ -16460,40 +17384,40 @@ var defaultProps$27 = {
     '$lead-font-weight': '300'
   }
 };
-var propTypes$31 = {
+var propTypes$32 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$link-color': PropTypes.string,
-    '$font-size-h3': PropTypes.string,
-    '$headings-margin-bottom': PropTypes.string,
-    '$headings-font-family': PropTypes.string,
-    '$headings-font-weight': PropTypes.string,
-    '$headings-line-height': PropTypes.string,
-    '$headings-color': PropTypes.string,
-    '$display1-size': PropTypes.string,
-    '$display2-size': PropTypes.string,
-    '$display3-size': PropTypes.string,
-    '$display4-size': PropTypes.string,
-    '$display1-weight': PropTypes.string,
-    '$display2-weight': PropTypes.string,
-    '$display3-weight': PropTypes.string,
-    '$display4-weight': PropTypes.string,
-    '$lead-font-size': PropTypes.string,
-    '$lead-font-weight': PropTypes.string
+  theme: propTypes$1.shape({
+    '$link-color': propTypes$1.string,
+    '$font-size-h3': propTypes$1.string,
+    '$headings-margin-bottom': propTypes$1.string,
+    '$headings-font-family': propTypes$1.string,
+    '$headings-font-weight': propTypes$1.string,
+    '$headings-line-height': propTypes$1.string,
+    '$headings-color': propTypes$1.string,
+    '$display1-size': propTypes$1.string,
+    '$display2-size': propTypes$1.string,
+    '$display3-size': propTypes$1.string,
+    '$display4-size': propTypes$1.string,
+    '$display1-weight': propTypes$1.string,
+    '$display2-weight': propTypes$1.string,
+    '$display3-weight': propTypes$1.string,
+    '$display4-weight': propTypes$1.string,
+    '$lead-font-size': propTypes$1.string,
+    '$lead-font-weight': propTypes$1.string
   }),
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  color: propTypes$1.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /** Toggles lead CSS style. */
-  lead: PropTypes.bool,
+  lead: propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var H3Unstyled = function (_React$Component) {
@@ -16536,7 +17460,7 @@ var H3Unstyled = function (_React$Component) {
 }(React__default.Component);
 
 H3Unstyled.defaultProps = defaultProps$27;
-H3Unstyled.propTypes = propTypes$31;
+H3Unstyled.propTypes = propTypes$32;
 
 
 var H3 = styled__default(H3Unstyled).withConfig({
@@ -16546,7 +17470,7 @@ var H3 = styled__default(H3Unstyled).withConfig({
 });
 
 H3.defaultProps = defaultProps$27;
-H3.propTypes = propTypes$31;
+H3.propTypes = propTypes$32;
 
 var defaultProps$28 = {
   theme: {
@@ -16568,40 +17492,40 @@ var defaultProps$28 = {
     '$lead-font-weight': '300'
   }
 };
-var propTypes$32 = {
+var propTypes$33 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$link-color': PropTypes.string,
-    '$font-size-h4': PropTypes.string,
-    '$headings-margin-bottom': PropTypes.string,
-    '$headings-font-family': PropTypes.string,
-    '$headings-font-weight': PropTypes.string,
-    '$headings-line-height': PropTypes.string,
-    '$headings-color': PropTypes.string,
-    '$display1-size': PropTypes.string,
-    '$display2-size': PropTypes.string,
-    '$display3-size': PropTypes.string,
-    '$display4-size': PropTypes.string,
-    '$display1-weight': PropTypes.string,
-    '$display2-weight': PropTypes.string,
-    '$display3-weight': PropTypes.string,
-    '$display4-weight': PropTypes.string,
-    '$lead-font-size': PropTypes.string,
-    '$lead-font-weight': PropTypes.string
+  theme: propTypes$1.shape({
+    '$link-color': propTypes$1.string,
+    '$font-size-h4': propTypes$1.string,
+    '$headings-margin-bottom': propTypes$1.string,
+    '$headings-font-family': propTypes$1.string,
+    '$headings-font-weight': propTypes$1.string,
+    '$headings-line-height': propTypes$1.string,
+    '$headings-color': propTypes$1.string,
+    '$display1-size': propTypes$1.string,
+    '$display2-size': propTypes$1.string,
+    '$display3-size': propTypes$1.string,
+    '$display4-size': propTypes$1.string,
+    '$display1-weight': propTypes$1.string,
+    '$display2-weight': propTypes$1.string,
+    '$display3-weight': propTypes$1.string,
+    '$display4-weight': propTypes$1.string,
+    '$lead-font-size': propTypes$1.string,
+    '$lead-font-weight': propTypes$1.string
   }),
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  color: propTypes$1.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /** Toggles lead CSS style. */
-  lead: PropTypes.bool,
+  lead: propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var H4Unstyled = function (_React$Component) {
@@ -16644,7 +17568,7 @@ var H4Unstyled = function (_React$Component) {
 }(React__default.Component);
 
 H4Unstyled.defaultProps = defaultProps$28;
-H4Unstyled.propTypes = propTypes$32;
+H4Unstyled.propTypes = propTypes$33;
 
 
 var H4 = styled__default(H4Unstyled).withConfig({
@@ -16654,7 +17578,7 @@ var H4 = styled__default(H4Unstyled).withConfig({
 });
 
 H4.defaultProps = defaultProps$28;
-H4.propTypes = propTypes$32;
+H4.propTypes = propTypes$33;
 
 var defaultProps$29 = {
   theme: {
@@ -16676,40 +17600,40 @@ var defaultProps$29 = {
     '$lead-font-weight': '300'
   }
 };
-var propTypes$33 = {
+var propTypes$34 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$link-color': PropTypes.string,
-    '$font-size-h5': PropTypes.string,
-    '$headings-margin-bottom': PropTypes.string,
-    '$headings-font-family': PropTypes.string,
-    '$headings-font-weight': PropTypes.string,
-    '$headings-line-height': PropTypes.string,
-    '$headings-color': PropTypes.string,
-    '$display1-size': PropTypes.string,
-    '$display2-size': PropTypes.string,
-    '$display3-size': PropTypes.string,
-    '$display4-size': PropTypes.string,
-    '$display1-weight': PropTypes.string,
-    '$display2-weight': PropTypes.string,
-    '$display3-weight': PropTypes.string,
-    '$display4-weight': PropTypes.string,
-    '$lead-font-size': PropTypes.string,
-    '$lead-font-weight': PropTypes.string
+  theme: propTypes$1.shape({
+    '$link-color': propTypes$1.string,
+    '$font-size-h5': propTypes$1.string,
+    '$headings-margin-bottom': propTypes$1.string,
+    '$headings-font-family': propTypes$1.string,
+    '$headings-font-weight': propTypes$1.string,
+    '$headings-line-height': propTypes$1.string,
+    '$headings-color': propTypes$1.string,
+    '$display1-size': propTypes$1.string,
+    '$display2-size': propTypes$1.string,
+    '$display3-size': propTypes$1.string,
+    '$display4-size': propTypes$1.string,
+    '$display1-weight': propTypes$1.string,
+    '$display2-weight': propTypes$1.string,
+    '$display3-weight': propTypes$1.string,
+    '$display4-weight': propTypes$1.string,
+    '$lead-font-size': propTypes$1.string,
+    '$lead-font-weight': propTypes$1.string
   }),
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  color: propTypes$1.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /** Toggles lead CSS style. */
-  lead: PropTypes.bool,
+  lead: propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var H5Unstyled = function (_React$Component) {
@@ -16752,7 +17676,7 @@ var H5Unstyled = function (_React$Component) {
 }(React__default.Component);
 
 H5Unstyled.defaultProps = defaultProps$29;
-H5Unstyled.propTypes = propTypes$33;
+H5Unstyled.propTypes = propTypes$34;
 
 
 var H5 = styled__default(H5Unstyled).withConfig({
@@ -16762,7 +17686,7 @@ var H5 = styled__default(H5Unstyled).withConfig({
 });
 
 H5.defaultProps = defaultProps$29;
-H5.propTypes = propTypes$33;
+H5.propTypes = propTypes$34;
 
 var defaultProps$30 = {
   theme: {
@@ -16784,40 +17708,40 @@ var defaultProps$30 = {
     '$lead-font-weight': '300'
   }
 };
-var propTypes$34 = {
+var propTypes$35 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$link-color': PropTypes.string,
-    '$font-size-h6': PropTypes.string,
-    '$headings-margin-bottom': PropTypes.string,
-    '$headings-font-family': PropTypes.string,
-    '$headings-font-weight': PropTypes.string,
-    '$headings-line-height': PropTypes.string,
-    '$headings-color': PropTypes.string,
-    '$display1-size': PropTypes.string,
-    '$display2-size': PropTypes.string,
-    '$display3-size': PropTypes.string,
-    '$display4-size': PropTypes.string,
-    '$display1-weight': PropTypes.string,
-    '$display2-weight': PropTypes.string,
-    '$display3-weight': PropTypes.string,
-    '$display4-weight': PropTypes.string,
-    '$lead-font-size': PropTypes.string,
-    '$lead-font-weight': PropTypes.string
+  theme: propTypes$1.shape({
+    '$link-color': propTypes$1.string,
+    '$font-size-h6': propTypes$1.string,
+    '$headings-margin-bottom': propTypes$1.string,
+    '$headings-font-family': propTypes$1.string,
+    '$headings-font-weight': propTypes$1.string,
+    '$headings-line-height': propTypes$1.string,
+    '$headings-color': propTypes$1.string,
+    '$display1-size': propTypes$1.string,
+    '$display2-size': propTypes$1.string,
+    '$display3-size': propTypes$1.string,
+    '$display4-size': propTypes$1.string,
+    '$display1-weight': propTypes$1.string,
+    '$display2-weight': propTypes$1.string,
+    '$display3-weight': propTypes$1.string,
+    '$display4-weight': propTypes$1.string,
+    '$lead-font-size': propTypes$1.string,
+    '$lead-font-weight': propTypes$1.string
   }),
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  color: propTypes$1.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /** Toggles lead CSS style. */
-  lead: PropTypes.bool,
+  lead: propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var H6Unstyled = function (_React$Component) {
@@ -16860,7 +17784,7 @@ var H6Unstyled = function (_React$Component) {
 }(React__default.Component);
 
 H6Unstyled.defaultProps = defaultProps$30;
-H6Unstyled.propTypes = propTypes$34;
+H6Unstyled.propTypes = propTypes$35;
 
 
 var H6 = styled__default(H6Unstyled).withConfig({
@@ -16870,7 +17794,7 @@ var H6 = styled__default(H6Unstyled).withConfig({
 });
 
 H6.defaultProps = defaultProps$30;
-H6.propTypes = propTypes$34;
+H6.propTypes = propTypes$35;
 
 var navbarToggleable_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -17043,39 +17967,39 @@ var defaultProps$31 = {
     '$navbar-inverse-disabled-color': 'rgba(255, 255, 255, 0.25)'
   }
 };
-var propTypes$35 = {
+var propTypes$36 = {
   /** Toggle shadow CSS style. */
-  shadowHeader: PropTypes.bool,
+  shadowHeader: propTypes$1.bool,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$enable-rounded': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool,
-    '$border-width': PropTypes.string,
-    '$font-size-lg': PropTypes.string,
-    '$border-radius': PropTypes.string,
-    '$navbar-padding-x': PropTypes.string,
-    '$navbar-padding-y': PropTypes.string,
-    '$zindex-navbar': PropTypes.string,
-    '$zindex-navbar-fixed': PropTypes.string,
-    '$zindex-navbar-sticky': PropTypes.string,
-    '$navbar-brand-padding-y': PropTypes.string,
-    '$navbar-divider-padding-y': PropTypes.string,
-    '$navbar-toggler-padding-y': PropTypes.string,
-    '$navbar-toggler-padding-x': PropTypes.string,
-    '$navbar-toggler-font-size': PropTypes.string,
-    '$navbar-toggler-border-radius': PropTypes.string,
-    '$navbar-light-active-color': PropTypes.string,
-    '$navbar-light-color': PropTypes.string,
-    '$navbar-light-hover-color': PropTypes.string,
-    '$navbar-light-toggler-border': PropTypes.string,
-    '$navbar-light-disabled-color': PropTypes.string,
-    '$navbar-light-toggler-bg': PropTypes.string,
-    '$navbar-inverse-active-color': PropTypes.string,
-    '$navbar-inverse-color': PropTypes.string,
-    '$navbar-inverse-hover-color': PropTypes.string,
-    '$navbar-inverse-toggler-border': PropTypes.string,
-    '$navbar-inverse-toggler-bg': PropTypes.string,
-    '$navbar-inverse-disabled-color': PropTypes.string
+  theme: propTypes$1.shape({
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool,
+    '$border-width': propTypes$1.string,
+    '$font-size-lg': propTypes$1.string,
+    '$border-radius': propTypes$1.string,
+    '$navbar-padding-x': propTypes$1.string,
+    '$navbar-padding-y': propTypes$1.string,
+    '$zindex-navbar': propTypes$1.string,
+    '$zindex-navbar-fixed': propTypes$1.string,
+    '$zindex-navbar-sticky': propTypes$1.string,
+    '$navbar-brand-padding-y': propTypes$1.string,
+    '$navbar-divider-padding-y': propTypes$1.string,
+    '$navbar-toggler-padding-y': propTypes$1.string,
+    '$navbar-toggler-padding-x': propTypes$1.string,
+    '$navbar-toggler-font-size': propTypes$1.string,
+    '$navbar-toggler-border-radius': propTypes$1.string,
+    '$navbar-light-active-color': propTypes$1.string,
+    '$navbar-light-color': propTypes$1.string,
+    '$navbar-light-hover-color': propTypes$1.string,
+    '$navbar-light-toggler-border': propTypes$1.string,
+    '$navbar-light-disabled-color': propTypes$1.string,
+    '$navbar-light-toggler-bg': propTypes$1.string,
+    '$navbar-inverse-active-color': propTypes$1.string,
+    '$navbar-inverse-color': propTypes$1.string,
+    '$navbar-inverse-hover-color': propTypes$1.string,
+    '$navbar-inverse-toggler-border': propTypes$1.string,
+    '$navbar-inverse-toggler-bg': propTypes$1.string,
+    '$navbar-inverse-disabled-color': propTypes$1.string
   })
 };
 /**
@@ -17089,7 +18013,7 @@ var Header = styled__default.header.withConfig({
 });
 
 Header.defaultProps = defaultProps$31;
-Header.propTypes = propTypes$35;
+Header.propTypes = propTypes$36;
 
 var defaultProps$32 = {
   theme: {
@@ -17097,11 +18021,11 @@ var defaultProps$32 = {
     '$hr-border-color': 'rgba(0, 0, 0, 0.1)'
   }
 };
-var propTypes$36 = {
+var propTypes$37 = {
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$hr-border-width': PropTypes.string,
-    '$hr-border-color': PropTypes.string
+  theme: propTypes$1.shape({
+    '$hr-border-width': propTypes$1.string,
+    '$hr-border-color': propTypes$1.string
   })
 };
 
@@ -17112,7 +18036,7 @@ var Hr = styled__default.hr.withConfig({
 });
 
 Hr.defaultProps = defaultProps$32;
-Hr.propTypes = propTypes$36;
+Hr.propTypes = propTypes$37;
 
 var image = createCommonjsModule(function (module, exports) {
 "use strict";
@@ -17178,46 +18102,46 @@ var defaultProps$33 = {
     '$figure-caption-color': '#636c72'
   }
 };
-var propTypes$37 = {
+var propTypes$38 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   /** Toggles fluid responsive CSS display. */
-  fluid: PropTypes.bool,
+  fluid: propTypes$1.bool,
   /** Toggles figure CSS style. */
-  figure: PropTypes.bool,
+  figure: propTypes$1.bool,
   /** Image source. */
-  src: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  src: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.object]).isRequired,
   /** Image alt description. */
-  alt: PropTypes.string.isRequired,
+  alt: propTypes$1.string.isRequired,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$enable-rounded': PropTypes.bool,
-    '$enable-transitions': PropTypes.bool,
-    '$enable-shadows': PropTypes.bool,
-    '$spacer-halved': PropTypes.string,
-    '$border-width': PropTypes.string,
-    '$border-radius': PropTypes.string,
-    '$thumbnail-padding': PropTypes.string,
-    '$thumbnail-bg': PropTypes.string,
-    '$thumbnail-border-width': PropTypes.string,
-    '$thumbnail-border-color': PropTypes.string,
-    '$thumbnail-border-radius': PropTypes.string,
-    '$thumbnail-box-shadow': PropTypes.string,
-    '$thumbnail-transition': PropTypes.string,
-    '$figure-caption-font-size': PropTypes.string,
-    '$figure-caption-color': PropTypes.string
+  theme: propTypes$1.shape({
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-transitions': propTypes$1.bool,
+    '$enable-shadows': propTypes$1.bool,
+    '$spacer-halved': propTypes$1.string,
+    '$border-width': propTypes$1.string,
+    '$border-radius': propTypes$1.string,
+    '$thumbnail-padding': propTypes$1.string,
+    '$thumbnail-bg': propTypes$1.string,
+    '$thumbnail-border-width': propTypes$1.string,
+    '$thumbnail-border-color': propTypes$1.string,
+    '$thumbnail-border-radius': propTypes$1.string,
+    '$thumbnail-box-shadow': propTypes$1.string,
+    '$thumbnail-transition': propTypes$1.string,
+    '$figure-caption-font-size': propTypes$1.string,
+    '$figure-caption-color': propTypes$1.string
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var ImgUnstyled = function (_React$Component) {
@@ -17268,7 +18192,7 @@ var ImgUnstyled = function (_React$Component) {
  */
 
 ImgUnstyled.defaultProps = defaultProps$33;
-ImgUnstyled.propTypes = propTypes$37;
+ImgUnstyled.propTypes = propTypes$38;
 var Img = styled__default(ImgUnstyled).withConfig({
   displayName: 'Img'
 })(['', ''], function (props) {
@@ -17276,7 +18200,7 @@ var Img = styled__default(ImgUnstyled).withConfig({
 });
 
 Img.defaultProps = defaultProps$33;
-Img.propTypes = propTypes$37;
+Img.propTypes = propTypes$38;
 
 /**
  * Figure Component
@@ -17314,8 +18238,8 @@ var FigureUnstyled = function (_React$Component) {
 
 FigureUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string
+  children: propTypes$1.node.isRequired,
+  className: propTypes$1.string
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -17365,10 +18289,10 @@ FigCaptionUnstyled.defaultProps = {
 };
 FigCaptionUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  children: PropTypes.node,
-  className: PropTypes.string,
-  right: PropTypes.bool,
-  theme: PropTypes.object
+  children: propTypes$1.node,
+  className: propTypes$1.string,
+  right: propTypes$1.bool,
+  theme: propTypes$1.object
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -17436,88 +18360,88 @@ var defaultProps$34 = {
   },
   type: 'text'
 };
-var propTypes$38 = {
+var propTypes$39 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<Input />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Specified string define the type of input to display. */
-  type: PropTypes.oneOf(['button', 'checkbox', 'color', 'date', 'datetime', 'datetime-local', 'email', 'file', 'hidden', 'image', 'month', 'number', 'password', 'radio', 'range', 'reset', 'search', 'submit', 'tel', 'text', 'textarea', 'select', 'time', 'url', 'week']),
+  type: propTypes$1.oneOf(['button', 'checkbox', 'color', 'date', 'datetime', 'datetime-local', 'email', 'file', 'hidden', 'image', 'month', 'number', 'password', 'radio', 'range', 'reset', 'search', 'submit', 'tel', 'text', 'textarea', 'select', 'time', 'url', 'week']),
   /** Specified string define the input size, small or large. */
-  size: PropTypes.oneOf(['sm', 'lg']),
+  size: propTypes$1.oneOf(['sm', 'lg']),
   /** Specified string define the input state. */
-  state: PropTypes.oneOf(['success', 'warning', 'danger']),
+  state: propTypes$1.oneOf(['success', 'warning', 'danger']),
   /** Use that property to pass a ref callback to the native button component. */
-  innerRef: PropTypes.func,
+  innerRef: propTypes$1.func,
   /** Toggles static CSS style. */
-  static: PropTypes.bool,
+  static: propTypes$1.bool,
   /** Toggles addon CSS style. */
-  addon: PropTypes.bool,
+  addon: propTypes$1.bool,
   /** Call specified function when `onChange` event is triggered. */
-  onChange: PropTypes.func,
+  onChange: propTypes$1.func,
   /** Toggles indeterminate CSS style. */
-  indeterminate: PropTypes.bool,
+  indeterminate: propTypes$1.bool,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$enable-rounded': PropTypes.bool,
-    '$enable-shadows': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool,
-    '$enable-transitions': PropTypes.bool,
-    '$font-weight-normal': PropTypes.string,
-    '$font-size-base': PropTypes.string,
-    '$font-size-lg': PropTypes.string,
-    '$font-size-sm': PropTypes.string,
-    '$font-size-xs': PropTypes.string,
-    '$btn-padding-x': PropTypes.string,
-    '$btn-padding-y': PropTypes.string,
-    '$btn-line-height': PropTypes.string,
-    '$btn-font-weight': PropTypes.string,
-    '$btn-transition': PropTypes.string,
-    '$btn-box-shadow': PropTypes.string,
-    '$btn-block-spacing-y': PropTypes.string,
-    '$btn-primary-color': PropTypes.string,
-    '$btn-primary-bg': PropTypes.string,
-    '$btn-primary-border': PropTypes.string,
-    '$btn-secondary-color': PropTypes.string,
-    '$btn-secondary-bg': PropTypes.string,
-    '$btn-secondary-border': PropTypes.string,
-    '$btn-info-color': PropTypes.string,
-    '$btn-info-bg': PropTypes.string,
-    '$btn-info-border': PropTypes.string,
-    '$btn-success-color': PropTypes.string,
-    '$btn-success-bg': PropTypes.string,
-    '$btn-success-border': PropTypes.string,
-    '$btn-warning-color': PropTypes.string,
-    '$btn-warning-bg': PropTypes.string,
-    '$btn-warning-border': PropTypes.string,
-    '$btn-danger-color': PropTypes.string,
-    '$btn-danger-bg': PropTypes.string,
-    '$btn-danger-border': PropTypes.string,
-    '$btn-link-disabled-color': PropTypes.string,
-    '$btn-padding-x-lg': PropTypes.string,
-    '$btn-padding-y-lg': PropTypes.string,
-    '$btn-padding-x-sm': PropTypes.string,
-    '$btn-padding-y-sm': PropTypes.string,
-    '$btn-border-radius': PropTypes.string,
-    '$btn-border-radius-lg': PropTypes.string,
-    '$btn-border-radius-sm': PropTypes.string,
-    '$input-btn-border-width': PropTypes.string, // For form controls and buttons
-    '$link-color': PropTypes.string,
-    '$link-hover-color': PropTypes.string,
-    '$link-hover-decoration': PropTypes.string,
-    '$cursor-disabled': PropTypes.string
+  theme: propTypes$1.shape({
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-shadows': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool,
+    '$enable-transitions': propTypes$1.bool,
+    '$font-weight-normal': propTypes$1.string,
+    '$font-size-base': propTypes$1.string,
+    '$font-size-lg': propTypes$1.string,
+    '$font-size-sm': propTypes$1.string,
+    '$font-size-xs': propTypes$1.string,
+    '$btn-padding-x': propTypes$1.string,
+    '$btn-padding-y': propTypes$1.string,
+    '$btn-line-height': propTypes$1.string,
+    '$btn-font-weight': propTypes$1.string,
+    '$btn-transition': propTypes$1.string,
+    '$btn-box-shadow': propTypes$1.string,
+    '$btn-block-spacing-y': propTypes$1.string,
+    '$btn-primary-color': propTypes$1.string,
+    '$btn-primary-bg': propTypes$1.string,
+    '$btn-primary-border': propTypes$1.string,
+    '$btn-secondary-color': propTypes$1.string,
+    '$btn-secondary-bg': propTypes$1.string,
+    '$btn-secondary-border': propTypes$1.string,
+    '$btn-info-color': propTypes$1.string,
+    '$btn-info-bg': propTypes$1.string,
+    '$btn-info-border': propTypes$1.string,
+    '$btn-success-color': propTypes$1.string,
+    '$btn-success-bg': propTypes$1.string,
+    '$btn-success-border': propTypes$1.string,
+    '$btn-warning-color': propTypes$1.string,
+    '$btn-warning-bg': propTypes$1.string,
+    '$btn-warning-border': propTypes$1.string,
+    '$btn-danger-color': propTypes$1.string,
+    '$btn-danger-bg': propTypes$1.string,
+    '$btn-danger-border': propTypes$1.string,
+    '$btn-link-disabled-color': propTypes$1.string,
+    '$btn-padding-x-lg': propTypes$1.string,
+    '$btn-padding-y-lg': propTypes$1.string,
+    '$btn-padding-x-sm': propTypes$1.string,
+    '$btn-padding-y-sm': propTypes$1.string,
+    '$btn-border-radius': propTypes$1.string,
+    '$btn-border-radius-lg': propTypes$1.string,
+    '$btn-border-radius-sm': propTypes$1.string,
+    '$input-btn-border-width': propTypes$1.string, // For form controls and buttons
+    '$link-color': propTypes$1.string,
+    '$link-hover-color': propTypes$1.string,
+    '$link-hover-decoration': propTypes$1.string,
+    '$cursor-disabled': propTypes$1.string
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var InputUnstyled = function (_React$Component) {
@@ -17588,7 +18512,7 @@ var InputUnstyled = function (_React$Component) {
 
 
 InputUnstyled.defaultProps = defaultProps$34;
-InputUnstyled.propTypes = propTypes$38;
+InputUnstyled.propTypes = propTypes$39;
 var Input = styled__default(InputUnstyled).withConfig({
   displayName: 'Input'
 })(['', ''], function (props) {
@@ -17596,7 +18520,7 @@ var Input = styled__default(InputUnstyled).withConfig({
 });
 
 Input.defaultProps = defaultProps$34;
-Input.propTypes = propTypes$38;
+Input.propTypes = propTypes$39;
 
 var forms = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -17785,63 +18709,63 @@ var defaultProps$35 = {
     '$cursor-disabled': 'not-allowed'
   }
 };
-var propTypes$39 = {
+var propTypes$40 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified string define the input size, small or large. */
-  size: PropTypes.oneOf(['sm', 'lg']),
+  size: propTypes$1.oneOf(['sm', 'lg']),
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$enable-rounded': PropTypes.bool,
-    '$enable-shadows': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool,
-    '$enable-transitions': PropTypes.bool,
-    '$font-size-base': PropTypes.string, // Assumes the browser default, typically `16px`
-    '$font-size-lg': PropTypes.string,
-    '$font-size-sm': PropTypes.string,
-    '$font-size-xs': PropTypes.string,
-    '$line-height-base': PropTypes.string,
-    '$border-radius': PropTypes.string,
-    '$border-radius-lg': PropTypes.string,
-    '$border-radius-sm': PropTypes.string,
-    '$input-padding-x': PropTypes.string,
-    '$input-padding-y': PropTypes.string,
-    '$input-bg': PropTypes.string,
-    '$input-bg-disabled': PropTypes.string,
-    '$input-padding-x-lg': PropTypes.string,
-    '$input-padding-y-lg': PropTypes.string,
-    '$input-line-height': PropTypes.string,
-    '$input-height': PropTypes.string,
-    '$input-box-shadow': PropTypes.string,
-    '$input-btn-border-width': PropTypes.string, // For form controls and buttons
-    '$input-group-addon-bg': PropTypes.string,
-    '$input-border-color': PropTypes.string,
-    '$input-border-focus': PropTypes.string,
-    '$input-box-shadow-focus': PropTypes.string,
-    '$input-color': PropTypes.string,
-    '$input-group-addon-border-color': PropTypes.string,
-    '$input-padding-x-sm': PropTypes.string,
-    '$input-padding-y-sm': PropTypes.string,
-    '$input-color-placeholder': PropTypes.string,
-    '$input-border-radius-lg': PropTypes.string,
-    '$input-border-radius-sm': PropTypes.string,
-    '$input-border-radius': PropTypes.string,
-    '$input-transition': PropTypes.string,
-    '$input-color-focus': PropTypes.string,
-    '$input-bg-focus': PropTypes.string,
-    '$cursor-disabled': PropTypes.string
+  theme: propTypes$1.shape({
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-shadows': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool,
+    '$enable-transitions': propTypes$1.bool,
+    '$font-size-base': propTypes$1.string, // Assumes the browser default, typically `16px`
+    '$font-size-lg': propTypes$1.string,
+    '$font-size-sm': propTypes$1.string,
+    '$font-size-xs': propTypes$1.string,
+    '$line-height-base': propTypes$1.string,
+    '$border-radius': propTypes$1.string,
+    '$border-radius-lg': propTypes$1.string,
+    '$border-radius-sm': propTypes$1.string,
+    '$input-padding-x': propTypes$1.string,
+    '$input-padding-y': propTypes$1.string,
+    '$input-bg': propTypes$1.string,
+    '$input-bg-disabled': propTypes$1.string,
+    '$input-padding-x-lg': propTypes$1.string,
+    '$input-padding-y-lg': propTypes$1.string,
+    '$input-line-height': propTypes$1.string,
+    '$input-height': propTypes$1.string,
+    '$input-box-shadow': propTypes$1.string,
+    '$input-btn-border-width': propTypes$1.string, // For form controls and buttons
+    '$input-group-addon-bg': propTypes$1.string,
+    '$input-border-color': propTypes$1.string,
+    '$input-border-focus': propTypes$1.string,
+    '$input-box-shadow-focus': propTypes$1.string,
+    '$input-color': propTypes$1.string,
+    '$input-group-addon-border-color': propTypes$1.string,
+    '$input-padding-x-sm': propTypes$1.string,
+    '$input-padding-y-sm': propTypes$1.string,
+    '$input-color-placeholder': propTypes$1.string,
+    '$input-border-radius-lg': propTypes$1.string,
+    '$input-border-radius-sm': propTypes$1.string,
+    '$input-border-radius': propTypes$1.string,
+    '$input-transition': propTypes$1.string,
+    '$input-color-focus': propTypes$1.string,
+    '$input-bg-focus': propTypes$1.string,
+    '$cursor-disabled': propTypes$1.string
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var InputGroupUnstyled = function (_React$Component) {
@@ -17884,7 +18808,7 @@ var InputGroupUnstyled = function (_React$Component) {
 
 
 InputGroupUnstyled.defaultProps = defaultProps$35;
-InputGroupUnstyled.propTypes = propTypes$39;
+InputGroupUnstyled.propTypes = propTypes$40;
 var InputGroup = styled__default(InputGroupUnstyled).withConfig({
   displayName: 'InputGroup'
 })(['', ''], function (props) {
@@ -17892,7 +18816,7 @@ var InputGroup = styled__default(InputGroupUnstyled).withConfig({
 });
 
 InputGroup.defaultProps = defaultProps$35;
-InputGroup.propTypes = propTypes$39;
+InputGroup.propTypes = propTypes$40;
 
 /**
  * InputGroup Component
@@ -17902,20 +18826,20 @@ InputGroup.propTypes = propTypes$39;
 var defaultProps$36 = {
   tag: 'div'
 };
-var propTypes$40 = {
+var propTypes$41 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var InputGroupAddon = function (_React$Component) {
@@ -17953,11 +18877,11 @@ var InputGroupAddon = function (_React$Component) {
 }(React__default.Component);
 
 InputGroupAddon.defaultProps = defaultProps$36;
-InputGroupAddon.propTypes = propTypes$40;
+InputGroupAddon.propTypes = propTypes$41;
 
 
 InputGroupAddon.defaultProps = defaultProps$36;
-InputGroupAddon.propTypes = propTypes$40;
+InputGroupAddon.propTypes = propTypes$41;
 
 /**
  * InputGroup Component
@@ -17967,26 +18891,26 @@ InputGroupAddon.propTypes = propTypes$40;
 var defaultProps$37 = {
   tag: 'div'
 };
-var propTypes$41 = {
+var propTypes$42 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<InputGroup />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Specified input group className. */
-  groupClassName: PropTypes.string,
+  groupClassName: propTypes$1.string,
   /** Specified input group attribute. */
-  groupAttributes: PropTypes.object,
+  groupAttributes: propTypes$1.object,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var InputGroupButton = function (_React$Component) {
@@ -18045,11 +18969,11 @@ var InputGroupButton = function (_React$Component) {
 }(React__default.Component);
 
 InputGroupButton.defaultProps = defaultProps$37;
-InputGroupButton.propTypes = propTypes$41;
+InputGroupButton.propTypes = propTypes$42;
 
 
 InputGroupButton.defaultProps = defaultProps$37;
-InputGroupButton.propTypes = propTypes$41;
+InputGroupButton.propTypes = propTypes$42;
 
 function IssueIcon(props) {
   return React__default.createElement(
@@ -18064,7 +18988,7 @@ function IssueIcon(props) {
 }
 
 IssueIcon.propTypes = {
-  className: PropTypes.string
+  className: propTypes$1.string
 };
 
 /**
@@ -18087,27 +19011,27 @@ var defaultProps$38 = {
     '$nested-kbd-font-weight': 'bold'
   }
 };
-var propTypes$42 = {
+var propTypes$43 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<Kbd />` component. */
-  children: PropTypes.node.isRequired,
+  children: propTypes$1.node.isRequired,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$enable-rounded': PropTypes.bool,
-    '$enable-shadows': PropTypes.bool,
-    '$font-family-monospace': PropTypes.string,
-    '$font-weight-bold': PropTypes.string,
-    '$border-radius-sm': PropTypes.string,
-    '$code-font-size': PropTypes.string,
-    '$code-padding-x': PropTypes.string,
-    '$code-padding-y': PropTypes.string,
-    '$kbd-color': PropTypes.string,
-    '$kbd-bg': PropTypes.string,
-    '$kbd-box-shadow': PropTypes.string,
-    '$nested-kbd-font-weight': PropTypes.string
+  theme: propTypes$1.shape({
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-shadows': propTypes$1.bool,
+    '$font-family-monospace': propTypes$1.string,
+    '$font-weight-bold': propTypes$1.string,
+    '$border-radius-sm': propTypes$1.string,
+    '$code-font-size': propTypes$1.string,
+    '$code-padding-x': propTypes$1.string,
+    '$code-padding-y': propTypes$1.string,
+    '$kbd-color': propTypes$1.string,
+    '$kbd-bg': propTypes$1.string,
+    '$kbd-box-shadow': propTypes$1.string,
+    '$nested-kbd-font-weight': propTypes$1.string
   })
 };
 
@@ -18151,7 +19075,7 @@ var KbdUnstyled = function (_React$Component) {
 
 
 KbdUnstyled.defaultProps = defaultProps$38;
-KbdUnstyled.propTypes = propTypes$42;
+KbdUnstyled.propTypes = propTypes$43;
 var Kbd = styled__default(KbdUnstyled).withConfig({
   displayName: 'Kbd'
 })(['', ''], function (props) {
@@ -18159,7 +19083,7 @@ var Kbd = styled__default(KbdUnstyled).withConfig({
 });
 
 Kbd.defaultProps = defaultProps$38;
-Kbd.propTypes = propTypes$42;
+Kbd.propTypes = propTypes$43;
 
 /**
  * A Jumbotron (Slider)
@@ -18181,30 +19105,30 @@ var defaultProps$39 = {
     '$jumbotron-bg': '#eceeef'
   }
 };
-var propTypes$43 = {
+var propTypes$44 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Toggles disabled CSS style. */
-  fluid: PropTypes.bool,
+  fluid: propTypes$1.bool,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$enable-rounded': PropTypes.bool,
-    '$grid-breakpoints': PropTypes.object,
-    '$border-radius-lg': PropTypes.string,
-    '$jumbotron-padding': PropTypes.string,
-    '$jumbotron-bg': PropTypes.string
+  theme: propTypes$1.shape({
+    '$enable-rounded': propTypes$1.bool,
+    '$grid-breakpoints': propTypes$1.object,
+    '$border-radius-lg': propTypes$1.string,
+    '$jumbotron-padding': propTypes$1.string,
+    '$jumbotron-bg': propTypes$1.string
   }),
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var JumbotronUnstyled = function (_React$Component) {
@@ -18247,7 +19171,7 @@ var JumbotronUnstyled = function (_React$Component) {
 
 
 JumbotronUnstyled.defaultProps = defaultProps$39;
-JumbotronUnstyled.propTypes = propTypes$43;
+JumbotronUnstyled.propTypes = propTypes$44;
 var Jumbotron = styled__default(JumbotronUnstyled).withConfig({
   displayName: 'Jumbotron'
 })(['', ''], function (props) {
@@ -18255,7 +19179,7 @@ var Jumbotron = styled__default(JumbotronUnstyled).withConfig({
 });
 
 Jumbotron.defaultProps = defaultProps$39;
-Jumbotron.propTypes = propTypes$43;
+Jumbotron.propTypes = propTypes$44;
 
 /**
  * Label component
@@ -18263,40 +19187,40 @@ Jumbotron.propTypes = propTypes$43;
 
 var colSizes = ['xs', 'sm', 'md', 'lg', 'xl'];
 
-var stringOrNumberProp$1 = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
+var stringOrNumberProp$1 = propTypes$1.oneOfType([propTypes$1.number, propTypes$1.string]);
 
-var columnProps$1 = PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.shape({
+var columnProps$1 = propTypes$1.oneOfType([propTypes$1.string, propTypes$1.number, propTypes$1.shape({
   size: stringOrNumberProp$1,
   push: stringOrNumberProp$1,
   pull: stringOrNumberProp$1,
   offset: stringOrNumberProp$1
 })]);
 
-var propTypes$44 = {
+var propTypes$45 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string]),
+  tag: propTypes$1.oneOfType([propTypes$1.string]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({}),
+  theme: propTypes$1.shape({}),
   /** Toggles check CSS style. */
-  check: PropTypes.bool,
+  check: propTypes$1.bool,
   /** Specified node element will be passed as children of `<Label />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Toggles disabled CSS style. */
-  disabled: PropTypes.bool,
+  disabled: propTypes$1.bool,
   /** `For` attribute ill be replaced with the specified one. */
-  for: PropTypes.string,
+  for: propTypes$1.string,
   /** Toggles hidden CSS style. */
-  hidden: PropTypes.bool,
+  hidden: propTypes$1.bool,
   /** Toggles inline CSS style. */
-  inline: PropTypes.bool,
+  inline: propTypes$1.bool,
   /** `size` attribute ill be replaced with the specified one. */
-  size: PropTypes.string,
+  size: propTypes$1.string,
   /** Extra small columns variables. */
   xs: columnProps$1,
   /** Small columns variables. */
@@ -18311,7 +19235,7 @@ var propTypes$44 = {
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var defaultProps$40 = {
@@ -18362,7 +19286,7 @@ var Label = styled__default(LabelUnstyled).withConfig({
   return '\n    /* Reboot Scss */\n    touch-action: manipulation;\n    /* Allow labels to use margin for spacing. */\n    display: inline-block;\n    margin-bottom: ' + props.theme['$label-margin-bottom'] + ';\n\n    ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
 
-Label.propTypes = propTypes$44;
+Label.propTypes = propTypes$45;
 Label.defaultProps = defaultProps$40;
 
 /* A Legend (Box) */
@@ -18399,42 +19323,42 @@ var defaultProps$41 = {
     '$list-inline-padding': '5px'
   }
 };
-var propTypes$45 = {
+var propTypes$46 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<Li />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$list-inline-padding': PropTypes.string
+  theme: propTypes$1.shape({
+    '$list-inline-padding': propTypes$1.string
   }),
   /** Toggles disabled CSS style. */
-  disabled: PropTypes.bool,
+  disabled: propTypes$1.bool,
   /** Toggles separator CSS display. */
-  separator: PropTypes.bool,
+  separator: propTypes$1.bool,
   /** Toggles active CSS display. */
-  active: PropTypes.bool,
+  active: propTypes$1.bool,
   /** Toggles inline CSS display. */
-  inline: PropTypes.bool,
+  inline: propTypes$1.bool,
   /** Toggles media CSS style. */
-  media: PropTypes.bool,
+  media: propTypes$1.bool,
   /** Toggles 'dropdown-item' CSS style. */
-  'dropdown-item': PropTypes.bool,
+  'dropdown-item': propTypes$1.bool,
   /** Toggles 'dropdown-header' CSS style. */
-  'dropdown-header': PropTypes.bool,
+  'dropdown-header': propTypes$1.bool,
   /** Toggles 'dropdown-footer' CSS style. */
-  'dropdown-footer': PropTypes.bool,
+  'dropdown-footer': propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var LiUnstyled = function (_React$Component) {
@@ -18487,7 +19411,7 @@ var LiUnstyled = function (_React$Component) {
 
 
 LiUnstyled.defaultProps = defaultProps$41;
-LiUnstyled.propTypes = propTypes$45;
+LiUnstyled.propTypes = propTypes$46;
 var Li = styled__default(LiUnstyled).withConfig({
   displayName: 'Li'
 })(['', ''], function (props) {
@@ -18495,7 +19419,7 @@ var Li = styled__default(LiUnstyled).withConfig({
 });
 
 Li.defaultProps = defaultProps$41;
-Li.propTypes = propTypes$45;
+Li.propTypes = propTypes$46;
 
 var listGroup = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -18699,66 +19623,66 @@ var defaultProps$43 = {
     '$navbar-inverse-disabled-color': 'rgba(255, 255, 255, 0.25)'
   }
 };
-var propTypes$47 = {
+var propTypes$48 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<Ul />` component. */
-  children: PropTypes.node.isRequired,
+  children: propTypes$1.node.isRequired,
   /** Toggles inline CSS style. */
-  inline: PropTypes.bool,
+  inline: propTypes$1.bool,
   /** Toggles un-styled CSS style. */
-  unstyled: PropTypes.bool,
+  unstyled: propTypes$1.bool,
   /** Toggles passed as a string. Can be `true` or `false` */
-  toggleable: PropTypes.string,
+  toggleable: propTypes$1.string,
   /** Theme variables. */
-  theme: PropTypes.shape({
-    '$enable-rounded': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool,
-    '$grid-breakpoints': PropTypes.object,
-    '$border-width': PropTypes.string,
-    '$font-size-lg': PropTypes.string,
-    '$body-bg': PropTypes.string,
-    '$component-active-bg': PropTypes.string,
-    '$component-active-color': PropTypes.string,
-    '$border-radius': PropTypes.string,
-    '$navbar-padding-x': PropTypes.string,
-    '$navbar-padding-y': PropTypes.string,
-    '$nav-link-padding': PropTypes.string,
-    '$nav-disabled-link-color': PropTypes.string,
-    '$nav-tabs-border-color': PropTypes.string,
-    '$nav-tabs-border-width': PropTypes.string,
-    '$nav-tabs-border-radius': PropTypes.string,
-    '$nav-tabs-link-hover-border-color': PropTypes.string,
-    '$nav-tabs-active-link-hover-color': PropTypes.string,
-    '$nav-tabs-active-link-hover-bg': PropTypes.string,
-    '$nav-tabs-active-link-hover-border-color': PropTypes.string,
-    '$nav-pills-border-radius': PropTypes.string,
-    '$nav-pills-active-link-color': PropTypes.string,
-    '$nav-pills-active-link-bg': PropTypes.string,
-    '$cursor-disabled': PropTypes.string,
-    '$zindex-navbar': PropTypes.string,
-    '$zindex-navbar-fixed': PropTypes.string,
-    '$zindex-navbar-sticky': PropTypes.string,
-    '$navbar-brand-padding-y': PropTypes.string,
-    '$navbar-divider-padding-y': PropTypes.string,
-    '$navbar-toggler-padding-y': PropTypes.string,
-    '$navbar-toggler-padding-x': PropTypes.string,
-    '$navbar-toggler-font-size': PropTypes.string,
-    '$navbar-toggler-border-radius': PropTypes.string,
-    '$navbar-light-active-color': PropTypes.string,
-    '$navbar-light-color': PropTypes.string,
-    '$navbar-light-hover-color': PropTypes.string,
-    '$navbar-light-toggler-border': PropTypes.string,
-    '$navbar-light-disabled-color': PropTypes.string,
-    '$navbar-light-toggler-bg': PropTypes.string,
-    '$navbar-inverse-active-color': PropTypes.string,
-    '$navbar-inverse-color': PropTypes.string,
-    '$navbar-inverse-hover-color': PropTypes.string,
-    '$navbar-inverse-toggler-border': PropTypes.string,
-    '$navbar-inverse-toggler-bg': PropTypes.string,
-    '$navbar-inverse-disabled-color': PropTypes.string
+  theme: propTypes$1.shape({
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool,
+    '$grid-breakpoints': propTypes$1.object,
+    '$border-width': propTypes$1.string,
+    '$font-size-lg': propTypes$1.string,
+    '$body-bg': propTypes$1.string,
+    '$component-active-bg': propTypes$1.string,
+    '$component-active-color': propTypes$1.string,
+    '$border-radius': propTypes$1.string,
+    '$navbar-padding-x': propTypes$1.string,
+    '$navbar-padding-y': propTypes$1.string,
+    '$nav-link-padding': propTypes$1.string,
+    '$nav-disabled-link-color': propTypes$1.string,
+    '$nav-tabs-border-color': propTypes$1.string,
+    '$nav-tabs-border-width': propTypes$1.string,
+    '$nav-tabs-border-radius': propTypes$1.string,
+    '$nav-tabs-link-hover-border-color': propTypes$1.string,
+    '$nav-tabs-active-link-hover-color': propTypes$1.string,
+    '$nav-tabs-active-link-hover-bg': propTypes$1.string,
+    '$nav-tabs-active-link-hover-border-color': propTypes$1.string,
+    '$nav-pills-border-radius': propTypes$1.string,
+    '$nav-pills-active-link-color': propTypes$1.string,
+    '$nav-pills-active-link-bg': propTypes$1.string,
+    '$cursor-disabled': propTypes$1.string,
+    '$zindex-navbar': propTypes$1.string,
+    '$zindex-navbar-fixed': propTypes$1.string,
+    '$zindex-navbar-sticky': propTypes$1.string,
+    '$navbar-brand-padding-y': propTypes$1.string,
+    '$navbar-divider-padding-y': propTypes$1.string,
+    '$navbar-toggler-padding-y': propTypes$1.string,
+    '$navbar-toggler-padding-x': propTypes$1.string,
+    '$navbar-toggler-font-size': propTypes$1.string,
+    '$navbar-toggler-border-radius': propTypes$1.string,
+    '$navbar-light-active-color': propTypes$1.string,
+    '$navbar-light-color': propTypes$1.string,
+    '$navbar-light-hover-color': propTypes$1.string,
+    '$navbar-light-toggler-border': propTypes$1.string,
+    '$navbar-light-disabled-color': propTypes$1.string,
+    '$navbar-light-toggler-bg': propTypes$1.string,
+    '$navbar-inverse-active-color': propTypes$1.string,
+    '$navbar-inverse-color': propTypes$1.string,
+    '$navbar-inverse-hover-color': propTypes$1.string,
+    '$navbar-inverse-toggler-border': propTypes$1.string,
+    '$navbar-inverse-toggler-bg': propTypes$1.string,
+    '$navbar-inverse-disabled-color': propTypes$1.string
   })
 };
 
@@ -18800,7 +19724,7 @@ var UlUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 UlUnstyled.defaultProps = defaultProps$43;
-UlUnstyled.propTypes = propTypes$47;
+UlUnstyled.propTypes = propTypes$48;
 
 
 var Ul = styled__default(UlUnstyled).withConfig({
@@ -18810,7 +19734,7 @@ var Ul = styled__default(UlUnstyled).withConfig({
 });
 
 Ul.defaultProps = defaultProps$43;
-Ul.propTypes = propTypes$47;
+Ul.propTypes = propTypes$48;
 
 /**
  * ListGroup component
@@ -18852,55 +19776,55 @@ var defaultProps$42 = {
     '$state-danger-bg': '#f2dede'
   }
 };
-var propTypes$46 = {
+var propTypes$47 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Replace the default component tag by the one specified. Can be: */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /** Toggles flush CSS style. */
-  flush: PropTypes.bool,
+  flush: propTypes$1.bool,
   /** Toggles passed as a string. Can be `true` or `false` */
-  toggleable: PropTypes.string,
+  toggleable: propTypes$1.string,
   /** Theme variables. */
-  theme: PropTypes.shape({
-    '$enable-rounded': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool,
-    '$component-active-color': PropTypes.string,
-    '$component-active-bg': PropTypes.string,
-    '$list-group-color': PropTypes.string,
-    '$list-group-bg': PropTypes.string,
-    '$list-group-border-color': PropTypes.string,
-    '$list-group-border-width': PropTypes.string,
-    '$list-group-border-radius': PropTypes.string,
-    '$list-group-item-padding-x': PropTypes.string,
-    '$list-group-item-padding-y': PropTypes.string,
-    '$list-group-hover-bg': PropTypes.string,
-    '$list-group-active-color': PropTypes.string,
-    '$list-group-active-bg': PropTypes.string,
-    '$list-group-active-border': PropTypes.string,
-    '$list-group-disabled-color': PropTypes.string,
-    '$list-group-disabled-bg': PropTypes.string,
-    '$list-group-link-color': PropTypes.string,
-    '$list-group-link-hover-color': PropTypes.string,
-    '$list-group-link-active-color': PropTypes.string,
-    '$list-group-link-active-bg': PropTypes.string,
-    '$cursor-disabled': PropTypes.string,
-    '$state-success-text': PropTypes.string,
-    '$state-success-bg': PropTypes.string,
-    '$state-info-text': PropTypes.string,
-    '$state-info-bg': PropTypes.string,
-    '$state-warning-text': PropTypes.string,
-    '$state-warning-bg': PropTypes.string,
-    '$state-danger-text': PropTypes.string,
-    '$state-danger-bg': PropTypes.string
+  theme: propTypes$1.shape({
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool,
+    '$component-active-color': propTypes$1.string,
+    '$component-active-bg': propTypes$1.string,
+    '$list-group-color': propTypes$1.string,
+    '$list-group-bg': propTypes$1.string,
+    '$list-group-border-color': propTypes$1.string,
+    '$list-group-border-width': propTypes$1.string,
+    '$list-group-border-radius': propTypes$1.string,
+    '$list-group-item-padding-x': propTypes$1.string,
+    '$list-group-item-padding-y': propTypes$1.string,
+    '$list-group-hover-bg': propTypes$1.string,
+    '$list-group-active-color': propTypes$1.string,
+    '$list-group-active-bg': propTypes$1.string,
+    '$list-group-active-border': propTypes$1.string,
+    '$list-group-disabled-color': propTypes$1.string,
+    '$list-group-disabled-bg': propTypes$1.string,
+    '$list-group-link-color': propTypes$1.string,
+    '$list-group-link-hover-color': propTypes$1.string,
+    '$list-group-link-active-color': propTypes$1.string,
+    '$list-group-link-active-bg': propTypes$1.string,
+    '$cursor-disabled': propTypes$1.string,
+    '$state-success-text': propTypes$1.string,
+    '$state-success-bg': propTypes$1.string,
+    '$state-info-text': propTypes$1.string,
+    '$state-info-bg': propTypes$1.string,
+    '$state-warning-text': propTypes$1.string,
+    '$state-warning-bg': propTypes$1.string,
+    '$state-danger-text': propTypes$1.string,
+    '$state-danger-bg': propTypes$1.string
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var ListGroupUnstyled = function (_React$Component) {
@@ -18942,7 +19866,7 @@ var ListGroupUnstyled = function (_React$Component) {
 
 
 ListGroupUnstyled.defaultProps = defaultProps$42;
-ListGroupUnstyled.propTypes = propTypes$46;
+ListGroupUnstyled.propTypes = propTypes$47;
 var ListGroup = styled__default(ListGroupUnstyled).withConfig({
   displayName: 'ListGroup'
 })(['', ''], function (props) {
@@ -18950,7 +19874,7 @@ var ListGroup = styled__default(ListGroupUnstyled).withConfig({
 });
 
 ListGroup.defaultProps = defaultProps$42;
-ListGroup.propTypes = propTypes$46;
+ListGroup.propTypes = propTypes$47;
 
 /**
  * ListGroup component
@@ -18962,26 +19886,26 @@ var handleDisabledOnClick = function handleDisabledOnClick(e) {
 var defaultProps$44 = {
   tag: 'li'
 };
-var propTypes$48 = {
+var propTypes$49 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** . */
-  action: PropTypes.bool,
-  active: PropTypes.bool,
-  disabled: PropTypes.bool,
+  action: propTypes$1.bool,
+  active: propTypes$1.bool,
+  disabled: propTypes$1.bool,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['success', 'info', 'warning', 'danger', '']),
+  color: propTypes$1.oneOf(['success', 'info', 'warning', 'danger', '']),
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var ListGroupItem = function (_React$Component) {
@@ -19026,11 +19950,11 @@ var ListGroupItem = function (_React$Component) {
 }(React__default.Component);
 
 ListGroupItem.defaultProps = defaultProps$44;
-ListGroupItem.propTypes = propTypes$48;
+ListGroupItem.propTypes = propTypes$49;
 
 
 ListGroupItem.defaultProps = defaultProps$44;
-ListGroupItem.propTypes = propTypes$48;
+ListGroupItem.propTypes = propTypes$49;
 
 /**
  * ListGroup component
@@ -19039,15 +19963,15 @@ ListGroupItem.propTypes = propTypes$48;
 var defaultProps$45 = {
   tag: H5
 };
-var propTypes$49 = {
+var propTypes$50 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func])
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func])
 };
 
 var ListGroupItemHeading = function (_React$Component) {
@@ -19083,11 +20007,11 @@ var ListGroupItemHeading = function (_React$Component) {
 }(React__default.Component);
 
 ListGroupItemHeading.defaultProps = defaultProps$45;
-ListGroupItemHeading.propTypes = propTypes$49;
+ListGroupItemHeading.propTypes = propTypes$50;
 
 
 ListGroupItemHeading.defaultProps = defaultProps$45;
-ListGroupItemHeading.propTypes = propTypes$49;
+ListGroupItemHeading.propTypes = propTypes$50;
 
 /**
  * ListGroupItemText component
@@ -19096,12 +20020,12 @@ ListGroupItemHeading.propTypes = propTypes$49;
 var defaultProps$46 = {
   tag: 'p'
 };
-var propTypes$50 = {
+var propTypes$51 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func])
+  className: propTypes$1.string,
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func])
 };
 
 var ListGroupItemText = function (_React$Component) {
@@ -19137,11 +20061,11 @@ var ListGroupItemText = function (_React$Component) {
 }(React__default.Component);
 
 ListGroupItemText.defaultProps = defaultProps$46;
-ListGroupItemText.propTypes = propTypes$50;
+ListGroupItemText.propTypes = propTypes$51;
 
 
 ListGroupItemText.defaultProps = defaultProps$46;
-ListGroupItemText.propTypes = propTypes$50;
+ListGroupItemText.propTypes = propTypes$51;
 
 /**
  * Map Component
@@ -19161,11 +20085,11 @@ var defaultProps$47 = {
     '$mark-bg': '#fcf8e3'
   }
 };
-var propTypes$51 = {
+var propTypes$52 = {
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$mark-padding': PropTypes.string,
-    '$mark-bg': PropTypes.string
+  theme: propTypes$1.shape({
+    '$mark-padding': propTypes$1.string,
+    '$mark-bg': propTypes$1.string
   })
 };
 var Mark = styled__default.mark.withConfig({
@@ -19175,44 +20099,44 @@ var Mark = styled__default.mark.withConfig({
 });
 
 Mark.defaultProps = defaultProps$47;
-Mark.propTypes = propTypes$51;
+Mark.propTypes = propTypes$52;
 
 /**
  * Media component
  */
 
-var propTypes$52 = {
+var propTypes$53 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<Media />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Toggles body CSS style. */
-  body: PropTypes.bool,
+  body: propTypes$1.bool,
   /** Toggles body CSS style. */
-  bottom: PropTypes.bool,
+  bottom: propTypes$1.bool,
   /** Toggles heading CSS style. */
-  heading: PropTypes.bool,
+  heading: propTypes$1.bool,
   /** Toggles left CSS display. */
-  left: PropTypes.bool,
+  left: propTypes$1.bool,
   /** Toggles list CSS style. */
-  list: PropTypes.bool,
+  list: propTypes$1.bool,
   /** Toggles middle CSS style. */
-  middle: PropTypes.bool,
+  middle: propTypes$1.bool,
   /** Toggles object CSS style. */
-  object: PropTypes.bool,
+  object: propTypes$1.bool,
   /** Toggles right CSS style. */
-  right: PropTypes.bool,
+  right: propTypes$1.bool,
   /** . */
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  tag: propTypes$1.oneOfType([propTypes$1.func, propTypes$1.string]),
   /** Toggles top CSS style. */
-  top: PropTypes.bool,
+  top: propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 /**
  * A classic `<Media />` component.
@@ -19287,14 +20211,282 @@ var MediaUnstyled = function (_React$Component) {
   return MediaUnstyled;
 }(React__default.Component);
 
-MediaUnstyled.propTypes = propTypes$52;
+MediaUnstyled.propTypes = propTypes$53;
 
 
 var Media = styled__default(MediaUnstyled).withConfig({
   displayName: 'Media'
 })(['&.media,& .media{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;}& .media-body{-webkit-box-flex:1;-ms-flex:1 1 0%;flex:1 1 0%}', ''], media_2());
 
-Media.propTypes = propTypes$52;
+Media.propTypes = propTypes$53;
+
+var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Portal$2 = function (_React$Component) {
+  _inherits(Portal, _React$Component);
+
+  function Portal() {
+    _classCallCheck(this, Portal);
+
+    return _possibleConstructorReturn(this, (Portal.__proto__ || Object.getPrototypeOf(Portal)).apply(this, arguments));
+  }
+
+  _createClass(Portal, [{
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      if (this.defaultNode) {
+        document.body.removeChild(this.defaultNode);
+      }
+      this.defaultNode = null;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (!canUseDOM) {
+        return null;
+      }
+      if (!this.props.node && !this.defaultNode) {
+        this.defaultNode = document.createElement('div');
+        document.body.appendChild(this.defaultNode);
+      }
+      return ReactDOM.createPortal(this.props.children, this.props.node || this.defaultNode);
+    }
+  }]);
+
+  return Portal;
+}(React__default.Component);
+
+Portal$2.propTypes = {
+  children: propTypes$1.node.isRequired,
+  node: propTypes$1.any
+};
+
+var _createClass$1 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck$1(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn$1(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits$1(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// This file is a fallback for a consumer who is not yet on React 16
+// as createPortal was introduced in React 16
+
+var Portal$3 = function (_React$Component) {
+  _inherits$1(Portal, _React$Component);
+
+  function Portal() {
+    _classCallCheck$1(this, Portal);
+
+    return _possibleConstructorReturn$1(this, (Portal.__proto__ || Object.getPrototypeOf(Portal)).apply(this, arguments));
+  }
+
+  _createClass$1(Portal, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.renderPortal();
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(props) {
+      this.renderPortal();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      if (this.defaultNode) {
+        document.body.removeChild(this.defaultNode);
+      }
+      this.defaultNode = null;
+      this.portal = null;
+    }
+  }, {
+    key: 'renderPortal',
+    value: function renderPortal(props) {
+      if (!this.props.node && !this.defaultNode) {
+        this.defaultNode = document.createElement('div');
+        document.body.appendChild(this.defaultNode);
+      }
+
+      var children = this.props.children;
+      // https://gist.github.com/jimfb/d99e0678e9da715ccf6454961ef04d1b
+      if (typeof this.props.children.type === 'function') {
+        children = React__default.cloneElement(this.props.children);
+      }
+
+      this.portal = ReactDOM__default.unstable_renderSubtreeIntoContainer(this, children, this.props.node || this.defaultNode);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return null;
+    }
+  }]);
+
+  return Portal;
+}(React__default.Component);
+
+Portal$3.propTypes = {
+  children: propTypes$1.node.isRequired,
+  node: propTypes$1.any
+};
+
+var Portal = void 0;
+
+if (ReactDOM__default.createPortal) {
+  Portal = Portal$2;
+} else {
+  Portal = Portal$3;
+}
+
+var Portal$1 = Portal;
+
+var _createClass$2 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck$2(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn$2(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits$2(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var KEYCODES = {
+  ESCAPE: 27
+};
+
+var PortalWithState = function (_React$Component) {
+  _inherits$2(PortalWithState, _React$Component);
+
+  function PortalWithState(props) {
+    _classCallCheck$2(this, PortalWithState);
+
+    var _this = _possibleConstructorReturn$2(this, (PortalWithState.__proto__ || Object.getPrototypeOf(PortalWithState)).call(this, props));
+
+    _this.portalNode = null;
+    _this.state = { active: !!props.defaultOpen };
+    _this.openPortal = _this.openPortal.bind(_this);
+    _this.closePortal = _this.closePortal.bind(_this);
+    _this.wrapWithPortal = _this.wrapWithPortal.bind(_this);
+    _this.handleOutsideMouseClick = _this.handleOutsideMouseClick.bind(_this);
+    _this.handleKeydown = _this.handleKeydown.bind(_this);
+    return _this;
+  }
+
+  _createClass$2(PortalWithState, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.props.closeOnEsc) {
+        document.addEventListener('keydown', this.handleKeydown);
+      }
+      if (this.props.closeOnOutsideClick) {
+        document.addEventListener('click', this.handleOutsideMouseClick);
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      if (this.props.closeOnEsc) {
+        document.removeEventListener('keydown', this.handleKeydown);
+      }
+      if (this.props.closeOnOutsideClick) {
+        document.removeEventListener('click', this.handleOutsideMouseClick);
+      }
+    }
+  }, {
+    key: 'openPortal',
+    value: function openPortal(e) {
+      if (this.state.active) {
+        return;
+      }
+      if (e && e.nativeEvent) {
+        e.nativeEvent.stopImmediatePropagation();
+      }
+      this.setState({ active: true }, this.props.onOpen);
+    }
+  }, {
+    key: 'closePortal',
+    value: function closePortal() {
+      if (!this.state.active) {
+        return;
+      }
+      this.setState({ active: false }, this.props.onClose);
+    }
+  }, {
+    key: 'wrapWithPortal',
+    value: function wrapWithPortal(children) {
+      var _this2 = this;
+
+      if (!this.state.active) {
+        return null;
+      }
+      return React__default.createElement(
+        Portal$1,
+        {
+          node: this.props.node,
+          key: 'react-portal',
+          ref: function ref(portalNode) {
+            return _this2.portalNode = portalNode;
+          }
+        },
+        children
+      );
+    }
+  }, {
+    key: 'handleOutsideMouseClick',
+    value: function handleOutsideMouseClick(e) {
+      if (!this.state.active) {
+        return;
+      }
+      var root = this.portalNode.props.node || this.portalNode.defaultNode;
+      if (!root || root.contains(e.target) || e.button && e.button !== 0) {
+        return;
+      }
+      this.closePortal();
+    }
+  }, {
+    key: 'handleKeydown',
+    value: function handleKeydown(e) {
+      if (e.keyCode === KEYCODES.ESCAPE && this.state.active) {
+        this.closePortal();
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return this.props.children({
+        openPortal: this.openPortal,
+        closePortal: this.closePortal,
+        portal: this.wrapWithPortal,
+        isOpen: this.state.active
+      });
+    }
+  }]);
+
+  return PortalWithState;
+}(React__default.Component);
+
+PortalWithState.propTypes = {
+  children: propTypes$1.func.isRequired,
+  defaultOpen: propTypes$1.bool,
+  node: propTypes$1.any,
+  openByClickOn: propTypes$1.element,
+  closeOnEsc: propTypes$1.bool,
+  closeOnOutsideClick: propTypes$1.bool,
+  onOpen: propTypes$1.func,
+  onClose: propTypes$1.func
+};
+
+PortalWithState.defaultProps = {
+  onOpen: function onOpen() {},
+  onClose: function onClose() {}
+};
 
 var tools = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -19497,57 +20689,57 @@ var tools_6 = tools.conditionallyUpdateScrollbar;
 var tools_10 = tools.tetherAttachements;
 
 /* eslint no-underscore-dangle: 0 */
-var FadePropTypes = PropTypes.shape(propTypes$3);
-var propTypes$53 = {
+var FadePropTypes = propTypes$1.shape(propTypes$4);
+var propTypes$54 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({}),
+  theme: propTypes$1.shape({}),
   /** Toggles opened CSS style. */
-  isOpen: PropTypes.bool,
+  isOpen: propTypes$1.bool,
   /** Toggles auto focus CSS style. */
-  autoFocus: PropTypes.bool,
+  autoFocus: propTypes$1.bool,
   /** Modal use default size base and can use different size such as: */
-  size: PropTypes.oneOf(['sm', 'lg', '']),
+  size: propTypes$1.oneOf(['sm', 'lg', '']),
   /** Call specified function when on toggle action is triggered. */
-  toggle: PropTypes.func,
+  toggle: propTypes$1.func,
   /** Toggles keyboard events. */
-  keyboard: PropTypes.bool,
+  keyboard: propTypes$1.bool,
   /** Define role with specified one. */
-  role: PropTypes.string,
+  role: propTypes$1.string,
   /** Define labelledBy with specified one. */
-  labelledBy: PropTypes.string,
+  labelledBy: propTypes$1.string,
   /** Toggles backdrop action. */
-  backdrop: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['static'])]),
+  backdrop: propTypes$1.oneOfType([propTypes$1.bool, propTypes$1.oneOf(['static'])]),
   /** Call specified function when entering modal is triggered. */
-  onEnter: PropTypes.func,
+  onEnter: propTypes$1.func,
   /** Call specified function when exiting modal is triggered. */
-  onExit: PropTypes.func,
+  onExit: propTypes$1.func,
   /** Call specified function when opened modal is triggered. */
-  onOpened: PropTypes.func,
+  onOpened: propTypes$1.func,
   /** Call specified function when closed modal is triggered. */
-  onClosed: PropTypes.func,
+  onClosed: propTypes$1.func,
   /** Specified node element will be passed as children of `<Modal />`. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Define document's className with specified one. */
-  documentClassName: PropTypes.string,
+  documentClassName: propTypes$1.string,
   /** Define modal's className with specified one. */
-  modalClassName: PropTypes.string,
+  modalClassName: propTypes$1.string,
   /** Define backdrop's className with specified one. */
-  backdropClassName: PropTypes.string,
+  backdropClassName: propTypes$1.string,
   /** Define content's className with specified one. */
-  contentClassName: PropTypes.string,
+  contentClassName: propTypes$1.string,
   /** Toggles fade transition. */
-  fade: PropTypes.bool,
+  fade: propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object,
+  cssModule: propTypes$1.object,
   /** Define z-index with specified one. */
-  zIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  zIndex: propTypes$1.oneOfType([propTypes$1.number, propTypes$1.string]),
   /** Define backdrop transition with specified one. */
   backdropTransition: FadePropTypes,
   /** Define modal transition with specified one. */
@@ -19776,7 +20968,7 @@ var ModalUnstyled = function (_React$Component) {
         });
 
         return React__default.createElement(
-          reactPortal.Portal,
+          Portal$1,
           { node: this._element },
           React__default.createElement(
             'div',
@@ -19812,7 +21004,7 @@ var ModalUnstyled = function (_React$Component) {
 
 
 ModalUnstyled.defaultProps = defaultProps$48;
-ModalUnstyled.propTypes = propTypes$53;
+ModalUnstyled.propTypes = propTypes$54;
 var Modal = styled__default(ModalUnstyled).withConfig({
   displayName: 'Modal'
 })(['', ''], function (props) {
@@ -19820,26 +21012,26 @@ var Modal = styled__default(ModalUnstyled).withConfig({
 });
 
 Modal.defaultProps = defaultProps$48;
-Modal.propTypes = propTypes$53;
+Modal.propTypes = propTypes$54;
 
 var defaultProps$49 = {
   tag: 'div'
 };
 
-var propTypes$54 = {
+var propTypes$55 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var ModalBody = function ModalBody(props) {
@@ -19854,27 +21046,27 @@ var ModalBody = function ModalBody(props) {
   }));
 };
 
-ModalBody.propTypes = propTypes$54;
+ModalBody.propTypes = propTypes$55;
 ModalBody.defaultProps = defaultProps$49;
 
 var defaultProps$50 = {
   tag: 'div'
 };
 
-var propTypes$55 = {
+var propTypes$56 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var ModalFooter = function ModalFooter(props) {
@@ -19889,7 +21081,7 @@ var ModalFooter = function ModalFooter(props) {
   }));
 };
 
-ModalFooter.propTypes = propTypes$55;
+ModalFooter.propTypes = propTypes$56;
 ModalFooter.defaultProps = defaultProps$50;
 
 var defaultProps$51 = {
@@ -19897,26 +21089,26 @@ var defaultProps$51 = {
   wrapTag: 'div'
 };
 
-var propTypes$56 = {
+var propTypes$57 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<ModalHeader />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /** Wrapped tag variables. Can be: */
-  wrapTag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  wrapTag: propTypes$1.oneOfType([propTypes$1.func, propTypes$1.string]),
   /** Call specified function when on toggle action is triggered. */
-  toggle: PropTypes.func,
+  toggle: propTypes$1.func,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 
 };
 
@@ -19949,7 +21141,7 @@ var ModalHeader = function ModalHeader(props) {
   );
 };
 
-ModalHeader.propTypes = propTypes$56;
+ModalHeader.propTypes = propTypes$57;
 ModalHeader.defaultProps = defaultProps$51;
 
 /**
@@ -20007,83 +21199,83 @@ var defaultProps$52 = {
     '$navbar-inverse-disabled-color': 'rgba(255, 255, 255, 0.25)'
   }
 };
-var propTypes$57 = {
+var propTypes$58 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Toggles passed as a string. Can be `true` or `false` */
-  toggleable: PropTypes.string,
+  toggleable: propTypes$1.string,
   /** Toggles inline CSS style. */
-  inline: PropTypes.bool,
+  inline: propTypes$1.bool,
   /** Toggles vertical CSS style. */
-  vertical: PropTypes.bool,
+  vertical: propTypes$1.bool,
   /** Toggles justified CSS style. */
-  justified: PropTypes.bool,
+  justified: propTypes$1.bool,
   /** Toggles fill CSS style. */
-  fill: PropTypes.bool,
+  fill: propTypes$1.bool,
   /** Toggles tabs CSS style. */
-  tabs: PropTypes.bool,
+  tabs: propTypes$1.bool,
   /** Toggles pills CSS style. */
-  pills: PropTypes.bool,
+  pills: propTypes$1.bool,
   /** Toggles stacked CSS style. */
-  stacked: PropTypes.bool,
+  stacked: propTypes$1.bool,
   /** Toggles navbar CSS style. */
-  navbar: PropTypes.bool,
+  navbar: propTypes$1.bool,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$border-width': PropTypes.string,
-    '$font-size-lg': PropTypes.string,
-    '$body-bg': PropTypes.string,
-    '$component-active-bg': PropTypes.string,
-    '$component-active-color': PropTypes.string,
-    '$border-radius': PropTypes.string,
-    '$navbar-padding-x': PropTypes.string,
-    '$navbar-padding-y': PropTypes.string,
-    '$nav-link-padding': PropTypes.string,
-    '$nav-disabled-link-color': PropTypes.string,
-    '$nav-tabs-border-color': PropTypes.string,
-    '$nav-tabs-border-width': PropTypes.string,
-    '$nav-tabs-border-radius': PropTypes.string,
-    '$nav-tabs-link-hover-border-color': PropTypes.string,
-    '$nav-tabs-active-link-hover-color': PropTypes.string,
-    '$nav-tabs-active-link-hover-bg': PropTypes.string,
-    '$nav-tabs-active-link-hover-border-color': PropTypes.string,
-    '$nav-pills-border-radius': PropTypes.string,
-    '$nav-pills-active-link-color': PropTypes.string,
-    '$nav-pills-active-link-bg': PropTypes.string,
-    '$cursor-disabled': PropTypes.string,
-    '$zindex-navbar': PropTypes.string,
-    '$zindex-navbar-fixed': PropTypes.string,
-    '$zindex-navbar-sticky': PropTypes.string,
-    '$navbar-brand-padding-y': PropTypes.string,
-    '$navbar-divider-padding-y': PropTypes.string,
-    '$navbar-toggler-padding-y': PropTypes.string,
-    '$navbar-toggler-padding-x': PropTypes.string,
-    '$navbar-toggler-font-size': PropTypes.string,
-    '$navbar-toggler-border-radius': PropTypes.string,
-    '$navbar-light-active-color': PropTypes.string,
-    '$navbar-light-color': PropTypes.string,
-    '$navbar-light-hover-color': PropTypes.string,
-    '$navbar-light-toggler-border': PropTypes.string,
-    '$navbar-light-disabled-color': PropTypes.string,
-    '$navbar-light-toggler-bg': PropTypes.string,
-    '$navbar-inverse-active-color': PropTypes.string,
-    '$navbar-inverse-color': PropTypes.string,
-    '$navbar-inverse-hover-color': PropTypes.string,
-    '$navbar-inverse-toggler-border': PropTypes.string,
-    '$navbar-inverse-toggler-bg': PropTypes.string,
-    '$navbar-inverse-disabled-color': PropTypes.string
+  theme: propTypes$1.shape({
+    '$border-width': propTypes$1.string,
+    '$font-size-lg': propTypes$1.string,
+    '$body-bg': propTypes$1.string,
+    '$component-active-bg': propTypes$1.string,
+    '$component-active-color': propTypes$1.string,
+    '$border-radius': propTypes$1.string,
+    '$navbar-padding-x': propTypes$1.string,
+    '$navbar-padding-y': propTypes$1.string,
+    '$nav-link-padding': propTypes$1.string,
+    '$nav-disabled-link-color': propTypes$1.string,
+    '$nav-tabs-border-color': propTypes$1.string,
+    '$nav-tabs-border-width': propTypes$1.string,
+    '$nav-tabs-border-radius': propTypes$1.string,
+    '$nav-tabs-link-hover-border-color': propTypes$1.string,
+    '$nav-tabs-active-link-hover-color': propTypes$1.string,
+    '$nav-tabs-active-link-hover-bg': propTypes$1.string,
+    '$nav-tabs-active-link-hover-border-color': propTypes$1.string,
+    '$nav-pills-border-radius': propTypes$1.string,
+    '$nav-pills-active-link-color': propTypes$1.string,
+    '$nav-pills-active-link-bg': propTypes$1.string,
+    '$cursor-disabled': propTypes$1.string,
+    '$zindex-navbar': propTypes$1.string,
+    '$zindex-navbar-fixed': propTypes$1.string,
+    '$zindex-navbar-sticky': propTypes$1.string,
+    '$navbar-brand-padding-y': propTypes$1.string,
+    '$navbar-divider-padding-y': propTypes$1.string,
+    '$navbar-toggler-padding-y': propTypes$1.string,
+    '$navbar-toggler-padding-x': propTypes$1.string,
+    '$navbar-toggler-font-size': propTypes$1.string,
+    '$navbar-toggler-border-radius': propTypes$1.string,
+    '$navbar-light-active-color': propTypes$1.string,
+    '$navbar-light-color': propTypes$1.string,
+    '$navbar-light-hover-color': propTypes$1.string,
+    '$navbar-light-toggler-border': propTypes$1.string,
+    '$navbar-light-disabled-color': propTypes$1.string,
+    '$navbar-light-toggler-bg': propTypes$1.string,
+    '$navbar-inverse-active-color': propTypes$1.string,
+    '$navbar-inverse-color': propTypes$1.string,
+    '$navbar-inverse-hover-color': propTypes$1.string,
+    '$navbar-inverse-toggler-border': propTypes$1.string,
+    '$navbar-inverse-toggler-bg': propTypes$1.string,
+    '$navbar-inverse-disabled-color': propTypes$1.string
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
   /** Toggles disabled CSS style. */
 };
 
@@ -20144,7 +21336,7 @@ var NavUnstyled = function (_React$Component) {
 
 
 NavUnstyled.defaultProps = defaultProps$52;
-NavUnstyled.propTypes = propTypes$57;
+NavUnstyled.propTypes = propTypes$58;
 var Nav = styled__default(NavUnstyled).withConfig({
   displayName: 'Nav'
 })(['', ''], function (props) {
@@ -20152,35 +21344,35 @@ var Nav = styled__default(NavUnstyled).withConfig({
 });
 
 Nav.defaultProps = defaultProps$52;
-Nav.propTypes = propTypes$57;
+Nav.propTypes = propTypes$58;
 
 var defaultProps$53 = {
   tag: A
 };
-var propTypes$58 = {
+var propTypes$59 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Use that property to pass a ref callback to the native button component. */
-  innerRef: PropTypes.func,
+  innerRef: propTypes$1.func,
   /** Toggles disabled CSS style. */
-  disabled: PropTypes.bool,
+  disabled: propTypes$1.bool,
   /** Toggles active CSS style. */
-  active: PropTypes.bool,
+  active: propTypes$1.bool,
   /** Call specified function when on click event is triggered. */
-  onClick: PropTypes.func,
+  onClick: propTypes$1.func,
   /** Replace the default component tag reference by the one specified. */
-  href: PropTypes.any,
+  href: propTypes$1.any,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var NavLink = function (_React$Component) {
@@ -20237,11 +21429,11 @@ var NavLink = function (_React$Component) {
 }(React__default.Component);
 
 NavLink.defaultProps = defaultProps$53;
-NavLink.propTypes = propTypes$58;
+NavLink.propTypes = propTypes$59;
 
 
 NavLink.defaultProps = defaultProps$53;
-NavLink.propTypes = propTypes$58;
+NavLink.propTypes = propTypes$59;
 
 /**
  * NavItem Component
@@ -20251,20 +21443,20 @@ NavLink.propTypes = propTypes$58;
 var defaultProps$54 = {
   tag: 'li'
 };
-var propTypes$59 = {
+var propTypes$60 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var NavItem = function (_React$Component) {
@@ -20302,11 +21494,11 @@ var NavItem = function (_React$Component) {
 }(React__default.Component);
 
 NavItem.defaultProps = defaultProps$54;
-NavItem.propTypes = propTypes$59;
+NavItem.propTypes = propTypes$60;
 
 
 NavItem.defaultProps = defaultProps$54;
-NavItem.propTypes = propTypes$59;
+NavItem.propTypes = propTypes$60;
 
 /**
  * Ordered List Tabs and Pills
@@ -20321,10 +21513,10 @@ var defaultProps$55 = {
     '$list-inline-padding': '5px'
   }
 };
-var propTypes$60 = {
+var propTypes$61 = {
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$list-inline-padding': PropTypes.string
+  theme: propTypes$1.shape({
+    '$list-inline-padding': propTypes$1.string
   })
 };
 var Ol = styled__default.ol.withConfig({
@@ -20334,7 +21526,7 @@ var Ol = styled__default.ol.withConfig({
 });
 
 Ol.defaultProps = defaultProps$55;
-Ol.propTypes = propTypes$60;
+Ol.propTypes = propTypes$61;
 
 /* Option */
 
@@ -20371,7 +21563,7 @@ var OutputUnstyled = function (_React$Component) {
 
 OutputUnstyled.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
-  className: PropTypes.string
+  className: propTypes$1.string
   /* eslint-enable react/no-unused-prop-types */
 };
 
@@ -20416,50 +21608,50 @@ var defaultProps$56 = {
   }
 };
 
-var propTypes$61 = {
+var propTypes$62 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<DropdownItem />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  color: propTypes$1.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /** Toggles lead CSS style. */
-  lead: PropTypes.bool,
+  lead: propTypes$1.bool,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$enable-rounded': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool,
-    '$grid-breakpoints': PropTypes.object,
-    '$font-size-h1': PropTypes.string,
-    '$font-size-h2': PropTypes.string,
-    '$font-size-h3': PropTypes.string,
-    '$font-size-h4': PropTypes.string,
-    '$font-size-h5': PropTypes.string,
-    '$font-size-h6': PropTypes.string,
-    '$headings-margin-bottom': PropTypes.string,
-    '$headings-font-family': PropTypes.string,
-    '$headings-font-weight': PropTypes.string,
-    '$headings-line-height': PropTypes.string,
-    '$headings-color': PropTypes.string,
-    '$display1-size': PropTypes.string,
-    '$display2-size': PropTypes.string,
-    '$display3-size': PropTypes.string,
-    '$display4-size': PropTypes.string,
-    '$display1-weight': PropTypes.string,
-    '$display2-weight': PropTypes.string,
-    '$display3-weight': PropTypes.string,
-    '$display4-weight': PropTypes.string,
-    '$display-line-height': PropTypes.string,
-    '$lead-font-size': PropTypes.string,
-    '$lead-font-weight': PropTypes.string
+  theme: propTypes$1.shape({
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool,
+    '$grid-breakpoints': propTypes$1.object,
+    '$font-size-h1': propTypes$1.string,
+    '$font-size-h2': propTypes$1.string,
+    '$font-size-h3': propTypes$1.string,
+    '$font-size-h4': propTypes$1.string,
+    '$font-size-h5': propTypes$1.string,
+    '$font-size-h6': propTypes$1.string,
+    '$headings-margin-bottom': propTypes$1.string,
+    '$headings-font-family': propTypes$1.string,
+    '$headings-font-weight': propTypes$1.string,
+    '$headings-line-height': propTypes$1.string,
+    '$headings-color': propTypes$1.string,
+    '$display1-size': propTypes$1.string,
+    '$display2-size': propTypes$1.string,
+    '$display3-size': propTypes$1.string,
+    '$display4-size': propTypes$1.string,
+    '$display1-weight': propTypes$1.string,
+    '$display2-weight': propTypes$1.string,
+    '$display3-weight': propTypes$1.string,
+    '$display4-weight': propTypes$1.string,
+    '$display-line-height': propTypes$1.string,
+    '$lead-font-size': propTypes$1.string,
+    '$lead-font-weight': propTypes$1.string
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var PUnstyled = function (_React$Component) {
@@ -20502,7 +21694,7 @@ var PUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 PUnstyled.defaultProps = defaultProps$56;
-PUnstyled.propTypes = propTypes$61;
+PUnstyled.propTypes = propTypes$62;
 
 
 var P = styled__default(PUnstyled).withConfig({
@@ -20642,49 +21834,49 @@ var defaultProps$57 = {
     '$pagination-disabled-border': '#ddd'
   }
 };
-var propTypes$62 = {
+var propTypes$63 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<Pagination />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Pagination use default size base and can use different size such as: */
-  size: PropTypes.oneOf(['sm', 'lg']),
+  size: propTypes$1.oneOf(['sm', 'lg']),
   /** Replace the default component tag by the one specified. Can be: */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$enable-rounded': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool,
-    '$pagination-padding-x': PropTypes.string,
-    '$pagination-padding-y': PropTypes.string,
-    '$pagination-padding-x-sm': PropTypes.string,
-    '$pagination-padding-y-sm': PropTypes.string,
-    '$pagination-padding-x-lg': PropTypes.string,
-    '$pagination-padding-y-lg': PropTypes.string,
-    '$pagination-line-height': PropTypes.string,
-    '$pagination-color': PropTypes.string,
-    '$pagination-bg': PropTypes.string,
-    '$pagination-border-width': PropTypes.string,
-    '$pagination-border-color': PropTypes.string,
-    '$pagination-hover-color': PropTypes.string,
-    '$pagination-hover-bg': PropTypes.string,
-    '$pagination-hover-border': PropTypes.string,
-    '$pagination-active-color': PropTypes.string,
-    '$pagination-active-bg': PropTypes.string,
-    '$pagination-active-border': PropTypes.string,
-    '$pagination-disabled-color': PropTypes.string,
-    '$pagination-disabled-bg': PropTypes.string,
-    '$pagination-disabled-border': PropTypes.string
+  theme: propTypes$1.shape({
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool,
+    '$pagination-padding-x': propTypes$1.string,
+    '$pagination-padding-y': propTypes$1.string,
+    '$pagination-padding-x-sm': propTypes$1.string,
+    '$pagination-padding-y-sm': propTypes$1.string,
+    '$pagination-padding-x-lg': propTypes$1.string,
+    '$pagination-padding-y-lg': propTypes$1.string,
+    '$pagination-line-height': propTypes$1.string,
+    '$pagination-color': propTypes$1.string,
+    '$pagination-bg': propTypes$1.string,
+    '$pagination-border-width': propTypes$1.string,
+    '$pagination-border-color': propTypes$1.string,
+    '$pagination-hover-color': propTypes$1.string,
+    '$pagination-hover-bg': propTypes$1.string,
+    '$pagination-hover-border': propTypes$1.string,
+    '$pagination-active-color': propTypes$1.string,
+    '$pagination-active-bg': propTypes$1.string,
+    '$pagination-active-border': propTypes$1.string,
+    '$pagination-disabled-color': propTypes$1.string,
+    '$pagination-disabled-bg': propTypes$1.string,
+    '$pagination-disabled-border': propTypes$1.string
   }),
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  color: propTypes$1.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var PaginationUnstyled = function (_React$Component) {
@@ -20722,7 +21914,7 @@ var PaginationUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 PaginationUnstyled.defaultProps = defaultProps$57;
-PaginationUnstyled.propTypes = propTypes$62;
+PaginationUnstyled.propTypes = propTypes$63;
 
 
 var Pagination = styled__default(PaginationUnstyled).withConfig({
@@ -20732,7 +21924,7 @@ var Pagination = styled__default(PaginationUnstyled).withConfig({
 });
 
 Pagination.defaultProps = defaultProps$57;
-Pagination.propTypes = propTypes$62;
+Pagination.propTypes = propTypes$63;
 
 /**
  * A PaginationItem
@@ -20775,12 +21967,12 @@ PaginationItem.defaultProps = {
   tag: 'li'
 };
 PaginationItem.propTypes = {
-  active: PropTypes.bool,
-  className: PropTypes.string,
-  children: PropTypes.node,
-  cssModule: PropTypes.object,
-  disabled: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+  active: propTypes$1.bool,
+  className: propTypes$1.string,
+  children: propTypes$1.node,
+  cssModule: propTypes$1.object,
+  disabled: propTypes$1.bool,
+  tag: propTypes$1.oneOfType([propTypes$1.func, propTypes$1.string])
 };
 
 /**
@@ -20862,13 +22054,13 @@ PaginationLink.defaultProps = {
   tag: A
 };
 PaginationLink.propTypes = {
-  'aria-label': PropTypes.string,
-  className: PropTypes.string,
-  children: PropTypes.node,
-  cssModule: PropTypes.object,
-  next: PropTypes.bool,
-  previous: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+  'aria-label': propTypes$1.string,
+  className: propTypes$1.string,
+  children: propTypes$1.node,
+  cssModule: propTypes$1.object,
+  next: propTypes$1.bool,
+  previous: propTypes$1.bool,
+  tag: propTypes$1.oneOfType([propTypes$1.func, propTypes$1.string])
 };
 
 /**
@@ -20883,13 +22075,13 @@ var defaultProps$58 = {
     '$font-family-monospace': 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace'
   }
 };
-var propTypes$63 = {
+var propTypes$64 = {
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$code-font-size': PropTypes.string,
-    '$pre-color': PropTypes.string,
-    '$pre-scrollable-max-height': PropTypes.string,
-    '$font-family-monospace': PropTypes.string
+  theme: propTypes$1.shape({
+    '$code-font-size': propTypes$1.string,
+    '$pre-color': propTypes$1.string,
+    '$pre-scrollable-max-height': propTypes$1.string,
+    '$font-family-monospace': propTypes$1.string
   })
 };
 var Pre = styled__default.pre.withConfig({
@@ -20899,7 +22091,7 @@ var Pre = styled__default.pre.withConfig({
 });
 
 Pre.defaultProps = defaultProps$58;
-Pre.propTypes = propTypes$63;
+Pre.propTypes = propTypes$64;
 
 var gradients = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -21012,25 +22204,25 @@ var defaultProps$59 = {
     '$progress-bar-animation-timing': 'infinite'
   }
 };
-var propTypes$64 = {
+var propTypes$65 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<Progress />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$enable-rounded': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool,
-    '$progress-height': PropTypes.string,
-    '$progress-font-size': PropTypes.string,
-    '$progress-bg': PropTypes.string,
-    '$progress-border-radius': PropTypes.string,
-    '$progress-box-shadow': PropTypes.string,
-    '$progress-bar-color': PropTypes.string,
-    '$progress-bar-bg': PropTypes.string,
-    '$progress-bar-animation-timing': PropTypes.string
+  theme: propTypes$1.shape({
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool,
+    '$progress-height': propTypes$1.string,
+    '$progress-font-size': propTypes$1.string,
+    '$progress-bg': propTypes$1.string,
+    '$progress-border-radius': propTypes$1.string,
+    '$progress-box-shadow': propTypes$1.string,
+    '$progress-bar-color': propTypes$1.string,
+    '$progress-bar-bg': propTypes$1.string,
+    '$progress-bar-animation-timing': propTypes$1.string
   })
 };
 
@@ -21069,7 +22261,7 @@ var ProgressUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 ProgressUnstyled.defaultProps = defaultProps$59;
-ProgressUnstyled.propTypes = propTypes$64;
+ProgressUnstyled.propTypes = propTypes$65;
 
 
 var backgroundPositionKeyFrame = function backgroundPositionKeyFrame(props) {
@@ -21087,7 +22279,7 @@ var Progress = styled__default(ProgressUnstyled).withConfig({
 });
 
 Progress.defaultProps = defaultProps$59;
-Progress.propTypes = propTypes$64;
+Progress.propTypes = propTypes$65;
 
 var asyncGenerator$2 = function () {
   function AwaitValue(value) {
@@ -21255,32 +22447,32 @@ var defaultProps$60 = {
   striped: false,
   animated: false
 };
-var propTypes$65 = {
+var propTypes$66 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<ProgressBar />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Defines the minimum value of the progress bar. */
-  valueMin: PropTypes.number,
+  valueMin: propTypes$1.number,
   /** Defines the current value of the progress bar. */
-  valueNow: PropTypes.number,
+  valueNow: propTypes$1.number,
   /** Defines the maximum value of the progress bar. */
-  valueMax: PropTypes.number,
+  valueMax: propTypes$1.number,
   /** Defines the size height. */
-  height: PropTypes.string,
+  height: propTypes$1.string,
   /** Toggles striped CSS style. */
-  striped: PropTypes.bool,
+  striped: propTypes$1.bool,
   /** Toggles animated CSS style. */
-  animated: PropTypes.bool,
+  animated: propTypes$1.bool,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['success', 'info', 'warning', 'danger', '']),
+  color: propTypes$1.oneOf(['success', 'info', 'warning', 'danger', '']),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var ProgressBar = function (_React$Component) {
@@ -21344,11 +22536,11 @@ var ProgressBar = function (_React$Component) {
 }(React__default.Component);
 
 ProgressBar.defaultProps = defaultProps$60;
-ProgressBar.propTypes = propTypes$65;
+ProgressBar.propTypes = propTypes$66;
 
 
 ProgressBar.defaultProps = defaultProps$60;
-ProgressBar.propTypes = propTypes$65;
+ProgressBar.propTypes = propTypes$66;
 
 var defaultProps$61 = {
   tag: 'div',
@@ -21363,27 +22555,27 @@ var defaultProps$61 = {
     '$enable-grid-classes': false
   }
 };
-var propTypes$66 = {
+var propTypes$67 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   /** . */
-  noGutters: PropTypes.bool,
+  noGutters: propTypes$1.bool,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$grid-gutter-widths': PropTypes.object,
-    '$enable-grid-classes': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$grid-gutter-widths': propTypes$1.object,
+    '$enable-grid-classes': propTypes$1.bool
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var RowUnstyled = function (_React$Component) {
@@ -21429,7 +22621,7 @@ var RowUnstyled = function (_React$Component) {
 
 
 RowUnstyled.defaultProps = defaultProps$61;
-RowUnstyled.propTypes = propTypes$66;
+RowUnstyled.propTypes = propTypes$67;
 var Row = styled__default(RowUnstyled).withConfig({
   displayName: 'Row'
 })(['', ''], function (props) {
@@ -21437,7 +22629,7 @@ var Row = styled__default(RowUnstyled).withConfig({
 });
 
 Row.defaultProps = defaultProps$61;
-Row.propTypes = propTypes$66;
+Row.propTypes = propTypes$67;
 
 /**
  * Samp component
@@ -21453,13 +22645,13 @@ var Section = styled__default.section.withConfig({
 
 /* A Select (Box) */
 
-var propTypes$67 = {
+var propTypes$68 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<Select />` component. */
-  children: PropTypes.node
+  children: propTypes$1.node
 };
 
 var SelectUnstyled = function (_React$Component) {
@@ -21525,12 +22717,12 @@ var SelectUnstyled = function (_React$Component) {
  */
 
 
-SelectUnstyled.propTypes = propTypes$67;
+SelectUnstyled.propTypes = propTypes$68;
 var Select = styled__default(SelectUnstyled).withConfig({
   displayName: 'Select'
 })(['&.select{touch-action:manipulation;line-height:inherit;}&:disabled{color:graytext;}']);
 
-Select.propTypes = propTypes$67;
+Select.propTypes = propTypes$68;
 
 /**
  * Small component
@@ -21541,28 +22733,28 @@ var defaultProps$62 = {
     '$small-font-size': '80%'
   }
 };
-var propTypes$68 = {
+var propTypes$69 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   /** Specified node element will be passed as children of `<Small />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$small-font-size': PropTypes.string
+  theme: propTypes$1.shape({
+    '$small-font-size': propTypes$1.string
   }),
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  color: propTypes$1.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var SmallUnstyled = function (_React$Component) {
@@ -21604,7 +22796,7 @@ var SmallUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 SmallUnstyled.defaultProps = defaultProps$62;
-SmallUnstyled.propTypes = propTypes$68;
+SmallUnstyled.propTypes = propTypes$69;
 
 
 var Small = styled__default(SmallUnstyled).withConfig({
@@ -21614,26 +22806,26 @@ var Small = styled__default(SmallUnstyled).withConfig({
 });
 
 Small.defaultProps = defaultProps$62;
-Small.propTypes = propTypes$68;
+Small.propTypes = propTypes$69;
 
 /**
  * Strong component
  */
 
-var propTypes$69 = {
+var propTypes$70 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<DropdownItem />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
+  color: propTypes$1.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var StrongUnstyled = function (_React$Component) {
@@ -21673,14 +22865,14 @@ var StrongUnstyled = function (_React$Component) {
   return StrongUnstyled;
 }(React__default.Component);
 
-StrongUnstyled.propTypes = propTypes$69;
+StrongUnstyled.propTypes = propTypes$70;
 
 
 var Strong = styled__default(StrongUnstyled).withConfig({
   displayName: 'Strong'
 })(['font-weight:bolder;']);
 
-Strong.propTypes = propTypes$69;
+Strong.propTypes = propTypes$70;
 
 var Summary = styled__default.summary.withConfig({
   displayName: 'Summary'
@@ -21755,59 +22947,59 @@ var defaultProps$63 = {
     '$state-danger-bg': '#f2dede'
   }
 };
-var propTypes$70 = {
+var propTypes$71 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   /** Change tab size with specified one. Can be: `sm` */
-  size: PropTypes.string,
+  size: propTypes$1.string,
   /** Toggles bordered CSS style. */
-  bordered: PropTypes.bool,
+  bordered: propTypes$1.bool,
   /** Toggles striped CSS style. */
-  striped: PropTypes.bool,
+  striped: propTypes$1.bool,
   /** Toggles inverse CSS style. */
-  inverse: PropTypes.bool,
+  inverse: propTypes$1.bool,
   /** Toggles hover CSS style. */
-  hover: PropTypes.bool,
+  hover: propTypes$1.bool,
   /** Toggles reflow CSS style. */
-  reflow: PropTypes.bool,
+  reflow: propTypes$1.bool,
   /** Toggles responsive CSS display. */
-  responsive: PropTypes.bool,
+  responsive: propTypes$1.bool,
   /** Replace the responsive component tag by the one specified. Can be: */
-  responsiveTag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  responsiveTag: propTypes$1.oneOfType([propTypes$1.func, propTypes$1.string]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$body-bg': PropTypes.string,
-    '$table-cell-padding': PropTypes.string,
-    '$table-sm-cell-padding': PropTypes.string,
-    '$table-bg': PropTypes.string,
-    '$table-inverse-bg': PropTypes.string,
-    '$table-inverse-bg-accent': PropTypes.string,
-    '$table-inverse-bg-hover': PropTypes.string,
-    '$table-inverse-color': PropTypes.string,
-    '$table-inverse-border': PropTypes.string,
-    '$table-bg-accent': PropTypes.string,
-    '$table-bg-hover': PropTypes.string,
-    '$table-bg-active': PropTypes.string,
-    '$table-head-bg': PropTypes.string,
-    '$table-head-color': PropTypes.string,
-    '$table-border-width': PropTypes.string,
-    '$table-border-color': PropTypes.string,
-    '$state-success-bg': PropTypes.string,
-    '$state-info-bg': PropTypes.string,
-    '$state-warning-bg': PropTypes.string,
-    '$state-danger-bg': PropTypes.string
+  theme: propTypes$1.shape({
+    '$body-bg': propTypes$1.string,
+    '$table-cell-padding': propTypes$1.string,
+    '$table-sm-cell-padding': propTypes$1.string,
+    '$table-bg': propTypes$1.string,
+    '$table-inverse-bg': propTypes$1.string,
+    '$table-inverse-bg-accent': propTypes$1.string,
+    '$table-inverse-bg-hover': propTypes$1.string,
+    '$table-inverse-color': propTypes$1.string,
+    '$table-inverse-border': propTypes$1.string,
+    '$table-bg-accent': propTypes$1.string,
+    '$table-bg-hover': propTypes$1.string,
+    '$table-bg-active': propTypes$1.string,
+    '$table-head-bg': propTypes$1.string,
+    '$table-head-color': propTypes$1.string,
+    '$table-border-width': propTypes$1.string,
+    '$table-border-color': propTypes$1.string,
+    '$state-success-bg': propTypes$1.string,
+    '$state-info-bg': propTypes$1.string,
+    '$state-warning-bg': propTypes$1.string,
+    '$state-danger-bg': propTypes$1.string
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var TableUnstyled = function (_React$Component) {
@@ -21871,7 +23063,7 @@ var TableUnstyled = function (_React$Component) {
 
 
 TableUnstyled.defaultProps = defaultProps$63;
-TableUnstyled.propTypes = propTypes$70;
+TableUnstyled.propTypes = propTypes$71;
 var Table = styled__default(TableUnstyled).withConfig({
   displayName: 'Table'
 })(['', ''], function (props) {
@@ -21879,7 +23071,7 @@ var Table = styled__default(TableUnstyled).withConfig({
 });
 
 Table.defaultProps = defaultProps$63;
-Table.propTypes = propTypes$70;
+Table.propTypes = propTypes$71;
 
 /**
  * Tbody
@@ -21900,17 +23092,17 @@ var Tfoot = styled__default.tfoot.withConfig({
  * Thead component
  */
 
-var propTypes$71 = {
+var propTypes$72 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<Td />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Toggles inverse CSS style. */
-  inverse: PropTypes.bool,
+  inverse: propTypes$1.bool,
   /** Toggles default background CSS style. */
-  defaultBg: PropTypes.bool
+  defaultBg: propTypes$1.bool
 };
 
 var Thead = function (_React$Component) {
@@ -21949,24 +23141,24 @@ var Thead = function (_React$Component) {
   return Thead;
 }(React__default.Component);
 
-Thead.propTypes = propTypes$71;
+Thead.propTypes = propTypes$72;
 
 
-Thead.propTypes = propTypes$71;
+Thead.propTypes = propTypes$72;
 
 /**
  * Td component
  */
 
-var propTypes$72 = {
+var propTypes$73 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<Td />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['active', 'success', 'info', 'warning', 'danger', ''])
+  color: propTypes$1.oneOf(['active', 'success', 'info', 'warning', 'danger', ''])
 };
 
 var Td = function (_React$Component) {
@@ -22004,24 +23196,24 @@ var Td = function (_React$Component) {
   return Td;
 }(React__default.Component);
 
-Td.propTypes = propTypes$72;
+Td.propTypes = propTypes$73;
 
 
-Td.propTypes = propTypes$72;
+Td.propTypes = propTypes$73;
 
 /**
  * Th component
  */
 
-var propTypes$73 = {
+var propTypes$74 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<Th />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['active', 'success', 'info', 'warning', 'danger', ''])
+  color: propTypes$1.oneOf(['active', 'success', 'info', 'warning', 'danger', ''])
 };
 
 var Th = function (_React$Component) {
@@ -22059,24 +23251,24 @@ var Th = function (_React$Component) {
   return Th;
 }(React__default.Component);
 
-Th.propTypes = propTypes$73;
+Th.propTypes = propTypes$74;
 
 
-Th.propTypes = propTypes$73;
+Th.propTypes = propTypes$74;
 
 /**
  * Tr component
  */
 
-var propTypes$74 = {
+var propTypes$75 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<Td />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['active', 'success', 'info', 'warning', 'danger', ''])
+  color: propTypes$1.oneOf(['active', 'success', 'info', 'warning', 'danger', ''])
 };
 
 var Tr = function (_React$Component) {
@@ -22114,10 +23306,10 @@ var Tr = function (_React$Component) {
   return Tr;
 }(React__default.Component);
 
-Tr.propTypes = propTypes$74;
+Tr.propTypes = propTypes$75;
 
 
-Tr.propTypes = propTypes$74;
+Tr.propTypes = propTypes$75;
 
 var badge = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -22181,47 +23373,47 @@ var defaultProps$64 = {
     '$enable-hover-media-query': false
   }
 };
-var propTypes$75 = {
+var propTypes$76 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['default', 'primary', 'success', 'info', 'warning', 'danger']),
+  color: propTypes$1.oneOf(['default', 'primary', 'success', 'info', 'warning', 'danger']),
   /**
    * Change badge border radius.
    */
-  pill: PropTypes.bool,
+  pill: propTypes$1.bool,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$badge-default-bg': PropTypes.string,
-    '$badge-primary-bg': PropTypes.string,
-    '$badge-success-bg': PropTypes.string,
-    '$badge-info-bg': PropTypes.string,
-    '$badge-warning-bg': PropTypes.string,
-    '$badge-danger-bg': PropTypes.string,
-    '$badge-color': PropTypes.string,
-    '$badge-link-hover-color': PropTypes.string,
-    '$badge-font-size': PropTypes.string,
-    '$badge-font-weight': PropTypes.string,
-    '$badge-padding-x': PropTypes.string,
-    '$badge-padding-y': PropTypes.string,
-    '$badge-pill-padding-x': PropTypes.string,
-    '$badge-pill-border-radius': PropTypes.string,
-    '$link-hover-decoration': PropTypes.string,
-    '$enable-rounded': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$badge-default-bg': propTypes$1.string,
+    '$badge-primary-bg': propTypes$1.string,
+    '$badge-success-bg': propTypes$1.string,
+    '$badge-info-bg': propTypes$1.string,
+    '$badge-warning-bg': propTypes$1.string,
+    '$badge-danger-bg': propTypes$1.string,
+    '$badge-color': propTypes$1.string,
+    '$badge-link-hover-color': propTypes$1.string,
+    '$badge-font-size': propTypes$1.string,
+    '$badge-font-weight': propTypes$1.string,
+    '$badge-padding-x': propTypes$1.string,
+    '$badge-padding-y': propTypes$1.string,
+    '$badge-pill-padding-x': propTypes$1.string,
+    '$badge-pill-border-radius': propTypes$1.string,
+    '$link-hover-decoration': propTypes$1.string,
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool
   }),
 
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var BadgeUnstyled = function (_React$Component) {
@@ -22262,7 +23454,7 @@ var BadgeUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 BadgeUnstyled.defaultProps = defaultProps$64;
-BadgeUnstyled.propTypes = propTypes$75;
+BadgeUnstyled.propTypes = propTypes$76;
 
 
 var Badge = styled__default(BadgeUnstyled).withConfig({
@@ -22274,7 +23466,7 @@ var Badge = styled__default(BadgeUnstyled).withConfig({
  * Badges can be used as link and buttons and also in order to provide a counter.
  */
 Badge.defaultProps = defaultProps$64;
-Badge.propTypes = propTypes$75;
+Badge.propTypes = propTypes$76;
 
 /* A Textarea (Box) */
 
@@ -22304,48 +23496,48 @@ var defaultTetherConfig$1 = {
 };
 // propTypes need to be excluded of the tooltip class
 // issue on : https://github.com/yannickcr/eslint-plugin-react/issues/203
-var propTypes$76 = {
+var propTypes$77 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Tooltip placement. Please consult [Tether documentation](http://tether.io/) for more information. */
-  placement: PropTypes.oneOf(tools_10),
+  placement: propTypes$1.oneOf(tools_10),
   /** Id name of the component triggering tooltip action. */
-  target: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  target: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.object]).isRequired,
   /** Toggles opened CSS display. */
-  isOpen: PropTypes.bool,
+  isOpen: propTypes$1.bool,
   /** Toggles disabled CSS display. */
-  disabled: PropTypes.bool,
+  disabled: propTypes$1.bool,
   /** Tether object. Please consult [Tether documentation](http://tether.io/) for more information. */
-  tether: PropTypes.object,
+  tether: propTypes$1.object,
   /** Tether reference. Please consult [Tether documentation](http://tether.io/) for more information. */
-  tetherRef: PropTypes.func,
+  tetherRef: propTypes$1.func,
   /** Call specified function when toggle action is triggered. */
-  toggle: PropTypes.func,
+  toggle: propTypes$1.func,
   /** Toggles hide CSS display. */
-  autohide: PropTypes.bool,
+  autohide: propTypes$1.bool,
   /** Define delay before opening the tooltip. */
-  delay: PropTypes.oneOfType([PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }), PropTypes.number]),
+  delay: propTypes$1.oneOfType([propTypes$1.shape({ show: propTypes$1.number, hide: propTypes$1.number }), propTypes$1.number]),
   /** Theme variables. */
-  theme: PropTypes.shape({
-    '$zindex-tooltip': PropTypes.string,
-    '$tooltip-max-width': PropTypes.string,
-    '$tooltip-color': PropTypes.string,
-    '$tooltip-bg': PropTypes.string,
-    '$tooltip-opacity': PropTypes.string,
-    '$tooltip-padding-y': PropTypes.string,
-    '$tooltip-padding-x': PropTypes.string,
-    '$tooltip-margin': PropTypes.string,
-    '$tooltip-arrow-width': PropTypes.string,
-    '$tooltip-arrow-color': PropTypes.string,
-    '$component-active-color': PropTypes.string
+  theme: propTypes$1.shape({
+    '$zindex-tooltip': propTypes$1.string,
+    '$tooltip-max-width': propTypes$1.string,
+    '$tooltip-color': propTypes$1.string,
+    '$tooltip-bg': propTypes$1.string,
+    '$tooltip-opacity': propTypes$1.string,
+    '$tooltip-padding-y': propTypes$1.string,
+    '$tooltip-padding-x': propTypes$1.string,
+    '$tooltip-margin': propTypes$1.string,
+    '$tooltip-arrow-width': propTypes$1.string,
+    '$tooltip-arrow-color': propTypes$1.string,
+    '$component-active-color': propTypes$1.string
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 var defaultProps$65 = {
   isOpen: false,
@@ -22491,7 +23683,7 @@ var TooltipUnstyled = function (_React$Component) {
         return null;
       }
 
-      var attributes = lodash_omit(this.props, Object.keys(propTypes$76));
+      var attributes = lodash_omit(this.props, Object.keys(propTypes$77));
 
       var classes = mapToCssModules(classnames('tooltip', this.props.className), this.props.cssModule);
 
@@ -22524,7 +23716,7 @@ var TooltipUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 TooltipUnstyled.defaultProps = defaultProps$65;
-TooltipUnstyled.propTypes = propTypes$76;
+TooltipUnstyled.propTypes = propTypes$77;
 var Tooltip = styled__default(TooltipUnstyled).withConfig({
   displayName: 'Tooltip'
 })(['', ''], function (props) {
@@ -22532,7 +23724,7 @@ var Tooltip = styled__default(TooltipUnstyled).withConfig({
 });
 
 Tooltip.defaultProps = defaultProps$65;
-Tooltip.propTypes = propTypes$76;
+Tooltip.propTypes = propTypes$77;
 
 var cards = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -22688,80 +23880,80 @@ var defaultProps$66 = {
   }
 };
 
-var propTypes$77 = {
+var propTypes$78 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.node]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.node]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$brand-primary': PropTypes.string,
-    '$brand-success': PropTypes.string,
-    '$brand-info': PropTypes.string,
-    '$brand-warning': PropTypes.string,
-    '$brand-danger': PropTypes.string,
-    '$brand-inverse': PropTypes.string,
-    '$card-spacer-x': PropTypes.string,
-    '$card-spacer-y': PropTypes.string,
-    '$card-border-width': PropTypes.string,
-    '$card-border-radius': PropTypes.string,
-    '$card-border-color': PropTypes.string,
-    '$card-border-radius-inner': PropTypes.string,
-    '$card-cap-bg': PropTypes.string,
-    '$card-bg': PropTypes.string,
-    '$card-link-hover-color': PropTypes.string,
-    '$card-img-overlay-padding': PropTypes.string,
-    '$card-margin-y-halved': PropTypes.string,
-    '$card-margin-x-halved': PropTypes.string,
-    '$card-columns-count-md': PropTypes.string,
-    '$card-columns-gap-md': PropTypes.string,
-    '$card-columns-margin-md': PropTypes.string,
-    '$card-columns-count-lg': PropTypes.string,
-    '$card-columns-gap-lg': PropTypes.string,
-    '$card-columns-margin-lg': PropTypes.string,
-    '$card-columns-count-xl': PropTypes.string,
-    '$card-columns-gap-xl': PropTypes.string,
-    '$card-columns-margin-xl': PropTypes.string,
-    '$card-columns-count-xxl': PropTypes.string,
-    '$card-columns-gap-xxl': PropTypes.string,
-    '$card-columns-margin-xxl': PropTypes.string,
-    '$card-deck-margin': PropTypes.string,
-    '$btn-primary-bg': PropTypes.string,
-    '$btn-secondary-border': PropTypes.string,
-    '$btn-info-bg': PropTypes.string,
-    '$btn-success-bg': PropTypes.string,
-    '$btn-warning-bg': PropTypes.string,
-    '$btn-danger-bg': PropTypes.string,
-    '$link-color': PropTypes.string,
-    '$link-decoration': PropTypes.string,
-    '$link-hover-color': PropTypes.string,
-    '$link-hover-decoration': PropTypes.string,
-    '$enable-rounded': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$brand-primary': propTypes$1.string,
+    '$brand-success': propTypes$1.string,
+    '$brand-info': propTypes$1.string,
+    '$brand-warning': propTypes$1.string,
+    '$brand-danger': propTypes$1.string,
+    '$brand-inverse': propTypes$1.string,
+    '$card-spacer-x': propTypes$1.string,
+    '$card-spacer-y': propTypes$1.string,
+    '$card-border-width': propTypes$1.string,
+    '$card-border-radius': propTypes$1.string,
+    '$card-border-color': propTypes$1.string,
+    '$card-border-radius-inner': propTypes$1.string,
+    '$card-cap-bg': propTypes$1.string,
+    '$card-bg': propTypes$1.string,
+    '$card-link-hover-color': propTypes$1.string,
+    '$card-img-overlay-padding': propTypes$1.string,
+    '$card-margin-y-halved': propTypes$1.string,
+    '$card-margin-x-halved': propTypes$1.string,
+    '$card-columns-count-md': propTypes$1.string,
+    '$card-columns-gap-md': propTypes$1.string,
+    '$card-columns-margin-md': propTypes$1.string,
+    '$card-columns-count-lg': propTypes$1.string,
+    '$card-columns-gap-lg': propTypes$1.string,
+    '$card-columns-margin-lg': propTypes$1.string,
+    '$card-columns-count-xl': propTypes$1.string,
+    '$card-columns-gap-xl': propTypes$1.string,
+    '$card-columns-margin-xl': propTypes$1.string,
+    '$card-columns-count-xxl': propTypes$1.string,
+    '$card-columns-gap-xxl': propTypes$1.string,
+    '$card-columns-margin-xxl': propTypes$1.string,
+    '$card-deck-margin': propTypes$1.string,
+    '$btn-primary-bg': propTypes$1.string,
+    '$btn-secondary-border': propTypes$1.string,
+    '$btn-info-bg': propTypes$1.string,
+    '$btn-success-bg': propTypes$1.string,
+    '$btn-warning-bg': propTypes$1.string,
+    '$btn-danger-bg': propTypes$1.string,
+    '$link-color': propTypes$1.string,
+    '$link-decoration': propTypes$1.string,
+    '$link-hover-color': propTypes$1.string,
+    '$link-hover-decoration': propTypes$1.string,
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool
   }),
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['primary', 'success', 'info', 'warning', 'danger', 'white']),
+  color: propTypes$1.oneOf(['primary', 'success', 'info', 'warning', 'danger', 'white']),
   /** Toggles inverse CSS color. */
-  inverse: PropTypes.bool,
+  inverse: propTypes$1.bool,
   /** Toggles block CSS display. */
-  block: PropTypes.bool,
+  block: propTypes$1.bool,
   /** Toggles outline CSS styles. */
-  outline: PropTypes.bool,
+  outline: propTypes$1.bool,
   /** Width size in percent. */
-  width: PropTypes.string,
+  width: propTypes$1.string,
   /** Use different background color with valid CSS. */
-  backgroundColor: PropTypes.string,
+  backgroundColor: propTypes$1.string,
   /** Use different border color with valid CSS. */
-  borderColor: PropTypes.string,
+  borderColor: propTypes$1.string,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var CardUnstyled = function (_React$Component) {
@@ -22813,7 +24005,7 @@ var CardUnstyled = function (_React$Component) {
 
 
 CardUnstyled.defaultProps = defaultProps$66;
-CardUnstyled.propTypes = propTypes$77;
+CardUnstyled.propTypes = propTypes$78;
 var Card = styled__default(CardUnstyled).withConfig({
   displayName: 'Card'
 })(['', ''], function (props) {
@@ -22821,7 +24013,7 @@ var Card = styled__default(CardUnstyled).withConfig({
 });
 
 Card.defaultProps = defaultProps$66;
-Card.propTypes = propTypes$77;
+Card.propTypes = propTypes$78;
 
 /**
  * Card Columns Component
@@ -22872,66 +24064,66 @@ var defaultProps$67 = {
     '$enable-hover-media-query': false
   }
 };
-var propTypes$78 = {
+var propTypes$79 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$brand-primary': PropTypes.string,
-    '$brand-success': PropTypes.string,
-    '$brand-info': PropTypes.string,
-    '$brand-warning': PropTypes.string,
-    '$brand-danger': PropTypes.string,
-    '$brand-inverse': PropTypes.string,
-    '$card-spacer-x': PropTypes.string,
-    '$card-spacer-y': PropTypes.string,
-    '$card-border-width': PropTypes.string,
-    '$card-border-radius': PropTypes.string,
-    '$card-border-color': PropTypes.string,
-    '$card-border-radius-inner': PropTypes.string,
-    '$card-cap-bg': PropTypes.string,
-    '$card-bg': PropTypes.string,
-    '$card-link-hover-color': PropTypes.string,
-    '$card-img-overlay-padding': PropTypes.string,
-    '$card-margin-y-halved': PropTypes.string,
-    '$card-margin-x-halved': PropTypes.string,
-    '$card-columns-count-md': PropTypes.string,
-    '$card-columns-gap-md': PropTypes.string,
-    '$card-columns-margin-md': PropTypes.string,
-    '$card-columns-count-lg': PropTypes.string,
-    '$card-columns-gap-lg': PropTypes.string,
-    '$card-columns-margin-lg': PropTypes.string,
-    '$card-columns-count-xl': PropTypes.string,
-    '$card-columns-gap-xl': PropTypes.string,
-    '$card-columns-margin-xl': PropTypes.string,
-    '$card-columns-count-xxl': PropTypes.string,
-    '$card-columns-gap-xxl': PropTypes.string,
-    '$card-columns-margin-xxl': PropTypes.string,
-    '$card-deck-margin': PropTypes.string,
-    '$btn-primary-bg': PropTypes.string,
-    '$btn-secondary-border': PropTypes.string,
-    '$btn-info-bg': PropTypes.string,
-    '$btn-success-bg': PropTypes.string,
-    '$btn-warning-bg': PropTypes.string,
-    '$btn-danger-bg': PropTypes.string,
-    '$link-color': PropTypes.string,
-    '$link-decoration': PropTypes.string,
-    '$link-hover-color': PropTypes.string,
-    '$link-hover-decoration': PropTypes.string,
-    '$enable-rounded': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$brand-primary': propTypes$1.string,
+    '$brand-success': propTypes$1.string,
+    '$brand-info': propTypes$1.string,
+    '$brand-warning': propTypes$1.string,
+    '$brand-danger': propTypes$1.string,
+    '$brand-inverse': propTypes$1.string,
+    '$card-spacer-x': propTypes$1.string,
+    '$card-spacer-y': propTypes$1.string,
+    '$card-border-width': propTypes$1.string,
+    '$card-border-radius': propTypes$1.string,
+    '$card-border-color': propTypes$1.string,
+    '$card-border-radius-inner': propTypes$1.string,
+    '$card-cap-bg': propTypes$1.string,
+    '$card-bg': propTypes$1.string,
+    '$card-link-hover-color': propTypes$1.string,
+    '$card-img-overlay-padding': propTypes$1.string,
+    '$card-margin-y-halved': propTypes$1.string,
+    '$card-margin-x-halved': propTypes$1.string,
+    '$card-columns-count-md': propTypes$1.string,
+    '$card-columns-gap-md': propTypes$1.string,
+    '$card-columns-margin-md': propTypes$1.string,
+    '$card-columns-count-lg': propTypes$1.string,
+    '$card-columns-gap-lg': propTypes$1.string,
+    '$card-columns-margin-lg': propTypes$1.string,
+    '$card-columns-count-xl': propTypes$1.string,
+    '$card-columns-gap-xl': propTypes$1.string,
+    '$card-columns-margin-xl': propTypes$1.string,
+    '$card-columns-count-xxl': propTypes$1.string,
+    '$card-columns-gap-xxl': propTypes$1.string,
+    '$card-columns-margin-xxl': propTypes$1.string,
+    '$card-deck-margin': propTypes$1.string,
+    '$btn-primary-bg': propTypes$1.string,
+    '$btn-secondary-border': propTypes$1.string,
+    '$btn-info-bg': propTypes$1.string,
+    '$btn-success-bg': propTypes$1.string,
+    '$btn-warning-bg': propTypes$1.string,
+    '$btn-danger-bg': propTypes$1.string,
+    '$link-color': propTypes$1.string,
+    '$link-decoration': propTypes$1.string,
+    '$link-hover-color': propTypes$1.string,
+    '$link-hover-decoration': propTypes$1.string,
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var CardColumnsUnstyled = function (_React$Component) {
@@ -22968,7 +24160,7 @@ var CardColumnsUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 CardColumnsUnstyled.defaultProps = defaultProps$67;
-CardColumnsUnstyled.propTypes = propTypes$78;
+CardColumnsUnstyled.propTypes = propTypes$79;
 
 
 var CardColumns = styled__default(CardColumnsUnstyled).withConfig({
@@ -22978,7 +24170,7 @@ var CardColumns = styled__default(CardColumnsUnstyled).withConfig({
 });
 
 CardColumns.defaultProps = defaultProps$67;
-CardColumns.propTypes = propTypes$78;
+CardColumns.propTypes = propTypes$79;
 
 /**
  * CardDeck Component
@@ -23029,66 +24221,66 @@ var defaultProps$68 = {
     '$enable-hover-media-query': false
   }
 };
-var propTypes$79 = {
+var propTypes$80 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$brand-primary': PropTypes.string,
-    '$brand-success': PropTypes.string,
-    '$brand-info': PropTypes.string,
-    '$brand-warning': PropTypes.string,
-    '$brand-danger': PropTypes.string,
-    '$brand-inverse': PropTypes.string,
-    '$card-spacer-x': PropTypes.string,
-    '$card-spacer-y': PropTypes.string,
-    '$card-border-width': PropTypes.string,
-    '$card-border-radius': PropTypes.string,
-    '$card-border-color': PropTypes.string,
-    '$card-border-radius-inner': PropTypes.string,
-    '$card-cap-bg': PropTypes.string,
-    '$card-bg': PropTypes.string,
-    '$card-link-hover-color': PropTypes.string,
-    '$card-img-overlay-padding': PropTypes.string,
-    '$card-margin-y-halved': PropTypes.string,
-    '$card-margin-x-halved': PropTypes.string,
-    '$card-columns-count-md': PropTypes.string,
-    '$card-columns-gap-md': PropTypes.string,
-    '$card-columns-margin-md': PropTypes.string,
-    '$card-columns-count-lg': PropTypes.string,
-    '$card-columns-gap-lg': PropTypes.string,
-    '$card-columns-margin-lg': PropTypes.string,
-    '$card-columns-count-xl': PropTypes.string,
-    '$card-columns-gap-xl': PropTypes.string,
-    '$card-columns-margin-xl': PropTypes.string,
-    '$card-columns-count-xxl': PropTypes.string,
-    '$card-columns-gap-xxl': PropTypes.string,
-    '$card-columns-margin-xxl': PropTypes.string,
-    '$card-deck-margin': PropTypes.string,
-    '$btn-primary-bg': PropTypes.string,
-    '$btn-secondary-border': PropTypes.string,
-    '$btn-info-bg': PropTypes.string,
-    '$btn-success-bg': PropTypes.string,
-    '$btn-warning-bg': PropTypes.string,
-    '$btn-danger-bg': PropTypes.string,
-    '$link-color': PropTypes.string,
-    '$link-decoration': PropTypes.string,
-    '$link-hover-color': PropTypes.string,
-    '$link-hover-decoration': PropTypes.string,
-    '$enable-rounded': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$brand-primary': propTypes$1.string,
+    '$brand-success': propTypes$1.string,
+    '$brand-info': propTypes$1.string,
+    '$brand-warning': propTypes$1.string,
+    '$brand-danger': propTypes$1.string,
+    '$brand-inverse': propTypes$1.string,
+    '$card-spacer-x': propTypes$1.string,
+    '$card-spacer-y': propTypes$1.string,
+    '$card-border-width': propTypes$1.string,
+    '$card-border-radius': propTypes$1.string,
+    '$card-border-color': propTypes$1.string,
+    '$card-border-radius-inner': propTypes$1.string,
+    '$card-cap-bg': propTypes$1.string,
+    '$card-bg': propTypes$1.string,
+    '$card-link-hover-color': propTypes$1.string,
+    '$card-img-overlay-padding': propTypes$1.string,
+    '$card-margin-y-halved': propTypes$1.string,
+    '$card-margin-x-halved': propTypes$1.string,
+    '$card-columns-count-md': propTypes$1.string,
+    '$card-columns-gap-md': propTypes$1.string,
+    '$card-columns-margin-md': propTypes$1.string,
+    '$card-columns-count-lg': propTypes$1.string,
+    '$card-columns-gap-lg': propTypes$1.string,
+    '$card-columns-margin-lg': propTypes$1.string,
+    '$card-columns-count-xl': propTypes$1.string,
+    '$card-columns-gap-xl': propTypes$1.string,
+    '$card-columns-margin-xl': propTypes$1.string,
+    '$card-columns-count-xxl': propTypes$1.string,
+    '$card-columns-gap-xxl': propTypes$1.string,
+    '$card-columns-margin-xxl': propTypes$1.string,
+    '$card-deck-margin': propTypes$1.string,
+    '$btn-primary-bg': propTypes$1.string,
+    '$btn-secondary-border': propTypes$1.string,
+    '$btn-info-bg': propTypes$1.string,
+    '$btn-success-bg': propTypes$1.string,
+    '$btn-warning-bg': propTypes$1.string,
+    '$btn-danger-bg': propTypes$1.string,
+    '$link-color': propTypes$1.string,
+    '$link-decoration': propTypes$1.string,
+    '$link-hover-color': propTypes$1.string,
+    '$link-hover-decoration': propTypes$1.string,
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var CardDeckUnstyled = function (_React$Component) {
@@ -23124,7 +24316,7 @@ var CardDeckUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 CardDeckUnstyled.defaultProps = defaultProps$68;
-CardDeckUnstyled.propTypes = propTypes$79;
+CardDeckUnstyled.propTypes = propTypes$80;
 
 
 var CardDeck = styled__default(CardDeckUnstyled).withConfig({
@@ -23134,7 +24326,7 @@ var CardDeck = styled__default(CardDeckUnstyled).withConfig({
 });
 
 CardDeck.defaultProps = defaultProps$68;
-CardDeck.propTypes = propTypes$79;
+CardDeck.propTypes = propTypes$80;
 
 /**
  * CardGroup Component
@@ -23185,66 +24377,66 @@ var defaultProps$69 = {
     '$enable-hover-media-query': false
   }
 };
-var propTypes$80 = {
+var propTypes$81 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$brand-primary': PropTypes.string,
-    '$brand-success': PropTypes.string,
-    '$brand-info': PropTypes.string,
-    '$brand-warning': PropTypes.string,
-    '$brand-danger': PropTypes.string,
-    '$brand-inverse': PropTypes.string,
-    '$card-spacer-x': PropTypes.string,
-    '$card-spacer-y': PropTypes.string,
-    '$card-border-width': PropTypes.string,
-    '$card-border-radius': PropTypes.string,
-    '$card-border-color': PropTypes.string,
-    '$card-border-radius-inner': PropTypes.string,
-    '$card-cap-bg': PropTypes.string,
-    '$card-bg': PropTypes.string,
-    '$card-link-hover-color': PropTypes.string,
-    '$card-img-overlay-padding': PropTypes.string,
-    '$card-margin-y-halved': PropTypes.string,
-    '$card-margin-x-halved': PropTypes.string,
-    '$card-columns-count-md': PropTypes.string,
-    '$card-columns-gap-md': PropTypes.string,
-    '$card-columns-margin-md': PropTypes.string,
-    '$card-columns-count-lg': PropTypes.string,
-    '$card-columns-gap-lg': PropTypes.string,
-    '$card-columns-margin-lg': PropTypes.string,
-    '$card-columns-count-xl': PropTypes.string,
-    '$card-columns-gap-xl': PropTypes.string,
-    '$card-columns-margin-xl': PropTypes.string,
-    '$card-columns-count-xxl': PropTypes.string,
-    '$card-columns-gap-xxl': PropTypes.string,
-    '$card-columns-margin-xxl': PropTypes.string,
-    '$card-deck-margin': PropTypes.string,
-    '$btn-primary-bg': PropTypes.string,
-    '$btn-secondary-border': PropTypes.string,
-    '$btn-info-bg': PropTypes.string,
-    '$btn-success-bg': PropTypes.string,
-    '$btn-warning-bg': PropTypes.string,
-    '$btn-danger-bg': PropTypes.string,
-    '$link-color': PropTypes.string,
-    '$link-decoration': PropTypes.string,
-    '$link-hover-color': PropTypes.string,
-    '$link-hover-decoration': PropTypes.string,
-    '$enable-rounded': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$brand-primary': propTypes$1.string,
+    '$brand-success': propTypes$1.string,
+    '$brand-info': propTypes$1.string,
+    '$brand-warning': propTypes$1.string,
+    '$brand-danger': propTypes$1.string,
+    '$brand-inverse': propTypes$1.string,
+    '$card-spacer-x': propTypes$1.string,
+    '$card-spacer-y': propTypes$1.string,
+    '$card-border-width': propTypes$1.string,
+    '$card-border-radius': propTypes$1.string,
+    '$card-border-color': propTypes$1.string,
+    '$card-border-radius-inner': propTypes$1.string,
+    '$card-cap-bg': propTypes$1.string,
+    '$card-bg': propTypes$1.string,
+    '$card-link-hover-color': propTypes$1.string,
+    '$card-img-overlay-padding': propTypes$1.string,
+    '$card-margin-y-halved': propTypes$1.string,
+    '$card-margin-x-halved': propTypes$1.string,
+    '$card-columns-count-md': propTypes$1.string,
+    '$card-columns-gap-md': propTypes$1.string,
+    '$card-columns-margin-md': propTypes$1.string,
+    '$card-columns-count-lg': propTypes$1.string,
+    '$card-columns-gap-lg': propTypes$1.string,
+    '$card-columns-margin-lg': propTypes$1.string,
+    '$card-columns-count-xl': propTypes$1.string,
+    '$card-columns-gap-xl': propTypes$1.string,
+    '$card-columns-margin-xl': propTypes$1.string,
+    '$card-columns-count-xxl': propTypes$1.string,
+    '$card-columns-gap-xxl': propTypes$1.string,
+    '$card-columns-margin-xxl': propTypes$1.string,
+    '$card-deck-margin': propTypes$1.string,
+    '$btn-primary-bg': propTypes$1.string,
+    '$btn-secondary-border': propTypes$1.string,
+    '$btn-info-bg': propTypes$1.string,
+    '$btn-success-bg': propTypes$1.string,
+    '$btn-warning-bg': propTypes$1.string,
+    '$btn-danger-bg': propTypes$1.string,
+    '$link-color': propTypes$1.string,
+    '$link-decoration': propTypes$1.string,
+    '$link-hover-color': propTypes$1.string,
+    '$link-hover-decoration': propTypes$1.string,
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var CardGroupUnstyled = function (_React$Component) {
@@ -23281,7 +24473,7 @@ var CardGroupUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 CardGroupUnstyled.defaultProps = defaultProps$69;
-CardGroupUnstyled.propTypes = propTypes$80;
+CardGroupUnstyled.propTypes = propTypes$81;
 
 
 var CardGroup = styled__default(CardGroupUnstyled).withConfig({
@@ -23291,25 +24483,25 @@ var CardGroup = styled__default(CardGroupUnstyled).withConfig({
 });
 
 CardGroup.defaultProps = defaultProps$69;
-CardGroup.propTypes = propTypes$80;
+CardGroup.propTypes = propTypes$81;
 
 var defaultProps$70 = {
   tag: 'div'
 };
-var propTypes$81 = {
+var propTypes$82 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var CardBlock = function (_React$Component) {
@@ -23347,29 +24539,29 @@ var CardBlock = function (_React$Component) {
 }(React__default.Component);
 
 CardBlock.defaultProps = defaultProps$70;
-CardBlock.propTypes = propTypes$81;
+CardBlock.propTypes = propTypes$82;
 
 
 CardBlock.defaultProps = defaultProps$70;
-CardBlock.propTypes = propTypes$81;
+CardBlock.propTypes = propTypes$82;
 
 var defaultProps$71 = {
   tag: 'div'
 };
-var propTypes$82 = {
+var propTypes$83 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var CardFooter = function (_React$Component) {
@@ -23407,29 +24599,29 @@ var CardFooter = function (_React$Component) {
 }(React__default.Component);
 
 CardFooter.defaultProps = defaultProps$71;
-CardFooter.propTypes = propTypes$82;
+CardFooter.propTypes = propTypes$83;
 
 
 CardFooter.defaultProps = defaultProps$71;
-CardFooter.propTypes = propTypes$82;
+CardFooter.propTypes = propTypes$83;
 
 var defaultProps$72 = {
   tag: 'div'
 };
-var propTypes$83 = {
+var propTypes$84 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var CardHeader = function (_React$Component) {
@@ -23467,33 +24659,33 @@ var CardHeader = function (_React$Component) {
 }(React__default.Component);
 
 CardHeader.defaultProps = defaultProps$72;
-CardHeader.propTypes = propTypes$83;
+CardHeader.propTypes = propTypes$84;
 
 
 CardHeader.defaultProps = defaultProps$72;
-CardHeader.propTypes = propTypes$83;
+CardHeader.propTypes = propTypes$84;
 
 var defaultProps$73 = {
   tag: 'img'
 };
-var propTypes$84 = {
+var propTypes$85 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /** Toggle image position to top of the card. */
-  top: PropTypes.bool,
+  top: propTypes$1.bool,
   /** Toggle image position to bottom of the card. */
-  bottom: PropTypes.bool,
+  bottom: propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var CardImg = function (_React$Component) {
@@ -23534,29 +24726,29 @@ var CardImg = function (_React$Component) {
 }(React__default.Component);
 
 CardImg.defaultProps = defaultProps$73;
-CardImg.propTypes = propTypes$84;
+CardImg.propTypes = propTypes$85;
 
 
 CardImg.defaultProps = defaultProps$73;
-CardImg.propTypes = propTypes$84;
+CardImg.propTypes = propTypes$85;
 
 var defaultProps$74 = {
   tag: 'div'
 };
-var propTypes$85 = {
+var propTypes$86 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var CardImgOverlay = function (_React$Component) {
@@ -23594,31 +24786,31 @@ var CardImgOverlay = function (_React$Component) {
 }(React__default.Component);
 
 CardImgOverlay.defaultProps = defaultProps$74;
-CardImgOverlay.propTypes = propTypes$85;
+CardImgOverlay.propTypes = propTypes$86;
 
 
 CardImgOverlay.defaultProps = defaultProps$74;
-CardImgOverlay.propTypes = propTypes$85;
+CardImgOverlay.propTypes = propTypes$86;
 
 var defaultProps$75 = {
   tag: A
 };
-var propTypes$86 = {
+var propTypes$87 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /** Use that property to pass a ref callback to the native button component. */
-  innerRef: PropTypes.func,
+  innerRef: propTypes$1.func,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var CardLink = function (_React$Component) {
@@ -23658,29 +24850,29 @@ var CardLink = function (_React$Component) {
 }(React__default.Component);
 
 CardLink.defaultProps = defaultProps$75;
-CardLink.propTypes = propTypes$86;
+CardLink.propTypes = propTypes$87;
 
 
 CardLink.defaultProps = defaultProps$75;
-CardLink.propTypes = propTypes$86;
+CardLink.propTypes = propTypes$87;
 
 var defaultProps$76 = {
   tag: H6
 };
-var propTypes$87 = {
+var propTypes$88 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var CardSubtitle = function (_React$Component) {
@@ -23718,29 +24910,29 @@ var CardSubtitle = function (_React$Component) {
 }(React__default.Component);
 
 CardSubtitle.defaultProps = defaultProps$76;
-CardSubtitle.propTypes = propTypes$87;
+CardSubtitle.propTypes = propTypes$88;
 
 
 CardSubtitle.defaultProps = defaultProps$76;
-CardSubtitle.propTypes = propTypes$87;
+CardSubtitle.propTypes = propTypes$88;
 
 var defaultProps$77 = {
   tag: 'p'
 };
-var propTypes$88 = {
+var propTypes$89 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var CardText = function (_React$Component) {
@@ -23778,29 +24970,29 @@ var CardText = function (_React$Component) {
 }(React__default.Component);
 
 CardText.defaultProps = defaultProps$77;
-CardText.propTypes = propTypes$88;
+CardText.propTypes = propTypes$89;
 
 
 CardText.defaultProps = defaultProps$77;
-CardText.propTypes = propTypes$88;
+CardText.propTypes = propTypes$89;
 
 var defaultProps$78 = {
   tag: H4
 };
-var propTypes$89 = {
+var propTypes$90 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var CardTitle = function (_React$Component) {
@@ -23838,29 +25030,29 @@ var CardTitle = function (_React$Component) {
 }(React__default.Component);
 
 CardTitle.defaultProps = defaultProps$78;
-CardTitle.propTypes = propTypes$89;
+CardTitle.propTypes = propTypes$90;
 
 
 CardTitle.defaultProps = defaultProps$78;
-CardTitle.propTypes = propTypes$89;
+CardTitle.propTypes = propTypes$90;
 
 var defaultProps$79 = {
   tag: Blockquote
 };
-var propTypes$90 = {
+var propTypes$91 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var CardBlockquote = function (_React$Component) {
@@ -23898,11 +25090,11 @@ var CardBlockquote = function (_React$Component) {
 }(React__default.Component);
 
 CardBlockquote.defaultProps = defaultProps$79;
-CardBlockquote.propTypes = propTypes$90;
+CardBlockquote.propTypes = propTypes$91;
 
 
 CardBlockquote.defaultProps = defaultProps$79;
-CardBlockquote.propTypes = propTypes$90;
+CardBlockquote.propTypes = propTypes$91;
 
 /*
  * Kopax Ltd Copyright (c) 2016.
@@ -23917,25 +25109,25 @@ var defaultProps$80 = {
   tag: Card,
   delay: 350
 };
-var propTypes$91 = {
+var propTypes$92 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * @ignore
    */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /** Delay transition in milliseconds before and after collapse. Can be: */
-  delay: PropTypes.oneOfType([PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }), PropTypes.number]),
+  delay: propTypes$1.oneOfType([propTypes$1.shape({ show: propTypes$1.number, hide: propTypes$1.number }), propTypes$1.number]),
   /** Heading used as title for accordion. Can be: */
-  heading: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  heading: propTypes$1.oneOfType([propTypes$1.node, propTypes$1.string]),
   /** `<AccordionGroup />` define active accordion with accordion name. */
-  name: PropTypes.string
+  name: propTypes$1.string
 };
 
 var Accordion = function (_React$Component) {
@@ -24012,33 +25204,33 @@ var Accordion = function (_React$Component) {
 }(React__default.Component);
 
 Accordion.defaultProps = defaultProps$80;
-Accordion.propTypes = propTypes$91;
+Accordion.propTypes = propTypes$92;
 Accordion.contextTypes = {
-  accordionGroup: PropTypes.object
+  accordionGroup: propTypes$1.object
 };
 
 
 Accordion.defaultProps = defaultProps$80;
-Accordion.propTypes = propTypes$91;
+Accordion.propTypes = propTypes$92;
 
 /**
  * Accordion Group Component
  *
  *
  */
-var propTypes$92 = {
+var propTypes$93 = {
   /**
    * Define current active accordion.
    */
-  activeAccordionName: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
+  activeAccordionName: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.number, propTypes$1.bool]),
   /**
    * Call specified function when `on click` event is triggered.
    */
-  onChange: PropTypes.func,
+  onChange: propTypes$1.func,
   /**
    * Toggles heading component visibility.
    */
-  'heading-component': PropTypes.bool
+  'heading-component': propTypes$1.bool
 };
 
 var AccordionGroup = function (_React$Component) {
@@ -24084,13 +25276,13 @@ var AccordionGroup = function (_React$Component) {
   return AccordionGroup;
 }(React__default.Component);
 
-AccordionGroup.propTypes = propTypes$92;
+AccordionGroup.propTypes = propTypes$93;
 AccordionGroup.childContextTypes = {
-  accordionGroup: PropTypes.object
+  accordionGroup: propTypes$1.object
 };
 
 
-AccordionGroup.propTypes = propTypes$92;
+AccordionGroup.propTypes = propTypes$93;
 
 /*
  * Kopax Ltd Copyright (c) 2016.
@@ -24434,165 +25626,165 @@ var defaultProps$81 = {
   }
 };
 
-var propTypes$93 = {
+var propTypes$94 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$brand-primary': PropTypes.string,
-    '$brand-success': PropTypes.string,
-    '$brand-info': PropTypes.string,
-    '$brand-warning': PropTypes.string,
-    '$brand-danger': PropTypes.string,
-    '$gray-dark': PropTypes.string,
-    '$gray': PropTypes.string,
-    '$gray-light': PropTypes.string,
-    '$gray-lighter': PropTypes.string,
-    '$gray-lightest': PropTypes.string,
-    '$border-width': PropTypes.string,
-    '$spacer': PropTypes.string,
-    '$spacer-y': PropTypes.string,
-    '$grid-breakpoints': PropTypes.shape({
-      'xs': PropTypes.string,
-      'sm': PropTypes.string,
-      'md': PropTypes.string,
-      'lg': PropTypes.string,
-      'xl': PropTypes.string
+  theme: propTypes$1.shape({
+    '$brand-primary': propTypes$1.string,
+    '$brand-success': propTypes$1.string,
+    '$brand-info': propTypes$1.string,
+    '$brand-warning': propTypes$1.string,
+    '$brand-danger': propTypes$1.string,
+    '$gray-dark': propTypes$1.string,
+    '$gray': propTypes$1.string,
+    '$gray-light': propTypes$1.string,
+    '$gray-lighter': propTypes$1.string,
+    '$gray-lightest': propTypes$1.string,
+    '$border-width': propTypes$1.string,
+    '$spacer': propTypes$1.string,
+    '$spacer-y': propTypes$1.string,
+    '$grid-breakpoints': propTypes$1.shape({
+      'xs': propTypes$1.string,
+      'sm': propTypes$1.string,
+      'md': propTypes$1.string,
+      'lg': propTypes$1.string,
+      'xl': propTypes$1.string
     }),
-    '$grid-gutter-width-base': PropTypes.string,
-    '$grid-gutter-widths': PropTypes.shape({
-      'xs': PropTypes.string,
-      'sm': PropTypes.string,
-      'md': PropTypes.string,
-      'lg': PropTypes.string,
-      'xl': PropTypes.string
+    '$grid-gutter-width-base': propTypes$1.string,
+    '$grid-gutter-widths': propTypes$1.shape({
+      'xs': propTypes$1.string,
+      'sm': propTypes$1.string,
+      'md': propTypes$1.string,
+      'lg': propTypes$1.string,
+      'xl': propTypes$1.string
     }),
-    '$font-size-base': PropTypes.string,
-    '$font-size-lg': PropTypes.string,
-    '$font-size-sm': PropTypes.string,
-    '$font-size-xs': PropTypes.string,
-    '$text-muted': PropTypes.string,
-    '$line-height-base': PropTypes.string,
-    '$line-height-lg': PropTypes.string,
-    '$line-height-sm': PropTypes.string,
-    '$border-radius': PropTypes.string,
-    '$border-radius-lg': PropTypes.string,
-    '$border-radius-sm': PropTypes.string,
-    '$input-padding-x': PropTypes.string,
-    '$input-padding-y': PropTypes.string,
-    '$input-line-height': PropTypes.string,
-    '$input-bg': PropTypes.string,
-    '$input-bg-disabled': PropTypes.string,
-    '$input-color': PropTypes.string,
-    '$input-border-color': PropTypes.string,
-    '$input-btn-border-width': PropTypes.string,
-    '$input-box-shadow': PropTypes.string,
-    '$input-border-radius': PropTypes.string,
-    '$input-border-radius-lg': PropTypes.string,
-    '$input-border-radius-sm': PropTypes.string,
-    '$input-bg-focus': PropTypes.string,
-    '$input-border-focus': PropTypes.string,
-    '$input-box-shadow-focus': PropTypes.string,
-    '$input-color-focus': PropTypes.string,
-    '$input-color-placeholder': PropTypes.string,
-    '$input-padding-x-sm': PropTypes.string,
-    '$input-padding-y-sm': PropTypes.string,
-    '$input-padding-x-lg': PropTypes.string,
-    '$input-padding-y-lg': PropTypes.string,
-    '$input-height': PropTypes.string,
-    '$input-height-sm': PropTypes.string,
-    '$input-height-lg': PropTypes.string,
-    '$input-transition': PropTypes.string,
-    '$form-text-margin-top': PropTypes.string,
-    '$form-feedback-margin-top': PropTypes.string,
-    '$form-check-margin-bottom': PropTypes.string,
-    '$form-check-input-gutter': PropTypes.string,
-    '$form-check-input-margin-y': PropTypes.string,
-    '$form-check-input-margin-x': PropTypes.string,
-    '$form-check-inline-margin-x': PropTypes.string,
-    '$form-group-margin-bottom': PropTypes.string,
-    '$input-group-addon-bg': PropTypes.string,
-    '$input-group-addon-border-color': PropTypes.string,
-    '$cursor-disabled': PropTypes.string,
-    '$custom-control-gutter': PropTypes.string,
-    '$custom-control-spacer-x': PropTypes.string,
-    '$custom-control-spacer-y': PropTypes.string,
-    '$custom-control-indicator-size': PropTypes.string,
-    '$custom-control-indicator-bg': PropTypes.string,
-    '$custom-control-indicator-bg-size': PropTypes.string,
-    '$custom-control-indicator-box-shadow': PropTypes.string,
-    '$custom-control-disabled-cursor': PropTypes.string,
-    '$custom-control-disabled-indicator-bg': PropTypes.string,
-    '$custom-control-disabled-description-color': PropTypes.string,
-    '$custom-control-checked-indicator-color': PropTypes.string,
-    '$custom-control-checked-indicator-bg': PropTypes.string,
-    '$custom-control-checked-indicator-box-shadow': PropTypes.string,
-    '$custom-control-focus-indicator-box-shadow': PropTypes.string,
-    '$custom-control-active-indicator-color': PropTypes.string,
-    '$custom-control-active-indicator-bg': PropTypes.string,
-    '$custom-control-active-indicator-box-shadow': PropTypes.string,
-    '$custom-checkbox-radius': PropTypes.string,
-    '$custom-checkbox-checked-icon': PropTypes.string,
-    '$custom-checkbox-indeterminate-bg': PropTypes.string,
-    '$custom-checkbox-indeterminate-indicator-color': PropTypes.string,
-    '$custom-checkbox-indeterminate-icon': PropTypes.string,
-    '$custom-checkbox-indeterminate-box-shadow': PropTypes.string,
-    '$custom-radio-radius': PropTypes.string,
-    '$custom-radio-checked-icon': PropTypes.string,
-    '$custom-select-padding-x': PropTypes.string,
-    '$custom-select-padding-y': PropTypes.string,
-    '$custom-select-indicator-padding': PropTypes.string,
-    '$custom-select-line-height': PropTypes.string,
-    '$custom-select-color': PropTypes.string,
-    '$custom-select-disabled-color': PropTypes.string,
-    '$custom-select-bg': PropTypes.string,
-    '$custom-select-disabled-bg': PropTypes.string,
-    '$custom-select-bg-size': PropTypes.string,
-    '$custom-select-indicator-color': PropTypes.string,
-    '$custom-select-indicator': PropTypes.string,
-    '$custom-select-border-width': PropTypes.string,
-    '$custom-select-border-color': PropTypes.string,
-    '$custom-select-border-radius': PropTypes.string,
-    '$custom-select-focus-border-color': PropTypes.string,
-    '$custom-select-focus-box-shadow': PropTypes.string,
-    '$custom-select-sm-font-size': PropTypes.string,
-    '$custom-file-height': PropTypes.string,
-    '$custom-file-width': PropTypes.string,
-    '$custom-file-focus-box-shadow': PropTypes.string,
-    '$custom-file-padding-x': PropTypes.string,
-    '$custom-file-padding-y': PropTypes.string,
-    '$custom-file-line-height': PropTypes.string,
-    '$custom-file-color': PropTypes.string,
-    '$custom-file-bg': PropTypes.string,
-    '$custom-file-border-width': PropTypes.string,
-    '$custom-file-border-color': PropTypes.string,
-    '$custom-file-border-radius': PropTypes.string,
-    '$custom-file-box-shadow': PropTypes.string,
-    '$custom-file-button-color': PropTypes.string,
-    '$custom-file-button-bg': PropTypes.string,
-    '$custom-file-text': PropTypes.object,
-    '$form-icon-success-color': PropTypes.string,
-    '$form-icon-success': PropTypes.string,
-    '$form-icon-warning-color': PropTypes.string,
-    '$form-icon-warning': PropTypes.string,
-    '$form-icon-danger-color': PropTypes.string,
-    '$form-icon-danger': PropTypes.string
+    '$font-size-base': propTypes$1.string,
+    '$font-size-lg': propTypes$1.string,
+    '$font-size-sm': propTypes$1.string,
+    '$font-size-xs': propTypes$1.string,
+    '$text-muted': propTypes$1.string,
+    '$line-height-base': propTypes$1.string,
+    '$line-height-lg': propTypes$1.string,
+    '$line-height-sm': propTypes$1.string,
+    '$border-radius': propTypes$1.string,
+    '$border-radius-lg': propTypes$1.string,
+    '$border-radius-sm': propTypes$1.string,
+    '$input-padding-x': propTypes$1.string,
+    '$input-padding-y': propTypes$1.string,
+    '$input-line-height': propTypes$1.string,
+    '$input-bg': propTypes$1.string,
+    '$input-bg-disabled': propTypes$1.string,
+    '$input-color': propTypes$1.string,
+    '$input-border-color': propTypes$1.string,
+    '$input-btn-border-width': propTypes$1.string,
+    '$input-box-shadow': propTypes$1.string,
+    '$input-border-radius': propTypes$1.string,
+    '$input-border-radius-lg': propTypes$1.string,
+    '$input-border-radius-sm': propTypes$1.string,
+    '$input-bg-focus': propTypes$1.string,
+    '$input-border-focus': propTypes$1.string,
+    '$input-box-shadow-focus': propTypes$1.string,
+    '$input-color-focus': propTypes$1.string,
+    '$input-color-placeholder': propTypes$1.string,
+    '$input-padding-x-sm': propTypes$1.string,
+    '$input-padding-y-sm': propTypes$1.string,
+    '$input-padding-x-lg': propTypes$1.string,
+    '$input-padding-y-lg': propTypes$1.string,
+    '$input-height': propTypes$1.string,
+    '$input-height-sm': propTypes$1.string,
+    '$input-height-lg': propTypes$1.string,
+    '$input-transition': propTypes$1.string,
+    '$form-text-margin-top': propTypes$1.string,
+    '$form-feedback-margin-top': propTypes$1.string,
+    '$form-check-margin-bottom': propTypes$1.string,
+    '$form-check-input-gutter': propTypes$1.string,
+    '$form-check-input-margin-y': propTypes$1.string,
+    '$form-check-input-margin-x': propTypes$1.string,
+    '$form-check-inline-margin-x': propTypes$1.string,
+    '$form-group-margin-bottom': propTypes$1.string,
+    '$input-group-addon-bg': propTypes$1.string,
+    '$input-group-addon-border-color': propTypes$1.string,
+    '$cursor-disabled': propTypes$1.string,
+    '$custom-control-gutter': propTypes$1.string,
+    '$custom-control-spacer-x': propTypes$1.string,
+    '$custom-control-spacer-y': propTypes$1.string,
+    '$custom-control-indicator-size': propTypes$1.string,
+    '$custom-control-indicator-bg': propTypes$1.string,
+    '$custom-control-indicator-bg-size': propTypes$1.string,
+    '$custom-control-indicator-box-shadow': propTypes$1.string,
+    '$custom-control-disabled-cursor': propTypes$1.string,
+    '$custom-control-disabled-indicator-bg': propTypes$1.string,
+    '$custom-control-disabled-description-color': propTypes$1.string,
+    '$custom-control-checked-indicator-color': propTypes$1.string,
+    '$custom-control-checked-indicator-bg': propTypes$1.string,
+    '$custom-control-checked-indicator-box-shadow': propTypes$1.string,
+    '$custom-control-focus-indicator-box-shadow': propTypes$1.string,
+    '$custom-control-active-indicator-color': propTypes$1.string,
+    '$custom-control-active-indicator-bg': propTypes$1.string,
+    '$custom-control-active-indicator-box-shadow': propTypes$1.string,
+    '$custom-checkbox-radius': propTypes$1.string,
+    '$custom-checkbox-checked-icon': propTypes$1.string,
+    '$custom-checkbox-indeterminate-bg': propTypes$1.string,
+    '$custom-checkbox-indeterminate-indicator-color': propTypes$1.string,
+    '$custom-checkbox-indeterminate-icon': propTypes$1.string,
+    '$custom-checkbox-indeterminate-box-shadow': propTypes$1.string,
+    '$custom-radio-radius': propTypes$1.string,
+    '$custom-radio-checked-icon': propTypes$1.string,
+    '$custom-select-padding-x': propTypes$1.string,
+    '$custom-select-padding-y': propTypes$1.string,
+    '$custom-select-indicator-padding': propTypes$1.string,
+    '$custom-select-line-height': propTypes$1.string,
+    '$custom-select-color': propTypes$1.string,
+    '$custom-select-disabled-color': propTypes$1.string,
+    '$custom-select-bg': propTypes$1.string,
+    '$custom-select-disabled-bg': propTypes$1.string,
+    '$custom-select-bg-size': propTypes$1.string,
+    '$custom-select-indicator-color': propTypes$1.string,
+    '$custom-select-indicator': propTypes$1.string,
+    '$custom-select-border-width': propTypes$1.string,
+    '$custom-select-border-color': propTypes$1.string,
+    '$custom-select-border-radius': propTypes$1.string,
+    '$custom-select-focus-border-color': propTypes$1.string,
+    '$custom-select-focus-box-shadow': propTypes$1.string,
+    '$custom-select-sm-font-size': propTypes$1.string,
+    '$custom-file-height': propTypes$1.string,
+    '$custom-file-width': propTypes$1.string,
+    '$custom-file-focus-box-shadow': propTypes$1.string,
+    '$custom-file-padding-x': propTypes$1.string,
+    '$custom-file-padding-y': propTypes$1.string,
+    '$custom-file-line-height': propTypes$1.string,
+    '$custom-file-color': propTypes$1.string,
+    '$custom-file-bg': propTypes$1.string,
+    '$custom-file-border-width': propTypes$1.string,
+    '$custom-file-border-color': propTypes$1.string,
+    '$custom-file-border-radius': propTypes$1.string,
+    '$custom-file-box-shadow': propTypes$1.string,
+    '$custom-file-button-color': propTypes$1.string,
+    '$custom-file-button-bg': propTypes$1.string,
+    '$custom-file-text': propTypes$1.object,
+    '$form-icon-success-color': propTypes$1.string,
+    '$form-icon-success': propTypes$1.string,
+    '$form-icon-warning-color': propTypes$1.string,
+    '$form-icon-warning': propTypes$1.string,
+    '$form-icon-danger-color': propTypes$1.string,
+    '$form-icon-danger': propTypes$1.string
   }),
   /** Toggles inline CSS style. */
-  inline: PropTypes.bool,
+  inline: propTypes$1.bool,
   /** Use that property to pass a ref callback to the native button component. */
-  innerRef: PropTypes.func,
+  innerRef: propTypes$1.func,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var FormUnstyled = function (_React$Component) {
@@ -24636,7 +25828,7 @@ var FormUnstyled = function (_React$Component) {
 
 
 FormUnstyled.defaultProps = defaultProps$81;
-FormUnstyled.propTypes = propTypes$93;
+FormUnstyled.propTypes = propTypes$94;
 var Form = styled__default(FormUnstyled).withConfig({
   displayName: 'Form'
 })(['  ', ''], function (props) {
@@ -24644,7 +25836,7 @@ var Form = styled__default(FormUnstyled).withConfig({
 });
 
 Form.defaultProps = defaultProps$81;
-Form.propTypes = propTypes$93;
+Form.propTypes = propTypes$94;
 
 /* eslint-disable quote-props, dot-notation */
 /**
@@ -24655,34 +25847,34 @@ Form.propTypes = propTypes$93;
 var defaultProps$82 = {
   tag: 'div'
 };
-var propTypes$94 = {
+var propTypes$95 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<DropdownItem />`. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Toggles input radio or checkbox check. */
-  check: PropTypes.bool,
+  check: propTypes$1.bool,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['success', 'warning', 'danger', '']),
+  color: propTypes$1.oneOf(['success', 'warning', 'danger', '']),
   /** Toggles disabled check of input radio or checkbox. */
-  disabled: PropTypes.bool,
+  disabled: propTypes$1.bool,
   /** Use that property to pass a ref callback to the native button component. */
-  innerRef: PropTypes.func,
+  innerRef: propTypes$1.func,
   /** Toggles inline CSS display. */
-  inline: PropTypes.bool,
+  inline: propTypes$1.bool,
   /** Toggles row CSS display. */
-  row: PropTypes.bool,
+  row: propTypes$1.bool,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var FormGroup = function (_React$Component) {
@@ -24725,11 +25917,11 @@ var FormGroup = function (_React$Component) {
 }(React__default.Component);
 
 FormGroup.defaultProps = defaultProps$82;
-FormGroup.propTypes = propTypes$94;
+FormGroup.propTypes = propTypes$95;
 
 
 FormGroup.defaultProps = defaultProps$82;
-FormGroup.propTypes = propTypes$94;
+FormGroup.propTypes = propTypes$95;
 
 /* eslint-disable quote-props, dot-notation */
 /**
@@ -24740,26 +25932,26 @@ FormGroup.propTypes = propTypes$94;
 var defaultProps$83 = {
   tag: 'small'
 };
-var propTypes$95 = {
+var propTypes$96 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<DropdownItem />`. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['success', 'warning', 'danger', 'muted', '']),
+  color: propTypes$1.oneOf(['success', 'warning', 'danger', 'muted', '']),
   /** Toggles inline CSS display. */
-  inline: PropTypes.bool,
+  inline: propTypes$1.bool,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var FormText = function (_React$Component) {
@@ -24799,11 +25991,11 @@ var FormText = function (_React$Component) {
 }(React__default.Component);
 
 FormText.defaultProps = defaultProps$83;
-FormText.propTypes = propTypes$95;
+FormText.propTypes = propTypes$96;
 
 
 FormText.defaultProps = defaultProps$83;
-FormText.propTypes = propTypes$95;
+FormText.propTypes = propTypes$96;
 
 /* eslint-disable quote-props, dot-notation */
 /**
@@ -24814,22 +26006,22 @@ FormText.propTypes = propTypes$95;
 var defaultProps$84 = {
   tag: 'div'
 };
-var propTypes$96 = {
+var propTypes$97 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<DropdownItem />`. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var FormFeedback = function (_React$Component) {
@@ -24867,11 +26059,11 @@ var FormFeedback = function (_React$Component) {
 }(React__default.Component);
 
 FormFeedback.defaultProps = defaultProps$84;
-FormFeedback.propTypes = propTypes$96;
+FormFeedback.propTypes = propTypes$97;
 
 
 FormFeedback.defaultProps = defaultProps$84;
-FormFeedback.propTypes = propTypes$96;
+FormFeedback.propTypes = propTypes$97;
 
 /* eslint-disable quote-props, dot-notation */
 /**
@@ -24879,27 +26071,27 @@ FormFeedback.propTypes = propTypes$96;
  *
  *
  */
-var propTypes$97 = {
+var propTypes$98 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<DropdownItem />`. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Specified id and name will be attributed to input of type radio. */
-  radio: PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string
+  radio: propTypes$1.shape({
+    id: propTypes$1.string,
+    name: propTypes$1.string
   }),
   /** Toggles default checked input of type radio or checkbox. */
-  defaultChecked: PropTypes.bool,
+  defaultChecked: propTypes$1.bool,
   /** Toggles checked input of type radio or checkbox. */
-  checked: PropTypes.bool,
+  checked: propTypes$1.bool,
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var FormCustom = function (_React$Component) {
@@ -24948,40 +26140,40 @@ var FormCustom = function (_React$Component) {
   return FormCustom;
 }(React__default.Component);
 
-FormCustom.propTypes = propTypes$97;
+FormCustom.propTypes = propTypes$98;
 
 
-FormCustom.propTypes = propTypes$97;
+FormCustom.propTypes = propTypes$98;
 
 var defaultProps$85 = {
   tag: 'button'
 };
-var propTypes$98 = {
+var propTypes$99 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * @ignore
    */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Toggles disabled CSS style. */
-  disabled: PropTypes.bool,
+  disabled: propTypes$1.bool,
   /** Toggles divider visibility. */
-  divider: PropTypes.bool,
+  divider: propTypes$1.bool,
   /** Toggles header element display. */
-  header: PropTypes.bool,
+  header: propTypes$1.bool,
   /** Call specified function when on click event is triggered. */
-  onClick: PropTypes.func,
+  onClick: propTypes$1.func,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var DropdownItem = function (_React$Component) {
@@ -25061,50 +26253,50 @@ var DropdownItem = function (_React$Component) {
 }(React__default.Component);
 
 DropdownItem.defaultProps = defaultProps$85;
-DropdownItem.propTypes = propTypes$98;
+DropdownItem.propTypes = propTypes$99;
 DropdownItem.contextTypes = {
-  toggle: PropTypes.func
+  toggle: propTypes$1.func
 };
 
 
 DropdownItem.defaultProps = defaultProps$85;
-DropdownItem.propTypes = propTypes$98;
+DropdownItem.propTypes = propTypes$99;
 
 var defaultProps$86 = {
   'aria-haspopup': true,
   'data-toggle': 'dropdown',
   color: 'primary'
 };
-var propTypes$99 = {
+var propTypes$100 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<DropdownItem />`. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Toggles popup CSS style. */
-  'aria-haspopup': PropTypes.bool,
+  'aria-haspopup': propTypes$1.bool,
   /** Toggles caret CSS style. */
-  caret: PropTypes.bool,
+  caret: propTypes$1.bool,
   /** Change toggle content with specified string. */
-  'data-toggle': PropTypes.string,
+  'data-toggle': propTypes$1.string,
   /** Toggles disabled CSS style. */
-  disabled: PropTypes.bool,
+  disabled: propTypes$1.bool,
   /** Call specified function when on click event is triggered. */
-  onClick: PropTypes.func,
+  onClick: propTypes$1.func,
   /** Toggles nav CSS style. */
-  nav: PropTypes.bool,
+  nav: propTypes$1.bool,
   /** Toggles split CSS style. */
-  split: PropTypes.bool,
+  split: propTypes$1.bool,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var DropdownToggle = function (_React$Component) {
@@ -25195,15 +26387,15 @@ var DropdownToggle = function (_React$Component) {
 }(React__default.Component);
 
 DropdownToggle.defaultProps = defaultProps$86;
-DropdownToggle.propTypes = propTypes$99;
+DropdownToggle.propTypes = propTypes$100;
 DropdownToggle.contextTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  toggle: PropTypes.func.isRequired
+  isOpen: propTypes$1.bool.isRequired,
+  toggle: propTypes$1.func.isRequired
 };
 
 
 DropdownToggle.defaultProps = defaultProps$86;
-DropdownToggle.propTypes = propTypes$99;
+DropdownToggle.propTypes = propTypes$100;
 
 /* eslint-disable */
 var getToggleableClass = function getToggleableClass(toggleable) {
@@ -25275,84 +26467,84 @@ var defaultProps$87 = {
     '$navbar-inverse-disabled-color': 'rgba(255, 255, 255, 0.25)'
   }
 };
-var propTypes$100 = {
+var propTypes$101 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /** Toggles light CSS style. */
-  light: PropTypes.bool,
+  light: propTypes$1.bool,
   /** Toggles inverse CSS style. */
-  inverse: PropTypes.bool,
+  inverse: propTypes$1.bool,
   /** Toggles full CSS style. */
-  full: PropTypes.bool,
+  full: propTypes$1.bool,
   /** Toggles fixed CSS style. */
-  fixed: PropTypes.string,
+  fixed: propTypes$1.string,
   /** Toggles sticky CSS style. */
-  sticky: PropTypes.string,
+  sticky: propTypes$1.string,
   /** Color variables. Can be: */
-  color: PropTypes.oneOf(['primary', 'success', 'info', 'warning', 'danger', 'inverse', 'faded']),
+  color: propTypes$1.oneOf(['primary', 'success', 'info', 'warning', 'danger', 'inverse', 'faded']),
   /** . */
-  role: PropTypes.string,
+  role: propTypes$1.string,
   /** . */
-  toggleable: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  toggleable: propTypes$1.oneOfType([propTypes$1.bool, propTypes$1.string]),
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$enable-rounded': PropTypes.bool,
-    '$enable-hover-media-query': PropTypes.bool,
-    '$grid-breakpoints': PropTypes.object,
-    '$border-width': PropTypes.string,
-    '$font-size-lg': PropTypes.string,
-    '$body-bg': PropTypes.string,
-    '$component-active-bg': PropTypes.string,
-    '$component-active-color': PropTypes.string,
-    '$border-radius': PropTypes.string,
-    '$navbar-padding-x': PropTypes.string,
-    '$navbar-padding-y': PropTypes.string,
-    '$nav-link-padding': PropTypes.string,
-    '$nav-disabled-link-color': PropTypes.string,
-    '$nav-tabs-border-color': PropTypes.string,
-    '$nav-tabs-border-width': PropTypes.string,
-    '$nav-tabs-border-radius': PropTypes.string,
-    '$nav-tabs-link-hover-border-color': PropTypes.string,
-    '$nav-tabs-active-link-hover-color': PropTypes.string,
-    '$nav-tabs-active-link-hover-bg': PropTypes.string,
-    '$nav-tabs-active-link-hover-border-color': PropTypes.string,
-    '$nav-pills-border-radius': PropTypes.string,
-    '$nav-pills-active-link-color': PropTypes.string,
-    '$nav-pills-active-link-bg': PropTypes.string,
-    '$cursor-disabled': PropTypes.string,
-    '$zindex-navbar': PropTypes.string,
-    '$zindex-navbar-fixed': PropTypes.string,
-    '$zindex-navbar-sticky': PropTypes.string,
-    '$navbar-brand-padding-y': PropTypes.string,
-    '$navbar-divider-padding-y': PropTypes.string,
-    '$navbar-toggler-padding-y': PropTypes.string,
-    '$navbar-toggler-padding-x': PropTypes.string,
-    '$navbar-toggler-font-size': PropTypes.string,
-    '$navbar-toggler-border-radius': PropTypes.string,
-    '$navbar-light-active-color': PropTypes.string,
-    '$navbar-light-color': PropTypes.string,
-    '$navbar-light-hover-color': PropTypes.string,
-    '$navbar-light-toggler-border': PropTypes.string,
-    '$navbar-light-disabled-color': PropTypes.string,
-    '$navbar-light-toggler-bg': PropTypes.string,
-    '$navbar-inverse-active-color': PropTypes.string,
-    '$navbar-inverse-color': PropTypes.string,
-    '$navbar-inverse-hover-color': PropTypes.string,
-    '$navbar-inverse-toggler-border': PropTypes.string,
-    '$navbar-inverse-toggler-bg': PropTypes.string,
-    '$navbar-inverse-disabled-color': PropTypes.string
+  theme: propTypes$1.shape({
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool,
+    '$grid-breakpoints': propTypes$1.object,
+    '$border-width': propTypes$1.string,
+    '$font-size-lg': propTypes$1.string,
+    '$body-bg': propTypes$1.string,
+    '$component-active-bg': propTypes$1.string,
+    '$component-active-color': propTypes$1.string,
+    '$border-radius': propTypes$1.string,
+    '$navbar-padding-x': propTypes$1.string,
+    '$navbar-padding-y': propTypes$1.string,
+    '$nav-link-padding': propTypes$1.string,
+    '$nav-disabled-link-color': propTypes$1.string,
+    '$nav-tabs-border-color': propTypes$1.string,
+    '$nav-tabs-border-width': propTypes$1.string,
+    '$nav-tabs-border-radius': propTypes$1.string,
+    '$nav-tabs-link-hover-border-color': propTypes$1.string,
+    '$nav-tabs-active-link-hover-color': propTypes$1.string,
+    '$nav-tabs-active-link-hover-bg': propTypes$1.string,
+    '$nav-tabs-active-link-hover-border-color': propTypes$1.string,
+    '$nav-pills-border-radius': propTypes$1.string,
+    '$nav-pills-active-link-color': propTypes$1.string,
+    '$nav-pills-active-link-bg': propTypes$1.string,
+    '$cursor-disabled': propTypes$1.string,
+    '$zindex-navbar': propTypes$1.string,
+    '$zindex-navbar-fixed': propTypes$1.string,
+    '$zindex-navbar-sticky': propTypes$1.string,
+    '$navbar-brand-padding-y': propTypes$1.string,
+    '$navbar-divider-padding-y': propTypes$1.string,
+    '$navbar-toggler-padding-y': propTypes$1.string,
+    '$navbar-toggler-padding-x': propTypes$1.string,
+    '$navbar-toggler-font-size': propTypes$1.string,
+    '$navbar-toggler-border-radius': propTypes$1.string,
+    '$navbar-light-active-color': propTypes$1.string,
+    '$navbar-light-color': propTypes$1.string,
+    '$navbar-light-hover-color': propTypes$1.string,
+    '$navbar-light-toggler-border': propTypes$1.string,
+    '$navbar-light-disabled-color': propTypes$1.string,
+    '$navbar-light-toggler-bg': propTypes$1.string,
+    '$navbar-inverse-active-color': propTypes$1.string,
+    '$navbar-inverse-color': propTypes$1.string,
+    '$navbar-inverse-hover-color': propTypes$1.string,
+    '$navbar-inverse-toggler-border': propTypes$1.string,
+    '$navbar-inverse-toggler-bg': propTypes$1.string,
+    '$navbar-inverse-disabled-color': propTypes$1.string
   }),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var NavbarUnstyled = function (_React$Component) {
@@ -25399,7 +26591,7 @@ var NavbarUnstyled = function (_React$Component) {
 }(React__default.Component);
 
 NavbarUnstyled.defaultProps = defaultProps$87;
-NavbarUnstyled.propTypes = propTypes$100;
+NavbarUnstyled.propTypes = propTypes$101;
 
 
 
@@ -25410,34 +26602,34 @@ var Navbar = styled__default(NavbarUnstyled).withConfig({
 });
 
 Navbar.defaultProps = defaultProps$87;
-Navbar.propTypes = propTypes$100;
+Navbar.propTypes = propTypes$101;
 
 var defaultProps$88 = {
   tag: 'button',
   type: 'button'
 };
-var propTypes$101 = {
+var propTypes$102 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<NavbarToggler />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Value type of the component. */
-  type: PropTypes.string,
+  type: propTypes$1.string,
   /** Toggles right CSS display. */
-  right: PropTypes.bool,
+  right: propTypes$1.bool,
   /** Toggles left CSS display. */
-  left: PropTypes.bool,
+  left: propTypes$1.bool,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var navbarToggleIcon = React__default.createElement('span', { className: 'navbar-toggler-icon' });
@@ -25461,27 +26653,27 @@ var NavbarToggler = function NavbarToggler(props) {
   );
 };
 
-NavbarToggler.propTypes = propTypes$101;
+NavbarToggler.propTypes = propTypes$102;
 NavbarToggler.defaultProps = defaultProps$88;
 
 var defaultProps$89 = {
   tag: 'a'
 };
 
-var propTypes$102 = {
+var propTypes$103 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 
 var NavbarBrand = function NavbarBrand(props) {
@@ -25496,29 +26688,29 @@ var NavbarBrand = function NavbarBrand(props) {
   return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
 };
 
-NavbarBrand.propTypes = propTypes$102;
+NavbarBrand.propTypes = propTypes$103;
 NavbarBrand.defaultProps = defaultProps$89;
 
-var propTypes$103 = {
+var propTypes$104 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Specified node element will be passed as children of `<DropdownItem />` component. */
-  children: PropTypes.node,
+  children: propTypes$1.node,
   /** Call specified function when toggle action triggered. */
-  toggle: PropTypes.func.isRequired,
+  toggle: propTypes$1.func.isRequired,
   /** Toggles isOpen CSS style. */
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: propTypes$1.bool.isRequired,
   /**
    * Replace the default component tag by the one specified. Can be:
    */
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   /**
    * Replace or remove a className from the component.
    * See example <a href="https://www.npmjs.com/package/map-to-css-modules" target="_blank">here</a>.
    */
-  cssModule: PropTypes.object
+  cssModule: propTypes$1.object
 };
 var defaultProps$90 = {
   tag: 'li'
@@ -25536,7 +26728,7 @@ var NavDropdown = function NavDropdown(props) {
   return React__default.createElement(Dropdown, _extends({}, attributes, { tag: Tag, className: classes }));
 };
 
-NavDropdown.propTypes = propTypes$103;
+NavDropdown.propTypes = propTypes$104;
 NavDropdown.defaultProps = defaultProps$90;
 
 var defaultProps$91 = {
@@ -25558,17 +26750,17 @@ var defaultProps$91 = {
     '$enable-grid-classes': true
   }
 };
-var propTypes$104 = {
+var propTypes$105 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$grid-gutter-width-base': PropTypes.string,
-    '$grid-gutter-widths': PropTypes.object,
-    '$container-max-widths': PropTypes.object,
-    '$enable-grid-classes': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$grid-gutter-width-base': propTypes$1.string,
+    '$grid-gutter-widths': propTypes$1.object,
+    '$container-max-widths': propTypes$1.object,
+    '$enable-grid-classes': propTypes$1.bool
   })
 };
 
@@ -25606,7 +26798,7 @@ var ContainerUnstyled = function (_React$Component) {
 
 
 ContainerUnstyled.defaultProps = defaultProps$91;
-ContainerUnstyled.propTypes = propTypes$104;
+ContainerUnstyled.propTypes = propTypes$105;
 var Container = styled__default(ContainerUnstyled).withConfig({
   displayName: 'Container'
 })(['', ''], function (props) {
@@ -25614,7 +26806,7 @@ var Container = styled__default(ContainerUnstyled).withConfig({
 });
 
 Container.defaultProps = defaultProps$91;
-Container.propTypes = propTypes$104;
+Container.propTypes = propTypes$105;
 
 var defaultProps$92 = {
   theme: {
@@ -25629,16 +26821,16 @@ var defaultProps$92 = {
     '$enable-grid-classes': true
   }
 };
-var propTypes$105 = {
+var propTypes$106 = {
   /**
    * @ignore
    */
-  className: PropTypes.string,
+  className: propTypes$1.string,
   /** Theme variables. Can be: */
-  theme: PropTypes.shape({
-    '$grid-gutter-width-base': PropTypes.string,
-    '$grid-gutter-widths': PropTypes.object,
-    '$enable-grid-classes': PropTypes.bool
+  theme: propTypes$1.shape({
+    '$grid-gutter-width-base': propTypes$1.string,
+    '$grid-gutter-widths': propTypes$1.object,
+    '$enable-grid-classes': propTypes$1.bool
   })
 };
 
@@ -25676,7 +26868,7 @@ var ContainerFluidUnstyled = function (_React$Component) {
 
 
 ContainerFluidUnstyled.defaultProps = defaultProps$92;
-ContainerFluidUnstyled.propTypes = propTypes$105;
+ContainerFluidUnstyled.propTypes = propTypes$106;
 var ContainerFluid = styled__default(ContainerFluidUnstyled).withConfig({
   displayName: 'ContainerFluid'
 })(['', ''], function (props) {
@@ -25684,7 +26876,7 @@ var ContainerFluid = styled__default(ContainerFluidUnstyled).withConfig({
 });
 
 ContainerFluid.defaultProps = defaultProps$92;
-ContainerFluid.propTypes = propTypes$105;
+ContainerFluid.propTypes = propTypes$106;
 
 // 0. Configuration
 
