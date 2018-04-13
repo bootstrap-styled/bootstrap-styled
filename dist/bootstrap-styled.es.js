@@ -11565,8 +11565,13 @@ var BootstrapProvider = function (_React$Component) {
     return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = BootstrapProvider.__proto__ || Object.getPrototypeOf(BootstrapProvider)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       theme: {},
       isWindowPhone8Fixed: null // just for unit testing
-    }, _this.makeTheme = function (_ref2, cb) {
+    }, _this.setTheme = function (_ref2, cb) {
       var userTheme = _ref2.theme;
+
+      var theme$$1 = _this.makeTheme({ theme: userTheme });
+      _this.setState({ theme: theme$$1 }, cb);
+    }, _this.makeTheme = function (_ref3) {
+      var userTheme = _ref3.theme;
 
       var theme$$1 = makeTheme$$1(userTheme);
       var metaKeyList = Object.keys(theme$$1).filter(function (f) {
@@ -11575,7 +11580,7 @@ var BootstrapProvider = function (_React$Component) {
       metaKeyList.forEach(function (k) {
         delete theme$$1[k];
       });
-      _this.setState({ theme: theme$$1 }, cb);
+      return theme$$1;
     }, _this.injectGlobal = function () {
       if (_this.props.injectGlobal) {
         /* eslint-disable no-unused-expressions */
@@ -11591,20 +11596,43 @@ var BootstrapProvider = function (_React$Component) {
   createClass(BootstrapProvider, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      this.makeTheme(this.props, this.injectGlobal);
+      this.setTheme(this.props, this.injectGlobal);
     }
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.windowPhone8Fix();
     }
+
+    /**
+     * On update props
+     * @param nextProps
+     */
+
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      if (JSON.stringify(this.props.theme) !== JSON.stringify(nextProps.theme)) {
-        this.makeTheme(this.props);
+      /**
+       * We only replace the theme if the filtered theme is different from the current one
+       */
+      if (JSON.stringify(this.makeTheme(this.props)) !== JSON.stringify(nextProps.theme)) {
+        this.setTheme(this.props);
       }
     }
+
+    /**
+     * setTheme is in charge of replacing the theme, it does not filter it, use makeTheme for that
+     * @param userTheme
+     * @param cb
+     */
+
+
+    /**
+     * makeTheme is in charge of filtering the meta data out of the theme
+     * @param userTheme
+     * @returns {*}
+     */
+
   }, {
     key: 'windowPhone8Fix',
     value: function windowPhone8Fix() {
