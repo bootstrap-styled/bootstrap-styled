@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [?NEXT?] - ????-??-??
 
 - Improve rerendering of the `BootstrapProvider`.
+- Upgrade `react-styleguidedist` to 6.5.0.
 
 ## [v1.5.14] - 2018-04-12
 
