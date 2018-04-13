@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 - Improve rerendering of the `BootstrapProvider`.
 - Upgrade `react-styleguidedist` to 6.5.0.
+- Rearrange peer / global / dependencies.
 
 ## [v1.5.14] - 2018-04-12
 
@@ -36,6 +37,8 @@ All notable changes to this project will be documented in this file.
 
 ## [v1.5.8] - 2018-03-27
 
+=======
+>>>>>>> Stashed changes
 - Change all `getRef` with `innerRef`.
 
 ## [v1.5.7] - 2018-03-27
