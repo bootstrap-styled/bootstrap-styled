@@ -1,4 +1,4 @@
-import makeTheme from '../makeTheme';
+import { makeTheme } from '../makeTheme';
 
 describe('makeTheme', () => {
   it('should have makeTheme defined', () => {

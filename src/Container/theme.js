@@ -1,5 +1,5 @@
 import { assertAscending } from 'bootstrap-styled-mixins/lib/variables';
-import { allowFalseValue } from '../makeTheme/utils';
+import { allowFalseValue } from '../theme/utils';
 /**
  * BOOTSTRAP THEME CONTAINER
  *

@@ -1,4 +1,4 @@
-import makeOriginal from '../makeTheme/makeOriginal';
+import makeOriginal from '../theme/makeOriginal';
 import { makeTheme as makeThemeA } from '../A/theme';
 import { makeTheme as makeThemeAlert } from '../Alert/theme';
 import { makeTheme as makeThemeBadge } from '../Badge/theme';
@@ -52,7 +52,7 @@ import { makeTheme as makeThemeTable } from '../Table/theme';
 import { makeTheme as makeThemeUl } from '../Ul/theme';
 import { makeTheme as makeThemeTooltip } from '../Tooltip/theme';
 
-const list = [
+export const makeThemeList = [
   makeOriginal,
   makeThemeA,
   makeThemeAlert,
@@ -108,15 +108,29 @@ const list = [
   makeThemeDrawer,
 ];
 
-export default function makeTheme(theme) {
+/* eslint-disable */
+/**
+ * This makeTheme can build from a list of makeTheme also
+ * @param list
+ * @param theme
+ * @returns {*}
+ */
+export function makeTheme(list, theme) {
+  if (!Array.isArray(list)) {
+    theme = list;
+    list = makeThemeList;
+  }
   const all = [].concat(list);
   let t = theme;
   let mt;
 
-  /* eslint-disable no-cond-assign */
   while (mt = all.shift()) {
     t = mt(t);
   }
-  /* eslint-enable no-cond-assign */
   return t;
 }
+
+const theme = makeTheme();
+
+export default theme;
+
