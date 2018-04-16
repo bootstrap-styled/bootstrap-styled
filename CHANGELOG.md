@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - Added rollup-umd bin and dependencies.
 - Documentation variables build in pages job.
 - Added doc prerequisite and commands.
+- Move from group `styled-components` to `bootstrap-styled`.
 
 ## [v1.6.0] - 2018-04-16
 

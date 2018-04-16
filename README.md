@@ -4,13 +4,13 @@ bootstrap-styled npm package.
 
 **Master**
 
-[![build status](https://module.kopaxgroup.com/styled-components/bootstrap-styled/badges/master/build.svg)](https://module.kopaxgroup.com/styled-components/bootstrap-styled/commits/master)
-[![coverage report](https://module.kopaxgroup.com/styled-components/bootstrap-styled/badges/master/coverage.svg)](https://module.kopaxgroup.com/styled-components/bootstrap-styled/commits/master)
+[![build status](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/badges/master/build.svg)](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/commits/master)
+[![coverage report](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/badges/master/coverage.svg)](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/commits/master)
 
 **Dev**
 
-[![build status](https://module.kopaxgroup.com/styled-components/bootstrap-styled/badges/dev/build.svg)](https://module.kopaxgroup.com/styled-components/bootstrap-styled/commits/dev)
-[![coverage report](https://module.kopaxgroup.com/styled-components/bootstrap-styled/badges/dev/coverage.svg)](https://module.kopaxgroup.com/styled-components/bootstrap-styled/commits/dev)
+[![build status](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/badges/dev/build.svg)](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/commits/dev)
+[![coverage report](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/badges/dev/coverage.svg)](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/commits/dev)
 
 ## Table of Contents
 
@@ -28,7 +28,7 @@ bootstrap-styled npm package.
 
 Clone project
 
-    git clone ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled.git
+    git clone ssh://git@module.kopaxgroup.com:20024/bootstrap-styled/bootstrap-styled.git
 
 Install dependencies
 

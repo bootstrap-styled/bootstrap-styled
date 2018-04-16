@@ -37,10 +37,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled.git"
+    "url": "ssh://git@module.kopaxgroup.com:20024/bootstrap-styled/bootstrap-styled.git"
   },
   "bugs": {
-    "url": "https://module.kopaxgroup.com/styled-components/bootstrap-styled/issues"
+    "url": "https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/issues"
   },
   "files": [
     "LICENSE.md",
