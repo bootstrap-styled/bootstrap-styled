@@ -30,7 +30,6 @@ It is now possible to share with anyone, all your front-end by using the most kn
 
   - View [Markdown documentation](docs)
   - View $PACKAGE_NAME [HTML documentation](https://bootstrap-styled.yeutech.com)
-  - View rollup-umd [HTML documentation](https://dev-tools.yeutech.com/rollup-umd) *(require access)*
 
 ## License
 
