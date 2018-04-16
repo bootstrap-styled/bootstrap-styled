@@ -4,7 +4,7 @@ const cliUpgrade = require('git-cli-upgrade-tool');
 const pkg = require(path.join(__dirname, '../../package.json'));
 const p = path.join(__base, 'internals/declination');
 
-const files = fs.readdirSync(p);
+const files = fs.existsSync(p) ? fs.readdirSync(p) : [];
 const declinationList = files
   .filter((f) => f !== 'create')
   .map((file) => `${file.split('-').slice(1).join('-')}`);

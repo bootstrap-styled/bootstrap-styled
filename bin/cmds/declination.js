@@ -1,6 +1,6 @@
 /* eslint-disable no-undef, no-param-reassign, global-require, no-unused-vars, no-console, no-underscore-dangle, prefer-destructuring */
 const p = path.join(__base, 'internals/declination');
-const files = fs.readdirSync(p);
+const files = fs.existsSync(p) ? fs.readdirSync(p) : [];
 const declinationList = files
   .filter((f) => f !== 'create');
 
