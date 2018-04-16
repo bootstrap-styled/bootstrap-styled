@@ -48,6 +48,7 @@ stages:
   - build
   - test
   - release
+  - publish
   - deploy
 
 # Job: Build
@@ -161,6 +162,20 @@ release:
     - git add CHANGELOG.md
     - git commit -m "Add todo next version $VERSION in CHANGELOG.md"
     - git push origin HEAD:dev
+  dependencies:
+    - build
+  only:
+    - master
+  tags:
+    - docker
+
+# Job: Publish
+publish:
+  stage: publish
+  script:
+    - git fetch --all
+    - git checkout ${PACKAGE_VERSION} || echo true
+    - npm run ci-publish
   dependencies:
     - build
   only:

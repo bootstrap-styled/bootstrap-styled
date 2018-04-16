@@ -24,6 +24,10 @@ export default function makeOriginal(userTheme = {}) {
   // the Bootstrap defaults without modifying key, versioned files.
   const v = {};
   const u = userTheme;
+
+  // all var must be grouped in a named theme
+  v['_name'] = u['_name'] || 'bootstrap-styled';
+
   // This variable is used by following variables: $spacer, $spacers, $popover-arrow-outer-width and $popover-arrow-width.
   // let detectedUnit;
 

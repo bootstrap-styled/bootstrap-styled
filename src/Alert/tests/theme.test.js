@@ -4,10 +4,10 @@ describe('theme', () => {
   it('should have theme defined', () => {
     expect(theme).toBeDefined();
   });
-  it('should have keys starting with $ only', () => {
-    Object.keys(theme).forEach((key) => expect(key[0]).toEqual('$'));
+  it('should have keys starting with $ or _ only', () => {
+    Object.keys(theme).forEach((key) => expect(['$', '_'].indexOf(key[0])).toBeGreaterThanOrEqual(0));
   });
   it('should makeTheme', () => {
-    expect(Object.keys(makeTheme()).length).toEqual(37);
+    expect(Object.keys(makeTheme()).length).toEqual(38);
   });
 });

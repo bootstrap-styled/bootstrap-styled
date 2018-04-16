@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ## [?NEXT?] - ????-??-??
 
+- Add dependency [ci-publish](https://www.npmjs.com/package/ci-publish) ^1.3.1.
+- Add dependency [basic-math-utils](https://www.npmjs.com/package/basic-math-utils) ^0.3.4.
+- Remove dependency [math-utils](https://module.kopaxgroup.com/dev-tools/math-utils/tags/v0.3.1).
+- Upgrade dependency [bootstrap-styled-mixins](https://www.npmjs.com/package/bootstrap-styled-mixins) from 1.0.2 to ^1.0.4.
+- Upgrade dependency [bootstrap-styled-utils](https://www.npmjs.com/package/bootstrap-styled-utils) from 20024/styled-components/bootstrap-styled-utils.git#1.0.1 to ^1.0.2.
+- Upgrade dependency [styled-components](https://www.npmjs.com/package/styled-components) to ^3.2.3.
+- MIT License.
+- Release to npm registry.
+- Added meta `_name` to theme.
+- Added component `Drawer`.
+
+## [v1.5.15] - 2018-04-13
+
 - Improve rerendering of the `BootstrapProvider`.
 - Upgrade `react-styleguidedist` to 6.5.0.
 - Rearrange peer / global / dependencies.

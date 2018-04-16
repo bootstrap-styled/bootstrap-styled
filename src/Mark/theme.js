@@ -12,7 +12,8 @@ export const makeTheme = (userTheme = {}) => {
   // the Bootstrap defaults without modifying key, versioned files.
   const v = {};
   const u = userTheme;
-
+  // all var must be grouped in a named theme
+  v['_name'] = u['_name'] || 'bootstrap-styled';
   // Form states and alerts
 
   v['$state-warning-bg'] = u['$state-warning-bg'] || '#fcf8e3';
