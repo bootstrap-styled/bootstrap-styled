@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-styled",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Modular and extended bootstrap components made for styled-component community.",
   "main": "lib/index.js",
   "jsnext:main": "dist/bootstrap-styled.es.js",
