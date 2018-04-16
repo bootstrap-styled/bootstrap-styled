@@ -4,7 +4,7 @@ The `<BootstrapProvider />` component allows you to configure the styling of all
 
 The theme allows you to very quickly change the value of variables associated with the CSS that builds our components.
 
-```js static
+```jsx static
 <BootstrapProvider
   theme={{
     '$brand-primary': 'red',
@@ -18,7 +18,7 @@ ___This will override the original color of $brand-primary and set it's value to
 
 #### **Global options**
 
-```js static
+```jsx static
 <BootstrapProvider
   theme={{
     '$spacer': '.5rem',
@@ -34,21 +34,23 @@ ___This will override the original color of $brand-primary and set it's value to
 
 If you want to do more than just overriding variables, you can also create your own and design a logic amongst them. To do so, you must first create a function that will build the theme for you:
 
-```js static
+```jsx static
 import { unit } from 'bootstrap-styled-mixins';
 
 function makeTheme(u = {}) {
   const v = {};
+  // you can add meta data to your theme
+  v['_name'] = u['_name'] || 'bootstrap-styled';
   // do all the logic to calculate your theme values
   v['$my-var'] = u['$my-var'] || '10px';
   v['$my-other-var'] = u['$my-other-var'] || unit.math.divide(v['$my-var'], 2);
-  return v;
+  return { ...u, ...v };
 }
 ```
 
 You can also combine your other themes together to create your application theme.
 
-```js static
+```jsx static
 import { BootstrapProvider, makeTheme as makeThemeBoostrap } from 'bootstrap-styled';
 import { makeTheme as makeThemeMotion } from 'bootstrap-styled-motion';
 import { makeTheme as makeThemeFoobar } from 'bootstrap-styled-foobar-components';
@@ -72,7 +74,7 @@ If you want to make the theme of bootstrap-styled, you must not forget to add it
 That tool can be useful when you are playing with themes while you build application or module that depend on bootstrap-styled.
 
 
-```js static
+```jsx static
 import { makeTheme } from 'bootstrap-styled';
 import { makeTheme as makeThemeMotion } from 'bootstrap-styled-motion';
 
@@ -95,7 +97,7 @@ Utils are all activated by default. They inject some CSS utilities classes in th
 
 Adding the BootstrapProvider to your and disabling all the utilities like this:
 
-```js static
+```jsx static
 import { BootstrapProvider, theme } from 'bootstrap-styled';
 
 ReactDOM.render(
@@ -124,7 +126,7 @@ ReactDOM.render(
 
 In addition to the BootstrapProvider, you will want to have our global-styles for injected in your app.
 
-```js static
+```jsx static
 import { getGlobalStyles } from 'bootstrap-styled';
 import { injectGlobal } from 'styled-components';
 
