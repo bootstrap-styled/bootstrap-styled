@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [?NEXT?] - ????-??-??
+## [v1.6.0] - 2018-04-16
 
 - Add dependency [ci-publish](https://www.npmjs.com/package/ci-publish) ^1.3.1.
 - Add dependency [basic-math-utils](https://www.npmjs.com/package/basic-math-utils) ^0.3.4.
