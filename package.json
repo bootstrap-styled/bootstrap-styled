@@ -3,6 +3,9 @@
   "version": "1.6.1",
   "description": "Modular and extended bootstrap components made for styled-component community.",
   "main": "lib/index.js",
+  "bin": {
+    "rollup-umd": "bin/rollup-umd.js"
+  },
   "jsnext:main": "dist/bootstrap-styled.es.js",
   "module": "dist/bootstrap-styled.es.js",
   "browserslist": [
@@ -30,7 +33,7 @@
     "ci-publish": "ci-publish",
     "prepublish": "npm run build",
     "lint-staged": "lint-staged",
-    "rollup-umd": "node ./internals/rollup-umd --"
+    "rollup-umd": "bin/rollup-umd.js"
   },
   "repository": {
     "type": "git",
@@ -228,6 +231,16 @@
     "lint-staged"
   ],
   "dependencies": {
+    "babel-core": "6.26.0",
+    "async": "2.6.0",
+    "directory-tree": "2.0.0",
+    "git-cli-upgrade-tool": "0.0.9",
+    "glob": "7.1.2",
+    "kopaxgroup-cli-helpers": "0.0.3",
+    "node-map-directory": "0.1.0",
+    "rimraf": "2.6.2",
+    "shelljs": "0.8.1",
+    "yargs": "11.0.0",
     "bootstrap-styled-mixins": "^1.0.4",
     "bootstrap-styled-utils": "^1.0.2",
     "classnames": "^2.2.5",
