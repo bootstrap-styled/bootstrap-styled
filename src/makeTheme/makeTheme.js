@@ -16,6 +16,7 @@ import { makeTheme as makeThemeContainer } from '../Container/theme';
 import { makeTheme as makeThemeContainerFluid } from '../ContainerFluid/theme';
 import { makeTheme as makeThemeDd } from '../Dd/theme';
 import { makeTheme as makeThemeDl } from '../Dl/theme';
+import { makeTheme as makeThemeDrawer } from '../Drawer/theme';
 import { makeTheme as makeThemeDropdown } from '../Dropdown/theme';
 import { makeTheme as makeThemeDt } from '../Dt/theme';
 import { makeTheme as makeThemeFieldset } from '../Fieldset/theme';
@@ -104,6 +105,7 @@ const list = [
   makeThemeTable,
   makeThemeUl,
   makeThemeTooltip,
+  makeThemeDrawer,
 ];
 
 export default function makeTheme(theme) {
