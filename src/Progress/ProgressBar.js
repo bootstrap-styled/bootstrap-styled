@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import { rangeUtils } from 'math-utils';
+import { rangeUtils } from 'basic-math-utils';
 import mapToCssModules from 'map-to-css-modules';
 
 export const defaultProps = {

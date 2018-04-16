@@ -13,7 +13,8 @@ export const makeTheme = (userTheme = {}) => {
   const v = {};
   const u = userTheme;
   // Fonts
-
+  // all var must be grouped in a named theme
+  v['_name'] = u['_name'] || 'bootstrap-styled';
   v['$small-font-size'] = u['$small-font-size'] || '80%';
 
   return Object.assign({}, u, v);

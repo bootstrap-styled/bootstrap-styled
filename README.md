@@ -15,27 +15,14 @@ bootstrap-styled npm package.
 ## Table of Contents
 
   - [Changelog](#changelog)
-  - [Reminders](#reminders)
   - [Quick start](#quick-start)
-  - [Release](#release)
+  - [License](#license)
 
 ---
 
 ## Changelog
 
   - View [Changelog](CHANGELOG.md)
-
-## Reminders
-
-**⚠️ When using this plugin, you must import in the first line of your application javascript entry file `babel-polyfill`: ⚠️**
-  
-    import "babel-polyfill";
-    
-To enable ES features in older browsers, you MUST include in the package.json
-
-    "browserslist": ["ie >= 9", "last 2 versions"]
-    // or
-    "browserslist": ["ie >= 10", "last 2 versions"]
 
 ## Quick start
 
@@ -81,15 +68,8 @@ If you wish to implement new functionalities you need to do a merge request incl
     git checkout $(whoami)-dev
     git push -u origin $(whoami)-dev 
 
-You can now start working on your branch. Don't forget to check `Delete branch when merged`.
+## License
 
-## Release
+Licensed under the MIT License, Copyright © 2017-present Yeutech Company Limited.
 
-Merge `dev` into `master` will release a new version and prepare a new version in `dev`.
-
-To release a new version, edit the [Changelog](CHANGELOG.md) and set the version in `package.json` and merge your change into `master`.
-
-**⚠️ if you are releasing on a git repository instead of a npm repository, **DO NOT** forget to remove `build`, and `dist` from the `.gitignore` ⚠️**
-
-    sed -i "/lib\|dist/d" .gitignore
-
+See [LICENSE](LICENSE.md) for more information.
