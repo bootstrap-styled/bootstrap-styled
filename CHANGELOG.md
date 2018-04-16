@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 - TODO: write changelog before preparing next tag
 
+## [v1.5.16] - 2018-xx-xx
+
+- Added component `Drawer`.
+
 ## [v1.5.15] - 2018-04-13
 
 - Improve rerendering of the `BootstrapProvider`.
