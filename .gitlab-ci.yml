@@ -208,7 +208,6 @@ pages:
     paths:
       - public
   only:
-    - dev
     - master
   tags:
     - docker
