@@ -1,8 +1,9 @@
 ![image](https://img.shields.io/badge/version-$PACKAGE_VERSION-green.svg)
-![image](https://img.shields.io/node/v/passport.svg)
-![image](https://img.shields.io/npm/v/npm.svg)
-![image](https://img.shields.io/github/stars/badges/shields.svg?style=social&logo=github&label=Stars)
-![image](https://img.shields.io/twitter/follow/espadrine.svg?style=social&logo=twitter&label=Follow)
-![image](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)
+![image](https://img.shields.io/badge/node-$NODE_VERSION-brightgreen.svg)
+![image](https://img.shields.io/badge/npm-$NPM_VERSION-red.svg)
+![image](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+![image]($IMG_SHIELD_PUBLISHING)
+
+[![image](https://user-images.githubusercontent.com/1866564/38087911-2f85c6e2-3384-11e8-9383-676504307e3f.png)]($CI_PROJECT_URL)
 
 Bootstrap Styled is a free and NO-CSS framework based on Bootstrap, ReactJS and Styled-component.
