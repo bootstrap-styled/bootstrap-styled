@@ -194,7 +194,7 @@ pages:
     - npm install
     # Replace variables
     - npm run rollup-umd -- doc variable PACKAGE_NAME=${PACKAGE_NAME}
-    - npm run rollup-umd -- doc variable PACKAGE_PEERS="${PACKAGE_PEERS}"
+    - npm run rollup-umd -- doc variable PACKAGE_PEERS="$(npm run rollup-umd -- peer npm-install-cmd | tail -1)"
     - npm run rollup-umd -- doc variable PACKAGE_VERSION=${PACKAGE_VERSION}
     - npm run rollup-umd -- doc variable NODE_VERSION=${NODE_VERSION}
     - npm run rollup-umd -- doc variable NPM_VERSION=${NPM_VERSION}
