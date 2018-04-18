@@ -34,6 +34,10 @@ module.exports = {
       name: 'Documentation',
       sections: [
         {
+          name: 'Prerequisite',
+          content: 'docs/prerequisite.md',
+        },
+        {
           name: 'Installation',
           content: 'docs/installation.md',
           description: 'Discover how to install `bootstrap-styled`',
@@ -186,6 +190,10 @@ module.exports = {
           components: 'src/Table/*.js',
         },
       ],
+    },
+    {
+      name: 'Developers',
+      content: 'docs/commands.md',
     },
   ],
   previewDelay: 500,

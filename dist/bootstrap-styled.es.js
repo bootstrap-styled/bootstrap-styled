@@ -7439,7 +7439,7 @@ var BootstrapProvider = function (_React$Component) {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       if (JSON.stringify(this.makeTheme(this.props)) !== JSON.stringify(nextProps.theme)) {
-        this.setTheme(this.props);
+        this.setTheme(nextProps);
       }
     }
   }, {

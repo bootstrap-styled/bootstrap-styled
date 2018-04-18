@@ -30,8 +30,11 @@ before_script:
   - git checkout ${CI_COMMIT_SHA}
 
   # const
+  - export PACKAGE_NAME=$(node -p "require('./package.json').name")
   - export PACKAGE_VERSION=$(node -p "require('./package.json').version")
   - export SONAR_VERSION=${PACKAGE_VERSION}-b${CI_PIPELINE_ID}-${CI_COMMIT_REF_NAME}
+  - export NODE_VERSION=$(node --version)
+  - export NPM_VERSION=$(npm --version)
 
   # logging
   - npm --version
@@ -187,14 +190,24 @@ publish:
 pages:
   stage: deploy
   script:
-    # REPLACE VERSION
-    - sed -i 's/$PACKAGE_VERSION/'`echo $PACKAGE_VERSION`'/g' docs/introduction.md
+    # capability of redeploying an old documentation without triggering all the pipeline
+    - npm install
+    # Replace variables
+    - npm run rollup-umd -- doc variable PACKAGE_NAME=${PACKAGE_NAME}
+    - npm run rollup-umd -- doc variable PACKAGE_PEERS="$(npm run rollup-umd -- peer npm-install-cmd | tail -1)"
+    - npm run rollup-umd -- doc variable PACKAGE_VERSION=${PACKAGE_VERSION}
+    - npm run rollup-umd -- doc variable NODE_VERSION=${NODE_VERSION}
+    - npm run rollup-umd -- doc variable NPM_VERSION=${NPM_VERSION}
+    - npm run rollup-umd -- doc variable CI_REPOSITORY_URL=${REPOSITORY_SSH_URL}
+    - npm run rollup-umd -- doc variable CI_PROJECT_URL=${CI_PROJECT_URL}
+    - npm run rollup-umd -- doc variable CI_PROJECT_NAMESPACE=${CI_PROJECT_NAMESPACE}
+    - npm run rollup-umd -- doc variable CI_PROJECT_NAME=${CI_PROJECT_NAME}
+    - npm run rollup-umd -- doc variable IMG_SHIELD_PUBLISHING=$(npm run rollup-umd -- publish status --badge | tail -1)
     - npm run styleguide:build
   artifacts:
     paths:
       - public
   only:
-    - dev
     - master
   tags:
     - docker

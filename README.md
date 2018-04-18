@@ -1,21 +1,23 @@
 # bootstrap-styled
 
-bootstrap-styled npm package.
+Bootstrap-Styled is Bootstrap 4 made for the community with styled-components.
+
+It is now possible to share with anyone, all your front-end by using the most known front-end framework in the world.
 
 **Master**
 
-[![build status](https://module.kopaxgroup.com/styled-components/bootstrap-styled/badges/master/build.svg)](https://module.kopaxgroup.com/styled-components/bootstrap-styled/commits/master)
-[![coverage report](https://module.kopaxgroup.com/styled-components/bootstrap-styled/badges/master/coverage.svg)](https://module.kopaxgroup.com/styled-components/bootstrap-styled/commits/master)
+[![build status](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/badges/master/build.svg)](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/commits/master)
+[![coverage report](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/badges/master/coverage.svg)](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/commits/master)
 
 **Dev**
 
-[![build status](https://module.kopaxgroup.com/styled-components/bootstrap-styled/badges/dev/build.svg)](https://module.kopaxgroup.com/styled-components/bootstrap-styled/commits/dev)
-[![coverage report](https://module.kopaxgroup.com/styled-components/bootstrap-styled/badges/dev/coverage.svg)](https://module.kopaxgroup.com/styled-components/bootstrap-styled/commits/dev)
+[![build status](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/badges/dev/build.svg)](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/commits/dev)
+[![coverage report](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/badges/dev/coverage.svg)](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/commits/dev)
 
 ## Table of Contents
 
   - [Changelog](#changelog)
-  - [Quick start](#quick-start)
+  - [Documentation](#documentation)
   - [License](#license)
 
 ---
@@ -23,50 +25,11 @@ bootstrap-styled npm package.
 ## Changelog
 
   - View [Changelog](CHANGELOG.md)
+  
+## Documentation
 
-## Quick start
-
-Clone project
-
-    git clone ssh://git@module.kopaxgroup.com:20024/styled-components/bootstrap-styled.git
-
-Install dependencies
-
-    npm install
-
-Build project
-
-    npm run build
-    
-Run unit test
-     
-    npm test
-    
-Watch unit test
-     
-    npm run test:watch
-
-Watch the `/dist` directory
-
-    npm run build:dist:watch
-
-Watch the `/lib` directory
-
-    npm run build:lib:watch
-
-# Contribute
-
-`master` is used to release the version. 
-
-- `master` only accept merge requests from `dev`
-
-`dev` is the developement branch. It should be used by developers for applying their merge requests.
-
-If you wish to implement new functionalities you need to do a merge request including your change on the `dev` branch.
-
-    git checkout dev
-    git checkout $(whoami)-dev
-    git push -u origin $(whoami)-dev 
+  - View [Markdown documentation](docs)
+  - View $PACKAGE_NAME [HTML documentation](https://bootstrap-styled.yeutech.com)
 
 ## License
 

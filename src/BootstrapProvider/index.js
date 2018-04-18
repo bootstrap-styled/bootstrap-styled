@@ -81,7 +81,7 @@ class BootstrapProvider extends React.Component { // eslint-disable-line react/p
      * We only replace the theme if the filtered theme is different from the current one
      */
     if (JSON.stringify(this.makeTheme(this.props)) !== JSON.stringify(nextProps.theme)) {
-      this.setTheme(this.props);
+      this.setTheme(nextProps);
     }
   }
 
