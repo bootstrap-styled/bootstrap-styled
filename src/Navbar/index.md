@@ -24,7 +24,7 @@ initialState = {
       </Nav>
       <Form inline className="my-2 my-lg-0">
         <Input className="form-control mr-sm-2" type="text" placeholder="Search" />
-        <Button color="success">Search</Button>
+        <Button href="javascript:;" color="success">Search</Button>
       </Form>
     </Collapse>
   </Container>
