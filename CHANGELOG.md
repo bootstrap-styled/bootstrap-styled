@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [?NEXT?] - ????-??-??
+## [v1.6.2] - 2018-04-18
 
 - Fix `bin`.
 
