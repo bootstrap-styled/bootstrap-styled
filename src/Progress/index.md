@@ -2,6 +2,7 @@
 
 ```js
 <div>
+  <div className="text-center">0%</div>
   <Progress>
     <ProgressBar valueNow={0} valueMax={100} />
   </Progress>
