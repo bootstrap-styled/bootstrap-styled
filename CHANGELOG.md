@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - Documentation variables build in pages job.
 - Added doc prerequisite and commands.
 - Move from group `styled-components` to `bootstrap-styled`.
+- Fix `BootstrapProvider` not updating theme.
 
 ## [v1.6.0] - 2018-04-16
 
