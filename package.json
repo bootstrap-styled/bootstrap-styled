@@ -173,6 +173,7 @@
     "react-styleguidist": "^6.5.0",
     "react-test-renderer": "^16.0.0",
     "redux": "^3.7.2",
+    "reselect": "^3.0.1",
     "rimraf": "^2.6.2",
     "rollup": "^0.50.0",
     "rollup-plugin-babel": "^3.0.2",
