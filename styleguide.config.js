@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const pkg = require('./package.json');
+const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin');
+const { generateCSSReferences, generateJSReferences } = MiniHtmlWebpackPlugin;
 
 module.exports = {
   styleguideDir: 'public',
@@ -214,7 +216,23 @@ module.exports = {
       },
     },
   },
-  template: path.join(__dirname, 'styleguide/template.html'),
+  template: ({
+     css,
+     js,
+     title,
+     publicPath,
+  }) => `<!DOCTYPE html>
+  <html>
+     <head>
+       <meta charset="UTF-8">
+       <title>${title}</title>
+       ${generateCSSReferences(css, publicPath)}
+     </head>
+     <body>
+       <div id="rsg-root"></div>
+       ${generateJSReferences(js, publicPath)}
+     </body>
+  </html>`,
   theme: {
     color: {
       link: '#4c279e',
@@ -231,6 +249,9 @@ module.exports = {
     return `import ${name} from '${dir}';`;
   },
   webpackConfig: {
+    devServer: {
+      historyApiFallback: true,
+    },
     plugins: [
       new webpack.SourceMapDevToolPlugin({
         filename: '[file].map',
