@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-styled",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "description": "Modular and extended bootstrap components made for styled-component community.",
   "main": "lib/index.js",
   "bin": {
