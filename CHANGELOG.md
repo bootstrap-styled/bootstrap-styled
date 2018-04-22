@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [?NEXT?] - ????-??-??
+## [v1.6.4] - 2018-04-22
 
 - Fix for preparing `rollup-umd-scripts` that depend on this package.
 
