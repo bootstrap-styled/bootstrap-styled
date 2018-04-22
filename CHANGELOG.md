@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 - Fix for preparing `rollup-umd-scripts` that depend on this package.
 
+## [v1.6.3] - 2018-04-22
+
+- Fix for preparing `rollup-umd-scripts` that depend on this package.
+
 ## [v1.6.2] - 2018-04-18
 
 - Fix `bin`.
