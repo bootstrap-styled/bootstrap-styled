@@ -17,7 +17,7 @@ exports.handler = (argv) => {
       argv.path = argv.path[1] === '/' ? path.join(process.cwd(), argv.path.slice(2)) : path.join(process.cwd(), argv.path);
       break;
   }
-  const configPath = path.join(argv.path, 'styleguide/styleguide.config.json');
+  const configPath = path.join(argv.path, 'styleguide/styleguide.config.js');
   const config = require(configPath);
 
   async.map([].concat(argv.glob).concat(argv.globs), (glob, cb) => {
