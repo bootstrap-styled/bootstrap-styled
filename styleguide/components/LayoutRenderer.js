@@ -12,6 +12,9 @@ import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-ro
 // import theme, { makeTheme } from '../../src/theme';
 import reducer from '../reducer';
 import Link from './Link';
+import NavBarDoc from './NavBarDoc';
+import { pages } from '../config';
+import Documentation from './pages/Documentation';
 
 import logoBs from './logo-bs';
 import logoYeutech from './logo-yeutech';
@@ -67,43 +70,37 @@ const styles = ({ color, fontFamily, fontSize, sidebarWidth, mq, space, maxWidth
   },
 });
 
-const Documentation = (props) => (
-  <div>
-    <main className={props.classes.content}>
-      {props.children}
-      <footer className={props.classes.footer}>
-        <span className="Bootstrap-Styled">Module provided by</span>
-        <a
-          href="https://www.yeutech.vn"
-          target="_blank"
-          alt="Yeutech Company Limited"
-          title="Yeutech Company Limited"
-        >
-          <img
-            src={`data:image/png;base64,${logoYeutech}`}
-            height="55px"
-            alt="Yeutech Company Limited logo"
-            title="Yeutech Company Limited logo"
-          />
-        </a>
-      </footer>
-    </main>
-    {props.hasSidebar && (
-      <div className={props.classes.sidebar}>
-        <div className={props.classes.logo}>
-          <img
-            src={`data:image/png;base64,${logoBs}`}
-            height="85px"
-            alt="Bootstrap-styled library"
-            title="Bootstrap-styled library logo"
-          />
-          <Logo>{props.title}</Logo>
-        </div>
-        {props.toc}
-      </div>
-    )}
-  </div>
-);
+// const Documentation = (props) => (
+//   <div>
+//     <main className={props.classes.content}>
+//       {props.children}
+//       <footer className={props.classes.footer}>
+//         <span className="Bootstrap-Styled">Module provided by</span>
+//         <a
+//           href="https://www.yeutech.vn"
+//           target="_blank"
+//           alt="Yeutech Company Limited"
+//           title="Yeutech Company Limited"
+//         >
+//           <img
+//             src={`data:image/png;base64,${logoYeutech}`}
+//             height="55px"
+//             alt="Yeutech Company Limited logo"
+//             title="Yeutech Company Limited logo"
+//           />
+//         </a>
+//       </footer>
+//     </main>
+//     {props.hasSidebar && (
+//       <div className={props.classes.sidebar}>
+//         <div className={props.classes.logo}>
+//           <Logo>{props.title}</Logo>
+//         </div>
+//         {props.toc}
+//       </div>
+//     )}
+//   </div>
+// );
 
 const Test = () => <div>test</div>;
 const Test1 = () => <div>test 1</div>;
@@ -161,32 +158,34 @@ export class StyleGuideRenderer extends Component { // eslint-disable-line react
     return (
       <div className={cn(classes.root, hasSidebar && classes.hasSidebar)}>
         <Provider store={store}>
-          <ConnectedRouter history={history}>
-            <div>
-              <ul>
-                <li><Link to="/">/</Link></li>
-                <li><Link to="/toto">/toto</Link></li>
-              </ul>
-              <Route exact path="/" component={() => (
-                <Documentation
-                  title={title}
-                  children={children}
-                  toc={toc}
-                  hasSidebar={hasSidebar}
-                  classes={classes}
-                />
-              )}/>
-              <Route exact path="/toto" component={() => (
-                <div>
-                  <ul>
-                    <li><Link to="/">/</Link></li>
-                    <li><Link to="/toto">/toto</Link></li>
-                  </ul>
-                  hey
-                </div>
-              )}/>
-            </div>
-          </ConnectedRouter>
+          <div>
+            <ConnectedRouter history={history}>
+              <div>
+              <NavBarDoc pages={pages} />
+              {/*<ul>*/}
+                {/*<li><Link to="/">/</Link></li>*/}
+                {/*<li><Link to="/toto">/toto</Link></li>*/}
+              {/*</ul>*/}
+              <div>
+                <Route exact path="/" component={() => (
+                  <div>home</div>
+                )}/>
+                <Route exact path="/documentation" component={() => (
+                  <Documentation
+                    title={title}
+                    children={children}
+                    toc={toc}
+                    hasSidebar={hasSidebar}
+                    classes={classes}
+                  />
+                )}/>
+                <Route exact path="/community" component={() => (
+                  <div>community</div>
+                )}/>
+              </div>
+              </div>
+            </ConnectedRouter>
+          </div>
         </Provider>
       </div>
     );
