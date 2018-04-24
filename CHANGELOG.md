@@ -7,6 +7,14 @@ All notable changes to this project will be documented in this file.
 - TODO: write changelog before preparing next tag
 - Added new dev dependencies react-redux@^5.0.7, redux@^3.7.2, react-dom@^16.3.2 and reselect@3.0.1
 
+## [v1.6.4] - 2018-04-22
+
+- Fix for preparing `rollup-umd-scripts` that depend on this package.
+
+## [v1.6.3] - 2018-04-22
+
+- Fix for preparing `rollup-umd-scripts` that depend on this package.
+
 ## [v1.6.2] - 2018-04-18
 
 - Fix `bin`.
