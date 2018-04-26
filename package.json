@@ -176,7 +176,7 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "react-styleguidist": "^7.0.7",
     "react-test-renderer": "^16.0.0",
-    "redux": "^3.7.2",
+    "redux": "^4.0.0",
     "reselect": "^3.0.1",
     "rimraf": "^2.6.2",
     "rollup": "^0.50.0",
@@ -192,7 +192,7 @@
     "rollup-watch": "^4.3.1",
     "rsg-components": "^3.0.0",
     "sinon": "^3.3.0",
-    "styled-components": "^3.2.5",
+    "styled-components": "^3.2.6",
     "toctoc": "^0.3.0",
     "webpack": "^3.11.0"
   },
@@ -263,6 +263,6 @@
   "peerDependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "styled-components": "^3.2.5"
+    "styled-components": "^3.2.6"
   }
 }
