@@ -327,6 +327,11 @@ module.exports = {
     devServer: {
       historyApiFallback: true,
     },
+    resolve: {
+      alias: {
+        'bootstrap-styled': path.resolve(__dirname),
+      },
+    },
     plugins: [
       new webpack.SourceMapDevToolPlugin({
         filename: '[file].map',
