@@ -1,11 +1,8 @@
 {
   "name": "bootstrap-styled",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "description": "Modular and extended bootstrap components made for styled-component community.",
   "main": "lib/index.js",
-  "bin": {
-    "rollup-umd": "bin/rollup-umd.js"
-  },
   "jsnext:main": "dist/bootstrap-styled.es.js",
   "module": "dist/bootstrap-styled.es.js",
   "browserslist": [
@@ -32,8 +29,7 @@
     "lint": "eslint src",
     "ci-publish": "ci-publish",
     "prepublish": "npm run build",
-    "lint-staged": "lint-staged",
-    "rollup-umd": "bin/rollup-umd.js"
+    "lint-staged": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -49,6 +45,7 @@
     "lib"
   ],
   "keywords": [
+    "rollup",
     "bootstrap",
     "bootstrap-styled",
     "styled",
@@ -75,6 +72,7 @@
       "sourceType": "module"
     },
     "rules": {
+      "no-undef": 0,
       "arrow-parens": [
         "error",
         "always"
@@ -169,10 +167,10 @@
     "raf": "^3.3.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-styleguidist": "^6.5.0",
     "react-test-renderer": "^16.0.0",
     "rimraf": "^2.6.2",
     "rollup": "^0.50.0",
+    "rollup-documentation": "^0.0.6",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-cleanup": "^1.0.1",
     "rollup-plugin-commonjs": "^8.2.1",
@@ -183,11 +181,10 @@
     "rollup-plugin-uglify": "^2.0.1",
     "rollup-plugin-visualizer": "^0.3.1",
     "rollup-watch": "^4.3.1",
-    "rsg-components": "^3.0.0",
     "sinon": "^3.3.0",
-    "styled-components": "^3.2.5",
+    "styled-components": "^3.2.6",
     "toctoc": "^0.3.0",
-    "webpack": "^3.11.0"
+    "webpack": "^4.6.0"
   },
   "jest": {
     "roots": [
@@ -231,16 +228,6 @@
     "lint-staged"
   ],
   "dependencies": {
-    "babel-core": "^6.26.0",
-    "async": "^2.6.0",
-    "directory-tree": "^2.0.0",
-    "git-cli-upgrade-tool": "^0.0.9",
-    "glob": "^7.1.2",
-    "kopaxgroup-cli-helpers": "^0.0.3",
-    "node-map-directory": "^0.1.0",
-    "rimraf": "^2.6.2",
-    "shelljs": "^0.8.1",
-    "yargs": "^11.0.0",
     "bootstrap-styled-mixins": "^1.0.4",
     "bootstrap-styled-utils": "^1.0.2",
     "classnames": "^2.2.5",
@@ -256,6 +243,6 @@
   "peerDependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "styled-components": "^3.2.5"
+    "styled-components": "^3.2.6"
   }
 }
