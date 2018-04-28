@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [?NEXT?] - ????-??-??
+
+- TODO: write changelog before preparing next tag
+
 ## [v1.6.5] - 2018-04-28
 
 - Using `rollup-documentation`.
