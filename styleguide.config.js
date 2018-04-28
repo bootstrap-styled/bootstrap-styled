@@ -1,8 +1,6 @@
 const path = require('path');
-const { config, layoutRendererBase, wrapperBase } = require('rollup-documentation/lib/styleguide.config.js');
+const { config } = require('rollup-documentation/lib/styleguide.config.js');
 
-console.log(layoutRendererBase);
-console.log(wrapperBase);
 module.exports = {
   ...config,
   require: [path.resolve(__dirname, 'styleguide/setup.js')],
