@@ -1,4 +1,4 @@
-image: kopaxgroup/node9-jdk8-flyway4-sonarscanner2-docker17-debian
+image: kopaxgroup/node10-jdk8-flyway4-sonarscanner2-docker17-debian
 
 variables:
   GIT_STRATEGY: none
