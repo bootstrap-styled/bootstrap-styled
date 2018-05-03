@@ -4,8 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [?NEXT?] - ????-??-??
 
-- TODO: write changelog before preparing next tag
-- Added new dev dependencies react-redux@^5.0.7, redux@^3.7.2, react-dom@^16.3.2 and reselect@3.0.1
+- Upgrade `rollup-documentation`.
+- Upgrade ci image to `image: kopaxgroup/node10-jdk8-flyway4-sonarscanner2-docker17-debian`.
+- Added new dev dependencies react-redux@^5.0.7, redux@^3.7.2, react-dom@^16.3.2 and reselect@3.0.1.
+
+## [v1.6.5] - 2018-04-28
+
+- Using `rollup-documentation`.
 
 ## [v1.6.4] - 2018-04-22
 
