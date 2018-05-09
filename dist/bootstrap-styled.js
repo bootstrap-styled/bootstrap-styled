@@ -12337,7 +12337,7 @@ var defaultProps$23 = {
     '$enable-rounded': true,
     '$enable-shadows': true,
     $white: '#fff',
-    '$drawer-bg': '$fff',
+    '$drawer-bg': '#fff',
     '$drawer-transition': 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
     '$drawer-box-shadow': 'rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px',
     '$drawer-border-radius': '0px',
