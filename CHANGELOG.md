@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 - Upgrade `rollup-documentation`.
 - Upgrade ci image to `image: kopaxgroup/node10-jdk8-flyway4-sonarscanner2-docker17-debian`.
-- Added new dev dependencies react-redux@^5.0.7, redux@^3.7.2, react-dom@^16.3.2 and reselect@3.0.1.
+- Corrected typo mistake in `Drawer` Component theme.
 
 ## [v1.6.5] - 2018-04-28
 
