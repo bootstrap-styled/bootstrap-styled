@@ -1,3 +1,9 @@
-export const CHANGE_THEME = '@bootstrap-styled/CHANGE_THEME';
-export const STORE_THEME = '@bootstrap-styled/STORE_THEME';
-export const DELETE_THEME = '@bootstrap-styled/DELETE_THEME';
+import {
+  CHANGE_THEME as CHANGE_THEME_ORIGINAL,
+  STORE_THEME as STORE_THEME_ORIGINAL,
+  DELETE_THEME as DELETE_THEME_ORIGINAL,
+} from 'bootstrap-styled-redux';
+
+export const CHANGE_THEME = CHANGE_THEME_ORIGINAL;
+export const STORE_THEME = STORE_THEME_ORIGINAL;
+export const DELETE_THEME = DELETE_THEME_ORIGINAL;
