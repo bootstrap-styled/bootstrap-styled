@@ -131,7 +131,6 @@ export const makeTheme = (userTheme = {}) => {
   v['$btn-link-disabled-color'] = u['$btn-link-disabled-color'] || v['$gray-light'];
 
   v['$btn-block-spacing-y'] = u['$btn-block-spacing-y'] || '.5rem';
-
   return Object.assign({}, u, v);
 };
 
