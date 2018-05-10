@@ -124,7 +124,6 @@ export const makeTheme = (userTheme = {}) => {
   // CardDeck
   const detectedUnit = detectUnit(v['$grid-gutter-width-base']);
   v['$card-deck-margin'] = u['$card-deck-margin'] || (rmUnit(v['$grid-gutter-width-base'], detectedUnit) / 2) + detectedUnit;
-
   return Object.assign({}, u, v);
 };
 
