@@ -14145,15 +14145,6 @@ var defaultProps$42 = {
     '$enable-shadows': false,
     '$enable-hover-media-query': false,
     '$enable-transitions': true,
-    '$white': '#fff',
-    '$black': '#000',
-    '$blue': '#0275d8',
-    '$green': '#5cb85c',
-    '$teal': '#5bc0de',
-    '$orange': '#f0ad4e',
-    '$red': '#d9534f',
-    '$gray-dark': '#292b2c',
-    '$gray-light': '#636c72',
     '$brand-primary': '#0275d8',
     '$brand-success': '#5cb85c',
     '$brand-info': '#5bc0de',
@@ -16454,7 +16445,7 @@ var defaultProps$61 = {
     '$progress-box-shadow': 'inset 0 .1rem .1rem rgba(0, 0, 0, 0.1)',
     '$progress-bar-color': '#fff',
     '$progress-bar-bg': '#0275d8',
-    '$progress-bar-animation-timing': 'infinite'
+    '$progress-bar-animation-timing': '1s linear infinite'
   }
 };
 var propTypes$66 = {
