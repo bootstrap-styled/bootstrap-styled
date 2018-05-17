@@ -20,6 +20,7 @@ export const defaultProps = {
     '$drawer-box-shadow': 'rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px',
     '$drawer-border-radius': '0px',
     '$drawer-zindex': '1030',
+    '$drawer-docked-width': '55px',
   },
 };
 
@@ -38,6 +39,8 @@ export const propTypes = {
   bottom: PropTypes.string,
   /** Place Drawer at the left of screen with it's set width */
   left: PropTypes.string,
+  /** Toggles to make Drawer part of layout rather than float above. */
+  docked: PropTypes.bool,
   /** Theme variables. Can be: */
   theme: PropTypes.shape({
     '$enable-rounded': PropTypes.bool,
@@ -47,6 +50,7 @@ export const propTypes = {
     '$drawer-box-shadow': PropTypes.string,
     '$drawer-border-radius': PropTypes.string,
     '$drawer-zindex': PropTypes.string,
+    '$drawer-docked-width': PropTypes.string,
   }),
   /**
    * Replace or remove a className from the component.
@@ -71,11 +75,12 @@ class DrawerUnstyled extends React.Component { // eslint-disable-line react/pref
       right,
       bottom,
       left,
+      docked,
       cssModule,
       ...props
     } = omit(this.props, ['theme']);
 
-    const classes = mapToCssModules(cn(className, 'drawer', {
+    const classes = mapToCssModules(cn(className, !docked ? 'drawer' : 'drawer-docked', {
       active,
       'drawer-top': top,
       'drawer-right': right,
@@ -96,8 +101,10 @@ const Drawer = styled(DrawerUnstyled)`
       background-color: ${props.theme['$drawer-bg']};
       transition: ${props.theme['$drawer-transition']};
       position: fixed;
+      flex: 1 0 auto;
       z-index: ${props.theme['$drawer-zindex']};
-      overflow: auto;
+      overflow-y: auto;
+      outline: none;
       ${borderRadius(
         props.theme['$enable-rounded'],
         props.theme['$drawer-border-radius'],
@@ -166,6 +173,33 @@ const Drawer = styled(DrawerUnstyled)`
           `
         )}
       }
+    }
+    &.drawer-docked { 
+      flex: 0 0 auto;
+      overflow: hidden;
+        &.drawer-top {
+          border-bottom: 1px solid grey;
+        }
+        &.drawer-right {
+          border-left: 1px solid grey;
+        }
+        &.drawer-bottom {
+          border-top: 1px solid grey;
+        }
+        &.drawer-left {
+  
+          ${ifThen(
+            props.left,
+            `
+            border-right: 1px solid grey;  
+            width: ${props.theme['$drawer-docked-width']};
+            transition: width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+            &.active {
+              width: ${props.left};
+            }
+            `
+          )}
+        }
     }
   `}
 `;
