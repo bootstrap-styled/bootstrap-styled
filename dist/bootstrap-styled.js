@@ -2188,6 +2188,7 @@ var makeTheme$18 = function makeTheme() {
   v['$drawer-box-shadow'] = u['$drawer-box-shadow'] || 'rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px';
   v['$drawer-border-radius'] = u['$drawer-border-radius'] || '0px';
   v['$drawer-zindex'] = u['$drawer-zindex'] || '1030';
+  v['$drawer-docked-width'] = u['$drawer-docked-width'] || '55px';
   return Object.assign({}, u, v);
 };
 makeTheme$18();
@@ -12343,7 +12344,8 @@ var defaultProps$23 = {
     '$drawer-transition': 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
     '$drawer-box-shadow': 'rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px',
     '$drawer-border-radius': '0px',
-    '$drawer-zindex': '1030'
+    '$drawer-zindex': '1030',
+    '$drawer-docked-width': '55px'
   }
 };
 var propTypes$26 = {
@@ -12353,6 +12355,7 @@ var propTypes$26 = {
   right: propTypes$1.string,
   bottom: propTypes$1.string,
   left: propTypes$1.string,
+  docked: propTypes$1.bool,
   theme: propTypes$1.shape({
     '$enable-rounded': propTypes$1.bool,
     '$enable-shadows': propTypes$1.bool,
@@ -12360,7 +12363,8 @@ var propTypes$26 = {
     '$drawer-transition': propTypes$1.string,
     '$drawer-box-shadow': propTypes$1.string,
     '$drawer-border-radius': propTypes$1.string,
-    '$drawer-zindex': propTypes$1.string
+    '$drawer-zindex': propTypes$1.string,
+    '$drawer-docked-width': propTypes$1.string
   }),
   cssModule: propTypes$1.object
 };
@@ -12380,9 +12384,10 @@ var DrawerUnstyled = function (_React$Component) {
           right = _omit.right,
           bottom = _omit.bottom,
           left = _omit.left,
+          docked = _omit.docked,
           cssModule = _omit.cssModule,
-          props = objectWithoutProperties(_omit, ['className', 'active', 'top', 'right', 'bottom', 'left', 'cssModule']);
-      var classes = mapToCssModules(classnames(className, 'drawer', {
+          props = objectWithoutProperties(_omit, ['className', 'active', 'top', 'right', 'bottom', 'left', 'docked', 'cssModule']);
+      var classes = mapToCssModules(classnames(className, !docked ? 'drawer' : 'drawer-docked', {
         active: active,
         'drawer-top': top,
         'drawer-right': right,
@@ -12399,7 +12404,7 @@ DrawerUnstyled.propTypes = propTypes$26;
 var Drawer = styled__default(DrawerUnstyled).withConfig({
   displayName: 'Drawer'
 })(['', ''], function (props) {
-  return '\n    &.drawer {\n      background-color: ' + props.theme['$drawer-bg'] + ';\n      transition: ' + props.theme['$drawer-transition'] + ';\n      position: fixed;\n      z-index: ' + props.theme['$drawer-zindex'] + ';\n      overflow: auto;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$drawer-border-radius']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$drawer-box-shadow']) + '\n      &.drawer-top {\n        ' + ifThen(props.top, '\n            left: 0;\n            top: 0;\n            width: 100%;\n            height: ' + props.top + ';\n            transform: translate(0px, -' + (props.top && unitUtils$1.math.addition(props.top, 4)) + ');\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-right {\n        ' + ifThen(props.right, '\n            bottom: 0;\n            right: 0;\n            height: 100%;\n            width: ' + props.right + ';\n            transform: translate(' + (props.right && unitUtils$1.math.addition(props.right, 4)) + ', 0px);\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-bottom {\n        ' + ifThen(props.bottom, '\n            left: 0;\n            bottom: 0;\n            width: 100%;\n            height: ' + props.bottom + ';\n            transform: translate(0px, ' + (props.bottom && unitUtils$1.math.addition(props.bottom, 4)) + ');\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-left {\n        ' + ifThen(props.left, '\n            bottom: 0;\n            left: 0;\n            height: 100%;\n            width: ' + props.left + ';\n            transform: translate(-' + (props.left && unitUtils$1.math.addition(props.left, 4)) + ', 0px);\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n    }\n  ';
+  return '\n    &.drawer {\n      background-color: ' + props.theme['$drawer-bg'] + ';\n      transition: ' + props.theme['$drawer-transition'] + ';\n      position: fixed;\n      flex: 1 0 auto;\n      z-index: ' + props.theme['$drawer-zindex'] + ';\n      overflow-y: auto;\n      outline: none;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$drawer-border-radius']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$drawer-box-shadow']) + '\n      &.drawer-top {\n        ' + ifThen(props.top, '\n            left: 0;\n            top: 0;\n            width: 100%;\n            height: ' + props.top + ';\n            transform: translate(0px, -' + (props.top && unitUtils$1.math.addition(props.top, 4)) + ');\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-right {\n        ' + ifThen(props.right, '\n            bottom: 0;\n            right: 0;\n            height: 100%;\n            width: ' + props.right + ';\n            transform: translate(' + (props.right && unitUtils$1.math.addition(props.right, 4)) + ', 0px);\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-bottom {\n        ' + ifThen(props.bottom, '\n            left: 0;\n            bottom: 0;\n            width: 100%;\n            height: ' + props.bottom + ';\n            transform: translate(0px, ' + (props.bottom && unitUtils$1.math.addition(props.bottom, 4)) + ');\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-left {\n        ' + ifThen(props.left, '\n            bottom: 0;\n            left: 0;\n            height: 100%;\n            width: ' + props.left + ';\n            transform: translate(-' + (props.left && unitUtils$1.math.addition(props.left, 4)) + ', 0px);\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n    }\n    &.drawer-docked { \n      flex: 0 0 auto;\n      overflow: hidden;\n        &.drawer-top {\n          border-bottom: 1px solid grey;\n        }\n        &.drawer-right {\n          border-left: 1px solid grey;\n        }\n        &.drawer-bottom {\n          border-top: 1px solid grey;\n        }\n        &.drawer-left {\n  \n          ' + ifThen(props.left, '\n            border-right: 1px solid grey;  \n            width: ' + props.theme['$drawer-docked-width'] + ';\n            transition: width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;\n            &.active {\n              width: ' + props.left + ';\n            }\n            ') + '\n        }\n    }\n  ';
 });
 Drawer.propTypes = propTypes$26;
 Drawer.defaultProps = defaultProps$23;
