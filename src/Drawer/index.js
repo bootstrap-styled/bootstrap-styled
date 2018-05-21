@@ -178,7 +178,6 @@ const Drawer = styled(DrawerUnstyled)`
       flex: 0 0 auto;
       overflow: hidden;
       &.drawer-left {
-
         ${ifThen(
           props.left,
           `
