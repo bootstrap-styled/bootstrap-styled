@@ -92,7 +92,6 @@ export { default as Thead } from './Table/Thead';
 export { default as Td } from './Table/Td';
 export { default as Th } from './Table/Th';
 export { default as Tr } from './Table/Tr';
-
 export { default as Badge } from './Badge';
 export { default as Textarea } from './Textarea';
 export { default as Tooltip } from './Tooltip';
