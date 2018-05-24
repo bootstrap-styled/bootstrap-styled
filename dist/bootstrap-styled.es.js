@@ -5174,7 +5174,13 @@ A.defaultProps = defaultProps;
 A.propTypes = propTypes;
 
 var defaultProps$1 = {
-  theme: theme
+  theme: {
+    '$link-color': '#0275d8',
+    '$link-decoration': 'none',
+    '$link-hover-color': '#014C8D',
+    '$link-hover-decoration': 'underline',
+    '$enable-hover-media-query': false
+  }
 };
 function composeLink(RouterLink) {
   var Link = function (_React$Component) {
@@ -5198,7 +5204,13 @@ function composeLink(RouterLink) {
   Link.propTypes = {
     className: propTypes$1.string,
     to: propTypes$1.string.isRequired,
-    theme: propTypes$1.object
+    theme: propTypes$1.shape({
+      '$link-color': propTypes$1.string,
+      '$link-decoration': propTypes$1.string,
+      '$link-hover-color': propTypes$1.string,
+      '$link-hover-decoration': propTypes$1.string,
+      '$enable-hover-media-query': propTypes$1.bool
+    })
   };
   Link = styled(Link).withConfig({
     displayName: 'composeLink__Link'
@@ -12398,11 +12410,7 @@ DrawerUnstyled.propTypes = propTypes$26;
 var Drawer = styled(DrawerUnstyled).withConfig({
   displayName: 'Drawer'
 })(['', ''], function (props) {
-<<<<<<< HEAD
   return '\n    &.drawer {\n      background-color: ' + props.theme['$drawer-bg'] + ';\n      transition: ' + props.theme['$drawer-transition'] + ';\n      position: fixed;\n      flex: 1 0 auto;\n      z-index: ' + props.theme['$drawer-zindex'] + ';\n      overflow-y: auto;\n      outline: none;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$drawer-border-radius']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$drawer-box-shadow']) + '\n      &.drawer-top {\n        ' + ifThen(props.top, '\n            left: 0;\n            top: 0;\n            width: 100%;\n            height: ' + props.top + ';\n            transform: translate(0px, -' + (props.top && unitUtils$1.math.addition(props.top, 4)) + ');\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-right {\n        ' + ifThen(props.right, '\n            bottom: 0;\n            right: 0;\n            height: 100%;\n            width: ' + props.right + ';\n            transform: translate(' + (props.right && unitUtils$1.math.addition(props.right, 4)) + ', 0px);\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-bottom {\n        ' + ifThen(props.bottom, '\n            left: 0;\n            bottom: 0;\n            width: 100%;\n            height: ' + props.bottom + ';\n            transform: translate(0px, ' + (props.bottom && unitUtils$1.math.addition(props.bottom, 4)) + ');\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-left {\n        ' + ifThen(props.left, '\n            bottom: 0;\n            left: 0;\n            height: 100%;\n            width: ' + props.left + ';\n            transform: translate(-' + (props.left && unitUtils$1.math.addition(props.left, 4)) + ', 0px);\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n    }\n    &.drawer-docked { \n      flex: 0 0 auto;\n      overflow: hidden;\n      &.drawer-left {\n        ' + ifThen(props.left, '\n          width: ' + props.theme['$drawer-docked-width'] + ';\n          transition: width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;\n          &.active {\n            width: ' + props.left + ';\n          }\n          ') + '\n      }\n    }\n  ';
-=======
-  return '\n    &.drawer {\n      background-color: ' + props.theme['$drawer-bg'] + ';\n      transition: ' + props.theme['$drawer-transition'] + ';\n      position: fixed;\n      flex: 1 0 auto;\n      z-index: ' + props.theme['$drawer-zindex'] + ';\n      overflow-y: auto;\n      outline: none;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$drawer-border-radius']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$drawer-box-shadow']) + '\n      &.drawer-top {\n        ' + ifThen(props.top, '\n            left: 0;\n            top: 0;\n            width: 100%;\n            height: ' + props.top + ';\n            transform: translate(0px, -' + (props.top && unitUtils$1.math.addition(props.top, 4)) + ');\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-right {\n        ' + ifThen(props.right, '\n            bottom: 0;\n            right: 0;\n            height: 100%;\n            width: ' + props.right + ';\n            transform: translate(' + (props.right && unitUtils$1.math.addition(props.right, 4)) + ', 0px);\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-bottom {\n        ' + ifThen(props.bottom, '\n            left: 0;\n            bottom: 0;\n            width: 100%;\n            height: ' + props.bottom + ';\n            transform: translate(0px, ' + (props.bottom && unitUtils$1.math.addition(props.bottom, 4)) + ');\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-left {\n        ' + ifThen(props.left, '\n            bottom: 0;\n            left: 0;\n            height: 100%;\n            width: ' + props.left + ';\n            transform: translate(-' + (props.left && unitUtils$1.math.addition(props.left, 4)) + ', 0px);\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n    }\n    &.drawer-docked { \n      flex: 0 0 auto;\n      overflow: hidden;\n        &.drawer-top {\n          border-bottom: 1px solid grey;\n        }\n        &.drawer-right {\n          border-left: 1px solid grey;\n        }\n        &.drawer-bottom {\n          border-top: 1px solid grey;\n        }\n        &.drawer-left {\n  \n          ' + ifThen(props.left, '\n            border-right: 1px solid grey;  \n            width: ' + props.theme['$drawer-docked-width'] + ';\n            transition: width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;\n            &.active {\n              width: ' + props.left + ';\n            }\n            ') + '\n        }\n    }\n  ';
->>>>>>> 314d91a46620e2e48635e8760803d474be8ee533
 });
 Drawer.propTypes = propTypes$26;
 Drawer.defaultProps = defaultProps$23;
