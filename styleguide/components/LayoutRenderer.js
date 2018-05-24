@@ -14,7 +14,6 @@ import { theme as themeStepProgress } from 'step-progress'
 import { makeTheme } from '../../src/theme';
 
 import defaultLogo from './logo';
-import StepProgress from './StepProgress';
 
 const theme = makeTheme({ ...themeStepProgress})
 
@@ -88,7 +87,6 @@ function LayoutRenderer({
         <div className={cn(className, classes.root, hasSidebar && classes.hasSidebar)}>
           <main className={classes.content}>
             {children}
-            <StepProgress />
             <footer className={classes.footer}>
               <span>{bottomLogoText}</span>
               <a

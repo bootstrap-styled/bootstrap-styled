@@ -177,29 +177,18 @@ const Drawer = styled(DrawerUnstyled)`
     &.drawer-docked { 
       flex: 0 0 auto;
       overflow: hidden;
-        &.drawer-top {
-          border-bottom: 1px solid grey;
-        }
-        &.drawer-right {
-          border-left: 1px solid grey;
-        }
-        &.drawer-bottom {
-          border-top: 1px solid grey;
-        }
-        &.drawer-left {
-  
-          ${ifThen(
-            props.left,
-            `
-            border-right: 1px solid grey;  
-            width: ${props.theme['$drawer-docked-width']};
-            transition: width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
-            &.active {
-              width: ${props.left};
-            }
-            `
-          )}
-        }
+      &.drawer-left {
+        ${ifThen(
+          props.left,
+          `
+          width: ${props.theme['$drawer-docked-width']};
+          transition: width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+          &.active {
+            width: ${props.left};
+          }
+          `
+        )}
+      }
     }
   `}
 `;
