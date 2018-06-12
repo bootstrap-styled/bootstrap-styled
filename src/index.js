@@ -9,7 +9,6 @@ export { default as Alert } from './Alert';
 export { default as Area } from './Area';
 export { default as Article } from './Article';
 export { default as Blockquote } from './Blockquote';
-export { default as BootstrapProvider } from './BootstrapProvider';
 export { default as Breadcrumb } from './Breadcrumb';
 export { default as BreadcrumbItem } from './Breadcrumb/BreadcrumbItem';
 export { default as Button } from './Button';
@@ -92,7 +91,6 @@ export { default as Thead } from './Table/Thead';
 export { default as Td } from './Table/Td';
 export { default as Th } from './Table/Th';
 export { default as Tr } from './Table/Tr';
-
 export { default as Badge } from './Badge';
 export { default as Textarea } from './Textarea';
 export { default as Tooltip } from './Tooltip';

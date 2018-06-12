@@ -3,10 +3,15 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
 import { a } from 'bootstrap-styled-mixins/lib/a';
-import bsTheme from '../theme';
 
 export const defaultProps = {
-  theme: bsTheme,
+  theme: {
+    '$link-color': '#0275d8',
+    '$link-decoration': 'none',
+    '$link-hover-color': '#014C8D',
+    '$link-hover-decoration': 'underline',
+    '$enable-hover-media-query': false,
+  },
 };
 
 export default function composeLink(RouterLink) {
@@ -14,9 +19,20 @@ export default function composeLink(RouterLink) {
 
     static propTypes = {
       /* eslint-disable react/no-unused-prop-types */
+      /**
+       * @ignore
+       */
       className: PropTypes.string,
+      /** Link destination. */
       to: PropTypes.string.isRequired,
-      theme: PropTypes.object,
+      /** Theme variables. Can be: */
+      theme: PropTypes.shape({
+        '$link-color': PropTypes.string,
+        '$link-decoration': PropTypes.string,
+        '$link-hover-color': PropTypes.string,
+        '$link-hover-decoration': PropTypes.string,
+        '$enable-hover-media-query': PropTypes.bool,
+      }),
       /* eslint-enable react/no-unused-prop-types */
     }
 
