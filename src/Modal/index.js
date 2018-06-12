@@ -18,7 +18,7 @@ import { mediaBreakpointUp } from 'bootstrap-styled-mixins/lib/breakpoints';
 import { fade } from 'bootstrap-styled-mixins/lib//utilities/transition';
 import rebootUtils from 'bootstrap-styled-mixins/lib/utilities/reboot';
 import Fade, { propTypes as FadePropType, defaultProps as FadeDefaultProps } from './Fade';
-
+import { makeTheme } from './theme';
 
 const FadePropTypes = PropTypes.shape(FadePropType);
 export const propTypes = {
@@ -96,48 +96,7 @@ export const defaultProps = {
   backdrop: true,
   keyboard: true,
   zIndex: 2000,
-  theme: {
-    '$enable-rounded': true,
-    '$enable-shadows': false,
-    '$enable-transitions': true,
-    '$grid-breakpoints': {
-      xs: '0',
-      sm: '576px',
-      md: '768px',
-      lg: '992px',
-      xl: '1200px',
-    },
-    '$body-bg': '#fff',
-    '$body-color': '#eceeef',
-    '$font-family-base': '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    '$font-size-base': '1rem', // Assumes the browser default, typically `16px`
-    '$font-weight-base': 'normal',
-    '$line-height-base': '1.5',
-    '$zindex-modal': '2050',
-    '$zindex-modal-backdrop': '2040',
-    '$transition-fade': 'opacity .15s linear',
-    '$border-radius-lg': '.3rem',
-    '$modal-inner-padding': '15px',
-    '$modal-dialog-margin': '10px',
-    '$modal-dialog-sm-up-margin-y': '30px',
-    '$modal-title-line-height': '1.5',
-    '$modal-content-bg': '#fff',
-    '$modal-content-border-color': 'rgba(0, 0, 0, 0.2)',
-    '$modal-content-border-width': '1px',
-    '$modal-content-xs-box-shadow': '0 3px 9px rgba(0, 0, 0, 0.5)',
-    '$modal-content-sm-up-box-shadow': '0 5px 15px rgba(0, 0, 0, 0.5)',
-    '$modal-backdrop-bg': '#000',
-    '$modal-backdrop-opacity': '.5',
-    '$modal-header-border-color': '#eceeef',
-    '$modal-footer-border-color': '#eceeef',
-    '$modal-header-border-width': '1px',
-    '$modal-footer-border-width': '1px',
-    '$modal-header-padding': '15px',
-    '$modal-lg': '800px',
-    '$modal-md': '500px',
-    '$modal-sm': '300px',
-    '$modal-transition': 'transform .3s ease-out',
-  },
+  theme: makeTheme(),
   fade: true,
   onOpened: null,
   onClosed: null,

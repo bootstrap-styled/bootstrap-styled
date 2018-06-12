@@ -130,6 +130,7 @@ export const makeTheme = (userTheme = {}) => {
   v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
 
   v['$input-height-lg'] = u['$input-height-lg'] || ((rmUnit(v['$font-size-lg'], UNIT.REM) * v['$line-height-lg']) + (rmUnit(v['$input-padding-y-lg'], UNIT.REM) * 2) + UNIT.REM);
+
   return Object.assign({}, u, v);
 };
 

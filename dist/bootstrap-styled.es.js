@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled, { ThemeProvider, injectGlobal, keyframes } from 'styled-components';
-import ReactDOM from 'react-dom';
+import ReactDOM, { createPortal } from 'react-dom';
 
 function makeOriginal() {
   var userTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -17,7 +17,7 @@ function commonjsRequire () {
 }
 
 function unwrapExports (x) {
-	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+	return x && x.__esModule ? x['default'] : x;
 }
 
 function createCommonjsModule(fn, module) {
@@ -1068,11 +1068,11 @@ convert.rgb.gray = function (rgb) {
 };
 });
 
+var models$1 = Object.keys(conversions);
 function buildGraph() {
 	var graph = {};
-	var models = Object.keys(conversions);
-	for (var len = models.length, i = 0; i < len; i++) {
-		graph[models[i]] = {
+	for (var len = models$1.length, i = 0; i < len; i++) {
+		graph[models$1[i]] = {
 			distance: -1,
 			parent: null
 		};
@@ -2182,7 +2182,6 @@ var makeTheme$18 = function makeTheme() {
   v['$drawer-box-shadow'] = u['$drawer-box-shadow'] || 'rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px';
   v['$drawer-border-radius'] = u['$drawer-border-radius'] || '0px';
   v['$drawer-zindex'] = u['$drawer-zindex'] || '1030';
-  v['$drawer-docked-width'] = u['$drawer-docked-width'] || '55px';
   return Object.assign({}, u, v);
 };
 makeTheme$18();
@@ -4852,7 +4851,7 @@ function a() {
   var $linkHoverColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$link-hover-color'];
   var $linkHoverDecoration = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$link-hover-decoration'];
   var $enableHoverMediaQuery = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$enable-hover-media-query'];
-  return '\n    color: ' + $linkColor + ';\n    text-decoration: ' + $linkDecoration + ';\n    background-color: transparent;\n    -webkit-text-decoration-skip: objects;\n  \n    ' + (_hover.hoverFocus)($enableHoverMediaQuery, '\n      color: ' + $linkHoverColor + ';\n      text-decoration: ' + $linkHoverDecoration + ';\n    ') + '\n    \n    &:focus {\n      ' + (_tabFocus.tabFocus)() + '\n    }\n\n    a:not([href]):not([tabindex]) {\n      color: inherit;\n      text-decoration: none;\n      \n      ' + (_hover.hoverFocus)($enableHoverMediaQuery, '\n        color: inherit;\n        text-decoration: none;\n      ') + '\n\n      &:focus {\n        outline: 0;\n      }\n    }\n  ';
+  return '\n    color: ' + $linkColor + ';\n    text-decoration: ' + $linkDecoration + ';\n    background-color: transparent;\n    -webkit-text-decoration-skip: objects;\n  \n    ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, '\n      color: ' + $linkHoverColor + ';\n      text-decoration: ' + $linkHoverDecoration + ';\n    ') + '\n    \n    &:focus {\n      ' + (0, tabFocus_1.tabFocus)() + '\n    }\n\n    a:not([href]):not([tabindex]) {\n      color: inherit;\n      text-decoration: none;\n      \n      ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, '\n        color: inherit;\n        text-decoration: none;\n      ') + '\n\n      &:focus {\n        outline: 0;\n      }\n    }\n  ';
 }
 exports.default = {
   defaultProps: defaultProps,
@@ -5140,9 +5139,9 @@ var AUnstyled = function (_React$Component) {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = AUnstyled.__proto__ || Object.getPrototypeOf(AUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = AUnstyled.__proto__ || Object.getPrototypeOf(AUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       focus: false
-    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+    }, _temp), possibleConstructorReturn(_this, _ret);
   }
   createClass(AUnstyled, [{
     key: 'render',
@@ -5174,13 +5173,7 @@ A.defaultProps = defaultProps;
 A.propTypes = propTypes;
 
 var defaultProps$1 = {
-  theme: {
-    '$link-color': '#0275d8',
-    '$link-decoration': 'none',
-    '$link-hover-color': '#014C8D',
-    '$link-hover-decoration': 'underline',
-    '$enable-hover-media-query': false
-  }
+  theme: theme
 };
 function composeLink(RouterLink) {
   var Link = function (_React$Component) {
@@ -5204,13 +5197,7 @@ function composeLink(RouterLink) {
   Link.propTypes = {
     className: propTypes$1.string,
     to: propTypes$1.string.isRequired,
-    theme: propTypes$1.shape({
-      '$link-color': propTypes$1.string,
-      '$link-decoration': propTypes$1.string,
-      '$link-hover-color': propTypes$1.string,
-      '$link-hover-decoration': propTypes$1.string,
-      '$enable-hover-media-query': propTypes$1.bool
-    })
+    theme: propTypes$1.object
   };
   Link = styled(Link).withConfig({
     displayName: 'composeLink__Link'
@@ -5279,7 +5266,7 @@ exports.alertVariant = alertVariant;
 var _color2 = _interopRequireDefault(color);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function alertVariant(background, border, bodyColor) {
-  return '\n    background-color: ' + background + ';\n    border-color: ' + border + ';\n    color: ' + bodyColor + ';\n  \n    hr {\n      border-top-color: ' + (_color2.default)(border).darken(0.5).toString() + ';\n    }\n    .alert-link {\n      color: ' + (_color2.default)(bodyColor).darken(0.1).toString() + ';\n    }\n  ';
+  return '\n    background-color: ' + background + ';\n    border-color: ' + border + ';\n    color: ' + bodyColor + ';\n  \n    hr {\n      border-top-color: ' + (0, _color2.default)(border).darken(0.5).toString() + ';\n    }\n    .alert-link {\n      color: ' + (0, _color2.default)(bodyColor).darken(0.1).toString() + ';\n    }\n  ';
 }
 exports.default = {
   alertVariant: alertVariant
@@ -5605,10 +5592,8 @@ var classNamesShape = exports.classNamesShape = _propTypes2.default.oneOfType([_
   active: _propTypes2.default.string
 }), _propTypes2.default.shape({
   enter: _propTypes2.default.string,
-  enterDone: _propTypes2.default.string,
   enterActive: _propTypes2.default.string,
   exit: _propTypes2.default.string,
-  exitDone: _propTypes2.default.string,
   exitActive: _propTypes2.default.string
 })]);
 });
@@ -6075,7 +6060,7 @@ var AlertUnstyled = function (_React$Component) {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = AlertUnstyled.__proto__ || Object.getPrototypeOf(AlertUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = AlertUnstyled.__proto__ || Object.getPrototypeOf(AlertUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       uncontrolledOpen: true,
       exited: false
     }, _this.setAutoHideTimer = function (autoHideDuration) {
@@ -6098,7 +6083,7 @@ var AlertUnstyled = function (_React$Component) {
       }
     }, _this.handleExited = function () {
       _this.setState({ exited: true });
-    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+    }, _temp), possibleConstructorReturn(_this, _ret);
   }
   createClass(AlertUnstyled, [{
     key: 'componentWillMount',
@@ -6432,7 +6417,7 @@ function bgVariant() {
   var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
   var selector = arguments[1];
   var bgColor = arguments[2];
-  return '\n    ' + selector + ' {\n      background-color: ' + bgColor + ' !important;\n    }\n    a' + selector + ' {\n      ' + (_hover.hoverFocus)(enableHoverMediaQuery, 'background-color: ' + (_color2.default)(bgColor).darken(0.2).rgb() + ' !important;') + '\n    }\n  ';
+  return '\n    ' + selector + ' {\n      background-color: ' + bgColor + ' !important;\n    }\n    a' + selector + ' {\n      ' + (0, hover_1.hoverFocus)(enableHoverMediaQuery, 'background-color: ' + (0, _color2.default)(bgColor).darken(0.2).rgb() + ' !important;') + '\n    }\n  ';
 }
 exports.default = {
   bgVariant: bgVariant
@@ -6466,35 +6451,35 @@ function getBackgroundUtilities() {
   var $brandDanger = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$brand-danger'];
   var $brandInverse = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$brand-inverse'];
   var $grayLightest = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$gray-lightest'];
-  return '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-primary', $brandPrimary) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-success', $brandSuccess) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-info', $brandInfo) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-warning', $brandWarning) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-danger', $brandDanger) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-inverse', $brandInverse) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-faded', $grayLightest) + '\n  ';
+  return '\n    ' + (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-primary', $brandPrimary) + '\n    ' + (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-success', $brandSuccess) + '\n    ' + (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-info', $brandInfo) + '\n    ' + (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-warning', $brandWarning) + '\n    ' + (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-danger', $brandDanger) + '\n    ' + (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-inverse', $brandInverse) + '\n    ' + (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-faded', $grayLightest) + '\n  ';
 }
 var bgPrimary = exports.bgPrimary = function bgPrimary($enableHoverMediaQuery) {
   var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-primary'];
-  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-primary', bgColor);
+  return (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-primary', bgColor);
 };
 var bgSuccess = exports.bgSuccess = function bgSuccess($enableHoverMediaQuery) {
   var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-success'];
-  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-success', bgColor);
+  return (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-success', bgColor);
 };
 var bgInfo = exports.bgInfo = function bgInfo($enableHoverMediaQuery) {
   var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-info'];
-  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-info', bgColor);
+  return (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-info', bgColor);
 };
 var bgWarning = exports.bgWarning = function bgWarning($enableHoverMediaQuery) {
   var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-warning'];
-  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-warning', bgColor);
+  return (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-warning', bgColor);
 };
 var bgDanger = exports.bgDanger = function bgDanger($enableHoverMediaQuery) {
   var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-danger'];
-  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-danger', bgColor);
+  return (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-danger', bgColor);
 };
 var bgInverse = exports.bgInverse = function bgInverse($enableHoverMediaQuery) {
   var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-inverse'];
-  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-inverse', bgColor);
+  return (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-inverse', bgColor);
 };
 var bgFaded = exports.bgFaded = function bgFaded($enableHoverMediaQuery) {
   var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$gray-lightest'];
-  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-faded', bgColor);
+  return (0, backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-faded', bgColor);
 };
 exports.default = {
   defaultProps: defaultProps,
@@ -6546,27 +6531,27 @@ function getBordersUtilities() {
 function rounded() {
   var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
   var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
-  return '\n    .rounded {\n      ' + (_borderRadius.borderRadius)(enableRounded, radius) + '\n    }\n  ';
+  return '\n    .rounded {\n      ' + (0, borderRadius_1.borderRadius)(enableRounded, radius) + '\n    }\n  ';
 }
 function roundedTop() {
   var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
   var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
-  return '\n    .rounded-top {\n      ' + (_borderRadius.borderTopRadius)(enableRounded, radius) + '\n    }\n  ';
+  return '\n    .rounded-top {\n      ' + (0, borderRadius_1.borderTopRadius)(enableRounded, radius) + '\n    }\n  ';
 }
 function roundedRight() {
   var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
   var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
-  return '\n    .rounded-right {\n      ' + (_borderRadius.borderRightRadius)(enableRounded, radius) + '\n    }\n  ';
+  return '\n    .rounded-right {\n      ' + (0, borderRadius_1.borderRightRadius)(enableRounded, radius) + '\n    }\n  ';
 }
 function roundedBottom() {
   var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
   var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
-  return '\n    .rounded-bottom {\n      ' + (_borderRadius.borderBottomRadius)(enableRounded, radius) + '\n    }\n  ';
+  return '\n    .rounded-bottom {\n      ' + (0, borderRadius_1.borderBottomRadius)(enableRounded, radius) + '\n    }\n  ';
 }
 function roundedLeft() {
   var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
   var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
-  return '\n    .rounded-left {\n      ' + (_borderRadius.borderLeftRadius)(enableRounded, radius) + '\n    }\n  ';
+  return '\n    .rounded-left {\n      ' + (0, borderRadius_1.borderLeftRadius)(enableRounded, radius) + '\n    }\n  ';
 }
 function roundedCircle() {
   return '\n    .rounded-circle {\n      border-radius: 50%;\n    }\n  ';
@@ -6641,7 +6626,7 @@ function getClearfixUtilities() {
   return '\n   ' + getClearfix() + '\n  ';
 }
 function getClearfix() {
-  return '\n    .clearfix {\n      ' + (_clearfix.clearfix)() + '\n    }\n  ';
+  return '\n    .clearfix {\n      ' + (0, clearfix_1$1.clearfix)() + '\n    }\n  ';
 }
 exports.default = {
   getClearfixUtilities: getClearfixUtilities,
@@ -6785,8 +6770,8 @@ function getDisplayUtilities() {
   var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-breakpoints'];
   var utilityList = [];
   Object.keys(gridBreakpoints).forEach(function (breakpoint) {
-    var infix = (_breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
-    utilityList.push('\n      ' + (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .d' + infix + '-none { display: none !important; }\n        .d' + infix + '-inline { display: inline !important; }\n        .d' + infix + '-inline-block { display: inline-block !important; }\n        .d' + infix + '-block { display: block !important; }\n        .d' + infix + '-table { display: table !important; }\n        .d' + infix + '-table-cell { display: table-cell !important; }\n        .d' + infix + '-flex { display: flex !important; }\n        .d' + infix + '-inline-flex { display: inline-flex !important; }\n      ') + '\n    ');
+    var infix = (0, breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
+    utilityList.push('\n      ' + (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .d' + infix + '-none { display: none !important; }\n        .d' + infix + '-inline { display: inline !important; }\n        .d' + infix + '-inline-block { display: inline-block !important; }\n        .d' + infix + '-block { display: block !important; }\n        .d' + infix + '-table { display: table !important; }\n        .d' + infix + '-table-cell { display: table-cell !important; }\n        .d' + infix + '-flex { display: flex !important; }\n        .d' + infix + '-inline-flex { display: inline-flex !important; }\n      ') + '\n    ');
   });
   utilityList.push('\n    .d-print-block {\n      display: none !important;\n    \n      @media print {\n        display: block !important;\n      }\n    }\n    \n    .d-print-inline {\n      display: none !important;\n    \n      @media print {\n        display: inline !important;\n      }\n    }\n    \n    .d-print-inline-block {\n      display: none !important;\n    \n      @media print {\n        display: inline-block !important;\n      }\n    }\n    \n    .d-print-none {\n      @media print {\n        display: none !important;\n      }\n    }\n  ');
   return utilityList.join('\n');
@@ -6818,8 +6803,8 @@ function getFlexUtilities() {
   var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-breakpoints'];
   var flexUtilityList = [];
   Object.keys(gridBreakpoints).forEach(function (breakpoint) {
-    var infix = (_breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
-    flexUtilityList.push('\n      /* Flex column reordering */\n      ' + (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .flex' + infix + '-first { order: -1; }\n        .flex' + infix + '-last { order: 1; }\n        .flex' + infix + '-unordered { order: 0; }\n      ') + '\n  \n      /* Flex direction */ \n      ' + (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .flex' + infix + '-row            { flex-direction: row !important; }\n        .flex' + infix + '-column         { flex-direction: column !important; }\n        .flex' + infix + '-row-reverse    { flex-direction: row-reverse !important; }\n        .flex' + infix + '-column-reverse { flex-direction: column-reverse !important; }\n      ') + '\n      \n      /* Flex wrap */ \n      ' + (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .flex' + infix + '-wrap         { flex-wrap: wrap !important; }\n        .flex' + infix + '-nowrap       { flex-wrap: nowrap !important; }\n        .flex' + infix + '-wrap-reverse { flex-wrap: wrap-reverse !important; }\n      ') + '\n      /* Flex justify-content */ \n      ' + (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .justify-content' + infix + '-start   { justify-content: flex-start !important; }\n        .justify-content' + infix + '-end     { justify-content: flex-end !important; }\n        .justify-content' + infix + '-center  { justify-content: center !important; }\n        .justify-content' + infix + '-between { justify-content: space-between !important; }\n        .justify-content' + infix + '-around  { justify-content: space-around !important; }\n      ') + '\n      /* Flex align-items */ \n      ' + (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .align-items' + infix + '-start    { align-items: flex-start !important; }\n        .align-items' + infix + '-end      { align-items: flex-end !important; }\n        .align-items' + infix + '-center   { align-items: center !important; }\n        .align-items' + infix + '-baseline { align-items: baseline !important; }\n        .align-items' + infix + '-stretch  { align-items: stretch !important; }\n      ') + '\n      /* Flex align-content */ \n      ' + (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .align-content' + infix + '-start   { align-content: flex-start !important; }\n        .align-content' + infix + '-end     { align-content: flex-end !important; }\n        .align-content' + infix + '-center  { align-content: center !important; }\n        .align-content' + infix + '-between { align-content: space-between !important; }\n        .align-content' + infix + '-around  { align-content: space-around !important; }\n        .align-content' + infix + '-stretch { align-content: stretch !important; }\n      ') + '\n      /* Flex align-self */ \n      ' + (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .align-self' + infix + '-auto     { align-self: auto !important; }\n        .align-self' + infix + '-start    { align-self: flex-start !important; }\n        .align-self' + infix + '-end      { align-self: flex-end !important; }\n        .align-self' + infix + '-center   { align-self: center !important; }\n        .align-self' + infix + '-baseline { align-self: baseline !important; }\n        .align-self' + infix + '-stretch  { align-self: stretch !important; }\n      ') + ' \n    ');
+    var infix = (0, breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
+    flexUtilityList.push('\n      /* Flex column reordering */\n      ' + (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .flex' + infix + '-first { order: -1; }\n        .flex' + infix + '-last { order: 1; }\n        .flex' + infix + '-unordered { order: 0; }\n      ') + '\n  \n      /* Flex direction */ \n      ' + (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .flex' + infix + '-row            { flex-direction: row !important; }\n        .flex' + infix + '-column         { flex-direction: column !important; }\n        .flex' + infix + '-row-reverse    { flex-direction: row-reverse !important; }\n        .flex' + infix + '-column-reverse { flex-direction: column-reverse !important; }\n      ') + '\n      \n      /* Flex wrap */ \n      ' + (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .flex' + infix + '-wrap         { flex-wrap: wrap !important; }\n        .flex' + infix + '-nowrap       { flex-wrap: nowrap !important; }\n        .flex' + infix + '-wrap-reverse { flex-wrap: wrap-reverse !important; }\n      ') + '\n      /* Flex justify-content */ \n      ' + (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .justify-content' + infix + '-start   { justify-content: flex-start !important; }\n        .justify-content' + infix + '-end     { justify-content: flex-end !important; }\n        .justify-content' + infix + '-center  { justify-content: center !important; }\n        .justify-content' + infix + '-between { justify-content: space-between !important; }\n        .justify-content' + infix + '-around  { justify-content: space-around !important; }\n      ') + '\n      /* Flex align-items */ \n      ' + (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .align-items' + infix + '-start    { align-items: flex-start !important; }\n        .align-items' + infix + '-end      { align-items: flex-end !important; }\n        .align-items' + infix + '-center   { align-items: center !important; }\n        .align-items' + infix + '-baseline { align-items: baseline !important; }\n        .align-items' + infix + '-stretch  { align-items: stretch !important; }\n      ') + '\n      /* Flex align-content */ \n      ' + (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .align-content' + infix + '-start   { align-content: flex-start !important; }\n        .align-content' + infix + '-end     { align-content: flex-end !important; }\n        .align-content' + infix + '-center  { align-content: center !important; }\n        .align-content' + infix + '-between { align-content: space-between !important; }\n        .align-content' + infix + '-around  { align-content: space-around !important; }\n        .align-content' + infix + '-stretch { align-content: stretch !important; }\n      ') + '\n      /* Flex align-self */ \n      ' + (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .align-self' + infix + '-auto     { align-self: auto !important; }\n        .align-self' + infix + '-start    { align-self: flex-start !important; }\n        .align-self' + infix + '-end      { align-self: flex-end !important; }\n        .align-self' + infix + '-center   { align-self: center !important; }\n        .align-self' + infix + '-baseline { align-self: baseline !important; }\n        .align-self' + infix + '-stretch  { align-self: stretch !important; }\n      ') + ' \n    ');
   });
   return flexUtilityList.join('\n');
 }
@@ -6875,8 +6860,8 @@ function getFloatUtilities() {
   var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-breakpoints'];
   var floatUtilityList = [];
   Object.keys(gridBreakpoints).forEach(function (breakpoint) {
-    var infix = (_breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
-    var floatUtility = (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n      .float' + infix + '-left {\n        ' + (_float.floatLeft)() + '\n      }\n      .float' + infix + '-right {\n        ' + (_float.floatRight)() + '\n      }\n      .float' + infix + '-none {\n        ' + (_float.floatNone)() + '\n      }\n    ');
+    var infix = (0, breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
+    var floatUtility = (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n      .float' + infix + '-left {\n        ' + (0, float_1$1.floatLeft)() + '\n      }\n      .float' + infix + '-right {\n        ' + (0, float_1$1.floatRight)() + '\n      }\n      .float' + infix + '-none {\n        ' + (0, float_1$1.floatNone)() + '\n      }\n    ');
     floatUtilityList.push(floatUtility);
   });
   return floatUtilityList.join('\n');
@@ -6955,7 +6940,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getScreenReadersUtilities = getScreenReadersUtilities;
 function getScreenReadersUtilities() {
-  return '\n    .sr-only {\n      ' + (_screenReader.srOnly)() + '\n    }\n    \n    .sr-only-focusable {\n      ' + (_screenReader.srOnlyFocusable)() + '\n    }\n  ';
+  return '\n    .sr-only {\n      ' + (0, screenReader.srOnly)() + '\n    }\n    \n    .sr-only-focusable {\n      ' + (0, screenReader.srOnlyFocusable)() + '\n    }\n  ';
 }
 exports.default = {
   getScreenReadersUtilities: getScreenReadersUtilities
@@ -7051,13 +7036,13 @@ function getSpacingUtilities()
   var spacingUtilityList = [];
   var infixList = [];
   Object.keys(gridBreakpoints).forEach(function (breakpoint) {
-    var infix = (_breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
+    var infix = (0, breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
     infixList.push(infix);
     Object.keys(abbrevs).forEach(function (prop) {
       var abbrev = abbrevs[prop];
       Object.keys(spacers).forEach(function (size) {
         var lengths = spacers[size];
-        spacingUtilityList.push((_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n          .' + abbrev + infix + '-' + size + ' { ' + prop + ':        ' + lengths.y + ' ' + lengths.x + ' !important; } /* a = All sides */\n          .' + abbrev + 't' + infix + '-' + size + ' { ' + prop + '-top:    ' + lengths.y + ' !important; }\n          .' + abbrev + 'r' + infix + '-' + size + ' { ' + prop + '-right:  ' + lengths.x + ' !important; }\n          .' + abbrev + 'b' + infix + '-' + size + ' { ' + prop + '-bottom: ' + lengths.y + ' !important; }\n          .' + abbrev + 'l' + infix + '-' + size + ' { ' + prop + '-left:   ' + lengths.x + ' !important; }\n          .' + abbrev + 'x' + infix + '-' + size + ' {\n            ' + prop + '-right:  ' + lengths.x + ' !important;\n            ' + prop + '-left:   ' + lengths.x + ' !important;\n          }\n          .' + abbrev + 'y' + infix + '-' + size + ' {\n            ' + prop + '-top:    ' + lengths.y + ' !important;\n            ' + prop + '-bottom: ' + lengths.y + ' !important;\n          }\n        '));
+        spacingUtilityList.push((0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n          .' + abbrev + infix + '-' + size + ' { ' + prop + ':        ' + lengths.y + ' ' + lengths.x + ' !important; } /* a = All sides */\n          .' + abbrev + 't' + infix + '-' + size + ' { ' + prop + '-top:    ' + lengths.y + ' !important; }\n          .' + abbrev + 'r' + infix + '-' + size + ' { ' + prop + '-right:  ' + lengths.x + ' !important; }\n          .' + abbrev + 'b' + infix + '-' + size + ' { ' + prop + '-bottom: ' + lengths.y + ' !important; }\n          .' + abbrev + 'l' + infix + '-' + size + ' { ' + prop + '-left:   ' + lengths.x + ' !important; }\n          .' + abbrev + 'x' + infix + '-' + size + ' {\n            ' + prop + '-right:  ' + lengths.x + ' !important;\n            ' + prop + '-left:   ' + lengths.x + ' !important;\n          }\n          .' + abbrev + 'y' + infix + '-' + size + ' {\n            ' + prop + '-top:    ' + lengths.y + ' !important;\n            ' + prop + '-bottom: ' + lengths.y + ' !important;\n          }\n        '));
       });
     });
   });
@@ -7119,7 +7104,7 @@ function textEmphasisVariant() {
   var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
   var parent = arguments[1];
   var textColor = arguments[2];
-  return '\n  ' + parent + ' {\n    color: ' + textColor + ' !important;\n  }\n  a' + parent + ' {\n  ' + (_hover.hoverFocus)(enableHoverMediaQuery, 'color: ' + (_color2.default)(textColor).darken(0.20).rgb() + ' !important;') + '\n  }\n';
+  return '\n  ' + parent + ' {\n    color: ' + textColor + ' !important;\n  }\n  a' + parent + ' {\n  ' + (0, hover_1.hoverFocus)(enableHoverMediaQuery, 'color: ' + (0, _color2.default)(textColor).darken(0.20).rgb() + ' !important;') + '\n  }\n';
 }
 exports.default = {
   defaultProps: defaultProps,
@@ -7168,11 +7153,11 @@ function getTextUtilities() {
   var grayDark = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps['$gray-dark'];
   var responseAlignmentList = [];
   Object.keys(gridBreakpoints).forEach(function (bp) {
-    var infix = (_breakpoints.breakpointInfix)(bp, gridBreakpoints);
-    var responsiveAlignement = (_breakpoints.mediaBreakpointUp)(bp, gridBreakpoints, '\n      .text' + infix + '-left { text-align: left !important; }\n      .text' + infix + '-right  { text-align: right !important; }\n      .text' + infix + '-center { text-align: center !important; }\n    ');
+    var infix = (0, breakpoints.breakpointInfix)(bp, gridBreakpoints);
+    var responsiveAlignement = (0, breakpoints.mediaBreakpointUp)(bp, gridBreakpoints, '\n      .text' + infix + '-left { text-align: left !important; }\n      .text' + infix + '-right  { text-align: right !important; }\n      .text' + infix + '-center { text-align: center !important; }\n    ');
     responseAlignmentList.push(responsiveAlignement);
   });
-  return '\n    /* Text */\n\n    /* Alignment */\n\n    .text-justify        { text-align: justify !important; }\n    .text-nowrap         { white-space: nowrap !important; }\n    .text-truncate       { ' + (_textTruncate.textTruncate)() + ' }\n\n    /* Responsive alignment */\n\n    ' + responseAlignmentList.join('\n') + '\n\n    /* Transformation */\n\n    .text-lowercase      { text-transform: lowercase !important; }\n    .text-uppercase      { text-transform: uppercase !important; }\n    .text-capitalize     { text-transform: capitalize !important; }\n\n    /* Weight and italics */\n\n    .font-weight-normal  { font-weight: ' + fontWeightNormal + '; }\n    .font-weight-bold    { font-weight: ' + fontWeightBold + '; }\n    .font-italic         { font-style: italic; }\n\n    /* Contextual colors */\n\n    .text-white {\n      color: #fff !important;\n    }\n\n    ' + (_textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-muted', textMuted) + '\n\n    ' + (_textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-primary', brandPrimary) + '\n\n    ' + (_textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-success', brandSuccess) + '\n\n    ' + (_textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-info', brandInfo) + '\n\n    ' + (_textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-warning', brandWarning) + '\n\n    ' + (_textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-danger', brandDanger) + '\n\n    /* Font color */\n\n    ' + (_textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-gray-dark', grayDark) + '\n\n    /* Misc */\n\n    .text-hide {\n      ' + (_textHide.textHide)() + '\n    }\n\n  ';
+  return '\n    /* Text */\n\n    /* Alignment */\n\n    .text-justify        { text-align: justify !important; }\n    .text-nowrap         { white-space: nowrap !important; }\n    .text-truncate       { ' + (0, textTruncate_1.textTruncate)() + ' }\n\n    /* Responsive alignment */\n\n    ' + responseAlignmentList.join('\n') + '\n\n    /* Transformation */\n\n    .text-lowercase      { text-transform: lowercase !important; }\n    .text-uppercase      { text-transform: uppercase !important; }\n    .text-capitalize     { text-transform: capitalize !important; }\n\n    /* Weight and italics */\n\n    .font-weight-normal  { font-weight: ' + fontWeightNormal + '; }\n    .font-weight-bold    { font-weight: ' + fontWeightBold + '; }\n    .font-italic         { font-style: italic; }\n\n    /* Contextual colors */\n\n    .text-white {\n      color: #fff !important;\n    }\n\n    ' + (0, textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-muted', textMuted) + '\n\n    ' + (0, textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-primary', brandPrimary) + '\n\n    ' + (0, textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-success', brandSuccess) + '\n\n    ' + (0, textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-info', brandInfo) + '\n\n    ' + (0, textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-warning', brandWarning) + '\n\n    ' + (0, textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-danger', brandDanger) + '\n\n    /* Font color */\n\n    ' + (0, textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-gray-dark', grayDark) + '\n\n    /* Misc */\n\n    .text-hide {\n      ' + (0, textHide_1.textHide)() + '\n    }\n\n  ';
 }
 exports.default = {
   defaultProps: defaultProps,
@@ -7272,21 +7257,21 @@ function getTransitionUtilities() {
 function fade() {
   var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
   var transitionFade = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$transition-fade'];
-  return '\n    .fade,\n     &.fade {\n      opacity: 0;\n      ' + (_transition.transition)(enableTransitions, transitionFade) + '\n    \n      &.show {\n        opacity: 1;\n      }\n    }\n  ';
+  return '\n    .fade,\n     &.fade {\n      opacity: 0;\n      ' + (0, transition_1$1.transition)(enableTransitions, transitionFade) + '\n    \n      &.show {\n        opacity: 1;\n      }\n    }\n  ';
 }
 function collapse() {
   var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
   var transitionCollapse = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$transition-collapse'];
-  return '\n    .collapse {\n      display: none;\n      &.show {\n        display: block;\n      }\n    }\n    \n    tr {\n      &.collapse.show {\n        display: table-row;\n      }\n    }\n    \n    tbody {\n      &.collapse.show {\n        display: table-row-group;\n      }\n    }\n    \n    .collapsing {\n      position: relative;\n      height: 0;\n      overflow: hidden;\n      ' + (_transition.transition)(enableTransitions, transitionCollapse) + '\n    }\n  ';
+  return '\n    .collapse {\n      display: none;\n      &.show {\n        display: block;\n      }\n    }\n    \n    tr {\n      &.collapse.show {\n        display: table-row;\n      }\n    }\n    \n    tbody {\n      &.collapse.show {\n        display: table-row-group;\n      }\n    }\n    \n    .collapsing {\n      position: relative;\n      height: 0;\n      overflow: hidden;\n      ' + (0, transition_1$1.transition)(enableTransitions, transitionCollapse) + '\n    }\n  ';
 }
 function getReactTransition(enableTransition, transition) {
-  var transitionList = (_parseTransition2.default)(transition);
+  var transitionList = (0, _parseTransition2.default)(transition);
   var _transitionList$ = transitionList[0],
       property = _transitionList$.property,
       duration = _transitionList$.duration,
       timingFunction = _transitionList$.timingFunction,
       delay = _transitionList$.delay;
-  return (_transition.transition)(enableTransition, property + ' ' + duration + 'ms ' + timingFunction + ' ' + delay + 'ms');
+  return (0, transition_1$1.transition)(enableTransition, property + ' ' + duration + 'ms ' + timingFunction + ' ' + delay + 'ms');
 }
 exports.default = {
   defaultProps: defaultProps,
@@ -7321,7 +7306,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getVisibilityUtilities = getVisibilityUtilities;
 function getVisibilityUtilities() {
-  return '\n    .visible {\n      ' + (_visibility.invisible)('visible') + '\n    }\n    \n    .invisible {\n      ' + (_visibility.invisible)('hidden') + '\n    }\n   \n  ';
+  return '\n    .visible {\n      ' + (0, visibility$1.invisible)('visible') + '\n    }\n    \n    .invisible {\n      ' + (0, visibility$1.invisible)('hidden') + '\n    }\n   \n  ';
 }
 exports.default = {
   getVisibilityUtilities: getVisibilityUtilities
@@ -7417,28 +7402,28 @@ var BootstrapProvider = function (_React$Component) {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = BootstrapProvider.__proto__ || Object.getPrototypeOf(BootstrapProvider)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = BootstrapProvider.__proto__ || Object.getPrototypeOf(BootstrapProvider)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       theme: {},
       isWindowPhone8Fixed: null
     }, _this.setTheme = function (_ref2, cb) {
       var userTheme = _ref2.theme;
-      var theme = _this.makeTheme({ theme: userTheme });
-      _this.setState({ theme: theme }, cb);
+      var theme$$1 = _this.makeTheme({ theme: userTheme });
+      _this.setState({ theme: theme$$1 }, cb);
     }, _this.makeTheme = function (_ref3) {
       var userTheme = _ref3.theme;
-      var theme = makeThemeBs(userTheme);
-      var metaKeyList = Object.keys(theme).filter(function (f) {
+      var theme$$1 = makeTheme$$1(userTheme);
+      var metaKeyList = Object.keys(theme$$1).filter(function (f) {
         return f[0] === '_';
       });
       metaKeyList.forEach(function (k) {
-        delete theme[k];
+        delete theme$$1[k];
       });
-      return theme;
+      return theme$$1;
     }, _this.injectGlobal = function () {
       if (_this.props.injectGlobal) {
-        injectGlobal(_templateObject, getGlobalStyleNoBootstrapProvider(_this.state.theme['$font-family-base'] || themeBs['$font-family-base'], _this.state.theme['$font-size-base'] || themeBs['$font-size-base'], _this.state.theme['$font-weight-base'] || themeBs['$font-weight-base'], _this.state.theme['$line-height-base'] || themeBs['$line-height-base'], _this.state.theme['$body-color'] || themeBs['$body-color'], _this.state.theme['$body-bg'] || themeBs['$body-bg']));
+        injectGlobal(_templateObject, reboot_2(_this.state.theme['$font-family-base'] || theme['$font-family-base'], _this.state.theme['$font-size-base'] || theme['$font-size-base'], _this.state.theme['$font-weight-base'] || theme['$font-weight-base'], _this.state.theme['$line-height-base'] || theme['$line-height-base'], _this.state.theme['$body-color'] || theme['$body-color'], _this.state.theme['$body-bg'] || theme['$body-bg']));
       }
-    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+    }, _temp), possibleConstructorReturn(_this, _ret);
   }
   createClass(BootstrapProvider, [{
     key: 'componentWillMount',
@@ -7686,13 +7671,13 @@ function buttonVariant() {
   var border = arguments[3];
   var btnActiveBoxShadow = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$btn-active-box-shadow'];
   var btnBoxShadow = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$btn-box-shadow'];
-  var activeBackground = (_color2.default)(background).darken(0.2).toString();
-  var activeBorder = (_color2.default)(border).darken(0.12).toString();
-  return '\n    color: ' + buttonColor + ';\n    background-color: ' + background + ';\n    border-color: ' + border + ';\n    ' + (_boxShadow.boxShadow)(enableShadows, btnBoxShadow) + '\n  \n    ' + (_hover.hover)('\n      color: ' + buttonColor + ';\n      background-color: ' + activeBackground + ';\n      border-color: ' + activeBorder + ';\n    ') + '\n  \n    &:focus,\n    &.focus {\n      ' + (_conditional.ifElse)('\n        box-shadow: ' + btnBoxShadow + ', 0 0 0 2px ' + (_color2.default)(border).alpha(0.5).toString() + ';\n      ', '\n        box-shadow: 0 0 0 2px ' + (_color2.default)(border).alpha(0.5).toString() + ';\n      ') + '\n    }\n  \n    /* Disabled comes first so active can properly restyle */\n    &.disabled,\n    &:disabled {\n      background-color: ' + background + ';\n      border-color: ' + border + ';\n    }\n    \n    &:active,\n    &.active,\n    .show > &.dropdown-toggle {\n      color: ' + buttonColor + ';\n      background-color: ' + activeBackground + ';\n      background-image: none;\n      border-color: ' + activeBorder + ';\n      ' + (_boxShadow.boxShadow)(enableShadows, btnActiveBoxShadow) + '\n    }\n  ';
+  var activeBackground = (0, _color2.default)(background).darken(0.2).toString();
+  var activeBorder = (0, _color2.default)(border).darken(0.12).toString();
+  return '\n    color: ' + buttonColor + ';\n    background-color: ' + background + ';\n    border-color: ' + border + ';\n    ' + (0, boxShadow_1.boxShadow)(enableShadows, btnBoxShadow) + '\n  \n    ' + (0, hover_1.hover)('\n      color: ' + buttonColor + ';\n      background-color: ' + activeBackground + ';\n      border-color: ' + activeBorder + ';\n    ') + '\n  \n    &:focus,\n    &.focus {\n      ' + (0, conditional.ifElse)('\n        box-shadow: ' + btnBoxShadow + ', 0 0 0 2px ' + (0, _color2.default)(border).alpha(0.5).toString() + ';\n      ', '\n        box-shadow: 0 0 0 2px ' + (0, _color2.default)(border).alpha(0.5).toString() + ';\n      ') + '\n    }\n  \n    /* Disabled comes first so active can properly restyle */\n    &.disabled,\n    &:disabled {\n      background-color: ' + background + ';\n      border-color: ' + border + ';\n    }\n    \n    &:active,\n    &.active,\n    .show > &.dropdown-toggle {\n      color: ' + buttonColor + ';\n      background-color: ' + activeBackground + ';\n      background-image: none;\n      border-color: ' + activeBorder + ';\n      ' + (0, boxShadow_1.boxShadow)(enableShadows, btnActiveBoxShadow) + '\n    }\n  ';
 }
 function buttonOutlineVariant(buttonColor) {
   var buttonColorHover = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#fff';
-  return '\n    color: ' + buttonColor + ';\n    background-image: none;\n    background-color: transparent;\n    border-color: ' + buttonColor + ';\n  \n    ' + (_hover.hover)('\n      color: ' + buttonColorHover + ';\n      background-color: ' + buttonColor + ';\n      border-color: ' + buttonColor + ';\n    ') + '\n  \n    &:focus,\n    &.focus {\n      box-shadow: 0 0 0 2px ' + (_color2.default)(buttonColor).alpha(0.5).toString() + ';\n    }\n  \n    &.disabled,\n    &:disabled {\n      color: ' + buttonColor + ';\n      border-color: transparent;\n    }\n    \n    &:active,\n    &.active,\n    & .open > &.dropdown-toggle {\n      color: ' + buttonColorHover + ';\n      background-color: ' + buttonColor + ';\n      border-color: ' + buttonColor + ';\n    }\n  ';
+  return '\n    color: ' + buttonColor + ';\n    background-image: none;\n    background-color: transparent;\n    border-color: ' + buttonColor + ';\n  \n    ' + (0, hover_1.hover)('\n      color: ' + buttonColorHover + ';\n      background-color: ' + buttonColor + ';\n      border-color: ' + buttonColor + ';\n    ') + '\n  \n    &:focus,\n    &.focus {\n      box-shadow: 0 0 0 2px ' + (0, _color2.default)(buttonColor).alpha(0.5).toString() + ';\n    }\n  \n    &.disabled,\n    &:disabled {\n      color: ' + buttonColor + ';\n      border-color: transparent;\n    }\n    \n    &:active,\n    &.active,\n    & .open > &.dropdown-toggle {\n      color: ' + buttonColorHover + ';\n      background-color: ' + buttonColor + ';\n      border-color: ' + buttonColor + ';\n    }\n  ';
 }
 function buttonSize() {
   var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
@@ -7700,7 +7685,7 @@ function buttonSize() {
   var paddingX = arguments[2];
   var fontSize = arguments[3];
   var btnBorderRadius = arguments[4];
-  return '\n    padding: ' + paddingY + ' ' + paddingX + ';\n    font-size: ' + fontSize + ';\n    ' + (_borderRadius.borderRadius)(enableRounded, btnBorderRadius) + '\n  ';
+  return '\n    padding: ' + paddingY + ' ' + paddingX + ';\n    font-size: ' + fontSize + ';\n    ' + (0, borderRadius_1.borderRadius)(enableRounded, btnBorderRadius) + '\n  ';
 }
 function button() {
   var $enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-shadows'];
@@ -7751,7 +7736,7 @@ function button() {
   var $btnDangerColor = arguments.length > 45 && arguments[45] !== undefined ? arguments[45] : defaultProps['$btn-danger-color'];
   var $btnDangerBg = arguments.length > 46 && arguments[46] !== undefined ? arguments[46] : defaultProps['$btn-danger-bg'];
   var $btnDangerBorder = arguments.length > 47 && arguments[47] !== undefined ? arguments[47] : defaultProps['$btn-danger-border'];
-  return '\n  \n    font-family: inherit;\n    \n    &.btn {\n      display: inline-block;\n      font-weight: ' + $btnFontWeight + ';\n      line-height: ' + $btnLineHeight + ';\n      text-align: center;\n      white-space: nowrap;\n      vertical-align: middle;\n      user-select: none;\n      border: ' + $inputBtnBorderWidth + ' solid transparent;\n      ' + buttonSize($enableRounded, $btnPaddingY, $btnPaddingX, $fontSizeBase, $btnBorderRadius) + '\n      ' + (_transition.transition)($enableTransitions, $btnTransition) + '\n      ' + (_hover.hoverFocus)($enableHoverMediaQuery, 'text-decoration: none;') + '\n\n      &:focus,\n      &.focus {\n        outline: 0;\n        box-shadow: ' + $btnFocusBoxShadow + ';\n      }\n\n      &.disabled,\n      &:disabled {\n        cursor: ' + $cursorDisabled + ';\n        opacity: .65;\n        ' + (_boxShadow.boxShadow)($enableShadows, 'none') + '\n      }  \n\n      &:active,\n      &.active {\n        background-image: none;\n        ' + (_boxShadow.boxShadow)($enableShadows, $btnFocusBoxShadow, $btnActiveBoxShadow) + '\n      }\n    }\n    \n    a.btn.disabled,\n    fieldset[disabled] a.btn {\n      pointer-events: none;\n    }\n   \n   \n    /* Alternate buttons */\n   \n    &.btn-primary {\n      ' + buttonVariant($enableShadows, $btnPrimaryColor, $btnPrimaryBg, $btnPrimaryBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-secondary {\n      ' + buttonVariant($enableShadows, $btnSecondaryColor, $btnSecondaryBg, $btnSecondaryBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-info {\n      ' + buttonVariant($enableShadows, $btnInfoColor, $btnInfoBg, $btnInfoBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-success {\n      ' + buttonVariant($enableShadows, $btnSuccessColor, $btnSuccessBg, $btnSuccessBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-warning {\n      ' + buttonVariant($enableShadows, $btnWarningColor, $btnWarningBg, $btnWarningBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-danger {\n      ' + buttonVariant($enableShadows, $btnDangerColor, $btnDangerBg, $btnDangerBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n   \n    &.btn-outline-primary {\n      ' + buttonOutlineVariant($btnPrimaryBg, $btnPrimaryColor) + '\n    }    \n    &.btn-outline-secondary {\n      ' + buttonOutlineVariant($btnSecondaryBorder, $btnSecondaryColor) + '\n    }    \n    &.btn-outline-info {\n      ' + buttonOutlineVariant($btnInfoBg, $btnInfoColor) + '\n    }    \n    &.btn-outline-success {\n      ' + buttonOutlineVariant($btnSuccessBg, $btnSuccessColor) + '\n    }\n    &.btn-outline-warning {\n      ' + buttonOutlineVariant($btnWarningBg, $btnWarningColor) + '\n    }\n    &.btn-outline-danger {\n      ' + buttonOutlineVariant($btnDangerBg, $btnDangerColor) + '\n    }\n   \n    /*\n     Link buttons\n    */\n   \n    &.btn-link {\n      font-weight: ' + $fontWeightNormal + ';\n      color: ' + $linkColor + ';\n      border-radius: 0;\n   \n      &,\n      &:active,\n      &.active,\n      &:disabled {\n        background-color: transparent;\n        ' + (_boxShadow.boxShadow)($enableShadows, 'none') + '\n      }\n     \n      &,\n      &:focus,\n      &:active {\n        border-color: transparent;\n      }\n     \n      ' + (_hover.hover)('border-color: transparent;') + '\n     \n      ' + (_hover.hoverFocus)($enableHoverMediaQuery, '\n        color: ' + $linkHoverColor + ';\n        text-decoration: ' + $linkHoverDecoration + ';\n        background-color: transparent;\n      ') + '\n     \n      &:disabled {\n        color: ' + $btnLinkDisabledColor + ';\n        ' + (_hover.hoverFocus)($enableHoverMediaQuery, '\n          text-decoration: none;\n        ') + '\n      }\n    }\n  \n  \n    /*\n     Button Sizes\n    */\n   \n    &.btn-lg {\n      /* line-height: ensure even-numbered height of button next to large input */\n      ' + buttonSize($enableRounded, $btnPaddingYLg, $btnPaddingXLg, $fontSizeLg, $btnBorderRadiusLg) + '\n    }\n   \n    &.btn-sm {\n      /* line-height: ensure proper height of button next to small input */\n      ' + buttonSize($enableRounded, $btnPaddingYSm, $btnPaddingXSm, $fontSizeSm, $btnBorderRadiusSm) + '\n    }\n   \n   \n    /*\n     Block button\n    */\n   \n    &.btn-block {\n      display: block;\n      width: 100%;\n    }\n   \n    /* Vertically space out multiple block buttons */\n    &.btn-block + .btn-block {\n      margin-top: ' + $btnBlockSpacingY + ';\n    }\n   \n    /* Specificity overrides */\n    input[type="submit"],\n    input[type="reset"],\n    input[type="button"] {\n      &.btn-block {\n        width: 100%;\n      }\n    }\n   \n    /* Reboot Scss */\n    touch-action: manipulation;\n    line-height: inherit;\n    &:focus{\n      outline: 1px dotted;\n      outline: 5px auto -webkit-focus-ring-color;\n    }\n    \n    &[type="button"],\n    &[type="reset"],\n    &[type="submit"] {\n      -webkit-appearance: button;\n    }\n    \n    &::-moz-focus-inner,\n    &[type="button"]::-moz-focus-inner,\n    &[type="reset"]::-moz-focus-inner,\n    &[type="submit"]::-moz-focus-inner {\n      padding: 0;\n      border-style: none;\n    }\n\n  ';
+  return '\n  \n    font-family: inherit;\n    \n    &.btn {\n      display: inline-block;\n      font-weight: ' + $btnFontWeight + ';\n      line-height: ' + $btnLineHeight + ';\n      text-align: center;\n      white-space: nowrap;\n      vertical-align: middle;\n      user-select: none;\n      border: ' + $inputBtnBorderWidth + ' solid transparent;\n      ' + buttonSize($enableRounded, $btnPaddingY, $btnPaddingX, $fontSizeBase, $btnBorderRadius) + '\n      ' + (0, transition_1$1.transition)($enableTransitions, $btnTransition) + '\n      ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'text-decoration: none;') + '\n\n      &:focus,\n      &.focus {\n        outline: 0;\n        box-shadow: ' + $btnFocusBoxShadow + ';\n      }\n\n      &.disabled,\n      &:disabled {\n        cursor: ' + $cursorDisabled + ';\n        opacity: .65;\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, 'none') + '\n      }  \n\n      &:active,\n      &.active {\n        background-image: none;\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $btnFocusBoxShadow, $btnActiveBoxShadow) + '\n      }\n    }\n    \n    a.btn.disabled,\n    fieldset[disabled] a.btn {\n      pointer-events: none;\n    }\n   \n   \n    /* Alternate buttons */\n   \n    &.btn-primary {\n      ' + buttonVariant($enableShadows, $btnPrimaryColor, $btnPrimaryBg, $btnPrimaryBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-secondary {\n      ' + buttonVariant($enableShadows, $btnSecondaryColor, $btnSecondaryBg, $btnSecondaryBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-info {\n      ' + buttonVariant($enableShadows, $btnInfoColor, $btnInfoBg, $btnInfoBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-success {\n      ' + buttonVariant($enableShadows, $btnSuccessColor, $btnSuccessBg, $btnSuccessBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-warning {\n      ' + buttonVariant($enableShadows, $btnWarningColor, $btnWarningBg, $btnWarningBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n    &.btn-danger {\n      ' + buttonVariant($enableShadows, $btnDangerColor, $btnDangerBg, $btnDangerBorder, $btnActiveBoxShadow, $btnBoxShadow) + '\n    }\n   \n    &.btn-outline-primary {\n      ' + buttonOutlineVariant($btnPrimaryBg, $btnPrimaryColor) + '\n    }    \n    &.btn-outline-secondary {\n      ' + buttonOutlineVariant($btnSecondaryBorder, $btnSecondaryColor) + '\n    }    \n    &.btn-outline-info {\n      ' + buttonOutlineVariant($btnInfoBg, $btnInfoColor) + '\n    }    \n    &.btn-outline-success {\n      ' + buttonOutlineVariant($btnSuccessBg, $btnSuccessColor) + '\n    }\n    &.btn-outline-warning {\n      ' + buttonOutlineVariant($btnWarningBg, $btnWarningColor) + '\n    }\n    &.btn-outline-danger {\n      ' + buttonOutlineVariant($btnDangerBg, $btnDangerColor) + '\n    }\n   \n    /*\n     Link buttons\n    */\n   \n    &.btn-link {\n      font-weight: ' + $fontWeightNormal + ';\n      color: ' + $linkColor + ';\n      border-radius: 0;\n   \n      &,\n      &:active,\n      &.active,\n      &:disabled {\n        background-color: transparent;\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, 'none') + '\n      }\n     \n      &,\n      &:focus,\n      &:active {\n        border-color: transparent;\n      }\n     \n      ' + (0, hover_1.hover)('border-color: transparent;') + '\n     \n      ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, '\n        color: ' + $linkHoverColor + ';\n        text-decoration: ' + $linkHoverDecoration + ';\n        background-color: transparent;\n      ') + '\n     \n      &:disabled {\n        color: ' + $btnLinkDisabledColor + ';\n        ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, '\n          text-decoration: none;\n        ') + '\n      }\n    }\n  \n  \n    /*\n     Button Sizes\n    */\n   \n    &.btn-lg {\n      /* line-height: ensure even-numbered height of button next to large input */\n      ' + buttonSize($enableRounded, $btnPaddingYLg, $btnPaddingXLg, $fontSizeLg, $btnBorderRadiusLg) + '\n    }\n   \n    &.btn-sm {\n      /* line-height: ensure proper height of button next to small input */\n      ' + buttonSize($enableRounded, $btnPaddingYSm, $btnPaddingXSm, $fontSizeSm, $btnBorderRadiusSm) + '\n    }\n   \n   \n    /*\n     Block button\n    */\n   \n    &.btn-block {\n      display: block;\n      width: 100%;\n    }\n   \n    /* Vertically space out multiple block buttons */\n    &.btn-block + .btn-block {\n      margin-top: ' + $btnBlockSpacingY + ';\n    }\n   \n    /* Specificity overrides */\n    input[type="submit"],\n    input[type="reset"],\n    input[type="button"] {\n      &.btn-block {\n        width: 100%;\n      }\n    }\n   \n    /* Reboot Scss */\n    touch-action: manipulation;\n    line-height: inherit;\n    &:focus{\n      outline: 1px dotted;\n      outline: 5px auto -webkit-focus-ring-color;\n    }\n    \n    &[type="button"],\n    &[type="reset"],\n    &[type="submit"] {\n      -webkit-appearance: button;\n    }\n    \n    &::-moz-focus-inner,\n    &[type="button"]::-moz-focus-inner,\n    &[type="reset"]::-moz-focus-inner,\n    &[type="submit"]::-moz-focus-inner {\n      padding: 0;\n      border-style: none;\n    }\n\n  ';
 }
 exports.default = {
   defaultProps: defaultProps,
@@ -7874,7 +7859,7 @@ var ButtonUnstyled = function (_React$Component) {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = ButtonUnstyled.__proto__ || Object.getPrototypeOf(ButtonUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.onClick = function (e) {
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = ButtonUnstyled.__proto__ || Object.getPrototypeOf(ButtonUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.onClick = function (e) {
       if (_this.props.disabled) {
         e.preventDefault();
         return;
@@ -7882,7 +7867,7 @@ var ButtonUnstyled = function (_React$Component) {
       if (_this.props.onClick) {
         _this.props.onClick(e);
       }
-    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+    }, _temp), possibleConstructorReturn(_this, _ret);
   }
   createClass(ButtonUnstyled, [{
     key: 'render',
@@ -7905,7 +7890,7 @@ var ButtonUnstyled = function (_React$Component) {
         dropup: dropup,
         active: active,
         disabled: disabled
-      }, babelHelpers.defineProperty(_cn, 'btn-' + size, size), babelHelpers.defineProperty(_cn, 'btn-block', block), _cn), 'btn' + (outline ? '-outline' : '') + '-' + color), cssModule);
+      }, defineProperty(_cn, 'btn-' + size, size), defineProperty(_cn, 'btn-block', block), _cn), 'btn' + (outline ? '-outline' : '') + '-' + color), cssModule);
       if (attributes.href && Tag === 'button') {
         Tag = 'a';
       }
@@ -7995,7 +7980,7 @@ function buttonGroup() {
   var $btnPaddingYSm = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps['$btn-padding-y-sm'];
   var $fontSizeSm = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : defaultProps['$font-size-sm'];
   var $btnBorderRadiusSm = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps['$btn-border-radius-sm'];
-  return ' \n    /*  Make the div behave like a button */\n    &.btn-group,\n    & .btn-group,\n    &.btn-group-vertical,\n    & .btn-group-vertical {\n      position: relative;\n      display: inline-flex;\n      vertical-align: middle; /* match .btn alignment given font-size hack above */\n    \n      > .btn {\n        position: relative;\n        flex: 0 1 auto;\n        margin-bottom: 0;\n    \n        /* Bring the "active" button to the front */\n        &:focus,\n        &:active,\n        &.active {\n          z-index: 2;\n        }\n        ' + (_hover.hover)('\n          z-index: 2;\n        ') + '\n      }\n    }\n    \n    /*  Prevent double borders when buttons are next to each other */\n    &.btn-group,\n    & .btn-group {\n      .btn + .btn,\n      .btn + .btn-group,\n      .btn-group + .btn,\n      .btn-group + .btn-group {\n        margin-left: -' + $inputBtnBorderWidth + ';\n      }\n    }\n    \n    /* Optional: Group multiple button groups together for a toolbar */\n    &.btn-toolbar,\n    & .btn-toolbar {\n      display: flex;\n      flex-wrap: wrap;\n      justify-content: flex-start;\n    \n      .input-group {\n        width: auto;\n      }\n    }\n     \n    &.btn-group,\n    & .btn-group {\n      > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {\n        border-radius: 0;\n      }\n    }\n    \n    /* Set corners individual because sometimes a single button can be in a .btn-group and we need :first-child and :last-child to both match */\n    &.btn-group,\n    & .btn-group {\n      > .btn:first-child {\n        margin-left: 0;\n    \n        &:not(:last-child):not(.dropdown-toggle) {\n          ' + (_borderRadius.borderRightRadius)($enableRounded, '0') + '\n        }\n      }\n    }\n    /* Need .dropdown-toggle since :last-child does not apply given a .dropdown-menu immediately after it */\n    &.btn-group > .btn:last-child:not(:first-child),\n    & .btn-group > .btn:last-child:not(:first-child),\n    &.btn-group > .dropdown-toggle:not(:first-child),\n    & .btn-group > .dropdown-toggle:not(:first-child) {\n      ' + (_borderRadius.borderLeftRadius)($enableRounded, '0') + '\n    }\n    \n    /* Custom edits for including btn-groups within btn-groups (useful for including dropdown buttons within a btn-group) */\n    &.btn-group > .btn-group,\n    & .btn-group > .btn-group {\n      float: left;\n    }\n    &.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn,\n    & .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {\n      border-radius: 0;\n    }\n    &.btn-group > .btn-group:first-child:not(:last-child),\n    & .btn-group > .btn-group:first-child:not(:last-child) {\n      > .btn:last-child,\n      > .dropdown-toggle {\n        ' + (_borderRadius.borderRightRadius)($enableRounded, '0') + '\n      }\n    }\n    &.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child,\n    & .btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {\n      ' + (_borderRadius.borderLeftRadius)($enableRounded, '0') + '\n    }\n    \n    /* On active and open, do not show outline */\n    &.btn-group .dropdown-toggle:active,\n    & .btn-group .dropdown-toggle:active,\n    &.btn-group.open .dropdown-toggle,\n    & .btn-group.open .dropdown-toggle {\n      outline: 0;\n    }\n    \n    \n    /* \n    Sizing Remix the default button sizing classes into new ones for easier manipulation.\n    */\n    \n    &.btn-group-sm > .btn,\n    & .btn-group-sm > .btn { \n      ' + (_buttons.buttonSize)($enableRounded, $btnPaddingYSm, $btnPaddingXSm, $fontSizeSm, $btnBorderRadiusSm) + '\n    }\n    &.btn-group-lg > .btn,\n    & .btn-group-lg > .btn {\n      ' + (_buttons.buttonSize)($enableRounded, $btnPaddingYLg, $btnPaddingXLg, $fontSizeLg, $btnBorderRadiusLg) + '\n    }\n    \n    /*\n     Split button dropdowns\n    */\n    \n    & .btn + .dropdown-toggle-split {\n      padding-right: ' + _unitUtils2.default.math.multiply($btnPaddingX, 0.75) + ';\n      padding-left: ' + _unitUtils2.default.math.multiply($btnPaddingX, 0.75) + ';\n    \n      &::after {\n        margin-left: 0;\n      }\n    }\n    \n    & .btn-sm + .dropdown-toggle-split {\n      padding-right: ' + _unitUtils2.default.math.multiply($btnPaddingXSm, 0.75) + ';\n      padding-left: ' + _unitUtils2.default.math.multiply($btnPaddingXSm, 0.75) + ';\n    }\n    \n    & .btn-lg + .dropdown-toggle-split {\n      padding-right: ' + _unitUtils2.default.math.multiply($btnPaddingXLg, 0.75) + ';\n      padding-left: ' + _unitUtils2.default.math.multiply($btnPaddingXLg, 0.75) + ';\n    }\n    \n    \n    /* The clickable button for toggling the menu */\n    /* Remove the gradient and set the same inset shadow as the :active state */\n    &.btn-group.open .dropdown-toggle {\n      ' + (_boxShadow.boxShadow)($enableShadows, $btnActiveBoxShadow) + '\n    \n      /* Show no shadow for .btn-link since it has no other button styles. */\n      &.btn-link {\n        ' + (_boxShadow.boxShadow)($enableShadows, 'none') + '\n      }\n    }\n\n    /*\n     Vertical button groups\n    */\n    \n    &.btn-group-vertical,\n    & .btn-group-vertical {\n      display: inline-flex;\n      flex-direction: column;\n      align-items: flex-start;\n      justify-content: center;\n    \n      .btn,\n      .btn-group {\n        width: 100%;\n      }\n      \n      > .btn + .btn,\n      > .btn + .btn-group,\n      > .btn-group + .btn,\n      > .btn-group + .btn-group {\n        margin-top: -' + $inputBtnBorderWidth + ';\n        margin-left: 0;\n      }\n    }\n    \n    &.btn-group-vertical > .btn,\n    & .btn-group-vertical > .btn {\n      &:not(:first-child):not(:last-child) {\n        border-radius: 0;\n      }\n      &:first-child:not(:last-child) {\n        ' + (_borderRadius.borderBottomRadius)($enableRounded, '0') + '\n      }\n      &:last-child:not(:first-child) {\n        ' + (_borderRadius.borderTopRadius)($enableRounded, '0') + '\n      }\n    }\n    \n    &.btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn,\n    & .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {\n      border-radius: 0;\n    }\n    \n    &.btn-group-vertical > .btn-group:first-child:not(:last-child),\n    & .btn-group-vertical > .btn-group:first-child:not(:last-child) {\n      > .btn:last-child,\n      > .dropdown-toggle {\n        ' + (_borderRadius.borderBottomRadius)($enableRounded, '0') + '      \n      }\n    }\n    &.btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child,\n    & .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child {\n      ' + (_borderRadius.borderTopRadius)($enableRounded, '0') + '\n    }\n    \n    &.btn-group {\n      > .btn,\n      > .btn-group > .btn {\n        input[type="radio"],\n        input[type="checkbox"] {\n          position: absolute;\n          clip: rect(0,0,0,0);\n          pointer-events: none;\n        }\n      }\n    }\n  ';
+  return ' \n    /*  Make the div behave like a button */\n    &.btn-group,\n    & .btn-group,\n    &.btn-group-vertical,\n    & .btn-group-vertical {\n      position: relative;\n      display: inline-flex;\n      vertical-align: middle; /* match .btn alignment given font-size hack above */\n    \n      > .btn {\n        position: relative;\n        flex: 0 1 auto;\n        margin-bottom: 0;\n    \n        /* Bring the "active" button to the front */\n        &:focus,\n        &:active,\n        &.active {\n          z-index: 2;\n        }\n        ' + (0, hover_1.hover)('\n          z-index: 2;\n        ') + '\n      }\n    }\n    \n    /*  Prevent double borders when buttons are next to each other */\n    &.btn-group,\n    & .btn-group {\n      .btn + .btn,\n      .btn + .btn-group,\n      .btn-group + .btn,\n      .btn-group + .btn-group {\n        margin-left: -' + $inputBtnBorderWidth + ';\n      }\n    }\n    \n    /* Optional: Group multiple button groups together for a toolbar */\n    &.btn-toolbar,\n    & .btn-toolbar {\n      display: flex;\n      flex-wrap: wrap;\n      justify-content: flex-start;\n    \n      .input-group {\n        width: auto;\n      }\n    }\n     \n    &.btn-group,\n    & .btn-group {\n      > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {\n        border-radius: 0;\n      }\n    }\n    \n    /* Set corners individual because sometimes a single button can be in a .btn-group and we need :first-child and :last-child to both match */\n    &.btn-group,\n    & .btn-group {\n      > .btn:first-child {\n        margin-left: 0;\n    \n        &:not(:last-child):not(.dropdown-toggle) {\n          ' + (0, borderRadius_1.borderRightRadius)($enableRounded, '0') + '\n        }\n      }\n    }\n    /* Need .dropdown-toggle since :last-child does not apply given a .dropdown-menu immediately after it */\n    &.btn-group > .btn:last-child:not(:first-child),\n    & .btn-group > .btn:last-child:not(:first-child),\n    &.btn-group > .dropdown-toggle:not(:first-child),\n    & .btn-group > .dropdown-toggle:not(:first-child) {\n      ' + (0, borderRadius_1.borderLeftRadius)($enableRounded, '0') + '\n    }\n    \n    /* Custom edits for including btn-groups within btn-groups (useful for including dropdown buttons within a btn-group) */\n    &.btn-group > .btn-group,\n    & .btn-group > .btn-group {\n      float: left;\n    }\n    &.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn,\n    & .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {\n      border-radius: 0;\n    }\n    &.btn-group > .btn-group:first-child:not(:last-child),\n    & .btn-group > .btn-group:first-child:not(:last-child) {\n      > .btn:last-child,\n      > .dropdown-toggle {\n        ' + (0, borderRadius_1.borderRightRadius)($enableRounded, '0') + '\n      }\n    }\n    &.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child,\n    & .btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {\n      ' + (0, borderRadius_1.borderLeftRadius)($enableRounded, '0') + '\n    }\n    \n    /* On active and open, do not show outline */\n    &.btn-group .dropdown-toggle:active,\n    & .btn-group .dropdown-toggle:active,\n    &.btn-group.open .dropdown-toggle,\n    & .btn-group.open .dropdown-toggle {\n      outline: 0;\n    }\n    \n    \n    /* \n    Sizing Remix the default button sizing classes into new ones for easier manipulation.\n    */\n    \n    &.btn-group-sm > .btn,\n    & .btn-group-sm > .btn { \n      ' + (0, buttons.buttonSize)($enableRounded, $btnPaddingYSm, $btnPaddingXSm, $fontSizeSm, $btnBorderRadiusSm) + '\n    }\n    &.btn-group-lg > .btn,\n    & .btn-group-lg > .btn {\n      ' + (0, buttons.buttonSize)($enableRounded, $btnPaddingYLg, $btnPaddingXLg, $fontSizeLg, $btnBorderRadiusLg) + '\n    }\n    \n    /*\n     Split button dropdowns\n    */\n    \n    & .btn + .dropdown-toggle-split {\n      padding-right: ' + _unitUtils2.default.math.multiply($btnPaddingX, 0.75) + ';\n      padding-left: ' + _unitUtils2.default.math.multiply($btnPaddingX, 0.75) + ';\n    \n      &::after {\n        margin-left: 0;\n      }\n    }\n    \n    & .btn-sm + .dropdown-toggle-split {\n      padding-right: ' + _unitUtils2.default.math.multiply($btnPaddingXSm, 0.75) + ';\n      padding-left: ' + _unitUtils2.default.math.multiply($btnPaddingXSm, 0.75) + ';\n    }\n    \n    & .btn-lg + .dropdown-toggle-split {\n      padding-right: ' + _unitUtils2.default.math.multiply($btnPaddingXLg, 0.75) + ';\n      padding-left: ' + _unitUtils2.default.math.multiply($btnPaddingXLg, 0.75) + ';\n    }\n    \n    \n    /* The clickable button for toggling the menu */\n    /* Remove the gradient and set the same inset shadow as the :active state */\n    &.btn-group.open .dropdown-toggle {\n      ' + (0, boxShadow_1.boxShadow)($enableShadows, $btnActiveBoxShadow) + '\n    \n      /* Show no shadow for .btn-link since it has no other button styles. */\n      &.btn-link {\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, 'none') + '\n      }\n    }\n\n    /*\n     Vertical button groups\n    */\n    \n    &.btn-group-vertical,\n    & .btn-group-vertical {\n      display: inline-flex;\n      flex-direction: column;\n      align-items: flex-start;\n      justify-content: center;\n    \n      .btn,\n      .btn-group {\n        width: 100%;\n      }\n      \n      > .btn + .btn,\n      > .btn + .btn-group,\n      > .btn-group + .btn,\n      > .btn-group + .btn-group {\n        margin-top: -' + $inputBtnBorderWidth + ';\n        margin-left: 0;\n      }\n    }\n    \n    &.btn-group-vertical > .btn,\n    & .btn-group-vertical > .btn {\n      &:not(:first-child):not(:last-child) {\n        border-radius: 0;\n      }\n      &:first-child:not(:last-child) {\n        ' + (0, borderRadius_1.borderBottomRadius)($enableRounded, '0') + '\n      }\n      &:last-child:not(:first-child) {\n        ' + (0, borderRadius_1.borderTopRadius)($enableRounded, '0') + '\n      }\n    }\n    \n    &.btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn,\n    & .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {\n      border-radius: 0;\n    }\n    \n    &.btn-group-vertical > .btn-group:first-child:not(:last-child),\n    & .btn-group-vertical > .btn-group:first-child:not(:last-child) {\n      > .btn:last-child,\n      > .dropdown-toggle {\n        ' + (0, borderRadius_1.borderBottomRadius)($enableRounded, '0') + '      \n      }\n    }\n    &.btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child,\n    & .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child {\n      ' + (0, borderRadius_1.borderTopRadius)($enableRounded, '0') + '\n    }\n    \n    &.btn-group {\n      > .btn,\n      > .btn-group > .btn {\n        input[type="radio"],\n        input[type="checkbox"] {\n          position: absolute;\n          clip: rect(0,0,0,0);\n          pointer-events: none;\n        }\n      }\n    }\n  ';
 }
 exports.default = {
   defaultProps: defaultProps,
@@ -9421,7 +9406,7 @@ var TetherContent = function (_React$Component) {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = TetherContent.__proto__ || Object.getPrototypeOf(TetherContent)).call.apply(_ref, [this].concat(args))), _this), _this.componentDidMount = function () {
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = TetherContent.__proto__ || Object.getPrototypeOf(TetherContent)).call.apply(_ref, [this].concat(args))), _this), _this.componentDidMount = function () {
       _this.handleProps();
     }, _this.componentDidUpdate = function (prevProps) {
       if (_this.props.isOpen !== prevProps.isOpen) {
@@ -9433,12 +9418,12 @@ var TetherContent = function (_React$Component) {
       _this.hide();
     }, _this.getTarget = function () {
       var target = _this.props.tether.target;
-      if (isFunction(target)) {
+      if (lodash_omit(target)) {
         return target();
       }
       return target;
     }, _this.getTetherConfig = function () {
-      var config = babelHelpers.extends({}, _this.props.tether);
+      var config = _extends({}, _this.props.tether);
       config.element = _this.element;
       config.target = _this.getTarget();
       return config;
@@ -9473,7 +9458,7 @@ var TetherContent = function (_React$Component) {
       _this.element.className = _this.props.className;
       document.body.appendChild(_this.element);
       _this.renderIntoSubtree();
-      _this.tether = new Tether(_this.getTetherConfig());
+      _this.tether = new tether(_this.getTetherConfig());
       if (_this.props.tetherRef) {
         _this.props.tetherRef(_this.tether);
       }
@@ -9490,7 +9475,7 @@ var TetherContent = function (_React$Component) {
           children = _this$props.children,
           style = _this$props.style;
       return React.cloneElement(children, { style: style });
-    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+    }, _temp), possibleConstructorReturn(_this, _ret);
   }
   createClass(TetherContent, [{
     key: 'render',
@@ -9537,29 +9522,29 @@ var defaultProps$12 = {
     '$dropdown-padding-y': '.5rem',
     '$dropdown-margin-top': '.125rem',
     '$dropdown-bg': '#fff',
-    '$dropdown-border-color': 'rgba(0, 0, 0, 0.15)',
-    '$dropdown-border-width': '1px',
-    '$dropdown-divider-bg': '#eceeef',
+    '$dropdown-border-color': '',
+    '$dropdown-border-width': '',
+    '$dropdown-divider-bg': '',
     '$dropdown-box-shadow': '0 .5rem 1rem rgba(#000,.175)',
-    '$dropdown-link-color': '#292b2c',
-    '$dropdown-link-hover-color': 'hsl(200, 3.5%, 15.8%)',
-    '$dropdown-link-hover-bg': '#f7f7f9',
-    '$dropdown-link-active-color': 'hsl(200, 3.5%, 15.8%)',
-    '$dropdown-link-active-bg': '#fff',
-    '$dropdown-link-disabled-color': '#636c72',
+    '$dropdown-link-color': '',
+    '$dropdown-link-hover-color': '',
+    '$dropdown-link-hover-bg': '',
+    '$dropdown-link-active-color': '',
+    '$dropdown-link-active-bg': '',
+    '$dropdown-link-disabled-color': '',
     '$dropdown-item-padding-x': '1.5rem',
-    '$dropdown-header-color': '#636c72',
-    '$input-btn-border-width': '1px',
+    '$dropdown-header-color': '',
+    '$input-btn-border-width': '',
     '$cursor-disabled': 'not-allowed',
     '$btn-padding-x': '1rem',
-    '$btn-active-box-shadow': 'inset 0 3px 5px rgba(0, 0, 0, 0.125)',
+    '$btn-active-box-shadow': '',
     '$btn-padding-x-lg': '1.5rem',
     '$btn-padding-y-lg': '.75rem',
-    '$btn-border-radius-lg': '.3rem',
-    '$btn-border-radius-sm': '.2rem',
+    '$btn-border-radius-lg': '',
+    '$btn-border-radius-sm': '',
     '$btn-padding-x-sm': '.5rem',
     '$btn-padding-y-sm': '.25rem',
-    '$input-height-lg': '3.5rem'
+    '$input-height-lg': ''
   }
 };
 var propTypes$13 = {
@@ -9632,7 +9617,7 @@ var DropdownUnstyled = function (_React$Component) {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = DropdownUnstyled.__proto__ || Object.getPrototypeOf(DropdownUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.getTetherConfig = function (childProps) {
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = DropdownUnstyled.__proto__ || Object.getPrototypeOf(DropdownUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.getTetherConfig = function (childProps) {
       var target = function target() {
         return _this.getTetherTarget();
       };
@@ -9648,7 +9633,7 @@ var DropdownUnstyled = function (_React$Component) {
         vElementAttach = 'bottom';
         vTargetAttach = 'top';
       }
-      return babelHelpers.extends({}, defaultTetherConfig, {
+      return _extends({}, defaultTetherConfig, {
         attachment: vElementAttach + ' ' + hElementAttach,
         targetAttachment: vTargetAttach + ' ' + hTargetAttach,
         target: target
@@ -9668,7 +9653,7 @@ var DropdownUnstyled = function (_React$Component) {
         return e && e.preventDefault();
       }
       return _this.props.toggle();
-    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+    }, _temp), possibleConstructorReturn(_this, _ret);
   }
   createClass(DropdownUnstyled, [{
     key: 'getChildContext',
@@ -9749,7 +9734,7 @@ var DropdownUnstyled = function (_React$Component) {
           attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'dropup', 'group', 'size', 'tag', 'isOpen']);
       var classes = mapToCssModules(classnames(className, (_cn = {
         'btn-group': group
-      }, babelHelpers.defineProperty(_cn, 'btn-group-' + size, !!size), babelHelpers.defineProperty(_cn, 'dropdown', !group), babelHelpers.defineProperty(_cn, 'show', isOpen), babelHelpers.defineProperty(_cn, 'dropup', dropup), _cn)), cssModule);
+      }, defineProperty(_cn, 'btn-group-' + size, !!size), defineProperty(_cn, 'dropdown', !group), defineProperty(_cn, 'show', isOpen), defineProperty(_cn, 'dropup', dropup), _cn)), cssModule);
       return React.createElement(
         Tag,
         _extends({}, attributes, {
@@ -10060,7 +10045,7 @@ function makeContainer() {
     var columns = [];
     Object.keys(gridGutterWidths).forEach(function (breakpoint) {
       var gutter = gridGutterWidths[breakpoint];
-      var column = (_breakpoints.mediaBreakpointUp)(breakpoint, gutter, '\n        padding-right: ' + _unitUtils2.default.rmUnit(gutter) / 2 + _unitUtils2.default.detectUnit(gutter) + ';\n        padding-left:  ' + _unitUtils2.default.rmUnit(gutter) / 2 + _unitUtils2.default.detectUnit(gutter) + ';\n      ');
+      var column = (0, breakpoints.mediaBreakpointUp)(breakpoint, gutter, '\n        padding-right: ' + _unitUtils2.default.rmUnit(gutter) / 2 + _unitUtils2.default.detectUnit(gutter) + ';\n        padding-left:  ' + _unitUtils2.default.rmUnit(gutter) / 2 + _unitUtils2.default.detectUnit(gutter) + ';\n      ');
       columns.push(column);
     });
     return '\n      position: relative;\n      margin-left: auto;\n      margin-right: auto;    \n      ' + columns.join('\n') + '\n    ';
@@ -10074,7 +10059,7 @@ function makeContainerMaxWidths() {
   if (enableGridClasses) {
     var maximumWidthList = [];
     Object.keys(containerMaxWidths).forEach(function (breakpoint) {
-      var maximumWidth = (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        width: ' + containerMaxWidths[breakpoint] + ';\n        max-width: 100%;\n      ');
+      var maximumWidth = (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        width: ' + containerMaxWidths[breakpoint] + ';\n        max-width: 100%;\n      ');
       maximumWidthList.push(maximumWidth);
     });
     return '\n      ' + maximumWidthList.join('\n') + '\n    ';
@@ -10088,7 +10073,7 @@ function makeGutters() {
   Object.keys(gridGutterWidths).forEach(function (breakpoint) {
     var gutterValue = gridGutterWidths[breakpoint];
     gutterValue = '' + _unitUtils2.default.rmUnit(gutterValue) / 2 + _unitUtils2.default.detectUnit(gutterValue);
-    var gutter = (_breakpoints.mediaBreakpointUp)(breakpoint, breakpoints$$2, '\n      padding-right: ' + gutterValue + ';\n      padding-left:  ' + gutterValue + ';\n    ');
+    var gutter = (0, breakpoints.mediaBreakpointUp)(breakpoint, breakpoints$$2, '\n      padding-right: ' + gutterValue + ';\n      padding-left:  ' + gutterValue + ';\n    ');
     gutterList.push(gutter);
   });
   return '\n    ' + gutterList.join('\n') + '\n  ';
@@ -10114,7 +10099,7 @@ function makeColReady() {
   Object.keys(gridGutterWidths).forEach(function (breakpoint) {
     var gutter = gridGutterWidths[breakpoint];
     gutter = '' + _unitUtils2.default.rmUnit(gutter) / 2 + _unitUtils2.default.detectUnit(gutter);
-    var colReady = (_breakpoints.mediaBreakpointUp)(breakpoint, gridGutterWidths, '\n      padding-right: ' + gutter + ';\n      padding-left:  ' + gutter + ';\n    ');
+    var colReady = (0, breakpoints.mediaBreakpointUp)(breakpoint, gridGutterWidths, '\n      padding-right: ' + gutter + ';\n      padding-left:  ' + gutter + ';\n    ');
     colReadyList.push(colReady);
   });
   return '\n    position: relative;\n    /* Prevent columns from becoming too narrow when at smaller grid tiers by */\n    /* always setting \'width: 100%;\'. This works because we use \'flex\' values */\n    /* later on to override this initial width. */\n    min-height: 1px; /* Prevent collapsing */\n    width: 100%;\n    ' + colReadyList.join('\n') + '\n  ';
@@ -10201,7 +10186,7 @@ var defaultProps = exports.defaultProps = {
 function getGridColumn() {
   var gridGutterWidths = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-gutter-widths'];
   var breakpoints$$2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
-  return '\n    position: relative;\n    width: 100%;\n    min-height: 1px; /* Prevent columns from collapsing when empty */\n    ' + (_grid.makeGutters)(gridGutterWidths, breakpoints$$2) + '\n  ';
+  return '\n    position: relative;\n    width: 100%;\n    min-height: 1px; /* Prevent columns from collapsing when empty */\n    ' + (0, grid.makeGutters)(gridGutterWidths, breakpoints$$2) + '\n  ';
 }
 function getColumnGridColumn() {
   var gridColumns = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-columns'];
@@ -10209,7 +10194,7 @@ function getColumnGridColumn() {
   var gridGutterWidths = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$grid-gutter-widths'];
   var breakpoint = arguments[3];
   var columnList = [];
-  var infix = (_breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
+  var infix = (0, breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
   for (var i = 1; i <= gridColumns; i += 1) {
     var column = '\n      &.col' + infix + '-' + i + ',\n       & .col' + infix + '-' + i + '{\n        ' + getGridColumn(gridGutterWidths, gridBreakpoints) + '\n      }\n    ';
     columnList.push(column);
@@ -10220,29 +10205,29 @@ function getMediaBreakpointUp() {
   var gridColumns = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-columns'];
   var gridBreakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
   var breakpoint = arguments[2];
-  var infix = (_breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
+  var infix = (0, breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
   var basic = '\n    &.col' + infix + ',\n     & .col' + infix + '{\n      flex-basis: 0;\n      flex-grow: 1;\n      max-width: 100%;\n    }\n    &.col' + infix + '-auto,\n     & .col' + infix + '-auto{\n      flex: 0 0 auto;\n      width: auto;\n    }\n  ';
   var columnList = [];
   for (var i = 1; i <= gridColumns; i += 1) {
-    var column = '\n      &.col' + infix + '-' + i + ',\n       & .col' + infix + '-' + i + '{\n        ' + (_grid.makeCol)(i, gridColumns) + '\n      }\n    ';
+    var column = '\n      &.col' + infix + '-' + i + ',\n       & .col' + infix + '-' + i + '{\n        ' + (0, grid.makeCol)(i, gridColumns) + '\n      }\n    ';
     columnList.push(column);
   }
   var modifierList = ['pull', 'push'];
   var columnModifierList = [];
   modifierList.forEach(function (modifier) {
     for (var _i = 0; _i <= gridColumns; _i += 1) {
-      var columnModifier = '\n        &.' + modifier + infix + '-' + _i + ',\n         & .' + modifier + infix + '-' + _i + '{\n          ' + (_grid.makeColModifier)(modifier, _i, gridColumns) + '\n        }\n      ';
+      var columnModifier = '\n        &.' + modifier + infix + '-' + _i + ',\n         & .' + modifier + infix + '-' + _i + '{\n          ' + (0, grid.makeColModifier)(modifier, _i, gridColumns) + '\n        }\n      ';
       columnModifierList.push(columnModifier);
     }
   });
   var offsetColumnList = [];
   for (var _i2 = 0; _i2 <= gridColumns - 1; _i2 += 1) {
     if (infix !== 1 || _i2 !== 0) {
-      var offsetColumn = '\n        &.offset' + infix + '-' + _i2 + ',\n         & .offset' + infix + '-' + _i2 + '{\n          ' + (_grid.makeColModifier)('offset', _i2, gridColumns) + '\n        }\n      ';
+      var offsetColumn = '\n        &.offset' + infix + '-' + _i2 + ',\n         & .offset' + infix + '-' + _i2 + '{\n          ' + (0, grid.makeColModifier)('offset', _i2, gridColumns) + '\n        }\n      ';
       offsetColumnList.push(offsetColumn);
     }
   }
-  return (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n    ' + basic + '\n    ' + columnList.join('\n') + '\n    ' + columnModifierList.join('\n') + '\n    ' + offsetColumnList.join('\n') + '\n  ');
+  return (0, breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n    ' + basic + '\n    ' + columnList.join('\n') + '\n    ' + columnModifierList.join('\n') + '\n    ' + offsetColumnList.join('\n') + '\n  ');
 }
 function makeGridColumns() {
   var enableGridClasses = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-grid-classes'];
@@ -10352,7 +10337,7 @@ var ColUnstyled = function (_React$Component) {
           var _cn;
           var colSizeInterfix = isXs ? '-' : '-' + colWidth + '-';
           colClass = getColumnSizeClass(isXs, colWidth, columnProp.size);
-          colClasses.push(mapToCssModules(classnames((_cn = {}, babelHelpers.defineProperty(_cn, colClass, columnProp.size || columnProp.size === ''), babelHelpers.defineProperty(_cn, 'push' + colSizeInterfix + columnProp.push, columnProp.push), babelHelpers.defineProperty(_cn, 'pull' + colSizeInterfix + columnProp.pull, columnProp.pull), babelHelpers.defineProperty(_cn, 'offset' + colSizeInterfix + columnProp.offset, columnProp.offset), _cn))), cssModule);
+          colClasses.push(mapToCssModules(classnames((_cn = {}, defineProperty(_cn, colClass, columnProp.size || columnProp.size === ''), defineProperty(_cn, 'push' + colSizeInterfix + columnProp.push, columnProp.push), defineProperty(_cn, 'pull' + colSizeInterfix + columnProp.pull, columnProp.pull), defineProperty(_cn, 'offset' + colSizeInterfix + columnProp.offset, columnProp.offset), _cn))), cssModule);
         } else {
           colClass = getColumnSizeClass(isXs, colWidth, columnProp);
           colClasses.push(colClass);
@@ -10414,10 +10399,10 @@ var Collapse = function (_Component) {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = Collapse.__proto__ || Object.getPrototypeOf(Collapse)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = Collapse.__proto__ || Object.getPrototypeOf(Collapse)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       collapse: HIDDEN,
       height: null
-    }, _this.element = null, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+    }, _this.element = null, _temp), possibleConstructorReturn(_this, _ret);
   }
   createClass(Collapse, [{
     key: 'componentWillMount',
@@ -11756,11 +11741,11 @@ convert.rgb.gray = function (rgb) {
 	return [val / 255 * 100];
 };
 });
-var models$1 = Object.keys(conversions$3);
+var models$1$1 = Object.keys(conversions$3);
 function buildGraph$1() {
 	var graph = {};
-	for (var len = models$1.length, i = 0; i < len; i++) {
-		graph[models$1[i]] = {
+	for (var len = models$1$1.length, i = 0; i < len; i++) {
+		graph[models$1$1[i]] = {
 			distance: -1,
 			parent: null
 		};
@@ -11818,7 +11803,7 @@ var route$3 = function (fromModel) {
 	return conversion;
 };
 var convert$2 = {};
-var models$1$1 = Object.keys(conversions$3);
+var models$2 = Object.keys(conversions$3);
 function wrapRaw$1(fn) {
 	var wrappedFn = function (args) {
 		if (args === undefined || args === null) {
@@ -11855,7 +11840,7 @@ function wrapRounded$1(fn) {
 	}
 	return wrappedFn;
 }
-models$1$1.forEach(function (fromModel) {
+models$2.forEach(function (fromModel) {
 	convert$2[fromModel] = {};
 	Object.defineProperty(convert$2[fromModel], 'channels', {value: conversions$3[fromModel].channels});
 	Object.defineProperty(convert$2[fromModel], 'labels', {value: conversions$3[fromModel].labels});
@@ -12346,12 +12331,11 @@ var defaultProps$23 = {
     '$enable-rounded': true,
     '$enable-shadows': true,
     $white: '#fff',
-    '$drawer-bg': '#fff',
+    '$drawer-bg': '$fff',
     '$drawer-transition': 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
     '$drawer-box-shadow': 'rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px',
     '$drawer-border-radius': '0px',
-    '$drawer-zindex': '1030',
-    '$drawer-docked-width': '55px'
+    '$drawer-zindex': '1030'
   }
 };
 var propTypes$26 = {
@@ -12361,7 +12345,6 @@ var propTypes$26 = {
   right: propTypes$1.string,
   bottom: propTypes$1.string,
   left: propTypes$1.string,
-  docked: propTypes$1.bool,
   theme: propTypes$1.shape({
     '$enable-rounded': propTypes$1.bool,
     '$enable-shadows': propTypes$1.bool,
@@ -12369,8 +12352,7 @@ var propTypes$26 = {
     '$drawer-transition': propTypes$1.string,
     '$drawer-box-shadow': propTypes$1.string,
     '$drawer-border-radius': propTypes$1.string,
-    '$drawer-zindex': propTypes$1.string,
-    '$drawer-docked-width': propTypes$1.string
+    '$drawer-zindex': propTypes$1.string
   }),
   cssModule: propTypes$1.object
 };
@@ -12390,10 +12372,9 @@ var DrawerUnstyled = function (_React$Component) {
           right = _omit.right,
           bottom = _omit.bottom,
           left = _omit.left,
-          docked = _omit.docked,
           cssModule = _omit.cssModule,
-          props = objectWithoutProperties(_omit, ['className', 'active', 'top', 'right', 'bottom', 'left', 'docked', 'cssModule']);
-      var classes = mapToCssModules(classnames(className, !docked ? 'drawer' : 'drawer-docked', {
+          props = objectWithoutProperties(_omit, ['className', 'active', 'top', 'right', 'bottom', 'left', 'cssModule']);
+      var classes = mapToCssModules(classnames(className, 'drawer', {
         active: active,
         'drawer-top': top,
         'drawer-right': right,
@@ -12410,7 +12391,7 @@ DrawerUnstyled.propTypes = propTypes$26;
 var Drawer = styled(DrawerUnstyled).withConfig({
   displayName: 'Drawer'
 })(['', ''], function (props) {
-  return '\n    &.drawer {\n      background-color: ' + props.theme['$drawer-bg'] + ';\n      transition: ' + props.theme['$drawer-transition'] + ';\n      position: fixed;\n      flex: 1 0 auto;\n      z-index: ' + props.theme['$drawer-zindex'] + ';\n      overflow-y: auto;\n      outline: none;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$drawer-border-radius']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$drawer-box-shadow']) + '\n      &.drawer-top {\n        ' + ifThen(props.top, '\n            left: 0;\n            top: 0;\n            width: 100%;\n            height: ' + props.top + ';\n            transform: translate(0px, -' + (props.top && unitUtils$1.math.addition(props.top, 4)) + ');\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-right {\n        ' + ifThen(props.right, '\n            bottom: 0;\n            right: 0;\n            height: 100%;\n            width: ' + props.right + ';\n            transform: translate(' + (props.right && unitUtils$1.math.addition(props.right, 4)) + ', 0px);\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-bottom {\n        ' + ifThen(props.bottom, '\n            left: 0;\n            bottom: 0;\n            width: 100%;\n            height: ' + props.bottom + ';\n            transform: translate(0px, ' + (props.bottom && unitUtils$1.math.addition(props.bottom, 4)) + ');\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-left {\n        ' + ifThen(props.left, '\n            bottom: 0;\n            left: 0;\n            height: 100%;\n            width: ' + props.left + ';\n            transform: translate(-' + (props.left && unitUtils$1.math.addition(props.left, 4)) + ', 0px);\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n    }\n    &.drawer-docked { \n      flex: 0 0 auto;\n      overflow: hidden;\n      &.drawer-left {\n        ' + ifThen(props.left, '\n          width: ' + props.theme['$drawer-docked-width'] + ';\n          transition: width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;\n          &.active {\n            width: ' + props.left + ';\n          }\n          ') + '\n      }\n    }\n  ';
+  return '\n    &.drawer {\n      background-color: ' + props.theme['$drawer-bg'] + ';\n      transition: ' + props.theme['$drawer-transition'] + ';\n      position: fixed;\n      z-index: ' + props.theme['$drawer-zindex'] + ';\n      overflow: auto;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$drawer-border-radius']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$drawer-box-shadow']) + '\n      &.drawer-top {\n        ' + ifThen(props.top, '\n            left: 0;\n            top: 0;\n            width: 100%;\n            height: ' + props.top + ';\n            transform: translate(0px, -' + (props.top && unitUtils$1.math.addition(props.top, 4)) + ');\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-right {\n        ' + ifThen(props.right, '\n            bottom: 0;\n            right: 0;\n            height: 100%;\n            width: ' + props.right + ';\n            transform: translate(' + (props.right && unitUtils$1.math.addition(props.right, 4)) + ', 0px);\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-bottom {\n        ' + ifThen(props.bottom, '\n            left: 0;\n            bottom: 0;\n            width: 100%;\n            height: ' + props.bottom + ';\n            transform: translate(0px, ' + (props.bottom && unitUtils$1.math.addition(props.bottom, 4)) + ');\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-left {\n        ' + ifThen(props.left, '\n            bottom: 0;\n            left: 0;\n            height: 100%;\n            width: ' + props.left + ';\n            transform: translate(-' + (props.left && unitUtils$1.math.addition(props.left, 4)) + ', 0px);\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n    }\n  ';
 });
 Drawer.propTypes = propTypes$26;
 Drawer.defaultProps = defaultProps$23;
@@ -12491,7 +12472,7 @@ var FaUnstyled = function (_React$Component) {
           size = _props.size,
           color = _props.color,
           attributes = objectWithoutProperties(_props, ['className', 'size', 'color']);
-      var classes = classnames(className, 'fa', (_cn = {}, babelHelpers.defineProperty(_cn, 'text-' + color, color), babelHelpers.defineProperty(_cn, 'fa-' + size, size), _cn));
+      var classes = classnames(className, 'fa', (_cn = {}, defineProperty(_cn, 'text-' + color, color), defineProperty(_cn, 'fa-' + size, size), _cn));
       return React.createElement('i', {
         className: classnames(classes, Object.keys(attributes).map(function (key) {
           return 'fa-' + key;
@@ -13143,9 +13124,9 @@ function navbarToggleable() {
   var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-breakpoints'];
   var navbarBreakpointList = [];
   Object.keys(gridBreakpoints).forEach(function (breakpoint) {
-    var next = (_breakpoints.breakpointNext)(breakpoint, gridBreakpoints);
-    var infix = (_breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
-    var navbarBreakpoint = '\n      &.navbar-toggleable' + infix + ' {\n        ' + (_breakpoints.mediaBreakpointDown)(breakpoint, gridBreakpoints, '\n          .navbar-nav {\n            .dropdown-menu {\n              position: static;\n              float: none;\n            }\n          }\n\n          > .container {\n            padding-right: 0;\n            padding-left: 0;\n          }\n        ') + '\n        ' + (_breakpoints.mediaBreakpointUp)(next, gridBreakpoints, '\n          flex-direction: row;\n          flex-wrap: nowrap;\n          align-items: center;\n  \n          .navbar-nav {\n            flex-direction: row;\n  \n            .nav-link {\n              padding-right: .5rem;\n              padding-left: .5rem;\n            }\n          }\n  \n          /* For nesting containers, have to redeclare for alignment purposes */\n          > .container {\n            display: flex;\n            flex-wrap: nowrap;\n            align-items: center;\n          }\n  \n          .navbar-collapse {\n            display: flex !important;\n            width: 100%;\n\n           }\n           \n          .navbar-toggler {\n            display: none;\n          }\n        ') + '\n      }\n    ';
+    var next = (0, breakpoints.breakpointNext)(breakpoint, gridBreakpoints);
+    var infix = (0, breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
+    var navbarBreakpoint = '\n      &.navbar-toggleable' + infix + ' {\n        ' + (0, breakpoints.mediaBreakpointDown)(breakpoint, gridBreakpoints, '\n          .navbar-nav {\n            .dropdown-menu {\n              position: static;\n              float: none;\n            }\n          }\n\n          > .container {\n            padding-right: 0;\n            padding-left: 0;\n          }\n        ') + '\n        ' + (0, breakpoints.mediaBreakpointUp)(next, gridBreakpoints, '\n          flex-direction: row;\n          flex-wrap: nowrap;\n          align-items: center;\n  \n          .navbar-nav {\n            flex-direction: row;\n  \n            .nav-link {\n              padding-right: .5rem;\n              padding-left: .5rem;\n            }\n          }\n  \n          /* For nesting containers, have to redeclare for alignment purposes */\n          > .container {\n            display: flex;\n            flex-wrap: nowrap;\n            align-items: center;\n          }\n  \n          .navbar-collapse {\n            display: flex !important;\n            width: 100%;\n\n           }\n           \n          .navbar-toggler {\n            display: none;\n          }\n        ') + '\n      }\n    ';
     navbarBreakpointList.push(navbarBreakpoint);
   });
   return '\n    ' + navbarBreakpointList.join('\n') + '\n  ';
@@ -13229,7 +13210,7 @@ function navbar() {
   var $navbarInverseTogglerBorder = arguments.length > 25 && arguments[25] !== undefined ? arguments[25] : defaultProps['$navbar-inverse-toggler-border'];
   var $navbarInverseTogglerBg = arguments.length > 26 && arguments[26] !== undefined ? arguments[26] : defaultProps['$navbar-inverse-toggler-bg'];
   var $navbarInverseDisabledColor = arguments.length > 27 && arguments[27] !== undefined ? arguments[27] : defaultProps['$navbar-inverse-disabled-color'];
-  return '\n    /* Wrapper and base class\n\n     Provide a static navbar from which we expand to create full-width, fixed, and\n     other navbar variations.\n    */\n\n    &.navbar {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      padding: ' + $navbarPaddingY + ' ' + $navbarPaddingX + ';\n    }\n    \n    /*\n     Brand/project name\n    */\n\n    & .navbar-brand {\n      display: inline-block;\n      padding-top: ' + $navbarBrandPaddingY + ';\n      padding-bottom: ' + $navbarBrandPaddingY + ';\n      margin-right: ' + $navbarPaddingX + ';\n      font-size: ' + $fontSizeLg + ';\n      line-height: inherit;\n      white-space: nowrap;\n      ' + (_hover.hoverFocus)($enableHoverMediaQuery, 'text-decoration: none;') + '\n    }\n    \n    /* Navigation\n\n     Custom navbar navigation built on the base .nav styles.\n    */\n\n    &.navbar-nav,\n    & .navbar-nav {\n      display: flex;\n      flex-direction: column; /* cannot use inherit to get the .navbars value */\n      padding-left: 0;\n      margin-bottom: 0;\n      list-style: none;\n    \n      .nav-link {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n    \n    /* Navbar text  */\n\n    & .navbar-text {\n      display: inline-block;\n      padding-top:    .425rem;\n      padding-bottom: .425rem;\n    }\n\n\n    /* Navbar toggle\n\n     Custom button for toggling the .navbar-collapse, powered by the collapse\n     Bootstrap JavaScript plugin.\n    */\n\n    & .navbar-toggler {\n      align-self: flex-start; \n      padding: ' + $navbarTogglerPaddingY + ' ' + $navbarTogglerPaddingX + ';\n      font-size: ' + $navbarTogglerFontSize + ';\n      line-height: 1;\n      background: transparent;\n      border: ' + $borderWidth + ' solid transparent;\n      ' + (_borderRadius.borderRadius)($enableRounded, $navbarTogglerBorderRadius) + '\n      ' + (_hover.hoverFocus)($enableHoverMediaQuery, 'text-decoration: none;') + '\n    }\n    \n    /* Keep as a separate element so folks can easily override it with another icon or image file as needed. */\n    & .navbar-toggler-icon {\n      display: inline-block;\n      width: 1.5em;\n      height: 1.5em;\n      vertical-align: middle;\n      content: "";\n      background: no-repeat center center;\n      background-size: 100% 100%;\n    }\n    \n    /* Use position on the toggler to prevent it from being auto placed as a flex item and allow easy placement. */\n    & .navbar-toggler-left {\n      position: absolute;\n      left: ' + $navbarPaddingX + ';\n    }\n    & .navbar-toggler-right {\n      position: absolute;\n      right: ' + $navbarPaddingX + ';\n    }\n\n    /* Dark links against a light background */\n    &.navbar-light {\n      .navbar-brand,\n      .navbar-toggler {\n        color: ' + $navbarLightActiveColor + ';\n\n        ' + (_hover.hoverFocus)($enableHoverMediaQuery, 'color: ' + $navbarLightActiveColor + ';') + '\n      }\n\n      .navbar-nav {\n        .nav-link {\n          color: ' + $navbarLightColor + ';\n          ' + (_hover.hoverFocus)($enableHoverMediaQuery, 'color: ' + $navbarLightHoverColor + ';') + '\n          &.disabled {\n            color: ' + $navbarLightDisabledColor + ';\n          }\n        }\n\n        .open > .nav-link,\n        .active > .nav-link,\n        .nav-link.open,\n        .nav-link.active {\n          color: ' + $navbarLightActiveColor + ';\n        }\n      }\n\n      .navbar-toggler {\n        border-color: ' + $navbarLightTogglerBorder + ';\n      }\n      .navbar-toggler-icon {\n        background-image: ' + $navbarLightTogglerBg + ';\n      }\n  \n      .navbar-text {\n        color: ' + $navbarLightColor + ';\n      }\n    }\n      \n\n    /* White links against a dark background */\n    &.navbar-inverse {\n      .navbar-brand,\n      .navbar-toggler {\n        color: ' + $navbarInverseActiveColor + ';\n        ' + (_hover.hoverFocus)($enableHoverMediaQuery, 'color: ' + $navbarInverseActiveColor + ';') + '\n      }\n\n      .navbar-nav {\n        .nav-link {\n          color: ' + $navbarInverseColor + ';\n          ' + (_hover.hoverFocus)($enableHoverMediaQuery, 'color: ' + $navbarInverseHoverColor + ';') + '\n          &.disabled {\n            color: ' + $navbarInverseDisabledColor + ';\n          }\n        }\n\n        .open > .nav-link,\n        .active > .nav-link,\n        .nav-link.open,\n        .nav-link.active {\n          color: ' + $navbarInverseActiveColor + ';\n        }\n      }\n\n      .navbar-toggler {\n        border-color: ' + $navbarInverseTogglerBorder + ';\n      }\n      \n      .navbar-toggler-icon {\n        background-image: ' + $navbarInverseTogglerBg + ';\n      }\n    \n      .navbar-text {\n        color: ' + $navbarInverseColor + ';\n      }\n    }\n    \n\n    ' + (_navbarToggleable.navbarToggleable)($gridBreakpoints) + '\n    \n    /* DELETED IN LATEST BOOTSTRAP VERSINO */\n    \n    /* Navbar alignment options\n\n     Display the navbar across the entirety of the page or fixed it to the top or\n     bottom of the page.\n    */\n\n    /* A static, full width modifier with no rounded corners. */\n    &.navbar-full {\n      z-index: ' + $zindexNavbar + ';\n      ' + (_breakpoints.mediaBreakpointUp)('sm', $gridBreakpoints, (_borderRadius.borderRadius)($enableRounded, '0')) + '\n    }\n\n      /* Fix the top/bottom navbars when screen real estate supports it */\n    &.navbar-fixed-top,\n    &.navbar-fixed-bottom {\n      position: fixed;\n      right: 0;\n      left: 0;\n      z-index: ' + $zindexNavbarFixed + ';\n      /*  Undo the rounded corners */\n      ' + (_breakpoints.mediaBreakpointUp)('sm', $gridBreakpoints, (_borderRadius.borderRadius)($enableRounded, '0')) + '\n    }\n\n    &.navbar-fixed-top {\n      top: 0;\n    }\n\n    &.navbar-fixed-bottom {\n      bottom: 0;\n    }\n\n    /* position sticky does not seem to be working AJT*/\n\n    &.navbar-sticky-top {\n      position: sticky;\n      top: 0;\n      z-index: ' + $zindexNavbarSticky + ';\n      width: 100%;\n\n        /*  Undo the rounded corners */\n      ' + (_breakpoints.mediaBreakpointUp)('sm', $gridBreakpoints, (_borderRadius.borderRadius)($enableRounded, '0')) + '\n    }\n\n    & .navbar-divider {\n      float: left;\n      width: ' + $borderWidth + ';\n      padding-top: ' + $navbarDividerPaddingY + ';\n      padding-bottom: ' + $navbarDividerPaddingY + ';\n      margin-right: ' + $navbarPaddingX + ';\n      margin-left:  ' + $navbarPaddingX + ';\n      overflow: hidden;\n\n      &::before {\n        content: \'\0a0\';\n      }\n    }\n  ';
+  return '\n    /* Wrapper and base class\n\n     Provide a static navbar from which we expand to create full-width, fixed, and\n     other navbar variations.\n    */\n\n    &.navbar {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      padding: ' + $navbarPaddingY + ' ' + $navbarPaddingX + ';\n    }\n    \n    /*\n     Brand/project name\n    */\n\n    & .navbar-brand {\n      display: inline-block;\n      padding-top: ' + $navbarBrandPaddingY + ';\n      padding-bottom: ' + $navbarBrandPaddingY + ';\n      margin-right: ' + $navbarPaddingX + ';\n      font-size: ' + $fontSizeLg + ';\n      line-height: inherit;\n      white-space: nowrap;\n      ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'text-decoration: none;') + '\n    }\n    \n    /* Navigation\n\n     Custom navbar navigation built on the base .nav styles.\n    */\n\n    &.navbar-nav,\n    & .navbar-nav {\n      display: flex;\n      flex-direction: column; /* cannot use inherit to get the .navbars value */\n      padding-left: 0;\n      margin-bottom: 0;\n      list-style: none;\n    \n      .nav-link {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n    \n    /* Navbar text  */\n\n    & .navbar-text {\n      display: inline-block;\n      padding-top:    .425rem;\n      padding-bottom: .425rem;\n    }\n\n\n    /* Navbar toggle\n\n     Custom button for toggling the .navbar-collapse, powered by the collapse\n     Bootstrap JavaScript plugin.\n    */\n\n    & .navbar-toggler {\n      align-self: flex-start; \n      padding: ' + $navbarTogglerPaddingY + ' ' + $navbarTogglerPaddingX + ';\n      font-size: ' + $navbarTogglerFontSize + ';\n      line-height: 1;\n      background: transparent;\n      border: ' + $borderWidth + ' solid transparent;\n      ' + (0, borderRadius_1.borderRadius)($enableRounded, $navbarTogglerBorderRadius) + '\n      ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'text-decoration: none;') + '\n    }\n    \n    /* Keep as a separate element so folks can easily override it with another icon or image file as needed. */\n    & .navbar-toggler-icon {\n      display: inline-block;\n      width: 1.5em;\n      height: 1.5em;\n      vertical-align: middle;\n      content: "";\n      background: no-repeat center center;\n      background-size: 100% 100%;\n    }\n    \n    /* Use position on the toggler to prevent it from being auto placed as a flex item and allow easy placement. */\n    & .navbar-toggler-left {\n      position: absolute;\n      left: ' + $navbarPaddingX + ';\n    }\n    & .navbar-toggler-right {\n      position: absolute;\n      right: ' + $navbarPaddingX + ';\n    }\n\n    /* Dark links against a light background */\n    &.navbar-light {\n      .navbar-brand,\n      .navbar-toggler {\n        color: ' + $navbarLightActiveColor + ';\n\n        ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'color: ' + $navbarLightActiveColor + ';') + '\n      }\n\n      .navbar-nav {\n        .nav-link {\n          color: ' + $navbarLightColor + ';\n          ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'color: ' + $navbarLightHoverColor + ';') + '\n          &.disabled {\n            color: ' + $navbarLightDisabledColor + ';\n          }\n        }\n\n        .open > .nav-link,\n        .active > .nav-link,\n        .nav-link.open,\n        .nav-link.active {\n          color: ' + $navbarLightActiveColor + ';\n        }\n      }\n\n      .navbar-toggler {\n        border-color: ' + $navbarLightTogglerBorder + ';\n      }\n      .navbar-toggler-icon {\n        background-image: ' + $navbarLightTogglerBg + ';\n      }\n  \n      .navbar-text {\n        color: ' + $navbarLightColor + ';\n      }\n    }\n      \n\n    /* White links against a dark background */\n    &.navbar-inverse {\n      .navbar-brand,\n      .navbar-toggler {\n        color: ' + $navbarInverseActiveColor + ';\n        ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'color: ' + $navbarInverseActiveColor + ';') + '\n      }\n\n      .navbar-nav {\n        .nav-link {\n          color: ' + $navbarInverseColor + ';\n          ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'color: ' + $navbarInverseHoverColor + ';') + '\n          &.disabled {\n            color: ' + $navbarInverseDisabledColor + ';\n          }\n        }\n\n        .open > .nav-link,\n        .active > .nav-link,\n        .nav-link.open,\n        .nav-link.active {\n          color: ' + $navbarInverseActiveColor + ';\n        }\n      }\n\n      .navbar-toggler {\n        border-color: ' + $navbarInverseTogglerBorder + ';\n      }\n      \n      .navbar-toggler-icon {\n        background-image: ' + $navbarInverseTogglerBg + ';\n      }\n    \n      .navbar-text {\n        color: ' + $navbarInverseColor + ';\n      }\n    }\n    \n\n    ' + (0, navbarToggleable_1.navbarToggleable)($gridBreakpoints) + '\n    \n    /* DELETED IN LATEST BOOTSTRAP VERSINO */\n    \n    /* Navbar alignment options\n\n     Display the navbar across the entirety of the page or fixed it to the top or\n     bottom of the page.\n    */\n\n    /* A static, full width modifier with no rounded corners. */\n    &.navbar-full {\n      z-index: ' + $zindexNavbar + ';\n      ' + (0, breakpoints.mediaBreakpointUp)('sm', $gridBreakpoints, (0, borderRadius_1.borderRadius)($enableRounded, '0')) + '\n    }\n\n      /* Fix the top/bottom navbars when screen real estate supports it */\n    &.navbar-fixed-top,\n    &.navbar-fixed-bottom {\n      position: fixed;\n      right: 0;\n      left: 0;\n      z-index: ' + $zindexNavbarFixed + ';\n      /*  Undo the rounded corners */\n      ' + (0, breakpoints.mediaBreakpointUp)('sm', $gridBreakpoints, (0, borderRadius_1.borderRadius)($enableRounded, '0')) + '\n    }\n\n    &.navbar-fixed-top {\n      top: 0;\n    }\n\n    &.navbar-fixed-bottom {\n      bottom: 0;\n    }\n\n    /* position sticky does not seem to be working AJT*/\n\n    &.navbar-sticky-top {\n      position: sticky;\n      top: 0;\n      z-index: ' + $zindexNavbarSticky + ';\n      width: 100%;\n\n        /*  Undo the rounded corners */\n      ' + (0, breakpoints.mediaBreakpointUp)('sm', $gridBreakpoints, (0, borderRadius_1.borderRadius)($enableRounded, '0')) + '\n    }\n\n    & .navbar-divider {\n      float: left;\n      width: ' + $borderWidth + ';\n      padding-top: ' + $navbarDividerPaddingY + ';\n      padding-bottom: ' + $navbarDividerPaddingY + ';\n      margin-right: ' + $navbarPaddingX + ';\n      margin-left:  ' + $navbarPaddingX + ';\n      overflow: hidden;\n\n      &::before {\n        content: \'\0a0\';\n      }\n    }\n  ';
 }
 exports.default = {
   defaultProps: defaultProps,
@@ -13741,13 +13722,13 @@ function formControl() {
   var $inputColorPlaceholder = arguments.length > 19 && arguments[19] !== undefined ? arguments[19] : defaultProps['$input-color-placeholder'];
   var $inputBgDisabled = arguments.length > 20 && arguments[20] !== undefined ? arguments[20] : defaultProps['$input-bg-disabled'];
   var $cursorDisabled = arguments.length > 21 && arguments[21] !== undefined ? arguments[21] : defaultProps['$cursor-disabled'];
-  return '\n      & .form-control {\n        display: block;\n        width: 100%;\n  \n        /* Make inputs at least the height of their button counterpart (base line-height + padding + border) */\n        /* height: ' + $inputHeight + '; */\n  \n        padding: ' + $inputPaddingY + ' ' + $inputPaddingX + ';\n        font-size: ' + $fontSizeBase + ';\n        line-height: ' + $inputLineHeight + ';\n        color: ' + $inputColor + ';\n        background-color: ' + $inputBg + ';\n  \n        /* Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214. */\n        background-image: none;\n        background-clip: padding-box;\n        /* Note: This has no effect on selects in some browsers, due to the limited stylability of selects in CSS. */\n        ' + ($enableRounded ? 'border-radius: ' + $inputBorderRadius + ';' : 'border-radius: 0;') + ' /* Manually use the if/else instead of the mixin to account for iOS override */\n        border: ' + $inputBtnBorderWidth + ' solid ' + $inputBorderColor + ';\n        ' + (_transition.transition)($enableTransitions, $inputTransition) + '\n        ' + (_boxShadow.boxShadow)($enableShadows, $inputBoxShadow) + '\n  \n        /* Unstyle the caret on selects in IE10+. */\n        &::-ms-expand {\n          background-color: transparent;\n          border: 0;\n        }\n  \n        /* Customize the :focus state to imitate native WebKit styles. */\n        ' + formControlFocus($enableShadows, $inputColorFocus, $inputBgFocus, $inputBorderFocus, $inputBoxShadowFocus) + '\n  \n        /* Placeholder */\n        &::placeholder {\n          color: ' + $inputColorPlaceholder + ';\n          /* Override Firefox unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526. */\n          opacity: 1;\n        }\n  \n        /* Disabled and read-only inputs\n         HTML5 says that controls under a fieldset > legend:first-child will not be\n         disabled if the fieldset is disabled. Due to implementation difficulty, we\n         do not honor that edge case; we style them as disabled anyway.\n         */\n  \n        &:disabled,\n        &[readonly] {\n          background-color:' + $inputBgDisabled + ';\n          /* iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655. */\n          opacity: 1;\n        }\n  \n        &:disabled {\n          cursor: ' + $cursorDisabled + ';\n        }\n      }\n  ';
+  return '\n      & .form-control {\n        display: block;\n        width: 100%;\n  \n        /* Make inputs at least the height of their button counterpart (base line-height + padding + border) */\n        /* height: ' + $inputHeight + '; */\n  \n        padding: ' + $inputPaddingY + ' ' + $inputPaddingX + ';\n        font-size: ' + $fontSizeBase + ';\n        line-height: ' + $inputLineHeight + ';\n        color: ' + $inputColor + ';\n        background-color: ' + $inputBg + ';\n  \n        /* Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214. */\n        background-image: none;\n        background-clip: padding-box;\n        /* Note: This has no effect on selects in some browsers, due to the limited stylability of selects in CSS. */\n        ' + ($enableRounded ? 'border-radius: ' + $inputBorderRadius + ';' : 'border-radius: 0;') + ' /* Manually use the if/else instead of the mixin to account for iOS override */\n        border: ' + $inputBtnBorderWidth + ' solid ' + $inputBorderColor + ';\n        ' + (0, transition_1$1.transition)($enableTransitions, $inputTransition) + '\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $inputBoxShadow) + '\n  \n        /* Unstyle the caret on selects in IE10+. */\n        &::-ms-expand {\n          background-color: transparent;\n          border: 0;\n        }\n  \n        /* Customize the :focus state to imitate native WebKit styles. */\n        ' + formControlFocus($enableShadows, $inputColorFocus, $inputBgFocus, $inputBorderFocus, $inputBoxShadowFocus) + '\n  \n        /* Placeholder */\n        &::placeholder {\n          color: ' + $inputColorPlaceholder + ';\n          /* Override Firefox unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526. */\n          opacity: 1;\n        }\n  \n        /* Disabled and read-only inputs\n         HTML5 says that controls under a fieldset > legend:first-child will not be\n         disabled if the fieldset is disabled. Due to implementation difficulty, we\n         do not honor that edge case; we style them as disabled anyway.\n         */\n  \n        &:disabled,\n        &[readonly] {\n          background-color:' + $inputBgDisabled + ';\n          /* iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655. */\n          opacity: 1;\n        }\n  \n        &:disabled {\n          cursor: ' + $cursorDisabled + ';\n        }\n      }\n  ';
 }
 function formControlValidation() {
   var enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-shadows'];
   var formColor = arguments[1];
   var inputBoxShadow = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$input-box-shadow'];
-  return '\n    /* Color the label and help text */\n    & .form-control-feedback,\n    & .form-control-label,\n    & .col-form-label,\n    & .form-check-label,\n    & .custom-control {\n      color: ' + formColor + ';\n    }\n  \n    /* Set the border and box shadow on specific inputs to match */\n      \n    & .form-control,\n    & .custom-select,\n    & .custom-file-control {\n      border-color: ' + formColor + ';\n  \n      &:focus {\n        ' + (_boxShadow.boxShadow)(enableShadows, inputBoxShadow + ', 0 0 6px ' + (_color2.default)(formColor).lighten(0.2).toString()) + '\n      }\n    }\n  \n    /* Set validation states also for addons */\n    .input-group-addon {\n      color: ' + formColor + ';\n      border-color: ' + formColor + ';\n      background-color: ' + (_color2.default)(formColor).lighten(0.40).toString() + ';\n    }\n  ';
+  return '\n    /* Color the label and help text */\n    & .form-control-feedback,\n    & .form-control-label,\n    & .col-form-label,\n    & .form-check-label,\n    & .custom-control {\n      color: ' + formColor + ';\n    }\n  \n    /* Set the border and box shadow on specific inputs to match */\n      \n    & .form-control,\n    & .custom-select,\n    & .custom-file-control {\n      border-color: ' + formColor + ';\n  \n      &:focus {\n        ' + (0, boxShadow_1.boxShadow)(enableShadows, inputBoxShadow + ', 0 0 6px ' + (0, _color2.default)(formColor).lighten(0.2).toString()) + '\n      }\n    }\n  \n    /* Set validation states also for addons */\n    .input-group-addon {\n      color: ' + formColor + ';\n      border-color: ' + formColor + ';\n      background-color: ' + (0, _color2.default)(formColor).lighten(0.40).toString() + ';\n    }\n  ';
 }
 function formControlFocus() {
   var enableShadows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-shadows'];
@@ -13755,7 +13736,7 @@ function formControlFocus() {
   var inputBgFocus = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$input-bg-focus'];
   var inputBorderFocus = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$input-border-focus'];
   var inputBoxShadowFocus = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$input-box-shadow-focus'];
-  return '\n    &:focus {\n      color: ' + inputColorFocus + ';\n      background-color: ' + inputBgFocus + ';\n      border-color: ' + inputBorderFocus + ';\n      outline: none;\n      ' + (_boxShadow.boxShadow)(enableShadows, inputBoxShadowFocus) + '\n    }\n  ';
+  return '\n    &:focus {\n      color: ' + inputColorFocus + ';\n      background-color: ' + inputBgFocus + ';\n      border-color: ' + inputBorderFocus + ';\n      outline: none;\n      ' + (0, boxShadow_1.boxShadow)(enableShadows, inputBoxShadowFocus) + '\n    }\n  ';
 }
 function inputSize() {
   var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
@@ -13766,7 +13747,7 @@ function inputSize() {
   var fontSize = arguments[5];
   var lineHeight = arguments[6];
   var inputBorderRadius = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$input-border-radius'];
-  return '\n    ' + parent + ' {\n      height: ' + inputHeight + ';\n      padding: ' + paddingY + ' ' + paddingX + ';\n      font-size: ' + fontSize + ';\n      line-height: ' + lineHeight + ';\n      ' + (_borderRadius.borderRadius)(enableRounded, inputBorderRadius) + '\n    }\n  \n    select' + parent + ' {\n      height: ' + inputHeight + ';\n      line-height: ' + inputHeight + ';\n    }\n  \n    textarea' + parent + ',\n      select[multiple]' + parent + ' {\n      height: auto;\n    }\n  ';
+  return '\n    ' + parent + ' {\n      height: ' + inputHeight + ';\n      padding: ' + paddingY + ' ' + paddingX + ';\n      font-size: ' + fontSize + ';\n      line-height: ' + lineHeight + ';\n      ' + (0, borderRadius_1.borderRadius)(enableRounded, inputBorderRadius) + '\n    }\n  \n    select' + parent + ' {\n      height: ' + inputHeight + ';\n      line-height: ' + inputHeight + ';\n    }\n  \n    textarea' + parent + ',\n      select[multiple]' + parent + ' {\n      height: auto;\n    }\n  ';
 }
 exports.default = {
   defaultProps: defaultProps,
@@ -14157,66 +14138,7 @@ var propTypes$46 = {
 };
 var defaultProps$42 = {
   tag: 'label',
-  theme: {
-    '$enable-rounded': true,
-    '$enable-shadows': false,
-    '$enable-hover-media-query': false,
-    '$enable-transitions': true,
-    '$brand-primary': '#0275d8',
-    '$brand-success': '#5cb85c',
-    '$brand-info': '#5bc0de',
-    '$brand-warning': '#f0ad4e',
-    '$brand-danger': '#d9534f',
-    '$border-width': '1px',
-    '$font-size-base': '1rem',
-    '$font-size-lg': '1.25rem',
-    '$font-size-sm': '.875rem',
-    '$font-size-xs': '.75rem',
-    '$font-weight-normal': 'normal',
-    '$border-radius': '.25rem',
-    '$border-radius-lg': '.3rem',
-    '$border-radius-sm': '.2rem',
-    '$link-color': '#0275d8',
-    '$link-hover-color': 'hsl(207.79999999999995, 98.2%, 27.8%)',
-    '$link-hover-decoration': 'underline',
-    '$input-btn-border-width': '1px',
-    '$cursor-disabled': 'not-allowed',
-    '$btn-padding-x': '1rem',
-    '$btn-padding-y': '.5rem',
-    '$btn-padding-x-lg': '1.5rem',
-    '$btn-padding-y-lg': '.75rem',
-    '$btn-padding-x-sm': '.5rem',
-    '$btn-padding-y-sm': '.25rem',
-    '$btn-line-height': '1.25',
-    '$btn-primary-color': '#fff',
-    '$btn-primary-bg': '#0275d8',
-    '$btn-primary-border': '#0275d8',
-    '$btn-secondary-color': '#292b2c',
-    '$btn-secondary-bg': '#fff',
-    '$btn-secondary-border': '#ccc',
-    '$btn-info-color': '#fff',
-    '$btn-info-bg': '#5bc0de',
-    '$btn-info-border': '#5bc0de',
-    '$btn-success-color': '#fff',
-    '$btn-success-bg': '#5cb85c',
-    '$btn-success-border': '#5cb85c',
-    '$btn-warning-color': '#fff',
-    '$btn-warning-bg': '#f0ad4e',
-    '$btn-warning-border': '#f0ad4e',
-    '$btn-danger-color': '#fff',
-    '$btn-danger-bg': '#d9534f',
-    '$btn-danger-border': '#d9534f',
-    '$btn-font-weight': 'normal',
-    '$btn-transition': 'all .2s ease-in-out',
-    '$btn-border-radius-lg': '.3rem',
-    '$btn-border-radius-sm': '.2rem',
-    '$btn-border-radius': '.25rem',
-    '$btn-box-shadow': 'inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075)',
-    '$btn-focus-box-shadow': '0 0 0 2px rgba(2, 117, 216, 0.25)',
-    '$btn-active-box-shadow': 'inset 0 3px 5px rgba(0, 0, 0, 0.125)',
-    '$btn-link-disabled-color': '#636c72',
-    '$btn-block-spacing-y': '.5rem'
-  }
+  theme: makeTheme$36()
 };
 var LabelUnstyled = function LabelUnstyled(props) {
   var _omit = lodash_omit(props, ['theme']),
@@ -14236,7 +14158,7 @@ var LabelUnstyled = function LabelUnstyled(props) {
     delete attributes[colSize];
     if (columnProp && columnProp.size) {
       var _cn;
-      colClasses.push(mapToCssModules(classnames((_cn = {}, babelHelpers.defineProperty(_cn, 'col-' + colSize + '-' + columnProp.size, columnProp.size), babelHelpers.defineProperty(_cn, 'push-' + colSize + '-' + columnProp.push, columnProp.push), babelHelpers.defineProperty(_cn, 'pull-' + colSize + '-' + columnProp.pull, columnProp.pull), babelHelpers.defineProperty(_cn, 'offset-' + colSize + '-' + columnProp.offset, columnProp.offset), _cn))), cssModule);
+      colClasses.push(mapToCssModules(classnames((_cn = {}, defineProperty(_cn, 'col-' + colSize + '-' + columnProp.size, columnProp.size), defineProperty(_cn, 'push-' + colSize + '-' + columnProp.push, columnProp.push), defineProperty(_cn, 'pull-' + colSize + '-' + columnProp.pull, columnProp.pull), defineProperty(_cn, 'offset-' + colSize + '-' + columnProp.offset, columnProp.offset), _cn))), cssModule);
     } else if (columnProp) {
       colClasses.push('col-' + colSize + '-' + columnProp);
     }
@@ -14352,7 +14274,7 @@ function listGroupItemVariant() {
   var state = arguments[1];
   var background = arguments[2];
   var listColor = arguments[3];
-  return '\n    & .list-group-item-' + state + ' {\n      color: ' + listColor + ';\n      background-color: ' + background + ';\n    }\n  \n    & a.list-group-item-' + state + ',\n    button.list-group-item-' + state + ' {\n      color: ' + listColor + ';\n  \n      .list-group-item-heading {\n        color: inherit;\n      }\n  \n      ' + (_hover.hoverFocus)(enableHoverMediaQuery, '\n        color: ' + listColor + ';\n        background-color: ' + (_color2.default)(background).darken(0.05).toString() + ';\n      ') + '\n  \n      &.active {\n        ' + (_hover.plainHoverFocus)(enableHoverMediaQuery, '\n          color: #fff;\n          background-color: ' + listColor + ';\n          border-color: ' + listColor + ';\n        ') + '\n      }\n    }\n  ';
+  return '\n    & .list-group-item-' + state + ' {\n      color: ' + listColor + ';\n      background-color: ' + background + ';\n    }\n  \n    & a.list-group-item-' + state + ',\n    button.list-group-item-' + state + ' {\n      color: ' + listColor + ';\n  \n      .list-group-item-heading {\n        color: inherit;\n      }\n  \n      ' + (0, hover_1.hoverFocus)(enableHoverMediaQuery, '\n        color: ' + listColor + ';\n        background-color: ' + (0, _color2.default)(background).darken(0.05).toString() + ';\n      ') + '\n  \n      &.active {\n        ' + (0, hover_1.plainHoverFocus)(enableHoverMediaQuery, '\n          color: #fff;\n          background-color: ' + listColor + ';\n          border-color: ' + listColor + ';\n        ') + '\n      }\n    }\n  ';
 }
 exports.default = {
   defaultProps: defaultProps,
@@ -14402,7 +14324,7 @@ function nav() {
   var $navPillsBorderRadius = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : defaultProps['$nav-pills-border-radius'];
   var $navPillsActiveLinkColor = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : defaultProps['$nav-pills-active-link-color'];
   var $navPillsActiveLinkBg = arguments.length > 14 && arguments[14] !== undefined ? arguments[14] : defaultProps['$nav-pills-active-link-bg'];
-  return '\n    &.nav {\n      display: flex;\n      padding-left: 0;\n      margin-bottom: 0;\n      list-style: none;\n    }\n    \n    & .nav-link {\n      display: block;\n      padding: ' + $navLinkPadding + ';\n      ' + (_hover.hoverFocus)($enableHoverMediaQuery, 'text-decoration: none;') + '\n      /* Disabled state lightens text and removes hover tab effects */\n      &.disabled {\n        color: ' + $navDisabledLinkColor + ';\n        cursor: ' + $cursorDisabled + '; \n      }\n    }\n        \n    /*\n     Tabs\n    */\n    \n    &.nav-tabs {\n      border-bottom: ' + $navTabBorderWidth + ' solid ' + $navTabsBorderColor + ';\n      & .nav-item {\n        margin-bottom: -' + $navTabBorderWidth + ';\n      }\n   \n      & .nav-link {\n        border: ' + $navTabBorderWidth + ' solid transparent;\n        ' + (_borderRadius.borderTopRadius)($enableRounded, $navTabsBorderRadius) + '\n        ' + (_hover.hoverFocus)($enableHoverMediaQuery, '\n          border-color: ' + $navTabsLinkHoverBorderColor + ' ' + $navTabsLinkHoverBorderColor + ' ' + $navTabsBorderColor + ';\n        ') + '\n      \n        &.disabled {\n          color: ' + $navDisabledLinkColor + ';\n          background-color: transparent;\n          border-color: transparent;\n        }\n      }\n      \n      & .nav-link.active,\n      .nav-item.open .nav-link {\n        color: ' + $navTabsActiveLinkHoverColor + ';\n        background-color: ' + $navTabsActiveLinkHoverBg + ';\n        border-color: ' + $navTabsActiveLinkHoverBorderColor + ' ' + $navTabsActiveLinkHoverBorderColor + ' transparent;\n      }\n      \n      & .dropdown-menu {\n        /* Make dropdown border overlap tab border */\n        margin-top: -' + $navTabBorderWidth + ';\n        /* Remove the top rounded corners here since there is a hard edge above the menu */\n        ' + (_borderRadius.borderTopRadius)($enableRounded, '0') + '\n      }\n    }\n    \n    /*\n     Pills\n    */\n    \n    &.nav-pills {\n      .nav-link {\n        ' + (_borderRadius.borderRadius)($enableRounded, $navPillsBorderRadius) + '\n      }\n\n      .nav-link.active,\n      .nav-item.show .nav-link {\n        color: ' + $navPillsActiveLinkColor + ';\n        background-color: ' + $navPillsActiveLinkBg + ';\n      }\n    }\n\n    /*\n      Justified variants\n    */\n    \n    &.nav-fill {\n      .nav-item {\n        flex: 1 1 auto;\n        text-align: center;\n      }\n    }\n    \n    &.nav-justified {\n      .nav-item {\n        flex: 1 1 100%;\n        text-align: center;\n      }\n    }\n    \n    /* Hide tabbable panes to start, show them when .active */\n    &.tab-content {\n      > .tab-pane {\n        display: none;\n      }\n      > .active {\n        display: block;\n      }\n    }\n  ';
+  return '\n    &.nav {\n      display: flex;\n      padding-left: 0;\n      margin-bottom: 0;\n      list-style: none;\n    }\n    \n    & .nav-link {\n      display: block;\n      padding: ' + $navLinkPadding + ';\n      ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, 'text-decoration: none;') + '\n      /* Disabled state lightens text and removes hover tab effects */\n      &.disabled {\n        color: ' + $navDisabledLinkColor + ';\n        cursor: ' + $cursorDisabled + '; \n      }\n    }\n        \n    /*\n     Tabs\n    */\n    \n    &.nav-tabs {\n      border-bottom: ' + $navTabBorderWidth + ' solid ' + $navTabsBorderColor + ';\n      & .nav-item {\n        margin-bottom: -' + $navTabBorderWidth + ';\n      }\n   \n      & .nav-link {\n        border: ' + $navTabBorderWidth + ' solid transparent;\n        ' + (0, borderRadius_1.borderTopRadius)($enableRounded, $navTabsBorderRadius) + '\n        ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, '\n          border-color: ' + $navTabsLinkHoverBorderColor + ' ' + $navTabsLinkHoverBorderColor + ' ' + $navTabsBorderColor + ';\n        ') + '\n      \n        &.disabled {\n          color: ' + $navDisabledLinkColor + ';\n          background-color: transparent;\n          border-color: transparent;\n        }\n      }\n      \n      & .nav-link.active,\n      .nav-item.open .nav-link {\n        color: ' + $navTabsActiveLinkHoverColor + ';\n        background-color: ' + $navTabsActiveLinkHoverBg + ';\n        border-color: ' + $navTabsActiveLinkHoverBorderColor + ' ' + $navTabsActiveLinkHoverBorderColor + ' transparent;\n      }\n      \n      & .dropdown-menu {\n        /* Make dropdown border overlap tab border */\n        margin-top: -' + $navTabBorderWidth + ';\n        /* Remove the top rounded corners here since there is a hard edge above the menu */\n        ' + (0, borderRadius_1.borderTopRadius)($enableRounded, '0') + '\n      }\n    }\n    \n    /*\n     Pills\n    */\n    \n    &.nav-pills {\n      .nav-link {\n        ' + (0, borderRadius_1.borderRadius)($enableRounded, $navPillsBorderRadius) + '\n      }\n\n      .nav-link.active,\n      .nav-item.show .nav-link {\n        color: ' + $navPillsActiveLinkColor + ';\n        background-color: ' + $navPillsActiveLinkBg + ';\n      }\n    }\n\n    /*\n      Justified variants\n    */\n    \n    &.nav-fill {\n      .nav-item {\n        flex: 1 1 auto;\n        text-align: center;\n      }\n    }\n    \n    &.nav-justified {\n      .nav-item {\n        flex: 1 1 100%;\n        text-align: center;\n      }\n    }\n    \n    /* Hide tabbable panes to start, show them when .active */\n    &.tab-content {\n      > .tab-pane {\n        display: none;\n      }\n      > .active {\n        display: block;\n      }\n    }\n  ';
 }
 exports.default = {
   nav: nav
@@ -14932,7 +14854,7 @@ var Portal$2 = function (_React$Component) {
         this.defaultNode = document.createElement('div');
         document.body.appendChild(this.defaultNode);
       }
-      return ReactDOM.createPortal(this.props.children, this.props.node || this.defaultNode);
+      return createPortal(this.props.children, this.props.node || this.defaultNode);
     }
   }]);
   return Portal;
@@ -14965,7 +14887,6 @@ var Portal$3 = function (_React$Component) {
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      ReactDOM.unmountComponentAtNode(this.defaultNode || this.props.node);
       if (this.defaultNode) {
         document.body.removeChild(this.defaultNode);
       }
@@ -15331,48 +15252,7 @@ var defaultProps$50 = {
   backdrop: true,
   keyboard: true,
   zIndex: 2000,
-  theme: {
-    '$enable-rounded': true,
-    '$enable-shadows': false,
-    '$enable-transitions': true,
-    '$grid-breakpoints': {
-      xs: '0',
-      sm: '576px',
-      md: '768px',
-      lg: '992px',
-      xl: '1200px'
-    },
-    '$body-bg': '#fff',
-    '$body-color': '#eceeef',
-    '$font-family-base': '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    '$font-size-base': '1rem',
-    '$font-weight-base': 'normal',
-    '$line-height-base': '1.5',
-    '$zindex-modal': '2050',
-    '$zindex-modal-backdrop': '2040',
-    '$transition-fade': 'opacity .15s linear',
-    '$border-radius-lg': '.3rem',
-    '$modal-inner-padding': '15px',
-    '$modal-dialog-margin': '10px',
-    '$modal-dialog-sm-up-margin-y': '30px',
-    '$modal-title-line-height': '1.5',
-    '$modal-content-bg': '#fff',
-    '$modal-content-border-color': 'rgba(0, 0, 0, 0.2)',
-    '$modal-content-border-width': '1px',
-    '$modal-content-xs-box-shadow': '0 3px 9px rgba(0, 0, 0, 0.5)',
-    '$modal-content-sm-up-box-shadow': '0 5px 15px rgba(0, 0, 0, 0.5)',
-    '$modal-backdrop-bg': '#000',
-    '$modal-backdrop-opacity': '.5',
-    '$modal-header-border-color': '#eceeef',
-    '$modal-footer-border-color': '#eceeef',
-    '$modal-header-border-width': '1px',
-    '$modal-footer-border-width': '1px',
-    '$modal-header-padding': '15px',
-    '$modal-lg': '800px',
-    '$modal-md': '500px',
-    '$modal-sm': '300px',
-    '$modal-transition': 'transform .3s ease-out'
-  },
+  theme: makeTheme$40(),
   fade: true,
   onOpened: null,
   onClosed: null,
@@ -16114,7 +15994,7 @@ var paginationSize = exports.paginationSize = function paginationSize() {
   var paddingX = arguments[2];
   var fontSize = arguments[3];
   var borderRadiusPagination = arguments[4];
-  return '\n  .page-link {\n    padding: ' + paddingY + ' ' + paddingX + ';\n    font-size: ' + fontSize + ';\n  }\n\n  .page-item {\n    &:first-child {\n      .page-link {\n        ' + (_borderRadius.borderLeftRadius)(enableRounded, borderRadiusPagination) + '\n      }\n    }\n    &:last-child {\n      .page-link {\n        ' + (_borderRadius.borderRightRadius)(enableRounded, borderRadiusPagination) + '\n      }\n    }\n  }\n';
+  return '\n  .page-link {\n    padding: ' + paddingY + ' ' + paddingX + ';\n    font-size: ' + fontSize + ';\n  }\n\n  .page-item {\n    &:first-child {\n      .page-link {\n        ' + (0, borderRadius_1.borderLeftRadius)(enableRounded, borderRadiusPagination) + '\n      }\n    }\n    &:last-child {\n      .page-link {\n        ' + (0, borderRadius_1.borderRightRadius)(enableRounded, borderRadiusPagination) + '\n      }\n    }\n  }\n';
 };
 function pagination() {
   var $enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
@@ -16147,7 +16027,7 @@ function pagination() {
   var $fontSizeSm = arguments.length > 27 && arguments[27] !== undefined ? arguments[27] : defaultProps['$font-size-sm'];
   var $lineHeightSm = arguments.length > 28 && arguments[28] !== undefined ? arguments[28] : defaultProps['$line-height-sm'];
   var $borderRadiusSm = arguments.length > 29 && arguments[29] !== undefined ? arguments[29] : defaultProps['$border-radius-sm'];
-  return '\n  &.pagination {\n    display: flex;\n    padding-left: 0;\n    list-style: none; \n    ' + (_borderRadius.borderRadius)($enableRounded) + '\n  }\n  \n  & .page-item {\n    &:first-child {\n      .page-link {\n        margin-left: 0;\n        ' + (_borderRadius.borderLeftRadius)($enableRounded, $borderRadius) + '\n      }\n    }\n    &:last-child {\n      .page-link {\n      ' + (_borderRadius.borderRightRadius)($enableRounded, $borderRadius) + '\n      }\n    }\n  \n    &.active .page-link {\n      z-index: 2;\n      color: ' + $paginationActiveColor + ';\n      background-color: ' + $paginationActiveBg + ';\n      border-color: ' + $paginationActiveBorder + ';\n    }\n  \n    &.disabled .page-link {\n      color: ' + $paginationDisabledColor + ';\n      pointer-events: none;\n      cursor: ' + $cursorDisabled + ';\n      background-color: ' + $paginationDisabledBg + ';\n      border-color: ' + $paginationDisabledBorder + ';\n    }\n  }\n  \n  & .page-link {\n    position: relative;\n    display: block;\n    padding: ' + $paginationPaddingY + ' ' + $paginationPaddingX + ';\n    margin-left: -1px;\n    line-height: ' + $paginationLineHeight + ';\n    color: ' + $paginationColor + ';\n    background-color: ' + $paginationBg + ';\n    border: ' + $paginationBorderWidth + ' solid ' + $paginationBorderColor + ';\n    \n    ' + (_hover.hoverFocus)($enableHoverMediaQuery, '\n      color: ' + $paginationHoverColor + ';\n      text-decoration: none;\n      background-color: ' + $paginationHoverBg + ';\n      border-color: ' + $paginationHoverBorder + ';\n    ') + '\n  }\n  \n  /* Sizing */\n  &.pagination-lg {\n  ' + paginationSize($enableRounded, $paginationPaddingYLg, $paginationPaddingXLg, $fontSizeLg, $lineHeightLg, $borderRadiusLg) + '\n  }\n  \n  &.pagination-sm {\n  ' + paginationSize($enableRounded, $paginationPaddingYSm, $paginationPaddingXSm, $fontSizeSm, $lineHeightSm, $borderRadiusSm) + '\n  }\n  ';
+  return '\n  &.pagination {\n    display: flex;\n    padding-left: 0;\n    list-style: none; \n    ' + (0, borderRadius_1.borderRadius)($enableRounded) + '\n  }\n  \n  & .page-item {\n    &:first-child {\n      .page-link {\n        margin-left: 0;\n        ' + (0, borderRadius_1.borderLeftRadius)($enableRounded, $borderRadius) + '\n      }\n    }\n    &:last-child {\n      .page-link {\n      ' + (0, borderRadius_1.borderRightRadius)($enableRounded, $borderRadius) + '\n      }\n    }\n  \n    &.active .page-link {\n      z-index: 2;\n      color: ' + $paginationActiveColor + ';\n      background-color: ' + $paginationActiveBg + ';\n      border-color: ' + $paginationActiveBorder + ';\n    }\n  \n    &.disabled .page-link {\n      color: ' + $paginationDisabledColor + ';\n      pointer-events: none;\n      cursor: ' + $cursorDisabled + ';\n      background-color: ' + $paginationDisabledBg + ';\n      border-color: ' + $paginationDisabledBorder + ';\n    }\n  }\n  \n  & .page-link {\n    position: relative;\n    display: block;\n    padding: ' + $paginationPaddingY + ' ' + $paginationPaddingX + ';\n    margin-left: -1px;\n    line-height: ' + $paginationLineHeight + ';\n    color: ' + $paginationColor + ';\n    background-color: ' + $paginationBg + ';\n    border: ' + $paginationBorderWidth + ' solid ' + $paginationBorderColor + ';\n    \n    ' + (0, hover_1.hoverFocus)($enableHoverMediaQuery, '\n      color: ' + $paginationHoverColor + ';\n      text-decoration: none;\n      background-color: ' + $paginationHoverBg + ';\n      border-color: ' + $paginationHoverBorder + ';\n    ') + '\n  }\n  \n  /* Sizing */\n  &.pagination-lg {\n  ' + paginationSize($enableRounded, $paginationPaddingYLg, $paginationPaddingXLg, $fontSizeLg, $lineHeightLg, $borderRadiusLg) + '\n  }\n  \n  &.pagination-sm {\n  ' + paginationSize($enableRounded, $paginationPaddingYSm, $paginationPaddingXSm, $fontSizeSm, $lineHeightSm, $borderRadiusSm) + '\n  }\n  ';
 }
 exports.default = {
   defaultProps: defaultProps,
@@ -16462,7 +16342,7 @@ var defaultProps$61 = {
     '$progress-box-shadow': 'inset 0 .1rem .1rem rgba(0, 0, 0, 0.1)',
     '$progress-bar-color': '#fff',
     '$progress-bar-bg': '#0275d8',
-    '$progress-bar-animation-timing': '1s linear infinite'
+    '$progress-bar-animation-timing': 'infinite'
   }
 };
 var propTypes$66 = {
@@ -16676,10 +16556,10 @@ var ProgressBar = function (_React$Component) {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = ProgressBar.__proto__ || Object.getPrototypeOf(ProgressBar)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = ProgressBar.__proto__ || Object.getPrototypeOf(ProgressBar)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       classNameProgress: '',
       classNameProgressBar: ''
-    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+    }, _temp), possibleConstructorReturn(_this, _ret);
   }
   createClass(ProgressBar, [{
     key: 'getWidth',
@@ -16794,9 +16674,9 @@ var SelectUnstyled = function (_React$Component) {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = SelectUnstyled.__proto__ || Object.getPrototypeOf(SelectUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = SelectUnstyled.__proto__ || Object.getPrototypeOf(SelectUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       className: null
-    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+    }, _temp), possibleConstructorReturn(_this, _ret);
   }
   createClass(SelectUnstyled, [{
     key: 'componentWillMount',
@@ -16944,8 +16824,8 @@ exports.tableRowVariant = tableRowVariant;
 var _color2 = _interopRequireDefault(color);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function tableRowVariant(state, background) {
-  var hoverBackground = (_color2.default)(background).darken(0.05).toString();
-  return '\n  /* Exact selectors below required to override \'.table-striped\' and prevent */\n  /* inheritance to nested tables. */\n  & .table-' + state + ' {\n    &,\n    > th,\n    > td {\n      background-color: ' + background + ';\n    }\n  }\n\n  /* Hover states for \'.table-hover\' */\n  /* Note: this is not available for cells or rows within \'thead\' or \'tfoot\'. */\n  &.table-hover {\n\n    .table-' + state + ' {\n      ' + (_hover.hover)('\n        background-color: ' + hoverBackground + ';\n\n        > td,\n        > th {\n          background-color: ' + hoverBackground + ';\n        }\n      ') + '\n    }\n  }\n  ';
+  var hoverBackground = (0, _color2.default)(background).darken(0.05).toString();
+  return '\n  /* Exact selectors below required to override \'.table-striped\' and prevent */\n  /* inheritance to nested tables. */\n  & .table-' + state + ' {\n    &,\n    > th,\n    > td {\n      background-color: ' + background + ';\n    }\n  }\n\n  /* Hover states for \'.table-hover\' */\n  /* Note: this is not available for cells or rows within \'thead\' or \'tfoot\'. */\n  &.table-hover {\n\n    .table-' + state + ' {\n      ' + (0, hover_1.hover)('\n        background-color: ' + hoverBackground + ';\n\n        > td,\n        > th {\n          background-color: ' + hoverBackground + ';\n        }\n      ') + '\n    }\n  }\n  ';
 }
 exports.default = {
   tableRowVariant: tableRowVariant
@@ -17215,7 +17095,7 @@ var defaultProps = exports.defaultProps = {
 function badgeVariant() {
   var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-mediaQuery'];
   var badgeColor = arguments[1];
-  return '\n    background-color: ' + badgeColor + ';\n    \n    &[href] {\n      ' + (_hover.hoverFocus)(enableHoverMediaQuery, 'background-color: ' + (_color2.default)(badgeColor).darken(0.1).toString() + ';') + '\n    }\n  ';
+  return '\n    background-color: ' + badgeColor + ';\n    \n    &[href] {\n      ' + (0, hover_1.hoverFocus)(enableHoverMediaQuery, 'background-color: ' + (0, _color2.default)(badgeColor).darken(0.1).toString() + ';') + '\n    }\n  ';
 }
 exports.default = {
   defaultProps: defaultProps,
@@ -17379,7 +17259,7 @@ var TooltipUnstyled = function (_React$Component) {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = TooltipUnstyled.__proto__ || Object.getPrototypeOf(TooltipUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = TooltipUnstyled.__proto__ || Object.getPrototypeOf(TooltipUnstyled)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       focus: false
     }, _this.componentDidMount = function () {
       _this.target = _this.getTarget();
@@ -17413,19 +17293,19 @@ var TooltipUnstyled = function (_React$Component) {
       _this.hideTimeout = setTimeout(_this.hide, _this.getDelay('hide'));
     }, _this.getDelay = function (key) {
       var delay = _this.props.delay;
-      if ((typeof delay === 'undefined' ? 'undefined' : babelHelpers.typeof(delay)) === 'object') {
+      if ((typeof delay === 'undefined' ? 'undefined' : _typeof(delay)) === 'object') {
         return isNaN(delay[key]) ? DEFAULT_DELAYS[key] : delay[key];
       }
       return delay;
     }, _this.getTarget = function () {
       var target = _this.props.target;
-      if ((typeof target === 'undefined' ? 'undefined' : babelHelpers.typeof(target)) === 'object') {
+      if ((typeof target === 'undefined' ? 'undefined' : _typeof(target)) === 'object') {
         return target;
       }
       return document.getElementById(target);
     }, _this.getTetherConfig = function () {
-      var attachments = getTetherAttachments(_this.props.placement);
-      return babelHelpers.extends({}, defaultTetherConfig, attachments, {
+      var attachments = tools_1(_this.props.placement);
+      return _extends({}, defaultTetherConfig$1, attachments, {
         target: _this.getTarget
       }, _this.props.tether);
     }, _this.show = function () {
@@ -17477,7 +17357,7 @@ var TooltipUnstyled = function (_React$Component) {
       _this.setState({
         focus: true
       });
-    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+    }, _temp), possibleConstructorReturn(_this, _ret);
   }
   createClass(TooltipUnstyled, [{
     key: 'render',
@@ -17569,7 +17449,7 @@ function cardOutlineVariant(cardColor) {
 function cardInverse() {
   var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
   var cardLinkHoverColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$card-link-hover-color'];
-  return '\n    color: rgba(255,255,255,.65);\n    & .card-header,\n    & .card-footer {\n      background-color: transparent;\n      border-color: rgba(255,255,255,.2);\n    }\n    & .card-header,\n    & .card-footer,\n    & .card-title,\n    & .card-blockquote {\n      color: #fff;\n    }\n    & .card-link,\n    & .card-text,\n    & .card-subtitle,\n    & .card-blockquote .blockquote-footer {\n      color: rgba(255,255,255,.65);\n    }\n    \n    & .card-link {\n      ' + (_hover.hoverFocus)(enableHoverMediaQuery, 'color: ' + cardLinkHoverColor + ';') + '\n    }\n  ';
+  return '\n    color: rgba(255,255,255,.65);\n    & .card-header,\n    & .card-footer {\n      background-color: transparent;\n      border-color: rgba(255,255,255,.2);\n    }\n    & .card-header,\n    & .card-footer,\n    & .card-title,\n    & .card-blockquote {\n      color: #fff;\n    }\n    & .card-link,\n    & .card-text,\n    & .card-subtitle,\n    & .card-blockquote .blockquote-footer {\n      color: rgba(255,255,255,.65);\n    }\n    \n    & .card-link {\n      ' + (0, hover_1.hoverFocus)(enableHoverMediaQuery, 'color: ' + cardLinkHoverColor + ';') + '\n    }\n  ';
 }
 function card() {
   var $enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
@@ -17597,7 +17477,7 @@ function card() {
   var $btnDangerBg = arguments.length > 22 && arguments[22] !== undefined ? arguments[22] : defaultProps['$btn-danger-bg'];
   var $cardLinkHoverColor = arguments.length > 23 && arguments[23] !== undefined ? arguments[23] : defaultProps['$card-link-hover-color'];
   var $cardImgOverlayPadding = arguments.length > 24 && arguments[24] !== undefined ? arguments[24] : defaultProps['$card-img-overlay-padding'];
-  return '\n    & .card {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + $cardBg + ';\n      border: ' + $cardBorderWidth + ' solid ' + $cardBorderColor + ';\n      ' + (_borderRadius.borderRadius)($enableRounded, $cardBorderRadius) + '\n    }\n    \n    & .card-block {\n      flex: 1 1 auto;\n\n      padding: ' + $cardSpacerX + ';\n    }\n    \n    & .card-title {\n      margin-bottom: ' + $cardSpacerY + ';\n    }\n    \n    & .card-subtitle {\n      margin-top: -' + $cardMarginYHalved + ';\n      margin-bottom: 0;\n    }\n    \n    & .card-text:last-child {\n      margin-bottom: 0;\n    }\n   \n    & .card-link {\n      ' + (_hover.hover)('text-decoration: none;') + '\n    \n      + .card-link {\n        margin-left: ' + $cardSpacerX + ';\n      }\n    }\n    \n    & .card{\n      > .list-group:first-child {\n        .list-group-item:first-child {\n          ' + (_borderRadius.borderTopRadius)($enableRounded, $cardBorderRadius) + '\n        }\n      }\n    \n      > .list-group:last-child {\n        .list-group-item:last-child {\n          ' + (_borderRadius.borderBottomRadius)($enableRounded, $cardBorderRadius) + '\n        }\n      }\n    }\n    \n    & .card-header {\n      padding: ' + $cardSpacerY + ' ' + $cardSpacerX + ';\n      margin-bottom: 0;\n      background-color: ' + $cardCapBg + ';\n      border-bottom: ' + $cardBorderWidth + ' solid ' + $cardBorderColor + ';\n    \n      &:first-child {\n        ' + (_borderRadius.borderRadius)($enableRounded, $cardBorderRadiusInner, $cardBorderRadiusInner, '0', '0') + '\n      }\n    }\n    \n    & .card-footer {\n      padding: ' + $cardSpacerY + ' ' + $cardSpacerX + ';\n      background-color: ' + $cardCapBg + ';\n      border-top: ' + $cardBorderWidth + ' solid ' + $cardBorderColor + ';\n    \n      &:last-child {\n        ' + (_borderRadius.borderRadius)($enableRounded, '0', '0', $cardBorderRadiusInner, $cardBorderRadiusInner) + '\n      }\n    }\n\n    & .card-header-tabs {\n      margin-right: -' + $cardMarginXHalved + ';\n      margin-bottom: -' + $cardSpacerY + ';\n      margin-left: -' + $cardMarginXHalved + ';\n      border-bottom: 0;\n    }\n    \n    & .card-header-pills {\n      margin-right: -' + $cardMarginXHalved + ';\n      margin-left: -' + $cardMarginXHalved + ';\n    }\n    \n    & .card-primary {\n      ' + cardVariant($brandPrimary, $brandPrimary) + '\n    }\n    & .card-success {\n      ' + cardVariant($brandSuccess, $brandSuccess) + '\n    }\n    & .card-info {\n      ' + cardVariant($brandInfo, $brandInfo) + '\n    }\n    & .card-warning {\n      ' + cardVariant($brandWarning, $brandWarning) + '\n    }\n    & .card-danger {\n      ' + cardVariant($brandDanger, $brandDanger) + '\n    }\n    \n    & .card-outline-primary {\n      ' + cardOutlineVariant($btnPrimaryBg) + '\n    }\n    & .card-outline-secondary {\n      ' + cardOutlineVariant($btnSecondaryBorder) + '\n    }\n    & .card-outline-info {\n      ' + cardOutlineVariant($btnInfoBg) + '\n    }\n    & .card-outline-success {\n      ' + cardOutlineVariant($btnSuccessBg) + '\n    }\n    & .card-outline-warning {\n      ' + cardOutlineVariant($btnWarningBg) + '\n    }\n    & .card-outline-danger {\n      ' + cardOutlineVariant($btnDangerBg) + '\n    }\n        \n    & .card-inverse {\n      ' + cardInverse($enableHoverMediaQuery, $cardLinkHoverColor) + '\n    }\n\n    & .card-blockquote {\n      padding: 0;\n      margin-bottom: 0;\n      border-left: 0;\n    }\n    \n    & .card-img {\n      ' + (_borderRadius.borderRadius)($enableRounded, $cardBorderRadiusInner) + '\n    }\n    \n    & .card-img-overlay {\n      position: absolute;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      padding: ' + $cardImgOverlayPadding + ';\n    }\n\n    & .card-img-top {\n      ' + (_borderRadius.borderTopRadius)($enableRounded, $cardBorderRadiusInner) + '\n    }\n    \n    & .card-img-bottom {\n      ' + (_borderRadius.borderBottomRadius)($enableRounded, $cardBorderRadiusInner) + '\n    }\n  ';
+  return '\n    & .card {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + $cardBg + ';\n      border: ' + $cardBorderWidth + ' solid ' + $cardBorderColor + ';\n      ' + (0, borderRadius_1.borderRadius)($enableRounded, $cardBorderRadius) + '\n    }\n    \n    & .card-block {\n      flex: 1 1 auto;\n\n      padding: ' + $cardSpacerX + ';\n    }\n    \n    & .card-title {\n      margin-bottom: ' + $cardSpacerY + ';\n    }\n    \n    & .card-subtitle {\n      margin-top: -' + $cardMarginYHalved + ';\n      margin-bottom: 0;\n    }\n    \n    & .card-text:last-child {\n      margin-bottom: 0;\n    }\n   \n    & .card-link {\n      ' + (0, hover_1.hover)('text-decoration: none;') + '\n    \n      + .card-link {\n        margin-left: ' + $cardSpacerX + ';\n      }\n    }\n    \n    & .card{\n      > .list-group:first-child {\n        .list-group-item:first-child {\n          ' + (0, borderRadius_1.borderTopRadius)($enableRounded, $cardBorderRadius) + '\n        }\n      }\n    \n      > .list-group:last-child {\n        .list-group-item:last-child {\n          ' + (0, borderRadius_1.borderBottomRadius)($enableRounded, $cardBorderRadius) + '\n        }\n      }\n    }\n    \n    & .card-header {\n      padding: ' + $cardSpacerY + ' ' + $cardSpacerX + ';\n      margin-bottom: 0;\n      background-color: ' + $cardCapBg + ';\n      border-bottom: ' + $cardBorderWidth + ' solid ' + $cardBorderColor + ';\n    \n      &:first-child {\n        ' + (0, borderRadius_1.borderRadius)($enableRounded, $cardBorderRadiusInner, $cardBorderRadiusInner, '0', '0') + '\n      }\n    }\n    \n    & .card-footer {\n      padding: ' + $cardSpacerY + ' ' + $cardSpacerX + ';\n      background-color: ' + $cardCapBg + ';\n      border-top: ' + $cardBorderWidth + ' solid ' + $cardBorderColor + ';\n    \n      &:last-child {\n        ' + (0, borderRadius_1.borderRadius)($enableRounded, '0', '0', $cardBorderRadiusInner, $cardBorderRadiusInner) + '\n      }\n    }\n\n    & .card-header-tabs {\n      margin-right: -' + $cardMarginXHalved + ';\n      margin-bottom: -' + $cardSpacerY + ';\n      margin-left: -' + $cardMarginXHalved + ';\n      border-bottom: 0;\n    }\n    \n    & .card-header-pills {\n      margin-right: -' + $cardMarginXHalved + ';\n      margin-left: -' + $cardMarginXHalved + ';\n    }\n    \n    & .card-primary {\n      ' + cardVariant($brandPrimary, $brandPrimary) + '\n    }\n    & .card-success {\n      ' + cardVariant($brandSuccess, $brandSuccess) + '\n    }\n    & .card-info {\n      ' + cardVariant($brandInfo, $brandInfo) + '\n    }\n    & .card-warning {\n      ' + cardVariant($brandWarning, $brandWarning) + '\n    }\n    & .card-danger {\n      ' + cardVariant($brandDanger, $brandDanger) + '\n    }\n    \n    & .card-outline-primary {\n      ' + cardOutlineVariant($btnPrimaryBg) + '\n    }\n    & .card-outline-secondary {\n      ' + cardOutlineVariant($btnSecondaryBorder) + '\n    }\n    & .card-outline-info {\n      ' + cardOutlineVariant($btnInfoBg) + '\n    }\n    & .card-outline-success {\n      ' + cardOutlineVariant($btnSuccessBg) + '\n    }\n    & .card-outline-warning {\n      ' + cardOutlineVariant($btnWarningBg) + '\n    }\n    & .card-outline-danger {\n      ' + cardOutlineVariant($btnDangerBg) + '\n    }\n        \n    & .card-inverse {\n      ' + cardInverse($enableHoverMediaQuery, $cardLinkHoverColor) + '\n    }\n\n    & .card-blockquote {\n      padding: 0;\n      margin-bottom: 0;\n      border-left: 0;\n    }\n    \n    & .card-img {\n      ' + (0, borderRadius_1.borderRadius)($enableRounded, $cardBorderRadiusInner) + '\n    }\n    \n    & .card-img-overlay {\n      position: absolute;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      padding: ' + $cardImgOverlayPadding + ';\n    }\n\n    & .card-img-top {\n      ' + (0, borderRadius_1.borderTopRadius)($enableRounded, $cardBorderRadiusInner) + '\n    }\n    \n    & .card-img-bottom {\n      ' + (0, borderRadius_1.borderBottomRadius)($enableRounded, $cardBorderRadiusInner) + '\n    }\n  ';
 }
 exports.default = {
   defaultProps: defaultProps,
@@ -17627,32 +17507,32 @@ var defaultProps$68 = {
     '$card-border-width': '1px',
     '$card-border-radius': '.25rem',
     '$card-border-color': 'rgba(0, 0, 0, 0.125)',
-    '$card-border-radius-inner': 'calc(.25rem - 1px)',
-    '$card-cap-bg': '#f7f7f9',
-    '$card-bg': '#fff',
-    '$card-link-hover-color': '#fff',
+    '$card-border-radius-inner': '',
+    '$card-cap-bg': '$gray-lightest',
+    '$card-bg': '$white',
+    '$card-link-hover-color': '$white',
     '$card-img-overlay-padding': '1.25rem',
-    '$card-margin-y-halved': '0.375rem',
-    '$card-margin-x-halved': '0.375rem',
+    '$card-margin-y-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
+    '$card-margin-x-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
     '$card-columns-count-md': '2',
     '$card-columns-gap-md': '1rem',
-    '$card-columns-margin-md': '.75rem',
+    '$card-columns-margin-md': '$card-spacer-y',
     '$card-columns-count-lg': '2',
     '$card-columns-gap-lg': '1.15rem',
-    '$card-columns-margin-lg': '.75rem',
+    '$card-columns-margin-lg': '$card-spacer-y',
     '$card-columns-count-xl': '2',
     '$card-columns-gap-xl': '1.25rem',
-    '$card-columns-margin-xl': '.75rem',
+    '$card-columns-margin-xl': '$card-spacer-y',
     '$card-columns-count-xxl': '3',
     '$card-columns-gap-xxl': '1.25rem',
-    '$card-columns-margin-xxl': '.75rem',
-    '$card-deck-margin': '15px',
-    '$btn-primary-bg': '#0275d8',
+    '$card-columns-margin-xxl': '$card-spacer-y',
+    '$card-deck-margin': '(r, detectedUnit) / 2) + detectedUni',
+    '$btn-primary-bg': '$brand-primary',
     '$btn-secondary-border': '#ccc',
-    '$btn-info-bg': '#5bc0de',
-    '$btn-success-bg': '#5cb85c',
-    '$btn-warning-bg': '#f0ad4e',
-    '$btn-danger-bg': '#d9534f',
+    '$btn-info-bg': '$brand-info',
+    '$btn-success-bg': '$brand-success',
+    '$btn-warning-bg': '$brand-warning',
+    '$btn-danger-bg': '$brand-danger',
     '$enable-rounded': false,
     '$enable-hover-media-query': false
   }
@@ -17737,7 +17617,7 @@ var CardUnstyled = function (_React$Component) {
         className: mapToCssModules(classnames(className, 'card', (_cn = {
           inverse: inverse,
           'card-block': block
-        }, babelHelpers.defineProperty(_cn, 'card-' + color, color), babelHelpers.defineProperty(_cn, 'card-' + (outline ? '-outline' : '') + '-' + color, outline), _cn)), cssModule)
+        }, defineProperty(_cn, 'card-' + color, color), defineProperty(_cn, 'card-' + (outline ? '-outline' : '') + '-' + color, outline), _cn)), cssModule)
       }, attributes));
     }
   }]);
@@ -17767,32 +17647,32 @@ var defaultProps$69 = {
     '$card-border-width': '1px',
     '$card-border-radius': '.25rem',
     '$card-border-color': 'rgba(0, 0, 0, 0.125)',
-    '$card-border-radius-inner': 'calc(.25rem - 1px)',
-    '$card-cap-bg': '#f7f7f9',
-    '$card-bg': '#fff',
-    '$card-link-hover-color': '#fff',
+    '$card-border-radius-inner': '',
+    '$card-cap-bg': '$gray-lightest',
+    '$card-bg': '$white',
+    '$card-link-hover-color': '$white',
     '$card-img-overlay-padding': '1.25rem',
-    '$card-margin-y-halved': '0.375rem',
-    '$card-margin-x-halved': '0.375rem',
+    '$card-margin-y-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
+    '$card-margin-x-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
     '$card-columns-count-md': '2',
     '$card-columns-gap-md': '1rem',
-    '$card-columns-margin-md': '.75rem',
+    '$card-columns-margin-md': '$card-spacer-y',
     '$card-columns-count-lg': '2',
     '$card-columns-gap-lg': '1.15rem',
-    '$card-columns-margin-lg': '.75rem',
+    '$card-columns-margin-lg': '$card-spacer-y',
     '$card-columns-count-xl': '2',
     '$card-columns-gap-xl': '1.25rem',
-    '$card-columns-margin-xl': '.75rem',
+    '$card-columns-margin-xl': '$card-spacer-y',
     '$card-columns-count-xxl': '3',
     '$card-columns-gap-xxl': '1.25rem',
-    '$card-columns-margin-xxl': '.75rem',
-    '$card-deck-margin': '15px',
-    '$btn-primary-bg': '#0275d8',
+    '$card-columns-margin-xxl': '$card-spacer-y',
+    '$card-deck-margin': '(r, detectedUnit) / 2) + detectedUni',
+    '$btn-primary-bg': '$brand-primary',
     '$btn-secondary-border': '#ccc',
-    '$btn-info-bg': '#5bc0de',
-    '$btn-success-bg': '#5cb85c',
-    '$btn-warning-bg': '#f0ad4e',
-    '$btn-danger-bg': '#d9534f',
+    '$btn-info-bg': '$brand-info',
+    '$btn-success-bg': '$brand-success',
+    '$btn-warning-bg': '$brand-warning',
+    '$btn-danger-bg': '$brand-danger',
     '$enable-rounded': false,
     '$enable-hover-media-query': false
   }
@@ -17892,32 +17772,32 @@ var defaultProps$70 = {
     '$card-border-width': '1px',
     '$card-border-radius': '.25rem',
     '$card-border-color': 'rgba(0, 0, 0, 0.125)',
-    '$card-border-radius-inner': 'calc(.25rem - 1px)',
-    '$card-cap-bg': '#f7f7f9',
-    '$card-bg': '#fff',
-    '$card-link-hover-color': '#fff',
+    '$card-border-radius-inner': '',
+    '$card-cap-bg': '$gray-lightest',
+    '$card-bg': '$white',
+    '$card-link-hover-color': '$white',
     '$card-img-overlay-padding': '1.25rem',
-    '$card-margin-y-halved': '0.375rem',
-    '$card-margin-x-halved': '0.375rem',
+    '$card-margin-y-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
+    '$card-margin-x-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
     '$card-columns-count-md': '2',
     '$card-columns-gap-md': '1rem',
-    '$card-columns-margin-md': '.75rem',
+    '$card-columns-margin-md': '$card-spacer-y',
     '$card-columns-count-lg': '2',
     '$card-columns-gap-lg': '1.15rem',
-    '$card-columns-margin-lg': '.75rem',
+    '$card-columns-margin-lg': '$card-spacer-y',
     '$card-columns-count-xl': '2',
     '$card-columns-gap-xl': '1.25rem',
-    '$card-columns-margin-xl': '.75rem',
+    '$card-columns-margin-xl': '$card-spacer-y',
     '$card-columns-count-xxl': '3',
     '$card-columns-gap-xxl': '1.25rem',
-    '$card-columns-margin-xxl': '.75rem',
-    '$card-deck-margin': '15px',
-    '$btn-primary-bg': '#0275d8',
+    '$card-columns-margin-xxl': '$card-spacer-y',
+    '$card-deck-margin': '(r, detectedUnit) / 2) + detectedUni',
+    '$btn-primary-bg': '$brand-primary',
     '$btn-secondary-border': '#ccc',
-    '$btn-info-bg': '#5bc0de',
-    '$btn-success-bg': '#5cb85c',
-    '$btn-warning-bg': '#f0ad4e',
-    '$btn-danger-bg': '#d9534f',
+    '$btn-info-bg': '$brand-info',
+    '$btn-success-bg': '$brand-success',
+    '$btn-warning-bg': '$brand-warning',
+    '$btn-danger-bg': '$brand-danger',
     '$enable-rounded': false,
     '$enable-hover-media-query': false
   }
@@ -18017,32 +17897,32 @@ var defaultProps$71 = {
     '$card-border-width': '1px',
     '$card-border-radius': '.25rem',
     '$card-border-color': 'rgba(0, 0, 0, 0.125)',
-    '$card-border-radius-inner': 'calc(.25rem - 1px)',
-    '$card-cap-bg': '#f7f7f9',
-    '$card-bg': '#fff',
-    '$card-link-hover-color': '#fff',
+    '$card-border-radius-inner': '',
+    '$card-cap-bg': '$gray-lightest',
+    '$card-bg': '$white',
+    '$card-link-hover-color': '$white',
     '$card-img-overlay-padding': '1.25rem',
-    '$card-margin-y-halved': '0.375rem',
-    '$card-margin-x-halved': '0.375rem',
+    '$card-margin-y-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
+    '$card-margin-x-halved': '((rmUnit(], UNIT.REM) / 2) + UNIT.REM',
     '$card-columns-count-md': '2',
     '$card-columns-gap-md': '1rem',
-    '$card-columns-margin-md': '.75rem',
+    '$card-columns-margin-md': '$card-spacer-y',
     '$card-columns-count-lg': '2',
     '$card-columns-gap-lg': '1.15rem',
-    '$card-columns-margin-lg': '.75rem',
+    '$card-columns-margin-lg': '$card-spacer-y',
     '$card-columns-count-xl': '2',
     '$card-columns-gap-xl': '1.25rem',
-    '$card-columns-margin-xl': '.75rem',
+    '$card-columns-margin-xl': '$card-spacer-y',
     '$card-columns-count-xxl': '3',
     '$card-columns-gap-xxl': '1.25rem',
-    '$card-columns-margin-xxl': '.75rem',
-    '$card-deck-margin': '15px',
-    '$btn-primary-bg': '#0275d8',
+    '$card-columns-margin-xxl': '$card-spacer-y',
+    '$card-deck-margin': '(r, detectedUnit) / 2) + detectedUni',
+    '$btn-primary-bg': '$brand-primary',
     '$btn-secondary-border': '#ccc',
-    '$btn-info-bg': '#5bc0de',
-    '$btn-success-bg': '#5cb85c',
-    '$btn-warning-bg': '#f0ad4e',
-    '$btn-danger-bg': '#d9534f',
+    '$btn-info-bg': '$brand-info',
+    '$btn-success-bg': '$brand-success',
+    '$btn-warning-bg': '$brand-warning',
+    '$btn-danger-bg': '$brand-danger',
     '$enable-rounded': false,
     '$enable-hover-media-query': false
   }
@@ -18760,7 +18640,7 @@ function customForms() {
   var selectBorderWidth = _unitUtils2.default.math.multiply($borderWidth, 2);
   var customSelectPaddingRight = _unitUtils2.default.math.addition($customSelectPaddingY, $customSelectIndicatorPadding);
   var lineHeightBaseMinusCustomControlIndicatorSize = _unitUtils2.default.math.subtract($lineHeightBase, $customControlIndicatorSize);
-  return '\n    /* Embedded icons from Open Iconic. */\n    /* Released under MIT and copyright 2014 Waybury. */\n    /* https://useiconic.com/open */\n    \n    \n    /* Checkboxes and radios */\n    /* Base class takes care of all the key behavioral aspects. */\n    \n    & .custom-control {\n      position: relative;\n      display: inline-flex;\n      min-height: calc(1rem * ' + $lineHeightBase + ');\n      padding-left: ' + $customControlGutter + ';\n      margin-right: ' + $customControlSpacerX + ';\n    }\n    \n    & .custom-control-input {\n      position: absolute;\n      z-index: -1; /* Put the input behind the label so it does not overlay text */\n      opacity: 0;\n    \n      &:checked ~ .custom-control-indicator {\n        color: ' + $customControlCheckedIndicatorColor + ';\n        background-color: ' + $customControlCheckedIndicatorBg + ';\n        ' + (_boxShadow.boxShadow)($enableShadows, $customControlCheckedIndicatorBoxShadow) + '\n      }\n    \n      &:focus ~ .custom-control-indicator {\n        /* the mixin is not used here to make sure there is feedback */\n        box-shadow: ' + $customControlFocusIndicatorBoxShadow + ';\n      }\n    \n      &:active ~ .custom-control-indicator {\n        color: ' + $customControlActiveIndicatorColor + ';\n        background-color: ' + $customControlActiveIndicatorBg + ';\n        ' + (_boxShadow.boxShadow)($enableShadows, $customControlActiveIndicatorBoxShadow) + '\n      }\n    \n      &:disabled {\n        ~ .custom-control-indicator {\n          cursor: ' + $customControlDisabledCursor + ';\n          background-color: ' + $customControlDisabledIndicatorBg + ';\n        }\n    \n        ~ .custom-control-description {\n          color: ' + $customControlDisabledDescriptionColor + ';\n          cursor: ' + $customControlDisabledCursor + ';\n        }\n      }\n    }\n    \n    /* Custom indicator */\n    /* Generates a shadow element to create our makeshift checkbox/radio background. */\n    \n    & .custom-control-indicator {\n      position: absolute;\n      top: calc(' + lineHeightBaseMinusCustomControlIndicatorSize + ' / 2);\n      left: 0;\n      display: block;\n      width: ' + $customControlIndicatorSize + ';\n      height: ' + $customControlIndicatorSize + ';\n      pointer-events: none;\n      user-select: none;\n      background-color: ' + $customControlIndicatorBg + ';\n      background-repeat: no-repeat;\n      background-position: center center;\n      background-size: ' + $customControlIndicatorBgSize + ';\n      ' + (_boxShadow.boxShadow)($enableShadows, $customControlIndicatorBoxShadow) + '\n    }\n    \n    /* Checkboxes */\n    /* Tweak just a few things for checkboxes.  */\n    \n    & .custom-checkbox {\n      & .custom-control-indicator {\n        ' + (_borderRadius.borderRadius)($enableRounded, $customCheckboxRadius) + '\n      }\n    \n      & .custom-control-input:checked ~ .custom-control-indicator {\n        background-image: ' + $customCheckboxCheckedIcon + ';\n      }\n    \n      & .custom-control-input.indeterminate ~ .custom-control-indicator {\n        background-color: ' + $customCheckboxIndeterminateBg + ';\n        background-image: ' + $customCheckboxIndeterminateIcon + ';\n        ' + (_boxShadow.boxShadow)($enableShadows, $customCheckboxIndeterminateBoxShadow) + '\n      }\n    }\n    \n    /* Radios */\n    /* Tweak just a few things for radios. */\n    \n    & .custom-radio {\n      & .custom-control-indicator {\n        border-radius: ' + $customRadioRadius + ';\n      }\n    \n      & .custom-control-input:checked ~ .custom-control-indicator {\n        background-image: ' + $customRadioCheckedIcon + ';\n      }\n    }\n    \n    \n    /* Layout options */\n    /* By default radios and checkboxes are inline-block with no additional spacing */\n    /* set. Use these optional classes to tweak the layout. */\n    \n    & .custom-controls-stacked {\n      display: flex;\n      flex-direction: column;\n    \n      & .custom-control {\n        margin-bottom: ' + $customControlSpacerY + ';\n    \n        + & .custom-control {\n          margin-left: 0;\n        }\n      }\n    }\n    \n    \n    /* Select */\n    /* Replaces the browser default select with a custom one, mostly pulled from */\n    /* http://primercss.io. */\n    \n    & .custom-select {\n      display: inline-block;\n      max-width: 100%;\n      height: calc(' + $inputHeight + ' + ' + selectBorderWidth + ');\n      padding: ' + $customSelectPaddingY + ' ' + customSelectPaddingRight + ' ' + $customSelectPaddingY + ' ' + $customSelectPaddingX + ';\n      line-height: ' + $customSelectLineHeight + ';\n      color: ' + $customSelectColor + ';\n      vertical-align: middle;\n      background: ' + $customSelectBg + ' ' + $customSelectIndicator + ' no-repeat right ' + $customSelectPaddingX + ' center;\n      background-size: ' + $customSelectBgSize + ';\n      border: ' + $customSelectBorderWidth + ' solid ' + $customSelectBorderColor + ';\n      ' + (_borderRadius.borderRadius)($enableRounded, $customSelectBorderRadius) + '\n      /* Use vendor prefixes as appearance is not part of the CSS spec.  */\n      -moz-appearance: none;\n      -webkit-appearance: none;\n    \n      &:focus {\n        border-color: ' + $customSelectFocusBorderColor + ';\n        outline: none;\n        ' + (_boxShadow.boxShadow)($enableShadows, $customSelectFocusBoxShadow) + '\n    \n        ::-ms-value {\n          /* For visual consistency with other platforms/browsers, */\n          /* supress the default white text on blue background highlight given to */\n          /* the selected option text when the (still closed) <select> receives focus */\n          /* in IE and (under certain conditions) Edge. */\n          /* See https://github.com/twbs/bootstrap/issues/19398. */\n          color: ' + $inputColor + ';\n          background-color: ' + $inputBg + ';\n        }\n      }\n    \n      &:disabled {\n        color: ' + $customSelectDisabledColor + ';\n        cursor: ' + $cursorDisabled + ';\n        background-color: ' + $customSelectDisabledBg + ';\n      }\n    \n      /* Hides the default caret in IE11 */\n      ::-ms-expand {\n        opacity: 0;\n      }\n    }\n    \n    & .custom-select-sm {\n      padding-top: ' + $customSelectPaddingY + ';\n      padding-bottom: ' + $customSelectPaddingY + ';\n      font-size: ' + $customSelectSmFontSize + ';\n    \n      /* &:not([multiple]) { */\n      /*   height: 26px; */\n      /*   min-height: 26px; */\n      /* } */\n    }\n    \n    \n    /* File */\n    /* Custom file input. */\n    \n    & .custom-file {\n      position: relative;\n      display: inline-block;\n      max-width: 100%;\n      height: ' + $customFileHeight + ';\n      margin-bottom: 0;\n    }\n    \n    & .custom-file-input {\n      min-width: ' + $customFileWidth + ';\n      max-width: 100%;\n      height: ' + $customFileHeight + ';\n      margin: 0;\n      opacity: 0;\n    \n      &:focus ~ .custom-file-control {\n        ' + (_boxShadow.boxShadow)($enableShadows, $customFileFocusBoxShadow) + '\n      }\n    }\n    \n    & .custom-file-control {\n      position: absolute;\n      top: 0;\n      right: 0;\n      left: 0;\n      z-index: 5;\n      height: ' + $customFileHeight + ';\n      padding: ' + $customFilePaddingX + ' ' + $customFilePaddingY + ';\n      line-height: ' + $customFileLineHeight + ';\n      color: ' + $customFileColor + ';\n      pointer-events: none;\n      user-select: none;\n      background-color: ' + $customFileBg + ';\n      border: ' + $customFileBorderWidth + ' solid ' + $customFileBorderColor + ';\n      ' + (_borderRadius.borderRadius)($enableRounded, $customFileBorderRadius) + '\n      ' + (_boxShadow.boxShadow)($enableShadows, $customFileBoxShadow) + '\n      \n      ' + customFileControlBeforeList.join('\n') + '\n    \n      &::before {\n        position: absolute;\n        top: ' + $customFileBorderWidth + ';\n        right: ' + $customFileBorderWidth + ';\n        bottom: ' + $customFileBorderWidth + ';\n        z-index: 6;\n        display: block;\n        height: ' + $customFileHeight + ';\n        padding: ' + $customFilePaddingX + ' ' + $customFilePaddingY + ';\n        line-height: ' + $customFileLineHeight + ';\n        color: ' + $customFileButtonColor + ';\n        background-color: ' + $customFileButtonBg + ';\n        border: ' + $customFileBorderWidth + ' solid ' + $customFileBorderColor + ';\n        ' + (_borderRadius.borderRadius)(0, $enableRounded, $customFileBorderRadius, $customFileBorderRadius, 0) + '\n      }\n\n      ' + customFileControlAfterList.join('\n') + '\n    }\n  ';
+  return '\n    /* Embedded icons from Open Iconic. */\n    /* Released under MIT and copyright 2014 Waybury. */\n    /* https://useiconic.com/open */\n    \n    \n    /* Checkboxes and radios */\n    /* Base class takes care of all the key behavioral aspects. */\n    \n    & .custom-control {\n      position: relative;\n      display: inline-flex;\n      min-height: calc(1rem * ' + $lineHeightBase + ');\n      padding-left: ' + $customControlGutter + ';\n      margin-right: ' + $customControlSpacerX + ';\n    }\n    \n    & .custom-control-input {\n      position: absolute;\n      z-index: -1; /* Put the input behind the label so it does not overlay text */\n      opacity: 0;\n    \n      &:checked ~ .custom-control-indicator {\n        color: ' + $customControlCheckedIndicatorColor + ';\n        background-color: ' + $customControlCheckedIndicatorBg + ';\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $customControlCheckedIndicatorBoxShadow) + '\n      }\n    \n      &:focus ~ .custom-control-indicator {\n        /* the mixin is not used here to make sure there is feedback */\n        box-shadow: ' + $customControlFocusIndicatorBoxShadow + ';\n      }\n    \n      &:active ~ .custom-control-indicator {\n        color: ' + $customControlActiveIndicatorColor + ';\n        background-color: ' + $customControlActiveIndicatorBg + ';\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $customControlActiveIndicatorBoxShadow) + '\n      }\n    \n      &:disabled {\n        ~ .custom-control-indicator {\n          cursor: ' + $customControlDisabledCursor + ';\n          background-color: ' + $customControlDisabledIndicatorBg + ';\n        }\n    \n        ~ .custom-control-description {\n          color: ' + $customControlDisabledDescriptionColor + ';\n          cursor: ' + $customControlDisabledCursor + ';\n        }\n      }\n    }\n    \n    /* Custom indicator */\n    /* Generates a shadow element to create our makeshift checkbox/radio background. */\n    \n    & .custom-control-indicator {\n      position: absolute;\n      top: calc(' + lineHeightBaseMinusCustomControlIndicatorSize + ' / 2);\n      left: 0;\n      display: block;\n      width: ' + $customControlIndicatorSize + ';\n      height: ' + $customControlIndicatorSize + ';\n      pointer-events: none;\n      user-select: none;\n      background-color: ' + $customControlIndicatorBg + ';\n      background-repeat: no-repeat;\n      background-position: center center;\n      background-size: ' + $customControlIndicatorBgSize + ';\n      ' + (0, boxShadow_1.boxShadow)($enableShadows, $customControlIndicatorBoxShadow) + '\n    }\n    \n    /* Checkboxes */\n    /* Tweak just a few things for checkboxes.  */\n    \n    & .custom-checkbox {\n      & .custom-control-indicator {\n        ' + (0, borderRadius_1.borderRadius)($enableRounded, $customCheckboxRadius) + '\n      }\n    \n      & .custom-control-input:checked ~ .custom-control-indicator {\n        background-image: ' + $customCheckboxCheckedIcon + ';\n      }\n    \n      & .custom-control-input.indeterminate ~ .custom-control-indicator {\n        background-color: ' + $customCheckboxIndeterminateBg + ';\n        background-image: ' + $customCheckboxIndeterminateIcon + ';\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $customCheckboxIndeterminateBoxShadow) + '\n      }\n    }\n    \n    /* Radios */\n    /* Tweak just a few things for radios. */\n    \n    & .custom-radio {\n      & .custom-control-indicator {\n        border-radius: ' + $customRadioRadius + ';\n      }\n    \n      & .custom-control-input:checked ~ .custom-control-indicator {\n        background-image: ' + $customRadioCheckedIcon + ';\n      }\n    }\n    \n    \n    /* Layout options */\n    /* By default radios and checkboxes are inline-block with no additional spacing */\n    /* set. Use these optional classes to tweak the layout. */\n    \n    & .custom-controls-stacked {\n      display: flex;\n      flex-direction: column;\n    \n      & .custom-control {\n        margin-bottom: ' + $customControlSpacerY + ';\n    \n        + & .custom-control {\n          margin-left: 0;\n        }\n      }\n    }\n    \n    \n    /* Select */\n    /* Replaces the browser default select with a custom one, mostly pulled from */\n    /* http://primercss.io. */\n    \n    & .custom-select {\n      display: inline-block;\n      max-width: 100%;\n      height: calc(' + $inputHeight + ' + ' + selectBorderWidth + ');\n      padding: ' + $customSelectPaddingY + ' ' + customSelectPaddingRight + ' ' + $customSelectPaddingY + ' ' + $customSelectPaddingX + ';\n      line-height: ' + $customSelectLineHeight + ';\n      color: ' + $customSelectColor + ';\n      vertical-align: middle;\n      background: ' + $customSelectBg + ' ' + $customSelectIndicator + ' no-repeat right ' + $customSelectPaddingX + ' center;\n      background-size: ' + $customSelectBgSize + ';\n      border: ' + $customSelectBorderWidth + ' solid ' + $customSelectBorderColor + ';\n      ' + (0, borderRadius_1.borderRadius)($enableRounded, $customSelectBorderRadius) + '\n      /* Use vendor prefixes as appearance is not part of the CSS spec.  */\n      -moz-appearance: none;\n      -webkit-appearance: none;\n    \n      &:focus {\n        border-color: ' + $customSelectFocusBorderColor + ';\n        outline: none;\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $customSelectFocusBoxShadow) + '\n    \n        ::-ms-value {\n          /* For visual consistency with other platforms/browsers, */\n          /* supress the default white text on blue background highlight given to */\n          /* the selected option text when the (still closed) <select> receives focus */\n          /* in IE and (under certain conditions) Edge. */\n          /* See https://github.com/twbs/bootstrap/issues/19398. */\n          color: ' + $inputColor + ';\n          background-color: ' + $inputBg + ';\n        }\n      }\n    \n      &:disabled {\n        color: ' + $customSelectDisabledColor + ';\n        cursor: ' + $cursorDisabled + ';\n        background-color: ' + $customSelectDisabledBg + ';\n      }\n    \n      /* Hides the default caret in IE11 */\n      ::-ms-expand {\n        opacity: 0;\n      }\n    }\n    \n    & .custom-select-sm {\n      padding-top: ' + $customSelectPaddingY + ';\n      padding-bottom: ' + $customSelectPaddingY + ';\n      font-size: ' + $customSelectSmFontSize + ';\n    \n      /* &:not([multiple]) { */\n      /*   height: 26px; */\n      /*   min-height: 26px; */\n      /* } */\n    }\n    \n    \n    /* File */\n    /* Custom file input. */\n    \n    & .custom-file {\n      position: relative;\n      display: inline-block;\n      max-width: 100%;\n      height: ' + $customFileHeight + ';\n      margin-bottom: 0;\n    }\n    \n    & .custom-file-input {\n      min-width: ' + $customFileWidth + ';\n      max-width: 100%;\n      height: ' + $customFileHeight + ';\n      margin: 0;\n      opacity: 0;\n    \n      &:focus ~ .custom-file-control {\n        ' + (0, boxShadow_1.boxShadow)($enableShadows, $customFileFocusBoxShadow) + '\n      }\n    }\n    \n    & .custom-file-control {\n      position: absolute;\n      top: 0;\n      right: 0;\n      left: 0;\n      z-index: 5;\n      height: ' + $customFileHeight + ';\n      padding: ' + $customFilePaddingX + ' ' + $customFilePaddingY + ';\n      line-height: ' + $customFileLineHeight + ';\n      color: ' + $customFileColor + ';\n      pointer-events: none;\n      user-select: none;\n      background-color: ' + $customFileBg + ';\n      border: ' + $customFileBorderWidth + ' solid ' + $customFileBorderColor + ';\n      ' + (0, borderRadius_1.borderRadius)($enableRounded, $customFileBorderRadius) + '\n      ' + (0, boxShadow_1.boxShadow)($enableShadows, $customFileBoxShadow) + '\n      \n      ' + customFileControlBeforeList.join('\n') + '\n    \n      &::before {\n        position: absolute;\n        top: ' + $customFileBorderWidth + ';\n        right: ' + $customFileBorderWidth + ';\n        bottom: ' + $customFileBorderWidth + ';\n        z-index: 6;\n        display: block;\n        height: ' + $customFileHeight + ';\n        padding: ' + $customFilePaddingX + ' ' + $customFilePaddingY + ';\n        line-height: ' + $customFileLineHeight + ';\n        color: ' + $customFileButtonColor + ';\n        background-color: ' + $customFileButtonBg + ';\n        border: ' + $customFileBorderWidth + ' solid ' + $customFileBorderColor + ';\n        ' + (0, borderRadius_1.borderRadius)(0, $enableRounded, $customFileBorderRadius, $customFileBorderRadius, 0) + '\n      }\n\n      ' + customFileControlAfterList.join('\n') + '\n    }\n  ';
 }
 exports.default = {
   customForms: customForms
@@ -19285,7 +19165,7 @@ var DropdownItem = function (_React$Component) {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = DropdownItem.__proto__ || Object.getPrototypeOf(DropdownItem)).call.apply(_ref, [this].concat(args))), _this), _this.onClick = function (e) {
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = DropdownItem.__proto__ || Object.getPrototypeOf(DropdownItem)).call.apply(_ref, [this].concat(args))), _this), _this.onClick = function (e) {
       if (_this.props.disabled || _this.props.header || _this.props.divider) {
         e.preventDefault();
         return;
@@ -19299,7 +19179,7 @@ var DropdownItem = function (_React$Component) {
         return '-1';
       }
       return '0';
-    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+    }, _temp), possibleConstructorReturn(_this, _ret);
   }
   createClass(DropdownItem, [{
     key: 'render',
@@ -19370,7 +19250,7 @@ var DropdownToggle = function (_React$Component) {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = DropdownToggle.__proto__ || Object.getPrototypeOf(DropdownToggle)).call.apply(_ref, [this].concat(args))), _this), _this.onClick = function (e) {
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = DropdownToggle.__proto__ || Object.getPrototypeOf(DropdownToggle)).call.apply(_ref, [this].concat(args))), _this), _this.onClick = function (e) {
       if (_this.props.disabled) {
         e.preventDefault();
         return;
@@ -19382,7 +19262,7 @@ var DropdownToggle = function (_React$Component) {
         _this.props.onClick(e);
       }
       _this.context.toggle();
-    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+    }, _temp), possibleConstructorReturn(_this, _ret);
   }
   createClass(DropdownToggle, [{
     key: 'render',
@@ -19590,7 +19470,7 @@ var NavbarUnstyled = function (_React$Component) {
       var classes = mapToCssModules(classnames(className, 'navbar', getToggleableClass(toggleable), (_cn = {
         'navbar-light': light,
         'navbar-inverse': inverse
-      }, babelHelpers.defineProperty(_cn, 'bg-' + color, color), babelHelpers.defineProperty(_cn, 'navbar-full', full), babelHelpers.defineProperty(_cn, 'fixed-' + fixed, fixed), babelHelpers.defineProperty(_cn, 'sticky-' + sticky, sticky), _cn)), cssModule);
+      }, defineProperty(_cn, 'bg-' + color, color), defineProperty(_cn, 'navbar-full', full), defineProperty(_cn, 'fixed-' + fixed, fixed), defineProperty(_cn, 'sticky-' + sticky, sticky), _cn)), cssModule);
       return React.createElement(Tag, _extends({}, attributes, { className: classes }));
     }
   }]);
