@@ -8,7 +8,7 @@ describe('makeTheme', () => {
     Object.keys(makeTheme()).forEach((key) => expect(['$', '_'].indexOf(key[0]) !== -1).toBe(true));
   });
   it('should makeTheme', () => {
-    expect(Object.keys(makeTheme()).length).toEqual(484);
+    expect(Object.keys(makeTheme()).length).toEqual(483);
   });
 });
 
