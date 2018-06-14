@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { mount } from 'enzyme';
-import BootstrapProvider from '../../BootstrapProvider';
+import BootstrapProvider from 'bootstrap-styled-provider/lib/BootstrapProvider';
 import DropdownItem from '../DropdownItem';
 import Dropdown from '../index';
 import DropdownToggle from '../DropdownToggle';

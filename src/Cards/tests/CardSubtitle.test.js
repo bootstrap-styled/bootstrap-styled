@@ -4,8 +4,8 @@
 
 import { mount } from 'enzyme';
 import React from 'react';
+import BootstrapProvider from 'bootstrap-styled-provider/lib/BootstrapProvider';
 import CardSubtitle from '../CardSubtitle';
-import BootstrapProvider from '../../BootstrapProvider';
 
 const children = <p> test </p>;
 

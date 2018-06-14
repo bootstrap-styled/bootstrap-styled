@@ -237,6 +237,7 @@
   "dependencies": {
     "basic-math-utils": "^0.3.4",
     "bootstrap-styled-mixins": "^1.0.4",
+    "bootstrap-styled-provider": "1.1.1",
     "classnames": "^2.2.5",
     "color": "^1.0.3",
     "lodash.omit": "^4.5.0",
