@@ -4,7 +4,7 @@
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import BootstrapProvider from '../../BootstrapProvider';
+import BootstrapProvider from 'bootstrap-styled-provider/lib/BootstrapProvider';
 
 import CardBlockquote from '../CardBlockquote';
 

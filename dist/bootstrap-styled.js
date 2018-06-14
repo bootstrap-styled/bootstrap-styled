@@ -5098,22 +5098,6 @@ var possibleConstructorReturn = function (self, call) {
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
 
-
-
-
-
-
-
-
-
-var taggedTemplateLiteral = function (strings, raw) {
-  return Object.freeze(Object.defineProperties(strings, {
-    raw: {
-      value: Object.freeze(raw)
-    }
-  }));
-};
-
 var defaultProps = {
   tag: 'a',
   theme: {
@@ -6124,10 +6108,6 @@ var AlertUnstyled = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       if (this.props.autoHideDuration) {
-        if (this.props.onClick) {
-          console.warn('You cannot make an Alert auto-hide when using an onClick function. Use the auto-hide props with the uncontrolled props!');
-          return;
-        }
         this.setAutoHideTimer();
       }
     }
@@ -6269,358 +6249,7 @@ var Blockquote = styled__default(BlockquoteUnstyled).withConfig({
 Blockquote.defaultProps = defaultProps$6;
 Blockquote.propTypes = propTypes$6;
 
-var reboot = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getGlobalStyles = getGlobalStyles;
-exports.getGlobalStyleNoBootstrapProvider = getGlobalStyleNoBootstrapProvider;
-exports.html = html;
-exports.boxSizing = boxSizing;
-exports.ie10FixViewport = ie10FixViewport;
-exports.body = body;
-exports.bodyUtils = bodyUtils;
-exports.tabIndex = tabIndex;
-exports.svg = svg;
-exports.ie10FixHidden = ie10FixHidden;
-exports.webkitFileUploadButton = webkitFileUploadButton;
-var defaultProps = exports.defaultProps = {
-  '$font-family-base': '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-  '$font-size-base': '1rem',
-  '$font-weight-base': '1.5',
-  '$line-height-base': '1.5',
-  '$body-color': '#292b2c',
-  '$body-bg': '#fff'
-};
-function getGlobalStyles() {
-  return '\n    html {\n      ' + html() + '\n    }\n    *,\n    *::before,\n    *::after {\n      ' + boxSizing() + '\n    }\n    @-ms-viewport { \n      ' + ie10FixViewport() + ' \n    }\n    body {\n      ' + bodyUtils() + '\n    }\n  ';
-}
-function getGlobalStyleNoBootstrapProvider() {
-  var fontFamilyBase = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$font-family-base'];
-  var fontSizeBase = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$font-size-base'];
-  var fontWeightBase = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$font-weight-base'];
-  var lineHeightBase = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$line-height-base'];
-  var bodyColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$body-color'];
-  var bodyBg = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$body-bg'];
-  return '\n  ' + getGlobalStyles() + '\n  body {\n  ' + body(fontFamilyBase, fontSizeBase, fontWeightBase, lineHeightBase, bodyColor, bodyBg) + ' \n}';
-}
-function html() {
-  return '\n    box-sizing: border-box;\n    font-family: sans-serif;\n    line-height: 1.15;\n    -ms-text-size-adjust: 100%;\n    -webkit-text-size-adjust: 100%;\n    -ms-overflow-style: scrollbar;\n    -webkit-tap-highlight-color: rgba(0,0,0,0);\n  ';
-}
-function boxSizing() {
-  return '\n    box-sizing: inherit;\n  ';
-}
-function ie10FixViewport() {
-  return '\n    width: device-width;\n  ';
-}
-function body() {
-  var fontFamilyBase = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$font-family-base'];
-  var fontSizeBase = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$font-size-base'];
-  var fontWeightBase = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$font-weight-base'];
-  var lineHeightBase = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$line-height-base'];
-  var bodyColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$body-color'];
-  var bodyBg = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$body-bg'];
-  return '\n    margin: 0;\n    font-family: ' + fontFamilyBase + ';\n    font-size: ' + fontSizeBase + ';\n    font-weight: ' + fontWeightBase + ';\n    line-height: ' + lineHeightBase + ';\n    color: ' + bodyColor + ';\n    background-color: ' + bodyBg + ';\n    \n    ' + bodyUtils() + '\n    \n    [tabindex="-1"]:focus {\n      ' + tabIndex() + '\n    }\n    svg:not(:root) {\n      ' + svg() + '\n    }\n    [hidden] {\n      ' + ie10FixHidden() + '\n    }\n    ::-webkit-file-upload-button {\n      ' + webkitFileUploadButton() + '\n    }\n  ';
-}
-function bodyUtils() {
-  return '\n    &.overflow {\n      overflow: hidden;\n    }\n  ';
-}
-function tabIndex() {
-  return '\n    outline: none !important;\n  ';
-}
-function svg() {
-  return '\n    overflow: hidden;\n  ';
-}
-function ie10FixHidden() {
-  return '\n    display: none !important;\n  ';
-}
-function webkitFileUploadButton() {
-  return '\n    font: inherit;\n    -webkit-appearance: button;\n  ';
-}
-exports.default = {
-  html: html,
-  boxSizing: boxSizing,
-  ie10FixViewport: ie10FixViewport,
-  body: body,
-  bodyUtils: bodyUtils,
-  tabIndex: tabIndex,
-  svg: svg,
-  ie10FixHidden: ie10FixHidden,
-  getGlobalStyles: getGlobalStyles,
-  getGlobalStyleNoBootstrapProvider: getGlobalStyleNoBootstrapProvider,
-  webkitFileUploadButton: webkitFileUploadButton
-};
-});
-var rebootUtils = unwrapExports(reboot);
-var reboot_1 = reboot.getGlobalStyles;
-var reboot_2 = reboot.getGlobalStyleNoBootstrapProvider;
-
-var conditional = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ifThen = ifThen;
-exports.ifElse = ifElse;
-function ifThen(conditions, returnTrue) {
-  return ifElse(conditions, returnTrue, '');
-}
-function ifElse(conditions, returnTrue, returnFalse) {
-  return conditions ? returnTrue : returnFalse;
-}
-exports.default = {
-  ifThen: ifThen,
-  ifElse: ifElse
-};
-});
-unwrapExports(conditional);
-var conditional_1 = conditional.ifThen;
-
-var align = createCommonjsModule(function (module, exports) {
-"use strict";
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getAlignUtilities = getAlignUtilities;
-exports.alignBaseline = alignBaseline;
-exports.alignTop = alignTop;
-exports.alignMiddle = alignMiddle;
-exports.alignBottom = alignBottom;
-exports.alignTextBottom = alignTextBottom;
-exports.alignTextTop = alignTextTop;
-function getAlignUtilities() {
-  return "\n   " + alignBaseline() + "\n   " + alignTop() + "\n   " + alignMiddle() + "\n   " + alignBottom() + "\n   " + alignTextBottom() + "\n   " + alignTextTop() + "\n  ";
-}
-function alignBaseline() {
-  return "\n    .align-baseline { vertical-align: baseline !important; } /* Browser default */\n  ";
-}
-function alignTop() {
-  return "\n    .align-top { vertical-align: top !important; }\n  ";
-}
-function alignMiddle() {
-  return "\n    .align-middle { vertical-align: middle !important; }\n  ";
-}
-function alignBottom() {
-  return "\n    .align-bottom { vertical-align: bottom !important; }\n  ";
-}
-function alignTextBottom() {
-  return "\n    .align-text-bottom { vertical-align: text-bottom !important; }\n  ";
-}
-function alignTextTop() {
-  return "\n    .align-text-top { vertical-align: text-top !important; }\n  ";
-}
-exports.default = {
-  getAlignUtilities: getAlignUtilities,
-  alignBaseline: alignBaseline,
-  alignTop: alignTop,
-  alignMiddle: alignMiddle,
-  alignBottom: alignBottom,
-  alignTextBottom: alignTextBottom,
-  alignTextTop: alignTextTop
-};
-});
-var alignUtils = unwrapExports(align);
-
-var backgroundVariant = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.defaultProps = undefined;
-exports.bgVariant = bgVariant;
-var _color2 = _interopRequireDefault(color);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var defaultProps = exports.defaultProps = {
-  '$enable-hover-media-query': false
-};
-function bgVariant() {
-  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
-  var selector = arguments[1];
-  var bgColor = arguments[2];
-  return '\n    ' + selector + ' {\n      background-color: ' + bgColor + ' !important;\n    }\n    a' + selector + ' {\n      ' + (_hover.hoverFocus)(enableHoverMediaQuery, 'background-color: ' + (_color2.default)(bgColor).darken(0.2).rgb() + ' !important;') + '\n    }\n  ';
-}
-exports.default = {
-  bgVariant: bgVariant
-};
-});
-unwrapExports(backgroundVariant);
-
-var background = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.bgFaded = exports.bgInverse = exports.bgDanger = exports.bgWarning = exports.bgInfo = exports.bgSuccess = exports.bgPrimary = exports.defaultProps = undefined;
-exports.getBackgroundUtilities = getBackgroundUtilities;
-var defaultProps = exports.defaultProps = {
-  '$enable-hover-media-query': false,
-  '$brand-primary': '#0275d8',
-  '$brand-success': '#5cb85c',
-  '$brand-info': '#5bc0de',
-  '$brand-warning': '#f0ad4e',
-  '$brand-danger': '#d9543f',
-  '$brand-inverse': '#373a3c',
-  '$gray-lightest': '#f7f7f9'
-};
-function getBackgroundUtilities() {
-  var $enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
-  var $brandPrimary = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-primary'];
-  var $brandSuccess = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$brand-success'];
-  var $brandInfo = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$brand-info'];
-  var $brandWarning = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$brand-warning'];
-  var $brandDanger = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$brand-danger'];
-  var $brandInverse = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$brand-inverse'];
-  var $grayLightest = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$gray-lightest'];
-  return '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-primary', $brandPrimary) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-success', $brandSuccess) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-info', $brandInfo) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-warning', $brandWarning) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-danger', $brandDanger) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-inverse', $brandInverse) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-faded', $grayLightest) + '\n  ';
-}
-var bgPrimary = exports.bgPrimary = function bgPrimary($enableHoverMediaQuery) {
-  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-primary'];
-  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-primary', bgColor);
-};
-var bgSuccess = exports.bgSuccess = function bgSuccess($enableHoverMediaQuery) {
-  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-success'];
-  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-success', bgColor);
-};
-var bgInfo = exports.bgInfo = function bgInfo($enableHoverMediaQuery) {
-  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-info'];
-  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-info', bgColor);
-};
-var bgWarning = exports.bgWarning = function bgWarning($enableHoverMediaQuery) {
-  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-warning'];
-  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-warning', bgColor);
-};
-var bgDanger = exports.bgDanger = function bgDanger($enableHoverMediaQuery) {
-  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-danger'];
-  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-danger', bgColor);
-};
-var bgInverse = exports.bgInverse = function bgInverse($enableHoverMediaQuery) {
-  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-inverse'];
-  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-inverse', bgColor);
-};
-var bgFaded = exports.bgFaded = function bgFaded($enableHoverMediaQuery) {
-  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$gray-lightest'];
-  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-faded', bgColor);
-};
-exports.default = {
-  defaultProps: defaultProps,
-  getBackgroundUtilities: getBackgroundUtilities,
-  bgFaded: bgFaded,
-  bgPrimary: bgPrimary,
-  bgSuccess: bgSuccess,
-  bgInfo: bgInfo,
-  bgWarning: bgWarning,
-  bgDanger: bgDanger,
-  bgInverse: bgInverse
-};
-});
-var backgroundUtils = unwrapExports(background);
-var background_9 = background.getBackgroundUtilities;
-
-var borders = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.defaultProps = undefined;
-exports.getBordersUtilities = getBordersUtilities;
-exports.rounded = rounded;
-exports.roundedTop = roundedTop;
-exports.roundedRight = roundedRight;
-exports.roundedBottom = roundedBottom;
-exports.roundedLeft = roundedLeft;
-exports.roundedCircle = roundedCircle;
-exports.resetBorder = resetBorder;
-exports.resetBorderTop = resetBorderTop;
-exports.resetBorderRight = resetBorderRight;
-exports.resetBorderBottom = resetBorderBottom;
-exports.resetBorderLeft = resetBorderLeft;
-exports.resetRounded = resetRounded;
-exports.resetRoundedTop = resetRoundedTop;
-exports.resetRoundedBottom = resetRoundedBottom;
-exports.resetRoundedLeft = resetRoundedLeft;
-exports.resetRoundedRight = resetRoundedRight;
-var defaultProps = exports.defaultProps = {
-  '$border-radius': '.25rem',
-  '$enable-rounded': true
-};
-function getBordersUtilities() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
-  return '\n    ' + rounded(enableRounded, radius) + '\n    ' + roundedTop(enableRounded, radius) + '\n    ' + roundedRight(enableRounded, radius) + '\n    ' + roundedBottom(enableRounded, radius) + '\n    ' + roundedLeft(enableRounded, radius) + '\n    ' + roundedCircle() + '\n    ' + resetRounded() + '\n    ' + resetRoundedTop() + '\n    ' + resetRoundedRight() + '\n    ' + resetRoundedLeft() + '\n    ' + resetRoundedBottom() + '\n    ' + resetBorder() + '\n    ' + resetBorderTop() + '\n    ' + resetBorderRight() + '\n    ' + resetBorderLeft() + '\n    ' + resetBorderBottom() + '\n  ';
-}
-function rounded() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
-  return '\n    .rounded {\n      ' + (_borderRadius.borderRadius)(enableRounded, radius) + '\n    }\n  ';
-}
-function roundedTop() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
-  return '\n    .rounded-top {\n      ' + (_borderRadius.borderTopRadius)(enableRounded, radius) + '\n    }\n  ';
-}
-function roundedRight() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
-  return '\n    .rounded-right {\n      ' + (_borderRadius.borderRightRadius)(enableRounded, radius) + '\n    }\n  ';
-}
-function roundedBottom() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
-  return '\n    .rounded-bottom {\n      ' + (_borderRadius.borderBottomRadius)(enableRounded, radius) + '\n    }\n  ';
-}
-function roundedLeft() {
-  var enableRounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-rounded'];
-  var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$border-radius'];
-  return '\n    .rounded-left {\n      ' + (_borderRadius.borderLeftRadius)(enableRounded, radius) + '\n    }\n  ';
-}
-function roundedCircle() {
-  return '\n    .rounded-circle {\n      border-radius: 50%;\n    }\n  ';
-}
-function resetBorder() {
-  return '\n    .border-0 {\n      border: 0 !important;\n    }\n  ';
-}
-function resetBorderTop() {
-  return '\n    .border-top-0 {\n      border-top: 0 !important;\n    }\n  ';
-}
-function resetBorderRight() {
-  return '\n    .border-right-0 {\n      border-right: 0 !important;\n    }\n  ';
-}
-function resetBorderBottom() {
-  return '\n    .border-bottom-0 {\n      border-bottom: 0 !important;\n    }\n  ';
-}
-function resetBorderLeft() {
-  return '\n    .border-left-0 {\n      border-left: 0 !important;\n    }\n  ';
-}
-function resetRounded() {
-  return '\n    .rounded-0 {\n      border-radius: 0 !important;\n    }\n  ';
-}
-function resetRoundedTop() {
-  return '\n    .rounded-top-0 {\n      border-top-left-radius: 0 !important;\n      border-top-right-radius: 0 !important;\n    }\n  ';
-}
-function resetRoundedBottom() {
-  return '\n    .rounded-bottom-0 {\n      border-bottom-left-radius: 0 !important;\n      border-bottom-right-radius: 0 !important;\n    }\n  ';
-}
-function resetRoundedLeft() {
-  return '\n    .rounded-left-0 {\n      border-bottom-left-radius: 0 !important;\n      border-top-left-radius: 0 !important;\n    }\n  ';
-}
-function resetRoundedRight() {
-  return '\n    .rounded-right-0 {\n      border-bottom-right-radius: 0 !important;\n      border-top-right-radius: 0 !important;\n    }\n  ';
-}
-exports.default = {
-  defaultProps: defaultProps,
-  getBordersUtilities: getBordersUtilities,
-  rounded: rounded,
-  roundedTop: roundedTop,
-  roundedRight: roundedRight,
-  roundedBottom: roundedBottom,
-  roundedLeft: roundedLeft,
-  roundedCircle: roundedCircle
-};
-});
-var bordersUtils = unwrapExports(borders);
-
-var clearfix_1$1 = createCommonjsModule(function (module, exports) {
+var clearfix_1 = createCommonjsModule(function (module, exports) {
 "use strict";
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -6633,873 +6262,10 @@ exports.default = {
   clearfix: clearfix
 };
 });
-unwrapExports(clearfix_1$1);
-var clearfix_2$1 = clearfix_1$1.clearfix;
+unwrapExports(clearfix_1);
+var clearfix_2 = clearfix_1.clearfix;
 
-var clearfix = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getClearfixUtilities = getClearfixUtilities;
-exports.getClearfix = getClearfix;
-function getClearfixUtilities() {
-  return '\n   ' + getClearfix() + '\n  ';
-}
-function getClearfix() {
-  return '\n    .clearfix {\n      ' + (_clearfix.clearfix)() + '\n    }\n  ';
-}
-exports.default = {
-  getClearfixUtilities: getClearfixUtilities,
-  getClearfix: getClearfix
-};
-});
-var clearfixUtils = unwrapExports(clearfix);
-
-var cursor = createCommonjsModule(function (module, exports) {
-"use strict";
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getCursorUtilities = getCursorUtilities;
-function getCursorUtilities() {
-  return "\n    .cursor-alias {\n      cursor: alias;\n    }\n    \n    .cursor-all-scroll {\n      cursor: all-scroll;\n    }\n    \n    .cursor-auto {\n      cursor: auto;\n    }\n    \n    .cursor-cell {\n      cursor: cell;\n    }\n    \n    .cursor-context-menu {\n      cursor: context-menu;\n    }\n    \n    .cursor-col-resize {\n      cursor: col-resize;\n    }\n    \n    .cursor-copy {\n      cursor: copy;\n    }\n    \n    .cursor-crosshair {\n      cursor: crosshair;\n    }\n    \n    .cursor-default {\n      cursor: default;\n    }\n    \n    .cursor-e-resize {\n      cursor: e-resize;\n    }\n    \n    .cursor-ew-resize {\n      cursor: ew-resize;\n    }\n    \n    .cursor-grab {\n      cursor: grab;\n    }\n    \n    .cursor-grabbing {\n      cursor: grabbing;\n    }\n    \n    .cursor-help {\n      cursor: help;\n    }\n    \n    .cursor-move {\n      cursor: move;\n    }\n    \n    .cursor-n-resize {\n      cursor: n-resize;\n    }\n    \n    .cursor-ne-resize {\n      cursor: ne-resize;\n    }\n    \n    .cursor-nesw-resize {\n      cursor: nesw-resize;\n    }\n    \n    .cursor-ns-resize {\n      cursor: ns-resize;\n    }\n    \n    .cursor-nw-resize {\n      cursor: nw-resize;\n    }\n    \n    .cursor-nwse-resize {\n      cursor: nwse-resize;\n    }\n    \n    .cursor-no-drop {\n      cursor: no-drop;\n    }\n    \n    .cursor-none {\n      cursor: none;\n    }\n    \n    .cursor-not-allowed {\n      cursor: not-allowed;\n    }\n    \n    .cursor-pointer {\n      cursor: pointer;\n    }\n    \n    .cursor-progress {\n      cursor: progress;\n    }\n    \n    .cursor-row-resize {\n      cursor: row-resize;\n    }\n    \n    .cursor-s-resize {\n      cursor: s-resize;\n    }\n    \n    .cursor-se-resize {\n      cursor: se-resize;\n    }\n    \n    .cursor-sw-resize {\n      cursor: sw-resize;\n    }\n    \n    .cursor-text {\n      cursor: text;\n    }\n    \n    .cursor-vertical-text {\n      cursor: vertical-text;\n    }\n    \n    .cursor-w-resize {\n      cursor: w-resize;\n    }\n    \n    .cursor-wait {\n      cursor: wait;\n    }\n    \n    .cursor-zoom-in {\n      cursor: zoom-in;\n    }\n    \n    .cursor-zoom-out {\n      cursor: zoom-out;\n    }\n    \n    .cursor-initial {\n      cursor: initial;\n    }\n  ";
-}
-exports.default = {
-  getCursorUtilities: getCursorUtilities
-};
-});
-var cursorUtils = unwrapExports(cursor);
-
-var breakpoints = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.defaultProps = undefined;
-exports.breakpointNext = breakpointNext;
-exports.breakpointMin = breakpointMin;
-exports.breakpointMax = breakpointMax;
-exports.breakpointInfix = breakpointInfix;
-exports.mediaBreakpointUp = mediaBreakpointUp;
-exports.mediaBreakpointDown = mediaBreakpointDown;
-exports.mediaBreakpointBetween = mediaBreakpointBetween;
-exports.mediaBreakpointOnly = mediaBreakpointOnly;
-var _unitUtils2 = _interopRequireDefault(unitUtils);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var defaultProps = exports.defaultProps = {
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  }
-};
-function breakpointNext(name) {
-  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
-  var breakpointNames = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Object.keys(breakpoints);
-  var n = breakpointNames.indexOf(name);
-  if (n !== -1 && n + 1 < breakpointNames.length) {
-    return breakpointNames[n + 1];
-  }
-  return null;
-}
-function breakpointMin(name) {
-  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
-  var min = breakpoints[name];
-  return min !== '0' ? min : null;
-}
-function breakpointMax(name) {
-  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
-  var next = breakpointNext(name, breakpoints);
-  if (next) {
-    var min = _unitUtils2.default.rmUnit(breakpointMin(next, breakpoints), _unitUtils2.default.UNIT.PX);
-    return (min - 1).toString() + _unitUtils2.default.UNIT.PX;
-  }
-  return null;
-}
-function breakpointInfix(name) {
-  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
-  return breakpointMin(name, breakpoints) == null ? '' : '-' + name;
-}
-function mediaBreakpointUp(name) {
-  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
-  var content = arguments[2];
-  var min = breakpointMin(name, breakpoints);
-  if (min) {
-    return '\n      @media (min-width: ' + min + ') {\n        ' + content + '\n      }\n    ';
-  }
-  return '\n    ' + content + '\n  ';
-}
-function mediaBreakpointDown(name) {
-  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
-  var content = arguments[2];
-  var max = breakpointMax(name, breakpoints);
-  if (max) {
-    return '\n      @media (max-width: ' + max + ') {\n        ' + content + '\n      }\n    ';
-  }
-  return '\n    ' + content + '\n  ';
-}
-function mediaBreakpointBetween(lower, upper) {
-  var breakpoints = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$grid-breakpoints'];
-  var content = arguments[3];
-  var min = breakpointMin(lower, breakpoints);
-  var max = breakpointMax(upper, breakpoints);
-  if (min && max) {
-    return '\n      @media (min-width: ' + min + ') and (max-width: ' + max + ') {\n        ' + content + '\n      }\n    ';
-  } else if (min) {
-    return '\n      @media (min-width: ' + min + ') {\n        ' + content + '\n      }\n    ';
-  } else if (max) {
-    return '\n      @media (max-width: ' + max + ') {\n        ' + content + '\n      }\n    ';
-  }
-  return '\n    ' + content + '\n  ';
-}
-function mediaBreakpointOnly(name) {
-  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
-  var content = arguments[2];
-  return mediaBreakpointBetween(name, name, breakpoints, content);
-}
-exports.default = {
-  defaultProps: defaultProps,
-  up: mediaBreakpointUp,
-  down: mediaBreakpointDown,
-  between: mediaBreakpointBetween,
-  only: mediaBreakpointOnly
-};
-});
-unwrapExports(breakpoints);
-var breakpoints_6 = breakpoints.mediaBreakpointUp;
-
-var display = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.defaultProps = undefined;
-exports.getDisplayUtilities = getDisplayUtilities;
-var defaultProps = exports.defaultProps = {
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  }
-};
-function getDisplayUtilities() {
-  var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-breakpoints'];
-  var utilityList = [];
-  Object.keys(gridBreakpoints).forEach(function (breakpoint) {
-    var infix = (_breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
-    utilityList.push('\n      ' + (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .d' + infix + '-none { display: none !important; }\n        .d' + infix + '-inline { display: inline !important; }\n        .d' + infix + '-inline-block { display: inline-block !important; }\n        .d' + infix + '-block { display: block !important; }\n        .d' + infix + '-table { display: table !important; }\n        .d' + infix + '-table-cell { display: table-cell !important; }\n        .d' + infix + '-flex { display: flex !important; }\n        .d' + infix + '-inline-flex { display: inline-flex !important; }\n      ') + '\n    ');
-  });
-  utilityList.push('\n    .d-print-block {\n      display: none !important;\n    \n      @media print {\n        display: block !important;\n      }\n    }\n    \n    .d-print-inline {\n      display: none !important;\n    \n      @media print {\n        display: inline !important;\n      }\n    }\n    \n    .d-print-inline-block {\n      display: none !important;\n    \n      @media print {\n        display: inline-block !important;\n      }\n    }\n    \n    .d-print-none {\n      @media print {\n        display: none !important;\n      }\n    }\n  ');
-  return utilityList.join('\n');
-}
-exports.default = {
-  defaultProps: defaultProps,
-  getDisplayUtilities: getDisplayUtilities
-};
-});
-var displayUtils = unwrapExports(display);
-
-var flex = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.defaultProps = undefined;
-exports.getFlexUtilities = getFlexUtilities;
-var defaultProps = exports.defaultProps = {
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  }
-};
-function getFlexUtilities() {
-  var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-breakpoints'];
-  var flexUtilityList = [];
-  Object.keys(gridBreakpoints).forEach(function (breakpoint) {
-    var infix = (_breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
-    flexUtilityList.push('\n      /* Flex column reordering */\n      ' + (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .flex' + infix + '-first { order: -1; }\n        .flex' + infix + '-last { order: 1; }\n        .flex' + infix + '-unordered { order: 0; }\n      ') + '\n  \n      /* Flex direction */ \n      ' + (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .flex' + infix + '-row            { flex-direction: row !important; }\n        .flex' + infix + '-column         { flex-direction: column !important; }\n        .flex' + infix + '-row-reverse    { flex-direction: row-reverse !important; }\n        .flex' + infix + '-column-reverse { flex-direction: column-reverse !important; }\n      ') + '\n      \n      /* Flex wrap */ \n      ' + (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .flex' + infix + '-wrap         { flex-wrap: wrap !important; }\n        .flex' + infix + '-nowrap       { flex-wrap: nowrap !important; }\n        .flex' + infix + '-wrap-reverse { flex-wrap: wrap-reverse !important; }\n      ') + '\n      /* Flex justify-content */ \n      ' + (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .justify-content' + infix + '-start   { justify-content: flex-start !important; }\n        .justify-content' + infix + '-end     { justify-content: flex-end !important; }\n        .justify-content' + infix + '-center  { justify-content: center !important; }\n        .justify-content' + infix + '-between { justify-content: space-between !important; }\n        .justify-content' + infix + '-around  { justify-content: space-around !important; }\n      ') + '\n      /* Flex align-items */ \n      ' + (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .align-items' + infix + '-start    { align-items: flex-start !important; }\n        .align-items' + infix + '-end      { align-items: flex-end !important; }\n        .align-items' + infix + '-center   { align-items: center !important; }\n        .align-items' + infix + '-baseline { align-items: baseline !important; }\n        .align-items' + infix + '-stretch  { align-items: stretch !important; }\n      ') + '\n      /* Flex align-content */ \n      ' + (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .align-content' + infix + '-start   { align-content: flex-start !important; }\n        .align-content' + infix + '-end     { align-content: flex-end !important; }\n        .align-content' + infix + '-center  { align-content: center !important; }\n        .align-content' + infix + '-between { align-content: space-between !important; }\n        .align-content' + infix + '-around  { align-content: space-around !important; }\n        .align-content' + infix + '-stretch { align-content: stretch !important; }\n      ') + '\n      /* Flex align-self */ \n      ' + (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n        .align-self' + infix + '-auto     { align-self: auto !important; }\n        .align-self' + infix + '-start    { align-self: flex-start !important; }\n        .align-self' + infix + '-end      { align-self: flex-end !important; }\n        .align-self' + infix + '-center   { align-self: center !important; }\n        .align-self' + infix + '-baseline { align-self: baseline !important; }\n        .align-self' + infix + '-stretch  { align-self: stretch !important; }\n      ') + ' \n    ');
-  });
-  return flexUtilityList.join('\n');
-}
-exports.default = {
-  defaultProps: defaultProps,
-  getFlexUtilities: getFlexUtilities
-};
-});
-var flexUtils = unwrapExports(flex);
-
-var float_1$1 = createCommonjsModule(function (module, exports) {
-"use strict";
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.floatLeft = floatLeft;
-exports.floatRight = floatRight;
-exports.floatNone = floatNone;
-function floatLeft() {
-  return "\n    float: left !important;\n  ";
-}
-function floatRight() {
-  return "\n    float: right !important;\n  ";
-}
-function floatNone() {
-  return "\n    float: none !important;\n  ";
-}
-exports.default = {
-  floatLeft: floatLeft,
-  floatRight: floatRight,
-  floatNone: floatNone
-};
-});
-unwrapExports(float_1$1);
-
-var float_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.defaultProps = undefined;
-exports.getFloatUtilities = getFloatUtilities;
-var defaultProps = exports.defaultProps = {
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  }
-};
-function getFloatUtilities() {
-  var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-breakpoints'];
-  var floatUtilityList = [];
-  Object.keys(gridBreakpoints).forEach(function (breakpoint) {
-    var infix = (_breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
-    var floatUtility = (_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n      .float' + infix + '-left {\n        ' + (_float.floatLeft)() + '\n      }\n      .float' + infix + '-right {\n        ' + (_float.floatRight)() + '\n      }\n      .float' + infix + '-none {\n        ' + (_float.floatNone)() + '\n      }\n    ');
-    floatUtilityList.push(floatUtility);
-  });
-  return floatUtilityList.join('\n');
-}
-exports.default = {
-  defaultProps: defaultProps,
-  getFloatUtilities: getFloatUtilities
-};
-});
-var floatUtils = unwrapExports(float_1);
-
-var position = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getPositionUtilities = getPositionUtilities;
-exports.fixedTop = fixedTop;
-exports.fixedBottom = fixedBottom;
-exports.stickTop = stickTop;
-var defaultProps = exports.defaultProps = {
-  '$zindex-fixed': '1030',
-  '$zindex-sticky': '1030'
-};
-function getPositionUtilities() {
-  var zindexFixed = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$zindex-fixed'];
-  var zindexSticky = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$zindex-sticky'];
-  return '\n    ' + fixedTop(zindexFixed) + '\n    ' + fixedBottom(zindexFixed) + '\n    ' + stickTop(zindexSticky) + '\n  ';
-}
-function fixedTop() {
-  var zindexFixed = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$zindex-fixed'];
-  return '\n  .fixed-top {\n    position: fixed !important;\n    top: 0;\n    right: 0;\n    left: 0;\n    z-index: ' + zindexFixed + ';\n  }\n  ';
-}
-function fixedBottom() {
-  var zindexFixed = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$zindex-fixed'];
-  return '\n    .fixed-bottom {\n      position: fixed !important;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + zindexFixed + ';\n    }\n  ';
-}
-function stickTop() {
-  var zindexSticky = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$zindex-sticky'];
-  return '\n    .sticky-top {\n      position: sticky !important;\n      top: 0;\n      z-index: ' + zindexSticky + ';\n    }\n  ';
-}
-exports.default = {
-  defaultProps: defaultProps,
-  getPositionUtilities: getPositionUtilities,
-  fixedTop: fixedTop,
-  fixedBottom: fixedBottom,
-  stickTop: stickTop
-};
-});
-var positionUtils = unwrapExports(position);
-
-var screenReader = createCommonjsModule(function (module, exports) {
-"use strict";
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.srOnly = srOnly;
-exports.srOnlyFocusable = srOnlyFocusable;
-function srOnly() {
-  return "\n    position: absolute !important;\n    width: 1px;\n    height: 1px;\n    padding: 0;\n    margin: -1px;\n    overflow: hidden;\n    clip: rect(0,0,0,0);\n    border: 0;\n  ";
-}
-function srOnlyFocusable() {
-  return "\n    &:active,\n    &:focus {\n      position: static;\n      width: auto;\n      height: auto;\n      margin: 0;\n      overflow: visible;\n      clip: auto;\n    }\n  ";
-}
-exports.default = {
-  srOnly: srOnly,
-  srOnlyFocusable: srOnlyFocusable
-};
-});
-unwrapExports(screenReader);
-
-var screenreaders = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getScreenReadersUtilities = getScreenReadersUtilities;
-function getScreenReadersUtilities() {
-  return '\n    .sr-only {\n      ' + (_screenReader.srOnly)() + '\n    }\n    \n    .sr-only-focusable {\n      ' + (_screenReader.srOnlyFocusable)() + '\n    }\n  ';
-}
-exports.default = {
-  getScreenReadersUtilities: getScreenReadersUtilities
-};
-});
-var screenreadersUtils = unwrapExports(screenreaders);
-
-var sizing = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getSizingUtilities = getSizingUtilities;
-var defaultProps = exports.defaultProps = {
-  $sizes: {
-    25: '25%',
-    50: '50%',
-    75: '75%',
-    100: '100%'
-  }
-};
-function getSizingUtilities() {
-  var sizes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$sizes'];
-  var abbrev = {
-    width: 'w',
-    height: 'h'
-  };
-  var sizingList = [];
-  Object.keys(abbrev).forEach(function (cssProp) {
-    Object.keys(sizes).forEach(function (size) {
-      sizingList.push('\n        .' + abbrev[cssProp] + '-' + size + ' { ' + cssProp + ': ' + sizes[size] + ' !important; }\n      ');
-    });
-  });
-  return '\n    ' + sizingList.join('\n') + '\n    .mw-100 { max-width: 100% !important; }\n    .mh-100 { max-height: 100% !important; }\n  ';
-}
-exports.default = {
-  defaultProps: defaultProps,
-  getSizingUtilities: getSizingUtilities
-};
-});
-var sizingUtils = unwrapExports(sizing);
-
-var spacing = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.defaultProps = undefined;
-exports.getSpacingUtilities = getSpacingUtilities;
-var defaultProps = exports.defaultProps = {
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  },
-  '$spacers': {
-    0: {
-      x: 0,
-      y: 0
-    },
-    1: {
-      x: '0.25rem',
-      y: '0.25rem'
-    },
-    2: {
-      x: '0.5rem',
-      y: '0.5rem'
-    },
-    3: {
-      x: '1rem',
-      y: '1rem'
-    },
-    4: {
-      x: '1.5rem',
-      y: '1.5rem'
-    },
-    5: {
-      x: '3rem',
-      y: '3rem'
-    }
-  }
-};
-function getSpacingUtilities()
-{
-  var gridBreakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-breakpoints'];
-  var spacers = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$spacers'];
-  var abbrevs = {
-    margin: 'm',
-    padding: 'p'
-  };
-  var spacingUtilityList = [];
-  var infixList = [];
-  Object.keys(gridBreakpoints).forEach(function (breakpoint) {
-    var infix = (_breakpoints.breakpointInfix)(breakpoint, gridBreakpoints);
-    infixList.push(infix);
-    Object.keys(abbrevs).forEach(function (prop) {
-      var abbrev = abbrevs[prop];
-      Object.keys(spacers).forEach(function (size) {
-        var lengths = spacers[size];
-        spacingUtilityList.push((_breakpoints.mediaBreakpointUp)(breakpoint, gridBreakpoints, '\n          .' + abbrev + infix + '-' + size + ' { ' + prop + ':        ' + lengths.y + ' ' + lengths.x + ' !important; } /* a = All sides */\n          .' + abbrev + 't' + infix + '-' + size + ' { ' + prop + '-top:    ' + lengths.y + ' !important; }\n          .' + abbrev + 'r' + infix + '-' + size + ' { ' + prop + '-right:  ' + lengths.x + ' !important; }\n          .' + abbrev + 'b' + infix + '-' + size + ' { ' + prop + '-bottom: ' + lengths.y + ' !important; }\n          .' + abbrev + 'l' + infix + '-' + size + ' { ' + prop + '-left:   ' + lengths.x + ' !important; }\n          .' + abbrev + 'x' + infix + '-' + size + ' {\n            ' + prop + '-right:  ' + lengths.x + ' !important;\n            ' + prop + '-left:   ' + lengths.x + ' !important;\n          }\n          .' + abbrev + 'y' + infix + '-' + size + ' {\n            ' + prop + '-top:    ' + lengths.y + ' !important;\n            ' + prop + '-bottom: ' + lengths.y + ' !important;\n          }\n        '));
-      });
-    });
-  });
-  var infixUtilityList = infixList.map(function (infix) {
-    return '\n    .m' + infix + '-auto  { margin:        auto !important; }\n    .mt' + infix + '-auto { margin-top:    auto !important; }\n    .mr' + infix + '-auto { margin-right:  auto !important; }\n    .mb' + infix + '-auto { margin-bottom: auto !important; }\n    .ml' + infix + '-auto { margin-left:   auto !important; }\n    .mx' + infix + '-auto {\n      margin-right: auto !important;\n      margin-left:  auto !important;\n    }\n    .my' + infix + '-auto {\n      margin-top:    auto !important;\n      margin-bottom: auto !important;\n    }\n  ';
-  });
-  return '\n    ' + infixUtilityList.join('\n') + '\n    ' + spacingUtilityList.join('\n') + '\n  ';
-}
-exports.default = {
-  defaultProps: defaultProps,
-  getSpacingUtilities: getSpacingUtilities
-};
-});
-var spacingUtils = unwrapExports(spacing);
-
-var textTruncate_1 = createCommonjsModule(function (module, exports) {
-"use strict";
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.textTruncate = textTruncate;
-function textTruncate() {
-  return "\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  ";
-}
-exports.default = {
-  textTruncate: textTruncate
-};
-});
-unwrapExports(textTruncate_1);
-
-var textHide_1 = createCommonjsModule(function (module, exports) {
-"use strict";
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.textHide = textHide;
-function textHide() {
-  return "\n    font: 0/0 a;\n    color: transparent;\n    text-shadow: none;\n    background-color: transparent;\n    border: 0;\n  ";
-}
-exports.default = {
-  textHide: textHide
-};
-});
-unwrapExports(textHide_1);
-
-var textEmphasis = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.defaultProps = undefined;
-exports.textEmphasisVariant = textEmphasisVariant;
-var _color2 = _interopRequireDefault(color);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var defaultProps = exports.defaultProps = {
-  '$enable-hover-media-query': false
-};
-function textEmphasisVariant() {
-  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
-  var parent = arguments[1];
-  var textColor = arguments[2];
-  return '\n  ' + parent + ' {\n    color: ' + textColor + ' !important;\n  }\n  a' + parent + ' {\n  ' + (_hover.hoverFocus)(enableHoverMediaQuery, 'color: ' + (_color2.default)(textColor).darken(0.20).rgb() + ' !important;') + '\n  }\n';
-}
-exports.default = {
-  defaultProps: defaultProps,
-  textEmphasisVariant: textEmphasisVariant
-};
-});
-unwrapExports(textEmphasis);
-
-var text = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.defaultProps = undefined;
-exports.getTextUtilities = getTextUtilities;
-var defaultProps = exports.defaultProps = {
-  '$grid-breakpoints': {
-    xs: '0',
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px'
-  },
-  '$enable-hover-media-query': false,
-  '$font-weight-normal': 'normal',
-  '$font-weight-bold': 'bold',
-  '$text-muted': '#818a91',
-  '$brand-primary': '#0275d8',
-  '$brand-success': '#5cb85c',
-  '$brand-info': '#5bc0de',
-  '$brand-warning': '#f0ad4e',
-  '$brand-danger': '#d9534f',
-  '$gray-dark': '#373a3c'
-};
-function getTextUtilities() {
-  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
-  var gridBreakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
-  var fontWeightNormal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$font-weight-normal'];
-  var fontWeightBold = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$font-weight-bold'];
-  var textMuted = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$text-muted'];
-  var brandPrimary = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$brand-primary'];
-  var brandSuccess = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$brand-success'];
-  var brandInfo = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$brand-info'];
-  var brandWarning = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : defaultProps['$brand-warning'];
-  var brandDanger = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : defaultProps['$brand-danger'];
-  var grayDark = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : defaultProps['$gray-dark'];
-  var responseAlignmentList = [];
-  Object.keys(gridBreakpoints).forEach(function (bp) {
-    var infix = (_breakpoints.breakpointInfix)(bp, gridBreakpoints);
-    var responsiveAlignement = (_breakpoints.mediaBreakpointUp)(bp, gridBreakpoints, '\n      .text' + infix + '-left { text-align: left !important; }\n      .text' + infix + '-right  { text-align: right !important; }\n      .text' + infix + '-center { text-align: center !important; }\n    ');
-    responseAlignmentList.push(responsiveAlignement);
-  });
-  return '\n    /* Text */\n\n    /* Alignment */\n\n    .text-justify        { text-align: justify !important; }\n    .text-nowrap         { white-space: nowrap !important; }\n    .text-truncate       { ' + (_textTruncate.textTruncate)() + ' }\n\n    /* Responsive alignment */\n\n    ' + responseAlignmentList.join('\n') + '\n\n    /* Transformation */\n\n    .text-lowercase      { text-transform: lowercase !important; }\n    .text-uppercase      { text-transform: uppercase !important; }\n    .text-capitalize     { text-transform: capitalize !important; }\n\n    /* Weight and italics */\n\n    .font-weight-normal  { font-weight: ' + fontWeightNormal + '; }\n    .font-weight-bold    { font-weight: ' + fontWeightBold + '; }\n    .font-italic         { font-style: italic; }\n\n    /* Contextual colors */\n\n    .text-white {\n      color: #fff !important;\n    }\n\n    ' + (_textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-muted', textMuted) + '\n\n    ' + (_textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-primary', brandPrimary) + '\n\n    ' + (_textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-success', brandSuccess) + '\n\n    ' + (_textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-info', brandInfo) + '\n\n    ' + (_textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-warning', brandWarning) + '\n\n    ' + (_textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-danger', brandDanger) + '\n\n    /* Font color */\n\n    ' + (_textEmphasis.textEmphasisVariant)(enableHoverMediaQuery, '.text-gray-dark', grayDark) + '\n\n    /* Misc */\n\n    .text-hide {\n      ' + (_textHide.textHide)() + '\n    }\n\n  ';
-}
-exports.default = {
-  defaultProps: defaultProps,
-  getTextUtilities: getTextUtilities
-};
-});
-var textUtils = unwrapExports(text);
-
-var parseTransition_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var parseTransition = function parseTransition(transitions) {
-  if (!transitions) {
-    return [];
-  }
-  var sample = transitions;
-  var RULE_DELIMITER = ',';
-  var PROPERTY_DELIMITER = ' ';
-  var MS_UNIT = 'ms';
-  var TMP_STR = 'TMP';
-  var DEFAULT_PROPERTY = 'all';
-  var DEFAULT_DURATION = 0;
-  var DEFAULT_TIMING_FUNCTION = 'ease';
-  var DEFAULT_DELAY = 0;
-  var BEZIER_REGEX = /cubic-bezier\([^\)]+\)/gi;
-  var cubicBezierList = transitions.match(BEZIER_REGEX);
-  if (cubicBezierList) {
-    sample = sample.replace(BEZIER_REGEX, TMP_STR);
-  }
-  var transitionList = sample.split(RULE_DELIMITER).map(function (rule) {
-    var properties = rule.trim().split(PROPERTY_DELIMITER);
-    return {
-      property: properties[0] || DEFAULT_PROPERTY,
-      duration: properties[1] && !(properties[1].indexOf(MS_UNIT) !== -1) ? parseFloat(properties[1]) * 1000 : parseFloat(properties[1]) || DEFAULT_DURATION,
-      timingFunction: properties[2] && properties[2] !== TMP_STR ? properties[2] : cubicBezierList ? cubicBezierList.shift() : DEFAULT_TIMING_FUNCTION,
-      delay: properties[3] && !(properties[3].indexOf(MS_UNIT) !== -1) ? parseFloat(properties[3]) * 1000 : parseFloat(properties[3]) || DEFAULT_DELAY
-    };
-  });
-  return transitionList;
-};
-exports.default = parseTransition;
-module.exports = exports['default'];
-});
-unwrapExports(parseTransition_1);
-
-var transition_1$1 = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.transition = transition;
-var defaultProps = exports.defaultProps = {
-  '$enable-transitions': true
-};
-function transition() {
-  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
-  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    args[_key - 1] = arguments[_key];
-  }
-  if (enableTransitions && args.length) {
-    return '\n      transition: ' + args.join(' ') + ';\n    ';
-  }
-  return '';
-}
-exports.default = {
-  transition: transition
-};
-});
-unwrapExports(transition_1$1);
-var transition_2$1 = transition_1$1.transition;
-
-var transition = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.defaultProps = undefined;
-exports.getTransitionUtilities = getTransitionUtilities;
-exports.fade = fade;
-exports.collapse = collapse;
-exports.getReactTransition = getReactTransition;
-var _parseTransition2 = _interopRequireDefault(parseTransition_1);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var defaultProps = exports.defaultProps = {
-  '$enable-transitions': true,
-  '$transition-fade': 'opacity .15s linear',
-  '$transition-collapse': 'height .35s ease'
-};
-function getTransitionUtilities() {
-  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
-  var transitionFade = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$transition-fade'];
-  var transitionCollapse = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$transition-collapse'];
-  return '\n    ' + fade(enableTransitions, transitionFade) + '\n    ' + collapse(enableTransitions, transitionCollapse) + '\n  ';
-}
-function fade() {
-  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
-  var transitionFade = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$transition-fade'];
-  return '\n    .fade,\n     &.fade {\n      opacity: 0;\n      ' + (_transition.transition)(enableTransitions, transitionFade) + '\n    \n      &.show {\n        opacity: 1;\n      }\n    }\n  ';
-}
-function collapse() {
-  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
-  var transitionCollapse = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$transition-collapse'];
-  return '\n    .collapse {\n      display: none;\n      &.show {\n        display: block;\n      }\n    }\n    \n    tr {\n      &.collapse.show {\n        display: table-row;\n      }\n    }\n    \n    tbody {\n      &.collapse.show {\n        display: table-row-group;\n      }\n    }\n    \n    .collapsing {\n      position: relative;\n      height: 0;\n      overflow: hidden;\n      ' + (_transition.transition)(enableTransitions, transitionCollapse) + '\n    }\n  ';
-}
-function getReactTransition(enableTransition, transition) {
-  var transitionList = (_parseTransition2.default)(transition);
-  var _transitionList$ = transitionList[0],
-      property = _transitionList$.property,
-      duration = _transitionList$.duration,
-      timingFunction = _transitionList$.timingFunction,
-      delay = _transitionList$.delay;
-  return (_transition.transition)(enableTransition, property + ' ' + duration + 'ms ' + timingFunction + ' ' + delay + 'ms');
-}
-exports.default = {
-  defaultProps: defaultProps,
-  getTransitionUtilities: getTransitionUtilities,
-  getReactTransition: getReactTransition,
-  fade: fade,
-  collapse: collapse
-};
-});
-var transitionUtils = unwrapExports(transition);
-var transition_3 = transition.fade;
-
-var visibility$1 = createCommonjsModule(function (module, exports) {
-"use strict";
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.invisible = invisible;
-function invisible(visibility) {
-  return "\n    visibility: " + visibility + " !important;\n  ";
-}
-exports.default = {
-  invisible: invisible
-};
-});
-unwrapExports(visibility$1);
-
-var visibility = createCommonjsModule(function (module, exports) {
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getVisibilityUtilities = getVisibilityUtilities;
-function getVisibilityUtilities() {
-  return '\n    .visible {\n      ' + (_visibility.invisible)('visible') + '\n    }\n    \n    .invisible {\n      ' + (_visibility.invisible)('hidden') + '\n    }\n   \n  ';
-}
-exports.default = {
-  getVisibilityUtilities: getVisibilityUtilities
-};
-});
-var visibilityUtils = unwrapExports(visibility);
-
-var defaultProps$8 = {
-  theme: theme,
-  utils: {
-    align: true,
-    background: true,
-    border: true,
-    clearfix: true,
-    cursor: true,
-    display: true,
-    flex: true,
-    float: true,
-    position: true,
-    screenreaders: true,
-    sizing: true,
-    spacing: true,
-    text: true,
-    transition: true,
-    visibility: true
-  }
-};
-var propTypes$8 = {
-  children: propTypes$1.node,
-  theme: propTypes$1.object,
-  utils: propTypes$1.shape({
-    align: propTypes$1.bool,
-    background: propTypes$1.bool,
-    a: propTypes$1.bool,
-    border: propTypes$1.bool,
-    clearfix: propTypes$1.bool,
-    display: propTypes$1.bool,
-    flex: propTypes$1.bool,
-    float: propTypes$1.bool,
-    position: propTypes$1.bool,
-    screenreaders: propTypes$1.bool,
-    sizing: propTypes$1.bool,
-    spacing: propTypes$1.bool,
-    text: propTypes$1.bool,
-    transition: propTypes$1.bool,
-    visibility: propTypes$1.bool
-  })
-};
-var UtilityProvider = styled__default.div.withConfig({
-  displayName: 'UtilityProvider'
-})(['', ''], function (props) {
-  return '\n    ' + rebootUtils.body(props.theme['$font-family-base'], props.theme['$font-size-base'], props.theme['$font-weight-base'], props.theme['$line-height-base'], props.theme['$body-color'], props.theme['$body-bg']) + '\n    ' + conditional_1(props.utils.align, alignUtils.getAlignUtilities()) + '\n    ' + conditional_1(props.utils.background, backgroundUtils.getBackgroundUtilities(props.theme['$enable-hover-media-query'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$brand-inverse'], props.theme['$gray-lightest'])) + '\n    ' + conditional_1(props.utils.border, bordersUtils.getBordersUtilities(props.theme['$enable-rounded'], props.theme['$border-radius'])) + '\n    ' + conditional_1(props.utils.clearfix, clearfixUtils.getClearfixUtilities()) + '\n    ' + conditional_1(props.utils.cursor, cursorUtils.getCursorUtilities()) + '\n    ' + conditional_1(props.utils.display, displayUtils.getDisplayUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + conditional_1(props.utils.flex, flexUtils.getFlexUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + conditional_1(props.utils.float, floatUtils.getFloatUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + conditional_1(props.utils.screenreaders, screenreadersUtils.getScreenReadersUtilities()) + '\n    ' + conditional_1(props.utils.spacing, spacingUtils.getSpacingUtilities(props.theme['$grid-breakpoints'], props.theme['$spacers']
-  )) + '\n    ' + conditional_1(props.utils.text, textUtils.getTextUtilities(props.theme['$enable-hover-media-query'], props.theme['$grid-breakpoints'], props.theme['$font-weight-normal'], props.theme['$font-weight-bold'], props.theme['$text-muted'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$gray-dark'])) + '\n    ' + conditional_1(props.utils.transition, transitionUtils.getTransitionUtilities(props.theme['$enable-transitions'], props.theme['$transition-fade'], props.theme['$transition-collapse'])) + '\n    ' + conditional_1(props.utils.visibility, visibilityUtils.getVisibilityUtilities(props.theme['$grid-breakpoints'])) + '\n    ' + conditional_1(props.utils.position, positionUtils.getPositionUtilities(props.theme['$zindex-fixed'], props.theme['$zindex-sticky'])) + '\n    ' + conditional_1(props.utils.sizing, sizingUtils.getSizingUtilities(props.theme['$sizes']
-  )) + '\n  ';
-});
-UtilityProvider.defaultProps = defaultProps$8;
-UtilityProvider.propTypes = propTypes$8;
-
-var _templateObject = taggedTemplateLiteral(['\n        ', '\n      '], ['\n        ', '\n      ']);
 var defaultProps$7 = {
-  theme: theme,
-  injectGlobal: true,
-  utils: defaultProps$8.utils
-};
-var propTypes$7 = {
-  children: propTypes$1.node,
-  injectGlobal: propTypes$1.bool,
-  theme: propTypes$1.object,
-  utils: propTypes$1.shape({
-    align: propTypes$1.bool,
-    background: propTypes$1.bool,
-    a: propTypes$1.bool,
-    border: propTypes$1.bool,
-    clearfix: propTypes$1.bool,
-    display: propTypes$1.bool,
-    flex: propTypes$1.bool,
-    float: propTypes$1.bool,
-    position: propTypes$1.bool,
-    screenreaders: propTypes$1.bool,
-    sizing: propTypes$1.bool,
-    spacing: propTypes$1.bool,
-    text: propTypes$1.bool,
-    transition: propTypes$1.bool,
-    visibility: propTypes$1.bool
-  })
-};
-var BootstrapProvider = function (_React$Component) {
-  inherits(BootstrapProvider, _React$Component);
-  function BootstrapProvider() {
-    var _ref;
-    var _temp, _this, _ret;
-    classCallCheck(this, BootstrapProvider);
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = BootstrapProvider.__proto__ || Object.getPrototypeOf(BootstrapProvider)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      theme: {},
-      isWindowPhone8Fixed: null
-    }, _this.setTheme = function (_ref2, cb) {
-      var userTheme = _ref2.theme;
-      var theme = _this.makeTheme({ theme: userTheme });
-      _this.setState({ theme: theme }, cb);
-    }, _this.makeTheme = function (_ref3) {
-      var userTheme = _ref3.theme;
-      var theme = makeThemeBs(userTheme);
-      var metaKeyList = Object.keys(theme).filter(function (f) {
-        return f[0] === '_';
-      });
-      metaKeyList.forEach(function (k) {
-        delete theme[k];
-      });
-      return theme;
-    }, _this.injectGlobal = function () {
-      if (_this.props.injectGlobal) {
-        injectGlobal(_templateObject, getGlobalStyleNoBootstrapProvider(_this.state.theme['$font-family-base'] || themeBs['$font-family-base'], _this.state.theme['$font-size-base'] || themeBs['$font-size-base'], _this.state.theme['$font-weight-base'] || themeBs['$font-weight-base'], _this.state.theme['$line-height-base'] || themeBs['$line-height-base'], _this.state.theme['$body-color'] || themeBs['$body-color'], _this.state.theme['$body-bg'] || themeBs['$body-bg']));
-      }
-    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
-  }
-  createClass(BootstrapProvider, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      this.setTheme(this.props, this.injectGlobal);
-    }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.windowPhone8Fix();
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      if (JSON.stringify(this.makeTheme(this.props)) !== JSON.stringify(nextProps.theme)) {
-        this.setTheme(nextProps);
-      }
-    }
-  }, {
-    key: 'windowPhone8Fix',
-    value: function windowPhone8Fix() {
-      if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
-        var msViewportStyle = document.createElement('style');
-        msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'));
-        document.head.appendChild(msViewportStyle);
-        this.setState({
-          isWindowPhone8Fixed: true
-        });
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          children = _props.children,
-          utils = _props.utils;
-      return React__default.createElement(
-        styled.ThemeProvider,
-        { theme: this.state.theme },
-        React__default.createElement(
-          UtilityProvider,
-          { utils: utils },
-          children
-        )
-      );
-    }
-  }]);
-  return BootstrapProvider;
-}(React__default.Component);
-BootstrapProvider.defaultProps = defaultProps$7;
-BootstrapProvider.propTypes = propTypes$7;
-BootstrapProvider.defaultProps = defaultProps$7;
-BootstrapProvider.propTypes = propTypes$7;
-
-var defaultProps$9 = {
   tag: 'ol',
   theme: {
     '$breadcrumb-padding-y': '.75rem',
@@ -7512,7 +6278,7 @@ var defaultProps$9 = {
     '$enable-rounded': false
   }
 };
-var propTypes$9 = {
+var propTypes$7 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   theme: propTypes$1.shape({
@@ -7548,20 +6314,20 @@ var BreadcrumbUnstyled = function (_React$Component) {
   }]);
   return BreadcrumbUnstyled;
 }(React__default.Component);
-BreadcrumbUnstyled.defaultProps = defaultProps$9;
-BreadcrumbUnstyled.propTypes = propTypes$9;
+BreadcrumbUnstyled.defaultProps = defaultProps$7;
+BreadcrumbUnstyled.propTypes = propTypes$7;
 var Breadcrumb = styled__default(BreadcrumbUnstyled).withConfig({
   displayName: 'Breadcrumb'
 })(['', ''], function (props) {
-  return '\n    &.breadcrumb {\n      padding: ' + props.theme['$breadcrumb-padding-y'] + ' ' + props.theme['$breadcrumb-padding-x'] + ';\n      margin-bottom: ' + props.theme['$spacer-y'] + ';\n      list-style: none;\n      background-color: ' + props.theme['$breadcrumb-bg'] + ';\n \n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n            \n      ' + clearfix_2$1() + '\n    }\n\n    & .breadcrumb-item {\n      float: left;\n    \n      /* The separator between breadcrumbs (by default, a forward-slash: "/") */\n      + .breadcrumb-item::before {\n        display: inline-block; /* Suppress underlining of the separator in modern browsers */\n        padding-right: ' + props.theme['$breadcrumb-item-padding'] + ';\n        padding-left: ' + props.theme['$breadcrumb-item-padding'] + ';\n        color: ' + props.theme['$breadcrumb-divider-color'] + ';\n        content: ' + props.theme['$breadcrumb-divider'] + ';\n      }\n  \n      /* IE9-11 hack to properly handle hyperlink underlines for breadcrumbs built\n       without \'ul\'s. The \'::before\' pseudo-element generates an element\n       *within* the .breadcrumb-item and thereby inherits the \'text-decoration\'.\n      \n       To trick IE into suppressing the underline, we give the pseudo-element an\n       underline and then immediately remove it.\n      */\n      \n      + .breadcrumb-item:hover::before {\n        text-decoration: underline;\n      }\n      + .breadcrumb-item:hover::before {\n        text-decoration: none;\n      }\n    \n      &.active {\n        color: ' + props.theme['$breadcrumb-active-color'] + ';\n      }\n    }\n  ';
+  return '\n    &.breadcrumb {\n      padding: ' + props.theme['$breadcrumb-padding-y'] + ' ' + props.theme['$breadcrumb-padding-x'] + ';\n      margin-bottom: ' + props.theme['$spacer-y'] + ';\n      list-style: none;\n      background-color: ' + props.theme['$breadcrumb-bg'] + ';\n \n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n            \n      ' + clearfix_2() + '\n    }\n\n    & .breadcrumb-item {\n      float: left;\n    \n      /* The separator between breadcrumbs (by default, a forward-slash: "/") */\n      + .breadcrumb-item::before {\n        display: inline-block; /* Suppress underlining of the separator in modern browsers */\n        padding-right: ' + props.theme['$breadcrumb-item-padding'] + ';\n        padding-left: ' + props.theme['$breadcrumb-item-padding'] + ';\n        color: ' + props.theme['$breadcrumb-divider-color'] + ';\n        content: ' + props.theme['$breadcrumb-divider'] + ';\n      }\n  \n      /* IE9-11 hack to properly handle hyperlink underlines for breadcrumbs built\n       without \'ul\'s. The \'::before\' pseudo-element generates an element\n       *within* the .breadcrumb-item and thereby inherits the \'text-decoration\'.\n      \n       To trick IE into suppressing the underline, we give the pseudo-element an\n       underline and then immediately remove it.\n      */\n      \n      + .breadcrumb-item:hover::before {\n        text-decoration: underline;\n      }\n      + .breadcrumb-item:hover::before {\n        text-decoration: none;\n      }\n    \n      &.active {\n        color: ' + props.theme['$breadcrumb-active-color'] + ';\n      }\n    }\n  ';
 });
-Breadcrumb.defaultProps = defaultProps$9;
-Breadcrumb.propTypes = propTypes$9;
+Breadcrumb.defaultProps = defaultProps$7;
+Breadcrumb.propTypes = propTypes$7;
 
-var defaultProps$10 = {
+var defaultProps$8 = {
   tag: 'li'
 };
-var propTypes$10 = {
+var propTypes$8 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   active: propTypes$1.bool,
@@ -7591,10 +6357,10 @@ var BreadcrumbItem = function (_React$Component) {
   }]);
   return BreadcrumbItem;
 }(React__default.Component);
-BreadcrumbItem.defaultProps = defaultProps$10;
-BreadcrumbItem.propTypes = propTypes$10;
-BreadcrumbItem.defaultProps = defaultProps$10;
-BreadcrumbItem.propTypes = propTypes$10;
+BreadcrumbItem.defaultProps = defaultProps$8;
+BreadcrumbItem.propTypes = propTypes$8;
+BreadcrumbItem.defaultProps = defaultProps$8;
+BreadcrumbItem.propTypes = propTypes$8;
 
 var boxShadow_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -7622,6 +6388,53 @@ exports.default = {
 });
 unwrapExports(boxShadow_1);
 var boxShadow_2 = boxShadow_1.boxShadow;
+
+var transition_1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.transition = transition;
+var defaultProps = exports.defaultProps = {
+  '$enable-transitions': true
+};
+function transition() {
+  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
+  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    args[_key - 1] = arguments[_key];
+  }
+  if (enableTransitions && args.length) {
+    return '\n      transition: ' + args.join(' ') + ';\n    ';
+  }
+  return '';
+}
+exports.default = {
+  transition: transition
+};
+});
+unwrapExports(transition_1);
+var transition_2 = transition_1.transition;
+
+var conditional = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ifThen = ifThen;
+exports.ifElse = ifElse;
+function ifThen(conditions, returnTrue) {
+  return ifElse(conditions, returnTrue, '');
+}
+function ifElse(conditions, returnTrue, returnFalse) {
+  return conditions ? returnTrue : returnFalse;
+}
+exports.default = {
+  ifThen: ifThen,
+  ifElse: ifElse
+};
+});
+unwrapExports(conditional);
+var conditional_1 = conditional.ifThen;
 
 var buttons = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -7770,7 +6583,7 @@ exports.default = {
 unwrapExports(buttons);
 var buttons_5 = buttons.button;
 
-var defaultProps$11 = {
+var defaultProps$9 = {
   tag: 'button',
   color: 'primary',
   theme: {
@@ -7815,7 +6628,7 @@ var defaultProps$11 = {
     '$btn-transition': 'all .2s ease-in-out'
   }
 };
-var propTypes$11 = {
+var propTypes$9 = {
   active: propTypes$1.bool,
   block: propTypes$1.bool,
   disabled: propTypes$1.bool,
@@ -7926,15 +6739,15 @@ var ButtonUnstyled = function (_React$Component) {
   }]);
   return ButtonUnstyled;
 }(React__default.Component);
-ButtonUnstyled.defaultProps = defaultProps$11;
-ButtonUnstyled.propTypes = propTypes$11;
+ButtonUnstyled.defaultProps = defaultProps$9;
+ButtonUnstyled.propTypes = propTypes$9;
 var Button = styled__default(ButtonUnstyled).withConfig({
   displayName: 'Button'
 })(['', ' '], function (props) {
   return '\n    ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
-Button.defaultProps = defaultProps$11;
-Button.propTypes = propTypes$11;
+Button.defaultProps = defaultProps$9;
+Button.propTypes = propTypes$9;
 
 var navDivider_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -8011,10 +6824,10 @@ exports.default = {
 unwrapExports(buttonGroup_1);
 var buttonGroup_3 = buttonGroup_1.buttonGroup;
 
-var defaultProps$13 = {
+var defaultProps$11 = {
   tag: 'div'
 };
-var propTypes$14 = {
+var propTypes$12 = {
   children: propTypes$1.node.isRequired,
   className: propTypes$1.string,
   cssModule: propTypes$1.object,
@@ -8033,8 +6846,8 @@ var DropdownMenu = function DropdownMenu(props, context) {
   var classes = mapToCssModules(classnames(className, 'dropdown-menu', { 'dropdown-menu-right': right }), cssModule);
   return React__default.createElement(Tag, _extends({}, attributes, { tabIndex: '-1', 'aria-hidden': !context.isOpen, role: 'menu', className: classes }));
 };
-DropdownMenu.propTypes = propTypes$14;
-DropdownMenu.defaultProps = defaultProps$13;
+DropdownMenu.propTypes = propTypes$12;
+DropdownMenu.defaultProps = defaultProps$11;
 DropdownMenu.contextTypes = contextTypes;
 
 var tether = createCommonjsModule(function (module, exports) {
@@ -9404,11 +8217,11 @@ return Tether;
 }));
 });
 
-var defaultProps$14 = {
+var defaultProps$12 = {
   isOpen: false,
   tetherRef: null
 };
-var propTypes$15 = {
+var propTypes$13 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   isOpen: propTypes$1.bool,
@@ -9506,17 +8319,17 @@ var TetherContent = function (_React$Component) {
   }]);
   return TetherContent;
 }(React__default.Component);
-TetherContent.defaultProps = defaultProps$14;
-TetherContent.propTypes = propTypes$15;
-TetherContent.defaultProps = defaultProps$14;
-TetherContent.propTypes = propTypes$15;
+TetherContent.defaultProps = defaultProps$12;
+TetherContent.propTypes = propTypes$13;
+TetherContent.defaultProps = defaultProps$12;
+TetherContent.propTypes = propTypes$13;
 
 var defaultTetherConfig = {
   classes: { element: 'dropdown', enabled: 'show' },
   classPrefix: 'bs-tether',
   constraints: [{ to: 'scrollParent', attachment: 'together none' }, { to: 'window', attachment: 'together none' }]
 };
-var defaultProps$12 = {
+var defaultProps$10 = {
   isOpen: false,
   tag: 'div',
   theme: {
@@ -9568,7 +8381,7 @@ var defaultProps$12 = {
     '$input-height-lg': '3.5rem'
   }
 };
-var propTypes$13 = {
+var propTypes$11 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   disabled: propTypes$1.bool,
@@ -9767,8 +8580,8 @@ var DropdownUnstyled = function (_React$Component) {
   }]);
   return DropdownUnstyled;
 }(React__default.Component);
-DropdownUnstyled.defaultProps = defaultProps$12;
-DropdownUnstyled.propTypes = propTypes$13;
+DropdownUnstyled.defaultProps = defaultProps$10;
+DropdownUnstyled.propTypes = propTypes$11;
 DropdownUnstyled.childContextTypes = {
   isOpen: propTypes$1.bool.isRequired,
   toggle: propTypes$1.func.isRequired
@@ -9778,10 +8591,10 @@ var Dropdown = styled__default(DropdownUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    &.dropup,\n    &.dropdown {\n      position: relative;\n    }\n\n    & .dropdown-hide {\n      display: none;\n    }\n    \n    & .dropdown-toggle {\n      /* Generate the caret automatically */\n      &::after {\n        display: inline-block;\n        width: 0;\n        height: 0;\n        margin-left: ' + props.theme['$caret-width'] + ';\n        vertical-align: middle;\n        content: \'\';\n        border-top: ' + props.theme['$caret-width'] + ' solid;\n        border-right: ' + props.theme['$caret-width'] + ' solid transparent;\n        border-left: ' + props.theme['$caret-width'] + ' solid transparent;\n      }\n\n      /* Prevent the focus on the dropdown toggle when closing dropdowns */\n      &:focus {\n        outline: 0;\n      }\n    }\n\n    &.dropup {\n      .dropdown-toggle {\n        &::after {\n          border-top: 0;\n          border-bottom: ' + props.theme['$caret-width'] + ' solid;\n        }\n      }\n    }\n\n    & .dropdown-menu {\n      clear: left;\n      position: absolute;\n      top: 100%;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown'] + ';\n      display: none; // none by default, but block on "open" of the menu\n      float: left;\n      min-width: ' + props.theme['$dropdown-min-width'] + ';\n      padding: ' + props.theme['$dropdown-padding-y'] + ' 0;\n      margin: ' + props.theme['$dropdown-margin-top'] + ' 0; /* override default ul */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      color: ' + props.theme['$body-color'] + ';\n      text-align: left; /* Ensures proper alignment if parent has it changed (e.g., modal footer) */\n      list-style: none;\n      background-color: ' + props.theme['$dropdown-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$dropdown-border-width'] + ' solid ' + props.theme['$dropdown-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$dropdown-box-shadow']) + '\n    }\n\n    /* mixin from bootstrap 4, see : scss/mixins/_nav-divider.css */\n    & .dropdown-divider {\n      ' + navDivider_3(props.theme['$spacer-y'], props.theme['$dropdown-divider-bg']) + '\n    }\n\n    & .dropdown-item {\n      display: block;\n      width: 100%; /* For <button>s */\n      padding: 3px ' + props.theme['$dropdown-item-padding-x'] + ';\n      clear: both;\n      font-weight: ' + props.theme['$font-weight-normal'] + ';\n      color: ' + props.theme['$dropdown-link-color'] + ';\n      text-align: inherit; /* For <button>s */\n      white-space: nowrap; /* prevent links from randomly breaking onto new lines */\n      background: none; /* For <button>s */\n      border: 0; /* For <button>s */\n\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$dropdown-link-hover-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-hover-bg'] + '\n      ') + '\n\n      &.active,\n      &:active {\n        color: ' + props.theme['$dropdown-link-active-color'] + ';\n        text-decoration: none;\n        background-color: ' + props.theme['$dropdown-link-active-bg'] + '\n      }\n\n      &.disabled,\n      &:disabled{\n        color: ' + props.theme['$dropdown-link-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: transparent;\n        ' + conditional_1(props.theme['$enable-gradients'], 'background-image: none; /* Remove CSS gradient */') + '\n      }\n    }\n\n    &.show {\n      /* show the menu */\n      &>.dropdown-menu {\n        display: block;\n      }\n\n      & > a {\n        outline: 0;\n      }\n    }\n\n\n    /* Menu positioning */\n\n    /* Add extra class to .dropdown-menu to flip the alignment of the dropdown*\n    /* menu with the parent. */\n    & .dropdown-menu-right {\n      right: 0;\n      left: auto; /* Reset the default from .dropdown-menu */\n    }\n\n    & .dropdown-menu-left {\n      right: auto;\n      left: 0;\n    }\n\n    /* Dropdown section headers */\n    & .dropdown-header {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    /* Dropdown section footers */\n    & .dropdown-footer {\n      display: block;\n      padding: ' + props.theme['$dropdown-padding-y'] + ' ' + props.theme['$dropdown-item-padding-x'] + ';\n      margin-bottom: 0; /* for use with heading elements */\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      color: ' + props.theme['$dropdown-header-color'] + ';\n      white-space: nowrap; /* as with > li > a */\n    }\n    \n\n    /* Backdrop to catch body clicks on mobile, etc. */\n    & .dropdown-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-dropdown-backdrop'] + ';\n    }\n\n    /* Allow for dropdowns to go bottom up (aka, dropup-menu) */\n\n    /* Just add .dropup after the standard .dropdown class and you\'re set. */\n    /* TODO: abstract this so that the navbar fixed styles are not placed here? */\n\n    &.dropup {\n      .dropdown-menu {\n        top: auto;\n        bottom: 100%;\n        margin-bottom: ' + props.theme['$dropdown-margin-top'] + ';\n      }\n    }\n        \n    /* Added Mixin boutonGroup to enable dropdown to beneficiate from buttonGroup classes */\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
-Dropdown.defaultProps = defaultProps$12;
-Dropdown.propTypes = propTypes$13;
+Dropdown.defaultProps = defaultProps$10;
+Dropdown.propTypes = propTypes$11;
 
-var propTypes$12 = {
+var propTypes$10 = {
   children: propTypes$1.node,
   isOpen: propTypes$1.bool.isRequired,
   toggle: propTypes$1.func.isRequired
@@ -9789,9 +8602,9 @@ var propTypes$12 = {
 var ButtonDropdown = function ButtonDropdown(props) {
   return React__default.createElement(Dropdown, _extends({}, props, { group: true }));
 };
-ButtonDropdown.propTypes = propTypes$12;
+ButtonDropdown.propTypes = propTypes$10;
 
-var defaultProps$15 = {
+var defaultProps$13 = {
   tag: 'div',
   role: 'group',
   theme: {
@@ -9810,7 +8623,7 @@ var defaultProps$15 = {
     '$enable-shadows': true
   }
 };
-var propTypes$16 = {
+var propTypes$14 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   theme: propTypes$1.shape({
@@ -9868,10 +8681,10 @@ var ButtonGroup = styled__default(ButtonGroupUnstyled).withConfig({
 })(['', '  '], function (props) {
   return '\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
-ButtonGroup.defaultProps = defaultProps$15;
-ButtonGroup.propTypes = propTypes$16;
+ButtonGroup.defaultProps = defaultProps$13;
+ButtonGroup.propTypes = propTypes$14;
 
-var defaultProps$16 = {
+var defaultProps$14 = {
   tag: 'div',
   role: 'toolbar',
   theme: {
@@ -9890,7 +8703,7 @@ var defaultProps$16 = {
     '$enable-shadows': true
   }
 };
-var propTypes$17 = {
+var propTypes$15 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   theme: propTypes$1.shape({
@@ -9931,23 +8744,23 @@ var ButtonToolbarUnstyled = function (_React$Component) {
   }]);
   return ButtonToolbarUnstyled;
 }(React__default.Component);
-ButtonToolbarUnstyled.defaultProps = defaultProps$16;
-ButtonToolbarUnstyled.propTypes = propTypes$17;
+ButtonToolbarUnstyled.defaultProps = defaultProps$14;
+ButtonToolbarUnstyled.propTypes = propTypes$15;
 var ButtonToolbar = styled__default(ButtonToolbarUnstyled).withConfig({
   displayName: 'ButtonToolbar'
 })(['', '  '], function (props) {
   return '\n    ' + buttonGroup_3(props.theme['$enable-shadows'], props.theme['$enable-rounded'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-active-box-shadow'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm']) + '\n  ';
 });
-ButtonToolbar.defaultProps = defaultProps$16;
-ButtonToolbar.propTypes = propTypes$17;
+ButtonToolbar.defaultProps = defaultProps$14;
+ButtonToolbar.propTypes = propTypes$15;
 
-var defaultProps$17 = {
+var defaultProps$15 = {
   theme: {
     '$table-cell-padding': '.75rem',
     '$text-muted': '#636c72'
   }
 };
-var propTypes$18 = {
+var propTypes$16 = {
   theme: propTypes$1.shape({
     '$table-cell-padding': propTypes$1.string,
     '$text-muted': propTypes$1.string
@@ -9958,10 +8771,10 @@ var Caption = styled__default.caption.withConfig({
 })(['', ''], function (props) {
   return '\n    padding-top: ' + props.theme['$table-cell-padding'] + ';\n    padding-bottom: ' + props.theme['$table-cell-padding'] + ';\n    color: ' + props.theme['$text-muted'] + ';\n    text-align: left;\n    caption-side: top;\n  ';
 });
-Caption.defaultProps = defaultProps$17;
-Caption.propTypes = propTypes$18;
+Caption.defaultProps = defaultProps$15;
+Caption.propTypes = propTypes$16;
 
-var defaultProps$18 = {
+var defaultProps$16 = {
   tag: 'a',
   theme: {
     '$code-font-size': '90%',
@@ -9972,7 +8785,7 @@ var defaultProps$18 = {
     '$enable-rounded': false
   }
 };
-var propTypes$19 = {
+var propTypes$17 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   theme: propTypes$1.shape({
@@ -10007,15 +8820,115 @@ var CodeUnstyled = function (_React$Component) {
   }]);
   return CodeUnstyled;
 }(React__default.Component);
-CodeUnstyled.defaultProps = defaultProps$18;
-CodeUnstyled.propTypes = propTypes$19;
+CodeUnstyled.defaultProps = defaultProps$16;
+CodeUnstyled.propTypes = propTypes$17;
 var Code = styled__default(CodeUnstyled).withConfig({
   displayName: 'Code'
 })(['', ''], function (props) {
   return '\n    /* Inline code */\n    padding: ' + props.theme['$code-padding-y'] + ' ' + props.theme['$code-padding-x'] + ';\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$code-color'] + ';\n    background-color: ' + props.theme['$code-bg'] + ';\n    ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + ';\n    \n    /* Streamline the style when inside anchors to avoid broken underline and more */\n    a > & {\n      padding: 0;\n      color: inherit;\n      background-color: inherit;\n    }\n    \n    /* Bootstrap 4 does not place this css rule straight into Code tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
-Code.defaultProps = defaultProps$18;
-Code.propTypes = propTypes$19;
+Code.defaultProps = defaultProps$16;
+Code.propTypes = propTypes$17;
+
+var breakpoints = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.breakpointNext = breakpointNext;
+exports.breakpointMin = breakpointMin;
+exports.breakpointMax = breakpointMax;
+exports.breakpointInfix = breakpointInfix;
+exports.mediaBreakpointUp = mediaBreakpointUp;
+exports.mediaBreakpointDown = mediaBreakpointDown;
+exports.mediaBreakpointBetween = mediaBreakpointBetween;
+exports.mediaBreakpointOnly = mediaBreakpointOnly;
+var _unitUtils2 = _interopRequireDefault(unitUtils);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var defaultProps = exports.defaultProps = {
+  '$grid-breakpoints': {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px'
+  }
+};
+function breakpointNext(name) {
+  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var breakpointNames = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Object.keys(breakpoints);
+  var n = breakpointNames.indexOf(name);
+  if (n !== -1 && n + 1 < breakpointNames.length) {
+    return breakpointNames[n + 1];
+  }
+  return null;
+}
+function breakpointMin(name) {
+  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var min = breakpoints[name];
+  return min !== '0' ? min : null;
+}
+function breakpointMax(name) {
+  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var next = breakpointNext(name, breakpoints);
+  if (next) {
+    var min = _unitUtils2.default.rmUnit(breakpointMin(next, breakpoints), _unitUtils2.default.UNIT.PX);
+    return (min - 1).toString() + _unitUtils2.default.UNIT.PX;
+  }
+  return null;
+}
+function breakpointInfix(name) {
+  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  return breakpointMin(name, breakpoints) == null ? '' : '-' + name;
+}
+function mediaBreakpointUp(name) {
+  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var content = arguments[2];
+  var min = breakpointMin(name, breakpoints);
+  if (min) {
+    return '\n      @media (min-width: ' + min + ') {\n        ' + content + '\n      }\n    ';
+  }
+  return '\n    ' + content + '\n  ';
+}
+function mediaBreakpointDown(name) {
+  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var content = arguments[2];
+  var max = breakpointMax(name, breakpoints);
+  if (max) {
+    return '\n      @media (max-width: ' + max + ') {\n        ' + content + '\n      }\n    ';
+  }
+  return '\n    ' + content + '\n  ';
+}
+function mediaBreakpointBetween(lower, upper) {
+  var breakpoints = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$grid-breakpoints'];
+  var content = arguments[3];
+  var min = breakpointMin(lower, breakpoints);
+  var max = breakpointMax(upper, breakpoints);
+  if (min && max) {
+    return '\n      @media (min-width: ' + min + ') and (max-width: ' + max + ') {\n        ' + content + '\n      }\n    ';
+  } else if (min) {
+    return '\n      @media (min-width: ' + min + ') {\n        ' + content + '\n      }\n    ';
+  } else if (max) {
+    return '\n      @media (max-width: ' + max + ') {\n        ' + content + '\n      }\n    ';
+  }
+  return '\n    ' + content + '\n  ';
+}
+function mediaBreakpointOnly(name) {
+  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var content = arguments[2];
+  return mediaBreakpointBetween(name, name, breakpoints, content);
+}
+exports.default = {
+  defaultProps: defaultProps,
+  up: mediaBreakpointUp,
+  down: mediaBreakpointDown,
+  between: mediaBreakpointBetween,
+  only: mediaBreakpointOnly
+};
+});
+unwrapExports(breakpoints);
+var breakpoints_6 = breakpoints.mediaBreakpointUp;
 
 var grid = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -10089,12 +9002,12 @@ function makeContainerMaxWidths() {
 }
 function makeGutters() {
   var gridGutterWidths = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-gutter-widths'];
-  var breakpoints$$2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  var breakpoints$$1 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
   var gutterList = [];
   Object.keys(gridGutterWidths).forEach(function (breakpoint) {
     var gutterValue = gridGutterWidths[breakpoint];
     gutterValue = '' + _unitUtils2.default.rmUnit(gutterValue) / 2 + _unitUtils2.default.detectUnit(gutterValue);
-    var gutter = (_breakpoints.mediaBreakpointUp)(breakpoint, breakpoints$$2, '\n      padding-right: ' + gutterValue + ';\n      padding-left:  ' + gutterValue + ';\n    ');
+    var gutter = (_breakpoints.mediaBreakpointUp)(breakpoint, breakpoints$$1, '\n      padding-right: ' + gutterValue + ';\n      padding-left:  ' + gutterValue + ';\n    ');
     gutterList.push(gutter);
   });
   return '\n    ' + gutterList.join('\n') + '\n  ';
@@ -10206,8 +9119,8 @@ var defaultProps = exports.defaultProps = {
 };
 function getGridColumn() {
   var gridGutterWidths = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-gutter-widths'];
-  var breakpoints$$2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
-  return '\n    position: relative;\n    width: 100%;\n    min-height: 1px; /* Prevent columns from collapsing when empty */\n    ' + (_grid.makeGutters)(gridGutterWidths, breakpoints$$2) + '\n  ';
+  var breakpoints$$1 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$grid-breakpoints'];
+  return '\n    position: relative;\n    width: 100%;\n    min-height: 1px; /* Prevent columns from collapsing when empty */\n    ' + (_grid.makeGutters)(gridGutterWidths, breakpoints$$1) + '\n  ';
 }
 function getColumnGridColumn() {
   var gridColumns = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$grid-columns'];
@@ -10292,7 +9205,7 @@ var getColumnSizeClass = function getColumnSizeClass(isXs, colWidth, colSize) {
   }
   return isXs ? 'col-' + colSize : 'col-' + colWidth + '-' + colSize;
 };
-var defaultProps$19 = {
+var defaultProps$17 = {
   tag: 'div',
   widths: colWidths,
   theme: {
@@ -10314,7 +9227,7 @@ var defaultProps$19 = {
     }
   }
 };
-var propTypes$20 = {
+var propTypes$18 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.func, propTypes$1.string]),
   xs: columnProps,
@@ -10371,21 +9284,21 @@ var ColUnstyled = function (_React$Component) {
   }]);
   return ColUnstyled;
 }(React__default.Component);
-ColUnstyled.defaultProps = defaultProps$19;
-ColUnstyled.propTypes = propTypes$20;
+ColUnstyled.defaultProps = defaultProps$17;
+ColUnstyled.propTypes = propTypes$18;
 var Col = styled__default(ColUnstyled).withConfig({
   displayName: 'Col'
 })(['', ''], function (props) {
   return '\n    ' + gridFramework_5(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-Col.defaultProps = defaultProps$19;
-Col.propTypes = propTypes$20;
+Col.defaultProps = defaultProps$17;
+Col.propTypes = propTypes$18;
 
 var SHOW = 'SHOW';
 var SHOWN = 'SHOWN';
 var HIDE = 'HIDE';
 var HIDDEN = 'HIDDEN';
-var defaultProps$20 = {
+var defaultProps$18 = {
   isOpen: false,
   theme: {
     '$transition-collapse': 'height .35s ease'
@@ -10398,7 +9311,7 @@ var defaultProps$20 = {
   onOpened: null,
   onClosed: null
 };
-var propTypes$21 = {
+var propTypes$19 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   delay: propTypes$1.oneOfType([propTypes$1.shape({ show: propTypes$1.number, hide: propTypes$1.number }), propTypes$1.number]),
@@ -10560,12 +9473,12 @@ var Collapse = function (_Component) {
   }]);
   return Collapse;
 }(React.Component);
-Collapse.defaultProps = defaultProps$20;
-Collapse.propTypes = propTypes$21;
-Collapse.defaultProps = defaultProps$20;
-Collapse.propTypes = propTypes$21;
+Collapse.defaultProps = defaultProps$18;
+Collapse.propTypes = propTypes$19;
+Collapse.defaultProps = defaultProps$18;
+Collapse.propTypes = propTypes$19;
 
-var defaultProps$21 = {
+var defaultProps$19 = {
   theme: {
     '$grid-columns': '12',
     '$grid-gutter-widths': {
@@ -10585,7 +9498,7 @@ var defaultProps$21 = {
     '$enable-grid-classes': true
   }
 };
-var propTypes$22 = {
+var propTypes$20 = {
   className: propTypes$1.string,
   theme: propTypes$1.shape({
     '$grid-columns': propTypes$1.string,
@@ -10611,17 +9524,17 @@ var DdUnstyled = function (_React$Component) {
   }]);
   return DdUnstyled;
 }(React__default.Component);
-DdUnstyled.defaultProps = defaultProps$21;
-DdUnstyled.propTypes = propTypes$22;
+DdUnstyled.defaultProps = defaultProps$19;
+DdUnstyled.propTypes = propTypes$20;
 var Dd = styled__default(DdUnstyled).withConfig({
   displayName: 'Dd'
 })(['  margin-bottom:.5rem;margin-left:0;', ''], function (props) {
   return '\n    ' + gridFramework_5(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-Dd.defaultProps = defaultProps$21;
-Dd.propTypes = propTypes$22;
+Dd.defaultProps = defaultProps$19;
+Dd.propTypes = propTypes$20;
 
-var propTypes$23 = {
+var propTypes$21 = {
   className: propTypes$1.string,
   children: propTypes$1.node.isRequired
 };
@@ -10644,13 +9557,13 @@ var DfnUnstyled = function (_React$Component) {
   }]);
   return DfnUnstyled;
 }(React__default.Component);
-DfnUnstyled.propTypes = propTypes$23;
+DfnUnstyled.propTypes = propTypes$21;
 var Dfn = styled__default(DfnUnstyled).withConfig({
   displayName: 'Dfn'
 })(['font-style:italic;']);
-Dfn.propTypes = propTypes$23;
+Dfn.propTypes = propTypes$21;
 
-var propTypes$24 = {
+var propTypes$22 = {
   className: propTypes$1.string,
   children: propTypes$1.node.isRequired
 };
@@ -10671,10 +9584,10 @@ var Details = function (_React$Component) {
   }]);
   return Details;
 }(React__default.Component);
-Details.propTypes = propTypes$24;
-Details.propTypes = propTypes$24;
+Details.propTypes = propTypes$22;
+Details.propTypes = propTypes$22;
 
-var defaultProps$22 = {
+var defaultProps$20 = {
   theme: {
     '$grid-gutter-widths': {
       xs: '30px',
@@ -10686,7 +9599,7 @@ var defaultProps$22 = {
     '$enable-grid-classes': true
   }
 };
-var propTypes$25 = {
+var propTypes$23 = {
   className: propTypes$1.string,
   theme: propTypes$1.shape({
     '$grid-gutter-widths': propTypes$1.object,
@@ -10710,15 +9623,15 @@ var DlUnstyled = function (_React$Component) {
   }]);
   return DlUnstyled;
 }(React__default.Component);
-DlUnstyled.defaultProps = defaultProps$22;
-DlUnstyled.propTypes = propTypes$25;
+DlUnstyled.defaultProps = defaultProps$20;
+DlUnstyled.propTypes = propTypes$23;
 var Dl = styled__default(DlUnstyled).withConfig({
   displayName: 'Dl'
 })(['  margin-top:0;margin-bottom:1rem;', ''], function (props) {
   return '\n    ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n  ';
 });
-Dl.defaultProps = defaultProps$22;
-Dl.propTypes = propTypes$25;
+Dl.defaultProps = defaultProps$20;
+Dl.propTypes = propTypes$23;
 
 function createCommonjsModule$1(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
@@ -12308,7 +11221,7 @@ function ifThen(conditions, returnTrue) {
 function ifElse(conditions, returnTrue, returnFalse) {
   return conditions ? returnTrue : returnFalse;
 }
-var parseTransition_1$1 = createCommonjsModule$1(function (module, exports) {
+var parseTransition_1 = createCommonjsModule$1(function (module, exports) {
 'use strict';
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -12346,7 +11259,7 @@ exports.default = parseTransition;
 module.exports = exports['default'];
 });
 
-var defaultProps$23 = {
+var defaultProps$21 = {
   active: false,
   theme: {
     '$enable-rounded': true,
@@ -12360,7 +11273,7 @@ var defaultProps$23 = {
     '$drawer-docked-width': '55px'
   }
 };
-var propTypes$26 = {
+var propTypes$24 = {
   className: propTypes$1.string,
   active: propTypes$1.bool.isRequired,
   top: propTypes$1.string,
@@ -12411,17 +11324,17 @@ var DrawerUnstyled = function (_React$Component) {
   }]);
   return DrawerUnstyled;
 }(React__default.Component);
-DrawerUnstyled.defaultProps = defaultProps$23;
-DrawerUnstyled.propTypes = propTypes$26;
+DrawerUnstyled.defaultProps = defaultProps$21;
+DrawerUnstyled.propTypes = propTypes$24;
 var Drawer = styled__default(DrawerUnstyled).withConfig({
   displayName: 'Drawer'
 })(['', ''], function (props) {
   return '\n    &.drawer {\n      background-color: ' + props.theme['$drawer-bg'] + ';\n      transition: ' + props.theme['$drawer-transition'] + ';\n      position: fixed;\n      flex: 1 0 auto;\n      z-index: ' + props.theme['$drawer-zindex'] + ';\n      overflow-y: auto;\n      outline: none;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$drawer-border-radius']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$drawer-box-shadow']) + '\n      &.drawer-top {\n        ' + ifThen(props.top, '\n            left: 0;\n            top: 0;\n            width: 100%;\n            height: ' + props.top + ';\n            transform: translate(0px, -' + (props.top && unitUtils$1.math.addition(props.top, 4)) + ');\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-right {\n        ' + ifThen(props.right, '\n            bottom: 0;\n            right: 0;\n            height: 100%;\n            width: ' + props.right + ';\n            transform: translate(' + (props.right && unitUtils$1.math.addition(props.right, 4)) + ', 0px);\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-bottom {\n        ' + ifThen(props.bottom, '\n            left: 0;\n            bottom: 0;\n            width: 100%;\n            height: ' + props.bottom + ';\n            transform: translate(0px, ' + (props.bottom && unitUtils$1.math.addition(props.bottom, 4)) + ');\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n      &.drawer-left {\n        ' + ifThen(props.left, '\n            bottom: 0;\n            left: 0;\n            height: 100%;\n            width: ' + props.left + ';\n            transform: translate(-' + (props.left && unitUtils$1.math.addition(props.left, 4)) + ', 0px);\n            &.active {\n              transform: translate(0px, 0px);\n            }\n          ') + '\n      }\n    }\n    &.drawer-docked { \n      flex: 0 0 auto;\n      overflow: hidden;\n      &.drawer-left {\n        ' + ifThen(props.left, '\n          width: ' + props.theme['$drawer-docked-width'] + ';\n          transition: width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;\n          &.active {\n            width: ' + props.left + ';\n          }\n          ') + '\n      }\n    }\n  ';
 });
-Drawer.propTypes = propTypes$26;
-Drawer.defaultProps = defaultProps$23;
+Drawer.propTypes = propTypes$24;
+Drawer.defaultProps = defaultProps$21;
 
-var defaultProps$25$1 = {
+var defaultProps$23$1 = {
   theme: {
     '$grid-columns': '12',
     '$grid-gutter-widths': {
@@ -12441,7 +11354,7 @@ var defaultProps$25$1 = {
     '$enable-grid-classes': true
   }
 };
-var propTypes$27 = {
+var propTypes$25 = {
   className: propTypes$1.string,
   theme: propTypes$1.shape({
     '$grid-columns': propTypes$1.string,
@@ -12467,17 +11380,17 @@ var DtUnstyled = function (_React$Component) {
   }]);
   return DtUnstyled;
 }(React__default.Component);
-DtUnstyled.defaultProps = defaultProps$25$1;
-DtUnstyled.propTypes = propTypes$27;
+DtUnstyled.defaultProps = defaultProps$23$1;
+DtUnstyled.propTypes = propTypes$25;
 var Dt = styled__default(DtUnstyled).withConfig({
   displayName: 'Dt'
 })(['  ', ''], function (props) {
   return '\n    /* Reboot Scss */\n    font-weight: ' + props.theme['$dt-font-weight'] + ';\n    ' + gridFramework_5(props.theme['$enable-grid-classes'], props.theme['$grid-columns'], props.theme['$grid-gutter-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-Dt.defaultProps = defaultProps$25$1;
-Dt.propTypes = propTypes$27;
+Dt.defaultProps = defaultProps$23$1;
+Dt.propTypes = propTypes$25;
 
-var propTypes$28 = {
+var propTypes$26 = {
   className: propTypes$1.string,
   size: propTypes$1.oneOf(['lg', '2x', '3x', '4x', '5x']),
   color: propTypes$1.oneOf(['success', 'info', 'warning', 'danger', 'white', 'gray-dark', 'primary', 'hide'])
@@ -12507,13 +11420,13 @@ var FaUnstyled = function (_React$Component) {
   }]);
   return FaUnstyled;
 }(React__default.Component);
-FaUnstyled.propTypes = propTypes$28;
+FaUnstyled.propTypes = propTypes$26;
 var Fa = styled__default(FaUnstyled).withConfig({
   displayName: 'Fa'
 })(['&.fa-lg{vertical-align:-2%;}']);
-Fa.propTypes = propTypes$28;
+Fa.propTypes = propTypes$26;
 
-var propTypes$29 = {
+var propTypes$27 = {
   className: propTypes$1.string,
   size: propTypes$1.oneOf(['lg', '2x', '3x', '4x', '5x', ''])
 };
@@ -12537,10 +11450,10 @@ var FaStacked = function (_React$Component) {
   }]);
   return FaStacked;
 }(React__default.Component);
-FaStacked.propTypes = propTypes$29;
-FaStacked.propTypes = propTypes$29;
+FaStacked.propTypes = propTypes$27;
+FaStacked.propTypes = propTypes$27;
 
-var defaultProps$26$1 = {
+var defaultProps$24$1 = {
   theme: {
     '$grid-gutter-widths': {
       xs: '30px',
@@ -12552,7 +11465,7 @@ var defaultProps$26$1 = {
     '$enable-grid-classes': true
   }
 };
-var propTypes$30 = {
+var propTypes$28 = {
   className: propTypes$1.string,
   children: propTypes$1.node.isRequired,
   theme: propTypes$1.shape({
@@ -12584,15 +11497,15 @@ var FieldsetUnstyled = function (_React$Component) {
   }]);
   return FieldsetUnstyled;
 }(React__default.Component);
-FieldsetUnstyled.defaultProps = defaultProps$26$1;
-FieldsetUnstyled.propTypes = propTypes$30;
+FieldsetUnstyled.defaultProps = defaultProps$24$1;
+FieldsetUnstyled.propTypes = propTypes$28;
 var Fieldset = styled__default(FieldsetUnstyled).withConfig({
   displayName: 'Fieldset'
 })(['', ''], function (props) {
   return '\n    min-width: 0;\n    padding: 0;\n    margin: 0;\n    border: 0;\n\n    & .row {\n      ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n\n  ';
 });
-Fieldset.defaultProps = defaultProps$26$1;
-Fieldset.propTypes = propTypes$30;
+Fieldset.defaultProps = defaultProps$24$1;
+Fieldset.propTypes = propTypes$28;
 
 var Footer = styled__default.footer.withConfig({
   displayName: 'Footer'
@@ -12643,7 +11556,7 @@ exports.default = {
 unwrapExports(typography_1);
 var typography_2 = typography_1.typography;
 
-var defaultProps$27$1 = {
+var defaultProps$25$1 = {
   theme: {
     '$font-size-h1': '2.5rem',
     '$headings-margin-bottom': '0.5rem',
@@ -12663,7 +11576,7 @@ var defaultProps$27$1 = {
     '$lead-font-weight': '300'
   }
 };
-var propTypes$31 = {
+var propTypes$29 = {
   className: propTypes$1.string,
   theme: propTypes$1.shape({
     '$link-color': propTypes$1.string,
@@ -12714,17 +11627,17 @@ var H1Unstyled = function (_React$Component) {
   }]);
   return H1Unstyled;
 }(React__default.Component);
-H1Unstyled.defaultProps = defaultProps$27$1;
-H1Unstyled.propTypes = propTypes$31;
+H1Unstyled.defaultProps = defaultProps$25$1;
+H1Unstyled.propTypes = propTypes$29;
 var H1 = styled__default(H1Unstyled).withConfig({
   displayName: 'H1'
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h1'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-H1.defaultProps = defaultProps$27$1;
-H1.propTypes = propTypes$31;
+H1.defaultProps = defaultProps$25$1;
+H1.propTypes = propTypes$29;
 
-var defaultProps$28$1 = {
+var defaultProps$26$1 = {
   theme: {
     '$font-size-h2': '2rem',
     '$headings-margin-bottom': '0.5rem',
@@ -12744,7 +11657,7 @@ var defaultProps$28$1 = {
     '$lead-font-weight': '300'
   }
 };
-var propTypes$32 = {
+var propTypes$30 = {
   className: propTypes$1.string,
   theme: propTypes$1.shape({
     '$link-color': propTypes$1.string,
@@ -12795,17 +11708,17 @@ var H2Unstyled = function (_React$Component) {
   }]);
   return H2Unstyled;
 }(React__default.Component);
-H2Unstyled.defaultProps = defaultProps$28$1;
-H2Unstyled.propTypes = propTypes$32;
+H2Unstyled.defaultProps = defaultProps$26$1;
+H2Unstyled.propTypes = propTypes$30;
 var H2 = styled__default(H2Unstyled).withConfig({
   displayName: 'H2'
 })(['', ''], function (props) {
   return '\n\n    font-size: ' + props.theme['$font-size-h2'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-H2.defaultProps = defaultProps$28$1;
-H2.propTypes = propTypes$32;
+H2.defaultProps = defaultProps$26$1;
+H2.propTypes = propTypes$30;
 
-var defaultProps$29$1 = {
+var defaultProps$27$1 = {
   theme: {
     '$font-size-h3': '1.75rem',
     '$headings-margin-bottom': '0.5rem',
@@ -12825,7 +11738,7 @@ var defaultProps$29$1 = {
     '$lead-font-weight': '300'
   }
 };
-var propTypes$33 = {
+var propTypes$31 = {
   className: propTypes$1.string,
   theme: propTypes$1.shape({
     '$link-color': propTypes$1.string,
@@ -12876,17 +11789,17 @@ var H3Unstyled = function (_React$Component) {
   }]);
   return H3Unstyled;
 }(React__default.Component);
-H3Unstyled.defaultProps = defaultProps$29$1;
-H3Unstyled.propTypes = propTypes$33;
+H3Unstyled.defaultProps = defaultProps$27$1;
+H3Unstyled.propTypes = propTypes$31;
 var H3 = styled__default(H3Unstyled).withConfig({
   displayName: 'H3'
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h3'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-H3.defaultProps = defaultProps$29$1;
-H3.propTypes = propTypes$33;
+H3.defaultProps = defaultProps$27$1;
+H3.propTypes = propTypes$31;
 
-var defaultProps$30$1 = {
+var defaultProps$28$1 = {
   theme: {
     '$font-size-h4': '1.5rem',
     '$headings-margin-bottom': '0.5rem',
@@ -12906,7 +11819,7 @@ var defaultProps$30$1 = {
     '$lead-font-weight': '300'
   }
 };
-var propTypes$34 = {
+var propTypes$32 = {
   className: propTypes$1.string,
   theme: propTypes$1.shape({
     '$link-color': propTypes$1.string,
@@ -12957,17 +11870,17 @@ var H4Unstyled = function (_React$Component) {
   }]);
   return H4Unstyled;
 }(React__default.Component);
-H4Unstyled.defaultProps = defaultProps$30$1;
-H4Unstyled.propTypes = propTypes$34;
+H4Unstyled.defaultProps = defaultProps$28$1;
+H4Unstyled.propTypes = propTypes$32;
 var H4 = styled__default(H4Unstyled).withConfig({
   displayName: 'H4'
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h4'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$dis$play4-weight']) + '\n\n    &.lead {\n      font-size: ' + props.theme['$lead-font-size'] + ';\n      font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-H4.defaultProps = defaultProps$30$1;
-H4.propTypes = propTypes$34;
+H4.defaultProps = defaultProps$28$1;
+H4.propTypes = propTypes$32;
 
-var defaultProps$31$1 = {
+var defaultProps$29$1 = {
   theme: {
     '$font-size-h5': '1.25rem',
     '$headings-margin-bottom': '0.5rem',
@@ -12987,7 +11900,7 @@ var defaultProps$31$1 = {
     '$lead-font-weight': '300'
   }
 };
-var propTypes$35 = {
+var propTypes$33 = {
   className: propTypes$1.string,
   theme: propTypes$1.shape({
     '$link-color': propTypes$1.string,
@@ -13038,17 +11951,17 @@ var H5Unstyled = function (_React$Component) {
   }]);
   return H5Unstyled;
 }(React__default.Component);
-H5Unstyled.defaultProps = defaultProps$31$1;
-H5Unstyled.propTypes = propTypes$35;
+H5Unstyled.defaultProps = defaultProps$29$1;
+H5Unstyled.propTypes = propTypes$33;
 var H5 = styled__default(H5Unstyled).withConfig({
   displayName: 'H5'
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h5'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n \n    &.lead {\n     font-size: ' + props.theme['$lead-font-size'] + ';\n     font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-H5.defaultProps = defaultProps$31$1;
-H5.propTypes = propTypes$35;
+H5.defaultProps = defaultProps$29$1;
+H5.propTypes = propTypes$33;
 
-var defaultProps$32$1 = {
+var defaultProps$30$1 = {
   theme: {
     '$font-size-h6': '1rem',
     '$headings-margin-bottom': '0.5rem',
@@ -13068,7 +11981,7 @@ var defaultProps$32$1 = {
     '$lead-font-weight': '300'
   }
 };
-var propTypes$36 = {
+var propTypes$34 = {
   className: propTypes$1.string,
   theme: propTypes$1.shape({
     '$link-color': propTypes$1.string,
@@ -13119,15 +12032,15 @@ var H6Unstyled = function (_React$Component) {
   }]);
   return H6Unstyled;
 }(React__default.Component);
-H6Unstyled.defaultProps = defaultProps$32$1;
-H6Unstyled.propTypes = propTypes$36;
+H6Unstyled.defaultProps = defaultProps$30$1;
+H6Unstyled.propTypes = propTypes$34;
 var H6 = styled__default(H6Unstyled).withConfig({
   displayName: 'H6'
 })(['', ''], function (props) {
   return '\n    font-size: ' + props.theme['$font-size-h6'] + ';\n    ' + typography_2(props.theme['$headings-margin-bottom'], props.theme['$headings-font-family'], props.theme['$headings-font-weight'], props.theme['$headings-line-height'], props.theme['$headings-color'], props.theme['$display1-size'], props.theme['$display2-size'], props.theme['$display3-size'], props.theme['$display4-size'], props.theme['$display1-weight'], props.theme['$display2-weight'], props.theme['$display3-weight'], props.theme['$display4-weight']) + '\n    \n    &.lead {\n     font-size: ' + props.theme['$lead-font-size'] + ';\n     font-weight: ' + props.theme['$lead-font-weight'] + ';\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;\n  ';
 });
-H6.defaultProps = defaultProps$32$1;
-H6.propTypes = propTypes$36;
+H6.defaultProps = defaultProps$30$1;
+H6.propTypes = propTypes$34;
 
 var navbarToggleable_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -13245,7 +12158,7 @@ exports.default = {
 unwrapExports(navbar_1);
 var navbar_3 = navbar_1.navbar;
 
-var defaultProps$33$1 = {
+var defaultProps$31$1 = {
   theme: {
     '$enable-rounded': true,
     '$enable-hover-media-query': false,
@@ -13277,7 +12190,7 @@ var defaultProps$33$1 = {
     '$navbar-inverse-disabled-color': 'rgba(255, 255, 255, 0.25)'
   }
 };
-var propTypes$37 = {
+var propTypes$35 = {
   shadowHeader: propTypes$1.bool,
   theme: propTypes$1.shape({
     '$enable-rounded': propTypes$1.bool,
@@ -13315,16 +12228,16 @@ var Header = styled__default.header.withConfig({
 })(['', '  '], function (props) {
   return '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + conditional_1(props.shadowHeader, 'box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);') + '\n  ';
 });
-Header.defaultProps = defaultProps$33$1;
-Header.propTypes = propTypes$37;
+Header.defaultProps = defaultProps$31$1;
+Header.propTypes = propTypes$35;
 
-var defaultProps$34$1 = {
+var defaultProps$32$1 = {
   theme: {
     '$hr-border-width': '1px',
     '$hr-border-color': 'rgba(0, 0, 0, 0.1)'
   }
 };
-var propTypes$38 = {
+var propTypes$36 = {
   theme: propTypes$1.shape({
     '$hr-border-width': propTypes$1.string,
     '$hr-border-color': propTypes$1.string
@@ -13335,8 +12248,8 @@ var Hr = styled__default.hr.withConfig({
 })(['', ''], function (props) {
   return '\n    margin-top: ' + props.theme['$spacer-y'] + ';\n    margin-bottom: ' + props.theme['$spacer-y'] + ';\n    border: 0;\n    border-top: ' + props.theme['$hr-border-width'] + ' solid ' + props.theme['$hr-border-color'] + ';\n  ';
 });
-Hr.defaultProps = defaultProps$34$1;
-Hr.propTypes = propTypes$38;
+Hr.defaultProps = defaultProps$32$1;
+Hr.propTypes = propTypes$36;
 
 var image = createCommonjsModule(function (module, exports) {
 "use strict";
@@ -13359,7 +12272,7 @@ exports.default = {
 unwrapExports(image);
 var image_1 = image.imgFluid;
 
-var defaultProps$35$1 = {
+var defaultProps$33$1 = {
   tag: 'img',
   theme: {
     '$enable-rounded': true,
@@ -13379,7 +12292,7 @@ var defaultProps$35$1 = {
     '$figure-caption-color': '#636c72'
   }
 };
-var propTypes$39 = {
+var propTypes$37 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   fluid: propTypes$1.bool,
@@ -13434,15 +12347,15 @@ var ImgUnstyled = function (_React$Component) {
   }]);
   return ImgUnstyled;
 }(React__default.Component);
-ImgUnstyled.defaultProps = defaultProps$35$1;
-ImgUnstyled.propTypes = propTypes$39;
+ImgUnstyled.defaultProps = defaultProps$33$1;
+ImgUnstyled.propTypes = propTypes$37;
 var Img = styled__default(ImgUnstyled).withConfig({
   displayName: 'Img'
 })(['', ''], function (props) {
-  return '\n    \n    /* \n      Responsive images (ensure images does not scale beyond their parents)\n      This is purposefully opt-in via an explicit class rather than being the default for all <img>.\n      We previously tried the "images are responsive by default" approach in Bootstrap v2,\n      and abandoned it in Bootstrap v3 because it breaks lots of third-party widgets (including Google Maps)\n      which we are not expecting the images within themselves to be involuntarily resized.\n      See also https://github.com/twbs/bootstrap/issues/18178\n    */\n    \n    &.img-fluid {\n      ' + image_1() + '\n    }\n    \n    \n     /* Image thumbnails */ \n    &.img-thumbnail {\n      padding: ' + props.theme['$thumbnail-padding'] + ';\n      background-color: ' + props.theme['$thumbnail-bg'] + ';\n      border: ' + props.theme['$thumbnail-border-width'] + ' solid ' + props.theme['$thumbnail-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$thumbnail-border-radius']) + '\n      ' + transition_2$1(props.theme['$enable-transitions'], props.theme['$thumbnail-transition']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$thumbnail-box-shadow']) + '\n      /* Keep them at most 100% wide */\n      ' + image_1() + '\n    }\n   \n    &.figure-img {\n      margin-bottom: ' + props.theme['$spacer-halved'] + ';\n      line-height: 1;\n    }\n    \n    /* Reboot Scss */\n    \n    /*\n     By default, <img> are inline-block. This assumes that, and vertically\n     centers them. This will not apply should you reset them to block level.\n    */\n    vertical-align: middle;\n    /*\n     Note: <img> are deliberately not made responsive by default.\n     For the rationale behind this, see the comments on the .img-fluid class.\n    */\n  ';
+  return '\n    \n    /* \n      Responsive images (ensure images does not scale beyond their parents)\n      This is purposefully opt-in via an explicit class rather than being the default for all <img>.\n      We previously tried the "images are responsive by default" approach in Bootstrap v2,\n      and abandoned it in Bootstrap v3 because it breaks lots of third-party widgets (including Google Maps)\n      which we are not expecting the images within themselves to be involuntarily resized.\n      See also https://github.com/twbs/bootstrap/issues/18178\n    */\n    \n    &.img-fluid {\n      ' + image_1() + '\n    }\n    \n    \n     /* Image thumbnails */ \n    &.img-thumbnail {\n      padding: ' + props.theme['$thumbnail-padding'] + ';\n      background-color: ' + props.theme['$thumbnail-bg'] + ';\n      border: ' + props.theme['$thumbnail-border-width'] + ' solid ' + props.theme['$thumbnail-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$thumbnail-border-radius']) + '\n      ' + transition_2(props.theme['$enable-transitions'], props.theme['$thumbnail-transition']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$thumbnail-box-shadow']) + '\n      /* Keep them at most 100% wide */\n      ' + image_1() + '\n    }\n   \n    &.figure-img {\n      margin-bottom: ' + props.theme['$spacer-halved'] + ';\n      line-height: 1;\n    }\n    \n    /* Reboot Scss */\n    \n    /*\n     By default, <img> are inline-block. This assumes that, and vertically\n     centers them. This will not apply should you reset them to block level.\n    */\n    vertical-align: middle;\n    /*\n     Note: <img> are deliberately not made responsive by default.\n     For the rationale behind this, see the comments on the .img-fluid class.\n    */\n  ';
 });
-Img.defaultProps = defaultProps$35$1;
-Img.propTypes = propTypes$39;
+Img.defaultProps = defaultProps$33$1;
+Img.propTypes = propTypes$37;
 
 var FigureUnstyled = function (_React$Component) {
   inherits(FigureUnstyled, _React$Component);
@@ -13515,7 +12428,7 @@ var FigCaption = styled__default(FigCaptionUnstyled).withConfig({
   return '\n    &.figure-caption {\n      font-size: ' + props.theme['$figure-caption-font-size'] + ';\n      color: ' + props.theme['$figure-caption-color'] + ';\n    }\n  ';
 });
 
-var defaultProps$36$1 = {
+var defaultProps$34$1 = {
   tag: 'p',
   theme: {
     '$enable-rounded': true,
@@ -13568,7 +12481,7 @@ var defaultProps$36$1 = {
   },
   type: 'text'
 };
-var propTypes$40 = {
+var propTypes$38 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   type: propTypes$1.oneOf(['button', 'checkbox', 'color', 'date', 'datetime', 'datetime-local', 'email', 'file', 'hidden', 'image', 'month', 'number', 'password', 'radio', 'range', 'reset', 'search', 'submit', 'tel', 'text', 'textarea', 'select', 'time', 'url', 'week']),
@@ -13678,15 +12591,15 @@ var InputUnstyled = function (_React$Component) {
   }]);
   return InputUnstyled;
 }(React__default.Component);
-InputUnstyled.defaultProps = defaultProps$36$1;
-InputUnstyled.propTypes = propTypes$40;
+InputUnstyled.defaultProps = defaultProps$34$1;
+InputUnstyled.propTypes = propTypes$38;
 var Input = styled__default(InputUnstyled).withConfig({
   displayName: 'Input'
 })(['', ''], function (props) {
   return '\n    /* Reboot Scss */\n    touch-action: manipulation;\n    \n    &[type="radio"],\n    &[type="checkbox"] {\n      box-sizing: border-box; /* 1. Add the correct box sizing in IE 10- */\n      padding: 0; /* 2. Remove the padding in IE 10- */\n      /*\n       Apply a disabled cursor for radios and checkboxes.\n       Note: Neither radios nor checkboxes can be readonly.\n      */\n   \n      &:disabled {\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n      }\n    }\n    \n    /* Normalize includes font: inherit;, so font-family. font-size, etc are */\n    /* properly inherited. However, line-height is not inherited there. */\n    line-height: inherit;\n   \n    &.disabled {\n      cursor: ' + props.theme['$cursor-disabled'] + ';\n    }\n   \n    &[type="date"],\n    &[type="time"],\n    &[type="datetime-local"],\n    &[type="month"] {\n    /* Remove the default appearance of temporal inputs to avoid a Mobile Safari\n       bug where setting a custom line-height prevents text from being vertically\n       centered within the input.\n       Bug report: https://github.com/twbs/bootstrap/issues/11266\n     */\n      -webkit-appearance: listbox;\n    }\n      \n    /* Correct the cursor style of increment and decrement buttons in Chrome. */\n    &[type="number"]::-webkit-inner-spin-button,\n    &[type="number"]::-webkit-outer-spin-button {\n      height: auto;\n    }\n    \n    &[type="search"] {\n      /* This overrides the extra rounded corners on search inputs in iOS so that our\n      .form-control class can properly style them. Note that this cannot simply\n       be added to .form-control as it is not specific enough. For details, see\n       https://github.com/twbs/bootstrap/issues/11586.\n       */\n      outline-offset: -2px; /* 2. Correct the outline style in Safari. */\n      -webkit-appearance: none;\n    }\n    \n    /* Remove the inner padding and cancel buttons in Chrome and Safari on macOS. */\n    &[type="search"]::-webkit-search-cancel-button,\n    &[type="search"]::-webkit-search-decoration {\n      -webkit-appearance: none;\n    }\n    \n    ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
-Input.defaultProps = defaultProps$36$1;
-Input.propTypes = propTypes$40;
+Input.defaultProps = defaultProps$34$1;
+Input.propTypes = propTypes$38;
 
 var forms$1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -13786,7 +12699,7 @@ unwrapExports(forms$1);
 var forms_2 = forms$1.formControl;
 var forms_3 = forms$1.formControlValidation;
 
-var defaultProps$37 = {
+var defaultProps$35$1 = {
   tag: 'div',
   theme: {
     '$enable-rounded': true,
@@ -13829,7 +12742,7 @@ var defaultProps$37 = {
     '$cursor-disabled': 'not-allowed'
   }
 };
-var propTypes$41 = {
+var propTypes$39 = {
   className: propTypes$1.string,
   size: propTypes$1.oneOf(['sm', 'lg']),
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
@@ -13896,20 +12809,20 @@ var InputGroupUnstyled = function (_React$Component) {
   }]);
   return InputGroupUnstyled;
 }(React__default.Component);
-InputGroupUnstyled.defaultProps = defaultProps$37;
-InputGroupUnstyled.propTypes = propTypes$41;
+InputGroupUnstyled.defaultProps = defaultProps$35$1;
+InputGroupUnstyled.propTypes = propTypes$39;
 var InputGroup = styled__default(InputGroupUnstyled).withConfig({
   displayName: 'InputGroup'
 })(['', ''], function (props) {
   return '\n    /*\n     Base styles\n    */\n   \n    &.input-group {\n      position: relative;\n      display: flex;\n      width: 100%;\n\n      .form-control {\n        /* \n          Ensure that the input is always above the *appended* addon button for\n          proper border colors.\n        */\n        \n        position: relative;\n        z-index: 2;\n        flex: 1 1 auto;\n        /* Add width 1% and flex-basis auto to ensure that button will not wrap out */\n        /* the column. Applies to IE Edge+ and Firefox. Chrome does not require this. */\n        width: 1%;\n        margin-bottom: 0;\n        \n        ' + hover_5(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n      }\n    }\n    \n    & .input-group-addon,\n    & .input-group-btn,\n    &.input-group .form-control {\n      /* Vertically centers the content of the addons within the input group */\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n\n\n      &:not(:first-child):not(:last-child) {\n        ' + borderRadius_2(props.theme['$enable-rounded'], '0') + '\n      }\n    }\n   \n    & .input-group-addon,\n    & .input-group-btn {\n\n      white-space: nowrap;\n      vertical-align: middle; /* Match the inputs */\n    }\n   \n   \n    /* Sizing options\n    Remix the default form control sizing classes into new ones for easier\n    manipulation.\n    */\n   \n    &.input-group-lg > .form-control,\n    &.input-group-lg > .input-group-addon,\n    &.input-group-lg > .input-group-btn > .btn {\n      padding: ' + props.theme['$input-padding-y-lg'] + ' ' + props.theme['$input-padding-x-lg'] + ';\n      font-size: ' + props.theme['$font-size-lg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-lg']) + '\n    }\n    \n    &.input-group-sm > .form-control,\n    &.input-group-sm > .input-group-addon,\n    &.input-group-sm > .input-group-btn > .btn {\n      padding: ' + props.theme['$input-padding-y-sm'] + ' ' + props.theme['$input-padding-x-sm'] + ';\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-sm']) + '\n    }\n   \n   \n    /*\n    Text input groups\n    */\n   \n    & .input-group-addon {\n      padding: ' + props.theme['$input-padding-y'] + ' ' + props.theme['$input-padding-x'] + ';\n      margin-bottom: 0; /* Allow use of <label> elements by overriding our default margin-bottom */\n      font-size: ' + props.theme['$font-size-base'] + ';\n      font-weight: normal;\n      line-height: ' + props.theme['$input-line-height'] + ';\n      color: ' + props.theme['$input-color'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$input-group-addon-bg'] + ';\n      border: ' + props.theme['$input-btn-border-width'] + ' solid ' + props.theme['$input-group-addon-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius']) + '\n   \n      /* \n      Nuke default margins from checkboxes and radios to vertically center within.\n      */\n      input[type="radio"],\n      input[type="checkbox"] {\n        margin-top: 0;\n      }\n    }\n   \n   \n    /*\n     Reset rounded corners\n    */\n   \n    &.input-group .form-control:not(:last-child),\n    & .input-group-addon:not(:last-child),\n    & .input-group-btn:not(:last-child) > .btn,\n    & .input-group-btn:not(:last-child) > .btn-group > .btn,\n    & .input-group-btn:not(:last-child) > .dropdown-toggle,\n    & .input-group-btn:not(:first-child) > .btn:not(:last-child):not(.dropdown-toggle),\n    & .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn {\n      ' + borderRadius_4(props.theme['$enable-rounded'], '0') + '\n    }\n    & .input-group-addon:not(:last-child) {\n      border-right: 0;\n    }\n    &.input-group .form-control:not(:first-child),\n    & .input-group-addon:not(:first-child),\n    & .input-group-btn:not(:first-child) > .btn,\n    & .input-group-btn:not(:first-child) > .btn-group > .btn,\n    & .input-group-btn:not(:first-child) > .dropdown-toggle,\n    & .input-group-btn:not(:last-child) > .btn:not(:first-child),\n    & .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn {\n      ' + borderRadius_6(props.theme['$enable-rounded'], '0') + '\n    }\n    & .form-control + .input-group-addon:not(:first-child) {\n      border-left: 0;\n    }\n   \n    /*\n     Button input groups\n    */\n   \n    & .input-group-btn {\n      position: relative;\n      /* Jankily prevent input button groups from wrapping with white-space and\n      font-size in combination with inline-block on buttons.\n      */\n      font-size: 0;\n      white-space: nowrap;\n   \n      /* Negative margin for spacing, position for bringing hovered/focused/actived\n      element above the siblings.\n      */\n      > .btn {\n        position: relative;\n        /* Vertically stretch the button and center its content */\n        flex: 1;\n        \n        + .btn {\n          margin-left: -' + props.theme['$input-btn-border-width'] + ';\n        }\n        \n        /* Bring the active button to the front */\n        ' + hover_5(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n      }\n   \n      /* Negative margin to only have a single, shared border between the two */\n      &:not(:last-child) {\n        > .btn,\n        > .btn-group {\n          margin-right: -' + props.theme['$input-btn-border-width'] + ';\n        }\n      }\n      &:not(:first-child) {\n        > .btn,\n        > .btn-group {\n          z-index: 2;\n          margin-left: -' + props.theme['$input-btn-border-width'] + ';\n          /* Because specificity */\n          ' + hover_5(props.theme['$enable-hover-media-query'], 'z-index: 3;') + '\n        }\n      }\n    }\n    \n   /* Added So that Inputs in InputGroup grab the same .form-control class as in Component Form Not Bs4 */\n   ' + forms_2(props.theme['$enable-rounded'], props.theme['$enable-transitions'], props.theme['$enable-shadows'], props.theme['$input-height'], props.theme['$input-padding-y'], props.theme['$input-padding-x'], props.theme['$font-size-base'], props.theme['$input-line-height'], props.theme['$input-color'], props.theme['$input-bg'], props.theme['$input-border-radius'], props.theme['$input-btn-border-width'], props.theme['$input-border-color'], props.theme['$input-transition'], props.theme['$input-box-shadow'], props.theme['$input-color-focus'], props.theme['$input-bg-focus'], props.theme['$input-border-focus'], props.theme['$input-box-shadow-focus'], props.theme['$input-color-placeholder'], props.theme['$input-bg-disabled'], props.theme['$cursor-disabled']) + '\n  ';
 });
-InputGroup.defaultProps = defaultProps$37;
-InputGroup.propTypes = propTypes$41;
+InputGroup.defaultProps = defaultProps$35$1;
+InputGroup.propTypes = propTypes$39;
 
-var defaultProps$38 = {
+var defaultProps$36$1 = {
   tag: 'div'
 };
-var propTypes$42 = {
+var propTypes$40 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   cssModule: propTypes$1.object
@@ -13934,15 +12847,15 @@ var InputGroupAddon = function (_React$Component) {
   }]);
   return InputGroupAddon;
 }(React__default.Component);
-InputGroupAddon.defaultProps = defaultProps$38;
-InputGroupAddon.propTypes = propTypes$42;
-InputGroupAddon.defaultProps = defaultProps$38;
-InputGroupAddon.propTypes = propTypes$42;
+InputGroupAddon.defaultProps = defaultProps$36$1;
+InputGroupAddon.propTypes = propTypes$40;
+InputGroupAddon.defaultProps = defaultProps$36$1;
+InputGroupAddon.propTypes = propTypes$40;
 
-var defaultProps$39 = {
+var defaultProps$37 = {
   tag: 'div'
 };
-var propTypes$43 = {
+var propTypes$41 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   groupClassName: propTypes$1.string,
@@ -13989,10 +12902,10 @@ var InputGroupButton = function (_React$Component) {
   }]);
   return InputGroupButton;
 }(React__default.Component);
-InputGroupButton.defaultProps = defaultProps$39;
-InputGroupButton.propTypes = propTypes$43;
-InputGroupButton.defaultProps = defaultProps$39;
-InputGroupButton.propTypes = propTypes$43;
+InputGroupButton.defaultProps = defaultProps$37;
+InputGroupButton.propTypes = propTypes$41;
+InputGroupButton.defaultProps = defaultProps$37;
+InputGroupButton.propTypes = propTypes$41;
 
 function IssueIcon(props) {
   return React__default.createElement(
@@ -14009,7 +12922,7 @@ IssueIcon.propTypes = {
   className: propTypes$1.string
 };
 
-var defaultProps$40 = {
+var defaultProps$38 = {
   theme: {
     '$enable-rounded': true,
     '$enable-shadows': false,
@@ -14025,7 +12938,7 @@ var defaultProps$40 = {
     '$nested-kbd-font-weight': 'bold'
   }
 };
-var propTypes$44 = {
+var propTypes$42 = {
   className: propTypes$1.string,
   children: propTypes$1.node.isRequired,
   theme: propTypes$1.shape({
@@ -14065,17 +12978,17 @@ var KbdUnstyled = function (_React$Component) {
   }]);
   return KbdUnstyled;
 }(React__default.Component);
-KbdUnstyled.defaultProps = defaultProps$40;
-KbdUnstyled.propTypes = propTypes$44;
+KbdUnstyled.defaultProps = defaultProps$38;
+KbdUnstyled.propTypes = propTypes$42;
 var Kbd = styled__default(KbdUnstyled).withConfig({
   displayName: 'Kbd'
 })(['', ''], function (props) {
   return '\n    /* User input typically entered via keyboard */\n    padding: ' + props.theme['$code-padding-y'] + ' ' + props.theme['$code-padding-x'] + ';\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$kbd-color'] + ';\n    background-color: ' + props.theme['$kbd-bg'] + ';\n    ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius-sm']) + '\n    ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$kbd-box-shadow']) + '\n    \n    & kbd {\n      padding: 0;\n      font-size: 100%;\n      font-weight: ' + props.theme['$nested-kbd-font-weight'] + ';\n      ' + boxShadow_2(props.theme['$enable-shadows'], 'none') + '\n    }\n    \n    /* Bootstrap 4 does not place this css rule straight into Kbd tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
-Kbd.defaultProps = defaultProps$40;
-Kbd.propTypes = propTypes$44;
+Kbd.defaultProps = defaultProps$38;
+Kbd.propTypes = propTypes$42;
 
-var defaultProps$41 = {
+var defaultProps$39 = {
   tag: 'div',
   theme: {
     '$enable-rounded': true,
@@ -14091,7 +13004,7 @@ var defaultProps$41 = {
     '$jumbotron-bg': '#eceeef'
   }
 };
-var propTypes$45 = {
+var propTypes$43 = {
   className: propTypes$1.string,
   fluid: propTypes$1.bool,
   theme: propTypes$1.shape({
@@ -14125,15 +13038,15 @@ var JumbotronUnstyled = function (_React$Component) {
   }]);
   return JumbotronUnstyled;
 }(React__default.Component);
-JumbotronUnstyled.defaultProps = defaultProps$41;
-JumbotronUnstyled.propTypes = propTypes$45;
+JumbotronUnstyled.defaultProps = defaultProps$39;
+JumbotronUnstyled.propTypes = propTypes$43;
 var Jumbotron = styled__default(JumbotronUnstyled).withConfig({
   displayName: 'Jumbotron'
 })(['', ''], function (props) {
   return '\n    &.jumbotron {\n      padding: ' + props.theme['$jumbotron-padding'] + ' calc(' + props.theme['$jumbotron-padding'] + ' / 2);\n      margin-bottom: ' + props.theme['$jumbotron-padding'] + ';\n      background-color: ' + props.theme['$jumbotron-bg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius-lg']) + '\n    \n      ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], 'padding: calc(' + props.theme['$jumbotron-padding'] + ' * 2) ' + props.theme['$jumbotron-padding'] + ';') + '  \n    }\n\n    & .jumbotron-hr {\n      border-top-color: ' + color(props.theme['$jumbotron-bg']).darken(0.1).toString() + ';\n    }\n    \n    &.jumbotron-fluid {\n      padding-right: 0;\n      padding-left: 0;\n      ' + borderRadius_2(props.theme['$enable-rounded'], '0') + '\n    }\n  ';
 });
-Jumbotron.defaultProps = defaultProps$41;
-Jumbotron.propTypes = propTypes$45;
+Jumbotron.defaultProps = defaultProps$39;
+Jumbotron.propTypes = propTypes$43;
 
 var colSizes = ['xs', 'sm', 'md', 'lg', 'xl'];
 var stringOrNumberProp$1 = propTypes$1.oneOfType([propTypes$1.number, propTypes$1.string]);
@@ -14143,7 +13056,7 @@ var columnProps$1 = propTypes$1.oneOfType([propTypes$1.string, propTypes$1.numbe
   pull: stringOrNumberProp$1,
   offset: stringOrNumberProp$1
 })]);
-var propTypes$46 = {
+var propTypes$44 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string]),
   theme: propTypes$1.shape({}),
@@ -14161,7 +13074,7 @@ var propTypes$46 = {
   xl: columnProps$1,
   cssModule: propTypes$1.object
 };
-var defaultProps$42 = {
+var defaultProps$40 = {
   tag: 'label',
   theme: {
     '$enable-rounded': true,
@@ -14255,8 +13168,8 @@ var Label = styled__default(LabelUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    /* Reboot Scss */\n    touch-action: manipulation;\n    /* Allow labels to use margin for spacing. */\n    display: inline-block;\n    margin-bottom: ' + props.theme['$label-margin-bottom'] + ';\n\n    ' + buttons_5(props.theme['$enable-shadows'], props.theme['$enable-hover-media-query'], props.theme['$enable-transitions'], props.theme['$enable-rounded'], props.theme['$font-weight-normal'], props.theme['$btn-font-weight'], props.theme['$btn-line-height'], props.theme['$btn-transition'], props.theme['$input-btn-border-width'], props.theme['$btn-padding-x'], props.theme['$btn-padding-y'], props.theme['$font-size-base'], props.theme['$btn-border-radius'], props.theme['$btn-box-shadow'], props.theme['$btn-focus-box-shadow'], props.theme['$btn-active-box-shadow'], props.theme['$cursor-disabled'], props.theme['$link-color'], props.theme['$link-hover-color'], props.theme['$link-hover-decoration'], props.theme['$btn-link-disabled-color'], props.theme['$btn-padding-x-lg'], props.theme['$btn-padding-y-lg'], props.theme['$font-size-lg'], props.theme['$btn-border-radius-lg'], props.theme['$btn-padding-x-sm'], props.theme['$btn-padding-y-sm'], props.theme['$font-size-sm'], props.theme['$btn-border-radius-sm'], props.theme['$btn-block-spacing-y'], props.theme['$btn-primary-color'], props.theme['$btn-primary-bg'], props.theme['$btn-primary-border'], props.theme['$btn-secondary-color'], props.theme['$btn-secondary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-color'], props.theme['$btn-info-bg'], props.theme['$btn-info-border'], props.theme['$btn-success-color'], props.theme['$btn-success-bg'], props.theme['$btn-success-border'], props.theme['$btn-warning-color'], props.theme['$btn-warning-bg'], props.theme['$btn-warning-border'], props.theme['$btn-danger-color'], props.theme['$btn-danger-bg'], props.theme['$btn-danger-border']) + '\n ';
 });
-Label.propTypes = propTypes$46;
-Label.defaultProps = defaultProps$42;
+Label.propTypes = propTypes$44;
+Label.defaultProps = defaultProps$40;
 
 var Legend = styled__default.legend.withConfig({
   displayName: 'Legend'
@@ -14278,12 +13191,12 @@ exports.default = {
 unwrapExports(media_1);
 var media_2 = media_1.media;
 
-var defaultProps$43 = {
+var defaultProps$41 = {
   theme: {
     '$list-inline-padding': '5px'
   }
 };
-var propTypes$47 = {
+var propTypes$45 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
@@ -14331,15 +13244,15 @@ var LiUnstyled = function (_React$Component) {
   }]);
   return LiUnstyled;
 }(React__default.Component);
-LiUnstyled.defaultProps = defaultProps$43;
-LiUnstyled.propTypes = propTypes$47;
+LiUnstyled.defaultProps = defaultProps$41;
+LiUnstyled.propTypes = propTypes$45;
 var Li = styled__default(LiUnstyled).withConfig({
   displayName: 'Li'
 })(['', ''], function (props) {
   return '\n    &.list-inline-item {\n      display: inline-block;\n    \n      &:not(:last-child) {\n        margin-right: ' + props.theme['$list-inline-padding'] + ';\n      }\n    }\n    \n    ' + media_2() + '\n  ';
 });
-Li.defaultProps = defaultProps$43;
-Li.propTypes = propTypes$47;
+Li.defaultProps = defaultProps$41;
+Li.propTypes = propTypes$45;
 
 var listGroup$1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -14449,7 +13362,7 @@ var lists_1 = lists$1.listUnstyled;
 var lists_2 = lists$1.listInline;
 var lists_3 = lists$1.listInlineItem;
 
-var defaultProps$45 = {
+var defaultProps$43 = {
   tag: 'nav',
   role: 'navigation',
   toggleable: 'false',
@@ -14507,7 +13420,7 @@ var defaultProps$45 = {
     '$navbar-inverse-disabled-color': 'rgba(255, 255, 255, 0.25)'
   }
 };
-var propTypes$49 = {
+var propTypes$47 = {
   className: propTypes$1.string,
   children: propTypes$1.node.isRequired,
   inline: propTypes$1.bool,
@@ -14586,17 +13499,17 @@ var UlUnstyled = function (_React$Component) {
   }]);
   return UlUnstyled;
 }(React__default.Component);
-UlUnstyled.defaultProps = defaultProps$45;
-UlUnstyled.propTypes = propTypes$49;
+UlUnstyled.defaultProps = defaultProps$43;
+UlUnstyled.propTypes = propTypes$47;
 var Ul = styled__default(UlUnstyled).withConfig({
   displayName: 'Ul'
 })(['', ''], function (props) {
   return '\n    ' + nav_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$font-size-lg'], props.theme['$border-width'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n\n    /* Type Scss */\n    &.list-unstyled {\n      ' + lists_1() + '\n    }\n\n    &.list-inline {\n      ' + lists_2() + '\n    }\n    \n    /* Reboot Scss */\n    margin-top: 0;\n    margin-bottom: 1rem;\n  \n    & ol,\n    & ul {\n      margin-bottom: 0;\n    }\n  ';
 });
-Ul.defaultProps = defaultProps$45;
-Ul.propTypes = propTypes$49;
+Ul.defaultProps = defaultProps$43;
+Ul.propTypes = propTypes$47;
 
-var defaultProps$44 = {
+var defaultProps$42 = {
   tag: Ul,
   toggleable: 'false',
   theme: {
@@ -14632,7 +13545,7 @@ var defaultProps$44 = {
     '$state-danger-bg': '#f2dede'
   }
 };
-var propTypes$48 = {
+var propTypes$46 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   flush: propTypes$1.bool,
@@ -14692,23 +13605,23 @@ var ListGroupUnstyled = function (_React$Component) {
   }]);
   return ListGroupUnstyled;
 }(React__default.Component);
-ListGroupUnstyled.defaultProps = defaultProps$44;
-ListGroupUnstyled.propTypes = propTypes$48;
+ListGroupUnstyled.defaultProps = defaultProps$42;
+ListGroupUnstyled.propTypes = propTypes$46;
 var ListGroup = styled__default(ListGroupUnstyled).withConfig({
   displayName: 'ListGroup'
 })(['', ''], function (props) {
   return '\n    /* \n      Base class\n      Easily usable on ul, ol, or div.\n    */\n    \n    &.list-group {\n      display: flex;\n      flex-direction: column;\n      /* No need to set list-style: none; since .list-group-item is block level */\n      padding-left: 0;  /* reset padding because ul and ol */\n      margin-bottom: 0;\n    }\n    \n    \n    /* \n      Interactive list items\n      Use anchor or button elements instead of \'li\'s or \'div\'s to create interactive\n      list items. Includes an extra \'.active\' modifier class for selected items.\n    */\n    \n    & .list-group-item-action {\n      width: 100%; /* For \'button\'s (anchors become 100% by default though) */\n      color: ' + props.theme['$list-group-link-color'] + ';\n      text-align: inherit; /* For \'button\'s (anchors inherit) */\n    \n      /* Hover state */\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n          color: ' + props.theme['$list-group-link-hover-color'] + ';\n          text-decoration: none;\n          background-color: ' + props.theme['$list-group-hover-bg'] + ';\n        ') + ';\n      \n      &:active {\n        color: ' + props.theme['$list-group-link-active-color'] + ';\n        background-color: ' + props.theme['$list-group-link-active-bg'] + ';\n      }\n    }\n    \n    /* \n      Individual list items\n      Use on \'li\'s or \'div\'s within the \'.list-group\' parent.\n    */\n    \n    & .list-group-item {\n      position: relative;\n      display: flex;\n      flex-flow: row wrap;\n      align-items: center;\n      padding: ' + props.theme['$list-group-item-padding-y'] + ' ' + props.theme['$list-group-item-padding-x'] + ';\n      /* Place the border on the list items and negative margin up for better styling */\n      margin-bottom: -' + props.theme['$list-group-border-width'] + ';\n      background-color: ' + props.theme['$list-group-bg'] + ';\n      border: ' + props.theme['$list-group-border-width'] + ' solid ' + props.theme['$list-group-border-color'] + ';\n    \n      &:first-child {\n        ' + borderRadius_3(props.theme['$enable-rounded'], props.theme['$list-group-border-radius']) + '\n      }\n\n      &:last-child {\n        margin-bottom: 0;\n        ' + borderRadius_5(props.theme['$enable-rounded'], props.theme['$list-group-border-radius']) + '\n      }\n      \n      ' + hover_3(props.theme['$enable-hover-media-query'], 'text-decoration: none;') + '\n        \n      &.disabled,\n      &:disabled {   \n        color: ' + props.theme['$list-group-disabled-color'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n        background-color: ' + props.theme['$list-group-disabled-bg'] + ';\n      }\n    \n    \n      &.active {\n        z-index: 2; /* Place active items above their siblings for proper border styling */\n        color: ' + props.theme['$list-group-active-color'] + ';\n        background-color: ' + props.theme['$list-group-active-bg'] + ';\n        border-color: ' + props.theme['$list-group-active-border'] + ';     \n      }\n    }\n    \n    /* \n      Flush list items\n      Remove borders and border-radius to keep list group items edge-to-edge. Most\n      useful within other components (e.g., cards).\n    */\n\n    &.list-group-flush {\n      .list-group-item {\n        border-right: 0;\n        border-left: 0;\n        border-radius: 0;\n      }\n      \n      &:first-child {\n        .list-group-item:first-child {\n          border-top: 0;\n        }\n      }\n\n      &:last-child {\n        .list-group-item:last-child {\n          border-bottom: 0;\n        }\n      }\n    }\n    \n    \n    \n    /* Contextual variants\n    \n     Add modifier classes to change text and background color on individual items.\n     Organizationally, this must come after the \':hover\' states.\n    */\n    \n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'success', props.theme['$state-success-bg'], props.theme['$state-success-text']) + '\n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'info', props.theme['$state-info-bg'], props.theme['$state-info-text']) + '\n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'warning', props.theme['$state-warning-bg'], props.theme['$state-warning-text']) + '\n    ' + listGroup_2(props.theme['$enable-hover-media-query'], 'danger', props.theme['$state-danger-bg'], props.theme['$state-danger-text']) + '\n  ';
 });
-ListGroup.defaultProps = defaultProps$44;
-ListGroup.propTypes = propTypes$48;
+ListGroup.defaultProps = defaultProps$42;
+ListGroup.propTypes = propTypes$46;
 
 var handleDisabledOnClick = function handleDisabledOnClick(e) {
   e.preventDefault();
 };
-var defaultProps$46 = {
+var defaultProps$44 = {
   tag: 'li'
 };
-var propTypes$50 = {
+var propTypes$48 = {
   className: propTypes$1.string,
   action: propTypes$1.bool,
   active: propTypes$1.bool,
@@ -14743,15 +13656,15 @@ var ListGroupItem = function (_React$Component) {
   }]);
   return ListGroupItem;
 }(React__default.Component);
-ListGroupItem.defaultProps = defaultProps$46;
-ListGroupItem.propTypes = propTypes$50;
-ListGroupItem.defaultProps = defaultProps$46;
-ListGroupItem.propTypes = propTypes$50;
+ListGroupItem.defaultProps = defaultProps$44;
+ListGroupItem.propTypes = propTypes$48;
+ListGroupItem.defaultProps = defaultProps$44;
+ListGroupItem.propTypes = propTypes$48;
 
-var defaultProps$47 = {
+var defaultProps$45 = {
   tag: H5
 };
-var propTypes$51 = {
+var propTypes$49 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func])
 };
@@ -14774,15 +13687,15 @@ var ListGroupItemHeading = function (_React$Component) {
   }]);
   return ListGroupItemHeading;
 }(React__default.Component);
-ListGroupItemHeading.defaultProps = defaultProps$47;
-ListGroupItemHeading.propTypes = propTypes$51;
-ListGroupItemHeading.defaultProps = defaultProps$47;
-ListGroupItemHeading.propTypes = propTypes$51;
+ListGroupItemHeading.defaultProps = defaultProps$45;
+ListGroupItemHeading.propTypes = propTypes$49;
+ListGroupItemHeading.defaultProps = defaultProps$45;
+ListGroupItemHeading.propTypes = propTypes$49;
 
-var defaultProps$48 = {
+var defaultProps$46 = {
   tag: 'p'
 };
-var propTypes$52 = {
+var propTypes$50 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func])
 };
@@ -14805,22 +13718,22 @@ var ListGroupItemText = function (_React$Component) {
   }]);
   return ListGroupItemText;
 }(React__default.Component);
-ListGroupItemText.defaultProps = defaultProps$48;
-ListGroupItemText.propTypes = propTypes$52;
-ListGroupItemText.defaultProps = defaultProps$48;
-ListGroupItemText.propTypes = propTypes$52;
+ListGroupItemText.defaultProps = defaultProps$46;
+ListGroupItemText.propTypes = propTypes$50;
+ListGroupItemText.defaultProps = defaultProps$46;
+ListGroupItemText.propTypes = propTypes$50;
 
 var Mapp = styled__default.map.withConfig({
   displayName: 'Map__Mapp'
 })(['display:inline;']);
 
-var defaultProps$49 = {
+var defaultProps$47 = {
   theme: {
     '$mark-padding': '.2em',
     '$mark-bg': '#fcf8e3'
   }
 };
-var propTypes$53 = {
+var propTypes$51 = {
   theme: propTypes$1.shape({
     '$mark-padding': propTypes$1.string,
     '$mark-bg': propTypes$1.string
@@ -14831,10 +13744,10 @@ var Mark = styled__default.mark.withConfig({
 })(['', ''], function (props) {
   return '\n    /* Reboot Scss */\n    padding: ' + props.theme['$mark-padding'] + ';\n    background-color: ' + props.theme['$mark-bg'] + ';\n  ';
 });
-Mark.defaultProps = defaultProps$49;
-Mark.propTypes = propTypes$53;
+Mark.defaultProps = defaultProps$47;
+Mark.propTypes = propTypes$51;
 
-var propTypes$54 = {
+var propTypes$52 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   body: propTypes$1.bool,
@@ -14902,11 +13815,11 @@ var MediaUnstyled = function (_React$Component) {
   }]);
   return MediaUnstyled;
 }(React__default.Component);
-MediaUnstyled.propTypes = propTypes$54;
+MediaUnstyled.propTypes = propTypes$52;
 var Media = styled__default(MediaUnstyled).withConfig({
   displayName: 'Media'
 })(['&.media,& .media{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;}& .media-body{-webkit-box-flex:1;-ms-flex:1 1 0%;flex:1 1 0%}', ''], media_2());
-Media.propTypes = propTypes$54;
+Media.propTypes = propTypes$52;
 
 var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
@@ -15303,8 +14216,187 @@ var tools_5 = tools.getOriginalBodyPadding;
 var tools_6 = tools.conditionallyUpdateScrollbar;
 var tools_10 = tools.tetherAttachements;
 
+var parseTransition_1$1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var parseTransition = function parseTransition(transitions) {
+  if (!transitions) {
+    return [];
+  }
+  var sample = transitions;
+  var RULE_DELIMITER = ',';
+  var PROPERTY_DELIMITER = ' ';
+  var MS_UNIT = 'ms';
+  var TMP_STR = 'TMP';
+  var DEFAULT_PROPERTY = 'all';
+  var DEFAULT_DURATION = 0;
+  var DEFAULT_TIMING_FUNCTION = 'ease';
+  var DEFAULT_DELAY = 0;
+  var BEZIER_REGEX = /cubic-bezier\([^\)]+\)/gi;
+  var cubicBezierList = transitions.match(BEZIER_REGEX);
+  if (cubicBezierList) {
+    sample = sample.replace(BEZIER_REGEX, TMP_STR);
+  }
+  var transitionList = sample.split(RULE_DELIMITER).map(function (rule) {
+    var properties = rule.trim().split(PROPERTY_DELIMITER);
+    return {
+      property: properties[0] || DEFAULT_PROPERTY,
+      duration: properties[1] && !(properties[1].indexOf(MS_UNIT) !== -1) ? parseFloat(properties[1]) * 1000 : parseFloat(properties[1]) || DEFAULT_DURATION,
+      timingFunction: properties[2] && properties[2] !== TMP_STR ? properties[2] : cubicBezierList ? cubicBezierList.shift() : DEFAULT_TIMING_FUNCTION,
+      delay: properties[3] && !(properties[3].indexOf(MS_UNIT) !== -1) ? parseFloat(properties[3]) * 1000 : parseFloat(properties[3]) || DEFAULT_DELAY
+    };
+  });
+  return transitionList;
+};
+exports.default = parseTransition;
+module.exports = exports['default'];
+});
+unwrapExports(parseTransition_1$1);
+
+var transition$2$1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.getTransitionUtilities = getTransitionUtilities;
+exports.fade = fade;
+exports.collapse = collapse;
+exports.getReactTransition = getReactTransition;
+var _parseTransition2 = _interopRequireDefault(parseTransition_1$1);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var defaultProps = exports.defaultProps = {
+  '$enable-transitions': true,
+  '$transition-fade': 'opacity .15s linear',
+  '$transition-collapse': 'height .35s ease'
+};
+function getTransitionUtilities() {
+  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
+  var transitionFade = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$transition-fade'];
+  var transitionCollapse = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$transition-collapse'];
+  return '\n    ' + fade(enableTransitions, transitionFade) + '\n    ' + collapse(enableTransitions, transitionCollapse) + '\n  ';
+}
+function fade() {
+  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
+  var transitionFade = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$transition-fade'];
+  return '\n    .fade,\n     &.fade {\n      opacity: 0;\n      ' + (_transition.transition)(enableTransitions, transitionFade) + '\n    \n      &.show {\n        opacity: 1;\n      }\n    }\n  ';
+}
+function collapse() {
+  var enableTransitions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-transitions'];
+  var transitionCollapse = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$transition-collapse'];
+  return '\n    .collapse {\n      display: none;\n      &.show {\n        display: block;\n      }\n    }\n    \n    tr {\n      &.collapse.show {\n        display: table-row;\n      }\n    }\n    \n    tbody {\n      &.collapse.show {\n        display: table-row-group;\n      }\n    }\n    \n    .collapsing {\n      position: relative;\n      height: 0;\n      overflow: hidden;\n      ' + (_transition.transition)(enableTransitions, transitionCollapse) + '\n    }\n  ';
+}
+function getReactTransition(enableTransition, transition) {
+  var transitionList = (_parseTransition2.default)(transition);
+  var _transitionList$ = transitionList[0],
+      property = _transitionList$.property,
+      duration = _transitionList$.duration,
+      timingFunction = _transitionList$.timingFunction,
+      delay = _transitionList$.delay;
+  return (_transition.transition)(enableTransition, property + ' ' + duration + 'ms ' + timingFunction + ' ' + delay + 'ms');
+}
+exports.default = {
+  defaultProps: defaultProps,
+  getTransitionUtilities: getTransitionUtilities,
+  getReactTransition: getReactTransition,
+  fade: fade,
+  collapse: collapse
+};
+});
+unwrapExports(transition$2$1);
+var transition_3$1 = transition$2$1.fade;
+
+var reboot$1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getGlobalStyles = getGlobalStyles;
+exports.getGlobalStyleNoBootstrapProvider = getGlobalStyleNoBootstrapProvider;
+exports.html = html;
+exports.boxSizing = boxSizing;
+exports.ie10FixViewport = ie10FixViewport;
+exports.body = body;
+exports.bodyUtils = bodyUtils;
+exports.tabIndex = tabIndex;
+exports.svg = svg;
+exports.ie10FixHidden = ie10FixHidden;
+exports.webkitFileUploadButton = webkitFileUploadButton;
+var defaultProps = exports.defaultProps = {
+  '$font-family-base': '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  '$font-size-base': '1rem',
+  '$font-weight-base': '1.5',
+  '$line-height-base': '1.5',
+  '$body-color': '#292b2c',
+  '$body-bg': '#fff'
+};
+function getGlobalStyles() {
+  return '\n    html {\n      ' + html() + '\n    }\n    *,\n    *::before,\n    *::after {\n      ' + boxSizing() + '\n    }\n    @-ms-viewport { \n      ' + ie10FixViewport() + ' \n    }\n    body {\n      ' + bodyUtils() + '\n    }\n  ';
+}
+function getGlobalStyleNoBootstrapProvider() {
+  var fontFamilyBase = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$font-family-base'];
+  var fontSizeBase = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$font-size-base'];
+  var fontWeightBase = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$font-weight-base'];
+  var lineHeightBase = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$line-height-base'];
+  var bodyColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$body-color'];
+  var bodyBg = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$body-bg'];
+  return '\n  ' + getGlobalStyles() + '\n  body {\n  ' + body(fontFamilyBase, fontSizeBase, fontWeightBase, lineHeightBase, bodyColor, bodyBg) + ' \n}';
+}
+function html() {
+  return '\n    box-sizing: border-box;\n    font-family: sans-serif;\n    line-height: 1.15;\n    -ms-text-size-adjust: 100%;\n    -webkit-text-size-adjust: 100%;\n    -ms-overflow-style: scrollbar;\n    -webkit-tap-highlight-color: rgba(0,0,0,0);\n  ';
+}
+function boxSizing() {
+  return '\n    box-sizing: inherit;\n  ';
+}
+function ie10FixViewport() {
+  return '\n    width: device-width;\n  ';
+}
+function body() {
+  var fontFamilyBase = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$font-family-base'];
+  var fontSizeBase = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$font-size-base'];
+  var fontWeightBase = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$font-weight-base'];
+  var lineHeightBase = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$line-height-base'];
+  var bodyColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$body-color'];
+  var bodyBg = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$body-bg'];
+  return '\n    margin: 0;\n    font-family: ' + fontFamilyBase + ';\n    font-size: ' + fontSizeBase + ';\n    font-weight: ' + fontWeightBase + ';\n    line-height: ' + lineHeightBase + ';\n    color: ' + bodyColor + ';\n    background-color: ' + bodyBg + ';\n    \n    ' + bodyUtils() + '\n    \n    [tabindex="-1"]:focus {\n      ' + tabIndex() + '\n    }\n    svg:not(:root) {\n      ' + svg() + '\n    }\n    [hidden] {\n      ' + ie10FixHidden() + '\n    }\n    ::-webkit-file-upload-button {\n      ' + webkitFileUploadButton() + '\n    }\n  ';
+}
+function bodyUtils() {
+  return '\n    &.overflow {\n      overflow: hidden;\n    }\n  ';
+}
+function tabIndex() {
+  return '\n    outline: none !important;\n  ';
+}
+function svg() {
+  return '\n    overflow: hidden;\n  ';
+}
+function ie10FixHidden() {
+  return '\n    display: none !important;\n  ';
+}
+function webkitFileUploadButton() {
+  return '\n    font: inherit;\n    -webkit-appearance: button;\n  ';
+}
+exports.default = {
+  html: html,
+  boxSizing: boxSizing,
+  ie10FixViewport: ie10FixViewport,
+  body: body,
+  bodyUtils: bodyUtils,
+  tabIndex: tabIndex,
+  svg: svg,
+  ie10FixHidden: ie10FixHidden,
+  getGlobalStyles: getGlobalStyles,
+  getGlobalStyleNoBootstrapProvider: getGlobalStyleNoBootstrapProvider,
+  webkitFileUploadButton: webkitFileUploadButton
+};
+});
+var rebootUtils = unwrapExports(reboot$1);
+var reboot_1 = reboot$1.getGlobalStyles;
+var reboot_2 = reboot$1.getGlobalStyleNoBootstrapProvider;
+
 var FadePropTypes = propTypes$1.shape(propTypes$4);
-var propTypes$55 = {
+var propTypes$53 = {
   className: propTypes$1.string,
   theme: propTypes$1.shape({}),
   isOpen: propTypes$1.bool,
@@ -15330,7 +14422,7 @@ var propTypes$55 = {
   backdropTransition: FadePropTypes,
   modalTransition: FadePropTypes
 };
-var defaultProps$50 = {
+var defaultProps$48 = {
   isOpen: false,
   autoFocus: true,
   role: 'dialog',
@@ -15589,20 +14681,20 @@ var ModalUnstyled = function (_React$Component) {
   }]);
   return ModalUnstyled;
 }(React__default.Component);
-ModalUnstyled.defaultProps = defaultProps$50;
-ModalUnstyled.propTypes = propTypes$55;
+ModalUnstyled.defaultProps = defaultProps$48;
+ModalUnstyled.propTypes = propTypes$53;
 var Modal = styled__default(ModalUnstyled).withConfig({
   displayName: 'Modal'
 })(['', ''], function (props) {
-  return '\n    & .modal {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal'] + ';\n      display: none;\n      outline: 0;\n      overflow-x: hidden;\n      overflow-y: auto;\n      \n      ' + transition_3(props.theme['$enable-transitions'], props.theme['$transition-fade']) + '\n      &.fade {\n        .modal-dialog {\n          ' + transition_2$1(props.theme['$enable-transitions'], props.theme['$modal-transition']) + '\n          transform: translate(0, -25%);\n        }\n      }\n      &.show {\n        .modal-dialog {\n          transform: translate(0, 0);\n        }\n      }\n    }\n    \n    & .modal-dialog {\n      position: relative;\n      width: auto;\n      margin: ' + props.theme['$modal-dialog-margin'] + ';\n      ' + rebootUtils.body(props.theme['$font-family-base'], props.theme['$font-size-base'], props.theme['$font-weight-base'], props.theme['$line-height-base'], props.theme['$body-color'], props.theme['$body-bg']) + '\n    }\n    \n    \n    & .modal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$modal-content-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$modal-content-border-width'] + ' solid ' + props.theme['$modal-content-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius-lg']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$modal-content-xs-box-shadow']) + '\n      outline: 0;\n    }\n    \n    & .modal-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal-backdrop'] + ';\n      background-color: ' + props.theme['$modal-backdrop-bg'] + ';\n      &.fade {\n        opacity: 0;\n        ' + transition_2$1(props.theme['$enable-transitions'], props.theme['$transition-fade']) + ';\n      }\n      &.show {\n        opacity: ' + props.theme['$modal-backdrop-opacity'] + ';\n      }\n    }\n      \n        \n    & .modal-header {\n      display: flex;\n      align-items: center;\n      justify-content: space-between;\n      padding: ' + props.theme['$modal-header-padding'] + ';\n      border-bottom: ' + props.theme['$modal-header-border-width'] + ' solid ' + props.theme['$modal-header-border-color'] + ';\n    }\n    \n    & .modal-title {\n      margin-bottom: 0;\n      line-height: ' + props.theme['$modal-title-line-height'] + ';\n    }\n    \n    & .modal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n    }\n    \n    & .modal-footer {\n      display: flex;\n      align-items: center;\n      justify-content: flex-end;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n      border-top: ' + props.theme['$modal-footer-border-width'] + ' solid ' + props.theme['$modal-footer-border-color'] + ';\n      // Easily place margin between footer elements\n      > :not(:first-child) { margin-left: .25rem; }\n      > :not(:last-child) { margin-right: .25rem; }\n    }\n    \n\n  \n    // Scale up the modal\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        & .modal-dialog {\n          max-width: ' + props.theme['$modal-md'] + ';\n          margin: ' + props.theme['$modal-dialog-sm-up-margin-y'] + ' auto;\n        }\n      \n        & .modal-content {\n          ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$modal-content-sm-up-box-shadow']) + '\n        }\n      \n        & .modal-sm {\n          max-width: ' + props.theme['$modal-sm'] + ';\n        }\n      ') + '\n  \n\n    ' + breakpoints_6('lg', props.theme['$grid-breakpoints'], '\n        & .modal-lg {\n           max-width:  ' + props.theme['$modal-lg'] + '; \n         }\n      ') + '\n  ';
+  return '\n    & .modal {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal'] + ';\n      display: none;\n      outline: 0;\n      overflow-x: hidden;\n      overflow-y: auto;\n      \n      ' + transition_3$1(props.theme['$enable-transitions'], props.theme['$transition-fade']) + '\n      &.fade {\n        .modal-dialog {\n          ' + transition_2(props.theme['$enable-transitions'], props.theme['$modal-transition']) + '\n          transform: translate(0, -25%);\n        }\n      }\n      &.show {\n        .modal-dialog {\n          transform: translate(0, 0);\n        }\n      }\n    }\n    \n    & .modal-dialog {\n      position: relative;\n      width: auto;\n      margin: ' + props.theme['$modal-dialog-margin'] + ';\n      ' + rebootUtils.body(props.theme['$font-family-base'], props.theme['$font-size-base'], props.theme['$font-weight-base'], props.theme['$line-height-base'], props.theme['$body-color'], props.theme['$body-bg']) + '\n    }\n    \n    \n    & .modal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$modal-content-bg'] + ';\n      background-clip: padding-box;\n      border: ' + props.theme['$modal-content-border-width'] + ' solid ' + props.theme['$modal-content-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius-lg']) + '\n      ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$modal-content-xs-box-shadow']) + '\n      outline: 0;\n    }\n    \n    & .modal-backdrop {\n      position: fixed;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      z-index: ' + props.theme['$zindex-modal-backdrop'] + ';\n      background-color: ' + props.theme['$modal-backdrop-bg'] + ';\n      &.fade {\n        opacity: 0;\n        ' + transition_2(props.theme['$enable-transitions'], props.theme['$transition-fade']) + ';\n      }\n      &.show {\n        opacity: ' + props.theme['$modal-backdrop-opacity'] + ';\n      }\n    }\n      \n        \n    & .modal-header {\n      display: flex;\n      align-items: center;\n      justify-content: space-between;\n      padding: ' + props.theme['$modal-header-padding'] + ';\n      border-bottom: ' + props.theme['$modal-header-border-width'] + ' solid ' + props.theme['$modal-header-border-color'] + ';\n    }\n    \n    & .modal-title {\n      margin-bottom: 0;\n      line-height: ' + props.theme['$modal-title-line-height'] + ';\n    }\n    \n    & .modal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n    }\n    \n    & .modal-footer {\n      display: flex;\n      align-items: center;\n      justify-content: flex-end;\n      padding: ' + props.theme['$modal-inner-padding'] + ';\n      border-top: ' + props.theme['$modal-footer-border-width'] + ' solid ' + props.theme['$modal-footer-border-color'] + ';\n      // Easily place margin between footer elements\n      > :not(:first-child) { margin-left: .25rem; }\n      > :not(:last-child) { margin-right: .25rem; }\n    }\n    \n\n  \n    // Scale up the modal\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        & .modal-dialog {\n          max-width: ' + props.theme['$modal-md'] + ';\n          margin: ' + props.theme['$modal-dialog-sm-up-margin-y'] + ' auto;\n        }\n      \n        & .modal-content {\n          ' + boxShadow_2(props.theme['$enable-shadows'], props.theme['$modal-content-sm-up-box-shadow']) + '\n        }\n      \n        & .modal-sm {\n          max-width: ' + props.theme['$modal-sm'] + ';\n        }\n      ') + '\n  \n\n    ' + breakpoints_6('lg', props.theme['$grid-breakpoints'], '\n        & .modal-lg {\n           max-width:  ' + props.theme['$modal-lg'] + '; \n         }\n      ') + '\n  ';
 });
-Modal.defaultProps = defaultProps$50;
-Modal.propTypes = propTypes$55;
+Modal.defaultProps = defaultProps$48;
+Modal.propTypes = propTypes$53;
 
-var defaultProps$51 = {
+var defaultProps$49 = {
   tag: 'div'
 };
-var propTypes$56 = {
+var propTypes$54 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   cssModule: propTypes$1.object
@@ -15616,13 +14708,13 @@ var ModalBody = function ModalBody(props) {
     className: mapToCssModules(classnames(className, 'modal-body'), cssModule)
   }));
 };
-ModalBody.propTypes = propTypes$56;
-ModalBody.defaultProps = defaultProps$51;
+ModalBody.propTypes = propTypes$54;
+ModalBody.defaultProps = defaultProps$49;
 
-var defaultProps$52 = {
+var defaultProps$50 = {
   tag: 'div'
 };
-var propTypes$57 = {
+var propTypes$55 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   cssModule: propTypes$1.object
@@ -15636,14 +14728,14 @@ var ModalFooter = function ModalFooter(props) {
     className: mapToCssModules(classnames(className, 'modal-footer'), cssModule)
   }));
 };
-ModalFooter.propTypes = propTypes$57;
-ModalFooter.defaultProps = defaultProps$52;
+ModalFooter.propTypes = propTypes$55;
+ModalFooter.defaultProps = defaultProps$50;
 
-var defaultProps$53 = {
+var defaultProps$51 = {
   tag: H4,
   wrapTag: 'div'
 };
-var propTypes$58 = {
+var propTypes$56 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
@@ -15675,10 +14767,10 @@ var ModalHeader = function ModalHeader(props) {
     closeButton
   );
 };
-ModalHeader.propTypes = propTypes$58;
-ModalHeader.defaultProps = defaultProps$53;
+ModalHeader.propTypes = propTypes$56;
+ModalHeader.defaultProps = defaultProps$51;
 
-var defaultProps$54 = {
+var defaultProps$52 = {
   tag: Ul,
   toggleable: 'false',
   theme: {
@@ -15728,7 +14820,7 @@ var defaultProps$54 = {
     '$navbar-inverse-disabled-color': 'rgba(255, 255, 255, 0.25)'
   }
 };
-var propTypes$59 = {
+var propTypes$57 = {
   className: propTypes$1.string,
   toggleable: propTypes$1.string,
   inline: propTypes$1.bool,
@@ -15822,20 +14914,20 @@ var NavUnstyled = function (_React$Component) {
   }]);
   return NavUnstyled;
 }(React__default.Component);
-NavUnstyled.defaultProps = defaultProps$54;
-NavUnstyled.propTypes = propTypes$59;
+NavUnstyled.defaultProps = defaultProps$52;
+NavUnstyled.propTypes = propTypes$57;
 var Nav = styled__default(NavUnstyled).withConfig({
   displayName: 'Nav'
 })(['', ''], function (props) {
   return '\n    ' + nav_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n    \n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n  ';
 });
-Nav.defaultProps = defaultProps$54;
-Nav.propTypes = propTypes$59;
+Nav.defaultProps = defaultProps$52;
+Nav.propTypes = propTypes$57;
 
-var defaultProps$55 = {
+var defaultProps$53 = {
   tag: A
 };
-var propTypes$60 = {
+var propTypes$58 = {
   className: propTypes$1.string,
   innerRef: propTypes$1.func,
   disabled: propTypes$1.bool,
@@ -15886,15 +14978,15 @@ var NavLink = function (_React$Component) {
   }]);
   return NavLink;
 }(React__default.Component);
-NavLink.defaultProps = defaultProps$55;
-NavLink.propTypes = propTypes$60;
-NavLink.defaultProps = defaultProps$55;
-NavLink.propTypes = propTypes$60;
+NavLink.defaultProps = defaultProps$53;
+NavLink.propTypes = propTypes$58;
+NavLink.defaultProps = defaultProps$53;
+NavLink.propTypes = propTypes$58;
 
-var defaultProps$56 = {
+var defaultProps$54 = {
   tag: 'li'
 };
-var propTypes$61 = {
+var propTypes$59 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   cssModule: propTypes$1.object
@@ -15919,17 +15011,17 @@ var NavItem = function (_React$Component) {
   }]);
   return NavItem;
 }(React__default.Component);
-NavItem.defaultProps = defaultProps$56;
-NavItem.propTypes = propTypes$61;
-NavItem.defaultProps = defaultProps$56;
-NavItem.propTypes = propTypes$61;
+NavItem.defaultProps = defaultProps$54;
+NavItem.propTypes = propTypes$59;
+NavItem.defaultProps = defaultProps$54;
+NavItem.propTypes = propTypes$59;
 
-var defaultProps$57 = {
+var defaultProps$55 = {
   theme: {
     '$list-inline-padding': '5px'
   }
 };
-var propTypes$62 = {
+var propTypes$60 = {
   theme: propTypes$1.shape({
     '$list-inline-padding': propTypes$1.string
   })
@@ -15939,8 +15031,8 @@ var Ol = styled__default.ol.withConfig({
 })(['', ''], function (props) {
   return '\n    /* Type Scss */\n    &.list-unstyled {\n      ' + lists_1() + '\n    }\n\n    &.list-inline {\n      ' + lists_2() + '\n    }\n\n    &.list-inline-item {\n      ' + lists_3(props.theme['$list-inline-padding']) + '\n    }\n\n    /* Reboot Scss */\n    margin-top: 0;\n    margin-bottom: 1rem;\n\n    & ol,\n    & ul {\n      margin-bottom: 0;\n    }\n  ';
 });
-Ol.defaultProps = defaultProps$57;
-Ol.propTypes = propTypes$62;
+Ol.defaultProps = defaultProps$55;
+Ol.propTypes = propTypes$60;
 
 var Option = styled__default.option.withConfig({
   displayName: 'Option'
@@ -15972,7 +15064,7 @@ var Output = styled__default(OutputUnstyled).withConfig({
   displayName: 'Output'
 })(['&.output{display:inline-block;}']);
 
-var defaultProps$58 = {
+var defaultProps$56 = {
   theme: {
     '$grid-breakpoints': {
       xs: '0',
@@ -16007,7 +15099,7 @@ var defaultProps$58 = {
     '$lead-font-weight': '300'
   }
 };
-var propTypes$63 = {
+var propTypes$61 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   color: propTypes$1.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
@@ -16067,8 +15159,8 @@ var PUnstyled = function (_React$Component) {
   }]);
   return PUnstyled;
 }(React__default.Component);
-PUnstyled.defaultProps = defaultProps$58;
-PUnstyled.propTypes = propTypes$63;
+PUnstyled.defaultProps = defaultProps$56;
+PUnstyled.propTypes = propTypes$61;
 var P = styled__default(PUnstyled).withConfig({
   displayName: 'P'
 })(['', ''], function (props) {
@@ -16164,7 +15256,7 @@ exports.default = {
 unwrapExports(paginations$1);
 var paginations_3 = paginations$1.pagination;
 
-var defaultProps$59 = {
+var defaultProps$57 = {
   tag: 'ul',
   theme: {
     '$enable-rounded': true,
@@ -16191,7 +15283,7 @@ var defaultProps$59 = {
     '$pagination-disabled-border': '#ddd'
   }
 };
-var propTypes$64 = {
+var propTypes$62 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   size: propTypes$1.oneOf(['sm', 'lg']),
@@ -16244,15 +15336,15 @@ var PaginationUnstyled = function (_React$Component) {
   }]);
   return PaginationUnstyled;
 }(React__default.Component);
-PaginationUnstyled.defaultProps = defaultProps$59;
-PaginationUnstyled.propTypes = propTypes$64;
+PaginationUnstyled.defaultProps = defaultProps$57;
+PaginationUnstyled.propTypes = propTypes$62;
 var Pagination = styled__default(PaginationUnstyled).withConfig({
   displayName: 'Pagination'
 })(['', ''], function (props) {
   return '\n    ' + paginations_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$border-radius'], props.theme['$pagination-active-color'], props.theme['$pagination-active-bg'], props.theme['$pagination-active-border'], props.theme['$pagination-disabled-color'], props.theme['$cursor-disabled'], props.theme['$pagination-disabled-bg'], props.theme['$pagination-disabled-border'], props.theme['$pagination-padding-y'], props.theme['$pagination-padding-x'], props.theme['$pagination-line-height'], props.theme['$pagination-color'], props.theme['$pagination-bg'], props.theme['$pagination-border-width'], props.theme['$pagination-border-color'], props.theme['$pagination-hover-color'], props.theme['$pagination-hover-bg'], props.theme['$pagination-hover-border'], props.theme['$pagination-padding-y-lg'], props.theme['$pagination-padding-x-lg'], props.theme['$font-size-lg'], props.theme['$line-height-lg'], props.theme['$border-radius-lg'], props.theme['$pagination-padding-y-sm'], props.theme['$pagination-padding-x-sm'], props.theme['$font-size-sm'], props.theme['$line-height-sm'], props.theme['$border-radius-sm']) + '\n  ';
 });
-Pagination.defaultProps = defaultProps$59;
-Pagination.propTypes = propTypes$64;
+Pagination.defaultProps = defaultProps$57;
+Pagination.propTypes = propTypes$62;
 
 var PaginationItem = function (_React$Component) {
   inherits(PaginationItem, _React$Component);
@@ -16364,7 +15456,7 @@ PaginationLink.propTypes = {
   tag: propTypes$1.oneOfType([propTypes$1.func, propTypes$1.string])
 };
 
-var defaultProps$60 = {
+var defaultProps$58 = {
   theme: {
     '$code-font-size': '90%',
     '$pre-color': '#292b2c',
@@ -16372,7 +15464,7 @@ var defaultProps$60 = {
     '$font-family-monospace': 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace'
   }
 };
-var propTypes$65 = {
+var propTypes$63 = {
   theme: propTypes$1.shape({
     '$code-font-size': propTypes$1.string,
     '$pre-color': propTypes$1.string,
@@ -16385,8 +15477,103 @@ var Pre = styled__default.pre.withConfig({
 })(['', ''], function (props) {
   return '\n    /* Blocks of code */\n    display: block;\n    margin-top: 0;\n    margin-bottom: 1rem;\n    font-size: ' + props.theme['$code-font-size'] + ';\n    color: ' + props.theme['$pre-color'] + ';\n    \n    /* Enable scrollable blocks of code */\n    /* AJT This class was present in bootstrap/scss/code.scss  We must decide if this class should be a mixin or not! */\n    &.pre-scrollable {\n      max-height: ' + props.theme['$pre-scrollable-max-height'] + ';\n      overflow-y: scroll;\n    }\n\n  \n    /* Account for some code outputs that place code tags in pre tags */\n    code {\n      padding: 0;\n      font-size: inherit;\n      color: inherit;\n      background-color: transparent;\n      border-radius: 0;\n    }\n    \n    /* Reboot Scss */\n\n    /* Remove browser default top margin */\n    margin-top: 0;\n    /* Reset browser default of \'1em\' to use \'rem\'s */\n    margin-bottom: 1rem;\n    /* Normalize v4 removed this property, causing \'pre\' content to break out of wrapping code snippets */\n    overflow: auto;\n    \n    /* Bootstrap 4 does not place this css rule straight into Kbd tag see: bootstrap/scss/code.scss */\n    font-family: ' + props.theme['$font-family-monospace'] + ';\n  ';
 });
-Pre.defaultProps = defaultProps$60;
-Pre.propTypes = propTypes$65;
+Pre.defaultProps = defaultProps$58;
+Pre.propTypes = propTypes$63;
+
+var backgroundVariant$1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultProps = undefined;
+exports.bgVariant = bgVariant;
+var _color2 = _interopRequireDefault(color);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var defaultProps = exports.defaultProps = {
+  '$enable-hover-media-query': false
+};
+function bgVariant() {
+  var enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
+  var selector = arguments[1];
+  var bgColor = arguments[2];
+  return '\n    ' + selector + ' {\n      background-color: ' + bgColor + ' !important;\n    }\n    a' + selector + ' {\n      ' + (_hover.hoverFocus)(enableHoverMediaQuery, 'background-color: ' + (_color2.default)(bgColor).darken(0.2).rgb() + ' !important;') + '\n    }\n  ';
+}
+exports.default = {
+  bgVariant: bgVariant
+};
+});
+unwrapExports(backgroundVariant$1);
+
+var background$1 = createCommonjsModule(function (module, exports) {
+'use strict';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.bgFaded = exports.bgInverse = exports.bgDanger = exports.bgWarning = exports.bgInfo = exports.bgSuccess = exports.bgPrimary = exports.defaultProps = undefined;
+exports.getBackgroundUtilities = getBackgroundUtilities;
+var defaultProps = exports.defaultProps = {
+  '$enable-hover-media-query': false,
+  '$brand-primary': '#0275d8',
+  '$brand-success': '#5cb85c',
+  '$brand-info': '#5bc0de',
+  '$brand-warning': '#f0ad4e',
+  '$brand-danger': '#d9543f',
+  '$brand-inverse': '#373a3c',
+  '$gray-lightest': '#f7f7f9'
+};
+function getBackgroundUtilities() {
+  var $enableHoverMediaQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProps['$enable-hover-media-query'];
+  var $brandPrimary = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-primary'];
+  var $brandSuccess = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultProps['$brand-success'];
+  var $brandInfo = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultProps['$brand-info'];
+  var $brandWarning = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultProps['$brand-warning'];
+  var $brandDanger = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultProps['$brand-danger'];
+  var $brandInverse = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : defaultProps['$brand-inverse'];
+  var $grayLightest = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : defaultProps['$gray-lightest'];
+  return '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-primary', $brandPrimary) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-success', $brandSuccess) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-info', $brandInfo) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-warning', $brandWarning) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-danger', $brandDanger) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-inverse', $brandInverse) + '\n    ' + (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-faded', $grayLightest) + '\n  ';
+}
+var bgPrimary = exports.bgPrimary = function bgPrimary($enableHoverMediaQuery) {
+  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-primary'];
+  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-primary', bgColor);
+};
+var bgSuccess = exports.bgSuccess = function bgSuccess($enableHoverMediaQuery) {
+  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-success'];
+  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-success', bgColor);
+};
+var bgInfo = exports.bgInfo = function bgInfo($enableHoverMediaQuery) {
+  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-info'];
+  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-info', bgColor);
+};
+var bgWarning = exports.bgWarning = function bgWarning($enableHoverMediaQuery) {
+  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-warning'];
+  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-warning', bgColor);
+};
+var bgDanger = exports.bgDanger = function bgDanger($enableHoverMediaQuery) {
+  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-danger'];
+  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-danger', bgColor);
+};
+var bgInverse = exports.bgInverse = function bgInverse($enableHoverMediaQuery) {
+  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$brand-inverse'];
+  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-inverse', bgColor);
+};
+var bgFaded = exports.bgFaded = function bgFaded($enableHoverMediaQuery) {
+  var bgColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultProps['$gray-lightest'];
+  return (_backgroundVariant.bgVariant)($enableHoverMediaQuery, '.bg-faded', bgColor);
+};
+exports.default = {
+  defaultProps: defaultProps,
+  getBackgroundUtilities: getBackgroundUtilities,
+  bgFaded: bgFaded,
+  bgPrimary: bgPrimary,
+  bgSuccess: bgSuccess,
+  bgInfo: bgInfo,
+  bgWarning: bgWarning,
+  bgDanger: bgDanger,
+  bgInverse: bgInverse
+};
+});
+unwrapExports(background$1);
+var background_9 = background$1.getBackgroundUtilities;
 
 var gradients$1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -16457,7 +15644,7 @@ exports.default = {
 unwrapExports(gradients$1);
 var gradients_7 = gradients$1.gradientStriped;
 
-var defaultProps$61 = {
+var defaultProps$59 = {
   theme: {
     '$enable-rounded': true,
     '$enable-hover-media-query': false,
@@ -16471,7 +15658,7 @@ var defaultProps$61 = {
     '$progress-bar-animation-timing': '1s linear infinite'
   }
 };
-var propTypes$66 = {
+var propTypes$64 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   theme: propTypes$1.shape({
@@ -16509,8 +15696,8 @@ var ProgressUnstyled = function (_React$Component) {
   }]);
   return ProgressUnstyled;
 }(React__default.Component);
-ProgressUnstyled.defaultProps = defaultProps$61;
-ProgressUnstyled.propTypes = propTypes$66;
+ProgressUnstyled.defaultProps = defaultProps$59;
+ProgressUnstyled.propTypes = propTypes$64;
 var backgroundPositionKeyFrame = function backgroundPositionKeyFrame(props) {
   return styled.keyframes(['from{background-position:', ' 0;}to{background-position:0 0;}'], props.theme['$progress-height']);
 };
@@ -16519,8 +15706,8 @@ var Progress = styled__default(ProgressUnstyled).withConfig({
 })(['', ''], function (props) {
   return '\n    \n    &.progress {\n      display: flex;\n      overflow: hidden; // force rounded corners by cropping it\n      font-size: ' + props.theme['$progress-font-size'] + ';\n      line-height: ' + props.theme['$progress-height'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$progress-bg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$progress-border-radius']) + '\n      ' + background_9(props.theme['$enable-hover-media-query'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$brand-inverse'], props.theme['$gray-lightest']) + '\n    }\n    \n    .progress-bar {\n      height: ' + props.theme['$progress-height'] + ';\n      line-height: ' + props.theme['$progress-height'] + ';\n      color: ' + props.theme['$progress-bar-color'] + ';\n      background-color: ' + props.theme['$progress-bar-bg'] + ';\n    }\n    \n    .progress-bar-striped {\n      ' + gradients_7() + '\n      background-size: ' + props.theme['$progress-height'] + ' ' + props.theme['$progress-height'] + ';\n      background-repeat: repeat; /* Not present in bootstrap original but required to repeat the background */\n    }\n    \n    .progress-bar-animated {\n      animation: ' + backgroundPositionKeyFrame(props) + ' ' + props.theme['$progress-bar-animation-timing'] + ';\n    }\n\n  ';
 });
-Progress.defaultProps = defaultProps$61;
-Progress.propTypes = propTypes$66;
+Progress.defaultProps = defaultProps$59;
+Progress.propTypes = propTypes$64;
 
 var asyncGenerator$2 = function () {
   function AwaitValue(value) {
@@ -16654,14 +15841,14 @@ var RangeUtils = function () {
 }();
 var index$1 = new RangeUtils();
 
-var defaultProps$62 = {
+var defaultProps$60 = {
   valueMin: 0,
   valueMax: 100,
   valueNow: 0,
   striped: false,
   animated: false
 };
-var propTypes$67 = {
+var propTypes$65 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   valueMin: propTypes$1.number,
@@ -16720,12 +15907,12 @@ var ProgressBar = function (_React$Component) {
   }]);
   return ProgressBar;
 }(React__default.Component);
-ProgressBar.defaultProps = defaultProps$62;
-ProgressBar.propTypes = propTypes$67;
-ProgressBar.defaultProps = defaultProps$62;
-ProgressBar.propTypes = propTypes$67;
+ProgressBar.defaultProps = defaultProps$60;
+ProgressBar.propTypes = propTypes$65;
+ProgressBar.defaultProps = defaultProps$60;
+ProgressBar.propTypes = propTypes$65;
 
-var defaultProps$63 = {
+var defaultProps$61 = {
   tag: 'div',
   theme: {
     '$grid-gutter-widths': {
@@ -16738,7 +15925,7 @@ var defaultProps$63 = {
     '$enable-grid-classes': false
   }
 };
-var propTypes$68 = {
+var propTypes$66 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   noGutters: propTypes$1.bool,
@@ -16769,15 +15956,15 @@ var RowUnstyled = function (_React$Component) {
   }]);
   return RowUnstyled;
 }(React__default.Component);
-RowUnstyled.defaultProps = defaultProps$63;
-RowUnstyled.propTypes = propTypes$68;
+RowUnstyled.defaultProps = defaultProps$61;
+RowUnstyled.propTypes = propTypes$66;
 var Row = styled__default(RowUnstyled).withConfig({
   displayName: 'Row'
 })(['', ''], function (props) {
   return '\n    &.row {\n      ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n    /*\n      Remove the negative margin from default .row, then the horizontal padding\n      from all immediate children columns (to prevent runaway style inheritance).\n    */\n\n    &.no-gutters {\n      margin-right: 0;\n      margin-left: 0;\n\n      > .col,\n      > [class*="col-"] {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n ';
 });
-Row.defaultProps = defaultProps$63;
-Row.propTypes = propTypes$68;
+Row.defaultProps = defaultProps$61;
+Row.propTypes = propTypes$66;
 
 var Samp = styled__default.samp.withConfig({
   displayName: 'Samp'
@@ -16787,7 +15974,7 @@ var Section = styled__default.section.withConfig({
   displayName: 'Section'
 })(['']);
 
-var propTypes$69 = {
+var propTypes$67 = {
   className: propTypes$1.string,
   children: propTypes$1.node
 };
@@ -16836,18 +16023,18 @@ var SelectUnstyled = function (_React$Component) {
   }]);
   return SelectUnstyled;
 }(React__default.Component);
-SelectUnstyled.propTypes = propTypes$69;
+SelectUnstyled.propTypes = propTypes$67;
 var Select = styled__default(SelectUnstyled).withConfig({
   displayName: 'Select'
 })(['&.select{touch-action:manipulation;line-height:inherit;}&:disabled{color:graytext;}']);
-Select.propTypes = propTypes$69;
+Select.propTypes = propTypes$67;
 
-var defaultProps$64 = {
+var defaultProps$62 = {
   theme: {
     '$small-font-size': '80%'
   }
 };
-var propTypes$70 = {
+var propTypes$68 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   children: propTypes$1.node,
@@ -16882,17 +16069,17 @@ var SmallUnstyled = function (_React$Component) {
   }]);
   return SmallUnstyled;
 }(React__default.Component);
-SmallUnstyled.defaultProps = defaultProps$64;
-SmallUnstyled.propTypes = propTypes$70;
+SmallUnstyled.defaultProps = defaultProps$62;
+SmallUnstyled.propTypes = propTypes$68;
 var Small = styled__default(SmallUnstyled).withConfig({
   displayName: 'Small'
 })(['', ''], function (props) {
   return '\n    /* Reboot Scss */\n    font-size: ' + props.theme['$small-font-size'] + ';\n    font-weight: normal;\n  ';
 });
-Small.defaultProps = defaultProps$64;
-Small.propTypes = propTypes$70;
+Small.defaultProps = defaultProps$62;
+Small.propTypes = propTypes$68;
 
-var propTypes$71 = {
+var propTypes$69 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   color: propTypes$1.oneOf(['white', 'muted', 'gray-dark', 'primary', 'success', 'info', 'warning', 'danger']),
@@ -16923,11 +16110,11 @@ var StrongUnstyled = function (_React$Component) {
   }]);
   return StrongUnstyled;
 }(React__default.Component);
-StrongUnstyled.propTypes = propTypes$71;
+StrongUnstyled.propTypes = propTypes$69;
 var Strong = styled__default(StrongUnstyled).withConfig({
   displayName: 'Strong'
 })(['font-weight:bolder;']);
-Strong.propTypes = propTypes$71;
+Strong.propTypes = propTypes$69;
 
 var Summary = styled__default.summary.withConfig({
   displayName: 'Summary'
@@ -16960,7 +16147,7 @@ exports.default = {
 unwrapExports(tableRow$1);
 var tableRow_1 = tableRow$1.tableRowVariant;
 
-var defaultProps$65 = {
+var defaultProps$63 = {
   tag: 'table',
   responsiveTag: 'div',
   theme: {
@@ -16986,7 +16173,7 @@ var defaultProps$65 = {
     '$state-danger-bg': '#f2dede'
   }
 };
-var propTypes$72 = {
+var propTypes$70 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element]),
   size: propTypes$1.string,
@@ -17058,15 +16245,15 @@ var TableUnstyled = function (_React$Component) {
   }]);
   return TableUnstyled;
 }(React__default.Component);
-TableUnstyled.defaultProps = defaultProps$65;
-TableUnstyled.propTypes = propTypes$72;
+TableUnstyled.defaultProps = defaultProps$63;
+TableUnstyled.propTypes = propTypes$70;
 var Table = styled__default(TableUnstyled).withConfig({
   displayName: 'Table'
 })(['', ''], function (props) {
   return '\n    /*\n     Basic Bootstrap table\n    */\n    &.table {\n      width: 100%;\n      max-width: 100%;\n      margin-bottom: ' + props.theme['$spacer'] + ';\n      background-color: ' + props.theme['$table-bg'] + ';\n\n      th,\n      td {\n        padding: ' + props.theme['$table-cell-padding'] + ';\n        vertical-align: top;\n        border-top: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      thead th {\n        vertical-align: bottom;\n        border-bottom: ' + unitUtils$1.math.multiply(props.theme['$table-border-width'], 2) + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      tbody + tbody {\n        border-top: ' + unitUtils$1.math.multiply(props.theme['$table-border-width'], 2) + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      .table {\n        background-color: ' + props.theme['$body-bg'] + ';\n      }\n    }\n    \n    \n    /*\n     Condensed table w/ half padding\n    */\n    \n    &.table-sm {\n      th,\n      td {\n        padding: ' + props.theme['$table-sm-cell-padding'] + ';\n      }\n    }\n    \n    \n    /* Bordered version\n     Add borders all around the table and between all the columns.\n    */\n    &.table-bordered {\n      border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n    \n      th,\n      td {\n        border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n      }\n    \n      thead {\n        th,\n        td {\n          border-bottom-width: ' + unitUtils$1.math.multiply(2, props.theme['$table-border-width']) + ';\n        }\n      }\n    }\n    \n    \n    /* Zebra-striping\n     Default zebra-stripe styles (alternating gray and transparent backgrounds)\n    */\n    \n    &.table-striped {\n      tbody tr:nth-of-type(odd) {\n        background-color: ' + props.theme['$table-bg-accent'] + ';\n      }\n    }\n    \n    \n    /* \n    Hover effect Placed here since it has to come after the potential zebra striping\n    */\n\n    \n    &.table-hover {\n      tbody tr {\n        ' + hover_2('\n          background-color: ' + props.theme['$table-bg-hover'] + ';\n        ') + '\n      }\n    }\n    \n    /* Table backgrounds\n    Exact selectors below required to override \'.table-striped\' and prevent\n    inheritance to nested tables.\n    */\n        \n    /* Generate the contextual variants */\n    ' + tableRow_1('active', props.theme['$table-bg-active']) + '\n    ' + tableRow_1('success', props.theme['$state-success-bg']) + '\n    ' + tableRow_1('info', props.theme['$state-info-bg']) + '\n    ' + tableRow_1('warning', props.theme['$state-warning-bg']) + '\n    ' + tableRow_1('danger', props.theme['$state-danger-bg']) + '\n     \n    \n    /* Inverse styles\n    Same table markup, but inverted color scheme: dark background and light text.\n    */ \n    \n    & thead.thead-inverse {\n      th {\n        color: ' + props.theme['$table-inverse-color'] + ';\n        background-color: ' + props.theme['$table-inverse-bg'] + ';\n      }\n    }\n    \n    \n    & thead.thead-default {\n      th {\n        color: ' + props.theme['$table-head-color'] + ';\n        background-color: ' + props.theme['$table-head-bg'] + ';\n      }\n    }\n    \n    &.table-inverse {\n      color: ' + props.theme['$table-inverse-color'] + ';\n      background-color: ' + props.theme['$table-inverse-bg'] + ';\n    \n      th,\n      td,\n      thead th {\n        border-color: ' + props.theme['$table-inverse-border'] + ';\n      }\n    \n      &.table-bordered {\n        border: 0;\n      }\n      \n      &.table-striped {\n        tbody tr:nth-of-type(odd) {\n        background-color: ' + props.theme['$table-inverse-bg-accent'] + ';\n        }\n      }\n      \n      &.table-hover {\n        tbody tr {\n          ' + hover_2('\n            background-color: ' + props.theme['$table-inverse-bg-hover'] + ';\n          ') + '\n        }\n      }\n    }\n    \n    /* Responsive tables\n     Wrap your tables in \'.table-responsive\' and we\'ll make them mobile friendly\n     by enabling horizontal scrolling. Only applies <768px. Everything above that\n     will display normally.\n     */\n    \n    &.table-responsive {\n      display: block;\n      width: 100%;\n      overflow-x: auto;\n      -ms-overflow-style: -ms-autohiding-scrollbar; /* See https://github.com/twbs/bootstrap/pull/10057 */\n      &.table-bordered {\n        border: 0;\n      }\n    }\n    \n    &.table-reflow {\n    \n      /* added bs4 missing tfoot rule */\n      thead, tfoot {\n        float: left;\n      }\n    \n      tbody {\n        display: block;\n        white-space: nowrap;\n      }\n    \n      th,\n      td {\n        border-top: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        border-left: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n    \n        &:last-child {\n          border-right: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        }\n      }\n    \n      thead,\n      tbody,\n      tfoot {\n        &:last-child {\n          tr:last-child th,\n          tr:last-child td {\n            border-bottom: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n          }\n        }\n      }\n    \n      tr {\n        float: left;\n    \n        th,\n        td {\n          display: block !important;\n          border: ' + props.theme['$table-border-width'] + ' solid ' + props.theme['$table-border-color'] + ';\n        }\n      }\n    }\n    \n    /* from reboot.scss */\n    th {\n      /* Centered by default, but left-align-ed to match the tds below. */\n      text-align: left;\n    }\n      \n    /* Reboot Scss */\n    /* No longer part of Normalize since v4 */\n    border-collapse: collapse;\n    /*  Reset for nesting within parents with \'background-color\'. */\n    background-color: ' + props.theme['$table-bg'] + ';    \n    \n  ';
 });
-Table.defaultProps = defaultProps$65;
-Table.propTypes = propTypes$72;
+Table.defaultProps = defaultProps$63;
+Table.propTypes = propTypes$70;
 
 var Tbody = styled__default.tbody.withConfig({
   displayName: 'Tbody'
@@ -17076,7 +16263,7 @@ var Tfoot = styled__default.tfoot.withConfig({
   displayName: 'Tfoot'
 })(['']);
 
-var propTypes$73 = {
+var propTypes$71 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   inverse: propTypes$1.bool,
@@ -17107,10 +16294,10 @@ var Thead = function (_React$Component) {
   }]);
   return Thead;
 }(React__default.Component);
-Thead.propTypes = propTypes$73;
-Thead.propTypes = propTypes$73;
+Thead.propTypes = propTypes$71;
+Thead.propTypes = propTypes$71;
 
-var propTypes$74 = {
+var propTypes$72 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   color: propTypes$1.oneOf(['active', 'success', 'info', 'warning', 'danger', ''])
@@ -17139,10 +16326,10 @@ var Td = function (_React$Component) {
   }]);
   return Td;
 }(React__default.Component);
-Td.propTypes = propTypes$74;
-Td.propTypes = propTypes$74;
+Td.propTypes = propTypes$72;
+Td.propTypes = propTypes$72;
 
-var propTypes$75 = {
+var propTypes$73 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   color: propTypes$1.oneOf(['active', 'success', 'info', 'warning', 'danger', ''])
@@ -17171,10 +16358,10 @@ var Th = function (_React$Component) {
   }]);
   return Th;
 }(React__default.Component);
-Th.propTypes = propTypes$75;
-Th.propTypes = propTypes$75;
+Th.propTypes = propTypes$73;
+Th.propTypes = propTypes$73;
 
-var propTypes$76 = {
+var propTypes$74 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   color: propTypes$1.oneOf(['active', 'success', 'info', 'warning', 'danger', ''])
@@ -17203,8 +16390,8 @@ var Tr = function (_React$Component) {
   }]);
   return Tr;
 }(React__default.Component);
-Tr.propTypes = propTypes$76;
-Tr.propTypes = propTypes$76;
+Tr.propTypes = propTypes$74;
+Tr.propTypes = propTypes$74;
 
 var badge$1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -17231,7 +16418,7 @@ exports.default = {
 unwrapExports(badge$1);
 var badge_2 = badge$1.badgeVariant;
 
-var defaultProps$66 = {
+var defaultProps$64 = {
   color: 'default',
   pill: false,
   tag: 'span',
@@ -17254,7 +16441,7 @@ var defaultProps$66 = {
     '$enable-hover-media-query': false
   }
 };
-var propTypes$77 = {
+var propTypes$75 = {
   className: propTypes$1.string,
   color: propTypes$1.oneOf(['default', 'primary', 'success', 'info', 'warning', 'danger']),
   pill: propTypes$1.bool,
@@ -17305,15 +16492,15 @@ var BadgeUnstyled = function (_React$Component) {
   }]);
   return BadgeUnstyled;
 }(React__default.Component);
-BadgeUnstyled.defaultProps = defaultProps$66;
-BadgeUnstyled.propTypes = propTypes$77;
+BadgeUnstyled.defaultProps = defaultProps$64;
+BadgeUnstyled.propTypes = propTypes$75;
 var Badge = styled__default(BadgeUnstyled).withConfig({
   displayName: 'Badge'
 })(['', ''], function (props) {
   return '\n    \n    /* Base class */\n    /* Requires one of the contextual, color modifier classes for \'color\' and */\n    /* \'background-color\'. */\n    \n    &.badge {\n      display: inline-block;\n      padding: ' + props.theme['$badge-padding-y'] + ' ' + props.theme['$badge-padding-x'] + ';\n      font-size: ' + props.theme['$badge-font-size'] + ';\n      font-weight: ' + props.theme['$badge-font-weight'] + ';\n      line-height: 1;\n      color: ' + props.theme['$badge-color'] + ';\n      text-align: center;\n      white-space: nowrap;\n      vertical-align: baseline;\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$border-radius']) + '\n    \n      /* Empty tags collapse automatically */\n      &:empty {\n        display: none;\n      }\n    }\n    \n    \n    /* scss-lint:disable QualifyingElement */\n    /* Add hover effects, but only for links */\n    &a {\n      ' + hover_3(props.theme['$enable-hover-media-query'], '\n        color: ' + props.theme['$badge-link-hover-color'] + ';\n        text-decoration: none;\n        cursor: pointer;\n      ') + '\n    }\n    /* scss-lint:enable QualifyingElement */\n    \n    /* Pill tags */\n    /* Make them extra rounded with a modifier to replace v3s badges. */\n    \n    &.badge-pill {\n      padding-right: ' + props.theme['$badge-pill-padding-x'] + ';\n      padding-left: ' + props.theme['$badge-pill-padding-x'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$badge-pill-border-radius']) + '\n    }\n    \n    /* Colors */\n    /* Contextual variations (linked tags get darker on :hover). */\n    \n    &.badge-default {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-default-bg']) + '\n    }     \n    \n    &.badge-primary {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-primary-bg']) + '\n    }\n    \n    &.badge-success {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-success-bg']) + '\n    }\n    \n    &.badge-info {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-info-bg']) + '\n    }\n    \n    &.badge-warning {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-warning-bg']) + '\n    }\n    \n    &.badge-danger {\n      ' + badge_2(props.theme['$enable-hover-media-query'], props.theme['$badge-danger-bg']) + '\n    }\n  ';
 });
-Badge.defaultProps = defaultProps$66;
-Badge.propTypes = propTypes$77;
+Badge.defaultProps = defaultProps$64;
+Badge.propTypes = propTypes$75;
 
 var Textarea = styled__default.textarea.withConfig({
   displayName: 'Textarea'
@@ -17331,7 +16518,7 @@ var defaultTetherConfig$1 = {
   },
   constraints: [{ to: 'scrollParent', attachment: 'together none' }, { to: 'window', attachment: 'together none' }]
 };
-var propTypes$78 = {
+var propTypes$76 = {
   className: propTypes$1.string,
   placement: propTypes$1.oneOf(tools_10),
   target: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.object]).isRequired,
@@ -17357,7 +16544,7 @@ var propTypes$78 = {
   }),
   cssModule: propTypes$1.object
 };
-var defaultProps$67 = {
+var defaultProps$65 = {
   isOpen: false,
   placement: 'bottom',
   delay: DEFAULT_DELAYS,
@@ -17491,7 +16678,7 @@ var TooltipUnstyled = function (_React$Component) {
       if (!this.props.isOpen) {
         return null;
       }
-      var attributes = lodash_omit(this.props, Object.keys(propTypes$78));
+      var attributes = lodash_omit(this.props, Object.keys(propTypes$76));
       var classes = mapToCssModules(classnames('tooltip', this.props.className), this.props.cssModule);
       var tetherConfig = this.getTetherConfig();
       var optional = {};
@@ -17519,15 +16706,15 @@ var TooltipUnstyled = function (_React$Component) {
   }]);
   return TooltipUnstyled;
 }(React__default.Component);
-TooltipUnstyled.defaultProps = defaultProps$67;
-TooltipUnstyled.propTypes = propTypes$78;
+TooltipUnstyled.defaultProps = defaultProps$65;
+TooltipUnstyled.propTypes = propTypes$76;
 var Tooltip = styled__default(TooltipUnstyled).withConfig({
   displayName: 'Tooltip'
 })(['', ''], function (props) {
   return '\n    &.tooltip {\n      position: absolute;\n      z-index: ' + props.theme['$zindex-tooltip'] + ';\n      display: block;\n      font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;\n      font-style: normal;\n      font-weight: 400;\n      letter-spacing: normal;\n      line-break: auto;\n      line-height: 1.5;\n      text-align: left;\n      text-align: start;\n      text-decoration: none;\n      text-shadow: none;\n      text-transform: none;\n      white-space: normal;\n      word-break: normal;\n      word-spacing: normal;\n      font-size: .875rem;\n      word-wrap: break-word;\n      opacity: 0\n    }\n    \n    &.tooltip.show {\n      opacity: ' + props.theme['$tooltip-opacity'] + '\n    }\n    \n    &.tooltip.bs-tether-element-attached-bottom,\n    &.tooltip.tooltip-top {\n      padding: 5px 0;\n      margin-top: -3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-bottom .tooltip-inner:before,\n    &.tooltip.tooltip-top .tooltip-inner:before {\n      bottom: 0;\n      left: 50%;\n      margin-left: -5px;\n      content: "";\n      border-width: 5px 5px 0;\n      border-top-color: #000\n    }\n    \n    &.tooltip.bs-tether-element-attached-left,\n    &.tooltip.tooltip-right {\n      padding: 0 5px;\n      margin-left: 3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-left .tooltip-inner:before,\n    &.tooltip.tooltip-right .tooltip-inner:before {\n      top: 50%;\n      left: 0;\n      margin-top: -5px;\n      content: "";\n      border-width: 5px 5px 5px 0;\n      border-right-color: #000\n    }\n    \n    &.tooltip.bs-tether-element-attached-top,\n    &.tooltip.tooltip-bottom {\n      padding: 5px 0;\n      margin-top: 3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-top .tooltip-inner:before,\n    &.tooltip.tooltip-bottom .tooltip-inner:before {\n      top: 0;\n      left: 50%;\n      margin-left: -5px;\n      content: "";\n      border-width: 0 5px 5px;\n      border-bottom-color: #000\n    }\n    \n    &.tooltip.bs-tether-element-attached-right,\n    &.tooltip.tooltip-left {\n      padding: 0 5px;\n      margin-left: -3px\n    }\n    \n    &.tooltip.bs-tether-element-attached-right .tooltip-inner:before,\n    &.tooltip.tooltip-left .tooltip-inner:before {\n      top: 50%;\n      right: 0;\n      margin-top: -5px;\n      content: "";\n      border-width: 5px 0 5px 5px;\n      border-left-color: #000\n    }\n    \n    & .tooltip-inner {\n      max-width: ' + props.theme['$tooltip-max-width'] + ';\n      padding: ' + props.theme['$tooltip-padding-y'] + ' ' + props.theme['$tooltip-padding-x'] + ';\n      color: ' + props.theme['$tooltip-color'] + ';\n      text-align: center;\n      background-color: ' + props.theme['$tooltip-bg'] + ';\n      border-radius: .25rem\n    }\n    \n    & .tooltip-inner:before {\n      position: absolute;\n      width: 0;\n      height: 0;\n      border-color: transparent;\n      border-style: solid\n    }\n  ';
 });
-Tooltip.defaultProps = defaultProps$67;
-Tooltip.propTypes = propTypes$78;
+Tooltip.defaultProps = defaultProps$65;
+Tooltip.propTypes = propTypes$76;
 
 var cards$1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -17619,7 +16806,7 @@ var cards_3 = cards$1.cardOutlineVariant;
 var cards_4 = cards$1.cardInverse;
 var cards_5 = cards$1.card;
 
-var defaultProps$68 = {
+var defaultProps$66 = {
   tag: 'div',
   theme: {
     '$brand-primary': '#0275d8',
@@ -17663,7 +16850,7 @@ var defaultProps$68 = {
     '$enable-hover-media-query': false
   }
 };
-var propTypes$79 = {
+var propTypes$77 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.node]),
   theme: propTypes$1.shape({
@@ -17749,15 +16936,265 @@ var CardUnstyled = function (_React$Component) {
   }]);
   return CardUnstyled;
 }(React__default.Component);
-CardUnstyled.defaultProps = defaultProps$68;
-CardUnstyled.propTypes = propTypes$79;
+CardUnstyled.defaultProps = defaultProps$66;
+CardUnstyled.propTypes = propTypes$77;
 var Card = styled__default(CardUnstyled).withConfig({
   displayName: 'Card'
 })(['', ''], function (props) {
   return '\n    \n    /*\n    Base styles\n    */\n    &.card {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      background-color: ' + props.theme['$card-bg'] + ';\n      border: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n      \n      ' + conditional_1(props.width, 'width: ' + props.width + ';') + '\n      ' + conditional_1(props.backgroundColor, 'background-color: ' + props.backgroundColor + ';') + '\n      ' + conditional_1(props.borderColor, 'border-color: ' + props.borderColor + ';') + '\n    }\n    \n    &.card-block,\n    & .card-block {\n      flex: 1 1 auto;\n      padding: ' + props.theme['$card-spacer-x'] + ';\n    }\n    \n    & .card-title {\n      margin-bottom: ' + props.theme['$card-spacer-y'] + ';\n    }\n    \n    & .card-subtitle {\n      margin-top: -' + props.theme['$card-margin-y-halved'] + ';\n      margin-bottom: 0;\n    }\n    \n    & .card-text:last-child {\n      margin-bottom: 0;\n    }\n   \n    & .card-link {\n      ' + hover_2('\n        text-decoration: none;\n      ') + '\n    \n      + .card-link {\n        margin-left: ' + props.theme['$card-spacer-x'] + ';\n      }\n    }\n    \n    &.card {\n      > .list-group:first-child {\n        .list-group-item:first-child {\n          ' + borderRadius_3(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n        }\n      }\n    \n      > .list-group:last-child {\n        .list-group-item:last-child {\n          ' + borderRadius_5(props.theme['$enable-rounded'], props.theme['$card-border-radius']) + '\n        }\n      }\n    }\n    \n    \n    /*\n     Optional textual caps\n    */\n    \n    & .card-header {\n      padding: ' + props.theme['$card-spacer-y'] + ' ' + props.theme['$card-spacer-x'] + ';\n      margin-bottom: 0; /* Removes the default margin-bottom of <hN> */\n      background-color: ' + props.theme['$card-cap-bg'] + ';\n      border-bottom: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n    \n      &:first-child {\n        ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner'], props.theme['$card-border-radius-inner'], '0', '0') + '\n      }\n    }\n    \n    & .card-footer {\n      padding: ' + props.theme['$card-spacer-y'] + ' ' + props.theme['$card-spacer-x'] + ';\n      background-color: ' + props.theme['$card-cap-bg'] + ';\n      border-top: ' + props.theme['$card-border-width'] + ' solid ' + props.theme['$card-border-color'] + ';\n    \n      &:last-child {\n        ' + borderRadius_2(props.theme['$enable-rounded'], '0', '0', props.theme['$card-border-radius-inner'], props.theme['$card-border-radius-inner']) + '\n      }\n    }\n    \n    \n    /*\n     Header navs\n    */\n    \n    & .card-header-tabs {\n      margin-right: -' + props.theme['$card-margin-x-halved'] + ';\n      margin-bottom: -' + props.theme['$card-spacer-y'] + ';\n      margin-left: -' + props.theme['$card-margin-x-halved'] + ';\n      border-bottom: 0;\n    }\n    \n    & .card-header-pills {\n      margin-right: -' + props.theme['$card-margin-x-halved'] + ';\n      margin-left: -' + props.theme['$card-margin-x-halved'] + ';\n    }\n    \n    \n    /*\n     Background variations\n    */\n    \n    &.card-primary {\n      ' + cards_2(props.theme['$brand-primary'], props.theme['$brand-primary']) + '\n    }\n    &.card-success {\n      ' + cards_2(props.theme['$brand-success'], props.theme['$brand-success']) + '\n    }\n    &.card-info {\n      ' + cards_2(props.theme['$brand-info'], props.theme['$brand-info']) + '\n    }\n    &.card-warning {\n      ' + cards_2(props.theme['$brand-warning'], props.theme['$brand-warning']) + '\n    }\n    &.card-danger {\n      ' + cards_2(props.theme['$brand-danger'], props.theme['$brand-danger']) + '\n    }\n    \n    /* Remove all backgrounds */\n    &.card-outline-primary {\n      ' + cards_3(props.theme['$btn-primary-bg']) + '\n    }\n    &.card-outline-secondary {\n      ' + cards_3(props.theme['$btn-secondary-border']) + '\n    }\n    &.card-outline-info {\n      ' + cards_3(props.theme['$btn-info-bg']) + '\n    }\n    &.card-outline-success {\n      ' + cards_3(props.theme['$btn-success-bg']) + '\n    }\n    &.card-outline-warning {\n      ' + cards_3(props.theme['$btn-warning-bg']) + '\n    }\n    &.card-outline-danger {\n      ' + cards_3(props.theme['$btn-danger-bg']) + '\n    }\n    \n    /*\n     Inverse text within a card for use with dark backgrounds\n    */\n    \n    &.card-inverse {\n      ' + cards_4(props.theme['$enable-hover-media-query'], props.theme['$card-link-hover-color']) + '\n    }\n    \n    /*\n     Blockquote\n    */\n    \n    & .card-blockquote {\n      padding: 0;\n      margin-bottom: 0;\n      border-left: 0;\n    }\n    \n    /* Card image */\n    & .card-img {\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n    \n    & .card-img-overlay {\n      position: absolute;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      padding: ' + props.theme['$card-img-overlay-padding'] + ';\n    }\n    \n    \n    \n    /* Card image caps */\n    & .card-img-top {\n      ' + borderRadius_3(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n    \n    & .card-img-bottom {\n      ' + borderRadius_5(props.theme['$enable-rounded'], props.theme['$card-border-radius-inner']) + '\n    }\n  ';
 });
-Card.defaultProps = defaultProps$68;
-Card.propTypes = propTypes$79;
+Card.defaultProps = defaultProps$66;
+Card.propTypes = propTypes$77;
+
+var defaultProps$67 = {
+  tag: 'div',
+  theme: {
+    '$brand-primary': '#0275d8',
+    '$brand-success': '#5cb85c',
+    '$brand-info': '#5bc0de',
+    '$brand-warning': '#f0ad4e',
+    '$brand-danger': '#d9534f',
+    '$brand-inverse': '#292b2c',
+    '$card-spacer-x': '1.25rem',
+    '$card-spacer-y': '.75rem',
+    '$card-border-width': '1px',
+    '$card-border-radius': '.25rem',
+    '$card-border-color': 'rgba(0, 0, 0, 0.125)',
+    '$card-border-radius-inner': 'calc(.25rem - 1px)',
+    '$card-cap-bg': '#f7f7f9',
+    '$card-bg': '#fff',
+    '$card-link-hover-color': '#fff',
+    '$card-img-overlay-padding': '1.25rem',
+    '$card-margin-y-halved': '0.375rem',
+    '$card-margin-x-halved': '0.375rem',
+    '$card-columns-count-md': '2',
+    '$card-columns-gap-md': '1rem',
+    '$card-columns-margin-md': '.75rem',
+    '$card-columns-count-lg': '2',
+    '$card-columns-gap-lg': '1.15rem',
+    '$card-columns-margin-lg': '.75rem',
+    '$card-columns-count-xl': '2',
+    '$card-columns-gap-xl': '1.25rem',
+    '$card-columns-margin-xl': '.75rem',
+    '$card-columns-count-xxl': '3',
+    '$card-columns-gap-xxl': '1.25rem',
+    '$card-columns-margin-xxl': '.75rem',
+    '$card-deck-margin': '15px',
+    '$btn-primary-bg': '#0275d8',
+    '$btn-secondary-border': '#ccc',
+    '$btn-info-bg': '#5bc0de',
+    '$btn-success-bg': '#5cb85c',
+    '$btn-warning-bg': '#f0ad4e',
+    '$btn-danger-bg': '#d9534f',
+    '$enable-rounded': false,
+    '$enable-hover-media-query': false
+  }
+};
+var propTypes$78 = {
+  className: propTypes$1.string,
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
+  theme: propTypes$1.shape({
+    '$brand-primary': propTypes$1.string,
+    '$brand-success': propTypes$1.string,
+    '$brand-info': propTypes$1.string,
+    '$brand-warning': propTypes$1.string,
+    '$brand-danger': propTypes$1.string,
+    '$brand-inverse': propTypes$1.string,
+    '$card-spacer-x': propTypes$1.string,
+    '$card-spacer-y': propTypes$1.string,
+    '$card-border-width': propTypes$1.string,
+    '$card-border-radius': propTypes$1.string,
+    '$card-border-color': propTypes$1.string,
+    '$card-border-radius-inner': propTypes$1.string,
+    '$card-cap-bg': propTypes$1.string,
+    '$card-bg': propTypes$1.string,
+    '$card-link-hover-color': propTypes$1.string,
+    '$card-img-overlay-padding': propTypes$1.string,
+    '$card-margin-y-halved': propTypes$1.string,
+    '$card-margin-x-halved': propTypes$1.string,
+    '$card-columns-count-md': propTypes$1.string,
+    '$card-columns-gap-md': propTypes$1.string,
+    '$card-columns-margin-md': propTypes$1.string,
+    '$card-columns-count-lg': propTypes$1.string,
+    '$card-columns-gap-lg': propTypes$1.string,
+    '$card-columns-margin-lg': propTypes$1.string,
+    '$card-columns-count-xl': propTypes$1.string,
+    '$card-columns-gap-xl': propTypes$1.string,
+    '$card-columns-margin-xl': propTypes$1.string,
+    '$card-columns-count-xxl': propTypes$1.string,
+    '$card-columns-gap-xxl': propTypes$1.string,
+    '$card-columns-margin-xxl': propTypes$1.string,
+    '$card-deck-margin': propTypes$1.string,
+    '$btn-primary-bg': propTypes$1.string,
+    '$btn-secondary-border': propTypes$1.string,
+    '$btn-info-bg': propTypes$1.string,
+    '$btn-success-bg': propTypes$1.string,
+    '$btn-warning-bg': propTypes$1.string,
+    '$btn-danger-bg': propTypes$1.string,
+    '$link-color': propTypes$1.string,
+    '$link-decoration': propTypes$1.string,
+    '$link-hover-color': propTypes$1.string,
+    '$link-hover-decoration': propTypes$1.string,
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool
+  }),
+  cssModule: propTypes$1.object
+};
+var CardColumnsUnstyled = function (_React$Component) {
+  inherits(CardColumnsUnstyled, _React$Component);
+  function CardColumnsUnstyled() {
+    classCallCheck(this, CardColumnsUnstyled);
+    return possibleConstructorReturn(this, (CardColumnsUnstyled.__proto__ || Object.getPrototypeOf(CardColumnsUnstyled)).apply(this, arguments));
+  }
+  createClass(CardColumnsUnstyled, [{
+    key: 'render',
+    value: function render() {
+      var _omit = lodash_omit(this.props, ['theme']),
+          className = _omit.className,
+          cssModule = _omit.cssModule,
+          Tag = _omit.tag,
+          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag']);
+      return React__default.createElement(Tag, _extends({
+        className: mapToCssModules(classnames(className, 'card-columns'), cssModule)
+      }, attributes));
+    }
+  }]);
+  return CardColumnsUnstyled;
+}(React__default.Component);
+CardColumnsUnstyled.defaultProps = defaultProps$67;
+CardColumnsUnstyled.propTypes = propTypes$78;
+var CardColumns = styled__default(CardColumnsUnstyled).withConfig({
+  displayName: 'CardColumns'
+})(['', ''], function (props) {
+  return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + breakpoints_6('md', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-md'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-md'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-md'] + ';\n          }\n        }\n      ') + '\n    ' + breakpoints_6('lg', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-lg'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-lg'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-lg'] + ';\n          }\n        }\n      ') + '\n    ' + breakpoints_6('xl', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-xl'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-xl'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-xl'] + ';\n          }\n        }\n      ') + '\n    ' + breakpoints_6('xxl', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-xxl'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-xxl'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-xxl'] + ';\n          }\n        }\n      ') + '\n  ';
+});
+CardColumns.defaultProps = defaultProps$67;
+CardColumns.propTypes = propTypes$78;
+
+var defaultProps$68 = {
+  tag: 'div',
+  theme: {
+    '$brand-primary': '#0275d8',
+    '$brand-success': '#5cb85c',
+    '$brand-info': '#5bc0de',
+    '$brand-warning': '#f0ad4e',
+    '$brand-danger': '#d9534f',
+    '$brand-inverse': '#292b2c',
+    '$card-spacer-x': '1.25rem',
+    '$card-spacer-y': '.75rem',
+    '$card-border-width': '1px',
+    '$card-border-radius': '.25rem',
+    '$card-border-color': 'rgba(0, 0, 0, 0.125)',
+    '$card-border-radius-inner': 'calc(.25rem - 1px)',
+    '$card-cap-bg': '#f7f7f9',
+    '$card-bg': '#fff',
+    '$card-link-hover-color': '#fff',
+    '$card-img-overlay-padding': '1.25rem',
+    '$card-margin-y-halved': '0.375rem',
+    '$card-margin-x-halved': '0.375rem',
+    '$card-columns-count-md': '2',
+    '$card-columns-gap-md': '1rem',
+    '$card-columns-margin-md': '.75rem',
+    '$card-columns-count-lg': '2',
+    '$card-columns-gap-lg': '1.15rem',
+    '$card-columns-margin-lg': '.75rem',
+    '$card-columns-count-xl': '2',
+    '$card-columns-gap-xl': '1.25rem',
+    '$card-columns-margin-xl': '.75rem',
+    '$card-columns-count-xxl': '3',
+    '$card-columns-gap-xxl': '1.25rem',
+    '$card-columns-margin-xxl': '.75rem',
+    '$card-deck-margin': '15px',
+    '$btn-primary-bg': '#0275d8',
+    '$btn-secondary-border': '#ccc',
+    '$btn-info-bg': '#5bc0de',
+    '$btn-success-bg': '#5cb85c',
+    '$btn-warning-bg': '#f0ad4e',
+    '$btn-danger-bg': '#d9534f',
+    '$enable-rounded': false,
+    '$enable-hover-media-query': false
+  }
+};
+var propTypes$79 = {
+  className: propTypes$1.string,
+  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
+  theme: propTypes$1.shape({
+    '$brand-primary': propTypes$1.string,
+    '$brand-success': propTypes$1.string,
+    '$brand-info': propTypes$1.string,
+    '$brand-warning': propTypes$1.string,
+    '$brand-danger': propTypes$1.string,
+    '$brand-inverse': propTypes$1.string,
+    '$card-spacer-x': propTypes$1.string,
+    '$card-spacer-y': propTypes$1.string,
+    '$card-border-width': propTypes$1.string,
+    '$card-border-radius': propTypes$1.string,
+    '$card-border-color': propTypes$1.string,
+    '$card-border-radius-inner': propTypes$1.string,
+    '$card-cap-bg': propTypes$1.string,
+    '$card-bg': propTypes$1.string,
+    '$card-link-hover-color': propTypes$1.string,
+    '$card-img-overlay-padding': propTypes$1.string,
+    '$card-margin-y-halved': propTypes$1.string,
+    '$card-margin-x-halved': propTypes$1.string,
+    '$card-columns-count-md': propTypes$1.string,
+    '$card-columns-gap-md': propTypes$1.string,
+    '$card-columns-margin-md': propTypes$1.string,
+    '$card-columns-count-lg': propTypes$1.string,
+    '$card-columns-gap-lg': propTypes$1.string,
+    '$card-columns-margin-lg': propTypes$1.string,
+    '$card-columns-count-xl': propTypes$1.string,
+    '$card-columns-gap-xl': propTypes$1.string,
+    '$card-columns-margin-xl': propTypes$1.string,
+    '$card-columns-count-xxl': propTypes$1.string,
+    '$card-columns-gap-xxl': propTypes$1.string,
+    '$card-columns-margin-xxl': propTypes$1.string,
+    '$card-deck-margin': propTypes$1.string,
+    '$btn-primary-bg': propTypes$1.string,
+    '$btn-secondary-border': propTypes$1.string,
+    '$btn-info-bg': propTypes$1.string,
+    '$btn-success-bg': propTypes$1.string,
+    '$btn-warning-bg': propTypes$1.string,
+    '$btn-danger-bg': propTypes$1.string,
+    '$link-color': propTypes$1.string,
+    '$link-decoration': propTypes$1.string,
+    '$link-hover-color': propTypes$1.string,
+    '$link-hover-decoration': propTypes$1.string,
+    '$enable-rounded': propTypes$1.bool,
+    '$enable-hover-media-query': propTypes$1.bool
+  }),
+  cssModule: propTypes$1.object
+};
+var CardDeckUnstyled = function (_React$Component) {
+  inherits(CardDeckUnstyled, _React$Component);
+  function CardDeckUnstyled() {
+    classCallCheck(this, CardDeckUnstyled);
+    return possibleConstructorReturn(this, (CardDeckUnstyled.__proto__ || Object.getPrototypeOf(CardDeckUnstyled)).apply(this, arguments));
+  }
+  createClass(CardDeckUnstyled, [{
+    key: 'render',
+    value: function render() {
+      var _omit = lodash_omit(this.props, ['theme']),
+          className = _omit.className,
+          cssModule = _omit.cssModule,
+          Tag = _omit.tag,
+          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag']);
+      return React__default.createElement(Tag, _extends({
+        className: mapToCssModules(classnames(className, 'card-deck'), cssModule)
+      }, attributes));
+    }
+  }]);
+  return CardDeckUnstyled;
+}(React__default.Component);
+CardDeckUnstyled.defaultProps = defaultProps$68;
+CardDeckUnstyled.propTypes = propTypes$79;
+var CardDeck = styled__default(CardDeckUnstyled).withConfig({
+  displayName: 'CardDeck'
+})(['', ''], function (props) {
+  return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        &.card-deck {\n          display: flex;\n          flex-flow: row wrap;\n        \n          .card {\n            display: flex;\n            flex: 1 0 0;\n            flex-direction: column;  \n            &:not(:first-child) { margin-left: ' + props.theme['$card-deck-margin'] + '; }\n            &:not(:last-child) { margin-right: ' + props.theme['$card-deck-margin'] + '; }\n          }\n        }\n      ') + '\n  ';
+});
+CardDeck.defaultProps = defaultProps$68;
+CardDeck.propTypes = propTypes$79;
 
 var defaultProps$69 = {
   tag: 'div',
@@ -17853,256 +17290,6 @@ var propTypes$80 = {
   }),
   cssModule: propTypes$1.object
 };
-var CardColumnsUnstyled = function (_React$Component) {
-  inherits(CardColumnsUnstyled, _React$Component);
-  function CardColumnsUnstyled() {
-    classCallCheck(this, CardColumnsUnstyled);
-    return possibleConstructorReturn(this, (CardColumnsUnstyled.__proto__ || Object.getPrototypeOf(CardColumnsUnstyled)).apply(this, arguments));
-  }
-  createClass(CardColumnsUnstyled, [{
-    key: 'render',
-    value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
-          className = _omit.className,
-          cssModule = _omit.cssModule,
-          Tag = _omit.tag,
-          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag']);
-      return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'card-columns'), cssModule)
-      }, attributes));
-    }
-  }]);
-  return CardColumnsUnstyled;
-}(React__default.Component);
-CardColumnsUnstyled.defaultProps = defaultProps$69;
-CardColumnsUnstyled.propTypes = propTypes$80;
-var CardColumns = styled__default(CardColumnsUnstyled).withConfig({
-  displayName: 'CardColumns'
-})(['', ''], function (props) {
-  return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + breakpoints_6('md', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-md'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-md'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-md'] + ';\n          }\n        }\n      ') + '\n    ' + breakpoints_6('lg', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-lg'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-lg'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-lg'] + ';\n          }\n        }\n      ') + '\n    ' + breakpoints_6('xl', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-xl'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-xl'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-xl'] + ';\n          }\n        }\n      ') + '\n    ' + breakpoints_6('xxl', props.theme['$grid-breakpoints'], '\n        &.card-columns {\n          column-count: ' + props.theme['$card-columns-count-xxl'] + ';\n          column-gap: ' + props.theme['$card-columns-gap-xxl'] + ';\n      \n          .card {\n            display: inline-block; /* Don\'t let them vertically span multiple columns */\n            width: 100%; /* Don\'t let them exceed the column width */\n            margin-bottom: ' + props.theme['$card-columns-margin-xxl'] + ';\n          }\n        }\n      ') + '\n  ';
-});
-CardColumns.defaultProps = defaultProps$69;
-CardColumns.propTypes = propTypes$80;
-
-var defaultProps$70 = {
-  tag: 'div',
-  theme: {
-    '$brand-primary': '#0275d8',
-    '$brand-success': '#5cb85c',
-    '$brand-info': '#5bc0de',
-    '$brand-warning': '#f0ad4e',
-    '$brand-danger': '#d9534f',
-    '$brand-inverse': '#292b2c',
-    '$card-spacer-x': '1.25rem',
-    '$card-spacer-y': '.75rem',
-    '$card-border-width': '1px',
-    '$card-border-radius': '.25rem',
-    '$card-border-color': 'rgba(0, 0, 0, 0.125)',
-    '$card-border-radius-inner': 'calc(.25rem - 1px)',
-    '$card-cap-bg': '#f7f7f9',
-    '$card-bg': '#fff',
-    '$card-link-hover-color': '#fff',
-    '$card-img-overlay-padding': '1.25rem',
-    '$card-margin-y-halved': '0.375rem',
-    '$card-margin-x-halved': '0.375rem',
-    '$card-columns-count-md': '2',
-    '$card-columns-gap-md': '1rem',
-    '$card-columns-margin-md': '.75rem',
-    '$card-columns-count-lg': '2',
-    '$card-columns-gap-lg': '1.15rem',
-    '$card-columns-margin-lg': '.75rem',
-    '$card-columns-count-xl': '2',
-    '$card-columns-gap-xl': '1.25rem',
-    '$card-columns-margin-xl': '.75rem',
-    '$card-columns-count-xxl': '3',
-    '$card-columns-gap-xxl': '1.25rem',
-    '$card-columns-margin-xxl': '.75rem',
-    '$card-deck-margin': '15px',
-    '$btn-primary-bg': '#0275d8',
-    '$btn-secondary-border': '#ccc',
-    '$btn-info-bg': '#5bc0de',
-    '$btn-success-bg': '#5cb85c',
-    '$btn-warning-bg': '#f0ad4e',
-    '$btn-danger-bg': '#d9534f',
-    '$enable-rounded': false,
-    '$enable-hover-media-query': false
-  }
-};
-var propTypes$81 = {
-  className: propTypes$1.string,
-  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
-  theme: propTypes$1.shape({
-    '$brand-primary': propTypes$1.string,
-    '$brand-success': propTypes$1.string,
-    '$brand-info': propTypes$1.string,
-    '$brand-warning': propTypes$1.string,
-    '$brand-danger': propTypes$1.string,
-    '$brand-inverse': propTypes$1.string,
-    '$card-spacer-x': propTypes$1.string,
-    '$card-spacer-y': propTypes$1.string,
-    '$card-border-width': propTypes$1.string,
-    '$card-border-radius': propTypes$1.string,
-    '$card-border-color': propTypes$1.string,
-    '$card-border-radius-inner': propTypes$1.string,
-    '$card-cap-bg': propTypes$1.string,
-    '$card-bg': propTypes$1.string,
-    '$card-link-hover-color': propTypes$1.string,
-    '$card-img-overlay-padding': propTypes$1.string,
-    '$card-margin-y-halved': propTypes$1.string,
-    '$card-margin-x-halved': propTypes$1.string,
-    '$card-columns-count-md': propTypes$1.string,
-    '$card-columns-gap-md': propTypes$1.string,
-    '$card-columns-margin-md': propTypes$1.string,
-    '$card-columns-count-lg': propTypes$1.string,
-    '$card-columns-gap-lg': propTypes$1.string,
-    '$card-columns-margin-lg': propTypes$1.string,
-    '$card-columns-count-xl': propTypes$1.string,
-    '$card-columns-gap-xl': propTypes$1.string,
-    '$card-columns-margin-xl': propTypes$1.string,
-    '$card-columns-count-xxl': propTypes$1.string,
-    '$card-columns-gap-xxl': propTypes$1.string,
-    '$card-columns-margin-xxl': propTypes$1.string,
-    '$card-deck-margin': propTypes$1.string,
-    '$btn-primary-bg': propTypes$1.string,
-    '$btn-secondary-border': propTypes$1.string,
-    '$btn-info-bg': propTypes$1.string,
-    '$btn-success-bg': propTypes$1.string,
-    '$btn-warning-bg': propTypes$1.string,
-    '$btn-danger-bg': propTypes$1.string,
-    '$link-color': propTypes$1.string,
-    '$link-decoration': propTypes$1.string,
-    '$link-hover-color': propTypes$1.string,
-    '$link-hover-decoration': propTypes$1.string,
-    '$enable-rounded': propTypes$1.bool,
-    '$enable-hover-media-query': propTypes$1.bool
-  }),
-  cssModule: propTypes$1.object
-};
-var CardDeckUnstyled = function (_React$Component) {
-  inherits(CardDeckUnstyled, _React$Component);
-  function CardDeckUnstyled() {
-    classCallCheck(this, CardDeckUnstyled);
-    return possibleConstructorReturn(this, (CardDeckUnstyled.__proto__ || Object.getPrototypeOf(CardDeckUnstyled)).apply(this, arguments));
-  }
-  createClass(CardDeckUnstyled, [{
-    key: 'render',
-    value: function render() {
-      var _omit = lodash_omit(this.props, ['theme']),
-          className = _omit.className,
-          cssModule = _omit.cssModule,
-          Tag = _omit.tag,
-          attributes = objectWithoutProperties(_omit, ['className', 'cssModule', 'tag']);
-      return React__default.createElement(Tag, _extends({
-        className: mapToCssModules(classnames(className, 'card-deck'), cssModule)
-      }, attributes));
-    }
-  }]);
-  return CardDeckUnstyled;
-}(React__default.Component);
-CardDeckUnstyled.defaultProps = defaultProps$70;
-CardDeckUnstyled.propTypes = propTypes$81;
-var CardDeck = styled__default(CardDeckUnstyled).withConfig({
-  displayName: 'CardDeck'
-})(['', ''], function (props) {
-  return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n        &.card-deck {\n          display: flex;\n          flex-flow: row wrap;\n        \n          .card {\n            display: flex;\n            flex: 1 0 0;\n            flex-direction: column;  \n            &:not(:first-child) { margin-left: ' + props.theme['$card-deck-margin'] + '; }\n            &:not(:last-child) { margin-right: ' + props.theme['$card-deck-margin'] + '; }\n          }\n        }\n      ') + '\n  ';
-});
-CardDeck.defaultProps = defaultProps$70;
-CardDeck.propTypes = propTypes$81;
-
-var defaultProps$71 = {
-  tag: 'div',
-  theme: {
-    '$brand-primary': '#0275d8',
-    '$brand-success': '#5cb85c',
-    '$brand-info': '#5bc0de',
-    '$brand-warning': '#f0ad4e',
-    '$brand-danger': '#d9534f',
-    '$brand-inverse': '#292b2c',
-    '$card-spacer-x': '1.25rem',
-    '$card-spacer-y': '.75rem',
-    '$card-border-width': '1px',
-    '$card-border-radius': '.25rem',
-    '$card-border-color': 'rgba(0, 0, 0, 0.125)',
-    '$card-border-radius-inner': 'calc(.25rem - 1px)',
-    '$card-cap-bg': '#f7f7f9',
-    '$card-bg': '#fff',
-    '$card-link-hover-color': '#fff',
-    '$card-img-overlay-padding': '1.25rem',
-    '$card-margin-y-halved': '0.375rem',
-    '$card-margin-x-halved': '0.375rem',
-    '$card-columns-count-md': '2',
-    '$card-columns-gap-md': '1rem',
-    '$card-columns-margin-md': '.75rem',
-    '$card-columns-count-lg': '2',
-    '$card-columns-gap-lg': '1.15rem',
-    '$card-columns-margin-lg': '.75rem',
-    '$card-columns-count-xl': '2',
-    '$card-columns-gap-xl': '1.25rem',
-    '$card-columns-margin-xl': '.75rem',
-    '$card-columns-count-xxl': '3',
-    '$card-columns-gap-xxl': '1.25rem',
-    '$card-columns-margin-xxl': '.75rem',
-    '$card-deck-margin': '15px',
-    '$btn-primary-bg': '#0275d8',
-    '$btn-secondary-border': '#ccc',
-    '$btn-info-bg': '#5bc0de',
-    '$btn-success-bg': '#5cb85c',
-    '$btn-warning-bg': '#f0ad4e',
-    '$btn-danger-bg': '#d9534f',
-    '$enable-rounded': false,
-    '$enable-hover-media-query': false
-  }
-};
-var propTypes$82 = {
-  className: propTypes$1.string,
-  tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
-  theme: propTypes$1.shape({
-    '$brand-primary': propTypes$1.string,
-    '$brand-success': propTypes$1.string,
-    '$brand-info': propTypes$1.string,
-    '$brand-warning': propTypes$1.string,
-    '$brand-danger': propTypes$1.string,
-    '$brand-inverse': propTypes$1.string,
-    '$card-spacer-x': propTypes$1.string,
-    '$card-spacer-y': propTypes$1.string,
-    '$card-border-width': propTypes$1.string,
-    '$card-border-radius': propTypes$1.string,
-    '$card-border-color': propTypes$1.string,
-    '$card-border-radius-inner': propTypes$1.string,
-    '$card-cap-bg': propTypes$1.string,
-    '$card-bg': propTypes$1.string,
-    '$card-link-hover-color': propTypes$1.string,
-    '$card-img-overlay-padding': propTypes$1.string,
-    '$card-margin-y-halved': propTypes$1.string,
-    '$card-margin-x-halved': propTypes$1.string,
-    '$card-columns-count-md': propTypes$1.string,
-    '$card-columns-gap-md': propTypes$1.string,
-    '$card-columns-margin-md': propTypes$1.string,
-    '$card-columns-count-lg': propTypes$1.string,
-    '$card-columns-gap-lg': propTypes$1.string,
-    '$card-columns-margin-lg': propTypes$1.string,
-    '$card-columns-count-xl': propTypes$1.string,
-    '$card-columns-gap-xl': propTypes$1.string,
-    '$card-columns-margin-xl': propTypes$1.string,
-    '$card-columns-count-xxl': propTypes$1.string,
-    '$card-columns-gap-xxl': propTypes$1.string,
-    '$card-columns-margin-xxl': propTypes$1.string,
-    '$card-deck-margin': propTypes$1.string,
-    '$btn-primary-bg': propTypes$1.string,
-    '$btn-secondary-border': propTypes$1.string,
-    '$btn-info-bg': propTypes$1.string,
-    '$btn-success-bg': propTypes$1.string,
-    '$btn-warning-bg': propTypes$1.string,
-    '$btn-danger-bg': propTypes$1.string,
-    '$link-color': propTypes$1.string,
-    '$link-decoration': propTypes$1.string,
-    '$link-hover-color': propTypes$1.string,
-    '$link-hover-decoration': propTypes$1.string,
-    '$enable-rounded': propTypes$1.bool,
-    '$enable-hover-media-query': propTypes$1.bool
-  }),
-  cssModule: propTypes$1.object
-};
 var CardGroupUnstyled = function (_React$Component) {
   inherits(CardGroupUnstyled, _React$Component);
   function CardGroupUnstyled() {
@@ -18124,20 +17311,20 @@ var CardGroupUnstyled = function (_React$Component) {
   }]);
   return CardGroupUnstyled;
 }(React__default.Component);
-CardGroupUnstyled.defaultProps = defaultProps$71;
-CardGroupUnstyled.propTypes = propTypes$82;
+CardGroupUnstyled.defaultProps = defaultProps$69;
+CardGroupUnstyled.propTypes = propTypes$80;
 var CardGroup = styled__default(CardGroupUnstyled).withConfig({
   displayName: 'CardGroup'
 })(['', ''], function (props) {
   return '\n    ' + cards_5(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$card-spacer-y'], props.theme['$card-spacer-x'], props.theme['$card-bg'], props.theme['$card-border-width'], props.theme['$card-border-color'], props.theme['$card-border-radius'], props.theme['$card-margin-y-halved'], props.theme['$card-margin-x-halved'], props.theme['$card-cap-bg'], props.theme['$card-border-radius-inner'], props.theme['$brand-primary'], props.theme['$brand-success'], props.theme['$brand-info'], props.theme['$brand-warning'], props.theme['$brand-danger'], props.theme['$btn-primary-bg'], props.theme['$btn-secondary-border'], props.theme['$btn-info-bg'], props.theme['$btn-success-bg'], props.theme['$btn-warning-bg'], props.theme['$btn-danger-bg'], props.theme['$card-link-hover-color'], props.theme['$card-img-overlay-padding'], props.theme['$card-inverse-bg-color'], props.theme['$card-inverse-border-color']) + '\n    /*\n      Card group\n    */\n      ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n          &.card-group {\n            display: flex;\n            flex-flow: row wrap;\n        \n            .card {\n              flex: 1 0 0;\n        \n              + .card {\n                margin-left: 0;\n                border-left: 0;\n              }\n        \n            ' + conditional_1(props.theme['$enable-rounded'], '\n                &:first-child {\n                  ' + borderRadius_4(props.theme['$enable-rounded'], '0') + '\n                  .card-img-top {\n                    border-top-right-radius: 0;\n                  }\n                  \n                  .card-img-bottom {\n                    border-bottom-right-radius: 0;\n                  }\n                }\n              \n                &:last-child {\n                  ' + borderRadius_6(props.theme['$enable-rounded'], '0') + '\n                  \n                  .card-img-top {\n                    border-top-left-radius: 0;\n                  }\n                  \n                  .card-img-bottom {\n                    border-bottom-left-radius: 0;\n                  }\n                }\n                \n                &:not(:first-child):not(:last-child) {\n                  border-radius: 0;\n        \n                  .card-img-top,\n                  .card-img-bottom {\n                    border-radius: 0;\n                  }\n                }\n              ') + '  \n          }\n        }\n      ') + '\n  ';
 });
-CardGroup.defaultProps = defaultProps$71;
-CardGroup.propTypes = propTypes$82;
+CardGroup.defaultProps = defaultProps$69;
+CardGroup.propTypes = propTypes$80;
 
-var defaultProps$72 = {
+var defaultProps$70 = {
   tag: 'div'
 };
-var propTypes$83 = {
+var propTypes$81 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   cssModule: propTypes$1.object
@@ -18163,15 +17350,15 @@ var CardBlock = function (_React$Component) {
   }]);
   return CardBlock;
 }(React__default.Component);
-CardBlock.defaultProps = defaultProps$72;
-CardBlock.propTypes = propTypes$83;
-CardBlock.defaultProps = defaultProps$72;
-CardBlock.propTypes = propTypes$83;
+CardBlock.defaultProps = defaultProps$70;
+CardBlock.propTypes = propTypes$81;
+CardBlock.defaultProps = defaultProps$70;
+CardBlock.propTypes = propTypes$81;
 
-var defaultProps$73 = {
+var defaultProps$71 = {
   tag: 'div'
 };
-var propTypes$84 = {
+var propTypes$82 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   cssModule: propTypes$1.object
@@ -18197,15 +17384,15 @@ var CardFooter = function (_React$Component) {
   }]);
   return CardFooter;
 }(React__default.Component);
-CardFooter.defaultProps = defaultProps$73;
-CardFooter.propTypes = propTypes$84;
-CardFooter.defaultProps = defaultProps$73;
-CardFooter.propTypes = propTypes$84;
+CardFooter.defaultProps = defaultProps$71;
+CardFooter.propTypes = propTypes$82;
+CardFooter.defaultProps = defaultProps$71;
+CardFooter.propTypes = propTypes$82;
 
-var defaultProps$74 = {
+var defaultProps$72 = {
   tag: 'div'
 };
-var propTypes$85 = {
+var propTypes$83 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   cssModule: propTypes$1.object
@@ -18231,15 +17418,15 @@ var CardHeader = function (_React$Component) {
   }]);
   return CardHeader;
 }(React__default.Component);
-CardHeader.defaultProps = defaultProps$74;
-CardHeader.propTypes = propTypes$85;
-CardHeader.defaultProps = defaultProps$74;
-CardHeader.propTypes = propTypes$85;
+CardHeader.defaultProps = defaultProps$72;
+CardHeader.propTypes = propTypes$83;
+CardHeader.defaultProps = defaultProps$72;
+CardHeader.propTypes = propTypes$83;
 
-var defaultProps$75 = {
+var defaultProps$73 = {
   tag: 'img'
 };
-var propTypes$86 = {
+var propTypes$84 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   top: propTypes$1.bool,
@@ -18275,15 +17462,15 @@ var CardImg = function (_React$Component) {
   }]);
   return CardImg;
 }(React__default.Component);
-CardImg.defaultProps = defaultProps$75;
-CardImg.propTypes = propTypes$86;
-CardImg.defaultProps = defaultProps$75;
-CardImg.propTypes = propTypes$86;
+CardImg.defaultProps = defaultProps$73;
+CardImg.propTypes = propTypes$84;
+CardImg.defaultProps = defaultProps$73;
+CardImg.propTypes = propTypes$84;
 
-var defaultProps$76 = {
+var defaultProps$74 = {
   tag: 'div'
 };
-var propTypes$87 = {
+var propTypes$85 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   cssModule: propTypes$1.object
@@ -18309,15 +17496,15 @@ var CardImgOverlay = function (_React$Component) {
   }]);
   return CardImgOverlay;
 }(React__default.Component);
-CardImgOverlay.defaultProps = defaultProps$76;
-CardImgOverlay.propTypes = propTypes$87;
-CardImgOverlay.defaultProps = defaultProps$76;
-CardImgOverlay.propTypes = propTypes$87;
+CardImgOverlay.defaultProps = defaultProps$74;
+CardImgOverlay.propTypes = propTypes$85;
+CardImgOverlay.defaultProps = defaultProps$74;
+CardImgOverlay.propTypes = propTypes$85;
 
-var defaultProps$77 = {
+var defaultProps$75 = {
   tag: A
 };
-var propTypes$88 = {
+var propTypes$86 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   innerRef: propTypes$1.func,
@@ -18346,15 +17533,15 @@ var CardLink = function (_React$Component) {
   }]);
   return CardLink;
 }(React__default.Component);
-CardLink.defaultProps = defaultProps$77;
-CardLink.propTypes = propTypes$88;
-CardLink.defaultProps = defaultProps$77;
-CardLink.propTypes = propTypes$88;
+CardLink.defaultProps = defaultProps$75;
+CardLink.propTypes = propTypes$86;
+CardLink.defaultProps = defaultProps$75;
+CardLink.propTypes = propTypes$86;
 
-var defaultProps$78 = {
+var defaultProps$76 = {
   tag: H6
 };
-var propTypes$89 = {
+var propTypes$87 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   cssModule: propTypes$1.object
@@ -18380,15 +17567,15 @@ var CardSubtitle = function (_React$Component) {
   }]);
   return CardSubtitle;
 }(React__default.Component);
-CardSubtitle.defaultProps = defaultProps$78;
-CardSubtitle.propTypes = propTypes$89;
-CardSubtitle.defaultProps = defaultProps$78;
-CardSubtitle.propTypes = propTypes$89;
+CardSubtitle.defaultProps = defaultProps$76;
+CardSubtitle.propTypes = propTypes$87;
+CardSubtitle.defaultProps = defaultProps$76;
+CardSubtitle.propTypes = propTypes$87;
 
-var defaultProps$79 = {
+var defaultProps$77 = {
   tag: 'p'
 };
-var propTypes$90 = {
+var propTypes$88 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   cssModule: propTypes$1.object
@@ -18414,15 +17601,15 @@ var CardText = function (_React$Component) {
   }]);
   return CardText;
 }(React__default.Component);
-CardText.defaultProps = defaultProps$79;
-CardText.propTypes = propTypes$90;
-CardText.defaultProps = defaultProps$79;
-CardText.propTypes = propTypes$90;
+CardText.defaultProps = defaultProps$77;
+CardText.propTypes = propTypes$88;
+CardText.defaultProps = defaultProps$77;
+CardText.propTypes = propTypes$88;
 
-var defaultProps$80 = {
+var defaultProps$78 = {
   tag: H4
 };
-var propTypes$91 = {
+var propTypes$89 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   cssModule: propTypes$1.object
@@ -18448,15 +17635,15 @@ var CardTitle = function (_React$Component) {
   }]);
   return CardTitle;
 }(React__default.Component);
-CardTitle.defaultProps = defaultProps$80;
-CardTitle.propTypes = propTypes$91;
-CardTitle.defaultProps = defaultProps$80;
-CardTitle.propTypes = propTypes$91;
+CardTitle.defaultProps = defaultProps$78;
+CardTitle.propTypes = propTypes$89;
+CardTitle.defaultProps = defaultProps$78;
+CardTitle.propTypes = propTypes$89;
 
-var defaultProps$81 = {
+var defaultProps$79 = {
   tag: Blockquote
 };
-var propTypes$92 = {
+var propTypes$90 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   cssModule: propTypes$1.object
@@ -18482,16 +17669,16 @@ var CardBlockquote = function (_React$Component) {
   }]);
   return CardBlockquote;
 }(React__default.Component);
-CardBlockquote.defaultProps = defaultProps$81;
-CardBlockquote.propTypes = propTypes$92;
-CardBlockquote.defaultProps = defaultProps$81;
-CardBlockquote.propTypes = propTypes$92;
+CardBlockquote.defaultProps = defaultProps$79;
+CardBlockquote.propTypes = propTypes$90;
+CardBlockquote.defaultProps = defaultProps$79;
+CardBlockquote.propTypes = propTypes$90;
 
-var defaultProps$82 = {
+var defaultProps$80 = {
   tag: Card,
   delay: 350
 };
-var propTypes$93 = {
+var propTypes$91 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
@@ -18559,15 +17746,15 @@ var Accordion = function (_React$Component) {
   }]);
   return Accordion;
 }(React__default.Component);
-Accordion.defaultProps = defaultProps$82;
-Accordion.propTypes = propTypes$93;
+Accordion.defaultProps = defaultProps$80;
+Accordion.propTypes = propTypes$91;
 Accordion.contextTypes = {
   accordionGroup: propTypes$1.object
 };
-Accordion.defaultProps = defaultProps$82;
-Accordion.propTypes = propTypes$93;
+Accordion.defaultProps = defaultProps$80;
+Accordion.propTypes = propTypes$91;
 
-var propTypes$94 = {
+var propTypes$92 = {
   activeAccordionName: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.number, propTypes$1.bool]),
   onChange: propTypes$1.func,
   'heading-component': propTypes$1.bool
@@ -18604,11 +17791,11 @@ var AccordionGroup = function (_React$Component) {
   }]);
   return AccordionGroup;
 }(React__default.Component);
-AccordionGroup.propTypes = propTypes$94;
+AccordionGroup.propTypes = propTypes$92;
 AccordionGroup.childContextTypes = {
   accordionGroup: propTypes$1.object
 };
-AccordionGroup.propTypes = propTypes$94;
+AccordionGroup.propTypes = propTypes$92;
 
 var customForms_1 = createCommonjsModule(function (module, exports) {
 'use strict';
@@ -18775,7 +17962,7 @@ exports.default = {
 unwrapExports(customForms_1);
 var customForms_3 = customForms_1.customForms;
 
-var defaultProps$83 = {
+var defaultProps$81 = {
   tag: 'form',
   theme: {
     '$brand-primary': '#0275d8',
@@ -18925,7 +18112,7 @@ var defaultProps$83 = {
     '$form-icon-danger': 'url(\'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="undefined" viewBox="-2 -2 7 7"%3E%3Cpath stroke="%23d9534f" d="M0 0l3 3m0-3L0 3"/%3E%3Ccircle r=".5"/%3E%3Ccircle cx="3" r=".5"/%3E%3Ccircle cy="3" r=".5"/%3E%3Ccircle cx="3" cy="3" r=".5"/%3E%3C/svg%3E\')'
   }
 };
-var propTypes$95 = {
+var propTypes$93 = {
   className: propTypes$1.string,
   theme: propTypes$1.shape({
     '$brand-primary': propTypes$1.string,
@@ -19094,20 +18281,20 @@ var FormUnstyled = function (_React$Component) {
   }]);
   return FormUnstyled;
 }(React__default.Component);
-FormUnstyled.defaultProps = defaultProps$83;
-FormUnstyled.propTypes = propTypes$95;
+FormUnstyled.defaultProps = defaultProps$81;
+FormUnstyled.propTypes = propTypes$93;
 var Form = styled__default(FormUnstyled).withConfig({
   displayName: 'Form'
 })(['  ', ''], function (props) {
   return '\n    /*\n     Textual form controls\n    */\n\n    ' + forms_2(props.theme['$enable-rounded'], props.theme['$enable-transitions'], props.theme['$enable-shadows'], props.theme['$input-height'], props.theme['$input-padding-y'], props.theme['$input-padding-x'], props.theme['$font-size-base'], props.theme['$input-line-height'], props.theme['$input-color'], props.theme['$input-bg'], props.theme['$input-border-radius'], props.theme['$input-btn-border-width'], props.theme['$input-border-color'], props.theme['$input-transition'], props.theme['$input-box-shadow'], props.theme['$input-color-focus'], props.theme['$input-bg-focus'], props.theme['$input-border-focus'], props.theme['$input-box-shadow-focus'], props.theme['$input-color-placeholder'], props.theme['$input-bg-disabled'], props.theme['$cursor-disabled']) + '\n    \n    select.form-control {\n      &:focus::-ms-value {\n        /* Suppress the nested default white text on blue background highlight given to\n         the selected option text when the (still closed) <select> receives focus\n         in IE and (under certain conditions) Edge, as it looks bad and cannot be made to\n         match the appearance of the native widget.\n         See https://github.com/twbs/bootstrap/issues/19398.\n         */\n        color: ' + props.theme['$input-color'] + ';\n        background-color: ' + props.theme['$input-bg'] + ';\n      }\n    }\n\n    /* Make file inputs better match text inputs by forcing them to new lines. */\n    & .form-control-file,\n    .form-control-range {\n      display: block;\n    }\n\n    /*\n     Labels\n    */\n\n    /* For use with horizontal and inline forms, when you need the label text to */\n    /* align with the form controls. */\n    & .col-form-label {\n      padding-top: calc(' + props.theme['$input-padding-y'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      margin-bottom: 0; /* Override the \'<label>\' default */\n    }\n\n    & .col-form-label-lg {\n      padding-top: calc(' + props.theme['$input-padding-y-lg'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y-lg'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      font-size: ' + props.theme['$font-size-lg'] + ';\n    }\n\n    & .col-form-label-sm {\n      padding-top: calc(' + props.theme['$input-padding-y-sm'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      padding-bottom: calc(' + props.theme['$input-padding-y-sm'] + ' - ' + props.theme['$input-btn-border-width'] + ' *2);\n      font-size: ' + props.theme['$font-size-sm'] + ';\n    }\n\n    /*\n     Legends\n    */\n\n    /* For use with horizontal and inline forms, when you need the legend text to */\n    /* be the same size as regular labels, and to align with the form controls. */\n    & .col-form-legend {\n      padding-top: ' + props.theme['$input-padding-y'] + ';\n      padding-bottom: ' + props.theme['$input-padding-y'] + ';\n      margin-bottom: 0;\n      font-size: ' + props.theme['$font-size-base'] + ';\n    }\n\n\n    /* Static form control text\n\n     Apply class to an element to make any string of text align with labels in a\n     horizontal form layout.\n    */\n\n    & .form-control-static {\n      padding-top: ' + props.theme['$input-padding-y'] + ';\n      padding-bottom: ' + props.theme['$input-padding-y'] + ';\n      margin-bottom: 0; /* match inputs if this class comes on inputs with default margins */\n      line-height: ' + props.theme['$input-line-height'] + ';\n      border: solid transparent;\n      border-width: ' + props.theme['$input-btn-border-width'] + ' 0;\n\n      &.form-control-sm,\n      &.form-control-lg {\n        padding-right: 0;\n        padding-left: 0;\n      }\n    }\n\n\n    /* Form control sizing\n\n     Build on .form-control with modifier classes to decrease or increase the\n     height and font-size of form controls.\n\n     The .form-group-* form-control variations are sadly duplicated to avoid the\n     issue documented in https://github.com/twbs/bootstrap/issues/15074.\n    */\n\n    & .form-control-sm {\n      padding: ' + props.theme['$input-padding-y-sm'] + ' ' + props.theme['$input-padding-x-sm'] + ';\n      font-size: ' + props.theme['$font-size-sm'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-sm']) + '\n    }\n\n    select.form-control-sm {\n      &:not([size]):not([multiple]) {\n        height: ' + props.theme['$input-height-sm'] + ';\n      }\n    }\n\n    & .form-control-lg {\n      padding: ' + props.theme['$input-padding-y-lg'] + ' ' + props.theme['$input-padding-x-lg'] + ';\n      font-size: ' + props.theme['$font-size-lg'] + ';\n      ' + borderRadius_2(props.theme['$enable-rounded'], props.theme['$input-border-radius-lg']) + '\n    }\n\n    select.form-control-lg {\n      &:not([size]):not([multiple]) {\n        height: ' + props.theme['$input-height-lg'] + ';\n      }\n    }\n\n\n    /* Form groups Designed to help with the organization and spacing of vertical forms. For horizontal forms, use the predefined grid classes. */\n\n    &.form-group,\n     & .form-group {\n      margin-bottom: ' + props.theme['$form-group-margin-bottom'] + ';\n    }\n\n    & .form-text {\n      display: block;\n      margin-top: ' + props.theme['$form-text-margin-top'] + '\n    }\n\n\n    /* Checkboxes and radios Indent the labels to position radios/checkboxes as hanging controls. */\n\n    & .form-check {\n      position: relative;\n      display: block;\n      margin-bottom: ' + props.theme['$form-check-margin-bottom'] + ';\n\n      &.disabled {\n        .form-check-label {\n          color: ' + props.theme['$text-muted'] + ';\n          cursor: ' + props.theme['$cursor-disabled'] + ';\n        }\n      }\n    }\n\n    & .form-check-label {\n      padding-left: ' + props.theme['$form-check-input-gutter'] + ';\n      margin-bottom: 0; /* Override default <label> bottom margin */\n      cursor: pointer;\n    }\n\n    & .form-check-input {\n      position: absolute;\n      margin-top: ' + props.theme['$form-check-input-margin-y'] + ';\n      margin-left: -' + props.theme['$form-check-input-gutter'] + ';\n\n      &:only-child {\n        position: static;\n      }\n    }\n\n    /* Radios and checkboxes on same line */\n    & .form-check-inline {\n      display: inline-block;\n      .form-check-label {\n        vertical-align: middle;\n      }\n\n      + .form-check-inline {\n        margin-left: ' + props.theme['$form-check-inline-margin-x'] + ';\n      }\n\n      &.disabled {\n        color: ' + props.theme['$text-muted'] + ';\n        cursor: ' + props.theme['$cursor-disabled'] + ';\n      }\n    }\n\n\n    /* Form control feedback states Apply contextual and semantic states to individual form controls. */\n    & .form-control-feedback {\n      margin-top: ' + props.theme['$form-feedback-margin-top'] + ';\n    }\n\n    & .form-control-success,\n    & .form-control-warning,\n    & .form-control-danger {\n      padding-right: ' + unitUtils$1.math.multiply(props.theme['$input-padding-x'], 3) + ';\n      background-repeat: no-repeat;\n      background-position: center right ' + unitUtils$1.math.divide(props.theme['$input-height'], 4) + ';\n      background-size: ' + unitUtils$1.math.divide(props.theme['$input-height'], 2) + ' ' + unitUtils$1.math.divide(props.theme['$input-height'], 2) + ';\n    }\n\n    /* Form validation states */\n    & .has-success {\n      ' + forms_3(props.theme['$enable-shadows'], props.theme['$brand-success'], props.theme['$box-shadow']) + '\n\n      .form-control-success {\n        background-image: ' + props.theme['$form-icon-success'] + ';\n      }\n    }\n\n    & .has-warning {\n      ' + forms_3(props.theme['$enable-shadows'], props.theme['$brand-warning'], props.theme['$box-shadow']) + '\n\n      .form-control-warning {\n        background-image: ' + props.theme['$form-icon-warning'] + ';\n      }\n    }\n\n    & .has-danger {\n      ' + forms_3(props.theme['$enable-shadows'], props.theme['$brand-danger'], props.theme['$box-shadow']) + '\n\n      .form-control-danger {\n        background-image: ' + props.theme['$form-icon-danger'] + ';\n      }\n    }\n\n\n    /* Inline forms\n\n     Make forms appear inline(-block) by adding the .form-inline class. Inline\n     forms begin stacked on extra small (mobile) devices and then go inline when\n     viewports reach <768px.\n\n     Requires wrapping inputs and labels with .form-group for proper display of\n     default HTML form controls and our custom form controls (e.g., input groups).\n    */\n\n    &.form-inline {\n      display: flex;\n      flex-flow: row wrap;\n      align-items: center; /* Prevent shorter elements from growing to same height as others (e.g., small buttons growing to normal sized button height) */\n\n      & .form-check {\n         width: 100%;\n      }\n\n      /* Kick in the inline */\n      ' + breakpoints_6('sm', props.theme['$grid-breakpoints'], '\n          label {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            margin-bottom: 0;\n          }\n          \n          /* Inline-block all the things for inline */\n          & .form-group {\n            display: flex;\n            flex: 0 0 auto;\n            flex-flow: row wrap;\n            margin-bottom: 0;\n          }\n      \n          /* Allow folks to *not* use .form-group */\n          & .form-control {\n            display: inline-block;\n            width: auto; /* Prevent labels from stacking above inputs in .form-group */\n            vertical-align: middle;\n          }\n      \n          /* Make static controls behave like regular ones */\n          & .form-control-static {\n            display: inline-block;\n          }\n      \n          & .input-group {\n            width: auto;\n          }\n          \n          & .form-control-label {\n             margin-bottom: 0;\n            vertical-align: middle;\n          }\n      \n          /* Remove default margin on radios/checkboxes that were used for stacking, and */\n          /*  then undo the floating of radios and checkboxes to match. */\n          & .form-check {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            width: auto;\n            margin-top: 0;\n            margin-bottom: 0;\n          }\n          & .form-check-label {\n            padding-left: 0;\n          }\n          & .form-check-input {\n            position: relative;\n            margin-left: 0;\n            margin-top: 0;\n            margin-right: ' + props.theme['$form-check-input-margin-x'] + ';\n          }\n          \n          /* Custom form controls */\n          & .custom-control {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            padding-left: 0;\n          }\n          \n          & .custom-control-indicator {\n            position: static;\n            display: inline-block;\n            margin-right: ' + props.theme['$form-check-input-margin-x'] + '; /* Flexbox alignment means we lose our HTML space here, so we compensate. */\n            vertical-align: text-bottom;\n          }\n          \n          /* Re-override the feedback icon. */\n          & .has-feedback .form-control-feedback {\n            top: 0;\n          }\n        ') + '\n    }\n    ' + customForms_3(props.theme['$enable-rounded'], props.theme['$enable-shadows'], props.theme['$custom-control-checked-indicator-box-shadow'], props.theme['$custom-control-active-indicator-box-shadow'], props.theme['$custom-control-indicator-box-shadow'], props.theme['$custom-checkbox-indeterminate-box-shadow'], props.theme['$custom-select-focus-box-shadow'], props.theme['$custom-file-focus-box-shadow'], props.theme['$custom-file-box-shadow'], props.theme['$custom-select-border-radius'], props.theme['$custom-file-border-radius'], props.theme['$custom-checkbox-radius'], props.theme['$input-bg'], props.theme['$custom-select-line-height'], props.theme['$line-height-base'], props.theme['$custom-control-gutter'], props.theme['$custom-control-spacer-x'], props.theme['$custom-control-checked-indicator-color'], props.theme['$custom-control-checked-indicator-bg'], props.theme['$custom-control-focus-indicator-box-shadow'], props.theme['$custom-control-active-indicator-color'], props.theme['$custom-control-active-indicator-bg'], props.theme['$custom-control-disabled-cursor'], props.theme['$custom-control-disabled-indicator-bg'], props.theme['$custom-control-disabled-description-color'], props.theme['$custom-control-indicator-size'], props.theme['$custom-control-indicator-bg'], props.theme['$custom-control-indicator-bg-size'], props.theme['$custom-checkbox-checked-icon'], props.theme['$custom-checkbox-indeterminate-bg'], props.theme['$custom-checkbox-indeterminate-icon'], props.theme['$custom-radio-radius'], props.theme['$custom-radio-checked-icon'], props.theme['$custom-control-spacer-y'], props.theme['$border-width'], props.theme['$input-height'], props.theme['$custom-select-padding-y'], props.theme['$custom-select-padding-x'], props.theme['$custom-select-indicator-padding'], props.theme['$custom-select-color'], props.theme['$custom-select-bg'], props.theme['$custom-select-indicator'], props.theme['$custom-select-bg-size'], props.theme['$custom-select-border-width'], props.theme['$custom-select-border-color'], props.theme['$custom-select-focus-border-color'], props.theme['$input-color'], props.theme['$custom-select-disabled-color'], props.theme['$cursor-disabled'], props.theme['$custom-select-disabled-bg'], props.theme['$custom-select-sm-font-size'], props.theme['$custom-file-width'], props.theme['$custom-file-height'], props.theme['$custom-file-padding-x'], props.theme['$custom-file-padding-y'], props.theme['$custom-file-line-height'], props.theme['$custom-file-color'], props.theme['$custom-file-bg'], props.theme['$custom-file-border-width'], props.theme['$custom-file-border-color'], props.theme['$custom-file-button-color'], props.theme['$custom-file-button-bg'], props.theme['$custom-file-text']) + '\n    & .row {\n      ' + grid_5(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    }\n  ';
 });
-Form.defaultProps = defaultProps$83;
-Form.propTypes = propTypes$95;
+Form.defaultProps = defaultProps$81;
+Form.propTypes = propTypes$93;
 
-var defaultProps$84 = {
+var defaultProps$82 = {
   tag: 'div'
 };
-var propTypes$96 = {
+var propTypes$94 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   check: propTypes$1.bool,
@@ -19144,15 +18331,15 @@ var FormGroup = function (_React$Component) {
   }]);
   return FormGroup;
 }(React__default.Component);
-FormGroup.defaultProps = defaultProps$84;
-FormGroup.propTypes = propTypes$96;
-FormGroup.defaultProps = defaultProps$84;
-FormGroup.propTypes = propTypes$96;
+FormGroup.defaultProps = defaultProps$82;
+FormGroup.propTypes = propTypes$94;
+FormGroup.defaultProps = defaultProps$82;
+FormGroup.propTypes = propTypes$94;
 
-var defaultProps$85 = {
+var defaultProps$83 = {
   tag: 'small'
 };
-var propTypes$97 = {
+var propTypes$95 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   color: propTypes$1.oneOf(['success', 'warning', 'danger', 'muted', '']),
@@ -19182,15 +18369,15 @@ var FormText = function (_React$Component) {
   }]);
   return FormText;
 }(React__default.Component);
-FormText.defaultProps = defaultProps$85;
-FormText.propTypes = propTypes$97;
-FormText.defaultProps = defaultProps$85;
-FormText.propTypes = propTypes$97;
+FormText.defaultProps = defaultProps$83;
+FormText.propTypes = propTypes$95;
+FormText.defaultProps = defaultProps$83;
+FormText.propTypes = propTypes$95;
 
-var defaultProps$86 = {
+var defaultProps$84 = {
   tag: 'div'
 };
-var propTypes$98 = {
+var propTypes$96 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
@@ -19216,12 +18403,12 @@ var FormFeedback = function (_React$Component) {
   }]);
   return FormFeedback;
 }(React__default.Component);
-FormFeedback.defaultProps = defaultProps$86;
-FormFeedback.propTypes = propTypes$98;
-FormFeedback.defaultProps = defaultProps$86;
-FormFeedback.propTypes = propTypes$98;
+FormFeedback.defaultProps = defaultProps$84;
+FormFeedback.propTypes = propTypes$96;
+FormFeedback.defaultProps = defaultProps$84;
+FormFeedback.propTypes = propTypes$96;
 
-var propTypes$99 = {
+var propTypes$97 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   radio: propTypes$1.shape({
@@ -19266,13 +18453,13 @@ var FormCustom = function (_React$Component) {
   }]);
   return FormCustom;
 }(React__default.Component);
-FormCustom.propTypes = propTypes$99;
-FormCustom.propTypes = propTypes$99;
+FormCustom.propTypes = propTypes$97;
+FormCustom.propTypes = propTypes$97;
 
-var defaultProps$87 = {
+var defaultProps$85 = {
   tag: 'button'
 };
-var propTypes$100 = {
+var propTypes$98 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   disabled: propTypes$1.bool,
@@ -19341,20 +18528,20 @@ var DropdownItem = function (_React$Component) {
   }]);
   return DropdownItem;
 }(React__default.Component);
-DropdownItem.defaultProps = defaultProps$87;
-DropdownItem.propTypes = propTypes$100;
+DropdownItem.defaultProps = defaultProps$85;
+DropdownItem.propTypes = propTypes$98;
 DropdownItem.contextTypes = {
   toggle: propTypes$1.func
 };
-DropdownItem.defaultProps = defaultProps$87;
-DropdownItem.propTypes = propTypes$100;
+DropdownItem.defaultProps = defaultProps$85;
+DropdownItem.propTypes = propTypes$98;
 
-var defaultProps$88 = {
+var defaultProps$86 = {
   'aria-haspopup': true,
   'data-toggle': 'dropdown',
   color: 'primary'
 };
-var propTypes$101 = {
+var propTypes$99 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   'aria-haspopup': propTypes$1.bool,
@@ -19436,14 +18623,14 @@ var DropdownToggle = function (_React$Component) {
   }]);
   return DropdownToggle;
 }(React__default.Component);
-DropdownToggle.defaultProps = defaultProps$88;
-DropdownToggle.propTypes = propTypes$101;
+DropdownToggle.defaultProps = defaultProps$86;
+DropdownToggle.propTypes = propTypes$99;
 DropdownToggle.contextTypes = {
   isOpen: propTypes$1.bool.isRequired,
   toggle: propTypes$1.func.isRequired
 };
-DropdownToggle.defaultProps = defaultProps$88;
-DropdownToggle.propTypes = propTypes$101;
+DropdownToggle.defaultProps = defaultProps$86;
+DropdownToggle.propTypes = propTypes$99;
 
 var getToggleableClass = function getToggleableClass(toggleable) {
   if (toggleable === false) {
@@ -19453,7 +18640,7 @@ var getToggleableClass = function getToggleableClass(toggleable) {
   }
   return 'navbar-toggleable-' + toggleable;
 };
-var defaultProps$89 = {
+var defaultProps$87 = {
   tag: 'nav',
   role: 'navigation',
   toggleable: false,
@@ -19511,7 +18698,7 @@ var defaultProps$89 = {
     '$navbar-inverse-disabled-color': 'rgba(255, 255, 255, 0.25)'
   }
 };
-var propTypes$102 = {
+var propTypes$100 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   light: propTypes$1.bool,
@@ -19602,22 +18789,22 @@ var NavbarUnstyled = function (_React$Component) {
   }]);
   return NavbarUnstyled;
 }(React__default.Component);
-NavbarUnstyled.defaultProps = defaultProps$89;
-NavbarUnstyled.propTypes = propTypes$102;
+NavbarUnstyled.defaultProps = defaultProps$87;
+NavbarUnstyled.propTypes = propTypes$100;
 
 var Navbar = styled__default(NavbarUnstyled).withConfig({
   displayName: 'Navbar'
 })(['', ''], function (props) {
   return '\n    ' + navbar_3(props.theme['$grid-breakpoints'], props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$navbar-padding-y'], props.theme['$navbar-padding-x'], props.theme['$zindex-navbar'], props.theme['$zindex-navbar-fixed'], props.theme['$zindex-navbar-sticky'], props.theme['$navbar-brand-padding-y'], props.theme['$font-size-lg'], props.theme['$navbar-divider-padding-y'], props.theme['$navbar-toggler-padding-y'], props.theme['$navbar-toggler-padding-x'], props.theme['$navbar-toggler-font-size'], props.theme['$border-width'], props.theme['$navbar-toggler-border-radius'], props.theme['$navbar-light-active-color'], props.theme['$navbar-light-color'], props.theme['$navbar-light-hover-color'], props.theme['$navbar-light-toggler-border'], props.theme['$navbar-light-disabled-color'], props.theme['$navbar-light-toggler-bg'], props.theme['$navbar-inverse-active-color'], props.theme['$navbar-inverse-color'], props.theme['$navbar-inverse-hover-color'], props.theme['$navbar-inverse-toggler-border'], props.theme['$navbar-inverse-toggler-bg'], props.theme['$navbar-inverse-disabled-color']) + '\n    ' + nav_3(props.theme['$enable-rounded'], props.theme['$enable-hover-media-query'], props.theme['$nav-link-padding'], props.theme['$nav-disabled-link-color'], props.theme['$cursor-disabled'], props.theme['$nav-tabs-border-width'], props.theme['$nav-tabs-border-color'], props.theme['$nav-tabs-border-radius'], props.theme['$nav-tabs-link-hover-border-color'], props.theme['$nav-tabs-active-link-hover-color'], props.theme['$nav-tabs-active-link-hover-bg'], props.theme['$nav-tabs-active-link-hover-border-color'], props.theme['$nav-pills-border-radius'], props.theme['$nav-pills-active-link-color'], props.theme['$nav-pills-active-link-bg']) + '\n  ';
 });
-Navbar.defaultProps = defaultProps$89;
-Navbar.propTypes = propTypes$102;
+Navbar.defaultProps = defaultProps$87;
+Navbar.propTypes = propTypes$100;
 
-var defaultProps$90 = {
+var defaultProps$88 = {
   tag: 'button',
   type: 'button'
 };
-var propTypes$103 = {
+var propTypes$101 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   type: propTypes$1.string,
@@ -19642,13 +18829,13 @@ var NavbarToggler = function NavbarToggler(props) {
     children || navbarToggleIcon
   );
 };
-NavbarToggler.propTypes = propTypes$103;
-NavbarToggler.defaultProps = defaultProps$90;
+NavbarToggler.propTypes = propTypes$101;
+NavbarToggler.defaultProps = defaultProps$88;
 
-var defaultProps$91 = {
+var defaultProps$89 = {
   tag: 'a'
 };
-var propTypes$104 = {
+var propTypes$102 = {
   className: propTypes$1.string,
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   cssModule: propTypes$1.object
@@ -19661,10 +18848,10 @@ var NavbarBrand = function NavbarBrand(props) {
   var classes = mapToCssModules(classnames(className, 'navbar-brand'), cssModule);
   return React__default.createElement(Tag, _extends({}, attributes, { className: classes }));
 };
-NavbarBrand.propTypes = propTypes$104;
-NavbarBrand.defaultProps = defaultProps$91;
+NavbarBrand.propTypes = propTypes$102;
+NavbarBrand.defaultProps = defaultProps$89;
 
-var propTypes$105 = {
+var propTypes$103 = {
   className: propTypes$1.string,
   children: propTypes$1.node,
   toggle: propTypes$1.func.isRequired,
@@ -19672,7 +18859,7 @@ var propTypes$105 = {
   tag: propTypes$1.oneOfType([propTypes$1.string, propTypes$1.element, propTypes$1.func]),
   cssModule: propTypes$1.object
 };
-var defaultProps$92 = {
+var defaultProps$90 = {
   tag: 'li'
 };
 var NavDropdown = function NavDropdown(props) {
@@ -19683,10 +18870,10 @@ var NavDropdown = function NavDropdown(props) {
   var classes = mapToCssModules(classnames(className, 'nav-item'), cssModule);
   return React__default.createElement(Dropdown, _extends({}, attributes, { tag: Tag, className: classes }));
 };
-NavDropdown.propTypes = propTypes$105;
-NavDropdown.defaultProps = defaultProps$92;
+NavDropdown.propTypes = propTypes$103;
+NavDropdown.defaultProps = defaultProps$90;
 
-var defaultProps$93 = {
+var defaultProps$91 = {
   theme: {
     '$grid-gutter-width-base': '30px',
     '$grid-gutter-widths': {
@@ -19705,7 +18892,7 @@ var defaultProps$93 = {
     '$enable-grid-classes': true
   }
 };
-var propTypes$106 = {
+var propTypes$104 = {
   className: propTypes$1.string,
   theme: propTypes$1.shape({
     '$grid-gutter-width-base': propTypes$1.string,
@@ -19731,17 +18918,17 @@ var ContainerUnstyled = function (_React$Component) {
   }]);
   return ContainerUnstyled;
 }(React__default.Component);
-ContainerUnstyled.defaultProps = defaultProps$93;
-ContainerUnstyled.propTypes = propTypes$106;
+ContainerUnstyled.defaultProps = defaultProps$91;
+ContainerUnstyled.propTypes = propTypes$104;
 var Container = styled__default(ContainerUnstyled).withConfig({
   displayName: 'Container'
 })(['', ''], function (props) {
   return '\n    ' + grid_2(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n    \n    ' + grid_3(props.theme['$enable-grid-classes'], props.theme['$container-max-widths'], props.theme['$grid-breakpoints']) + '\n  ';
 });
-Container.defaultProps = defaultProps$93;
-Container.propTypes = propTypes$106;
+Container.defaultProps = defaultProps$91;
+Container.propTypes = propTypes$104;
 
-var defaultProps$94 = {
+var defaultProps$92 = {
   theme: {
     '$grid-gutter-width-base': '30px',
     '$grid-gutter-widths': {
@@ -19754,7 +18941,7 @@ var defaultProps$94 = {
     '$enable-grid-classes': true
   }
 };
-var propTypes$107 = {
+var propTypes$105 = {
   className: propTypes$1.string,
   theme: propTypes$1.shape({
     '$grid-gutter-width-base': propTypes$1.string,
@@ -19779,15 +18966,15 @@ var ContainerFluidUnstyled = function (_React$Component) {
   }]);
   return ContainerFluidUnstyled;
 }(React__default.Component);
-ContainerFluidUnstyled.defaultProps = defaultProps$94;
-ContainerFluidUnstyled.propTypes = propTypes$107;
+ContainerFluidUnstyled.defaultProps = defaultProps$92;
+ContainerFluidUnstyled.propTypes = propTypes$105;
 var ContainerFluid = styled__default(ContainerFluidUnstyled).withConfig({
   displayName: 'ContainerFluid'
 })(['', ''], function (props) {
   return '\n    ' + grid_2(props.theme['$enable-grid-classes'], props.theme['$grid-gutter-widths']) + '\n  ';
 });
-ContainerFluid.defaultProps = defaultProps$94;
-ContainerFluid.propTypes = propTypes$107;
+ContainerFluid.defaultProps = defaultProps$92;
+ContainerFluid.propTypes = propTypes$105;
 
 exports.theme = theme;
 exports.makeTheme = makeTheme$$1;
@@ -19799,7 +18986,6 @@ exports.Alert = Alert;
 exports.Area = Area;
 exports.Article = Article;
 exports.Blockquote = Blockquote;
-exports.BootstrapProvider = BootstrapProvider;
 exports.Breadcrumb = Breadcrumb;
 exports.BreadcrumbItem = BreadcrumbItem;
 exports.Button = Button;

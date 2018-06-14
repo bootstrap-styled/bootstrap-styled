@@ -11,8 +11,9 @@ All notable changes to this project will be documented in this file.
 - Corrected import mistake in `ProgressBar` component.
 - Added bootstrap-styled-redux@^0.1.2 dependencie.
 - Removed useless code in `Alert`.
-- Moved `BootstrapProvider` and `UtilityProvider` to tis own [package](https://module.kopaxgroup.com/bootstrap-styled/providers).
-
+- Moved `BootstrapProvider` and `UtilityProvider` to its own [package](https://module.kopaxgroup.com/bootstrap-styled/providers).
+- Replaced all the `BootstrapProvider` imports in tests.
+- Added details about `bootstrap-styled-provider` in README.
 
 ## [v1.6.5] - 2018-04-28
 

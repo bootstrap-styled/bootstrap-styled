@@ -9,13 +9,12 @@ import Styled from 'react-styleguidist/lib/rsg-components/Styled';
 import Logo from 'react-styleguidist/lib/rsg-components/Logo';
 
 import cn from 'classnames';
-import BootstrapProvider from 'bootstrap-styled/lib/BootstrapProvider';
-import { theme as themeStepProgress } from 'step-progress'
+import BootstrapProvider from 'bootstrap-styled-provider/lib/BootstrapProvider';
 import { makeTheme } from '../../src/theme';
 
 import defaultLogo from './logo';
 
-const theme = makeTheme({ ...themeStepProgress})
+const theme = makeTheme()
 
 const styles = ({
                   color, fontFamily, fontSize, sidebarWidth, mq, space, maxWidth,
@@ -83,7 +82,8 @@ function LayoutRenderer({
                         }) {
   return (
     <Provider store={store}>
-      <BootstrapProvider theme={theme}>
+      <BootstrapProvider injectGlobal theme={theme}>
+        {console.log(theme)}
         <div className={cn(className, classes.root, hasSidebar && classes.hasSidebar)}>
           <main className={classes.content}>
             {children}

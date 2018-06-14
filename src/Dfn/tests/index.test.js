@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import BootstrapProvider from '../../BootstrapProvider';
+import BootstrapProvider from 'bootstrap-styled-provider/lib/BootstrapProvider';
 import Dfn from '../index';
 
 const children = 'Test';
