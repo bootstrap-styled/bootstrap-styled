@@ -81,7 +81,7 @@ class ButtonGroupUnstyled extends React.Component { // eslint-disable-line react
     vertical: PropTypes.bool,
     theme: PropTypes.object,
     /* eslint-enable react/no-unused-prop-types */
-  }
+  };
 
   render() {
     const {

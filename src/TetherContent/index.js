@@ -34,11 +34,8 @@ export const propTypes = {
 };
 class TetherContent extends React.Component {// eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = defaultProps;
-
-  /* eslint-disable react/no-unused-prop-types */
   static propTypes = propTypes;
-  /* eslint-enable react/no-unused-prop-types */
+  static defaultProps = defaultProps;
 
   componentDidMount = () => {
     this.handleProps();

@@ -41,15 +41,11 @@ export const propTypes = {
 
 class DropdownItem extends React.Component {
 
-  static defaultProps = defaultProps;
-
-  /* eslint-disable react/no-unused-prop-types */
   static propTypes = propTypes;
-  /* eslint-enable react/no-unused-prop-types */
-
   static contextTypes = {
     toggle: PropTypes.func,
   };
+  static defaultProps = defaultProps;
 
   onClick = (e) => {
     if (this.props.disabled || this.props.header || this.props.divider) {
