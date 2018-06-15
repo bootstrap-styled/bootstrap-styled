@@ -1,93 +1,19 @@
-image: kopaxgroup/node9-jdk8-flyway4-sonarscanner2-docker17-debian
-
-variables:
-  GIT_STRATEGY: none
+image: kopaxgroup/node10-jdk8-flyway4-sonarscanner2-docker17-debian
 
 before_script:
-  # Install ssh-agent if not already installed, it is required by Docker.
-  # (change apt-get to yum if you use a CentOS-based image)
-  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-
-  # Run ssh-agent (inside the build environment)
-  - eval $(ssh-agent -s)
-
-  # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
-  - ssh-add <(echo "$SSH_PRIVATE_KEY")
-
-  # For Docker builds disable host key checking. Be aware that by adding that
-  # you are suspectible to man-in-the-middle attacks.
-  # WARNING: Use this only with the Docker executor, if you use it with shell
-  # you will overwrite your user's SSH config.
-  - mkdir -p ~/.ssh
-  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-  # In order to properly check the server's host key, assuming you created the
-  # SSH_SERVER_HOSTKEYS variable previously, uncomment the following two lines
-  # instead.
-  # - mkdir -p ~/.ssh
-  # - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
-  # clone with ssh
-  - "[[ ! -e 'package.json' ]] && git clone ${REPOSITORY_SSH_URL} ."
-  - git checkout ${CI_COMMIT_SHA}
-
-  # const
-  - export PACKAGE_NAME=$(node -p "require('./package.json').name")
-  - export PACKAGE_VERSION=$(node -p "require('./package.json').version")
-  - export SONAR_VERSION=${PACKAGE_VERSION}-b${CI_PIPELINE_ID}-${CI_COMMIT_REF_NAME}
-  - export NODE_VERSION=$(node --version)
-  - export NPM_VERSION=$(npm --version)
-
-  # logging
-  - npm --version
-  - node --version
-  - npx rollup-umd-scripts --version
-
-  # commit message
-  - git config --global user.email "contact@kopaxgroup.com"
-  - git config --global user.name "Gitlab-CI"
-
-#after_script:
-#  - rm secrets
+  - npx -p rollup-umd-scripts scripts-ci before-script
 
 stages:
   - build
   - test
   - release
-  - publish
   - deploy
 
 # Job: Build
-build_dev:
-  stage: build
-  script:
-    - npm install
-    - npm run build
-    - du -h dist/*.min.js
-    # release dist and lib
-    - git add dist/ lib/
-    - git commit -m "new release dist and lib" || echo "no change detected"
-    - git push origin HEAD:${CI_COMMIT_REF_NAME}
-  cache:
-    key: ${CI_BUILD_REF_NAME}
-    paths:
-      - node_modules/
-  artifacts:
-    when: on_success
-    name: "${CI_PROJECT_PATH}-${CI_PIPELINE_ID}-${CI_COMMIT_REF_NAME}"
-    untracked: true
-    expire_in: 3 mins
-    paths:
-      - .
-  only:
-    - dev
-  tags:
-    - docker
-
 build:
   stage: build
   script:
-    - npm install
-    - npm run build
-    - du -h dist/*.min.js
+    - npx -p rollup-umd-scripts scripts-ci build
   cache:
     key: ${CI_BUILD_REF_NAME}
     paths:
@@ -100,33 +26,49 @@ build:
     paths:
       - .
   only:
+    - tags
+    - dev
     - master
   tags:
     - docker
 
 # Job: Test
-test_dev:
-  stage: test
-  coverage: '/All files[^|]*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*([\d.]*)\s*\|\s*/'
-  script:
-    - npm run test
-    - sonar-scanner -Dsonar.host.url=${SONAR_URL} -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=${CI_COMMIT_REF_NAME} -Dsonar.projectVersion=${SONAR_VERSION}
-  dependencies:
-    - build_dev
-  only:
-    - dev
-  tags:
-    - docker
-
 test:
   stage: test
   coverage: '/All files[^|]*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*([\d.]*)\s*\|\s*/'
   script:
-    - npm run test
-    - sonar-scanner -Dsonar.host.url=${SONAR_URL} -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch=${CI_COMMIT_REF_NAME} -Dsonar.projectVersion=${SONAR_VERSION}
+    - npx -p rollup-umd-scripts scripts-ci test
   dependencies:
     - build
   only:
+    - tags
+    - dev
+    - master
+  tags:
+    - docker
+
+.node:8:
+  image: node:8
+  stage: test
+  dependencies:
+    - build
+  script:
+    - npx -p rollup-umd-scripts scripts-ci test
+  only:
+    - dev
+    - master
+  tags:
+    - docker
+
+.node:9:
+  image: node:9
+  stage: test
+  dependencies:
+    - build
+  script:
+    - npx -p rollup-umd-scripts scripts-ci test
+  only:
+    - dev
     - master
   tags:
     - docker
@@ -135,51 +77,7 @@ test:
 release:
   stage: release
   script:
-    # update release date
-    - git checkout -b ${PACKAGE_VERSION}
-    - git checkout package-lock.json || echo 'nothing to do'
-    - sed -i 's/????-??-??/'`date +%Y-%m-%d`'/g' CHANGELOG.md
-    - sed -i "s/?NEXT?/v$PACKAGE_VERSION/g" CHANGELOG.md
-    - git add CHANGELOG.md
-    - git commit -m "Set release date in CHANGELOG.md"
-    - git push origin ${PACKAGE_VERSION}
-    # tag version
-    - git tag -a -m "new version ${PACKAGE_VERSION}" ${PACKAGE_VERSION}
-    - git push --tags
-    # prepare next dev version
-    - git checkout dev
-    - npm run build:clean
-    - git reset HEAD --hard
-    - git pull origin dev
-    # again update release date for dev branch
-    - sed -i 's/????-??-??/'`date +%Y-%m-%d`'/g' CHANGELOG.md
-    - sed -i "s/?NEXT?/v$PACKAGE_VERSION/g" CHANGELOG.md
-    - git add CHANGELOG.md
-    - git commit -m "Set release date in CHANGELOG.md"
-    # add next release
-    - VERSION=$(npm version patch -m "preparing next version %s")
-    - PATTERN="All notable changes to this project will be documented in this file"
-    - sed -i "/$PATTERN/a- TODO":" write changelog before preparing next tag" CHANGELOG.md
-    - sed -i "/$PATTERN/G" CHANGELOG.md
-    - sed -i "/$PATTERN/a## [?NEXT?] - ????-??-??" CHANGELOG.md
-    - sed -i "/$PATTERN/G" CHANGELOG.md
-    - git add CHANGELOG.md
-    - git commit -m "Add todo next version $VERSION in CHANGELOG.md"
-    - git push origin HEAD:dev
-  dependencies:
-    - build
-  only:
-    - master
-  tags:
-    - docker
-
-# Job: Publish
-publish:
-  stage: publish
-  script:
-    - git fetch --all
-    - git checkout ${PACKAGE_VERSION} || echo true
-    - npm run ci-publish
+    - npx -p rollup-umd-scripts scripts-ci release
   dependencies:
     - build
   only:
@@ -191,25 +89,11 @@ publish:
 pages:
   stage: deploy
   script:
-    # capability of redeploying an old documentation without triggering all the pipeline
-    - npm install
-    # Replace variables
-    - npx rollup-umd-scripts doc variable PACKAGE_NAME=${PACKAGE_NAME}
-    - npx rollup-umd-scripts doc variable PACKAGE_PEERS="$(npx rollup-umd-scripts peer npm-install-cmd | tail -1)"
-    - npx rollup-umd-scripts doc variable PACKAGE_VERSION=${PACKAGE_VERSION}
-    - npx rollup-umd-scripts doc variable NODE_VERSION=${NODE_VERSION}
-    - npx rollup-umd-scripts doc variable NPM_VERSION=${NPM_VERSION}
-    - npx rollup-umd-scripts doc variable CI_REPOSITORY_URL=${REPOSITORY_SSH_URL}
-    - npx rollup-umd-scripts doc variable CI_PROJECT_URL=${CI_PROJECT_URL}
-    - npx rollup-umd-scripts doc variable CI_PROJECT_NAMESPACE=${CI_PROJECT_NAMESPACE}
-    - npx rollup-umd-scripts doc variable CI_PROJECT_NAME=${CI_PROJECT_NAME}
-    - npx rollup-umd-scripts doc variable IMG_SHIELD_PUBLISHING=$(npx rollup-umd-scripts publish status --badge | tail -1)
-    - npm run styleguide:build
+    - npx -p rollup-umd-scripts scripts-ci deploy
   artifacts:
     paths:
-      - public
+    - public
   only:
-    - master
+    - tags
   tags:
     - docker
-

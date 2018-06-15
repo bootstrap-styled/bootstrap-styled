@@ -10,10 +10,6 @@ import mapToCssModules from 'map-to-css-modules';
 
 class PaginationItem extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: 'li',
-  };
-
   static propTypes = {
     active: PropTypes.bool,
     className: PropTypes.string,
@@ -21,7 +17,12 @@ class PaginationItem extends React.Component { // eslint-disable-line react/pref
     cssModule: PropTypes.object,
     disabled: PropTypes.bool,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  }
+  };
+
+  static defaultProps = {
+    tag: 'li',
+  };
+
 
   render() {
     const {

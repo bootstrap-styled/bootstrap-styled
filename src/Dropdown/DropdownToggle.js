@@ -47,16 +47,12 @@ export const propTypes = {
 };
 class DropdownToggle extends React.Component {
 
-  static defaultProps = defaultProps;
-
-  /* eslint-disable react/no-unused-prop-types */
   static propTypes = propTypes;
-  /* eslint-enable react/no-unused-prop-types */
-
   static contextTypes = {
     isOpen: PropTypes.bool.isRequired,
     toggle: PropTypes.func.isRequired,
   };
+  static defaultProps = defaultProps;
 
   onClick = (e) => {
     if (this.props.disabled) {

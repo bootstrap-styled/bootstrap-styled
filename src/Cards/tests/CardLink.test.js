@@ -4,8 +4,8 @@
 
 import { mount } from 'enzyme';
 import React from 'react';
+import { BootstrapProvider } from 'bootstrap-styled-provider';
 import CardLink from '../CardLink';
-import BootstrapProvider from '../../BootstrapProvider';
 
 const children = <h1> test </h1>;
 

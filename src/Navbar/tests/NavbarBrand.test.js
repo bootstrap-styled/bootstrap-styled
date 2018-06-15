@@ -3,7 +3,7 @@
  */
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import BootstrapProvider from '../../BootstrapProvider';
+import { BootstrapProvider } from 'bootstrap-styled-provider';
 import NavbarBrand from '../NavbarBrand';
 
 const children = (<span>Test</span>);

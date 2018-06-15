@@ -8,14 +8,10 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
 import omit from 'lodash.omit';
-import { makeTheme } from './theme';
+import theme from './theme';
 
 
 class FigCaptionUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
-  static defaultProps = {
-    theme: makeTheme(),
-  };
 
   static propTypes = {
     /* eslint-disable react/no-unused-prop-types */
@@ -24,7 +20,11 @@ class FigCaptionUnstyled extends React.Component { // eslint-disable-line react/
     right: PropTypes.bool,
     theme: PropTypes.object,
     /* eslint-enable react/no-unused-prop-types */
-  }
+  };
+
+  static defaultProps = {
+    theme,
+  };
 
   render() {
     const {

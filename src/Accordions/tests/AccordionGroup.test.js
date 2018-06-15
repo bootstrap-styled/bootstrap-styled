@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import BootstrapProvider from '../../BootstrapProvider';
+import { BootstrapProvider } from 'bootstrap-styled-provider';
 import AccordionGroup from '../AccordionGroup';
 import Accordion from '../Accordion';
 

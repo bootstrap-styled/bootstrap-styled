@@ -2,7 +2,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import BootstrapProvider from '../../BootstrapProvider';
+import { BootstrapProvider } from 'bootstrap-styled-provider';
 
 import Fade from '../Fade';
 

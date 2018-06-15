@@ -4,7 +4,7 @@
 
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import BootstrapProvider from '../../BootstrapProvider';
+import { BootstrapProvider } from 'bootstrap-styled-provider';
 import ListGroupItem from '../ListGroupItem';
 
 const children = (<h1>Test</h1>);

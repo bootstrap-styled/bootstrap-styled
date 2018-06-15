@@ -9,7 +9,6 @@ export { default as Alert } from './Alert';
 export { default as Area } from './Area';
 export { default as Article } from './Article';
 export { default as Blockquote } from './Blockquote';
-export { default as BootstrapProvider } from './BootstrapProvider';
 export { default as Breadcrumb } from './Breadcrumb';
 export { default as BreadcrumbItem } from './Breadcrumb/BreadcrumbItem';
 export { default as Button } from './Button';

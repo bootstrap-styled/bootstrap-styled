@@ -62,11 +62,8 @@ export const propTypes = {
 };
 class Collapse extends Component {
 
-  static defaultProps = defaultProps;
-
-  /* eslint-disable react/no-unused-prop-types */
   static propTypes = propTypes;
-  /* eslint-enable react/no-unused-prop-types */
+  static defaultProps = defaultProps;
 
   state = {
     collapse: HIDDEN,

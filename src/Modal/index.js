@@ -111,10 +111,8 @@ export const defaultProps = {
 
 class ModalUnstyled extends React.Component {
 
-  static defaultProps = defaultProps;
-  /* eslint-disable react/no-unused-prop-types */
   static propTypes = propTypes;
-  /* eslint-enable react/no-unused-prop-types */
+  static defaultProps = defaultProps;
 
   constructor(props) {
     super(props);

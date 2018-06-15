@@ -16,7 +16,7 @@ class FigureUnstyled extends React.Component { // eslint-disable-line react/pref
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
     /* eslint-enable react/no-unused-prop-types */
-  }
+  };
 
   render() {
     const {
