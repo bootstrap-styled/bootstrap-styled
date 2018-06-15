@@ -257,7 +257,7 @@
     "basic-math-utils": "^0.3.4",
     "bootstrap-styled-mixins": "^1.0.4",
     "bootstrap-styled-utils": "^1.0.2",
-    "classnames": "^2.2.5",
+    "classnames": "^2.2.6s",
     "color": "^1.0.3",
     "lodash.omit": "^4.5.0",
     "map-to-css-modules": "^1.0.6",
