@@ -1,7 +1,9 @@
+Add the `bootstrap-styled-provider` package.
+
 Import required **Bootstrap Styled** components within `src/App.js` file or your custom component files:
 
 ```js static
-import { Button, BootstrapProvider } from 'bootstrap-styled';
+import BootstrapProvider from 'bootstrap-styled/lib/BootstrapProvider';
 ```
 
 Bootstrap Styled does not include Bootstrap CSS, instead it include a BootstrapProvider:

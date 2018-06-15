@@ -3,8 +3,8 @@
  */
 import { shallow, mount } from 'enzyme';
 import React from 'react';
+import BootstrapProvider from 'bootstrap-styled-provider/lib/BootstrapProvider';
 import InputGroupAddon from '../InputGroupAddon';
-import BootstrapProvider from '../../BootstrapProvider';
 
 const children = (<h1>Test</h1>);
 

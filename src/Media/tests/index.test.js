@@ -5,8 +5,8 @@
 
 import { mount } from 'enzyme';
 import React from 'react';
+import BootstrapProvider from 'bootstrap-styled-provider/lib/BootstrapProvider';
 import Media from '../index';
-import BootstrapProvider from '../../BootstrapProvider';
 
 const children = (
   <div>
