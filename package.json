@@ -33,10 +33,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.git"
+    "url": "https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com.git"
   },
   "bugs": {
-    "url": "https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/issues"
+    "url": "https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/issues"
   },
   "keywords": [
     "rollup",
