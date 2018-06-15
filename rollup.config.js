@@ -65,7 +65,6 @@ const plugins = [
       // relative to the current directory, or the name
       // of a module in node_modules
       'bootstrap-styled-utils': ['parseTransition'],
-      'styled-components': ['keyframes'],
       immutable: ['fromJS'],
     },
   }),
