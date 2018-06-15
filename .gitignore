@@ -6,6 +6,12 @@ bundle-stats.html
 .idea/
 coverage/
 /reports
-/public
 /test-report.xml
 jest_0
+lib
+dist
+/public
+/docs/cli
+/docs/declinations
+/docs/translation.md
+.npmrc

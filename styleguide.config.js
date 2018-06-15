@@ -1,27 +1,19 @@
+const pkg = require('./package.json');
 const path = require('path');
-const { config } = require('rollup-documentation/lib/styleguide.config.js');
+const { default: createConfig, config } = require('@yeutech/rollup-documentation/lib/styleguide.config.js');
+
+/**
+ * we generally make the modules aliased for having nice example, but in this case
+ * we use the module itself for the documentation and to prevent multiple version of
+ * styled-components, we must disable the alias
+ */
+const originalWebpack = config.webpackConfig;
+delete originalWebpack.resolve.alias[pkg.name];
+
 module.exports = {
-  ...config,
-  require: [path.resolve(__dirname, 'styleguide/setup.js')],
-  components: 'src/**/*.js',
-  styles: {
-    Markdown: {
-      pre: {
-        border: 1,
-        background: '#363438',
-      },
-      code: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        color: '#a280ed',
-      },
-    },
-  },
-  theme: {
-    color: {
-      link: '#4c279e',
-      linkHover: '#a280ed',
-    },
-  },
-  verbose: false,
+  ...createConfig({
+    require: [path.resolve(__dirname, 'styleguide/setup.js')],
+    verbose: false,
+  }),
+  webpackConfig: originalWebpack,
 };

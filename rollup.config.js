@@ -8,20 +8,37 @@ import json from 'rollup-plugin-json';
 import uglify from 'rollup-plugin-uglify';
 import cleanup from 'rollup-plugin-cleanup';
 import visualizer from 'rollup-plugin-visualizer';
+import builtins from 'rollup-plugin-node-builtins';
 import pkg from './package.json';
+import declination from './declination.json';
 const processShim = '\0process-shim';
 const prod = process.env.PRODUCTION;
 const mode = prod ? 'production' : 'development';
+const { external, globals } = declination;
 
 console.log(`Creating ${mode} bundle...`);
 
 const output = prod ? [
-  { file: `dist/${pkg.name}.min.js`, format: 'umd' },
+  {
+    name: pkg.name, exports: 'named', globals, file: `dist/${pkg.name}.min.js`, format: 'umd', sourcemap: true,
+  },
+  {
+    name: pkg.name, exports: 'named', globals, file: `dist/${pkg.name}.cjs.min.js`, format: 'cjs', sourcemap: true,
+  },
+  {
+    name: pkg.name, exports: 'named', globals, file: `dist/${pkg.name}.esm.js`, format: 'es', sourcemap: true,
+  },
 ] : [
-  { file: `dist/${pkg.name}.js`, format: 'umd' },
-  { file: `dist/${pkg.name}.es.js`, format: 'es' },
+  {
+    name: pkg.name, exports: 'named', globals, file: `dist/${pkg.name}.js`, format: 'umd', sourcemap: true,
+  },
+  {
+    name: pkg.name, exports: 'named', globals, file: `dist/${pkg.name}.cjs.js`, format: 'cjs', sourcemap: true,
+  },
+  {
+    name: pkg.name, exports: 'named', globals, file: `dist/${pkg.name}.esm.js`, format: 'es', sourcemap: true,
+  },
 ];
-
 
 const plugins = [
   // Unlike Webpack and Browserify, Rollup doesn't automatically shim Node
@@ -37,7 +54,10 @@ const plugins = [
       return null;
     },
   },
-  nodeResolve(),
+  builtins(),
+  nodeResolve({
+    browser: true,
+  }),
   commonjs({
     include: 'node_modules/**',
     namedExports: {
@@ -67,11 +87,7 @@ if (prod) plugins.push(uglify(), visualizer({ filename: './bundle-stats.html' })
 
 export default {
   input: 'src/index.js',
-  sourcemap: true,
-  name: pkg.name,
-  external: ['react', 'react-dom', 'styled-components'],
-  exports: 'named',
+  external,
   output,
   plugins,
-  globals: { react: 'React', 'react-dom': 'ReactDom', 'styled-components': 'styled' },
 };

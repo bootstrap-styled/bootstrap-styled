@@ -1,6 +1,6 @@
 `<Drawer />` component example:
 
-```js
+```js static
 initialState = {
   isOpen: false,
 };
@@ -15,7 +15,7 @@ initialState = {
 
 You can also `dock` your component so that, when activated, it pushes the content of your main layout:
 
-```js
+```js static
 initialState = {
   isOpen: false,
 };
