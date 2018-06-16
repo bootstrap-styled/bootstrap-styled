@@ -28,5 +28,3 @@ It is now possible to share with anyone, all your UIs by using the most known fr
 ## License
 
 Licensed under the MIT License, Copyright © 2017-present Yeutech Company Limited.
-
-See [LICENSE](LICENSE.md) for more information.
