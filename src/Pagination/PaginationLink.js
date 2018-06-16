@@ -11,10 +11,6 @@ import A from '../A';
 
 class PaginationLink extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = {
-    tag: A,
-  };
-
   static propTypes = {
     'aria-label': PropTypes.string,
     className: PropTypes.string,
@@ -23,7 +19,11 @@ class PaginationLink extends React.Component { // eslint-disable-line react/pref
     next: PropTypes.bool,
     previous: PropTypes.bool,
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  }
+  };
+
+  static defaultProps = {
+    tag: A,
+  };
 
   render() {
     const {

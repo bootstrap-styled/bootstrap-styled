@@ -99,9 +99,8 @@ export const defaultProps = {
 };
 export class TooltipUnstyled extends React.Component {
 
-  static defaultProps = defaultProps;
-
   static propTypes = propTypes;
+  static defaultProps = defaultProps;
 
   state = {
     focus: false,

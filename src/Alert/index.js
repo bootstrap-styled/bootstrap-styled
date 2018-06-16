@@ -128,11 +128,8 @@ export const propTypes = {
 
 class AlertUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = defaultProps;
-
-  /* eslint-disable react/no-unused-prop-types */
   static propTypes = propTypes;
-  /* eslint-enable react/no-unused-prop-types */
+  static defaultProps = defaultProps;
 
   state = {
     uncontrolledOpen: true,
@@ -154,6 +151,10 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
   /* eslint-disable no-console */
   componentDidMount() {
     if (this.props.autoHideDuration) {
+      if (this.props.onClick) {
+        console.warn('You cannot make an Alert auto-hide when using an onClick function. Use the auto-hide props with the uncontrolled props!');
+        return;
+      }
       this.setAutoHideTimer();
     }
   }

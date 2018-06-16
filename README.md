@@ -2,7 +2,7 @@
 
 Bootstrap-Styled is Bootstrap 4 made for the community with styled-components.
 
-It is now possible to share with anyone, all your front-end by using the most known front-end framework in the world.
+It is now possible to share with anyone, all your UIs by using the most known front-end framework in the world.
 
 **Master**
 
@@ -16,20 +16,14 @@ It is now possible to share with anyone, all your front-end by using the most kn
 
 ## Table of Contents
 
-  - [Changelog](#changelog)
   - [Documentation](#documentation)
   - [License](#license)
 
 ---
-
-## Changelog
-
-  - View [Changelog](CHANGELOG.md)
   
 ## Documentation
 
-  - View [Markdown documentation](docs)
-  - View $PACKAGE_NAME [HTML documentation](https://bootstrap-styled.yeutech.com)
+  - View bootstrap-styled [HTML documentation](https://bootstrap-styled.yeutech.com)
 
 ## License
 

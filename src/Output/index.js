@@ -8,10 +8,8 @@ import styled from 'styled-components';
 class OutputUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    /* eslint-disable react/no-unused-prop-types */
     className: PropTypes.string,
-    /* eslint-enable react/no-unused-prop-types */
-  }
+  };
 
   render() {
     const {

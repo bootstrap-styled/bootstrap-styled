@@ -15,12 +15,11 @@ export const defaultProps = {
     '$enable-rounded': true,
     '$enable-shadows': true,
     $white: '#fff',
-    '$drawer-bg': '#fff',
+    '$drawer-bg': '$fff',
     '$drawer-transition': 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
     '$drawer-box-shadow': 'rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px',
     '$drawer-border-radius': '0px',
     '$drawer-zindex': '1030',
-    '$drawer-docked-width': '55px',
   },
 };
 
@@ -39,8 +38,6 @@ export const propTypes = {
   bottom: PropTypes.string,
   /** Place Drawer at the left of screen with it's set width */
   left: PropTypes.string,
-  /** Toggles to make Drawer part of layout rather than float above. */
-  docked: PropTypes.bool,
   /** Theme variables. Can be: */
   theme: PropTypes.shape({
     '$enable-rounded': PropTypes.bool,
@@ -50,7 +47,6 @@ export const propTypes = {
     '$drawer-box-shadow': PropTypes.string,
     '$drawer-border-radius': PropTypes.string,
     '$drawer-zindex': PropTypes.string,
-    '$drawer-docked-width': PropTypes.string,
   }),
   /**
    * Replace or remove a className from the component.
@@ -61,11 +57,8 @@ export const propTypes = {
 
 class DrawerUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = defaultProps;
-
-  /* eslint-disable react/no-unused-prop-types */
   static propTypes = propTypes;
-  /* eslint-enable react/no-unused-prop-types */
+  static defaultProps = defaultProps;
 
   render() {
     const {
@@ -75,12 +68,11 @@ class DrawerUnstyled extends React.Component { // eslint-disable-line react/pref
       right,
       bottom,
       left,
-      docked,
       cssModule,
       ...props
     } = omit(this.props, ['theme']);
 
-    const classes = mapToCssModules(cn(className, !docked ? 'drawer' : 'drawer-docked', {
+    const classes = mapToCssModules(cn(className, 'drawer', {
       active,
       'drawer-top': top,
       'drawer-right': right,
@@ -101,10 +93,8 @@ const Drawer = styled(DrawerUnstyled)`
       background-color: ${props.theme['$drawer-bg']};
       transition: ${props.theme['$drawer-transition']};
       position: fixed;
-      flex: 1 0 auto;
       z-index: ${props.theme['$drawer-zindex']};
-      overflow-y: auto;
-      outline: none;
+      overflow: auto;
       ${borderRadius(
         props.theme['$enable-rounded'],
         props.theme['$drawer-border-radius'],
@@ -170,22 +160,6 @@ const Drawer = styled(DrawerUnstyled)`
             &.active {
               transform: translate(0px, 0px);
             }
-          `
-        )}
-      }
-    }
-    &.drawer-docked { 
-      flex: 0 0 auto;
-      overflow: hidden;
-      &.drawer-left {
-        ${ifThen(
-          props.left,
-          `
-          width: ${props.theme['$drawer-docked-width']};
-          transition: width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
-          &.active {
-            width: ${props.left};
-          }
           `
         )}
       }

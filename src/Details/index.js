@@ -12,9 +12,7 @@ export const propTypes = {
 
 class Details extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  /* eslint-disable react/no-unused-prop-types */
   static propTypes = propTypes;
-  /* eslint-enable react/no-unused-prop-types */
 
   render() {
     const { className, ...attributes } = this.props;

@@ -171,11 +171,8 @@ export const propTypes = {
 };
 class NavbarUnstyled extends React.Component {
 
-  static defaultProps = defaultProps;
-
-  /* eslint-disable react/no-unused-prop-types */
   static propTypes = propTypes;
-  /* eslint-enable react/no-unused-prop-types */
+  static defaultProps = defaultProps;
 
   render() {
     const {

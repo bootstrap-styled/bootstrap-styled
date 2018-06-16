@@ -4,7 +4,7 @@
 
 import { mount } from 'enzyme';
 import React from 'react';
-import BootstrapProvider from 'bootstrap-styled-provider/lib/BootstrapProvider';
+import { BootstrapProvider } from 'bootstrap-styled-provider';
 import CardText from '../CardText';
 
 const children = <span> test </span>;

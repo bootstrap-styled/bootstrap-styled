@@ -119,6 +119,7 @@ export const makeTheme = (userTheme = {}) => {
   v['$modal-sm'] = u['$modal-sm'] || '300px';
 
   v['$modal-transition'] = u['$modal-transition'] || 'transform .3s ease-out';
+
   return Object.assign({}, u, v);
 };
 

@@ -16,9 +16,7 @@ export const propTypes = {
 };
 class SelectUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  /* eslint-disable react/no-unused-prop-types */
   static propTypes = propTypes;
-  /* eslint-enable react/no-unused-prop-types */
 
   state = {
     className: null,

@@ -144,11 +144,8 @@ export const propTypes = {
 };
 class ButtonUnstyled extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static defaultProps = defaultProps;
-
-  /* eslint-disable react/no-unused-prop-types */
   static propTypes = propTypes;
-  /* eslint-enable react/no-unused-prop-types */
+  static defaultProps = defaultProps;
 
   onClick = (e) => {
     if (this.props.disabled) {

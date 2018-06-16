@@ -25,7 +25,7 @@ initialState = {
 ;
 <div>
    <Button onClick={() => setState({ alertIsOpen: !state.alertIsOpen })}>Activate Alert</Button>
-   <Alert color="info" isOpen={state.alertIsOpen} uncontrolled autoHideDuration={3000}>
+   <Alert color="info" isOpen={state.alertIsOpen} uncontrolled autoHideDuration="3000">
       I am a timed alert with a delay of 3000 milliseconds
    </Alert>
 </div>
