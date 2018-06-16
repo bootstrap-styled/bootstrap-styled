@@ -3,7 +3,7 @@ const path = require('path');
 const { default: createConfig, config } = require('@yeutech/rollup-documentation/lib/styleguide.config.js');
 
 /**
- * we generally make the modules aliased for having nice example, but in this case
+ * We generally make the modules aliased for having nice example, but in this case
  * we use the module itself for the documentation and to prevent multiple version of
  * styled-components, we must disable the alias
  */
