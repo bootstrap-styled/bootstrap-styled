@@ -1,3 +1,10 @@
+## [1.1.1](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.1.0...v1.1.1) (2018-06-16)
+
+
+### Performance Improvements
+
+* **ok:** BREAKING CHANGE we need go over 1.6.5 ([0368096](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/0368096))
+
 # [1.1.0](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.0.0...v1.1.0) (2018-06-16)
 
 
