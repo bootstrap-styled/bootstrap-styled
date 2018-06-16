@@ -1,3 +1,15 @@
+# [1.1.0](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.0.0...v1.1.0) (2018-06-16)
+
+
+### Features
+
+* **bump:** need to bump ([8c2a8b9](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/8c2a8b9))
+
+
+### Performance Improvements
+
+* **doc:** using doc made with bs ([560a785](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/560a785))
+
 # 1.0.0 (2018-06-15)
 
 
