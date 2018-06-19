@@ -15,11 +15,11 @@ initialState = {
 
 You can also `dock` your component so that, when activated, it pushes the content of your main layout:
 
-```js static
+```js
 initialState = {
   isOpen: false,
 };
-// We ONLY set a height in the root component for example environment.
+// The height style added to the root component is ONLY to correct conflict with the example environment.
 <div className="d-flex" style={{ height: '250px' }}>
   <Drawer docked active={state.isOpen} left="260px" className="p-3">
     <P>1. First</P>
