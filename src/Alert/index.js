@@ -151,10 +151,6 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
   /* eslint-disable no-console */
   componentDidMount() {
     if (this.props.autoHideDuration) {
-      if (this.props.onClick) {
-        console.warn('You cannot make an Alert auto-hide when using an onClick function. Use the auto-hide props with the uncontrolled props!');
-        return;
-      }
       this.setAutoHideTimer();
     }
   }
@@ -214,6 +210,8 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
   };
 
   render() {
+    console.log(this.props.autoHideDuration, 'autoHideDuration');
+
     const {
       className,
       cssModule,
@@ -227,7 +225,6 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
       uncontrolled,
       ...attributes
     } = omit(this.props, ['theme', 'autoHideDuration', 'toggle']);
-
     const classes = mapToCssModules(cn(
       className,
       'alert',
