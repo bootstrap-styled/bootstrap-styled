@@ -210,8 +210,6 @@ class AlertUnstyled extends React.Component { // eslint-disable-line react/prefe
   };
 
   render() {
-    console.log(this.props.autoHideDuration, 'autoHideDuration');
-
     const {
       className,
       cssModule,
