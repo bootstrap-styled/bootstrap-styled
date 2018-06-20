@@ -204,7 +204,7 @@
     "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-uglify": "^3.0.0",
     "rollup-plugin-visualizer": "^0.5.0",
-    "rollup-umd-scripts": "^0.12.7",
+    "rollup-umd-scripts": "^0.13.0",
     "rollup-watch": "^4.3.1",
     "semantic-release": "^15.5.4",
     "sinon": "^3.3.0",
