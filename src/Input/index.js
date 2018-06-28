@@ -246,11 +246,6 @@ const Input = styled(InputUnstyled)`
     /* Reboot Scss */
     touch-action: manipulation;
     
-    // Assures that width: 100% does not break when padding applied.
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
-    
     &[type="radio"],
     &[type="checkbox"] {
       box-sizing: border-box; /* 1. Add the correct box sizing in IE 10- */
