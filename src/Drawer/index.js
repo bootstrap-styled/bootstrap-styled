@@ -176,6 +176,7 @@ const Drawer = styled(DrawerUnstyled)`
     &.drawer-docked { 
       flex: 0 0 auto;
       overflow: hidden;
+      background-color: ${props.theme['$drawer-bg']};
       &.drawer-left {
         ${ifThen(
           props.left,
