@@ -58,8 +58,6 @@ export const makeTheme = (userTheme = {}) => {
 
   v['$state-warning-text'] = u['$state-warning-text'] || '#8a6d3b';
   v['$state-warning-bg'] = u['$state-warning-bg'] || '#fcf8e3';
-
-  v['$mark-bg'] = u['$mark-bg'] || v['$state-warning-bg'];
   v['$state-warning-border'] = u['$state-warning-border'] || Color(v['$state-warning-bg']).darken(0.05).toString();
 
   v['$state-danger-text'] = u['$state-danger-text'] || '#a94442';
