@@ -1,6 +1,6 @@
 const pkg = require('./package.json');
 const path = require('path');
-const { default: createConfig, config } = require('@yeutech/rollup-documentation/lib/styleguide.config.js');
+const { default: createConfig, config } = require('@yeutech-lab/rollup-umd-documentation/lib/styleguide.config.js');
 
 /**
  * We generally make the modules aliased for having nice example, but in this case
