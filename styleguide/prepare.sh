@@ -2,6 +2,7 @@
 
 npx rollup-umd-scripts doc variable \
   PACKAGE_NAME=$(node -p "require('./package.json').name") \
+  PACKAGE_DESCRIPTION=$(node -p "require('./package.json').description") \
   PACKAGE_PEERS="$(npx rollup-umd-scripts peer npm-install-cmd)" \
   PACKAGE_VERSION=$(node -p "require('./package.json').version") \
   NODE_VERSION=$(node --version) \

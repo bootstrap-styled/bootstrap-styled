@@ -1,7 +1,7 @@
 {
   "name": "bootstrap-styled",
   "version": "1.7.0",
-  "description": "Modular and extended bootstrap components made for styled-component community.",
+  "description": "Set of styled-components theme variables based on Bootstrap philosophy.",
   "main": "lib/index.js",
   "jsnext:main": "dist/bootstrap-styled.esm.js",
   "module": "dist/bootstrap-styled.esm.js",
@@ -139,7 +139,7 @@
     }
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^2.0.2",
+    "@semantic-release/changelog": "^3.0.0",
     "@semantic-release/exec": "^2.3.0",
     "@semantic-release/git": "^7.0.0",
     "@semantic-release/gitlab": "^2.1.4",
@@ -149,7 +149,7 @@
     "@yeutech/rollup-umd-ci-build": "^1.0.5",
     "@yeutech/rollup-umd-ci-deploy": "^1.0.7",
     "@yeutech/rollup-umd-ci-release": "^1.0.5",
-    "@yeutech/rollup-umd-ci-release-transitive": "^1.0.6",
+    "@yeutech/rollup-umd-ci-release-transitive": "^1.0.9",
     "@yeutech/rollup-umd-ci-test": "^1.0.4",
     "@yeutech/rollup-umd-scripts": "^0.15.22",
     "babel-cli": "^6.26.0",
@@ -216,7 +216,7 @@
     "sinon": "^3.3.0",
     "styled-components": "^3.3.2",
     "toctoc": "^0.3.0",
-    "webpack": "^4.12.0"
+    "webpack": "^4.15.1"
   },
   "jest": {
     "roots": [
@@ -314,8 +314,7 @@
         "path": "@semantic-release/git",
         "assets": [
           "package.json",
-          "dist/**/*.{js|es}",
-          "lib/**/*.js",
+          "src/**/*.js",
           "CHANGELOG.md",
           "README.md",
           "LICENSE.md"
