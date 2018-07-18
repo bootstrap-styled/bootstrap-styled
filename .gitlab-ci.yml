@@ -1,7 +1,7 @@
 image: kopaxgroup/node10-jdk8-flyway4-sonarscanner2-docker17-debian
 
 before_script:
-  - npx -p rollup-umd-scripts scripts-ci before-script
+  - npx @yeutech-lab/rollup-umd-ci-before-script
 
 stages:
   - build
@@ -13,7 +13,7 @@ stages:
 build:
   stage: build
   script:
-    - npx -p rollup-umd-scripts scripts-ci build
+    - npx @yeutech/rollup-umd-ci-build
   cache:
     key: ${CI_BUILD_REF_NAME}
     paths:
@@ -37,7 +37,7 @@ test:
   stage: test
   coverage: '/All files[^|]*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*[\d.]*\s*\|\s*([\d.]*)\s*\|\s*/'
   script:
-    - npx -p rollup-umd-scripts scripts-ci test
+    - npx @yeutech/rollup-umd-ci-test
   dependencies:
     - build
   only:
@@ -53,7 +53,7 @@ test:
   dependencies:
     - build
   script:
-    - npx -p rollup-umd-scripts scripts-ci test
+    - npx @yeutech/rollup-umd-ci-test
   only:
     - dev
     - master
@@ -66,7 +66,7 @@ test:
   dependencies:
     - build
   script:
-    - npx -p rollup-umd-scripts scripts-ci test
+    - npx @yeutech/rollup-umd-ci-test
   only:
     - dev
     - master
@@ -77,7 +77,7 @@ test:
 release:
   stage: release
   script:
-    - npx -p rollup-umd-scripts scripts-ci release
+    - npx @yeutech/rollup-umd-ci-release
   dependencies:
     - build
   only:
@@ -89,7 +89,7 @@ release:
 pages:
   stage: deploy
   script:
-    - npx -p rollup-umd-scripts scripts-ci deploy
+    - npx @yeutech/rollup-umd-ci-deploy
   artifacts:
     paths:
     - public
