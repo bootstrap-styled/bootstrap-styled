@@ -11,6 +11,7 @@ import mapToCssModules from 'map-to-css-modules';
 import { button } from 'bootstrap-styled-mixins/lib/buttons';
 
 export const defaultProps = {
+  tag: 'p',
   theme: {
     '$enable-rounded': true,
     '$enable-shadows': false,
@@ -205,7 +206,7 @@ class InputUnstyled extends React.Component { // eslint-disable-line react/prefe
     const fileInput = type === 'file';
     const textareaInput = type === 'textarea';
     const selectInput = type === 'select';
-    let Tag = tag || ((selectInput || textareaInput) ? type : 'input');
+    let Tag = ((selectInput || textareaInput) ? type : 'input');
 
     let formControlClass = 'form-control';
 
