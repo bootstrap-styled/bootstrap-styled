@@ -3,7 +3,7 @@
  */
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import { BootstrapProvider } from 'bootstrap-styled-provider';
+import BootstrapProvider from 'bootstrap-styled-provider';
 
 import Input from '../index';
 
@@ -12,13 +12,11 @@ const renderComponent = (props = {}) => shallow(
 
 );
 
-
 const renderComponentUsingTheme = (props = {}) => mount(
   <BootstrapProvider>
     <Input {...props} />
   </BootstrapProvider>
 );
-
 
 describe('<Input />', () => {
   it('should render an <Input> tag without a theme', () => {
@@ -80,14 +78,12 @@ describe('<Input />', () => {
   });
   it('should not render with "form-check-input" nor "form-control" class when type is checkbox and addon is truthy', () => {
     const renderedComponent = shallow(<Input addon type="checkbox" />);
-
     expect(renderedComponent.hasClass('form-check-input')).toBe(false);
     expect(renderedComponent.hasClass('form-control')).toBe(false);
   });
 
   it('should not render with "form-check-input" nor "form-control" class when type is radio and addon is truthy', () => {
     const renderedComponent = shallow(<Input addon type="radio" />);
-
     expect(renderedComponent.hasClass('form-check-input')).toBe(false);
     expect(renderedComponent.hasClass('form-control')).toBe(false);
   });

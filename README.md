@@ -1,8 +1,8 @@
 # bootstrap-styled
 
-Bootstrap-Styled is Bootstrap 4 made for the community with styled-components.
+Set of styled-components theme variables based on Bootstrap philosophy.
 
-It is now possible to share with anyone, all your UIs by using the most known front-end framework in the world.
+You can now share with anyone all your UIs by using the most known front-end framework in the world and this module extension theme chart.
 
 **Master**
 
