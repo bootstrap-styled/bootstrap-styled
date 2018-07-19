@@ -52,12 +52,6 @@ describe('<Input />', () => {
     });
     expect(renderedComponent.find('input').props().placeholder).toEqual('Enter your input here');
   });
-  it('should have a class form-control-static if static: true with a theme', () => {
-    const renderedComponent = renderComponentUsingTheme({
-      static: true,
-    });
-    expect(renderedComponent.find('Input').hasClass('form-control-static'));
-  });
   it('should have a class form-control-file if type: file with a theme', () => {
     const renderedComponent = renderComponentUsingTheme({
       type: 'file',
