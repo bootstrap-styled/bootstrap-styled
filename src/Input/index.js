@@ -11,7 +11,7 @@ import mapToCssModules from 'map-to-css-modules';
 import { button } from 'bootstrap-styled-mixins/lib/buttons';
 
 export const defaultProps = {
-  tag: 'p',
+  tag: 'input',
   theme: {
     '$enable-rounded': true,
     '$enable-shadows': false,
