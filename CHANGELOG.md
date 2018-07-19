@@ -1,3 +1,12 @@
+## [1.7.4](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.7.3...v1.7.4) (2018-07-19)
+
+
+### Bug Fixes
+
+* **dependencies:** upgrade ci dependencies ([54b2f08](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/54b2f08))
+* **doc:** Upgrade [@yeutech-lab](https://module.kopaxgroup.com/yeutech-lab)/rollup-umd-documentation to 2.3.18, react-styleguidist to 7.1.0 and [@yeutech](https://module.kopaxgroup.com/yeutech)/rollup-umd-ci-release-transitive to 1.1.3 ([233ec12](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/233ec12))
+* **Input:** using input for default tag ([2040d56](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/2040d56))
+
 ## [1.7.3](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.7.2...v1.7.3) (2018-07-19)
 
 
