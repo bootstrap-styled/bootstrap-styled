@@ -1,3 +1,12 @@
+## [1.7.3](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.7.2...v1.7.3) (2018-07-19)
+
+
+### Bug Fixes
+
+* **Input:** removed old commit due to bug. ([13b05a5](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/13b05a5))
+* **tests:** corrected test issuyes ([047bc52](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/047bc52))
+* updating from dev branch ([0f3e7a5](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/0f3e7a5))
+
 ## [1.7.2](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.7.1...v1.7.2) (2018-07-18)
 
 
