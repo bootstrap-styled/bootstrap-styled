@@ -1,3 +1,10 @@
+## [1.7.5](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.7.4...v1.7.5) (2018-09-12)
+
+
+### Bug Fixes
+
+* **devDeps:** remove ci scripts packages ([2aadb53](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/2aadb53))
+
 ## [1.7.4](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.7.3...v1.7.4) (2018-07-19)
 
 
