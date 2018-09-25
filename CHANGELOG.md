@@ -1,3 +1,10 @@
+## [1.7.6](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.7.5...v1.7.6) (2018-09-25)
+
+
+### Bug Fixes
+
+* **page:** fix build of page failing ([15677a3](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/15677a3))
+
 ## [1.7.5](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.7.4...v1.7.5) (2018-09-12)
 
 
