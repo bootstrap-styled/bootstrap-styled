@@ -90,6 +90,8 @@ pages:
   stage: deploy
   script:
     - npx @yeutech/rollup-umd-ci-deploy
+  dependencies:
+    - build
   artifacts:
     paths:
     - public
