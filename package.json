@@ -1,7 +1,7 @@
 {
   "name": "bootstrap-styled",
   "version": "1.7.5",
-  "description": "Set of styled-components theme variables based on Bootstrap philosophy.",
+  "description": "List of bootstrap variables and theme auto-configuration functions.",
   "main": "lib/index.js",
   "jsnext:main": "dist/bootstrap-styled.esm.js",
   "module": "dist/bootstrap-styled.esm.js",
@@ -125,7 +125,8 @@
       "react/jsx-no-target-blank": 0,
       "react/require-extension": 0,
       "react/self-closing-comp": 0,
-      "react/require-default-props": 0
+      "react/require-default-props": 0,
+      "spaced-comment": 0
     },
     "settings": {
       "import/resolver": {
@@ -144,7 +145,7 @@
     "@semantic-release/git": "^7.0.0",
     "@semantic-release/gitlab": "^2.1.4",
     "@semantic-release/npm": "^4.0.0",
-    "@yeutech-lab/rollup-umd-documentation": "^2.3.18",
+    "@yeutech-lab/rollup-umd-documentation": "^2.3.20",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
