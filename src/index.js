@@ -5,5 +5,5 @@ export { default as theme, makeTheme } from './theme';
 export { default as createMakeTheme, makeScopedTheme, toMakeTheme } from './utils';
 
 // 2. extra
-export { getGlobalStyles, getGlobalStyleNoBootstrapProvider } from 'bootstrap-styled-mixins/lib/utilities/reboot';
+export { getGlobalStyles, getGlobalStyleNoBootstrapProvider } from '@bootstrap-styled/css-utils/lib/reboot';
 
