@@ -1,6 +1,9 @@
-// 0. Configuration
-export { default as theme, makeTheme, makeScopedTheme } from './theme';
+// 0. Basic bs theme variables and theme configuration utils
+export { default as theme, makeTheme } from './theme';
 
-// 4. extra
+//  1. Utils
+export { default as createMakeTheme, makeScopedTheme, toMakeTheme } from './utils';
+
+// 2. extra
 export { getGlobalStyles, getGlobalStyleNoBootstrapProvider } from 'bootstrap-styled-mixins/lib/utilities/reboot';
 
