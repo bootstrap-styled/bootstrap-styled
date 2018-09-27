@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "jsnext:main": "dist/bootstrap-styled.esm.js",
   "module": "dist/bootstrap-styled.esm.js",
-  "homepage": "https://bootstrap-styled.yeutech.com",
+  "homepage": "https://bootstrap-styled.github.io",
   "browserslist": [
     "IE >= 9",
     "last 2 versions"
@@ -257,8 +257,9 @@
   ],
   "dependencies": {
     "basic-math-utils": "^0.3.4",
-    "bootstrap-styled-mixins": "^1.0.4",
-    "bootstrap-styled-utils": "^1.0.2",
+    "@bootstrap-styled/css-mixins": "^1.0.4",
+    "@bootstrap-styled/css-utils": "^1.0.5",
+    "@bootstrap-styled/utils": "^1.0.1",
     "color": "^1.0.3"
   },
   "peerDependencies": {

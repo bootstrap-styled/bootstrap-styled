@@ -1,6 +1,6 @@
 import Color from 'color';
-import unitUtils from 'bootstrap-styled-utils/lib/unitUtils';
-import { assertAscending, assertStartAtZero } from 'bootstrap-styled-mixins/lib/variables';
+import unitUtils from '@bootstrap-styled/utils/lib/unitUtils';
+import { assertAscending, assertStartAtZero } from '@bootstrap-styled/css-mixins/lib/variables';
 import { allowFalseValue } from './utils';
 
 const { detectUnit, rmUnit } = unitUtils;
