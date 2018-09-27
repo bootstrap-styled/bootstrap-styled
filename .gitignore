@@ -13,5 +13,6 @@ dist
 /public
 /docs/cli
 /docs/declinations
-/docs/translation.md
+.git-credentials
 .npmrc
+package-lock.json
