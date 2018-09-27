@@ -1,3 +1,14 @@
+## [1.7.7](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.7.6...v1.7.7) (2018-09-27)
+
+
+### Bug Fixes
+
+* **package-lock.json:** data corupted ([dbee2df](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/dbee2df))
+* **package.json:** added testUrl to jest config ([4924bbe](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/4924bbe))
+* **package.json:** corrected wrong repo url ([50dd9c0](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/50dd9c0))
+* **package.json:** wrong registry address ([3f0728b](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/3f0728b))
+* **package.json:** wrong repios url ([f1ca2a1](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/f1ca2a1))
+
 ## [1.7.6](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.7.5...v1.7.6) (2018-09-25)
 
 
