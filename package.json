@@ -36,7 +36,7 @@
     "url": "https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com.git"
   },
   "bugs": {
-    "url": "https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled/issues"
+    "url": "https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com.git/issues"
   },
   "keywords": [
     "rollup",
@@ -269,7 +269,7 @@
   },
   "publishConfig": {
     "tag": "latest",
-    "registry": "https://npm.kopaxgroup.com"
+    "registry": "https://registry.npmjs.org"
   },
   "private": false,
   "release": {
