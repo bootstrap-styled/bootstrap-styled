@@ -176,7 +176,6 @@ This is not much different then what others have already done. However, it is he
 
 We 
 
-
 example bootstrap:
 We have used styled-components to Here you can see how we applied 
 
