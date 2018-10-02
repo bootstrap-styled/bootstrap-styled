@@ -86,7 +86,7 @@ release:
     - docker
 
 # Pages
-pages:
+.pages:
   stage: deploy
   script:
     - npx @yeutech/rollup-umd-ci-deploy
