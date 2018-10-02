@@ -14,5 +14,4 @@ dist
 /docs/cli
 /docs/declinations
 .git-credentials
-.npmrc
 package-lock.json
