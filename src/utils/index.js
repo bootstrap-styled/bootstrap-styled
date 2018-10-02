@@ -29,19 +29,19 @@ export default function createMakeTheme(list) {
   * Create a scoped makeTheme
   * @param userTheme
   * @param scopeName string
-  * ex: '$font-size-h2' can be set in the scope as a new value
   *
   **/
 
-export const makeScopedTheme = (userTheme = { [scopeName]: {} }, scopeName) => {
+export function makeScopedTheme(userTheme = { [scopeName]: {} }, scopeName) {
   if (scopeName === undefined) return console.warn('You may have forgotten to set the scope name in the makeScopedTheme function.');
-  const u = userTheme[scopeName] || {};
+
   const newTheme = { [scopeName]: {} };
   const v = newTheme[scopeName];
+  const u = userTheme[scopeName] || {};
 
   Object.keys(userTheme).forEach((variable) => {
     v[variable] = u[variable] || userTheme[variable];
   });
 
-  return makeTheme({ ...newTheme, ...userTheme });
-};
+  return makeTheme({ ...newTheme });
+}

@@ -1,6 +1,6 @@
 import Color from 'color';
 import { makeTheme as makeThemeBs } from '../../theme/makeTheme';
-import createMakeTheme, { makeScopedTheme, toMakeTheme, makeDynamicScopedTheme } from '../index';
+import createMakeTheme, { makeScopedTheme, toMakeTheme } from '../index';
 
 describe('bootstrap-styled theme utils', () => {
   describe('makeScopedTheme', () => {
@@ -15,23 +15,19 @@ describe('bootstrap-styled theme utils', () => {
       expect(makeScopedTheme({})).toEqual(undefined);
     });
   });
-  describe('makeDynamicScopedTheme', () => {
-    it('should have makeDynamicScopedTheme defined', () => {
-      expect(makeDynamicScopedTheme).toBeDefined();
-    });
-    it('should have makeDynamicScopedTheme with a scoped theme', () => {
+  describe('makeScopedTheme wiht calculus', () => {
+    it('should have calculated scoped theme', () => {
       const makeThemeTest = () => {
         const v = {};
         v.$white = 'pink';
         v.$blue = v.$white;
         v['$blue-darker'] = Color(v.$blue).darken(0.05).toString();
-        v.$font = '12px';
         return v;
       };
-      const result = { $blue: 'pink', '$blue-darker': 'hsl(349.5, 100%, 83.3%)', $font: '12px', $white: 'pink' };
+      const result = { $blue: 'pink', '$blue-darker': 'hsl(349.5, 100%, 83.3%)', $white: 'pink' };
       expect(makeScopedTheme(makeThemeTest(), 'scopeName').scopeName).toEqual(result);
-      expect(makeScopedTheme(makeThemeTest(), 'scopeName')['$brand-primary']).toEqual(result.$blue);
-      expect(makeScopedTheme(makeThemeTest(), 'scopeName')['$blue-darker']).toEqual(result['$blue-darker']);
+      expect(makeScopedTheme(makeThemeTest(), 'scopeName')['$brand-primary']).toEqual('#0275d8');
+      expect(makeScopedTheme(makeThemeTest(), 'scopeName').scopeName['$blue-darker']).toEqual(result['$blue-darker']);
     });
     it('should have makeScopedTheme with a scoped theme name', () => {
       expect(makeScopedTheme({})).toEqual(undefined);
