@@ -14,6 +14,7 @@ build:
   stage: build
   script:
     - npx @yeutech/rollup-umd-ci-build
+    - npm ls eslint
   cache:
     key: ${CI_BUILD_REF_NAME}
     paths:
@@ -86,15 +87,15 @@ release:
     - docker
 
 # Pages
-pages:
+.pages:
   stage: deploy
   script:
     - npx @yeutech/rollup-umd-ci-deploy
-  dependencies:
-    - build
   artifacts:
     paths:
     - public
+  dependencies:
+    - build
   only:
     - tags
   tags:
