@@ -1,3 +1,21 @@
+## [1.7.8](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.7.7...v1.7.8) (2018-10-04)
+
+
+### Bug Fixes
+
+* **.npmrc:** added package-lock=false ([5b92bc2](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/5b92bc2))
+* **CI:** fixing CI ([519e206](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/519e206))
+* **CI:** trying to fix CI ([b893d73](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/b893d73))
+* **docs/introductions:** added some doc ([c649e3a](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/c649e3a))
+* **eslint:** corrected following standards ([c2026e5](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/c2026e5))
+* **package.json:** chagned wrong url ([aecc477](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/aecc477))
+* **package.json:** corrected wrong url and registryu ([fc2e8fa](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/fc2e8fa))
+* **package.json:** correcter wrong deps ([9fe06dd](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/9fe06dd))
+* **package.json:** rollup-umd-doc 2.3.19 ([6397ce9](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/6397ce9))
+* **src/utils/*:** added makeScopedTheme + tests ([4f7eab3](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/4f7eab3))
+* **utils:** added test for dynamicSscopedTheme ([148f6c5](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/148f6c5))
+* **yml and packge:** remove rollup um doc for tagging ([55ebfa8](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/55ebfa8))
+
 ## [1.7.7](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.7.6...v1.7.7) (2018-09-27)
 
 
