@@ -1,4 +1,4 @@
-import makeOriginal from '../theme/makeOriginal';
+import makeOriginal from './makeOriginal';
 
 export const makeThemeList = [
   makeOriginal,

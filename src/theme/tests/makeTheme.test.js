@@ -8,4 +8,3 @@ describe('makeTheme', () => {
     Object.keys(makeTheme()).forEach((key) => expect(['$', '_'].indexOf(key[0]) !== -1).toBe(true));
   });
 });
-

@@ -6,4 +6,3 @@ export { default as createMakeTheme, makeScopedTheme, toMakeTheme } from './util
 
 // 2. extra
 export { getGlobalStyles, getGlobalStyleNoBootstrapProvider } from '@bootstrap-styled/css-utils/lib/reboot';
-

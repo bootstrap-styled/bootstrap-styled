@@ -25,12 +25,12 @@ export default function createMakeTheme(list) {
   return (theme) => makeThemeFromList(list, theme);
 }
 
-  /**
-  * Create a scoped makeTheme
-  * @param userTheme
-  * @param scopeName string
-  *
-  **/
+/**
+* Create a scoped makeTheme
+* @param userTheme
+* @param scopeName string
+*
+**/
 
 export function makeScopedTheme(userTheme = { [scopeName]: {} }, scopeName) {
   if (scopeName === undefined) return console.warn('You may have forgotten to set the scope name in the makeScopedTheme function.');
