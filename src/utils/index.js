@@ -1,10 +1,18 @@
-import { makeTheme } from '../theme/makeTheme';
-
 /**
  * Convert a theme into a makeTheme
  * @param theme
  */
 export const toMakeTheme = (theme) => (userTheme) => ({ ...theme, ...userTheme });
+
+/**
+ * Convert a scoped theme into a makeTheme
+ * @param theme
+ */
+export const toMakeScopedTheme = (theme) => (userTheme) => {
+  let result = {};
+  Object.keys(theme).forEach((key) => result = { [key]: { ...theme[key], ...userTheme } }); // eslint-disable-line no-return-assign
+  return result;
+};
 
 function makeThemeFromList(list, theme) {
   const all = [].concat(list);
@@ -43,5 +51,5 @@ export function makeScopedTheme(userTheme = { [scopeName]: {} }, scopeName) {
     v[variable] = u[variable] || userTheme[variable];
   });
 
-  return makeTheme({ ...newTheme });
+  return { [scopeName]: { ...userTheme, ...v } };
 }
