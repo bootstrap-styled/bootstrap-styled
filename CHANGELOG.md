@@ -1,3 +1,10 @@
+# [1.8.0](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.7.8...v1.8.0) (2018-10-12)
+
+
+### Features
+
+* **utils:** added makeScopedTheme and toMakeScopedTheme functions. ([b4aed09](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/b4aed09))
+
 ## [1.7.8](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.7.7...v1.7.8) (2018-10-04)
 
 
