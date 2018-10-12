@@ -1,6 +1,6 @@
 import Color from 'color';
 import { makeTheme as makeThemeBs } from '../../theme/makeTheme';
-import createMakeTheme, { makeScopedTheme, toMakeTheme } from '../index';
+import createMakeTheme, { makeScopedTheme, toMakeTheme, toMakeScopedTheme } from '../index';
 
 describe('bootstrap-styled theme utils', () => {
   describe('makeScopedTheme', () => {
@@ -9,7 +9,7 @@ describe('bootstrap-styled theme utils', () => {
     });
     it('should have makeScopedTheme with a scoped theme', () => {
       const result = makeThemeBs({ scopeName: { $white: 'pink' } });
-      expect(makeScopedTheme({ $white: 'pink' }, 'scopeName')).toEqual(result);
+      expect(makeScopedTheme({ $white: 'pink' }, 'scopeName')).toEqual({ scopeName: result.scopeName });
     });
     it('should have makeScopedTheme with a scoped theme name', () => {
       expect(makeScopedTheme({})).toEqual(undefined);
@@ -26,11 +26,7 @@ describe('bootstrap-styled theme utils', () => {
       };
       const result = { $blue: 'pink', '$blue-darker': 'hsl(349.5, 100%, 83.3%)', $white: 'pink' };
       expect(makeScopedTheme(makeThemeTest(), 'scopeName').scopeName).toEqual(result);
-      expect(makeScopedTheme(makeThemeTest(), 'scopeName')['$brand-primary']).toEqual('#0275d8');
       expect(makeScopedTheme(makeThemeTest(), 'scopeName').scopeName['$blue-darker']).toEqual(result['$blue-darker']);
-    });
-    it('should have makeScopedTheme with a scoped theme name', () => {
-      expect(makeScopedTheme({})).toEqual(undefined);
     });
   });
   describe('createMakeTheme', () => {
@@ -69,6 +65,22 @@ describe('bootstrap-styled theme utils', () => {
       expect(makeTheme({
         '$headings-font-family': '"Arial"',
       })['$headings-font-family']).toBe('"Arial"');
+    });
+  });
+  describe('toMakeScopedTheme', () => {
+    it('should create a makeTheme froma  scopedTheme', () => {
+      const scopedTheme = { scopeName: { '$headings-font-family': 'Comic' } };
+      const makeTheme = toMakeScopedTheme(scopedTheme);
+      expect(makeTheme().scopeName['$headings-font-family']).toBe(scopedTheme.scopeName['$headings-font-family']);
+    });
+
+    it('should override $headings-font-family variable to be equal to Arial', () => {
+      const scopedTheme = { scopeName: { '$headings-font-family': 'Comic' } };
+      const makeTheme = toMakeScopedTheme(scopedTheme);
+      const customTheme = makeTheme({
+        '$headings-font-family': '"Arial"',
+      });
+      expect(customTheme.scopeName['$headings-font-family']).toBe('"Arial"');
     });
   });
 });
