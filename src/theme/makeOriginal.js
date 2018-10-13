@@ -432,6 +432,8 @@ export default function makeOriginal(userTheme = {}) {
 
   v['$input-transition'] = u['$input-transition'] || 'border-color ease-in-out .15s, box-shadow ease-in-out .15s';
 
+  v['$label-margin-bottom'] = u['$label-margin-bottom'] || '.5rem';
+
   v['$form-text-margin-top'] = u['$form-text-margin-top'] || '.25rem';
   v['$form-feedback-margin-top'] = u['$form-feedback-margin-top'] || v['$form-text-margin-top'];
 
