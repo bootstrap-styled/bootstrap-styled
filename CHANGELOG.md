@@ -1,3 +1,10 @@
+## [1.8.1](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.8.0...v1.8.1) (2018-10-13)
+
+
+### Bug Fixes
+
+* **makeExtend:** removed all extended variables as they were redundant. ([2165a64](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/2165a64))
+
 # [1.8.0](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.7.8...v1.8.0) (2018-10-12)
 
 
