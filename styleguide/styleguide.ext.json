@@ -19,8 +19,8 @@
     "**/theme.js"
   ],
   "ribbon": {
-    "url": "https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com",
-    "text": "Fork us on GitLab"
+    "url": "https://github.com/bootstrap-styled/bootstrap-styled",
+    "text": "Fork us on GitHub"
   },
   "sections": [
     {
