@@ -1,0 +1,84 @@
+language: node_js
+sudo: required
+dist: trusty
+
+# Blocklist
+branches:
+  except:
+    - gh-pages # will be deployed to, no need to build it
+
+cache:
+  directories:
+    - node_modules
+
+before_install:
+    - npm install -g npm
+    # const
+    - export PACKAGE_NAME=$(node -p "require('./package.json').name")
+    - export PACKAGE_VERSION=$(node -p "require('./package.json').version")
+    - export SONAR_VERSION=${PACKAGE_VERSION}-b${TRAVIS_BUILD_ID}-${TRAVIS_BRANCH}
+    - export NODE_VERSION=$(node --version)
+    - export NPM_VERSION=$(npm --version)
+
+    # logging
+    - npm --version || echo npm not installed
+    - node --version || echo node not installed
+    - echo "package version $PACKAGE_VERSION"
+
+stages:
+  - build
+  - test
+  - release
+  - deploy
+
+jobs:
+  include:
+
+    # Job: Build
+    - stage: build
+      node_js:
+        - 'lts/*'
+        - '10'
+        - '8'
+      script:
+        - npm run build
+    # Job: Test
+    - stage: test
+      node_js:
+        - 'lts/*'
+        - '10'
+        - '8'
+      addons:
+        sonarcloud:
+          organization: $(echo $TRAVIS_REPO_SLUG | awk -F '/' '{print $1}')
+      script:
+        - npm run test
+        - sonar-scanner -Dsonar.projectVersion=${SONAR_VERSION}
+
+    # Job: Release
+    - stage: release
+      if: branch = master
+      node_js:
+        - 'lts/*'
+      skip_cleanup: true
+      script:
+        - npx semantic-release
+
+    # Job: Page
+    - stage: deploy
+      if: branch = master
+      node_js:
+        - 'lts/*'
+      script:
+        - git fetch --tags
+        - git checkout refs/tags/$(git describe --tags `git rev-list --tags --max-count=1`)
+        - npm install
+        - chmod +x styleguide/prepare.sh
+        - styleguide/prepare.sh
+        - npm run styleguide:build
+      deploy:
+        - provider: pages
+          skip_cleanup: true
+          github_token: $GH_TOKEN # Set in the settings page of your repository, as a secure variable
+          keep_history: true
+          local_dir: public/

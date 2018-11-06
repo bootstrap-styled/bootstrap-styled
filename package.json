@@ -255,9 +255,9 @@
   ],
   "dependencies": {
     "basic-math-utils": "^0.3.4",
-    "@bootstrap-styled/css-mixins": "^1.0.0",
-    "@bootstrap-styled/css-utils": "^1.0.0",
-    "@bootstrap-styled/utils": "^1.0.5",
+    "@bootstrap-styled/css-mixins": "^1.0.2",
+    "@bootstrap-styled/css-utils": "^1.0.1",
+    "@bootstrap-styled/utils": "^1.6.1",
     "color": "^1.0.3"
   },
   "peerDependencies": {
@@ -322,6 +322,25 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "transitive": {
+    "name": "bootstrap-styled",
+    "scope": "bootstrap-styled",
+    "scopedName": "@bootstrap-styled/bootstrap-styled",
+    "jsnext:main": "dist/@bootstrap-styled/bootstrap-styled.esm.js",
+    "module": "dist/@bootstrap-styled/bootstrap-styled.esm.js",
+    "homepage": "https://bootstrap-styled.github.io/bootstrap-styled",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/bootstrap-styled/bootstrap-styled.git"
+    },
+    "bugs": {
+      "url": "https://github.com/bootstrap-styled/bootstrap-styled/issues"
+    },
+    "publishConfig": {
+      "access": "public",
+      "registry": "https://registry.npmjs.org"
     }
   }
 }
