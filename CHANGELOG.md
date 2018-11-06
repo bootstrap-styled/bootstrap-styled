@@ -1,3 +1,10 @@
+# [1.9.0](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.8.1...v1.9.0) (2018-11-06)
+
+
+### Features
+
+* **gh:** release to GitHub. ([3ed0d29](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/commit/3ed0d29))
+
 ## [1.8.1](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.8.0...v1.8.1) (2018-10-13)
 
 

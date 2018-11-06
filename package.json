@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-styled",
-  "version": "1.8.1",
+  "version": "1.9.0",
   "description": "List of bootstrap variables and theme auto-configuration functions.",
   "main": "lib/index.js",
   "jsnext:main": "dist/bootstrap-styled.esm.js",
@@ -29,7 +29,8 @@
     "test:watch": "npm run test -- --watch",
     "lint": "eslint src",
     "prepublish": "npm run build",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "postinstall": "node -e \"console.log('\\u001b[31mbootstrap-styled is deprecated, use @bootstrap-styled/bootstrap-styled instead.')\" || exit 0"
   },
   "repository": {
     "type": "git",
