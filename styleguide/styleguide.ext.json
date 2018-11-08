@@ -22,32 +22,213 @@
     "url": "https://github.com/bootstrap-styled/bootstrap-styled",
     "text": "Fork us on GitHub"
   },
+  "pagePerSection": true,
   "sections": [
     {
       "name": "Introduction",
-      "content": "docs/introduction.md"
-    },
-    {
-      "name": "Documentation",
+      "content": "docs/introduction.md",
       "sections": [
-        {
-          "name": "Prerequisite",
-          "content": "docs/prerequisite.md"
-        },
         {
           "name": "Installation",
           "content": "docs/installation.md",
           "description": "Discover how to install `bootstrap-styled`"
-        },
-        {
-          "name": "Configuration",
-          "content": "docs/configuration.md"
         }
       ]
     },
     {
-      "name": "Tools",
-      "content": "docs/tools.md"
+      "name": "Vision",
+      "content": "docs/vision.md"
+    },
+    {
+      "name": "How it works",
+      "sections": [
+        {
+          "name": "Styling",
+          "content": "docs/styling.md"
+        },
+        {
+          "name": "Customizing",
+          "content": "docs/customizing.md"
+        }
+      ]
+    },
+    {
+      "name": "Theming",
+      "content": "docs/theming.md",
+      "sections": [
+        {
+          "name": "MakeTheme",
+          "content": "docs/makeTheme.md"
+        },
+        {
+          "name": "ToMakeTheme",
+          "content": "docs/toMakeTheme.md"
+        }
+      ]
+    },
+    {
+      "name": "Advanced theming",
+      "content": "docs/advancedTheming.md",
+      "sections": [
+        {
+          "name": "MakeScopedTheme",
+          "content": "docs/makeScopedTheme.md"
+        },
+        {
+          "name": "ToMakeScopedTheme",
+          "content": "docs/toMakeScopedTheme.md"
+        }
+      ]
+    },
+    {
+      "name": "Variables",
+      "content": "docs/variables.md",
+      "sections": [
+        {
+          "name": "Global options",
+          "sections": [
+            {
+              "name": "Colours",
+              "content": "docs/variables/colours.md"
+            },
+            {
+              "name": "Options",
+              "content": "docs/variables/options.md"
+            },
+            {
+              "name": "Spacing",
+              "content": "docs/variables/spacing.md"
+            },
+            {
+              "name": "Grid-breakpoints",
+              "content": "docs/variables/grid-breakpoints.md"
+            },
+            {
+              "name": "Columns",
+              "content": "docs/variables/columns.md"
+            },
+            {
+              "name": "Container",
+              "content": "docs/variables/container.md"
+            },
+            {
+              "name": "Fonts",
+              "content": "docs/variables/fonts.md"
+            },
+            {
+              "name": "Components",
+              "content": "docs/variables/components.md"
+            },
+            {
+              "name": "Links",
+              "content": "docs/variables/links.md"
+            },
+            {
+              "name": "Z-index",
+              "content": "docs/variables/z-index.md"
+            }
+          ]
+        },
+        {
+          "name": "Content",
+          "sections": [
+            {
+              "name": "Code",
+              "content": "docs/variables/code.md"
+            },
+            {
+              "name": "Image",
+              "content": "docs/variables/image.md"
+            },
+            {
+              "name": "Tables",
+              "content": "docs/variables/table.md"
+            }
+          ]
+        },
+        {
+          "name": "Components",
+          "sections": [
+            {
+              "name": "Alert",
+              "content": "docs/variables/alert.md"
+            },
+            {
+              "name": "Badges",
+              "content": "docs/variables/badges.md"
+            },
+            {
+              "name": "Blockquote",
+              "content": "docs/variables/blockquote.md"
+            },
+            {
+              "name": "Button",
+              "content": "docs/variables/button.md"
+            },
+            {
+              "name": "Breadcrumb",
+              "content": "docs/variables/breadcrumb.md"
+            },
+            {
+              "name": "Card",
+              "content": "docs/variables/card.md"
+            },
+            {
+              "name": "Close",
+              "content": "docs/variables/close.md"
+            },
+            {
+              "name": "Dropdown",
+              "content": "docs/variables/dropdown.md"
+            },
+            {
+              "name": "Form",
+              "content": "docs/variables/form.md"
+            },
+            {
+              "name": "Hr",
+              "content": "docs/variables/hr.md"
+            },
+            {
+              "name": "Jumbotron",
+              "content": "docs/variables/jumbotron.md"
+            },
+            {
+              "name": "List group",
+              "content": "docs/variables/list-group.md"
+            },
+            {
+              "name": "Modal",
+              "content": "docs/variables/modal.md"
+            },
+            {
+              "name": "Nav",
+              "content": "docs/variables/nav.md"
+            },
+            {
+              "name": "Navbar",
+              "content": "docs/variables/navbar.md"
+            },
+            {
+              "name": "Pagination",
+              "content": "docs/variables/pagination.md"
+            },
+            {
+              "name": "Popover",
+              "content": "docs/variables/popover.md"
+            },
+            {
+              "name": "Progress bar",
+              "content": "docs/variables/progress-bar.md"
+            },
+            {
+              "name": "Tooltip",
+              "content": "docs/variables/tooltip.md"
+            }
+          ]
+        }
+      ],
+      "sectionDepth": 1
     },
     {
       "name": "Developers",
