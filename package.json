@@ -207,7 +207,7 @@
     "rollup-watch": "^4.3.1",
     "semantic-release": "^15.8.0",
     "sinon": "^3.3.0",
-    "styled-components": "^3.3.2",
+    "styled-components": "^3.4.9",
     "toctoc": "^0.3.0",
     "webpack": "^4.16.1"
   },
@@ -255,7 +255,6 @@
   ],
   "dependencies": {
     "basic-math-utils": "^0.3.4",
-    "@bootstrap-styled/css-mixins": "^1.0.2",
     "@bootstrap-styled/css-utils": "^1.0.1",
     "@bootstrap-styled/utils": "^1.6.1",
     "color": "^1.0.3"
@@ -263,7 +262,7 @@
   "peerDependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "styled-components": "^4.0.3"
+    "styled-components": "^3.4.9"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
