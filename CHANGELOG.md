@@ -1,3 +1,79 @@
+# 1.0.0 (2018-11-09)
+
+
+### Bug Fixes
+
+* improved Drawer ([792ed69](https://github.com/bootstrap-styled/bootstrap-styled/commit/792ed69))
+* minor bugs & feat: Drawer component props docker. Run build dist, if you pull this commit ([b30cfc9](https://github.com/bootstrap-styled/bootstrap-styled/commit/b30cfc9))
+* updating from dev branch ([0f3e7a5](https://github.com/bootstrap-styled/bootstrap-styled/commit/0f3e7a5))
+* **.npmrc:** added package-lock=false ([5b92bc2](https://github.com/bootstrap-styled/bootstrap-styled/commit/5b92bc2))
+* **Alert:** Corrected warnings related to `autoHideDuration` props. ([e1a1097](https://github.com/bootstrap-styled/bootstrap-styled/commit/e1a1097))
+* **Alert:** Removed console.log() ([cfdaa44](https://github.com/bootstrap-styled/bootstrap-styled/commit/cfdaa44))
+* **Alert:** removed unecessary variable ([f0fdc03](https://github.com/bootstrap-styled/bootstrap-styled/commit/f0fdc03))
+* **BootstrapProvider:** BREAKING CHANGE move to bootstrap-styled-provider ([78a91f5](https://github.com/bootstrap-styled/bootstrap-styled/commit/78a91f5))
+* **build:** updated semantic-release, installed ci scripts dependencies, install new [@yeutech](https://github.com/yeutech)/rollup-umd-scripts and [@yeutech-lab](https://github.com/yeutech-lab)/rollup-umd-documentation ([bb62068](https://github.com/bootstrap-styled/bootstrap-styled/commit/bb62068))
+* **CHANGELOG:** removed ([51dd61a](https://github.com/bootstrap-styled/bootstrap-styled/commit/51dd61a))
+* **ci:** prepare documentation script updated with changelog and code of conduct ([3dc7226](https://github.com/bootstrap-styled/bootstrap-styled/commit/3dc7226))
+* **ci:** update .gitlab-ci.yml ([add8e2d](https://github.com/bootstrap-styled/bootstrap-styled/commit/add8e2d))
+* **CI:** fixing CI ([519e206](https://github.com/bootstrap-styled/bootstrap-styled/commit/519e206))
+* **CI:** trying to fix CI ([b893d73](https://github.com/bootstrap-styled/bootstrap-styled/commit/b893d73))
+* **composeLink:** Addded theme and full props description. ([2f77fc7](https://github.com/bootstrap-styled/bootstrap-styled/commit/2f77fc7))
+* **dependencies:** added more dependencies ([d070869](https://github.com/bootstrap-styled/bootstrap-styled/commit/d070869))
+* **dependencies:** Installed semantic releases and updated jest ([37c80e4](https://github.com/bootstrap-styled/bootstrap-styled/commit/37c80e4))
+* **dependencies:** upgrade ci dependencies ([54b2f08](https://github.com/bootstrap-styled/bootstrap-styled/commit/54b2f08))
+* **dependencies:** Upgrade environment (semantic-release, rollup-documentation, rollup-umd-scripts)... ([65be205](https://github.com/bootstrap-styled/bootstrap-styled/commit/65be205))
+* **devDeps:** remove ci scripts packages ([2aadb53](https://github.com/bootstrap-styled/bootstrap-styled/commit/2aadb53))
+* **doc:** Upgrade [@yeutech-lab](https://github.com/yeutech-lab)/rollup-umd-documentation to 2.3.18, react-styleguidist to 7.1.0 and [@yeutech](https://github.com/yeutech)/rollup-umd-ci-release-transitive to 1.1.3 ([233ec12](https://github.com/bootstrap-styled/bootstrap-styled/commit/233ec12))
+* **docs/introductions:** added some doc ([c649e3a](https://github.com/bootstrap-styled/bootstrap-styled/commit/c649e3a))
+* **documentation:** fix deployement by removing CODE_OF_CONDUCT.md and CHANGELOG.md ([74bfee9](https://github.com/bootstrap-styled/bootstrap-styled/commit/74bfee9))
+* **documentation:** updated some deps + improved quality of documentation. ([cb44db1](https://github.com/bootstrap-styled/bootstrap-styled/commit/cb44db1))
+* **documentation:** variable ([09d8997](https://github.com/bootstrap-styled/bootstrap-styled/commit/09d8997))
+* **Drawer:** fixed theming issue ([2f82f9c](https://github.com/bootstrap-styled/bootstrap-styled/commit/2f82f9c))
+* **Drawer/*:** Reimplemented lost `docked` props and corrected related example. ([548724e](https://github.com/bootstrap-styled/bootstrap-styled/commit/548724e))
+* **eslint:** corrected following standards ([c2026e5](https://github.com/bootstrap-styled/bootstrap-styled/commit/c2026e5))
+* **Input:** added box-sizing to correct widt: 100% breaking when padding applied ([3cfab62](https://github.com/bootstrap-styled/bootstrap-styled/commit/3cfab62))
+* **Input:** added default tag "input" ([ee54c84](https://github.com/bootstrap-styled/bootstrap-styled/commit/ee54c84))
+* **Input:** corrected default value of Input ([7e04fad](https://github.com/bootstrap-styled/bootstrap-styled/commit/7e04fad))
+* **Input:** removed old commit due to bug. ([13b05a5](https://github.com/bootstrap-styled/bootstrap-styled/commit/13b05a5))
+* **Input:** using input for default tag ([2040d56](https://github.com/bootstrap-styled/bootstrap-styled/commit/2040d56))
+* **lint:** fix many lint react/sort-comp ([9e0977a](https://github.com/bootstrap-styled/bootstrap-styled/commit/9e0977a))
+* **makeExtend:** removed all extended variables as they were redundant. ([2165a64](https://github.com/bootstrap-styled/bootstrap-styled/commit/2165a64))
+* **package-lock.json:** data corupted ([dbee2df](https://github.com/bootstrap-styled/bootstrap-styled/commit/dbee2df))
+* **package.json:** added testUrl to jest config ([4924bbe](https://github.com/bootstrap-styled/bootstrap-styled/commit/4924bbe))
+* **package.json:** chagned wrong url ([aecc477](https://github.com/bootstrap-styled/bootstrap-styled/commit/aecc477))
+* **package.json:** corrected wrong repo url ([50dd9c0](https://github.com/bootstrap-styled/bootstrap-styled/commit/50dd9c0))
+* **package.json:** corrected wrong url and registryu ([fc2e8fa](https://github.com/bootstrap-styled/bootstrap-styled/commit/fc2e8fa))
+* **package.json:** correcter wrong deps ([9fe06dd](https://github.com/bootstrap-styled/bootstrap-styled/commit/9fe06dd))
+* **package.json:** rollup-umd-doc 2.3.19 ([6397ce9](https://github.com/bootstrap-styled/bootstrap-styled/commit/6397ce9))
+* **package.json:** Updated "rollup-umd-scripts" to 0.13.0 ([0291c3f](https://github.com/bootstrap-styled/bootstrap-styled/commit/0291c3f))
+* **package.json:** wrong registry address ([3f0728b](https://github.com/bootstrap-styled/bootstrap-styled/commit/3f0728b))
+* **package.json:** wrong repios url ([f1ca2a1](https://github.com/bootstrap-styled/bootstrap-styled/commit/f1ca2a1))
+* **page:** fix build of page failing ([15677a3](https://github.com/bootstrap-styled/bootstrap-styled/commit/15677a3))
+* **release:** GitHub release https://github.com/bootstrap-styled/bootstrap-styled ([b00f400](https://github.com/bootstrap-styled/bootstrap-styled/commit/b00f400))
+* **repository:** fix issues and repository url ([c06d486](https://github.com/bootstrap-styled/bootstrap-styled/commit/c06d486))
+* **src/utils/*:** added makeScopedTheme + tests ([4f7eab3](https://github.com/bootstrap-styled/bootstrap-styled/commit/4f7eab3))
+* **tests:** corrected test issuyes ([047bc52](https://github.com/bootstrap-styled/bootstrap-styled/commit/047bc52))
+* **utils:** added test for dynamicSscopedTheme ([148f6c5](https://github.com/bootstrap-styled/bootstrap-styled/commit/148f6c5))
+* **variable utils:** removed dependency css-mixins that was importing utils that are only used internally to this repos. ([f73d8f5](https://github.com/bootstrap-styled/bootstrap-styled/commit/f73d8f5))
+* **yml and packge:** remove rollup um doc for tagging ([55ebfa8](https://github.com/bootstrap-styled/bootstrap-styled/commit/55ebfa8))
+
+
+### Features
+
+* **bump:** need to bump ([8c2a8b9](https://github.com/bootstrap-styled/bootstrap-styled/commit/8c2a8b9))
+* **changelog:** removed ([567edbc](https://github.com/bootstrap-styled/bootstrap-styled/commit/567edbc))
+* **clean:** need to jump to 1.6.0 ([7adaad9](https://github.com/bootstrap-styled/bootstrap-styled/commit/7adaad9))
+* **doc:** Bump over 1.6.6 ([24d11d8](https://github.com/bootstrap-styled/bootstrap-styled/commit/24d11d8))
+* **gh:** release to GitHub. ([3ed0d29](https://github.com/bootstrap-styled/bootstrap-styled/commit/3ed0d29))
+* **package.json:** Initialized commitizen. ([ff03cfd](https://github.com/bootstrap-styled/bootstrap-styled/commit/ff03cfd))
+* **utils:** added makeScopedTheme and toMakeScopedTheme functions. ([b4aed09](https://github.com/bootstrap-styled/bootstrap-styled/commit/b4aed09))
+
+
+### Performance Improvements
+
+* **doc:** using doc made with bs ([560a785](https://github.com/bootstrap-styled/bootstrap-styled/commit/560a785))
+* **ok:** BREAKING CHANGE we need go over 1.6.5 ([0368096](https://github.com/bootstrap-styled/bootstrap-styled/commit/0368096))
+
 # [1.9.0](https://module.kopaxgroup.com/bootstrap-styled/bootstrap-styled.yeutech.com/compare/v1.8.1...v1.9.0) (2018-11-06)
 
 
