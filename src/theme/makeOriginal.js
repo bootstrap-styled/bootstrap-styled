@@ -1,7 +1,6 @@
 import Color from 'color';
 import unitUtils from '@bootstrap-styled/utils/lib/unitUtils';
-import { assertAscending, assertStartAtZero } from '@bootstrap-styled/css-mixins/lib/variables';
-import { allowFalseValue } from './utils';
+import { allowFalseValue, assertAscending, assertStartAtZero } from './utils';
 
 const { detectUnit, rmUnit } = unitUtils;
 
@@ -287,9 +286,6 @@ export default function makeOriginal(userTheme = {}) {
 
   v['$dt-font-weight'] = u['$dt-font-weight'] || v['$font-weight-bold'];
 
-  v['$kbd-box-shadow'] = u['$kbd-box-shadow'] || `inset 0 -.1rem 0 ${Color(v['$black']).alpha(0.25).toString()}`;
-  v['$nested-kbd-font-weight'] = u['$nested-kbd-font-weight'] || v['$font-weight-bold'];
-
   v['$list-inline-padding'] = u['$list-inline-padding'] || '5px';
 
 
@@ -391,7 +387,7 @@ export default function makeOriginal(userTheme = {}) {
   v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
   v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
 
-  v['$btn-transition'] = u['$btn-transition'] || 'all .2s ease-in-out';
+  v['$btn-transition'] = u['$btn-transition'] || v['$transition-base'];
 
 
   // Forms
@@ -672,8 +668,9 @@ export default function makeOriginal(userTheme = {}) {
 
   v['$state-warning-text'] = u['$state-warning-text'] || '#8a6d3b';
   v['$state-warning-bg'] = u['$state-warning-bg'] || '#fcf8e3';
-  v['$mark-bg'] = u['$mark-bg'] || v['$state-warning-bg'];
   v['$state-warning-border'] = u['$state-warning-border'] || Color(v['$state-warning-bg']).darken(0.05).toString();
+
+  v['$mark-bg'] = u['$mark-bg'] || v['$state-warning-bg'];
 
   v['$state-danger-text'] = u['$state-danger-text'] || '#a94442';
   v['$state-danger-bg'] = u['$state-danger-bg'] || '#f2dede';
@@ -913,6 +910,8 @@ export default function makeOriginal(userTheme = {}) {
 
   v['$kbd-color'] = u['$kbd-color'] || v['$white'];
   v['$kbd-bg'] = u['$kbd-bg'] || v['$gray-dark'];
+  v['$kbd-box-shadow'] = u['$kbd-box-shadow'] || `inset 0 -.1rem 0 ${Color(v['$black']).alpha(0.25).toString()}`;
+  v['$nested-kbd-font-weight'] = u['$nested-kbd-font-weight'] || v['$font-weight-bold'];
 
   v['$pre-color'] = u['$pre-color'] || v['$gray-dark'];
   v['$pre-scrollable-max-height'] = u['$pre-scrollable-max-height'] || '340px';
