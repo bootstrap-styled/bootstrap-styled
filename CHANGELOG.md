@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v1.0.0...v1.0.1) (2018-11-12)
+
+
+### Performance Improvements
+
+* **package.json:** removed scope from name ([8b360cd](https://github.com/bootstrap-styled/bootstrap-styled/commit/8b360cd))
+
 # 1.0.0 (2018-11-09)
 
 
