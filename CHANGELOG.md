@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/bootstrap-styled/bootstrap-styled/compare/v1.0.1...v1.0.2) (2018-11-12)
+
+
+### Bug Fixes
+
+* **doc:** updated documentation and styled. ([6fcfa66](https://github.com/bootstrap-styled/bootstrap-styled/commit/6fcfa66))
+
 ## [1.0.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v1.0.0...v1.0.1) (2018-11-12)
 
 
