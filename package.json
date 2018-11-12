@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-styled",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "List of bootstrap variables and theme auto-configuration functions.",
   "main": "lib/index.js",
   "jsnext:main": "dist/bootstrap-styled.esm.js",

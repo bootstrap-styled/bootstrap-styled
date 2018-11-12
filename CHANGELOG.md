@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/bootstrap-styled/bootstrap-styled/compare/v1.0.2...v1.0.3) (2018-11-12)
+
+
+### Bug Fixes
+
+* **build tag:** changed to the rigfht url -_-, if i do one more build im gonna kill myself ([64a41a1](https://github.com/bootstrap-styled/bootstrap-styled/commit/64a41a1))
+
 ## [1.0.2](https://github.com/bootstrap-styled/bootstrap-styled/compare/v1.0.1...v1.0.2) (2018-11-12)
 
 
