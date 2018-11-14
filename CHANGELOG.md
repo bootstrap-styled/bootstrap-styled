@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.0.1...v2.0.2) (2018-11-14)
+
+
+### Bug Fixes
+
+* **version:** restore version development number and release 2.0.2 ([8a1a6e7](https://github.com/bootstrap-styled/bootstrap-styled/commit/8a1a6e7))
+
 ## [1.0.4](https://github.com/bootstrap-styled/bootstrap-styled/compare/v1.0.3...v1.0.4) (2018-11-14)
 
 
