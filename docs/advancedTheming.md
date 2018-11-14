@@ -7,15 +7,16 @@ For example if you were creating a `LoginForm`.
 import React from 'react';
 import styled from 'styled-components';
 
-class LoginFormUnstyled extends React.Component {
+class LoginForm extends React.Component {
 ...
 }
 
-const LoginForm = styled(LoginFormUnstyled)`
+const LoginFormStyled = styled(LoginForm)`
   ${(props) => `
     background-color: ${props.theme.loginForm['$login-form-bg-color']};
     color: ${props.theme.loginForm['$login-form-color']};
  `} 
 `;
 
+export default LoginForm;
 ```

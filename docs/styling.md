@@ -6,8 +6,9 @@ Styling a component is as easy as this:
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import ButtonBs from '@bootstrap-styled/v4/lib/Button'
 
-class ButtonUnstyled extends React.Component {
+class Button extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
@@ -16,18 +17,20 @@ class ButtonUnstyled extends React.Component {
 
   render() {
     return (
-      <Button className={this.props.className} {...props} />
+      <ButtonBs className={this.props.className} {...props} />
     )
   }
+  
 }
 
-const Button = styled(ButtonUnstyled)`
+const ButtonStyled = styled(Button)`
   ${(props) => `
     background-color: ${props.theme['$btn-primary-bg']};
     color: ${props.theme['$btn-primary-color']};
  `} 
 `;
 
+export default Button;
 ```
 
 You probably recognized the variables used in the `Button` component's css.
