@@ -1,10 +1,9 @@
 # bootstrap-styled
 
-[![Build Status](https://travis-ci.org/bootstrap-styled/bootstrap-styled.svg?branch=master)](https://travis-ci.org/@bootstrap-styled/bootstrap-styled) [![npm Version](https://img.shields.io/npm/v/@bootstrap-styled/bootstrap-styled.svg?style=flat)](https://www.npmjs.com/package/@bootstrap-styled/bootstrap-styled) [![License](https://img.shields.io/npm/l/@bootstrap-styled/bootstrap-styled.svg?style=flat)](https://www.npmjs.com/package/@bootstrap-styled/bootstrap-styled) [![NPM monthly downloads](https://img.shields.io/npm/dm/@bootstrap-styled/bootstrap-styled.svg?style=flat)](https://npmjs.org/package/@bootstrap-styled/bootstrap-styled) [![NPM total downloads](https://img.shields.io/npm/dt/@bootstrap-styled/bootstrap-styled.svg?style=flat)](https://npmjs.org/package/@bootstrap-styled/bootstrap-styled) [![npm Version](https://img.shields.io/node/v/@bootstrap-styled/bootstrap-styled.svg?style=flat)](https://www.npmjs.com/package/@bootstrap-styled/bootstrap-styled) [![Module formats](https://img.shields.io/badge/module%20formats-umd%2C%20cjs%2C%20esm-green.svg?style=flat)](https://www.npmjs.com/package/@bootstrap-styled/bootstrap-styled)
+[![Build Status](https://travis-ci.org/bootstrap-styled/bootstrap-styled.svg?branch=master)](https://travis-ci.org/bootstrap-styled/bootstrap-styled) [![npm Version](https://img.shields.io/npm/v/bootstrap-styled.svg?style=flat)](https://www.npmjs.com/package/bootstrap-styled) [![License](https://img.shields.io/npm/l/bootstrap-styled.svg?style=flat)](https://www.npmjs.com/package/bootstrap-styled) [![NPM monthly downloads](https://img.shields.io/npm/dm/bootstrap-styled.svg?style=flat)](https://npmjs.org/package/bootstrap-styled) [![NPM total downloads](https://img.shields.io/npm/dt/bootstrap-styled.svg?style=flat)](https://npmjs.org/package/bootstrap-styled) [![npm Version](https://img.shields.io/node/v/bootstrap-styled.svg?style=flat)](https://www.npmjs.com/package/bootstrap-styled) [![Module formats](https://img.shields.io/badge/module%20formats-umd%2C%20cjs%2C%20esm-green.svg?style=flat)](https://www.npmjs.com/package/bootstrap-styled)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.github.bootstrap-styled.bootstrap-styled&metric=coverage)](https://sonarcloud.io/api/project_badges/measure?project=com.github.bootstrap-styled.bootstrap-styled&metric=coverage) [![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=com.github.bootstrap-styled.bootstrap-styled&metric=alert_status)](https://sonarcloud.io/api/project_badges/measure?project=com.github.bootstrap-styled.bootstrap-styled&metric=alert_status)
 
 List of bootstrap variables and theme auto-configuration functions.
-
 
 ## Table of Contents
 
@@ -29,7 +28,7 @@ Please also note that all repositories under the bootstrap-styled organization f
 
 The MIT License
 
-Copyright (c) 2017-2018 Yeutech Company Limited. https://bootstrap-styled.yeutech.com
+Copyright (c) 2017-2018 Yeutech Company Limited. https://bootstrap-styled.github.io
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

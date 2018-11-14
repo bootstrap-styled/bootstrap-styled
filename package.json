@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-styled",
-  "version": "1.0.3",
+  "version": "0.0.0-development",
   "description": "List of bootstrap variables and theme auto-configuration functions.",
   "main": "lib/index.js",
   "jsnext:main": "dist/bootstrap-styled.esm.js",
@@ -10,6 +10,9 @@
     "IE >= 9",
     "last 2 versions"
   ],
+  "engines": {
+    "node": ">=7.9.0"
+  },
   "scripts": {
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build",
@@ -185,12 +188,12 @@
     "mini-html-webpack-plugin": "^0.2.3",
     "pre-commit": "^1.2.2",
     "raf": "^3.3.2",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "react-redux": "^5.0.7",
-    "react-styleguidist": "8.0.3",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-redux": "^5.1.1",
+    "react-styleguidist": "^8.0.3",
     "react-test-renderer": "^16.0.0",
-    "redux": "^4.0.0",
+    "redux": "^4.0.1",
     "redux-immutable": "^4.0.0",
     "rimraf": "^2.6.2",
     "rollup": "^0.57.1",
@@ -207,8 +210,8 @@
     "rollup-watch": "^4.3.1",
     "semantic-release": "^15.8.0",
     "sinon": "^3.3.0",
-    "styled-components": "^4.1.0",
-    "toctoc": "^0.3.0",
+    "styled-components": "^4.1.1",
+    "toctoc": "^0.3.2",
     "webpack": "^4.16.1"
   },
   "jest": {
@@ -255,14 +258,14 @@
   ],
   "dependencies": {
     "basic-math-utils": "^0.3.4",
-    "@bootstrap-styled/css-utils": "^1.0.1",
+    "@bootstrap-styled/css-utils": "^1.0.2",
     "@bootstrap-styled/utils": "^1.6.1",
     "color": "^1.0.3"
   },
   "peerDependencies": {
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "styled-components": "^4.1.0"
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "styled-components": "^4.1.1"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
