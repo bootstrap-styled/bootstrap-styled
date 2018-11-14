@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/bootstrap-styled/bootstrap-styled/compare/v1.0.3...v1.0.4) (2018-11-14)
+
+
+### Performance Improvements
+
+* **v4:** Move v4 to [@bootstrap-styled](https://github.com/bootstrap-styled)/v4 BREAKING CHANGE\n update to react 16.6.3 and styled-components 4. This package will now only export theming function. New documentation ([23c0d71](https://github.com/bootstrap-styled/bootstrap-styled/commit/23c0d71))
+
 ## [1.0.3](https://github.com/bootstrap-styled/bootstrap-styled/compare/v1.0.2...v1.0.3) (2018-11-12)
 
 
