@@ -147,7 +147,7 @@
     "@semantic-release/git": "^7.0.5",
     "@semantic-release/github": "^5.2.1",
     "@semantic-release/npm": "^4.0.0",
-    "@yeutech-lab/rollup-umd-documentation": "^2.4.2",
+    "@yeutech-lab/rollup-umd-documentation": "^2.4.3",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
@@ -191,7 +191,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-redux": "^5.1.1",
-    "react-styleguidist": "^8.0.3",
+    "react-styleguidist": "^8.0.4",
     "react-test-renderer": "^16.0.0",
     "redux": "^4.0.1",
     "redux-immutable": "^4.0.0",
@@ -258,7 +258,7 @@
   ],
   "dependencies": {
     "basic-math-utils": "^0.3.4",
-    "@bootstrap-styled/css-utils": "^1.0.2",
+    "@bootstrap-styled/css-utils": "^1.1.0",
     "@bootstrap-styled/utils": "^1.6.1",
     "color": "^1.0.3"
   },
