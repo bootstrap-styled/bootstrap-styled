@@ -22,6 +22,8 @@ export default function makeOriginal(userTheme = {}) {
 
   let detectedUnit;
 
+  v._name = u._name || 'bootstrap-styled'; // eslint-disable-line
+
   // Table of Contents
   //
   // Colors
