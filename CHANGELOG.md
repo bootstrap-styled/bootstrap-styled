@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.0.3...v2.0.4) (2018-11-17)
+
+
+### Bug Fixes
+
+* **name:** adding meta _name to makeOriginal ([ab39ca8](https://github.com/bootstrap-styled/bootstrap-styled/commit/ab39ca8))
+
 ## [2.0.3](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.0.2...v2.0.3) (2018-11-14)
 
 
