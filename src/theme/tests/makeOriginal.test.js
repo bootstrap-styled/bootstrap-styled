@@ -2,7 +2,7 @@ import { fromJS } from 'immutable/';
 import makeOriginal from '../makeOriginal';
 
 describe('makeOriginal', () => {
-  const FINAL_CHECKSUM_THEME_ORIGINAL = -489741350; // DO NOT change this value UNLESS you have added a new variable COMING, i did say COMING from bootstrap
+  const FINAL_CHECKSUM_THEME_ORIGINAL = 309105295; // DO NOT change this value UNLESS you have added a new variable COMING, i did say COMING from bootstrap
   it('should have makeOriginal defined', () => {
     expect(makeOriginal).toBeDefined();
   });
