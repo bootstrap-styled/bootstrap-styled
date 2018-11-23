@@ -28,6 +28,13 @@ import deepMerge from 'lodash.merge';
  *    '$btn-primary-bg': 'red',
  * })
  *
+ * const loginFormMakeTheme = toMakeTheme(loginFormTheme);
+ *
+ * const anotherLoginFormTheme = loginFormMakeTheme({
+ *     loginForm: {
+ *        '$body-bg': '#121212'
+ *     }
+ * });
  */
 export const toMakeTheme = (theme) => (userTheme) => { // eslint-disable-line arrow-body-style
   return deepMerge(theme, userTheme);

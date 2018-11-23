@@ -1,22 +1,28 @@
-If you want to create more complex components and extend the same modularity, the chances are that you will need to add
- new variables. This is easily done as long as the new variables are scoped.
+If you wish to create a dynamic theme, you must create your theme object manually. That is because the object evaluates all
+its values before being instantiated, thing that we cannot do via the functions.
 
-For example if you were creating a `LoginForm`.
+Luckily enough, here is a template for you so that you can start as quickly.
 
 ```js static
-import React from 'react';
-import styled from 'styled-components';
-
-class LoginForm extends React.Component {
-...
+// My customizable theme
+export function makeTheme(userTheme = { myScopedThemeName: {} }) {
+  const newTheme = { myScopedThemeName: {} };
+  const v = newTheme.myScopedThemeName;
+  const u = userTheme.myScopedThemeName || {};
+  
+  v['$red'] = u['$red'] || 'red';
+  v['$something-red'] = u['$something-red'] || v['$red'];
+  
+  newTheme.myScopedThemeName = v;
+  return { ...userTheme, ...newTheme };
 }
 
-const LoginFormStyled = styled(LoginForm)`
-  ${(props) => `
-    background-color: ${props.theme.loginForm['$login-form-bg-color']};
-    color: ${props.theme.loginForm['$login-form-color']};
- `} 
-`;
+// My default theme
+export default makeTheme();
 
-export default LoginForm;
 ```
+
+We have a series of [utilities](https://github.com/bootstrap-styled/utils) that can help you with calculating numerical
+values directly in the theme.
+
+Other libraries such as [Color](https://github.com/Qix-/color) are very useful for similar operations.
