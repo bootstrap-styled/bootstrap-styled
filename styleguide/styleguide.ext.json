@@ -26,10 +26,6 @@
       ]
     },
     {
-      "name": "Vision",
-      "content": "docs/vision.md"
-    },
-    {
       "name": "How it works",
       "sections": [
         {
@@ -37,42 +33,54 @@
           "content": "docs/styling.md"
         },
         {
-          "name": "Customizing",
-          "content": "docs/customizing.md"
+          "name": "Variables",
+          "content": "docs/variables.md"
+        },
+        {
+          "name": "BootstrapProvider",
+          "content": "docs/themeProvider.md"
         }
       ]
     },
     {
-      "name": "Theming",
+      "name": "Themes",
       "content": "docs/theming.md",
       "sections": [
         {
-          "name": "MakeTheme",
+          "name": "Personalizing",
           "content": "docs/makeTheme.md"
         },
         {
-          "name": "ToMakeTheme",
+          "name": "Sharing",
           "content": "docs/toMakeTheme.md"
         }
       ]
     },
     {
-      "name": "Advanced theming",
-      "content": "docs/advancedTheming.md",
+      "name": "Scoping themes",
+      "content": "docs/creatingVariables.md",
       "sections": [
         {
-          "name": "MakeScopedTheme",
+          "name": "Scoping",
           "content": "docs/makeScopedTheme.md"
-        },
-        {
-          "name": "ToMakeScopedTheme",
-          "content": "docs/toMakeScopedTheme.md"
         }
       ]
     },
     {
-      "name": "Variables",
-      "content": "docs/variables.md",
+      "name": "Dynamic themes",
+      "content": "docs/advancedTheming.md"
+    },
+    {
+      "name": "Combining themes",
+      "content": "docs/combiningThemes.md"
+    },
+    {
+      "name": "Convention",
+      "content": "docs/convention.md"
+    },
+    {
+      "name": "Variable lists",
+      "content": "docs/variableLists.md",
       "sections": [
         {
           "name": "Global options",
