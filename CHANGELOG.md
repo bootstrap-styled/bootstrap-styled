@@ -1,3 +1,31 @@
+## [2.0.4](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.0.3...v2.0.4) (2018-11-17)
+
+
+### Bug Fixes
+
+* **name:** adding meta _name to makeOriginal ([ab39ca8](https://github.com/bootstrap-styled/bootstrap-styled/commit/ab39ca8))
+
+## [2.0.3](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.0.2...v2.0.3) (2018-11-14)
+
+
+### Bug Fixes
+
+* **dependencies:** updated dependencies ([a4bf736](https://github.com/bootstrap-styled/bootstrap-styled/commit/a4bf736))
+
+## [2.0.2](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.0.1...v2.0.2) (2018-11-14)
+
+
+### Bug Fixes
+
+* **version:** restore version development number and release 2.0.2 ([8a1a6e7](https://github.com/bootstrap-styled/bootstrap-styled/commit/8a1a6e7))
+
+## [1.0.4](https://github.com/bootstrap-styled/bootstrap-styled/compare/v1.0.3...v1.0.4) (2018-11-14)
+
+
+### Performance Improvements
+
+* **v4:** Move v4 to [@bootstrap-styled](https://github.com/bootstrap-styled)/v4 BREAKING CHANGE\n update to react 16.6.3 and styled-components 4. This package will now only export theming function. New documentation ([23c0d71](https://github.com/bootstrap-styled/bootstrap-styled/commit/23c0d71))
+
 ## [1.0.3](https://github.com/bootstrap-styled/bootstrap-styled/compare/v1.0.2...v1.0.3) (2018-11-12)
 
 

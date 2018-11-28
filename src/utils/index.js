@@ -1,17 +1,43 @@
+import deepMerge from 'lodash.merge';
 /**
- * Convert a theme into a makeTheme
+ * Convert a theme or a scopedTheme into a makeTheme.
  * @param theme
+ *
+ *
+ * @example
+ * const darkTheme = originalMakeTheme({
+ *    '$body-bg': 'dark',
+ *    '$body-color': 'white',
+ *    '$btn-primary-bg': 'red',
+ * });
+ *
+ * const darkMakeTheme = toMakeTheme(darkTheme);
+ *
+ * Now you can create a new theme starting from the personalized theme as default theme rather than the default original theme.
+ * This allows others to build from your theme as a starting point and makes it a lot easier to share and make new themes.
+ *
+ * const anotherDarkTheme = darkMakeTheme({
+ *     '$body-bg': '#121212'
+ * });
+ *
+ * The method also takes care of scopedTheme so that you don't have to worry about a thing.
+ *
+ * const loginFormTheme = makeScopedTheme('loginForm', {
+ *    '$body-bg': 'dark',
+ *    '$body-color': 'white',
+ *    '$btn-primary-bg': 'red',
+ * })
+ *
+ * const loginFormMakeTheme = toMakeTheme(loginFormTheme);
+ *
+ * const anotherLoginFormTheme = loginFormMakeTheme({
+ *     loginForm: {
+ *        '$body-bg': '#121212'
+ *     }
+ * });
  */
-export const toMakeTheme = (theme) => (userTheme) => ({ ...theme, ...userTheme });
-
-/**
- * Convert a scoped theme into a makeTheme
- * @param theme
- */
-export const toMakeScopedTheme = (theme) => (userTheme) => {
-  let result = {};
-  Object.keys(theme).forEach((key) => result = { [key]: { ...theme[key], ...userTheme } }); // eslint-disable-line no-return-assign
-  return result;
+export const toMakeTheme = (theme) => (userTheme) => { // eslint-disable-line arrow-body-style
+  return deepMerge(theme, userTheme);
 };
 
 function makeThemeFromList(list, theme) {
@@ -25,7 +51,7 @@ function makeThemeFromList(list, theme) {
 }
 
 /**
- * Create a makeTheme using a list of makeTheme
+ * Create a makeTheme using a list of makeThemes.
  * @param list
  * @returns {function(*=): *}
  */
@@ -34,15 +60,14 @@ export default function createMakeTheme(list) {
 }
 
 /**
-* Create a scoped makeTheme
-* @param userTheme
+* Creates a scoped makeTheme. Used for creating components or modules with their own variables.
 * @param scopeName string
+* @param userTheme
 *
 **/
 
-export function makeScopedTheme(userTheme = { [scopeName]: {} }, scopeName) {
-  if (scopeName === undefined) return console.warn('You may have forgotten to set the scope name in the makeScopedTheme function.');
-
+export function makeScopedTheme(scopeName, userTheme = { [scopeName]: {} }) {
+  if (scopeName === undefined || typeof scopeName !== 'string') return console.warn('You may have forgotten to set the scope name in the makeScopedTheme function.');
   const newTheme = { [scopeName]: {} };
   const v = newTheme[scopeName];
   const u = userTheme[scopeName] || {};

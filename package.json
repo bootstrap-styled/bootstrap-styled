@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-styled",
-  "version": "0.0.0-development",
+  "version": "2.0.4",
   "description": "Bootstrap-styled is an ecosystem of tools, components and variables to create standardized, sharable and highly customizable front-end modules.",
   "main": "lib/index.js",
   "jsnext:main": "dist/bootstrap-styled.esm.js",
@@ -233,10 +233,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 95,
-        "branches": 92,
-        "functions": 90,
-        "lines": 95
+        "statements": 99,
+        "branches": 99,
+        "functions": 100,
+        "lines": 99
       }
     },
     "moduleDirectories": [
@@ -260,7 +260,8 @@
     "basic-math-utils": "^0.3.4",
     "@bootstrap-styled/css-utils": "^1.1.0",
     "@bootstrap-styled/utils": "^1.6.1",
-    "color": "^1.0.3"
+    "color": "^1.0.3",
+    "lodash.merge": "^4.6.1"
   },
   "peerDependencies": {
     "react": "^16.6.3",

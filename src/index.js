@@ -3,7 +3,7 @@ export { default as theme, makeTheme } from './theme';
 
 //  1. Utils
 export {
-  default as createMakeTheme, makeScopedTheme, toMakeTheme, toMakeScopedTheme,
+  default as createMakeTheme, makeScopedTheme, toMakeTheme,
 } from './utils';
 
 // 2. extra

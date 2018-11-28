@@ -2,8 +2,18 @@
 
 $PACKAGE_DESCRIPTION
  
-By taking advantage of the modularity offered by React and injecting the css straight in your components - creating complex, customizable and sharable modules is quick and easy.
+Bootstrap-styled takes advantage of the modularity offered by React to make css-in-js components.
+Simplifying the creation of customizable and sharable modules through the bootstrap-styled convention.
 
-Theme auto-configuration functions and list of variables based on [Bootstrap v4](http://www.getbootstrap.com/).
+
+## Ecosystem
+
+* [bootstrap-styled](https://github.com/bootstrap-styled/bootstrap-styled) Theme auto-configuration functions and variable list.
+* [@bootstrap-styled/provider](https://github.com/bootstrap-styled/provider) Provider that manages the theme and other cool features.
+* [@bootstrap-styled/v4](https://github.com/bootstrap-styled/v4) Component library based on bootstrap-styled convention and ecosystem.
+* [@bootstrap-styled/redux](https://github.com/bootstrap-styled/redux) ConnectedBootstrapProvider and Toggle to change theme quickly and simply with Redux. 
+* [@bootstrap-styled/utils](https://github.com/bootstrap-styled/utils) Utils and functions for bootstrap-styled.
+* [@bootstrap-styled/css-utils](https://github.com/bootstrap-styled/css-utils) Css global utilities.
+* [@bootstrap-styled/css-mixins](https://github.com/bootstrap-styled/css-mixins) Css component mixins.
 
 

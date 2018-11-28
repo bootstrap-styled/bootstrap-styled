@@ -1,25 +1,20 @@
-List of available variables based on bootstrap v4.
+We use variables to ensure that all our components are customizable. The props `theme` contains all our variables.
 
-Certain utilities are used to calculate variables dynamically so that you don't loose your time.
+```js static
+import styled from 'styled-components'
 
-We use [Colors](https://github.com/Qix-/color) to dynamically assign shades of color to connected variables.
+const Button = styled.button`
+  ${(props) => `
+     background-color: ${props.theme['$btn-primary-bg']};
+     color: ${props.theme['$btn-primary-color']};
+  `};
+`;
 
-```jsx static
-  v['$state-success-bg'] = '#dff0d8';
-
-  v['$state-success-border'] = Color(v['$state-success-bg']).darken(0.05).toString();
+export default Button;
 ```
 
+>>> You probably recognized the variables used in the `Button` component's css.
 
-Also check out our [utils repos](https://github.com/bootstrap-styled/utils) which gives tools to calculate `detectUnit`
- and `rmUnit`.
-
-```jsx static
-  v['$spacer'] = '1rem';
-
-  detectedUnit = detectUnit(v['$spacer']);
-  v['$spacer-halved'] = ((rmUnit(v['$spacer'], detectedUnit) / 2) + detectedUnit);
-```
-
-You can also find the component variables own [components](https://github.com/bootstrap-styled/v4).
-
+>>> By styling the bootstrap CSS framework as above and integrating its widely known variables, we produced a front-end 
+library [@bootstrap-styled/v4](https://github.com/bootstrap-styled/v4) that is highly and easily customizable. It is also
+a great place if you are looking for more complex examples.

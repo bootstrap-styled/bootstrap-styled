@@ -573,17 +573,22 @@ export default function makeOriginal(userTheme = {}) {
 
   v['$zindex-dropdown-backdrop'] = u['$zindex-dropdown-backdrop'] || '990';
   v['$zindex-dropdown'] = u['$zindex-dropdown'] || '1000';
-  v['$zindex-fixed'] = u['$zindex-fixed'] || '1030';
-  v['$zindex-sticky'] = u['$zindex-sticky'] || '1030';
   v['$zindex-modal-backdrop'] = u['$zindex-modal-backdrop'] || '2040';
   v['$zindex-modal'] = u['$zindex-modal'] || '2050';
   v['$zindex-popover'] = u['$zindex-popover'] || '1060';
   v['$zindex-tooltip'] = u['$zindex-tooltip'] || '1070';
+  v['$zindex-navbar'] = u['$zindex-navbar'] || '1000';
+  v['$zindex-navbar-fixed'] = u['$zindex-navbar-fixed'] || '1030';
+  v['$zindex-navbar-sticky'] = u['$zindex-navbar-sticky'] || '1030';
 
   // Navbar
 
   v['$navbar-padding-x'] = u['$navbar-padding-x'] || v['$spacer'];
   v['$navbar-padding-y'] = u['$navbar-padding-y'] || v['$spacer-halved'];
+
+  v['$navbar-brand-padding-y'] = u['$navbar-brand-padding-y'] || '.25rem';
+
+  v['$navbar-divider-padding-y'] = u['$navbar-divider-padding-y'] || '.425rem';
 
   v['$navbar-toggler-padding-x'] = u['$navbar-toggler-padding-x'] || '.75rem';
   v['$navbar-toggler-padding-y'] = u['$navbar-toggler-padding-y'] || '.25rem';
