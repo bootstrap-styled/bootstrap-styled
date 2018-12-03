@@ -11,7 +11,7 @@ const { detectUnit, rmUnit } = unitUtils;
  * this file is not meant to be used and must be kept as original
  * @param userTheme
  */
-export function makeOriginal(userTheme = {}) {
+function makeOriginal(userTheme = {}) {
   /* eslint dot-notation: 'off', new-cap: 'off' */
   // Variables
   //
@@ -925,6 +925,8 @@ export function makeOriginal(userTheme = {}) {
 
   return Object.assign({}, u, v);
 }
+
+export const makeTheme = makeOriginal;
 
 const theme = makeOriginal();
 

@@ -1,5 +1,5 @@
 // 0. Basic bs theme variables and theme configuration utils
-export { default as theme, makeOriginal as makeTheme } from './theme';
+export { default as theme, makeTheme } from './theme';
 
 //  1. Utils
 export {

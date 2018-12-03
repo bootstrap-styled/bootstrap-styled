@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable/';
-import theme, { makeOriginal } from '../theme';
+import theme, { makeTheme } from '../theme';
 
 describe('theme', () => {
   describe('default theme', () => {
@@ -12,17 +12,17 @@ describe('theme', () => {
 
   describe('makeTheme', () => {
     it('should return a default theme', () => {
-      const newTheme = makeOriginal();
+      const newTheme = makeTheme();
       Object.keys(newTheme).forEach((key) => {
         expect(newTheme[key]).toBeDefined();
       });
     });
     it('should return an extended theme', () => {
-      const notDefaultTheme = makeOriginal({
+      const notDefaultTheme = makeTheme({
         $white: '#eee',
       });
       expect(fromJS(notDefaultTheme).hashCode() !== fromJS(theme).hashCode()).toBe(true);
-      expect(fromJS(makeOriginal()).hashCode() === fromJS(theme).hashCode()).toBe(true);
+      expect(fromJS(makeTheme()).hashCode() === fromJS(theme).hashCode()).toBe(true);
     });
   });
 });
