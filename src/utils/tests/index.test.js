@@ -1,5 +1,5 @@
 import Color from 'color';
-import { makeTheme as makeThemeBs } from '../../theme/makeTheme';
+import { makeOriginal as makeThemeBs } from '../../theme';
 import createMakeTheme, { makeScopedTheme, toMakeTheme } from '../index';
 
 describe('bootstrap-styled theme utils', () => {

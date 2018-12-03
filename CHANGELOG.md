@@ -1,3 +1,17 @@
+# [2.1.0](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.0.4...v2.1.0) (2018-11-28)
+
+
+### Bug Fixes
+
+* **documentation:** added new sections and explications. ([f2fd8d3](https://github.com/bootstrap-styled/bootstrap-styled/commit/f2fd8d3))
+* **test:** updated bs checksum following previous commit ([51b3e31](https://github.com/bootstrap-styled/bootstrap-styled/commit/51b3e31))
+* **variables:** added missing navbar variables ([74ffbf9](https://github.com/bootstrap-styled/bootstrap-styled/commit/74ffbf9))
+
+
+### Features
+
+* **toMakeTheme:** toMakeTheme now operates a deepMerge on the theme and userTheme, allowing lists of makeThemes to be passed. ([bb7e117](https://github.com/bootstrap-styled/bootstrap-styled/commit/bb7e117))
+
 ## [2.0.4](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.0.3...v2.0.4) (2018-11-17)
 
 
