@@ -57,7 +57,7 @@ jobs:
 
     # Job: Release
     - stage: release
-      if: branch = master
+      if: branch = master AND type = push AND fork = false
       node_js:
         - 'lts/*'
       skip_cleanup: true
@@ -66,7 +66,7 @@ jobs:
 
     # Job: Page
     - stage: deploy
-      if: branch = master
+      if: branch = master AND type = push AND fork = false
       node_js:
         - 'lts/*'
       script:
