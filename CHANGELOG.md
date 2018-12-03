@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.1.0...v2.1.1) (2018-12-03)
+
+
+### Bug Fixes
+
+* **theme:** refractored the makeOriginal after we removed all seperate components makeThemes. ([91e7773](https://github.com/bootstrap-styled/bootstrap-styled/commit/91e7773))
+
 # [2.1.0](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.0.4...v2.1.0) (2018-11-28)
 
 
