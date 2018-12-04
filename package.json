@@ -143,11 +143,12 @@
     }
   },
   "devDependencies": {
+    "@bootstrap-styled/documentation": "^1.0.1",
+    "@rollup-umd/documentation": "^1.0.17",
     "@semantic-release/changelog": "^3.0.0",
     "@semantic-release/git": "^7.0.5",
     "@semantic-release/github": "^5.2.1",
     "@semantic-release/npm": "^4.0.0",
-    "@yeutech-lab/rollup-umd-documentation": "^2.4.5",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
@@ -191,7 +192,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-redux": "^5.1.1",
-    "react-styleguidist": "^8.0.4",
+    "react-styleguidist": "^8.0.6",
     "react-test-renderer": "^16.0.0",
     "redux": "^4.0.1",
     "redux-immutable": "^4.0.0",
