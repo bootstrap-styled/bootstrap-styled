@@ -14,8 +14,6 @@
     "node": ">=7.9.0"
   },
   "scripts": {
-    "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build",
     "prebuild": "npm run build:clean",
     "build": "npm run build:lib && npm run build:dist",
     "prebuild:lib": "rimraf lib/*",
@@ -32,7 +30,12 @@
     "test:watch": "npm run test -- --watch",
     "lint": "eslint src",
     "prepublish": "npm run build",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "jsdoc-documentation": "jsdoc-documentation",
+    "jsdoc": "jsdoc-documentation --file",
+    "prestyleguide": "npm run jsdoc",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build"
   },
   "repository": {
     "type": "git",
