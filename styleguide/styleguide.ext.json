@@ -21,7 +21,7 @@
         {
           "name": "Installation",
           "content": "docs/installation.md",
-          "description": "Discover how to install `bootstrap-styled`"
+          "description": "Use npm or yarn:"
         }
       ]
     },
