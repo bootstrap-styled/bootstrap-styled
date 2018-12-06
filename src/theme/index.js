@@ -1,4 +1,4 @@
-import Color from 'color';
+import Color from '@bootstrap-styled/color';
 import unitUtils from '@bootstrap-styled/utils/lib/unitUtils';
 import { allowFalseValue, assertAscending, assertStartAtZero } from './utils';
 
