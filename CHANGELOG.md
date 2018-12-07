@@ -1,3 +1,17 @@
+# [2.2.0](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.1.2...v2.2.0) (2018-12-07)
+
+
+### Bug Fixes
+
+* **ci:** build ([f06cef0](https://github.com/bootstrap-styled/bootstrap-styled/commit/f06cef0))
+* **dependencies:** Upgrade many deps, semantic-release, babel 7, remove color ([b4fd289](https://github.com/bootstrap-styled/bootstrap-styled/commit/b4fd289))
+* **documentation:** Using [@rollup-umd](https://github.com/rollup-umd)/documentation and [@bootstrap-styled](https://github.com/bootstrap-styled)/documentation for the documentation engine ([0eebaa2](https://github.com/bootstrap-styled/bootstrap-styled/commit/0eebaa2))
+
+
+### Features
+
+* **dependencies:** update to babel7, update semantic-release, replace color with [@bootstrap-styled](https://github.com/bootstrap-styled)/color ([5038425](https://github.com/bootstrap-styled/bootstrap-styled/commit/5038425))
+
 ## [2.1.2](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.1.1...v2.1.2) (2018-12-03)
 
 
