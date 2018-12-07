@@ -176,7 +176,7 @@
     "babel-plugin-dynamic-import-node": "^1.0.2",
     "babel-plugin-react-intl": "^2.3.1",
     "babel-plugin-react-transform": "^2.0.2",
-    "babel-plugin-styled-components": "^1.5.1",
+    "babel-plugin-styled-components": "^1.9.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.8",
     "babel-preset-react-hmre": "^1.1.1",
     "cz-conventional-changelog": "^2.1.0",
@@ -265,7 +265,7 @@
   ],
   "dependencies": {
     "@bootstrap-styled/color": "^1.0.6",
-    "@bootstrap-styled/css-utils": "^1.1.0",
+    "@bootstrap-styled/css-utils": "^1.1.4",
     "@bootstrap-styled/utils": "^1.6.1",
     "basic-math-utils": "^0.3.4",
     "lodash.merge": "^4.6.1"
@@ -273,7 +273,7 @@
   "peerDependencies": {
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "styled-components": "^4.1.1"
+    "styled-components": "^4.1.2"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
