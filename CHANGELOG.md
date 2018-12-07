@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.0...v2.2.1) (2018-12-07)
+
+
+### Bug Fixes
+
+* **documentation:** added +x on jsdoc.sh ([d25772f](https://github.com/bootstrap-styled/bootstrap-styled/commit/d25772f))
+
 # [2.2.0](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.1.2...v2.2.0) (2018-12-07)
 
 
