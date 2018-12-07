@@ -1,3 +1,10 @@
+## [2.2.2](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.1...v2.2.2) (2018-12-07)
+
+
+### Bug Fixes
+
+* **toMakeTheme:** deep merge into a new object instead of theme ([2b6f3a1](https://github.com/bootstrap-styled/bootstrap-styled/commit/2b6f3a1))
+
 ## [2.2.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.0...v2.2.1) (2018-12-07)
 
 
