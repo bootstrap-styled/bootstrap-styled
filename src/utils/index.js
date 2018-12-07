@@ -37,7 +37,7 @@ import deepMerge from 'lodash.merge';
  * });
  */
 export const toMakeTheme = (theme) => (userTheme) => { // eslint-disable-line arrow-body-style
-  return deepMerge(theme, userTheme);
+  return deepMerge({}, theme, userTheme);
 };
 
 function makeThemeFromList(list, theme) {
