@@ -161,8 +161,8 @@
     "@babel/plugin-transform-react-inline-elements": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "@bootstrap-styled/documentation": "^1.0.1",
-    "@rollup-umd/documentation": "^1.0.17",
+    "@bootstrap-styled/documentation": "^1.0.7",
+    "@rollup-umd/documentation": "^1.0.22",
     "@semantic-release/changelog": "^3.0.1",
     "@semantic-release/git": "^7.0.5",
     "@semantic-release/github": "^5.2.5",
@@ -266,7 +266,7 @@
   "dependencies": {
     "@bootstrap-styled/color": "^1.0.6",
     "@bootstrap-styled/css-utils": "^1.1.4",
-    "@bootstrap-styled/utils": "^1.6.1",
+    "@bootstrap-styled/utils": "^1.6.4",
     "basic-math-utils": "^0.3.4",
     "lodash.merge": "^4.6.1"
   },
