@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-styled",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "Bootstrap-styled is an ecosystem of tools, components and variables to create standardized, sharable and highly customizable front-end modules.",
   "main": "lib/index.js",
   "jsnext:main": "dist/bootstrap-styled.esm.js",

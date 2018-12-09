@@ -1,3 +1,10 @@
+## [2.2.3](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.2...v2.2.3) (2018-12-09)
+
+
+### Bug Fixes
+
+* **dependencies:** update some dependencies ([609236b](https://github.com/bootstrap-styled/bootstrap-styled/commit/609236b))
+
 ## [2.2.2](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.1...v2.2.2) (2018-12-07)
 
 
