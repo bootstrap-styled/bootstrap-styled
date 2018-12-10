@@ -1,3 +1,10 @@
+## [2.2.5](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.4...v2.2.5) (2018-12-10)
+
+
+### Bug Fixes
+
+* **documentation:** introduction was having incorrect badge ([974bf80](https://github.com/bootstrap-styled/bootstrap-styled/commit/974bf80))
+
 ## [2.2.4](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.3...v2.2.4) (2018-12-09)
 
 
