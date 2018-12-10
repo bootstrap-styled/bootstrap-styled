@@ -161,7 +161,7 @@
     "@babel/plugin-transform-react-inline-elements": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "@bootstrap-styled/documentation": "^1.0.7",
+    "@bootstrap-styled/documentation": "^1.0.8",
     "@rollup-umd/documentation": "^1.0.22",
     "@semantic-release/changelog": "^3.0.1",
     "@semantic-release/git": "^7.0.5",
