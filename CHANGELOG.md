@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.5...v2.3.0) (2018-12-16)
+
+
+### Features
+
+* **greenkeeper:** added greenkeeper and updated all dependencies ([7b23edc](https://github.com/bootstrap-styled/bootstrap-styled/commit/7b23edc))
+
 ## [2.2.5](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.4...v2.2.5) (2018-12-10)
 
 
