@@ -53,7 +53,7 @@ jobs:
           organization: $(echo $TRAVIS_REPO_SLUG | awk -F '/' '{print $1}')
       script:
         - npm run test
-        - sonar-scanner -Dsonar.projectVersion=${SONAR_VERSION}
+        - if [[ "$TRAVIS_BRANCH" != greenkeeper* ]]; then sonar-scanner -Dsonar.projectVersion=${SONAR_VERSION}; fi
 
     # Job: Release
     - stage: release
