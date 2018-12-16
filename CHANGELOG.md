@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.3.0...v2.3.1) (2018-12-16)
+
+
+### Bug Fixes
+
+* **greenkeeper:** fix greenkeeper executing sonar ([943b0b5](https://github.com/bootstrap-styled/bootstrap-styled/commit/943b0b5))
+
 # [2.3.0](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.5...v2.3.0) (2018-12-16)
 
 
