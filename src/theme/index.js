@@ -928,6 +928,4 @@ function makeOriginal(userTheme = {}) {
 
 export const makeTheme = makeOriginal;
 
-const theme = makeOriginal();
-
-export default theme;
+export default makeOriginal();

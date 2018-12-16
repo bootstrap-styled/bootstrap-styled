@@ -8,7 +8,7 @@
 [![npm Version](https://img.shields.io/node/v/bootstrap-styled.svg?style=flat)](https://www.npmjs.com/package/bootstrap-styled) 
 [![Module formats](https://img.shields.io/badge/module%20formats-umd%2C%20cjs%2C%20esm-green.svg?style=flat)](https://www.npmjs.com/package/bootstrap-styled)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.github.bootstrap-styled.bootstrap-styled&metric=coverage)](https://sonarcloud.io/dashboard?id=com.github.bootstrap-styled.bootstrap-styled) [![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=com.github.bootstrap-styled.bootstrap-styled&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.github.bootstrap-styled.bootstrap-styled)
-[![gitter](https://badges.gitter.im/bootstrap-styled/bootstrap-styled.svg)](https://gitter.im/bootstrap-styled)
+[![gitter](https://badges.gitter.im/bootstrap-styled/bootstrap-styled.svg)](https://gitter.im/bootstrap-styled) [![Greenkeeper badge](https://badges.greenkeeper.io/bootstrap-styled/bootstrap-styled.svg)](https://greenkeeper.io/)
 
 List of bootstrap variables and theme auto-configuration functions.
 
