@@ -1,3 +1,59 @@
+## [2.2.5](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.4...v2.2.5) (2018-12-10)
+
+
+### Bug Fixes
+
+* **documentation:** introduction was having incorrect badge ([974bf80](https://github.com/bootstrap-styled/bootstrap-styled/commit/974bf80))
+
+## [2.2.4](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.3...v2.2.4) (2018-12-09)
+
+
+### Bug Fixes
+
+* **documentation:** introduction was having incorrect badge ([ca0434e](https://github.com/bootstrap-styled/bootstrap-styled/commit/ca0434e))
+
+## [2.2.3](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.2...v2.2.3) (2018-12-09)
+
+
+### Bug Fixes
+
+* **dependencies:** update some dependencies ([609236b](https://github.com/bootstrap-styled/bootstrap-styled/commit/609236b))
+
+## [2.2.2](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.1...v2.2.2) (2018-12-07)
+
+
+### Bug Fixes
+
+* **toMakeTheme:** deep merge into a new object instead of theme ([2b6f3a1](https://github.com/bootstrap-styled/bootstrap-styled/commit/2b6f3a1))
+
+## [2.2.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.0...v2.2.1) (2018-12-07)
+
+
+### Bug Fixes
+
+* **documentation:** added +x on jsdoc.sh ([d25772f](https://github.com/bootstrap-styled/bootstrap-styled/commit/d25772f))
+
+# [2.2.0](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.1.2...v2.2.0) (2018-12-07)
+
+
+### Bug Fixes
+
+* **ci:** build ([f06cef0](https://github.com/bootstrap-styled/bootstrap-styled/commit/f06cef0))
+* **dependencies:** Upgrade many deps, semantic-release, babel 7, remove color ([b4fd289](https://github.com/bootstrap-styled/bootstrap-styled/commit/b4fd289))
+* **documentation:** Using [@rollup-umd](https://github.com/rollup-umd)/documentation and [@bootstrap-styled](https://github.com/bootstrap-styled)/documentation for the documentation engine ([0eebaa2](https://github.com/bootstrap-styled/bootstrap-styled/commit/0eebaa2))
+
+
+### Features
+
+* **dependencies:** update to babel7, update semantic-release, replace color with [@bootstrap-styled](https://github.com/bootstrap-styled)/color ([5038425](https://github.com/bootstrap-styled/bootstrap-styled/commit/5038425))
+
+## [2.1.2](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.1.1...v2.1.2) (2018-12-03)
+
+
+### Bug Fixes
+
+* **exports:** corrected mistake with makeTheme export ([b1338b1](https://github.com/bootstrap-styled/bootstrap-styled/commit/b1338b1))
+
 ## [2.1.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.1.0...v2.1.1) (2018-12-03)
 
 
