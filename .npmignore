@@ -9,6 +9,9 @@ babel.config.json
 .eslintignore
 bundle-stats.html
 CODE_OF_CONDUCT.md
+CHANGELOG.md
+README.md
+CONTRIBUTING.md
 declination.json
 rollup.config.js
 /styleguide.config.js

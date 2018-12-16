@@ -5,7 +5,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import inject from 'rollup-plugin-inject';
 import babel from 'rollup-plugin-babel';
 import json from 'rollup-plugin-json';
-import uglify from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 import cleanup from 'rollup-plugin-cleanup';
 import visualizer from 'rollup-plugin-visualizer';
 import builtins from 'rollup-plugin-node-builtins';
@@ -82,11 +82,9 @@ const plugins = [
   cleanup(),
 ];
 
-if (prod) plugins.push(uglify(), visualizer({ filename: './bundle-stats.html' }));
-
-export default {
+export default output.map((o) => ({
   input: 'src/index.js',
   external,
-  output,
-  plugins,
-};
+  output: o,
+  plugins: prod ? plugins.concat([terser(), visualizer({ filename: './bundle-stats.html' })]) : plugins,
+}));

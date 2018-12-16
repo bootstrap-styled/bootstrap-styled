@@ -26,5 +26,5 @@ Simplifying the creation of customizable and sharable modules through the Bootst
 * [@bootstrap-styled/utils](https://github.com/bootstrap-styled/utils) Utils and functions for bootstrap-styled.
 * [@bootstrap-styled/color](https://github.com/bootstrap-styled/color) Qix/color wrapper for bootstrap-styled, it help you use color without worrying if the provided css color can be manipulated with color.
 * [@bootstrap-styled/rsg-components](https://github.com/bootstrap-styled/rsg-components) Create documentation layouts for your react-styleguidist using Bootstrap-Styled rsg-component. Boostrap Styled rsg-components use the @bootstrap-styled/v4 for recreating the original rsg-components.
-* [@bootstrap-styled/documentation](https://github.com/bootstrap-styled/documentation) Bootstrap Styled Layouts and @rollup-umd/documentation configuration extension.
+* [@bootstrap-styled/documentation](https://github.com/bootstrap-styled/documentation) Bootstrap Styled documentation layouts and @rollup-umd/documentation configuration extension.
 
