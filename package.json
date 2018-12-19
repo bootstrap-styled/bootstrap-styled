@@ -162,6 +162,7 @@
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
     "@bootstrap-styled/documentation": "^1.1.1",
+    "@bootstrap-styled/provider": "^1.4.1",
     "@rollup-umd/documentation": "^1.2.0",
     "@semantic-release/changelog": "^3.0.1",
     "@semantic-release/git": "^7.0.5",
@@ -174,6 +175,7 @@
     "babel-plugin-add-module-exports": "^1.0.0",
     "babel-plugin-array-includes": "^2.0.3",
     "babel-plugin-dynamic-import-node": "^2.2.0",
+    "babel-plugin-macros": "^2.4.3",
     "babel-plugin-react-intl": "^3.0.1",
     "babel-plugin-react-transform": "^3.0.0",
     "babel-plugin-styled-components": "^1.9.4",
@@ -240,10 +242,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 99,
-        "branches": 99,
-        "functions": 100,
-        "lines": 99
+        "statements": 84,
+        "branches": 94,
+        "functions": 42,
+        "lines": 85
       }
     },
     "moduleDirectories": [
@@ -273,7 +275,11 @@
     "@bootstrap-styled/css-utils": "^1.2.0",
     "@bootstrap-styled/utils": "^1.7.0",
     "basic-math-utils": "^0.3.4",
-    "lodash.merge": "^4.6.1"
+    "debounce": "^1.2.0",
+    "hoist-non-react-statics": "^3.2.1",
+    "lodash.merge": "^4.6.1",
+    "prop-types": "^15.6.2",
+    "react-event-listener": "^0.6.4"
   },
   "peerDependencies": {
     "react": "^16.6.3",

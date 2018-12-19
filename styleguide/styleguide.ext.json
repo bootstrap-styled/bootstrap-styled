@@ -99,7 +99,13 @@
             },
             {
               "name": "Grid-breakpoints",
-              "content": "docs/variables/grid-breakpoints.md"
+              "content": "docs/variables/grid-breakpoints.md",
+              "sections": [
+                {
+                  "name": "Breakpoints",
+                  "content": "docs/breakpoints.md"
+                }
+              ]
             },
             {
               "name": "Columns",

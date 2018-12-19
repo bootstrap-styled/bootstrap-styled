@@ -27,7 +27,7 @@ Read [bootstrap-styled documentation](https://bootstrap-styled.github.io/bootstr
 
 ## Contributing
 
-If you want to contribute to bootstrap-styled please see our [contributing and community guidelines](https://github.com/bootstrap-styled/bootstrap-styled/blob/master/CONTRIBUTING.md), they\'ll help you get set up locally and explain the whole process.
+If you want to contribute to bootstrap-styled please see our [contributing and community guidelines](https://github.com/bootstrap-styled/bootstrap-styled/blob/master/.github/CONTRIBUTING.md), they\'ll help you get set up locally and explain the whole process.
 
 Please also note that all repositories under the bootstrap-styled organization follow our [Code of Conduct](https://github.com/bootstrap-styled/bootstrap-styled/blob/master/CODE_OF_CONDUCT.md), make sure to review and follow it.
 
