@@ -104,7 +104,7 @@ For instance, it can be used to defined a `getInitialProps()` static method (nex
   In some situation, you might want to use an heuristic to approximate
   the screen width of the client browser screen width.
   - `options.resizeInterval` (*Number* [optional]): Defaults to 166, corresponds to 10 frames at 60 Hz. Number of milliseconds to wait before responding to a screen resize event.
-  - `options.loggin` (*Boolean* [optional]): Default to `false`, if `true`, it will console.log the breakpoint change.
+  - `options.logging` (*Boolean* [optional]): Default to `false`, if `true`, it will console.log the breakpoint change.
   
 #### Returns
 
@@ -151,7 +151,7 @@ import { css } from 'styled-components';
     background-color: blue;
     ${(props) => `${bp.up(props.theme['$grid-breakpoints'], `background-color: red;`)}}`
   `}
->
+/>
 ```
 
 ### `bp.down(theme['$grid-breakpoints'], css) => media query`
@@ -176,7 +176,7 @@ import { css } from 'styled-components';
     background-color: blue;
     ${(props) => `${bp.down(props.theme['$grid-breakpoints'], `background-color: red;`)}}`
   `}
->
+/>
 ```
 
 ### `bp.only(key, theme['$grid-breakpoints'], css) => media query`
@@ -202,7 +202,7 @@ import { css } from 'styled-components';
     background-color: blue;
     ${(props) => `${bp.only('md', props.theme['$grid-breakpoints'], `background-color: red;`)}}`
   `}
->
+/>
 ```
 
 ### `bp.between(start, end, theme['$grid-breakpoints'], css) => media query`
@@ -229,5 +229,5 @@ import { css } from 'styled-components';
     background-color: blue;
     ${(props) => `${bp.only('md', props.theme['$grid-breakpoints'], `background-color: red;`)}}`
   `}
->
+/>
 ```
