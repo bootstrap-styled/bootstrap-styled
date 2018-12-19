@@ -67,7 +67,7 @@ export default function createMakeTheme(list) {
 **/
 
 export function makeScopedTheme(scopeName, userTheme = { [scopeName]: {} }) {
-  if (scopeName === undefined || typeof scopeName !== 'string') return console.warn('You may have forgotten to set the scope name in the makeScopedTheme function.');
+  if (scopeName === undefined || typeof scopeName !== 'string') return console.warn('You may have forgotten to set the scope name in the makeScopedTheme function.'); // eslint-disable-line no-console
   const newTheme = { [scopeName]: {} };
   const v = newTheme[scopeName];
   const u = userTheme[scopeName] || {};

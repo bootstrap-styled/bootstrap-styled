@@ -14,6 +14,7 @@ module.exports = {
   ],
   plugins: [
     'styled-components',
+    'babel-plugin-macros',
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-syntax-import-meta',
     '@babel/plugin-proposal-class-properties',
