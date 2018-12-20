@@ -12,8 +12,8 @@
 
   v['$card-img-overlay-padding'] = '1.25rem';
 
-  detectedUnit = detectUnit(v['$grid-gutter-width-base']);
-  v['$card-deck-margin'] = (rmUnit(v['$grid-gutter-width-base'], detectedUnit) / 2) + detectedUnit;
+  detectedUnit = detectUnit(v['$grid-gutter-width']);
+  v['$card-deck-margin'] = (rmUnit(v['$grid-gutter-width'], detectedUnit) / 2) + detectedUnit;
 
   v['$card-columns-count-md'] = '2';
   v['$card-columns-gap-md'] = '1rem';

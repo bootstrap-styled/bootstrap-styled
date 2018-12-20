@@ -214,14 +214,7 @@ function makeOriginal(userTheme = {}) {
   // Set the number of columns and specify the width of the gutters.
 
   v['$grid-columns'] = u['$grid-columns'] || '12';
-  v['$grid-gutter-width-base'] = u['$grid-gutter-width-base'] || '30px';
-  v['$grid-gutter-widths'] = u['$grid-gutter-widths'] || {
-    xs: v['$grid-gutter-width-base'],
-    sm: v['$grid-gutter-width-base'],
-    md: v['$grid-gutter-width-base'],
-    lg: v['$grid-gutter-width-base'],
-    xl: v['$grid-gutter-width-base'],
-  };
+  v['$grid-gutter-width'] = u['$grid-gutter-width'] || '30px';
 
   // Fonts
   //
@@ -699,8 +692,9 @@ function makeOriginal(userTheme = {}) {
 
   v['$card-img-overlay-padding'] = u['$card-img-overlay-padding'] || '1.25rem';
 
-  detectedUnit = detectUnit(v['$grid-gutter-width-base']);
-  v['$card-deck-margin'] = u['$card-deck-margin'] || (rmUnit(v['$grid-gutter-width-base'], detectedUnit) / 2) + detectedUnit;
+  detectedUnit = detectUnit(v['$grid-gutter-width']);
+  v['$card-group-margin'] = u['$card-group-margin'] || (rmUnit(v['$grid-gutter-width'], detectedUnit) / 2) + detectedUnit;
+  v['$card-deck-margin'] = u['$card-deck-margin'] || v['$card-group-margin'];
 
   v['$card-columns-count-md'] = u['$card-columns-count-md'] || '2';
   v['$card-columns-gap-md'] = u['$card-columns-gap-md'] || '1rem';
