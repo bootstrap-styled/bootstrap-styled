@@ -1,3 +1,10 @@
+## [2.4.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.0...v2.4.1) (2018-12-20)
+
+
+### Bug Fixes
+
+* **variables:** Added variable `$card-group-margin`, `$grid-gutter-width`, remove `$grid-gutter-widt ([78c659e](https://github.com/bootstrap-styled/bootstrap-styled/commit/78c659e))
+
 # [2.4.0](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.3.1...v2.4.0) (2018-12-19)
 
 
