@@ -10,20 +10,36 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.github.bootstrap-styled.bootstrap-styled&metric=coverage)](https://sonarcloud.io/dashboard?id=com.github.bootstrap-styled.bootstrap-styled) [![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=com.github.bootstrap-styled.bootstrap-styled&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.github.bootstrap-styled.bootstrap-styled)
 [![gitter](https://badges.gitter.im/bootstrap-styled/bootstrap-styled.svg)](https://gitter.im/bootstrap-styled) [![Greenkeeper badge](https://badges.greenkeeper.io/bootstrap-styled/bootstrap-styled.svg)](https://greenkeeper.io/)
 
-List of bootstrap variables and theme auto-configuration functions.
+Bootstrap Styled provide a **chart** and common utilities for writing UI components that can be shared and maintained globally for all the :rocket: ReactJS community.
+It permit an ecosystem of tools, components and variables to create standardized, sharable and highly customizable front-end modules.
 
 ## Table of Contents
 
+  - [Why ?](#why)
+  - [How ?](#how)
   - [Documentation](#documentation)
   - [Contributing](#contributing)
   - [License MIT](#license-mit)
 
 ---
 
+## Why ?
+
+Most of front-end developers one day used [Twitter Bootstrap](http://getbootstrap.com). Because most developers know it, it is the favorite front-end framework for companies.
+
+This is why **bootstrap-styled** is the best library for sharing React UI globally and this is the main reason why it is a solid front-end library candidate for your organization.
+ 
+## How ?
+
+It's fully written in javascript, the API is working for every React application. Everyone use the same set of theme variables or can create a new scope of variables.
+ 
+Every UI created with it can be shared and maintained in **Community** without any risks of breaking change for anyone thanks to the simplicity of [extending styles](https://www.styled-components.com/docs/basics#extending-styles) anywhere.
+
+Using **bootstrap-styled**, you can quickly prototype things that will be working in other's Bootstrap Styled applications without any change to your source code.
+
 ## Documentation
 
 Read [bootstrap-styled documentation](https://bootstrap-styled.github.io/bootstrap-styled).
-
 
 ## Contributing
 
