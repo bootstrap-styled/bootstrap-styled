@@ -7,9 +7,9 @@ branches:
   except:
     - gh-pages # will be deployed to, no need to build it
 
-cache:
-  directories:
-    - node_modules
+#cache:
+#  directories:
+#    - node_modules
 
 before_install:
     - npm install -g npm
