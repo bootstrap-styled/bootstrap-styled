@@ -16,7 +16,7 @@
 [![gitter](https://badges.gitter.im/bootstrap-styled/bootstrap-styled.svg)](https://gitter.im/bootstrap-styled) 
 [![Greenkeeper badge](https://badges.greenkeeper.io/bootstrap-styled/bootstrap-styled.svg)](https://greenkeeper.io/)
 
-Bootstrap Styled is an eco system made with Bootstrap 4 philosophy, using the power of css-in-js thanks to [styled-components](https://www.styled-components.com/).
+Bootstrap Styled is a front-end ecosystem for React made with Bootstrap 4 philosophy, using the power of css-in-js thanks to [styled-components](https://www.styled-components.com/).
 It offer a community an ecosystem of tools, components and variables to create standardized, sharable and highly customizable front-end modules.
 
 This main package explain our **chart** for writing components and provide theme common utilities for writing UI components that can be shared and maintained globally for all the :rocket: ReactJS community.
