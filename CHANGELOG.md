@@ -1,3 +1,11 @@
+## [2.4.5](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.4...v2.4.5) (2018-12-22)
+
+
+### Bug Fixes
+
+* **documentation:** improve presentation ([441b643](https://github.com/bootstrap-styled/bootstrap-styled/commit/441b643))
+* **documentation:** improve presentation ([5191fc8](https://github.com/bootstrap-styled/bootstrap-styled/commit/5191fc8))
+
 ## [2.4.4](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.3...v2.4.4) (2018-12-22)
 
 
