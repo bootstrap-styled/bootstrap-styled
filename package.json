@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-styled",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "Bootstrap Styled provide a **chart** and common utilities for writing UI components that can be shared and maintained globally for all the :rocket: ReactJS community. It permit an ecosystem of tools, components and variables to create standardized, sharable and highly customizable front-end modules.",
   "main": "lib/index.js",
   "jsnext:main": "dist/bootstrap-styled.esm.js",
