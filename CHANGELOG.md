@@ -1,3 +1,12 @@
+## [2.4.4](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.3...v2.4.4) (2018-12-22)
+
+
+### Bug Fixes
+
+* **documentation:** added logo in intro and in readme ([9db033c](https://github.com/bootstrap-styled/bootstrap-styled/commit/9db033c))
+* **documentation:** added logo in intro and in readme ([ddde74f](https://github.com/bootstrap-styled/bootstrap-styled/commit/ddde74f))
+* **documentation:** added logo in intro and in readme ([766efe6](https://github.com/bootstrap-styled/bootstrap-styled/commit/766efe6))
+
 ## [2.4.3](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.2...v2.4.3) (2018-12-22)
 
 
