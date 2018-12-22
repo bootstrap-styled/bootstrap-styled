@@ -1,5 +1,3 @@
-# bootstrap-styled
-
 <div align="center">
   <a href="https://bootstrap-styled.github.io">
     <img alt="bootstrap-styled" src="https://user-images.githubusercontent.com/1866564/50375497-cda74880-0630-11e9-9f1e-e8d798dff47b.png" />
@@ -18,7 +16,6 @@
 [![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=com.github.bootstrap-styled.bootstrap-styled&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.github.bootstrap-styled.bootstrap-styled)
 [![gitter](https://badges.gitter.im/bootstrap-styled/bootstrap-styled.svg)](https://gitter.im/bootstrap-styled) 
 [![Greenkeeper badge](https://badges.greenkeeper.io/bootstrap-styled/bootstrap-styled.svg)](https://greenkeeper.io/)
-
 
 Bootstrap Styled provide a **chart** and common utilities for writing UI components that can be shared and maintained globally for all the :rocket: ReactJS community.
 It permit an ecosystem of tools, components and variables to create standardized, sharable and highly customizable front-end modules.
