@@ -10,15 +10,17 @@
 [![npm Version](https://img.shields.io/npm/v/bootstrap-styled.svg?style=flat)](https://www.npmjs.com/package/bootstrap-styled) 
 [![License](https://img.shields.io/npm/l/bootstrap-styled.svg?style=flat)](https://www.npmjs.com/package/bootstrap-styled) 
 [![NPM total downloads](https://img.shields.io/npm/dt/bootstrap-styled.svg?style=flat)](https://npmjs.org/package/bootstrap-styled) 
-[![npm Version](https://img.shields.io/node/v/bootstrap-styled.svg?style=flat)](https://www.npmjs.com/package/bootstrap-styled) 
 [![Module formats](https://img.shields.io/badge/module%20formats-umd%2C%20cjs%2C%20esm-green.svg?style=flat)](https://www.npmjs.com/package/bootstrap-styled)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.github.bootstrap-styled.bootstrap-styled&metric=coverage)](https://sonarcloud.io/dashboard?id=com.github.bootstrap-styled.bootstrap-styled) 
 [![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=com.github.bootstrap-styled.bootstrap-styled&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.github.bootstrap-styled.bootstrap-styled)
 [![gitter](https://badges.gitter.im/bootstrap-styled/bootstrap-styled.svg)](https://gitter.im/bootstrap-styled) 
 [![Greenkeeper badge](https://badges.greenkeeper.io/bootstrap-styled/bootstrap-styled.svg)](https://greenkeeper.io/)
 
-Bootstrap Styled provide a **chart** and common utilities for writing UI components that can be shared and maintained globally for all the :rocket: ReactJS community.
-It permit an ecosystem of tools, components and variables to create standardized, sharable and highly customizable front-end modules.
+Bootstrap Styled is a front-end ecosystem for React made with Bootstrap 4 philosophy, using the power of css-in-js thanks to [styled-components](https://www.styled-components.com/).
+It offer a community an ecosystem of tools, components and variables to create standardized, sharable and highly customizable front-end modules.
+
+This main package explain our **chart** for writing components and provide theme common utilities for writing UI components that can be shared and maintained globally for all the :rocket: ReactJS community.
+
 
 ## Table of Contents
 

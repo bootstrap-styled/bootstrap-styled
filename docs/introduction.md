@@ -13,6 +13,10 @@
 [![Module formats](https://img.shields.io/badge/module%20formats-umd%2C%20cjs%2C%20esm-green.svg?style=flat)](https://www.npmjs.com/package/@bootstrap-styled/bootstrap-styled)
 [![gitter](https://badges.gitter.im/bootstrap-styled/bootstrap-styled.svg)](https://gitter.im/bootstrap-styled)
 
-Bootstrap Styled provide a **chart** and common utilities for writing UI components that can be shared and maintained globally for all the ReactJS community. 
 
-It permit an ecosystem of tools, components and variables to create standardized, sharable and highly customizable front-end modules.
+Bootstrap Styled is a front-end ecosystem for React made with Bootstrap 4 philosophy, using the power of css-in-js thanks to [styled-components](https://www.styled-components.com/).
+It offer a community an ecosystem of tools, components and variables to create standardized, sharable and highly customizable front-end modules.
+
+This main package explain our **chart** for writing components and provide theme common utilities for writing UI components that can be shared and maintained globally for all the :rocket: ReactJS community.
+
+
