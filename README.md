@@ -1,8 +1,8 @@
 # bootstrap-styled
 
 <div align="center">
-  <a href="https://bootstrap-styled.github.o">
-    ![bs](https://user-images.githubusercontent.com/1866564/50375497-cda74880-0630-11e9-9f1e-e8d798dff47b.png)
+  <a href="https://bootstrap-styled.github.io">
+    <img alt="bootstrap-styled" src="https://user-images.githubusercontent.com/1866564/50375497-cda74880-0630-11e9-9f1e-e8d798dff47b.png" />
   </a>
   <br/>
   <br/>  
