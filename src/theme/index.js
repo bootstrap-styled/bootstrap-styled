@@ -1,6 +1,7 @@
 import Color from '@bootstrap-styled/color';
 import unitUtils from '@bootstrap-styled/utils/lib/unitUtils';
 import { allowFalseValue, assertAscending, assertStartAtZero } from './utils';
+import { linearGradientRe } from '../utils/regex';
 
 const { detectUnit, rmUnit } = unitUtils;
 
@@ -341,31 +342,45 @@ function makeOriginal(userTheme = {}) {
   v['$btn-font-weight'] = u['$btn-font-weight'] || v['$font-weight-normal'];
   v['$btn-box-shadow'] = u['$btn-box-shadow'] || `inset 0 1px 0 ${Color(v['$white']).alpha(0.15).toString()}, 0 1px 1px ${Color(v['$black']).alpha(0.075).toString()}`;
   v['$btn-focus-box-shadow'] = u['$btn-focus-box-shadow'] || `0 0 0 2px ${Color(v['$brand-primary']).alpha(0.25).toString()}`;
+  v['$btn-disabled-opacity'] = u['$btn-disabled-opacity'] || '.65';
   v['$btn-active-box-shadow'] = u['$btn-active-box-shadow'] || `inset 0 3px 5px ${Color(v['$black']).alpha(0.125).toString()}`;
 
   v['$btn-primary-color'] = u['$btn-primary-color'] || v['$white'];
   v['$btn-primary-bg'] = u['$btn-primary-bg'] || v['$brand-primary'];
-  v['$btn-primary-border'] = u['$btn-primary-border'] || v['$btn-primary-bg'];
 
   v['$btn-secondary-color'] = u['$btn-secondary-color'] || v['$gray-dark'];
   v['$btn-secondary-bg'] = u['$btn-secondary-bg'] || v['$white'];
-  v['$btn-secondary-border'] = u['$btn-secondary-border'] || '#ccc';
 
   v['$btn-info-color'] = u['$btn-info-color'] || v['$white'];
   v['$btn-info-bg'] = u['$btn-info-bg'] || v['$brand-info'];
-  v['$btn-info-border'] = u['$btn-info-border'] || v['$btn-info-bg'];
 
   v['$btn-success-color'] = u['$btn-success-color'] || v['$white'];
   v['$btn-success-bg'] = u['$btn-success-bg'] || v['$brand-success'];
-  v['$btn-success-border'] = u['$btn-success-border'] || v['$btn-success-bg'];
 
   v['$btn-warning-color'] = u['$btn-warning-color'] || v['$white'];
   v['$btn-warning-bg'] = u['$btn-warning-bg'] || v['$brand-warning'];
-  v['$btn-warning-border'] = u['$btn-warning-border'] || v['$btn-warning-bg'];
 
   v['$btn-danger-color'] = u['$btn-danger-color'] || v['$white'];
   v['$btn-danger-bg'] = u['$btn-danger-bg'] || v['$brand-danger'];
-  v['$btn-danger-border'] = u['$btn-danger-border'] || v['$btn-danger-bg'];
+
+  /* this improvement will solve the linear-gradient when used for the background */
+  [
+    'primary',
+    'secondary',
+    'info',
+    'success',
+    'warning',
+    'danger',
+  ].forEach((type) => {
+    if (v[`$btn-${type}-bg`].includes('linear-gradient')) {
+      v[`$btn-${type}-border`] = v[`$btn-${type}-bg`].match(linearGradientRe)[1]; // eslint-disable-line prefer-destructuring
+    } else if (type === 'secondary') {
+      // secondary is having a white background, they use by default #ccc to make it look like a button
+      v['$btn-secondary-border'] = u['$btn-secondary-border'] || '#ccc';
+    } else {
+      v[`$btn-${type}-border`] = u[`$btn-${type}-border`] || v[`$btn-${type}-bg`];
+    }
+  });
 
   v['$btn-link-disabled-color'] = u['$btn-link-disabled-color'] || v['$gray-light'];
 
