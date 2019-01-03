@@ -1,3 +1,11 @@
+## [2.4.7](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.6...v2.4.7) (2019-01-03)
+
+
+### Bug Fixes
+
+* **button:** fixed linear-gradient values ([4f45049](https://github.com/bootstrap-styled/bootstrap-styled/commit/4f45049))
+* **dependencies:** upgrade all dependencies ([a795401](https://github.com/bootstrap-styled/bootstrap-styled/commit/a795401))
+
 ## [2.4.6](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.5...v2.4.6) (2018-12-29)
 
 
