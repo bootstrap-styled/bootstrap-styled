@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-styled",
-  "version": "2.4.9",
+  "version": "2.4.10",
   "description": "Bootstrap Styled is a front-end ecosystem for React made with Bootstrap 4 philosophy, using the power of css-in-js thanks to styled-components.",
   "main": "lib/index.js",
   "jsnext:main": "dist/bootstrap-styled.esm.js",

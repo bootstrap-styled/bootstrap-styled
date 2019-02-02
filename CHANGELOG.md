@@ -1,3 +1,10 @@
+## [2.4.10](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.9...v2.4.10) (2019-02-02)
+
+
+### Bug Fixes
+
+* **dependencies:** fix terser ([df0631e](https://github.com/bootstrap-styled/bootstrap-styled/commit/df0631e))
+
 ## [2.4.9](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.8...v2.4.9) (2019-02-02)
 
 
