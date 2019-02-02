@@ -1,8 +1,9 @@
 import deepMerge from 'lodash.merge';
 /**
- * Convert a theme or a scopedTheme into a makeTheme.
- * @param theme
- *
+ * @public
+ * @description Convert a theme or a scopedTheme into a makeTheme.
+ * @param {object} theme
+ * @returns {function} makeTheme
  *
  * @example
  * const darkTheme = originalMakeTheme({
@@ -51,8 +52,9 @@ function makeThemeFromList(list, theme) {
 }
 
 /**
- * Create a makeTheme using a list of makeThemes.
- * @param list
+ * @public
+ * @description Create a makeTheme using a list of makeThemes.
+ * @param {Array} themes
  * @returns {function(*=): *}
  */
 export default function createMakeTheme(list) {
@@ -60,12 +62,13 @@ export default function createMakeTheme(list) {
 }
 
 /**
-* Creates a scoped makeTheme. Used for creating components or modules with their own variables.
-* @param scopeName string
-* @param userTheme
-*
-**/
-
+ * @public
+ * @description
+ * Creates a scoped makeTheme. Used for creating components or modules with their own variables.
+ * @param scopeName string
+ * @param userTheme
+ *
+ */
 export function makeScopedTheme(scopeName, userTheme = { [scopeName]: {} }) {
   if (scopeName === undefined || typeof scopeName !== 'string') return console.warn('You may have forgotten to set the scope name in the makeScopedTheme function.');
   const newTheme = { [scopeName]: {} };

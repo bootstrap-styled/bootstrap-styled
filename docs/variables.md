@@ -13,8 +13,8 @@ const Button = styled.button`
 export default Button;
 ```
 
->>> You probably recognized the variables used in the `Button` component's css.
+> You probably recognized the variables used in the `Button` component's css.
 
->>> By styling the bootstrap CSS framework as above and integrating its widely known variables, we produced a front-end 
+> By styling the bootstrap CSS framework as above and integrating its widely known variables, we produced a front-end
 library [@bootstrap-styled/v4](https://github.com/bootstrap-styled/v4) that is highly and easily customizable. It is also
 a great place if you are looking for more complex examples.

@@ -35,6 +35,7 @@
     "jsdoc": "jsdoc-documentation --file",
     "prestyleguide": "npm run jsdoc",
     "styleguide": "styleguidist server",
+    "prestyleguide:build": "npm run jsdoc",
     "styleguide:build": "styleguidist build"
   },
   "repository": {
@@ -146,7 +147,7 @@
     }
   },
   "devDependencies": {
-    "@bootstrap-styled/documentation": "^1.0.1",
+    "@bootstrap-styled/documentation": "^1.2.2",
     "@rollup-umd/documentation": "^1.0.17",
     "@semantic-release/changelog": "^3.0.0",
     "@semantic-release/git": "^7.0.5",
@@ -262,8 +263,8 @@
   ],
   "dependencies": {
     "basic-math-utils": "^0.3.4",
-    "@bootstrap-styled/css-utils": "^1.1.0",
-    "@bootstrap-styled/utils": "^1.6.1",
+    "@bootstrap-styled/css-utils": "^1.2.6",
+    "@bootstrap-styled/utils": "^1.7.1",
     "color": "^1.0.3",
     "lodash.merge": "^4.6.1"
   },
