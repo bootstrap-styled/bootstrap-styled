@@ -60,7 +60,7 @@ Please also note that all repositories under the bootstrap-styled organization f
 
 The MIT License
 
-Copyright (c) 2017-2018 Yeutech Company Limited. https://bootstrap-styled.github.io
+Copyright (c) 2017-2018 Yeutech Company Limited. https://bootstrap-styled.github.io/bootstrap-styled
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
