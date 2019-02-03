@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "jsnext:main": "dist/bootstrap-styled.esm.js",
   "module": "dist/bootstrap-styled.esm.js",
-  "homepage": "https://bootstrap-styled.github.io",
+  "homepage": "https://bootstrap-styled.github.io/bootstrap-styled",
   "browserslist": [
     "IE >= 9",
     "last 2 versions"
