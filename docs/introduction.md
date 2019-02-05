@@ -1,19 +1,22 @@
-[![Build Status](https://travis-ci.org/bootstrap-styled/bootstrap-styled.svg?branch=master)](https://travis-ci.org/@bootstrap-styled/bootstrap-styled) [![npm Version](https://img.shields.io/npm/v/@bootstrap-styled/bootstrap-styled.svg?style=flat)](https://www.npmjs.com/package/@bootstrap-styled/bootstrap-styled) [![License](https://img.shields.io/npm/l/@bootstrap-styled/bootstrap-styled.svg?style=flat)](https://www.npmjs.com/package/@bootstrap-styled/bootstrap-styled) [![npm Version](https://img.shields.io/node/v/@bootstrap-styled/bootstrap-styled.svg?style=flat)](https://www.npmjs.com/package/@bootstrap-styled/bootstrap-styled) [![Module formats](https://img.shields.io/badge/module%20formats-umd%2C%20cjs%2C%20esm-green.svg?style=flat)](https://www.npmjs.com/package/@bootstrap-styled/bootstrap-styled)
+<div align="center">
+  <a href="https://bootstrap-styled.github.io">
+    <img alt="bootstrap-styled" src="https://user-images.githubusercontent.com/1866564/50375497-cda74880-0630-11e9-9f1e-e8d798dff47b.png" />
+  </a>
+  <br/>
+  <br/>  
+</div>
 
-$PACKAGE_DESCRIPTION
- 
-Bootstrap-styled takes advantage of the modularity offered by React to make css-in-js components.
-Simplifying the creation of customizable and sharable modules through the bootstrap-styled convention.
+[![Build Status](https://travis-ci.org/bootstrap-styled/bootstrap-styled.svg?branch=master)](https://travis-ci.org/bootstrap-styled/bootstrap-styled) 
+[![npm Version](https://img.shields.io/npm/v/bootstrap-styled.svg?style=flat)](https://www.npmjs.com/package/bootstrap-styled) 
+[![License](https://img.shields.io/npm/l/bootstrap-styled.svg?style=flat)](https://www.npmjs.com/package/bootstrap-styled) 
+[![npm Version](https://img.shields.io/node/v/bootstrap-styled.svg?style=flat)](https://www.npmjs.com/package/bootstrap-styled) 
+[![Module formats](https://img.shields.io/badge/module%20formats-umd%2C%20cjs%2C%20esm-green.svg?style=flat)](https://www.npmjs.com/package/@bootstrap-styled/bootstrap-styled)
+[![gitter](https://badges.gitter.im/bootstrap-styled/bootstrap-styled.svg)](https://gitter.im/bootstrap-styled)
 
 
-## Ecosystem
+Bootstrap Styled is a front-end ecosystem for React made with Bootstrap 4 philosophy, using the power of css-in-js thanks to [styled-components](https://www.styled-components.com/).
+It offer a community an ecosystem of tools, components and variables to create standardized, sharable and highly customizable front-end modules.
 
-* [bootstrap-styled](https://github.com/bootstrap-styled/bootstrap-styled) Theme auto-configuration functions and variable list.
-* [@bootstrap-styled/provider](https://github.com/bootstrap-styled/provider) Provider that manages the theme and other cool features.
-* [@bootstrap-styled/v4](https://github.com/bootstrap-styled/v4) Component library based on bootstrap-styled convention and ecosystem.
-* [@bootstrap-styled/redux](https://github.com/bootstrap-styled/redux) ConnectedBootstrapProvider and Toggle to change theme quickly and simply with Redux. 
-* [@bootstrap-styled/utils](https://github.com/bootstrap-styled/utils) Utils and functions for bootstrap-styled.
-* [@bootstrap-styled/css-utils](https://github.com/bootstrap-styled/css-utils) Css global utilities.
-* [@bootstrap-styled/css-mixins](https://github.com/bootstrap-styled/css-mixins) Css component mixins.
+This main package explain our **chart** for writing components and provide theme common utilities for writing UI components that can be shared and maintained globally for all the :rocket: ReactJS community.
 
 

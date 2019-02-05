@@ -19,6 +19,18 @@
       "content": "docs/introduction.md",
       "sections": [
         {
+          "name": "Why",
+          "content": "docs/why.md"
+        },
+        {
+          "name": "How",
+          "content": "docs/how.md"
+        },
+        {
+          "name": "Ecosystem",
+          "content": "docs/ecosystem.md"
+        },
+        {
           "name": "Installation",
           "content": "docs/installation.md",
           "description": "Use npm or yarn:"
@@ -99,7 +111,13 @@
             },
             {
               "name": "Grid-breakpoints",
-              "content": "docs/variables/grid-breakpoints.md"
+              "content": "docs/variables/grid-breakpoints.md",
+              "sections": [
+                {
+                  "name": "Breakpoints",
+                  "content": "docs/breakpoints.md"
+                }
+              ]
             },
             {
               "name": "Columns",

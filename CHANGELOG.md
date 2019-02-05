@@ -1,3 +1,126 @@
+## [2.4.7](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.6...v2.4.7) (2019-01-03)
+
+
+### Bug Fixes
+
+* **button:** fixed linear-gradient values ([4f45049](https://github.com/bootstrap-styled/bootstrap-styled/commit/4f45049))
+* **dependencies:** upgrade all dependencies ([a795401](https://github.com/bootstrap-styled/bootstrap-styled/commit/a795401))
+
+## [2.4.6](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.5...v2.4.6) (2018-12-29)
+
+
+### Bug Fixes
+
+* **dependencies:** fix test and upgrade dependencies ([da41983](https://github.com/bootstrap-styled/bootstrap-styled/commit/da41983))
+
+## [2.4.5](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.4...v2.4.5) (2018-12-22)
+
+
+### Bug Fixes
+
+* **documentation:** improve presentation ([441b643](https://github.com/bootstrap-styled/bootstrap-styled/commit/441b643))
+* **documentation:** improve presentation ([5191fc8](https://github.com/bootstrap-styled/bootstrap-styled/commit/5191fc8))
+
+## [2.4.4](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.3...v2.4.4) (2018-12-22)
+
+
+### Bug Fixes
+
+* **documentation:** added logo in intro and in readme ([9db033c](https://github.com/bootstrap-styled/bootstrap-styled/commit/9db033c))
+* **documentation:** added logo in intro and in readme ([ddde74f](https://github.com/bootstrap-styled/bootstrap-styled/commit/ddde74f))
+* **documentation:** added logo in intro and in readme ([766efe6](https://github.com/bootstrap-styled/bootstrap-styled/commit/766efe6))
+
+## [2.4.3](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.2...v2.4.3) (2018-12-22)
+
+
+### Bug Fixes
+
+* **dependencies:** Upgrade all dependencies ([a5e5739](https://github.com/bootstrap-styled/bootstrap-styled/commit/a5e5739))
+
+## [2.4.2](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.1...v2.4.2) (2018-12-21)
+
+
+### Bug Fixes
+
+* **dependencies:** Upgrade all dependencies ([131c051](https://github.com/bootstrap-styled/bootstrap-styled/commit/131c051))
+
+## [2.4.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.0...v2.4.1) (2018-12-20)
+
+
+### Bug Fixes
+
+* **variables:** Added variable `$card-group-margin`, `$grid-gutter-width`, remove `$grid-gutter-widt ([78c659e](https://github.com/bootstrap-styled/bootstrap-styled/commit/78c659e))
+
+# [2.4.0](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.3.1...v2.4.0) (2018-12-19)
+
+
+### Features
+
+* **withWidth:** Added withWith higher order component and breakpoints documentation (inspired from MUI) ([55fbd11](https://github.com/bootstrap-styled/bootstrap-styled/commit/55fbd11)), closes [#12](https://github.com/bootstrap-styled/bootstrap-styled/issues/12) [#31](https://github.com/bootstrap-styled/bootstrap-styled/issues/31)
+
+## [2.3.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.3.0...v2.3.1) (2018-12-16)
+
+
+### Bug Fixes
+
+* **greenkeeper:** fix greenkeeper executing sonar ([943b0b5](https://github.com/bootstrap-styled/bootstrap-styled/commit/943b0b5))
+
+# [2.3.0](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.5...v2.3.0) (2018-12-16)
+
+
+### Features
+
+* **greenkeeper:** added greenkeeper and updated all dependencies ([7b23edc](https://github.com/bootstrap-styled/bootstrap-styled/commit/7b23edc))
+
+## [2.2.5](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.4...v2.2.5) (2018-12-10)
+
+
+### Bug Fixes
+
+* **documentation:** introduction was having incorrect badge ([974bf80](https://github.com/bootstrap-styled/bootstrap-styled/commit/974bf80))
+
+## [2.2.4](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.3...v2.2.4) (2018-12-09)
+
+
+### Bug Fixes
+
+* **documentation:** introduction was having incorrect badge ([ca0434e](https://github.com/bootstrap-styled/bootstrap-styled/commit/ca0434e))
+
+## [2.2.3](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.2...v2.2.3) (2018-12-09)
+
+
+### Bug Fixes
+
+* **dependencies:** update some dependencies ([609236b](https://github.com/bootstrap-styled/bootstrap-styled/commit/609236b))
+
+## [2.2.2](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.1...v2.2.2) (2018-12-07)
+
+
+### Bug Fixes
+
+* **toMakeTheme:** deep merge into a new object instead of theme ([2b6f3a1](https://github.com/bootstrap-styled/bootstrap-styled/commit/2b6f3a1))
+
+## [2.2.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.2.0...v2.2.1) (2018-12-07)
+
+
+### Bug Fixes
+
+* **documentation:** added +x on jsdoc.sh ([d25772f](https://github.com/bootstrap-styled/bootstrap-styled/commit/d25772f))
+
+# [2.2.0](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.1.2...v2.2.0) (2018-12-07)
+
+
+### Bug Fixes
+
+* **ci:** build ([f06cef0](https://github.com/bootstrap-styled/bootstrap-styled/commit/f06cef0))
+* **dependencies:** Upgrade many deps, semantic-release, babel 7, remove color ([b4fd289](https://github.com/bootstrap-styled/bootstrap-styled/commit/b4fd289))
+* **documentation:** Using [@rollup-umd](https://github.com/rollup-umd)/documentation and [@bootstrap-styled](https://github.com/bootstrap-styled)/documentation for the documentation engine ([0eebaa2](https://github.com/bootstrap-styled/bootstrap-styled/commit/0eebaa2))
+
+
+### Features
+
+* **dependencies:** update to babel7, update semantic-release, replace color with [@bootstrap-styled](https://github.com/bootstrap-styled)/color ([5038425](https://github.com/bootstrap-styled/bootstrap-styled/commit/5038425))
+
 ## [2.1.2](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.1.1...v2.1.2) (2018-12-03)
 
 

@@ -1,4 +1,4 @@
-import Color from 'color';
+import Color from '@bootstrap-styled/color';
 import { makeTheme as makeThemeBs } from '../../theme';
 import createMakeTheme, { makeScopedTheme, toMakeTheme } from '../index';
 
