@@ -1,3 +1,26 @@
+## [2.4.10](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.9...v2.4.10) (2019-02-02)
+
+
+### Bug Fixes
+
+* **dependencies:** fix terser ([df0631e](https://github.com/bootstrap-styled/bootstrap-styled/commit/df0631e))
+
+## [2.4.9](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.8...v2.4.9) (2019-02-02)
+
+
+### Bug Fixes
+
+* **dependencies:** install terser@3.41.1 (see https://github.com/webpack-contrib/terser-webpack-plugin/issues/66) ([7a14400](https://github.com/bootstrap-styled/bootstrap-styled/commit/7a14400))
+
+## [2.4.8](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.7...v2.4.8) (2019-02-02)
+
+
+### Bug Fixes
+
+* **dependencies:** revert rollup-umd-scripts to latest public version ([f8dcded](https://github.com/bootstrap-styled/bootstrap-styled/commit/f8dcded))
+* **dependencies:** Upgrade all dependencies and updated link of documentation ([a517b32](https://github.com/bootstrap-styled/bootstrap-styled/commit/a517b32))
+* **dependencies:** Upgrade all dependencies and updated link of documentation ([b3db203](https://github.com/bootstrap-styled/bootstrap-styled/commit/b3db203))
+
 ## [2.4.7](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.6...v2.4.7) (2019-01-03)
 
 
