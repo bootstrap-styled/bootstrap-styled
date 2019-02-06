@@ -1,3 +1,11 @@
+## [2.4.11](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.10...v2.4.11) (2019-02-06)
+
+
+### Bug Fixes
+
+* **merge:** resolv ocnflict. ([94afa55](https://github.com/bootstrap-styled/bootstrap-styled/commit/94afa55))
+* **variables:** added variable for btn-border-width ([e27a8e9](https://github.com/bootstrap-styled/bootstrap-styled/commit/e27a8e9))
+
 ## [2.4.10](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.9...v2.4.10) (2019-02-02)
 
 
