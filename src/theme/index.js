@@ -397,6 +397,9 @@ function makeOriginal(userTheme = {}) {
   v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
   v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
 
+  v['$btn-border-width'] = u['$btn-border-width'] || '1px';
+
+
   v['$btn-transition'] = u['$btn-transition'] || v['$transition-base'];
 
 

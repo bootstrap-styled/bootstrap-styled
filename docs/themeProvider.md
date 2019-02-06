@@ -18,7 +18,7 @@ const App = (
 
 ```
 
->>>You can also connect multiple themes at the same time using our
+>You can also connect multiple themes at the same time using our
 [ConnectedBootstrapProvider](https://github.com/bootstrap-styled/redux).
 
->>>Toggle between different themes via your interface even quicker.
+>Toggle between different themes via your interface even quicker.
