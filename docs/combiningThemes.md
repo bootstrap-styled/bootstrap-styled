@@ -5,7 +5,7 @@ makeTheme.
 
 
 ```js static
-import { createMakeTheme, toMakeTheme } from 'bootstrap-styled/lib/utils';
+import createMakeTheme, { toMakeTheme } from 'bootstrap-styled/lib/utils';
 import { makeTheme as makeDarkTheme } from 'coolProject/lib/theme';
 import { makeTheme as makeLoginFormTheme } from 'coolLoginForm/lib/theme';
 
