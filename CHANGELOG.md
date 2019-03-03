@@ -1,3 +1,10 @@
+## [2.4.12](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.11...v2.4.12) (2019-03-03)
+
+
+### Bug Fixes
+
+* **combiningThemes:** fix import of createMakeTheme ([3e7205d](https://github.com/bootstrap-styled/bootstrap-styled/commit/3e7205d))
+
 ## [2.4.11](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.10...v2.4.11) (2019-02-06)
 
 
