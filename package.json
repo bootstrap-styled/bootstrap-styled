@@ -113,7 +113,7 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
-    "react-styleguidist": "^8.0.6",
+    "react-styleguidist": "^9.0.2",
     "react-test-renderer": "^16.7.0",
     "redux": "^4.0.1",
     "redux-immutable": "^4.0.0",
