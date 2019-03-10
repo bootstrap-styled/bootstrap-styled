@@ -1,7 +1,7 @@
 import Color from '@bootstrap-styled/color';
 import unitUtils from '@bootstrap-styled/utils/lib/unitUtils';
 import { allowFalseValue, assertAscending, assertStartAtZero } from './utils';
-import { linearGradientRe } from '../utils/regex';
+// import { linearGradientRe } from '../utils/regex';
 
 const { detectUnit, rmUnit } = unitUtils;
 
@@ -72,37 +72,91 @@ function makeOriginal(userTheme = {}) {
   // Grayscale and brand colors for use across Bootstrap.
 
   // Start with assigning color names to specific hex values.
-  v['$white'] = u['$white'] || '#fff';
-  v['$black'] = u['$black'] || '#000';
-  v['$red'] = u['$red'] || '#d9534f';
-  v['$orange'] = u['$orange'] || '#f0ad4e';
-  v['$yellow'] = u['$yellow'] || '#ffd500';
-  v['$green'] = u['$green'] || '#5cb85c';
-  v['$blue'] = u['$blue'] || '#0275d8';
-  v['$teal'] = u['$teal'] || '#5bc0de';
-  v['$pink'] = u['$pink'] || '#ff5b77';
-  v['$purple'] = u['$purple'] || '#613d7c';
 
   // Create grayscale
-  v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
-  v['$gray'] = u['$gray'] || '#464a4c';
-  v['$gray-light'] = u['$gray-light'] || '#636c72';
-  v['$gray-lighter'] = u['$gray-lighter'] || '#eceeef';
-  v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
+  v['$white'] = u['$white'] || '#fff';
+  v['$black'] = u['$black'] || '#000';
+  v['$gray-100'] = u['$gray-100'] || '#f8f9fa';
+  v['$gray-200'] = u['$gray-200'] || '#e9ecef';
+  v['$gray-300'] = u['$gray-300'] || '#dee2e6';
+  v['$gray-400'] = u['$gray-400'] || '#ced4da';
+  v['$gray-500'] = u['$gray-500'] || '#adb5bd';
+  v['$gray-600'] = u['$gray-600'] || '#6c757d';
+  v['$gray-700'] = u['$gray-700'] || '#495057';
+  v['$gray-800'] = u['$gray-800'] || '#343a40';
+  v['$gray-900'] = u['$gray-900'] || '#212529';
 
-  // Reassign color vars to semantic color scheme
-  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
-  v['$brand-success'] = u['$brand-success'] || v['$green'];
-  v['$brand-info'] = u['$brand-info'] || v['$teal'];
-  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
-  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
-  v['$brand-inverse'] = u['$brand-inverse'] || v['$gray-dark'];
+  v['$grays'] = u['$grays'] || {
+    100: v['$gray-100'],
+    200: v['$gray-200'],
+    300: v['$gray-300'],
+    400: v['$gray-400'],
+    500: v['$gray-500'],
+    600: v['$gray-600'],
+    700: v['$gray-700'],
+    800: v['$gray-800'],
+    900: v['$gray-900'],
+  };
 
+  v['$blue'] = u['$blue'] || '#007bff';
+  v['$indigo'] = u['$indigo'] || '#6610f2';
+  v['$purple'] = u['$purple'] || '#6f42c1';
+  v['$pink'] = u['$pink'] || '#e83e8c';
+  v['$red'] = u['$red'] || '#dc3545';
+  v['$orange'] = u['$orange'] || '#fd7e14';
+  v['$yellow'] = u['$yellow'] || '#ffc107';
+  v['$green'] = u['$green'] || '#28a745';
+  v['$teal'] = u['$teal'] || '#20c997';
+  v['$cyan'] = u['$cyan'] || '#17a2b8';
+
+  v['$colors'] = u['$colors'] || {
+    blue: v['$blue'],
+    indigo: v['$indigo'],
+    purple: v['$purple'],
+    pink: v['$pink'],
+    red: v['$red'],
+    orange: v['$orange'],
+    yellow: v['$yellow'],
+    green: v['$green'],
+    teal: v['$teal'],
+    cyan: v['$cyan'],
+  };
+
+  v['$primary'] = u['$primary'] || v['$blue'];
+  v['$secondary'] = u['$secondary'] || v['$gray-600'];
+  v['$success'] = u['$success'] || v['$green'];
+  v['$info'] = u['$info'] || v['$cyan'];
+  v['$warning'] = u['$warning'] || v['$yellow'];
+  v['$danger'] = u['$danger'] || v['$red'];
+  v['$light'] = u['$light'] || v['$gray-100'];
+  v['$dark'] = u['$dark'] || v['$gray-800'];
+
+  v['$theme-colors'] = u['$theme-colors'] || {
+    primary: v['$primary'],
+    secondary: v['$secondary'],
+    success: v['$success'],
+    info: v['$info'],
+    warning: v['$warning'],
+    danger: v['$danger'],
+    light: v['$light'],
+    dark: v['$dark'],
+  };
+
+  // Set a specific jump point for requesting color jumps
+  v['$theme-color-interval'] = u['$theme-color-interval'] || '8%';
+
+  // The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
+  v['$yiq-contrasted-threshold'] = u['$yiq-contrasted-threshold'] || '150';
+
+  // Customize the light and dark text colors for use in our YIQ color contrast function.
+  v['$yiq-text-dark'] = u['$yiq-text-dark'] || v['$gray-900'];
+  v['$yiq-text-light'] = u['$yiq-text-light'] || v['$white'];
 
   // Options
   //
   // Quickly modify global styling by enabling or disabling optional features.
 
+  v['$enable-caret'] = allowFalseValue(u['$enable-caret'], true);
   v['$enable-rounded'] = allowFalseValue(u['$enable-rounded'], true);
   v['$enable-shadows'] = allowFalseValue(u['$enable-shadows'], false);
   v['$enable-gradients'] = allowFalseValue(u['$enable-gradients'], false);
@@ -168,20 +222,24 @@ function makeOriginal(userTheme = {}) {
   // Settings for the `<body>` element.
 
   v['$body-bg'] = u['$body-bg'] || v['$white'];
-  v['$body-color'] = u['$body-color'] || v['$gray-dark'];
+  v['$body-color'] = u['$body-color'] || v['$gray-900'];
 
   // Links
   //
   // Style anchor elements.
 
-  v['$link-color'] = u['$link-color'] || v['$brand-primary'];
+  v['$link-color'] = u['$link-color'] || v['$theme-colors'].primary;
   v['$link-decoration'] = u['$link-decoration'] || 'none';
-  v['$link-hover-color'] = u['$link-hover-color'] || Color(v['$link-color']).darken(0.35).toString();
+  v['$link-hover-color'] = u['$link-hover-color'] || Color(v['$link-color']).darken(0.15).toString();
   v['$link-hover-decoration'] = u['$link-hover-decoration'] || 'underline';
 
+  // Paragraphs
+  //
+  // Style p element.
+
+  v['$paragraph-margin-bottom'] = u['$paragraph-margin-bottom'] || '1rem';
 
   // Grid breakpoints
-
   //
   // Define the minimum dimensions at which your layout will change,
   // adapting to different screen sizes, for use in media queries.
@@ -217,37 +275,60 @@ function makeOriginal(userTheme = {}) {
   v['$grid-columns'] = u['$grid-columns'] || '12';
   v['$grid-gutter-width'] = u['$grid-gutter-width'] || '30px';
 
+  // Components
+  //
+  // Define common padding and border radius sizes and more.
+
+  v['$line-height-lg'] = u['$line-height-lg'] || '1.5';
+  v['$line-height-sm'] = u['$line-height-sm'] || '1.5';
+
+  v['$border-width'] = u['$border-width'] || '1px';
+  v['$border-color'] = u['$border-color'] || v['$gray-300'];
+
+  v['$border-radius'] = u['$border-radius'] || '.25rem';
+  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
+  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  v['$component-active-color'] = u['$component-active-color'] || v['$white'];
+  v['$component-active-bg'] = u['$component-active-bg'] || v['$theme-colors'].primary;
+
+  v['$caret-width'] = u['$caret-width'] || '.3em';
+
+  v['$transition-base'] = u['$transition-base'] || 'all .2s ease-in-out';
+  v['$transition-fade'] = u['$transition-fade'] || 'opacity .15s linear';
+  v['$transition-collapse'] = u['$transition-collapse'] || 'height .35s ease';
+
   // Fonts
   //
   // Font, line-height, and color for body text, headings, and more.
-
-  v['$font-family-sans-serif'] = u['$font-family-sans-serif'] || '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
-  v['$font-family-monospace'] = u['$font-family-monospace'] || 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
+  v['$font-family-sans-serif'] = u['$font-family-sans-serif'] || '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
+  v['$font-family-monospace'] = u['$font-family-monospace'] || 'SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
   v['$font-family-base'] = u['$font-family-base'] || v['$font-family-sans-serif'];
 
   v['$font-size-base'] = u['$font-size-base'] || '1rem'; // Assumes the browser default, typically `16px`
-  v['$font-size-lg'] = u['$font-size-lg'] || '1.25rem';
-  v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
-  v['$font-size-xs'] = u['$font-size-xs'] || '.75rem';
+  detectedUnit = detectUnit(v['$font-size-base']);
+  v['$font-size-lg'] = u['$font-size-lg'] || (rmUnit(v['$font-size-base']) * 1.25) + detectedUnit;
+  v['$font-size-sm'] = u['$font-size-sm'] || (rmUnit(v['$font-size-base']) * 0.875) + detectedUnit;
 
-  v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
-  v['$font-weight-bold'] = u['$font-weight-bold'] || 'bold';
+  v['$font-weight-light'] = u['$font-weight-light'] || '300';
+  v['$font-weight-normal'] = u['$font-weight-normal'] || '400';
+  v['$font-weight-bold'] = u['$font-weight-bold'] || '700';
 
   v['$font-weight-base'] = u['$font-weight-base'] || v['$font-weight-normal'];
   v['$line-height-base'] = u['$line-height-base'] || '1.5';
 
-  v['$font-size-h1'] = u['$font-size-h1'] || '2.5rem';
-  v['$font-size-h2'] = u['$font-size-h2'] || '2rem';
-  v['$font-size-h3'] = u['$font-size-h3'] || '1.75rem';
-  v['$font-size-h4'] = u['$font-size-h4'] || '1.5rem';
-  v['$font-size-h5'] = u['$font-size-h5'] || '1.25rem';
-  v['$font-size-h6'] = u['$font-size-h6'] || '1rem';
+  v['$h1-font-size'] = u['$h1-font-size'] || (rmUnit(v['$font-size-base']) * 2.5) + detectedUnit;
+  v['$h2-font-size'] = u['$h2-font-size'] || (rmUnit(v['$font-size-base']) * 2) + detectedUnit;
+  v['$h3-font-size'] = u['$h3-font-size'] || (rmUnit(v['$font-size-base']) * 1.75) + detectedUnit;
+  v['$h4-font-size'] = u['$h4-font-size'] || (rmUnit(v['$font-size-base']) * 1.5) + detectedUnit;
+  v['$h5-font-size'] = u['$h5-font-size'] || (rmUnit(v['$font-size-base']) * 1.25) + detectedUnit;
+  v['$h6-font-size'] = u['$h6-font-size'] || v['$font-size-base'];
 
   detectedUnit = detectUnit(v['$spacer']);
   v['$headings-margin-bottom'] = u['$headings-margin-bottom'] || (rmUnit(v['$spacer'], detectedUnit) / 2) + detectedUnit;
   v['$headings-font-family'] = u['$headings-font-family'] || 'inherit';
   v['$headings-font-weight'] = u['$headings-font-weight'] || '500';
-  v['$headings-line-height'] = u['$headings-line-height'] || '1.1';
+  v['$headings-line-height'] = u['$headings-line-height'] || '1.2';
   v['$headings-color'] = u['$headings-color'] || 'inherit';
 
   v['$display1-size'] = u['$display1-size'] || '6rem';
@@ -259,21 +340,18 @@ function makeOriginal(userTheme = {}) {
   v['$display2-weight'] = u['$display2-weight'] || '300';
   v['$display3-weight'] = u['$display3-weight'] || '300';
   v['$display4-weight'] = u['$display4-weight'] || '300';
-
   v['$display-line-height'] = u['$display-line-height'] || v['$headings-line-height'];
 
-  v['$lead-font-size'] = u['$lead-font-size'] || '1.25rem';
+  detectedUnit = detectUnit(v['$font-size-base']);
+  v['$lead-font-size'] = u['$lead-font-size'] || (rmUnit(v['$font-size-base']) * 1.25) + detectedUnit;
   v['$lead-font-weight'] = u['$lead-font-weight'] || '300';
 
   v['$small-font-size'] = u['$small-font-size'] || '80%';
 
-  v['$text-muted'] = u['$text-muted'] || v['$gray-light'];
+  v['$text-muted'] = u['$text-muted'] || v['$gray-600'];
 
-  v['$blockquote-small-color'] = u['$blockquote-small-color'] || v['$gray-light'];
-  detectedUnit = detectUnit(v['$font-size-base']);
+  v['$blockquote-small-color'] = u['$blockquote-small-color'] || v['$gray-600'];
   v['$blockquote-font-size'] = u['$blockquote-font-size'] || (rmUnit(v['$font-size-base'], detectedUnit) * 1.25) + detectedUnit;
-  v['$blockquote-border-color'] = u['$blockquote-border-color'] || v['$gray-lighter'];
-  v['$blockquote-border-width'] = u['$blockquote-border-width'] || '.25rem';
 
   v['$hr-border-color'] = u['$hr-border-color'] || Color(v['$black']).alpha(0.1).toString();
   v['$hr-border-width'] = u['$hr-border-width'] || v['$border-width'];
@@ -282,113 +360,87 @@ function makeOriginal(userTheme = {}) {
 
   v['$dt-font-weight'] = u['$dt-font-weight'] || v['$font-weight-bold'];
 
-  v['$list-inline-padding'] = u['$list-inline-padding'] || '5px';
+  v['$kbd-box-shadow'] = u['$kbd-box-shadow'] || `inset 0 -.1rem 0 ${Color(v['$black']).alpha(0.25).toString()}`;
+  v['$nested-kbd-font-weight'] = u['$nested-kbd-font-weight'] || v['$font-weight-bold'];
 
+  v['$list-inline-padding'] = u['$list-inline-padding'] || '.5rem';
 
-  // Components
-  //
-  // Define common padding and border radius sizes and more.
+  v['$mark-bg'] = u['$mark-bg'] || '#fcf8e3';
 
-  v['$line-height-lg'] = u['$line-height-lg'] || '1.6';
-  v['$line-height-sm'] = u['$line-height-sm'] || '1.3';
-
-  v['$border-radius'] = u['$border-radius'] || '.25rem';
-  v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
-  v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
-
-  v['$component-active-color'] = u['$component-active-color'] || v['$white'];
-  v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
-
-  v['$caret-width'] = u['$caret-width'] || '.3em';
-
-  v['$transition-base'] = u['$transition-base'] || 'all .2s ease-in-out';
-  v['$transition-fade'] = u['$transition-fade'] || 'opacity .15s linear';
-  v['$transition-collapse'] = u['$transition-collapse'] || 'height .35s ease';
-
+  v['$hr-margin-y'] = u['$hr-margin-y'] || v['$spacer'];
 
   // Tables
   //
   // Customizes the `.table` component with basic values, each used across all table variations.
 
   v['$table-cell-padding'] = u['$table-cell-padding'] || '.75rem';
-  v['$table-sm-cell-padding'] = u['$table-sm-cell-padding'] || '.3rem';
+  v['$table-sm-cell-padding'] = u['$table-cell-sm-padding'] || '.3rem';
 
   v['$table-bg'] = u['$table-bg'] || 'transparent';
-
-  v['$table-inverse-bg'] = u['$table-inverse-bg'] || v['$gray-dark'];
-  v['$table-inverse-bg-accent'] = u['$table-inverse-bg-accent'] || Color(v['$white']).alpha(0.05).toString();
-  v['$table-inverse-bg-hover'] = u['$table-inverse-bg-hover'] || Color(v['$white']).alpha(0.075).toString();
-  v['$table-inverse-color'] = u['$table-inverse-color'] || v['$body-bg'];
-  v['$table-inverse-border'] = u['$table-inverse-border'] || Color(v['$gray-dark']).lighten(0.075).toString();
-
   v['$table-bg-accent'] = u['$table-bg-accent'] || Color(v['$black']).alpha(0.05).toString();
   v['$table-bg-hover'] = u['$table-bg-hover'] || Color(v['$black']).alpha(0.075).toString();
   v['$table-bg-active'] = u['$table-bg-active'] || v['$table-bg-hover'];
 
-  v['$table-head-bg'] = u['$table-head-bg'] || v['$gray-lighter'];
-  v['$table-head-color'] = u['$table-head-color'] || v['$gray'];
-
   v['$table-border-width'] = u['$table-border-width'] || v['$border-width'];
-  v['$table-border-color'] = u['$table-border-color'] || v['$gray-lighter'];
+  v['$table-border-color'] = u['$table-border-color'] || v['$gray-300'];
 
+  v['$table-head-bg'] = u['$table-head-bg'] || v['$gray-200'];
+  v['$table-head-color'] = u['$table-head-color'] || v['$gray-700'];
+
+  v['$table-dark-bg'] = u['$table-dark-bg'] || v['$gray-900'];
+  v['$table-dark-accent-bg'] = u['$table-dark-accent-bg'] || Color(v['$white']).alpha(0.05).toString();
+  v['$table-dark-hover-bg'] = u['$table-inverse-hover-bg'] || Color(v['$white']).alpha(0.075).toString();
+  v['$table-dark-border-color'] = u['$table-dark-border-color'] || Color(v['$gray-900']).lighten(0.075).toString();
+  v['$table-dark-color'] = u['$table-dark-color'] || v['$body-bg'];
+
+  // Buttons + Forms
+  //
+  // Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
+
+  v['$input-btn-padding-y'] = u['$input-btn-padding-y'] || '.375rem';
+  v['$input-btn-padding-x'] = u['$input-btn-padding-x'] || '.75rem';
+  v['$input-btn-line-height'] = u['$input-btn-line-height'] || v['$line-height-base'];
+
+  v['$input-btn-focus-width'] = u['$input-btn-focus-width'] || '.2rem';
+  v['$input-btn-focus-color'] = u['$input-btn-focus-color'] || Color(v['$component-active-bg']).alpha(0.25).toString();
+  v['$input-btn-focus-box-shadow'] = u['$input-btn-focus-box-shadow'] || `0 0 0 ${v['$input-btn-focus-width']} ${v['$input-btn-focus-color']}`;
+
+  v['$input-btn-padding-y-sm'] = u['$input-btn-padding-y-sm'] || '.25rem';
+  v['$input-btn-padding-x-sm'] = u['$input-btn-padding-x-sm'] || '.5rem';
+  v['$input-btn-line-height-sm'] = u['$input-btn-line-height-sm'] || v['$line-height-sm'];
+
+  v['$input-btn-padding-y-lg'] = u['$input-btn-padding-y-lg'] || '.5rem';
+  v['$input-btn-padding-x-lg'] = u['$input-btn-padding-x-lg'] || '1rem';
+  v['$input-btn-line-height-lg'] = u['$input-btn-line-height-lg'] || v['$line-height-lg'];
+
+  v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width'];
 
   // Buttons
   //
   // For each of Bootstrap's buttons, define text, background and border color.
 
-  v['$btn-padding-x'] = u['$btn-padding-x'] || '1rem';
-  v['$btn-padding-y'] = u['$btn-padding-y'] || '.5rem';
-  v['$btn-line-height'] = u['$btn-line-height'] || '1.25';
+  v['$btn-padding-x'] = u['$btn-padding-x'] || v['$input-btn-padding-x'];
+  v['$btn-padding-y'] = u['$btn-padding-y'] || v['$input-btn-padding-y'];
+  v['$btn-line-height'] = u['$btn-line-height'] || v['$input-btn-line-height'];
+
+  v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || v['$input-btn-padding-x-sm'];
+  v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || v['$input-btn-padding-y-sm'];
+  v['$btn-line-height-sm'] = u['$btn-line-height-sm'] || v['$input-btn-line-height-sm'];
+
+  v['$btn-padding-x-lg'] = u['$btn-padding-x-lg'] || v['$input-btn-padding-x-lg'];
+  v['$btn-padding-y-lg'] = u['$btn-padding-y-lg'] || v['$input-btn-padding-y-lg'];
+  v['$btn-line-height-lg'] = u['$btn-line-height-lg'] || v['$input-btn-line-height-lg'];
+
+  v['$btn-border-width'] = u['$btn-border-width'] || v['$input-btn-border-width'];
+
   v['$btn-font-weight'] = u['$btn-font-weight'] || v['$font-weight-normal'];
   v['$btn-box-shadow'] = u['$btn-box-shadow'] || `inset 0 1px 0 ${Color(v['$white']).alpha(0.15).toString()}, 0 1px 1px ${Color(v['$black']).alpha(0.075).toString()}`;
-  v['$btn-focus-box-shadow'] = u['$btn-focus-box-shadow'] || `0 0 0 2px ${Color(v['$brand-primary']).alpha(0.25).toString()}`;
+  v['$btn-focus-width'] = u['$btn-focus-width'] || v['$input-btn-focus-width'];
+  v['$btn-focus-box-shadow'] = u['$btn-focus-box-shadow'] || v['$input-btn-focus-box-shadow'];
   v['$btn-disabled-opacity'] = u['$btn-disabled-opacity'] || '.65';
   v['$btn-active-box-shadow'] = u['$btn-active-box-shadow'] || `inset 0 3px 5px ${Color(v['$black']).alpha(0.125).toString()}`;
 
-  v['$btn-primary-color'] = u['$btn-primary-color'] || v['$white'];
-  v['$btn-primary-bg'] = u['$btn-primary-bg'] || v['$brand-primary'];
-
-  v['$btn-secondary-color'] = u['$btn-secondary-color'] || v['$gray-dark'];
-  v['$btn-secondary-bg'] = u['$btn-secondary-bg'] || v['$white'];
-
-  v['$btn-info-color'] = u['$btn-info-color'] || v['$white'];
-  v['$btn-info-bg'] = u['$btn-info-bg'] || v['$brand-info'];
-
-  v['$btn-success-color'] = u['$btn-success-color'] || v['$white'];
-  v['$btn-success-bg'] = u['$btn-success-bg'] || v['$brand-success'];
-
-  v['$btn-warning-color'] = u['$btn-warning-color'] || v['$white'];
-  v['$btn-warning-bg'] = u['$btn-warning-bg'] || v['$brand-warning'];
-
-  v['$btn-danger-color'] = u['$btn-danger-color'] || v['$white'];
-  v['$btn-danger-bg'] = u['$btn-danger-bg'] || v['$brand-danger'];
-
-  /* this improvement will solve the linear-gradient when used for the background */
-  [
-    'primary',
-    'secondary',
-    'info',
-    'success',
-    'warning',
-    'danger',
-  ].forEach((type) => {
-    if (v[`$btn-${type}-bg`].includes('linear-gradient')) {
-      v[`$btn-${type}-border`] = v[`$btn-${type}-bg`].match(linearGradientRe)[1]; // eslint-disable-line prefer-destructuring
-    } else if (type === 'secondary') {
-      // secondary is having a white background, they use by default #ccc to make it look like a button
-      v['$btn-secondary-border'] = u['$btn-secondary-border'] || '#ccc';
-    } else {
-      v[`$btn-${type}-border`] = u[`$btn-${type}-border`] || v[`$btn-${type}-bg`];
-    }
-  });
-
-  v['$btn-link-disabled-color'] = u['$btn-link-disabled-color'] || v['$gray-light'];
-
-  v['$btn-padding-x-sm'] = u['$btn-padding-x-sm'] || '.5rem';
-  v['$btn-padding-y-sm'] = u['$btn-padding-y-sm'] || '.25rem';
-
-  v['$btn-padding-x-lg'] = u['$btn-padding-x-lg'] || '1.5rem';
-  v['$btn-padding-y-lg'] = u['$btn-padding-y-lg'] || '.75rem';
+  v['$btn-link-disabled-color'] = u['$btn-link-disabled-color'] || v['$gray-600'];
 
   v['$btn-block-spacing-y'] = u['$btn-block-spacing-y'] || '.5rem';
 
@@ -397,138 +449,176 @@ function makeOriginal(userTheme = {}) {
   v['$btn-border-radius-lg'] = u['$btn-border-radius-lg'] || v['$border-radius-lg'];
   v['$btn-border-radius-sm'] = u['$btn-border-radius-sm'] || v['$border-radius-sm'];
 
-  v['$btn-border-width'] = u['$btn-border-width'] || '1px';
+  v['$btn-transition'] = u['$btn-transition'] || 'color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out';
 
-
-  v['$btn-transition'] = u['$btn-transition'] || v['$transition-base'];
-
+  // v['$btn-primary-color'] = u['$btn-primary-color'] || v['$white'];
+  // v['$btn-primary-bg'] = u['$btn-primary-bg'] || v['$brand-primary'];
+  //
+  // v['$btn-secondary-color'] = u['$btn-secondary-color'] || v['$gray-dark'];
+  // v['$btn-secondary-bg'] = u['$btn-secondary-bg'] || v['$white'];
+  //
+  // v['$btn-info-color'] = u['$btn-info-color'] || v['$white'];
+  // v['$btn-info-bg'] = u['$btn-info-bg'] || v['$brand-info'];
+  //
+  // v['$btn-success-color'] = u['$btn-success-color'] || v['$white'];
+  // v['$btn-success-bg'] = u['$btn-success-bg'] || v['$brand-success'];
+  //
+  // v['$btn-warning-color'] = u['$btn-warning-color'] || v['$white'];
+  // v['$btn-warning-bg'] = u['$btn-warning-bg'] || v['$brand-warning'];
+  //
+  // v['$btn-danger-color'] = u['$btn-danger-color'] || v['$white'];
+  // v['$btn-danger-bg'] = u['$btn-danger-bg'] || v['$brand-danger'];
+  //
+  // /* this improvement will solve the linear-gradient when used for the background */
+  // v['$theme-colors'].forEach((color) => {
+  //   if (v[`$btn-${color}-bg`].includes('linear-gradient')) {
+  //     v[`$btn-${color}-border`] = v[`$btn-${color}-bg`].match(linearGradientRe)[1]; // eslint-disable-line prefer-destructuring
+  //   } else if (color === 'secondary') {
+  //     // secondary is having a white background, they use by default #ccc to make it look like a button
+  //     v['$btn-secondary-border'] = u['$btn-secondary-border'] || '#ccc';
+  //   } else {
+  //     v[`$btn-${color}-border`] = u[`$btn-${color}-border`] || v[`$btn-${color}-bg`];
+  //   }
+  // });
 
   // Forms
 
-  v['$input-padding-x'] = u['$input-padding-x'] || '.75rem';
-  v['$input-padding-y'] = u['$input-padding-y'] || '.5rem';
-  v['$input-line-height'] = u['$input-line-height'] || '1.25';
+  v['$input-padding-x'] = u['$input-padding-x'] || v['$input-btn-padding-x'];
+  v['$input-padding-y'] = u['$input-padding-y'] || v['$input-btn-padding-y'];
+  v['$input-line-height'] = u['$input-line-height'] || v['$input-btn-line-height'];
+
+  v['$input-padding-x-sm'] = u['$input-padding-x-sm'] || v['$input-btn-padding-x-sm'];
+  v['$input-padding-y-sm'] = u['$input-padding-y-sm'] || v['$input-btn-padding-y-sm'];
+  v['$input-line-height'] = u['$input-line-height'] || v['$input-btn-line-height-sm'];
+
+  v['$input-padding-x-lg'] = u['$input-padding-x-lg'] || v['$input-btn-padding-x-lg'];
+  v['$input-padding-y-lg'] = u['$input-padding-y-lg'] || v['$input-btn-padding-y-lg'];
+  v['$input-line-height'] = u['$input-line-height'] || v['$input-btn-line-height-lg'];
 
   v['$input-bg'] = u['$input-bg'] || v['$white'];
-  v['$input-bg-disabled'] = u['$input-bg-disabled'] || v['$gray-lighter'];
+  v['$input-bg-disabled'] = u['$input-bg-disabled'] || v['$gray-200'];
 
-  v['$input-color'] = u['$input-color'] || v['$gray'];
-  v['$input-border-color'] = u['$input-border-color'] || Color(v['$black']).alpha(0.15).toString();
-  v['$input-btn-border-width'] = u['$input-btn-border-width'] || v['$border-width']; // For form controls and buttons
+  v['$input-color'] = u['$input-color'] || v['$gray-700'];
+  v['$input-border-color'] = u['$input-border-color'] || v['$gray-400'];
+  v['$input-border-width'] = u['$input-border-width'] || v['$input-btn-border-width'];
   v['$input-box-shadow'] = u['$input-box-shadow'] || `inset 0 1px 1px ${Color(v['$black']).alpha(0.075).toString()}`;
 
   v['$input-border-radius'] = u['$input-border-radius'] || v['$border-radius'];
   v['$input-border-radius-lg'] = u['$input-border-radius-lg'] || v['$border-radius-lg'];
   v['$input-border-radius-sm'] = u['$input-border-radius-sm'] || v['$border-radius-sm'];
 
-  v['$input-bg-focus'] = u['$input-bg-focus'] || v['$input-bg'];
-  v['$input-border-focus'] = u['$input-border-focus'] || Color(v['$brand-primary']).lighten(0.25).toString();
-  v['$input-box-shadow-focus'] = u['$input-box-shadow-focus'] || `${v['$input-box-shadow']}, 0 0 8px rgba(${v['$input-border-focus']},.6)`;
-  v['$input-color-focus'] = u['$input-color-focus'] || v['$input-color'];
+  v['$input-focus-bg'] = u['$input-focus-bg'] || v['$input-bg'];
+  v['$input-focus-border-color'] = u['$input-focus-border-color'] || Color(v['$component-active-bg']).lighten(0.25).toString();
+  v['$input-focus-color'] = u['$input-focus-color'] || v['$input-color'];
+  v['$input-focus-width'] = u['$input-focus-color'] || v['$input-btn-focus-width'];
+  v['$input-focus-box-shadow'] = u['$input-focus-box-shadow'] || v['$input-btn-focus-box-shadow'];
 
-  v['$input-color-placeholder'] = u['$input-color-placeholder'] || v['$gray-light'];
+  v['$input-placeholder-color'] = u['$input-placeholder-color'] || v['$gray-600'];
 
-  v['$input-padding-x-sm'] = u['$input-padding-x-sm'] || '.5rem';
-  v['$input-padding-y-sm'] = u['$input-padding-y-sm'] || '.25rem';
-
-  v['$input-padding-x-lg'] = u['$input-padding-x-lg'] || '1.5rem';
-  v['$input-padding-y-lg'] = u['$input-padding-y-lg'] || '.75rem';
+  detectedUnit = detectUnit(v['$input-border-width']);
+  v['$input-height-border'] = u['$input-height-border'] || (rmUnit(v['$input-border-width'], detectedUnit) * 2) + detectedUnit;
 
   detectedUnit = detectUnit(v['$font-size-base']);
-  v['$input-height'] = u['$input-height'] || ((rmUnit(v['$font-size-base'], detectedUnit) * v['$line-height-base']) + (rmUnit(v['$input-padding-y'], detectedUnit) * 2) + detectedUnit);
-  v['$input-height-sm'] = u['$input-height-sm'] || ((rmUnit(v['$font-size-sm'], detectedUnit) * v['$line-height-sm']) + (rmUnit(v['$input-padding-y-sm'], detectedUnit) * 2) + detectedUnit);
-  v['$input-height-lg'] = u['$input-height-lg'] || ((rmUnit(v['$font-size-lg'], detectedUnit) * v['$line-height-lg']) + (rmUnit(v['$input-padding-y-lg'], detectedUnit) * 2) + detectedUnit);
+
+  v['$input-height-inner'] = u['$input-height-inner'] || (rmUnit(v['$font-size-base'], detectedUnit) * (rmUnit(v['$input-btn-line-height'], detectedUnit)) + (rmUnit(v['$input-btn-padding-y'], detectedUnit) * 2) + detectedUnit);
+  v['$input-height'] = u['$input-height'] || (rmUnit(v['$input-height-inner'], detectedUnit) + (rmUnit(v['$input-height-border'], detectedUnit)) + detectedUnit);
+
+  v['$input-height-inner-sm'] = u['$input-height-inner-sm'] || (rmUnit(v['$font-size-sm'], detectedUnit) * (rmUnit(v['$input-btn-line-height-sm'], detectedUnit)) + (rmUnit(v['$input-btn-padding-y-sm'], detectedUnit) * 2) + detectedUnit);
+  v['$input-height-sm'] = u['$input-height-sm'] || (rmUnit(v['$input-height-inner-sm'], detectedUnit) + (rmUnit(v['$input-height-border'], detectedUnit)) + detectedUnit);
+
+  v['$input-height-inner-lg'] = u['$input-height-inner-lg'] || (rmUnit(v['$font-size-lg'], detectedUnit) * (rmUnit(v['$input-btn-line-height-lg'], detectedUnit)) + (rmUnit(v['$input-btn-padding-y-lg'], detectedUnit) * 2) + detectedUnit);
+  v['$input-height-lg'] = u['$input-height-lg'] || (rmUnit(v['$input-height-inner-lg'], detectedUnit) + (rmUnit(v['$input-height-border'], detectedUnit)) + detectedUnit);
 
   v['$input-transition'] = u['$input-transition'] || 'border-color ease-in-out .15s, box-shadow ease-in-out .15s';
 
-  v['$label-margin-bottom'] = u['$label-margin-bottom'] || '.5rem';
-
   v['$form-text-margin-top'] = u['$form-text-margin-top'] || '.25rem';
-  v['$form-feedback-margin-top'] = u['$form-feedback-margin-top'] || v['$form-text-margin-top'];
 
-  v['$form-check-margin-bottom'] = u['$form-check-margin-bottom'] || '.5rem';
   v['$form-check-input-gutter'] = u['$form-check-input-gutter'] || '1.25rem';
-  v['$form-check-input-margin-y'] = u['$form-check-input-margin-y'] || '.25rem';
+  v['$form-check-input-margin-y'] = u['$form-check-input-margin-y'] || '.3rem';
   v['$form-check-input-margin-x'] = u['$form-check-input-margin-x'] || '.25rem';
 
   v['$form-check-inline-margin-x'] = u['$form-check-inline-margin-x'] || '.75rem';
+  v['$form-check-inline-input-margin-x'] = u['$form-check-inline-input-margin-x'] || '.3125rem';
 
-  v['$form-group-margin-bottom'] = u['$form-group-margin-bottom'] || v['$spacer-y'];
+  v['$form-group-margin-bottom'] = u['$form-group-margin-bottom'] || '1rem';
 
-  v['$input-group-addon-bg'] = u['$input-group-addon-bg'] || v['$gray-lighter'];
+  v['$input-group-addon-color'] = u['$input-group-addon-color'] || v['$input-color'];
+  v['$input-group-addon-bg'] = u['$input-group-addon-bg'] || v['$gray-200'];
   v['$input-group-addon-border-color'] = u['$input-group-addon-border-color'] || v['$input-border-color'];
-
-  v['$cursor-disabled'] = u['$cursor-disabled'] || 'not-allowed';
 
   v['$custom-control-gutter'] = u['$custom-control-gutter'] || '1.5rem';
   v['$custom-control-spacer-x'] = u['$custom-control-spacer-x'] || '1rem';
-  v['$custom-control-spacer-y'] = u['$custom-control-spacer-y'] || '.25rem';
 
   v['$custom-control-indicator-size'] = u['$custom-control-indicator-size'] || '1rem';
-  v['$custom-control-indicator-bg'] = u['$custom-control-indicator-bg'] || '#ddd';
+  v['$custom-control-indicator-bg'] = u['$custom-control-indicator-bg'] || v['$gray-300'];
   v['$custom-control-indicator-bg-size'] = u['$custom-control-indicator-bg-size'] || '50% 50%';
   v['$custom-control-indicator-box-shadow'] = u['$custom-control-indicator-box-shadow'] || `inset 0 .25rem .25rem ${Color(v['$black']).alpha(0.1).toString()}`;
 
-  v['$custom-control-disabled-cursor'] = u['$custom-control-disabled-cursor'] || v['$cursor-disabled'];
-  v['$custom-control-disabled-indicator-bg'] = u['$custom-control-disabled-indicator-bg'] || v['$gray-lighter'];
-  v['$custom-control-disabled-description-color'] = u['$custom-control-disabled-description-color'] || v['$gray-light'];
+  v['$custom-control-indicator-disabled-bg'] = u['$custom-control-indicator-disabled-bg'] || v['$gray-200'];
+  v['$custom-control-label-disabled-color'] = u['$custom-control-label-disabled-color'] || v['$gray-600'];
 
-  v['$custom-control-checked-indicator-color'] = u['$custom-control-checked-indicator-color'] || v['$white'];
-  v['$custom-control-checked-indicator-bg'] = u['$custom-control-checked-indicator-bg'] || v['$brand-primary'];
-  v['$custom-control-checked-indicator-box-shadow'] = u['$custom-control-checked-indicator-box-shadow'] || 'none';
+  v['$custom-control-indicator-checked-color'] = u['$custom-control-indicator-checked-color'] || v['$component-active-color'];
+  v['$custom-control-indicator-checked-bg'] = u['$custom-control-indicator-checked-bg'] || v['$component-active-bg'];
+  v['$custom-control-indicator-checked-disabled-bg'] = u['$custom-control-indicator-checked-disabled-bg'] || `${Color(v['$theme-colors'].primary).alpha(0.5).toString()}`;
+  v['$custom-control-indicator-checked-box-shadow'] = u['$custom-control-indicator-checked-box-shadow'] || 'none';
 
-  v['$custom-control-focus-indicator-box-shadow'] = u['$custom-control-focus-indicator-box-shadow'] || `0 0 0 1px ${v['$body-bg']}, 0 0 0 3px ${v['$brand-primary']}`;
+  v['$custom-control-indicator-focus-box-shadow'] = u['$custom-control-indicator-focus-box-shadow'] || `0 0 0 1px ${v['$body-bg']}, ${v['$input-btn-focus-box-shadow']}`;
 
-  v['$custom-control-active-indicator-color'] = u['$custom-control-active-indicator-color'] || v['$white'];
-  v['$custom-control-active-indicator-bg'] = u['$custom-control-active-indicator-bg'] || Color(v['$brand-primary']).lighten(0.35).toString();
-  v['$custom-control-active-indicator-box-shadow'] = u['$custom-control-active-indicator-box-shadow'] || 'none';
+  v['$custom-control-indicator-active-color'] = u['$custom-control-indicator-active-color'] || v['$component-active-color'];
+  v['$custom-control-indicator-active-bg'] = u['$custom-control-indicator-active-bg'] || Color(v['$component-active-bg']).lighten(0.35).toString();
+  v['$custom-control-indicator-active-box-shadow'] = u['$custom-control-indicator-active-box-shadow'] || 'none';
 
-  v['$custom-checkbox-radius'] = u['$custom-checkbox-radius'] || v['$border-radius'];
-  v['$custom-checkbox-checked-icon'] = u['$custom-checkbox-checked-icon'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="${v['$custom-control-checked-indicator-color']}" d="M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z"/%3E%3C/svg%3E')`;
+  v['$custom-checkbox-indicator-border-radius'] = u['$custom-checkbox-indicator-border-radius'] || v['$border-radius'];
+  v['$custom-checkbox-indicator-icon-checked'] = u['$custom-checkbox-indicator-icon-checked'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="${v['$custom-control-checked-indicator-color']}" d="M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z"/%3E%3C/svg%3E')`;
 
-  v['$custom-checkbox-indeterminate-bg'] = u['$custom-checkbox-indeterminate-bg'] || v['$brand-primary'];
-  v['$custom-checkbox-indeterminate-indicator-color'] = u['$custom-checkbox-indeterminate-indicator-color'] || v['$custom-control-checked-indicator-color'];
-  v['$custom-checkbox-indeterminate-icon'] = u['$custom-checkbox-indeterminate-icon'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 4"%3E%3Cpath stroke="${v['$custom-checkbox-indeterminate-indicator-color']}" d="M0 2h4"/%3E%3C/svg%3E')`;
-  v['$custom-checkbox-indeterminate-box-shadow'] = u['$custom-checkbox-indeterminate-box-shadow'] || 'none';
+  v['$custom-checkbox-indicator-indeterminate-bg'] = u['$custom-checkbox-indicator-indeterminate-bg'] || v['$component-active-bg'];
+  v['$custom-checkbox-indicator-indeterminate-indicator-color'] = u['$custom-checkbox-indicator-indeterminate-indicator-color'] || v['$custom-control-indicator-checked-color'];
+  v['$custom-checkbox-indicator-indeterminate-icon'] = u['$custom-checkbox-indicator-indeterminate-icon'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 4"%3E%3Cpath stroke="${v['$custom-checkbox-indeterminate-indicator-color']}" d="M0 2h4"/%3E%3C/svg%3E')`;
+  v['$custom-checkbox-indicator-indeterminate-box-shadow'] = u['$custom-checkbox-indicator-indeterminate-box-shadow'] || 'none';
 
-  v['$custom-radio-radius'] = u['$custom-radio-radius'] || '50%';
-  v['$custom-radio-checked-icon'] = u['$custom-radio-checked-icon'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"%3E%3Ccircle r="3" fill="${v['$custom-control-checked-indicator-color']}"/%3E%3C/svg%3E')`;
+  v['$custom-radio-indicator-border-radius'] = u['$custom-radio-indicator-border-radius'] || '50%';
+  v['$custom-radio-indicator-icon-checked'] = u['$custom-radio-indicator-icon-checked'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"%3E%3Ccircle r="3" fill="${v['$custom-control-checked-indicator-color']}"/%3E%3C/svg%3E')`;
 
   v['$custom-select-padding-x'] = u['$custom-select-padding-x'] || '.75rem ';
   v['$custom-select-padding-y'] = u['$custom-select-padding-y'] || '.375rem';
+  v['$custom-select-height'] = u['$custom-select-height'] || v['$input-height'];
   v['$custom-select-indicator-padding'] = u['$custom-select-indicator-padding'] || '1rem'; // Extra padding to account for the presence of the background-image based indicator
-  v['$custom-select-line-height'] = u['$custom-select-line-height'] || v['$input-line-height'];
+  v['$custom-select-line-height'] = u['$custom-select-line-height'] || v['$input-btn-line-height'];
   v['$custom-select-color'] = u['$custom-select-color'] || v['$input-color'];
-  v['$custom-select-disabled-color'] = u['$custom-select-disabled-color'] || v['$gray-light'];
+  v['$custom-select-disabled-color'] = u['$custom-select-disabled-color'] || v['$gray-600'];
   v['$custom-select-bg'] = u['$custom-select-bg'] || v['$white'];
-  v['$custom-select-disabled-bg'] = u['$custom-select-disabled-bg'] || v['$gray-lighter'];
+  v['$custom-select-disabled-bg'] = u['$custom-select-disabled-bg'] || v['$gray-200'];
   v['$custom-select-bg-size'] = u['$custom-select-bg-size'] || '8px 10px'; // In pixels because image dimensions
-  v['$custom-select-indicator-color'] = u['$custom-select-indicator-color'] || '#333';
+  v['$custom-select-indicator-color'] = u['$custom-select-indicator-color'] || v['$gray-800'];
   v['$custom-select-indicator'] = u['$custom-select-indicator'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"%3E%3Cpath fill="${v['$custom-select-indicator-color']}" d="M2 0L0 2h4zm0 5L0 3h4z"/%3E%3C/svg%3E')`;
   v['$custom-select-border-width'] = u['$custom-select-border-width'] || v['$input-btn-border-width'];
   v['$custom-select-border-color'] = u['$custom-select-border-color'] || v['$input-border-color'];
   v['$custom-select-border-radius'] = u['$custom-select-border-radius'] || v['$border-radius'];
 
-  v['$custom-select-focus-border-color'] = u['$custom-select-focus-border-color'] || Color(v['$brand-primary']).lighten(0.25).toString();
+  v['$custom-select-focus-border-color'] = u['$custom-select-focus-border-color'] || v['$input-focus-border-color'];
   v['$custom-select-focus-box-shadow'] = u['$custom-select-focus-box-shadow'] || `inset 0 1px 2px ${Color(v['$black']).alpha(0.75).toString()}, 0 0 5px rgba(${v['$custom-select-focus-border-color']}, .5)`;
 
-  v['$custom-select-sm-font-size'] = u['$custom-select-sm-font-size'] || '75%';
+  v['$custom-select-font-size-sm'] = u['$custom-select-font-size-sm'] || '75%';
+  v['$custom-select-height-sm'] = u['$custom-select-height-sm'] || v['$input-height-sm'];
 
-  v['$custom-file-height'] = u['$custom-file-height'] || '2.5rem';
-  v['$custom-file-width'] = u['$custom-file-width'] || '14rem';
-  v['$custom-file-focus-box-shadow'] = u['$custom-file-focus-box-shadow'] || `0 0 0 .075rem ${v['$white']}, 0 0 0 .2rem ${v['$brand-primary']}`;
+  v['$custom-select-font-size-lg'] = u['$custom-select-font-size-lg'] || '125%';
+  v['$custom-select-height-lg'] = u['$custom-select-height-lg'] || v['$input-height-lg'];
 
-  v['$custom-file-padding-x'] = u['$custom-file-padding-x'] || '.5rem';
-  v['$custom-file-padding-y'] = u['$custom-file-padding-y'] || '1rem';
-  v['$custom-file-line-height'] = u['$custom-file-line-height'] || '1.5';
-  v['$custom-file-color'] = u['$custom-file-color'] || v['$gray'];
-  v['$custom-file-bg'] = u['$custom-file-bg'] || v['$white'];
-  v['$custom-file-border-width'] = u['$custom-file-border-width'] || v['$border-width'];
+  v['$custom-file-height'] = u['$custom-file-height'] || v['$input-height'];
+  v['$custom-file-focus-border-color'] = u['$custom-file-focus-border-color'] || v['$input-focus-border-color'];
+  v['$custom-file-focus-box-shadow'] = u['$custom-file-focus-box-shadow'] || v['$input-btn-focus-box-shadow'];
+
+  v['$custom-file-padding-x'] = u['$custom-file-padding-x'] || v['$input-btn-padding-x'];
+  v['$custom-file-padding-y'] = u['$custom-file-padding-y'] || v['$input-btn-padding-y'];
+  v['$custom-file-line-height'] = u['$custom-file-line-height'] || v['$input-btn-line-height'];
+  v['$custom-file-color'] = u['$custom-file-color'] || v['$input-color'];
+  v['$custom-file-bg'] = u['$custom-file-bg'] || v['$input-bg'];
+  v['$custom-file-border-width'] = u['$custom-file-border-width'] || v['$input-btn-border-width'];
   v['$custom-file-border-color'] = u['$custom-file-border-color'] || v['$input-border-color'];
-  v['$custom-file-border-radius'] = u['$custom-file-border-radius'] || v['$border-radius'];
-  v['$custom-file-box-shadow'] = u['$custom-file-box-shadow'] || `inset 0 .2rem .4rem ${Color(v['$black']).alpha(0.05).toString()}`;
+  v['$custom-file-border-radius'] = u['$custom-file-border-radius'] || v['$input-border-radius'];
+  v['$custom-file-box-shadow'] = u['$custom-file-box-shadow'] || v['$input-box-shadow'];
   v['$custom-file-button-color'] = u['$custom-file-button-color'] || v['$custom-file-color'];
-  v['$custom-file-button-bg'] = u['$custom-file-button-bg'] || v['$gray-lighter'];
+  v['$custom-file-button-bg'] = u['$custom-file-button-bg'] || v['$input-group-addon-bg'];
   v['$custom-file-text'] = u['$custom-file-text'] || {
     placeholder: {
       en: 'Choose file...',
@@ -538,17 +628,12 @@ function makeOriginal(userTheme = {}) {
     },
   };
 
+  // Form validation
+  v['$form-feedback-margin-top'] = u['$form-feedback-margin-top'] || v['$form-text-margin-top'];
+  v['$form-feedback-font-size'] = u['$form-feedback-font-size'] || v['$small-font-size'];
 
-  // Form validation icons
-  v['$form-icon-success-color'] = u['$form-icon-success-color'] || v['$brand-success'];
-  v['$form-icon-success'] = u['$form-icon-success'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="${v['$form-icon-success-color']}" d="M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z"/%3E%3C/svg%3E')`;
-
-  v['$form-icon-warning-color'] = u['$form-icon-warning-color'] || v['$brand-warning'];
-  v['$form-icon-warning'] = u['$form-icon-warning'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"%3E%3Cpath fill="${v['$form-icon-warning-color']}" d="M4.4 5.324h-.8v-2.46h.8zm0 1.42h-.8V5.89h.8zM3.76.63L.04 7.075c-.115.2.016.425.26.426h7.397c.242 0 .372-.226.258-.426C6.726 4.924 5.47 2.79 4.253.63c-.113-.174-.39-.174-.494 0z"/%3E%3C/svg%3E')`;
-
-  v['$form-icon-danger-color'] = u['$form-icon-danger-color'] || v['$brand-danger'];
-  v['$form-icon-danger'] = u['$form-icon-danger'] || `url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="${v['$form-icon-danger-color']}" viewBox="-2 -2 7 7"%3E%3Cpath stroke="%23d9534f" d="M0 0l3 3m0-3L0 3"/%3E%3Ccircle r=".5"/%3E%3Ccircle cx="3" r=".5"/%3E%3Ccircle cy="3" r=".5"/%3E%3Ccircle cx="3" cy="3" r=".5"/%3E%3C/svg%3E')`;
-
+  v['$form-feedback-valid-color'] = u['$form-feedback-valid-color'] || v['$theme-colors'].success;
+  v['$form-feedback-invalid-color'] = u['$form-feedback-invalid-color'] || v['$theme-colors'].danger;
 
   // Dropdowns
   //
@@ -556,87 +641,90 @@ function makeOriginal(userTheme = {}) {
 
   v['$dropdown-min-width'] = u['$dropdown-min-width'] || '10rem';
   v['$dropdown-padding-y'] = u['$dropdown-padding-y'] || '.5rem';
-  v['$dropdown-margin-top'] = u['$dropdown-margin-top'] || '.125rem';
+  v['$dropdown-spacer'] = u['$dropdown-spacer'] || '.125rem';
   v['$dropdown-bg'] = u['$dropdown-bg'] || v['$white'];
   v['$dropdown-border-color'] = u['$dropdown-border-color'] || Color(v['$black']).alpha(0.15).toString();
+  v['$dropdown-border-radius'] = u['$dropdown-border-radius'] || v['$border-radius'];
   v['$dropdown-border-width'] = u['$dropdown-border-width'] || v['$border-width'];
-  v['$dropdown-divider-bg'] = u['$dropdown-divider-bg'] || v['$gray-lighter'];
+  v['$dropdown-divider-bg'] = u['$dropdown-divider-bg'] || v['$gray-200'];
   v['$dropdown-box-shadow'] = u['$dropdown-box-shadow'] || `0 .5rem 1rem rgba(${v['$black']},.175)`;
 
-  v['$dropdown-link-color'] = u['$dropdown-link-color'] || v['$gray-dark'];
-  v['$dropdown-link-hover-color'] = u['$dropdown-link-hover-color'] || Color(v['$gray-dark']).darken(0.05).toString();
-  v['$dropdown-link-hover-bg'] = u['$dropdown-link-hover-bg'] || v['$gray-lightest'];
+  v['$dropdown-link-color'] = u['$dropdown-link-color'] || v['$gray-900'];
+  v['$dropdown-link-hover-color'] = u['$dropdown-link-hover-color'] || Color(v['$gray-900']).darken(0.05).toString();
+  v['$dropdown-link-hover-bg'] = u['$dropdown-link-hover-bg'] || v['$gray-100'];
 
   v['$dropdown-link-active-color'] = u['$dropdown-link-active-color'] || v['$component-active-color'];
   v['$dropdown-link-active-bg'] = u['$dropdown-link-active-bg'] || v['$component-active-bg'];
 
-  v['$dropdown-link-disabled-color'] = u['$dropdown-link-disabled-color'] || v['$gray-light'];
+  v['$dropdown-link-disabled-color'] = u['$dropdown-link-disabled-color'] || v['$gray-600'];
 
   v['$dropdown-item-padding-x'] = u['$dropdown-item-padding-x'] || '1.5rem';
+  v['$dropdown-item-padding-y'] = u['$dropdown-item-padding-y'] || '.25rem';
 
-  v['$dropdown-header-color'] = u['$dropdown-header-color'] || v['$gray-light'];
-
+  v['$dropdown-header-color'] = u['$dropdown-header-color'] || v['$gray-600'];
 
   // Z-index master list
   //
   // Warning = 'Avoid customizing these values. They're used for a bird's eye view
   // of components dependent on the z-axis and are designed to all work together.
 
-  v['$zindex-dropdown-backdrop'] = u['$zindex-dropdown-backdrop'] || '990';
   v['$zindex-dropdown'] = u['$zindex-dropdown'] || '1000';
-  v['$zindex-modal-backdrop'] = u['$zindex-modal-backdrop'] || '2040';
-  v['$zindex-modal'] = u['$zindex-modal'] || '2050';
+  v['$zindex-sticky'] = u['$zindex-sticky'] || '1020';
+  v['$zindex-fixed'] = u['$zindex-fixed'] || '1030';
+  v['$zindex-modal-backdrop'] = u['$zindex-modal-backdrop'] || '1040';
+  v['$zindex-modal'] = u['$zindex-modal'] || '1050';
   v['$zindex-popover'] = u['$zindex-popover'] || '1060';
   v['$zindex-tooltip'] = u['$zindex-tooltip'] || '1070';
-  v['$zindex-navbar'] = u['$zindex-navbar'] || '1000';
-  v['$zindex-navbar-fixed'] = u['$zindex-navbar-fixed'] || '1030';
-  v['$zindex-navbar-sticky'] = u['$zindex-navbar-sticky'] || '1030';
+
+  // Navs
+
+  v['$nav-link-padding-y'] = u['$nav-link-padding-y'] || '.5rem';
+  v['$nav-link-padding-x'] = u['$nav-link-padding-x'] || '1rem';
+  v['$nav-link-disabled-color'] = u['$nav-link-disabled-color'] || v['$gray-600'];
+
+  v['$nav-tabs-border-color'] = u['$nav-tabs-border-color'] || v['$gray-300'];
+  v['$nav-tabs-border-width'] = u['$nav-tabs-border-width'] || v['$border-width'];
+  v['$nav-tabs-border-radius'] = u['$nav-tabs-border-radius'] || v['$border-radius'];
+  v['$nav-tabs-link-hover-border-color'] = u['$nav-tabs-link-hover-border-color'] || `${v['$gray-200']} ${v['$gray-200']} ${v['$nav-tabs-border-color']}`;
+  v['$nav-tabs-link-active-color'] = u['$nav-tabs-link-active-color'] || v['$gray-700'];
+  v['$nav-tabs-link-active-bg'] = u['$nav-tabs-link-active-bg'] || v['$body-bg'];
+  v['$nav-tabs-link-active-border-color'] = u['$nav-tabs-link-active-border-color'] || `${v['$gray-300']} ${v['$gray-300']} ${v['$nav-tabs-link-active-bg']}`;
+
+  v['$nav-pills-border-radius'] = u['$nav-pills-border-radius'] || v['$border-radius'];
+  v['$nav-pills-link-active-color'] = u['$nav-pills-link-active-color'] || v['$component-active-color'];
+  v['$nav-pills-link-active-bg'] = u['$nav-pills-link-active-bg'] || v['$component-active-bg'];
 
   // Navbar
 
   v['$navbar-padding-x'] = u['$navbar-padding-x'] || v['$spacer'];
   v['$navbar-padding-y'] = u['$navbar-padding-y'] || v['$spacer-halved'];
 
-  v['$navbar-brand-padding-y'] = u['$navbar-brand-padding-y'] || '.25rem';
+  v['$navbar-nav-link-padding-x'] = u['$navbar-nav-link-padding-x'] || '.5rem';
 
-  v['$navbar-divider-padding-y'] = u['$navbar-divider-padding-y'] || '.425rem';
+  v['$navbar-brand-font-size'] = u['$navbar-brand-font-size'] || v['$font-size-lg'];
+  // Compute the navbar-brand padding-y so the navbar-brand will have the same height as navbar-text and nav-link
+  v['$nav-link-height'] = u['$nav-link-height'] || (rmUnit(v['$font-size-base'], detectedUnit) * (rmUnit(v['$line-height-base'], detectedUnit)) + (rmUnit(v['$nav-link-padding-y'], detectedUnit)) * 2 + detectedUnit);
+  v['$navbar-brand-height'] = u['$navbar-brand-height'] || (rmUnit(v['$navbar-brand-font-size'], detectedUnit) * (rmUnit(v['$line-height-base'], detectedUnit)) + detectedUnit);
+  v['$navbar-brand-padding-y'] = u['$navbar-brand-padding-y'] || (rmUnit(v['$nav-link-height'], detectedUnit) - (rmUnit(v['$navbar-brand-height'], detectedUnit)) / 2 + detectedUnit);
 
   v['$navbar-toggler-padding-x'] = u['$navbar-toggler-padding-x'] || '.75rem';
   v['$navbar-toggler-padding-y'] = u['$navbar-toggler-padding-y'] || '.25rem';
   v['$navbar-toggler-font-size'] = u['$navbar-toggler-font-size'] || v['$font-size-lg'];
   v['$navbar-toggler-border-radius'] = u['$navbar-toggler-border-radius'] || v['$btn-border-radius'];
 
-  v['$navbar-inverse-color'] = u['$navbar-inverse-color'] || Color(v['$white']).alpha(0.5).toString();
-  v['$navbar-inverse-hover-color'] = u['$navbar-inverse-hover-color'] || Color(v['$white']).alpha(0.75).toString();
-  v['$navbar-inverse-active-color'] = u['$navbar-inverse-active-color'] || Color(v['$white']).alpha(1).toString();
-  v['$navbar-inverse-disabled-color'] = u['$navbar-inverse-disabled-color'] || Color(v['$white']).alpha(0.25).toString();
-  v['$navbar-inverse-toggler-bg'] = u['$navbar-inverse-toggler-bg'] || `url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="${v['$navbar-inverse-color']}" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E')`;
-  v['$navbar-inverse-toggler-border'] = u['$navbar-inverse-toggler-border'] || Color(v['$white']).alpha(0.1).toString();
+  v['$navbar-dark-color'] = u['$navbar-dark-color'] || Color(v['$white']).alpha(0.5).toString();
+  v['$navbar-dark-hover-color'] = u['$navbar-dark-hover-color'] || Color(v['$white']).alpha(0.75).toString();
+  v['$navbar-dark-active-color'] = u['$navbar-dark-active-color'] || v['$white'];
+  v['$navbar-dark-disabled-color'] = u['$navbar-dark-disabled-color'] || Color(v['$white']).alpha(0.25).toString();
+  v['$navbar-dark-toggler-icon-bg'] = u['$navbar-dark-toggler-icon-bg'] || `url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="${v['$navbar-inverse-color']}" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E')`;
+  v['$navbar-dark-toggler-border-color'] = u['$navbar-dark-toggler-border-color'] || Color(v['$white']).alpha(0.1).toString();
 
   v['$navbar-light-color'] = u['$navbar-light-color'] || Color(v['$black']).alpha(0.5).toString();
   v['$navbar-light-hover-color'] = u['$navbar-light-hover-color'] || Color(v['$black']).alpha(0.7).toString();
   v['$navbar-light-active-color'] = u['$navbar-light-active-color'] || Color(v['$black']).alpha(0.9).toString();
   v['$navbar-light-disabled-color'] = u['$navbar-light-disabled-color'] || Color(v['$black']).alpha(0.3).toString();
-  v['$navbar-light-toggler-bg'] = u['$navbar-light-toggler-bg'] || `url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="${v['$navbar-light-color']}" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E')`;
-  v['$navbar-light-toggler-border'] = u['$navbar-light-toggler-border'] || Color(v['$black']).alpha(0.1).toString();
-
-  // Navs
-
-  v['$nav-link-padding'] = u['$nav-link-padding'] || '.5em 1em';
-  v['$nav-disabled-link-color'] = u['$nav-disabled-link-color'] || v['$gray-light'];
-
-  v['$nav-tabs-border-color'] = u['$nav-tabs-border-color'] || '#ddd';
-  v['$nav-tabs-border-width'] = u['$nav-tabs-border-width'] || v['$border-width'];
-  v['$nav-tabs-border-radius'] = u['$nav-tabs-border-radius'] || v['$border-radius'];
-  v['$nav-tabs-link-hover-border-color'] = u['$nav-tabs-link-hover-border-color'] || v['$gray-lighter'];
-  v['$nav-tabs-active-link-hover-color'] = u['$nav-tabs-active-link-hover-color'] || v['$gray'];
-  v['$nav-tabs-active-link-hover-bg'] = u['$nav-tabs-active-link-hover-bg'] || v['$body-bg'];
-  v['$nav-tabs-active-link-hover-border-color'] = u['$nav-tabs-active-link-hover-border-color'] || '#ddd';
-
-  v['$nav-pills-border-radius'] = u['$nav-pills-border-radius'] || v['$border-radius'];
-  v['$nav-pills-active-link-color'] = u['$nav-pills-active-link-color'] || v['$component-active-color'];
-  v['$nav-pills-active-link-bg'] = u['$nav-pills-active-link-bg'] || v['$component-active-bg'];
-
+  v['$navbar-light-toggler-icon-bg'] = u['$navbar-light-toggler-icon-bg'] || `url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="${v['$navbar-light-color']}" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E')`;
+  v['$navbar-light-toggler-border-color'] = u['$navbar-light-toggler-border-color'] || Color(v['$black']).alpha(0.1).toString();
 
   // Pagination
 
@@ -651,62 +739,37 @@ function makeOriginal(userTheme = {}) {
   v['$pagination-color'] = u['$pagination-color'] || v['$link-color'];
   v['$pagination-bg'] = u['$pagination-bg'] || v['$white'];
   v['$pagination-border-width'] = u['$pagination-border-width'] || v['$border-width'];
-  v['$pagination-border-color'] = u['$pagination-border-color'] || '#ddd';
+  v['$pagination-border-color'] = u['$pagination-border-color'] || v['$gray-300'];
+
+  v['$pagination-focus-box-shadow'] = u['$pagination-focus-box-shadow'] || v['$input-btn-focus-box-shadow'];
 
   v['$pagination-hover-color'] = u['$pagination-hover-color'] || v['$link-hover-color'];
-  v['$pagination-hover-bg'] = u['$pagination-hover-bg'] || v['$gray-lighter'];
-  v['$pagination-hover-border'] = u['$pagination-hover-border'] || '#ddd';
+  v['$pagination-hover-bg'] = u['$pagination-hover-bg'] || v['$gray-200'];
+  v['$pagination-hover-border'] = u['$pagination-hover-border'] || v['$gray-300'];
 
-  v['$pagination-active-color'] = u['$pagination-active-color'] || v['$white'];
-  v['$pagination-active-bg'] = u['$pagination-active-bg'] || v['$brand-primary'];
-  v['$pagination-active-border'] = u['$pagination-active-border'] || v['$brand-primary'];
+  v['$pagination-active-color'] = u['$pagination-active-color'] || v['$component-active-color'];
+  v['$pagination-active-bg'] = u['$pagination-active-bg'] || v['$component-active-bg'];
+  v['$pagination-active-border-color'] = u['$pagination-active-border-color'] || v['$pagination-active-bg'];
 
-  v['$pagination-disabled-color'] = u['$pagination-disabled-color'] || v['$gray-light'];
+  v['$pagination-disabled-color'] = u['$pagination-disabled-color'] || v['$gray-600'];
   v['$pagination-disabled-bg'] = u['$pagination-disabled-bg'] || v['$white'];
-  v['$pagination-disabled-border'] = u['$pagination-disabled-border'] || '#ddd';
+  v['$pagination-disabled-border-color'] = u['$pagination-disabled-border-color'] || v['$gray-300'];
 
 
   // Jumbotron
 
   v['$jumbotron-padding'] = u['$jumbotron-padding'] || '2rem';
-  v['$jumbotron-bg'] = u['$jumbotron-bg'] || v['$gray-lighter'];
-
-
-  // Form states and alerts
-  //
-  // Define colors for form feedback states and, by default, alerts.
-
-  v['$state-success-text'] = u['$state-success-text'] || '#3c763d';
-  v['$state-success-bg'] = u['$state-success-bg'] || '#dff0d8';
-  v['$state-success-border'] = u['$state-success-border'] || Color(v['$state-success-bg']).darken(0.05).toString();
-
-  v['$state-info-text'] = u['$state-info-text'] || '#31708f';
-  v['$state-info-bg'] = u['$state-info-bg'] || '#d9edf7';
-  v['$state-info-border'] = u['$state-info-border'] || Color(v['$state-info-bg']).darken(0.07).toString();
-
-  v['$state-warning-text'] = u['$state-warning-text'] || '#8a6d3b';
-  v['$state-warning-bg'] = u['$state-warning-bg'] || '#fcf8e3';
-  v['$state-warning-border'] = u['$state-warning-border'] || Color(v['$state-warning-bg']).darken(0.05).toString();
-
-  v['$mark-bg'] = u['$mark-bg'] || v['$state-warning-bg'];
-
-  v['$state-danger-text'] = u['$state-danger-text'] || '#a94442';
-  v['$state-danger-bg'] = u['$state-danger-bg'] || '#f2dede';
-  v['$state-danger-border'] = u['$state-danger-border'] || Color(v['$state-danger-bg']).darken(0.05).toString();
-
+  v['$jumbotron-bg'] = u['$jumbotron-bg'] || v['$gray-200'];
 
   // Cards
 
   v['$card-spacer-x'] = u['$card-spacer-x'] || '1.25rem';
   v['$card-spacer-y'] = u['$card-spacer-y'] || '.75rem';
-  v['$card-border-width'] = u['$card-border-width'] || '1px';
+  v['$card-border-width'] = u['$card-border-width'] || v['$border-width'];
   v['$card-border-radius'] = u['$card-border-radius'] || v['$border-radius'];
   v['$card-border-color'] = u['$card-border-color'] || Color(v['$black']).alpha(0.125).toString();
-  v['$card-border-radius-inner'] = u['$card-border-radius-inner'] || `calc(${v['$card-border-radius']} - ${v['$card-border-width']})`;
-  v['$card-cap-bg'] = u['$card-cap-bg'] || v['$gray-lightest'];
-  v['$card-bg'] = u['$card-bg'] || v['$white'];
-
-  v['$card-link-hover-color'] = u['$card-link-hover-color'] || v['$white'];
+  v['$card-border-inner-radius'] = u['$card-border-inner-radius'] || `calc(${v['$card-border-radius']} - ${v['$card-border-width']})`;
+  v['$card-cap-bg'] = u['$card-cap-bg'] || Color(v['$black']).alpha(0.03).toString();
 
   v['$card-img-overlay-padding'] = u['$card-img-overlay-padding'] || '1.25rem';
 
@@ -714,73 +777,59 @@ function makeOriginal(userTheme = {}) {
   v['$card-group-margin'] = u['$card-group-margin'] || (rmUnit(v['$grid-gutter-width'], detectedUnit) / 2) + detectedUnit;
   v['$card-deck-margin'] = u['$card-deck-margin'] || v['$card-group-margin'];
 
-  v['$card-columns-count-md'] = u['$card-columns-count-md'] || '2';
-  v['$card-columns-gap-md'] = u['$card-columns-gap-md'] || '1rem';
-  v['$card-columns-margin-md'] = u['$card-columns-margin-md'] || v['$card-spacer-y'];
-  v['$card-columns-count-lg'] = u['$card-columns-count-lg'] || '2';
-  v['$card-columns-gap-lg'] = u['$card-columns-gap-lg'] || '1.15rem';
-  v['$card-columns-margin-lg'] = u['$card-columns-margin-lg'] || v['$card-spacer-y'];
-  v['$card-columns-count-xl'] = u['$card-columns-count-xl'] || '3';
-  v['$card-columns-gap-xl'] = u['$card-columns-gap-xl'] || '1.25rem';
-  v['$card-columns-margin-xl'] = u['$card-columns-margin-xl'] || v['$card-spacer-y'];
-  v['$card-columns-count-xxl'] = u['$card-columns-count-xxl'] || '4';
-  v['$card-columns-gap-xxl'] = u['$card-columns-gap-xxl'] || '1.25rem';
-  v['$card-columns-margin-xxl'] = u['$card-columns-margin-xxl'] || v['$card-spacer-y'];
+  v['$card-columns-count'] = u['$card-columns-count'] || '3';
+  v['$card-columns-gap'] = u['$card-columns-gap'] || '1.25rem';
+  v['$card-columns-margin'] = u['$card-columns-margin'] || v['$card-spacer-y'];
 
   // Tooltips
 
+  v['$tooltip-font-size'] = u['$tooltip-font-size'] || v['$font-size-sm'];
   v['$tooltip-max-width'] = u['$tooltip-max-width'] || '200px';
   v['$tooltip-color'] = u['$tooltip-color'] || v['$white'];
   v['$tooltip-bg'] = u['$tooltip-bg'] || v['$black'];
   v['$tooltip-opacity'] = u['$tooltip-opacity'] || '.9';
-  v['$tooltip-padding-y'] = u['$tooltip-padding-y'] || '3px';
-  v['$tooltip-padding-x'] = u['$tooltip-padding-x'] || '8px';
-  v['$tooltip-margin'] = u['$tooltip-margin'] || '3px';
+  v['$tooltip-padding-y'] = u['$tooltip-padding-y'] || '.25re';
+  v['$tooltip-padding-x'] = u['$tooltip-padding-x'] || '.5rem';
+  v['$tooltip-margin'] = u['$tooltip-margin'] || '0';
 
-  v['$tooltip-arrow-width'] = u['$tooltip-arrow-width'] || '5px';
+  v['$tooltip-arrow-width'] = u['$tooltip-arrow-width'] || '.8rem';
+  v['$tooltip-arrow-height'] = u['$tooltip-arrow-height'] || '.4rem';
   v['$tooltip-arrow-color'] = u['$tooltip-arrow-color'] || v['$tooltip-bg'];
 
 
   // Popovers
 
-  v['$popover-inner-padding'] = u['$popover-inner-padding'] || '1px';
+  v['$popover-font-size'] = u['$popover-font-size'] || v['$font-size-sm'];
   v['$popover-bg'] = u['$popover-bg'] || v['$white'];
   v['$popover-max-width'] = u['$popover-max-width'] || '276px';
   v['$popover-border-width'] = u['$popover-border-width'] || v['$border-width'];
-
   v['$popover-border-color'] = u['$popover-border-color'] || Color(v['$black']).alpha(0.2).toString();
-  v['$popover-box-shadow'] = u['$popover-box-shadow'] || `0 5px 10px ${Color(v['$black']).alpha(0.2).toString()}`;
+  v['$popover-border-radius'] = u['$popover-border-radius'] || v['$border-radius-lg'];
+  v['$popover-box-shadow'] = u['$popover-box-shadow'] || `0 .25rem .5rem ${Color(v['$black']).alpha(0.2).toString()}`;
 
-  v['$popover-title-bg'] = u['$popover-title-bg'] || Color(v['$popover-bg']).darken(0.03).toString();
-  v['$popover-title-padding-x'] = u['$popover-title-padding-x'] || '14px';
-  v['$popover-title-padding-y'] = u['$popover-title-padding-y'] || '8px';
+  v['$popover-header-bg'] = u['$popover-header-bg'] || Color(v['$popover-bg']).darken(0.03).toString();
+  v['$popover-header-color'] = u['$popover-header-color'] || v['$headings-color'];
+  v['$popover-header-padding-y'] = u['$popover-header-padding-y'] || '.5rem';
+  v['$popover-header-padding-x'] = u['$popover-header-padding-x'] || '.75rem';
 
-  v['$popover-content-padding-x'] = u['$popover-content-padding-x'] || '14px';
-  v['$popover-content-padding-y'] = u['$popover-content-padding-y'] || '9px';
+  v['$popover-body-color'] = u['$popover-body-color'] || v['$body-color'];
+  v['$popover-body-padding-y'] = u['$popover-body-padding-y'] || v['$popover-header-padding-y'];
+  v['$popover-body-padding-x'] = u['$popover-body-padding-x'] || v['$popover-header-padding-x'];
 
-  v['$popover-arrow-width'] = u['$popover-arrow-width'] || '10px';
+  v['$popover-arrow-width'] = u['$popover-arrow-width'] || '1rem';
+  v['$popover-arrow-height'] = u['$popover-arrow-height'] || '.5rem';
   v['$popover-arrow-color'] = u['$popover-arrow-color'] || v['$popover-bg'];
 
-  detectedUnit = detectUnit(v['$popover-arrow-width']);
-  v['$popover-arrow-outer-width'] = u['$popover-arrow-outer-width'] || ((rmUnit(v['$popover-arrow-width'], detectedUnit) + 1) + detectedUnit);
   v['$popover-arrow-outer-color'] = u['$popover-arrow-outer-color'] || Color(v['$popover-border-color']).fade(0.5).toString();
 
 
   // Badges
 
-  v['$badge-default-bg'] = u['$badge-default-bg'] || v['$gray-light'];
-  v['$badge-primary-bg'] = u['$badge-primary-bg'] || v['$brand-primary'];
-  v['$badge-success-bg'] = u['$badge-success-bg'] || v['$brand-success'];
-  v['$badge-info-bg'] = u['$badge-info-bg'] || v['$brand-info'];
-  v['$badge-warning-bg'] = u['$badge-warning-bg'] || v['$brand-warning'];
-  v['$badge-danger-bg'] = u['$badge-danger-bg'] || v['$brand-danger'];
-
-  v['$badge-color'] = u['$badge-color'] || v['$white'];
-  v['$badge-link-hover-color'] = u['$badge-link-hover-color'] || v['$white'];
   v['$badge-font-size'] = u['$badge-font-size'] || '75%';
   v['$badge-font-weight'] = u['$badge-font-weight'] || v['$font-weight-bold'];
   v['$badge-padding-x'] = u['$badge-padding-x'] || '.4em';
   v['$badge-padding-y'] = u['$badge-padding-y'] || '.25em';
+  v['$badge-border-radius'] = u['$badge-border-radius'] || v['$border-radius'];
 
   v['$badge-pill-padding-x'] = u['$badge-pill-padding-x'] || '.6em';
   // Use a higher than normal value to ensure completely rounded edges when
@@ -791,26 +840,26 @@ function makeOriginal(userTheme = {}) {
   // Modals
 
   // Padding applied to the modal body
-  v['$modal-inner-padding'] = u['$modal-inner-padding'] || '15px';
+  v['$modal-inner-padding'] = u['$modal-inner-padding'] || '1rem';
 
-  v['$modal-dialog-margin'] = u['$modal-dialog-margin'] || '10px';
-  v['$modal-dialog-sm-up-margin-y'] = u['$modal-dialog-sm-up-margin-y'] || '30px';
+  v['$modal-dialog-margin'] = u['$modal-dialog-margin'] || '.5rem';
+  v['$modal-dialog-margin-y-sm-up'] = u['$modal-dialog-margin-y-sm-up'] || '1.75rem';
 
   v['$modal-title-line-height'] = u['$modal-title-line-height'] || v['$line-height-base'];
 
   v['$modal-content-bg'] = u['$modal-content-bg'] || v['$white'];
   v['$modal-content-border-color'] = u['$modal-content-border-color'] || Color(v['$black']).alpha(0.2).toString();
   v['$modal-content-border-width'] = u['$modal-content-border-width'] || v['$border-width'];
-  v['$modal-content-xs-box-shadow'] = u['$modal-content-xs-box-shadow'] || `0 3px 9px ${Color(v['$black']).alpha(0.5).toString()}`;
-  v['$modal-content-sm-up-box-shadow'] = u['$modal-content-sm-up-box-shadow'] || `0 5px 15px ${Color(v['$black']).alpha(0.5).toString()}`;
+  v['$modal-content-box-shadow-xs'] = u['$modal-content-box-shadow-xs'] || `0 .25rem .5rem ${Color(v['$black']).alpha(0.5).toString()}`;
+  v['$modal-content-box-shadow-sm-up'] = u['$modal-content-box-shadow-sm-up'] || `0 .5rem 1rem ${Color(v['$black']).alpha(0.5).toString()}`;
 
   v['$modal-backdrop-bg'] = u['$modal-backdrop-bg'] || v['$black'];
   v['$modal-backdrop-opacity'] = u['$modal-backdrop-opacity'] || '.5';
-  v['$modal-header-border-color'] = u['$modal-header-border-color'] || v['$gray-lighter'];
+  v['$modal-header-border-color'] = u['$modal-header-border-color'] || v['$gray-200'];
   v['$modal-footer-border-color'] = u['$modal-footer-border-color'] || v['$modal-header-border-color'];
   v['$modal-header-border-width'] = u['$modal-header-border-width'] || v['$modal-content-border-width'];
   v['$modal-footer-border-width'] = u['$modal-footer-border-width'] || v['$modal-header-border-width'];
-  v['$modal-header-padding'] = u['$modal-header-padding'] || '15px';
+  v['$modal-header-padding'] = u['$modal-header-padding'] || '1rem';
 
   v['$modal-lg'] = u['$modal-lg'] || '800px';
   v['$modal-md'] = u['$modal-md'] || '500px';
@@ -825,42 +874,31 @@ function makeOriginal(userTheme = {}) {
 
   v['$alert-padding-x'] = u['$alert-padding-x'] || '1.25rem';
   v['$alert-padding-y'] = u['$alert-padding-y'] || '.75rem';
-  v['$alert-margin-bottom'] = u['$alert-margin-bottom'] || v['$spacer-y'];
+  v['$alert-margin-bottom'] = u['$alert-margin-bottom'] || '1rem';
   v['$alert-border-radius'] = u['$alert-border-radius'] || v['$border-radius'];
   v['$alert-link-font-weight'] = u['$alert-link-font-weight'] || v['$font-weight-bold'];
   v['$alert-border-width'] = u['$alert-border-width'] || v['$border-width'];
 
-  v['$alert-success-bg'] = u['$alert-success-bg'] || v['$state-success-bg'];
-  v['$alert-success-text'] = u['$alert-success-text'] || v['$state-success-text'];
-  v['$alert-success-border'] = u['$alert-success-border'] || v['$state-success-border'];
-
-  v['$alert-info-bg'] = u['$alert-info-bg'] || v['$state-info-bg'];
-  v['$alert-info-text'] = u['$alert-info-text'] || v['$state-info-text'];
-  v['$alert-info-border'] = u['$alert-info-border'] || v['$state-info-border'];
-
-  v['$alert-warning-bg'] = u['$alert-warning-bg'] || v['$state-warning-bg'];
-  v['$alert-warning-text'] = u['$alert-warning-text'] || v['$state-warning-text'];
-  v['$alert-warning-border'] = u['$alert-warning-border'] || v['$state-warning-border'];
-
-  v['$alert-danger-bg'] = u['$alert-danger-bg'] || v['$state-danger-bg'];
-  v['$alert-danger-text'] = u['$alert-danger-text'] || v['$state-danger-text'];
-  v['$alert-danger-border'] = u['$alert-danger-border'] || v['$state-danger-border'];
+  v['$alert-bg-level'] = u['$alert-bg-level'] || '-10';
+  v['$alert-border-level'] = u['$alert-border-level'] || '-9';
+  v['$alert-color-level'] = u['$alert-color-level'] || '6';
 
 
   // Progress bars
 
   v['$progress-height'] = u['$progress-height'] || '1rem';
-  v['$progress-font-size'] = u['$progress-font-size'] || '.75rem';
-  v['$progress-bg'] = u['$progress-bg'] || v['$gray-lighter'];
+  detectedUnit = detectUnit(v['$font-size-base']);
+  v['$progress-font-size'] = u['$progress-font-size'] || (rmUnit(v['$font-size-base'], detectedUnit) * 0.75) + detectedUnit;
+  v['$progress-bg'] = u['$progress-bg'] || v['$gray-200'];
   v['$progress-border-radius'] = u['$progress-border-radius'] || v['$border-radius'];
   v['$progress-box-shadow'] = u['$progress-box-shadow'] || `inset 0 .1rem .1rem ${Color(v['$black']).alpha(0.1).toString()}`;
   v['$progress-bar-color'] = u['$progress-bar-color'] || v['$white'];
-  v['$progress-bar-bg'] = u['$progress-bar-bg'] || v['$brand-primary'];
+  v['$progress-bar-bg'] = u['$progress-bar-bg'] || v['$theme-colors'].primary;
   v['$progress-bar-animation-timing'] = u['$progress-bar-animation-timing'] || '1s linear infinite';
+  v['$progress-bar-transition'] = u['$progress-bar-transition'] || 'width .6s ease';
 
   // List group
 
-  v['$list-group-color'] = u['$list-group-color'] || v['$body-color'];
   v['$list-group-bg'] = u['$list-group-bg'] || v['$white'];
   v['$list-group-border-color'] = u['$list-group-border-color'] || Color(v['$black']).alpha(0.125).toString();
   v['$list-group-border-width'] = u['$list-group-border-width'] || v['$border-width'];
@@ -869,19 +907,19 @@ function makeOriginal(userTheme = {}) {
   v['$list-group-item-padding-x'] = u['$list-group-item-padding-x'] || '1.25rem';
   v['$list-group-item-padding-y'] = u['$list-group-item-padding-y'] || '.75rem';
 
-  v['$list-group-hover-bg'] = u['$list-group-hover-bg'] || v['$gray-lightest'];
+  v['$list-group-hover-bg'] = u['$list-group-hover-bg'] || v['$gray-100'];
   v['$list-group-active-color'] = u['$list-group-active-color'] || v['$component-active-color'];
   v['$list-group-active-bg'] = u['$list-group-active-bg'] || v['$component-active-bg'];
-  v['$list-group-active-border'] = u['$list-group-active-border'] || v['$list-group-active-bg'];
+  v['$list-group-active-border-color'] = u['$list-group-active-border-color'] || v['$list-group-active-bg'];
 
-  v['$list-group-disabled-color'] = u['$list-group-disabled-color'] || v['$gray-light'];
+  v['$list-group-disabled-color'] = u['$list-group-disabled-color'] || v['$gray-600'];
   v['$list-group-disabled-bg'] = u['$list-group-disabled-bg'] || v['$list-group-bg'];
 
-  v['$list-group-link-color'] = u['$list-group-link-color'] || v['$gray'];
-  v['$list-group-link-hover-color'] = u['$list-group-link-hover-color'] || v['$list-group-link-color'];
+  v['$list-group-action-color'] = u['$list-group-action-color'] || v['$gray-700'];
+  v['$list-group-action-hover-color'] = u['$list-group-action-hover-color'] || v['$list-group-action-color'];
 
-  v['$list-group-link-active-color'] = u['$list-group-link-active-color'] || v['$list-group-color'];
-  v['$list-group-link-active-bg'] = u['$list-group-link-active-bg'] || v['$gray-lighter'];
+  v['$list-group-action-active-color'] = u['$list-group-action-active-color'] || v['$body-color'];
+  v['$list-group-action-active-bg'] = u['$list-group-action-active-bg'] || v['$gray-200'];
 
 
   // Image thumbnails
@@ -889,16 +927,15 @@ function makeOriginal(userTheme = {}) {
   v['$thumbnail-padding'] = u['$thumbnail-padding'] || '.25rem';
   v['$thumbnail-bg'] = u['$thumbnail-bg'] || v['$body-bg'];
   v['$thumbnail-border-width'] = u['$thumbnail-border-width'] || v['$border-width'];
-  v['$thumbnail-border-color'] = u['$thumbnail-border-color'] || '#ddd';
+  v['$thumbnail-border-color'] = u['$thumbnail-border-color'] || v['$gray-300'];
   v['$thumbnail-border-radius'] = u['$thumbnail-border-radius'] || v['$border-radius'];
   v['$thumbnail-box-shadow'] = u['$thumbnail-box-shadow'] || `0 1px 2px ${Color(v['$black']).alpha(0.75).toString()}`;
-  v['$thumbnail-transition'] = u['$thumbnail-transition'] || 'all .2s ease-in-out';
 
 
   // Figures
 
   v['$figure-caption-font-size'] = u['$figure-caption-font-size'] || '90%';
-  v['$figure-caption-color'] = u['$figure-caption-color'] || v['$gray-light'];
+  v['$figure-caption-color'] = u['$figure-caption-color'] || v['$gray-600'];
 
 
   // Breadcrumbs
@@ -907,9 +944,11 @@ function makeOriginal(userTheme = {}) {
   v['$breadcrumb-padding-x'] = u['$breadcrumb-padding-x'] || '1rem';
   v['$breadcrumb-item-padding'] = u['$breadcrumb-item-padding'] || '.5rem';
 
-  v['$breadcrumb-bg'] = u['$breadcrumb-bg'] || v['$gray-lighter'];
-  v['$breadcrumb-divider-color'] = u['$breadcrumb-divider-color'] || v['$gray-light'];
-  v['$breadcrumb-active-color'] = u['$breadcrumb-active-color'] || v['$gray-light'];
+  v['$breadcrumb-margin-bottom'] = u['$breadcrumb-margin-bottom'] || '1rem';
+
+  v['$breadcrumb-bg'] = u['$breadcrumb-bg'] || v['$gray-200'];
+  v['$breadcrumb-divider-color'] = u['$breadcrumb-divider-color'] || v['$gray-600'];
+  v['$breadcrumb-active-color'] = u['$breadcrumb-active-color'] || v['$gray-600'];
   v['$breadcrumb-divider'] = u['$breadcrumb-divider'] || '"/"';
 
   // Close
@@ -921,19 +960,21 @@ function makeOriginal(userTheme = {}) {
 
   // Code
 
-  v['$code-font-size'] = u['$code-font-size'] || '90%';
-  v['$code-padding-x'] = u['$code-padding-x'] || '.4rem';
-  v['$code-padding-y'] = u['$code-padding-y'] || '.2rem';
-  v['$code-color'] = u['$code-color'] || '#bd4147';
-  v['$code-bg'] = u['$code-bg'] || v['$gray-lightest'];
+  v['$code-font-size'] = u['$code-font-size'] || '87.5%';
+  v['$code-color'] = u['$code-color'] || v['$pink'];
 
+  v['$kbd-padding-y'] = u['$kbd-padding-y'] || '.2rem';
+  v['$kbd-padding-x'] = u['$kbd-padding-x'] || '.4rem';
+  v['$kbd-font-size'] = u['$kbd-font-size'] || v['$code-font-size'];
   v['$kbd-color'] = u['$kbd-color'] || v['$white'];
-  v['$kbd-bg'] = u['$kbd-bg'] || v['$gray-dark'];
-  v['$kbd-box-shadow'] = u['$kbd-box-shadow'] || `inset 0 -.1rem 0 ${Color(v['$black']).alpha(0.25).toString()}`;
-  v['$nested-kbd-font-weight'] = u['$nested-kbd-font-weight'] || v['$font-weight-bold'];
+  v['$kbd-bg'] = u['$kbd-bg'] || v['$gray-900'];
 
-  v['$pre-color'] = u['$pre-color'] || v['$gray-dark'];
+  v['$pre-color'] = u['$pre-color'] || v['$gray-900'];
   v['$pre-scrollable-max-height'] = u['$pre-scrollable-max-height'] || '340px';
+
+  // Printing
+  v['$print-page-size'] = u['$print-page-size'] || 'a3';
+  v['$print-body-min-width'] = u['$print-body-min-width'] || v['$grid-breakpoints'].lg;
 
   return Object.assign({}, u, v);
 }
