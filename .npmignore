@@ -21,3 +21,5 @@ coverage/
 docs/
 reports/
 /styleguide
+.ncurrc.js
+**/tests/*.test.js

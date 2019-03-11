@@ -163,7 +163,7 @@
           ]
         },
         {
-          "name": "Components",
+          "name": "Components variables",
           "sections": [
             {
               "name": "Alert",
@@ -245,6 +245,11 @@
         }
       ],
       "sectionDepth": 1
+    },
+    {
+      "name": "Bootstrap V4 Components",
+      "external": true,
+      "href": "https://bootstrap-styled.github.io/v4"
     },
     {
       "name": "Developers",
