@@ -76,7 +76,7 @@
     "@babel/preset-react": "^7.0.0",
     "@bootstrap-styled/documentation": "^1.2.3",
     "@bootstrap-styled/provider": "^1.4.2",
-    "@rollup-umd/documentation": "^1.3.7",
+    "@rollup-umd/documentation": "^2.0.0",
     "@rollup-umd/documentation-cli": "^1.1.1",
     "@semantic-release/changelog": "^3.0.2",
     "@semantic-release/git": "^7.0.8",
