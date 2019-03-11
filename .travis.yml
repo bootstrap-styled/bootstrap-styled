@@ -7,10 +7,6 @@ branches:
   except:
     - gh-pages # will be deployed to, no need to build it
 
-#cache:
-#  directories:
-#    - node_modules
-
 before_install:
     - npm install -g npm
     # const
@@ -53,7 +49,7 @@ jobs:
           organization: $(echo $TRAVIS_REPO_SLUG | awk -F '/' '{print $1}')
       script:
         - npm run test
-        - if [[ "$TRAVIS_BRANCH" != greenkeeper* ]]; then sonar-scanner -Dsonar.projectVersion=${SONAR_VERSION}; fi
+        - if [[ "$TRAVIS_BRANCH" != greenkeeper* && -n "$SONAR_TOKEN" ]]; then sonar-scanner -Dsonar.projectVersion=${SONAR_VERSION}; fi
 
     # Job: Release
     - stage: release
@@ -70,12 +66,8 @@ jobs:
       node_js:
         - 'lts/*'
       script:
-        - git fetch --tags
-        - git checkout refs/tags/$(git describe --tags `git rev-list --tags --max-count=1`)
-        - npm install
-        - chmod +x styleguide/prepare.sh
-        - styleguide/prepare.sh
-        - npm run styleguide:build
+        - targetVersion=$(git describe --tags `git rev-list --tags --max-count=1`)
+        - npx @rollup-umd/deploy --target-version "${targetVersion}"
       deploy:
         - provider: pages
           skip_cleanup: true
