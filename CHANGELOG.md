@@ -1,3 +1,10 @@
+## [2.4.13](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.12...v2.4.13) (2019-03-11)
+
+
+### Bug Fixes
+
+* **documentation:** Remove react-styleguidist and upgrade @rollup-umd/documentation that use react-s ([90998f5](https://github.com/bootstrap-styled/bootstrap-styled/commit/90998f5)), closes [#88](https://github.com/bootstrap-styled/bootstrap-styled/issues/88)
+
 ## [2.4.12](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.11...v2.4.12) (2019-03-03)
 
 
