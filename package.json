@@ -107,7 +107,7 @@
     "immutable": "^4.0.0-rc.12",
     "jest-cli": "^24.3.1",
     "jest-sonar-reporter": "^2.0.0",
-    "lint-staged": "^8.1.5",
+    "lint-staged": "^9.0.0",
     "mini-html-webpack-plugin": "^0.2.3",
     "pre-commit": "^1.2.2",
     "raf": "^3.4.1",
