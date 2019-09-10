@@ -1,3 +1,10 @@
+## [2.5.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.5.0...v2.5.1) (2019-09-10)
+
+
+### Bug Fixes
+
+* **babel:** copy files in lib ([6e67ede](https://github.com/bootstrap-styled/bootstrap-styled/commit/6e67ede))
+
 # [2.5.0](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.4.13...v2.5.0) (2019-07-30)
 
 
