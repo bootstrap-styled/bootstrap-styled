@@ -17,7 +17,7 @@
     "prebuild": "npm run build:clean",
     "build": "npm run build:lib && npm run build:dist",
     "prebuild:lib": "rimraf lib/*",
-    "build:lib": "BABEL_ENV=production babel --out-dir lib src",
+    "build:lib": "BABEL_ENV=production babel --out-dir lib src --copy-files",
     "prebuild:dist": "rimraf dist/*",
     "build:clean": "rimraf lib/* dist/*",
     "build:dist": "rollup -c && rollup -c --environment PRODUCTION",
