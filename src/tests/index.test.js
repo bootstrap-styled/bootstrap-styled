@@ -1,4 +1,4 @@
-const bootstrapStyled = require('../index');
+const bootstrapStyled = require('../..');
 
 describe('api exports', () => {
   it('should have all exports defined', () => {
