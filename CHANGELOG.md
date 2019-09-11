@@ -1,3 +1,10 @@
+## [2.5.2](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.5.1...v2.5.2) (2019-09-11)
+
+
+### Bug Fixes
+
+* **typescript:** Move typescript definition to the root of the project ([864c5af](https://github.com/bootstrap-styled/bootstrap-styled/commit/864c5af))
+
 ## [2.5.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.5.0...v2.5.1) (2019-09-10)
 
 
