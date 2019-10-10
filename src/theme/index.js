@@ -935,7 +935,7 @@ function makeOriginal(userTheme = {}) {
   v['$pre-color'] = u['$pre-color'] || v['$gray-dark'];
   v['$pre-scrollable-max-height'] = u['$pre-scrollable-max-height'] || '340px';
 
-  return Object.assign({}, u, v);
+  return { ...u, ...v };
 }
 
 export const makeTheme = makeOriginal;

@@ -1,9 +1,8 @@
-/* eslint-disable react/prefer-stateless-function */
+/* eslint-disable react/prefer-stateless-function, max-classes-per-file, react/static-property-placement */
 /* eslint-disable react/no-multi-comp */
 // https://raw.githubusercontent.com/mui-org/material-ui/83adb95e594d7799b5f399a824f0d72f749ba349/packages/material-ui-utils/src/getDisplayName.test.js
 import React from 'react';
 import getDisplayName, { getFunctionName } from '../getDisplayName';
-
 describe('utils/getDisplayName.js', () => {
   describe('getDisplayName', () => {
     it('gets the display name of a React component', () => {
