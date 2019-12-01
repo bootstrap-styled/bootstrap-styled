@@ -1,5 +1,7 @@
 import unitUtils from '@bootstrap-styled/utils/lib/unitUtils';
 
+const { detectUnit, rmUnit } = unitUtils;
+
 /**
  * Helper used to keep false values provided by userTheme
  * @param userValue
@@ -19,13 +21,13 @@ export function assertAscending(map, mapName) {
     const num = map[key];
     if (prevNum == null) {
       // do nothing
-    } else if (!comparable(unitUtils.rmUnit(prevNum), unitUtils.rmUnit(num))) {
+    } else if (!comparable(rmUnit(prevNum), rmUnit(num))) {
       /* istanbul ignore if */
       if (process.env.NODE !== 'test') {
         console.warn(`Potentially invalid value for ${mapName}: This map must be in ascending order, but key '${key}' has value ${num} whose unit makes it incomparable to ${prevNum}, the value of the previous key '${prevKey}' !`); // eslint-disable-line no-console
       }
       asserted = false;
-    } else if (unitUtils.rmUnit(prevNum) >= unitUtils.rmUnit(num)) {
+    } else if (rmUnit(prevNum) >= rmUnit(num)) {
       /* istanbul ignore if */
       if (process.env.NODE !== 'test') {
         console.warn(`Invalid value for ${mapName}: This map must be in ascending order, but key '${key}' has value ${num} which isn't greater than ${prevNum}, the value of the previous key '${prevKey}' !`); // eslint-disable-line no-console
@@ -40,7 +42,7 @@ export function assertAscending(map, mapName) {
 
 export function assertStartAtZero(map) {
   const values = Object.keys(map).map((key) => map[key]);
-  const firstValue = unitUtils.rmUnit(values[0]);
+  const firstValue = rmUnit(values[0]);
   let asserted = true;
   if (firstValue !== 0) {
     if (process.env.NODE !== 'test') {
@@ -61,9 +63,11 @@ export function negativifyMap(map) {
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of map) {
       if (key !== 0 && key !== '0') {
+        const detectedUnit = detectUnit(value);
+        const newValue = (rmUnit(value) * -1) + detectedUnit;
         result = new Map([
           ...result,
-          ...new Map([[`n${key}`, `calc(${value} * -1)`]]),
+          ...new Map([[`n${key}`, newValue]]),
         ]);
       }
     }
@@ -72,9 +76,11 @@ export function negativifyMap(map) {
   let result = {};
   Object.keys(map).forEach((key) => {
     if (key !== 0 && key !== '0') {
+      const detectedUnit = detectUnit(map[key]);
+      const newValue = (rmUnit(map[key]) * -1) + detectedUnit;
       result = {
         ...result,
-        ...{ [`n${key}`]: `calc(${map[key]} * -1)` },
+        ...{ [`n${key}`]: newValue },
       };
     }
   });

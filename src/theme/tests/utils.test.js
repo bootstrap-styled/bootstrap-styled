@@ -64,38 +64,38 @@ describe('utils', () => {
   it('negativifyMap should return object', () => {
     const spacers = {
       0: 0,
-      1: 1 * 0.25,
-      2: 1 * 0.5,
-      3: 1,
-      4: 1 * 1.5,
-      5: 1 * 3,
+      1: '0.25rem',
+      2: '0.5rem',
+      3: '1rem',
+      4: '1.5rem',
+      5: '3rem',
     };
     const res = negativifyMap(spacers);
     expect(res).toEqual({
-      n1: 'calc(0.25 * -1)',
-      n2: 'calc(0.5 * -1)',
-      n3: 'calc(1 * -1)',
-      n4: 'calc(1.5 * -1)',
-      n5: 'calc(3 * -1)',
+      n1: '-0.25rem',
+      n2: '-0.5rem',
+      n3: '-1rem',
+      n4: '-1.5rem',
+      n5: '-3rem',
     });
   });
 
   it('negativifyMap should return map', () => {
     const spacers = new Map([
       [0, 0],
-      [1, 1 * 0.25],
-      [2, 1 * 0.5],
-      [3, 1],
-      [4, 1 * 1.5],
-      [5, 1 * 3],
+      [1, '0.25rem'],
+      [2, '0.5rem'],
+      [3, '1rem'],
+      [4, '1.5rem'],
+      [5, '3rem'],
     ]);
     const res = negativifyMap(spacers);
     expect(res).toEqual(new Map([
-      ['n1', 'calc(0.25 * -1)'],
-      ['n2', 'calc(0.5 * -1)'],
-      ['n3', 'calc(1 * -1)'],
-      ['n4', 'calc(1.5 * -1)'],
-      ['n5', 'calc(3 * -1)'],
+      ['n1', '-0.25rem'],
+      ['n2', '-0.5rem'],
+      ['n3', '-1rem'],
+      ['n4', '-1.5rem'],
+      ['n5', '-3rem'],
     ]));
   });
 });
