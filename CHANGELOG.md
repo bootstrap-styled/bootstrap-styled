@@ -1,3 +1,16 @@
+# [2.6.0](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.5.3...v2.6.0) (2019-12-01)
+
+
+### Bug Fixes
+
+* **dependencies:** upgrade all dependencies ([1b66a63](https://github.com/bootstrap-styled/bootstrap-styled/commit/1b66a63ffc6b81daf2a231caa5cbf7080c6b617b))
+* **spacers:** BREAKING CHANGE spacers is now a map, added negative spacers. if you rely on $spacers[1].x , you will have to rely on $spacers[1] ([8712246](https://github.com/bootstrap-styled/bootstrap-styled/commit/87122465989a5b4e8c3a5037870ea35a78fef61c))
+
+
+### Features
+
+* **colors:** updated coloors and added negative spacers ([42ddc14](https://github.com/bootstrap-styled/bootstrap-styled/commit/42ddc1483545fd4344b93761e8b891f83a60dc38))
+
 ## [2.5.3](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.5.2...v2.5.3) (2019-09-26)
 
 
