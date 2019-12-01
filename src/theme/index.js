@@ -187,30 +187,12 @@ function makeOriginal(userTheme = {}) {
   v['$spacer-x'] = u['$spacer-x'] || v['$spacer'];
   v['$spacer-y'] = u['$spacer-y'] || v['$spacer'];
   v['$spacers'] = u['$spacers'] || {
-    0: {
-      x: 0,
-      y: 0,
-    },
-    1: {
-      x: (rmUnit(v['$spacer-x']) * 0.25) + detectedUnit,
-      y: (rmUnit(v['$spacer-y']) * 0.25) + detectedUnit,
-    },
-    2: {
-      x: (rmUnit(v['$spacer-x']) * 0.5) + detectedUnit,
-      y: (rmUnit(v['$spacer-y']) * 0.5) + detectedUnit,
-    },
-    3: {
-      x: v['$spacer-x'],
-      y: v['$spacer-y'],
-    },
-    4: {
-      x: (rmUnit(v['$spacer-x']) * 1.5) + detectedUnit,
-      y: (rmUnit(v['$spacer-y']) * 1.5) + detectedUnit,
-    },
-    5: {
-      x: (rmUnit(v['$spacer-x']) * 3) + detectedUnit,
-      y: (rmUnit(v['$spacer-y']) * 3) + detectedUnit,
-    },
+    0: 0,
+    1: (rmUnit(v['$spacer-x']) * 0.25) + detectedUnit,
+    2: (rmUnit(v['$spacer-x']) * 0.5) + detectedUnit,
+    3: v['$spacer'],
+    4: (rmUnit(v['$spacer-x']) * 1.5) + detectedUnit,
+    5: (rmUnit(v['$spacer-x']) * 3) + detectedUnit,
   };
 
   v['$negative-spacers'] = u['$negative-spacers'] || negativifyMap(v['$spacers']);
