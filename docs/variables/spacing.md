@@ -5,7 +5,7 @@
     v['$spacer'] = '1rem';
   
     detectedUnit = detectUnit(v['$spacer']);
-    v['$spacer-halved'] = ((rmUnit(v['$spacer'], detectedUnit) / 2) + detectedUnit);
+    v['$spacer-halved'] = `calc(${v['$spacer']} / 2)`;
   
     v['$spacer-x'] = v['$spacer'];
     v['$spacer-y'] = v['$spacer'];
@@ -15,26 +15,28 @@
         y: 0,
       },
       1: {
-        x: (rmUnit(v['$spacer-x']) * 0.25) + detectedUnit,
-        y: (rmUnit(v['$spacer-y']) * 0.25) + detectedUnit,
+        x: `calc(${v['$spacer-x']}) * 0.25`,
+        y: `calc(${v['$spacer-y']}) * 0.25`,
       },
       2: {
-        x: (rmUnit(v['$spacer-x']) * 0.5) + detectedUnit,
-        y: (rmUnit(v['$spacer-y']) * 0.5) + detectedUnit,
+        x: `calc(${v['$spacer-x']}) * 0.5`,
+        y: `calc(${v['$spacer-y']}) * 0.5`,
       },
       3: {
         x: v['$spacer-x'],
         y: v['$spacer-y'],
       },
       4: {
-        x: (rmUnit(v['$spacer-x']) * 1.5) + detectedUnit,
-        y: (rmUnit(v['$spacer-y']) * 1.5) + detectedUnit,
+        x: `calc(${v['$spacer-x']}) * 1.5`,
+        y: `calc(${v['$spacer-y']}) * 1.5`,
       },
       5: {
-        x: (rmUnit(v['$spacer-x']) * 3) + detectedUnit,
-        y: (rmUnit(v['$spacer-y']) * 3) + detectedUnit,
+        x: `calc(${v['$spacer-x']}) * 3`,
+        y: `calc(${v['$spacer-y']}) * 3`,
       },
     };
+    
+    v['$negative-spacers'] = negativifyMap(v['$spacers']);
     
     v['$border-width'] = '1px';
   

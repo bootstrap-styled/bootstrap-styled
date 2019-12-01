@@ -55,8 +55,35 @@ export function comparable(a, b) {
   return !isNaN(a + b); // eslint-disable-line no-restricted-globals
 }
 
+export function negativifyMap(map) {
+  if (map instanceof Map) {
+    let result = new Map();
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [key, value] of map) {
+      if (key !== 0 && key !== '0') {
+        result = new Map([
+          ...result,
+          ...new Map([[`n${key}`, `calc(${value} * -1)`]]),
+        ]);
+      }
+    }
+    return result;
+  }
+  let result = {};
+  Object.keys(map).forEach((key) => {
+    if (key !== 0 && key !== '0') {
+      result = {
+        ...result,
+        ...{ [`n${key}`]: `calc(${map[key]} * -1)` },
+      };
+    }
+  });
+  return result;
+}
+
 export default {
   assertAscending,
   assertStartAtZero,
   comparable,
+  negativifyMap,
 };

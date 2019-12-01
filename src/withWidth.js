@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import EventListener from 'react-event-listener';
 import debounce from 'debounce'; // < 1kb payload overhead when lodash/debounce is > 3kb.
@@ -6,7 +6,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics';
 import { withTheme } from 'styled-components';
 import getDisplayName from './utils/getDisplayName';
 
-/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/destructuring-assignment, react/jsx-fragments, react/jsx-props-no-spreading */
 // By default, returns true if screen width is the same or greater than the given breakpoint.
 export const isWidthUp = (gridBreakpoints, breakpoint, width, inclusive = true) => {
   const breakpointKeys = Object.keys(gridBreakpoints);
@@ -128,10 +128,10 @@ const withWidth = (options = {}) => (Component) => {
       }
 
       return (
-        <React.Fragment>
+        <Fragment>
           <Component {...more} />
           <EventListener target="window" onResize={this.handleResize} />
-        </React.Fragment>
+        </Fragment>
       );
     }
   }
