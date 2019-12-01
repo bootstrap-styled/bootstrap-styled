@@ -9,8 +9,13 @@
   v['$font-size-sm'] = '.875rem';
   v['$font-size-xs'] = '.75rem';
 
-  v['$font-weight-normal'] = 'normal';
-  v['$font-weight-bold'] = 'bold';
+
+  v['$font-weight-light'] = '300';
+  v['$font-weight-lighter'] = 'lighter';
+  v['$font-weight-bolder'] = 'bolder';
+
+  v['$font-weight-normal'] = '400';
+  v['$font-weight-bold'] = '700';
 
   v['$font-weight-base'] = v['$font-weight-normal'];
   v['$line-height-base'] = '1.5';
@@ -22,8 +27,7 @@
   v['$font-size-h5'] = '1.25rem';
   v['$font-size-h6'] = '1rem';
 
-  detectedUnit = detectUnit(v['$spacer']);
-  v['$headings-margin-bottom'] = (rmUnit(v['$spacer'], detectedUnit) / 2) + detectedUnit;
+  v['$headings-margin-bottom'] = `calc(${v['$spacer']} / 2)`;
   v['$headings-font-family'] = 'inherit';
   v['$headings-font-weight'] = '500';
   v['$headings-line-height'] = '1.1';

@@ -1,6 +1,11 @@
 import Color from '@bootstrap-styled/color';
 import unitUtils from '@bootstrap-styled/utils/lib/unitUtils';
-import { allowFalseValue, assertAscending, assertStartAtZero } from './utils';
+import {
+  allowFalseValue,
+  assertAscending,
+  assertStartAtZero,
+  negativifyMap,
+} from './utils';
 import { linearGradientRe } from '../utils/regex';
 
 const { detectUnit, rmUnit } = unitUtils;
@@ -73,16 +78,57 @@ function makeOriginal(userTheme = {}) {
 
   // Start with assigning color names to specific hex values.
   v['$white'] = u['$white'] || '#fff';
+  v['$gray-100'] = v['$gray-100'] || '#f8f9fa';
+  v['$gray-200'] = v['$gray-200'] || '#e9ecef';
+  v['$gray-300'] = v['$gray-300'] || '#dee2e6';
+  v['$gray-400'] = v['$gray-400'] || '#ced4da';
+  v['$gray-500'] = v['$gray-500'] || '#adb5bd';
+  v['$gray-600'] = v['$gray-600'] || '#6c757d';
+  v['$gray-700'] = v['$gray-700'] || '#495057';
+  v['$gray-800'] = v['$gray-800'] || '#343a40';
+  v['$gray-900'] = v['$gray-900'] || '#212529';
   v['$black'] = u['$black'] || '#000';
+
+  v['$grays'] = u['$grays'] || {
+    100: v['$gray-100'],
+    200: v['$gray-200'],
+    300: v['$gray-300'],
+    400: v['$gray-400'],
+    500: v['$gray-500'],
+    600: v['$gray-600'],
+    700: v['$gray-700'],
+    800: v['$gray-800'],
+    900: v['$gray-900'],
+  };
   v['$red'] = u['$red'] || '#d9534f';
   v['$orange'] = u['$orange'] || '#f0ad4e';
   v['$yellow'] = u['$yellow'] || '#ffd500';
   v['$green'] = u['$green'] || '#5cb85c';
   v['$blue'] = u['$blue'] || '#0275d8';
+  v['$indigo'] = u['$indigo'] || '#0275d8';
   v['$teal'] = u['$teal'] || '#5bc0de';
   v['$pink'] = u['$pink'] || '#ff5b77';
   v['$purple'] = u['$purple'] || '#613d7c';
-
+  v['$light'] = u['$light'] || v['$gray-100'];
+  v['$dark'] = u['$dark'] || v['$gray-800'];
+  v['$colors'] = {
+    ...{
+      blue: v['$blue'],
+      indigo: v['$indigo'],
+      purple: v['$purple'],
+      pink: v['$pink'],
+      red: v['$red'],
+      orange: v['$orange'],
+      yellow: v['$yellow'],
+      green: v['$green'],
+      teal: v['$teal'],
+      cyan: v['$cyan'],
+      white: v['$white'],
+      gray: v['$gray-600'],
+      'gray-dark': v['$gray-800'],
+    },
+    ...(u['$colors'] || {}),
+  };
   // Create grayscale
   v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
   v['$gray'] = u['$gray'] || '#464a4c';
@@ -98,6 +144,19 @@ function makeOriginal(userTheme = {}) {
   v['$brand-danger'] = u['$brand-danger'] || v['$red'];
   v['$brand-inverse'] = u['$brand-inverse'] || v['$gray-dark'];
 
+  v['$theme-colors'] = {
+    ...{
+      primary: u['$primary'],
+      secondary: u['$secondary'],
+      success: u['$success'],
+      info: u['$info'],
+      warning: u['$warning'],
+      danger: u['$danger'],
+      light: u['$light'],
+      dark: u['$dark'],
+    },
+    ...(u['$theme-colors'] || {}),
+  };
 
   // Options
   //
@@ -153,6 +212,9 @@ function makeOriginal(userTheme = {}) {
       y: (rmUnit(v['$spacer-y']) * 3) + detectedUnit,
     },
   };
+
+  v['$negative-spacers'] = u['$negative-spacers'] || negativifyMap(v['$spacers']);
+
   v['$border-width'] = u['$border-width'] || '1px';
 
   // This variable affects the `.h-*` and `.w-*` classes.
@@ -230,8 +292,12 @@ function makeOriginal(userTheme = {}) {
   v['$font-size-sm'] = u['$font-size-sm'] || '.875rem';
   v['$font-size-xs'] = u['$font-size-xs'] || '.75rem';
 
-  v['$font-weight-normal'] = u['$font-weight-normal'] || 'normal';
-  v['$font-weight-bold'] = u['$font-weight-bold'] || 'bold';
+  v['$font-weight-light'] = u['$font-weight-light'] || '300';
+  v['$font-weight-lighter'] = u['$font-weight-lighter'] || 'lighter';
+  v['$font-weight-bolder'] = u['$font-weight-bolder'] || 'bolder';
+
+  v['$font-weight-normal'] = u['$font-weight-normal'] || '400';
+  v['$font-weight-bold'] = u['$font-weight-bold'] || '700';
 
   v['$font-weight-base'] = u['$font-weight-base'] || v['$font-weight-normal'];
   v['$line-height-base'] = u['$line-height-base'] || '1.5';
@@ -295,6 +361,13 @@ function makeOriginal(userTheme = {}) {
   v['$border-radius'] = u['$border-radius'] || '.25rem';
   v['$border-radius-lg'] = u['$border-radius-lg'] || '.3rem';
   v['$border-radius-sm'] = u['$border-radius-sm'] || '.2rem';
+
+  v['$rounded-pill'] = u['$rounded-pill'] || '50rem';
+
+  v['$box-shadow-sm'] = u['$box-shadow-sm'] || `0 .125rem .25rem rgba(${v.$black}, .075)`;
+  v['$box-shadow'] = u['$box-shadow'] || `0 .5rem 1rem rgba(${v.$black}, .15)`;
+  v['$box-shadow-lg'] = u['$box-shadow-lg'] || `0 1rem 3rem rgba(${v.$black}, .175)`;
+  v['$box-shadow-inset'] = u['$box-shadow-inset'] || `inset 0 1px 2px rgba(${v.$black}, .075)`;
 
   v['$component-active-color'] = u['$component-active-color'] || v['$white'];
   v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
