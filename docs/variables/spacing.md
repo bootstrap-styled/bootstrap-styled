@@ -11,11 +11,11 @@
     v['$spacer-y'] = v['$spacer'];
     v['$spacers'] = {
       0: 0,
-      1: (rmUnit(v['$spacer-x']) * 0.25) + detectedUnit,
-      2: (rmUnit(v['$spacer-x']) * 0.5) + detectedUnit,
+      1: (rmUnit(v['$spacer']) * 0.25) + detectedUnit,
+      2: (rmUnit(v['$spacer']) * 0.5) + detectedUnit,
       3: v['$spacer'],
-      4: (rmUnit(v['$spacer-x']) * 1.5) + detectedUnit,
-      5: (rmUnit(v['$spacer-x']) * 3) + detectedUnit,
+      4: (rmUnit(v['$spacer']) * 1.5) + detectedUnit,
+      5: (rmUnit(v['$spacer']) * 3) + detectedUnit,
     };
     
     v['$border-width'] = '1px';
