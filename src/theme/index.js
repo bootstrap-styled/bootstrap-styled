@@ -1,3 +1,6 @@
+import 'core-js/es';
+import 'core-js/features/set/map';
+
 import Color from '@bootstrap-styled/color';
 import unitUtils from '@bootstrap-styled/utils/lib/unitUtils';
 import {
