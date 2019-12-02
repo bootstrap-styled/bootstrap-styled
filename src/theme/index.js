@@ -1,3 +1,6 @@
+import 'core-js/es';
+import 'core-js/features/set/map';
+
 import Color from '@bootstrap-styled/color';
 import unitUtils from '@bootstrap-styled/utils/lib/unitUtils';
 import {
@@ -346,10 +349,10 @@ function makeOriginal(userTheme = {}) {
 
   v['$rounded-pill'] = u['$rounded-pill'] || '50rem';
 
-  v['$box-shadow-sm'] = u['$box-shadow-sm'] || `0 .125rem .25rem rgba(${v.$black}, .075)`;
-  v['$box-shadow'] = u['$box-shadow'] || `0 .5rem 1rem rgba(${v.$black}, .15)`;
-  v['$box-shadow-lg'] = u['$box-shadow-lg'] || `0 1rem 3rem rgba(${v.$black}, .175)`;
-  v['$box-shadow-inset'] = u['$box-shadow-inset'] || `inset 0 1px 2px rgba(${v.$black}, .075)`;
+  v['$box-shadow-sm'] = u['$box-shadow-sm'] || `0 .125rem .25rem ${Color(v.$black).alpha(0.075).toString()}`;
+  v['$box-shadow'] = u['$box-shadow'] || `0 .5rem 1rem ${Color(v.$black).alpha(0.15).toString()}`;
+  v['$box-shadow-lg'] = u['$box-shadow-lg'] || `0 1rem 3rem ${Color(v.$black).alpha(0.175).toString()}`;
+  v['$box-shadow-inset'] = u['$box-shadow-inset'] || `inset 0 1px 2px ${Color(v.$black).alpha(0.075).toString()}`;
 
   v['$component-active-color'] = u['$component-active-color'] || v['$white'];
   v['$component-active-bg'] = u['$component-active-bg'] || v['$brand-primary'];
@@ -478,7 +481,7 @@ function makeOriginal(userTheme = {}) {
 
   v['$input-bg-focus'] = u['$input-bg-focus'] || v['$input-bg'];
   v['$input-border-focus'] = u['$input-border-focus'] || Color(v['$brand-primary']).lighten(0.25).toString();
-  v['$input-box-shadow-focus'] = u['$input-box-shadow-focus'] || `${v['$input-box-shadow']}, 0 0 8px rgba(${v['$input-border-focus']},.6)`;
+  v['$input-box-shadow-focus'] = u['$input-box-shadow-focus'] || `${v['$input-box-shadow']}, 0 0 8px ${Color(v['$input-border-focus']).alpha(0.6).toString()}`;
   v['$input-color-focus'] = u['$input-color-focus'] || v['$input-color'];
 
   v['$input-color-placeholder'] = u['$input-color-placeholder'] || v['$gray-light'];
@@ -565,7 +568,7 @@ function makeOriginal(userTheme = {}) {
   v['$custom-select-border-radius'] = u['$custom-select-border-radius'] || v['$border-radius'];
 
   v['$custom-select-focus-border-color'] = u['$custom-select-focus-border-color'] || Color(v['$brand-primary']).lighten(0.25).toString();
-  v['$custom-select-focus-box-shadow'] = u['$custom-select-focus-box-shadow'] || `inset 0 1px 2px ${Color(v['$black']).alpha(0.75).toString()}, 0 0 5px rgba(${v['$custom-select-focus-border-color']}, .5)`;
+  v['$custom-select-focus-box-shadow'] = u['$custom-select-focus-box-shadow'] || `inset 0 1px 2px ${Color(v['$black']).alpha(0.75).toString()}, 0 0 5px ${Color(v['$custom-select-focus-border-color']).alpha(0.5).toString()}`;
 
   v['$custom-select-sm-font-size'] = u['$custom-select-sm-font-size'] || '75%';
 
@@ -616,7 +619,7 @@ function makeOriginal(userTheme = {}) {
   v['$dropdown-border-color'] = u['$dropdown-border-color'] || Color(v['$black']).alpha(0.15).toString();
   v['$dropdown-border-width'] = u['$dropdown-border-width'] || v['$border-width'];
   v['$dropdown-divider-bg'] = u['$dropdown-divider-bg'] || v['$gray-lighter'];
-  v['$dropdown-box-shadow'] = u['$dropdown-box-shadow'] || `0 .5rem 1rem rgba(${v['$black']},.175)`;
+  v['$dropdown-box-shadow'] = u['$dropdown-box-shadow'] || `0 .5rem 1rem ${Color(v['$black']).alpha(0.175).toString()}`;
 
   v['$dropdown-link-color'] = u['$dropdown-link-color'] || v['$gray-dark'];
   v['$dropdown-link-hover-color'] = u['$dropdown-link-hover-color'] || Color(v['$gray-dark']).darken(0.05).toString();
