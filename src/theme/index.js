@@ -132,6 +132,16 @@ function makeOriginal(userTheme = {}) {
     },
     ...(u['$colors'] || {}),
   };
+
+  v['$primary'] = u['$primary'] || v['$blue'];
+  v['$secondary'] = u['$secondary'] || v['$gray-600'];
+  v['$success'] = u['$success'] || v['$green'];
+  v['$info'] = u['$info'] || v['$cyan'];
+  v['$warning'] = u['$warning'] || v['$yellow'];
+  v['$danger'] = u['$danger'] || v['$red'];
+  v['$light'] = u['$light'] || v['$gray-100'];
+  v['$dark'] = u['$dark'] || v['$gray-800'];
+
   // Create grayscale
   v['$gray-dark'] = u['$gray-dark'] || '#292b2c';
   v['$gray'] = u['$gray'] || '#464a4c';
@@ -140,11 +150,11 @@ function makeOriginal(userTheme = {}) {
   v['$gray-lightest'] = u['$gray-lightest'] || '#f7f7f9';
 
   // Reassign color vars to semantic color scheme
-  v['$brand-primary'] = u['$brand-primary'] || v['$blue'];
-  v['$brand-success'] = u['$brand-success'] || v['$green'];
-  v['$brand-info'] = u['$brand-info'] || v['$teal'];
-  v['$brand-warning'] = u['$brand-warning'] || v['$orange'];
-  v['$brand-danger'] = u['$brand-danger'] || v['$red'];
+  v['$brand-primary'] = u['$brand-primary'] || v['$primary'];
+  v['$brand-success'] = u['$brand-success'] || v['$success'];
+  v['$brand-info'] = u['$brand-info'] || v['$info'];
+  v['$brand-warning'] = u['$brand-warning'] || v['$warning'];
+  v['$brand-danger'] = u['$brand-danger'] || v['$danger'];
   v['$brand-inverse'] = u['$brand-inverse'] || v['$gray-dark'];
 
   v['$theme-colors'] = {
@@ -201,6 +211,7 @@ function makeOriginal(userTheme = {}) {
   v['$negative-spacers'] = u['$negative-spacers'] || negativifyMap(v['$spacers']);
 
   v['$border-width'] = u['$border-width'] || '1px';
+  v['$border-color'] = u['$border-color'] || v['$gray-300'];
 
   // This variable affects the `.h-*` and `.w-*` classes.
   v['$sizes'] = u['$sizes'] || {
