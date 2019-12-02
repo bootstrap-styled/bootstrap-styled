@@ -1,3 +1,10 @@
+# [2.7.0](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.6.2...v2.7.0) (2019-12-02)
+
+
+### Features
+
+* **utilities:** added $utilities to theme ([426047f](https://github.com/bootstrap-styled/bootstrap-styled/commit/426047fb3122480aa39cb861d5ea22b342650e9d))
+
 ## [2.6.2](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.6.1...v2.6.2) (2019-12-02)
 
 
