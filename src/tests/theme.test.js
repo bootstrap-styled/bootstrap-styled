@@ -1,6 +1,5 @@
-import { fromJS } from 'immutable/';
+import { fromJS } from 'immutable';
 import theme, { makeTheme } from '../theme';
-
 describe('theme', () => {
   describe('default theme', () => {
     it('should have every values defined', () => {
@@ -21,8 +20,11 @@ describe('theme', () => {
       const notDefaultTheme = makeTheme({
         $white: '#eee',
       });
-      expect(fromJS(notDefaultTheme).hashCode() !== fromJS(theme).hashCode()).toBe(true);
-      expect(fromJS(makeTheme()).hashCode() === fromJS(theme).hashCode()).toBe(true);
+      expect(fromJS(notDefaultTheme).hashCode()).not.toEqual(fromJS(theme).hashCode());
+      const { $utilities: omitted1, ...mT } = makeTheme();
+      const { $utilities: omitted2, ...t } = theme;
+      expect(omitted1).toEqual(omitted2);
+      expect(fromJS(mT).hashCode()).toEqual(fromJS(t).hashCode());
     });
   });
 });
