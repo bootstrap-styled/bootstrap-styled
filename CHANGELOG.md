@@ -1,3 +1,10 @@
+## [2.7.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.7.0...v2.7.1) (2019-12-02)
+
+
+### Bug Fixes
+
+* **dependencies:** remove core-js dependency ([ff68592](https://github.com/bootstrap-styled/bootstrap-styled/commit/ff68592216062ae5ff2846eb4762b6b7d0852034))
+
 # [2.7.0](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.6.2...v2.7.0) (2019-12-02)
 
 
