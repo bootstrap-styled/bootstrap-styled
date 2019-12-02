@@ -1,3 +1,11 @@
+## [2.6.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.6.0...v2.6.1) (2019-12-02)
+
+
+### Bug Fixes
+
+* **esm:** added core-js and features set and map ([172544f](https://github.com/bootstrap-styled/bootstrap-styled/commit/172544f1064696ed8441a026853576618c08338a))
+* **theme:** replace rgba call by Color ([e6b6134](https://github.com/bootstrap-styled/bootstrap-styled/commit/e6b61341cc7d29ba08b212a4844c0b455bf27c0f))
+
 # [2.6.0](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.5.3...v2.6.0) (2019-12-01)
 
 
