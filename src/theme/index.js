@@ -795,16 +795,20 @@ function makeOriginal(userTheme = {}) {
   v['$card-columns-margin-xxl'] = u['$card-columns-margin-xxl'] || v['$card-spacer-y'];
 
   // Tooltips
-
+  v['$tooltip-font-family'] = u['$tooltip-font-family'] || v['$font-family-base'];
+  v['$tooltip-font-size'] = u['$tooltip-font-size'] || '.875rem';
+  v['$tooltip-font-weight'] = u['$tooltip-font-weight'] || '400';
   v['$tooltip-max-width'] = u['$tooltip-max-width'] || '200px';
   v['$tooltip-color'] = u['$tooltip-color'] || v['$white'];
   v['$tooltip-bg'] = u['$tooltip-bg'] || v['$black'];
+  v['$tooltip-border-radius'] = u['$tooltip-border-radius'] || v['$border-radius'];
   v['$tooltip-opacity'] = u['$tooltip-opacity'] || '.9';
-  v['$tooltip-padding-y'] = u['$tooltip-padding-y'] || '3px';
-  v['$tooltip-padding-x'] = u['$tooltip-padding-x'] || '8px';
-  v['$tooltip-margin'] = u['$tooltip-margin'] || '3px';
-
-  v['$tooltip-arrow-width'] = u['$tooltip-arrow-width'] || '5px';
+  v['$tooltip-padding-y'] = u['$tooltip-padding-y'] || '.25rem';
+  v['$tooltip-padding-x'] = u['$tooltip-padding-x'] || '.5rem';
+  v['$tooltip-margin'] = u['$tooltip-margin'] || '0';
+  v['$tooltip-line-height'] = u['$tooltip-line-height'] || '1.5';
+  v['$tooltip-arrow-width'] = u['$tooltip-arrow-width'] || '.8rem';
+  v['$tooltip-arrow-height'] = u['$tooltip-arrow-height'] || '.4rem';
   v['$tooltip-arrow-color'] = u['$tooltip-arrow-color'] || v['$tooltip-bg'];
 
 
