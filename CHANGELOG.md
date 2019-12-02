@@ -1,3 +1,10 @@
+## [2.7.2](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.7.1...v2.7.2) (2019-12-02)
+
+
+### Bug Fixes
+
+* **variables:** added more variables for tooltip ([b0cf947](https://github.com/bootstrap-styled/bootstrap-styled/commit/b0cf947e694ca9618cfc7cda31ad77740a872e3a))
+
 ## [2.7.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.7.0...v2.7.1) (2019-12-02)
 
 
