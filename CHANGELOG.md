@@ -1,3 +1,10 @@
+## [2.6.2](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.6.1...v2.6.2) (2019-12-02)
+
+
+### Bug Fixes
+
+* **colors:** updated colors from bs 4 ([b2f8535](https://github.com/bootstrap-styled/bootstrap-styled/commit/b2f8535adc1e17693adba01ee28c0becbba711b8))
+
 ## [2.6.1](https://github.com/bootstrap-styled/bootstrap-styled/compare/v2.6.0...v2.6.1) (2019-12-02)
 
 
