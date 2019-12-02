@@ -3,6 +3,7 @@ import 'core-js/features/set/map';
 
 import Color from '@bootstrap-styled/color';
 import unitUtils from '@bootstrap-styled/utils/lib/unitUtils';
+import { getUtilities } from '@bootstrap-styled/css-utils/lib/utilities';
 import {
   allowFalseValue,
   assertAscending,
@@ -10,7 +11,6 @@ import {
   negativifyMap,
 } from './utils';
 import { linearGradientRe } from '../utils/regex';
-
 const { detectUnit, rmUnit } = unitUtils;
 
 
@@ -1004,7 +1004,7 @@ function makeOriginal(userTheme = {}) {
 
   v['$pre-color'] = u['$pre-color'] || v['$gray-dark'];
   v['$pre-scrollable-max-height'] = u['$pre-scrollable-max-height'] || '340px';
-
+  v['$utilities'] = getUtilities(v, u['$utilities']);
   return { ...u, ...v };
 }
 
