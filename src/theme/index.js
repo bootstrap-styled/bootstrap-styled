@@ -103,15 +103,16 @@ function makeOriginal(userTheme = {}) {
     800: v['$gray-800'],
     900: v['$gray-900'],
   };
+  v['$blue'] = u['$blue'] || '#0275d8';
+  v['$indigo'] = u['$indigo'] || '#0275d8';
+  v['$purple'] = u['$purple'] || '#613d7c';
+  v['$pink'] = u['$pink'] || '#ff5b77';
   v['$red'] = u['$red'] || '#d9534f';
   v['$orange'] = u['$orange'] || '#f0ad4e';
   v['$yellow'] = u['$yellow'] || '#ffd500';
   v['$green'] = u['$green'] || '#5cb85c';
-  v['$blue'] = u['$blue'] || '#0275d8';
-  v['$indigo'] = u['$indigo'] || '#0275d8';
   v['$teal'] = u['$teal'] || '#5bc0de';
-  v['$pink'] = u['$pink'] || '#ff5b77';
-  v['$purple'] = u['$purple'] || '#613d7c';
+  v['$cyan'] = u['$cyan'] || '#17a2b8';
   v['$light'] = u['$light'] || v['$gray-100'];
   v['$dark'] = u['$dark'] || v['$gray-800'];
   v['$colors'] = {
@@ -159,14 +160,14 @@ function makeOriginal(userTheme = {}) {
 
   v['$theme-colors'] = {
     ...{
-      primary: u['$primary'],
-      secondary: u['$secondary'],
-      success: u['$success'],
-      info: u['$info'],
-      warning: u['$warning'],
-      danger: u['$danger'],
-      light: u['$light'],
-      dark: u['$dark'],
+      primary: v['$primary'],
+      secondary: v['$secondary'],
+      success: v['$success'],
+      info: v['$info'],
+      warning: v['$warning'],
+      danger: v['$danger'],
+      light: v['$light'],
+      dark: v['$dark'],
     },
     ...(u['$theme-colors'] || {}),
   };

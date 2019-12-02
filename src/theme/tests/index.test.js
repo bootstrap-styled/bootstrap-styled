@@ -1,8 +1,8 @@
-import { fromJS } from 'immutable/';
+import { fromJS } from 'immutable';
 import { makeTheme } from '../index';
 
 describe('makeTheme exports', () => {
-  it('should have makeTheme defined', () => {
+  it.only('should have makeTheme defined', () => {
     expect(makeTheme).toBeDefined();
   });
   it('should have keys starting with $ or _ only', () => {
