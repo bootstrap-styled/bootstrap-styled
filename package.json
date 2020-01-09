@@ -81,7 +81,7 @@
     "@rollup-umd/rollup": "^1.0.13",
     "@semantic-release/changelog": "^3.0.4",
     "@semantic-release/git": "^7.0.16",
-    "@semantic-release/github": "^5.5.3",
+    "@semantic-release/github": "^6.0.0",
     "@semantic-release/npm": "^5.2.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
