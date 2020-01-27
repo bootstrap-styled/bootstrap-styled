@@ -82,7 +82,7 @@
     "@semantic-release/changelog": "^3.0.4",
     "@semantic-release/git": "^7.0.16",
     "@semantic-release/github": "^5.5.3",
-    "@semantic-release/npm": "^5.2.0",
+    "@semantic-release/npm": "^7.0.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
