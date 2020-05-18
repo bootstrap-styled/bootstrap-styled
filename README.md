@@ -14,7 +14,7 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.github.bootstrap-styled.bootstrap-styled&metric=coverage)](https://sonarcloud.io/dashboard?id=com.github.bootstrap-styled.bootstrap-styled)
 [![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=com.github.bootstrap-styled.bootstrap-styled&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.github.bootstrap-styled.bootstrap-styled)
 [![gitter](https://badges.gitter.im/bootstrap-styled/bootstrap-styled.svg)](https://gitter.im/bootstrap-styled)
-[![Greenkeeper badge](https://badges.greenkeeper.io/bootstrap-styled/bootstrap-styled.svg)](https://greenkeeper.io/)
+
 
 Bootstrap Styled is a front-end ecosystem for React made with Bootstrap 4 philosophy, using the power of css-in-js thanks to [styled-components](https://www.styled-components.com/).
 It offer a community an ecosystem of tools, components and variables to create standardized, sharable and highly customizable front-end modules.
