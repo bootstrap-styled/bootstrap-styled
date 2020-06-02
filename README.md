@@ -15,6 +15,7 @@
 [![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=com.github.bootstrap-styled.bootstrap-styled&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.github.bootstrap-styled.bootstrap-styled)
 [![gitter](https://badges.gitter.im/bootstrap-styled/bootstrap-styled.svg)](https://gitter.im/bootstrap-styled)
 [![Greenkeeper badge](https://badges.greenkeeper.io/bootstrap-styled/bootstrap-styled.svg)](https://greenkeeper.io/)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbootstrap-styled%2Fbootstrap-styled.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbootstrap-styled%2Fbootstrap-styled?ref=badge_shield)
 
 Bootstrap Styled is a front-end ecosystem for React made with Bootstrap 4 philosophy, using the power of css-in-js thanks to [styled-components](https://www.styled-components.com/).
 It offer a community an ecosystem of tools, components and variables to create standardized, sharable and highly customizable front-end modules.
@@ -31,6 +32,9 @@ This main package explain our **chart** for writing components and provide theme
   - [License MIT](#license-mit)
 
 ---
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbootstrap-styled%2Fbootstrap-styled.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbootstrap-styled%2Fbootstrap-styled?ref=badge_large)
 
 ## Why ?
 
@@ -79,4 +83,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
