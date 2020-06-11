@@ -439,7 +439,7 @@ function makeOriginal(userTheme = {}) {
     'warning',
     'danger',
   ].forEach((type) => {
-    if (v[`$btn-${type}-bg`].includes('linear-gradient')) {
+    if (v[`$btn-${type}-bg`].indexOf('linear-gradient') !== -1) {
       v[`$btn-${type}-border`] = v[`$btn-${type}-bg`].match(linearGradientRe)[1]; // eslint-disable-line prefer-destructuring
     } else if (type === 'secondary') {
       // secondary is having a white background, they use by default #ccc to make it look like a button
