@@ -4,7 +4,7 @@ The `makeTheme()` method allows you to create your own theme by easily overridin
 ```jsx static
 import React from 'react';
 import BootstrapProvider from '@bootstrap-styled/provider/lib/BootstrapProvider';
-import makeTheme from 'bootstrap-styled/lib/theme/makeTheme';
+import { makeTheme } from "bootstrap-styled/lib/theme/index";
 
 const darkTheme = makeTheme({
   '$body-bg': 'darkslategrey'.
